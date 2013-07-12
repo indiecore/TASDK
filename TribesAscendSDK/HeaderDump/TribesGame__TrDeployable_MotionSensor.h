@@ -1,0 +1,37 @@
+#pragma once
+#define ADD_VAR( x, y, z ) ( ##x ) var_##y() \
+{ \
+	static ScriptProperty *script_property = ( ScriptProperty* )( ScriptObject::Find( #x " TribesGame.TrDeployable_MotionSensor." #y ) ); \
+	return ( ##x( this, script_property->offset, z ) ); \
+}
+#define ADD_STRUCT( x, y, z ) ( ##x ) var_##y() \
+{ \
+	static ScriptProperty *script_property = ( ScriptProperty* )( ScriptObject::Find( "StructProperty TribesGame.TrDeployable_MotionSensor." #y ) ); \
+	return ( ##x( this, script_property->offset, z ) ); \
+}
+#define ADD_OBJECT( x, y ) ( class x* ) var_##y() \
+{ \
+	static ScriptProperty *script_property = ( ScriptProperty* )( ScriptObject::Find( "ObjectProperty TribesGame.TrDeployable_MotionSensor." #y ) ); \
+	return *( x** )( this + script_property->offset ); \
+}
+namespace UnrealScript
+{
+	class TrDeployable_MotionSensor : public TrDeployable_Sensor
+	{
+	public:
+			ADD_OBJECT( Texture2D, m_AlarmIcon )
+			ADD_STRUCT( ::VectorProperty, LastCameraPos, 0xFFFFFFFF )
+			ADD_STRUCT( ::VectorProperty, LastCameraDir, 0xFFFFFFFF )
+			ADD_STRUCT( ::VectorProperty, LastScreenLoc, 0xFFFFFFFF )
+			ADD_VAR( ::FloatProperty, m_IconAlpha, 0xFFFFFFFF )
+			ADD_VAR( ::FloatProperty, m_fHUDAlarmTime, 0xFFFFFFFF )
+			ADD_VAR( ::BoolProperty, m_bDrawHUDAlarm, 0x1 )
+			ADD_VAR( ::FloatProperty, m_fLastAlarmTimestamp, 0xFFFFFFFF )
+			ADD_VAR( ::FloatProperty, m_fTimeBetweenAlarms, 0xFFFFFFFF )
+			ADD_VAR( ::FloatProperty, m_fMotionSenseExpireTime, 0xFFFFFFFF )
+	};
+}
+
+#undef ADD_VAR
+#undef ADD_STRUCT
+#undef ADD_OBJECT
