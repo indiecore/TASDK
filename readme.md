@@ -5,6 +5,11 @@ To develop with it and use mods made with it,  you'll need the leaked
 Tribes: Ascend developer build. You can download that via the .torrent
 included in this repo.
 
+Guidelines and such ==================================================
+
+Minimize global namespace pollution
+Maintain coding style
+
 To-do (priority order) ===============================================
 
 Fix garbage in code buffer in ScriptStackFrame - it appears to be valid
