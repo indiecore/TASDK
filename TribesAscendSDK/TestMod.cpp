@@ -5,42 +5,6 @@ const char *kLogName = "SDKTest.log";
 
 using namespace UnrealScript;
 
-#define M_PI ( float )( 3.14159f )
-void AngleVectors( Rotator angles, Vector &forward, Vector &right, Vector &up )
-{
-	float	 angle;
-	float	 sr, sp, sy, cr, cp, cy;
-
-	angle = angles.y * (M_PI*2 / 360);
-	sy = sin(angle);
-	cy = cos(angle);
-	angle = angles.x * (M_PI*2 / 360);
-	sp = sin(angle);
-	cp = cos(angle);
-	angle = angles.z * (M_PI*2 / 360);
-	sr = sin(angle);
-	cr = cos(angle);
-
-	//if (forward)
-	//{
-		forward.x = cp*cy;
-		forward.y = cp*sy;
-		forward.z = -sp;
-	//}
-	//if (right)
-	//{
-		right.x = (-1*sr*sp*cy+-1*cr*-sy);
-		right.y = (-1*sr*sp*sy+-1*cr*cy);
-		right.z = -1*sr*cp;
-	//}
-	//if (up)
-	//{
-		up.x = (cr*sp*cy+-sr*-sy);
-		up.y = (cr*sp*sy+-sr*cy);
-		up.z = cr*cp;
-	//}
-}
-
 HookType ProcessMove( TrPlayerController *controller, int num_params, void *result, float delta_time )
 {
 	OutputLog( "delta time: %f\n", delta_time );
@@ -72,5 +36,10 @@ void ModInit()
 	OutputLog( "locals: 0x%X\n", offsetof( ScriptStackFrame, locals ) );
 	OutputLog( "\n" );
 
-	script_hooks::AddHook( "Function TribesGame.TrDevice.GetReloadTime", ProcessMove );
+	script_hooks::AddHook( "Function TribesGame.TrDevice.GetReloadTime", ProcessMove ); //This is like this because GetReloadTime is a script->script
+																						//call and it's easy to compare the bytecode to what it should
+																						//be in the UPK.
+
+																						//Hooks aren't working because ScriptStackFrame::code gives garbage data.
+																						
 }
