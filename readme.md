@@ -5,11 +5,19 @@ To develop with it and use mods made with it,  you'll need the leaked
 Tribes: Ascend developer build. You can download that via the .torrent
 included in this repo.
 
+
+Using the dev build ==================================================
+
+To run a local server: TribesAscend mapname (in CookedPC/Maps) -seekfreeloading
+To run a dedicated server: TribesAscend server mapname -seekfreeloading
+
+
 Guidelines and such ==================================================
 
 Minimize global namespace pollution
 
 Maintain coding style
+
 
 To-do (priority order) ===============================================
 
