@@ -8,6 +8,7 @@ included in this repo.
 Guidelines and such ==================================================
 
 Minimize global namespace pollution
+
 Maintain coding style
 
 To-do (priority order) ===============================================
