@@ -1,17 +1,17 @@
 #pragma once
 #define ADD_VAR( x, y, z ) ( ##x ) var_##y() \
 { \
-	static ScriptProperty *script_property = ( ScriptProperty* )( ScriptObject::Find( #x " Engine.Info." #y ) ); \
+	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( #x " Engine.Info." #y ); \
 	return ( ##x( this, script_property->offset, z ) ); \
 }
 #define ADD_STRUCT( x, y, z ) ( ##x ) var_##y() \
 { \
-	static ScriptProperty *script_property = ( ScriptProperty* )( ScriptObject::Find( "StructProperty Engine.Info." #y ) ); \
+	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( "StructProperty Engine.Info." #y ); \
 	return ( ##x( this, script_property->offset, z ) ); \
 }
 #define ADD_OBJECT( x, y ) ( class x* ) var_##y() \
 { \
-	static ScriptProperty *script_property = ( ScriptProperty* )( ScriptObject::Find( "ObjectProperty Engine.Info." #y ) ); \
+	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( "ObjectProperty Engine.Info." #y ); \
 	return *( x** )( this + script_property->offset ); \
 }
 namespace UnrealScript

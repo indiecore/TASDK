@@ -21,6 +21,15 @@ Maintain coding style
 
 To-do (priority order) ===============================================
 
+Add automated UnrealScript calls to the generated headers using ProcessEvent.
+
+Add a specialized Rotator class.
+
+Improve implicit conversion between UE3 short vectors and standard float vectors.
+
+
+Finished ===============================================================
+
 Fix garbage in code buffer in ScriptStackFrame - it appears to be valid
 UnrealScript bytecode, but seems to be from another call and does not
 contain valid args for the hooked function. This prevents grabbing args
@@ -28,9 +37,3 @@ from ScriptStackFrame and is top priority.
 
 Automatically grab args off of ScriptStackFrame and pass them to the hook
 for more user-friendly hooking. Sort of implemented but the ASM is wrong.
-
-Add automated UnrealScript calls to the generated headers using ProcessEvent.
-
-Add a specialized Rotator class.
-
-Improve implicit conversion between UE3 short vectors and standard float vectors.

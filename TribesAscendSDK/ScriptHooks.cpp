@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <deque>
 #include "TASDK.h"
 
 using namespace UnrealScript;
@@ -7,22 +8,23 @@ struct HookInfo
 {
 	HookFunction hook_function;
 	ScriptFunction *hook_target;
+	NativeFunction orig_function;
 
-	int arg_count;
-	int *arg_size;
-	int arg_size_total;
+	std::deque< int > arg_size;
+	int stack_size;
 };
 
 namespace script_hooks
 {
-	HookInfo *hook_array = NULL;
-	int hook_count = 0;
+	std::deque< HookInfo > hook_array;
 
 	NativeFunction *native_array;
 	NativeFunction OrigVirtualFunction;
 	CleanupStack cleanup_stack;
+	CallFunction call_function;
 
-	__declspec( naked ) HookType CallHook( HookFunction function, ScriptObject *object, int num_params, int param_size, void *result, byte *func_args )
+	DWORD test;
+	__declspec( naked ) HookType CallHook( HookFunction function, ScriptObject *object, int param_size, void *result, byte *func_args )
 	{	
 		__asm
 		{
@@ -30,26 +32,30 @@ namespace script_hooks
 			mov ebp, esp
 
 			push edx
+			push ecx
+
+			mov ecx, func_args
+			add ecx, param_size
 
 			mov edx, func_args
-			add edx, param_size
 		}
 push_loop:
 		__asm
 		{
-			sub edx, 4
 			push [edx]
-			cmp edx, func_args
-			jg push_loop
+			add edx, 4
+
+			cmp edx, ecx
+			jl push_loop
 
 			push result
-			push num_params
 			push object
 
 			call function
-			add esp, 12
+			add esp, 8
 			add esp, param_size
 
+			pop ecx
 			pop edx
 			pop ebp
 
@@ -57,36 +63,23 @@ push_loop:
 		}
 	}
 
-	void __fastcall VirtualFunction( ScriptObject *thisptr, int edx, ScriptStackFrame &stack, void *result )
+	void __fastcall HookHandler( ScriptObject *thisptr, int edx, ScriptStackFrame &stack, void *result )
 	{
-		for( int i = 0; i < hook_count; i++ )
+		byte *orig_code = stack.code;
+		for( DWORD i = 0; i < hook_array.size(); i++ )
 		{
-			if( stack.node == hook_array[ i ].hook_target )
+			if( ( uintptr_t )( stack.node ) - 0xC0 == ( uintptr_t )( hook_array[ i ].hook_target ) )
 			{
-				byte *orig_code = stack.code;
+				byte *func_args = ( byte* )( malloc( hook_array[ i ].stack_size ) );
+				int arg_offset = hook_array[ i ].stack_size;
 
-				stack.code += sizeof( ScriptName );
-
-				byte *func_args = ( byte* )( calloc( 1, hook_array[ i ].arg_size_total ) );
-				int arg_offset = 0;
-				int num_params = 0;
-
-				//for( int i = 0; i < 20; i++ )
-				//	OutputLog( "*stack.code: 0x%X\n",  stack.code[ i ] );
-
-				float delta_time = stack.GetArg< float >();
-				OutputLog( "delta time (from stack): %f\n", delta_time );
-				stack.code = orig_code + sizeof( ScriptName );
-
-				while( *stack.code != 0x16 )
+				for( int num_params = 0; *stack.code != 0x16; num_params++ ) //copy args to buffer, respecting LIFO
 				{
+					arg_offset -= hook_array[ i ].arg_size[ num_params ];
 					native_array[ *stack.code++ ]( stack.object, stack, func_args + arg_offset );
-					arg_offset += hook_array[ i ].arg_size[ num_params++ ];
-					OutputLog( "arg_offset: %i\n", arg_offset );
 				}
 
-				OutputLog( "Param size: %i\n", ( int )( 4.0f * ceil( 0.25f * hook_array[ i ].arg_size_total ) ) );
-				if( CallHook( hook_array[ i ].hook_function, stack.object, num_params, ( int )( 4.0f * ceil( 0.25f * hook_array[ i ].arg_size_total ) ), result, func_args ) == kHookBlock )
+				if( CallHook( hook_array[ i ].hook_function, stack.object, hook_array[ i ].stack_size, result, func_args ) == kHookBlock )
 				{
 					cleanup_stack( stack, result, hook_array[ i ].hook_target );
 					free( func_args );
@@ -94,91 +87,71 @@ push_loop:
 				}
 
 				free( func_args );
-
 				stack.code = orig_code;
 
-				break;
+				if( hook_array[ i ].orig_function )
+				{
+					hook_array[ i ].hook_target->set_function( hook_array[ i ].orig_function );
+					call_function( thisptr, stack, result, hook_array[ i ].hook_target );
+					hook_array[ i ].hook_target->set_function( HookHandler );
+				}
+				else
+				{
+					hook_array[ i ].hook_target->set_function_flags( hook_array[ i ].hook_target->function_flags() & ~ScriptFunction::kFuncNative );
+					call_function( thisptr, stack, result, hook_array[ i ].hook_target );
+					hook_array[ i ].hook_target->set_function_flags( hook_array[ i ].hook_target->function_flags() | ScriptFunction::kFuncNative );
+				}
+
+				return;
 			}
 		}
-
-		OrigVirtualFunction( thisptr, stack, result );
-	}
-
-	void SetupHooks()
-	{
-		//OrigVirtualFunction = native_array[ 0x1B ];
-		//native_array[ 0x1B ] = ( NativeFunction )( VirtualFunction );
-		OutputLog( "Hooked execVirtualFunction\n" );
-	}
-
-	struct SetXP_Params
-	{
-		TrPlayerController *controller;
-		int exp;
-	};
-
-	void __fastcall Test( TrPlayerController *thisptr, int edx, ScriptStackFrame &stack, void *result )
-	{
-		byte *orig_code = stack.code;
-		for( int i = 0; i < 50; i++ )
-		{
-			OutputLog( "Stack.Code: 0x%X\n", *stack.code++ );
-		}
-		stack.code = orig_code;
-
-		OutputLog( "Stack: 0x%X\n", &stack );
-		OutputLog( "Result: 0x%X\n", result );
-		OutputLog( "PRI: 0x%X\n", stack.GetArg< PlayerReplicationInfo* >() );
-		OutputLog( "Slot: %i\n", stack.GetArg< int >() );
-
-		stack.code++;
 	}
 
 	void AddHook( char *function_name, void *function )
 	{
-		ScriptFunction *script_function = ( ScriptFunction* )( ScriptObject::Find( function_name ) );
+		ScriptFunction *script_function = ScriptObject::Find< ScriptFunction >( function_name );
 
 		if( script_function )
 		{
-			if( hook_array == NULL )
+			HookInfo new_hook;
+
+			new_hook.hook_function = ( HookFunction )( function );
+			new_hook.hook_target = script_function;
+
+			new_hook.stack_size = 0;
+
+			if( script_function->function_flags() & ScriptFunction::kFuncNative )
 			{
-				hook_array = ( HookInfo* )( malloc( sizeof( HookInfo ) ) );
+				new_hook.orig_function = ( NativeFunction )( script_function->function() );
 			}
 			else
 			{
-				hook_array = ( HookInfo* )( realloc( hook_array, ( hook_count + 1 ) * sizeof( HookInfo ) ) );
+				new_hook.orig_function = NULL;
 			}
 
-			hook_array[ hook_count ].hook_function = ( HookFunction )( function );
-			hook_array[ hook_count ].hook_target = script_function;
-
-			hook_array[ hook_count ].arg_size_total = 0;
-			hook_array[ hook_count ].arg_count = 0;
-
-			hook_array[ hook_count ].arg_size = ( int* )( malloc( 4 ) );
+			OutputLog( "orig function: 0x%X\n", new_hook.orig_function );
+			script_function->set_function_flags( script_function->function_flags() | ScriptFunction::kFuncNative );
+			script_function->set_function( HookHandler );
 
 			for( ScriptProperty *script_property = ( ScriptProperty* )( script_function->children() ); script_property; script_property = ( ScriptProperty* )( script_property->next() ) )
 			{
 				if( script_property->property_flags & ScriptProperty::kPropParm )
 				{
 					OutputLog( "Arg %s size %i\n", script_property->GetName(), script_property->element_size );
-					hook_array[ hook_count ].arg_size[ hook_array[ hook_count ].arg_count++ ] = script_property->element_size;
-					hook_array[ hook_count ].arg_size_total += script_property->element_size;
-
-					hook_array[ hook_count ].arg_size = ( int* )( realloc( hook_array[ hook_count ].arg_size, hook_array[ hook_count ].arg_count * 4 ) );
+					new_hook.arg_size.push_back( script_property->element_size );
+					new_hook.stack_size += script_property->element_size;
 				}
 			}
 
-			script_function->set_function_flags( script_function->function_flags() | ScriptFunction::kFuncNative );
-			script_function->set_function( Test );
+			new_hook.stack_size = ceil( new_hook.stack_size / 4.0f ) * 4;
 
-			hook_count++;
+			hook_array.push_back( new_hook );
 
-			OutputLog( "Hooked function %s (0x%X)\n", function_name, script_function );
+			OutputLog( "Hooked function %s (0x%X) (args %i)\n\n", function_name, script_function, new_hook.stack_size );
 		}
 		else
 		{
-			OutputLog( "Error: could not find function %s.\n", function_name );
+			OutputLog( "Error: could not find function %s.\n\n", function_name );
 		}
 	}
 }

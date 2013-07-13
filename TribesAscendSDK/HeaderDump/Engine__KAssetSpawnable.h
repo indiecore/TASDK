@@ -1,17 +1,17 @@
 #pragma once
 #define ADD_VAR( x, y, z ) ( ##x ) var_##y() \
 { \
-	static ScriptProperty *script_property = ( ScriptProperty* )( ScriptObject::Find( #x " Engine.KAssetSpawnable." #y ) ); \
+	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( #x " Engine.KAssetSpawnable." #y ); \
 	return ( ##x( this, script_property->offset, z ) ); \
 }
 #define ADD_STRUCT( x, y, z ) ( ##x ) var_##y() \
 { \
-	static ScriptProperty *script_property = ( ScriptProperty* )( ScriptObject::Find( "StructProperty Engine.KAssetSpawnable." #y ) ); \
+	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( "StructProperty Engine.KAssetSpawnable." #y ); \
 	return ( ##x( this, script_property->offset, z ) ); \
 }
 #define ADD_OBJECT( x, y ) ( class x* ) var_##y() \
 { \
-	static ScriptProperty *script_property = ( ScriptProperty* )( ScriptObject::Find( "ObjectProperty Engine.KAssetSpawnable." #y ) ); \
+	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( "ObjectProperty Engine.KAssetSpawnable." #y ); \
 	return *( x** )( this + script_property->offset ); \
 }
 namespace UnrealScript

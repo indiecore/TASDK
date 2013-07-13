@@ -1,22 +1,6 @@
 #include <Windows.h>
 #include "TASDK.h"
 
-ScriptObject* ScriptObject::Find( char *object_name )
-{
-	if( *object_name == ':' ) //hack for global namespace in the generated headers
-		object_name += 2;
-
-	for( int i = 0; i < object_array()->count(); i++ )
-	{
-		ScriptObject *object = ( *object_array() )( i );
-		if( !strcmp( object->GetFullName(), object_name ) )
-		{
-			return object;
-		}
-	}
-	return NULL;
-}
-
 void ScriptObject::LogAll()
 {
 	OutputLog( "ScriptObject.LogAll output: \n" );
@@ -65,19 +49,19 @@ void ScriptObject::GenerateHeader()
 
 	OutputLogTo( file_name.c_str(), "#define ADD_VAR( x, y, z ) ( ##x ) var_##y() \\\n" );
 	OutputLogTo( file_name.c_str(), "{ \\\n" );
-	OutputLogTo( file_name.c_str(), "\tstatic ScriptProperty *script_property = ( ScriptProperty* )( ScriptObject::Find( #x \" %s.%s.\" #y ) ); \\\n", this->outer()->GetName(), this->GetName() );
+	OutputLogTo( file_name.c_str(), "\tstatic ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( #x \" %s.%s.\" #y ); \\\n", this->outer()->GetName(), this->GetName() );
 	OutputLogTo( file_name.c_str(), "\treturn ( ##x( this, script_property->offset, z ) ); \\\n" );
 	OutputLogTo( file_name.c_str(), "}\n" );
 
 	OutputLogTo( file_name.c_str(), "#define ADD_STRUCT( x, y, z ) ( ##x ) var_##y() \\\n" );
 	OutputLogTo( file_name.c_str(), "{ \\\n" );
-	OutputLogTo( file_name.c_str(), "\tstatic ScriptProperty *script_property = ( ScriptProperty* )( ScriptObject::Find( \"StructProperty %s.%s.\" #y ) ); \\\n", this->outer()->GetName(), this->GetName() );
+	OutputLogTo( file_name.c_str(), "\tstatic ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( \"StructProperty %s.%s.\" #y ); \\\n", this->outer()->GetName(), this->GetName() );
 	OutputLogTo( file_name.c_str(), "\treturn ( ##x( this, script_property->offset, z ) ); \\\n" );
 	OutputLogTo( file_name.c_str(), "}\n" );
 
 	OutputLogTo( file_name.c_str(), "#define ADD_OBJECT( x, y ) ( class x* ) var_##y() \\\n" );
 	OutputLogTo( file_name.c_str(), "{ \\\n" );
-	OutputLogTo( file_name.c_str(), "\tstatic ScriptProperty *script_property = ( ScriptProperty* )( ScriptObject::Find( \"ObjectProperty %s.%s.\" #y ) ); \\\n", this->outer()->GetName(), this->GetName() );
+	OutputLogTo( file_name.c_str(), "\tstatic ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( \"ObjectProperty %s.%s.\" #y ); \\\n", this->outer()->GetName(), this->GetName() );
 	OutputLogTo( file_name.c_str(), "\treturn *( x** )( this + script_property->offset ); \\\n" );
 	OutputLogTo( file_name.c_str(), "}\n" );
 
@@ -135,7 +119,7 @@ void ScriptObject::GenerateHeader()
 	OutputLogTo( file_name.c_str(), "#undef ADD_STRUCT\n" );
 	OutputLogTo( file_name.c_str(), "#undef ADD_OBJECT\n" );
 
-	ScriptClass *core_class = ( ScriptClass* )( ScriptObject::Find( "Class Core.Class" ) );
+	ScriptClass *core_class = ScriptObject::Find< ScriptClass >( "Class Core.Class" );
 	for( int i = 0; i < object_array()->count(); i++ )
 	{
 		ScriptObject *class_object = ( *object_array() )( i );
@@ -156,7 +140,7 @@ void ScriptObject::GenerateHeaders()
 {
 	InitLoggingTo( "..\\..\\..\\src\\TribesAscendSDK\\HeaderDump\\HeaderDump.h" );
 	
-	Find( "Class Core.Object" )->GenerateHeader();
+	Find< ScriptObject >( "Class Core.Object" )->GenerateHeader();
 
 	OutputLog( "Finished.\n" );
 }

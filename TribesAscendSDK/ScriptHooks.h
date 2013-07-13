@@ -36,14 +36,15 @@ enum HookType
 };
 
 typedef void( __thiscall *NativeFunction )( void *thisptr, ScriptStackFrame &stack, void *result );
-typedef HookType( *HookFunction )( void *object, int num_params, void *result, byte *args );
+typedef HookType( *HookFunction )( void *object, void *result, byte *args );
 typedef void( __stdcall *CleanupStack )( ScriptStackFrame &stack, void *result, ScriptFunction *function );
+typedef void( __thiscall *CallFunction )( void  *thisptr, ScriptStackFrame &stack, void *result, ScriptFunction *function );
 
 namespace script_hooks
 {
 	extern NativeFunction *native_array;
 	extern CleanupStack cleanup_stack;
+	extern CallFunction call_function;
 
-	void SetupHooks();
 	void AddHook( char *function_name, void *function );
 }

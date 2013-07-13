@@ -90,7 +90,7 @@ public:
 
 class ScriptObject
 {
-public:
+private:
 	int object_internal_integer_;
 	QWord object_flags_;
 	void *hash_next_;
@@ -119,7 +119,22 @@ public:
 		OutputLog( "Object Array: 0x%X\n", new_object_array );
 	}
 
-	static ScriptObject* Find( char *object_name );
+	template< class T > static T* Find( char *object_name )
+	{
+		if( *object_name == ':' ) //hack for global namespace in the generated headers
+			object_name += 2;
+
+		for( int i = 0; i < object_array()->count(); i++ )
+		{
+			ScriptObject *object = ( *object_array() )( i );
+			if( !strcmp( object->GetFullName(), object_name ) )
+			{
+				return ( T* )( object );
+			}
+		}
+		return NULL;
+	}
+
 	static void LogAll();
 	bool IsA( ScriptClass *script_class );
 	void GenerateHeader();
@@ -467,12 +482,12 @@ struct Vector
 				x * vec.y - y * vec.x);
 	}
 
-	class ShortVector ToShortVector();
+	struct ShortVector ToShortVector();
 };
 
 struct ShortVector
 {
-	short x, y, z;
+	int x, y, z;
 
 	ShortVector( short X = 0, short Y = 0, short Z = 0 )
 	{
