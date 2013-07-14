@@ -126,6 +126,11 @@ class RotatorProperty
 	DWORD offset_;
 	uintptr_t thisptr_;
 
+	inline Rotator *GetRotator()
+	{
+		return ( Rotator* )( thisptr_ + offset_ );
+	}
+
 public:
 
 	RotatorProperty( void *thisptr, DWORD offset, DWORD bit_mask )
@@ -134,23 +139,89 @@ public:
 		offset_ = offset;
 	}
 
-	void operator =( ShortRotator new_val )
-		{ *( ShortRotator* )( thisptr_ + offset_ ) = new_val; }
-
 	void operator =( Rotator new_val )
-		{ *( ShortVector* )( thisptr_ + offset_ ) = new_val.ToShortVector(); }
-
-	operator ShortRotator()
-		{ return *( ShortRotator* )( thisptr_ + offset_ ); }
+		{ *GetRotator() = new_val; }
 
 	operator Rotator()
-		{ return ( *( ShortRotator* )( thisptr_ + offset_ ) ).ToFloatVector(); }
+		{ return *GetRotator(); }
+
+	Rotator operator *( float num )
+	{
+		return Rotator( ( int )( num * GetRotator()->pitch ), ( int )( num * GetRotator()->yaw ), ( int )( num * GetRotator()->roll ) );
+	}
+
+	Rotator operator *=( float num )
+	{
+		GetRotator()->pitch	= ( int )( num * GetRotator()->pitch );
+		GetRotator()->yaw	= ( int )( num * GetRotator()->yaw );
+		GetRotator()->roll	= ( int )( num * GetRotator()->roll );
+		return *GetRotator();
+	}
+
+	Rotator operator /( float num )
+	{
+		return Rotator( ( int )( ( 1.0f / num ) * GetRotator()->pitch ), ( int )( ( 1.0f / num ) * GetRotator()->yaw ), ( int )( ( 1.0f / num ) * GetRotator()->roll ) );
+	}
+
+	Rotator operator /=( float num )
+	{
+		GetRotator()->pitch	= ( int )( ( 1.0f / num ) * GetRotator()->pitch );
+		GetRotator()->yaw	= ( int )( ( 1.0f / num ) * GetRotator()->yaw );
+		GetRotator()->roll	= ( int )( ( 1.0f / num ) * GetRotator()->roll );
+		return *GetRotator();
+	}
+
+	Rotator operator +( const Rotator &rot )
+	{
+		return Rotator( ( int )( GetRotator()->pitch + rot.pitch ), ( int )( GetRotator()->yaw + rot.yaw ), ( int )( GetRotator()->roll + rot.roll ) );
+	}
+
+	Rotator operator +=( const Rotator &rot )
+	{
+		GetRotator()->pitch	+= rot.pitch;
+		GetRotator()->yaw	+= rot.yaw;
+		GetRotator()->roll	+= rot.roll;
+		return *GetRotator();
+	}
+
+	Rotator operator -( const Rotator &rot )
+	{
+		return Rotator( GetRotator()->pitch - rot.pitch, GetRotator()->yaw - rot.yaw, GetRotator()->roll - rot.roll );
+	}
+
+	Rotator operator -=( const Rotator &rot )
+	{
+		GetRotator()->pitch	-= rot.pitch;
+		GetRotator()->yaw	-= rot.yaw;
+		GetRotator()->roll	-= rot.roll;
+		return *GetRotator();
+	}
+
+	Vector GetForward()
+	{
+		return GetRotator()->GetForward();
+	}
+
+	Vector GetRight()
+	{
+		return GetRotator()->GetForward();
+	}
+
+	Vector GetUp()
+	{
+		return GetRotator()->GetForward();
+	}
 };
 
 class VectorProperty
 {
 	DWORD offset_;
 	uintptr_t thisptr_;
+
+	inline Vector *GetVector()
+	{
+		return ( Vector* )( thisptr_ + offset_ );
+	}
 
 public:
 
@@ -160,17 +231,78 @@ public:
 		offset_ = offset;
 	}
 
-	void operator =( ShortVector new_val )
-		{ *( ShortVector* )( thisptr_ + offset_ ) = new_val; }
-
 	void operator =( Vector new_val )
-		{ *( Vector* )( thisptr_ + offset_ ) = new_val; }
-
-	operator ShortVector()
-		{ return *( ShortVector* )( thisptr_ + offset_ ); }
+		{ *GetVector() = new_val; }
 
 	operator Vector()
-		{ return ( *( Vector* )( thisptr_ + offset_ ) ); }
+		{ return *GetVector(); }
+
+	Vector operator *( float num )
+	{
+		return Vector( GetVector()->x * num, GetVector()->y * num, GetVector()->z * num );
+	}
+
+	Vector operator *=( float num )
+	{
+		GetVector()->x	= num * GetVector()->x;
+		GetVector()->y	= num * GetVector()->y;
+		GetVector()->z	= num * GetVector()->z;
+		return *GetVector();
+	}
+
+	Vector operator /( float num )
+	{
+		return Vector( GetVector()->x / num, GetVector()->y / num, GetVector()->z / num );
+	}
+
+	Vector operator /=( float num )
+	{
+		GetVector()->x	= GetVector()->x / num;
+		GetVector()->y	= GetVector()->y / num;
+		GetVector()->z	= GetVector()->z / num;
+		return *GetVector();
+	}
+
+	Vector operator +( const Vector &vec )
+	{
+		return Vector( GetVector()->x + vec.x, GetVector()->y + vec.y, GetVector()->z + vec.z );
+	}
+
+	Vector operator +=( const Vector &vec )
+	{
+		GetVector()->x	+= vec.x;
+		GetVector()->y	+= vec.y;
+		GetVector()->z	+= vec.z;
+		return *GetVector();
+	}
+
+	Vector operator -( const Vector &vec )
+	{
+		return Vector( GetVector()->x - vec.x, GetVector()->y - vec.y, GetVector()->z - vec.z );
+	}
+
+	Vector operator -=( const Vector &vec )
+	{
+		GetVector()->x	-= vec.x;
+		GetVector()->y	-= vec.y;
+		GetVector()->z	-= vec.z;
+		return *GetVector();
+	}
+
+	float Length()
+	{
+		return GetVector()->Length();
+	}
+
+	float DotProduct( const Vector &vec )
+	{
+		return GetVector()->DotProduct( vec );
+	}
+
+	Vector CrossProduct( const Vector &vec )
+	{
+		return GetVector()->CrossProduct( vec );
+	}
 };
 
 template< class T > class ObjectProperty

@@ -172,15 +172,5 @@ const char *ScriptObject::GetFullName()
 	return "Failed to get name";
 }
 
-ShortVector Vector::ToShortVector()
-{
-	return ShortVector( ( short )( ( x / 360.0f ) * 65535.0f ), ( short )( ( y / 360.0f ) * 65535.0f ), ( short )( ( z / 360.0f ) * 65535.0f ) );
-}
-
-Vector ShortVector::ToFloatVector()
-{
-	return Vector( ( 360.0f * x ) / 65535.0f, ( 360.0f * y ) / 65535.0f, ( 360.0f * z ) / 65535.0f );
-}
-
 ScriptArray< ScriptObject* > *ScriptObject::object_array_ = NULL;
 ScriptArray< ScriptNameEntry* > *ScriptName::name_array_ = NULL;

@@ -76,6 +76,7 @@ push_loop:
 		byte *orig_code = stack.code;
 		for( DWORD i = 0; i < hook_array.size(); i++ )
 		{
+			//lea ebp, [esp-404] in CallFunction
 			uintptr_t function = *( uintptr_t* )( *GetEBP() + 0x414 ); //3rd arg of CallFunction
 
 			if( function == ( uintptr_t )( hook_array[ i ].hook_target ) )

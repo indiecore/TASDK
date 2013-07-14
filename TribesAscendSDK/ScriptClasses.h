@@ -415,10 +415,16 @@ struct Vector
 		return sqrtf( x * x + y * y + z * z );
 	}
 
-	Vector operator *( float num ) const
+	Vector operator *( float num )
 	{
 		return Vector( x * num, y * num, z * num );
 	}
+
+	friend Vector operator *( float num, const Vector &vec )
+	{
+		return Vector( vec.x * num, vec.y * num, vec.z * num );
+	}
+
 	Vector operator *=( float num )
 	{
 		x *= num;
@@ -439,15 +445,11 @@ struct Vector
 		return *this;
 	}
 
-	friend Vector operator *( float num, Vector const &vec )
-	{
-		return Vector( vec.x * num, vec.y * num, vec.z * num );
-	}
-
 	Vector operator +( const Vector &vec ) const
 	{
 		return Vector( x + vec.x, y + vec.y, z + vec.z );
 	}
+
 	Vector operator +=( const Vector &vec )
 	{
 		x += vec.x;
@@ -479,118 +481,160 @@ struct Vector
 		return temp_vec;
 	}
 	
-	float DotProduct( const Vector &vec ) const
+	float DotProduct( const Vector &vec )
 	{
 		return x * vec.x + y * vec.y + z * vec.z;
 	}
 
-	Vector CrossProduct( const Vector &vec ) const
+	Vector CrossProduct( const Vector &vec )
 	{
 		return Vector(y * vec.z - z * vec.y,
 				z * vec.x - x * vec.z,
 				x * vec.y - y * vec.x);
 	}
-
-	struct ShortVector ToShortVector();
 };
 
-struct ShortVector
+struct Rotator
 {
-	int x, y, z;
+	int pitch, yaw, roll;
 
-	ShortVector( short X = 0, short Y = 0, short Z = 0 )
+	Rotator( int pitch_ = 0, int yaw_ = 0, int roll_ = 0 )
 	{
-		x = X;
-		y = Y;
-		z = Z;
+		pitch = pitch_;
+		yaw = yaw_;
+		roll = roll_;
 	}
 
-	float Length()
+	Rotator operator *( float num )
 	{
-		if( x == 0.0f && y == 0.0f && z == 0.0f )
-			return 0.0f;
-
-		return sqrtf( ( float )( x * x + y * y + z * z ) );
+		return Rotator( ( int )( num * pitch ), ( int )( num * yaw ), ( int )( num * roll ) );
 	}
 
-	ShortVector operator *( float num ) const
+	friend Rotator operator *( float num, const Rotator &rot )
 	{
-		return ShortVector( ( short )( ( float )( x ) * num ), ( short )( ( float )( y ) * num ), ( short )( ( float )( z ) * num ) );
+		return Rotator( ( int )( num * rot.pitch ), ( int )( num * rot.yaw ), ( int )( num * rot.roll ) );
 	}
-	ShortVector operator *=( float num )
+
+	Rotator operator *=( float num )
 	{
-		x *= num;
-		y *= num;
-		z *= num;
+		pitch	= ( int )( num * pitch );
+		yaw		= ( int )( num * yaw );
+		roll	= ( int )( num * roll );
 		return *this;
 	}
 
-	ShortVector operator /( float num ) const
+	Rotator operator /( float num )
 	{
-		return ShortVector( x / num, y / num, z / num );
+		return Rotator( ( int )( ( 1.0f / num ) * pitch ), ( int )( ( 1.0f / num ) * yaw ), ( int )( ( 1.0f / num ) * roll ) );
 	}
-	ShortVector operator /=( float num )
+
+	Rotator operator /=( float num )
 	{
-		x /= num;
-		y /= num;
-		z /= num;
+		pitch	= ( int )( ( 1.0f / num ) * pitch );
+		yaw		= ( int )( ( 1.0f / num ) * yaw );
+		roll	= ( int )( ( 1.0f / num ) * roll );
 		return *this;
 	}
 
-	friend ShortVector operator *( float num, ShortVector const &vec )
+	Rotator operator +( const Rotator &rot )
 	{
-		return ShortVector( vec.x * num, vec.y * num, vec.z * num );
+		return Rotator( ( int )( pitch + rot.pitch ), ( int )( yaw + rot.yaw ), ( int )( roll + rot.roll ) );
 	}
 
-	ShortVector operator +( const ShortVector &vec ) const
+	Rotator operator +=( const Rotator &rot )
 	{
-		return ShortVector( x + vec.x, y + vec.y, z + vec.z );
-	}
-	ShortVector operator +=( const ShortVector &vec )
-	{
-		x += vec.x;
-		y += vec.y;
-		z += vec.z;
+		pitch	+= rot.pitch;
+		yaw		+= rot.yaw;
+		roll	+= rot.roll;
 		return *this;
 	}
 
-	ShortVector operator -( const ShortVector &vec ) const
+	Rotator operator -( const Rotator &rot )
 	{
-		return ShortVector( x - vec.x, y - vec.y, z - vec.z );
+		return Rotator( pitch - rot.pitch, yaw - rot.yaw, roll - rot.roll );
 	}
 
-	ShortVector operator -=( const ShortVector &vec )
+	Rotator operator -=( const Rotator &rot )
 	{
-		x -= vec.x;
-		y -= vec.y;
-		z -= vec.z;
+		pitch	-= rot.pitch;
+		yaw		-= rot.yaw;
+		roll	-= rot.roll;
 		return *this;
 	}
 
-	ShortVector GetNormal()
+	Vector GetForward() //Thanks id software
 	{
-		float magnitude = Length();
-		ShortVector temp_vec = *this;
-		temp_vec.x /= magnitude;
-		temp_vec.y /= magnitude;
-		temp_vec.z /= magnitude;
-		return temp_vec;
-	}
-	
-	float DotProduct( const ShortVector &vec ) const
-	{
-		return x * vec.x + y * vec.y + z * vec.z;
+		float	 angle;
+		float	 sin_pitch, cos_pitch;
+		float	 sin_yaw, cos_yaw;
+
+		angle = ( float )( pitch ) * ( 3.14159f * 2 / 65535 );
+		sin_pitch = sin( angle );
+		cos_pitch = cos( angle );
+
+		angle = ( float )( yaw ) * ( 3.14159f * 2 / 65535 );
+		sin_yaw = sin( angle );
+		cos_yaw = cos( angle );
+
+		Vector forward;
+
+		forward.x = cos_pitch * cos_yaw;
+		forward.y = cos_pitch * sin_yaw;
+		forward.z = sin_pitch;
+		return forward;
 	}
 
-	ShortVector CrossProduct( const ShortVector &vec ) const
+	Vector GetRight() //Thanks id software
 	{
-		return ShortVector(y * vec.z - z * vec.y,
-				z * vec.x - x * vec.z,
-				x * vec.y - y * vec.x);
+		float	 angle;
+		float	 sin_pitch, cos_pitch;
+		float	 sin_yaw, cos_yaw;
+		float	 sin_roll, cos_roll;
+
+		angle = ( float )( pitch ) * ( 3.14159f * 2 / 65535 );
+		sin_pitch = sin( angle );
+		cos_pitch = cos( angle );
+
+		angle = ( float )( yaw ) * ( 3.14159f * 2 / 65535 );
+		sin_yaw = sin( angle );
+		cos_yaw = cos( angle );
+		
+		angle = ( float )( roll ) * ( 3.14159f * 2 / 65535 );
+		sin_roll = sin( angle );
+		cos_roll = cos( angle );
+
+		Vector right;
+
+		right.x = ( -sin_roll * sin_pitch * cos_yaw + cos_roll * sin_yaw );
+		right.y = ( -sin_roll * sin_pitch * sin_yaw - cos_roll * cos_yaw );
+		right.z = sin_roll * cos_pitch;
+		return right;
 	}
 
-	Vector ToFloatVector();
+	Vector GetUp() //Thanks id software
+	{
+		float	 angle;
+		float	 sin_pitch, cos_pitch;
+		float	 sin_yaw, cos_yaw;
+		float	 sin_roll, cos_roll;
+
+		angle = ( float )( pitch ) * ( 3.14159f * 2 / 65535 );
+		sin_pitch = sin( angle );
+		cos_pitch = cos( angle );
+
+		angle = ( float )( yaw ) * ( 3.14159f * 2 / 65535 );
+		sin_yaw = sin( angle );
+		cos_yaw = cos( angle );
+		
+		angle = ( float )( roll ) * ( 3.14159f * 2 / 65535 );
+		sin_roll = sin( angle );
+		cos_roll = cos( angle );
+
+		Vector up;
+
+		up.x = ( cos_roll * sin_pitch * cos_yaw + sin_roll * sin_yaw );
+		up.y = ( cos_roll * sin_pitch * sin_yaw - sin_roll * cos_yaw );
+		up.z = -cos_roll * cos_pitch;
+		return up;
+	}
 };
-
-typedef Vector Rotator;
-typedef ShortVector ShortRotator;
