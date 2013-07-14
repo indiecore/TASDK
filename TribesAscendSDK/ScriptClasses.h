@@ -162,6 +162,15 @@ public:
 		return object_class_;
 	}
 
+	enum ENetRole
+	{
+		ROLE_None               = 0,
+		ROLE_SimulatedProxy     = 1,
+		ROLE_AutonomousProxy    = 2,
+		ROLE_Authority          = 3,
+		ROLE_MAX                = 4,
+	};
+
 private:
 	virtual void Vfunc00() = 0;
 	virtual void Vfunc01() = 0;
@@ -229,7 +238,7 @@ private:
 	virtual void Vfunc63() = 0;
 	virtual void Vfunc64() = 0;
 public:
-	virtual void ProcessEvent( class ScriptFunction* function, void* params, void* result ) = 0;
+	virtual void ProcessEvent( class ScriptFunction* function, void *params, void *result ) = 0;
 };
 
 class ScriptField : public ScriptObject

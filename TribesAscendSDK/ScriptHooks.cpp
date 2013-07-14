@@ -1,6 +1,5 @@
-#include <Windows.h>
-#include <deque>
 #include "TASDK.h"
+#include <deque>
 
 using namespace UnrealScript;
 
@@ -63,12 +62,23 @@ push_loop:
 		}
 	}
 
+	__declspec( naked ) uintptr_t *GetEBP()
+	{
+		__asm
+		{
+			mov eax, ebp
+			retn
+		}
+	}
+
 	void __fastcall HookHandler( ScriptObject *thisptr, int edx, ScriptStackFrame &stack, void *result )
 	{
 		byte *orig_code = stack.code;
 		for( DWORD i = 0; i < hook_array.size(); i++ )
 		{
-			if( ( uintptr_t )( stack.node ) - 0xC0 == ( uintptr_t )( hook_array[ i ].hook_target ) )
+			uintptr_t function = *( uintptr_t* )( *GetEBP() + 0x414 ); //3rd arg of CallFunction
+
+			if( function == ( uintptr_t )( hook_array[ i ].hook_target ) )
 			{
 				byte *func_args = ( byte* )( malloc( hook_array[ i ].stack_size ) );
 				int arg_offset = hook_array[ i ].stack_size;
@@ -129,7 +139,6 @@ push_loop:
 				new_hook.orig_function = NULL;
 			}
 
-			OutputLog( "orig function: 0x%X\n", new_hook.orig_function );
 			script_function->set_function_flags( script_function->function_flags() | ScriptFunction::kFuncNative );
 			script_function->set_function( HookHandler );
 
@@ -143,7 +152,7 @@ push_loop:
 				}
 			}
 
-			new_hook.stack_size = ceil( new_hook.stack_size / 4.0f ) * 4;
+			new_hook.stack_size = ( int )( ceil( new_hook.stack_size / 4.0f ) ) * 4;
 
 			hook_array.push_back( new_hook );
 

@@ -1,7 +1,7 @@
+#include "TASDK.h"
 #include <fstream>
 #include <string>
 #include <cstdio>
-#include <Windows.h>
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include <Windows.h>
+#include "TASDK.h"
 #include <Psapi.h>
 
 MODULEINFO GetModuleInfo( char *module_name )

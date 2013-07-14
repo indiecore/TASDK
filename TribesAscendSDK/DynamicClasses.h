@@ -164,13 +164,13 @@ public:
 		{ *( ShortVector* )( thisptr_ + offset_ ) = new_val; }
 
 	void operator =( Vector new_val )
-		{ *( ShortVector* )( thisptr_ + offset_ ) = new_val.ToShortVector(); }
+		{ *( Vector* )( thisptr_ + offset_ ) = new_val; }
 
 	operator ShortVector()
 		{ return *( ShortVector* )( thisptr_ + offset_ ); }
 
 	operator Vector()
-		{ return ( *( ShortVector* )( thisptr_ + offset_ ) ).ToFloatVector(); }
+		{ return ( *( Vector* )( thisptr_ + offset_ ) ); }
 };
 
 template< class T > class ObjectProperty

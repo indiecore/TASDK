@@ -1,5 +1,3 @@
-#include <Windows.h>
-
 #include "TASDK.h"
 #include "Sigscans.h"
 

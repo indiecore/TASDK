@@ -19,6 +19,9 @@
     <Filter Include="Header Files\SDK">
       <UniqueIdentifier>{d30272c6-50bc-41a6-bd0b-e93596268710}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Tribes Classic">
+      <UniqueIdentifier>{465dbb7d-e626-48a0-b07a-a21f48b8308b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sigscans.cpp">
@@ -58,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="DynamicClasses.h">
       <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor.h">
+      <Filter>Header Files\Tribes Classic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

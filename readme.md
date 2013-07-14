@@ -5,6 +5,11 @@ To develop with it and use mods made with it,  you'll need the leaked
 Tribes: Ascend developer build. You can download that via the .torrent
 included in this repo.
 
+Making maps ==========================================================
+
+http://download.udk.com/UDKInstall-2011-01-BETA.exe
+A package to allow T:A asset usage in UDK will be available Soon™.
+
 
 Using the dev build ==================================================
 

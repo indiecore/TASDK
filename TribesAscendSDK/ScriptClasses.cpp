@@ -1,5 +1,5 @@
-#include <Windows.h>
 #include "TASDK.h"
+#include <Windows.h>
 
 void ScriptObject::LogAll()
 {
