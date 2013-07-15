@@ -28,10 +28,6 @@ To-do (priority order) ===============================================
 
 Add automated UnrealScript calls to the generated headers using ProcessEvent.
 
-Add a specialized Rotator class.
-
-Improve implicit conversion between UE3 short vectors and standard float vectors.
-
 
 Finished ===============================================================
 
@@ -42,3 +38,7 @@ from ScriptStackFrame and is top priority.
 
 Automatically grab args off of ScriptStackFrame and pass them to the hook
 for more user-friendly hooking. Sort of implemented but the ASM is wrong.
+
+Add a specialized Rotator class.
+
+Improve implicit conversion between UE3 short vectors and standard float vectors.
