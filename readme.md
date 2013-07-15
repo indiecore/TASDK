@@ -8,7 +8,7 @@ included in this repo.
 Making maps ==========================================================
 
 http://download.udk.com/UDKInstall-2011-01-BETA.exe
-A package to allow T:A asset usage in UDK will be available Soon™.
+Guide: http://www.reddit.com/r/Tribes/comments/1ia5jb/ta_sdk_the_guide_to_mapping/
 
 
 Using the dev build ==================================================
