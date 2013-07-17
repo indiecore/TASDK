@@ -20,6 +20,25 @@ namespace UnrealScript
 	{
 	public:
 			ADD_STRUCT( ::VectorProperty, Direction, 0xFFFFFFFF )
+			bool AlongLine( class NavigationHandle* NavHandle, Vector Dir )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshPath_AlongLine.AlongLine" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( Vector* )( params + 4 ) = Dir;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshPath_AlongLine.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

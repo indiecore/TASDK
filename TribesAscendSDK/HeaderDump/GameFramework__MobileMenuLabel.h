@@ -24,6 +24,15 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, TextXScale, 0xFFFFFFFF )
 			ADD_OBJECT( Font, TextFont )
 			ADD_VAR( ::StrProperty, Caption, 0xFFFFFFFF )
+			void RenderObject( class Canvas* Canvas )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuLabel.RenderObject" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Canvas** )( params + 0 ) = Canvas;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

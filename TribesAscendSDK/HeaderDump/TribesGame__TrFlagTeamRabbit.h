@@ -19,6 +19,48 @@ namespace UnrealScript
 	class TrFlagTeamRabbit : public TrFlagBase
 	{
 	public:
+			void SetHolder( class Controller* C )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrFlagTeamRabbit.SetHolder" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Controller** )( params + 0 ) = C;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ClearHolder(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrFlagTeamRabbit.ClearHolder" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SendHome( class Controller* Returner )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrFlagTeamRabbit.SendHome" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Controller** )( params + 0 ) = Returner;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void BroadcastReturnedMessage(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrFlagTeamRabbit.BroadcastReturnedMessage" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ClientReturnedHome(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrFlagTeamRabbit.ClientReturnedHome" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,40 @@ namespace UnrealScript
 	class TrFlagRabbit : public TrFlagBase
 	{
 	public:
+			void SetHolder( class Controller* C )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrFlagRabbit.SetHolder" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Controller** )( params + 0 ) = C;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ClearHolder(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrFlagRabbit.ClearHolder" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SendHome( class Controller* Returner )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrFlagRabbit.SendHome" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Controller** )( params + 0 ) = Returner;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void BroadcastReturnedMessage(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrFlagRabbit.BroadcastReturnedMessage" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

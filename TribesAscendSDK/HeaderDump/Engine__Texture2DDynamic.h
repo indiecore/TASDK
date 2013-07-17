@@ -24,6 +24,31 @@ namespace UnrealScript
 			ADD_VAR( ::ByteProperty, Format, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, SizeY, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, SizeX, 0xFFFFFFFF )
+			void Init( int InSizeX, int InSizeY, byte InFormat, bool InIsResolveTarget )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Texture2DDynamic.Init" );
+				byte *params = ( byte* )( malloc( 13 ) );
+				*( int* )( params + 0 ) = InSizeX;
+				*( int* )( params + 4 ) = InSizeY;
+				*( byte* )( params + 8 ) = InFormat;
+				*( bool* )( params + 12 ) = InIsResolveTarget;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class Texture2DDynamic* Create( int InSizeX, int InSizeY, byte InFormat, bool InIsResolveTarget )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Texture2DDynamic.Create" );
+				byte *params = ( byte* )( malloc( 13 ) );
+				*( int* )( params + 0 ) = InSizeX;
+				*( int* )( params + 4 ) = InSizeY;
+				*( byte* )( params + 8 ) = InFormat;
+				*( bool* )( params + 12 ) = InIsResolveTarget;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Texture2DDynamic** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

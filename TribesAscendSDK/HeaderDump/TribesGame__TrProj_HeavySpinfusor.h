@@ -19,6 +19,14 @@ namespace UnrealScript
 	class TrProj_HeavySpinfusor : public TrProjectile
 	{
 	public:
+			void SpawnFlightEffects(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_HeavySpinfusor.SpawnFlightEffects" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

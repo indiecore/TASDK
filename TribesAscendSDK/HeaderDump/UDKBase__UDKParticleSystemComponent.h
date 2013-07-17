@@ -22,6 +22,15 @@ namespace UnrealScript
 			ADD_STRUCT( ::VectorProperty, SavedScale3D, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bHasSavedScale3D, 0x1 )
 			ADD_VAR( ::FloatProperty, FOV, 0xFFFFFFFF )
+			void SetFOV( float NewFOV )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKParticleSystemComponent.SetFOV" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = NewFOV;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

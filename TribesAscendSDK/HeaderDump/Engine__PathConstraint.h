@@ -21,6 +21,23 @@ namespace UnrealScript
 	public:
 			ADD_OBJECT( PathConstraint, NextConstraint )
 			ADD_VAR( ::IntProperty, CacheIdx, 0xFFFFFFFF )
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PathConstraint.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			ScriptArray< wchar_t > GetDumpString(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PathConstraint.GetDumpString" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

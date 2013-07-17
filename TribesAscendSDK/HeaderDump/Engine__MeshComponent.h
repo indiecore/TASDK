@@ -19,6 +19,66 @@ namespace UnrealScript
 	class MeshComponent : public PrimitiveComponent
 	{
 	public:
+			class MaterialInterface* GetMaterial( int ElementIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MeshComponent.GetMaterial" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = ElementIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class MaterialInterface** )( params + function->return_val_offset() );
+			}
+
+			void SetMaterial( int ElementIndex, class MaterialInterface* Material )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MeshComponent.SetMaterial" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = ElementIndex;
+				*( class MaterialInterface** )( params + 4 ) = Material;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int GetNumElements(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MeshComponent.GetNumElements" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void PrestreamTextures( float Seconds, bool bPrioritizeCharacterTextures, int CinematicTextureGroups )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MeshComponent.PrestreamTextures" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( float* )( params + 0 ) = Seconds;
+				*( bool* )( params + 4 ) = bPrioritizeCharacterTextures;
+				*( int* )( params + 8 ) = CinematicTextureGroups;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class MaterialInstanceConstant* CreateAndSetMaterialInstanceConstant( int ElementIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MeshComponent.CreateAndSetMaterialInstanceConstant" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = ElementIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class MaterialInstanceConstant** )( params + function->return_val_offset() );
+			}
+
+			class MaterialInstanceTimeVarying* CreateAndSetMaterialInstanceTimeVarying( int ElementIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MeshComponent.CreateAndSetMaterialInstanceTimeVarying" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = ElementIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class MaterialInstanceTimeVarying** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

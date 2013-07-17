@@ -19,6 +19,30 @@ namespace UnrealScript
 	class UDKGameSettingsCommon : public OnlineGameSettings
 	{
 	public:
+			bool StringToBlob( ScriptArray< wchar_t > &InString, ScriptArray< wchar_t > &OutBlob )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKGameSettingsCommon.StringToBlob" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = InString;
+				*( ScriptArray< wchar_t >* )( params + 12 ) = OutBlob;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				InString = *( ScriptArray< wchar_t >* )( params + 0 );
+				OutBlob = *( ScriptArray< wchar_t >* )( params + 12 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			ScriptArray< wchar_t > BlobToString( ScriptArray< wchar_t > &InBlob )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKGameSettingsCommon.BlobToString" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = InBlob;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				InBlob = *( ScriptArray< wchar_t >* )( params + 0 );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

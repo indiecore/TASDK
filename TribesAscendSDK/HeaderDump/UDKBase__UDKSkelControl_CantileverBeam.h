@@ -19,6 +19,15 @@ namespace UnrealScript
 	class UDKSkelControl_CantileverBeam : public SkelControlLookAt
 	{
 	public:
+			Vector EntireBeamVelocity(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKSkelControl_CantileverBeam.EntireBeamVelocity" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::FloatProperty, PercentBeamVelocityTransfer, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, SpringDamping, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, SpringStiffness, 0xFFFFFFFF )

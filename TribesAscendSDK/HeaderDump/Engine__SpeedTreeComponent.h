@@ -37,6 +37,26 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bUseLeafMeshes, 0x2 )
 			ADD_VAR( ::BoolProperty, bUseLeafCards, 0x1 )
 			ADD_OBJECT( SpeedTree, SpeedTree )
+			class MaterialInterface* GetMaterial( byte MeshType )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SpeedTreeComponent.GetMaterial" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = MeshType;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class MaterialInterface** )( params + function->return_val_offset() );
+			}
+
+			void SetMaterial( byte MeshType, class MaterialInterface* Material )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SpeedTreeComponent.SetMaterial" );
+				byte *params = ( byte* )( malloc( 5 ) );
+				*( byte* )( params + 0 ) = MeshType;
+				*( class MaterialInterface** )( params + 4 ) = Material;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

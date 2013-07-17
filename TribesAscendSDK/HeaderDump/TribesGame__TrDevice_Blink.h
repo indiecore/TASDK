@@ -19,6 +19,15 @@ namespace UnrealScript
 	class TrDevice_Blink : public TrDevice_Pack
 	{
 	public:
+			Vector GetBlinkImpulse(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_Blink.GetBlinkImpulse" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::FloatProperty, m_fMinZImpulse, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, m_fPowerPoolCost, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, m_fSpeedCapThresholdStart, 0xFFFFFFFF )
@@ -27,6 +36,23 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, m_fLastActivationTimestamp, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, m_fCooldownTime, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, m_vBlinkImpulse, 0xFFFFFFFF )
+			void ToggleActivate(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_Blink.ToggleActivate" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnBlink( float PercentEffectiveness )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_Blink.OnBlink" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = PercentEffectiveness;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

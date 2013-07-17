@@ -20,6 +20,16 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( GFxUI_PauseMenu, FamilyMenuMovie )
+			bool Start( bool StartPaused )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_MainMenu.Start" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = StartPaused;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

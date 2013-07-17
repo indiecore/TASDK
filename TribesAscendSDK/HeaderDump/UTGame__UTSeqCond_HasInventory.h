@@ -21,7 +21,16 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bCheckVehicleDriver, 0x2 )
 			ADD_VAR( ::BoolProperty, bAllowSubclass, 0x1 )
+			ADD_OBJECT( ScriptClass, RequiredInventory )
 			ADD_OBJECT( Actor, Target )
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqCond_HasInventory.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

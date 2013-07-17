@@ -20,6 +20,25 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( ParticleSystem, ParticleTemplate )
+			void SetTemplate( class ParticleSystem* NewTemplate, bool bDestroyOnFinish )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterSpawnable.SetTemplate" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class ParticleSystem** )( params + 0 ) = NewTemplate;
+				*( bool* )( params + 4 ) = bDestroyOnFinish;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ReplicatedEvent( ScriptName VarName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterSpawnable.ReplicatedEvent" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = VarName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -22,6 +22,26 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, SoftStartPenalty, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bSoft, 0x1 )
 			ADD_VAR( ::FloatProperty, MaxTraversalDist, 0xFFFFFFFF )
+			bool DontExceedMaxDist( class Pawn* P, float InMaxTraversalDist, bool bInSoft )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Path_WithinTraversalDist.DontExceedMaxDist" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( class Pawn** )( params + 0 ) = P;
+				*( float* )( params + 4 ) = InMaxTraversalDist;
+				*( bool* )( params + 8 ) = bInSoft;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Path_WithinTraversalDist.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,19 @@ namespace UnrealScript
 	class AnimNotify : public Object
 	{
 	public:
+			bool FindNextNotifyOfClass( class AnimNodeSequence* AnimSeqInstigator, ScriptClass* NotifyClass, void* &OutEvent )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNotify.FindNextNotifyOfClass" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( class AnimNodeSequence** )( params + 0 ) = AnimSeqInstigator;
+				*( ScriptClass** )( params + 4 ) = NotifyClass;
+				*( void** )( params + 8 ) = OutEvent;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutEvent = *( void** )( params + 8 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

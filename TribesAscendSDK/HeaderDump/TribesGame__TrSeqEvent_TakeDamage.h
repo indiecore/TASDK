@@ -19,6 +19,27 @@ namespace UnrealScript
 	class TrSeqEvent_TakeDamage : public SeqEvent_TakeDamage
 	{
 	public:
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeqEvent_TakeDamage.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void HandleDamage( class Actor* InOriginator, class Actor* InInstigator, ScriptClass* inDamageType, int inAmount )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeqEvent_TakeDamage.HandleDamage" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class Actor** )( params + 0 ) = InOriginator;
+				*( class Actor** )( params + 4 ) = InInstigator;
+				*( ScriptClass** )( params + 8 ) = inDamageType;
+				*( int* )( params + 12 ) = inAmount;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

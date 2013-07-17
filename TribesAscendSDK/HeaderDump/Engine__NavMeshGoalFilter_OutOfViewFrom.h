@@ -20,6 +20,17 @@ namespace UnrealScript
 	{
 	public:
 			ADD_STRUCT( ::VectorProperty, OutOfViewLocation, 0xFFFFFFFF )
+			bool MustBeHiddenFromThisPoint( class NavMeshGoal_GenericFilterContainer* FilterContainer, Vector InOutOfViewLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoalFilter_OutOfViewFrom.MustBeHiddenFromThisPoint" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class NavMeshGoal_GenericFilterContainer** )( params + 0 ) = FilterContainer;
+				*( Vector* )( params + 4 ) = InOutOfViewLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

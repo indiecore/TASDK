@@ -19,6 +19,22 @@ namespace UnrealScript
 	class GFxUDKFrontEnd_InstantAction : public GFxUDKFrontEnd_LaunchGame
 	{
 	public:
+			void OnViewActivated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_InstantAction.OnViewActivated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnStartGame_Confirm(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_InstantAction.OnStartGame_Confirm" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

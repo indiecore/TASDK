@@ -42,6 +42,34 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, BlendInTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, ControlStrength, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, ControlName, 0xFFFFFFFF )
+			void SetSkelControlActive( bool bInActive )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkelControlBase.SetSkelControlActive" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bInActive;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetSkelControlStrength( float NewStrength, float InBlendTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkelControlBase.SetSkelControlStrength" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = NewStrength;
+				*( float* )( params + 4 ) = InBlendTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void TickSkelControl( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkelControlBase.TickSkelControl" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

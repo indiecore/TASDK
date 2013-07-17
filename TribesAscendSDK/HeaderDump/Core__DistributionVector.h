@@ -21,6 +21,17 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bIsDirty, 0x2 )
 			ADD_VAR( ::BoolProperty, bCanBeBaked, 0x1 )
+			Vector GetVectorValue( float F, int LastExtreme )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.DistributionVector.GetVectorValue" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = F;
+				*( int* )( params + 4 ) = LastExtreme;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -23,6 +23,15 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, LightShaftConeAngle, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, OuterConeAngle, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, InnerConeAngle, 0xFFFFFFFF )
+			void SetRotation( Rotator NewRotation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SpotLightComponent.SetRotation" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Rotator* )( params + 0 ) = NewRotation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

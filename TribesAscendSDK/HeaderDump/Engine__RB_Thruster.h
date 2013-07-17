@@ -21,6 +21,15 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::FloatProperty, ThrustStrength, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bThrustEnabled, 0x1 )
+			void OnToggle( class SeqAct_Toggle* Action )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Thruster.OnToggle" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SeqAct_Toggle** )( params + 0 ) = Action;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,15 @@ namespace UnrealScript
 	class SeqCond_IsBenchmarking : public SequenceCondition
 	{
 	public:
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqCond_IsBenchmarking.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

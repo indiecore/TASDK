@@ -19,6 +19,7 @@ namespace UnrealScript
 	class SeqVar_Character : public SeqVar_Object
 	{
 	public:
+			ADD_OBJECT( ScriptClass, PawnClass )
 	};
 }
 

@@ -28,6 +28,15 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, SoundDuration, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, ExtraDelay, 0xFFFFFFFF )
 			ADD_OBJECT( SoundCue, PlaySound )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_PlaySound.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

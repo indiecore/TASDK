@@ -28,6 +28,24 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, SpawnRate, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, MaxAgents, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bKillAgentsInstantly, 0x1 )
+			ADD_OBJECT( ScriptClass, PopulationManagerClass )
+			void FindPopMgrTarget(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqAct_GameCrowdPopulationManagerToggle.FindPopMgrTarget" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqAct_GameCrowdPopulationManagerToggle.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

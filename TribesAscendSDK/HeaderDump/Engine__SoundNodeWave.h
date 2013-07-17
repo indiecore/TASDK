@@ -41,6 +41,15 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bLoopingSound, 0x2 )
 			ADD_VAR( ::BoolProperty, bForceRealTimeDecompression, 0x1 )
 			ADD_VAR( ::IntProperty, CompressionQuality, 0xFFFFFFFF )
+			void GeneratePCMData( int SamplesNeeded )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SoundNodeWave.GeneratePCMData" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( int* )( params + 12 ) = SamplesNeeded;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

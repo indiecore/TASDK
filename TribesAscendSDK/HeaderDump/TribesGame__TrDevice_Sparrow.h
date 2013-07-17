@@ -19,6 +19,14 @@ namespace UnrealScript
 	class TrDevice_Sparrow : public TrDevice
 	{
 	public:
+			void InstantFire(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_Sparrow.InstantFire" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

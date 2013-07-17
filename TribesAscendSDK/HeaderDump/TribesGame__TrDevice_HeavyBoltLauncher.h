@@ -20,6 +20,75 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( SoundCue, m_BoltIdleSound )
+			void SetBoltIdle( bool bEnabled )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_HeavyBoltLauncher.SetBoltIdle" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bEnabled;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PostInitAnimTree(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_HeavyBoltLauncher.PostInitAnimTree" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnAnimPlay( class AnimNodeSequence* SeqNode )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_HeavyBoltLauncher.OnAnimPlay" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class AnimNodeSequence** )( params + 0 ) = SeqNode;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnAnimEnd( class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_HeavyBoltLauncher.OnAnimEnd" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( class AnimNodeSequence** )( params + 0 ) = SeqNode;
+				*( float* )( params + 4 ) = PlayedTime;
+				*( float* )( params + 8 ) = ExcessTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayWeaponEquip(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_HeavyBoltLauncher.PlayWeaponEquip" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayWeaponPutDown(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_HeavyBoltLauncher.PlayWeaponPutDown" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PutDownFast(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_HeavyBoltLauncher.PutDownFast" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnSwitchAwayFromWeapon(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_HeavyBoltLauncher.OnSwitchAwayFromWeapon" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

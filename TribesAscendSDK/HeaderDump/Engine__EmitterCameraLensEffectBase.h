@@ -25,6 +25,60 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, BaseFOV, 0xFFFFFFFF )
 			ADD_OBJECT( ParticleSystem, PS_CameraEffectNonExtremeContent )
 			ADD_OBJECT( ParticleSystem, PS_CameraEffect )
+			void Destroyed(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterCameraLensEffectBase.Destroyed" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RegisterCamera( class Camera* C )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterCameraLensEffectBase.RegisterCamera" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Camera** )( params + 0 ) = C;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void NotifyRetriggered(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterCameraLensEffectBase.NotifyRetriggered" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterCameraLensEffectBase.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ActivateLensEffect(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterCameraLensEffectBase.ActivateLensEffect" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateLocation( Vector &CamLoc, Rotator &CamRot, float CamFOVDeg )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterCameraLensEffectBase.UpdateLocation" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( Vector* )( params + 0 ) = CamLoc;
+				*( Rotator* )( params + 12 ) = CamRot;
+				*( float* )( params + 24 ) = CamFOVDeg;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				CamLoc = *( Vector* )( params + 0 );
+				CamRot = *( Rotator* )( params + 12 );
+			}
+
 	};
 }
 

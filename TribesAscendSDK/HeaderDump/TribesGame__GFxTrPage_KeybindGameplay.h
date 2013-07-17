@@ -19,6 +19,14 @@ namespace UnrealScript
 	class GFxTrPage_KeybindGameplay : public GFxTrPage_KeybindAction
 	{
 	public:
+			void Initialize(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_KeybindGameplay.Initialize" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

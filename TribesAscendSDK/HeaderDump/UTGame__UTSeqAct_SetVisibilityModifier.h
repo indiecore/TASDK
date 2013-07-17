@@ -20,6 +20,14 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::FloatProperty, NewVisibilityModifier, 0xFFFFFFFF )
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqAct_SetVisibilityModifier.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

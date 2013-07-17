@@ -28,6 +28,63 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, m_fInTakeHitFlashRemainingTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, m_fOutTakeHitFlashTimeLength, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, m_fInTakeHitFlashTimeLength, 0xFFFFFFFF )
+			void Touch( class Actor* Other, Vector HitLocation, Vector HitNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_ForceField.Touch" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				*( Vector* )( params + 8 ) = HitLocation;
+				*( Vector* )( params + 20 ) = HitNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnHealthChanged( bool wasDamage )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_ForceField.OnHealthChanged" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = wasDamage;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayDamageHealthEffects( int DamageAmount, int HitBoneIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_ForceField.PlayDamageHealthEffects" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = DamageAmount;
+				*( int* )( params + 4 ) = HitBoneIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayHitOtherEffects( class Actor* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_ForceField.PlayHitOtherEffects" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Tick( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_ForceField.Tick" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class Texture2D* GetMarker(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_ForceField.GetMarker" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Texture2D** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

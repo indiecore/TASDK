@@ -19,6 +19,15 @@ namespace UnrealScript
 	class UTSeqAct_SpawnProjectile : public SequenceAction
 	{
 	public:
+			ADD_OBJECT( ScriptClass, ProjectileClass )
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqAct_SpawnProjectile.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

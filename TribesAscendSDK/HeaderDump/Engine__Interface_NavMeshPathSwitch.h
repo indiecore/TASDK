@@ -19,6 +19,16 @@ namespace UnrealScript
 	class Interface_NavMeshPathSwitch : public Interface_NavMeshPathObject
 	{
 	public:
+			bool AIActivateSwitch( class AIController* AI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Interface_NavMeshPathSwitch.AIActivateSwitch" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class AIController** )( params + 0 ) = AI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

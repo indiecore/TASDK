@@ -21,6 +21,16 @@ namespace UnrealScript
 	public:
 			ADD_OBJECT( PhysicsAssetInstance, DefaultInstance )
 			ADD_OBJECT( SkeletalMesh, DefaultSkelMesh )
+			int FindBodyIndex( ScriptName BodyName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAsset.FindBodyIndex" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = BodyName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

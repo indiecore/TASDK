@@ -20,6 +20,17 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::FloatProperty, DistanceToCheck, 0xFFFFFFFF )
+			bool NotNearOtherAI( class NavMeshGoal_GenericFilterContainer* FilterContainer, float InDistanceToCheck )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoalFilter_NotNearOtherAI.NotNearOtherAI" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class NavMeshGoal_GenericFilterContainer** )( params + 0 ) = FilterContainer;
+				*( float* )( params + 4 ) = InDistanceToCheck;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

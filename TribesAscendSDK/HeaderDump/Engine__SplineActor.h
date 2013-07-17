@@ -27,6 +27,153 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bAlreadyVisited, 0x2 )
 			ADD_VAR( ::BoolProperty, bDisableDestination, 0x1 )
 			ADD_STRUCT( ::VectorProperty, SplineActorTangent, 0xFFFFFFFF )
+			Vector GetWorldSpaceTangent(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.GetWorldSpaceTangent" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			void UpdateSplineComponents(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.UpdateSplineComponents" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateConnectedSplineComponents( bool bFinish )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.UpdateConnectedSplineComponents" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bFinish;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void AddConnectionTo( class SplineActor* NextActor )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.AddConnectionTo" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SplineActor** )( params + 0 ) = NextActor;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool IsConnectedTo( class SplineActor* NextActor, bool bCheckForDisableDestination )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.IsConnectedTo" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class SplineActor** )( params + 0 ) = NextActor;
+				*( bool* )( params + 4 ) = bCheckForDisableDestination;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void* FindSplineComponentTo( class SplineActor* NextActor )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.FindSplineComponentTo" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SplineActor** )( params + 0 ) = NextActor;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
+			class SplineActor* FindTargetForComponent(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.FindTargetForComponent" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class SplineActor** )( params + function->return_val_offset() );
+			}
+
+			void BreakConnectionTo( class SplineActor* NextActor )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.BreakConnectionTo" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SplineActor** )( params + 0 ) = NextActor;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void BreakAllConnections(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.BreakAllConnections" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void BreakAllConnectionsFrom(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.BreakAllConnectionsFrom" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class SplineActor* GetRandomConnection( bool bUseLinksFrom )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.GetRandomConnection" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bUseLinksFrom;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class SplineActor** )( params + function->return_val_offset() );
+			}
+
+			class SplineActor* GetBestConnectionInDirection( Vector DesiredDir, bool bUseLinksFrom )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.GetBestConnectionInDirection" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( Vector* )( params + 0 ) = DesiredDir;
+				*( bool* )( params + 12 ) = bUseLinksFrom;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class SplineActor** )( params + function->return_val_offset() );
+			}
+
+			bool FindSplinePathTo( class SplineActor* Goal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.FindSplinePathTo" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class SplineActor** )( params + 0 ) = Goal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void GetAllConnectedSplineActors(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.GetAllConnectedSplineActors" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnToggle( class SeqAct_Toggle* inAction )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.OnToggle" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SeqAct_Toggle** )( params + 0 ) = inAction;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnToggleHidden( class SeqAct_ToggleHidden* Action )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.OnToggleHidden" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SeqAct_ToggleHidden** )( params + 0 ) = Action;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

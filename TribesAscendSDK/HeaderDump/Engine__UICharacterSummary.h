@@ -23,6 +23,15 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, CharacterBio, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, CharacterName, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, ClassPathName, 0xFFFFFFFF )
+			bool IsProviderDisabled(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UICharacterSummary.IsProviderDisabled" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

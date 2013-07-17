@@ -20,6 +20,7 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( ForceFeedbackWaveform, FFWaveform )
+			ADD_OBJECT( ScriptClass, PredefinedWaveForm )
 	};
 }
 

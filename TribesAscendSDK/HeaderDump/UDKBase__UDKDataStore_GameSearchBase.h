@@ -20,6 +20,62 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( UDKUIDataProvider_ServerDetails, ServerDetailsProvider )
+			bool GetEnabledMutators(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKDataStore_GameSearchBase.GetEnabledMutators" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Init(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKDataStore_GameSearchBase.Init" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool SubmitGameSearch( byte ControllerIndex, bool bInvalidateExistingSearchResults )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKDataStore_GameSearchBase.SubmitGameSearch" );
+				byte *params = ( byte* )( malloc( 5 ) );
+				*( byte* )( params + 0 ) = ControllerIndex;
+				*( bool* )( params + 4 ) = bInvalidateExistingSearchResults;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void OnSearchComplete( bool bWasSuccessful )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKDataStore_GameSearchBase.OnSearchComplete" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bWasSuccessful;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool HasOutstandingQueries( bool bRestrictCheckToSelf )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKDataStore_GameSearchBase.HasOutstandingQueries" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bRestrictCheckToSelf;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool HasExistingSearchResults(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKDataStore_GameSearchBase.HasExistingSearchResults" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

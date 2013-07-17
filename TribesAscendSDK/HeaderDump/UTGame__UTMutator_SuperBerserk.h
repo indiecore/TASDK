@@ -19,6 +19,25 @@ namespace UnrealScript
 	class UTMutator_SuperBerserk : public UTMutator
 	{
 	public:
+			void ModifyPlayer( class Pawn* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMutator_SuperBerserk.ModifyPlayer" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool CheckReplacement( class Actor* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMutator_SuperBerserk.CheckReplacement" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

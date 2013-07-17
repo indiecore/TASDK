@@ -19,6 +19,15 @@ namespace UnrealScript
 	class TrFlagCTF_DiamondSword : public TrFlagCTF
 	{
 	public:
+			ScriptArray< wchar_t > GetSpectatorName(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrFlagCTF_DiamondSword.GetSpectatorName" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

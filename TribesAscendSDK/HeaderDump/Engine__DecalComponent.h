@@ -62,6 +62,41 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, Height, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, Width, 0xFFFFFFFF )
 			ADD_OBJECT( MaterialInterface, DecalMaterial )
+			void ResetToDefaults(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DecalComponent.ResetToDefaults" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetDecalMaterial( class MaterialInterface* NewDecalMaterial )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DecalComponent.SetDecalMaterial" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class MaterialInterface** )( params + 0 ) = NewDecalMaterial;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class MaterialInterface* GetDecalMaterial(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DecalComponent.GetDecalMaterial" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class MaterialInterface** )( params + function->return_val_offset() );
+			}
+
+			void SetGameplayRequired( bool bIsGameplayRelevant )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DecalComponent.SetGameplayRequired" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bIsGameplayRelevant;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -51,6 +51,47 @@ namespace UnrealScript
 			ADD_VAR( ::ByteProperty, LookAtAxis, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, TargetLocationSpace, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, TargetLocation, 0xFFFFFFFF )
+			void SetTargetLocation( Vector NewTargetLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkelControlLookAt.SetTargetLocation" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = NewTargetLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void InterpolateTargetLocation( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkelControlLookAt.InterpolateTargetLocation" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetLookAtAlpha( float DesiredAlpha, float DesiredBlendTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkelControlLookAt.SetLookAtAlpha" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = DesiredAlpha;
+				*( float* )( params + 4 ) = DesiredBlendTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool CanLookAtPoint( Vector PointLoc, bool bDrawDebugInfo, bool bDebugUsePersistentLines, bool bDebugFlushLinesFirst )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkelControlLookAt.CanLookAtPoint" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( Vector* )( params + 0 ) = PointLoc;
+				*( bool* )( params + 12 ) = bDrawDebugInfo;
+				*( bool* )( params + 16 ) = bDebugUsePersistentLines;
+				*( bool* )( params + 20 ) = bDebugFlushLinesFirst;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

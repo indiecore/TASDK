@@ -30,6 +30,7 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bOnePerGroup, 0x1 )
 			ADD_VAR( ::StrProperty, TrackTitle, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, ActiveCondition, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, TrackInstClass )
 	};
 }
 

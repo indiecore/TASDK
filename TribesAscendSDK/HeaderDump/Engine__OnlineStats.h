@@ -19,6 +19,28 @@ namespace UnrealScript
 	class OnlineStats : public Object
 	{
 	public:
+			bool GetViewId( ScriptName ViewName, int &ViewId )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStats.GetViewId" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptName* )( params + 0 ) = ViewName;
+				*( int* )( params + 8 ) = ViewId;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				ViewId = *( int* )( params + 8 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			ScriptName GetViewName( int ViewId )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStats.GetViewName" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = ViewId;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptName* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

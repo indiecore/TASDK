@@ -27,6 +27,15 @@ namespace UnrealScript
 			ADD_OBJECT( Actor, Instigator )
 			ADD_VAR( ::BoolProperty, bUseEmitterLocation, 0x2 )
 			ADD_VAR( ::BoolProperty, bEnabled, 0x1 )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_ParticleEventGenerator.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

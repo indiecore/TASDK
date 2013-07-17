@@ -22,6 +22,26 @@ namespace UnrealScript
 			ADD_OBJECT( ParticleSystem, ProjectileEntryEffect )
 			ADD_OBJECT( ParticleSystem, PS_EnterWaterEffect_Vehicle )
 			ADD_OBJECT( ParticleSystem, PS_EnterWaterEffect_Pawn )
+			void Touch( class Actor* Other, Vector HitLocation, Vector HitNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWaterVolume.Touch" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				*( Vector* )( params + 8 ) = HitLocation;
+				*( Vector* )( params + 20 ) = HitNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayEntrySplash( class Actor* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWaterVolume.PlayEntrySplash" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

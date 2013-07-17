@@ -26,6 +26,55 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, TextureResolutionY, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, TextureResolutionX, 0xFFFFFFFF )
 			ADD_OBJECT( PortalTeleporter, SisterPortal )
+			bool TransformActor( class Actor* A )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PortalTeleporter.TransformActor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = A;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			Vector TransformVectorDir( Vector V )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PortalTeleporter.TransformVectorDir" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = V;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			Vector TransformHitLocation( Vector HitLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PortalTeleporter.TransformHitLocation" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = HitLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			class TextureRenderTarget2D* CreatePortalTexture(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PortalTeleporter.CreatePortalTexture" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class TextureRenderTarget2D** )( params + function->return_val_offset() );
+			}
+
+			bool StopsProjectile( class Projectile* P )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PortalTeleporter.StopsProjectile" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Projectile** )( params + 0 ) = P;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

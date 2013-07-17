@@ -24,6 +24,48 @@ namespace UnrealScript
 			ADD_OBJECT( Pawn, m_LocalPawn )
 			ADD_VAR( ::StrProperty, m_LastUpgradeMsg, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, m_nLastUpgradeLevel, 0xFFFFFFFF )
+			void OnPawnAdded( class Pawn* aPawn )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCollisionProxy_PromptText.OnPawnAdded" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = aPawn;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RequestPromptText(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCollisionProxy_PromptText.RequestPromptText" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void CheckForUpgradeLevel(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCollisionProxy_PromptText.CheckForUpgradeLevel" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void TryTraceAgainTimer(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCollisionProxy_PromptText.TryTraceAgainTimer" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnPawnRemoved( class Pawn* aPawn )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCollisionProxy_PromptText.OnPawnRemoved" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = aPawn;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

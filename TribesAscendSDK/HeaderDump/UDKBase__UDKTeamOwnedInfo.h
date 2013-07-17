@@ -20,6 +20,15 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( TeamInfo, Team )
+			byte GetTeamNum(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKTeamOwnedInfo.GetTeamNum" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( byte* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

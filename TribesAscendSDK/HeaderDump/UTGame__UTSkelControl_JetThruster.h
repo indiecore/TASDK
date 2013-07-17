@@ -22,6 +22,15 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, DesiredStrength, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, BlendRate, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, MaxForwardVelocity, 0xFFFFFFFF )
+			void TickSkelControl( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSkelControl_JetThruster.TickSkelControl" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

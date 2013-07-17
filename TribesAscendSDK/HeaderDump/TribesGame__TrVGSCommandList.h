@@ -342,6 +342,25 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, ChatString_GlobalHi, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, ChatString_GlobalNo, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, ChatString_GlobalYes, 0xFFFFFFFF )
+			void Init(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVGSCommandList.Init" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			ScriptArray< wchar_t > GetContextLocationString( byte Loc, bool bEnemyLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVGSCommandList.GetContextLocationString" );
+				byte *params = ( byte* )( malloc( 5 ) );
+				*( byte* )( params + 0 ) = Loc;
+				*( bool* )( params + 4 ) = bEnemyLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

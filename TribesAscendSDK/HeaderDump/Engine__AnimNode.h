@@ -35,6 +35,67 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bTickDuringPausedAnims, 0x4 )
 			ADD_VAR( ::BoolProperty, bJustBecameRelevant, 0x2 )
 			ADD_VAR( ::BoolProperty, bRelevant, 0x1 )
+			void OnInit(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNode.OnInit" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnBecomeRelevant(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNode.OnBecomeRelevant" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnCeaseRelevant(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNode.OnCeaseRelevant" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class AnimNode* FindAnimNode( ScriptName InNodeName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNode.FindAnimNode" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = InNodeName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class AnimNode** )( params + function->return_val_offset() );
+			}
+
+			void PlayAnim( bool bLoop, float Rate, float StartTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNode.PlayAnim" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( bool* )( params + 0 ) = bLoop;
+				*( float* )( params + 4 ) = Rate;
+				*( float* )( params + 8 ) = StartTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void StopAnim(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNode.StopAnim" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ReplayAnim(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNode.ReplayAnim" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

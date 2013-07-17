@@ -19,6 +19,44 @@ namespace UnrealScript
 	class UTAutoCrouchVolume : public Volume
 	{
 	public:
+			void Touch( class Actor* Other, Vector HitLocation, Vector HitNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTAutoCrouchVolume.Touch" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				*( Vector* )( params + 8 ) = HitLocation;
+				*( Vector* )( params + 20 ) = HitNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetCrouch( class Pawn* P, byte bCrouch )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTAutoCrouchVolume.SetCrouch" );
+				byte *params = ( byte* )( malloc( 5 ) );
+				*( class Pawn** )( params + 0 ) = P;
+				*( byte* )( params + 4 ) = bCrouch;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UnTouch( class Actor* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTAutoCrouchVolume.UnTouch" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void CrouchTimer(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTAutoCrouchVolume.CrouchTimer" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

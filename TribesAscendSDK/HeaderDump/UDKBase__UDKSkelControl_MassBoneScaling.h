@@ -19,6 +19,26 @@ namespace UnrealScript
 	class UDKSkelControl_MassBoneScaling : public SkelControlBase
 	{
 	public:
+			void SetBoneScale( ScriptName BoneName, float Scale )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKSkelControl_MassBoneScaling.SetBoneScale" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptName* )( params + 0 ) = BoneName;
+				*( float* )( params + 8 ) = Scale;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			float GetBoneScale( ScriptName BoneName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKSkelControl_MassBoneScaling.GetBoneScale" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = BoneName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -68,6 +68,189 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bExecutingWhatToDoNext, 0x1 )
 			ADD_OBJECT( Actor, TemporaryFocus )
 			ADD_OBJECT( UDKSquadAI, Squad )
+			class Actor* FaceActor( float StrafingModifier )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.FaceActor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = StrafingModifier;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Actor** )( params + function->return_val_offset() );
+			}
+
+			void ExecuteWhatToDoNext(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.ExecuteWhatToDoNext" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ReceiveRunOverWarning( class UDKVehicle* V, float projSpeed, Vector VehicleDir )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.ReceiveRunOverWarning" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( class UDKVehicle** )( params + 0 ) = V;
+				*( float* )( params + 4 ) = projSpeed;
+				*( Vector* )( params + 8 ) = VehicleDir;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void WaitToSeeEnemy(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.WaitToSeeEnemy" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void LatentWhatToDoNext(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.LatentWhatToDoNext" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool CanMakePathTo( class Actor* A )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.CanMakePathTo" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = A;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			class Actor* FindBestInventoryPath( float &MinWeight )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.FindBestInventoryPath" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = MinWeight;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				MinWeight = *( float* )( params + 0 );
+				return *( class Actor** )( params + function->return_val_offset() );
+			}
+
+			class Actor* FindPathToSquadRoute( bool bWeightDetours )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.FindPathToSquadRoute" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bWeightDetours;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Actor** )( params + function->return_val_offset() );
+			}
+
+			void BuildSquadRoute(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.BuildSquadRoute" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class Actor* FindBestSuperPickup( float MaxDist )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.FindBestSuperPickup" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = MaxDist;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Actor** )( params + function->return_val_offset() );
+			}
+
+			void WhatToDoNext(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.WhatToDoNext" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void MonitoredPawnAlert(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.MonitoredPawnAlert" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void TimeDJReset(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.TimeDJReset" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void MayDodgeToMoveTarget(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.MayDodgeToMoveTarget" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool SpecialJumpCost( float RequiredJumpZ, float &Cost )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.SpecialJumpCost" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = RequiredJumpZ;
+				*( float* )( params + 4 ) = Cost;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				Cost = *( float* )( params + 4 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			float SuperDesireability( class PickupFactory* P )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.SuperDesireability" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PickupFactory** )( params + 0 ) = P;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
+			float AdjustAimError( float TargetDist, bool bInstantProj )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.AdjustAimError" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = TargetDist;
+				*( bool* )( params + 4 ) = bInstantProj;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
+			void MissedDodge(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.MissedDodge" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DelayedWarning(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.DelayedWarning" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DelayedLeaveVehicle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.DelayedLeaveVehicle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

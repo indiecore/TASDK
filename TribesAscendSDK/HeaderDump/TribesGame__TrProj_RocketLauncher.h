@@ -19,6 +19,14 @@ namespace UnrealScript
 	class TrProj_RocketLauncher : public TrProjectile
 	{
 	public:
+			void SpawnFlightEffects(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_RocketLauncher.SpawnFlightEffects" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

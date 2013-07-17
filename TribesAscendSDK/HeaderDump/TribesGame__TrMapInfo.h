@@ -20,6 +20,7 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::NameProperty, m_DefaultPhysicalMaterialName, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, m_WeatherEffect )
 			ADD_OBJECT( TrMapMusicInfo, m_MapMusicInfo )
 	};
 }

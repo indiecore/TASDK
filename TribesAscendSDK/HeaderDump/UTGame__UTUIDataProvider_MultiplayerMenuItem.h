@@ -21,6 +21,15 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bRequiresOnlineAccess, 0x1 )
 			ADD_VAR( ::StrProperty, Description, 0xFFFFFFFF )
+			bool ShouldBeFiltered(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTUIDataProvider_MultiplayerMenuItem.ShouldBeFiltered" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

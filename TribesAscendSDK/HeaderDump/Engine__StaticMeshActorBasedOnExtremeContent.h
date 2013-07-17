@@ -19,6 +19,22 @@ namespace UnrealScript
 	class StaticMeshActorBasedOnExtremeContent : public Actor
 	{
 	public:
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.StaticMeshActorBasedOnExtremeContent.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetMaterialBasedOnExtremeContent(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.StaticMeshActorBasedOnExtremeContent.SetMaterialBasedOnExtremeContent" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

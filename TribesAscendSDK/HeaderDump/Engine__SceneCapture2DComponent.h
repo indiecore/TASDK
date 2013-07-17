@@ -24,6 +24,28 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, NearPlane, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, FieldOfView, 0xFFFFFFFF )
 			ADD_OBJECT( TextureRenderTarget2D, TextureTarget )
+			void SetCaptureParameters( class TextureRenderTarget2D* NewTextureTarget, float NewFOV, float NewNearPlane, float NewFarPlane )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCapture2DComponent.SetCaptureParameters" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class TextureRenderTarget2D** )( params + 0 ) = NewTextureTarget;
+				*( float* )( params + 4 ) = NewFOV;
+				*( float* )( params + 8 ) = NewNearPlane;
+				*( float* )( params + 12 ) = NewFarPlane;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetView( Vector NewLocation, Rotator NewRotation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCapture2DComponent.SetView" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( Vector* )( params + 0 ) = NewLocation;
+				*( Rotator* )( params + 12 ) = NewRotation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

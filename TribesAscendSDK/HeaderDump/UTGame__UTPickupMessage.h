@@ -19,6 +19,19 @@ namespace UnrealScript
 	class UTPickupMessage : public UTLocalMessage
 	{
 	public:
+			void ClientReceive( class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI_, class Object* OptionalObject )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTPickupMessage.ClientReceive" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( class PlayerController** )( params + 0 ) = P;
+				*( int* )( params + 4 ) = Switch;
+				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
+				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
+				*( class Object** )( params + 16 ) = OptionalObject;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

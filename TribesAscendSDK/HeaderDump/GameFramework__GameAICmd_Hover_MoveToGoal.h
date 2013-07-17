@@ -30,6 +30,47 @@ namespace UnrealScript
 			ADD_OBJECT( Actor, Goal )
 			ADD_OBJECT( Actor, Find )
 			ADD_OBJECT( Actor, Path )
+			bool MoveToGoal( class GameAIController* AI, class Actor* InGoal, float InGoalDistance, float InHoverHeight )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAICmd_Hover_MoveToGoal.MoveToGoal" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class GameAIController** )( params + 0 ) = AI;
+				*( class Actor** )( params + 4 ) = InGoal;
+				*( float* )( params + 8 ) = InGoalDistance;
+				*( float* )( params + 12 ) = InHoverHeight;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Pushed(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAICmd_Hover_MoveToGoal.Pushed" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool HandlePathObstruction( class Actor* BlockedBy )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAICmd_Hover_MoveToGoal.HandlePathObstruction" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = BlockedBy;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool IsEnemyBasedOnInterpActor( class Pawn* InEnemy )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAICmd_Hover_MoveToGoal.IsEnemyBasedOnInterpActor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = InEnemy;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

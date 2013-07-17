@@ -21,9 +21,27 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::StrProperty, ClassName, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, Description, 0xFFFFFFFF )
+			bool ShouldBeFiltered(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTUIDataProvider_Mutator.ShouldBeFiltered" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::StrProperty, GroupNames, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bOfficialMutator, 0x2 )
 			ADD_VAR( ::BoolProperty, bStandaloneOnly, 0x1 )
+			bool SupportsCurrentGameMode(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTUIDataProvider_Mutator.SupportsCurrentGameMode" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

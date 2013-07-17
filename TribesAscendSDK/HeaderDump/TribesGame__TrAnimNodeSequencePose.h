@@ -19,6 +19,15 @@ namespace UnrealScript
 	class TrAnimNodeSequencePose : public AnimNodeSequence
 	{
 	public:
+			void FillWithPose( class TrPawn* P )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeSequencePose.FillWithPose" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrPawn** )( params + 0 ) = P;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

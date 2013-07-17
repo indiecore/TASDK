@@ -30,6 +30,35 @@ namespace UnrealScript
 			ADD_OBJECT( GFxObject, TitleMC )
 			ADD_OBJECT( GFxClikWidget, BackBtn )
 			ADD_VAR( ::StrProperty, ViewTitle, 0xFFFFFFFF )
+			void FocusIn_BackButton( void* ev )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Screen.FocusIn_BackButton" );
+				byte *params = ( byte* )( malloc( 36 ) );
+				*( void** )( params + 0 ) = ev;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateHelpButtonImages(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Screen.UpdateHelpButtonImages" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool WidgetInitialized( ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Screen.WidgetInitialized" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( ScriptName* )( params + 0 ) = WidgetName;
+				*( ScriptName* )( params + 8 ) = WidgetPath;
+				*( class GFxObject** )( params + 16 ) = Widget;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -21,6 +21,31 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bRespondToExplosions, 0x2 )
 			ADD_VAR( ::BoolProperty, bLastHitWasHeadShot, 0x1 )
+			void UpdateShadowSettings( bool bInWantShadow )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePawn.UpdateShadowSettings" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bInWantShadow;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ReattachMesh(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePawn.ReattachMesh" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ReattachMeshWithoutBeingSeen(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePawn.ReattachMeshWithoutBeingSeen" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

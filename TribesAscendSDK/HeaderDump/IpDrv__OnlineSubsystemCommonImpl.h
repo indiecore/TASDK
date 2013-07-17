@@ -23,6 +23,46 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bIsUsingSpeechRecognition, 0x1 )
 			ADD_VAR( ::IntProperty, MaxRemoteTalkers, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, MaxLocalTalkers, 0xFFFFFFFF )
+			ScriptArray< wchar_t > GetPlayerNicknameFromIndex( int UserIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlineSubsystemCommonImpl.GetPlayerNicknameFromIndex" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = UserIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
+			void* GetPlayerUniqueNetIdFromIndex( int UserIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlineSubsystemCommonImpl.GetPlayerUniqueNetIdFromIndex" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = UserIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
+			bool IsPlayerInSession( ScriptName SessionName, void* PlayerID )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlineSubsystemCommonImpl.IsPlayerInSession" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( ScriptName* )( params + 0 ) = SessionName;
+				*( void** )( params + 8 ) = PlayerID;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void GetRegisteredPlayers( ScriptName SessionName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlineSubsystemCommonImpl.GetRegisteredPlayers" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( ScriptName* )( params + 0 ) = SessionName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

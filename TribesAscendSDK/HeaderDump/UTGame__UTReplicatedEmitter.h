@@ -21,6 +21,14 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::FloatProperty, ServerLifeSpan, 0xFFFFFFFF )
 			ADD_OBJECT( ParticleSystem, EmitterTemplate )
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTReplicatedEmitter.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

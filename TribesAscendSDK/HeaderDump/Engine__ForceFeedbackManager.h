@@ -26,6 +26,34 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, CurrentSample, 0xFFFFFFFF )
 			ADD_OBJECT( ForceFeedbackWaveform, FFWaveform )
 			ADD_VAR( ::BoolProperty, bIsPaused, 0x2 )
+			void PlayForceFeedbackWaveform( class ForceFeedbackWaveform* WaveForm, class Actor* WaveInstigator )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFeedbackManager.PlayForceFeedbackWaveform" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class ForceFeedbackWaveform** )( params + 0 ) = WaveForm;
+				*( class Actor** )( params + 4 ) = WaveInstigator;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void StopForceFeedbackWaveform( class ForceFeedbackWaveform* WaveForm )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFeedbackManager.StopForceFeedbackWaveform" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class ForceFeedbackWaveform** )( params + 0 ) = WaveForm;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PauseWaveform( bool bPause )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFeedbackManager.PauseWaveform" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bPause;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

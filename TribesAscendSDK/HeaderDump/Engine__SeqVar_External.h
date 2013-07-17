@@ -20,6 +20,7 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::StrProperty, VariableLabel, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, ExpectedType )
 	};
 }
 

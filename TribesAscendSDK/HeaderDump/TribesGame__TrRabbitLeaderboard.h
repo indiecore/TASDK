@@ -26,6 +26,89 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bUpdated, 0x1 )
 			ADD_VAR( ::IntProperty, RemainingTime, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, PrevSlots, 0xFFFFFFFF )
+			void Initialize( class TrPlayerController* PC, class GfxTrHud* MP )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.Initialize" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class TrPlayerController** )( params + 0 ) = PC;
+				*( class GfxTrHud** )( params + 4 ) = MP;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Show(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.Show" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Hide(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.Hide" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Tick(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.Tick" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdatePlayers( class TrGameReplicationInfo* GRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.UpdatePlayers" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool UpdateLeaderboard( int Index, ScriptName PRIName, ScriptArray< wchar_t > PlayerName, int Score )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.UpdateLeaderboard" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( int* )( params + 0 ) = Index;
+				*( ScriptName* )( params + 4 ) = PRIName;
+				*( ScriptArray< wchar_t >* )( params + 12 ) = PlayerName;
+				*( int* )( params + 24 ) = Score;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void UpdateTime( class TrGameReplicationInfo* GRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.UpdateTime" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			ScriptArray< wchar_t > FormatTime( int Seconds )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.FormatTime" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = Seconds;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
+			void ForceUpdate(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.ForceUpdate" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

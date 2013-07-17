@@ -32,6 +32,63 @@ namespace UnrealScript
 			ADD_OBJECT( GFxObject, MenuButtonsMC )
 			ADD_OBJECT( GFxObject, MainMenuMC )
 			ADD_OBJECT( GFxObject, TitleScreenMC )
+			bool Start( bool StartPaused )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUIFrontEnd_TitleScreen.Start" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = StartPaused;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool FilterButtonInput( int ControllerId, ScriptName ButtonName, byte InputEvent )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUIFrontEnd_TitleScreen.FilterButtonInput" );
+				byte *params = ( byte* )( malloc( 13 ) );
+				*( int* )( params + 0 ) = ControllerId;
+				*( ScriptName* )( params + 4 ) = ButtonName;
+				*( byte* )( params + 12 ) = InputEvent;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void OnMenuButtonPress( void* ev )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUIFrontEnd_TitleScreen.OnMenuButtonPress" );
+				byte *params = ( byte* )( malloc( 36 ) );
+				*( void** )( params + 0 ) = ev;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayCloseAnimation(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUIFrontEnd_TitleScreen.PlayCloseAnimation" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnCloseAnimationComplete(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUIFrontEnd_TitleScreen.OnCloseAnimationComplete" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UT_ConsoleCommand( ScriptArray< wchar_t > Cmd, bool bWriteToLog )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUIFrontEnd_TitleScreen.UT_ConsoleCommand" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = Cmd;
+				*( bool* )( params + 12 ) = bWriteToLog;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

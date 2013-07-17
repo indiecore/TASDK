@@ -1,7 +1,7 @@
 #include "TASDK.h"
 #include <deque>
 
-using namespace UnrealScript;
+//using namespace UnrealScript;
 
 struct HookInfo
 {
@@ -76,41 +76,93 @@ push_loop:
 		byte *orig_code = stack.code;
 		for( DWORD i = 0; i < hook_array.size(); i++ )
 		{
-			//lea ebp, [esp-404] in CallFunction
-			uintptr_t function = *( uintptr_t* )( *GetEBP() + 0x414 ); //3rd arg of CallFunction
+			uintptr_t function;
+
+			uintptr_t ret_addr;
+			__asm
+			{
+				push eax
+				mov eax, [ebp+0x4]
+				mov ret_addr, eax
+				pop eax
+			}
+
+			if( ret_addr >= ( uintptr_t )( call_function ) &&
+				ret_addr <= ( uintptr_t )( call_function ) + 0x100
+				)
+			{
+				//lea ebp, [esp-404] in CallFunction
+				function = *( uintptr_t* )( *GetEBP() + 0x414 ); //3rd arg of CallFunction
+			}
+			else //ProcessEvent
+			{
+				OutputLog( "ProcessEvent: 0x%X\n", ret_addr );
+				function = *( uintptr_t* )( *GetEBP() + 0x8 ); //1st arg of ProcessEvent
+			}
 
 			if( function == ( uintptr_t )( hook_array[ i ].hook_target ) )
 			{
 				byte *func_args = ( byte* )( malloc( hook_array[ i ].stack_size ) );
 				int arg_offset = hook_array[ i ].stack_size;
 
-				for( int num_params = 0; *stack.code != 0x16; num_params++ ) //copy args to buffer, respecting LIFO
+				for( DWORD num_params = 0; *stack.code != 0x16 && num_params < hook_array[ i ].arg_size.size(); num_params++ ) //copy args to buffer, respecting LIFO
 				{
 					arg_offset -= hook_array[ i ].arg_size[ num_params ];
 					native_array[ *stack.code++ ]( stack.object, stack, func_args + arg_offset );
 				}
 
-				if( CallHook( hook_array[ i ].hook_function, stack.object, hook_array[ i ].stack_size, result, func_args ) == kHookBlock )
+				if( ret_addr >= ( uintptr_t )( call_function ) &&
+				ret_addr <= ( uintptr_t )( call_function ) + 0x100
+				)
 				{
-					cleanup_stack( stack, result, hook_array[ i ].hook_target );
+					OutputLog( "Function: %s\n", hook_array[ i ].hook_target->GetName() );
+					if( CallHook( hook_array[ i ].hook_function, stack.object, hook_array[ i ].stack_size, /*stack.locals + hook_array[ i ].hook_target->return_val_offset()*/result, func_args ) == kHookBlock )
+					{
+						cleanup_stack( stack, result, hook_array[ i ].hook_target );
+						free( func_args );
+						return;
+					}
+
 					free( func_args );
-					return;
-				}
+					stack.code = orig_code;
 
-				free( func_args );
-				stack.code = orig_code;
-
-				if( hook_array[ i ].orig_function )
-				{
-					hook_array[ i ].hook_target->set_function( hook_array[ i ].orig_function );
-					call_function( thisptr, stack, result, hook_array[ i ].hook_target );
-					hook_array[ i ].hook_target->set_function( HookHandler );
+					if( hook_array[ i ].orig_function )
+					{
+						hook_array[ i ].hook_target->set_function( hook_array[ i ].orig_function );
+						call_function( thisptr, stack, result, hook_array[ i ].hook_target );
+						hook_array[ i ].hook_target->set_function( HookHandler );
+					}
+					else
+					{
+						hook_array[ i ].hook_target->set_function_flags( hook_array[ i ].hook_target->function_flags() & ~ScriptFunction::kFuncNative );
+						call_function( thisptr, stack, result, hook_array[ i ].hook_target );
+						hook_array[ i ].hook_target->set_function_flags( hook_array[ i ].hook_target->function_flags() | ScriptFunction::kFuncNative );
+					}
 				}
 				else
 				{
-					hook_array[ i ].hook_target->set_function_flags( hook_array[ i ].hook_target->function_flags() & ~ScriptFunction::kFuncNative );
-					call_function( thisptr, stack, result, hook_array[ i ].hook_target );
-					hook_array[ i ].hook_target->set_function_flags( hook_array[ i ].hook_target->function_flags() | ScriptFunction::kFuncNative );
+					if( CallHook( hook_array[ i ].hook_function, stack.object, hook_array[ i ].stack_size, /*stack.locals + hook_array[ i ].hook_target->return_val_offset()*/result, func_args ) == kHookBlock )
+					{
+						free( func_args );
+						return;
+					}
+
+					free( func_args );
+
+					void *params = *( void** )( *GetEBP() + 0xC );
+
+					if( hook_array[ i ].orig_function )
+					{
+						hook_array[ i ].hook_target->set_function( hook_array[ i ].orig_function );
+						thisptr->ProcessEvent( hook_array[ i ].hook_target, params, result );
+						hook_array[ i ].hook_target->set_function( HookHandler );
+					}
+					else
+					{
+						hook_array[ i ].hook_target->set_function_flags( hook_array[ i ].hook_target->function_flags() & ~ScriptFunction::kFuncNative );
+						thisptr->ProcessEvent( hook_array[ i ].hook_target, params, result );
+						hook_array[ i ].hook_target->set_function_flags( hook_array[ i ].hook_target->function_flags() | ScriptFunction::kFuncNative );
+					}
 				}
 
 				return;

@@ -34,6 +34,105 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, ReturnedBlue, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, ReturnRed, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, ReturnBlue, 0xFFFFFFFF )
+			void ClientReceive( class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI_, class Object* OptionalObject )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.ClientReceive" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( class PlayerController** )( params + 0 ) = P;
+				*( int* )( params + 4 ) = Switch;
+				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
+				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
+				*( class Object** )( params + 16 ) = OptionalObject;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class SoundNodeWave* AnnouncementSound( int MessageIndex, class Object* OptionalObject, class PlayerController* PC )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.AnnouncementSound" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( int* )( params + 0 ) = MessageIndex;
+				*( class Object** )( params + 4 ) = OptionalObject;
+				*( class PlayerController** )( params + 8 ) = PC;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class SoundNodeWave** )( params + function->return_val_offset() );
+			}
+
+			byte AnnouncementLevel( byte MessageIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.AnnouncementLevel" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = MessageIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( byte* )( params + function->return_val_offset() );
+			}
+
+			ScriptArray< wchar_t > GetString( int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI_, class Object* OptionalObject )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.GetString" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( int* )( params + 0 ) = Switch;
+				*( bool* )( params + 4 ) = bPRI1HUD;
+				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
+				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
+				*( class Object** )( params + 16 ) = OptionalObject;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
+			bool ShouldBeRemoved( class UTQueuedAnnouncement* MyAnnouncement, ScriptClass* NewAnnouncementClass, int NewMessageIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.ShouldBeRemoved" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( class UTQueuedAnnouncement** )( params + 0 ) = MyAnnouncement;
+				*( ScriptClass** )( params + 4 ) = NewAnnouncementClass;
+				*( int* )( params + 8 ) = NewMessageIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool ShouldRemoveFlagAnnouncement( int MyMessageIndex, ScriptClass* NewAnnouncementClass, int NewMessageIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.ShouldRemoveFlagAnnouncement" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( int* )( params + 0 ) = MyMessageIndex;
+				*( ScriptClass** )( params + 4 ) = NewAnnouncementClass;
+				*( int* )( params + 8 ) = NewMessageIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool AddAnnouncement( class UTAnnouncer* Announcer, int MessageIndex, class PlayerReplicationInfo* PRI, class Object* OptionalObject )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.AddAnnouncement" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class UTAnnouncer** )( params + 0 ) = Announcer;
+				*( int* )( params + 4 ) = MessageIndex;
+				*( class PlayerReplicationInfo** )( params + 8 ) = PRI;
+				*( class Object** )( params + 12 ) = OptionalObject;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool PartiallyDuplicates( int Switch1, int Switch2, class Object* OptionalObject1, class Object* OptionalObject2 )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.PartiallyDuplicates" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( int* )( params + 0 ) = Switch1;
+				*( int* )( params + 4 ) = Switch2;
+				*( class Object** )( params + 8 ) = OptionalObject1;
+				*( class Object** )( params + 12 ) = OptionalObject2;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

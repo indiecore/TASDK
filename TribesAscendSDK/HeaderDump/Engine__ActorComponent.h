@@ -25,6 +25,41 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bTickInEditor, 0x2 )
 			ADD_VAR( ::BoolProperty, bAttached, 0x1 )
 			ADD_OBJECT( Actor, Owner )
+			void SetTickGroup( byte NewTickGroup )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ActorComponent.SetTickGroup" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = NewTickGroup;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetComponentRBFixed( bool bFixed )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ActorComponent.SetComponentRBFixed" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bFixed;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ForceUpdate( bool bTransformOnly )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ActorComponent.ForceUpdate" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bTransformOnly;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DetachFromAny(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ActorComponent.DetachFromAny" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

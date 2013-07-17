@@ -29,6 +29,44 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, AccountLabel, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, SubmitLabel, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, HelpLabel, 0xFFFFFFFF )
+			int TakeAction( int ActionIndex, class GFxObject* DataList )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_Login.TakeAction" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = ActionIndex;
+				*( class GFxObject** )( params + 4 ) = DataList;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void FillData( class GFxObject* DataList )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_Login.FillData" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class GFxObject** )( params + 0 ) = DataList;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class GFxObject* FillOption( int ActionIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_Login.FillOption" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = ActionIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class GFxObject** )( params + function->return_val_offset() );
+			}
+
+			void ShowModel(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_Login.ShowModel" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

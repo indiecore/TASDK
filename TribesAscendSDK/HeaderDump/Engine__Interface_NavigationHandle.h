@@ -19,6 +19,14 @@ namespace UnrealScript
 	class Interface_NavigationHandle : public Interface
 	{
 	public:
+			void NotifyPathChanged(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Interface_NavigationHandle.NotifyPathChanged" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,15 @@ namespace UnrealScript
 	class Trigger_LOS : public Trigger
 	{
 	public:
+			void Tick( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Trigger_LOS.Tick" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

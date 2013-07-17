@@ -25,6 +25,24 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bAllowDynamicShadowsOnTranslucency, 0x4 )
 			ADD_VAR( ::BoolProperty, bForceNonCompositeDynamicLights, 0x2 )
 			ADD_VAR( ::BoolProperty, bEnabled, 0x1 )
+			void SetEnabled( bool bNewEnabled )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightEnvironmentComponent.SetEnabled" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bNewEnabled;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool IsEnabled(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightEnvironmentComponent.IsEnabled" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

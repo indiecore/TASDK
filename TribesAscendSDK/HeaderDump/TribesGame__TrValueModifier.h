@@ -114,6 +114,50 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, IconId, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, Description, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, FriendlyName, 0xFFFFFFFF )
+			void Reset(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrValueModifier.Reset" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Merge( class TrValueModifier* ModifierToMerge )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrValueModifier.Merge" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrValueModifier** )( params + 0 ) = ModifierToMerge;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void MergeClass( ScriptClass* ModifierClassToMerge )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrValueModifier.MergeClass" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( ScriptClass** )( params + 0 ) = ModifierClassToMerge;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void MergeModification( int ModType, float Value )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrValueModifier.MergeModification" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = ModType;
+				*( float* )( params + 4 ) = Value;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void LogModifiedValues(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrValueModifier.LogModifiedValues" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

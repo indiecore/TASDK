@@ -19,6 +19,41 @@ namespace UnrealScript
 	class UTClientSideWeaponPawn : public UTWeaponPawn
 	{
 	public:
+			void PreBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTClientSideWeaponPawn.PreBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void AttachDriver( class Pawn* P )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTClientSideWeaponPawn.AttachDriver" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = P;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DetachDriver( class Pawn* P )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTClientSideWeaponPawn.DetachDriver" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = P;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Tick( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTClientSideWeaponPawn.Tick" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

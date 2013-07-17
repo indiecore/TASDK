@@ -19,10 +19,42 @@ namespace UnrealScript
 	class PhysicalMaterial : public Object
 	{
 	public:
+			void* FindPhysEffectInfo( byte Type )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicalMaterial.FindPhysEffectInfo" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = Type;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::IntProperty, MaterialIndex, 0xFFFFFFFF )
+			void FindFractureSounds( class SoundCue* &OutSoundExplosion, class SoundCue* &OutSoundSingle )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicalMaterial.FindFractureSounds" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class SoundCue** )( params + 0 ) = OutSoundExplosion;
+				*( class SoundCue** )( params + 4 ) = OutSoundSingle;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutSoundExplosion = *( class SoundCue** )( params + 0 );
+				OutSoundSingle = *( class SoundCue** )( params + 4 );
+			}
+
 			ADD_OBJECT( SoundCue, FractureSoundSingle )
 			ADD_OBJECT( SoundCue, FractureSoundExplosion )
 			ADD_OBJECT( PhysicalMaterial, Parent )
+			class PhysicalMaterialPropertyBase* GetPhysicalMaterialProperty( ScriptClass* DesiredClass )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicalMaterial.GetPhysicalMaterialProperty" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( ScriptClass** )( params + 0 ) = DesiredClass;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class PhysicalMaterialPropertyBase** )( params + function->return_val_offset() );
+			}
+
 			ADD_OBJECT( PhysicalMaterialPropertyBase, PhysicalMaterialProperty )
 			ADD_VAR( ::FloatProperty, Friction, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, Restitution, 0xFFFFFFFF )

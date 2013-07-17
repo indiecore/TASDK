@@ -19,6 +19,28 @@ namespace UnrealScript
 	class UTKismetAnnouncement : public UTObjectiveSpecificMessage
 	{
 	public:
+			void* GetObjectiveAnnouncement( byte MessageIndex, class Object* Objective, class PlayerController* PC )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTKismetAnnouncement.GetObjectiveAnnouncement" );
+				byte *params = ( byte* )( malloc( 9 ) );
+				*( byte* )( params + 0 ) = MessageIndex;
+				*( class Object** )( params + 4 ) = Objective;
+				*( class PlayerController** )( params + 8 ) = PC;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
+			byte AnnouncementLevel( byte MessageIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTKismetAnnouncement.AnnouncementLevel" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = MessageIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( byte* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

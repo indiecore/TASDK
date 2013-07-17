@@ -21,6 +21,15 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::ByteProperty, ImageDrawStyle, 0xFFFFFFFF )
 			ADD_OBJECT( Texture2D, Image )
+			void RenderObject( class Canvas* Canvas )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuImage.RenderObject" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Canvas** )( params + 0 ) = Canvas;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,25 @@ namespace UnrealScript
 	class TrMainMenuContentData : public Object
 	{
 	public:
+			void SendPaperDollANewMesh( class TrPaperDollMainMenu* MainMenuPaperDoll, byte ContentDataType )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrMainMenuContentData.SendPaperDollANewMesh" );
+				byte *params = ( byte* )( malloc( 5 ) );
+				*( class TrPaperDollMainMenu** )( params + 0 ) = MainMenuPaperDoll;
+				*( byte* )( params + 4 ) = ContentDataType;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PreloadTextures( float ForceDuration )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrMainMenuContentData.PreloadTextures" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = ForceDuration;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

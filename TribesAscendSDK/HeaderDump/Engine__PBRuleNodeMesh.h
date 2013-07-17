@@ -21,6 +21,15 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bBlockAll, 0x2 )
 			ADD_VAR( ::BoolProperty, bDoOcclusionTest, 0x1 )
+			int PickRandomBuildingMesh(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PBRuleNodeMesh.PickRandomBuildingMesh" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

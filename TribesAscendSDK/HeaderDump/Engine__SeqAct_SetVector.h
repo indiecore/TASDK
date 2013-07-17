@@ -20,6 +20,14 @@ namespace UnrealScript
 	{
 	public:
 			ADD_STRUCT( ::VectorProperty, DefaultValue, 0xFFFFFFFF )
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_SetVector.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

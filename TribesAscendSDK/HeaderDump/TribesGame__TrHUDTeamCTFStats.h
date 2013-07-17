@@ -31,6 +31,112 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, FlagReturnTime, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, RemainingTime, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, MyTeam, 0xFFFFFFFF )
+			void Initialize( class TrPlayerController* PC, class GfxTrHud* MP )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.Initialize" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class TrPlayerController** )( params + 0 ) = PC;
+				*( class GfxTrHud** )( params + 4 ) = MP;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Show(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.Show" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Hide(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.Hide" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Tick(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.Tick" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateTeam(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.UpdateTeam" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int GetTeamIndex( int I )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.GetTeamIndex" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = I;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void UpdateFlagStatus( class TrGameReplicationInfo* GRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.UpdateFlagStatus" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateGeneratorStatus( class TrGameReplicationInfo* GRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.UpdateGeneratorStatus" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateTeamScore( class TrGameReplicationInfo* GRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.UpdateTeamScore" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateTime( class TrGameReplicationInfo* GRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.UpdateTime" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			ScriptArray< wchar_t > FormatTime( int Seconds )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.FormatTime" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = Seconds;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
+			void ForceUpdate(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.ForceUpdate" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

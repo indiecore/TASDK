@@ -19,6 +19,37 @@ namespace UnrealScript
 	class MorphNodeMultiPose : public MorphNodeBase
 	{
 	public:
+			bool AddMorphTarget( ScriptName MorphTargetName, float InWeight )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MorphNodeMultiPose.AddMorphTarget" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptName* )( params + 0 ) = MorphTargetName;
+				*( float* )( params + 8 ) = InWeight;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void RemoveMorphTarget( ScriptName MorphTargetName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MorphNodeMultiPose.RemoveMorphTarget" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = MorphTargetName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool UpdateMorphTarget( class MorphTarget* Target, float InWeight )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MorphNodeMultiPose.UpdateMorphTarget" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class MorphTarget** )( params + 0 ) = Target;
+				*( float* )( params + 4 ) = InWeight;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

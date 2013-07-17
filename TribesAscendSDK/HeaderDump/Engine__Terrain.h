@@ -51,6 +51,22 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, NumSectionsY, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, NumSectionsX, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, NormalMapLayer, 0xFFFFFFFF )
+			void CalcLayerBounds(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Terrain.CalcLayerBounds" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Terrain.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

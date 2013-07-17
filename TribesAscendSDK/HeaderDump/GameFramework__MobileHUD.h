@@ -37,6 +37,128 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bForceMobileHUD, 0x4 )
 			ADD_VAR( ::BoolProperty, bShowMobileHud, 0x2 )
 			ADD_VAR( ::BoolProperty, bShowGameHud, 0x1 )
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PostRender(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.PostRender" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DrawMobileDebugString( float XPos, float YPos, ScriptArray< wchar_t > Str )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawMobileDebugString" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( float* )( params + 0 ) = XPos;
+				*( float* )( params + 4 ) = YPos;
+				*( ScriptArray< wchar_t >* )( params + 8 ) = Str;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool ShowMobileHud(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.ShowMobileHud" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void RenderMobileMenu(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.RenderMobileMenu" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DrawInputZoneOverlays(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawInputZoneOverlays" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DrawMobileZone_Button( class MobileInputZone* Zone )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawMobileZone_Button" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class MobileInputZone** )( params + 0 ) = Zone;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DrawMobileZone_Joystick( class MobileInputZone* Zone )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawMobileZone_Joystick" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class MobileInputZone** )( params + 0 ) = Zone;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DrawMobileZone_Trackball( class MobileInputZone* Zone )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawMobileZone_Trackball" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class MobileInputZone** )( params + 0 ) = Zone;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DrawMobileTilt( class MobilePlayerInput* MobileInput )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawMobileTilt" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class MobilePlayerInput** )( params + 0 ) = MobileInput;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DrawMobileZone_Slider( class MobileInputZone* Zone )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawMobileZone_Slider" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class MobileInputZone** )( params + 0 ) = Zone;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RefreshKismetLinks(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.RefreshKismetLinks" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void AddKismetRenderEvent( class SeqEvent_HudRender* NewEvent )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.AddKismetRenderEvent" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SeqEvent_HudRender** )( params + 0 ) = NewEvent;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RenderKismetHud(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.RenderKismetHud" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

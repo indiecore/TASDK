@@ -24,6 +24,14 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, ForceRadius, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, ForceStrength, 0xFFFFFFFF )
 			ADD_OBJECT( ForceFieldShape, Shape )
+			void DoInitRBPhys(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NxForceFieldRadial.DoInitRBPhys" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

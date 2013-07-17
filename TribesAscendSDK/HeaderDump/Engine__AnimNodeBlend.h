@@ -23,6 +23,16 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, BlendTimeToGo, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, Child2WeightTarget, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, Child2Weight, 0xFFFFFFFF )
+			void SetBlendTarget( float BlendTarget, float BlendTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeBlend.SetBlendTarget" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = BlendTarget;
+				*( float* )( params + 4 ) = BlendTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

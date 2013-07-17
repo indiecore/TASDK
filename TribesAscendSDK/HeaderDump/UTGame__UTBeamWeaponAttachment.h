@@ -23,6 +23,33 @@ namespace UnrealScript
 			ADD_OBJECT( UTPawn, PawnOwner )
 			ADD_VAR( ::NameProperty, BeamSockets, 0xFFFFFFFF )
 			ADD_OBJECT( ParticleSystem, BeamTemplate )
+			void AddBeamEmitter(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTBeamWeaponAttachment.AddBeamEmitter" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void HideEmitter( int Index, bool bHide )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTBeamWeaponAttachment.HideEmitter" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = Index;
+				*( bool* )( params + 4 ) = bHide;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateBeam( byte FireModeNum )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTBeamWeaponAttachment.UpdateBeam" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = FireModeNum;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

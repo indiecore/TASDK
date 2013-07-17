@@ -19,6 +19,31 @@ namespace UnrealScript
 	class GameKActorSpawnableEffect : public KActor
 	{
 	public:
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameKActorSpawnableEffect.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void FellOutOfWorld( ScriptClass* dmgType )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameKActorSpawnableEffect.FellOutOfWorld" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( ScriptClass** )( params + 0 ) = dmgType;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void StartScalingDown(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameKActorSpawnableEffect.StartScalingDown" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -22,6 +22,15 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, NumNodesProcessed, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, NumNodesThrownOut, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bShowDebug, 0x1 )
+			ScriptArray< wchar_t > GetDumpString(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_Filter.GetDumpString" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

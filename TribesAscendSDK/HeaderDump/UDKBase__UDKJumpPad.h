@@ -24,6 +24,36 @@ namespace UnrealScript
 			ADD_OBJECT( SoundCue, JumpSound )
 			ADD_OBJECT( PathNode, JumpTarget )
 			ADD_STRUCT( ::VectorProperty, JumpVelocity, 0xFFFFFFFF )
+			void Touch( class Actor* Other, Vector HitLocation, Vector HitNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKJumpPad.Touch" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				*( Vector* )( params + 8 ) = HitLocation;
+				*( Vector* )( params + 20 ) = HitNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PostTouch( class Actor* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKJumpPad.PostTouch" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool SuggestMovePreparation( class Pawn* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKJumpPad.SuggestMovePreparation" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

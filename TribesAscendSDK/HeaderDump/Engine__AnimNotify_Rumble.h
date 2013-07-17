@@ -19,6 +19,7 @@ namespace UnrealScript
 	class AnimNotify_Rumble : public AnimNotify
 	{
 	public:
+			ADD_OBJECT( ScriptClass, PredefinedWaveForm )
 			ADD_OBJECT( ForceFeedbackWaveform, WaveForm )
 			ADD_VAR( ::FloatProperty, EffectRadius, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bCheckForBasedPlayer, 0x1 )

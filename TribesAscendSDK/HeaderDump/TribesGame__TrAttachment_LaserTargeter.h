@@ -20,6 +20,49 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::BoolProperty, m_bIsTracerActive, 0x1 )
+			void KillLaserEffect(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_LaserTargeter.KillLaserEffect" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SpawnLaserEffect( Vector HitLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_LaserTargeter.SpawnLaserEffect" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = HitLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateLaserEffect( Vector HitLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_LaserTargeter.UpdateLaserEffect" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = HitLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ThirdPersonFireEffects( Vector HitLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_LaserTargeter.ThirdPersonFireEffects" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = HitLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void StopThirdPersonFireEffects(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_LaserTargeter.StopThirdPersonFireEffects" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

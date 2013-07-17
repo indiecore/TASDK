@@ -19,6 +19,35 @@ namespace UnrealScript
 	class DebugCameraHUD : public HUD
 	{
 	public:
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DebugCameraHUD.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool DisplayMaterials( float X, float &Y, float DY )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DebugCameraHUD.DisplayMaterials" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( float* )( params + 0 ) = X;
+				*( float* )( params + 4 ) = Y;
+				*( float* )( params + 8 ) = DY;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				Y = *( float* )( params + 4 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void PostRender(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DebugCameraHUD.PostRender" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

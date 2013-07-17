@@ -20,6 +20,14 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::IntProperty, TeamNum, 0xFFFFFFFF )
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqAct_GetTeamNum.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

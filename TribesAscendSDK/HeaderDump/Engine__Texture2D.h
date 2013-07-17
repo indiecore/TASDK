@@ -39,6 +39,28 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, OriginalSizeX, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, SizeY, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, SizeX, 0xFFFFFFFF )
+			void SetForceMipLevelsToBeResident( float Seconds, int CinematicTextureGroups )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Texture2D.SetForceMipLevelsToBeResident" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = Seconds;
+				*( int* )( params + 4 ) = CinematicTextureGroups;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class Texture2D* Create( int InSizeX, int InSizeY, byte InFormat )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Texture2D.Create" );
+				byte *params = ( byte* )( malloc( 9 ) );
+				*( int* )( params + 0 ) = InSizeX;
+				*( int* )( params + 4 ) = InSizeY;
+				*( byte* )( params + 8 ) = InFormat;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Texture2D** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

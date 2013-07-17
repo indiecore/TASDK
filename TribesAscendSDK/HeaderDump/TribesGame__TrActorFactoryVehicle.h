@@ -20,6 +20,15 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::ByteProperty, TeamNum, 0xFFFFFFFF )
+			void PostCreateActor( class Actor* NewActor )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrActorFactoryVehicle.PostCreateActor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = NewActor;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

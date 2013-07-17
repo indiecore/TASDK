@@ -19,8 +19,30 @@ namespace UnrealScript
 	class Path_MinDistBetweenSpecsOfType : public PathConstraint
 	{
 	public:
+			ADD_OBJECT( ScriptClass, ReachSpecClass )
 			ADD_STRUCT( ::VectorProperty, InitLocation, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, MinDistBetweenSpecTypes, 0xFFFFFFFF )
+			bool EnforceMinDist( class Pawn* P, float InMinDist, ScriptClass* InSpecClass, Vector LastLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Path_MinDistBetweenSpecsOfType.EnforceMinDist" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( class Pawn** )( params + 0 ) = P;
+				*( float* )( params + 4 ) = InMinDist;
+				*( ScriptClass** )( params + 8 ) = InSpecClass;
+				*( Vector* )( params + 12 ) = LastLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Path_MinDistBetweenSpecsOfType.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -30,6 +30,65 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bChangesVelocity, 0x1 )
 			ADD_VAR( ::NameProperty, ProductRequired, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, URL, 0xFFFFFFFF )
+			bool CanTeleport( class Actor* A )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Teleporter.CanTeleport" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = A;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Teleporter.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool Accept( class Actor* Incoming, class Actor* Source )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Teleporter.Accept" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Actor** )( params + 0 ) = Incoming;
+				*( class Actor** )( params + 4 ) = Source;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Touch( class Actor* Other, Vector HitLocation, Vector HitNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Teleporter.Touch" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				*( Vector* )( params + 8 ) = HitLocation;
+				*( Vector* )( params + 20 ) = HitNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PostTouch( class Actor* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Teleporter.PostTouch" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class Actor* SpecialHandling( class Pawn* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Teleporter.SpecialHandling" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Actor** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

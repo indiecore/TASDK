@@ -19,6 +19,7 @@ namespace UnrealScript
 	class TrSeqAct_GiveAccolade : public SequenceAction
 	{
 	public:
+			ADD_OBJECT( ScriptClass, AccoladeType )
 	};
 }
 

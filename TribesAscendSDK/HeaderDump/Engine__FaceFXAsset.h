@@ -21,6 +21,24 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::IntProperty, NumLoadErrors, 0xFFFFFFFF )
 			ADD_OBJECT( SkeletalMesh, DefaultSkelMesh )
+			void MountFaceFXAnimSet( class FaceFXAnimSet* AnimSet )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FaceFXAsset.MountFaceFXAnimSet" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class FaceFXAnimSet** )( params + 0 ) = AnimSet;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UnmountFaceFXAnimSet( class FaceFXAnimSet* AnimSet )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FaceFXAsset.UnmountFaceFXAnimSet" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class FaceFXAnimSet** )( params + 0 ) = AnimSet;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

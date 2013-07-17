@@ -73,6 +73,122 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bMobileAllowFog, 0x2 )
 			ADD_VAR( ::BoolProperty, bAutoFlattenMobile, 0x1 )
 			ADD_VAR( ::StrProperty, PreviewMesh, 0xFFFFFFFF )
+			class Material* GetMaterial(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetMaterial" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Material** )( params + function->return_val_offset() );
+			}
+
+			class PhysicalMaterial* GetPhysicalMaterial(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetPhysicalMaterial" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class PhysicalMaterial** )( params + function->return_val_offset() );
+			}
+
+			bool GetParameterDesc( ScriptName ParameterName, ScriptArray< wchar_t > &OutDesc )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetParameterDesc" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptArray< wchar_t >* )( params + 8 ) = OutDesc;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutDesc = *( ScriptArray< wchar_t >* )( params + 8 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool GetFontParameterValue( ScriptName ParameterName, class Font* &OutFontValue, int &OutFontPage )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetFontParameterValue" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( class Font** )( params + 8 ) = OutFontValue;
+				*( int* )( params + 12 ) = OutFontPage;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutFontValue = *( class Font** )( params + 8 );
+				OutFontPage = *( int* )( params + 12 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool GetScalarParameterValue( ScriptName ParameterName, float &OutValue )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetScalarParameterValue" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( float* )( params + 8 ) = OutValue;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutValue = *( float* )( params + 8 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool GetScalarCurveParameterValue( ScriptName ParameterName, void* &OutValue )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetScalarCurveParameterValue" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( void** )( params + 8 ) = OutValue;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutValue = *( void** )( params + 8 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool GetTextureParameterValue( ScriptName ParameterName, class Texture* &OutValue )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetTextureParameterValue" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( class Texture** )( params + 8 ) = OutValue;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutValue = *( class Texture** )( params + 8 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool GetVectorParameterValue( ScriptName ParameterName, void* &OutValue )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetVectorParameterValue" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( void** )( params + 8 ) = OutValue;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutValue = *( void** )( params + 8 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool GetVectorCurveParameterValue( ScriptName ParameterName, void* &OutValue )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetVectorCurveParameterValue" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( void** )( params + 8 ) = OutValue;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutValue = *( void** )( params + 8 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void SetForceMipLevelsToBeResident( bool OverrideForceMiplevelsToBeResident, bool bForceMiplevelsToBeResidentValue, float ForceDuration, int CinematicTextureGroups )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.SetForceMipLevelsToBeResident" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( bool* )( params + 0 ) = OverrideForceMiplevelsToBeResident;
+				*( bool* )( params + 4 ) = bForceMiplevelsToBeResidentValue;
+				*( float* )( params + 8 ) = ForceDuration;
+				*( int* )( params + 12 ) = CinematicTextureGroups;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

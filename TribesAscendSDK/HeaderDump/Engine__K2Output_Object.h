@@ -19,6 +19,7 @@ namespace UnrealScript
 	class K2Output_Object : public K2Output
 	{
 	public:
+			ADD_OBJECT( ScriptClass, ObjClass )
 	};
 }
 

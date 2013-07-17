@@ -19,6 +19,33 @@ namespace UnrealScript
 	class MobileMenuGame : public GameInfo
 	{
 	public:
+			ADD_OBJECT( ScriptClass, InitialSceneToDisplayClass )
+			void PostLogin( class PlayerController* NewPlayer )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuGame.PostLogin" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PlayerController** )( params + 0 ) = NewPlayer;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void StartMatch(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuGame.StartMatch" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RestartPlayer( class Controller* NewPlayer )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuGame.RestartPlayer" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Controller** )( params + 0 ) = NewPlayer;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

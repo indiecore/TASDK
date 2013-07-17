@@ -19,6 +19,15 @@ namespace UnrealScript
 	class PathNode_Dynamic : public PathNode
 	{
 	public:
+			ScriptArray< wchar_t > GetDebugAbbrev(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PathNode_Dynamic.GetDebugAbbrev" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

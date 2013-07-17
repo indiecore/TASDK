@@ -28,6 +28,27 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, NumberOfProjectiles, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, FireTimeLength, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, CallRadius, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, ProjectileFireClass )
+			bool FireCompletedCallIn( int CallInOffs, Vector TargetLocation, Vector TargetNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCallIn_Projectile.FireCompletedCallIn" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( int* )( params + 0 ) = CallInOffs;
+				*( Vector* )( params + 4 ) = TargetLocation;
+				*( Vector* )( params + 16 ) = TargetNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void FireProjectile(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCallIn_Projectile.FireProjectile" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

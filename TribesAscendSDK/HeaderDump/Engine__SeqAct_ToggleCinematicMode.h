@@ -26,6 +26,14 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bDisableInput, 0x8 )
 			ADD_VAR( ::BoolProperty, bDroppedPickups, 0x40 )
 			ADD_VAR( ::BoolProperty, bDeadBodies, 0x20 )
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_ToggleCinematicMode.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

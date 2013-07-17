@@ -19,6 +19,18 @@ namespace UnrealScript
 	class UTPickupInventory : public UTInventory
 	{
 	public:
+			float BotDesireability( class Actor* PickupHolder, class Pawn* P, class Controller* C )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTPickupInventory.BotDesireability" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( class Actor** )( params + 0 ) = PickupHolder;
+				*( class Pawn** )( params + 4 ) = P;
+				*( class Controller** )( params + 8 ) = C;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

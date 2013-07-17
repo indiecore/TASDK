@@ -19,6 +19,62 @@ namespace UnrealScript
 	class ProcBuilding : public Volume
 	{
 	public:
+			int FindEdgeForTopLevelScope( int TopLevelScopeIndex, byte Edge )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ProcBuilding.FindEdgeForTopLevelScope" );
+				byte *params = ( byte* )( malloc( 5 ) );
+				*( int* )( params + 0 ) = TopLevelScopeIndex;
+				*( byte* )( params + 4 ) = Edge;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void BreakFractureComponent( Vector BoxMin, Vector BoxMax )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ProcBuilding.BreakFractureComponent" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( Vector* )( params + 4 ) = BoxMin;
+				*( Vector* )( params + 16 ) = BoxMax;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void GetAllGroupedProcBuildings(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ProcBuilding.GetAllGroupedProcBuildings" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class ProcBuilding* GetBaseMostBuilding(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ProcBuilding.GetBaseMostBuilding" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class ProcBuilding** )( params + function->return_val_offset() );
+			}
+
+			void* FindComponentsForTopLevelScope( int TopLevelScopeIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ProcBuilding.FindComponentsForTopLevelScope" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = TopLevelScopeIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
+			void ClearBuildingMeshes(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ProcBuilding.ClearBuildingMeshes" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_OBJECT( ProcBuildingRuleset, Ruleset )
 			ADD_VAR( ::BoolProperty, bGenerateRoofMesh, 0x1 )
 			ADD_VAR( ::BoolProperty, bGenerateFloorMesh, 0x2 )

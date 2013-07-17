@@ -19,6 +19,24 @@ namespace UnrealScript
 	class TrMineCollisionProxy : public TrCollisionProxy
 	{
 	public:
+			void OnPawnAdded( class Pawn* aPawn )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrMineCollisionProxy.OnPawnAdded" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = aPawn;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnPawnRemoved( class Pawn* aPawn )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrMineCollisionProxy.OnPawnRemoved" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = aPawn;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

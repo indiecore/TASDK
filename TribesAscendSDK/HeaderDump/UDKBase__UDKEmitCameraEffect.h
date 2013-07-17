@@ -21,6 +21,60 @@ namespace UnrealScript
 	public:
 			ADD_OBJECT( UDKPlayerController, Cam )
 			ADD_VAR( ::FloatProperty, DistFromCamera, 0xFFFFFFFF )
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKEmitCameraEffect.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Destroyed(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKEmitCameraEffect.Destroyed" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RegisterCamera( class UDKPlayerController* inCam )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKEmitCameraEffect.RegisterCamera" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class UDKPlayerController** )( params + 0 ) = inCam;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Activate(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKEmitCameraEffect.Activate" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Deactivate(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKEmitCameraEffect.Deactivate" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateLocation( Vector &CamLoc, Rotator &CamRot, float CamFOVDeg )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKEmitCameraEffect.UpdateLocation" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( Vector* )( params + 0 ) = CamLoc;
+				*( Rotator* )( params + 12 ) = CamRot;
+				*( float* )( params + 24 ) = CamFOVDeg;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				CamLoc = *( Vector* )( params + 0 );
+				CamRot = *( Rotator* )( params + 12 );
+			}
+
 	};
 }
 

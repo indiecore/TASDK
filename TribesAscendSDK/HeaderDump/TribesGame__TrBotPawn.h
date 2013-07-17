@@ -19,6 +19,32 @@ namespace UnrealScript
 	class TrBotPawn : public TrPlayerPawn
 	{
 	public:
+			void SetMovementPhysics(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBotPawn.SetMovementPhysics" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Tick( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBotPawn.Tick" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RechargeHealthPool( float DeltaSeconds )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBotPawn.RechargeHealthPool" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaSeconds;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

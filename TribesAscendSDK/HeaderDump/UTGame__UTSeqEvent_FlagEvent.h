@@ -19,6 +19,25 @@ namespace UnrealScript
 	class UTSeqEvent_FlagEvent : public SequenceEvent
 	{
 	public:
+			void Trigger( ScriptName EventType, class Controller* EventInstigator )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqEvent_FlagEvent.Trigger" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptName* )( params + 0 ) = EventType;
+				*( class Controller** )( params + 8 ) = EventInstigator;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqEvent_FlagEvent.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -36,6 +36,15 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bAdjustCamera, 0x4 )
 			ADD_VAR( ::BoolProperty, bAlwaysFocus, 0x2 )
 			ADD_VAR( ::BoolProperty, bAffectCamera, 0x1 )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_CameraLookAt.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

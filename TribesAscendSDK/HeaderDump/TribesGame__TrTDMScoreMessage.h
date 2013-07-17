@@ -19,6 +19,29 @@ namespace UnrealScript
 	class TrTDMScoreMessage : public UTLocalMessage
 	{
 	public:
+			byte AnnouncementLevel( byte MessageIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTDMScoreMessage.AnnouncementLevel" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = MessageIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( byte* )( params + function->return_val_offset() );
+			}
+
+			void ClientReceive( class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI_, class Object* OptionalObject )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTDMScoreMessage.ClientReceive" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( class PlayerController** )( params + 0 ) = P;
+				*( int* )( params + 4 ) = Switch;
+				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
+				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
+				*( class Object** )( params + 16 ) = OptionalObject;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

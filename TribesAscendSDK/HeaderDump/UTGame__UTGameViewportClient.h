@@ -25,6 +25,63 @@ namespace UnrealScript
 			ADD_OBJECT( Font, LoadingScreenGameTypeNameFont )
 			ADD_OBJECT( Font, LoadingScreenMapNameFont )
 			ADD_VAR( ::StrProperty, UTFrontEndString, 0xFFFFFFFF )
+			void PostRender( class Canvas* Canvas )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameViewportClient.PostRender" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Canvas** )( params + 0 ) = Canvas;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DrawTransition( class Canvas* Canvas )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameViewportClient.DrawTransition" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Canvas** )( params + 0 ) = Canvas;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RenderHeader( class Canvas* Canvas )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameViewportClient.RenderHeader" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Canvas** )( params + 0 ) = Canvas;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateActiveSplitscreenType(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameViewportClient.UpdateActiveSplitscreenType" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetProgressMessage( byte MessageType, ScriptArray< wchar_t > Message, ScriptArray< wchar_t > Title, bool bIgnoreFutureNetworkMessages )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameViewportClient.SetProgressMessage" );
+				byte *params = ( byte* )( malloc( 29 ) );
+				*( byte* )( params + 0 ) = MessageType;
+				*( ScriptArray< wchar_t >* )( params + 4 ) = Message;
+				*( ScriptArray< wchar_t >* )( params + 16 ) = Title;
+				*( bool* )( params + 28 ) = bIgnoreFutureNetworkMessages;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void NotifyConnectionError( ScriptArray< wchar_t > Message, ScriptArray< wchar_t > Title )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameViewportClient.NotifyConnectionError" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = Message;
+				*( ScriptArray< wchar_t >* )( params + 12 ) = Title;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

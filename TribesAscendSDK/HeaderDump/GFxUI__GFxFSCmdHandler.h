@@ -19,6 +19,19 @@ namespace UnrealScript
 	class GFxFSCmdHandler : public Object
 	{
 	public:
+			bool FSCommand( class GFxMoviePlayer* Movie, class GFxEvent_FSCommand* Event, ScriptArray< wchar_t > Cmd, ScriptArray< wchar_t > Arg )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxFSCmdHandler.FSCommand" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( class GFxMoviePlayer** )( params + 0 ) = Movie;
+				*( class GFxEvent_FSCommand** )( params + 4 ) = Event;
+				*( ScriptArray< wchar_t >* )( params + 8 ) = Cmd;
+				*( ScriptArray< wchar_t >* )( params + 20 ) = Arg;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

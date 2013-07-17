@@ -25,6 +25,32 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bVelChange, 0x1 )
 			ADD_VAR( ::FloatProperty, ImpulseRange, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, ImpulseStrength, 0xFFFFFFFF )
+			void FireLineImpulse(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_LineImpulseActor.FireLineImpulse" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnToggle( class SeqAct_Toggle* inAction )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_LineImpulseActor.OnToggle" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SeqAct_Toggle** )( params + 0 ) = inAction;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ReplicatedEvent( ScriptName VarName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_LineImpulseActor.ReplicatedEvent" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = VarName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

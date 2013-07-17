@@ -19,6 +19,41 @@ namespace UnrealScript
 	class TrProj_ThrowDeployable : public TrProj_Mine
 	{
 	public:
+			ADD_OBJECT( ScriptClass, m_DeployableToSpawn )
+			class TrDeployable* SpawnDeployable(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_ThrowDeployable.SpawnDeployable" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class TrDeployable** )( params + function->return_val_offset() );
+			}
+
+			void DestroyOldestOverLimit(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_ThrowDeployable.DestroyOldestOverLimit" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int GetMaxDeployedLimit(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_ThrowDeployable.GetMaxDeployedLimit" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void ArmedTimer(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_ThrowDeployable.ArmedTimer" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -22,6 +22,33 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, SlowSpeed, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, RampUpTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, SlowTime, 0xFFFFFFFF )
+			bool MutatorIsAllowed(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMutator_SlowTimeKills.MutatorIsAllowed" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void ScoreKill( class Controller* Killer, class Controller* Killed )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMutator_SlowTimeKills.ScoreKill" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Controller** )( params + 0 ) = Killer;
+				*( class Controller** )( params + 4 ) = Killed;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Timer(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMutator_SlowTimeKills.Timer" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

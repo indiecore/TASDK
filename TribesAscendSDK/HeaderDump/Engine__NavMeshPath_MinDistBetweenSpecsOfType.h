@@ -22,6 +22,27 @@ namespace UnrealScript
 			ADD_VAR( ::ByteProperty, EdgeType, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, InitLocation, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, MinDistBetweenEdgeTypes, 0xFFFFFFFF )
+			bool EnforceMinDist( class NavigationHandle* NavHandle, float InMinDist, byte InEdgeType, Vector LastLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshPath_MinDistBetweenSpecsOfType.EnforceMinDist" );
+				byte *params = ( byte* )( malloc( 21 ) );
+				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( float* )( params + 4 ) = InMinDist;
+				*( byte* )( params + 8 ) = InEdgeType;
+				*( Vector* )( params + 12 ) = LastLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshPath_MinDistBetweenSpecsOfType.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

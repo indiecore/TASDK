@@ -28,6 +28,75 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, BlurScale, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, DepthPriorityGroup, 0xFFFFFFFF )
 			ADD_OBJECT( MaterialInterface, Material )
+			void SetMaterial( class MaterialInterface* InMaterial )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.SetMaterial" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class MaterialInterface** )( params + 0 ) = InMaterial;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetBlurScale( float InBlurScale )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.SetBlurScale" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = InBlurScale;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetBlurFalloffExponent( float InBlurFalloffExponent )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.SetBlurFalloffExponent" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = InBlurFalloffExponent;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetBlurOpacity( float InBlurOpacity )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.SetBlurOpacity" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = InBlurOpacity;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetEnabled( bool bInEnabled )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.SetEnabled" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bInEnabled;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnUpdatePropertyBlurScale(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.OnUpdatePropertyBlurScale" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnUpdatePropertyBlurFalloffExponent(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.OnUpdatePropertyBlurFalloffExponent" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnUpdatePropertyBlurOpacity(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.OnUpdatePropertyBlurOpacity" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

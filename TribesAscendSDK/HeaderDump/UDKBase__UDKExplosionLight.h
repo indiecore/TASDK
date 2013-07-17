@@ -19,11 +19,27 @@ namespace UnrealScript
 	class UDKExplosionLight : public PointLightComponent
 	{
 	public:
+			void OnLightFinished(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKExplosionLight.OnLightFinished" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_VAR( ::IntProperty, TimeShiftIndex, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, Lifetime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, HighDetailFrameTime, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bInitialized, 0x2 )
 			ADD_VAR( ::BoolProperty, bCheckFrameRate, 0x1 )
+			void ResetLight(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKExplosionLight.ResetLight" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

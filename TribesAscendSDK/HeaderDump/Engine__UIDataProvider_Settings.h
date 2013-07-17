@@ -21,6 +21,25 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bIsAListRow, 0x1 )
 			ADD_OBJECT( Settings, Settings )
+			void ArrayProviderPropertyChanged( class UIDataProvider* SourceProvider, ScriptName PropTag )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_Settings.ArrayProviderPropertyChanged" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( class UIDataProvider** )( params + 0 ) = SourceProvider;
+				*( ScriptName* )( params + 4 ) = PropTag;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnSettingValueUpdated( ScriptName SettingName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_Settings.OnSettingValueUpdated" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = SettingName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

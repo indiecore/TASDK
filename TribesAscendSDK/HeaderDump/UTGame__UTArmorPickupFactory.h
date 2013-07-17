@@ -20,6 +20,62 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::IntProperty, ShieldAmount, 0xFFFFFFFF )
+			void UpdateHUD( class UTHUD* H )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTArmorPickupFactory.UpdateHUD" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class UTHUD** )( params + 0 ) = H;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTArmorPickupFactory.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SpawnCopyFor( class Pawn* Recipient )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTArmorPickupFactory.SpawnCopyFor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = Recipient;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int CanUseShield( class UTPawn* P )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTArmorPickupFactory.CanUseShield" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class UTPawn** )( params + 0 ) = P;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void AddShieldStrength( class UTPawn* P )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTArmorPickupFactory.AddShieldStrength" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class UTPawn** )( params + 0 ) = P;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			float BotDesireability( class Pawn* Bot, class Controller* C )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTArmorPickupFactory.BotDesireability" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Pawn** )( params + 0 ) = Bot;
+				*( class Controller** )( params + 4 ) = C;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

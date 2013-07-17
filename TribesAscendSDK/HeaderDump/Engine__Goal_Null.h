@@ -19,6 +19,25 @@ namespace UnrealScript
 	class Goal_Null : public PathGoalEvaluator
 	{
 	public:
+			bool GoUntilBust( class Pawn* P, int InMaxPathVisits )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Goal_Null.GoUntilBust" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Pawn** )( params + 0 ) = P;
+				*( int* )( params + 4 ) = InMaxPathVisits;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Goal_Null.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

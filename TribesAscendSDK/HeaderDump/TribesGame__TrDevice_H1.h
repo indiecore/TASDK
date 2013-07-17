@@ -19,6 +19,14 @@ namespace UnrealScript
 	class TrDevice_H1 : public TrDevice
 	{
 	public:
+			void InstantFire(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_H1.InstantFire" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

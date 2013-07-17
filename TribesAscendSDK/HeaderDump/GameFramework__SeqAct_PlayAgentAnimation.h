@@ -28,6 +28,24 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bUseRootMotion, 0x1 )
 			ADD_VAR( ::FloatProperty, BlendOutTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, BlendInTime, 0xFFFFFFFF )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqAct_PlayAgentAnimation.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void SetCurrentAnimationActionFor( class GameCrowdAgentSkeletal* Agent )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqAct_PlayAgentAnimation.SetCurrentAnimationActionFor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class GameCrowdAgentSkeletal** )( params + 0 ) = Agent;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

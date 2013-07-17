@@ -27,6 +27,16 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, XL, 0xFFFFFFFF )
 			ADD_OBJECT( Texture2D, DisplayTexture )
 			ADD_STRUCT( ::VectorProperty, DisplayLocation, 0xFFFFFFFF )
+			void Render( class Canvas* TargetCanvas, class HUD* TargetHud )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqEvent_HudRenderImage.Render" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Canvas** )( params + 0 ) = TargetCanvas;
+				*( class HUD** )( params + 4 ) = TargetHud;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

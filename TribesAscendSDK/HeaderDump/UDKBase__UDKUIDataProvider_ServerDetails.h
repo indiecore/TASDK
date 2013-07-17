@@ -20,6 +20,24 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::IntProperty, SearchResultsRow, 0xFFFFFFFF )
+			class UIDataProvider_Settings* GetSearchResultsProvider(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataProvider_ServerDetails.GetSearchResultsProvider" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class UIDataProvider_Settings** )( params + function->return_val_offset() );
+			}
+
+			int GetElementCount(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataProvider_ServerDetails.GetElementCount" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

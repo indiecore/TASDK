@@ -21,6 +21,15 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::StrProperty, Value, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, Target, 0xFFFFFFFF )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_SetString.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

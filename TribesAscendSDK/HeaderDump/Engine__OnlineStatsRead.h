@@ -24,6 +24,84 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, TotalRowsInView, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, SortColumnId, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, ViewId, 0xFFFFFFFF )
+			void OnReadComplete(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.OnReadComplete" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool GetIntStatValueForPlayer( void* PlayerID, int StatColumnNo, int &StatValue )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.GetIntStatValueForPlayer" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( void** )( params + 0 ) = PlayerID;
+				*( int* )( params + 8 ) = StatColumnNo;
+				*( int* )( params + 12 ) = StatValue;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				StatValue = *( int* )( params + 12 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool SetIntStatValueForPlayer( void* PlayerID, int StatColumnNo, int StatValue )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.SetIntStatValueForPlayer" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( void** )( params + 0 ) = PlayerID;
+				*( int* )( params + 8 ) = StatColumnNo;
+				*( int* )( params + 12 ) = StatValue;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool GetFloatStatValueForPlayer( void* PlayerID, int StatColumnNo, float &StatValue )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.GetFloatStatValueForPlayer" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( void** )( params + 0 ) = PlayerID;
+				*( int* )( params + 8 ) = StatColumnNo;
+				*( float* )( params + 12 ) = StatValue;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				StatValue = *( float* )( params + 12 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool SetFloatStatValueForPlayer( void* PlayerID, int StatColumnNo, float StatValue )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.SetFloatStatValueForPlayer" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( void** )( params + 0 ) = PlayerID;
+				*( int* )( params + 8 ) = StatColumnNo;
+				*( float* )( params + 12 ) = StatValue;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void AddPlayer( ScriptArray< wchar_t > PlayerName, void* PlayerID )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.AddPlayer" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = PlayerName;
+				*( void** )( params + 12 ) = PlayerID;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int GetRankForPlayer( void* PlayerID )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.GetRankForPlayer" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( void** )( params + 0 ) = PlayerID;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

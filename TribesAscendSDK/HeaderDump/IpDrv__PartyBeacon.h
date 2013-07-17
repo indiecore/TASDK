@@ -19,6 +19,14 @@ namespace UnrealScript
 	class PartyBeacon : public Object
 	{
 	public:
+			void OnDestroyComplete(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.PartyBeacon.OnDestroyComplete" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_VAR( ::NameProperty, BeaconName, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, ElapsedHeartbeatTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, HeartbeatTimeout, 0xFFFFFFFF )
@@ -26,6 +34,14 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bWantsDeferredDestroy, 0x2 )
 			ADD_VAR( ::BoolProperty, bIsInTick, 0x1 )
 			ADD_VAR( ::IntProperty, PartyBeaconPort, 0xFFFFFFFF )
+			void DestroyBeacon(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.PartyBeacon.DestroyBeacon" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

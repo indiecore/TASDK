@@ -22,6 +22,15 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bEnabled, 0x1 )
 			ADD_OBJECT( PostProcessVolume, NextLowerPriorityVolume )
 			ADD_VAR( ::FloatProperty, Priority, 0xFFFFFFFF )
+			void OnToggle( class SeqAct_Toggle* Action )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PostProcessVolume.OnToggle" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SeqAct_Toggle** )( params + 0 ) = Action;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

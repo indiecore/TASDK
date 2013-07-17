@@ -19,6 +19,44 @@ namespace UnrealScript
 	class UTMutator : public Mutator
 	{
 	public:
+			class UTMutator* GetNextUTMutator(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMutator.GetNextUTMutator" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class UTMutator** )( params + function->return_val_offset() );
+			}
+
+			bool MutatorIsAllowed(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMutator.MutatorIsAllowed" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool ReplaceWith( class Actor* Other, ScriptArray< wchar_t > aClassName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMutator.ReplaceWith" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				*( ScriptArray< wchar_t >* )( params + 4 ) = aClassName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void ProcessSpeechRecognition( class UTPlayerController* Speaker )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMutator.ProcessSpeechRecognition" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class UTPlayerController** )( params + 0 ) = Speaker;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

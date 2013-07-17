@@ -20,6 +20,14 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::ByteProperty, m_MessageType, 0xFFFFFFFF )
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeqAct_TrainingMessage.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

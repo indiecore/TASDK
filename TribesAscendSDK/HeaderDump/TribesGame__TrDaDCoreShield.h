@@ -24,6 +24,58 @@ namespace UnrealScript
 			ADD_OBJECT( TrDaDCore, m_Core )
 			ADD_OBJECT( Material, m_BaseMaterial )
 			ADD_VAR( ::ByteProperty, m_DefenderTeamIndex, 0xFFFFFFFF )
+			void Init( int ShieldIndex, class TrDaDCore* Core, class TrDaDShell* Shell )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCoreShield.Init" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( int* )( params + 0 ) = ShieldIndex;
+				*( class TrDaDCore** )( params + 4 ) = Core;
+				*( class TrDaDShell** )( params + 8 ) = Shell;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCoreShield.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DisableBlocking(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCoreShield.DisableBlocking" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void EnableBlocking(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCoreShield.EnableBlocking" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateMaterialForPawn( class TrPawn* P )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCoreShield.UpdateMaterialForPawn" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrPawn** )( params + 0 ) = P;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void CreateMICs(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCoreShield.CreateMICs" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

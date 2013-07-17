@@ -22,6 +22,8 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, TeamIndex, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bGiveDefaultInventory, 0x1 )
 			ADD_VAR( ::StrProperty, PawnName, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, PawnClass )
+			ADD_OBJECT( ScriptClass, ControllerClass )
 	};
 }
 

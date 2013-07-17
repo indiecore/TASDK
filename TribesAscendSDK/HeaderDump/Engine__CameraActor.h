@@ -24,6 +24,30 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, CamOverridePostProcessAlpha, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, FOVAngle, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bCamOverridePostProcess, 0x2 )
+			void GetCameraView( float DeltaTime, void* &OutPOV )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraActor.GetCameraView" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				*( void** )( params + 4 ) = OutPOV;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutPOV = *( void** )( params + 4 );
+			}
+
+			void DisplayDebug( class HUD* HUD, float &out_YL, float &out_YPos )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraActor.DisplayDebug" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( class HUD** )( params + 0 ) = HUD;
+				*( float* )( params + 4 ) = out_YL;
+				*( float* )( params + 8 ) = out_YPos;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				out_YL = *( float* )( params + 4 );
+				out_YPos = *( float* )( params + 8 );
+			}
+
 	};
 }
 

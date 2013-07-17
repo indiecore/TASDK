@@ -42,6 +42,22 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bIsDisabled, 0x4 )
 			ADD_VAR( ::BoolProperty, bPulseBase, 0x2 )
 			ADD_VAR( ::BoolProperty, bIsRespawning, 0x1 )
+			void SetPickupVisible(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPickupFactory.SetPickupVisible" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetPickupHidden(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPickupFactory.SetPickupHidden" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

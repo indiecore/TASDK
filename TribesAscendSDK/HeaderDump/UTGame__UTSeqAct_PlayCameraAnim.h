@@ -24,6 +24,15 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, Rate, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, BlendInTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, BlendOutTime, 0xFFFFFFFF )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqAct_PlayCameraAnim.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

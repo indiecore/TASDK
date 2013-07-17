@@ -20,6 +20,54 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::ByteProperty, SystemUpdateMode, 0xFFFFFFFF )
+			byte GetCurrentLODMethod(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystem.GetCurrentLODMethod" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( byte* )( params + function->return_val_offset() );
+			}
+
+			int GetLODLevelCount(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystem.GetLODLevelCount" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			float GetLODDistance( int LODLevelIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystem.GetLODDistance" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = LODLevelIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
+			void SetCurrentLODMethod( byte InMethod )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystem.SetCurrentLODMethod" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = InMethod;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool SetLODDistance( int LODLevelIndex, float InDistance )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystem.SetLODDistance" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = LODLevelIndex;
+				*( float* )( params + 4 ) = InDistance;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::ByteProperty, LODMethod, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, OcclusionBoundsMethod, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, UpdateTime_FPS, 0xFFFFFFFF )

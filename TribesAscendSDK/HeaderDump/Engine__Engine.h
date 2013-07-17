@@ -19,6 +19,78 @@ namespace UnrealScript
 	class Engine : public Subsystem
 	{
 	public:
+			bool IsGame(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.IsGame" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool IsEditor(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.IsEditor" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			class Font* GetSmallFont(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetSmallFont" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Font** )( params + function->return_val_offset() );
+			}
+
+			class AudioDevice* GetAudioDevice(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetAudioDevice" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class AudioDevice** )( params + function->return_val_offset() );
+			}
+
+			bool IsSplitScreen(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.IsSplitScreen" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			class Font* GetTinyFont(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetTinyFont" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Font** )( params + function->return_val_offset() );
+			}
+
+			class Font* GetMediumFont(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetMediumFont" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Font** )( params + function->return_val_offset() );
+			}
+
+			class Font* GetLargeFont(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetLargeFont" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Font** )( params + function->return_val_offset() );
+			}
+
 			ADD_OBJECT( TranslationContext, GlobalTranslationContext )
 			ADD_VAR( ::IntProperty, ScreenSaverInhibitorSemaphore, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, TrackedOcclusionStepSize, 0xFFFFFFFF )
@@ -85,6 +157,7 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, DefaultPostProcessName, 0xFFFFFFFF )
 			ADD_OBJECT( PostProcessChain, DefaultPostProcess )
 			ADD_VAR( ::StrProperty, DefaultOnlineSubsystemName, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, OnlineSubsystemClass )
 			ADD_VAR( ::FloatProperty, TerrainTessellationCheckDistance, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, TerrainTessellationCheckCount, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, TerrainMaterialMaxTextureCount, 0xFFFFFFFF )
@@ -195,9 +268,13 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, DefaultMaterialName, 0xFFFFFFFF )
 			ADD_OBJECT( Material, DefaultMaterial )
 			ADD_VAR( ::StrProperty, LocalPlayerClassName, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, LocalPlayerClass )
 			ADD_VAR( ::StrProperty, DataStoreClientClassName, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, DataStoreClientClass )
 			ADD_VAR( ::StrProperty, GameViewportClientClassName, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, GameViewportClientClass )
 			ADD_VAR( ::StrProperty, ConsoleClassName, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, ConsoleClass )
 			ADD_VAR( ::StrProperty, SubtitleFontName, 0xFFFFFFFF )
 			ADD_OBJECT( Font, SubtitleFont )
 			ADD_VAR( ::StrProperty, LargeFontName, 0xFFFFFFFF )
@@ -208,6 +285,161 @@ namespace UnrealScript
 			ADD_OBJECT( Font, SmallFont )
 			ADD_VAR( ::StrProperty, TinyFontName, 0xFFFFFFFF )
 			ADD_OBJECT( Font, TinyFont )
+			class WorldInfo* GetCurrentWorldInfo(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetCurrentWorldInfo" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class WorldInfo** )( params + function->return_val_offset() );
+			}
+
+			ScriptArray< wchar_t > GetBuildDate(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetBuildDate" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
+			class Font* GetSubtitleFont(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetSubtitleFont" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Font** )( params + function->return_val_offset() );
+			}
+
+			class Font* GetAdditionalFont( int AdditionalFontIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetAdditionalFont" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = AdditionalFontIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Font** )( params + function->return_val_offset() );
+			}
+
+			ScriptArray< wchar_t > GetLastMovieName(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetLastMovieName" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
+			bool PlayLoadMapMovie(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.PlayLoadMapMovie" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void StopMovie( bool bDelayStopUntilGameHasRendered )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.StopMovie" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bDelayStopUntilGameHasRendered;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RemoveAllOverlays(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.RemoveAllOverlays" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void AddOverlay( class Font* Font, ScriptArray< wchar_t > Text, float X, float Y, float ScaleX, float ScaleY, bool bIsCentered )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.AddOverlay" );
+				byte *params = ( byte* )( malloc( 36 ) );
+				*( class Font** )( params + 0 ) = Font;
+				*( ScriptArray< wchar_t >* )( params + 4 ) = Text;
+				*( float* )( params + 16 ) = X;
+				*( float* )( params + 20 ) = Y;
+				*( float* )( params + 24 ) = ScaleX;
+				*( float* )( params + 28 ) = ScaleY;
+				*( bool* )( params + 32 ) = bIsCentered;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void AddOverlayWrapped( class Font* Font, ScriptArray< wchar_t > Text, float X, float Y, float ScaleX, float ScaleY, float WrapWidth )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.AddOverlayWrapped" );
+				byte *params = ( byte* )( malloc( 36 ) );
+				*( class Font** )( params + 0 ) = Font;
+				*( ScriptArray< wchar_t >* )( params + 4 ) = Text;
+				*( float* )( params + 16 ) = X;
+				*( float* )( params + 20 ) = Y;
+				*( float* )( params + 24 ) = ScaleX;
+				*( float* )( params + 28 ) = ScaleY;
+				*( float* )( params + 32 ) = WrapWidth;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class Engine* GetEngine(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetEngine" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Engine** )( params + function->return_val_offset() );
+			}
+
+			class PostProcessChain* GetWorldPostProcessChain(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetWorldPostProcessChain" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class PostProcessChain** )( params + function->return_val_offset() );
+			}
+
+			void AddTextureStreamingSlaveLoc( Vector InLoc )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.AddTextureStreamingSlaveLoc" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = InLoc;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool BasicSaveObject( class Object* Obj, ScriptArray< wchar_t > PathName, bool bIsSaveGame, int Version )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.BasicSaveObject" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( class Object** )( params + 0 ) = Obj;
+				*( ScriptArray< wchar_t >* )( params + 4 ) = PathName;
+				*( bool* )( params + 16 ) = bIsSaveGame;
+				*( int* )( params + 20 ) = Version;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool BasicLoadObject( class Object* Obj, ScriptArray< wchar_t > PathName, bool bIsSaveGame, int Version )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.BasicLoadObject" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( class Object** )( params + 0 ) = Obj;
+				*( ScriptArray< wchar_t >* )( params + 4 ) = PathName;
+				*( bool* )( params + 16 ) = bIsSaveGame;
+				*( int* )( params + 20 ) = Version;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

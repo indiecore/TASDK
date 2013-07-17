@@ -19,6 +19,26 @@ namespace UnrealScript
 	class TrSubDevice : public TrDevice
 	{
 	public:
+			void Reset(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSubDevice.Reset" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void* CalcWeaponFire( Vector StartTrace, Vector EndTrace, Vector Extent )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSubDevice.CalcWeaponFire" );
+				byte *params = ( byte* )( malloc( 48 ) );
+				*( Vector* )( params + 0 ) = StartTrace;
+				*( Vector* )( params + 12 ) = EndTrace;
+				*( Vector* )( params + 36 ) = Extent;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

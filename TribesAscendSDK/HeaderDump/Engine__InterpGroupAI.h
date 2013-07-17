@@ -24,6 +24,7 @@ namespace UnrealScript
 			ADD_OBJECT( Actor, StageMarkActor )
 			ADD_OBJECT( Pawn, PreviewPawn )
 			ADD_VAR( ::NameProperty, StageMarkGroup, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, PreviewPawnClass )
 	};
 }
 

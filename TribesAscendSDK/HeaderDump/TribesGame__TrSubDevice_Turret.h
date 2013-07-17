@@ -19,6 +19,26 @@ namespace UnrealScript
 	class TrSubDevice_Turret : public TrSubDevice
 	{
 	public:
+			Vector GetPhysicalFireStartLoc( Vector AimDir )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSubDevice_Turret.GetPhysicalFireStartLoc" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = AimDir;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			float GetFireInterval( byte FireModeNum )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSubDevice_Turret.GetFireInterval" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = FireModeNum;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

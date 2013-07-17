@@ -30,6 +30,100 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, JoinFriendSubLabel, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, CustomServerSubtext, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, ComingSoonSubtext, 0xFFFFFFFF )
+			int GetMeshEnumFromVV( int InVal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_PlayNow.GetMeshEnumFromVV" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = InVal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void Initialize(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_PlayNow.Initialize" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SpecialAction( class GFxTrAction* Action )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_PlayNow.SpecialAction" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class GFxTrAction** )( params + 0 ) = Action;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int TakeAction( int ActionIndex, class GFxObject* DataList )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_PlayNow.TakeAction" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = ActionIndex;
+				*( class GFxObject** )( params + 4 ) = DataList;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void RefreshButtons(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_PlayNow.RefreshButtons" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void FillData( class GFxObject* DataList )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_PlayNow.FillData" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class GFxObject** )( params + 0 ) = DataList;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RemoveDuplicateQueues(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_PlayNow.RemoveDuplicateQueues" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool HaveDuplicates( int Index )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_PlayNow.HaveDuplicates" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = Index;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			class GFxObject* FillOption( int ActionIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_PlayNow.FillOption" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = ActionIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class GFxObject** )( params + function->return_val_offset() );
+			}
+
+			int TakeFocus( int ActionIndex, class GFxObject* DataList )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_PlayNow.TakeFocus" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = ActionIndex;
+				*( class GFxObject** )( params + 4 ) = DataList;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

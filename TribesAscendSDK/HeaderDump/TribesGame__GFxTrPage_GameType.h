@@ -19,6 +19,74 @@ namespace UnrealScript
 	class GFxTrPage_GameType : public GFxTrPage
 	{
 	public:
+			void Initialize(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_GameType.Initialize" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int TakeAction( int ActionIndex, class GFxObject* DataList )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_GameType.TakeAction" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = ActionIndex;
+				*( class GFxObject** )( params + 4 ) = DataList;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			int TakeFocus( int ActionIndex, class GFxObject* DataList )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_GameType.TakeFocus" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = ActionIndex;
+				*( class GFxObject** )( params + 4 ) = DataList;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void FillData( class GFxObject* DataList )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_GameType.FillData" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class GFxObject** )( params + 0 ) = DataList;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class GFxObject* FillOption( int ActionIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_GameType.FillOption" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = ActionIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class GFxObject** )( params + function->return_val_offset() );
+			}
+
+			void CheckDescription( class GFxObject* DataList )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_GameType.CheckDescription" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class GFxObject** )( params + 0 ) = DataList;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class GFxObject* FillDescription( class GFxObject* DataList )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_GameType.FillDescription" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class GFxObject** )( params + 0 ) = DataList;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class GFxObject** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

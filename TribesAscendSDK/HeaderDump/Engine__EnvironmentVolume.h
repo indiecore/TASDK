@@ -20,6 +20,15 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::BoolProperty, bSplitNavMesh, 0x1 )
+			void SetSplitNavMesh( bool bNewValue )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EnvironmentVolume.SetSplitNavMesh" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bNewValue;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

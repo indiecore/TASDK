@@ -19,6 +19,7 @@ namespace UnrealScript
 	class TrAnimNotify_Sound : public AnimNotify_Sound
 	{
 	public:
+			ADD_OBJECT( ScriptClass, m_PreviewDeviceClass )
 	};
 }
 

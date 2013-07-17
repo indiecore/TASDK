@@ -22,6 +22,25 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, ClearStreamingTime, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bForceLoadTextures, 0x1 )
 			ADD_VAR( ::FloatProperty, FOV, 0xFFFFFFFF )
+			void PreloadTextures( bool bForcePreload, float ClearTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKSkeletalMeshComponent.PreloadTextures" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( bool* )( params + 0 ) = bForcePreload;
+				*( float* )( params + 4 ) = ClearTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetFOV( float NewFOV )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKSkeletalMeshComponent.SetFOV" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = NewFOV;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

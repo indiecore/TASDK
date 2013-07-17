@@ -22,6 +22,15 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bEnabled, 0x1 )
 			ADD_VAR( ::BoolProperty, bPrimaryStart, 0x2 )
 			ADD_VAR( ::IntProperty, TeamIndex, 0xFFFFFFFF )
+			void OnToggle( class SeqAct_Toggle* Action )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerStart.OnToggle" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SeqAct_Toggle** )( params + 0 ) = Action;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

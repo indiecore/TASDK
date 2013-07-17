@@ -20,6 +20,14 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( UTVehicle, SpawnedVehicle )
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqEvent_VehicleFactory.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

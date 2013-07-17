@@ -20,6 +20,15 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::NameProperty, ParentSocketName, 0xFFFFFFFF )
+			void PreloadTextures( float ForceDuration )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrMainMenuMeshInfo.PreloadTextures" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = ForceDuration;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

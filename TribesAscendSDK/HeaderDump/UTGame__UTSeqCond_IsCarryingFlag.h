@@ -21,6 +21,14 @@ namespace UnrealScript
 	public:
 			ADD_OBJECT( UTGameObjective, FlagBase )
 			ADD_OBJECT( Actor, Target )
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqCond_IsCarryingFlag.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

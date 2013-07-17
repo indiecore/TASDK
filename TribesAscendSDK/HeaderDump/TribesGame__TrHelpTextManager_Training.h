@@ -20,7 +20,71 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::StrProperty, m_TrainingHelpTextExample1, 0xFFFFFFFF )
+			void InitHelpTextManager(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHelpTextManager_Training.InitHelpTextManager" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateTypesToRemoveOnTimers( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHelpTextManager_Training.UpdateTypesToRemoveOnTimers" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool CheckDestroy(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHelpTextManager_Training.CheckDestroy" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool RequestHelpText( byte RequestedType )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHelpTextManager_Training.RequestHelpText" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = RequestedType;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void RemoveHelpText( byte TypeToRemove, float Time, bool bDoNotSuppress )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHelpTextManager_Training.RemoveHelpText" );
+				byte *params = ( byte* )( malloc( 9 ) );
+				*( byte* )( params + 0 ) = TypeToRemove;
+				*( float* )( params + 4 ) = Time;
+				*( bool* )( params + 8 ) = bDoNotSuppress;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RequestHelpText_Training( byte RequestedType )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHelpTextManager_Training.RequestHelpText_Training" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = RequestedType;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_VAR( ::ByteProperty, m_CurrentHelpTextTrainingType, 0xFFFFFFFF )
+			void UpdateHUD(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHelpTextManager_Training.UpdateHUD" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_VAR( ::StrProperty, m_TrainingHelpTextExample1MenuTitle, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, m_TrainingHelpTextExample2, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, m_TrainingHelpTextExample2MenuTitle, 0xFFFFFFFF )

@@ -19,6 +19,20 @@ namespace UnrealScript
 	class DebugCameraInput : public PlayerInput
 	{
 	public:
+			bool InputKey( int ControllerId, ScriptName Key, byte Event, float AmountDepressed, bool bGamepad )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DebugCameraInput.InputKey" );
+				byte *params = ( byte* )( malloc( 21 ) );
+				*( int* )( params + 0 ) = ControllerId;
+				*( ScriptName* )( params + 4 ) = Key;
+				*( byte* )( params + 12 ) = Event;
+				*( float* )( params + 16 ) = AmountDepressed;
+				*( bool* )( params + 20 ) = bGamepad;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

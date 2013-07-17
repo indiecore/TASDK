@@ -100,6 +100,175 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bNoJumpAdjust, 0x8 )
 			ADD_VAR( ::BoolProperty, bCanDoubleJump, 0x4 )
 			ADD_VAR( ::BoolProperty, bRequiresDoubleJump, 0x2 )
+			void GetBoundingCylinder( float &CollisionRadius, float &CollisionHeight )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.GetBoundingCylinder" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = CollisionRadius;
+				*( float* )( params + 4 ) = CollisionHeight;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				CollisionRadius = *( float* )( params + 0 );
+				CollisionHeight = *( float* )( params + 4 );
+			}
+
+			void RestorePreRagdollCollisionComponent(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.RestorePreRagdollCollisionComponent" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void EnsureOverlayComponentLast(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.EnsureOverlayComponentLast" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			Vector GetTargetLocation( class Actor* RequestedBy, bool bRequestAlternateLoc )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.GetTargetLocation" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Actor** )( params + 0 ) = RequestedBy;
+				*( bool* )( params + 4 ) = bRequestAlternateLoc;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			bool IsInvisible(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.IsInvisible" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void HoldGameObject( class UDKCarriedObject* UDKGameObj )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.HoldGameObject" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class UDKCarriedObject** )( params + 0 ) = UDKGameObj;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void StoppedFalling(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.StoppedFalling" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void EndCrouch( float HeightAdjust )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.EndCrouch" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = HeightAdjust;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void StartCrouch( float HeightAdjust )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.StartCrouch" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = HeightAdjust;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool SuggestJumpVelocity( Vector &JumpVelocity, Vector Destination, Vector Start, bool bRequireFallLanding )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.SuggestJumpVelocity" );
+				byte *params = ( byte* )( malloc( 40 ) );
+				*( Vector* )( params + 0 ) = JumpVelocity;
+				*( Vector* )( params + 12 ) = Destination;
+				*( Vector* )( params + 24 ) = Start;
+				*( bool* )( params + 36 ) = bRequireFallLanding;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				JumpVelocity = *( Vector* )( params + 0 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void SetHUDLocation( Vector NewHUDLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.SetHUDLocation" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = NewHUDLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void NativePostRenderFor( class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.NativePostRenderFor" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( class PlayerController** )( params + 0 ) = PC;
+				*( class Canvas** )( params + 4 ) = Canvas;
+				*( Vector* )( params + 8 ) = CameraPosition;
+				*( Vector* )( params + 20 ) = CameraDir;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetWeaponAttachmentVisibility( bool bAttachmentVisible )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.SetWeaponAttachmentVisibility" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bAttachmentVisible;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetHandIKEnabled( bool bEnabled )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.SetHandIKEnabled" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bEnabled;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void StartFeignDeathRecoveryAnim(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.StartFeignDeathRecoveryAnim" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void TakeHitBlendedOut(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.TakeHitBlendedOut" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateEyeHeight( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.UpdateEyeHeight" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void StuckFalling(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.StuckFalling" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

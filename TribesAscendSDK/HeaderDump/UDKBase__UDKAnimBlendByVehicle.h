@@ -21,6 +21,14 @@ namespace UnrealScript
 	public:
 			ADD_OBJECT( Vehicle, LastVehicle )
 			ADD_VAR( ::BoolProperty, bLastPawnDriving, 0x1 )
+			void UpdateVehicleState(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimBlendByVehicle.UpdateVehicleState" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

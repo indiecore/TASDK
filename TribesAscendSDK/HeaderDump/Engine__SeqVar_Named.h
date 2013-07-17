@@ -21,6 +21,7 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bStatusIsOk, 0x1 )
 			ADD_VAR( ::NameProperty, FindVarName, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, ExpectedType )
 	};
 }
 

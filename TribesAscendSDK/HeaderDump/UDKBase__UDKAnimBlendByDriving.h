@@ -19,6 +19,14 @@ namespace UnrealScript
 	class UDKAnimBlendByDriving : public AnimNodeBlend
 	{
 	public:
+			void UpdateDrivingState(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimBlendByDriving.UpdateDrivingState" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

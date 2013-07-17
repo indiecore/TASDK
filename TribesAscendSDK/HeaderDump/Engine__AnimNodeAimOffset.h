@@ -27,6 +27,24 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bPassThroughWhenNotRendered, 0x4 )
 			ADD_VAR( ::BoolProperty, bBakeFromAnimations, 0x2 )
 			ADD_VAR( ::BoolProperty, bForceAimDir, 0x1 )
+			void SetActiveProfileByName( ScriptName ProfileName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeAimOffset.SetActiveProfileByName" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = ProfileName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetActiveProfileByIndex( int ProfileIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeAimOffset.SetActiveProfileByIndex" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = ProfileIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

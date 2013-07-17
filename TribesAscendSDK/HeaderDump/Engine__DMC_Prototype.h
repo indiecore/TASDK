@@ -21,6 +21,8 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::StrProperty, DefaultPropText, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, FunctionCode, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, GeneratedClass )
+			ADD_OBJECT( ScriptClass, ParentClass )
 	};
 }
 

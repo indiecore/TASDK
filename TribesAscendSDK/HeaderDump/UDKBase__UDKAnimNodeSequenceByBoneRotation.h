@@ -21,6 +21,14 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::ByteProperty, BoneAxis, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, BoneName, 0xFFFFFFFF )
+			void OnBecomeRelevant(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimNodeSequenceByBoneRotation.OnBecomeRelevant" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,19 @@ namespace UnrealScript
 	class SequenceEvent : public SequenceOp
 	{
 	public:
+			bool CheckActivate( class Actor* InOriginator, class Actor* InInstigator, bool bTest, bool bPushTop )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceEvent.CheckActivate" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( class Actor** )( params + 0 ) = InOriginator;
+				*( class Actor** )( params + 4 ) = InInstigator;
+				*( bool* )( params + 8 ) = bTest;
+				*( bool* )( params + 24 ) = bPushTop;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::BoolProperty, bEnabled, 0x1 )
 			ADD_VAR( ::IntProperty, MaxTriggerCount, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, TriggerCount, 0xFFFFFFFF )
@@ -31,6 +44,30 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, ActivationTime, 0xFFFFFFFF )
 			ADD_OBJECT( Actor, Instigator )
 			ADD_OBJECT( Actor, Originator )
+			void RegisterEvent(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceEvent.RegisterEvent" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Reset(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceEvent.Reset" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Toggled(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceEvent.Toggled" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

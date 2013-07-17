@@ -20,6 +20,19 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( DMC_Prototype, UtilityDMC )
+			ADD_OBJECT( ScriptClass, CommandClass )
+			class AICommandNodeBase* SelectBestChild( class AIController* InAI, void* &Handle )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AICommandNodeBase.SelectBestChild" );
+				byte *params = ( byte* )( malloc( 52 ) );
+				*( class AIController** )( params + 0 ) = InAI;
+				*( void** )( params + 4 ) = Handle;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				Handle = *( void** )( params + 4 );
+				return *( class AICommandNodeBase** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

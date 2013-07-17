@@ -19,6 +19,15 @@ namespace UnrealScript
 	class UTMutator_BigHead : public UTMutator
 	{
 	public:
+			void ModifyPlayer( class Pawn* P )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMutator_BigHead.ModifyPlayer" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = P;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

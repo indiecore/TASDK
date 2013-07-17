@@ -19,6 +19,39 @@ namespace UnrealScript
 	class TrPlayerVoice : public TrDevice
 	{
 	public:
+			void PlaySoundEx( byte Command, class TrPlayerController* TrPC, class PlayerReplicationInfo* InstigatorPRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerVoice.PlaySoundEx" );
+				byte *params = ( byte* )( malloc( 9 ) );
+				*( byte* )( params + 0 ) = Command;
+				*( class TrPlayerController** )( params + 4 ) = TrPC;
+				*( class PlayerReplicationInfo** )( params + 8 ) = InstigatorPRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlaySoundContext( class TrPlayerController* TrPC, byte ContextActor, byte ContextLocation, bool bEnemyLocation, class PlayerReplicationInfo* InstigatorPRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerVoice.PlaySoundContext" );
+				byte *params = ( byte* )( malloc( 14 ) );
+				*( class TrPlayerController** )( params + 0 ) = TrPC;
+				*( byte* )( params + 4 ) = ContextActor;
+				*( byte* )( params + 5 ) = ContextLocation;
+				*( bool* )( params + 8 ) = bEnemyLocation;
+				*( class PlayerReplicationInfo** )( params + 12 ) = InstigatorPRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayRandomSample( class TrPlayerController* TrPC )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerVoice.PlayRandomSample" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrPlayerController** )( params + 0 ) = TrPC;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -31,6 +31,16 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bMultiplyByZVelocity, 0x1 )
 			ADD_VAR( ::FloatProperty, MaxLeanChangeSpeed, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, JumpLeanStrength, 0xFFFFFFFF )
+			void SetLeanWeight( float WeightTarget, float BlendTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimNodeJumpLeanOffset.SetLeanWeight" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = WeightTarget;
+				*( float* )( params + 4 ) = BlendTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

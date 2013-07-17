@@ -73,6 +73,7 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, m_fLowHealthThreshold, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, m_fJetpackInitTotalTime, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, InfoBit, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, DefaultSkinClass )
 			ADD_OBJECT( PhysicsAsset, m_PaperDollSidekickPhysics )
 			ADD_OBJECT( AnimTree, m_PaperDollSidekickAnimTree )
 			ADD_OBJECT( AnimSet, m_PaperDollSidekickAnimset )
@@ -96,6 +97,26 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, m_fJetpackPowerPoolTickRate, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, m_fJetpackPowerPoolCost, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, m_fJetpackInitAccelMultiplier, 0xFFFFFFFF )
+			ScriptClass* GetDeviceClassByEquipPoint( byte EquipPoint )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrFamilyInfo.GetDeviceClassByEquipPoint" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = EquipPoint;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptClass** )( params + function->return_val_offset() );
+			}
+
+			ScriptArray< wchar_t > GetContentDeviceClassStringByEquipPoint( byte EquipPoint )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrFamilyInfo.GetContentDeviceClassStringByEquipPoint" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = EquipPoint;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

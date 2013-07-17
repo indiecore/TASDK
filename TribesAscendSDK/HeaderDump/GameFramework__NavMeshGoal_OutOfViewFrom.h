@@ -21,6 +21,33 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bShowDebug, 0x1 )
 			ADD_STRUCT( ::VectorProperty, OutOfViewLocation, 0xFFFFFFFF )
+			void RecycleNative(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.NavMeshGoal_OutOfViewFrom.RecycleNative" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool MustBeHiddenFromThisPoint( class NavigationHandle* NavHandle, Vector InOutOfViewLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.NavMeshGoal_OutOfViewFrom.MustBeHiddenFromThisPoint" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( Vector* )( params + 4 ) = InOutOfViewLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.NavMeshGoal_OutOfViewFrom.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

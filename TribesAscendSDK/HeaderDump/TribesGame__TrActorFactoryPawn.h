@@ -19,8 +19,18 @@ namespace UnrealScript
 	class TrActorFactoryPawn : public UTActorFactoryAI
 	{
 	public:
+			ADD_OBJECT( ScriptClass, FamilyInfo )
 			ADD_VAR( ::FloatProperty, GroundSpeed, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, NextTeam, 0xFFFFFFFF )
+			void PostCreateActor( class Actor* NewActor )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrActorFactoryPawn.PostCreateActor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = NewActor;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

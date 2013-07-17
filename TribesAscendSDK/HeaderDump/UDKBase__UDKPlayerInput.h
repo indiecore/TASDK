@@ -19,6 +19,16 @@ namespace UnrealScript
 	class UDKPlayerInput : public MobilePlayerInput
 	{
 	public:
+			ScriptArray< wchar_t > GetUDKBindNameFromCommand( ScriptArray< wchar_t > BindCommand )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPlayerInput.GetUDKBindNameFromCommand" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = BindCommand;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

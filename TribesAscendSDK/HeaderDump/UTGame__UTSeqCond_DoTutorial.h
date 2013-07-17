@@ -19,6 +19,14 @@ namespace UnrealScript
 	class UTSeqCond_DoTutorial : public SequenceCondition
 	{
 	public:
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqCond_DoTutorial.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -36,6 +36,40 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, HorizontalScale, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, TimeSinceLastFrame, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, TimeIntoMovie, 0xFFFFFFFF )
+			void Play(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.TextureFlipBook.Play" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Pause(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.TextureFlipBook.Pause" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Stop(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.TextureFlipBook.Stop" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetCurrentFrame( int Row, int Col )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.TextureFlipBook.SetCurrentFrame" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = Row;
+				*( int* )( params + 4 ) = Col;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

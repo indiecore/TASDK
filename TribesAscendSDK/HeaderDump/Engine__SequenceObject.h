@@ -20,6 +20,15 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::IntProperty, ObjInstanceVersion, 0xFFFFFFFF )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceObject.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::IntProperty, DrawHeight, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, DrawWidth, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bSuppressAutoComment, 0x10 )
@@ -33,6 +42,43 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, ObjPosY, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, ObjPosX, 0xFFFFFFFF )
 			ADD_OBJECT( Sequence, ParentSequence )
+			void ScriptLog( ScriptArray< wchar_t > LogText, bool bWarning )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceObject.ScriptLog" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = LogText;
+				*( bool* )( params + 12 ) = bWarning;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class WorldInfo* GetWorldInfo(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceObject.GetWorldInfo" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class WorldInfo** )( params + function->return_val_offset() );
+			}
+
+			bool IsValidLevelSequenceObject(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceObject.IsValidLevelSequenceObject" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool IsPastingIntoLevelSequenceAllowed(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceObject.IsPastingIntoLevelSequenceAllowed" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

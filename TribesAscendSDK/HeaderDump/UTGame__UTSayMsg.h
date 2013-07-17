@@ -19,6 +19,16 @@ namespace UnrealScript
 	class UTSayMsg : public UTLocalMessage
 	{
 	public:
+			void* GetConsoleColor( class PlayerReplicationInfo* RelatedPRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSayMsg.GetConsoleColor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PlayerReplicationInfo** )( params + 0 ) = RelatedPRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

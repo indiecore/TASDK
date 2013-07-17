@@ -27,6 +27,36 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, ForceLOD, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, MaterialIndex, 0xFFFFFFFF )
 			ADD_OBJECT( TextureRenderTarget2D, TextureTarget )
+			void SetCaptureTargetTexture( class TextureRenderTarget2D* InTextureTarget )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCapture2DHitMaskComponent.SetCaptureTargetTexture" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TextureRenderTarget2D** )( params + 0 ) = InTextureTarget;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetCaptureParameters( Vector InMaskPosition, float InMaskRadius, Vector InStartupPosition, bool bOnlyWhenFacing )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCapture2DHitMaskComponent.SetCaptureParameters" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( Vector* )( params + 0 ) = InMaskPosition;
+				*( float* )( params + 12 ) = InMaskRadius;
+				*( Vector* )( params + 16 ) = InStartupPosition;
+				*( bool* )( params + 28 ) = bOnlyWhenFacing;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetFadingStartTimeSinceHit( float InFadingStartTimeSinceHit )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCapture2DHitMaskComponent.SetFadingStartTimeSinceHit" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = InFadingStartTimeSinceHit;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

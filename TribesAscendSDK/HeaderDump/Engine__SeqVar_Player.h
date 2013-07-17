@@ -21,6 +21,23 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::IntProperty, PlayerIdx, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bAllPlayers, 0x1 )
+			void UpdatePlayersList(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqVar_Player.UpdatePlayersList" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class Object* GetObjectValue(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqVar_Player.GetObjectValue" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Object** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -25,6 +25,22 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, DefaultDuration, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bStartWillRestart, 0x2 )
 			ADD_VAR( ::BoolProperty, bDelayActive, 0x1 )
+			void Reset(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_Delay.Reset" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ResetDelayActive(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_Delay.ResetDelayActive" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

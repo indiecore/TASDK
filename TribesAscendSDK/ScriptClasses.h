@@ -11,6 +11,7 @@ typedef unsigned __int64 QWord;
 
 template< class T > class ScriptArray
 {
+protected:
 	T *data_;
 	int count_;
 	int max_;
@@ -42,6 +43,26 @@ public:
 	T& operator ()( int i )
 	{
 		return data_[ i ];
+	}
+
+	friend class ScriptString;
+};
+
+class ScriptString
+{
+	ScriptArray< wchar_t > string;
+
+public:
+	ScriptString( wchar_t* string_ )
+	{
+		string.count_ = wcslen( string_ ) + 1;
+		string.data_ = ( wchar_t* )( realloc( string.data_, sizeof( wchar_t ) * string.count_ ) );
+		wcscpy_s( string.data_, wcslen( string_ ) + 1, string_ );
+	}
+
+	operator ScriptArray< wchar_t >()
+	{
+		return string;
 	}
 };
 
@@ -172,73 +193,74 @@ public:
 	};
 
 private:
-	virtual void Vfunc00() = 0;
-	virtual void Vfunc01() = 0;
-	virtual void Vfunc02() = 0;
-	virtual void Vfunc03() = 0;
-	virtual void Vfunc04() = 0;
-	virtual void Vfunc05() = 0;
-	virtual void Vfunc06() = 0;
-	virtual void Vfunc07() = 0;
-	virtual void Vfunc08() = 0;
-	virtual void Vfunc09() = 0;
-	virtual void Vfunc10() = 0;
-	virtual void Vfunc11() = 0;
-	virtual void Vfunc12() = 0;
-	virtual void Vfunc13() = 0;
-	virtual void Vfunc14() = 0;
-	virtual void Vfunc15() = 0;
-	virtual void Vfunc16() = 0;
-	virtual void Vfunc17() = 0;
-	virtual void Vfunc18() = 0;
-	virtual void Vfunc19() = 0;
-	virtual void Vfunc20() = 0;
-	virtual void Vfunc21() = 0;
-	virtual void Vfunc22() = 0;
-	virtual void Vfunc23() = 0;
-	virtual void Vfunc24() = 0;
-	virtual void Vfunc25() = 0;
-	virtual void Vfunc26() = 0;
-	virtual void Vfunc27() = 0;
-	virtual void Vfunc28() = 0;
-	virtual void Vfunc29() = 0;
-	virtual void Vfunc30() = 0;
-	virtual void Vfunc31() = 0;
-	virtual void Vfunc32() = 0;
-	virtual void Vfunc33() = 0;
-	virtual void Vfunc34() = 0;
-	virtual void Vfunc35() = 0;
-	virtual void Vfunc36() = 0;
-	virtual void Vfunc37() = 0;
-	virtual void Vfunc38() = 0;
-	virtual void Vfunc39() = 0;
-	virtual void Vfunc40() = 0;
-	virtual void Vfunc41() = 0;
-	virtual void Vfunc42() = 0;
-	virtual void Vfunc43() = 0;
-	virtual void Vfunc44() = 0;
-	virtual void Vfunc45() = 0;
-	virtual void Vfunc46() = 0;
-	virtual void Vfunc47() = 0;
-	virtual void Vfunc48() = 0;
-	virtual void Vfunc49() = 0;
-	virtual void Vfunc50() = 0;
-	virtual void Vfunc51() = 0;
-	virtual void Vfunc52() = 0;
-	virtual void Vfunc53() = 0;
-	virtual void Vfunc54() = 0;
-	virtual void Vfunc55() = 0;
-	virtual void Vfunc56() = 0;
-	virtual void Vfunc57() = 0;
-	virtual void Vfunc58() = 0;
-	virtual void Vfunc59() = 0;
-	virtual void Vfunc60() = 0;
-	virtual void Vfunc61() = 0;
-	virtual void Vfunc62() = 0;
-	virtual void Vfunc63() = 0;
-	virtual void Vfunc64() = 0;
+	virtual void Vfunc00();
+	virtual void Vfunc01();
+	virtual void Vfunc02();
+	virtual void Vfunc03();
+	virtual void Vfunc04();
+	virtual void Vfunc05();
+	virtual void Vfunc06();
+	virtual void Vfunc07();
+	virtual void Vfunc08();
+	virtual void Vfunc09();
+	virtual void Vfunc10();
+	virtual void Vfunc11();
+	virtual void Vfunc12();
+	virtual void Vfunc13();
+	virtual void Vfunc14();
+	virtual void Vfunc15();
+	virtual void Vfunc16();
+	virtual void Vfunc17();
+	virtual void Vfunc18();
+	virtual void Vfunc19();
+	virtual void Vfunc20();
+	virtual void Vfunc21();
+	virtual void Vfunc22();
+	virtual void Vfunc23();
+	virtual void Vfunc24();
+	virtual void Vfunc25();
+	virtual void Vfunc26();
+	virtual void Vfunc27();
+	virtual void Vfunc28();
+	virtual void Vfunc29();
+	virtual void Vfunc30();
+	virtual void Vfunc31();
+	virtual void Vfunc32();
+	virtual void Vfunc33();
+	virtual void Vfunc34();
+	virtual void Vfunc35();
+	virtual void Vfunc36();
+	virtual void Vfunc37();
+	virtual void Vfunc38();
+	virtual void Vfunc39();
+	virtual void Vfunc40();
+	virtual void Vfunc41();
+	virtual void Vfunc42();
+	virtual void Vfunc43();
+	virtual void Vfunc44();
+	virtual void Vfunc45();
+	virtual void Vfunc46();
+	virtual void Vfunc47();
+	virtual void Vfunc48();
+	virtual void Vfunc49();
+	virtual void Vfunc50();
+	virtual void Vfunc51();
+	virtual void Vfunc52();
+	virtual void Vfunc53();
+	virtual void Vfunc54();
+	virtual void Vfunc55();
+	virtual void Vfunc56();
+	virtual void Vfunc57();
+	virtual void Vfunc58();
+	virtual void Vfunc59();
+	virtual void Vfunc60();
+	virtual void Vfunc61();
+	virtual void Vfunc62();
+	virtual void Vfunc63();
+	virtual void Vfunc64();
+	virtual void Vfunc65();
 public:
-	virtual void ProcessEvent( class ScriptFunction* function, void *params, void *result ) = 0;
+	virtual void ProcessEvent( class ScriptFunction* function, void *params, void *result );
 };
 
 class ScriptField : public ScriptObject
@@ -321,6 +343,11 @@ public:
 	inline void set_native( int native )
 	{
 		native_ = native;
+	}
+
+	inline DWORD return_val_offset()
+	{
+		return return_val_offset_;
 	}
 
 	static const DWORD kFuncFinal =		1 << 0;

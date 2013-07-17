@@ -21,6 +21,15 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bSkipDuringEnumeration, 0x2 )
 			ADD_VAR( ::BoolProperty, bDataBindingPropertiesOnly, 0x1 )
+			void InitializeProvider( bool bIsEditor )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIResourceDataProvider.InitializeProvider" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bIsEditor;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -35,6 +35,24 @@ namespace UnrealScript
 			ADD_VAR( ::ByteProperty, Coordinates, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, RBChannel, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, ExcludeChannel, 0xFFFFFFFF )
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NxGenericForceFieldBrush.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool StopsProjectile( class Projectile* P )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NxGenericForceFieldBrush.StopsProjectile" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Projectile** )( params + 0 ) = P;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

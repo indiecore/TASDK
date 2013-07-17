@@ -21,6 +21,15 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bUnload, 0x1 )
 			ADD_OBJECT( GFxMoviePlayer, Movie )
+			bool IsValidLevelSequenceObject(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxAction_CloseMovie.IsValidLevelSequenceObject" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

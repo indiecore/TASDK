@@ -19,6 +19,18 @@ namespace UnrealScript
 	class FluidSurfaceComponent : public PrimitiveComponent
 	{
 	public:
+			void ApplyForce( Vector WorldPos, float Strength, float Radius, bool bImpulse )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FluidSurfaceComponent.ApplyForce" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( Vector* )( params + 0 ) = WorldPos;
+				*( float* )( params + 12 ) = Strength;
+				*( float* )( params + 16 ) = Radius;
+				*( bool* )( params + 20 ) = bImpulse;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_VAR( ::FloatProperty, ForceImpact, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, EditorViewPosition, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, DetailPosition, 0xFFFFFFFF )
@@ -67,6 +79,24 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, EnableSimulation, 0x1 )
 			ADD_VAR( ::IntProperty, LightMapResolution, 0xFFFFFFFF )
 			ADD_OBJECT( MaterialInterface, FluidMaterial )
+			void SetDetailPosition( Vector WorldPos )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FluidSurfaceComponent.SetDetailPosition" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = WorldPos;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetSimulationPosition( Vector WorldPos )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FluidSurfaceComponent.SetSimulationPosition" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = WorldPos;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

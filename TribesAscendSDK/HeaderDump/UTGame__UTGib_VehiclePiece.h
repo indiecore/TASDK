@@ -19,6 +19,14 @@ namespace UnrealScript
 	class UTGib_VehiclePiece : public UTGib_Vehicle
 	{
 	public:
+			void PreBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib_VehiclePiece.PreBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

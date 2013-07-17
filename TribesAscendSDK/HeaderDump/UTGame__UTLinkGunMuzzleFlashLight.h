@@ -19,6 +19,15 @@ namespace UnrealScript
 	class UTLinkGunMuzzleFlashLight : public UDKExplosionLight
 	{
 	public:
+			void SetTeam( byte NewTeam )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTLinkGunMuzzleFlashLight.SetTeam" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = NewTeam;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

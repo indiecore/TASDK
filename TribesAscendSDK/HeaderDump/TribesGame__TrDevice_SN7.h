@@ -19,6 +19,15 @@ namespace UnrealScript
 	class TrDevice_SN7 : public TrDevice
 	{
 	public:
+			class Projectile* ProjectileFire(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_SN7.ProjectileFire" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Projectile** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -19,6 +19,16 @@ namespace UnrealScript
 	class UTMutator_NoPowerups : public UTMutator
 	{
 	public:
+			bool CheckReplacement( class Actor* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMutator_NoPowerups.CheckReplacement" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

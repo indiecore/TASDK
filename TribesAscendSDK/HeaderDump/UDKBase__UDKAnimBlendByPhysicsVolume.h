@@ -20,6 +20,15 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( PhysicsVolume, LastPhysicsVolume )
+			void PhysicsVolumeChanged( class PhysicsVolume* NewVolume )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimBlendByPhysicsVolume.PhysicsVolumeChanged" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PhysicsVolume** )( params + 0 ) = NewVolume;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

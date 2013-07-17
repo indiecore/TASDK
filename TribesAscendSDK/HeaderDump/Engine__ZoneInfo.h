@@ -21,6 +21,7 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::FloatProperty, KillZ, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bSoftKillZ, 0x1 )
+			ADD_OBJECT( ScriptClass, KillZDamageType )
 			ADD_VAR( ::FloatProperty, SoftKill, 0xFFFFFFFF )
 	};
 }

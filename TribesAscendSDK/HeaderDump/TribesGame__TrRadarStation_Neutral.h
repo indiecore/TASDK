@@ -19,6 +19,25 @@ namespace UnrealScript
 	class TrRadarStation_Neutral : public TrDeployable_RadarSensor
 	{
 	public:
+			bool ShouldShowHelpText( byte HelpTextType )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRadarStation_Neutral.ShouldShowHelpText" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = HelpTextType;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			class Texture2D* GetMarker(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRadarStation_Neutral.GetMarker" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Texture2D** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -19,6 +19,16 @@ namespace UnrealScript
 	class UTVehicleCTFGame : public UTCTFGame
 	{
 	public:
+			bool AllowMutator( ScriptArray< wchar_t > MutatorClassName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTVehicleCTFGame.AllowMutator" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = MutatorClassName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

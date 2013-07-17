@@ -21,6 +21,45 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bSuperHeal, 0x1 )
 			ADD_VAR( ::IntProperty, HealingAmount, 0xFFFFFFFF )
+			void UpdateHUD( class UTHUD* H )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHealthPickupFactory.UpdateHUD" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class UTHUD** )( params + 0 ) = H;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SpawnCopyFor( class Pawn* Recipient )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHealthPickupFactory.SpawnCopyFor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = Recipient;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int HealAmount( class Pawn* Recipient )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHealthPickupFactory.HealAmount" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = Recipient;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			float BotDesireability( class Pawn* P, class Controller* C )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHealthPickupFactory.BotDesireability" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Pawn** )( params + 0 ) = P;
+				*( class Controller** )( params + 4 ) = C;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

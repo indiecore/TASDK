@@ -23,6 +23,7 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, InfoPanelDescription, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, TranslucencySortPriority, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, ItemId, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, SkinMeleeDevice )
 	};
 }
 

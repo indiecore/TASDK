@@ -19,6 +19,15 @@ namespace UnrealScript
 	class SeqAct_ChangeCollision : public SequenceAction
 	{
 	public:
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_ChangeCollision.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::BoolProperty, bCollideActors, 0x1 )
 			ADD_VAR( ::BoolProperty, bBlockActors, 0x2 )
 			ADD_VAR( ::BoolProperty, bIgnoreEncroachers, 0x4 )

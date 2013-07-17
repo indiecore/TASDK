@@ -19,6 +19,15 @@ namespace UnrealScript
 	class UDKSkelControl_TurretConstrained : public SkelControlSingleBone
 	{
 	public:
+			void OnTurretStatusChange( bool bIsMoving )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKSkelControl_TurretConstrained.OnTurretStatusChange" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bIsMoving;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_STRUCT( ::RotatorProperty, ConstrainedBoneRotation, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, AssociatedSeatIndex, 0xFFFFFFFF )
 			ADD_STRUCT( ::RotatorProperty, DesiredBoneRotation, 0xFFFFFFFF )
@@ -33,6 +42,25 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bConstrainRoll, 0x4 )
 			ADD_VAR( ::BoolProperty, bConstrainYaw, 0x2 )
 			ADD_VAR( ::BoolProperty, bConstrainPitch, 0x1 )
+			void InitTurret( Rotator InitRot )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKSkelControl_TurretConstrained.InitTurret" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( Rotator* )( params + 0 ) = InitRot;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool WouldConstrainPitch( int TestPitch )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKSkelControl_TurretConstrained.WouldConstrainPitch" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = TestPitch;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

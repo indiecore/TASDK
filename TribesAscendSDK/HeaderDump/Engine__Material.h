@@ -76,6 +76,7 @@ namespace UnrealScript
 			ADD_OBJECT( PhysicalMaterial, BlackPhysicalMaterial )
 			ADD_VAR( ::IntProperty, PhysMaterialMaskUVChannel, 0xFFFFFFFF )
 			ADD_OBJECT( Texture2D, PhysMaterialMask )
+			ADD_OBJECT( ScriptClass, PhysicalMaterial )
 			ADD_OBJECT( PhysicalMaterial, PhysMaterial )
 	};
 }

@@ -23,6 +23,15 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bPersistFade, 0x1 )
 			ADD_VAR( ::FloatProperty, FadeTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, FadeOpacity, 0xFFFFFFFF )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_CameraFade.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

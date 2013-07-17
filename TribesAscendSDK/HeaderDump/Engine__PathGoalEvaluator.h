@@ -23,6 +23,23 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, MaxPathVisits, 0xFFFFFFFF )
 			ADD_OBJECT( NavigationPoint, GeneratedGoal )
 			ADD_OBJECT( PathGoalEvaluator, NextEvaluator )
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PathGoalEvaluator.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			ScriptArray< wchar_t > GetDumpString(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PathGoalEvaluator.GetDumpString" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

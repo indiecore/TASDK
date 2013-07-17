@@ -19,6 +19,25 @@ namespace UnrealScript
 	class FileLog : public FileWriter
 	{
 	public:
+			void OpenLog( ScriptArray< wchar_t > LogFilename, ScriptArray< wchar_t > extension, bool bUnique )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FileLog.OpenLog" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = LogFilename;
+				*( ScriptArray< wchar_t >* )( params + 12 ) = extension;
+				*( bool* )( params + 24 ) = bUnique;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void CloseLog(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FileLog.CloseLog" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -31,6 +31,14 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, RotationalStrength, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, RadialStrength, 0xFFFFFFFF )
 			ADD_OBJECT( ForceFieldShape, Shape )
+			void DoInitRBPhys(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NxForceFieldTornado.DoInitRBPhys" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

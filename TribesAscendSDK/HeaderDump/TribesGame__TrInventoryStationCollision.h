@@ -19,6 +19,16 @@ namespace UnrealScript
 	class TrInventoryStationCollision : public TrStationCollision
 	{
 	public:
+			bool CheckCanPawnUseStationNow( class TrPawn* P )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrInventoryStationCollision.CheckCanPawnUseStationNow" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrPawn** )( params + 0 ) = P;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

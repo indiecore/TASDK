@@ -27,6 +27,16 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, HelpWebLink, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, HelpUsage, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, HelpDescription, 0xFFFFFFFF )
+			int Main( ScriptArray< wchar_t > Params )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Commandlet.Main" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = Params;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

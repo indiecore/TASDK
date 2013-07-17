@@ -19,6 +19,16 @@ namespace UnrealScript
 	class AICommandBase : public Object
 	{
 	public:
+			int GetUtility( class AIController* InAI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AICommandBase.GetUtility" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class AIController** )( params + 0 ) = InAI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

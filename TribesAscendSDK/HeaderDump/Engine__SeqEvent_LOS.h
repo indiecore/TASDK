@@ -22,6 +22,15 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bCheckForObstructions, 0x1 )
 			ADD_VAR( ::FloatProperty, TriggerDistance, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, ScreenCenterDistance, 0xFFFFFFFF )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqEvent_LOS.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

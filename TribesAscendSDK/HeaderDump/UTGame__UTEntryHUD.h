@@ -19,6 +19,14 @@ namespace UnrealScript
 	class UTEntryHUD : public HUD
 	{
 	public:
+			void PostRender(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTEntryHUD.PostRender" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

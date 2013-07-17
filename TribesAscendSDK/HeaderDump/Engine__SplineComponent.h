@@ -23,6 +23,51 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, SplineArrowSize, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, SplineDrawRes, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, SplineCurviness, 0xFFFFFFFF )
+			void UpdateSplineCurviness(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineComponent.UpdateSplineCurviness" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateSplineReparamTable(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineComponent.UpdateSplineReparamTable" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			float GetSplineLength(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineComponent.GetSplineLength" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
+			Vector GetLocationAtDistanceAlongSpline( float Distance )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineComponent.GetLocationAtDistanceAlongSpline" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = Distance;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			Vector GetTangentAtDistanceAlongSpline( float Distance )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineComponent.GetTangentAtDistanceAlongSpline" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = Distance;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

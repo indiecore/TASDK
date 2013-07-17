@@ -50,6 +50,27 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bRelativeTop, 0x4 )
 			ADD_VAR( ::BoolProperty, bRelativeLeft, 0x2 )
 			ADD_VAR( ::BoolProperty, bHasBeenInitialized, 0x1 )
+			void InitMenuObject( class MobilePlayerInput* PlayerInput, class MobileMenuScene* Scene, int ScreenWidth, int ScreenHeight )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuObject.InitMenuObject" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class MobilePlayerInput** )( params + 0 ) = PlayerInput;
+				*( class MobileMenuScene** )( params + 4 ) = Scene;
+				*( int* )( params + 8 ) = ScreenWidth;
+				*( int* )( params + 12 ) = ScreenHeight;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RenderObject( class Canvas* Canvas )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuObject.RenderObject" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Canvas** )( params + 0 ) = Canvas;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

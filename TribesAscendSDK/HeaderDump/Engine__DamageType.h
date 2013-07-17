@@ -33,6 +33,16 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bExtraMomentumZ, 0x4 )
 			ADD_VAR( ::BoolProperty, bCausedByWorld, 0x2 )
 			ADD_VAR( ::BoolProperty, bArmorStops, 0x1 )
+			float VehicleDamageScalingFor( class Vehicle* V )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DamageType.VehicleDamageScalingFor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Vehicle** )( params + 0 ) = V;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

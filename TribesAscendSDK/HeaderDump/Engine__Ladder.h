@@ -21,6 +21,16 @@ namespace UnrealScript
 	public:
 			ADD_OBJECT( Ladder, LadderList )
 			ADD_OBJECT( LadderVolume, MyLadder )
+			bool SuggestMovePreparation( class Pawn* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Ladder.SuggestMovePreparation" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

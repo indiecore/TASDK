@@ -27,6 +27,15 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, PP_DesaturationMultiplier, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, ConfiguredLanSpeed, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, ConfiguredInternetSpeed, 0xFFFFFFFF )
+			void SwitchController( class PlayerController* PC )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Player.SwitchController" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PlayerController** )( params + 0 ) = PC;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

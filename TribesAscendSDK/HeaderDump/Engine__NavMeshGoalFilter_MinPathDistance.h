@@ -20,6 +20,17 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::IntProperty, MinDistancePathShouldBe, 0xFFFFFFFF )
+			bool MustBeLongerPathThan( class NavMeshGoal_GenericFilterContainer* FilterContainer, int InMinDistancePathShouldBe )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoalFilter_MinPathDistance.MustBeLongerPathThan" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class NavMeshGoal_GenericFilterContainer** )( params + 0 ) = FilterContainer;
+				*( int* )( params + 4 ) = InMinDistancePathShouldBe;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

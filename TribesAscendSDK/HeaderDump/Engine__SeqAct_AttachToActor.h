@@ -26,6 +26,15 @@ namespace UnrealScript
 			ADD_STRUCT( ::RotatorProperty, RelativeRotation, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, RelativeOffset, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, BoneName, 0xFFFFFFFF )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_AttachToActor.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

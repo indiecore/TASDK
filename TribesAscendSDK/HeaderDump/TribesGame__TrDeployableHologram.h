@@ -22,6 +22,49 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, m_nOldInvalidDeployReason, 0xFFFFFFFF )
 			ADD_OBJECT( MaterialInstanceConstant, m_RuntimeMIC )
 			ADD_OBJECT( MaterialInstanceConstant, m_HologramMaterial )
+			void SetValidDeployableLocation( bool bValidLocation, int InvalidDeployReason )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployableHologram.SetValidDeployableLocation" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( bool* )( params + 0 ) = bValidLocation;
+				*( int* )( params + 4 ) = InvalidDeployReason;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ClearAllMessages(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployableHologram.ClearAllMessages" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Destroyed(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployableHologram.Destroyed" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PreBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployableHologram.PreBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Init( ScriptClass* DeployableClass )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployableHologram.Init" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( ScriptClass** )( params + 0 ) = DeployableClass;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

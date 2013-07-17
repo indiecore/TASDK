@@ -21,6 +21,36 @@ namespace UnrealScript
 	public:
 			ADD_STRUCT( ::VectorProperty, GoalPoint, 0xFFFFFFFF )
 			ADD_OBJECT( Actor, GoalActor )
+			bool TowardGoal( class NavigationHandle* NavHandle, class Actor* Goal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshPath_Toward.TowardGoal" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( class Actor** )( params + 4 ) = Goal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool TowardPoint( class NavigationHandle* NavHandle, Vector Point )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshPath_Toward.TowardPoint" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( Vector* )( params + 4 ) = Point;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshPath_Toward.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

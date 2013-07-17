@@ -36,6 +36,52 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, m_fPawnZOffset, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, m_fCameraDistanceInterpSpeed, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, m_fInterpedCameraDistance, 0xFFFFFFFF )
+			void InitializeFor( class PlayerController* PC )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCamera_Spectator.InitializeFor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PlayerController** )( params + 0 ) = PC;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateCamera( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCamera_Spectator.UpdateCamera" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateViewTarget( void* &OutVT, float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCamera_Spectator.UpdateViewTarget" );
+				byte *params = ( byte* )( malloc( 48 ) );
+				*( void** )( params + 0 ) = OutVT;
+				*( float* )( params + 44 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutVT = *( void** )( params + 0 );
+			}
+
+			void ShowHiddenPawn(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCamera_Spectator.ShowHiddenPawn" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetFOV( float NewFOV )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCamera_Spectator.SetFOV" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = NewFOV;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

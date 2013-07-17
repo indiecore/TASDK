@@ -19,6 +19,16 @@ namespace UnrealScript
 	class MultiFont : public Font
 	{
 	public:
+			int GetResolutionTestTableIndex( float HeightTest )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MultiFont.GetResolutionTestTableIndex" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = HeightTest;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

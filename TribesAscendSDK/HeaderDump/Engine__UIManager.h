@@ -19,6 +19,54 @@ namespace UnrealScript
 	class UIManager : public Object
 	{
 	public:
+			class UIManager* GetUIManager(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIManager.GetUIManager" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class UIManager** )( params + function->return_val_offset() );
+			}
+
+			bool CanUnpauseInternalUI(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIManager.CanUnpauseInternalUI" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void PauseGame( bool bDesiredPauseState, int PlayerIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIManager.PauseGame" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( bool* )( params + 0 ) = bDesiredPauseState;
+				*( int* )( params + 4 ) = PlayerIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void NotifyPlayerAdded( int PlayerIndex, class LocalPlayer* AddedPlayer )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIManager.NotifyPlayerAdded" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = PlayerIndex;
+				*( class LocalPlayer** )( params + 4 ) = AddedPlayer;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void NotifyPlayerRemoved( int PlayerIndex, class LocalPlayer* RemovedPlayer )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIManager.NotifyPlayerRemoved" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = PlayerIndex;
+				*( class LocalPlayer** )( params + 4 ) = RemovedPlayer;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,14 @@ namespace UnrealScript
 	class CrowdAgentBase : public Actor
 	{
 	public:
+			void NotifyPathChanged(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CrowdAgentBase.NotifyPathChanged" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

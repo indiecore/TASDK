@@ -19,6 +19,15 @@ namespace UnrealScript
 	class PathNode : public NavigationPoint
 	{
 	public:
+			ScriptArray< wchar_t > GetDebugAbbrev(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PathNode.GetDebugAbbrev" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -19,6 +19,14 @@ namespace UnrealScript
 	class TrSeqAct_EndMatch : public SequenceAction
 	{
 	public:
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeqAct_EndMatch.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

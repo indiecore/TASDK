@@ -19,6 +19,15 @@ namespace UnrealScript
 	class UTDecalManager : public DecalManager
 	{
 	public:
+			bool CanSpawnDecals(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDecalManager.CanSpawnDecals" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

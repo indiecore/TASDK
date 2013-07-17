@@ -19,6 +19,15 @@ namespace UnrealScript
 	class UDKUIDataProvider_StringArray : public UDKUIDataProvider_SimpleElementProvider
 	{
 	public:
+			int GetElementCount(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataProvider_StringArray.GetElementCount" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

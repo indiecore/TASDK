@@ -19,6 +19,24 @@ namespace UnrealScript
 	class dsWebAdmin : public WebApplication
 	{
 	public:
+			void Init(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.dsWebAdmin.Init" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Query( class WebRequest* Request, class WebResponse* Response )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.dsWebAdmin.Query" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class WebRequest** )( params + 0 ) = Request;
+				*( class WebResponse** )( params + 4 ) = Response;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

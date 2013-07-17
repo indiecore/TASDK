@@ -19,6 +19,7 @@ namespace UnrealScript
 	class PMESTG_LeaveADecalBase : public ParticleModuleEventSendToGame
 	{
 	public:
+			ADD_OBJECT( ScriptClass, PhysicalMaterialPropertyClass )
 	};
 }
 

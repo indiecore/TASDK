@@ -25,6 +25,8 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bEditAfterNew, 0x2 )
 			ADD_VAR( ::BoolProperty, bCreateNew, 0x1 )
 			ADD_VAR( ::StrProperty, Description, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, ContextClass )
+			ADD_OBJECT( ScriptClass, SupportedClass )
 	};
 }
 

@@ -20,6 +20,26 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( GameThirdPersonCamera, ThirdPersonCam )
+			float GetDesiredFOV( class Pawn* ViewedPawn )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.GetDesiredFOV" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = ViewedPawn;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
+			bool SetFocusPoint( class Pawn* ViewedPawn )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.SetFocusPoint" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = ViewedPawn;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::ByteProperty, CurrentViewportType, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, OffsetAdjustmentInterpSpeed, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, ViewOffsetInterp, 0xFFFFFFFF )
@@ -72,6 +92,125 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bLockedToViewTarget, 0x1 )
 			ADD_VAR( ::FloatProperty, BlendTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, FOVAngle, 0xFFFFFFFF )
+			void Init(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.Init" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnBecomeActive( class Pawn* TargetPawn, class GameThirdPersonCameraMode* PrevMode )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.OnBecomeActive" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Pawn** )( params + 0 ) = TargetPawn;
+				*( class GameThirdPersonCameraMode** )( params + 4 ) = PrevMode;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnBecomeInActive( class Pawn* TargetPawn, class GameThirdPersonCameraMode* NewMode )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.OnBecomeInActive" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Pawn** )( params + 0 ) = TargetPawn;
+				*( class GameThirdPersonCameraMode** )( params + 4 ) = NewMode;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			Vector AdjustViewOffset( class Pawn* P, Vector Offset )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.AdjustViewOffset" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class Pawn** )( params + 0 ) = P;
+				*( Vector* )( params + 4 ) = Offset;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			Vector GetCameraWorstCaseLoc( class Pawn* TargetPawn, void* CurrentViewTarget )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.GetCameraWorstCaseLoc" );
+				byte *params = ( byte* )( malloc( 48 ) );
+				*( class Pawn** )( params + 0 ) = TargetPawn;
+				*( void** )( params + 4 ) = CurrentViewTarget;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			void ProcessViewRotation( float DeltaTime, class Actor* ViewTarget, Rotator &out_ViewRotation, Rotator &out_DeltaRot )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.ProcessViewRotation" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				*( class Actor** )( params + 4 ) = ViewTarget;
+				*( Rotator* )( params + 8 ) = out_ViewRotation;
+				*( Rotator* )( params + 20 ) = out_DeltaRot;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				out_ViewRotation = *( Rotator* )( params + 8 );
+				out_DeltaRot = *( Rotator* )( params + 20 );
+			}
+
+			Vector GetDOFFocusLoc( class Actor* TraceOwner, Vector StartTrace, Vector EndTrace )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.GetDOFFocusLoc" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( class Actor** )( params + 0 ) = TraceOwner;
+				*( Vector* )( params + 4 ) = StartTrace;
+				*( Vector* )( params + 16 ) = EndTrace;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			Vector DOFTrace( class Actor* TraceOwner, Vector StartTrace, Vector EndTrace )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.DOFTrace" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( class Actor** )( params + 0 ) = TraceOwner;
+				*( Vector* )( params + 4 ) = StartTrace;
+				*( Vector* )( params + 16 ) = EndTrace;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			void UpdatePostProcess( void* &VT, float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.UpdatePostProcess" );
+				byte *params = ( byte* )( malloc( 48 ) );
+				*( void** )( params + 0 ) = VT;
+				*( float* )( params + 44 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				VT = *( void** )( params + 0 );
+			}
+
+			void ModifyPostProcessSettings( void* &PP )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.ModifyPostProcessSettings" );
+				byte *params = ( byte* )( malloc( 220 ) );
+				*( void** )( params + 0 ) = PP;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				PP = *( void** )( params + 0 );
+			}
+
+			void SetViewOffset( void* &NewViewOffset )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.SetViewOffset" );
+				byte *params = ( byte* )( malloc( 36 ) );
+				*( void** )( params + 0 ) = NewViewOffset;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				NewViewOffset = *( void** )( params + 0 );
+			}
+
 	};
 }
 

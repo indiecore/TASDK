@@ -19,6 +19,24 @@ namespace UnrealScript
 	class SeqVar_ObjectList : public SeqVar_Object
 	{
 	public:
+			class Object* GetObjectValue(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqVar_ObjectList.GetObjectValue" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Object** )( params + function->return_val_offset() );
+			}
+
+			void SetObjectValue( class Object* NewValue )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqVar_ObjectList.SetObjectValue" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Object** )( params + 0 ) = NewValue;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

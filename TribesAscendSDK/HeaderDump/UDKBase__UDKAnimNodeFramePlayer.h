@@ -19,6 +19,25 @@ namespace UnrealScript
 	class UDKAnimNodeFramePlayer : public AnimNodeSequence
 	{
 	public:
+			void SetAnimation( ScriptName Sequence, float RateScale )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimNodeFramePlayer.SetAnimation" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptName* )( params + 0 ) = Sequence;
+				*( float* )( params + 8 ) = RateScale;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetAnimPosition( float Perc )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimNodeFramePlayer.SetAnimPosition" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = Perc;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

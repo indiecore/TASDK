@@ -20,6 +20,15 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::BoolProperty, bEnabled, 0x1 )
+			void SetEnabled( bool bEnable )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCaptureComponent.SetEnabled" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bEnable;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_VAR( ::FloatProperty, MaxStreamingUpdateDist, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, MaxViewDistanceOverride, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, MaxUpdateDist, 0xFFFFFFFF )
@@ -33,6 +42,15 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bUseMainScenePostProcessSettings, 0x8 )
 			ADD_VAR( ::BoolProperty, bEnableFog, 0x4 )
 			ADD_VAR( ::BoolProperty, bEnablePostProcess, 0x2 )
+			void SetFrameRate( float NewFrameRate )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCaptureComponent.SetFrameRate" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = NewFrameRate;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,34 @@ namespace UnrealScript
 	class GameCrowdSpawnerInterface : public Interface
 	{
 	public:
+			bool AddToAgentPool( class GameCrowdAgent* Agent )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdSpawnerInterface.AddToAgentPool" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class GameCrowdAgent** )( params + 0 ) = Agent;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			float GetMaxSpawnDist(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdSpawnerInterface.GetMaxSpawnDist" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
+			void AgentDestroyed( class GameCrowdAgent* Agent )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdSpawnerInterface.AgentDestroyed" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class GameCrowdAgent** )( params + 0 ) = Agent;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

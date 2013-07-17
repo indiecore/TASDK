@@ -19,6 +19,28 @@ namespace UnrealScript
 	class UIPropertyDataProvider : public UIDataProvider
 	{
 	public:
+			bool CanSupportComplexPropertyType( class Property* UnsupportedProperty )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIPropertyDataProvider.CanSupportComplexPropertyType" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Property** )( params + 0 ) = UnsupportedProperty;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool GetCustomPropertyValue( void* &PropertyValue, int ArrayIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIPropertyDataProvider.GetCustomPropertyValue" );
+				byte *params = ( byte* )( malloc( 88 ) );
+				*( void** )( params + 0 ) = PropertyValue;
+				*( int* )( params + 84 ) = ArrayIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				PropertyValue = *( void** )( params + 0 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

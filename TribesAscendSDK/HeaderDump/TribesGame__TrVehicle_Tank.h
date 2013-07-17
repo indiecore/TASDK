@@ -25,6 +25,50 @@ namespace UnrealScript
 			ADD_VAR( ::ByteProperty, GunnerFlashCount, 0xFFFFFFFF )
 			ADD_STRUCT( ::RotatorProperty, GunnerWeaponRotation, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, GunnerFlashLocation, 0xFFFFFFFF )
+			void PostInitAnimTree(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVehicle_Tank.PostInitAnimTree" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void VehicleWeaponFireEffects( Vector HitLocation, int SeatIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVehicle_Tank.VehicleWeaponFireEffects" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( Vector* )( params + 0 ) = HitLocation;
+				*( int* )( params + 12 ) = SeatIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ProcessViewRotationBasedOnSeat( int SeatIndex, float DeltaTime, Rotator &out_ViewRotation, Rotator &out_DeltaRot )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVehicle_Tank.ProcessViewRotationBasedOnSeat" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( int* )( params + 0 ) = SeatIndex;
+				*( float* )( params + 4 ) = DeltaTime;
+				*( Rotator* )( params + 8 ) = out_ViewRotation;
+				*( Rotator* )( params + 20 ) = out_DeltaRot;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				out_ViewRotation = *( Rotator* )( params + 8 );
+				out_DeltaRot = *( Rotator* )( params + 20 );
+			}
+
+			Rotator LimitViewRotation( Rotator LimitViewRotation, float LimitViewPitchMin, float LimitViewPitchMax )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVehicle_Tank.LimitViewRotation" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( Rotator* )( params + 0 ) = LimitViewRotation;
+				*( float* )( params + 12 ) = LimitViewPitchMin;
+				*( float* )( params + 16 ) = LimitViewPitchMax;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Rotator* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

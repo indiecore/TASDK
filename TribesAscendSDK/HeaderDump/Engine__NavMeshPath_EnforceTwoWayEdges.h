@@ -19,6 +19,16 @@ namespace UnrealScript
 	class NavMeshPath_EnforceTwoWayEdges : public NavMeshPathConstraint
 	{
 	public:
+			bool EnforceTwoWayEdges( class NavigationHandle* NavHandle )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshPath_EnforceTwoWayEdges.EnforceTwoWayEdges" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

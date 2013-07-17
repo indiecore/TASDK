@@ -30,6 +30,31 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bReversePlayback, 0x2 )
 			ADD_VAR( ::BoolProperty, bIsPlaying, 0x1 )
 			ADD_OBJECT( SeqAct_Interp, InterpAction )
+			void AddAIGroupActor( class InterpGroupInstAI* AIGroupInst )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MatineeActor.AddAIGroupActor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class InterpGroupInstAI** )( params + 0 ) = AIGroupInst;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Update(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MatineeActor.Update" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void CheckPriorityRefresh(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MatineeActor.CheckPriorityRefresh" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

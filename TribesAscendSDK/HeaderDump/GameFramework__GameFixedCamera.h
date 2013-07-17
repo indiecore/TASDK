@@ -20,6 +20,28 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::FloatProperty, DefaultFOV, 0xFFFFFFFF )
+			void UpdateCamera( class Pawn* P, class GamePlayerCamera* CameraActor, float DeltaTime, void* &OutVT )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameFixedCamera.UpdateCamera" );
+				byte *params = ( byte* )( malloc( 56 ) );
+				*( class Pawn** )( params + 0 ) = P;
+				*( class GamePlayerCamera** )( params + 4 ) = CameraActor;
+				*( float* )( params + 8 ) = DeltaTime;
+				*( void** )( params + 12 ) = OutVT;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutVT = *( void** )( params + 12 );
+			}
+
+			void OnBecomeActive( class GameCameraBase* OldCamera )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameFixedCamera.OnBecomeActive" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class GameCameraBase** )( params + 0 ) = OldCamera;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

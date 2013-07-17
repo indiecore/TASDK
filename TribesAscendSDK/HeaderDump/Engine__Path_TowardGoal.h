@@ -20,6 +20,25 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( Actor, GoalActor )
+			bool TowardGoal( class Pawn* P, class Actor* Goal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Path_TowardGoal.TowardGoal" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Pawn** )( params + 0 ) = P;
+				*( class Actor** )( params + 4 ) = Goal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Path_TowardGoal.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

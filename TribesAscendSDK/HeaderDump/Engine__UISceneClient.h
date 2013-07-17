@@ -22,6 +22,42 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bEnablePostProcess, 0x1 )
 			ADD_OBJECT( PostProcessChain, UIScenePostProcess )
 			ADD_OBJECT( DataStoreClient, DataStoreManager )
+			bool IsUIActive( int Flags )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UISceneClient.IsUIActive" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = Flags;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void* GetCanvasToScreen(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UISceneClient.GetCanvasToScreen" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
+			void* GetInverseCanvasToScreen(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UISceneClient.GetInverseCanvasToScreen" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
+			void InitializeSceneClient(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UISceneClient.InitializeSceneClient" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

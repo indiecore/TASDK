@@ -20,6 +20,32 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::IntProperty, MaxTextureSize, 0xFFFFFFFF )
+			bool SourceTexturesFullyStreamedIn(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Texture2DComposite.SourceTexturesFullyStreamedIn" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void UpdateCompositeTexture( int NumMipsToGenerate )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Texture2DComposite.UpdateCompositeTexture" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = NumMipsToGenerate;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ResetSourceRegions(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Texture2DComposite.ResetSourceRegions" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -33,6 +33,73 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bInHardware, 0x1 )
 			ADD_VAR( ::IntProperty, SceneIndex, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, GrabbedBoneName, 0xFFFFFFFF )
+			void GrabComponent( ScriptName InBoneName, Vector GrabLocation, bool bConstrainRotation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Handle.GrabComponent" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( ScriptName* )( params + 4 ) = InBoneName;
+				*( Vector* )( params + 12 ) = GrabLocation;
+				*( bool* )( params + 24 ) = bConstrainRotation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ReleaseComponent(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Handle.ReleaseComponent" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetLocation( Vector NewLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Handle.SetLocation" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = NewLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetSmoothLocation( Vector NewLocation, float MoveTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Handle.SetSmoothLocation" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( Vector* )( params + 0 ) = NewLocation;
+				*( float* )( params + 12 ) = MoveTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateSmoothLocation( Vector &NewLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Handle.UpdateSmoothLocation" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = NewLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				NewLocation = *( Vector* )( params + 0 );
+			}
+
+			void SetOrientation( void* &NewOrientation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Handle.SetOrientation" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( void** )( params + 0 ) = NewOrientation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				NewOrientation = *( void** )( params + 0 );
+			}
+
+			void* GetOrientation(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Handle.GetOrientation" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

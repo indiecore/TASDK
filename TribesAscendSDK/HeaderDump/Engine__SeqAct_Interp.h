@@ -19,6 +19,15 @@ namespace UnrealScript
 	class SeqAct_Interp : public SeqAct_Latent
 	{
 	public:
+			void AddPlayerToDirectorTracks( class PlayerController* PC )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_Interp.AddPlayerToDirectorTracks" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PlayerController** )( params + 0 ) = PC;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_VAR( ::BoolProperty, bReversePlayback, 0x80 )
 			ADD_VAR( ::BoolProperty, bNoResetOnRewind, 0x20 )
 			ADD_VAR( ::BoolProperty, bRewindOnPlay, 0x10 )
@@ -29,6 +38,7 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, TerminationTime, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, PreferredSplitScreenNum, 0xFFFFFFFF )
 			ADD_OBJECT( MatineeActor, ReplicatedActor )
+			ADD_OBJECT( ScriptClass, ReplicatedActorClass )
 			ADD_OBJECT( InterpData, InterpData )
 			ADD_VAR( ::BoolProperty, bShouldShowGore, 0x4000 )
 			ADD_VAR( ::BoolProperty, bIsSkippable, 0x2000 )
@@ -41,6 +51,41 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bLooping, 0x8 )
 			ADD_VAR( ::BoolProperty, bIsBeingEdited, 0x4 )
 			ADD_VAR( ::FloatProperty, ForceStartPosition, 0xFFFFFFFF )
+			void SetPosition( float NewPosition, bool bJump )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_Interp.SetPosition" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = NewPosition;
+				*( bool* )( params + 4 ) = bJump;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Stop(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_Interp.Stop" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Reset(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_Interp.Reset" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_Interp.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

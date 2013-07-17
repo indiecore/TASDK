@@ -19,6 +19,15 @@ namespace UnrealScript
 	class TrUIDataProvider_MapInfo : public UDKUIDataProvider_MapInfo
 	{
 	public:
+			bool ShouldBeFiltered(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrUIDataProvider_MapInfo.ShouldBeFiltered" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

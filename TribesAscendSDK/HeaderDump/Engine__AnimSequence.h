@@ -22,6 +22,22 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, SequenceLength, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, RateScale, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, SequenceName, 0xFFFFFFFF )
+			float GetNotifyTimeByClass( ScriptClass* NotifyClass, float PlayRate, float StartPosition, class AnimNotify* &out_Notify, float &out_Duration )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimSequence.GetNotifyTimeByClass" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( ScriptClass** )( params + 0 ) = NotifyClass;
+				*( float* )( params + 4 ) = PlayRate;
+				*( float* )( params + 8 ) = StartPosition;
+				*( class AnimNotify** )( params + 12 ) = out_Notify;
+				*( float* )( params + 16 ) = out_Duration;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				out_Notify = *( class AnimNotify** )( params + 12 );
+				out_Duration = *( float* )( params + 16 );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::IntProperty, NumFrames, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bNoLoopingInterpolation, 0x1 )
 			ADD_VAR( ::BoolProperty, bIsAdditive, 0x2 )

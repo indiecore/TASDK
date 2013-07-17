@@ -19,6 +19,7 @@ namespace UnrealScript
 	class TrDeviceContentData : public Object
 	{
 	public:
+			ADD_OBJECT( ScriptClass, m_TrDeviceClass )
 			ADD_OBJECT( AnimSet, m_PaperDollAnimSet )
 			ADD_OBJECT( AnimTree, m_AnimTreeTemplate1p )
 			ADD_OBJECT( PhysicsAsset, m_PhysicsAsset1p )

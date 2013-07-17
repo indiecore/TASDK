@@ -19,6 +19,63 @@ namespace UnrealScript
 	class TrGame_TrTraining : public TrGame
 	{
 	public:
+			bool CheckScore( class PlayerReplicationInfo* Scorer )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrTraining.CheckScore" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PlayerReplicationInfo** )( params + 0 ) = Scorer;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			byte PickTeam( byte Num, class Controller* C )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrTraining.PickTeam" );
+				byte *params = ( byte* )( malloc( 5 ) );
+				*( byte* )( params + 0 ) = Num;
+				*( class Controller** )( params + 4 ) = C;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( byte* )( params + function->return_val_offset() );
+			}
+
+			byte PickTeamForMigration( class Controller* C )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrTraining.PickTeamForMigration" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Controller** )( params + 0 ) = C;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( byte* )( params + function->return_val_offset() );
+			}
+
+			void EndGame( class PlayerReplicationInfo* Winner, ScriptArray< wchar_t > Reason )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrTraining.EndGame" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class PlayerReplicationInfo** )( params + 0 ) = Winner;
+				*( ScriptArray< wchar_t >* )( params + 4 ) = Reason;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void AutoEndGame(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrTraining.AutoEndGame" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayEndOfMatchMessage(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrTraining.PlayEndOfMatchMessage" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

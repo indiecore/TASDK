@@ -19,6 +19,34 @@ namespace UnrealScript
 	class TrEntryGame : public UTEntryGame
 	{
 	public:
+			void SendMenuEngineLoaded(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEntryGame.SendMenuEngineLoaded" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			ScriptClass* SetGameType( ScriptArray< wchar_t > MapName, ScriptArray< wchar_t > Options, ScriptArray< wchar_t > Portal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEntryGame.SetGameType" );
+				byte *params = ( byte* )( malloc( 36 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = MapName;
+				*( ScriptArray< wchar_t >* )( params + 12 ) = Options;
+				*( ScriptArray< wchar_t >* )( params + 24 ) = Portal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptClass** )( params + function->return_val_offset() );
+			}
+
+			void OnEngineHasLoaded(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEntryGame.OnEngineHasLoaded" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

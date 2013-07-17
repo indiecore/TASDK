@@ -20,6 +20,16 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::FloatProperty, DetonationSpeed, 0xFFFFFFFF )
+			bool MeetsDetonationRequirements( class Pawn* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_ArmoredClaymore.MeetsDetonationRequirements" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -23,6 +23,26 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, m_MaxSpeed, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, m_MinDamage, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, m_MaxDamage, 0xFFFFFFFF )
+			void InstantFire(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSubDevice_ForceField.InstantFire" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			float ModifyInstantHitDamage( byte FiringMode, void* Impact, float Damage )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSubDevice_ForceField.ModifyInstantHitDamage" );
+				byte *params = ( byte* )( malloc( 85 ) );
+				*( byte* )( params + 0 ) = FiringMode;
+				*( void** )( params + 4 ) = Impact;
+				*( float* )( params + 84 ) = Damage;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -19,6 +19,35 @@ namespace UnrealScript
 	class PointLightToggleable : public PointLight
 	{
 	public:
+			bool ShouldSaveForCheckpoint(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PointLightToggleable.ShouldSaveForCheckpoint" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void CreateCheckpointRecord( void* &Record )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PointLightToggleable.CreateCheckpointRecord" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( void** )( params + 0 ) = Record;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				Record = *( void** )( params + 0 );
+			}
+
+			void ApplyCheckpointRecord( void* &Record )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PointLightToggleable.ApplyCheckpointRecord" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( void** )( params + 0 ) = Record;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				Record = *( void** )( params + 0 );
+			}
+
 	};
 }
 

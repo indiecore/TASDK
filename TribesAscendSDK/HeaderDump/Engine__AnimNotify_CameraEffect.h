@@ -19,6 +19,7 @@ namespace UnrealScript
 	class AnimNotify_CameraEffect : public AnimNotify
 	{
 	public:
+			ADD_OBJECT( ScriptClass, CameraLensEffect )
 	};
 }
 

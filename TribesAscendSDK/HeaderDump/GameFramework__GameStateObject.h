@@ -24,6 +24,22 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bIsRoundStarted, 0x2 )
 			ADD_VAR( ::BoolProperty, bIsMatchStarted, 0x1 )
 			ADD_VAR( ::ByteProperty, SessionType, 0xFFFFFFFF )
+			void PreProcessStream(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameStateObject.PreProcessStream" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Reset(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameStateObject.Reset" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

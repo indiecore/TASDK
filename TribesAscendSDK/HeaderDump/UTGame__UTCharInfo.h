@@ -19,9 +19,28 @@ namespace UnrealScript
 	class UTCharInfo : public Object
 	{
 	public:
+			ScriptClass* FindFamilyInfo( ScriptArray< wchar_t > InFamilyID )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCharInfo.FindFamilyInfo" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = InFamilyID;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptClass** )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::FloatProperty, LOD3DisplayFactor, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, LOD2DisplayFactor, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, LOD1DisplayFactor, 0xFFFFFFFF )
+			ScriptArray< wchar_t > GetRandomCharClassName(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCharInfo.GetRandomCharClassName" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

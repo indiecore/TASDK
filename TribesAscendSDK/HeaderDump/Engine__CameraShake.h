@@ -19,6 +19,24 @@ namespace UnrealScript
 	class CameraShake : public Object
 	{
 	public:
+			float GetLocOscillationMagnitude(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraShake.GetLocOscillationMagnitude" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
+			float GetRotOscillationMagnitude(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraShake.GetRotOscillationMagnitude" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::BoolProperty, bSingleInstance, 0x1 )
 			ADD_VAR( ::BoolProperty, bRandomAnimSegment, 0x2 )
 			ADD_VAR( ::FloatProperty, OscillationDuration, 0xFFFFFFFF )

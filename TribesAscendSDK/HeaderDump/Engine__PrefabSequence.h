@@ -20,6 +20,24 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( PrefabInstance, OwnerPrefab )
+			void SetOwnerPrefab( class PrefabInstance* InOwner )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrefabSequence.SetOwnerPrefab" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PrefabInstance** )( params + 0 ) = InOwner;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class PrefabInstance* GetOwnerPrefab(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrefabSequence.GetOwnerPrefab" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class PrefabInstance** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

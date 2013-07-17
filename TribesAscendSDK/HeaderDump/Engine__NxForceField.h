@@ -23,6 +23,23 @@ namespace UnrealScript
 			ADD_VAR( ::ByteProperty, RBChannel, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bForceActive, 0x1 )
 			ADD_VAR( ::IntProperty, ExcludeChannel, 0xFFFFFFFF )
+			void DoInitRBPhys(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NxForceField.DoInitRBPhys" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnToggle( class SeqAct_Toggle* inAction )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NxForceField.OnToggle" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SeqAct_Toggle** )( params + 0 ) = inAction;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

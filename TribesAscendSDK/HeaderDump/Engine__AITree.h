@@ -20,6 +20,30 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( K2GraphBase, GatherList )
+			bool SetActiveRoot( ScriptName InName, void* &Handle )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AITree.SetActiveRoot" );
+				byte *params = ( byte* )( malloc( 56 ) );
+				*( ScriptName* )( params + 0 ) = InName;
+				*( void** )( params + 8 ) = Handle;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				Handle = *( void** )( params + 8 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void* EvaluateTree( class AIController* InAI, void* &Handle )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AITree.EvaluateTree" );
+				byte *params = ( byte* )( malloc( 52 ) );
+				*( class AIController** )( params + 0 ) = InAI;
+				*( void** )( params + 4 ) = Handle;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				Handle = *( void** )( params + 4 );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

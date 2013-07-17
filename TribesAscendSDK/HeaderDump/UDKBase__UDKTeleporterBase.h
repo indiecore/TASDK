@@ -27,6 +27,34 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, TextureResolutionY, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, TextureResolutionX, 0xFFFFFFFF )
 			ADD_OBJECT( TextureRenderTarget2D, TextureTarget )
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKTeleporterBase.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void InitializePortalEffect( class Actor* Dest )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKTeleporterBase.InitializePortalEffect" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = Dest;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool Accept( class Actor* Incoming, class Actor* Source )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKTeleporterBase.Accept" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Actor** )( params + 0 ) = Incoming;
+				*( class Actor** )( params + 4 ) = Source;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

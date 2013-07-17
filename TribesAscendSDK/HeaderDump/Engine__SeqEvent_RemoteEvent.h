@@ -21,6 +21,15 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bStatusIsOk, 0x1 )
 			ADD_VAR( ::NameProperty, EventName, 0xFFFFFFFF )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqEvent_RemoteEvent.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

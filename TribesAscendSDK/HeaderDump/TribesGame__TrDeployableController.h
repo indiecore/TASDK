@@ -20,6 +20,26 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( TrPlayerController, m_SpawnedFromController )
+			bool CanFireWeapon( class Weapon* Wpn, byte FireModeNum )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployableController.CanFireWeapon" );
+				byte *params = ( byte* )( malloc( 5 ) );
+				*( class Weapon** )( params + 0 ) = Wpn;
+				*( byte* )( params + 4 ) = FireModeNum;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			byte ScriptGetTeamNum(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployableController.ScriptGetTeamNum" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( byte* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

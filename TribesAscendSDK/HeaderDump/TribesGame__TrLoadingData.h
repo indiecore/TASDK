@@ -31,6 +31,32 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, MapURL, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, Rules, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, Tip, 0xFFFFFFFF )
+			ScriptArray< wchar_t > GetRandomTip( int GameIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrLoadingData.GetRandomTip" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = GameIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
+			void Initialize(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrLoadingData.Initialize" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetDataFields(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrLoadingData.SetDataFields" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

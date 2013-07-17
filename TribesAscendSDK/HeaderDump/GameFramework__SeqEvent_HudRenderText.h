@@ -23,6 +23,25 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, DisplayText, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, DisplayLocation, 0xFFFFFFFF )
 			ADD_OBJECT( Font, DisplayFont )
+			void Render( class Canvas* TargetCanvas, class HUD* TargetHud )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqEvent_HudRenderText.Render" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Canvas** )( params + 0 ) = TargetCanvas;
+				*( class HUD** )( params + 4 ) = TargetHud;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqEvent_HudRenderText.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -20,6 +20,34 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::BoolProperty, bEnabled, 0x1 )
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DynamicBlockingVolume.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void CreateCheckpointRecord( void* &Record )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DynamicBlockingVolume.CreateCheckpointRecord" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( void** )( params + 0 ) = Record;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				Record = *( void** )( params + 0 );
+			}
+
+			void ApplyCheckpointRecord( void* &Record )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DynamicBlockingVolume.ApplyCheckpointRecord" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( void** )( params + 0 ) = Record;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				Record = *( void** )( params + 0 );
+			}
+
 	};
 }
 

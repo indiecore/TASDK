@@ -20,6 +20,25 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::FloatProperty, m_fWorldZPlacementOffset, 0xFFFFFFFF )
+			Vector GetPhysicalFireStartLoc( Vector AimDir )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_Claymore.GetPhysicalFireStartLoc" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = AimDir;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			class Projectile* ProjectileFire(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_Claymore.ProjectileFire" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Projectile** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

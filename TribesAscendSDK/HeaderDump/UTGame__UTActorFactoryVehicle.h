@@ -22,6 +22,15 @@ namespace UnrealScript
 			ADD_VAR( ::ByteProperty, TeamNum, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bKeyVehicle, 0x2 )
 			ADD_VAR( ::BoolProperty, bTeamLocked, 0x1 )
+			void PostCreateActor( class Actor* NewActor )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTActorFactoryVehicle.PostCreateActor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = NewActor;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

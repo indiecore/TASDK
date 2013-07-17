@@ -19,7 +19,27 @@ namespace UnrealScript
 	class UTDataStore_GameSearchHistory : public UTDataStore_GameSearchPersonal
 	{
 	public:
+			bool HasOutstandingQueries( bool bRestrictCheckToSelf )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDataStore_GameSearchHistory.HasOutstandingQueries" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bRestrictCheckToSelf;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 			ADD_OBJECT( UTDataStore_GameSearchFavorites, FavoritesGameSearchDataStore )
+			ADD_OBJECT( ScriptClass, FavoritesGameSearchDataStoreClass )
+			void Registered( class LocalPlayer* PlayerOwner )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDataStore_GameSearchHistory.Registered" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class LocalPlayer** )( params + 0 ) = PlayerOwner;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

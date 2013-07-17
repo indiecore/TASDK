@@ -19,6 +19,16 @@ namespace UnrealScript
 	class ImageServer : public WebApplication
 	{
 	public:
+			void Query( class WebRequest* Request, class WebResponse* Response )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.ImageServer.Query" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class WebRequest** )( params + 0 ) = Request;
+				*( class WebResponse** )( params + 4 ) = Response;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

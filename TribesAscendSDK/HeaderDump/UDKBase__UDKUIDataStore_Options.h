@@ -19,6 +19,34 @@ namespace UnrealScript
 	class UDKUIDataStore_Options : public UIDataStore_GameResource
 	{
 	public:
+			void ClearSet( ScriptName SetName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_Options.ClearSet" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = SetName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void AppendToSet( ScriptName SetName, int NumOptions )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_Options.AppendToSet" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptName* )( params + 0 ) = SetName;
+				*( int* )( params + 8 ) = NumOptions;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void GetSet( ScriptName SetName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_Options.GetSet" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( ScriptName* )( params + 0 ) = SetName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

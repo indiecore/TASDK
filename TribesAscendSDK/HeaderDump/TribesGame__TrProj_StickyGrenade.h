@@ -21,6 +21,55 @@ namespace UnrealScript
 	public:
 			ADD_OBJECT( Actor, m_OldBase )
 			ADD_VAR( ::BoolProperty, m_bHasStuckToTarget, 0x1 )
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_StickyGrenade.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void HitWall( Vector HitNormal, class Actor* Wall )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_StickyGrenade.HitWall" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( Vector* )( params + 0 ) = HitNormal;
+				*( class Actor** )( params + 12 ) = Wall;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ProcessTouch( class Actor* Other, Vector HitLocation, Vector HitNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_StickyGrenade.ProcessTouch" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				*( Vector* )( params + 4 ) = HitLocation;
+				*( Vector* )( params + 16 ) = HitNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool StickToTarget( class Actor* Target, Vector HitLocation, Vector HitNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_StickyGrenade.StickToTarget" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( class Actor** )( params + 0 ) = Target;
+				*( Vector* )( params + 4 ) = HitLocation;
+				*( Vector* )( params + 16 ) = HitNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void OnBaseChanged(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_StickyGrenade.OnBaseChanged" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

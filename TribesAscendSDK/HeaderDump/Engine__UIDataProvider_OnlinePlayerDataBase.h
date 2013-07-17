@@ -20,6 +20,23 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::IntProperty, PlayerControllerId, 0xFFFFFFFF )
+			void OnRegister( class LocalPlayer* InPlayer )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_OnlinePlayerDataBase.OnRegister" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class LocalPlayer** )( params + 0 ) = InPlayer;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnUnregister(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_OnlinePlayerDataBase.OnUnregister" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

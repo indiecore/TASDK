@@ -19,7 +19,16 @@ namespace UnrealScript
 	class UTSeqCond_CheckWeapon : public SequenceCondition
 	{
 	public:
+			ADD_OBJECT( ScriptClass, TestForWeaponClass )
 			ADD_OBJECT( Actor, Target )
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqCond_CheckWeapon.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

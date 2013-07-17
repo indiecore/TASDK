@@ -19,6 +19,16 @@ namespace UnrealScript
 	class PostProcessChain : public Object
 	{
 	public:
+			class PostProcessEffect* FindPostProcessEffect( ScriptName EffectName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PostProcessChain.FindPostProcessEffect" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = EffectName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class PostProcessEffect** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

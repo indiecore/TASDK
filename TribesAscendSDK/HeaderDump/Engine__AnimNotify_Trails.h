@@ -34,6 +34,16 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bPreview, 0x2 )
 			ADD_VAR( ::BoolProperty, bIsExtremeContent, 0x1 )
 			ADD_OBJECT( ParticleSystem, PSTemplate )
+			int GetNumSteps( int InLastTrailIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNotify_Trails.GetNumSteps" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = InLastTrailIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

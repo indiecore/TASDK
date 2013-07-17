@@ -33,6 +33,71 @@ namespace UnrealScript
 			ADD_OBJECT( UTMapInfo, MapInfo )
 			ADD_OBJECT( WorldInfo, ThisWorld )
 			ADD_OBJECT( GFxMinimapHud, HUD )
+			void Init( class GFxMinimapHud* H )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimap.Init" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class GFxMinimapHud** )( params + 0 ) = H;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateData(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimap.UpdateData" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void* GenFriendIcons( int N )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimap.GenFriendIcons" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = N;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
+			void* GenEnemyIcons( int N )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimap.GenEnemyIcons" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = N;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
+			void* GenFlagIcons( int N )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimap.GenFlagIcons" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = N;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
+			void UpdateIcons( bool bIsRedIconType )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimap.UpdateIcons" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( bool* )( params + 24 ) = bIsRedIconType;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Update( float Scale )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimap.Update" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = Scale;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

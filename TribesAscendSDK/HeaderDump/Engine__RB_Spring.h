@@ -31,6 +31,26 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, SceneIndex, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, BoneName2, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, BoneName1, 0xFFFFFFFF )
+			void SetComponents( ScriptName InBoneName1, Vector Position1, ScriptName InBoneName2, Vector Position2 )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Spring.SetComponents" );
+				byte *params = ( byte* )( malloc( 48 ) );
+				*( ScriptName* )( params + 4 ) = InBoneName1;
+				*( Vector* )( params + 12 ) = Position1;
+				*( ScriptName* )( params + 28 ) = InBoneName2;
+				*( Vector* )( params + 36 ) = Position2;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Clear(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Spring.Clear" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

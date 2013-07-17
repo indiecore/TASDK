@@ -21,6 +21,35 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bLoopLastSequence, 0x2 )
 			ADD_VAR( ::BoolProperty, bAutoStart, 0x1 )
+			void PlayAnimation( ScriptName Sequence, float SeqRate, bool bSeqLoop )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimNodeSequence.PlayAnimation" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( ScriptName* )( params + 0 ) = Sequence;
+				*( float* )( params + 8 ) = SeqRate;
+				*( bool* )( params + 12 ) = bSeqLoop;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayAnimationSet( float SeqRate, bool bLoopLast )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimNodeSequence.PlayAnimationSet" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( float* )( params + 12 ) = SeqRate;
+				*( bool* )( params + 16 ) = bLoopLast;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnInit(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimNodeSequence.OnInit" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

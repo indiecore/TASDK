@@ -21,6 +21,16 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bAttractionFalloff, 0x1 )
 			ADD_VAR( ::FloatProperty, Attraction, 0xFFFFFFFF )
+			Vector AppliedForce( class GameCrowdAgent* Agent )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAttractor.AppliedForce" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class GameCrowdAgent** )( params + 0 ) = Agent;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

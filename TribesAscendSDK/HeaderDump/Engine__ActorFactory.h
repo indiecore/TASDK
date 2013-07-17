@@ -21,9 +21,20 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bShowInEditorQuickMenu, 0x2 )
 			ADD_VAR( ::BoolProperty, bPlaceable, 0x1 )
+			ADD_OBJECT( ScriptClass, NewActorClass )
 			ADD_VAR( ::IntProperty, AlternateMenuPriority, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, MenuPriority, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, MenuName, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, GameplayActorClass )
+			void PostCreateActor( class Actor* NewActor )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ActorFactory.PostCreateActor" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = NewActor;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

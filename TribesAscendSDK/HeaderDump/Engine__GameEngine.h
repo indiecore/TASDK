@@ -19,6 +19,61 @@ namespace UnrealScript
 	class GameEngine : public Engine
 	{
 	public:
+			class OnlineSubsystem* GetOnlineSubsystem(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameEngine.GetOnlineSubsystem" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class OnlineSubsystem** )( params + function->return_val_offset() );
+			}
+
+			class DownloadableContentManager* GetDLCManager(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameEngine.GetDLCManager" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class DownloadableContentManager** )( params + function->return_val_offset() );
+			}
+
+			class DownloadableContentEnumerator* GetDLCEnumerator(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameEngine.GetDLCEnumerator" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class DownloadableContentEnumerator** )( params + function->return_val_offset() );
+			}
+
+			bool CreateNamedNetDriver( ScriptName NetDriverName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameEngine.CreateNamedNetDriver" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = NetDriverName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void DestroyNamedNetDriver( ScriptName NetDriverName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameEngine.DestroyNamedNetDriver" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = NetDriverName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class InGameAdManager* GetAdManager(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameEngine.GetAdManager" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class InGameAdManager** )( params + function->return_val_offset() );
+			}
+
 			ADD_OBJECT( PendingLevel, GPendingLevel )
 			ADD_VAR( ::StrProperty, PendingLevelPlayerControllerClassName, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, TravelURL, 0xFFFFFFFF )

@@ -19,6 +19,16 @@ namespace UnrealScript
 	class StringsTag : public TranslatorTag
 	{
 	public:
+			ScriptArray< wchar_t > Translate( ScriptArray< wchar_t > InArgument )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.StringsTag.Translate" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = InArgument;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

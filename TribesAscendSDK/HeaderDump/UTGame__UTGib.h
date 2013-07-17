@@ -34,6 +34,143 @@ namespace UnrealScript
 			ADD_OBJECT( MaterialInstance, MI_Decal )
 			ADD_OBJECT( MaterialInstanceConstant, MIC_Gib )
 			ADD_OBJECT( SoundCue, HitSound )
+			void PreBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.PreBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetTexturesToBeResident( float TimeToBeResident )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.SetTexturesToBeResident" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = TimeToBeResident;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DisplayDebug( class HUD* HUD, float &out_YL, float &out_YPos )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.DisplayDebug" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( class HUD** )( params + 0 ) = HUD;
+				*( float* )( params + 4 ) = out_YL;
+				*( float* )( params + 8 ) = out_YPos;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				out_YL = *( float* )( params + 4 );
+				out_YPos = *( float* )( params + 8 );
+			}
+
+			void SetGibStaticMesh( class StaticMesh* NewStaticMesh )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.SetGibStaticMesh" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class StaticMesh** )( params + 0 ) = NewStaticMesh;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ChooseGib(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.ChooseGib" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DoCustomGibEffects(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.DoCustomGibEffects" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Timer(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.Timer" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void BecomeViewTarget( class PlayerController* PC )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.BecomeViewTarget" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PlayerController** )( params + 0 ) = PC;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool CalcCamera( float fDeltaTime, Vector &out_CamLoc, Rotator &out_CamRot, float &out_FOV )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.CalcCamera" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( float* )( params + 0 ) = fDeltaTime;
+				*( Vector* )( params + 4 ) = out_CamLoc;
+				*( Rotator* )( params + 16 ) = out_CamRot;
+				*( float* )( params + 28 ) = out_FOV;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				out_CamLoc = *( Vector* )( params + 4 );
+				out_CamRot = *( Rotator* )( params + 16 );
+				out_FOV = *( float* )( params + 28 );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void RigidBodyCollision( void* &RigidCollisionData, int ContactIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.RigidBodyCollision" );
+				byte *params = ( byte* )( malloc( 48 ) );
+				*( void** )( params + 8 ) = RigidCollisionData;
+				*( int* )( params + 44 ) = ContactIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				RigidCollisionData = *( void** )( params + 8 );
+			}
+
+			void LeaveADecal( Vector HitLoc, Vector HitNorm )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.LeaveADecal" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( Vector* )( params + 0 ) = HitLoc;
+				*( Vector* )( params + 12 ) = HitNorm;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void TurnOnCollision(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.TurnOnCollision" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Landed( Vector HitNormal, class Actor* FloorActor )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.Landed" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( Vector* )( params + 0 ) = HitNormal;
+				*( class Actor** )( params + 12 ) = FloorActor;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void HitWall( Vector HitNormal, class Actor* Wall )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.HitWall" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( Vector* )( params + 0 ) = HitNormal;
+				*( class Actor** )( params + 12 ) = Wall;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

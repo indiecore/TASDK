@@ -20,6 +20,7 @@ namespace UnrealScript
 	{
 	public:
 			ADD_OBJECT( UTQueuedAnnouncement, nextAnnouncement )
+			ADD_OBJECT( ScriptClass, AnnouncementClass )
 			ADD_VAR( ::IntProperty, MessageIndex, 0xFFFFFFFF )
 			ADD_OBJECT( PlayerReplicationInfo, PRI )
 			ADD_OBJECT( Object, OptionalObject )

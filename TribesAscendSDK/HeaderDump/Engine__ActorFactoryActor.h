@@ -19,6 +19,7 @@ namespace UnrealScript
 	class ActorFactoryActor : public ActorFactory
 	{
 	public:
+			ADD_OBJECT( ScriptClass, ActorClass )
 	};
 }
 

@@ -19,6 +19,7 @@ namespace UnrealScript
 	class SeqAct_AssignController : public SequenceAction
 	{
 	public:
+			ADD_OBJECT( ScriptClass, ControllerClass )
 	};
 }
 

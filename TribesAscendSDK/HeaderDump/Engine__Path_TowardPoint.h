@@ -20,6 +20,25 @@ namespace UnrealScript
 	{
 	public:
 			ADD_STRUCT( ::VectorProperty, GoalPoint, 0xFFFFFFFF )
+			bool TowardPoint( class Pawn* P, Vector Point )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Path_TowardPoint.TowardPoint" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class Pawn** )( params + 0 ) = P;
+				*( Vector* )( params + 4 ) = Point;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Path_TowardPoint.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

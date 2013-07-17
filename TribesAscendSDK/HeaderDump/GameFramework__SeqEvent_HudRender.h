@@ -21,6 +21,24 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bIsActive, 0x1 )
 			ADD_VAR( ::FloatProperty, AuthoredGlobalScale, 0xFFFFFFFF )
+			void RegisterEvent(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqEvent_HudRender.RegisterEvent" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Render( class Canvas* TargetCanvas, class HUD* TargetHud )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqEvent_HudRender.Render" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Canvas** )( params + 0 ) = TargetCanvas;
+				*( class HUD** )( params + 4 ) = TargetHud;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

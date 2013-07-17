@@ -21,6 +21,15 @@ namespace UnrealScript
 	public:
 			ADD_STRUCT( ::VectorProperty, VelocityVect, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, VelocityMag, 0xFFFFFFFF )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_GetVelocity.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

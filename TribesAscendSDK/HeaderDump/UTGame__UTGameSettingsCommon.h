@@ -21,6 +21,74 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::IntProperty, MaxPlayers, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, MinNetPlayers, 0xFFFFFFFF )
+			void SetCustomMapName( ScriptArray< wchar_t > MapName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameSettingsCommon.SetCustomMapName" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = MapName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetOfficialMutatorBitmask( int MutatorBitmask )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameSettingsCommon.SetOfficialMutatorBitmask" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = MutatorBitmask;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void BuildURL( ScriptArray< wchar_t > &OutURL )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameSettingsCommon.BuildURL" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = OutURL;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				OutURL = *( ScriptArray< wchar_t >* )( params + 0 );
+			}
+
+			void UpdateFromURL( ScriptArray< wchar_t > &URL, class GameInfo* Game )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameSettingsCommon.UpdateFromURL" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				*( class GameInfo** )( params + 12 ) = Game;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				URL = *( ScriptArray< wchar_t >* )( params + 0 );
+			}
+
+			void SetMutators( ScriptArray< wchar_t > &URL )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameSettingsCommon.SetMutators" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				URL = *( ScriptArray< wchar_t >* )( params + 0 );
+			}
+
+			int GenerateMutatorBitmaskFromURL( class UTUIDataStore_MenuItems* MenuDataStore )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameSettingsCommon.GenerateMutatorBitmaskFromURL" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class UTUIDataStore_MenuItems** )( params + 0 ) = MenuDataStore;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void SetCustomMutators( class UTUIDataStore_MenuItems* MenuDataStore )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameSettingsCommon.SetCustomMutators" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class UTUIDataStore_MenuItems** )( params + 0 ) = MenuDataStore;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

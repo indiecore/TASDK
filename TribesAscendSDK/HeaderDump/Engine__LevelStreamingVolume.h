@@ -25,6 +25,35 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bTestDistanceToVolume, 0x4 )
 			ADD_VAR( ::BoolProperty, bDisabled, 0x2 )
 			ADD_VAR( ::BoolProperty, bEditorPreVisOnly, 0x1 )
+			void OnToggle( class SeqAct_Toggle* Action )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LevelStreamingVolume.OnToggle" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SeqAct_Toggle** )( params + 0 ) = Action;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void CreateCheckpointRecord( void* &Record )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LevelStreamingVolume.CreateCheckpointRecord" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( void** )( params + 0 ) = Record;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				Record = *( void** )( params + 0 );
+			}
+
+			void ApplyCheckpointRecord( void* &Record )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LevelStreamingVolume.ApplyCheckpointRecord" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( void** )( params + 0 ) = Record;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				Record = *( void** )( params + 0 );
+			}
+
 	};
 }
 

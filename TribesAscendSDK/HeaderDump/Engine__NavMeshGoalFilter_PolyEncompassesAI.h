@@ -20,6 +20,17 @@ namespace UnrealScript
 	{
 	public:
 			ADD_STRUCT( ::VectorProperty, OverrideExtentToCheck, 0xFFFFFFFF )
+			bool MakeSureAIFits( class NavMeshGoal_GenericFilterContainer* FilterContainer, Vector InOverrideExtentToCheck )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoalFilter_PolyEncompassesAI.MakeSureAIFits" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class NavMeshGoal_GenericFilterContainer** )( params + 0 ) = FilterContainer;
+				*( Vector* )( params + 4 ) = InOverrideExtentToCheck;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

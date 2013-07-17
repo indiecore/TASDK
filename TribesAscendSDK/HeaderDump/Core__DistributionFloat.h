@@ -21,6 +21,16 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bIsDirty, 0x2 )
 			ADD_VAR( ::BoolProperty, bCanBeBaked, 0x1 )
+			float GetFloatValue( float F )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.DistributionFloat.GetFloatValue" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = F;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

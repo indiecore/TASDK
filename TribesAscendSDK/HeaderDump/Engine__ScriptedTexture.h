@@ -19,6 +19,15 @@ namespace UnrealScript
 	class ScriptedTexture : public TextureRenderTarget2D
 	{
 	public:
+			void Render( class Canvas* C )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ScriptedTexture.Render" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Canvas** )( params + 0 ) = C;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_VAR( ::BoolProperty, bSkipNextClear, 0x2 )
 			ADD_VAR( ::BoolProperty, bNeedsUpdate, 0x1 )
 	};

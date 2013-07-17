@@ -19,6 +19,14 @@ namespace UnrealScript
 	class NxCylindricalForceFieldCapsule : public NxCylindricalForceField
 	{
 	public:
+			void DoInitRBPhys(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NxCylindricalForceFieldCapsule.DoInitRBPhys" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,27 @@ namespace UnrealScript
 	class TrAttachment_Melee : public TrDeviceAttachment
 	{
 	public:
+			void PlayImpactSound( class Actor* HitActor, class SoundCue* SoundToPlay, Vector FireDir, Vector HitLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_Melee.PlayImpactSound" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( class Actor** )( params + 0 ) = HitActor;
+				*( class SoundCue** )( params + 4 ) = SoundToPlay;
+				*( Vector* )( params + 8 ) = FireDir;
+				*( Vector* )( params + 20 ) = HitLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayImpactEffects( Vector HitLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_Melee.PlayImpactEffects" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = HitLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

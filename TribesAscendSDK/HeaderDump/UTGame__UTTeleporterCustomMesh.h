@@ -22,6 +22,28 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, LastTime, 0xFFFFFFFF )
 			ADD_OBJECT( UTPawn, LastPawn )
 			ADD_OBJECT( SoundCue, TeleportingSound )
+			bool Accept( class Actor* Incoming, class Actor* Source )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeleporterCustomMesh.Accept" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Actor** )( params + 0 ) = Incoming;
+				*( class Actor** )( params + 4 ) = Source;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Touch( class Actor* Other, Vector HitLocation, Vector HitNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeleporterCustomMesh.Touch" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				*( Vector* )( params + 8 ) = HitLocation;
+				*( Vector* )( params + 20 ) = HitNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

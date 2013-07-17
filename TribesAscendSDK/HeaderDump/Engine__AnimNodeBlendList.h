@@ -26,6 +26,16 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bPlayActiveChild, 0x1 )
 			ADD_VAR( ::IntProperty, ActiveChildIndex, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, BlendTimeToGo, 0xFFFFFFFF )
+			void SetActiveChild( int ChildIndex, float BlendTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeBlendList.SetActiveChild" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = ChildIndex;
+				*( float* )( params + 4 ) = BlendTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

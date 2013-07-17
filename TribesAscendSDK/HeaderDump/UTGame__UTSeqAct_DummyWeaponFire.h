@@ -25,8 +25,35 @@ namespace UnrealScript
 			ADD_OBJECT( Actor, Origin )
 			ADD_VAR( ::IntProperty, ShotsFired, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, FireMode, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, WeaponClass )
 			ADD_VAR( ::IntProperty, ShotsToFire, 0xFFFFFFFF )
 			ADD_OBJECT( UTDummyPawn, DummyPawn )
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqAct_DummyWeaponFire.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void NotifyDummyFire(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqAct_DummyWeaponFire.NotifyDummyFire" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool Update( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqAct_DummyWeaponFire.Update" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

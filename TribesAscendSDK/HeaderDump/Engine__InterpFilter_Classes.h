@@ -19,6 +19,7 @@ namespace UnrealScript
 	class InterpFilter_Classes : public InterpFilter
 	{
 	public:
+			ADD_OBJECT( ScriptClass, ClassToFilterBy )
 	};
 }
 

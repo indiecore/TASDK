@@ -22,6 +22,17 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, MySeatIndex, 0xFFFFFFFF )
 			ADD_OBJECT( UDKWeapon, MyVehicleWeapon )
 			ADD_OBJECT( UDKVehicle, MyVehicle )
+			Vector GetTargetLocation( class Actor* RequestedBy, bool bRequestAlternateLoc )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKWeaponPawn.GetTargetLocation" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Actor** )( params + 0 ) = RequestedBy;
+				*( bool* )( params + 4 ) = bRequestAlternateLoc;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

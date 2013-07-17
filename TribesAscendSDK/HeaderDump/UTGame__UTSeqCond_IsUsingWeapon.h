@@ -21,7 +21,16 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bMustBeImpactHammer, 0x2 )
 			ADD_VAR( ::BoolProperty, bAllowSubclass, 0x1 )
+			ADD_OBJECT( ScriptClass, RequiredWeapon )
 			ADD_OBJECT( Actor, Target )
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqCond_IsUsingWeapon.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,14 @@ namespace UnrealScript
 	class TrProj_TrackingMissile_MKD : public TrProjectile
 	{
 	public:
+			void Destroyed(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_TrackingMissile_MKD.Destroyed" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

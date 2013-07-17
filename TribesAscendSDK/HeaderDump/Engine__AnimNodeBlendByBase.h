@@ -21,6 +21,7 @@ namespace UnrealScript
 	public:
 			ADD_OBJECT( Actor, CachedBase )
 			ADD_VAR( ::FloatProperty, BlendTime, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, ActorClass )
 			ADD_VAR( ::NameProperty, ActorTag, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, Type, 0xFFFFFFFF )
 	};

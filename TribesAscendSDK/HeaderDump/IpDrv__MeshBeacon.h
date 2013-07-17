@@ -33,6 +33,14 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bWantsDeferredDestroy, 0x2 )
 			ADD_VAR( ::BoolProperty, bIsInTick, 0x1 )
 			ADD_VAR( ::IntProperty, MeshBeaconPort, 0xFFFFFFFF )
+			void DestroyBeacon(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.MeshBeacon.DestroyBeacon" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,15 @@ namespace UnrealScript
 	class TrVehicleInput_Flying : public PlayerInput
 	{
 	public:
+			void AdjustMouseSensitivity( float FOVScale )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVehicleInput_Flying.AdjustMouseSensitivity" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = FOVScale;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

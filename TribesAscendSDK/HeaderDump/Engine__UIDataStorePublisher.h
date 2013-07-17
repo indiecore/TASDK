@@ -19,6 +19,16 @@ namespace UnrealScript
 	class UIDataStorePublisher : public UIDataStoreSubscriber
 	{
 	public:
+			bool SaveSubscriberValue( int BindingIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStorePublisher.SaveSubscriberValue" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( int* )( params + 12 ) = BindingIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

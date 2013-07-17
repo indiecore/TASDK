@@ -23,6 +23,15 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, CurrentTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, Period, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, MaxDelta, 0xFFFFFFFF )
+			void TickSkelControl( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSkelControl_Oscillate.TickSkelControl" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

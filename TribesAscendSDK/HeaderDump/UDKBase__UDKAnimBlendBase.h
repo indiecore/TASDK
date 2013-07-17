@@ -21,6 +21,36 @@ namespace UnrealScript
 	public:
 			ADD_VAR( ::BoolProperty, bTickAnimInScript, 0x1 )
 			ADD_VAR( ::FloatProperty, BlendTime, 0xFFFFFFFF )
+			float GetBlendTime( int ChildIndex, bool bGetDefault )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimBlendBase.GetBlendTime" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = ChildIndex;
+				*( bool* )( params + 4 ) = bGetDefault;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
+			float GetAnimDuration( int ChildIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimBlendBase.GetAnimDuration" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = ChildIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
+			void TickAnim( float DeltaSeconds )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimBlendBase.TickAnim" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaSeconds;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

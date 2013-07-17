@@ -23,6 +23,15 @@ namespace UnrealScript
 			ADD_STRUCT( ::VectorProperty, Rotation, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, RotationVector, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, Location, 0xFFFFFFFF )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_GetLocationAndRotation.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

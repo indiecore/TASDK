@@ -22,6 +22,42 @@ namespace UnrealScript
 			ADD_OBJECT( AnimNodeSequence, m_FireAnimSeqNode )
 			ADD_VAR( ::NameProperty, m_nmFireAnimSeqNodeName, 0xFFFFFFFF )
 			ADD_OBJECT( TrPawn, m_TrPawn )
+			void PlayIdle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayIdle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayFire( float RefireTime, ScriptName FireAnimName, float ReloadTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayFire" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( float* )( params + 0 ) = RefireTime;
+				*( ScriptName* )( params + 4 ) = FireAnimName;
+				*( float* )( params + 12 ) = ReloadTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayReload( float ReloadTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayReload" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = ReloadTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayOffhand(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayOffhand" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

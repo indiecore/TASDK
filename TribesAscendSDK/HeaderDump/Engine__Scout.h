@@ -42,12 +42,21 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, NavMeshGen_StartingHeightOffset, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, NavMeshGen_EntityHalfHeight, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, NavMeshGen_StepSize, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, DefaultReachSpecClass )
 			ADD_VAR( ::IntProperty, MinNumPlayerStarts, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, MaxLandingVelocity, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, TestFallSpeed, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, TestMaxFallSpeed, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, TestGroundSpeed, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, TestJumpZ, 0xFFFFFFFF )
+			void PreBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Scout.PreBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,16 @@ namespace UnrealScript
 	class TrEffect_Blink : public TrEffect_Managed
 	{
 	public:
+			void Apply( class Actor* Target, void* Impact )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEffect_Blink.Apply" );
+				byte *params = ( byte* )( malloc( 84 ) );
+				*( class Actor** )( params + 0 ) = Target;
+				*( void** )( params + 4 ) = Impact;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

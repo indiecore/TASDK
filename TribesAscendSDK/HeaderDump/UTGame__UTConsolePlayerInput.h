@@ -72,6 +72,93 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bAutoCenterPitch, 0x1 )
 			ADD_VAR( ::FloatProperty, TurningAccelerationMultiplier, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, SensitivityMultiplier, 0xFFFFFFFF )
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTConsolePlayerInput.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PreProcessInput( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTConsolePlayerInput.PreProcessInput" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ApplyViewAutoPitchCentering( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTConsolePlayerInput.ApplyViewAutoPitchCentering" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ApplyViewAutoVehiclePitchCentering( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTConsolePlayerInput.ApplyViewAutoVehiclePitchCentering" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ApplyViewAcceleration( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTConsolePlayerInput.ApplyViewAcceleration" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ApplyTargetAdhesion( float DeltaTime, class UTWeapon* W, int &out_YawRot, int &out_PitchRot )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTConsolePlayerInput.ApplyTargetAdhesion" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				*( class UTWeapon** )( params + 4 ) = W;
+				*( int* )( params + 8 ) = out_YawRot;
+				*( int* )( params + 12 ) = out_PitchRot;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				out_YawRot = *( int* )( params + 8 );
+				out_PitchRot = *( int* )( params + 12 );
+			}
+
+			void AdjustMouseSensitivity( float FOVScale )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTConsolePlayerInput.AdjustMouseSensitivity" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = FOVScale;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ApplyTargetFriction( float DeltaTime, class UTWeapon* W )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTConsolePlayerInput.ApplyTargetFriction" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				*( class UTWeapon** )( params + 4 ) = W;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			byte CheckForDoubleClickMove( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTConsolePlayerInput.CheckForDoubleClickMove" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( byte* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

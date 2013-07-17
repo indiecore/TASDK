@@ -78,6 +78,24 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, CTFDSGeneratorRoom, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, CTFBEGeneratorRoom, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, DSBase, 0xFFFFFFFF )
+			ScriptArray< wchar_t > GetDescription(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCamera_SpectatorBookmark.GetDescription" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
+			ScriptArray< wchar_t > GetSpectatorName(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCamera_SpectatorBookmark.GetSpectatorName" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

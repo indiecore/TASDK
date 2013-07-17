@@ -28,6 +28,15 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bRandomStartTime, 0x2 )
 			ADD_VAR( ::BoolProperty, bLoop, 0x1 )
 			ADD_OBJECT( CameraAnim, CameraAnim )
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_PlayCameraAnim.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

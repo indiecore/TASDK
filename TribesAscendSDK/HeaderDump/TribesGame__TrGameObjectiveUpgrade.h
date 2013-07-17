@@ -22,6 +22,15 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, m_fNewValue, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, m_nmClassPropertyName, 0xFFFFFFFF )
 			ADD_OBJECT( TrGameObjective, m_Owner )
+			void InitUpgrade( class TrGameObjective* OwnerObject )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameObjectiveUpgrade.InitUpgrade" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrGameObjective** )( params + 0 ) = OwnerObject;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

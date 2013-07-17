@@ -19,6 +19,33 @@ namespace UnrealScript
 	class NavMeshGoal_Null : public NavMeshPathGoalEvaluator
 	{
 	public:
+			bool GoUntilBust( class NavigationHandle* NavHandle, int InMaxPathVisits )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_Null.GoUntilBust" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( int* )( params + 4 ) = InMaxPathVisits;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void RecycleNative(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_Null.RecycleNative" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_Null.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

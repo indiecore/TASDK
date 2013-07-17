@@ -19,6 +19,16 @@ namespace UnrealScript
 	class TrCheatManager : public UTCheatManager
 	{
 	public:
+			class Weapon* GiveWeapon( ScriptArray< wchar_t > WeaponClassStr )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCheatManager.GiveWeapon" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = WeaponClassStr;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Weapon** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

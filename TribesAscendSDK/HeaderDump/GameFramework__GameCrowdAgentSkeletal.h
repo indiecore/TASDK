@@ -37,6 +37,95 @@ namespace UnrealScript
 			ADD_OBJECT( AnimNodeSequence, ActionSeqNode )
 			ADD_OBJECT( AnimNodeSlot, FullBodySlot )
 			ADD_OBJECT( AnimNodeBlend, SpeedBlendNode )
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgentSkeletal.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetLighting( bool bEnableLightEnvironment, void* AgentLightingChannel, bool bCastShadows )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgentSkeletal.SetLighting" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( bool* )( params + 0 ) = bEnableLightEnvironment;
+				*( void** )( params + 4 ) = AgentLightingChannel;
+				*( bool* )( params + 8 ) = bCastShadows;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayDeath( Vector KillMomentum )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgentSkeletal.PlayDeath" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = KillMomentum;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetRootMotion( bool bRootMotionEnabled )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgentSkeletal.SetRootMotion" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bRootMotionEnabled;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnPlayAgentAnimation( class SeqAct_PlayAgentAnimation* Action )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgentSkeletal.OnPlayAgentAnimation" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SeqAct_PlayAgentAnimation** )( params + 0 ) = Action;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ClearLatentAnimation(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgentSkeletal.ClearLatentAnimation" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PlayIdleAnimation(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgentSkeletal.PlayIdleAnimation" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void StopIdleAnimation(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgentSkeletal.StopIdleAnimation" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnAnimEnd( class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgentSkeletal.OnAnimEnd" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( class AnimNodeSequence** )( params + 0 ) = SeqNode;
+				*( float* )( params + 4 ) = PlayedTime;
+				*( float* )( params + 8 ) = ExcessTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void CreateAttachments(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgentSkeletal.CreateAttachments" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

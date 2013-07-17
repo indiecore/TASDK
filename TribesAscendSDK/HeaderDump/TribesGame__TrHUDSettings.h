@@ -19,7 +19,27 @@ namespace UnrealScript
 	class TrHUDSettings : public GFxObject
 	{
 	public:
+			float GetCurrentValue( byte Index )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDSettings.GetCurrentValue" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = Index;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::IntProperty, SettingsCount, 0xFFFFFFFF )
+			void SaveSetting( int Index, float val )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDSettings.SaveSetting" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = Index;
+				*( float* )( params + 4 ) = val;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_OBJECT( GFxObject, SettingsList )
 	};
 }

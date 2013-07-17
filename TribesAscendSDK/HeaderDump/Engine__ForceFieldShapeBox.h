@@ -19,6 +19,64 @@ namespace UnrealScript
 	class ForceFieldShapeBox : public ForceFieldShape
 	{
 	public:
+			Vector GetRadii(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFieldShapeBox.GetRadii" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			void FillBySphere( float Radius )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFieldShapeBox.FillBySphere" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = Radius;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void FillByBox( Vector Extent )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFieldShapeBox.FillByBox" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = Extent;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void FillByCapsule( float Height, float Radius )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFieldShapeBox.FillByCapsule" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = Height;
+				*( float* )( params + 4 ) = Radius;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void FillByCylinder( float BottomRadius, float TopRadius, float Height, float HeightOffset )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFieldShapeBox.FillByCylinder" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( float* )( params + 0 ) = BottomRadius;
+				*( float* )( params + 4 ) = TopRadius;
+				*( float* )( params + 8 ) = Height;
+				*( float* )( params + 12 ) = HeightOffset;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void* GetDrawComponent(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFieldShapeBox.GetDrawComponent" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

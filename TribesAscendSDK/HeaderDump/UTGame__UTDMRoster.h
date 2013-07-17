@@ -19,7 +19,18 @@ namespace UnrealScript
 	class UTDMRoster : public UTTeamInfo
 	{
 	public:
+			ADD_OBJECT( ScriptClass, DMSquadClass )
 			ADD_VAR( ::IntProperty, Position, 0xFFFFFFFF )
+			bool AddToTeam( class Controller* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDMRoster.AddToTeam" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Controller** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

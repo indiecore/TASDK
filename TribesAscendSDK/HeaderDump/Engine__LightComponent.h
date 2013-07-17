@@ -19,8 +19,102 @@ namespace UnrealScript
 	class LightComponent : public ActorComponent
 	{
 	public:
+			void SetEnabled( bool bSetEnabled )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightComponent.SetEnabled" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bSetEnabled;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetLightProperties( float NewBrightness, void* NewLightColor, class LightFunction* NewLightFunction )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightComponent.SetLightProperties" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( float* )( params + 0 ) = NewBrightness;
+				*( void** )( params + 4 ) = NewLightColor;
+				*( class LightFunction** )( params + 8 ) = NewLightFunction;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_VAR( ::FloatProperty, Brightness, 0xFFFFFFFF )
 			ADD_OBJECT( LightFunction, Function )
+			Vector GetOrigin(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightComponent.GetOrigin" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			Vector GetDirection(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightComponent.GetDirection" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			void UpdateColorAndBrightness(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightComponent.UpdateColorAndBrightness" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateLightShaftParameters(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightComponent.UpdateLightShaftParameters" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnUpdatePropertyBloomScale(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightComponent.OnUpdatePropertyBloomScale" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnUpdatePropertyBloomTint(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightComponent.OnUpdatePropertyBloomTint" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnUpdatePropertyOcclusionMaskDarkness(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightComponent.OnUpdatePropertyOcclusionMaskDarkness" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnUpdatePropertyBrightness(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightComponent.OnUpdatePropertyBrightness" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnUpdatePropertyLightColor(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LightComponent.OnUpdatePropertyLightColor" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 			ADD_VAR( ::FloatProperty, LightEnv_BouncedLightBrightness, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bEnabled, 0x1 )
 			ADD_VAR( ::BoolProperty, CastShadows, 0x2 )

@@ -26,6 +26,17 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, TransitionTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, ActivateTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, DeactivateTime, 0xFFFFFFFF )
+			bool OnPreDrawZone( class MobileInputZone* Zone, class Canvas* Canvas )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.OnPreDrawZone" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( class Canvas** )( params + 4 ) = Canvas;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::ByteProperty, Type, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, X, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, Y, 0xFFFFFFFF )
@@ -40,6 +51,67 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, CaptionYAdjustment, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bRenderGuides, 0x8000 )
 			ADD_VAR( ::ByteProperty, SlideType, 0xFFFFFFFF )
+			void OnPostDrawZone( class MobileInputZone* Zone, class Canvas* Canvas )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.OnPostDrawZone" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( class Canvas** )( params + 4 ) = Canvas;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool OnProcessSlide( class MobileInputZone* Zone, byte EventType, int SlideValue, void* ViewportSize )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.OnProcessSlide" );
+				byte *params = ( byte* )( malloc( 17 ) );
+				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( byte* )( params + 4 ) = EventType;
+				*( int* )( params + 8 ) = SlideValue;
+				*( void** )( params + 12 ) = ViewportSize;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool OnDoubleTapDelegate( class MobileInputZone* Zone, byte EventType, void* TouchLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.OnDoubleTapDelegate" );
+				byte *params = ( byte* )( malloc( 13 ) );
+				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( byte* )( params + 4 ) = EventType;
+				*( void** )( params + 8 ) = TouchLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool OnTapDelegate( class MobileInputZone* Zone, byte EventType, void* TouchLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.OnTapDelegate" );
+				byte *params = ( byte* )( malloc( 13 ) );
+				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( byte* )( params + 4 ) = EventType;
+				*( void** )( params + 8 ) = TouchLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool OnProcessInputDelegate( class MobileInputZone* Zone, float DeltaTime, int Handle, byte EventType, void* TouchLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.OnProcessInputDelegate" );
+				byte *params = ( byte* )( malloc( 21 ) );
+				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( float* )( params + 4 ) = DeltaTime;
+				*( int* )( params + 8 ) = Handle;
+				*( byte* )( params + 12 ) = EventType;
+				*( void** )( params + 16 ) = TouchLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::FloatProperty, LastWentActiveTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, TotalActiveTime, 0xFFFFFFFF )
 			ADD_OBJECT( MobilePlayerInput, InputOwner )
@@ -77,6 +149,31 @@ namespace UnrealScript
 			ADD_VAR( ::NameProperty, TapInputKey, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, HorizontalInputKey, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, InputKey, 0xFFFFFFFF )
+			void ActivateZone(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.ActivateZone" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DeactivateZone(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.DeactivateZone" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void AddKismetEventHandler( class SeqEvent_MobileZoneBase* NewHandler )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.AddKismetEventHandler" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class SeqEvent_MobileZoneBase** )( params + 0 ) = NewHandler;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

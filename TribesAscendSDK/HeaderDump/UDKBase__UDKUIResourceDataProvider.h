@@ -25,6 +25,24 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bRemoveOn360, 0x2 )
 			ADD_VAR( ::BoolProperty, bSearchAllInis, 0x1 )
 			ADD_VAR( ::StrProperty, FriendlyName, 0xFFFFFFFF )
+			bool IsFiltered(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIResourceDataProvider.IsFiltered" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool ShouldBeFiltered(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIResourceDataProvider.ShouldBeFiltered" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

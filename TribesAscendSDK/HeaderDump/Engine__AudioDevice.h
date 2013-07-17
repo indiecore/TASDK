@@ -19,6 +19,16 @@ namespace UnrealScript
 	class AudioDevice : public Subsystem
 	{
 	public:
+			bool SetSoundMode( ScriptName NewMode )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AudioDevice.SetSoundMode" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = NewMode;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::FloatProperty, LastUpdateTime, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, TransientMasterVolume, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, DebugState, 0xFFFFFFFF )
@@ -41,6 +51,16 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, LowPassFilterResonance, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, CommonAudioPoolSize, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, MaxChannels, 0xFFFFFFFF )
+			class SoundClass* FindSoundClass( ScriptName SoundClassName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AudioDevice.FindSoundClass" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = SoundClassName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class SoundClass** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

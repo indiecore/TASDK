@@ -26,6 +26,40 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, IsLocalCol, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, NatTypeCol, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, NickNameCol, 0xFFFFFFFF )
+			void OnRegister( class LocalPlayer* InPlayer )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_OnlinePartyChatList.OnRegister" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class LocalPlayer** )( params + 0 ) = InPlayer;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnUnregister(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_OnlinePartyChatList.OnUnregister" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OnLoginChange( byte LocalUserNum )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_OnlinePartyChatList.OnLoginChange" );
+				byte *params = ( byte* )( malloc( 1 ) );
+				*( byte* )( params + 0 ) = LocalUserNum;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RefreshMembersList(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_OnlinePartyChatList.RefreshMembersList" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

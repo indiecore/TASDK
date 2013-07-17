@@ -19,6 +19,52 @@ namespace UnrealScript
 	class OnlineSuppliedUIInterface : public Interface
 	{
 	public:
+			void OnShowOnlineStatsUIComplete(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSuppliedUIInterface.OnShowOnlineStatsUIComplete" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool ShowOnlineStatsUI( class OnlineStatsRead* StatsRead )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSuppliedUIInterface.ShowOnlineStatsUI" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class OnlineStatsRead** )( params + 12 ) = StatsRead;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void AddShowOnlineStatsUICompleteDelegate(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSuppliedUIInterface.AddShowOnlineStatsUICompleteDelegate" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ClearShowOnlineStatsUICompleteDelegate(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSuppliedUIInterface.ClearShowOnlineStatsUICompleteDelegate" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool ShowMatchmakingUI( byte SearchingPlayerNum, class OnlineGameSearch* SearchSettings, class OnlineGameSettings* GameSettings )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSuppliedUIInterface.ShowMatchmakingUI" );
+				byte *params = ( byte* )( malloc( 9 ) );
+				*( byte* )( params + 0 ) = SearchingPlayerNum;
+				*( class OnlineGameSearch** )( params + 4 ) = SearchSettings;
+				*( class OnlineGameSettings** )( params + 8 ) = GameSettings;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

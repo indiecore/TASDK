@@ -36,6 +36,15 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bWaitingPlayer, 0x8 )
 			ADD_VAR( ::IntProperty, Kills, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bFromPreviousLevel, 0x200 )
+			class PlayerReplicationInfo* Duplicate(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.Duplicate" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class PlayerReplicationInfo** )( params + function->return_val_offset() );
+			}
+
 			ADD_VAR( ::BoolProperty, bIsInactive, 0x100 )
 			ADD_VAR( ::StrProperty, OldName, 0xFFFFFFFF )
 			ADD_OBJECT( Texture2D, Avatar )
@@ -50,6 +59,7 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, StatPingMin, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, StatPingTotals, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, StatConnectionCounts, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, GameMessageClass )
 			ADD_VAR( ::StrProperty, StringUnknown, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, StringSpectating, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, bHasBeenWelcomed, 0x80 )
@@ -57,6 +67,204 @@ namespace UnrealScript
 			ADD_VAR( ::IntProperty, NumLives, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, TTSSpeaker, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, Deaths, 0xFFFFFFFF )
+			void UpdatePing( float TimeStamp )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.UpdatePing" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = TimeStamp;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ClientInitialize( class Controller* C )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.ClientInitialize" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Controller** )( params + 0 ) = C;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetPlayerTeam( class TeamInfo* NewTeam )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.SetPlayerTeam" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TeamInfo** )( params + 0 ) = NewTeam;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ReplicatedEvent( ScriptName VarName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.ReplicatedEvent" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = VarName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool ShouldBroadCastWelcomeMessage( bool bExiting )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.ShouldBroadCastWelcomeMessage" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bExiting;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Destroyed(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.Destroyed" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Reset(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.Reset" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			ScriptArray< wchar_t > GetHumanReadableName(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.GetHumanReadableName" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
+			void DisplayDebug( class HUD* HUD, float &YL, float &YPos )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.DisplayDebug" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( class HUD** )( params + 0 ) = HUD;
+				*( float* )( params + 4 ) = YL;
+				*( float* )( params + 8 ) = YPos;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				YL = *( float* )( params + 4 );
+				YPos = *( float* )( params + 8 );
+			}
+
+			void SetPlayerName( ScriptArray< wchar_t > S )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.SetPlayerName" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetWaitingPlayer( bool B )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.SetWaitingPlayer" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = B;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void OverrideWith( class PlayerReplicationInfo* PRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.OverrideWith" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PlayerReplicationInfo** )( params + 0 ) = PRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void CopyProperties( class PlayerReplicationInfo* PRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.CopyProperties" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PlayerReplicationInfo** )( params + 0 ) = PRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void IncrementDeaths( int Amt )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.IncrementDeaths" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = Amt;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SeamlessTravelTo( class PlayerReplicationInfo* NewPRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.SeamlessTravelTo" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PlayerReplicationInfo** )( params + 0 ) = NewPRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetUniqueId( void* PlayerUniqueId )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.SetUniqueId" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( void** )( params + 0 ) = PlayerUniqueId;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			byte GetTeamNum(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.GetTeamNum" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( byte* )( params + function->return_val_offset() );
+			}
+
+			bool IsInvalidName(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.IsInvalidName" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void RegisterPlayerWithSession(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.RegisterPlayerWithSession" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UnregisterPlayerFromSession(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.UnregisterPlayerFromSession" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			ScriptArray< wchar_t > GetSpectatorName(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerReplicationInfo.GetSpectatorName" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

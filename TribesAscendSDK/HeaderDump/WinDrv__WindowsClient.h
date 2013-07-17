@@ -19,6 +19,7 @@ namespace UnrealScript
 	class WindowsClient : public Client
 	{
 	public:
+			ADD_OBJECT( ScriptClass, AudioDeviceClass )
 			ADD_VAR( ::IntProperty, AllowJoystickInput, 0xFFFFFFFF )
 	};
 }

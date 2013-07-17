@@ -19,6 +19,7 @@ namespace UnrealScript
 	class Component : public Object
 	{
 	public:
+			ADD_OBJECT( ScriptClass, TemplateOwnerClass )
 			ADD_VAR( ::NameProperty, TemplateName, 0xFFFFFFFF )
 	};
 }

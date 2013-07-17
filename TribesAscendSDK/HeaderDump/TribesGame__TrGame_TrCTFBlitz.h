@@ -22,6 +22,42 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, m_bRotateBothFlagsOnCapture, 0x1 )
 			ADD_OBJECT( TrCTFBase_DiamondSword, DiamondSwordFlagStands )
 			ADD_OBJECT( TrCTFBase_BloodEagle, BloodEagleFlagStands )
+			void ApplyServerSettings(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrCTFBlitz.ApplyServerSettings" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RegisterFlagBase( class TrCTFBase* FlagBase )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrCTFBlitz.RegisterFlagBase" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrCTFBase** )( params + 0 ) = FlagBase;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ScoreFlag( class Controller* Scorer, class TrFlagBase* theFlag )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrCTFBlitz.ScoreFlag" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class Controller** )( params + 0 ) = Scorer;
+				*( class TrFlagBase** )( params + 4 ) = theFlag;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RotateFlag( class TrFlagBase* theFlag )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrCTFBlitz.RotateFlag" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class TrFlagBase** )( params + 0 ) = theFlag;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

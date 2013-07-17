@@ -19,6 +19,14 @@ namespace UnrealScript
 	class UTSeqAct_PlayAnnouncement : public SequenceAction
 	{
 	public:
+			void Activated(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSeqAct_PlayAnnouncement.Activated" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

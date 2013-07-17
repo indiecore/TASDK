@@ -19,6 +19,42 @@ namespace UnrealScript
 	class SeqCond_SwitchBase : public SequenceCondition
 	{
 	public:
+			void VerifyDefaultCaseValue(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqCond_SwitchBase.VerifyDefaultCaseValue" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool IsFallThruEnabled( int ValueIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqCond_SwitchBase.IsFallThruEnabled" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = ValueIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void InsertValueEntry( int InsertIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqCond_SwitchBase.InsertValueEntry" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = InsertIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RemoveValueEntry( int RemoveIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqCond_SwitchBase.RemoveValueEntry" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = RemoveIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

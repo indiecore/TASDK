@@ -50,6 +50,35 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bControlStrFollowsHealth, 0x4 )
 			ADD_VAR( ::BoolProperty, bOnDamageActive, 0x2 )
 			ADD_VAR( ::BoolProperty, bInitialized, 0x1 )
+			void BreakApart( Vector PartLocation, bool bIsVisible )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKSkelControl_Damage.BreakApart" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( Vector* )( params + 0 ) = PartLocation;
+				*( bool* )( params + 12 ) = bIsVisible;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void BreakApartOnDeath( Vector PartLocation, bool bIsVisible )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKSkelControl_Damage.BreakApartOnDeath" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( Vector* )( params + 0 ) = PartLocation;
+				*( bool* )( params + 12 ) = bIsVisible;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			float RestorePart(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKSkelControl_Damage.RestorePart" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

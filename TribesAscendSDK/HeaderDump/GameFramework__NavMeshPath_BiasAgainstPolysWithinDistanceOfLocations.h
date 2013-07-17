@@ -22,6 +22,27 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, DistanceToCheck, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, Rotation, 0xFFFFFFFF )
 			ADD_STRUCT( ::VectorProperty, Location, 0xFFFFFFFF )
+			bool BiasAgainstPolysWithinDistanceOfLocations( class NavigationHandle* NavHandle, Vector InLocation, Rotator InRotation, float InDistanceToCheck )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.NavMeshPath_BiasAgainstPolysWithinDistanceOfLocations.BiasAgainstPolysWithinDistanceOfLocations" );
+				byte *params = ( byte* )( malloc( 44 ) );
+				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( Vector* )( params + 4 ) = InLocation;
+				*( Rotator* )( params + 16 ) = InRotation;
+				*( float* )( params + 28 ) = InDistanceToCheck;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.NavMeshPath_BiasAgainstPolysWithinDistanceOfLocations.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

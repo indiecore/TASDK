@@ -24,12 +24,37 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, Stopped, 0x2 )
 			ADD_VAR( ::BoolProperty, Paused, 0x1 )
 			ADD_OBJECT( CodecMovie, Decoder )
+			ADD_OBJECT( ScriptClass, DecoderClass )
 			ADD_VAR( ::ByteProperty, MovieStreamSource, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, SizeX, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, AddressY, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, AddressX, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, Format, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, SizeY, 0xFFFFFFFF )
+			void Play(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.TextureMovie.Play" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Pause(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.TextureMovie.Pause" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Stop(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.TextureMovie.Stop" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

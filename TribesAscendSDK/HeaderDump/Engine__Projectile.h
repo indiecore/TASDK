@@ -24,6 +24,7 @@ namespace UnrealScript
 			ADD_OBJECT( Controller, InstigatorController )
 			ADD_OBJECT( SoundCue, ImpactSound )
 			ADD_OBJECT( SoundCue, SpawnSound )
+			ADD_OBJECT( ScriptClass, MyDamageType )
 			ADD_VAR( ::FloatProperty, MomentumTransfer, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, DamageRadius, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, Damage, 0xFFFFFFFF )
@@ -34,6 +35,214 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bSwitchToZeroCollision, 0x1 )
 			ADD_VAR( ::FloatProperty, MaxSpeed, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, Speed, 0xFFFFFFFF )
+			bool EncroachingOn( class Actor* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.EncroachingOn" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void PreBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.PreBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void PostBeginPlay(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.PostBeginPlay" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Init( Vector Direction )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.Init" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = Direction;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			byte GetTeamNum(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.GetTeamNum" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( byte* )( params + function->return_val_offset() );
+			}
+
+			bool CanSplash(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.CanSplash" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Reset(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.Reset" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool ProjectileHurtRadius( Vector HurtOrigin, Vector HitNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.ProjectileHurtRadius" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( Vector* )( params + 0 ) = HurtOrigin;
+				*( Vector* )( params + 12 ) = HitNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool HurtRadius( float DamageAmount, float InDamageRadius, ScriptClass* DamageType, float Momentum, Vector HurtOrigin, class Actor* IgnoredActor, class Controller* InstigatedByController, bool bDoFullDamage )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.HurtRadius" );
+				byte *params = ( byte* )( malloc( 40 ) );
+				*( float* )( params + 0 ) = DamageAmount;
+				*( float* )( params + 4 ) = InDamageRadius;
+				*( ScriptClass** )( params + 8 ) = DamageType;
+				*( float* )( params + 12 ) = Momentum;
+				*( Vector* )( params + 16 ) = HurtOrigin;
+				*( class Actor** )( params + 28 ) = IgnoredActor;
+				*( class Controller** )( params + 32 ) = InstigatedByController;
+				*( bool* )( params + 36 ) = bDoFullDamage;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Touch( class Actor* Other, Vector HitLocation, Vector HitNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.Touch" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				*( Vector* )( params + 8 ) = HitLocation;
+				*( Vector* )( params + 20 ) = HitNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ProcessTouch( class Actor* Other, Vector HitLocation, Vector HitNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.ProcessTouch" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				*( Vector* )( params + 4 ) = HitLocation;
+				*( Vector* )( params + 16 ) = HitNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void HitWall( Vector HitNormal, class Actor* Wall )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.HitWall" );
+				byte *params = ( byte* )( malloc( 20 ) );
+				*( Vector* )( params + 0 ) = HitNormal;
+				*( class Actor** )( params + 12 ) = Wall;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void EncroachedBy( class Actor* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.EncroachedBy" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Actor** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void Explode( Vector HitLocation, Vector HitNormal )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.Explode" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( Vector* )( params + 0 ) = HitLocation;
+				*( Vector* )( params + 12 ) = HitNormal;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void RandSpin( float spinRate )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.RandSpin" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = spinRate;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool IsStationary(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.IsStationary" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void FellOutOfWorld( ScriptClass* dmgType )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.FellOutOfWorld" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( ScriptClass** )( params + 0 ) = dmgType;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			float GetTimeToLocation( Vector TargetLoc )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.GetTimeToLocation" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = TargetLoc;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
+			float StaticGetTimeToLocation( Vector TargetLoc, Vector StartLoc, class Controller* RequestedBy )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.StaticGetTimeToLocation" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( Vector* )( params + 0 ) = TargetLoc;
+				*( Vector* )( params + 12 ) = StartLoc;
+				*( class Controller** )( params + 24 ) = RequestedBy;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
+			float GetRange(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.GetRange" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( float* )( params + function->return_val_offset() );
+			}
+
+			void ApplyFluidSurfaceImpact( class FluidSurfaceActor* Fluid, Vector HitLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Projectile.ApplyFluidSurfaceImpact" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class FluidSurfaceActor** )( params + 0 ) = Fluid;
+				*( Vector* )( params + 4 ) = HitLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

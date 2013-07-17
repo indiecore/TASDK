@@ -26,6 +26,62 @@ namespace UnrealScript
 			ADD_OBJECT( TrDaDCore, m_Core )
 			ADD_VAR( ::FloatProperty, m_fShieldBarPlacementY, 0xFFFFFFFF )
 			ADD_OBJECT( MaterialInstanceConstant, m_ShieldBarMIC )
+			void Init( class TrDaDCore* Core, int Index )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCapacitor.Init" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class TrDaDCore** )( params + 0 ) = Core;
+				*( int* )( params + 4 ) = Index;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void TakeDamage( int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, void* HitInfo, class Actor* DamageCauser )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCapacitor.TakeDamage" );
+				byte *params = ( byte* )( malloc( 68 ) );
+				*( int* )( params + 0 ) = DamageAmount;
+				*( class Controller** )( params + 4 ) = EventInstigator;
+				*( Vector* )( params + 8 ) = HitLocation;
+				*( Vector* )( params + 20 ) = Momentum;
+				*( ScriptClass** )( params + 32 ) = DamageType;
+				*( void** )( params + 36 ) = HitInfo;
+				*( class Actor** )( params + 64 ) = DamageCauser;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			ScriptArray< wchar_t > GetScreenName( class PlayerController* PC )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCapacitor.GetScreenName" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class PlayerController** )( params + 0 ) = PC;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
+			}
+
+			void PostRenderFor( class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCapacitor.PostRenderFor" );
+				byte *params = ( byte* )( malloc( 32 ) );
+				*( class PlayerController** )( params + 0 ) = PC;
+				*( class Canvas** )( params + 4 ) = Canvas;
+				*( Vector* )( params + 8 ) = CameraPosition;
+				*( Vector* )( params + 20 ) = CameraDir;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class Texture2D* GetMarker(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCapacitor.GetMarker" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class Texture2D** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

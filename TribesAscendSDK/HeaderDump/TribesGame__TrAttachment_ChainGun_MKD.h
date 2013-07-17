@@ -24,6 +24,23 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, m_fCurrSpinTime, 0xFFFFFFFF )
 			ADD_VAR( ::BoolProperty, m_bSpinningUp, 0x2 )
 			ADD_VAR( ::BoolProperty, m_bIsFiring, 0x1 )
+			void PostInitAnimTree(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_ChainGun_MKD.PostInitAnimTree" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ThirdPersonFireEffects( Vector HitLocation )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_ChainGun_MKD.ThirdPersonFireEffects" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( Vector* )( params + 0 ) = HitLocation;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -20,6 +20,28 @@ namespace UnrealScript
 	{
 	public:
 			ADD_STRUCT( ::VectorProperty, r_TargetLocation, 0xFFFFFFFF )
+			void ReplicatedEvent( ScriptName VarName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_CallInBase.ReplicatedEvent" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = VarName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool EffectIsRelevant( Vector SpawnLocation, bool bForceDedicated, float VisibleCullDistance, float HiddenCullDistance )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_CallInBase.EffectIsRelevant" );
+				byte *params = ( byte* )( malloc( 24 ) );
+				*( Vector* )( params + 0 ) = SpawnLocation;
+				*( bool* )( params + 12 ) = bForceDedicated;
+				*( float* )( params + 16 ) = VisibleCullDistance;
+				*( float* )( params + 20 ) = HiddenCullDistance;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

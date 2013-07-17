@@ -19,6 +19,26 @@ namespace UnrealScript
 	class UTDeathmatch : public UTGame
 	{
 	public:
+			bool WantsPickups( class UTBot* B )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDeathmatch.WantsPickups" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class UTBot** )( params + 0 ) = B;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			int GetHandicapNeed( class Pawn* Other )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDeathmatch.GetHandicapNeed" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class Pawn** )( params + 0 ) = Other;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

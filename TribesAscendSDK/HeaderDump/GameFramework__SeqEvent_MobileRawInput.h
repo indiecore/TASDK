@@ -23,6 +23,14 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, TouchLocationY, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, TouchLocationX, 0xFFFFFFFF )
 			ADD_VAR( ::IntProperty, TouchIndex, 0xFFFFFFFF )
+			void RegisterEvent(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqEvent_MobileRawInput.RegisterEvent" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

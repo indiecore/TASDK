@@ -28,6 +28,14 @@ namespace UnrealScript
 			ADD_VAR( ::NameProperty, AnimName_LD, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, AnimName_LC, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, AnimName_LU, 0xFFFFFFFF )
+			void CheckAnimsUpToDate(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSequenceBlendByAim.CheckAnimsUpToDate" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

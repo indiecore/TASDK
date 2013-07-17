@@ -22,6 +22,15 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, Weight, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, MorphName, 0xFFFFFFFF )
 			ADD_OBJECT( MorphTarget, Target )
+			void SetMorphTarget( ScriptName MorphTargetName )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MorphNodePose.SetMorphTarget" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( ScriptName* )( params + 0 ) = MorphTargetName;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

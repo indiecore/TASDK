@@ -19,6 +19,24 @@ namespace UnrealScript
 	class UTUIDataProvider_MapInfo : public UDKUIDataProvider_MapInfo
 	{
 	public:
+			bool ShouldBeFiltered(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTUIDataProvider_MapInfo.ShouldBeFiltered" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool SupportedByCurrentGameMode(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTUIDataProvider_MapInfo.SupportedByCurrentGameMode" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

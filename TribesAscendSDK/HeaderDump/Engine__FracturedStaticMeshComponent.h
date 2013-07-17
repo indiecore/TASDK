@@ -27,6 +27,109 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bTopFragmentsRootNonDestroyable, 0x4 )
 			ADD_VAR( ::BoolProperty, bUseVisibleVertsForBounds, 0x2 )
 			ADD_VAR( ::BoolProperty, bUseSkinnedRendering, 0x1 )
+			void SetVisibleFragments(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshComponent.SetVisibleFragments" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			bool IsFragmentDestroyable( int FragmentIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshComponent.IsFragmentDestroyable" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = FragmentIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool IsRootFragment( int FragmentIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshComponent.IsRootFragment" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = FragmentIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			bool IsNoPhysFragment( int FragmentIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshComponent.IsNoPhysFragment" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = FragmentIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void* GetFragmentBox( int FragmentIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshComponent.GetFragmentBox" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = FragmentIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
+			Vector GetFragmentAverageExteriorNormal( int FragmentIndex )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshComponent.GetFragmentAverageExteriorNormal" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( int* )( params + 0 ) = FragmentIndex;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( Vector* )( params + function->return_val_offset() );
+			}
+
+			int GetCoreFragmentIndex(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshComponent.GetCoreFragmentIndex" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
+			void* GetFragmentGroups( float MinConnectionArea )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshComponent.GetFragmentGroups" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( float* )( params + 12 ) = MinConnectionArea;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
+			void* GetBoundaryHiddenFragments(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshComponent.GetBoundaryHiddenFragments" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( void** )( params + function->return_val_offset() );
+			}
+
+			void RecreatePhysState(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshComponent.RecreatePhysState" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			class PhysicalMaterial* GetFracturedMeshPhysMaterial(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshComponent.GetFracturedMeshPhysMaterial" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( class PhysicalMaterial** )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

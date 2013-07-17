@@ -20,6 +20,25 @@ namespace UnrealScript
 	{
 	public:
 			ADD_STRUCT( ::VectorProperty, OverrideExtentToCheck, 0xFFFFFFFF )
+			bool MakeSureAIFits( class NavigationHandle* NavHandle, Vector InOverrideExtentToCheck )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_PolyEncompassesAI.MakeSureAIFits" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( Vector* )( params + 4 ) = InOverrideExtentToCheck;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void Recycle(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_PolyEncompassesAI.Recycle" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

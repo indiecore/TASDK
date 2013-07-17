@@ -26,6 +26,77 @@ namespace UnrealScript
 			ADD_VAR( ::NameProperty, EndPointParamName, 0xFFFFFFFF )
 			ADD_VAR( ::NameProperty, BeamSockets, 0xFFFFFFFF )
 			ADD_OBJECT( ParticleSystem, BeamTemplate )
+			void AddBeamEmitter(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTBeamWeapon.AddBeamEmitter" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void KillBeamEmitter(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTBeamWeapon.KillBeamEmitter" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetBeamEmitterHidden( bool bHide )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTBeamWeapon.SetBeamEmitterHidden" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bHide;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void UpdateBeamEmitter( Vector FlashLocation, Vector HitNormal, class Actor* HitActor )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTBeamWeapon.UpdateBeamEmitter" );
+				byte *params = ( byte* )( malloc( 28 ) );
+				*( Vector* )( params + 0 ) = FlashLocation;
+				*( Vector* )( params + 12 ) = HitNormal;
+				*( class Actor** )( params + 24 ) = HitActor;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void ProcessBeamHit( Vector StartTrace, Vector AimDir, void* &TestImpact, float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTBeamWeapon.ProcessBeamHit" );
+				byte *params = ( byte* )( malloc( 108 ) );
+				*( Vector* )( params + 0 ) = StartTrace;
+				*( Vector* )( params + 12 ) = AimDir;
+				*( void** )( params + 24 ) = TestImpact;
+				*( float* )( params + 104 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				TestImpact = *( void** )( params + 24 );
+			}
+
+			void UpdateBeam( float DeltaTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTBeamWeapon.UpdateBeam" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( float* )( params + 0 ) = DeltaTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void DisplayDebug( class HUD* HUD, float &out_YL, float &out_YPos )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTBeamWeapon.DisplayDebug" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( class HUD** )( params + 0 ) = HUD;
+				*( float* )( params + 4 ) = out_YL;
+				*( float* )( params + 8 ) = out_YPos;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				out_YL = *( float* )( params + 4 );
+				out_YPos = *( float* )( params + 8 );
+			}
+
 	};
 }
 

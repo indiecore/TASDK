@@ -20,6 +20,15 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::StrProperty, TargetZoneName, 0xFFFFFFFF )
+			void AddToMobileInput( class MobilePlayerInput* MPI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqEvent_MobileZoneBase.AddToMobileInput" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class MobilePlayerInput** )( params + 0 ) = MPI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -20,6 +20,7 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::FloatProperty, CameraLensEffectRadius, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, CameraLensEffect )
 			ADD_VAR( ::FloatProperty, CamShakeFalloff, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, CamShakeOuterRadius, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, CamShakeInnerRadius, 0xFFFFFFFF )
@@ -42,6 +43,9 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, CringeRadius, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, KnockDownStrength, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, KnockDownRadius, 0xFFFFFFFF )
+			ADD_OBJECT( ScriptClass, MyDamageType )
+			ADD_OBJECT( ScriptClass, ActorClassToIgnoreForKnockdownsAndCringes )
+			ADD_OBJECT( ScriptClass, ActorClassToIgnoreForDamage )
 			ADD_OBJECT( Actor, ActorToIgnoreForDamage )
 			ADD_VAR( ::FloatProperty, DamageFalloffExponent, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, DamageRadius, 0xFFFFFFFF )

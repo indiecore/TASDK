@@ -19,6 +19,27 @@ namespace UnrealScript
 	class TrContentLoader : public Object
 	{
 	public:
+			bool StartLoadingDeviceContentPackage( ScriptClass* WeaponClass )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrContentLoader.StartLoadingDeviceContentPackage" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( ScriptClass** )( params + 0 ) = WeaponClass;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
+			void StartLoadingPlayerSkin( int ClassId, int skinId, bool bLoad1PData )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrContentLoader.StartLoadingPlayerSkin" );
+				byte *params = ( byte* )( malloc( 12 ) );
+				*( int* )( params + 0 ) = ClassId;
+				*( int* )( params + 4 ) = skinId;
+				*( bool* )( params + 8 ) = bLoad1PData;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

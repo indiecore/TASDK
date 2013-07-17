@@ -37,6 +37,15 @@ namespace UnrealScript
 			ADD_VAR( ::StrProperty, DescriptionMarkup, 0xFFFFFFFF )
 			ADD_VAR( ::StrProperty, DataStoreMarkup, 0xFFFFFFFF )
 			ADD_VAR( ::ByteProperty, OptionType, 0xFFFFFFFF )
+			bool IsFiltered(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_MenuItem.IsFiltered" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -32,6 +32,34 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bIsActive, 0x2 )
 			ADD_VAR( ::BoolProperty, bAutoActivate, 0x1 )
 			ADD_OBJECT( LensFlare, Template )
+			void SetTemplate( class LensFlare* NewTemplate, bool bForceSet )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LensFlareComponent.SetTemplate" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class LensFlare** )( params + 0 ) = NewTemplate;
+				*( bool* )( params + 4 ) = bForceSet;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetSourceColor( void* InSourceColor )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LensFlareComponent.SetSourceColor" );
+				byte *params = ( byte* )( malloc( 16 ) );
+				*( void** )( params + 0 ) = InSourceColor;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void SetIsActive( bool bInIsActive )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LensFlareComponent.SetIsActive" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( bool* )( params + 0 ) = bInIsActive;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

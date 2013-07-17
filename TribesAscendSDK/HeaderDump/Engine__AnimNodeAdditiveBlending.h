@@ -20,6 +20,16 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::BoolProperty, bPassThroughWhenNotRendered, 0x1 )
+			void SetBlendTarget( float BlendTarget, float BlendTime )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeAdditiveBlending.SetBlendTarget" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = BlendTarget;
+				*( float* )( params + 4 ) = BlendTime;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

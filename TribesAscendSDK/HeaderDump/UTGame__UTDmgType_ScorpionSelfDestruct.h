@@ -20,6 +20,16 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::IntProperty, DamageGivenForSelfDestruct, 0xFFFFFFFF )
+			int IncrementKills( class UTPlayerReplicationInfo* KillerPRI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDmgType_ScorpionSelfDestruct.IncrementKills" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class UTPlayerReplicationInfo** )( params + 0 ) = KillerPRI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

@@ -27,7 +27,17 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bCaptureInput, 0x2 )
 			ADD_VAR( ::BoolProperty, bTakeFocus, 0x1 )
 			ADD_OBJECT( GFxMoviePlayer, MoviePlayer )
+			ADD_OBJECT( ScriptClass, MoviePlayerClass )
 			ADD_OBJECT( SwfMovie, Movie )
+			bool IsValidLevelSequenceObject(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxAction_OpenMovie.IsValidLevelSequenceObject" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( bool* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 

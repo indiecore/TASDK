@@ -37,6 +37,14 @@ namespace UnrealScript
 			ADD_VAR( ::FloatProperty, RoughExtentZ, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, RoughExtentY, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, RoughExtentX, 0xFFFFFFFF )
+			void DoInitRBPhys(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NxForceFieldGeneric.DoInitRBPhys" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

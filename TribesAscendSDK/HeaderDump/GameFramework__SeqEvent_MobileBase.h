@@ -19,6 +19,23 @@ namespace UnrealScript
 	class SeqEvent_MobileBase : public SequenceEvent
 	{
 	public:
+			void RegisterEvent(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqEvent_MobileBase.RegisterEvent" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			void AddToMobileInput( class MobilePlayerInput* MPI )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqEvent_MobileBase.AddToMobileInput" );
+				byte *params = ( byte* )( malloc( 4 ) );
+				*( class MobilePlayerInput** )( params + 0 ) = MPI;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -19,6 +19,16 @@ namespace UnrealScript
 	class UTDmgType_Pancake : public UTDmgType_RanOver
 	{
 	public:
+			void SmallReward( class UTPlayerController* Killer, int KillCount )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDmgType_Pancake.SmallReward" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( class UTPlayerController** )( params + 0 ) = Killer;
+				*( int* )( params + 4 ) = KillCount;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

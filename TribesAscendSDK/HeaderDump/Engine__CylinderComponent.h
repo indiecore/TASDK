@@ -24,6 +24,16 @@ namespace UnrealScript
 			ADD_VAR( ::BoolProperty, bDrawBoundingBox, 0x1 )
 			ADD_VAR( ::FloatProperty, CollisionRadius, 0xFFFFFFFF )
 			ADD_VAR( ::FloatProperty, CollisionHeight, 0xFFFFFFFF )
+			void SetCylinderSize( float NewRadius, float NewHeight )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CylinderComponent.SetCylinderSize" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( float* )( params + 0 ) = NewRadius;
+				*( float* )( params + 4 ) = NewHeight;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
 	};
 }
 

@@ -20,6 +20,25 @@ namespace UnrealScript
 	{
 	public:
 			ADD_VAR( ::StrProperty, Command, 0xFFFFFFFF )
+			void VersionUpdated( int OldVersion, int NewVersion )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_ConsoleCommand.VersionUpdated" );
+				byte *params = ( byte* )( malloc( 8 ) );
+				*( int* )( params + 0 ) = OldVersion;
+				*( int* )( params + 4 ) = NewVersion;
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+			}
+
+			int GetObjClassVersion(  )
+			{
+				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_ConsoleCommand.GetObjClassVersion" );
+				byte *params = ( byte* )( malloc( 0 ) );
+				ScriptObject *object = ( ScriptObject* )( this );
+				object->ProcessEvent( function, params, NULL );
+				return *( int* )( params + function->return_val_offset() );
+			}
+
 	};
 }
 
