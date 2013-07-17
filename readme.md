@@ -1,44 +1,50 @@
-Tribes Ascend SDK - Unfinished
+# Tribes Ascend SDK - Unfinished
 
 This repo contains the source for the unofficial Tribes Ascend SDK.
 To develop with it and use mods made with it,  you'll need the leaked
-Tribes: Ascend developer build. You can download that via the .torrent
+Tribes: Ascend developer build. You can download that via the [.torrent](bin.torrent?raw=true)
 included in this repo.
 
-Making maps ==========================================================
+## Making maps
 
-http://download.udk.com/UDKInstall-2011-01-BETA.exe
-Guide: http://www.reddit.com/r/Tribes/comments/1ia5jb/ta_sdk_the_guide_to_mapping/
+1. Download the UDK here: http://download.udk.com/UDKInstall-2011-01-BETA.exe
 
-
-Using the dev build ==================================================
-
-To run a local server: TribesAscend mapname (in CookedPC/Maps) -seekfreeloading
-To run a dedicated server: TribesAscend server mapname -seekfreeloading
+2. Follow the guide: http://www.reddit.com/r/Tribes/comments/1ia5jb/ta_sdk_the_guide_to_mapping/
 
 
-Guidelines and such ==================================================
+## Using the dev build
 
-Minimize global namespace pollution
+The `TribesAscend` executable is found under `Binaries\Win32`
 
-Maintain coding style
+To run a local server: 
+`TribesAscend mapname (in CookedPC/Maps) -seekfreeloading`
+
+To run a dedicated server: 
+`TribesAscend server mapname -seekfreeloading`
 
 
-To-do (priority order) ===============================================
+## Guidelines
 
-Add automated UnrealScript calls to the generated headers using ProcessEvent.
+* Minimize global namespace pollution
+
+* Maintain coding style
 
 
-Finished ===============================================================
+## TODO list (priority order)
 
-Fix garbage in code buffer in ScriptStackFrame - it appears to be valid
-UnrealScript bytecode, but seems to be from another call and does not
-contain valid args for the hooked function. This prevents grabbing args
-from ScriptStackFrame and is top priority.
+- Add automated UnrealScript calls to the generated headers using ProcessEvent.
 
-Automatically grab args off of ScriptStackFrame and pass them to the hook
-for more user-friendly hooking. Sort of implemented but the ASM is wrong.
 
-Add a specialized Rotator class.
+  ### Finished
 
-Improve implicit conversion between UE3 short vectors and standard float vectors.
+  - Fix garbage in code buffer in ScriptStackFrame - it appears to be valid
+  UnrealScript bytecode, but seems to be from another call and does not
+  contain valid args for the hooked function. This prevents grabbing args
+  from ScriptStackFrame and is top priority.
+  
+  - Automatically grab args off of ScriptStackFrame and pass them to the hook
+  for more user-friendly hooking. Sort of implemented but the ASM is wrong.
+  
+  - Add a specialized Rotator class.
+  
+  - Improve implicit conversion between UE3 short vectors and standard float vectors.
