@@ -1,5 +1,5 @@
 #include "TASDK.h"
-#include "Armor.h"
+//#include "Armor.h"
 
 const char *kLogName = "SDKTest.log";
 
