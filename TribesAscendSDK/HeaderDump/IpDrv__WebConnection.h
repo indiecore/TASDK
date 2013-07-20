@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.WebConnection.ReceivedText" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Text;
+				*( ScriptArray< wchar_t >* )params = Text;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.WebConnection.ReceivedLine" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -75,7 +75,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.WebConnection.ProcessHead" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.WebConnection.ProcessGet" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.WebConnection.ProcessPost" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

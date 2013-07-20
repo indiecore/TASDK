@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.Glow" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = F;
+				*( float* )params = F;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -42,7 +42,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.LM" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = MessageClassName;
+				*( ScriptArray< wchar_t >* )params = MessageClassName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -51,7 +51,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.LMS" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -60,7 +60,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.SummonV" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ClassName;
+				*( ScriptArray< wchar_t >* )params = ClassName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -101,7 +101,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.Invisible" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = B;
+				*( bool* )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -134,7 +134,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.RBGrav" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = NewGravityScaling;
+				*( float* )params = NewGravityScaling;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -143,7 +143,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.SuicideBy" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Type;
+				*( ScriptArray< wchar_t >* )params = Type;
 				*( int* )( params + 12 ) = DeathHealth;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -153,7 +153,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.EditWeapon" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = WhichWeapon;
+				*( ScriptArray< wchar_t >* )params = WhichWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -178,7 +178,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.LeaveADecal" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = HitLoc;
+				*( Vector* )params = HitLoc;
 				*( Vector* )( params + 12 ) = HitNorm;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -188,7 +188,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.TiltIt" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bActive;
+				*( bool* )params = bActive;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -205,7 +205,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.SetStickBind" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = val;
+				*( float* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -214,7 +214,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.KillAll" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = aClass;
+				*( ScriptClass** )params = aClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -223,7 +223,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCheatManager.KillAllPawns" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = aClass;
+				*( ScriptClass** )params = aClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqEvent_Mover.NotifyEncroachingOn" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Hit;
+				*( class Actor** )params = Hit;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqEvent_Mover.NotifyAttached" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqEvent_Mover.NotifyDetached" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

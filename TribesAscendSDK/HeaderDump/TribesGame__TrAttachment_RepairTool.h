@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_RepairTool.SpawnRepairEffect" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = HitLocation;
+				*( Vector* )params = HitLocation;
 				*( Vector* )( params + 12 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_RepairTool.UpdateRepairEffect" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				*( Vector* )( params + 4 ) = HitLocation;
 				*( Vector* )( params + 16 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_RepairTool.PlayImpactEffects" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = HitLocation;
+				*( Vector* )params = HitLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -64,7 +64,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAttachment_RepairTool.ThirdPersonFireEffects" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = HitLocation;
+				*( Vector* )params = HitLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

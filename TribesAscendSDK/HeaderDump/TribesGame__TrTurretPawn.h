@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTurretPawn.LeadingAimLocation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Enemy;
+				*( class Actor** )params = Enemy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTurretPawn.GetValidAimTarget" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = PawnLocation;
+				*( Vector* )params = PawnLocation;
 				*( Vector* )( params + 12 ) = PawnTargetLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTurretPawn.WeaponFired" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( bool* )( params + 4 ) = bViaReplication;
 				*( Vector* )( params + 8 ) = HitLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -72,7 +72,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTurretPawn.GetAimVectorFor" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( Vector* )( params + 4 ) = projStart;
 				*( class Actor** )( params + 16 ) = Enemy;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTurretPawn.GetAdjustedAimFor" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( Vector* )( params + 4 ) = projStart;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTurretPawn.GetWeaponStartTraceLocation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = CurrentWeapon;
+				*( class Weapon** )params = CurrentWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTurretPawn.TakeDamage" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( int* )( params + 0 ) = Damage;
+				*( int* )params = Damage;
 				*( class Controller** )( params + 4 ) = EventInstigator;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = Momentum;
@@ -128,7 +128,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTurretPawn.TakeRadiusDamage" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( class Controller** )( params + 0 ) = EventInstigator;
+				*( class Controller** )params = EventInstigator;
 				*( float* )( params + 4 ) = BaseDamage;
 				*( float* )( params + 8 ) = DamageRadius;
 				*( ScriptClass** )( params + 12 ) = DamageType;
@@ -153,7 +153,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTurretPawn.RefreshInventory" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bIsRespawn;
+				*( bool* )params = bIsRespawn;
 				*( bool* )( params + 4 ) = bCallin;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -163,7 +163,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTurretPawn.SetCharacterClassFromInfo" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = Info;
+				*( ScriptClass** )params = Info;
 				*( bool* )( params + 4 ) = bForce;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -173,7 +173,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTurretPawn.PostRenderFor" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( class Canvas** )( params + 4 ) = Canvas;
 				*( Vector* )( params + 8 ) = CameraPosition;
 				*( Vector* )( params + 20 ) = CameraDir;
@@ -185,7 +185,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrTurretPawn.IncrementFlashCount" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class Weapon** )( params + 0 ) = W;
+				*( class Weapon** )params = W;
 				*( byte* )( params + 4 ) = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

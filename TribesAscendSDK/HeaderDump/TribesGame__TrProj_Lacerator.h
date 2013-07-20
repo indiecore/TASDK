@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_Lacerator.InitProjectile" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = Direction;
+				*( Vector* )params = Direction;
 				*( ScriptClass** )( params + 12 ) = ClassToInherit;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -58,7 +58,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_Lacerator.GetDamage" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				*( Vector* )( params + 4 ) = HitLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_Lacerator.ProcessTouch" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				*( Vector* )( params + 4 ) = HitLocation;
 				*( Vector* )( params + 16 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_Lacerator.Landed" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = HitNormal;
+				*( Vector* )params = HitNormal;
 				*( class Actor** )( params + 12 ) = FloorActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_Lacerator.SpawnImpactEffect" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = HitLocation;
+				*( Vector* )params = HitLocation;
 				*( Vector* )( params + 12 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -110,7 +110,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_Lacerator.HitWall" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Vector* )( params + 0 ) = HitNormal;
+				*( Vector* )params = HitNormal;
 				*( class Actor** )( params + 12 ) = Wall;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

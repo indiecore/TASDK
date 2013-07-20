@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshPath_SameCoverLink.SameCoverLink" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( class NavigationHandle** )params = NavHandle;
 				*( class CoverLink** )( params + 4 ) = InLink;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeBlendBase.PlayAnim" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( bool* )( params + 0 ) = bLoop;
+				*( bool* )params = bLoop;
 				*( float* )( params + 4 ) = Rate;
 				*( float* )( params + 8 ) = StartTime;
 				ScriptObject *object = ( ScriptObject* )( this );

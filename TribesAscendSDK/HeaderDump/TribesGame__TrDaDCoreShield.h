@@ -28,7 +28,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCoreShield.Init" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ShieldIndex;
+				*( int* )params = ShieldIndex;
 				*( class TrDaDCore** )( params + 4 ) = Core;
 				*( class TrDaDShell** )( params + 8 ) = Shell;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -63,7 +63,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDaDCoreShield.UpdateMaterialForPawn" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPawn** )( params + 0 ) = P;
+				*( class TrPawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

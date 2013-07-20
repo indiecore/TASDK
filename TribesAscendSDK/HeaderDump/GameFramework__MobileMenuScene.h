@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuScene.InitMenuScene" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class MobilePlayerInput** )( params + 0 ) = PlayerInput;
+				*( class MobilePlayerInput** )params = PlayerInput;
 				*( int* )( params + 4 ) = ScreenWidth;
 				*( int* )( params + 8 ) = ScreenHeight;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -72,7 +72,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuScene.RenderScene" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				*( float* )( params + 4 ) = RenderDelta;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -82,7 +82,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuScene.OnTouch" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class MobileMenuObject** )( params + 0 ) = Sender;
+				*( class MobileMenuObject** )params = Sender;
 				*( float* )( params + 4 ) = TouchX;
 				*( float* )( params + 8 ) = TouchY;
 				*( bool* )( params + 12 ) = bCancel;
@@ -94,7 +94,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuScene.OnSceneTouch" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = EventType;
+				*( byte* )params = EventType;
 				*( float* )( params + 4 ) = TouchX;
 				*( float* )( params + 8 ) = TouchY;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -106,7 +106,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuScene.Opened" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Mode;
+				*( ScriptArray< wchar_t >* )params = Mode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -148,7 +148,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuScene.FindMenuObject" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Tag;
+				*( ScriptArray< wchar_t >* )params = Tag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class MobileMenuObject** )( params + function->return_val_offset() );
@@ -158,7 +158,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuScene.MobileMenuCommand" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Command;
+				*( ScriptArray< wchar_t >* )params = Command;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

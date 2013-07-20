@@ -29,7 +29,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Path_WithinDistanceEnvelope.StayWithinEnvelopeToLoc" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( Vector* )( params + 4 ) = InEnvelopeTestPoint;
 				*( float* )( params + 16 ) = InMaxDistance;
 				*( float* )( params + 20 ) = InMinDistance;

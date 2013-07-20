@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.TranslatorTag.Translate" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InArgument;
+				*( ScriptArray< wchar_t >* )params = InArgument;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );

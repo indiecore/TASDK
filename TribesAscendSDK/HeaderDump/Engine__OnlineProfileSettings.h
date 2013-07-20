@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineProfileSettings.GetProfileSettingDefaultId" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ProfileSettingId;
+				*( int* )params = ProfileSettingId;
 				*( int* )( params + 4 ) = DefaultId;
 				*( int* )( params + 8 ) = ListIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineProfileSettings.GetProfileSettingDefaultInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ProfileSettingId;
+				*( int* )params = ProfileSettingId;
 				*( int* )( params + 4 ) = DefaultInt;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineProfileSettings.GetProfileSettingDefaultFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ProfileSettingId;
+				*( int* )params = ProfileSettingId;
 				*( float* )( params + 4 ) = DefaultFloat;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

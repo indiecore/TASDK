@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.ReplicatedEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = VarName;
+				*( ScriptName* )params = VarName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -64,7 +64,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.OnToggle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Toggle** )( params + 0 ) = Action;
+				*( class SeqAct_Toggle** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.OnSetMaterial" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_SetMaterial** )( params + 0 ) = Action;
+				*( class SeqAct_SetMaterial** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -82,7 +82,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.BeginAnimControl" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class InterpGroup** )( params + 0 ) = InInterpGroup;
+				*( class InterpGroup** )params = InInterpGroup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -91,7 +91,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.MAT_BeginAnimControl" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class InterpGroup** )( params + 0 ) = InInterpGroup;
+				*( class InterpGroup** )params = InInterpGroup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -100,7 +100,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.SetAnimPosition" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptName* )( params + 0 ) = SlotName;
+				*( ScriptName* )params = SlotName;
 				*( int* )( params + 8 ) = ChannelIndex;
 				*( ScriptName* )( params + 12 ) = InAnimSeqName;
 				*( float* )( params + 20 ) = InPosition;
@@ -115,7 +115,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.FinishAnimControl" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class InterpGroup** )( params + 0 ) = InInterpGroup;
+				*( class InterpGroup** )params = InInterpGroup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -124,7 +124,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.MAT_FinishAnimControl" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class InterpGroup** )( params + 0 ) = InInterpGroup;
+				*( class InterpGroup** )params = InInterpGroup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -133,7 +133,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.PlayActorFaceFXAnim" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class FaceFXAnimSet** )( params + 0 ) = AnimSet;
+				*( class FaceFXAnimSet** )params = AnimSet;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = GroupName;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = SeqName;
 				*( class SoundCue** )( params + 28 ) = SoundCueToPlay;
@@ -163,7 +163,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.OnPlayFaceFXAnim" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_PlayFaceFXAnim** )( params + 0 ) = inAction;
+				*( class SeqAct_PlayFaceFXAnim** )params = inAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -190,7 +190,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.OnSetMesh" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_SetMesh** )( params + 0 ) = Action;
+				*( class SeqAct_SetMesh** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -199,7 +199,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.OnUpdatePhysBonesFromAnim" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_UpdatePhysBonesFromAnim** )( params + 0 ) = Action;
+				*( class SeqAct_UpdatePhysBonesFromAnim** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -208,7 +208,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.OnSetSkelControlTarget" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_SetSkelControlTarget** )( params + 0 ) = Action;
+				*( class SeqAct_SetSkelControlTarget** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -217,7 +217,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.DoKismetAttachment" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = Attachment;
+				*( class Actor** )params = Attachment;
 				*( class SeqAct_AttachToActor** )( params + 4 ) = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -227,7 +227,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.TakeDamage" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( int* )( params + 0 ) = Damage;
+				*( int* )params = Damage;
 				*( class Controller** )( params + 4 ) = EventInstigator;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = Momentum;
@@ -251,27 +251,27 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.CreateCheckpointRecord" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( void** )( params + 0 ) = Record;
+				*( void** )params = Record;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Record = *( void** )( params + 0 );
+				Record = *( void** )params;
 			}
 
 			void ApplyCheckpointRecord( void* &Record )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.ApplyCheckpointRecord" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( void** )( params + 0 ) = Record;
+				*( void** )params = Record;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Record = *( void** )( params + 0 );
+				Record = *( void** )params;
 			}
 
 			bool PlayParticleEffect( class AnimNotify_PlayParticleEffect* AnimNotifyData )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.PlayParticleEffect" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class AnimNotify_PlayParticleEffect** )( params + 0 ) = AnimNotifyData;
+				*( class AnimNotify_PlayParticleEffect** )params = AnimNotifyData;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -289,7 +289,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActor.CreateForceField" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class AnimNotify_ForceField** )( params + 0 ) = AnimNotifyData;
+				*( class AnimNotify_ForceField** )params = AnimNotifyData;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

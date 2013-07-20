@@ -54,7 +54,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuObject.InitMenuObject" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class MobilePlayerInput** )( params + 0 ) = PlayerInput;
+				*( class MobilePlayerInput** )params = PlayerInput;
 				*( class MobileMenuScene** )( params + 4 ) = Scene;
 				*( int* )( params + 8 ) = ScreenWidth;
 				*( int* )( params + 12 ) = ScreenHeight;
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileMenuObject.RenderObject" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

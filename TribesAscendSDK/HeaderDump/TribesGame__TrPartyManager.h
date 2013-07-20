@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPartyManager.Kick" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PlayerName;
+				*( ScriptArray< wchar_t >* )params = PlayerName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -79,7 +79,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPartyManager.SendInvite" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PlayerName;
+				*( ScriptArray< wchar_t >* )params = PlayerName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPartyManager.GetMemberId" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPartyManager.GetMemberName" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -109,7 +109,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPartyManager.ActiveMember" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -155,7 +155,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPartyManager.ShowInvitation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = LeaderName;
+				*( ScriptArray< wchar_t >* )params = LeaderName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -164,7 +164,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPartyManager.InvitationPopup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -173,7 +173,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPartyManager.InvitationComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Action;
+				*( int* )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -190,7 +190,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPartyManager.LeaveParty" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bHandle;
+				*( bool* )params = bHandle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

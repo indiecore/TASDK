@@ -24,10 +24,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameViewportClient.Init" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = OutError;
+				*( ScriptArray< wchar_t >* )params = OutError;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				OutError = *( ScriptArray< wchar_t >* )( params + 0 );
+				OutError = *( ScriptArray< wchar_t >* )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameViewportClient.PostRender" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

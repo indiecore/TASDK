@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.ProceedWithMove" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -80,11 +80,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.GetBoundingCylinder" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = CollisionRadius;
+				*( float* )params = CollisionRadius;
 				*( float* )( params + 4 ) = CollisionHeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				CollisionRadius = *( float* )( params + 0 );
+				CollisionRadius = *( float* )params;
 				CollisionHeight = *( float* )( params + 4 );
 			}
 
@@ -92,7 +92,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.GetReachSpecTo" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class NavigationPoint** )( params + 0 ) = Nav;
+				*( class NavigationPoint** )params = Nav;
 				*( ScriptClass** )( params + 4 ) = SpecClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -103,7 +103,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.IsUsableAnchorFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.CanTeleport" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = A;
+				*( class Actor** )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -123,7 +123,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.SpecialCost" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = Seeker;
+				*( class Pawn** )params = Seeker;
 				*( class ReachSpec** )( params + 4 ) = Path;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -134,7 +134,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.Accept" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = Incoming;
+				*( class Actor** )params = Incoming;
 				*( class Actor** )( params + 4 ) = Source;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -145,7 +145,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.DetourWeight" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				*( float* )( params + 4 ) = PathWeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -156,7 +156,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.SuggestMovePreparation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -166,7 +166,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.GetNearestNavToActor" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class Actor** )( params + 0 ) = ChkActor;
+				*( class Actor** )params = ChkActor;
 				*( ScriptClass** )( params + 4 ) = RequiredClass;
 				*( float* )( params + 20 ) = MinDist;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -178,7 +178,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.GetNearestNavToPoint" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class Actor** )( params + 0 ) = ChkActor;
+				*( class Actor** )params = ChkActor;
 				*( Vector* )( params + 4 ) = ChkPoint;
 				*( ScriptClass** )( params + 16 ) = RequiredClass;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -190,7 +190,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.GetAllNavInRadius" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( class Actor** )( params + 0 ) = ChkActor;
+				*( class Actor** )params = ChkActor;
 				*( Vector* )( params + 4 ) = ChkPoint;
 				*( float* )( params + 16 ) = Radius;
 				*( bool* )( params + 32 ) = bSkipBlocked;
@@ -205,7 +205,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.IsOnDifferentNetwork" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class NavigationPoint** )( params + 0 ) = Nav;
+				*( class NavigationPoint** )params = Nav;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -215,7 +215,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.OnToggle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Toggle** )( params + 0 ) = inAction;
+				*( class SeqAct_Toggle** )params = inAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -241,20 +241,20 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.CreateCheckpointRecord" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = Record;
+				*( void** )params = Record;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Record = *( void** )( params + 0 );
+				Record = *( void** )params;
 			}
 
 			void ApplyCheckpointRecord( void* &Record )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationPoint.ApplyCheckpointRecord" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = Record;
+				*( void** )params = Record;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Record = *( void** )( params + 0 );
+				Record = *( void** )params;
 			}
 
 			ScriptArray< wchar_t > GetDebugAbbrev(  )

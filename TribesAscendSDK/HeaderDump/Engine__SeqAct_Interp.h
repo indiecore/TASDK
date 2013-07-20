@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_Interp.AddPlayerToDirectorTracks" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_Interp.SetPosition" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = NewPosition;
+				*( float* )params = NewPosition;
 				*( bool* )( params + 4 ) = bJump;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

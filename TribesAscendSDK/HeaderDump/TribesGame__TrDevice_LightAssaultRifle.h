@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_LightAssaultRifle.StopFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_LightAssaultRifle.StartFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_LightAssaultRifle.EndFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_LightAssaultRifle.ServerStopFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

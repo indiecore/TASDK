@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_LaunchGame.GetGameModeFriendlyString" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InGameMode;
+				*( ScriptArray< wchar_t >* )params = InGameMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_LaunchGame.DisableSubComponents" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bDisableComponents;
+				*( bool* )params = bDisableComponents;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_LaunchGame.OnTopMostView" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bPlayOpenAnimation;
+				*( bool* )params = bPlayOpenAnimation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -127,7 +127,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_LaunchGame.OnListItemPress" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( void** )( params + 0 ) = ev;
+				*( void** )params = ev;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -136,7 +136,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_LaunchGame.OnListChange" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( void** )( params + 0 ) = ev;
+				*( void** )params = ev;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -161,7 +161,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_LaunchGame.WidgetInitialized" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = WidgetName;
+				*( ScriptName* )params = WidgetName;
 				*( ScriptName* )( params + 8 ) = WidgetPath;
 				*( class GFxObject** )( params + 16 ) = Widget;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -173,7 +173,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_LaunchGame.GetStringFromMarkup" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = MarkupString;
+				*( ScriptArray< wchar_t >* )params = MarkupString;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );

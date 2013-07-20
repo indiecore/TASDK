@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameKActorSpawnableEffect.FellOutOfWorld" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = dmgType;
+				*( ScriptClass** )params = dmgType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PickupFactory.ReplicatedEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = VarName;
+				*( ScriptName* )params = VarName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -115,7 +115,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PickupFactory.DetourWeight" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				*( float* )( params + 4 ) = PathWeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -126,7 +126,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PickupFactory.SpawnCopyFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Recipient;
+				*( class Pawn** )params = Recipient;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -135,7 +135,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PickupFactory.ReadyToPickup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = MaxWait;
+				*( float* )params = MaxWait;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -145,7 +145,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PickupFactory.GiveTo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -154,7 +154,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PickupFactory.PickedUpBy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

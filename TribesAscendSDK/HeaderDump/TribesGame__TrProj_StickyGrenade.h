@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_StickyGrenade.HitWall" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Vector* )( params + 0 ) = HitNormal;
+				*( Vector* )params = HitNormal;
 				*( class Actor** )( params + 12 ) = Wall;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_StickyGrenade.ProcessTouch" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				*( Vector* )( params + 4 ) = HitLocation;
 				*( Vector* )( params + 16 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -54,7 +54,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_StickyGrenade.StickToTarget" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Actor** )( params + 0 ) = Target;
+				*( class Actor** )params = Target;
 				*( Vector* )( params + 4 ) = HitLocation;
 				*( Vector* )( params + 16 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );

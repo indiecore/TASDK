@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendBy3pDevice.PlayFire" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = RefireTime;
+				*( float* )params = RefireTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -59,7 +59,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendBy3pDevice.PlayPutaway" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = PutAwayTime;
+				*( float* )params = PutAwayTime;
 				*( float* )( params + 4 ) = ForcedRateBuff;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendBy3pDevice.PlayRetrieve" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = RetrieveTime;
+				*( float* )params = RetrieveTime;
 				*( float* )( params + 4 ) = ForcedRateBuff;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -79,7 +79,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendBy3pDevice.PlayReload" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = ReloadTime;
+				*( float* )params = ReloadTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -88,7 +88,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendBy3pDevice.PlayOffhand" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = OffhandAnimName;
+				*( ScriptName* )params = OffhandAnimName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

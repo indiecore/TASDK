@@ -39,7 +39,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_RepairDeployable.InitProjectile" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = Direction;
+				*( Vector* )params = Direction;
 				*( ScriptClass** )( params + 12 ) = ClassToInherit;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_RepairDeployable.HitWall" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Vector* )( params + 0 ) = HitNormal;
+				*( Vector* )params = HitNormal;
 				*( class Actor** )( params + 12 ) = Wall;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -75,7 +75,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_RepairDeployable.Explode" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = HitLocation;
+				*( Vector* )params = HitLocation;
 				*( Vector* )( params + 12 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -85,7 +85,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_RepairDeployable.DetonateObsolete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bDetonateFromDamage;
+				*( bool* )params = bDetonateFromDamage;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

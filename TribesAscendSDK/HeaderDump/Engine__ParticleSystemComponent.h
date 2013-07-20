@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetTemplate" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class ParticleSystem** )( params + 0 ) = NewTemplate;
+				*( class ParticleSystem** )params = NewTemplate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.ActivateSystem" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bFlagAsJustAttached;
+				*( bool* )params = bFlagAsJustAttached;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetActive" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bNowActive;
+				*( bool* )params = bNowActive;
 				*( bool* )( params + 4 ) = bFlagAsJustAttached;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -75,7 +75,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.KillParticlesInEmitter" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = InEmitterName;
+				*( ScriptName* )params = InEmitterName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetSkipUpdateDynamicDataDuringTick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bInSkipUpdateDynamicDataDuringTick;
+				*( bool* )params = bInSkipUpdateDynamicDataDuringTick;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -102,7 +102,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetKillOnDeactivate" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				*( bool* )( params + 4 ) = bKill;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -112,7 +112,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetKillOnCompleted" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				*( bool* )( params + 4 ) = bKill;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -122,7 +122,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.RewindEmitterInstance" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -139,7 +139,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetBeamType" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				*( int* )( params + 4 ) = NewMethod;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -149,7 +149,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetBeamTessellationFactor" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				*( float* )( params + 4 ) = NewFactor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -159,7 +159,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetBeamEndPoint" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				*( Vector* )( params + 4 ) = NewEndPoint;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -169,7 +169,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetBeamDistance" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				*( float* )( params + 4 ) = Distance;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -179,7 +179,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetBeamSourcePoint" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				*( Vector* )( params + 4 ) = NewSourcePoint;
 				*( int* )( params + 16 ) = SourceIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -190,7 +190,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetBeamSourceTangent" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				*( Vector* )( params + 4 ) = NewTangentPoint;
 				*( int* )( params + 16 ) = SourceIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -201,7 +201,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetBeamSourceStrength" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				*( float* )( params + 4 ) = NewSourceStrength;
 				*( int* )( params + 8 ) = SourceIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -212,7 +212,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetBeamTargetPoint" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				*( Vector* )( params + 4 ) = NewTargetPoint;
 				*( int* )( params + 16 ) = TargetIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -223,7 +223,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetBeamTargetTangent" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				*( Vector* )( params + 4 ) = NewTangentPoint;
 				*( int* )( params + 16 ) = TargetIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -234,7 +234,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetBeamTargetStrength" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = EmitterIndex;
+				*( int* )params = EmitterIndex;
 				*( float* )( params + 4 ) = NewTargetStrength;
 				*( int* )( params + 8 ) = TargetIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -245,10 +245,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.DetermineLODLevelForLocation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = EffectLocation;
+				*( Vector* )params = EffectLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				EffectLocation = *( Vector* )( params + 0 );
+				EffectLocation = *( Vector* )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 
@@ -256,7 +256,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetLODLevel" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = InLODLevel;
+				*( int* )params = InLODLevel;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -265,7 +265,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetEditorLODLevel" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = InLODLevel;
+				*( int* )params = InLODLevel;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -292,7 +292,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetFloatParameter" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( float* )( params + 8 ) = Param;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -302,7 +302,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetFloatRandParameter" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( float* )( params + 8 ) = Param;
 				*( float* )( params + 12 ) = ParamLow;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -313,7 +313,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetVectorParameter" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( Vector* )( params + 8 ) = Param;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -323,7 +323,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetVectorRandParameter" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( Vector* )( params + 8 ) = Param;
 				*( Vector* )( params + 20 ) = ParamLow;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -336,7 +336,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetColorParameter" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( void** )( params + 8 ) = Param;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -346,7 +346,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetActorParameter" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( class Actor** )( params + 8 ) = Param;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -356,7 +356,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetMaterialParameter" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( class MaterialInterface** )( params + 8 ) = Param;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -366,7 +366,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.GetFloatParameter" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = InName;
+				*( ScriptName* )params = InName;
 				*( float* )( params + 8 ) = OutFloat;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -378,7 +378,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.GetVectorParameter" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = InName;
+				*( ScriptName* )params = InName;
 				*( Vector* )( params + 8 ) = OutVector;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -390,7 +390,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.GetColorParameter" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = InName;
+				*( ScriptName* )params = InName;
 				*( void** )( params + 8 ) = OutColor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -402,7 +402,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.GetActorParameter" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = InName;
+				*( ScriptName* )params = InName;
 				*( class Actor** )( params + 8 ) = OutActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -414,7 +414,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.GetMaterialParameter" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = InName;
+				*( ScriptName* )params = InName;
 				*( class MaterialInterface** )( params + 8 ) = OutMaterial;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -426,7 +426,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.ClearParameter" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( byte* )( params + 8 ) = ParameterType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -444,7 +444,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystemComponent.SetStopSpawning" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = InEmitterIndex;
+				*( int* )params = InEmitterIndex;
 				*( bool* )( params + 4 ) = bInStopSpawning;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

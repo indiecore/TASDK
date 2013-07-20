@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_MapRotation.TakeAction" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ActionIndex;
+				*( int* )params = ActionIndex;
 				*( class GFxObject** )( params + 4 ) = DataList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_MapRotation.TakeFocus" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ActionIndex;
+				*( int* )params = ActionIndex;
 				*( class GFxObject** )( params + 4 ) = DataList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -54,7 +54,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_MapRotation.FillData" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = DataList;
+				*( class GFxObject** )params = DataList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -63,7 +63,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_MapRotation.FillOption" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ActionIndex;
+				*( int* )params = ActionIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class GFxObject** )( params + function->return_val_offset() );
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_MapRotation.CheckDescription" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = DataList;
+				*( class GFxObject** )params = DataList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -82,7 +82,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_MapRotation.FillDescription" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = DataList;
+				*( class GFxObject** )params = DataList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class GFxObject** )( params + function->return_val_offset() );

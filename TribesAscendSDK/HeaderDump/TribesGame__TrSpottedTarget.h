@@ -38,7 +38,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSpottedTarget.SetSpottedActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = NewSpottedActor;
+				*( class Actor** )params = NewSpottedActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSpottedTarget.PostRenderFor" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( class Canvas** )( params + 4 ) = Canvas;
 				*( Vector* )( params + 8 ) = CameraPosition;
 				*( Vector* )( params + 20 ) = CameraDir;

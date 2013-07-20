@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.TcpLink.BindPort" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PortNum;
+				*( int* )params = PortNum;
 				*( bool* )( params + 4 ) = bUseNextAvailable;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -46,7 +46,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.TcpLink.Open" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = Addr;
+				*( void** )params = Addr;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -74,7 +74,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.TcpLink.SendText" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Str;
+				*( ScriptArray< wchar_t >* )params = Str;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.TcpLink.SendBinary" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( int* )( params + 0 ) = Count;
+				*( int* )params = Count;
 				*( byte* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -95,10 +95,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.TcpLink.ReadText" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Str;
+				*( ScriptArray< wchar_t >* )params = Str;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Str = *( ScriptArray< wchar_t >* )( params + 0 );
+				Str = *( ScriptArray< wchar_t >* )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 
@@ -106,7 +106,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.TcpLink.ReadBinary" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( int* )( params + 0 ) = Count;
+				*( int* )params = Count;
 				*( byte* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -142,7 +142,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.TcpLink.ReceivedText" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Text;
+				*( ScriptArray< wchar_t >* )params = Text;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -151,7 +151,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.TcpLink.ReceivedLine" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Line;
+				*( ScriptArray< wchar_t >* )params = Line;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -160,7 +160,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.TcpLink.ReceivedBinary" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( int* )( params + 0 ) = Count;
+				*( int* )params = Count;
 				*( byte* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

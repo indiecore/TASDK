@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UISceneClient.IsUIActive" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Flags;
+				*( int* )params = Flags;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

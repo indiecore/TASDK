@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DebugCameraHUD.DisplayMaterials" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = X;
+				*( float* )params = X;
 				*( float* )( params + 4 ) = Y;
 				*( float* )( params + 8 ) = DY;
 				ScriptObject *object = ( ScriptObject* )( this );

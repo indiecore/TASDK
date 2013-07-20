@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrScene_MatchSummary.CreditsSort" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class TrPlayerReplicationInfo** )( params + 0 ) = A;
+				*( class TrPlayerReplicationInfo** )params = A;
 				*( class TrPlayerReplicationInfo** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrScene_MatchSummary.LoadTeamStatsData" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = List;
+				*( class GFxObject** )params = List;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrScene_MatchSummary.LoadTeamAccoladeData" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = List;
+				*( class GFxObject** )params = List;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrScene_MatchSummary.LoadTeamScoreboardData" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = List;
+				*( class GFxObject** )params = List;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -104,7 +104,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrScene_MatchSummary.LoadTeamMiscData" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = List;
+				*( class GFxObject** )params = List;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrScene_MatchSummary.AddAward" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = PlayerID;
+				*( int* )params = PlayerID;
 				*( int* )( params + 4 ) = AwardId;
 				*( int* )( params + 8 ) = val;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -124,7 +124,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrScene_MatchSummary.AddAccolade" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = PlayerID;
+				*( int* )params = PlayerID;
 				*( int* )( params + 4 ) = AccoladeId;
 				*( int* )( params + 8 ) = val;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -135,7 +135,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrScene_MatchSummary.AddScoreSlot" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PlayerName;
+				*( ScriptArray< wchar_t >* )params = PlayerName;
 				*( int* )( params + 12 ) = Kills;
 				*( int* )( params + 16 ) = Assists;
 				*( int* )( params + 20 ) = Credits;
@@ -156,7 +156,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrScene_MatchSummary.FormatResult" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = aWinningTeam;
+				*( int* )params = aWinningTeam;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -166,7 +166,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrScene_MatchSummary.FormatTime" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Seconds;
+				*( int* )params = Seconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -176,7 +176,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrScene_MatchSummary.FindPlayerName" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PlayerID;
+				*( int* )params = PlayerID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );

@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameReplicationInfo.IsClassAllowed" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = TeamNum;
+				*( int* )params = TeamNum;
 				*( ScriptClass** )( params + 4 ) = FamilyInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameReplicationInfo.GetTeamSize" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = TeamNum;
+				*( byte* )params = TeamNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameReplicationInfo.CanJoinTeam" );
 				byte *params = ( byte* )( malloc( 2 ) );
-				*( byte* )( params + 0 ) = RequestedTeam;
+				*( byte* )params = RequestedTeam;
 				*( byte* )( params + 1 ) = CurrentTeam;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -124,7 +124,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameReplicationInfo.ReplicatedEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = VarName;
+				*( ScriptName* )params = VarName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -157,7 +157,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameReplicationInfo.CanPlaceDeployables" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = Value;
+				*( bool* )params = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -190,7 +190,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameReplicationInfo.OnSameTeam" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = A;
+				*( class Actor** )params = A;
 				*( class Actor** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -209,7 +209,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameReplicationInfo.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -218,7 +218,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameReplicationInfo.ChangePhysicsType" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Type;
+				*( int* )params = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -227,7 +227,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameReplicationInfo.IsValidTeamPlayer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPlayerReplicationInfo** )( params + 0 ) = TrPRI;
+				*( class TrPlayerReplicationInfo** )params = TrPRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -237,7 +237,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameReplicationInfo.SetWarmingUp" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWarmup;
+				*( bool* )params = bWarmup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -246,7 +246,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameReplicationInfo.AddPRI" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class PlayerReplicationInfo** )params = PRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

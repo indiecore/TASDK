@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AICommandNodeBase.SelectBestChild" );
 				byte *params = ( byte* )( malloc( 52 ) );
-				*( class AIController** )( params + 0 ) = InAI;
+				*( class AIController** )params = InAI;
 				*( void** )( params + 4 ) = Handle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

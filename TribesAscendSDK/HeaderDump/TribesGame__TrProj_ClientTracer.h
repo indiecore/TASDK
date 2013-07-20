@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_ClientTracer.InitProjectile" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = Direction;
+				*( Vector* )params = Direction;
 				*( ScriptClass** )( params + 12 ) = ClassToInherit;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_ClientTracer.GetExplosionSound" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PhysicalMaterial** )( params + 0 ) = HitMaterial;
+				*( class PhysicalMaterial** )params = HitMaterial;
 				*( class Actor** )( params + 4 ) = HitActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_ClientTracer.ProcessTouch" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				*( Vector* )( params + 4 ) = HitLocation;
 				*( Vector* )( params + 16 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );

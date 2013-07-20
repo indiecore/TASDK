@@ -72,7 +72,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Mutators.OnTopMostView" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bPlayOpenAnimation;
+				*( bool* )params = bPlayOpenAnimation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -81,7 +81,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Mutators.DisableSubComponents" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bDisableComponents;
+				*( bool* )params = bDisableComponents;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -98,7 +98,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Mutators.OnListItemPress" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( void** )( params + 0 ) = ev;
+				*( void** )params = ev;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -107,7 +107,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Mutators.FindMutatorIndexByClass" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = MutatorClass;
+				*( ScriptArray< wchar_t >* )params = MutatorClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -117,7 +117,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Mutators.OnListChange" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( void** )( params + 0 ) = ev;
+				*( void** )params = ev;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -150,7 +150,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Mutators.SetMutatorEnabled" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = MutatorId;
+				*( int* )params = MutatorId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -159,7 +159,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Mutators.AddMutatorAndFilterList" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = NewMutator;
+				*( int* )params = NewMutator;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -185,7 +185,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Mutators.SetList" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = List;
+				*( class GFxObject** )params = List;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -194,7 +194,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Mutators.SetConfigList" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = ConfigList;
+				*( class GFxObject** )params = ConfigList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -203,7 +203,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Mutators.WidgetInitialized" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = WidgetName;
+				*( ScriptName* )params = WidgetName;
 				*( ScriptName* )( params + 8 ) = WidgetPath;
 				*( class GFxObject** )( params + 16 ) = Widget;
 				ScriptObject *object = ( ScriptObject* )( this );

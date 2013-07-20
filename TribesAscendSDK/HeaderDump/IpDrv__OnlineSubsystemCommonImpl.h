@@ -27,7 +27,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlineSubsystemCommonImpl.GetPlayerNicknameFromIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = UserIndex;
+				*( int* )params = UserIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlineSubsystemCommonImpl.GetPlayerUniqueNetIdFromIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = UserIndex;
+				*( int* )params = UserIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlineSubsystemCommonImpl.IsPlayerInSession" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( void** )( params + 8 ) = PlayerID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -58,7 +58,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlineSubsystemCommonImpl.GetRegisteredPlayers" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

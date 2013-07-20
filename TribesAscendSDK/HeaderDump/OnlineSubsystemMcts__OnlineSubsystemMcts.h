@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnConnectionStatusChange" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = ConnectionStatus;
+				*( byte* )params = ConnectionStatus;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLoginChange" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLoginFailed" );
 				byte *params = ( byte* )( malloc( 2 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( byte* )( params + 1 ) = ErrorCode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -51,7 +51,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLogoutCompleted" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -60,7 +60,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLinkStatusChange" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bIsConnected;
+				*( bool* )params = bIsConnected;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnChatMessage" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( int* )( params + 0 ) = Channel;
+				*( int* )params = Channel;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Sender;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -80,7 +80,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnKeyboardInputComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReadAchievementsComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TitleId;
+				*( int* )params = TitleId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -98,7 +98,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnUnlockAchievementComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -107,7 +107,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnFriendMessageReceived" );
 				byte *params = ( byte* )( malloc( 33 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = SendingPlayer;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = SendingNick;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = Message;
@@ -119,7 +119,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnJoinFriendGameComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -128,7 +128,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReceivedGameInvite" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = InviterName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -138,7 +138,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnFriendInviteReceived" );
 				byte *params = ( byte* )( malloc( 33 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = RequestingPlayer;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = RequestingNick;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = Message;
@@ -150,7 +150,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnAddFriendByNameComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -159,7 +159,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReadFriendsComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -176,7 +176,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnWritePlayerStorageComplete" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( bool* )( params + 4 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -186,7 +186,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReadPlayerStorageForNetIdComplete" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = NetId;
+				*( void** )params = NetId;
 				*( bool* )( params + 8 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -196,7 +196,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReadPlayerStorageComplete" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( bool* )( params + 4 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -206,7 +206,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnWriteProfileSettingsComplete" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( bool* )( params + 4 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -216,7 +216,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReadProfileSettingsComplete" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( bool* )( params + 4 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -242,7 +242,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLoginStatusChange" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = NewStatus;
+				*( byte* )params = NewStatus;
 				*( void** )( params + 4 ) = NewId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -260,7 +260,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnControllerChange" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ControllerId;
+				*( int* )params = ControllerId;
 				*( bool* )( params + 4 ) = bIsConnected;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -270,7 +270,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnExternalUIChange" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bIsOpening;
+				*( bool* )params = bIsOpening;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -304,7 +304,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.Login" );
 				byte *params = ( byte* )( malloc( 29 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = LoginName;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Password;
 				*( bool* )( params + 28 ) = bWantsLocalOnly;
@@ -317,7 +317,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.RequestNewPlayer" );
 				byte *params = ( byte* )( malloc( 37 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = LoginName;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Password;
 				*( ScriptArray< wchar_t >* )( params + 28 ) = DesiredPlayerName;
@@ -339,7 +339,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddLoginFailedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -348,7 +348,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearLoginFailedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -357,7 +357,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.Logout" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -367,7 +367,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddLogoutCompletedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -376,7 +376,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearLogoutCompletedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -385,7 +385,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetLoginStatus" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -395,7 +395,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.IsGuestLogin" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -405,7 +405,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.IsLocalLogin" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -415,7 +415,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetUniquePlayerId" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = PlayerID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -427,7 +427,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetPlayerNickname" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -437,7 +437,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.CanPlayOnline" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -447,7 +447,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.CanDownloadUserContent" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -457,7 +457,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.CanPurchaseContent" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -467,7 +467,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.CanViewPlayerProfiles" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -477,7 +477,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.CanShowPresenceInformation" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -487,7 +487,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.IsFriend" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = PlayerID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -498,7 +498,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AreAnyFriends" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -542,7 +542,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetPlayerNicknameFromIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = UserIndex;
+				*( int* )params = UserIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -552,7 +552,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetPlayerUniqueNetIdFromIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = UserIndex;
+				*( int* )params = UserIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -628,7 +628,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.IsControllerConnected" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ControllerId;
+				*( int* )params = ControllerId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -695,7 +695,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.SendChatMessage" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Channel;
+				*( int* )params = Channel;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -705,7 +705,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.SendPrivateChatMessage" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PlayerName;
+				*( ScriptArray< wchar_t >* )params = PlayerName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -715,7 +715,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.WriteActiveCharacterClass" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -741,7 +741,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.WritePlayerProfileData" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = UniqueId;
+				*( void** )params = UniqueId;
 				*( class TgPlayerProfile** )( params + 8 ) = Profile;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -752,7 +752,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadPlayerProfileData" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = UniqueId;
+				*( void** )params = UniqueId;
 				*( class TgPlayerProfile** )( params + 8 ) = Profile;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -763,7 +763,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.NotifyTeamChange" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( void** )( params + 0 ) = PlayerUid;
+				*( void** )params = PlayerUid;
 				*( byte* )( params + 8 ) = TeamID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -773,7 +773,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetCharacterIdFromClassId" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = UniqueId;
+				*( void** )params = UniqueId;
 				*( int* )( params + 8 ) = nClassId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -784,7 +784,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.IsMuted" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = PlayerID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -795,7 +795,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.CanCommunicate" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -839,7 +839,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadProfileSettings" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( class OnlineProfileSettings** )( params + 4 ) = ProfileSettings;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -850,7 +850,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.WriteProfileSettings" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( class OnlineProfileSettings** )( params + 4 ) = ProfileSettings;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -861,7 +861,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetProfileSettings" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class OnlineProfileSettings** )( params + function->return_val_offset() );
@@ -887,7 +887,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReadProfileSettingsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -896,7 +896,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReadProfileSettingsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -905,7 +905,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddWriteProfileSettingsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -914,7 +914,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearWriteProfileSettingsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -923,7 +923,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadPlayerStorage" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( class OnlinePlayerStorage** )( params + 4 ) = PlayerStorage;
 				*( int* )( params + 8 ) = DeviceID;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -935,7 +935,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReadPlayerStorageCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -944,7 +944,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReadPlayerStorageCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -953,7 +953,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadPlayerStorageForNetId" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = NetId;
 				*( class OnlinePlayerStorage** )( params + 12 ) = PlayerStorage;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -965,7 +965,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReadPlayerStorageForNetIdCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = NetId;
+				*( void** )params = NetId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -974,7 +974,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReadPlayerStorageForNetIdCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = NetId;
+				*( void** )params = NetId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -983,7 +983,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetPlayerStorage" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class OnlinePlayerStorage** )( params + function->return_val_offset() );
@@ -993,7 +993,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.WritePlayerStorage" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( class OnlinePlayerStorage** )( params + 4 ) = PlayerStorage;
 				*( int* )( params + 8 ) = DeviceID;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1005,7 +1005,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddWritePlayerStorageCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1014,7 +1014,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearWritePlayerStorageCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1023,7 +1023,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddFriendsChangeDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1032,7 +1032,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearFriendsChangeDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1041,7 +1041,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadFriendsList" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 4 ) = Count;
 				*( int* )( params + 8 ) = StartingAt;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1053,7 +1053,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReadFriendsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1062,7 +1062,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReadFriendsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1071,7 +1071,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetFriendsList" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 16 ) = Count;
 				*( int* )( params + 20 ) = StartingAt;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1083,7 +1083,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.SetOnlineStatus" );
 				byte *params = ( byte* )( malloc( 29 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 4 ) = StatusId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1093,7 +1093,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ShowKeyboardUI" );
 				byte *params = ( byte* )( malloc( 49 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = TitleText;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = DescriptionText;
 				*( bool* )( params + 28 ) = bIsPassword;
@@ -1125,10 +1125,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetKeyboardInputResults" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = bWasCanceled;
+				*( byte* )params = bWasCanceled;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				bWasCanceled = *( byte* )( params + 0 );
+				bWasCanceled = *( byte* )params;
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
 			}
 
@@ -1136,7 +1136,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddFriend" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = NewFriend;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1148,7 +1148,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddFriendByName" );
 				byte *params = ( byte* )( malloc( 25 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = FriendName;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1160,7 +1160,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddAddFriendByNameCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1169,7 +1169,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearAddFriendByNameCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1178,7 +1178,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AcceptFriendInvite" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = RequestingPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1189,7 +1189,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.DenyFriendInvite" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = RequestingPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1200,7 +1200,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.RemoveFriend" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = FormerFriend;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1211,7 +1211,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddFriendInviteReceivedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1220,7 +1220,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearFriendInviteReceivedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1229,7 +1229,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.SendMessageToFriend" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = Friend;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1241,7 +1241,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.SendGameInviteToFriend" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = Friend;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Text;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1253,7 +1253,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.SendGameInviteToFriends" );
 				byte *params = ( byte* )( malloc( 25 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Text;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1264,7 +1264,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReceivedGameInviteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1273,7 +1273,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReceivedGameInviteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1282,7 +1282,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.JoinFriendGame" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = Friend;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1309,7 +1309,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetFriendMessages" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1318,7 +1318,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddFriendMessageReceivedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1327,7 +1327,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearFriendMessageReceivedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1336,7 +1336,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.UnlockAchievement" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 4 ) = AchievementId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1347,7 +1347,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadAchievements" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 4 ) = TitleId;
 				*( bool* )( params + 8 ) = bShouldReadText;
 				*( bool* )( params + 12 ) = bShouldReadImages;
@@ -1360,7 +1360,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetAchievements" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 16 ) = TitleId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1371,7 +1371,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddUnlockAchievementCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1380,7 +1380,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearUnlockAchievementCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1389,7 +1389,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReadAchievementsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1398,7 +1398,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReadAchievementsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1407,7 +1407,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.DeleteMessage" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 4 ) = MessageIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1418,7 +1418,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ShowFriendsUI" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1428,7 +1428,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.ShowLoginUI" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bShowOnlineOnly;
+				*( bool* )params = bShowOnlineOnly;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1438,7 +1438,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineSubsystemMcts.SetNetworkNotificationPosition" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = NewPos;
+				*( byte* )params = NewPos;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

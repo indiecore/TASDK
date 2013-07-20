@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetLinearDriveScale" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( float* )( params + 0 ) = InLinearSpringScale;
+				*( float* )params = InLinearSpringScale;
 				*( float* )( params + 4 ) = InLinearDampingScale;
 				*( float* )( params + 8 ) = InLinearForceLimitScale;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetAngularDriveScale" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( float* )( params + 0 ) = InAngularSpringScale;
+				*( float* )params = InAngularSpringScale;
 				*( float* )( params + 4 ) = InAngularDampingScale;
 				*( float* )( params + 8 ) = InAngularForceLimitScale;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -54,7 +54,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.GetTotalMassBelowBone" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = InBoneName;
+				*( ScriptName* )params = InBoneName;
 				*( class PhysicsAsset** )( params + 8 ) = InAsset;
 				*( class SkeletalMesh** )( params + 12 ) = InSkelMesh;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetAllBodiesFixed" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewFixed;
+				*( bool* )params = bNewFixed;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -75,7 +75,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetNamedBodiesFixed" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( bool* )( params + 0 ) = bNewFixed;
+				*( bool* )params = bNewFixed;
 				*( bool* )( params + 20 ) = bSetOtherBodiesToComplement;
 				*( bool* )( params + 24 ) = bSkipFullAnimWeightBodies;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -86,19 +86,19 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.ForceAllBodiesBelowUnfixed" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = InBoneName;
+				*( ScriptName* )params = InBoneName;
 				*( class PhysicsAsset** )( params + 8 ) = InAsset;
 				*( bool* )( params + 16 ) = InbInstanceAlwaysFullAnimWeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				InBoneName = *( ScriptName* )( params + 0 );
+				InBoneName = *( ScriptName* )params;
 			}
 
 			void SetAllMotorsAngularPositionDrive( bool bEnableSwingDrive, bool bEnableTwistDrive, bool bSkipFullAnimWeightBodies )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetAllMotorsAngularPositionDrive" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bEnableSwingDrive;
+				*( bool* )params = bEnableSwingDrive;
 				*( bool* )( params + 4 ) = bEnableTwistDrive;
 				*( bool* )( params + 12 ) = bSkipFullAnimWeightBodies;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -109,7 +109,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetAllMotorsAngularVelocityDrive" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bEnableSwingDrive;
+				*( bool* )params = bEnableSwingDrive;
 				*( bool* )( params + 4 ) = bEnableTwistDrive;
 				*( bool* )( params + 12 ) = bSkipFullAnimWeightBodies;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -120,7 +120,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetAllMotorsAngularDriveParams" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( float* )( params + 0 ) = InSpring;
+				*( float* )params = InSpring;
 				*( float* )( params + 4 ) = InDamping;
 				*( float* )( params + 8 ) = InForceLimit;
 				*( bool* )( params + 16 ) = bSkipFullAnimWeightBodies;
@@ -132,7 +132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetNamedMotorsAngularPositionDrive" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( bool* )( params + 0 ) = bEnableSwingDrive;
+				*( bool* )params = bEnableSwingDrive;
 				*( bool* )( params + 4 ) = bEnableTwistDrive;
 				*( bool* )( params + 24 ) = bSetOtherBodiesToComplement;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -143,7 +143,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetNamedMotorsAngularVelocityDrive" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( bool* )( params + 0 ) = bEnableSwingDrive;
+				*( bool* )params = bEnableSwingDrive;
 				*( bool* )( params + 4 ) = bEnableTwistDrive;
 				*( bool* )( params + 24 ) = bSetOtherBodiesToComplement;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -154,7 +154,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetNamedRBBoneSprings" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( bool* )( params + 0 ) = bEnable;
+				*( bool* )params = bEnable;
 				*( float* )( params + 16 ) = InBoneLinearSpring;
 				*( float* )( params + 20 ) = InBoneAngularSpring;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -165,7 +165,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetNamedBodiesBlockRigidBody" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( bool* )( params + 0 ) = bNewBlockRigidBody;
+				*( bool* )params = bNewBlockRigidBody;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -174,7 +174,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetFullAnimWeightBlockRigidBody" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bNewBlockRigidBody;
+				*( bool* )params = bNewBlockRigidBody;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -183,7 +183,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.SetFullAnimWeightBonesFixed" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bNewFixed;
+				*( bool* )params = bNewFixed;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -192,7 +192,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.FindBodyInstance" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = BodyName;
+				*( ScriptName* )params = BodyName;
 				*( class PhysicsAsset** )( params + 8 ) = InAsset;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -203,7 +203,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicsAssetInstance.FindConstraintInstance" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = ConName;
+				*( ScriptName* )params = ConName;
 				*( class PhysicsAsset** )( params + 8 ) = InAsset;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

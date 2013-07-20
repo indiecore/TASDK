@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrInventoryStation_Spawnable.TakeDamage" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( int* )( params + 0 ) = DamageAmount;
+				*( int* )params = DamageAmount;
 				*( class Controller** )( params + 4 ) = EventInstigator;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = Momentum;

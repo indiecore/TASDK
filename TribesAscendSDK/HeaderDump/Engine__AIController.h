@@ -46,7 +46,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AIController.DisplayDebug" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				*( float* )( params + 4 ) = out_YL;
 				*( float* )( params + 8 ) = out_YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -59,7 +59,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AIController.SetTeam" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = inTeamIdx;
+				*( int* )params = inTeamIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -68,11 +68,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AIController.GetPlayerViewPoint" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = out_Location;
+				*( Vector* )params = out_Location;
 				*( Rotator* )( params + 12 ) = out_Rotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				out_Location = *( Vector* )( params + 0 );
+				out_Location = *( Vector* )params;
 				out_Rotation = *( Rotator* )( params + 12 );
 			}
 
@@ -80,7 +80,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AIController.OnAIMoveToActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_AIMoveToActor** )( params + 0 ) = Action;
+				*( class SeqAct_AIMoveToActor** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AIController.NotifyWeaponFired" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class Weapon** )( params + 0 ) = W;
+				*( class Weapon** )params = W;
 				*( byte* )( params + 4 ) = FireMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AIController.NotifyWeaponFinishedFiring" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class Weapon** )( params + 0 ) = W;
+				*( class Weapon** )params = W;
 				*( byte* )( params + 4 ) = FireMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -109,7 +109,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AIController.CanFireWeapon" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class Weapon** )( params + 0 ) = Wpn;
+				*( class Weapon** )params = Wpn;
 				*( byte* )( params + 4 ) = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRadarStation_Neutral.ShouldShowHelpText" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = HelpTextType;
+				*( byte* )params = HelpTextType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

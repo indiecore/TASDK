@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimBlendByWeapon.AnimFire" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptName* )( params + 0 ) = FireSequence;
+				*( ScriptName* )params = FireSequence;
 				*( bool* )( params + 8 ) = bAutoFire;
 				*( float* )( params + 12 ) = AnimRate;
 				*( float* )( params + 16 ) = SpecialBlendTime;
@@ -39,7 +39,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimBlendByWeapon.AnimStopFire" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = SpecialBlendTime;
+				*( float* )params = SpecialBlendTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

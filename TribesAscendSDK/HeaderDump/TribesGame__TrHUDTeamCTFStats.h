@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.Initialize" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class TrPlayerController** )( params + 0 ) = PC;
+				*( class TrPlayerController** )params = PC;
 				*( class GfxTrHud** )( params + 4 ) = MP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.GetTeamIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = I;
+				*( int* )params = I;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.UpdateFlagStatus" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				*( class TrGameReplicationInfo** )params = GRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -96,7 +96,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.UpdateGeneratorStatus" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				*( class TrGameReplicationInfo** )params = GRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -105,7 +105,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.UpdateTeamScore" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				*( class TrGameReplicationInfo** )params = GRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -114,7 +114,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.UpdateTime" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				*( class TrGameReplicationInfo** )params = GRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -123,7 +123,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUDTeamCTFStats.FormatTime" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Seconds;
+				*( int* )params = Seconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );

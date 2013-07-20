@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GfxTrHudTeam.Init" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LocalPlayer** )( params + 0 ) = Player;
+				*( class LocalPlayer** )params = Player;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GfxTrHudTeam.ClearStats" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = clearScores;
+				*( bool* )params = clearScores;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -53,7 +53,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GfxTrHudTeam.UpdateGameHUD" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class UTPlayerReplicationInfo** )params = PRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -62,7 +62,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GfxTrHudTeam.GetRank" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class PlayerReplicationInfo** )params = PRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );

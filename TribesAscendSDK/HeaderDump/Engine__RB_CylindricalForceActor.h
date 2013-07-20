@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_CylindricalForceActor.OnToggle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Toggle** )( params + 0 ) = inAction;
+				*( class SeqAct_Toggle** )params = inAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

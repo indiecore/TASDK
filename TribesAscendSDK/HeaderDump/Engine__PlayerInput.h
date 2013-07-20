@@ -27,7 +27,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerInput.CheckForDoubleClickMove" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -106,7 +106,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerInput.SetSensitivity" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = F;
+				*( float* )params = F;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -115,7 +115,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerInput.DrawHUD" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class HUD** )( params + 0 ) = H;
+				*( class HUD** )params = H;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -124,7 +124,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerInput.PreProcessInput" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -133,7 +133,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerInput.PostProcessInput" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -142,7 +142,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerInput.AdjustMouseSensitivity" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = FOVScale;
+				*( float* )params = FOVScale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -156,11 +156,11 @@ namespace UnrealScript
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
-			void PlayerInput_( float DeltaTime )
+			void PlayerInput( float DeltaTime )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerInput.PlayerInput" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -169,7 +169,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerInput.ProcessInputMatching" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -210,7 +210,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerInput.SmoothMouse" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( float* )( params + 0 ) = aMouse;
+				*( float* )params = aMouse;
 				*( float* )( params + 4 ) = DeltaTime;
 				*( byte* )( params + 8 ) = SampleCount;
 				*( int* )( params + 12 ) = Index;
@@ -240,7 +240,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerInput.PreClientTravel" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PendingURL;
+				*( ScriptArray< wchar_t >* )params = PendingURL;
 				*( byte* )( params + 12 ) = TravelType;
 				*( bool* )( params + 16 ) = bIsSeamlessTravel;
 				ScriptObject *object = ( ScriptObject* )( this );

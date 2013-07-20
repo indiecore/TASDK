@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoalFilter_OutOfViewFrom.MustBeHiddenFromThisPoint" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class NavMeshGoal_GenericFilterContainer** )( params + 0 ) = FilterContainer;
+				*( class NavMeshGoal_GenericFilterContainer** )params = FilterContainer;
 				*( Vector* )( params + 4 ) = InOutOfViewLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

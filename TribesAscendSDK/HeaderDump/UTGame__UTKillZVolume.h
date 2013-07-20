@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTKillZVolume.ActorEnteredVolume" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTKillZVolume.PawnEnteredVolume" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -42,7 +42,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTKillZVolume.Touch" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -53,7 +53,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTKillZVolume.KillActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

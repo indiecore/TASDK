@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NxGenericForceFieldBrush.StopsProjectile" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Projectile** )( params + 0 ) = P;
+				*( class Projectile** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

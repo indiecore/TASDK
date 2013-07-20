@@ -42,7 +42,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_Spinfusor.OnAnimPlay" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class AnimNodeSequence** )( params + 0 ) = SeqNode;
+				*( class AnimNodeSequence** )params = SeqNode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -51,7 +51,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_Spinfusor.OnAnimEnd" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class AnimNodeSequence** )( params + 0 ) = SeqNode;
+				*( class AnimNodeSequence** )params = SeqNode;
 				*( float* )( params + 4 ) = PlayedTime;
 				*( float* )( params + 8 ) = ExcessTime;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -62,7 +62,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_Spinfusor.PlayFireEffects" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				*( Vector* )( params + 4 ) = HitLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -80,7 +80,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_Spinfusor.SetDiscVisibility" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bVisible;
+				*( bool* )params = bVisible;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_Spinfusor.SetDiscSpinning" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnabled;
+				*( bool* )params = bEnabled;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

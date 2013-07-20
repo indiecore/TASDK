@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Path_MinDistBetweenSpecsOfType.EnforceMinDist" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( float* )( params + 4 ) = InMinDist;
 				*( ScriptClass** )( params + 8 ) = InSpecClass;
 				*( Vector* )( params + 12 ) = LastLocation;

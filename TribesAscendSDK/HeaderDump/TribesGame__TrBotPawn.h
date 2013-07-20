@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBotPawn.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBotPawn.RechargeHealthPool" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaSeconds;
+				*( float* )params = DeltaSeconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

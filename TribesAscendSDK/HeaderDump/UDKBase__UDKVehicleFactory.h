@@ -39,7 +39,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicleFactory.SetHUDLocation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = NewHUDLocation;
+				*( Vector* )params = NewHUDLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNode_MultiBlendPerBone.SetMaskWeight" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = MaskIndex;
+				*( int* )params = MaskIndex;
 				*( float* )( params + 4 ) = DesiredWeight;
 				*( float* )( params + 8 ) = BlendTime;
 				ScriptObject *object = ( ScriptObject* )( this );

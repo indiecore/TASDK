@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdDestinationQueuePoint.QueueReachedBy" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class GameCrowdAgent** )( params + 0 ) = Agent;
+				*( class GameCrowdAgent** )params = Agent;
 				*( Vector* )( params + 4 ) = TestPosition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -60,7 +60,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdDestinationQueuePoint.ReachedDestination" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdAgent** )( params + 0 ) = Agent;
+				*( class GameCrowdAgent** )params = Agent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdDestinationQueuePoint.AdvanceCustomerTo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdInteractionPoint** )( params + 0 ) = FrontPosition;
+				*( class GameCrowdInteractionPoint** )params = FrontPosition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdDestinationQueuePoint.AddCustomer" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class GameCrowdAgent** )( params + 0 ) = NewCustomer;
+				*( class GameCrowdAgent** )params = NewCustomer;
 				*( class GameCrowdInteractionPoint** )( params + 4 ) = PreviousPosition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -96,7 +96,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdDestinationQueuePoint.ClearQueue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdAgent** )( params + 0 ) = OldCustomer;
+				*( class GameCrowdAgent** )params = OldCustomer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

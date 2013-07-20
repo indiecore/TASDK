@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrStormControlPointGate.Touch" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrStormControlPointGate.PostRenderFor" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( class Canvas** )( params + 4 ) = Canvas;
 				*( Vector* )( params + 8 ) = CameraPosition;
 				*( Vector* )( params + 20 ) = CameraDir;

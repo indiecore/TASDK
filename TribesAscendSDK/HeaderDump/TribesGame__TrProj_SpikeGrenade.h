@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_SpikeGrenade.ReplicatedEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = VarName;
+				*( ScriptName* )params = VarName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_SpikeGrenade.InitProjectile" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = Direction;
+				*( Vector* )params = Direction;
 				*( ScriptClass** )( params + 12 ) = ClassToInherit;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -67,7 +67,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_SpikeGrenade.Explode" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = HitLocation;
+				*( Vector* )params = HitLocation;
 				*( Vector* )( params + 12 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -110,7 +110,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_SpikeGrenade.SpawnFractalExplosionEffects" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = ShotLocation;
+				*( Vector* )params = ShotLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -127,7 +127,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_SpikeGrenade.SpawnExplosionEffects" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = HitLocation;
+				*( Vector* )params = HitLocation;
 				*( Vector* )( params + 12 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

@@ -36,7 +36,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InteractiveFoliageActor.TakeDamage" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( int* )( params + 0 ) = Damage;
+				*( int* )params = Damage;
 				*( class Controller** )( params + 4 ) = EventInstigator;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = Momentum;
@@ -51,7 +51,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InteractiveFoliageActor.Touch" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );

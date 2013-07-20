@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCamera_Spectator.InitializeFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCamera_Spectator.UpdateCamera" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -58,11 +58,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCamera_Spectator.UpdateViewTarget" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( void** )( params + 0 ) = OutVT;
+				*( void** )params = OutVT;
 				*( float* )( params + 44 ) = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				OutVT = *( void** )( params + 0 );
+				OutVT = *( void** )params;
 			}
 
 			void ShowHiddenPawn(  )
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCamera_Spectator.SetFOV" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = NewFOV;
+				*( float* )params = NewFOV;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

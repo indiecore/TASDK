@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterPool.SpawnEmitter" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( class ParticleSystem** )( params + 0 ) = EmitterTemplate;
+				*( class ParticleSystem** )params = EmitterTemplate;
 				*( Vector* )( params + 4 ) = SpawnLocation;
 				*( Rotator* )( params + 16 ) = SpawnRotation;
 				*( class Actor** )( params + 28 ) = AttachToActor;
@@ -60,7 +60,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterPool.ClearPoolComponents" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bClearActive;
+				*( bool* )params = bClearActive;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterPool.GetFreeStaticMeshComponent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bCreateNewObject;
+				*( bool* )params = bCreateNewObject;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterPool.GetFreeMatInstConsts" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bCreateNewObject;
+				*( bool* )params = bCreateNewObject;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class MaterialInstanceConstant** )( params + function->return_val_offset() );
@@ -105,7 +105,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterPool.GetPooledComponent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class ParticleSystem** )( params + 0 ) = EmitterTemplate;
+				*( class ParticleSystem** )params = EmitterTemplate;
 				*( bool* )( params + 4 ) = bAutoActivate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -116,7 +116,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterPool.SpawnEmitterMeshAttachment" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( class ParticleSystem** )( params + 0 ) = EmitterTemplate;
+				*( class ParticleSystem** )params = EmitterTemplate;
 				*( ScriptName* )( params + 8 ) = AttachPointName;
 				*( bool* )( params + 16 ) = bAttachToSocket;
 				*( Vector* )( params + 20 ) = RelativeLoc;
@@ -130,7 +130,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.EmitterPool.SpawnEmitterCustomLifetime" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class ParticleSystem** )( params + 0 ) = EmitterTemplate;
+				*( class ParticleSystem** )params = EmitterTemplate;
 				*( bool* )( params + 4 ) = bSkipAutoActivate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

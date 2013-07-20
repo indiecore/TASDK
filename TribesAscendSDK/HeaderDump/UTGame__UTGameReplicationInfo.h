@@ -42,7 +42,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameReplicationInfo.InOrder" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = P1;
+				*( class PlayerReplicationInfo** )params = P1;
 				*( class PlayerReplicationInfo** )( params + 4 ) = P2;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameReplicationInfo.SetFlagHome" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TeamIndex;
+				*( int* )params = TeamIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -79,7 +79,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameReplicationInfo.FlagIsHome" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TeamIndex;
+				*( int* )params = TeamIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -98,7 +98,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameReplicationInfo.SetFlagHeldFriendly" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TeamIndex;
+				*( int* )params = TeamIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -107,7 +107,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameReplicationInfo.FlagIsHeldFriendly" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TeamIndex;
+				*( int* )params = TeamIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -117,7 +117,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameReplicationInfo.SetFlagHeldEnemy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TeamIndex;
+				*( int* )params = TeamIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -126,7 +126,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameReplicationInfo.FlagIsHeldEnemy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TeamIndex;
+				*( int* )params = TeamIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -136,7 +136,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameReplicationInfo.SetFlagDown" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TeamIndex;
+				*( int* )params = TeamIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -145,7 +145,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameReplicationInfo.FlagIsDown" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TeamIndex;
+				*( int* )params = TeamIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -163,7 +163,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameReplicationInfo.ShowMidGameMenu" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class UTPlayerController** )( params + 0 ) = InstigatorPC;
+				*( class UTPlayerController** )params = InstigatorPC;
 				*( ScriptName* )( params + 4 ) = TabTag;
 				*( bool* )( params + 12 ) = bEnableInput;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -174,7 +174,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameReplicationInfo.SetHudShowScores" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bShow;
+				*( bool* )params = bShow;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -183,7 +183,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGameReplicationInfo.AddGameRule" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Rule;
+				*( ScriptArray< wchar_t >* )params = Rule;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

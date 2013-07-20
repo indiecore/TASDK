@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.GetUniquePlayerId" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = PlayerID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.GetLoginStatus" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.GetPlayerNickname" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.CanPlayOnline" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.CanDownloadUserContent" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnLoginChange" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnReadAchievementsComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TitleId;
+				*( int* )params = TitleId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -102,7 +102,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnUnlockAchievementComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -111,7 +111,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnFriendMessageReceived" );
 				byte *params = ( byte* )( malloc( 33 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = SendingPlayer;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = SendingNick;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = Message;
@@ -123,7 +123,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnJoinFriendGameComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -132,7 +132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnReceivedGameInvite" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = InviterName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -142,7 +142,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnFriendInviteReceived" );
 				byte *params = ( byte* )( malloc( 33 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = RequestingPlayer;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = RequestingNick;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = Message;
@@ -154,7 +154,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnAddFriendByNameComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -163,7 +163,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnKeyboardInputComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -172,7 +172,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnReadFriendsComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -181,7 +181,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnWritePlayerStorageComplete" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( bool* )( params + 4 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -191,7 +191,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnReadPlayerStorageForNetIdComplete" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = NetId;
+				*( void** )params = NetId;
 				*( bool* )( params + 8 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -201,7 +201,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnReadPlayerStorageComplete" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( bool* )( params + 4 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -211,7 +211,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnWriteProfileSettingsComplete" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( bool* )( params + 4 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -221,7 +221,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnReadProfileSettingsComplete" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( bool* )( params + 4 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -231,7 +231,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnLoginStatusChange" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = NewStatus;
+				*( byte* )params = NewStatus;
 				*( void** )( params + 4 ) = NewId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -241,7 +241,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnLogoutCompleted" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -250,7 +250,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.OnLoginFailed" );
 				byte *params = ( byte* )( malloc( 2 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( byte* )( params + 1 ) = ErrorCode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -284,7 +284,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ShowLoginUI" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bShowOnlineOnly;
+				*( bool* )params = bShowOnlineOnly;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -294,7 +294,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.Login" );
 				byte *params = ( byte* )( malloc( 29 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = LoginName;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Password;
 				*( bool* )( params + 28 ) = bWantsLocalOnly;
@@ -307,7 +307,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddLoginFailedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -316,7 +316,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearLoginFailedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -325,7 +325,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.Logout" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -335,7 +335,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddLogoutCompletedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -344,7 +344,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearLogoutCompletedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -353,7 +353,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.IsGuestLogin" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -363,7 +363,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.IsLocalLogin" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -373,7 +373,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.CanCommunicate" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -383,7 +383,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.CanPurchaseContent" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -393,7 +393,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.CanViewPlayerProfiles" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -403,7 +403,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.CanShowPresenceInformation" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -413,7 +413,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.IsFriend" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = PlayerID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -424,7 +424,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AreAnyFriends" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -434,7 +434,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.IsMuted" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = PlayerID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -445,7 +445,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ShowFriendsUI" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -521,7 +521,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddFriendsChangeDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -530,7 +530,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearFriendsChangeDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -539,7 +539,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ReadProfileSettings" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( class OnlineProfileSettings** )( params + 4 ) = ProfileSettings;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -550,7 +550,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddReadProfileSettingsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -559,7 +559,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearReadProfileSettingsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -568,7 +568,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.GetProfileSettings" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class OnlineProfileSettings** )( params + function->return_val_offset() );
@@ -578,7 +578,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.WriteProfileSettings" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( class OnlineProfileSettings** )( params + 4 ) = ProfileSettings;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -589,7 +589,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddWriteProfileSettingsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -598,7 +598,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearWriteProfileSettingsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -607,7 +607,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ReadPlayerStorage" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( class OnlinePlayerStorage** )( params + 4 ) = PlayerStorage;
 				*( int* )( params + 8 ) = DeviceID;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -619,7 +619,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddReadPlayerStorageCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -628,7 +628,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearReadPlayerStorageCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -637,7 +637,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ReadPlayerStorageForNetId" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = NetId;
 				*( class OnlinePlayerStorage** )( params + 12 ) = PlayerStorage;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -649,7 +649,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddReadPlayerStorageForNetIdCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = NetId;
+				*( void** )params = NetId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -658,7 +658,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearReadPlayerStorageForNetIdCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = NetId;
+				*( void** )params = NetId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -667,7 +667,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.GetPlayerStorage" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class OnlinePlayerStorage** )( params + function->return_val_offset() );
@@ -677,7 +677,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.WritePlayerStorage" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( class OnlinePlayerStorage** )( params + 4 ) = PlayerStorage;
 				*( int* )( params + 8 ) = DeviceID;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -689,7 +689,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddWritePlayerStorageCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -698,7 +698,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearWritePlayerStorageCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -707,7 +707,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ReadFriendsList" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 4 ) = Count;
 				*( int* )( params + 8 ) = StartingAt;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -719,7 +719,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddReadFriendsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -728,7 +728,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearReadFriendsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -737,7 +737,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.GetFriendsList" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 16 ) = Count;
 				*( int* )( params + 20 ) = StartingAt;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -749,7 +749,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.SetOnlineStatus" );
 				byte *params = ( byte* )( malloc( 29 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 4 ) = StatusId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -759,7 +759,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ShowKeyboardUI" );
 				byte *params = ( byte* )( malloc( 49 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = TitleText;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = DescriptionText;
 				*( bool* )( params + 28 ) = bIsPassword;
@@ -791,10 +791,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.GetKeyboardInputResults" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = bWasCanceled;
+				*( byte* )params = bWasCanceled;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				bWasCanceled = *( byte* )( params + 0 );
+				bWasCanceled = *( byte* )params;
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
 			}
 
@@ -802,7 +802,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddFriend" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = NewFriend;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -814,7 +814,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddFriendByName" );
 				byte *params = ( byte* )( malloc( 25 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = FriendName;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -826,7 +826,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddAddFriendByNameCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -835,7 +835,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearAddFriendByNameCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -844,7 +844,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AcceptFriendInvite" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = RequestingPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -855,7 +855,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.DenyFriendInvite" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = RequestingPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -866,7 +866,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.RemoveFriend" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = FormerFriend;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -877,7 +877,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddFriendInviteReceivedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -886,7 +886,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearFriendInviteReceivedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -895,7 +895,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.SendMessageToFriend" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = Friend;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -907,7 +907,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.SendGameInviteToFriend" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = Friend;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Text;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -919,7 +919,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.SendGameInviteToFriends" );
 				byte *params = ( byte* )( malloc( 25 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Text;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -930,7 +930,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddReceivedGameInviteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -939,7 +939,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearReceivedGameInviteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -948,7 +948,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.JoinFriendGame" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = Friend;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -975,7 +975,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.GetFriendMessages" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -984,7 +984,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddFriendMessageReceivedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -993,7 +993,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearFriendMessageReceivedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1002,7 +1002,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.DeleteMessage" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 4 ) = MessageIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1013,7 +1013,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.UnlockAchievement" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 4 ) = AchievementId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1024,7 +1024,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddUnlockAchievementCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1033,7 +1033,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearUnlockAchievementCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1042,7 +1042,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ReadAchievements" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 4 ) = TitleId;
 				*( bool* )( params + 8 ) = bShouldReadText;
 				*( bool* )( params + 12 ) = bShouldReadImages;
@@ -1055,7 +1055,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.AddReadAchievementsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1064,7 +1064,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.ClearReadAchievementsCompleteDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1073,7 +1073,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlinePlayerInterface.GetAchievements" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( int* )( params + 16 ) = TitleId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

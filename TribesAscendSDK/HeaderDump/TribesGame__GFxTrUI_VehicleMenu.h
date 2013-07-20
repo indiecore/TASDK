@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_VehicleMenu.Start" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = StartPaused;
+				*( bool* )params = StartPaused;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_VehicleMenu.ConfigureOptions" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = FamilyInfo;
+				*( ScriptClass** )params = FamilyInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -42,7 +42,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_VehicleMenu.VehicleOptionsComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Credits;
+				*( int* )params = Credits;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -59,7 +59,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_VehicleMenu.SetVehicleOption" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ClassName;
+				*( ScriptArray< wchar_t >* )params = ClassName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = DisplayName;
 				*( int* )( params + 24 ) = Cost;
 				*( int* )( params + 28 ) = nIconIndex;

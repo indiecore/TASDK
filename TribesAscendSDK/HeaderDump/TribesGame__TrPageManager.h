@@ -62,7 +62,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.NavigateGold" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bViaStore;
+				*( bool* )params = bViaStore;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -167,7 +167,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.PopupData" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -176,7 +176,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.PopupComplete" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Action;
+				*( int* )params = Action;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = TextInput;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -186,7 +186,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.TakeFocus" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( class GFxObject** )( params + 4 ) = DataList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -197,7 +197,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.TakeAction" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( class GFxObject** )( params + 4 ) = DataList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -224,7 +224,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.ModifyAction" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ActionIndex;
+				*( int* )params = ActionIndex;
 				*( class GFxObject** )( params + 4 ) = DataList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -235,7 +235,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.ModifyFocus" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ActionIndex;
+				*( int* )params = ActionIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -244,7 +244,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.HelpButton" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ActionIndex;
+				*( int* )params = ActionIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -253,7 +253,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.ProfileUp" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ActionIndex;
+				*( int* )params = ActionIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -262,7 +262,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.ProfileDown" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ActionIndex;
+				*( int* )params = ActionIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -271,7 +271,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.PushPage" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxTrPage** )( params + 0 ) = Page;
+				*( class GFxTrPage** )params = Page;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -280,7 +280,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.PushOpen" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxTrPage** )( params + 0 ) = Page;
+				*( class GFxTrPage** )params = Page;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -393,7 +393,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.PromoAction" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ActionIndex;
+				*( int* )params = ActionIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -402,7 +402,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.SelectedFeature" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ActionIndex;
+				*( int* )params = ActionIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -411,7 +411,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.ShowReticule" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -420,7 +420,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPageManager.SaveReticule" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Data;
+				*( class GFxObject** )params = Data;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

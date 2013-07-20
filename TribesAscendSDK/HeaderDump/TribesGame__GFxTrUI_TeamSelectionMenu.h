@@ -46,7 +46,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_TeamSelectionMenu.Start" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = StartPaused;
+				*( bool* )params = StartPaused;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -56,7 +56,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_TeamSelectionMenu.SetFontIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = FontIdx;
+				*( int* )params = FontIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_TeamSelectionMenu.SetLabels" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Title;
+				*( ScriptArray< wchar_t >* )params = Title;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Spectate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -83,7 +83,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_TeamSelectionMenu.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameReplicationInfo** )( params + 0 ) = GRI;
+				*( class GameReplicationInfo** )params = GRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -92,7 +92,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_TeamSelectionMenu.EnableBloodEagle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnable;
+				*( bool* )params = bEnable;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -101,7 +101,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_TeamSelectionMenu.AsTeamChooseEnableButton" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = TeamID;
+				*( int* )params = TeamID;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = bEnable;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -111,7 +111,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_TeamSelectionMenu.EnableDiamondSword" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnable;
+				*( bool* )params = bEnable;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -120,7 +120,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_TeamSelectionMenu.EnableSpectate" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnable;
+				*( bool* )params = bEnable;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -153,7 +153,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrUI_TeamSelectionMenu.CompleteMovie" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bHaveTeam;
+				*( bool* )params = bHaveTeam;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

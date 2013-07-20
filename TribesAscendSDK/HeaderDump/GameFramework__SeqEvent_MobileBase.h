@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqEvent_MobileBase.AddToMobileInput" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class MobilePlayerInput** )( params + 0 ) = MPI;
+				*( class MobilePlayerInput** )params = MPI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

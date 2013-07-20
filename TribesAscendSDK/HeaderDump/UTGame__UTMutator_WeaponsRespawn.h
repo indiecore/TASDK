@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMutator_WeaponsRespawn.InitMutator" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Options;
+				*( ScriptArray< wchar_t >* )params = Options;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = ErrorMessage;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

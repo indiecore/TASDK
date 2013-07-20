@@ -30,7 +30,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSpinfusorSpreeMessage.GetFontSize" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				*( class PlayerReplicationInfo** )( params + 4 ) = RelatedPRI1;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI2;
 				*( class PlayerReplicationInfo** )( params + 12 ) = LocalPlayer;
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSpinfusorSpreeMessage.GetString" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				*( bool* )( params + 4 ) = bPRI1HUD;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSpinfusorSpreeMessage.ClientReceive" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class PlayerController** )( params + 0 ) = P;
+				*( class PlayerController** )params = P;
 				*( int* )( params + 4 ) = Switch;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
@@ -70,7 +70,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSpinfusorSpreeMessage.AnnouncementSound" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = MessageIndex;
+				*( int* )params = MessageIndex;
 				*( class Object** )( params + 4 ) = OptionalObject;
 				*( class PlayerController** )( params + 8 ) = PC;
 				ScriptObject *object = ( ScriptObject* )( this );

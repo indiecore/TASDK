@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrObjectPool.GetTracer" );
 				byte *params = ( byte* )( malloc( 26 ) );
-				*( byte* )( params + 0 ) = TracerType;
+				*( byte* )params = TracerType;
 				*( byte* )( params + 1 ) = ActiveReloadTier;
 				*( Vector* )( params + 4 ) = SpawnLocation;
 				*( Rotator* )( params + 16 ) = SpawnRotation;
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrObjectPool.CreateTracer" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = TracerType;
+				*( byte* )params = TracerType;
 				*( ScriptClass** )( params + 4 ) = TracerClass;
 				*( int* )( params + 8 ) = Idx;
 				*( bool* )( params + 12 ) = bForceCreate;

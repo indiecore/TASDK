@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraAnimInst.SetPlaySpace" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = NewSpace;
+				*( byte* )params = NewSpace;
 				*( Rotator* )( params + 4 ) = UserPlaySpace;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -56,7 +56,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraAnimInst.Play" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( class CameraAnim** )( params + 0 ) = Anim;
+				*( class CameraAnim** )params = Anim;
 				*( class Actor** )( params + 4 ) = CamActor;
 				*( float* )( params + 8 ) = InRate;
 				*( float* )( params + 12 ) = InScale;
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraAnimInst.Update" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( float* )( params + 0 ) = NewRate;
+				*( float* )params = NewRate;
 				*( float* )( params + 4 ) = NewScale;
 				*( float* )( params + 8 ) = NewBlendInTime;
 				*( float* )( params + 12 ) = NewBlendOutTime;
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraAnimInst.AdvanceAnim" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				*( bool* )( params + 4 ) = bJump;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -96,7 +96,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraAnimInst.Stop" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bImmediate;
+				*( bool* )params = bImmediate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -105,7 +105,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraAnimInst.ApplyTransientScaling" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Scalar;
+				*( float* )params = Scalar;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

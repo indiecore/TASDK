@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDestroyableTarget.TakeDamage" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( int* )( params + 0 ) = DamageAmount;
+				*( int* )params = DamageAmount;
 				*( class Controller** )( params + 4 ) = EventInstigator;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = Momentum;
@@ -38,7 +38,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDestroyableTarget.OnToggle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Toggle** )( params + 0 ) = Action;
+				*( class SeqAct_Toggle** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

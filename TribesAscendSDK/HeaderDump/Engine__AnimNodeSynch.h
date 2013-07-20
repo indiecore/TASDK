@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSynch.AddNodeToGroup" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class AnimNodeSequence** )( params + 0 ) = SeqNode;
+				*( class AnimNodeSequence** )params = SeqNode;
 				*( ScriptName* )( params + 4 ) = GroupName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSynch.RemoveNodeFromGroup" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class AnimNodeSequence** )( params + 0 ) = SeqNode;
+				*( class AnimNodeSequence** )params = SeqNode;
 				*( ScriptName* )( params + 4 ) = GroupName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSynch.GetMasterNodeOfGroup" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = GroupName;
+				*( ScriptName* )params = GroupName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class AnimNodeSequence** )( params + function->return_val_offset() );
@@ -53,7 +53,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSynch.ForceRelativePosition" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = GroupName;
+				*( ScriptName* )params = GroupName;
 				*( float* )( params + 8 ) = RelativePosition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -63,7 +63,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSynch.GetRelativePosition" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = GroupName;
+				*( ScriptName* )params = GroupName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSynch.SetGroupRateScale" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = GroupName;
+				*( ScriptName* )params = GroupName;
 				*( float* )( params + 8 ) = NewRateScale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

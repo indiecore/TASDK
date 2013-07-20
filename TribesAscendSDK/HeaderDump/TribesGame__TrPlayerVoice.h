@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerVoice.PlaySoundEx" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = Command;
+				*( byte* )params = Command;
 				*( class TrPlayerController** )( params + 4 ) = TrPC;
 				*( class PlayerReplicationInfo** )( params + 8 ) = InstigatorPRI;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerVoice.PlaySoundContext" );
 				byte *params = ( byte* )( malloc( 14 ) );
-				*( class TrPlayerController** )( params + 0 ) = TrPC;
+				*( class TrPlayerController** )params = TrPC;
 				*( byte* )( params + 4 ) = ContextActor;
 				*( byte* )( params + 5 ) = ContextLocation;
 				*( bool* )( params + 8 ) = bEnemyLocation;
@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerVoice.PlayRandomSample" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPlayerController** )( params + 0 ) = TrPC;
+				*( class TrPlayerController** )params = TrPC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

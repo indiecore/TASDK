@@ -48,7 +48,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_Blink.OnBlink" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = PercentEffectiveness;
+				*( float* )params = PercentEffectiveness;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

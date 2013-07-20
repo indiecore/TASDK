@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSayMsg.GetConsoleColor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = RelatedPRI;
+				*( class PlayerReplicationInfo** )params = RelatedPRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );

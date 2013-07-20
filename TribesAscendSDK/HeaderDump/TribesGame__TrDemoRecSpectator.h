@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDemoRecSpectator.Slomo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = NewTimeDilation;
+				*( float* )params = NewTimeDilation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDemoRecSpectator.ViewClass" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptClass** )( params + 0 ) = aClass;
+				*( ScriptClass** )params = aClass;
 				*( bool* )( params + 4 ) = bQuiet;
 				*( bool* )( params + 8 ) = bCheat;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -80,7 +80,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDemoRecSpectator.SetViewTarget" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Actor** )( params + 0 ) = NewViewTarget;
+				*( class Actor** )params = NewViewTarget;
 				*( void** )( params + 4 ) = TransitionParams;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -90,7 +90,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDemoRecSpectator.ServerViewSelf" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = TransitionParams;
+				*( void** )params = TransitionParams;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDemoRecSpectator.ClientSetRealViewTarget" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = NewTarget;
+				*( class PlayerReplicationInfo** )params = NewTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -108,7 +108,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDemoRecSpectator.SetPause" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bPause;
+				*( bool* )params = bPause;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -126,11 +126,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDemoRecSpectator.GetPlayerViewPoint" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = CameraLocation;
+				*( Vector* )params = CameraLocation;
 				*( Rotator* )( params + 12 ) = CameraRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				CameraLocation = *( Vector* )( params + 0 );
+				CameraLocation = *( Vector* )params;
 				CameraRotation = *( Rotator* )( params + 12 );
 			}
 
@@ -138,7 +138,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDemoRecSpectator.UpdateRotation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

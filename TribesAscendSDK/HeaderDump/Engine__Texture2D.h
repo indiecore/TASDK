@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Texture2D.SetForceMipLevelsToBeResident" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = Seconds;
+				*( float* )params = Seconds;
 				*( int* )( params + 4 ) = CinematicTextureGroups;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -53,7 +53,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Texture2D.Create" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( int* )( params + 0 ) = InSizeX;
+				*( int* )params = InSizeX;
 				*( int* )( params + 4 ) = InSizeY;
 				*( byte* )( params + 8 ) = InFormat;
 				ScriptObject *object = ( ScriptObject* )( this );

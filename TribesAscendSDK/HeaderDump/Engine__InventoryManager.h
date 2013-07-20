@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.HandlePickupQuery" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = ItemClass;
+				*( ScriptClass** )params = ItemClass;
 				*( class Actor** )( params + 4 ) = Pickup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.AddInventory" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Inventory** )( params + 0 ) = NewItem;
+				*( class Inventory** )params = NewItem;
 				*( bool* )( params + 4 ) = bDoNotActivate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.GetPendingFireLength" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -67,7 +67,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.SetPendingFire" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( int* )( params + 4 ) = InFiringMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.ClearPendingFire" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( int* )( params + 4 ) = InFiringMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.IsPendingFire" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( int* )( params + 4 ) = InFiringMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -98,7 +98,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.ClearAllPendingFire" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -107,7 +107,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.InventoryActors" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = BaseClass;
+				*( ScriptClass** )params = BaseClass;
 				*( class Inventory** )( params + 4 ) = Inv;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -118,7 +118,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.SetupFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -135,7 +135,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.FindInventoryType" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = DesiredClass;
+				*( ScriptClass** )params = DesiredClass;
 				*( bool* )( params + 4 ) = bAllowSubclass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -146,7 +146,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.CreateInventory" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = NewInventoryItemClass;
+				*( ScriptClass** )params = NewInventoryItemClass;
 				*( bool* )( params + 4 ) = bDoNotActivate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -157,7 +157,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.RemoveFromInventory" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Inventory** )( params + 0 ) = ItemToRemove;
+				*( class Inventory** )params = ItemToRemove;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -182,7 +182,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.DrawHUD" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class HUD** )( params + 0 ) = H;
+				*( class HUD** )params = H;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -191,7 +191,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.GetWeaponRatingFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = W;
+				*( class Weapon** )params = W;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -201,7 +201,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.GetBestWeapon" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bForceADifferentWeapon;
+				*( bool* )params = bForceADifferentWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Weapon** )( params + function->return_val_offset() );
@@ -211,7 +211,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.SwitchToBestWeapon" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bForceADifferentWeapon;
+				*( bool* )params = bForceADifferentWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -236,7 +236,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.SetCurrentWeapon" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = DesiredWeapon;
+				*( class Weapon** )params = DesiredWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -245,7 +245,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.InternalSetCurrentWeapon" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = DesiredWeapon;
+				*( class Weapon** )params = DesiredWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -254,7 +254,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.ServerSetCurrentWeapon" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = DesiredWeapon;
+				*( class Weapon** )params = DesiredWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -263,7 +263,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.SetPendingWeapon" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = DesiredWeapon;
+				*( class Weapon** )params = DesiredWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -297,7 +297,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InventoryManager.ClientWeaponSet" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Weapon** )( params + 0 ) = NewWeapon;
+				*( class Weapon** )params = NewWeapon;
 				*( bool* )( params + 4 ) = bOptionalSet;
 				*( bool* )( params + 8 ) = bDoNotActivate;
 				ScriptObject *object = ( ScriptObject* )( this );

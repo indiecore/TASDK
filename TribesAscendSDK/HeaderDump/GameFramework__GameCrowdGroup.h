@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdGroup.AddMember" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdAgent** )( params + 0 ) = Agent;
+				*( class GameCrowdAgent** )params = Agent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdGroup.RemoveMember" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdAgent** )( params + 0 ) = Agent;
+				*( class GameCrowdAgent** )params = Agent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdGroup.UpdateDestinations" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdDestination** )( params + 0 ) = NewDestination;
+				*( class GameCrowdDestination** )params = NewDestination;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

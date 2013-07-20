@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.IniLocPatcher.OnReadTitleFileComplete" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Filename;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.IniLocPatcher.OnReadFileComplete" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Filename;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -59,7 +59,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.IniLocPatcher.ProcessIniLocFile" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Filename;
+				*( ScriptArray< wchar_t >* )params = Filename;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.IniLocPatcher.AddFileToDownload" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Filename;
+				*( ScriptArray< wchar_t >* )params = Filename;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -101,7 +101,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.IniLocPatcher.UpdateLocFileName" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Filename;
+				*( ScriptArray< wchar_t >* )params = Filename;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );

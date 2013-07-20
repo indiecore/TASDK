@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameUISceneClient.PauseGame" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bDesiredPauseState;
+				*( bool* )params = bDesiredPauseState;
 				*( int* )( params + 4 ) = PlayerIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameUISceneClient.NotifyClientTravel" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( class PlayerController** )( params + 0 ) = TravellingPlayer;
+				*( class PlayerController** )params = TravellingPlayer;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = TravelURL;
 				*( byte* )( params + 16 ) = TravelType;
 				*( bool* )( params + 20 ) = bIsSeamlessTravel;
@@ -85,7 +85,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameUISceneClient.NotifyPlayerAdded" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PlayerIndex;
+				*( int* )params = PlayerIndex;
 				*( class LocalPlayer** )( params + 4 ) = AddedPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameUISceneClient.NotifyPlayerRemoved" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PlayerIndex;
+				*( int* )params = PlayerIndex;
 				*( class LocalPlayer** )( params + 4 ) = RemovedPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -105,7 +105,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameUISceneClient.FindLocalPlayerIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Player** )( params + 0 ) = P;
+				*( class Player** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );

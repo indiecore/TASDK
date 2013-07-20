@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDoll.IsFullyStreamed" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( void** )( params + 0 ) = PaperDoll;
+				*( void** )params = PaperDoll;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -76,7 +76,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDoll.GetCharacterSkeletalMesh" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( ScriptClass** )( params + 0 ) = FamilyInfoClass;
+				*( ScriptClass** )params = FamilyInfoClass;
 				*( byte* )( params + 4 ) = TeamNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDoll.OnCharacterMeshContentDataClassLoaded" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = Skin3PDataClass;
+				*( ScriptClass** )params = Skin3PDataClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -96,7 +96,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDoll.OnSkeletalMeshFinishedStreaming" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SkeletalMesh** )( params + 0 ) = NewSkelMesh;
+				*( class SkeletalMesh** )params = NewSkelMesh;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDoll.SetFamilyInfo" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptClass** )( params + 0 ) = NewFamilyInfoClass;
+				*( ScriptClass** )params = NewFamilyInfoClass;
 				*( ScriptClass** )( params + 4 ) = DeviceClass;
 				*( ScriptClass** )( params + 8 ) = skinClass;
 				*( int* )( params + 12 ) = TeamNum;
@@ -133,7 +133,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDoll.StopCustomAnimation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = FadeOutTime;
+				*( float* )params = FadeOutTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -150,7 +150,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDoll.OnAnimEnd" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class AnimNodeSequence** )( params + 0 ) = SeqNode;
+				*( class AnimNodeSequence** )params = SeqNode;
 				*( float* )( params + 4 ) = PlayedTime;
 				*( float* )( params + 8 ) = ExcessTime;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -161,7 +161,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDoll.OnDeviceContentDataClassLoaded" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = DeviceContentDataClass;
+				*( ScriptClass** )params = DeviceContentDataClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -186,7 +186,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDoll.OnWeaponFinishedStreaming" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( void** )( params + 0 ) = NewPaperDollInfo;
+				*( void** )params = NewPaperDollInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -195,7 +195,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDoll.SetWeaponOnlyMesh" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = WeaponClass;
+				*( ScriptClass** )params = WeaponClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -204,7 +204,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDoll.GetDevicePaperDollInfo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = WeaponClass;
+				*( ScriptClass** )params = WeaponClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -214,7 +214,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDoll.SetMainMesh" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( void** )( params + 0 ) = NewInfo;
+				*( void** )params = NewInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

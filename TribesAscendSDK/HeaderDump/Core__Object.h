@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetSystemTime" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( int* )( params + 0 ) = Year;
+				*( int* )params = Year;
 				*( int* )( params + 4 ) = Month;
 				*( int* )( params + 8 ) = DayOfWeek;
 				*( int* )( params + 12 ) = Day;
@@ -51,7 +51,7 @@ namespace UnrealScript
 				*( int* )( params + 28 ) = MSec;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Year = *( int* )( params + 0 );
+				Year = *( int* )params;
 				Month = *( int* )( params + 4 );
 				DayOfWeek = *( int* )( params + 8 );
 				Day = *( int* )( params + 12 );
@@ -74,7 +74,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.TransformVectorByRotation" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( Rotator* )( params + 0 ) = SourceRotation;
+				*( Rotator* )params = SourceRotation;
 				*( Vector* )( params + 12 ) = SourceVector;
 				*( bool* )( params + 24 ) = bInverse;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -106,7 +106,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ByteToFloat" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = inputByte;
+				*( byte* )params = inputByte;
 				*( bool* )( params + 4 ) = bSigned;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -117,7 +117,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FloatToByte" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = inputFloat;
+				*( float* )params = inputFloat;
 				*( bool* )( params + 4 ) = bSigned;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -128,7 +128,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.UnwindHeading" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -138,7 +138,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FindDeltaAngle" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A1;
+				*( float* )params = A1;
 				*( float* )( params + 4 ) = A2;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -149,7 +149,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetHeadingAngle" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = Dir;
+				*( Vector* )params = Dir;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -159,17 +159,17 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetAngularDegreesFromRadians" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = OutFOV;
+				*( void** )params = OutFOV;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				OutFOV = *( void** )( params + 0 );
+				OutFOV = *( void** )params;
 			}
 
 			float Acos( float A )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Acos" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -179,25 +179,25 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetAngularFromDotDist" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = OutAngDist;
+				*( void** )params = OutAngDist;
 				*( void** )( params + 8 ) = DotDist;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				OutAngDist = *( void** )( params + 0 );
+				OutAngDist = *( void** )params;
 			}
 
 			bool GetAngularDistance( void* &OutAngularDist, Vector Direction, Vector AxisX, Vector AxisY, Vector AxisZ )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetAngularDistance" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( void** )( params + 0 ) = OutAngularDist;
+				*( void** )params = OutAngularDist;
 				*( Vector* )( params + 8 ) = Direction;
 				*( Vector* )( params + 20 ) = AxisX;
 				*( Vector* )( params + 32 ) = AxisY;
 				*( Vector* )( params + 44 ) = AxisZ;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				OutAngularDist = *( void** )( params + 0 );
+				OutAngularDist = *( void** )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -205,14 +205,14 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetDotDistance" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( void** )( params + 0 ) = OutDotDist;
+				*( void** )params = OutDotDist;
 				*( Vector* )( params + 8 ) = Direction;
 				*( Vector* )( params + 20 ) = AxisX;
 				*( Vector* )( params + 32 ) = AxisY;
 				*( Vector* )( params + 44 ) = AxisZ;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				OutDotDist = *( void** )( params + 0 );
+				OutDotDist = *( void** )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -220,7 +220,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.PointProjectToPlane" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( Vector* )( params + 0 ) = Point;
+				*( Vector* )params = Point;
 				*( Vector* )( params + 12 ) = A;
 				*( Vector* )( params + 24 ) = B;
 				*( Vector* )( params + 36 ) = C;
@@ -233,7 +233,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.PointDistToPlane" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( Vector* )( params + 0 ) = Point;
+				*( Vector* )params = Point;
 				*( Rotator* )( params + 12 ) = Orientation;
 				*( Vector* )( params + 24 ) = Origin;
 				*( Vector* )( params + 36 ) = out_ClosestPoint;
@@ -247,7 +247,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.PointDistToSegment" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( Vector* )( params + 0 ) = Point;
+				*( Vector* )params = Point;
 				*( Vector* )( params + 12 ) = StartPoint;
 				*( Vector* )( params + 24 ) = EndPoint;
 				*( Vector* )( params + 36 ) = OutClosestPoint;
@@ -261,7 +261,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.PointDistToLine" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( Vector* )( params + 0 ) = Point;
+				*( Vector* )params = Point;
 				*( Vector* )( params + 12 ) = Line;
 				*( Vector* )( params + 24 ) = Origin;
 				*( Vector* )( params + 36 ) = OutClosestPoint;
@@ -275,7 +275,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetPerObjectConfigSections" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptClass** )( params + 0 ) = SearchClass;
+				*( ScriptClass** )params = SearchClass;
 				*( class Object** )( params + 16 ) = ObjectOuter;
 				*( int* )( params + 20 ) = MaxResults;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -303,7 +303,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FindObject" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ObjectName;
+				*( ScriptArray< wchar_t >* )params = ObjectName;
 				*( ScriptClass** )( params + 12 ) = ObjectClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -314,7 +314,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.DynamicLoadObject" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ObjectName;
+				*( ScriptArray< wchar_t >* )params = ObjectName;
 				*( ScriptClass** )( params + 12 ) = ObjectClass;
 				*( bool* )( params + 16 ) = MayFail;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -326,7 +326,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetEnum" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Object** )( params + 0 ) = E;
+				*( class Object** )params = E;
 				*( int* )( params + 4 ) = I;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -337,7 +337,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Disable" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = ProbeFunc;
+				*( ScriptName* )params = ProbeFunc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -346,7 +346,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Enable" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = ProbeFunc;
+				*( ScriptName* )params = ProbeFunc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -387,7 +387,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.EndState" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = NextStateName;
+				*( ScriptName* )params = NextStateName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -396,7 +396,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.BeginState" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = PreviousStateName;
+				*( ScriptName* )params = PreviousStateName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -413,7 +413,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.PopState" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bPopAll;
+				*( bool* )params = bPopAll;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -422,7 +422,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.PushState" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = NewState;
+				*( ScriptName* )params = NewState;
 				*( ScriptName* )( params + 8 ) = NewLabel;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -441,7 +441,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.IsChildState" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = TestState;
+				*( ScriptName* )params = TestState;
 				*( ScriptName* )( params + 8 ) = TestParentState;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -452,7 +452,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.IsInState" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = TestState;
+				*( ScriptName* )params = TestState;
 				*( bool* )( params + 8 ) = bTestStateStack;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -463,7 +463,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GotoState" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = NewState;
+				*( ScriptName* )params = NewState;
 				*( ScriptName* )( params + 8 ) = Label;
 				*( bool* )( params + 16 ) = bForceEvents;
 				*( bool* )( params + 20 ) = bKeepStack;
@@ -484,7 +484,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SetUTracing" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bShouldUTrace;
+				*( bool* )params = bShouldUTrace;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -502,7 +502,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.DebugBreak" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( int* )( params + 0 ) = UserFlags;
+				*( int* )params = UserFlags;
 				*( byte* )( params + 4 ) = DebuggerType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -529,7 +529,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ParseLocalizedPropertyPath" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PathName;
+				*( ScriptArray< wchar_t >* )params = PathName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -539,7 +539,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Localize" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = SectionName;
+				*( ScriptArray< wchar_t >* )params = SectionName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = KeyName;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = PackageName;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -551,7 +551,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ParseStringIntoArray" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = BaseString;
+				*( ScriptArray< wchar_t >* )params = BaseString;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = delim;
 				*( bool* )( params + 36 ) = bCullEmpty;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -562,7 +562,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.WarnInternal" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -571,7 +571,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.LogInternal" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				*( ScriptName* )( params + 12 ) = Tag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -581,7 +581,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Subtract_LinearColorLinearColor" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 16 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -592,7 +592,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Multiply_LinearColorFloat" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = LC;
+				*( void** )params = LC;
 				*( float* )( params + 16 ) = Mult;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -603,7 +603,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ColorToLinearColor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = OldColor;
+				*( void** )params = OldColor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -613,7 +613,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MakeLinearColor" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = R;
+				*( float* )params = R;
 				*( float* )( params + 4 ) = G;
 				*( float* )( params + 8 ) = B;
 				*( float* )( params + 12 ) = A;
@@ -626,7 +626,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.LerpColor" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 4 ) = B;
 				*( float* )( params + 8 ) = Alpha;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -638,7 +638,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MakeColor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( byte* )( params + 0 ) = R;
+				*( byte* )params = R;
 				*( byte* )( params + 1 ) = G;
 				*( byte* )( params + 2 ) = B;
 				*( byte* )( params + 3 ) = A;
@@ -651,7 +651,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Add_ColorColor" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -662,7 +662,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Multiply_ColorFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -673,7 +673,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Multiply_FloatColor" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( void** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -684,7 +684,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Subtract_ColorColor" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -695,7 +695,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.EvalInterpCurveVector2D" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = Vector2DCurve;
+				*( void** )params = Vector2DCurve;
 				*( float* )( params + 16 ) = InVal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -706,7 +706,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.EvalInterpCurveVector" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = VectorCurve;
+				*( void** )params = VectorCurve;
 				*( float* )( params + 16 ) = InVal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -717,7 +717,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.EvalInterpCurveFloat" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = FloatCurve;
+				*( void** )params = FloatCurve;
 				*( float* )( params + 16 ) = InVal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -728,7 +728,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.vect2d" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = InX;
+				*( float* )params = InX;
 				*( float* )( params + 4 ) = InY;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -739,7 +739,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetMappedRangeValue" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = InputRange;
+				*( void** )params = InputRange;
 				*( void** )( params + 8 ) = OutputRange;
 				*( float* )( params + 16 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -751,7 +751,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetRangePctByValue" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = Range;
+				*( void** )params = Range;
 				*( float* )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -762,7 +762,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetRangeValueByPct" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = Range;
+				*( void** )params = Range;
 				*( float* )( params + 8 ) = Pct;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -773,11 +773,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SubtractEqual_Vector2DVector2D" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( void** )( params + 0 );
+				A = *( void** )params;
 				return *( void** )( params + function->return_val_offset() );
 			}
 
@@ -785,11 +785,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.AddEqual_Vector2DVector2D" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( void** )( params + 0 );
+				A = *( void** )params;
 				return *( void** )( params + function->return_val_offset() );
 			}
 
@@ -797,11 +797,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.DivideEqual_Vector2DFloat" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( float* )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( void** )( params + 0 );
+				A = *( void** )params;
 				return *( void** )( params + function->return_val_offset() );
 			}
 
@@ -809,11 +809,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MultiplyEqual_Vector2DFloat" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( float* )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( void** )( params + 0 );
+				A = *( void** )params;
 				return *( void** )( params + function->return_val_offset() );
 			}
 
@@ -821,7 +821,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Divide_Vector2DFloat" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( float* )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -832,7 +832,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Multiply_Vector2DFloat" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( float* )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -843,7 +843,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Subtract_Vector2DVector2D" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -854,7 +854,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Add_Vector2DVector2D" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -865,7 +865,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Subtract_QuatQuat" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 16 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -876,7 +876,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Add_QuatQuat" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 16 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -887,7 +887,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.QuatSlerp" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 16 ) = B;
 				*( float* )( params + 32 ) = Alpha;
 				*( bool* )( params + 36 ) = bShortestPath;
@@ -900,7 +900,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.QuatToRotator" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Rotator* )( params + function->return_val_offset() );
@@ -910,7 +910,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.QuatFromRotator" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -920,7 +920,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.QuatFromAxisAndAngle" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = Axis;
+				*( Vector* )params = Axis;
 				*( float* )( params + 12 ) = Angle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -931,7 +931,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.QuatFindBetween" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -942,7 +942,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.QuatRotateVector" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( Vector* )( params + 16 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -953,7 +953,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.QuatInvert" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -963,7 +963,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.QuatDot" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 16 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -974,7 +974,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.QuatProduct" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 16 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -985,7 +985,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MatrixGetAxis" );
 				byte *params = ( byte* )( malloc( 65 ) );
-				*( void** )( params + 0 ) = TM;
+				*( void** )params = TM;
 				*( byte* )( params + 64 ) = Axis;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -996,7 +996,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MatrixGetOrigin" );
 				byte *params = ( byte* )( malloc( 64 ) );
-				*( void** )( params + 0 ) = TM;
+				*( void** )params = TM;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -1006,7 +1006,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MatrixGetRotator" );
 				byte *params = ( byte* )( malloc( 64 ) );
-				*( void** )( params + 0 ) = TM;
+				*( void** )params = TM;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Rotator* )( params + function->return_val_offset() );
@@ -1016,7 +1016,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MakeRotationMatrix" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Rotator* )( params + 0 ) = Rotation;
+				*( Rotator* )params = Rotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -1026,7 +1026,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MakeRotationTranslationMatrix" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = Translation;
+				*( Vector* )params = Translation;
 				*( Rotator* )( params + 12 ) = Rotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1037,7 +1037,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.InverseTransformNormal" );
 				byte *params = ( byte* )( malloc( 76 ) );
-				*( void** )( params + 0 ) = TM;
+				*( void** )params = TM;
 				*( Vector* )( params + 64 ) = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1048,7 +1048,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.TransformNormal" );
 				byte *params = ( byte* )( malloc( 76 ) );
-				*( void** )( params + 0 ) = TM;
+				*( void** )params = TM;
 				*( Vector* )( params + 64 ) = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1059,7 +1059,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.InverseTransformVector" );
 				byte *params = ( byte* )( malloc( 76 ) );
-				*( void** )( params + 0 ) = TM;
+				*( void** )params = TM;
 				*( Vector* )( params + 64 ) = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1070,7 +1070,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.TransformVector" );
 				byte *params = ( byte* )( malloc( 76 ) );
-				*( void** )( params + 0 ) = TM;
+				*( void** )params = TM;
 				*( Vector* )( params + 64 ) = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1081,7 +1081,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Multiply_MatrixMatrix" );
 				byte *params = ( byte* )( malloc( 128 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 64 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1092,7 +1092,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.NotEqual_NameName" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = A;
+				*( ScriptName* )params = A;
 				*( ScriptName* )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1103,7 +1103,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.EqualEqual_NameName" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = A;
+				*( ScriptName* )params = A;
 				*( ScriptName* )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1114,7 +1114,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.IsA" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = ClassName;
+				*( ScriptName* )params = ClassName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1124,7 +1124,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ClassIsChildOf" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = TestClass;
+				*( ScriptClass** )params = TestClass;
 				*( ScriptClass** )( params + 4 ) = ParentClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1153,7 +1153,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.NotEqual_ObjectObject" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Object** )( params + 0 ) = A;
+				*( class Object** )params = A;
 				*( class Object** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1164,7 +1164,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.EqualEqual_ObjectObject" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Object** )( params + 0 ) = A;
+				*( class Object** )params = A;
 				*( class Object** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1175,7 +1175,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.PathName" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = CheckObject;
+				*( class Object** )params = CheckObject;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -1185,7 +1185,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SplitString" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Source;
+				*( ScriptArray< wchar_t >* )params = Source;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Delimiter;
 				*( bool* )( params + 24 ) = bCullEmpty;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1209,7 +1209,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetRightMost" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Text;
+				*( ScriptArray< wchar_t >* )params = Text;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -1219,11 +1219,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ConcatEqual_StrStr" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( ScriptArray< wchar_t >* )( params + 0 );
+				A = *( ScriptArray< wchar_t >* )params;
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
 			}
 
@@ -1231,7 +1231,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Split" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Text;
+				*( ScriptArray< wchar_t >* )params = Text;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = SplitStr;
 				*( bool* )( params + 24 ) = bOmitSplitStr;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1243,7 +1243,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Repl" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Src;
+				*( ScriptArray< wchar_t >* )params = Src;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Match;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = With;
 				*( bool* )( params + 36 ) = bCaseSensitive;
@@ -1256,7 +1256,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Asc" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -1266,7 +1266,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Chr" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = I;
+				*( int* )params = I;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -1276,7 +1276,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Locs" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -1286,7 +1286,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Caps" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -1296,7 +1296,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Right" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				*( int* )( params + 12 ) = I;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1307,7 +1307,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Left" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				*( int* )( params + 12 ) = I;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1318,7 +1318,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Mid" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				*( int* )( params + 12 ) = I;
 				*( int* )( params + 16 ) = J;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1330,7 +1330,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.InStr" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = T;
 				*( bool* )( params + 24 ) = bSearchFromRight;
 				*( bool* )( params + 28 ) = bIgnoreCase;
@@ -1344,7 +1344,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Len" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -1354,11 +1354,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SubtractEqual_StrStr" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( ScriptArray< wchar_t >* )( params + 0 );
+				A = *( ScriptArray< wchar_t >* )params;
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
 			}
 
@@ -1366,11 +1366,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.AtEqual_StrStr" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( ScriptArray< wchar_t >* )( params + 0 );
+				A = *( ScriptArray< wchar_t >* )params;
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
 			}
 
@@ -1378,7 +1378,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ComplementEqual_StrStr" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1389,7 +1389,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.NotEqual_StrStr" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1400,7 +1400,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.EqualEqual_StrStr" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1411,7 +1411,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GreaterEqual_StrStr" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1422,7 +1422,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.LessEqual_StrStr" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1433,7 +1433,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Greater_StrStr" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1444,7 +1444,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Less_StrStr" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1455,7 +1455,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.At_StrStr" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1466,7 +1466,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Concat_StrStr" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1477,7 +1477,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MakeRotator" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = Pitch;
+				*( int* )params = Pitch;
 				*( int* )( params + 4 ) = Yaw;
 				*( int* )( params + 8 ) = Roll;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1489,7 +1489,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SClampRotAxis" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				*( int* )( params + 4 ) = ViewAxis;
 				*( int* )( params + 8 ) = out_DeltaViewAxis;
 				*( int* )( params + 12 ) = MaxLimit;
@@ -1505,7 +1505,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ClampRotAxisFromRange" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = Current;
+				*( int* )params = Current;
 				*( int* )( params + 4 ) = Min;
 				*( int* )( params + 8 ) = Max;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1517,7 +1517,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.NormalizeRotAxis" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Angle;
+				*( int* )params = Angle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -1527,7 +1527,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FInterpTo" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = Current;
+				*( float* )params = Current;
 				*( float* )( params + 4 ) = Target;
 				*( float* )( params + 8 ) = DeltaTime;
 				*( float* )( params + 12 ) = InterpSpeed;
@@ -1540,7 +1540,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ClampRotAxisFromBase" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = Current;
+				*( int* )params = Current;
 				*( int* )( params + 4 ) = Center;
 				*( int* )( params + 8 ) = MaxDelta;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1552,7 +1552,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ClampRotAxis" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = ViewAxis;
+				*( int* )params = ViewAxis;
 				*( int* )( params + 4 ) = out_DeltaViewAxis;
 				*( int* )( params + 8 ) = MaxLimit;
 				*( int* )( params + 12 ) = MinLimit;
@@ -1565,7 +1565,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.RSize" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Rotator* )( params + 0 ) = R;
+				*( Rotator* )params = R;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -1575,7 +1575,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.RDiff" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( Rotator* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1586,7 +1586,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.RInterpTo" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( Rotator* )( params + 0 ) = Current;
+				*( Rotator* )params = Current;
 				*( Rotator* )( params + 12 ) = Target;
 				*( float* )( params + 24 ) = DeltaTime;
 				*( float* )( params + 28 ) = InterpSpeed;
@@ -1600,7 +1600,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.RTransform" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Rotator* )( params + 0 ) = R;
+				*( Rotator* )params = R;
 				*( Rotator* )( params + 12 ) = RBasis;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1611,7 +1611,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.RSmerp" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( Rotator* )( params + 12 ) = B;
 				*( float* )( params + 24 ) = Alpha;
 				*( bool* )( params + 28 ) = bShortestPath;
@@ -1624,7 +1624,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.RLerp" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( Rotator* )( params + 12 ) = B;
 				*( float* )( params + 24 ) = Alpha;
 				*( bool* )( params + 28 ) = bShortestPath;
@@ -1637,7 +1637,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Normalize" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Rotator* )( params + 0 ) = Rot;
+				*( Rotator* )params = Rot;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Rotator* )( params + function->return_val_offset() );
@@ -1647,7 +1647,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.OrthoRotation" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( Vector* )( params + 0 ) = X;
+				*( Vector* )params = X;
 				*( Vector* )( params + 12 ) = Y;
 				*( Vector* )( params + 24 ) = Z;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1659,7 +1659,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.RotRand" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bRoll;
+				*( bool* )params = bRoll;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Rotator* )( params + function->return_val_offset() );
@@ -1669,7 +1669,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetRotatorAxis" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( int* )( params + 12 ) = Axis;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1680,7 +1680,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetUnAxes" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( Vector* )( params + 12 ) = X;
 				*( Vector* )( params + 24 ) = Y;
 				*( Vector* )( params + 36 ) = Z;
@@ -1695,7 +1695,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GetAxes" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( Vector* )( params + 12 ) = X;
 				*( Vector* )( params + 24 ) = Y;
 				*( Vector* )( params + 36 ) = Z;
@@ -1710,7 +1710,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ClockwiseFrom_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1721,11 +1721,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SubtractEqual_RotatorRotator" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( Rotator* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( Rotator* )( params + 0 );
+				A = *( Rotator* )params;
 				return *( Rotator* )( params + function->return_val_offset() );
 			}
 
@@ -1733,11 +1733,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.AddEqual_RotatorRotator" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( Rotator* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( Rotator* )( params + 0 );
+				A = *( Rotator* )params;
 				return *( Rotator* )( params + function->return_val_offset() );
 			}
 
@@ -1745,7 +1745,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Subtract_RotatorRotator" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( Rotator* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1756,7 +1756,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Add_RotatorRotator" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( Rotator* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1767,11 +1767,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.DivideEqual_RotatorFloat" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( float* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( Rotator* )( params + 0 );
+				A = *( Rotator* )params;
 				return *( Rotator* )( params + function->return_val_offset() );
 			}
 
@@ -1779,11 +1779,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MultiplyEqual_RotatorFloat" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( float* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( Rotator* )( params + 0 );
+				A = *( Rotator* )params;
 				return *( Rotator* )( params + function->return_val_offset() );
 			}
 
@@ -1791,7 +1791,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Divide_RotatorFloat" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( float* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1802,7 +1802,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Multiply_FloatRotator" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( Rotator* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1813,7 +1813,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Multiply_RotatorFloat" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( float* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1824,7 +1824,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.NotEqual_RotatorRotator" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( Rotator* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1835,7 +1835,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.EqualEqual_RotatorRotator" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Rotator* )( params + 0 ) = A;
+				*( Rotator* )params = A;
 				*( Rotator* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1846,7 +1846,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.InCylinder" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( Vector* )( params + 0 ) = Origin;
+				*( Vector* )params = Origin;
 				*( Rotator* )( params + 12 ) = Dir;
 				*( float* )( params + 24 ) = Width;
 				*( Vector* )( params + 28 ) = A;
@@ -1860,7 +1860,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.NoZDot" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1871,7 +1871,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ClampLength" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = V;
+				*( Vector* )params = V;
 				*( float* )( params + 12 ) = MaxLength;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1882,7 +1882,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.VInterpTo" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( Vector* )( params + 0 ) = Current;
+				*( Vector* )params = Current;
 				*( Vector* )( params + 12 ) = Target;
 				*( float* )( params + 24 ) = DeltaTime;
 				*( float* )( params + 28 ) = InterpSpeed;
@@ -1895,7 +1895,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.IsZero" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1905,7 +1905,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ProjectOnTo" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = X;
+				*( Vector* )params = X;
 				*( Vector* )( params + 12 ) = Y;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1916,7 +1916,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MirrorVectorByNormal" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = InVect;
+				*( Vector* )params = InVect;
 				*( Vector* )( params + 12 ) = InNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1927,7 +1927,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.VRandCone2" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Vector* )( params + 0 ) = Dir;
+				*( Vector* )params = Dir;
 				*( float* )( params + 12 ) = HorizontalConeHalfAngleRadians;
 				*( float* )( params + 16 ) = VerticalConeHalfAngleRadians;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1939,7 +1939,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.VRandCone" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = Dir;
+				*( Vector* )params = Dir;
 				*( float* )( params + 12 ) = ConeHalfAngleRadians;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1959,7 +1959,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.VSmerp" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				*( float* )( params + 24 ) = Alpha;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1971,7 +1971,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.VLerp" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				*( float* )( params + 24 ) = Alpha;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1983,7 +1983,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Normal" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -1993,7 +1993,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.VSizeSq2D" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2003,7 +2003,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.VSizeSq" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2013,7 +2013,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.VSize2D" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2023,7 +2023,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.VSize" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2033,11 +2033,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SubtractEqual_VectorVector" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( Vector* )( params + 0 );
+				A = *( Vector* )params;
 				return *( Vector* )( params + function->return_val_offset() );
 			}
 
@@ -2045,11 +2045,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.AddEqual_VectorVector" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( Vector* )( params + 0 );
+				A = *( Vector* )params;
 				return *( Vector* )( params + function->return_val_offset() );
 			}
 
@@ -2057,11 +2057,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.DivideEqual_VectorFloat" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( float* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( Vector* )( params + 0 );
+				A = *( Vector* )params;
 				return *( Vector* )( params + function->return_val_offset() );
 			}
 
@@ -2069,11 +2069,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MultiplyEqual_VectorVector" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( Vector* )( params + 0 );
+				A = *( Vector* )params;
 				return *( Vector* )( params + function->return_val_offset() );
 			}
 
@@ -2081,11 +2081,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MultiplyEqual_VectorFloat" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( float* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( Vector* )( params + 0 );
+				A = *( Vector* )params;
 				return *( Vector* )( params + function->return_val_offset() );
 			}
 
@@ -2093,7 +2093,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Cross_VectorVector" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2104,7 +2104,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Dot_VectorVector" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2115,7 +2115,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.NotEqual_VectorVector" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2126,7 +2126,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.EqualEqual_VectorVector" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2137,7 +2137,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GreaterGreater_VectorRotator" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Rotator* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2148,7 +2148,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.LessLess_VectorRotator" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Rotator* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2159,7 +2159,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Subtract_VectorVector" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2170,7 +2170,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Add_VectorVector" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2181,7 +2181,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Divide_VectorFloat" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( float* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2192,7 +2192,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Multiply_VectorVector" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( Vector* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2203,7 +2203,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Multiply_FloatVector" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( Vector* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2214,7 +2214,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Multiply_VectorFloat" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				*( float* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2225,7 +2225,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Subtract_PreVector" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = A;
+				*( Vector* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -2235,7 +2235,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FInterpConstantTo" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = Current;
+				*( float* )params = Current;
 				*( float* )( params + 4 ) = Target;
 				*( float* )( params + 8 ) = DeltaTime;
 				*( float* )( params + 12 ) = InterpSpeed;
@@ -2248,7 +2248,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FPctByRange" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( float* )( params + 0 ) = Value;
+				*( float* )params = Value;
 				*( float* )( params + 4 ) = InMin;
 				*( float* )( params + 8 ) = InMax;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -2260,7 +2260,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.RandRange" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = InMin;
+				*( float* )params = InMin;
 				*( float* )( params + 4 ) = InMax;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2271,7 +2271,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FInterpEaseInOut" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				*( float* )( params + 8 ) = Alpha;
 				*( float* )( params + 12 ) = Exp;
@@ -2284,7 +2284,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FInterpEaseOut" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				*( float* )( params + 8 ) = Alpha;
 				*( float* )( params + 12 ) = Exp;
@@ -2297,7 +2297,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FInterpEaseIn" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				*( float* )( params + 8 ) = Alpha;
 				*( float* )( params + 12 ) = Exp;
@@ -2310,7 +2310,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FCubicInterp" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( float* )( params + 0 ) = P0;
+				*( float* )params = P0;
 				*( float* )( params + 4 ) = T0;
 				*( float* )( params + 8 ) = P1;
 				*( float* )( params + 12 ) = T1;
@@ -2324,7 +2324,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FCeil" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -2334,7 +2334,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FFloor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -2344,7 +2344,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Round" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -2354,7 +2354,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Lerp" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				*( float* )( params + 8 ) = Alpha;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -2366,7 +2366,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FClamp" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( float* )( params + 0 ) = V;
+				*( float* )params = V;
 				*( float* )( params + 4 ) = A;
 				*( float* )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -2378,7 +2378,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FMax" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2389,7 +2389,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.FMin" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2409,7 +2409,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Square" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2419,7 +2419,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Sqrt" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2429,7 +2429,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Loge" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2439,7 +2439,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Exp" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2449,7 +2449,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Atan2" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2460,7 +2460,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Atan" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2470,7 +2470,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Tan" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2480,7 +2480,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Cos" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2490,7 +2490,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Asin" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2500,7 +2500,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Sin" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2510,7 +2510,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Abs" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2520,11 +2520,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SubtractEqual_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( float* )( params + 0 );
+				A = *( float* )params;
 				return *( float* )( params + function->return_val_offset() );
 			}
 
@@ -2532,11 +2532,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.AddEqual_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( float* )( params + 0 );
+				A = *( float* )params;
 				return *( float* )( params + function->return_val_offset() );
 			}
 
@@ -2544,11 +2544,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.DivideEqual_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( float* )( params + 0 );
+				A = *( float* )params;
 				return *( float* )( params + function->return_val_offset() );
 			}
 
@@ -2556,11 +2556,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MultiplyEqual_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( float* )( params + 0 );
+				A = *( float* )params;
 				return *( float* )( params + function->return_val_offset() );
 			}
 
@@ -2568,7 +2568,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.NotEqual_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2579,7 +2579,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ComplementEqual_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2590,7 +2590,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.EqualEqual_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2601,7 +2601,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GreaterEqual_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2612,7 +2612,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.LessEqual_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2623,7 +2623,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Greater_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2634,7 +2634,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Less_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2645,7 +2645,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Subtract_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2656,7 +2656,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Add_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2667,7 +2667,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Percent_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2678,7 +2678,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Divide_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2689,7 +2689,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Multiply_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2700,7 +2700,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MultiplyMultiply_FloatFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = Base;
+				*( float* )params = Base;
 				*( float* )( params + 4 ) = Exp;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2711,7 +2711,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Subtract_PreFloat" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = A;
+				*( float* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -2721,7 +2721,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.ToHex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -2731,7 +2731,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Clamp" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = V;
+				*( int* )params = V;
 				*( int* )( params + 4 ) = A;
 				*( int* )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -2743,7 +2743,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Max" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2754,7 +2754,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Min" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2765,7 +2765,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Rand" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Max;
+				*( int* )params = Max;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -2775,10 +2775,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SubtractSubtract_Int" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( int* )( params + 0 );
+				A = *( int* )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 
@@ -2786,10 +2786,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.AddAdd_Int" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( int* )( params + 0 );
+				A = *( int* )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 
@@ -2797,10 +2797,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SubtractSubtract_PreInt" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( int* )( params + 0 );
+				A = *( int* )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 
@@ -2808,10 +2808,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.AddAdd_PreInt" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( int* )( params + 0 );
+				A = *( int* )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 
@@ -2819,11 +2819,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SubtractEqual_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( int* )( params + 0 );
+				A = *( int* )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 
@@ -2831,11 +2831,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.AddEqual_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( int* )( params + 0 );
+				A = *( int* )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 
@@ -2843,11 +2843,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.DivideEqual_IntFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( int* )( params + 0 );
+				A = *( int* )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 
@@ -2855,11 +2855,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MultiplyEqual_IntFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( int* )( params + 0 );
+				A = *( int* )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 
@@ -2867,7 +2867,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Or_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2878,7 +2878,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Xor_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2889,7 +2889,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.And_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2900,7 +2900,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.NotEqual_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2911,7 +2911,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.EqualEqual_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2922,7 +2922,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GreaterEqual_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2933,7 +2933,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.LessEqual_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2944,7 +2944,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Greater_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2955,7 +2955,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Less_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2966,7 +2966,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GreaterGreaterGreater_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2977,7 +2977,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.GreaterGreater_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2988,7 +2988,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.LessLess_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2999,7 +2999,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Subtract_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -3010,7 +3010,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Add_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -3021,7 +3021,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Percent_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -3032,7 +3032,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Divide_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -3043,7 +3043,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Multiply_IntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				*( int* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -3054,7 +3054,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Subtract_PreInt" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -3064,7 +3064,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Complement_PreInt" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = A;
+				*( int* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -3074,10 +3074,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SubtractSubtract_Byte" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = A;
+				*( byte* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( byte* )( params + 0 );
+				A = *( byte* )params;
 				return *( byte* )( params + function->return_val_offset() );
 			}
 
@@ -3085,10 +3085,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.AddAdd_Byte" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = A;
+				*( byte* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( byte* )( params + 0 );
+				A = *( byte* )params;
 				return *( byte* )( params + function->return_val_offset() );
 			}
 
@@ -3096,10 +3096,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SubtractSubtract_PreByte" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = A;
+				*( byte* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( byte* )( params + 0 );
+				A = *( byte* )params;
 				return *( byte* )( params + function->return_val_offset() );
 			}
 
@@ -3107,10 +3107,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.AddAdd_PreByte" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = A;
+				*( byte* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( byte* )( params + 0 );
+				A = *( byte* )params;
 				return *( byte* )( params + function->return_val_offset() );
 			}
 
@@ -3118,11 +3118,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.SubtractEqual_ByteByte" );
 				byte *params = ( byte* )( malloc( 2 ) );
-				*( byte* )( params + 0 ) = A;
+				*( byte* )params = A;
 				*( byte* )( params + 1 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( byte* )( params + 0 );
+				A = *( byte* )params;
 				return *( byte* )( params + function->return_val_offset() );
 			}
 
@@ -3130,11 +3130,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.AddEqual_ByteByte" );
 				byte *params = ( byte* )( malloc( 2 ) );
-				*( byte* )( params + 0 ) = A;
+				*( byte* )params = A;
 				*( byte* )( params + 1 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( byte* )( params + 0 );
+				A = *( byte* )params;
 				return *( byte* )( params + function->return_val_offset() );
 			}
 
@@ -3142,11 +3142,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.DivideEqual_ByteByte" );
 				byte *params = ( byte* )( malloc( 2 ) );
-				*( byte* )( params + 0 ) = A;
+				*( byte* )params = A;
 				*( byte* )( params + 1 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( byte* )( params + 0 );
+				A = *( byte* )params;
 				return *( byte* )( params + function->return_val_offset() );
 			}
 
@@ -3154,11 +3154,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MultiplyEqual_ByteFloat" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = A;
+				*( byte* )params = A;
 				*( float* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( byte* )( params + 0 );
+				A = *( byte* )params;
 				return *( byte* )( params + function->return_val_offset() );
 			}
 
@@ -3166,11 +3166,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.MultiplyEqual_ByteByte" );
 				byte *params = ( byte* )( malloc( 2 ) );
-				*( byte* )( params + 0 ) = A;
+				*( byte* )params = A;
 				*( byte* )( params + 1 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				A = *( byte* )( params + 0 );
+				A = *( byte* )params;
 				return *( byte* )( params + function->return_val_offset() );
 			}
 
@@ -3178,7 +3178,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.OrOr_BoolBool" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = A;
+				*( bool* )params = A;
 				*( bool* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -3189,7 +3189,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.XorXor_BoolBool" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = A;
+				*( bool* )params = A;
 				*( bool* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -3200,7 +3200,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.AndAnd_BoolBool" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = A;
+				*( bool* )params = A;
 				*( bool* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -3211,7 +3211,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.NotEqual_BoolBool" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = A;
+				*( bool* )params = A;
 				*( bool* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -3222,7 +3222,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.EqualEqual_BoolBool" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = A;
+				*( bool* )params = A;
 				*( bool* )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -3233,7 +3233,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.Object.Not_PreBool" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = A;
+				*( bool* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

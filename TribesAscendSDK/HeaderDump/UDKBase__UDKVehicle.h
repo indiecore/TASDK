@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.OnTouchForcedDirVolume" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UDKForcedDirectionVolume** )( params + 0 ) = Vol;
+				*( class UDKForcedDirectionVolume** )params = Vol;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -109,7 +109,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.SeatWeaponRotation" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = SeatIndex;
+				*( int* )params = SeatIndex;
 				*( Rotator* )( params + 4 ) = NewRot;
 				*( bool* )( params + 16 ) = bReadValue;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -121,7 +121,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.SeatFlashLocation" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = SeatIndex;
+				*( int* )params = SeatIndex;
 				*( Vector* )( params + 4 ) = NewLoc;
 				*( bool* )( params + 16 ) = bReadValue;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -133,7 +133,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.SeatFlashCount" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( int* )( params + 0 ) = SeatIndex;
+				*( int* )params = SeatIndex;
 				*( byte* )( params + 4 ) = NewCount;
 				*( bool* )( params + 8 ) = bReadValue;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -145,7 +145,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.SeatFiringMode" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( int* )( params + 0 ) = SeatIndex;
+				*( int* )params = SeatIndex;
 				*( byte* )( params + 4 ) = NewFireMode;
 				*( bool* )( params + 8 ) = bReadValue;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -157,7 +157,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.ForceWeaponRotation" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = SeatIndex;
+				*( int* )params = SeatIndex;
 				*( Rotator* )( params + 4 ) = NewRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -167,7 +167,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.GetSeatPivotPoint" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SeatIndex;
+				*( int* )params = SeatIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -177,7 +177,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.GetBarrelIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SeatIndex;
+				*( int* )params = SeatIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -187,7 +187,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.IsSeatControllerReplicationViewer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SeatIndex;
+				*( int* )params = SeatIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -197,7 +197,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.IsLocalOnVehicle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = InP;
+				*( class Pawn** )params = InP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -207,7 +207,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.LockOnWarning" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UDKProjectile** )( params + 0 ) = IncomingMissile;
+				*( class UDKProjectile** )params = IncomingMissile;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -216,7 +216,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.OnPropertyChange" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = PropName;
+				*( ScriptName* )params = PropName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -267,7 +267,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.CheckAutoDestruct" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class TeamInfo** )( params + 0 ) = InstigatorTeam;
+				*( class TeamInfo** )params = InstigatorTeam;
 				*( float* )( params + 4 ) = CheckRadius;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -278,7 +278,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.SelfDestruct" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = ImpactedActor;
+				*( class Actor** )params = ImpactedActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -296,7 +296,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.NativePostRenderFor" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( class Canvas** )( params + 4 ) = Canvas;
 				*( Vector* )( params + 8 ) = CameraPosition;
 				*( Vector* )( params + 20 ) = CameraDir;
@@ -308,7 +308,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.InUseableRange" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UDKPlayerController** )( params + 0 ) = PC;
+				*( class UDKPlayerController** )params = PC;
 				*( float* )( params + 4 ) = Dist;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -319,7 +319,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.SetHUDLocation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = NewHUDLocation;
+				*( Vector* )params = NewHUDLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -344,7 +344,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.ApplyMorphDamage" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( Vector* )( params + 0 ) = HitLocation;
+				*( Vector* )params = HitLocation;
 				*( int* )( params + 12 ) = Damage;
 				*( Vector* )( params + 16 ) = Momentum;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -355,7 +355,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.MorphTargetDestroyed" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = MorphNodeIndex;
+				*( int* )params = MorphNodeIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -404,7 +404,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicle.UpdateHoverboardDustEffect" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DustHeight;
+				*( float* )params = DustHeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

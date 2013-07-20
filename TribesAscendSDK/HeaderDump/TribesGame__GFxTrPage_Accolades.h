@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_Accolades.SpecialAction" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxTrAction** )( params + 0 ) = Action;
+				*( class GFxTrAction** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_Accolades.TakeAction" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ActionIndex;
+				*( int* )params = ActionIndex;
 				*( class GFxObject** )( params + 4 ) = DataList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -60,7 +60,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_Accolades.TakeFocus" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ActionIndex;
+				*( int* )params = ActionIndex;
 				*( class GFxObject** )( params + 4 ) = DataList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -71,7 +71,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_Accolades.FillData" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = DataList;
+				*( class GFxObject** )params = DataList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_Accolades.FillAccolade" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = Accolade;
+				*( void** )params = Accolade;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class GFxObject** )( params + function->return_val_offset() );
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrPage_Accolades.GetAccoladeClass" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = AccoladeId;
+				*( int* )params = AccoladeId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptClass** )( params + function->return_val_offset() );

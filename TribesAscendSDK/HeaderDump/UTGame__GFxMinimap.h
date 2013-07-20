@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimap.Init" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxMinimapHud** )( params + 0 ) = H;
+				*( class GFxMinimapHud** )params = H;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -54,7 +54,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimap.GenFriendIcons" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = N;
+				*( int* )params = N;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -64,7 +64,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimap.GenEnemyIcons" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = N;
+				*( int* )params = N;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -74,7 +74,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimap.GenFlagIcons" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = N;
+				*( int* )params = N;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimap.Update" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Scale;
+				*( float* )params = Scale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

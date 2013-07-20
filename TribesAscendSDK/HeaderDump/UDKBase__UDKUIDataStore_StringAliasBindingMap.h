@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_StringAliasBindingMap.GetStringWithFieldName" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = FieldName;
+				*( ScriptArray< wchar_t >* )params = FieldName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = MappedString;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -36,7 +36,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_StringAliasBindingMap.GetBoundStringWithFieldName" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = FieldName;
+				*( ScriptArray< wchar_t >* )params = FieldName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = MappedString;
 				*( int* )( params + 24 ) = StartIndex;
 				*( ScriptArray< wchar_t >* )( params + 28 ) = BindString;
@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_StringAliasBindingMap.FindMappingInBoundKeyCache" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Command;
+				*( ScriptArray< wchar_t >* )params = Command;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = MappingStr;
 				*( int* )( params + 24 ) = FieldIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_StringAliasBindingMap.AddMappingToBoundKeyCache" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Command;
+				*( ScriptArray< wchar_t >* )params = Command;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = MappingStr;
 				*( int* )( params + 24 ) = FieldIndex;
 				ScriptObject *object = ( ScriptObject* )( this );

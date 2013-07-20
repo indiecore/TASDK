@@ -39,7 +39,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_Settings.PopulateOptionDataProviderForIndex" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( class GFxObject** )( params + 4 ) = OutDataProvider;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = OutDefaultValue;
 				*( int* )( params + 20 ) = OutDefaultIndex;

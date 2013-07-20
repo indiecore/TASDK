@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlineEventsInterfaceMcp.UploadPlayerData" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( void** )( params + 0 ) = UniqueId;
+				*( void** )params = UniqueId;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = PlayerNick;
 				*( class OnlineProfileSettings** )( params + 20 ) = ProfileSettings;
 				*( class OnlinePlayerStorage** )( params + 24 ) = PlayerStorage;
@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlineEventsInterfaceMcp.UploadGameplayEventsData" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = UniqueId;
+				*( void** )params = UniqueId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlineEventsInterfaceMcp.UpdatePlaylistPopulation" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PlaylistId;
+				*( int* )params = PlaylistId;
 				*( int* )( params + 4 ) = NumPlayers;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -58,7 +58,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlineEventsInterfaceMcp.UploadMatchmakingStats" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = UniqueId;
+				*( void** )params = UniqueId;
 				*( class OnlineMatchmakingStats** )( params + 8 ) = MMStats;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

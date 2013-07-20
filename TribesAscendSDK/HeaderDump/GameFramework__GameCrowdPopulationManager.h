@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.AddSpawnPoint" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdDestination** )( params + 0 ) = GCD;
+				*( class GameCrowdDestination** )params = GCD;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.RemoveSpawnPoint" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdDestination** )( params + 0 ) = GCD;
+				*( class GameCrowdDestination** )params = GCD;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -96,7 +96,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.OnGameCrowdPopulationManagerToggle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_GameCrowdPopulationManagerToggle** )( params + 0 ) = inAction;
+				*( class SeqAct_GameCrowdPopulationManagerToggle** )params = inAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.AgentDestroyed" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdAgent** )( params + 0 ) = Agent;
+				*( class GameCrowdAgent** )params = Agent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -122,7 +122,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.AddToAgentPool" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdAgent** )( params + 0 ) = Agent;
+				*( class GameCrowdAgent** )params = Agent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -132,7 +132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.DisplayDebug" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				*( float* )( params + 4 ) = out_YL;
 				*( float* )( params + 8 ) = out_YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -154,7 +154,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaSeconds;
+				*( float* )params = DeltaSeconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -172,7 +172,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.PrioritizeSpawnPoints" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaSeconds;
+				*( float* )params = DeltaSeconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -181,7 +181,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.AnalyzeSpawnPoints" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( int* )( params + 0 ) = StartIndex;
+				*( int* )params = StartIndex;
 				*( int* )( params + 4 ) = StopIndex;
 				*( Vector* )( params + 8 ) = ViewLocation;
 				*( Vector* )( params + 20 ) = PredictionLocation;
@@ -193,7 +193,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.AddPrioritizedSpawnPoint" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class GameCrowdDestination** )( params + 0 ) = GCD;
+				*( class GameCrowdDestination** )params = GCD;
 				*( Vector* )( params + 4 ) = ViewLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -203,7 +203,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.ValidateSpawnAt" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdDestination** )( params + 0 ) = Candidate;
+				*( class GameCrowdDestination** )params = Candidate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -213,7 +213,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.SpawnAgent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdDestination** )( params + 0 ) = SpawnLoc;
+				*( class GameCrowdDestination** )params = SpawnLoc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class GameCrowdAgent** )( params + function->return_val_offset() );
@@ -223,7 +223,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdPopulationManager.CreateNewAgent" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class GameCrowdDestination** )( params + 0 ) = SpawnLoc;
+				*( class GameCrowdDestination** )params = SpawnLoc;
 				*( class GameCrowdAgent** )( params + 4 ) = AgentTemplate;
 				*( class GameCrowdGroup** )( params + 8 ) = NewGroup;
 				ScriptObject *object = ( ScriptObject* )( this );

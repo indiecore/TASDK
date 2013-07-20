@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqAct_ConsoleCommand.VersionUpdated" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = OldVersion;
+				*( int* )params = OldVersion;
 				*( int* )( params + 4 ) = NewVersion;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

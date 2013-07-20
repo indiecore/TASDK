@@ -28,7 +28,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Texture2DDynamic.Init" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( int* )( params + 0 ) = InSizeX;
+				*( int* )params = InSizeX;
 				*( int* )( params + 4 ) = InSizeY;
 				*( byte* )( params + 8 ) = InFormat;
 				*( bool* )( params + 12 ) = InIsResolveTarget;
@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Texture2DDynamic.Create" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( int* )( params + 0 ) = InSizeX;
+				*( int* )params = InSizeX;
 				*( int* )( params + 4 ) = InSizeY;
 				*( byte* )( params + 8 ) = InFormat;
 				*( bool* )( params + 12 ) = InIsResolveTarget;

@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_HostGame.OnTopMostView" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bPlayOpenAnimation;
+				*( bool* )params = bPlayOpenAnimation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_HostGame.StripInvalidPasswordCharacters" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PasswordString;
+				*( ScriptArray< wchar_t >* )params = PasswordString;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = InvalidChars;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -76,7 +76,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_HostGame.CreateOnlineGame" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PlayerIndex;
+				*( int* )params = PlayerIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -85,7 +85,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_HostGame.OnGameCreated" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( bool* )( params + 8 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

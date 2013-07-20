@@ -36,7 +36,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_MainMenu.OnTopMostView" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bPlayOpenAnimation;
+				*( bool* )params = bPlayOpenAnimation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_MainMenu.DisableSubComponents" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bDisableComponents;
+				*( bool* )params = bDisableComponents;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_MainMenu.ExitDialog_SelectOK" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( void** )( params + 0 ) = ev;
+				*( void** )params = ev;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_MainMenu.ExitDialog_SelectBack" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( void** )( params + 0 ) = ev;
+				*( void** )params = ev;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -96,7 +96,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_MainMenu.OnListItemPress" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( void** )( params + 0 ) = ev;
+				*( void** )params = ev;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -105,7 +105,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_MainMenu.OnListChange" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( void** )( params + 0 ) = ev;
+				*( void** )params = ev;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -130,7 +130,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_MainMenu.SetList" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = InList;
+				*( class GFxObject** )params = InList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -147,7 +147,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_MainMenu.WidgetInitialized" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = WidgetName;
+				*( ScriptName* )params = WidgetName;
 				*( ScriptName* )( params + 8 ) = WidgetPath;
 				*( class GFxObject** )( params + 16 ) = Widget;
 				ScriptObject *object = ( ScriptObject* )( this );

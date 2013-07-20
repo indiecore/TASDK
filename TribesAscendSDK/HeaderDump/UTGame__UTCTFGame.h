@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCTFGame.SetEndGameFocus" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = Winner;
+				*( class PlayerReplicationInfo** )params = Winner;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -42,7 +42,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCTFGame.GetHandicapNeed" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCTFGame.GetLocationFor" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Pawn** )( params + 0 ) = StatusPawn;
+				*( class Pawn** )params = StatusPawn;
 				*( class Actor** )( params + 4 ) = LocationObject;
 				*( int* )( params + 8 ) = MessageIndex;
 				*( int* )( params + 12 ) = LocationSpeechOffset;
@@ -67,7 +67,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCTFGame.RegisterFlag" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTCarriedObject** )( params + 0 ) = F;
+				*( class UTCarriedObject** )params = F;
 				*( int* )( params + 4 ) = TeamIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCTFGame.NearGoal" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCTFGame.WantFastSpawnFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class AIController** )( params + 0 ) = B;
+				*( class AIController** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -97,7 +97,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCTFGame.CheckEndGame" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = Winner;
+				*( class PlayerReplicationInfo** )params = Winner;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Reason;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -108,7 +108,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCTFGame.ScoreFlag" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Controller** )( params + 0 ) = Scorer;
+				*( class Controller** )params = Scorer;
 				*( class UTCTFFlag** )( params + 4 ) = theFlag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -118,7 +118,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCTFGame.ViewObjective" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -127,7 +127,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCTFGame.GetAutoObjectiveFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPlayerController** )( params + 0 ) = PC;
+				*( class UTPlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Actor** )( params + function->return_val_offset() );

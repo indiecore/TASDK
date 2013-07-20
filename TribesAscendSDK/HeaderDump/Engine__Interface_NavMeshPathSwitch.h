@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Interface_NavMeshPathSwitch.AIActivateSwitch" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class AIController** )( params + 0 ) = AI;
+				*( class AIController** )params = AI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

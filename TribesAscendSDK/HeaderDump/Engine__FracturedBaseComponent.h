@@ -30,7 +30,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedBaseComponent.SetStaticMesh" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class StaticMesh** )( params + 0 ) = NewMesh;
+				*( class StaticMesh** )params = NewMesh;
 				*( bool* )( params + 4 ) = bForce;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedBaseComponent.IsFragmentVisible" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = FragmentIndex;
+				*( int* )params = FragmentIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

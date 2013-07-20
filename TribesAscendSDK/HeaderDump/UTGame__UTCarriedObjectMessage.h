@@ -38,7 +38,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.ClientReceive" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class PlayerController** )( params + 0 ) = P;
+				*( class PlayerController** )params = P;
 				*( int* )( params + 4 ) = Switch;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
@@ -51,7 +51,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.AnnouncementSound" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = MessageIndex;
+				*( int* )params = MessageIndex;
 				*( class Object** )( params + 4 ) = OptionalObject;
 				*( class PlayerController** )( params + 8 ) = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -63,7 +63,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.AnnouncementLevel" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = MessageIndex;
+				*( byte* )params = MessageIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.GetString" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				*( bool* )( params + 4 ) = bPRI1HUD;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.ShouldBeRemoved" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class UTQueuedAnnouncement** )( params + 0 ) = MyAnnouncement;
+				*( class UTQueuedAnnouncement** )params = MyAnnouncement;
 				*( ScriptClass** )( params + 4 ) = NewAnnouncementClass;
 				*( int* )( params + 8 ) = NewMessageIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.ShouldRemoveFlagAnnouncement" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = MyMessageIndex;
+				*( int* )params = MyMessageIndex;
 				*( ScriptClass** )( params + 4 ) = NewAnnouncementClass;
 				*( int* )( params + 8 ) = NewMessageIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -111,7 +111,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.AddAnnouncement" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class UTAnnouncer** )( params + 0 ) = Announcer;
+				*( class UTAnnouncer** )params = Announcer;
 				*( int* )( params + 4 ) = MessageIndex;
 				*( class PlayerReplicationInfo** )( params + 8 ) = PRI;
 				*( class Object** )( params + 12 ) = OptionalObject;
@@ -124,7 +124,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCarriedObjectMessage.PartiallyDuplicates" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Switch1;
+				*( int* )params = Switch1;
 				*( int* )( params + 4 ) = Switch2;
 				*( class Object** )( params + 8 ) = OptionalObject1;
 				*( class Object** )( params + 12 ) = OptionalObject2;

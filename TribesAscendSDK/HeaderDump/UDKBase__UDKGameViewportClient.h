@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKGameViewportClient.LoadRandomLocalizedHintMessage" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Category1Name;
+				*( ScriptArray< wchar_t >* )params = Category1Name;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Category2Name;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

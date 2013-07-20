@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.GetPriorityAttackObjectiveFor" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTSquadAI** )( params + 0 ) = InAttackSquad;
+				*( class UTSquadAI** )params = InAttackSquad;
 				*( class Controller** )( params + 4 ) = InController;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.FriendlyToward" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -83,7 +83,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.CriticalObjectiveWarning" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTGameObjective** )( params + 0 ) = G;
+				*( class UTGameObjective** )params = G;
 				*( class Pawn** )( params + 4 ) = NewEnemy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -117,7 +117,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.NotifyKilled" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Controller** )( params + 0 ) = Killer;
+				*( class Controller** )params = Killer;
 				*( class Controller** )( params + 4 ) = Killed;
 				*( class Pawn** )( params + 8 ) = KilledPawn;
 				*( ScriptClass** )( params + 12 ) = DamageType;
@@ -129,7 +129,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.FindNewObjectives" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTGameObjective** )( params + 0 ) = DisabledObjective;
+				*( class UTGameObjective** )params = DisabledObjective;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -138,7 +138,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.FindNewObjectiveFor" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTSquadAI** )( params + 0 ) = S;
+				*( class UTSquadAI** )params = S;
 				*( bool* )( params + 4 ) = bForceUpdate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -148,7 +148,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.RemoveSquad" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTSquadAI** )( params + 0 ) = Squad;
+				*( class UTSquadAI** )params = Squad;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -174,7 +174,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.PutBotOnSquadLedBy" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				*( class UTBot** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -184,7 +184,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.AddSquadWithLeader" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				*( class UTGameObjective** )( params + 4 ) = O;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -195,7 +195,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.GetLeastDefendedObjective" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = InController;
+				*( class Controller** )params = InController;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class UTGameObjective** )( params + function->return_val_offset() );
@@ -205,7 +205,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.GetPriorityStandaloneObjectiveFor" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTSquadAI** )( params + 0 ) = InAttackSquad;
+				*( class UTSquadAI** )params = InAttackSquad;
 				*( class Controller** )( params + 4 ) = InController;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -216,7 +216,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.GetPriorityFreelanceObjectiveFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTSquadAI** )( params + 0 ) = InFreelanceSquad;
+				*( class UTSquadAI** )params = InFreelanceSquad;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class UTGameObjective** )( params + function->return_val_offset() );
@@ -226,7 +226,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.PutOnDefense" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -236,7 +236,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.PutOnOffense" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -245,7 +245,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.PutOnFreelance" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -254,7 +254,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.SetBotOrders" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = NewBot;
+				*( class UTBot** )params = NewBot;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -263,7 +263,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.SetOrders" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( ScriptName* )( params + 4 ) = NewOrders;
 				*( class Controller** )( params + 12 ) = OrderGiver;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -274,7 +274,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamAI.RemoveFromTeam" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = Other;
+				*( class Controller** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

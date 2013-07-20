@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIResourceCombinationProvider.InitializeProvider" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( bool* )( params + 0 ) = bIsEditor;
+				*( bool* )params = bIsEditor;
 				*( class UIResourceDataProvider** )( params + 4 ) = InStaticResourceProvider;
 				*( class UIDataProvider_OnlineProfileSettings** )( params + 8 ) = InProfileProvider;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIResourceCombinationProvider.GetElementCount" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIResourceCombinationProvider.GetListElements" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIResourceCombinationProvider.IsElementEnabled" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( int* )( params + 8 ) = CollectionIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -76,7 +76,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIResourceCombinationProvider.GetElementCellSchemaProvider" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIResourceCombinationProvider.GetElementCellValueProvider" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( int* )( params + 8 ) = ListIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -97,7 +97,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIResourceCombinationProvider.GetElementCellTags" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -106,7 +106,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIResourceCombinationProvider.GetCellFieldType" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( ScriptName* )( params + 8 ) = CellTag;
 				*( byte* )( params + 16 ) = FieldType;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -119,7 +119,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIResourceCombinationProvider.GetCellFieldValue" );
 				byte *params = ( byte* )( malloc( 112 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( ScriptName* )( params + 8 ) = CellTag;
 				*( int* )( params + 16 ) = ListIndex;
 				*( void** )( params + 20 ) = out_FieldValue;

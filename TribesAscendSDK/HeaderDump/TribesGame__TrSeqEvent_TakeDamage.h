@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeqEvent_TakeDamage.HandleDamage" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Actor** )( params + 0 ) = InOriginator;
+				*( class Actor** )params = InOriginator;
 				*( class Actor** )( params + 4 ) = InInstigator;
 				*( ScriptClass** )( params + 8 ) = inDamageType;
 				*( int* )( params + 12 ) = inAmount;

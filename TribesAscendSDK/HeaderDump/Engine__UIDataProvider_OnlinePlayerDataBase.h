@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_OnlinePlayerDataBase.OnRegister" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LocalPlayer** )( params + 0 ) = InPlayer;
+				*( class LocalPlayer** )params = InPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

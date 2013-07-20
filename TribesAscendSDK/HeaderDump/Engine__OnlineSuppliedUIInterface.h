@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSuppliedUIInterface.ShowMatchmakingUI" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = SearchingPlayerNum;
+				*( byte* )params = SearchingPlayerNum;
 				*( class OnlineGameSearch** )( params + 4 ) = SearchSettings;
 				*( class OnlineGameSettings** )( params + 8 ) = GameSettings;
 				ScriptObject *object = ( ScriptObject* )( this );

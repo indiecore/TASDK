@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCTFTeamAI.AddSquadWithLeader" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				*( class UTGameObjective** )( params + 4 ) = O;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTCTFTeamAI.GetPriorityFreelanceObjectiveFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTSquadAI** )( params + 0 ) = InFreelanceSquad;
+				*( class UTSquadAI** )params = InFreelanceSquad;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class UTGameObjective** )( params + function->return_val_offset() );

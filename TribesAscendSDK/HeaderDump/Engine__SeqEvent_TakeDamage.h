@@ -27,7 +27,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqEvent_TakeDamage.IsValidDamageType" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = inDamageType;
+				*( ScriptClass** )params = inDamageType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqEvent_TakeDamage.HandleDamage" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Actor** )( params + 0 ) = InOriginator;
+				*( class Actor** )params = InOriginator;
 				*( class Actor** )( params + 4 ) = InInstigator;
 				*( ScriptClass** )( params + 8 ) = inDamageType;
 				*( int* )( params + 12 ) = inAmount;

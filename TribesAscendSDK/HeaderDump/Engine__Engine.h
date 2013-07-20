@@ -316,7 +316,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.GetAdditionalFont" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = AdditionalFontIndex;
+				*( int* )params = AdditionalFontIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Font** )( params + function->return_val_offset() );
@@ -344,7 +344,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.StopMovie" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bDelayStopUntilGameHasRendered;
+				*( bool* )params = bDelayStopUntilGameHasRendered;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -361,7 +361,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.AddOverlay" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( class Font** )( params + 0 ) = Font;
+				*( class Font** )params = Font;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Text;
 				*( float* )( params + 16 ) = X;
 				*( float* )( params + 20 ) = Y;
@@ -376,7 +376,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.AddOverlayWrapped" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( class Font** )( params + 0 ) = Font;
+				*( class Font** )params = Font;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Text;
 				*( float* )( params + 16 ) = X;
 				*( float* )( params + 20 ) = Y;
@@ -409,7 +409,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.AddTextureStreamingSlaveLoc" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = InLoc;
+				*( Vector* )params = InLoc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -418,7 +418,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.BasicSaveObject" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class Object** )( params + 0 ) = Obj;
+				*( class Object** )params = Obj;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = PathName;
 				*( bool* )( params + 16 ) = bIsSaveGame;
 				*( int* )( params + 20 ) = Version;
@@ -431,7 +431,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Engine.BasicLoadObject" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class Object** )( params + 0 ) = Obj;
+				*( class Object** )params = Obj;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = PathName;
 				*( bool* )( params + 16 ) = bIsSaveGame;
 				*( int* )( params + 20 ) = Version;

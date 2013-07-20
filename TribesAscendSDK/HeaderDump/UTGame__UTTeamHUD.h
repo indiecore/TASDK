@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamHUD.GetTeamScore" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = TeamIndex;
+				*( byte* )params = TeamIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamHUD.GetDirectionalDest" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = TeamIndex;
+				*( byte* )params = TeamIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Actor** )( params + function->return_val_offset() );
@@ -67,7 +67,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamHUD.DisplayTeamLogos" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = TeamIndex;
+				*( byte* )params = TeamIndex;
 				*( void** )( params + 4 ) = pos;
 				*( float* )( params + 12 ) = DestScale;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTTeamHUD.DisplayDirectionIndicator" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( byte* )( params + 0 ) = TeamIndex;
+				*( byte* )params = TeamIndex;
 				*( void** )( params + 4 ) = pos;
 				*( class Actor** )( params + 12 ) = destActor;
 				*( float* )( params + 16 ) = DestScale;

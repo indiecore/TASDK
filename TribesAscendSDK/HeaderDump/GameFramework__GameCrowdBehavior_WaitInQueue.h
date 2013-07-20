@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdBehavior_WaitInQueue.ChangingDestination" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdDestination** )( params + 0 ) = NewDest;
+				*( class GameCrowdDestination** )params = NewDest;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

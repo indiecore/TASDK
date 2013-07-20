@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshPath_WithinTraversalDist.DontExceedMaxDist" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( class NavigationHandle** )params = NavHandle;
 				*( float* )( params + 4 ) = InMaxTraversalDist;
 				*( bool* )( params + 8 ) = bInSoft;
 				ScriptObject *object = ( ScriptObject* )( this );

@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_PlayerAchievements.GetAchievementIconPathName" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = AchievementId;
+				*( int* )params = AchievementId;
 				*( bool* )( params + 4 ) = bReturnLockedIcon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -60,7 +60,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_PlayerAchievements.GetAchievementDetails" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( int* )( params + 0 ) = AchievementId;
+				*( int* )params = AchievementId;
 				*( void** )( params + 4 ) = OutAchievementDetails;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -71,7 +71,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_PlayerAchievements.OnPlayerAchievementsChanged" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TitleId;
+				*( int* )params = TitleId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -80,7 +80,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_PlayerAchievements.OnPlayerAchievementUnlocked" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_PlayerAchievements.OnRegister" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LocalPlayer** )( params + 0 ) = InPlayer;
+				*( class LocalPlayer** )params = InPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -106,7 +106,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_PlayerAchievements.OnLoginChange" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

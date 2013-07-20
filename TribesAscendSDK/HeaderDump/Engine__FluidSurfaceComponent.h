@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FluidSurfaceComponent.ApplyForce" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = WorldPos;
+				*( Vector* )params = WorldPos;
 				*( float* )( params + 12 ) = Strength;
 				*( float* )( params + 16 ) = Radius;
 				*( bool* )( params + 20 ) = bImpulse;
@@ -83,7 +83,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FluidSurfaceComponent.SetDetailPosition" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = WorldPos;
+				*( Vector* )params = WorldPos;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -92,7 +92,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FluidSurfaceComponent.SetSimulationPosition" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = WorldPos;
+				*( Vector* )params = WorldPos;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqEvent_Touch.CheckTouchActivate" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Actor** )( params + 0 ) = InOriginator;
+				*( class Actor** )params = InOriginator;
 				*( class Actor** )( params + 4 ) = InInstigator;
 				*( bool* )( params + 8 ) = bTest;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -38,7 +38,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqEvent_Touch.CheckUnTouchActivate" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Actor** )( params + 0 ) = InOriginator;
+				*( class Actor** )params = InOriginator;
 				*( class Actor** )( params + 4 ) = InInstigator;
 				*( bool* )( params + 8 ) = bTest;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -58,7 +58,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqEvent_Touch.NotifyTouchingPawnDied" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

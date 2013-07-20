@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployableController.CanFireWeapon" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class Weapon** )( params + 0 ) = Wpn;
+				*( class Weapon** )params = Wpn;
 				*( byte* )( params + 4 ) = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

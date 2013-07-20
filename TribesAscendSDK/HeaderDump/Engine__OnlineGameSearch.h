@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineGameSearch.SetSkillOverride" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = LeaderboardId;
+				*( int* )params = LeaderboardId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

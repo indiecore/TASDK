@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSubDevice.CalcWeaponFire" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( Vector* )( params + 0 ) = StartTrace;
+				*( Vector* )params = StartTrace;
 				*( Vector* )( params + 12 ) = EndTrace;
 				*( Vector* )( params + 36 ) = Extent;
 				ScriptObject *object = ( ScriptObject* )( this );

@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdSpawnInterface.GetSpawnPosition" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class SeqAct_GameCrowdSpawner** )( params + 0 ) = Spawner;
+				*( class SeqAct_GameCrowdSpawner** )params = Spawner;
 				*( Vector* )( params + 4 ) = SpawnPos;
 				*( Rotator* )( params + 16 ) = SpawnRot;
 				ScriptObject *object = ( ScriptObject* )( this );

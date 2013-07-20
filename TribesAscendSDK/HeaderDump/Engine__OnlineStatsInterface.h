@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsInterface.WriteOnlinePlayerScores" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( int* )( params + 8 ) = LeaderboardId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -34,10 +34,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsInterface.RegisterHostStatGuid" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = HostStatGuid;
+				*( ScriptArray< wchar_t >* )params = HostStatGuid;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				HostStatGuid = *( ScriptArray< wchar_t >* )( params + 0 );
+				HostStatGuid = *( ScriptArray< wchar_t >* )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -54,7 +54,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsInterface.RegisterStatGuid" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = PlayerID;
+				*( void** )params = PlayerID;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = ClientStatGuid;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -85,7 +85,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsInterface.ReadOnlineStatsForFriends" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( class OnlineStatsRead** )( params + 4 ) = StatsRead;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -96,7 +96,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsInterface.ReadOnlineStatsByRank" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class OnlineStatsRead** )( params + 0 ) = StatsRead;
+				*( class OnlineStatsRead** )params = StatsRead;
 				*( int* )( params + 4 ) = StartIndex;
 				*( int* )( params + 8 ) = NumToRead;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -108,7 +108,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsInterface.ReadOnlineStatsByRankAroundPlayer" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( class OnlineStatsRead** )( params + 4 ) = StatsRead;
 				*( int* )( params + 8 ) = NumRows;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -120,7 +120,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsInterface.OnReadOnlineStatsComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -129,7 +129,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsInterface.OnRegisterHostStatGuidComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -138,7 +138,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsInterface.OnFlushOnlineStatsComplete" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( bool* )( params + 8 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -164,7 +164,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsInterface.FreeStats" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class OnlineStatsRead** )( params + 0 ) = StatsRead;
+				*( class OnlineStatsRead** )params = StatsRead;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -173,7 +173,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsInterface.WriteOnlineStats" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( void** )( params + 8 ) = Player;
 				*( class OnlineStatsWrite** )( params + 16 ) = StatsWrite;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -185,7 +185,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsInterface.FlushOnlineStats" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

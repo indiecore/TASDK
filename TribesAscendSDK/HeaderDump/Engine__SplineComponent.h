@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineComponent.GetLocationAtDistanceAlongSpline" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Distance;
+				*( float* )params = Distance;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -62,7 +62,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineComponent.GetTangentAtDistanceAlongSpline" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Distance;
+				*( float* )params = Distance;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );

@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.AllowContinueOnFoot" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( class UTVehicle** )( params + 4 ) = V;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.AllowImpactJumpBy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -54,7 +54,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.SetEnemy" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( class Pawn** )( params + 4 ) = NewEnemy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.AssignSquadResponsibility" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -76,7 +76,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.FindNewEnemyFor" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( bool* )( params + 4 ) = bSeeEnemy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.MustKeepEnemy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = E;
+				*( class Pawn** )params = E;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -97,7 +97,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.IsDefending" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -107,7 +107,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.HasOtherVisibleEnemy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -117,7 +117,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.PriorityObjective" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -127,7 +127,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.AllowDetourTo" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( class NavigationPoint** )( params + 4 ) = N;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -138,7 +138,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.SetFacingActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Actor** )( params + function->return_val_offset() );
@@ -148,7 +148,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.FormationCenter" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Actor** )( params + function->return_val_offset() );
@@ -158,7 +158,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.AcceptableDefensivePosition" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class NavigationPoint** )( params + 0 ) = N;
+				*( class NavigationPoint** )params = N;
 				*( class UTBot** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -169,7 +169,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.FindDefensivePositionFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class NavigationPoint** )( params + function->return_val_offset() );
@@ -180,7 +180,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.ClearPathFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -190,7 +190,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.LostEnemy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -200,7 +200,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.PickRetreatDestination" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -210,7 +210,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.BeDevious" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Enemy;
+				*( class Pawn** )params = Enemy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -220,7 +220,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.ShouldSuppressEnemy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -230,7 +230,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.VehicleDesireability" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTVehicle** )( params + 0 ) = V;
+				*( class UTVehicle** )params = V;
 				*( class UTBot** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -241,7 +241,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.HandlePathObstruction" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( class Actor** )( params + 4 ) = BlockedBy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -252,7 +252,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.FindPathToObjective" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( class Actor** )( params + 4 ) = O;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -298,7 +298,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.CriticalObjectiveWarning" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = NewEnemy;
+				*( class Pawn** )params = NewEnemy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -315,7 +315,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.GetLinkVehicle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class UTVehicle** )( params + function->return_val_offset() );
@@ -334,7 +334,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.AddEnemy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = NewEnemy;
+				*( class Pawn** )params = NewEnemy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -344,7 +344,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.ValidEnemy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = NewEnemy;
+				*( class Pawn** )params = NewEnemy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -354,7 +354,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.IsOnSquad" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -364,7 +364,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.RemoveEnemy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = E;
+				*( class Pawn** )params = E;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -373,7 +373,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.NotifyKilled" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Controller** )( params + 0 ) = Killer;
+				*( class Controller** )params = Killer;
 				*( class Controller** )( params + 4 ) = Killed;
 				*( class Pawn** )( params + 8 ) = KilledPawn;
 				*( ScriptClass** )( params + 12 ) = DamageType;
@@ -385,7 +385,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.ModifyThreat" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = Current;
+				*( float* )params = Current;
 				*( class Pawn** )( params + 4 ) = NewThreat;
 				*( bool* )( params + 8 ) = bThreatVisible;
 				*( class UTBot** )( params + 12 ) = B;
@@ -398,7 +398,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.UnderFire" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = NewThreat;
+				*( class Pawn** )params = NewThreat;
 				*( class UTBot** )( params + 4 ) = Ignored;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -409,7 +409,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.AssessThreat" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( class Pawn** )( params + 4 ) = NewThreat;
 				*( bool* )( params + 8 ) = bThreatVisible;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -421,7 +421,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.ShouldDeferTo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -431,7 +431,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.WaitAtThisPosition" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -441,7 +441,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.WanderNearLeader" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -451,7 +451,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.NearFormationCenter" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -461,7 +461,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.CloseToLeader" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -471,7 +471,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.MergeWith" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTSquadAI** )( params + 0 ) = S;
+				*( class UTSquadAI** )params = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -480,7 +480,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.Initialize" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class UTTeamInfo** )( params + 0 ) = T;
+				*( class UTTeamInfo** )params = T;
 				*( class UTGameObjective** )( params + 4 ) = O;
 				*( class Controller** )( params + 8 ) = C;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -500,7 +500,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.SetAlternatePathTo" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class NavigationPoint** )( params + 0 ) = NewRouteObjective;
+				*( class NavigationPoint** )params = NewRouteObjective;
 				*( class UTBot** )( params + 4 ) = RouteMaker;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -510,7 +510,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.TryToIntercept" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( class Pawn** )( params + 4 ) = P;
 				*( class Actor** )( params + 8 ) = RouteGoal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -522,7 +522,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.CloseEnoughToObjective" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( class Actor** )( params + 4 ) = O;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -533,7 +533,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.LeaveVehicleToReachObjective" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( class Actor** )( params + 4 ) = O;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -544,7 +544,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.MustCompleteOnFoot" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = O;
+				*( class Actor** )params = O;
 				*( class Pawn** )( params + 4 ) = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -555,7 +555,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.LeaveVehicleAtParkingSpot" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( class Actor** )( params + 4 ) = O;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -565,7 +565,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.SetLeader" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -574,7 +574,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.RemovePlayer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = P;
+				*( class PlayerController** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -583,7 +583,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.RemoveBot" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -592,7 +592,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.AddBot" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -601,7 +601,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.SetDefenseScriptFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -610,7 +610,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.SetObjective" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTGameObjective** )( params + 0 ) = O;
+				*( class UTGameObjective** )params = O;
 				*( bool* )( params + 4 ) = bForceUpdate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -620,7 +620,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.Retask" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -629,7 +629,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.GetOrderStringFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class UTPlayerReplicationInfo** )params = PRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -639,7 +639,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.GetShortOrderStringFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class UTPlayerReplicationInfo** )params = PRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -657,7 +657,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.TellBotToFollow" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( class Controller** )( params + 4 ) = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -668,7 +668,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.AllowTaunt" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -678,7 +678,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.AddTransientCosts" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( float* )( params + 4 ) = F;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -688,7 +688,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.MaxVehicleDist" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -698,7 +698,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.NeverBail" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -708,7 +708,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.BotEnteredVehicle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -717,7 +717,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.IsOnPathToSquadObjective" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Goal;
+				*( class Actor** )params = Goal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -727,7 +727,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.GetOnHoverboard" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -737,7 +737,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.EnterAndExitVehicle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -747,7 +747,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.GotoVehicle" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTVehicle** )( params + 0 ) = SquadVehicle;
+				*( class UTVehicle** )params = SquadVehicle;
 				*( class UTBot** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -758,7 +758,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.CheckVehicle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -768,7 +768,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.CheckHoverboard" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -778,7 +778,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.ShouldUseHoverboard" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -788,7 +788,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.OverrideFollowPlayer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -798,7 +798,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.ShouldCheckSuperVehicle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -808,7 +808,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.CheckSuperItem" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( float* )( params + 4 ) = SuperDist;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -819,7 +819,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.CheckSquadObjectives" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -829,7 +829,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.BotSuitability" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -848,7 +848,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.DisplayDebug" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				*( float* )( params + 4 ) = YL;
 				*( float* )( params + 8 ) = YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -861,7 +861,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.FriendlyToward" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -871,7 +871,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.GetMaxDefenseDistanceFrom" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = Center;
+				*( class Actor** )params = Center;
 				*( class UTBot** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -882,7 +882,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.RateDefensivePosition" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class NavigationPoint** )( params + 0 ) = N;
+				*( class NavigationPoint** )params = N;
 				*( class UTBot** )( params + 4 ) = CurrentBot;
 				*( class Actor** )( params + 8 ) = Center;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -894,7 +894,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.MarkHuntingSpots" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -903,7 +903,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTSquadAI.ModifyAggression" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( float* )( params + 4 ) = Aggression;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

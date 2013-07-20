@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateInt" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateBool" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bVal;
+				*( bool* )params = bVal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateString" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = val;
+				*( ScriptArray< wchar_t >* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -59,7 +59,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateGFxList" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = List;
+				*( class GFxObject** )params = List;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateIntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = Val1;
+				*( int* )params = Val1;
 				*( int* )( params + 4 ) = Val2;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateIntString" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Val1;
+				*( int* )params = Val1;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Val2;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -88,7 +88,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateStringInt" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Val1;
+				*( ScriptArray< wchar_t >* )params = Val1;
 				*( int* )( params + 12 ) = Val2;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -98,7 +98,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateStringBool" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = val;
+				*( ScriptArray< wchar_t >* )params = val;
 				*( bool* )( params + 12 ) = bVal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -108,7 +108,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateIntGFxList" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				*( class GFxObject** )( params + 4 ) = List;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -118,7 +118,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateOnMarshalEvent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = pMarEvent;
+				*( void** )params = pMarEvent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -136,7 +136,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateGetPrice" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = XPValue;
+				*( float* )params = XPValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -146,7 +146,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateIntIntInt" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = Val1;
+				*( int* )params = Val1;
 				*( int* )( params + 4 ) = Val2;
 				*( int* )( params + 8 ) = Val3;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -158,7 +158,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateGetBoolIntInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotId;
+				*( int* )params = SlotId;
 				*( int* )( params + 4 ) = ClassId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -169,7 +169,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateLogin" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = UserName;
+				*( ScriptArray< wchar_t >* )params = UserName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Password;
 				*( bool* )( params + 24 ) = bRemember;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -181,7 +181,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateBoolGetBool" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = val;
+				*( bool* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -200,7 +200,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateOptions" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class GFxObject** )( params + 0 ) = List;
+				*( class GFxObject** )params = List;
 				*( int* )( params + 4 ) = ClassId;
 				*( int* )( params + 8 ) = SkillId;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -211,7 +211,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DelegateAction" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				*( class GFxObject** )( params + 4 ) = List;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -231,7 +231,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.RequestPurchaseSteamItem" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = LootId;
+				*( int* )params = LootId;
 				*( int* )( params + 4 ) = Price;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -285,7 +285,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.RequestPurchasePortalItem" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = LootItemId;
+				*( int* )params = LootItemId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -304,7 +304,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.PurchasedItem" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( int* )( params + 0 ) = VendorId;
+				*( int* )params = VendorId;
 				*( int* )( params + 4 ) = LootId;
 				*( bool* )( params + 8 ) = bSuccess;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Message;
@@ -316,7 +316,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.OnMarshalEvent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = pMarEvent;
+				*( void** )params = pMarEvent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -325,7 +325,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ReadPlayerProfileData" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TgPlayerProfile** )( params + 0 ) = Profile;
+				*( class TgPlayerProfile** )params = Profile;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -335,7 +335,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.UserLoginChanged" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = pMarEvent;
+				*( void** )params = pMarEvent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -370,7 +370,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.AddAcquisition" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = VendorId;
+				*( int* )params = VendorId;
 				*( int* )( params + 4 ) = LootId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -406,7 +406,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.GetEquipmentXP" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ActivityId;
+				*( int* )params = ActivityId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -416,7 +416,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.GetEquipmentTierXP" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ActivityId;
+				*( int* )params = ActivityId;
 				*( int* )( params + 4 ) = Tier;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -436,7 +436,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.Start" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = StartPaused;
+				*( bool* )params = StartPaused;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -788,7 +788,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_SetFontIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = FontIdx;
+				*( int* )params = FontIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -951,7 +951,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.SummaryAction" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ActionId;
+				*( int* )params = ActionId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -969,7 +969,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ToggleMutePlayer" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PlayerName;
+				*( ScriptArray< wchar_t >* )params = PlayerName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -978,7 +978,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.StripTag" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = sValue;
+				*( ScriptArray< wchar_t >* )params = sValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -1058,7 +1058,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.SetPlayerInLogin" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bServerDrop;
+				*( bool* )params = bServerDrop;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1106,7 +1106,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_GotoState" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = NewState;
+				*( ScriptArray< wchar_t >* )params = NewState;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1205,7 +1205,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.QuitGamePopup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1214,7 +1214,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.LeaveMatchPopup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1223,7 +1223,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.QuitGamePopupComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Action;
+				*( int* )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1232,7 +1232,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.LeaveMatchPopupComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Action;
+				*( int* )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1249,7 +1249,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.SendPlayerLogin" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PlayerName;
+				*( ScriptArray< wchar_t >* )params = PlayerName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Reason;
 				*( bool* )( params + 24 ) = Success;
 				*( bool* )( params + 28 ) = bNeedEULA;
@@ -1271,7 +1271,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.OnProfileLoaded" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bShowEula;
+				*( bool* )params = bShowEula;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1335,7 +1335,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.JoinFailed" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Error;
+				*( ScriptArray< wchar_t >* )params = Error;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1346,7 +1346,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.DisplayJoinFailed" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1364,7 +1364,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.JoinRequiresPasswordComplete" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Action;
+				*( int* )params = Action;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = TextInput;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1374,7 +1374,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.CheckRibbons" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bForce;
+				*( bool* )params = bForce;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1407,7 +1407,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_PopupError" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Message;
+				*( ScriptArray< wchar_t >* )params = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1432,7 +1432,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_FillEULAText" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = EULAText;
+				*( ScriptArray< wchar_t >* )params = EULAText;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Title;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = Accept;
 				*( ScriptArray< wchar_t >* )( params + 36 ) = Decline;
@@ -1452,7 +1452,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.PlayerNameNotAllowed" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bTaken;
+				*( bool* )params = bTaken;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1491,7 +1491,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_FillProfile" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = ObjList;
+				*( class GFxObject** )params = ObjList;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1500,7 +1500,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.GetBoostLabel" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Hours;
+				*( int* )params = Hours;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -1510,7 +1510,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.GetRankFromXP" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = XP;
+				*( int* )params = XP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptClass** )( params + function->return_val_offset() );
@@ -1520,7 +1520,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.WidgetInitialized" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = WidgetName;
+				*( ScriptName* )params = WidgetName;
 				*( ScriptName* )( params + 8 ) = WidgetPath;
 				*( class GFxObject** )( params + 16 ) = Widget;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1558,7 +1558,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ShowMovie" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bFocus;
+				*( bool* )params = bFocus;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1584,7 +1584,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ChatMessageReceived" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( int* )( params + 0 ) = Channel;
+				*( int* )params = Channel;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Sender;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1595,7 +1595,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.UpdateStatus" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Message;
+				*( ScriptArray< wchar_t >* )params = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1604,7 +1604,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.SetCountdownTimer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Seconds;
+				*( int* )params = Seconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1614,7 +1614,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.LoadingTimer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bStart;
+				*( bool* )params = bStart;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1632,7 +1632,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.KeyBindCaptured" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = KeyName;
+				*( ScriptArray< wchar_t >* )params = KeyName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1642,7 +1642,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.KeyPressCaptured" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = KeyName;
+				*( ScriptArray< wchar_t >* )params = KeyName;
 				*( bool* )( params + 12 ) = bReleased;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1717,7 +1717,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.UnlockedItem" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Description;
+				*( ScriptArray< wchar_t >* )params = Description;
 				*( int* )( params + 12 ) = ItemId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1731,7 +1731,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.UnlockedGold" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Description;
+				*( ScriptArray< wchar_t >* )params = Description;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1740,7 +1740,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.UnlockedXP" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Description;
+				*( ScriptArray< wchar_t >* )params = Description;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1749,7 +1749,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.UnlockedBooster" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Description;
+				*( ScriptArray< wchar_t >* )params = Description;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1758,7 +1758,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.UnlockedBadge" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Description;
+				*( ScriptArray< wchar_t >* )params = Description;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = RankStr;
 				*( int* )( params + 24 ) = Id;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1769,7 +1769,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.UnlockedNameChange" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Description;
+				*( ScriptArray< wchar_t >* )params = Description;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1794,7 +1794,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.UnlockedClanTag" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bRemoved;
+				*( bool* )params = bRemoved;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1803,7 +1803,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.UnlockedSkill" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SkillId;
+				*( int* )params = SkillId;
 				*( int* )( params + 4 ) = ParentId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1821,7 +1821,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ClaimedPromotion" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PromoName;
+				*( ScriptArray< wchar_t >* )params = PromoName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1838,7 +1838,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ReadyAcquisition" );
 				byte *params = ( byte* )( malloc( 29 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = TopName;
+				*( ScriptArray< wchar_t >* )params = TopName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = BotName;
 				*( byte* )( params + 24 ) = IconType;
 				*( int* )( params + 28 ) = IconId;
@@ -1866,7 +1866,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_UnlockedItem" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = TopName;
+				*( ScriptArray< wchar_t >* )params = TopName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = BotName;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = IconType;
 				*( int* )( params + 36 ) = IconId;
@@ -1878,7 +1878,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.KickVoteFeedback" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bComplete;
+				*( bool* )params = bComplete;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1888,7 +1888,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.PlayerInLoginQueue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Estimate;
+				*( int* )params = Estimate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1898,7 +1898,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.LoginQueuePopupData" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1907,7 +1907,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.LoginQueuePopupComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Action;
+				*( int* )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1916,7 +1916,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ServerDropPopupData" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1925,7 +1925,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.AFKKickPopupData" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1935,7 +1935,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.LoginFailedPopup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1944,7 +1944,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.WaitingForPurchaseReturn" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1954,7 +1954,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.PasswordPopup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1963,7 +1963,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.AddFriendScoreboardPopup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1973,7 +1973,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.PurchaseFailed" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = FailMessage;
+				*( ScriptArray< wchar_t >* )params = FailMessage;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1984,7 +1984,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.PurchaseFailedPopup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1994,7 +1994,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.PromoCodeFailed" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Reason;
+				*( ScriptArray< wchar_t >* )params = Reason;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2005,7 +2005,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.PromoCodeFailedPopup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2014,7 +2014,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.GenericFailure" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Reason;
+				*( ScriptArray< wchar_t >* )params = Reason;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2024,7 +2024,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.GenericFailurePopup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2033,7 +2033,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.NewPlayerNamePopup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2068,7 +2068,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_ShowNews" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = News;
+				*( ScriptArray< wchar_t >* )params = News;
 				*( bool* )( params + 12 ) = bFeatured;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2086,7 +2086,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.BeginExperienceTweens" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bDailyCompleted;
+				*( bool* )params = bDailyCompleted;
 				*( bool* )( params + 4 ) = bWeeklyCompleted;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2112,7 +2112,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ToggleWorkingGraphic" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnabled;
+				*( bool* )params = bEnabled;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2137,7 +2137,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.UnlockedUnknown" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = VendorId;
+				*( int* )params = VendorId;
 				*( int* )( params + 4 ) = LootId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2147,7 +2147,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.SeedAccolades" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TgPlayerProfile** )( params + 0 ) = Profile;
+				*( class TgPlayerProfile** )params = Profile;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2180,7 +2180,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ShowVehicleMenu" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Credits;
+				*( int* )params = Credits;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2213,7 +2213,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.AddVehicleMenuOption" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ClassName;
+				*( ScriptArray< wchar_t >* )params = ClassName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = DisplayName;
 				*( int* )( params + 24 ) = Cost;
 				*( int* )( params + 28 ) = Icon;
@@ -2243,7 +2243,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.PushChat" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = chatStr;
+				*( ScriptArray< wchar_t >* )params = chatStr;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2268,7 +2268,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ShowSteamResponse" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bAuthorized;
+				*( bool* )params = bAuthorized;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2277,7 +2277,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.HandlePopup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -2287,7 +2287,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.HandlePopupComplete" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Id;
+				*( int* )params = Id;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Text;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2298,7 +2298,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.NavigateSteamGold" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bSuccess;
+				*( bool* )params = bSuccess;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2315,7 +2315,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ShowNotification" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Message;
+				*( ScriptArray< wchar_t >* )params = Message;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Message2;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2333,7 +2333,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.UpdateButton" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Obj;
+				*( class GFxObject** )params = Obj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2350,7 +2350,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_ShowQueue" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Estimate;
+				*( ScriptArray< wchar_t >* )params = Estimate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2391,7 +2391,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_GlobalAlert" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Message;
+				*( ScriptArray< wchar_t >* )params = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2400,7 +2400,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_KeyPressCaptured" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = KeyName;
+				*( ScriptArray< wchar_t >* )params = KeyName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2409,7 +2409,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_PromptNewPlayerName" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ErrorString;
+				*( ScriptArray< wchar_t >* )params = ErrorString;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2418,7 +2418,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_PurchaseComplete" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bSuccess;
+				*( bool* )params = bSuccess;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2428,7 +2428,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_ShowReticuleBuilder" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = Data;
+				*( class GFxObject** )params = Data;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2445,7 +2445,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrMenuMoviePlayer.ASC_SetMapLoadText" );
 				byte *params = ( byte* )( malloc( 96 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = A;
+				*( ScriptArray< wchar_t >* )params = A;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = B;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = C;
 				*( ScriptArray< wchar_t >* )( params + 36 ) = D;

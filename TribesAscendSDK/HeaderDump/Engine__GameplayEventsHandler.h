@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsHandler.SetReader" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameplayEventsReader** )( params + 0 ) = NewReader;
+				*( class GameplayEventsReader** )params = NewReader;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsHandler.AddFilter" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsHandler.RemoveFilter" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -75,7 +75,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsHandler.IsEventFiltered" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

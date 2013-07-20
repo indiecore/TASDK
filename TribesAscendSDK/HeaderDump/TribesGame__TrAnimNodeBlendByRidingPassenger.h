@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayFire" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = RefireTime;
+				*( float* )params = RefireTime;
 				*( ScriptName* )( params + 4 ) = FireAnimName;
 				*( float* )( params + 12 ) = ReloadTime;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayReload" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = ReloadTime;
+				*( float* )params = ReloadTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

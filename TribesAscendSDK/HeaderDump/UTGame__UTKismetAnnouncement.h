@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTKismetAnnouncement.GetObjectiveAnnouncement" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = MessageIndex;
+				*( byte* )params = MessageIndex;
 				*( class Object** )( params + 4 ) = Objective;
 				*( class PlayerController** )( params + 8 ) = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTKismetAnnouncement.AnnouncementLevel" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = MessageIndex;
+				*( byte* )params = MessageIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );

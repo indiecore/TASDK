@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIInteraction.IsLoggedIn" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ControllerId;
+				*( int* )params = ControllerId;
 				*( bool* )( params + 4 ) = bRequireOnlineLogin;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIInteraction.IsGamepadConnected" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ControllerId;
+				*( int* )params = ControllerId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -74,7 +74,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIInteraction.GetPlayerIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ControllerId;
+				*( int* )params = ControllerId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIInteraction.GetPlayerControllerId" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PlayerIndex;
+				*( int* )params = PlayerIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -94,7 +94,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIInteraction.GetLocalPlayer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PlayerIndex;
+				*( int* )params = PlayerIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class LocalPlayer** )( params + function->return_val_offset() );
@@ -104,7 +104,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIInteraction.NotifyPlayerAdded" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PlayerIndex;
+				*( int* )params = PlayerIndex;
 				*( class LocalPlayer** )( params + 4 ) = AddedPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -114,7 +114,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIInteraction.NotifyPlayerRemoved" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PlayerIndex;
+				*( int* )params = PlayerIndex;
 				*( class LocalPlayer** )( params + 4 ) = RemovedPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -124,7 +124,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIInteraction.GetLoginStatus" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ControllerId;
+				*( int* )params = ControllerId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -152,7 +152,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIInteraction.GetLoggedInPlayerCount" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bRequireOnlineLogin;
+				*( bool* )params = bRequireOnlineLogin;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );

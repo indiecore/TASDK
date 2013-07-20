@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalMessage.GetConsoleColor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = RelatedPRI;
+				*( class PlayerReplicationInfo** )params = RelatedPRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -39,7 +39,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalMessage.PartiallyDuplicates" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Switch1;
+				*( int* )params = Switch1;
 				*( int* )( params + 4 ) = Switch2;
 				*( class Object** )( params + 8 ) = OptionalObject1;
 				*( class Object** )( params + 12 ) = OptionalObject2;
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalMessage.ClientReceive" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class PlayerController** )( params + 0 ) = P;
+				*( class PlayerController** )params = P;
 				*( int* )( params + 4 ) = Switch;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalMessage.GetString" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				*( bool* )( params + 4 ) = bPRI1HUD;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
@@ -82,7 +82,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalMessage.GetColor" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				*( class PlayerReplicationInfo** )( params + 4 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI_;
 				*( class Object** )( params + 12 ) = OptionalObject;
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalMessage.GetPos" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				*( class HUD** )( params + 4 ) = myHUD;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -106,7 +106,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalMessage.GetFontSize" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				*( class PlayerReplicationInfo** )( params + 4 ) = RelatedPRI1;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI2;
 				*( class PlayerReplicationInfo** )( params + 12 ) = LocalPlayer;
@@ -119,7 +119,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalMessage.GetLifeTime" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -129,7 +129,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalMessage.IsConsoleMessage" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

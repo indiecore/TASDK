@@ -34,10 +34,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Input.GetBind" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = Key;
+				*( ScriptName* )params = Key;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Key = *( ScriptName* )( params + 0 );
+				Key = *( ScriptName* )params;
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
 			}
 
@@ -45,10 +45,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Input.GetBindNameFromCommandScript" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = KeyCommand;
+				*( ScriptArray< wchar_t >* )params = KeyCommand;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				KeyCommand = *( ScriptArray< wchar_t >* )( params + 0 );
+				KeyCommand = *( ScriptArray< wchar_t >* )params;
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
 			}
 
@@ -56,11 +56,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Input.SetBind" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = BindName;
+				*( ScriptName* )params = BindName;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = Command;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				BindName = *( ScriptName* )( params + 0 );
+				BindName = *( ScriptName* )params;
 			}
 
 	};

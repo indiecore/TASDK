@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimNodeJumpLeanOffset.SetLeanWeight" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = WeightTarget;
+				*( float* )params = WeightTarget;
 				*( float* )( params + 4 ) = BlendTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

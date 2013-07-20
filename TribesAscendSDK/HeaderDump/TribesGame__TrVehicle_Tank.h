@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVehicle_Tank.VehicleWeaponFireEffects" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = HitLocation;
+				*( Vector* )params = HitLocation;
 				*( int* )( params + 12 ) = SeatIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVehicle_Tank.ProcessViewRotationBasedOnSeat" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( int* )( params + 0 ) = SeatIndex;
+				*( int* )params = SeatIndex;
 				*( float* )( params + 4 ) = DeltaTime;
 				*( Rotator* )( params + 8 ) = out_ViewRotation;
 				*( Rotator* )( params + 20 ) = out_DeltaRot;
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVehicle_Tank.LimitViewRotation" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Rotator* )( params + 0 ) = LimitViewRotation;
+				*( Rotator* )params = LimitViewRotation;
 				*( float* )( params + 12 ) = LimitViewPitchMin;
 				*( float* )( params + 16 ) = LimitViewPitchMax;
 				ScriptObject *object = ( ScriptObject* )( this );

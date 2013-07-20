@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqEvent_HudRender.Render" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Canvas** )( params + 0 ) = TargetCanvas;
+				*( class Canvas** )params = TargetCanvas;
 				*( class HUD** )( params + 4 ) = TargetHud;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

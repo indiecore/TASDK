@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInstanceTimeVarying.SetParent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class MaterialInterface** )( params + 0 ) = NewParent;
+				*( class MaterialInterface** )params = NewParent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInstanceTimeVarying.SetScalarParameterValue" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( float* )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInstanceTimeVarying.SetScalarCurveParameterValue" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( void** )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInstanceTimeVarying.SetScalarStartTime" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( float* )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInstanceTimeVarying.SetDuration" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Value;
+				*( float* )params = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -74,7 +74,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInstanceTimeVarying.SetTextureParameterValue" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( class Texture** )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInstanceTimeVarying.SetVectorParameterValue" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( void** )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInstanceTimeVarying.SetVectorCurveParameterValue" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( void** )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -106,7 +106,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInstanceTimeVarying.SetVectorStartTime" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( float* )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -116,7 +116,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInstanceTimeVarying.SetFontParameterValue" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( class Font** )( params + 8 ) = FontValue;
 				*( int* )( params + 12 ) = FontPage;
 				ScriptObject *object = ( ScriptObject* )( this );

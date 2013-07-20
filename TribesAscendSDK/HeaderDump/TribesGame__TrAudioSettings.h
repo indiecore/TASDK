@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.GetCurrentSettingValue" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = Type;
+				*( byte* )params = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -48,7 +48,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.StoreSetting" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SettingId;
+				*( int* )params = SettingId;
 				*( int* )( params + 4 ) = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -58,7 +58,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.ReadSetting" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SettingId;
+				*( int* )params = SettingId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.LoadAudioSettings" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = List;
+				*( class GFxObject** )params = List;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.ApplyAudioSetting" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = Type;
+				*( int* )params = Type;
 				*( int* )( params + 4 ) = val;
 				*( bool* )( params + 8 ) = bStore;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -104,7 +104,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.AddSettingToList" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = SettingName;
+				*( ScriptArray< wchar_t >* )params = SettingName;
 				*( int* )( params + 12 ) = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -114,7 +114,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.SetMasterVolume" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = NewVolume;
+				*( float* )params = NewVolume;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -123,7 +123,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.SetEffectsVolume" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = NewVolume;
+				*( float* )params = NewVolume;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -132,7 +132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.SetMusicVolume" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = NewVolume;
+				*( float* )params = NewVolume;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -141,7 +141,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.SetVGSVolume" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = NewVolume;
+				*( float* )params = NewVolume;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -150,7 +150,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.SetVoiceVolume" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = NewVolume;
+				*( float* )params = NewVolume;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -168,7 +168,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.SetBassBoost" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = NewBassBoost;
+				*( bool* )params = NewBassBoost;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -177,7 +177,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAudioSettings.GetSettingNameFromType" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = Type;
+				*( byte* )params = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );

@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_RemoteArxBuster.TakeRadiusDamage" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( class Controller** )( params + 0 ) = EventInstigator;
+				*( class Controller** )params = EventInstigator;
 				*( float* )( params + 4 ) = BaseDamage;
 				*( float* )( params + 8 ) = InDamageRadius;
 				*( ScriptClass** )( params + 12 ) = DamageType;
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_RemoteArxBuster.TakeDamage" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( int* )( params + 0 ) = DamageAmount;
+				*( int* )params = DamageAmount;
 				*( class Controller** )( params + 4 ) = EventInstigator;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = Momentum;
@@ -72,7 +72,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_RemoteArxBuster.StickToTarget" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Actor** )( params + 0 ) = Target;
+				*( class Actor** )params = Target;
 				*( Vector* )( params + 4 ) = HitLocation;
 				*( Vector* )( params + 16 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );

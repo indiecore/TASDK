@@ -26,11 +26,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCallIn_SupportItemPlatform.GetBoundingCylinder" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = CollisionRadius;
+				*( float* )params = CollisionRadius;
 				*( float* )( params + 4 ) = CollisionHeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				CollisionRadius = *( float* )( params + 0 );
+				CollisionRadius = *( float* )params;
 				CollisionHeight = *( float* )( params + 4 );
 			}
 
@@ -38,7 +38,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCallIn_SupportItemPlatform.Init" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = DeployableOwner;
+				*( class Actor** )params = DeployableOwner;
 				*( ScriptClass** )( params + 4 ) = GameObjectiveClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCallIn_SupportItemPlatform.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

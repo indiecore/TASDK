@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTPickupInventory.BotDesireability" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Actor** )( params + 0 ) = PickupHolder;
+				*( class Actor** )params = PickupHolder;
 				*( class Pawn** )( params + 4 ) = P;
 				*( class Controller** )( params + 8 ) = C;
 				ScriptObject *object = ( ScriptObject* )( this );

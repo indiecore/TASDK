@@ -42,7 +42,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCaHStats.Initialize" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class TrPlayerController** )( params + 0 ) = PC;
+				*( class TrPlayerController** )params = PC;
 				*( class GfxTrHud** )( params + 4 ) = MP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCaHStats.UpdateCapturePointData" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				*( class TrGameReplicationInfo** )params = GRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCaHStats.UpdateTeamScore" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				*( class TrGameReplicationInfo** )params = GRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -102,7 +102,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCaHStats.FormatTime" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Seconds;
+				*( int* )params = Seconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );

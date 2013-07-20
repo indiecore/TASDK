@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Interaction.OnReceivedNativeInputKey" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( int* )( params + 0 ) = ControllerId;
+				*( int* )params = ControllerId;
 				*( ScriptName* )( params + 4 ) = Key;
 				*( byte* )( params + 12 ) = EventType;
 				*( float* )( params + 16 ) = AmountDepressed;
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Interaction.OnReceivedNativeInputChar" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = ControllerId;
+				*( int* )params = ControllerId;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Unicode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -56,7 +56,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Interaction.OnReceivedNativeInputAxis" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( int* )( params + 0 ) = ControllerId;
+				*( int* )params = ControllerId;
 				*( ScriptName* )( params + 4 ) = Key;
 				*( float* )( params + 12 ) = Delta;
 				*( float* )( params + 16 ) = DeltaTime;
@@ -70,7 +70,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Interaction.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -79,7 +79,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Interaction.PostRender" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -112,7 +112,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Interaction.NotifyPlayerAdded" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PlayerIndex;
+				*( int* )params = PlayerIndex;
 				*( class LocalPlayer** )( params + 4 ) = AddedPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -122,7 +122,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Interaction.NotifyPlayerRemoved" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PlayerIndex;
+				*( int* )params = PlayerIndex;
 				*( class LocalPlayer** )( params + 4 ) = RemovedPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

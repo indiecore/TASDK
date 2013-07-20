@@ -46,7 +46,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.SetTexturesToBeResident" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = TimeToBeResident;
+				*( float* )params = TimeToBeResident;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.DisplayDebug" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				*( float* )( params + 4 ) = out_YL;
 				*( float* )( params + 8 ) = out_YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.SetGibStaticMesh" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class StaticMesh** )( params + 0 ) = NewStaticMesh;
+				*( class StaticMesh** )params = NewStaticMesh;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -101,7 +101,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.BecomeViewTarget" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -110,7 +110,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.CalcCamera" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( float* )( params + 0 ) = fDeltaTime;
+				*( float* )params = fDeltaTime;
 				*( Vector* )( params + 4 ) = out_CamLoc;
 				*( Rotator* )( params + 16 ) = out_CamRot;
 				*( float* )( params + 28 ) = out_FOV;
@@ -137,7 +137,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.LeaveADecal" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = HitLoc;
+				*( Vector* )params = HitLoc;
 				*( Vector* )( params + 12 ) = HitNorm;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -155,7 +155,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.Landed" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = HitNormal;
+				*( Vector* )params = HitNormal;
 				*( class Actor** )( params + 12 ) = FloorActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -165,7 +165,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGib.HitWall" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Vector* )( params + 0 ) = HitNormal;
+				*( Vector* )params = HitNormal;
 				*( class Actor** )( params + 12 ) = Wall;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

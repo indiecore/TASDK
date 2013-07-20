@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKEmitCameraEffect.RegisterCamera" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UDKPlayerController** )( params + 0 ) = inCam;
+				*( class UDKPlayerController** )params = inCam;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -66,12 +66,12 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKEmitCameraEffect.UpdateLocation" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( Vector* )( params + 0 ) = CamLoc;
+				*( Vector* )params = CamLoc;
 				*( Rotator* )( params + 12 ) = CamRot;
 				*( float* )( params + 24 ) = CamFOVDeg;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				CamLoc = *( Vector* )( params + 0 );
+				CamLoc = *( Vector* )params;
 				CamRot = *( Rotator* )( params + 12 );
 			}
 

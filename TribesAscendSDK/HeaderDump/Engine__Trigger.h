@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Trigger.Touch" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Trigger.StopsProjectile" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Projectile** )( params + 0 ) = P;
+				*( class Projectile** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -71,20 +71,20 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Trigger.CreateCheckpointRecord" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = Record;
+				*( void** )params = Record;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Record = *( void** )( params + 0 );
+				Record = *( void** )params;
 			}
 
 			void ApplyCheckpointRecord( void* &Record )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Trigger.ApplyCheckpointRecord" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = Record;
+				*( void** )params = Record;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Record = *( void** )( params + 0 );
+				Record = *( void** )params;
 			}
 
 	};

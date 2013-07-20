@@ -67,7 +67,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.SetCharacterClassFromInfo" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = Info;
+				*( ScriptClass** )params = Info;
 				*( bool* )( params + 4 ) = bForce;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.UpdateEyeHeight" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.GetMaterialBelowFeetByLoc" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = TestLocation;
+				*( Vector* )params = TestLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptName* )( params + function->return_val_offset() );
@@ -105,7 +105,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.ActuallyPlayFootstepSound" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = FootDown;
+				*( int* )params = FootDown;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -114,7 +114,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.WeaponBob" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = BobDamping;
+				*( float* )params = BobDamping;
 				*( float* )( params + 4 ) = JumpDamping;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -125,7 +125,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.ReplicatedEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = VarName;
+				*( ScriptName* )params = VarName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -142,7 +142,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.PlayHardLandingEffect" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = HitLocation;
+				*( Vector* )params = HitLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -231,7 +231,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.PlayReload" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = EquipPoint;
+				*( byte* )params = EquipPoint;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -240,7 +240,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -249,7 +249,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.CalcCamera" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( float* )( params + 0 ) = fDeltaTime;
+				*( float* )params = fDeltaTime;
 				*( Vector* )( params + 4 ) = out_CamLoc;
 				*( Rotator* )( params + 16 ) = out_CamRot;
 				*( float* )( params + 28 ) = out_FOV;
@@ -265,7 +265,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.SetThirdPersonCamera" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewBehindView;
+				*( bool* )params = bNewBehindView;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -274,7 +274,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.CalcThirdPersonCam" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( float* )( params + 0 ) = fDeltaTime;
+				*( float* )params = fDeltaTime;
 				*( Vector* )( params + 4 ) = out_CamLoc;
 				*( Rotator* )( params + 16 ) = out_CamRot;
 				*( float* )( params + 28 ) = out_FOV;
@@ -290,7 +290,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.CalcOtherWatchingCam" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( float* )( params + 0 ) = fDeltaTime;
+				*( float* )params = fDeltaTime;
 				*( Vector* )( params + 4 ) = out_CamLoc;
 				*( Rotator* )( params + 16 ) = out_CamRot;
 				*( float* )( params + 28 ) = out_FOV;
@@ -323,7 +323,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPlayerPawn.SuppressAnimNotifies" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bSuppress;
+				*( bool* )params = bSuppress;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

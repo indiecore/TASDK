@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.OnFocusLost" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = LocalPlayerIndex;
+				*( int* )params = LocalPlayerIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.OnFocusGained" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = LocalPlayerIndex;
+				*( int* )params = LocalPlayerIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.ConsoleCommand" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Command;
+				*( ScriptArray< wchar_t >* )params = Command;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.Init" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LocalPlayer** )( params + 0 ) = LocPlay;
+				*( class LocalPlayer** )params = LocPlay;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetWidgetPathBinding" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class GFxObject** )( params + 0 ) = WidgetToBind;
+				*( class GFxObject** )params = WidgetToBind;
 				*( ScriptName* )( params + 4 ) = Path;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -90,7 +90,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.Advance" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Time;
+				*( float* )params = Time;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -107,7 +107,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.WidgetUnloaded" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = WidgetName;
+				*( ScriptName* )params = WidgetName;
 				*( ScriptName* )( params + 8 ) = WidgetPath;
 				*( class GFxObject** )( params + 16 ) = Widget;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -119,7 +119,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.WidgetInitialized" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = WidgetName;
+				*( ScriptName* )params = WidgetName;
 				*( ScriptName* )( params + 8 ) = WidgetPath;
 				*( class GFxObject** )( params + 16 ) = Widget;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -131,7 +131,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.ActionScriptObject" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class GFxObject** )( params + function->return_val_offset() );
@@ -141,7 +141,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.ActionScriptString" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -151,7 +151,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.ActionScriptFloat" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -161,7 +161,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.ActionScriptInt" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -171,7 +171,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.ActionScriptVoid" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -180,7 +180,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.Invoke" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = method;
+				*( ScriptArray< wchar_t >* )params = method;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -190,7 +190,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.ActionScriptSetFunction" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class GFxObject** )( params + 0 ) = Object;
+				*( class GFxObject** )params = Object;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Member;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -209,7 +209,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.CreateObject" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ASClass;
+				*( ScriptArray< wchar_t >* )params = ASClass;
 				*( ScriptClass** )( params + 12 ) = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -220,7 +220,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetVariableStringArray" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( int* )( params + 12 ) = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -231,7 +231,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetVariableFloatArray" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( int* )( params + 12 ) = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -242,7 +242,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetVariableIntArray" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( int* )( params + 12 ) = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -253,7 +253,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetVariableArray" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( int* )( params + 12 ) = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -264,7 +264,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.GetVariableStringArray" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( int* )( params + 12 ) = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -275,7 +275,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.GetVariableFloatArray" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( int* )( params + 12 ) = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -286,7 +286,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.GetVariableIntArray" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( int* )( params + 12 ) = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -297,7 +297,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.GetVariableArray" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( int* )( params + 12 ) = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -308,7 +308,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetVariableObject" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( class GFxObject** )( params + 12 ) = Object;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -318,7 +318,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetVariableString" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -328,7 +328,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetVariableNumber" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( float* )( params + 12 ) = F;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -338,7 +338,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetVariableBool" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( bool* )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -348,7 +348,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetVariable" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( void** )( params + 12 ) = Arg;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -358,7 +358,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.GetVariableObject" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				*( ScriptClass** )( params + 12 ) = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -369,7 +369,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.GetVariableString" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -379,7 +379,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.GetVariableNumber" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -389,7 +389,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.GetVariableBool" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -399,7 +399,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.GetVariable" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Path;
+				*( ScriptArray< wchar_t >* )params = Path;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -409,7 +409,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.FilterButtonInput" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( int* )( params + 0 ) = ControllerId;
+				*( int* )params = ControllerId;
 				*( ScriptName* )( params + 4 ) = ButtonName;
 				*( byte* )( params + 12 ) = InputEvent;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -421,7 +421,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.FlushPlayerInput" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = capturekeysonly;
+				*( bool* )params = capturekeysonly;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -438,7 +438,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.AddFocusIgnoreKey" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = Key;
+				*( ScriptName* )params = Key;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -455,7 +455,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.AddCaptureKey" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = Key;
+				*( ScriptName* )params = Key;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -464,7 +464,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetMovieCanReceiveInput" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bCanReceiveInput;
+				*( bool* )params = bCanReceiveInput;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -473,7 +473,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetMovieCanReceiveFocus" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bCanReceiveFocus;
+				*( bool* )params = bCanReceiveFocus;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -482,33 +482,33 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetPerspective3D" );
 				byte *params = ( byte* )( malloc( 64 ) );
-				*( void** )( params + 0 ) = matPersp;
+				*( void** )params = matPersp;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				matPersp = *( void** )( params + 0 );
+				matPersp = *( void** )params;
 			}
 
 			void SetView3D( void* &matView )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetView3D" );
 				byte *params = ( byte* )( malloc( 64 ) );
-				*( void** )( params + 0 ) = matView;
+				*( void** )params = matView;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				matView = *( void** )( params + 0 );
+				matView = *( void** )params;
 			}
 
 			void GetVisibleFrameRect( float &x0, float &y0, float &X1, float &Y1 )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.GetVisibleFrameRect" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = x0;
+				*( float* )params = x0;
 				*( float* )( params + 4 ) = y0;
 				*( float* )( params + 8 ) = X1;
 				*( float* )( params + 12 ) = Y1;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				x0 = *( float* )( params + 0 );
+				x0 = *( float* )params;
 				y0 = *( float* )( params + 4 );
 				X1 = *( float* )( params + 8 );
 				Y1 = *( float* )( params + 12 );
@@ -518,7 +518,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetAlignment" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = A;
+				*( byte* )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -527,7 +527,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetViewScaleMode" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = SM;
+				*( byte* )params = SM;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -536,7 +536,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetViewport" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = X;
+				*( int* )params = X;
 				*( int* )( params + 4 ) = Y;
 				*( int* )( params + 8 ) = Width;
 				*( int* )( params + 12 ) = Height;
@@ -557,7 +557,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetPriority" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = NewPriority;
+				*( byte* )params = NewPriority;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -582,7 +582,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetExternalTexture" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Resource;
+				*( ScriptArray< wchar_t >* )params = Resource;
 				*( class Texture** )( params + 12 ) = Texture;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -593,7 +593,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetExternalInterface" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = H;
+				*( class Object** )params = H;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -602,7 +602,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetForceSmoothAnimation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnable;
+				*( bool* )params = bEnable;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -612,7 +612,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetTimingMode" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = Mode;
+				*( byte* )params = Mode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -621,7 +621,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetMovieInfo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SwfMovie** )( params + 0 ) = Data;
+				*( class SwfMovie** )params = Data;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -647,7 +647,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.Close" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = Unload;
+				*( bool* )params = Unload;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -656,7 +656,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.SetPause" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bPausePlayback;
+				*( bool* )params = bPausePlayback;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -665,7 +665,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.OnPostAdvance" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -674,7 +674,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.PostAdvance" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -683,7 +683,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxMoviePlayer.Start" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = StartPaused;
+				*( bool* )params = StartPaused;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

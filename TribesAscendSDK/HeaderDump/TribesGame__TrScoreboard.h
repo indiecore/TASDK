@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrScoreboard.CreditsSort" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class TrPlayerReplicationInfo** )( params + 0 ) = A;
+				*( class TrPlayerReplicationInfo** )params = A;
 				*( class TrPlayerReplicationInfo** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -36,7 +36,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrScoreboard.AssistsSort" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class TrPlayerReplicationInfo** )( params + 0 ) = A;
+				*( class TrPlayerReplicationInfo** )params = A;
 				*( class TrPlayerReplicationInfo** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrScoreboard.KillsSort" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class TrPlayerReplicationInfo** )( params + 0 ) = A;
+				*( class TrPlayerReplicationInfo** )params = A;
 				*( class TrPlayerReplicationInfo** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -72,7 +72,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrScoreboard.Initialize" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class TrPlayerController** )( params + 0 ) = PC;
+				*( class TrPlayerController** )params = PC;
 				*( class GfxTrHud** )( params + 4 ) = MP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -82,7 +82,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrScoreboard.Show" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bIsTeamGame;
+				*( bool* )params = bIsTeamGame;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -107,7 +107,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrScoreboard.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -116,7 +116,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrScoreboard.UpdatePRILists" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrGameReplicationInfo** )( params + 0 ) = TrGRI;
+				*( class TrGameReplicationInfo** )params = TrGRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -143,7 +143,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrScoreboard.ClearSlot" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -153,7 +153,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrScoreboard.UpdateSlot" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( class TrPlayerReplicationInfo** )( params + 4 ) = PRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -164,7 +164,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrScoreboard.FormatTime" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Seconds;
+				*( int* )params = Seconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -174,7 +174,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrScoreboard.UpdateHeaders" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				*( class TrGameReplicationInfo** )params = GRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -183,7 +183,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrScoreboard.IsValidScoreboardPlayer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class TrPlayerReplicationInfo** )params = PRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DataStoreClient.FindDataStore" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = DataStoreTag;
+				*( ScriptName* )params = DataStoreTag;
 				*( class LocalPlayer** )( params + 8 ) = PlayerOwner;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DataStoreClient.FindDataStoreClass" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = RequiredMetaClass;
+				*( ScriptClass** )params = RequiredMetaClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptClass** )( params + function->return_val_offset() );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DataStoreClient.CreateDataStore" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = DataStoreClass;
+				*( ScriptClass** )params = DataStoreClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class UIDataStore** )( params + function->return_val_offset() );
@@ -54,7 +54,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DataStoreClient.RegisterDataStore" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UIDataStore** )( params + 0 ) = DataStore;
+				*( class UIDataStore** )params = DataStore;
 				*( class LocalPlayer** )( params + 4 ) = PlayerOwner;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DataStoreClient.UnregisterDataStore" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UIDataStore** )( params + 0 ) = DataStore;
+				*( class UIDataStore** )params = DataStore;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -83,7 +83,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DataStoreClient.FindPlayerDataStoreIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LocalPlayer** )( params + 0 ) = PlayerOwner;
+				*( class LocalPlayer** )params = PlayerOwner;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -101,7 +101,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DataStoreClient.DebugDumpDataStoreInfo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bVerbose;
+				*( bool* )params = bVerbose;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

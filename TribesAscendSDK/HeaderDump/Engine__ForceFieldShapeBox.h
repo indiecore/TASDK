@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFieldShapeBox.FillBySphere" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Radius;
+				*( float* )params = Radius;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFieldShapeBox.FillByBox" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = Extent;
+				*( Vector* )params = Extent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFieldShapeBox.FillByCapsule" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = Height;
+				*( float* )params = Height;
 				*( float* )( params + 4 ) = Radius;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -60,7 +60,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFieldShapeBox.FillByCylinder" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = BottomRadius;
+				*( float* )params = BottomRadius;
 				*( float* )( params + 4 ) = TopRadius;
 				*( float* )( params + 8 ) = Height;
 				*( float* )( params + 12 ) = HeightOffset;

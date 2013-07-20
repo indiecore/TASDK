@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGameObjectiveUpgrade.InitUpgrade" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrGameObjective** )( params + 0 ) = OwnerObject;
+				*( class TrGameObjective** )params = OwnerObject;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

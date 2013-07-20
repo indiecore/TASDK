@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AutoTestManager.InitializeOptions" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Options;
+				*( ScriptArray< wchar_t >* )params = Options;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -74,7 +74,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AutoTestManager.BeginSentinelRun" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = TaskDescription;
+				*( ScriptArray< wchar_t >* )params = TaskDescription;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = TaskParameter;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = TagDesc;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -85,7 +85,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AutoTestManager.AddSentinelPerTimePeriodStats" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = InLocation;
+				*( Vector* )params = InLocation;
 				*( Rotator* )( params + 12 ) = InRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AutoTestManager.EndSentinelRun" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = RunResult;
+				*( byte* )params = RunResult;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -128,7 +128,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AutoTestManager.GetTravelLocations" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = LevelName;
+				*( ScriptName* )params = LevelName;
 				*( class PlayerController** )( params + 8 ) = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -138,7 +138,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AutoTestManager.DoSentinel_MemoryAtSpecificLocation" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = InLocation;
+				*( Vector* )params = InLocation;
 				*( Rotator* )( params + 12 ) = InRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -148,11 +148,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AutoTestManager.DoSentinel_PerfAtSpecificLocation" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = InLocation;
+				*( Vector* )params = InLocation;
 				*( Rotator* )( params + 12 ) = InRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				InLocation = *( Vector* )( params + 0 );
+				InLocation = *( Vector* )params;
 				InRotation = *( Rotator* )( params + 12 );
 			}
 
@@ -160,11 +160,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AutoTestManager.DoSentinel_ViewDependentMemoryAtSpecificLocation" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = InLocation;
+				*( Vector* )params = InLocation;
 				*( Rotator* )( params + 12 ) = InRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				InLocation = *( Vector* )( params + 0 );
+				InLocation = *( Vector* )params;
 				InRotation = *( Rotator* )( params + 12 );
 			}
 

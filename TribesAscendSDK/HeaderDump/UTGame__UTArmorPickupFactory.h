@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTArmorPickupFactory.UpdateHUD" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTHUD** )( params + 0 ) = H;
+				*( class UTHUD** )params = H;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTArmorPickupFactory.SpawnCopyFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Recipient;
+				*( class Pawn** )params = Recipient;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTArmorPickupFactory.CanUseShield" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPawn** )( params + 0 ) = P;
+				*( class UTPawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -60,7 +60,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTArmorPickupFactory.AddShieldStrength" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPawn** )( params + 0 ) = P;
+				*( class UTPawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTArmorPickupFactory.BotDesireability" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = Bot;
+				*( class Pawn** )params = Bot;
 				*( class Controller** )( params + 4 ) = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

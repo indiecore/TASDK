@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.GFxTrDevices.Init" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxMinimapHud** )( params + 0 ) = H;
+				*( class GFxMinimapHud** )params = H;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

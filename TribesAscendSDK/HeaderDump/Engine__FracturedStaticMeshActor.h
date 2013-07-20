@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshActor.IsFracturedByDamageType" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = dmgType;
+				*( ScriptClass** )params = dmgType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshActor.FractureEffectIsRelevant" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( bool* )( params + 0 ) = bForceDedicated;
+				*( bool* )params = bForceDedicated;
 				*( class Pawn** )( params + 4 ) = EffectInstigator;
 				*( byte* )( params + 8 ) = bWantPhysChunksAndParticles;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshActor.SpawnPart" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( int* )( params + 0 ) = ChunkIndex;
+				*( int* )params = ChunkIndex;
 				*( Vector* )( params + 4 ) = InitialVel;
 				*( Vector* )( params + 16 ) = InitialAngVel;
 				*( float* )( params + 28 ) = RelativeScale;
@@ -117,7 +117,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshActor.RemoveDecals" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = IndexToRemoveDecalsFrom;
+				*( int* )params = IndexToRemoveDecalsFrom;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -126,7 +126,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshActor.TakeDamage" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( int* )( params + 0 ) = Damage;
+				*( int* )params = Damage;
 				*( class Controller** )( params + 4 ) = EventInstigator;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = Momentum;
@@ -149,7 +149,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshActor.BreakOffPartsInRadius" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = Origin;
+				*( Vector* )params = Origin;
 				*( float* )( params + 12 ) = Radius;
 				*( float* )( params + 16 ) = RBStrength;
 				*( bool* )( params + 20 ) = bWantPhysChunksAndParticles;
@@ -193,7 +193,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FracturedStaticMeshActor.NotifyHitByExplosion" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Controller** )( params + 0 ) = InstigatorController;
+				*( class Controller** )params = InstigatorController;
 				*( float* )( params + 4 ) = DamageAmount;
 				*( ScriptClass** )( params + 8 ) = dmgType;
 				ScriptObject *object = ( ScriptObject* )( this );

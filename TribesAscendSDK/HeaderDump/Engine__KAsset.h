@@ -36,7 +36,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.KAsset.SetMeshAndPhysAsset" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class SkeletalMesh** )( params + 0 ) = NewMesh;
+				*( class SkeletalMesh** )params = NewMesh;
 				*( class PhysicsAsset** )( params + 4 ) = NewPhysAsset;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -46,7 +46,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.KAsset.ReplicatedEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = VarName;
+				*( ScriptName* )params = VarName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.KAsset.TakeDamage" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( int* )( params + 0 ) = Damage;
+				*( int* )params = Damage;
 				*( class Controller** )( params + 4 ) = EventInstigator;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = Momentum;
@@ -70,7 +70,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.KAsset.TakeRadiusDamage" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( class Controller** )( params + 0 ) = InstigatedBy;
+				*( class Controller** )params = InstigatedBy;
 				*( float* )( params + 4 ) = BaseDamage;
 				*( float* )( params + 8 ) = DamageRadius;
 				*( ScriptClass** )( params + 12 ) = DamageType;
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.KAsset.OnToggle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Toggle** )( params + 0 ) = Action;
+				*( class SeqAct_Toggle** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -96,7 +96,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.KAsset.OnTeleport" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Teleport** )( params + 0 ) = inAction;
+				*( class SeqAct_Teleport** )params = inAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -105,7 +105,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.KAsset.DoKismetAttachment" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = Attachment;
+				*( class Actor** )params = Attachment;
 				*( class SeqAct_AttachToActor** )( params + 4 ) = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

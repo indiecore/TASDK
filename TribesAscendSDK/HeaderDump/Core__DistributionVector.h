@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Core.DistributionVector.GetVectorValue" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = F;
+				*( float* )params = F;
 				*( int* )( params + 4 ) = LastExtreme;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

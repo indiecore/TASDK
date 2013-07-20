@@ -27,7 +27,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SpotLightComponent.SetRotation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Rotator* )( params + 0 ) = NewRotation;
+				*( Rotator* )params = NewRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

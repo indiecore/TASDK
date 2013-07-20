@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshPath_MinDistBetweenSpecsOfType.EnforceMinDist" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( class NavigationHandle** )params = NavHandle;
 				*( float* )( params + 4 ) = InMinDist;
 				*( byte* )( params + 8 ) = InEdgeType;
 				*( Vector* )( params + 12 ) = LastLocation;

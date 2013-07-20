@@ -54,7 +54,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTVehicleFactory.RenderMapIcon" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class UTMapInfo** )( params + 0 ) = MP;
+				*( class UTMapInfo** )params = MP;
 				*( class Canvas** )( params + 4 ) = Canvas;
 				*( class UTPlayerController** )( params + 8 ) = PlayerOwner;
 				*( void** )( params + 12 ) = FinalColor;
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTVehicleFactory.Activate" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = T;
+				*( byte* )params = T;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -91,7 +91,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTVehicleFactory.VehicleDestroyed" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTVehicle** )( params + 0 ) = V;
+				*( class UTVehicle** )params = V;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -108,7 +108,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTVehicleFactory.OnToggle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Toggle** )( params + 0 ) = Action;
+				*( class SeqAct_Toggle** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

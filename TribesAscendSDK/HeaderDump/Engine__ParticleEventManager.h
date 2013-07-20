@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleEventManager.HandleParticleModuleEventSendToGame" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( class ParticleModuleEventSendToGame** )( params + 0 ) = InEvent;
+				*( class ParticleModuleEventSendToGame** )params = InEvent;
 				*( Vector* )( params + 4 ) = InCollideDirection;
 				*( Vector* )( params + 16 ) = InHitLocation;
 				*( Vector* )( params + 28 ) = InHitNormal;

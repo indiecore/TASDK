@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MorphNodeMultiPose.AddMorphTarget" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = MorphTargetName;
+				*( ScriptName* )params = MorphTargetName;
 				*( float* )( params + 8 ) = InWeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MorphNodeMultiPose.RemoveMorphTarget" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = MorphTargetName;
+				*( ScriptName* )params = MorphTargetName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MorphNodeMultiPose.UpdateMorphTarget" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class MorphTarget** )( params + 0 ) = Target;
+				*( class MorphTarget** )params = Target;
 				*( float* )( params + 4 ) = InWeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

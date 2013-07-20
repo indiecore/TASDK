@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_PhaseRifle.ModifyInstantHitDamage" );
 				byte *params = ( byte* )( malloc( 85 ) );
-				*( byte* )( params + 0 ) = FiringMode;
+				*( byte* )params = FiringMode;
 				*( void** )( params + 4 ) = Impact;
 				*( float* )( params + 84 ) = Damage;
 				ScriptObject *object = ( ScriptObject* )( this );

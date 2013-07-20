@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSkelControl_SpinControl.Spin" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnabled;
+				*( bool* )params = bEnabled;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSkelControl_SpinControl.SpinToTargetRotation" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Rotator* )( params + 0 ) = TargetRotation;
+				*( Rotator* )params = TargetRotation;
 				*( float* )( params + 12 ) = Time;
 				*( bool* )( params + 16 ) = bReset;
 				ScriptObject *object = ( ScriptObject* )( this );

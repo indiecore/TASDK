@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MultiFont.GetResolutionTestTableIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = HeightTest;
+				*( float* )params = HeightTest;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );

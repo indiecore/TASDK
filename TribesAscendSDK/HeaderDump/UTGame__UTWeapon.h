@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.CoversScreenSpace" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = ScreenLoc;
+				*( Vector* )params = ScreenLoc;
 				*( class Canvas** )( params + 12 ) = Canvas;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.DesireAmmo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bDetour;
+				*( bool* )params = bDetour;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.ServerStartFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -102,7 +102,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.ReplicatedEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = VarName;
+				*( ScriptName* )params = VarName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -122,7 +122,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.ShouldSwitchTo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTWeapon** )( params + 0 ) = InWeapon;
+				*( class UTWeapon** )params = InWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -132,7 +132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.SetSkin" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Material** )( params + 0 ) = NewMaterial;
+				*( class Material** )params = NewMaterial;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -141,7 +141,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.ActiveRenderOverlays" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class HUD** )( params + 0 ) = H;
+				*( class HUD** )params = H;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -150,7 +150,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.DrawWeaponCrosshair" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -161,7 +161,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.DrawLockedOn" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class HUD** )( params + 0 ) = H;
+				*( class HUD** )params = H;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -176,7 +176,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.DisplayDebug" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				*( float* )( params + 4 ) = out_YL;
 				*( float* )( params + 8 ) = out_YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -191,7 +191,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.GetFireInterval" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -201,7 +201,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.PlayArmAnimation" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = Sequence;
+				*( ScriptName* )params = Sequence;
 				*( float* )( params + 8 ) = fDesiredDuration;
 				*( bool* )( params + 12 ) = OffHand;
 				*( bool* )( params + 16 ) = bLoop;
@@ -214,7 +214,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.PlayWeaponAnimation" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = Sequence;
+				*( ScriptName* )params = Sequence;
 				*( float* )( params + 8 ) = fDesiredDuration;
 				*( bool* )( params + 12 ) = bLoop;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -225,7 +225,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.PlayFireEffects" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				*( Vector* )( params + 4 ) = HitLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -235,7 +235,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.StopFireEffects" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -253,7 +253,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.WeaponCalcCamera" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( float* )( params + 0 ) = fDeltaTime;
+				*( float* )params = fDeltaTime;
 				*( Vector* )( params + 4 ) = out_CamLoc;
 				*( Rotator* )( params + 16 ) = out_CamRot;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -266,7 +266,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.WeaponPlaySound" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class SoundCue** )( params + 0 ) = Sound;
+				*( class SoundCue** )params = Sound;
 				*( float* )( params + 4 ) = NoiseLoudness;
 				*( bool* )( params + 8 ) = bStopWhenOwnerDestroyed;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -416,7 +416,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.ChangeVisibility" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bIsVisible;
+				*( bool* )params = bIsVisible;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -433,12 +433,12 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.GetViewAxes" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( Vector* )( params + 0 ) = XAxis;
+				*( Vector* )params = XAxis;
 				*( Vector* )( params + 12 ) = YAxis;
 				*( Vector* )( params + 24 ) = ZAxis;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				XAxis = *( Vector* )( params + 0 );
+				XAxis = *( Vector* )params;
 				YAxis = *( Vector* )( params + 12 );
 				ZAxis = *( Vector* )( params + 24 );
 			}
@@ -473,7 +473,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.SetPosition" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UDKPawn** )( params + 0 ) = Holder;
+				*( class UDKPawn** )params = Holder;
 				*( float* )( params + 4 ) = DeltaSeconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -504,7 +504,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.LagRot" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = NewValue;
+				*( int* )params = NewValue;
 				*( int* )( params + 4 ) = LastValue;
 				*( float* )( params + 8 ) = MaxDiff;
 				*( int* )( params + 12 ) = Index;
@@ -523,14 +523,14 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.AdjustPlayerDamage" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( int* )( params + 0 ) = Damage;
+				*( int* )params = Damage;
 				*( class Controller** )( params + 4 ) = InstigatedBy;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = Momentum;
 				*( ScriptClass** )( params + 32 ) = DamageType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Damage = *( int* )( params + 0 );
+				Damage = *( int* )params;
 				Momentum = *( Vector* )( params + 20 );
 			}
 
@@ -538,7 +538,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.RelativeStrengthVersus" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( float* )( params + 4 ) = Dist;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -559,7 +559,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.CanAttack" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -569,7 +569,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.BotDesireability" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Actor** )( params + 0 ) = PickupHolder;
+				*( class Actor** )params = PickupHolder;
 				*( class Pawn** )( params + 4 ) = P;
 				*( class Controller** )( params + 8 ) = C;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -581,7 +581,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.AmmoMaxed" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Mode;
+				*( int* )params = Mode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -602,7 +602,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.CanHeal" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -612,7 +612,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.GetOptimalRangeFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Target;
+				*( class Actor** )params = Target;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -631,7 +631,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.FocusOnLeader" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bLeaderFiring;
+				*( bool* )params = bLeaderFiring;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -714,7 +714,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.ReadyToFire" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bFinished;
+				*( bool* )params = bFinished;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -724,7 +724,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.StillFiring" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireMode;
+				*( byte* )params = FireMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -734,7 +734,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.ConsumeAmmo" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -743,7 +743,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.AddAmmo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Amount;
+				*( int* )params = Amount;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -753,7 +753,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.HasAmmo" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				*( int* )( params + 4 ) = Amount;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -782,7 +782,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.Loaded" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bUseWeaponMax;
+				*( bool* )params = bUseWeaponMax;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -791,7 +791,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.DenyPickupQuery" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = ItemClass;
+				*( ScriptClass** )params = ItemClass;
 				*( class Actor** )( params + 4 ) = Pickup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -828,7 +828,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.InstantFireEndTrace" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = StartTrace;
+				*( Vector* )params = StartTrace;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -847,7 +847,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.InstantAimHelp" );
 				byte *params = ( byte* )( malloc( 104 ) );
-				*( Vector* )( params + 0 ) = StartTrace;
+				*( Vector* )params = StartTrace;
 				*( Vector* )( params + 12 ) = EndTrace;
 				*( void** )( params + 24 ) = RealImpact;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -869,7 +869,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.ProcessInstantHit" );
 				byte *params = ( byte* )( malloc( 85 ) );
-				*( byte* )( params + 0 ) = FiringMode;
+				*( byte* )params = FiringMode;
 				*( void** )( params + 4 ) = Impact;
 				*( int* )( params + 84 ) = NumHits;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -889,7 +889,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.CheckZoom" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -900,7 +900,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.StartZoom" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPlayerController** )( params + 0 ) = PC;
+				*( class UTPlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -910,7 +910,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.EndZoom" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTPlayerController** )( params + 0 ) = PC;
+				*( class UTPlayerController** )params = PC;
 				*( bool* )( params + 4 ) = bReturningTo3P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -921,7 +921,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.ClientEndFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -930,7 +930,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.EndFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -939,7 +939,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.SendToFiringState" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -948,7 +948,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.ClientWeaponSet" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bOptionalSet;
+				*( bool* )params = bOptionalSet;
 				*( bool* )( params + 4 ) = bDoNotActivate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -967,7 +967,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.PreloadTextures" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bForcePreload;
+				*( bool* )params = bForcePreload;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -976,7 +976,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.AllowSwitchTo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = NewWeapon;
+				*( class Weapon** )params = NewWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1003,7 +1003,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.GetPhysicalFireStartLoc" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = AimDir;
+				*( Vector* )params = AimDir;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -1056,7 +1056,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.SetWeaponOverlayFlags" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPawn** )( params + 0 ) = OwnerPawn;
+				*( class UTPawn** )params = OwnerPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1065,7 +1065,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.DetourWeight" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				*( float* )( params + 4 ) = PathWeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1085,11 +1085,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.ThrottleLook" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = aTurn;
+				*( float* )params = aTurn;
 				*( float* )( params + 4 ) = aLookUp;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				aTurn = *( float* )( params + 0 );
+				aTurn = *( float* )params;
 				aLookUp = *( float* )( params + 4 );
 			}
 
@@ -1105,7 +1105,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.DropFrom" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = StartLocation;
+				*( Vector* )params = StartLocation;
 				*( Vector* )( params + 12 ) = StartVelocity;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1150,7 +1150,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTWeapon.DrawKillIcon" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				*( float* )( params + 4 ) = ScreenX;
 				*( float* )( params + 8 ) = ScreenY;
 				*( float* )( params + 12 ) = HUDScaleX;

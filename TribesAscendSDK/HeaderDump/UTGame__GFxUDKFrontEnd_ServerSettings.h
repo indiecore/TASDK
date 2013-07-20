@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_ServerSettings.OnOptionChanged" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( void** )( params + 0 ) = ev;
+				*( void** )params = ev;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_ServerSettings.PopulateOptionDataProviderForIndex" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( class GFxObject** )( params + 4 ) = OutDataProvider;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = OutDefaultValue;
 				*( int* )( params + 20 ) = OutDefaultIndex;
@@ -72,7 +72,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxUDKFrontEnd_ServerSettings.FindControlByUTClassName" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = UTUIControlClass;
+				*( byte* )params = UTUIControlClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );

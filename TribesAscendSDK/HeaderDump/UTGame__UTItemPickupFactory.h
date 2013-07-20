@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTItemPickupFactory.GetLocalString" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				*( class PlayerReplicationInfo** )( params + 4 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI_;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTItemPickupFactory.SpawnCopyFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Recipient;
+				*( class Pawn** )params = Recipient;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTItemPickupFactory.BotDesireability" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( class Controller** )( params + 4 ) = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

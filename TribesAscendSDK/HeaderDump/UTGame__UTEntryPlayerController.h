@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTEntryPlayerController.OnControllerChanged" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ControllerId;
+				*( int* )params = ControllerId;
 				*( bool* )( params + 4 ) = bIsConnected;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -59,7 +59,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTEntryPlayerController.OnGameInviteReceived" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = RequestingNick;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTEntryPlayerController.OnFriendInviteReceived" );
 				byte *params = ( byte* )( malloc( 33 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = RequestingPlayer;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = RequestingNick;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = Message;
@@ -81,7 +81,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTEntryPlayerController.OnFriendMessageReceived" );
 				byte *params = ( byte* )( malloc( 33 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( void** )( params + 4 ) = SendingPlayer;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = SendingNick;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = Message;
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTEntryPlayerController.OnConnectionStatusChange" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = ConnectionStatus;
+				*( byte* )params = ConnectionStatus;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -102,7 +102,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTEntryPlayerController.OnLinkStatusChanged" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bConnected;
+				*( bool* )params = bConnected;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -119,7 +119,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTEntryPlayerController.SetPawnConstructionScene" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bShow;
+				*( bool* )params = bShow;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -128,7 +128,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTEntryPlayerController.ShowMidGameMenu" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = TabTag;
+				*( ScriptName* )params = TabTag;
 				*( bool* )( params + 8 ) = bEnableInput;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

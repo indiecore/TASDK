@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDataStore_GameSearchDM.Registered" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LocalPlayer** )( params + 0 ) = PlayerOwner;
+				*( class LocalPlayer** )params = PlayerOwner;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDataStore_GameSearchDM.SubmitGameSearch" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = ControllerIndex;
+				*( byte* )params = ControllerIndex;
 				*( bool* )( params + 4 ) = bInvalidateExistingSearchResults;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDataStore_GameSearchDM.HasOutstandingQueries" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bRestrictCheckToSelf;
+				*( bool* )params = bRestrictCheckToSelf;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDataStore_GameSearchDM.FindStoredSearchIndex" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = GameSearchName;
+				*( ScriptName* )params = GameSearchName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDataStore_GameSearchDM.FindStoredSettingValueIndex" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = StoredGameSearchIndex;
+				*( int* )params = StoredGameSearchIndex;
 				*( int* )( params + 4 ) = LocalizedSettingId;
 				*( bool* )( params + 8 ) = bAddIfNecessary;
 				ScriptObject *object = ( ScriptObject* )( this );

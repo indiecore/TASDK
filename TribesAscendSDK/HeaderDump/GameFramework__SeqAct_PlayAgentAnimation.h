@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqAct_PlayAgentAnimation.SetCurrentAnimationActionFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdAgentSkeletal** )( params + 0 ) = Agent;
+				*( class GameCrowdAgentSkeletal** )params = Agent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

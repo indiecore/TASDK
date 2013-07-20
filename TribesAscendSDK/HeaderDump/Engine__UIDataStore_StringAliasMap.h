@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_StringAliasMap.FindMappingWithFieldName" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = FieldName;
+				*( ScriptArray< wchar_t >* )params = FieldName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = SetName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_StringAliasMap.GetStringWithFieldName" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = FieldName;
+				*( ScriptArray< wchar_t >* )params = FieldName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = MappedString;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRepairStation.OnAnimEnd" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class AnimNodeSequence** )( params + 0 ) = SeqNode;
+				*( class AnimNodeSequence** )params = SeqNode;
 				*( float* )( params + 4 ) = PlayedTime;
 				*( float* )( params + 8 ) = ExcessTime;
 				ScriptObject *object = ( ScriptObject* )( this );

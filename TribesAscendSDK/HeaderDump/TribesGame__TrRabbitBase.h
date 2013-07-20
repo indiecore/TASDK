@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitBase.GetLocationMessageIndex" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTBot** )( params + 0 ) = B;
+				*( class UTBot** )params = B;
 				*( class Pawn** )( params + 4 ) = StatusPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitBase.GetLocationSpeechFor" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( int* )( params + 4 ) = LocationSpeechOffset;
 				*( int* )( params + 8 ) = MessageIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -122,7 +122,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitBase.SpawnHelpTextCollisionProxy" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = HelpTextType;
+				*( byte* )params = HelpTextType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

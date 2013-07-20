@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSlot.PlayCustomAnim" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptName* )( params + 0 ) = AnimName;
+				*( ScriptName* )params = AnimName;
 				*( float* )( params + 8 ) = Rate;
 				*( float* )( params + 12 ) = BlendInTime;
 				*( float* )( params + 16 ) = BlendOutTime;
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSlot.PlayCustomAnimByDuration" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptName* )( params + 0 ) = AnimName;
+				*( ScriptName* )params = AnimName;
 				*( float* )( params + 8 ) = Duration;
 				*( float* )( params + 12 ) = BlendInTime;
 				*( float* )( params + 16 ) = BlendOutTime;
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSlot.StopCustomAnim" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = BlendOutTime;
+				*( float* )params = BlendOutTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -82,7 +82,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSlot.SetCustomAnim" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = AnimName;
+				*( ScriptName* )params = AnimName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -91,7 +91,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSlot.SetActorAnimEndNotification" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewStatus;
+				*( bool* )params = bNewStatus;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -109,7 +109,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSlot.SetRootBoneAxisOption" );
 				byte *params = ( byte* )( malloc( 3 ) );
-				*( byte* )( params + 0 ) = AxisX;
+				*( byte* )params = AxisX;
 				*( byte* )( params + 1 ) = AxisY;
 				*( byte* )( params + 2 ) = AxisZ;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -120,7 +120,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSlot.SetRootBoneRotationOption" );
 				byte *params = ( byte* )( malloc( 3 ) );
-				*( byte* )( params + 0 ) = AxisX;
+				*( byte* )params = AxisX;
 				*( byte* )( params + 1 ) = AxisY;
 				*( byte* )( params + 2 ) = AxisZ;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -131,7 +131,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSlot.AddToSynchGroup" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = GroupName;
+				*( ScriptName* )params = GroupName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

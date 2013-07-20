@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqAct_GameCrowdSpawner.SpawnedAgent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdAgent** )( params + 0 ) = NewAgent;
+				*( class GameCrowdAgent** )params = NewAgent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqAct_GameCrowdSpawner.UpdateSpawning" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaSeconds;
+				*( float* )params = DeltaSeconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqAct_GameCrowdSpawner.SpawnAgent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = SpawnLoc;
+				*( class Actor** )params = SpawnLoc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class GameCrowdAgent** )( params + function->return_val_offset() );
@@ -88,7 +88,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.SeqAct_GameCrowdSpawner.CreateNewAgent" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Actor** )( params + 0 ) = SpawnLoc;
+				*( class Actor** )params = SpawnLoc;
 				*( class GameCrowdAgent** )( params + 4 ) = AgentTemplate;
 				*( class GameCrowdGroup** )( params + 8 ) = NewGroup;
 				ScriptObject *object = ( ScriptObject* )( this );

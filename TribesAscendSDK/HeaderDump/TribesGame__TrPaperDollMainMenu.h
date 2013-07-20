@@ -36,7 +36,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDollMainMenu.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDollMainMenu.GetDevicePaperDollInfo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = WeaponClass;
+				*( ScriptClass** )params = WeaponClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDollMainMenu.SetMainMesh" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( void** )( params + 0 ) = NewInfo;
+				*( void** )params = NewInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -64,7 +64,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDollMainMenu.OnCharacterMeshContentDataClassLoaded" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = Skin3PDataClass;
+				*( ScriptClass** )params = Skin3PDataClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDollMainMenu.OnDeviceContentDataClassLoaded" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = DeviceContentDataClass;
+				*( ScriptClass** )params = DeviceContentDataClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -90,7 +90,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDollMainMenu.SetWeaponOnlyMesh" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = WeaponClass;
+				*( ScriptClass** )params = WeaponClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDollMainMenu.SetFamilyInfo" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptClass** )( params + 0 ) = NewFamilyInfoClass;
+				*( ScriptClass** )params = NewFamilyInfoClass;
 				*( ScriptClass** )( params + 4 ) = DeviceClass;
 				*( ScriptClass** )( params + 8 ) = skinClass;
 				*( int* )( params + 12 ) = TeamNum;
@@ -111,7 +111,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDollMainMenu.SetMainMeshInfo" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class TrMainMenuMeshInfo** )( params + 0 ) = NewMainMeshInfo;
+				*( class TrMainMenuMeshInfo** )params = NewMainMeshInfo;
 				*( byte* )( params + 4 ) = ContentDataType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -137,7 +137,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDollMainMenu.SetSpinning" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bShouldSpin;
+				*( bool* )params = bShouldSpin;
 				*( bool* )( params + 4 ) = bReset;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -155,7 +155,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrPaperDollMainMenu.AddChildrenMeshes" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrMainMenuMeshInfo** )( params + 0 ) = Parent;
+				*( class TrMainMenuMeshInfo** )params = Parent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

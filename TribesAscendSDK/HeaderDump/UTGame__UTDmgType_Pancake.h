@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDmgType_Pancake.SmallReward" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTPlayerController** )( params + 0 ) = Killer;
+				*( class UTPlayerController** )params = Killer;
 				*( int* )( params + 4 ) = KillCount;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

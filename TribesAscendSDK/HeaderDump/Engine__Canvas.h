@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.SetPos" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( float* )( params + 0 ) = PosX;
+				*( float* )params = PosX;
 				*( float* )( params + 4 ) = PosY;
 				*( float* )( params + 8 ) = PosZ;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.SetDrawColor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( byte* )( params + 0 ) = R;
+				*( byte* )params = R;
 				*( byte* )( params + 1 ) = G;
 				*( byte* )( params + 2 ) = B;
 				*( byte* )( params + 3 ) = A;
@@ -46,7 +46,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawText" );
 				byte *params = ( byte* )( malloc( 64 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Text;
+				*( ScriptArray< wchar_t >* )params = Text;
 				*( bool* )( params + 12 ) = CR;
 				*( float* )( params + 16 ) = XScale;
 				*( float* )( params + 20 ) = YScale;
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.Project" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = Location;
+				*( Vector* )params = Location;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -71,7 +71,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.StrLen" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = String;
+				*( ScriptArray< wchar_t >* )params = String;
 				*( float* )( params + 12 ) = XL;
 				*( float* )( params + 16 ) = YL;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -97,7 +97,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawTile" );
 				byte *params = ( byte* )( malloc( 49 ) );
-				*( class Texture** )( params + 0 ) = Tex;
+				*( class Texture** )params = Tex;
 				*( float* )( params + 4 ) = XL;
 				*( float* )( params + 8 ) = YL;
 				*( float* )( params + 12 ) = U;
@@ -115,7 +115,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.PreOptimizeDrawTiles" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( int* )( params + 0 ) = Num;
+				*( int* )params = Num;
 				*( class Texture** )( params + 4 ) = Tex;
 				*( byte* )( params + 8 ) = Blend;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -126,7 +126,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawMaterialTile" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class MaterialInterface** )( params + 0 ) = Mat;
+				*( class MaterialInterface** )params = Mat;
 				*( float* )( params + 4 ) = XL;
 				*( float* )( params + 8 ) = YL;
 				*( float* )( params + 12 ) = U;
@@ -142,7 +142,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawRotatedTile" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( class Texture** )( params + 0 ) = Tex;
+				*( class Texture** )params = Tex;
 				*( Rotator* )( params + 4 ) = Rotation;
 				*( float* )( params + 16 ) = XL;
 				*( float* )( params + 20 ) = YL;
@@ -160,7 +160,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawRotatedMaterialTile" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( class MaterialInterface** )( params + 0 ) = Mat;
+				*( class MaterialInterface** )params = Mat;
 				*( Rotator* )( params + 4 ) = Rotation;
 				*( float* )( params + 16 ) = XL;
 				*( float* )( params + 20 ) = YL;
@@ -178,7 +178,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawTileStretched" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( class Texture** )( params + 0 ) = Tex;
+				*( class Texture** )params = Tex;
 				*( float* )( params + 4 ) = XL;
 				*( float* )( params + 8 ) = YL;
 				*( float* )( params + 12 ) = U;
@@ -197,7 +197,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawTris" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Texture** )( params + 0 ) = Tex;
+				*( class Texture** )params = Tex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -206,7 +206,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.CreateFontRenderInfo" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( bool* )( params + 0 ) = bClipText;
+				*( bool* )params = bClipText;
 				*( bool* )( params + 4 ) = bEnableShadow;
 				*( void** )( params + 8 ) = GlowColor;
 				*( void** )( params + 24 ) = GlowOuterRadius;
@@ -220,7 +220,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.TextSize" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = String;
+				*( ScriptArray< wchar_t >* )params = String;
 				*( float* )( params + 12 ) = XL;
 				*( float* )( params + 16 ) = YL;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -233,7 +233,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DeProject" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( void** )( params + 0 ) = ScreenPos;
+				*( void** )params = ScreenPos;
 				*( Vector* )( params + 8 ) = WorldOrigin;
 				*( Vector* )( params + 20 ) = WorldDirection;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -246,7 +246,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.PushTranslationMatrix" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = TranslationVector;
+				*( Vector* )params = TranslationVector;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -263,7 +263,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.Reset" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bKeepOrigin;
+				*( bool* )params = bKeepOrigin;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -272,7 +272,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.SetOrigin" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = X;
+				*( float* )params = X;
 				*( float* )( params + 4 ) = Y;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -282,7 +282,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.SetClip" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = X;
+				*( float* )params = X;
 				*( float* )( params + 4 ) = Y;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -292,7 +292,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawTexture" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Texture** )( params + 0 ) = Tex;
+				*( class Texture** )params = Tex;
 				*( float* )( params + 4 ) = Scale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -302,7 +302,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawTextureBlended" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( class Texture** )( params + 0 ) = Tex;
+				*( class Texture** )params = Tex;
 				*( float* )( params + 4 ) = Scale;
 				*( byte* )( params + 8 ) = Blend;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -313,7 +313,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.MakeIcon" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Texture** )( params + 0 ) = Texture;
+				*( class Texture** )params = Texture;
 				*( float* )( params + 4 ) = U;
 				*( float* )( params + 8 ) = V;
 				*( float* )( params + 12 ) = UL;
@@ -327,7 +327,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawIcon" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( void** )( params + 0 ) = Icon;
+				*( void** )params = Icon;
 				*( float* )( params + 20 ) = X;
 				*( float* )( params + 24 ) = Y;
 				*( float* )( params + 28 ) = Scale;
@@ -339,7 +339,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawRect" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( float* )( params + 0 ) = RectX;
+				*( float* )params = RectX;
 				*( float* )( params + 4 ) = RectY;
 				*( class Texture** )( params + 8 ) = Tex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -350,7 +350,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawBox" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = Width;
+				*( float* )params = Width;
 				*( float* )( params + 4 ) = Height;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -360,7 +360,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.SetDrawColorStruct" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = C;
+				*( void** )params = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -369,7 +369,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.Draw2DLine" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( float* )( params + 0 ) = X1;
+				*( float* )params = X1;
 				*( float* )( params + 4 ) = Y1;
 				*( float* )( params + 8 ) = X2;
 				*( float* )( params + 12 ) = Y2;
@@ -382,7 +382,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawTextureLine" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( Vector* )( params + 0 ) = StartPoint;
+				*( Vector* )params = StartPoint;
 				*( Vector* )( params + 12 ) = EndPoint;
 				*( float* )( params + 24 ) = Perc;
 				*( float* )( params + 28 ) = Width;
@@ -400,7 +400,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawTextureDoubleLine" );
 				byte *params = ( byte* )( malloc( 64 ) );
-				*( Vector* )( params + 0 ) = StartPoint;
+				*( Vector* )params = StartPoint;
 				*( Vector* )( params + 12 ) = EndPoint;
 				*( float* )( params + 24 ) = Perc;
 				*( float* )( params + 28 ) = Spacing;
@@ -420,7 +420,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Canvas.DrawDebugGraph" );
 				byte *params = ( byte* )( malloc( 52 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Title;
+				*( ScriptArray< wchar_t >* )params = Title;
 				*( float* )( params + 12 ) = ValueX;
 				*( float* )( params + 16 ) = ValueY;
 				*( float* )( params + 20 ) = UL_X;

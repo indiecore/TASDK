@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_PolyEncompassesAI.MakeSureAIFits" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( class NavigationHandle** )params = NavHandle;
 				*( Vector* )( params + 4 ) = InOverrideExtentToCheck;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxClikWidget.EventListener" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxClikWidget.AddEventListener" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = Type;
+				*( ScriptName* )params = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxClikWidget.GetEventStringFromTypename" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = Typename;
+				*( ScriptName* )params = Typename;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -51,7 +51,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxClikWidget.SetListener" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class GFxObject** )( params + 0 ) = O;
+				*( class GFxObject** )params = O;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Member;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxClikWidget.ASAddEventListener" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Type;
+				*( ScriptArray< wchar_t >* )params = Type;
 				*( class GFxObject** )( params + 12 ) = O;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = func;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -72,7 +72,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxClikWidget.RemoveAllEventListeners" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Event;
+				*( ScriptArray< wchar_t >* )params = Event;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -81,7 +81,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxClikWidget.ASRemoveAllEventListeners" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Event;
+				*( ScriptArray< wchar_t >* )params = Event;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

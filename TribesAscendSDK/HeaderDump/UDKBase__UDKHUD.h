@@ -29,7 +29,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKHUD.DrawGlowText" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Text;
+				*( ScriptArray< wchar_t >* )params = Text;
 				*( float* )( params + 12 ) = X;
 				*( float* )( params + 16 ) = Y;
 				*( float* )( params + 20 ) = MaxHeightInPixels;
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKHUD.TranslateBindToFont" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InBindStr;
+				*( ScriptArray< wchar_t >* )params = InBindStr;
 				*( class Font** )( params + 12 ) = DrawFont;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = OutBindStr;
 				ScriptObject *object = ( ScriptObject* )( this );

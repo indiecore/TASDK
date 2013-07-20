@@ -104,11 +104,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.GetBoundingCylinder" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = CollisionRadius;
+				*( float* )params = CollisionRadius;
 				*( float* )( params + 4 ) = CollisionHeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				CollisionRadius = *( float* )( params + 0 );
+				CollisionRadius = *( float* )params;
 				CollisionHeight = *( float* )( params + 4 );
 			}
 
@@ -132,7 +132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.GetTargetLocation" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = RequestedBy;
+				*( class Actor** )params = RequestedBy;
 				*( bool* )( params + 4 ) = bRequestAlternateLoc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -152,7 +152,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.HoldGameObject" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UDKCarriedObject** )( params + 0 ) = UDKGameObj;
+				*( class UDKCarriedObject** )params = UDKGameObj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -169,7 +169,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.EndCrouch" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = HeightAdjust;
+				*( float* )params = HeightAdjust;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -178,7 +178,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.StartCrouch" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = HeightAdjust;
+				*( float* )params = HeightAdjust;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -187,13 +187,13 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.SuggestJumpVelocity" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( Vector* )( params + 0 ) = JumpVelocity;
+				*( Vector* )params = JumpVelocity;
 				*( Vector* )( params + 12 ) = Destination;
 				*( Vector* )( params + 24 ) = Start;
 				*( bool* )( params + 36 ) = bRequireFallLanding;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				JumpVelocity = *( Vector* )( params + 0 );
+				JumpVelocity = *( Vector* )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -201,7 +201,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.SetHUDLocation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = NewHUDLocation;
+				*( Vector* )params = NewHUDLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -210,7 +210,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.NativePostRenderFor" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( class Canvas** )( params + 4 ) = Canvas;
 				*( Vector* )( params + 8 ) = CameraPosition;
 				*( Vector* )( params + 20 ) = CameraDir;
@@ -222,7 +222,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.SetWeaponAttachmentVisibility" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bAttachmentVisible;
+				*( bool* )params = bAttachmentVisible;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -231,7 +231,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.SetHandIKEnabled" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnabled;
+				*( bool* )params = bEnabled;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -256,7 +256,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKPawn.UpdateEyeHeight" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

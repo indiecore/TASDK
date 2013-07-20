@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DamageType.VehicleDamageScalingFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Vehicle** )( params + 0 ) = V;
+				*( class Vehicle** )params = V;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );

@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCameraBase.OnBecomeActive" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCameraBase** )( params + 0 ) = OldCamera;
+				*( class GameCameraBase** )params = OldCamera;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCameraBase.OnBecomeInActive" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCameraBase** )( params + 0 ) = NewCamera;
+				*( class GameCameraBase** )params = NewCamera;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -51,7 +51,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCameraBase.UpdateCamera" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( class GamePlayerCamera** )( params + 4 ) = CameraActor;
 				*( float* )( params + 8 ) = DeltaTime;
 				*( void** )( params + 12 ) = OutVT;
@@ -64,7 +64,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCameraBase.ProcessViewRotation" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				*( class Actor** )( params + 4 ) = ViewTarget;
 				*( Rotator* )( params + 8 ) = out_ViewRotation;
 				*( Rotator* )( params + 20 ) = out_DeltaRot;
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCameraBase.DisplayDebug" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				*( float* )( params + 4 ) = out_YL;
 				*( float* )( params + 8 ) = out_YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -99,10 +99,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCameraBase.ModifyPostProcessSettings" );
 				byte *params = ( byte* )( malloc( 220 ) );
-				*( void** )( params + 0 ) = PP;
+				*( void** )params = PP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				PP = *( void** )( params + 0 );
+				PP = *( void** )params;
 			}
 
 	};

@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrCTFBlitz.RegisterFlagBase" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrCTFBase** )( params + 0 ) = FlagBase;
+				*( class TrCTFBase** )params = FlagBase;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrCTFBlitz.ScoreFlag" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Controller** )( params + 0 ) = Scorer;
+				*( class Controller** )params = Scorer;
 				*( class TrFlagBase** )( params + 4 ) = theFlag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -53,7 +53,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrCTFBlitz.RotateFlag" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrFlagBase** )( params + 0 ) = theFlag;
+				*( class TrFlagBase** )params = theFlag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

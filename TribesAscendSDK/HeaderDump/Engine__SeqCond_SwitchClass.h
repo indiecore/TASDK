@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqCond_SwitchClass.IsFallThruEnabled" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ValueIndex;
+				*( int* )params = ValueIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqCond_SwitchClass.InsertValueEntry" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = InsertIndex;
+				*( int* )params = InsertIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqCond_SwitchClass.RemoveValueEntry" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = RemoveIndex;
+				*( int* )params = RemoveIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

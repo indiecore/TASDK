@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.CheckRelevance" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ParseOption" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Options;
+				*( ScriptArray< wchar_t >* )params = Options;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = InKey;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.AtCapacity" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bSpectator;
+				*( bool* )params = bSpectator;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -58,7 +58,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ForceClearUnpauseDelegates" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = PauseActor;
+				*( class Actor** )params = PauseActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -79,7 +79,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.SetPause" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ChangeTeam" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Controller** )( params + 0 ) = Other;
+				*( class Controller** )params = Other;
 				*( int* )( params + 4 ) = N;
 				*( bool* )( params + 8 ) = bNewTeam;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -101,7 +101,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.CanSpectate" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PlayerController** )( params + 0 ) = Viewer;
+				*( class PlayerController** )params = Viewer;
 				*( class PlayerReplicationInfo** )( params + 4 ) = ViewTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.PlayerCanRestartGame" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = aPlayer;
+				*( class PlayerController** )params = aPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -123,7 +123,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.PlayerCanRestart" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = aPlayer;
+				*( class PlayerController** )params = aPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -155,7 +155,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.PickupQuery" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				*( ScriptClass** )( params + 4 ) = ItemClass;
 				*( class Actor** )( params + 8 ) = Pickup;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -169,12 +169,12 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.GetSupportedGameTypes" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InFilename;
+				*( ScriptArray< wchar_t >* )params = InFilename;
 				*( void** )( params + 12 ) = OutGameType;
 				*( bool* )( params + 64 ) = bCheckExt;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				InFilename = *( ScriptArray< wchar_t >* )( params + 0 );
+				InFilename = *( ScriptArray< wchar_t >* )params;
 				OutGameType = *( void** )( params + 12 );
 				return *( bool* )( params + function->return_val_offset() );
 			}
@@ -183,11 +183,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.GetMapCommonPackageName" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InFilename;
+				*( ScriptArray< wchar_t >* )params = InFilename;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = OutCommonPackageName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				InFilename = *( ScriptArray< wchar_t >* )( params + 0 );
+				InFilename = *( ScriptArray< wchar_t >* )params;
 				OutCommonPackageName = *( ScriptArray< wchar_t >* )( params + 12 );
 				return *( bool* )( params + function->return_val_offset() );
 			}
@@ -218,7 +218,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.DisplayDebug" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				*( float* )( params + 4 ) = out_YL;
 				*( float* )( params + 8 ) = out_YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -242,7 +242,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ShouldReset" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = ActorToReset;
+				*( class Actor** )params = ActorToReset;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -278,7 +278,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.NotifyNavigationChanged" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class NavigationPoint** )( params + 0 ) = N;
+				*( class NavigationPoint** )params = N;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -295,7 +295,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.KickIdler" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -305,7 +305,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ForceKickPlayer" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = KickReason;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -367,7 +367,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.SetGameSpeed" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = T;
+				*( float* )params = T;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -376,11 +376,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.GrabOption" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Options;
+				*( ScriptArray< wchar_t >* )params = Options;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Result;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Options = *( ScriptArray< wchar_t >* )( params + 0 );
+				Options = *( ScriptArray< wchar_t >* )params;
 				Result = *( ScriptArray< wchar_t >* )( params + 12 );
 				return *( bool* )( params + function->return_val_offset() );
 			}
@@ -389,7 +389,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.GetKeyValue" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Pair;
+				*( ScriptArray< wchar_t >* )params = Pair;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Key;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -402,7 +402,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.HasOption" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Options;
+				*( ScriptArray< wchar_t >* )params = Options;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = InKey;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -413,7 +413,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.GetIntOption" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Options;
+				*( ScriptArray< wchar_t >* )params = Options;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = ParseString;
 				*( int* )( params + 24 ) = CurrentValue;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -425,7 +425,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.GetDefaultGameClassPath" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = MapName;
+				*( ScriptArray< wchar_t >* )params = MapName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Options;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = Portal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -437,7 +437,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.SetGameType" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = MapName;
+				*( ScriptArray< wchar_t >* )params = MapName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Options;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = Portal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -449,7 +449,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.InitGame" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Options;
+				*( ScriptArray< wchar_t >* )params = Options;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = ErrorMessage;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -483,7 +483,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.AddMutator" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = mutname;
+				*( ScriptArray< wchar_t >* )params = mutname;
 				*( bool* )( params + 12 ) = bUserAdded;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -493,7 +493,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.RemoveMutator" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Mutator** )( params + 0 ) = MutatorToRemove;
+				*( class Mutator** )params = MutatorToRemove;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -502,7 +502,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ProcessServerTravel" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				*( ScriptArray< wchar_t >* )params = URL;
 				*( bool* )( params + 12 ) = bAbsolute;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -514,13 +514,13 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ProcessClientTravel" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				*( ScriptArray< wchar_t >* )params = URL;
 				*( void** )( params + 12 ) = NextMapGuid;
 				*( bool* )( params + 28 ) = bSeamless;
 				*( bool* )( params + 32 ) = bAbsolute;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				URL = *( ScriptArray< wchar_t >* )( params + 0 );
+				URL = *( ScriptArray< wchar_t >* )params;
 				return *( class PlayerController** )( params + function->return_val_offset() );
 			}
 
@@ -537,7 +537,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.PreLogin" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Options;
+				*( ScriptArray< wchar_t >* )params = Options;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Address;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = ErrorMessage;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -560,7 +560,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.SpawnPlayerController" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = SpawnLocation;
+				*( Vector* )params = SpawnLocation;
 				*( Rotator* )( params + 12 ) = SpawnRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -572,7 +572,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.Login" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Portal;
+				*( ScriptArray< wchar_t >* )params = Portal;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Options;
 				*( void** )( params + 24 ) = UniqueId;
 				*( ScriptArray< wchar_t >* )( params + 32 ) = ErrorMessage;
@@ -603,7 +603,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.OnStartOnlineGameComplete" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( bool* )( params + 8 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -629,7 +629,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.RestartPlayer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = NewPlayer;
+				*( class Controller** )params = NewPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -638,7 +638,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.SpawnDefaultPawnFor" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Controller** )( params + 0 ) = NewPlayer;
+				*( class Controller** )params = NewPlayer;
 				*( class NavigationPoint** )( params + 4 ) = StartSpot;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -649,7 +649,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.GetDefaultPlayerClass" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptClass** )( params + function->return_val_offset() );
@@ -660,7 +660,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ReplicateStreamingStatus" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -669,7 +669,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.GenericPlayerInitialization" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -679,7 +679,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.BestNextHostSort" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PlayerController** )( params + 0 ) = A;
+				*( class PlayerController** )params = A;
 				*( class PlayerController** )( params + 4 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -698,7 +698,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.PostLogin" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = NewPlayer;
+				*( class PlayerController** )params = NewPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -735,7 +735,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.Logout" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = Exiting;
+				*( class Controller** )params = Exiting;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -745,7 +745,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.UnregisterPlayer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -754,7 +754,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.AcceptInventory" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = PlayerPawn;
+				*( class Pawn** )params = PlayerPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -763,7 +763,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.AddDefaultInventory" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -772,7 +772,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.Mutate" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = MutateString;
+				*( ScriptArray< wchar_t >* )params = MutateString;
 				*( class PlayerController** )( params + 12 ) = Sender;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -782,7 +782,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.SetPlayerDefaults" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = PlayerPawn;
+				*( class Pawn** )params = PlayerPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -791,7 +791,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.NotifyKilled" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Controller** )( params + 0 ) = Killer;
+				*( class Controller** )params = Killer;
 				*( class Controller** )( params + 4 ) = Killed;
 				*( class Pawn** )( params + 8 ) = KilledPawn;
 				*( ScriptClass** )( params + 12 ) = DamageType;
@@ -803,7 +803,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.Killed" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Controller** )( params + 0 ) = Killer;
+				*( class Controller** )params = Killer;
 				*( class Controller** )( params + 4 ) = KilledPlayer;
 				*( class Pawn** )( params + 8 ) = KilledPawn;
 				*( ScriptClass** )( params + 12 ) = DamageType;
@@ -815,7 +815,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.PreventDeath" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class Pawn** )( params + 0 ) = KilledPawn;
+				*( class Pawn** )params = KilledPawn;
 				*( class Controller** )( params + 4 ) = Killer;
 				*( ScriptClass** )( params + 8 ) = DamageType;
 				*( Vector* )( params + 12 ) = HitLocation;
@@ -828,7 +828,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.BroadcastDeathMessage" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Controller** )( params + 0 ) = Killer;
+				*( class Controller** )params = Killer;
 				*( class Controller** )( params + 4 ) = Other;
 				*( ScriptClass** )( params + 8 ) = DamageType;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -840,7 +840,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.Kick" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -849,7 +849,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.KickBan" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -858,7 +858,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ReduceDamage" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( int* )( params + 0 ) = Damage;
+				*( int* )params = Damage;
 				*( class Pawn** )( params + 4 ) = injured;
 				*( class Controller** )( params + 8 ) = InstigatedBy;
 				*( Vector* )( params + 12 ) = HitLocation;
@@ -867,7 +867,7 @@ namespace UnrealScript
 				*( class Actor** )( params + 40 ) = DamageCauser;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Damage = *( int* )( params + 0 );
+				Damage = *( int* )params;
 				Momentum = *( Vector* )( params + 24 );
 			}
 
@@ -875,7 +875,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ShouldRespawn" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PickupFactory** )( params + 0 ) = Other;
+				*( class PickupFactory** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -885,7 +885,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.DiscardInventory" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				*( class Controller** )( params + 4 ) = Killer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -895,7 +895,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ChangeName" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Controller** )( params + 0 ) = Other;
+				*( class Controller** )params = Other;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = S;
 				*( bool* )( params + 16 ) = bNameChange;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -906,7 +906,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.PickTeam" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = Current;
+				*( byte* )params = Current;
 				*( class Controller** )( params + 4 ) = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -917,7 +917,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.SendPlayer" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class PlayerController** )( params + 0 ) = aPlayer;
+				*( class PlayerController** )params = aPlayer;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = URL;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -957,7 +957,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.Broadcast" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class Actor** )( params + 0 ) = Sender;
+				*( class Actor** )params = Sender;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = msg;
 				*( ScriptName* )( params + 16 ) = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -968,7 +968,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.BroadcastTeam" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class Controller** )( params + 0 ) = Sender;
+				*( class Controller** )params = Sender;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = msg;
 				*( ScriptName* )( params + 16 ) = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -979,7 +979,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.BroadcastLocalized" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class Actor** )( params + 0 ) = Sender;
+				*( class Actor** )params = Sender;
 				*( ScriptClass** )( params + 4 ) = Message;
 				*( int* )( params + 8 ) = Switch;
 				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI;
@@ -993,7 +993,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.BroadcastLocalizedTeam" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( int* )( params + 0 ) = TeamIndex;
+				*( int* )params = TeamIndex;
 				*( class Actor** )( params + 4 ) = Sender;
 				*( ScriptClass** )( params + 8 ) = Message;
 				*( int* )( params + 12 ) = Switch;
@@ -1008,7 +1008,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.CheckModifiedEndGame" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = Winner;
+				*( class PlayerReplicationInfo** )params = Winner;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Reason;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1019,7 +1019,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.CheckEndGame" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = Winner;
+				*( class PlayerReplicationInfo** )params = Winner;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Reason;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1056,7 +1056,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.EndGame" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = Winner;
+				*( class PlayerReplicationInfo** )params = Winner;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Reason;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1090,7 +1090,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.EndLogging" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Reason;
+				*( ScriptArray< wchar_t >* )params = Reason;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1099,7 +1099,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ShouldSpawnAtStartSpot" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = Player;
+				*( class Controller** )params = Player;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1109,7 +1109,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.FindPlayerStart" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( class Controller** )( params + 0 ) = Player;
+				*( class Controller** )params = Player;
 				*( byte* )( params + 4 ) = InTeam;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = IncomingName;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1121,7 +1121,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ChoosePlayerStart" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class Controller** )( params + 0 ) = Player;
+				*( class Controller** )params = Player;
 				*( byte* )( params + 4 ) = InTeam;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1132,7 +1132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.RatePlayerStart" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( class PlayerStart** )( params + 0 ) = P;
+				*( class PlayerStart** )params = P;
 				*( byte* )( params + 4 ) = Team;
 				*( class Controller** )( params + 8 ) = Player;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1144,7 +1144,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.AddObjectiveScore" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = Scorer;
+				*( class PlayerReplicationInfo** )params = Scorer;
 				*( int* )( params + 4 ) = Score;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1154,7 +1154,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ScoreObjective" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = Scorer;
+				*( class PlayerReplicationInfo** )params = Scorer;
 				*( int* )( params + 4 ) = Score;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1164,7 +1164,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.CheckScore" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = Scorer;
+				*( class PlayerReplicationInfo** )params = Scorer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1174,7 +1174,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ScoreKill" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Controller** )( params + 0 ) = Killer;
+				*( class Controller** )params = Killer;
 				*( class Controller** )( params + 4 ) = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1185,7 +1185,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ModifyScoreKill" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Controller** )( params + 0 ) = Killer;
+				*( class Controller** )params = Killer;
 				*( class Controller** )( params + 4 ) = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1195,7 +1195,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.DriverEnteredVehicle" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Vehicle** )( params + 0 ) = V;
+				*( class Vehicle** )params = V;
 				*( class Pawn** )( params + 4 ) = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1205,7 +1205,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.CanLeaveVehicle" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Vehicle** )( params + 0 ) = V;
+				*( class Vehicle** )params = V;
 				*( class Pawn** )( params + 4 ) = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1216,7 +1216,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.DriverLeftVehicle" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Vehicle** )( params + 0 ) = V;
+				*( class Vehicle** )params = V;
 				*( class Pawn** )( params + 4 ) = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1226,7 +1226,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.AllowMutator" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = MutatorClassName;
+				*( ScriptArray< wchar_t >* )params = MutatorClassName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1236,7 +1236,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.AllowCheats" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = P;
+				*( class PlayerController** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1246,7 +1246,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.AllowPausing" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1258,7 +1258,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.PreCommitMapChange" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PreviousMapName;
+				*( ScriptArray< wchar_t >* )params = PreviousMapName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = NextMapName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1276,7 +1276,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.AddInactivePRI" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class PlayerReplicationInfo** )params = PRI;
 				*( class PlayerController** )( params + 4 ) = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1286,7 +1286,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.FindInactivePRI" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1296,7 +1296,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.SetPRI" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( class PlayerReplicationInfo** )( params + 4 ) = NewPRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1306,7 +1306,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.OverridePRI" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( class PlayerReplicationInfo** )( params + 4 ) = OldPRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1316,7 +1316,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.GetSeamlessTravelActorList" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bToEntry;
+				*( bool* )params = bToEntry;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1325,7 +1325,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.SwapPlayerControllers" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PlayerController** )( params + 0 ) = OldPC;
+				*( class PlayerController** )params = OldPC;
 				*( class PlayerController** )( params + 4 ) = NewPC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1352,17 +1352,17 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.HandleSeamlessTravelPlayer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				C = *( class Controller** )( params + 0 );
+				C = *( class Controller** )params;
 			}
 
 			void SetSeamlessTravelViewTarget( class PlayerController* PC )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.SetSeamlessTravelViewTarget" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1379,7 +1379,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ProcessClientRegistrationCompletion" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( bool* )( params + 4 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1413,7 +1413,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.ArbitrationRegistrationComplete" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( bool* )( params + 8 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1442,7 +1442,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.UpdateGameplayMuteList" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1484,7 +1484,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.OnLoginFailed" );
 				byte *params = ( byte* )( malloc( 2 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( byte* )( params + 1 ) = ErrorCode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1494,7 +1494,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.OnLoginChange" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1512,7 +1512,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.OnServerCreateComplete" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( bool* )( params + 8 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1530,7 +1530,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.TellClientsToTravelToSession" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( ScriptClass** )( params + 8 ) = SearchClass;
 				*( byte* )( params + 12 ) = PlatformSpecificInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1585,7 +1585,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.BeginBVT" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = TagDesc;
+				*( ScriptArray< wchar_t >* )params = TagDesc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1594,7 +1594,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.EnableStandbyCheatDetection" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bIsEnabled;
+				*( bool* )params = bIsEnabled;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1603,7 +1603,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameInfo.StandbyCheatDetected" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = StandbyType;
+				*( byte* )params = StandbyType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

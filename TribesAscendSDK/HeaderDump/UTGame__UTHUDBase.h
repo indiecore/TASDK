@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUDBase.DisplayHit" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Vector* )( params + 0 ) = HitDir;
+				*( Vector* )params = HitDir;
 				*( int* )( params + 12 ) = Damage;
 				*( ScriptClass** )( params + 16 ) = DamageType;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -100,7 +100,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUDBase.SetVisible" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewVisible;
+				*( bool* )params = bNewVisible;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -150,7 +150,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUDBase.DrawToolTip" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( class Canvas** )( params + 0 ) = Cvs;
+				*( class Canvas** )params = Cvs;
 				*( class PlayerController** )( params + 4 ) = PC;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = Command;
 				*( float* )( params + 20 ) = X;
@@ -187,7 +187,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUDBase.DrawShadowedTile" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( class Texture2D** )( params + 0 ) = Tex;
+				*( class Texture2D** )params = Tex;
 				*( float* )( params + 4 ) = X;
 				*( float* )( params + 8 ) = Y;
 				*( float* )( params + 12 ) = XL;
@@ -206,7 +206,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUDBase.DrawShadowedStretchedTile" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( class Texture2D** )( params + 0 ) = Tex;
+				*( class Texture2D** )params = Tex;
 				*( float* )( params + 4 ) = X;
 				*( float* )( params + 8 ) = Y;
 				*( float* )( params + 12 ) = XL;
@@ -225,7 +225,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUDBase.DrawShadowedRotatedTile" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( class Texture2D** )( params + 0 ) = Tex;
+				*( class Texture2D** )params = Tex;
 				*( Rotator* )( params + 4 ) = Rot;
 				*( float* )( params + 16 ) = X;
 				*( float* )( params + 20 ) = Y;

@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.StaticMeshComponent.SetStaticMesh" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class StaticMesh** )( params + 0 ) = NewMesh;
+				*( class StaticMesh** )params = NewMesh;
 				*( bool* )( params + 4 ) = bForce;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -70,7 +70,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.StaticMeshComponent.SetForceStaticDecals" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bInForceStaticDecals;
+				*( bool* )params = bInForceStaticDecals;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCallIn_CrashLandInfo.SpawnCrashLandInfo" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( class Controller** )( params + 0 ) = Initializer;
+				*( class Controller** )params = Initializer;
 				*( float* )( params + 4 ) = CrashLandTime;
 				*( Vector* )( params + 8 ) = CrashLandPoint;
 				*( Vector* )( params + 20 ) = CrashLandNormal;
@@ -71,7 +71,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCallIn_CrashLandInfo.MoveSameTeamPawn" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPawn** )( params + 0 ) = PawnToMove;
+				*( class TrPawn** )params = PawnToMove;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

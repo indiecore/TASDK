@@ -67,7 +67,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGFxHudWrapper.SetVisible" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewVisible;
+				*( bool* )params = bNewVisible;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -76,7 +76,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGFxHudWrapper.DisplayHit" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Vector* )( params + 0 ) = HitDir;
+				*( Vector* )params = HitDir;
 				*( int* )( params + 12 ) = Damage;
 				*( ScriptClass** )( params + 16 ) = DamageType;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -119,7 +119,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGFxHudWrapper.LocalizedMessage" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( ScriptClass** )( params + 0 ) = InMessageClass;
+				*( ScriptClass** )params = InMessageClass;
 				*( class PlayerReplicationInfo** )( params + 4 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI_;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = CriticalString;
@@ -137,7 +137,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTGFxHudWrapper.AddConsoleMessage" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = M;
+				*( ScriptArray< wchar_t >* )params = M;
 				*( ScriptClass** )( params + 12 ) = InMessageClass;
 				*( class PlayerReplicationInfo** )( params + 16 ) = PRI;
 				*( float* )( params + 20 ) = Lifetime;

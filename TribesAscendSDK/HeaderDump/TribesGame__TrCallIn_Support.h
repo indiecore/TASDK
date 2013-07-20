@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCallIn_Support.FireCompletedCallIn" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( int* )( params + 0 ) = CallInOffs;
+				*( int* )params = CallInOffs;
 				*( Vector* )( params + 4 ) = TargetLocation;
 				*( Vector* )( params + 16 ) = TargetNormal;
 				ScriptObject *object = ( ScriptObject* )( this );

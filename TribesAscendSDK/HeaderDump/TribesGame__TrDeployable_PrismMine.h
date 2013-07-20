@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_PrismMine.CreateTripActor" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class TrDeployable_PrismMine** )( params + 0 ) = Right;
+				*( class TrDeployable_PrismMine** )params = Right;
 				*( Vector* )( params + 4 ) = LeftLocation;
 				*( Vector* )( params + 16 ) = RightLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_PrismMine.DestroyTripActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrTripActor** )( params + 0 ) = DestroyTrip;
+				*( class TrTripActor** )params = DestroyTrip;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_PrismMine.AddTripActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrTripActor** )( params + 0 ) = NewTrip;
+				*( class TrTripActor** )params = NewTrip;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_PrismMine.RemoveTripActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrTripActor** )( params + 0 ) = RemoveTrip;
+				*( class TrTripActor** )params = RemoveTrip;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -70,7 +70,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_PrismMine.TripActivated" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				*( Vector* )( params + 4 ) = ActivateLocation;
 				*( class TrTripActor** )( params + 16 ) = TripActor;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -90,7 +90,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_PrismMine.GetTripSocketPosition" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bIsLeft;
+				*( bool* )params = bIsLeft;
 				*( Vector* )( params + 4 ) = SocketPosition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -126,7 +126,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_PrismMine.NoConnectionExists" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrDeployable_PrismMine** )( params + 0 ) = AdjacentMine;
+				*( class TrDeployable_PrismMine** )params = AdjacentMine;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

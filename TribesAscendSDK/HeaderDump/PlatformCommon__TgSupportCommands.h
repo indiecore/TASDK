@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.gmMatchForce" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = nQueueId;
+				*( int* )params = nQueueId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.gmMatchNext" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = nMapId;
+				*( int* )params = nMapId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.gmCommand" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = sCommand;
+				*( ScriptArray< wchar_t >* )params = sCommand;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.gmC" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = sCommand;
+				*( ScriptArray< wchar_t >* )params = sCommand;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.GPerfDebugFeet" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = feet;
+				*( int* )params = feet;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -70,7 +70,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.GPerfDebugSkips" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = skips;
+				*( int* )params = skips;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -79,7 +79,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.GPerfDebugRelevMode" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Mode;
+				*( int* )params = Mode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -88,7 +88,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.scLog" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = LogName;
+				*( ScriptArray< wchar_t >* )params = LogName;
 				*( bool* )( params + 12 ) = bEnabled;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -98,7 +98,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.scLogMark" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Comment;
+				*( ScriptArray< wchar_t >* )params = Comment;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -107,7 +107,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.scStartGame" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Reason;
+				*( ScriptArray< wchar_t >* )params = Reason;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -116,7 +116,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.scEndGame" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Reason;
+				*( ScriptArray< wchar_t >* )params = Reason;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -125,7 +125,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.scScore" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = nTeam;
+				*( int* )params = nTeam;
 				*( int* )( params + 4 ) = nCount;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -135,7 +135,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.scTime" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = nSeconds;
+				*( int* )params = nSeconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -144,7 +144,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.scTimer" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = sCommand;
+				*( ScriptArray< wchar_t >* )params = sCommand;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -169,7 +169,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.scPerfDebugFeet" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = feet;
+				*( int* )params = feet;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -178,7 +178,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.scPerfDebugSkip" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = skips;
+				*( int* )params = skips;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -187,7 +187,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgSupportCommands.scPerfDebugRelevMode" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Mode;
+				*( int* )params = Mode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

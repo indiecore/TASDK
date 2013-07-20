@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FileLog.OpenLog" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = LogFilename;
+				*( ScriptArray< wchar_t >* )params = LogFilename;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = extension;
 				*( bool* )( params + 24 ) = bUnique;
 				ScriptObject *object = ( ScriptObject* )( this );

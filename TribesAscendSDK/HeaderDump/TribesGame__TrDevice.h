@@ -146,7 +146,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.IsValidTarget" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = Target;
+				*( class Actor** )params = Target;
 				*( int* )( params + 4 ) = nFireMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -157,7 +157,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.IsEnemy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Target;
+				*( class Actor** )params = Target;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -167,7 +167,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.IsInsideCone" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( Vector* )( params + 0 ) = SourceLookDir;
+				*( Vector* )params = SourceLookDir;
 				*( class Actor** )( params + 12 ) = TargetActor;
 				*( Vector* )( params + 16 ) = StartCone;
 				*( float* )( params + 28 ) = MinCosine;
@@ -180,7 +180,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ShouldAddToImpactList" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Actor** )( params + 0 ) = HitActor;
+				*( class Actor** )params = HitActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -190,7 +190,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.TickInHandWeapon" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaSeconds;
+				*( float* )params = DeltaSeconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -216,7 +216,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.SpawnPet" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bPet;
+				*( bool* )params = bPet;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class TrDeployable** )( params + function->return_val_offset() );
@@ -235,7 +235,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.RestoreAccuracy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = fTimeStep;
+				*( float* )params = fTimeStep;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -244,7 +244,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.RestoreKickback" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaSeconds;
+				*( float* )params = DeltaSeconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -253,7 +253,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.IsInLOS" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Actor** )( params + 0 ) = TouchedActor;
+				*( class Actor** )params = TouchedActor;
 				*( Vector* )( params + 4 ) = ExpectedLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -281,7 +281,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ValidateClientReportedHit" );
 				byte *params = ( byte* )( malloc( 89 ) );
-				*( byte* )( params + 0 ) = FiringMode;
+				*( byte* )params = FiringMode;
 				*( void** )( params + 4 ) = Impact;
 				*( bool* )( params + 84 ) = bHeadShot;
 				*( bool* )( params + 88 ) = bDeviceIsFiring;
@@ -294,7 +294,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ValidateClientReportedHitInternal" );
 				byte *params = ( byte* )( malloc( 89 ) );
-				*( byte* )( params + 0 ) = FiringMode;
+				*( byte* )params = FiringMode;
 				*( void** )( params + 4 ) = Impact;
 				*( bool* )( params + 84 ) = bHeadShot;
 				*( bool* )( params + 88 ) = bDeviceIsFiring;
@@ -325,7 +325,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ReplicatedEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = VarName;
+				*( ScriptName* )params = VarName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -342,7 +342,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.AddAmmo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Amount;
+				*( int* )params = Amount;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -361,7 +361,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ConsumeAmmo_Internal" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -370,7 +370,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ConsumeAmmo" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -405,7 +405,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ChangeVisibility" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bIsVisible;
+				*( bool* )params = bIsVisible;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -414,7 +414,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.CentralUpdateHandsMesh" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = FamilyInfo;
+				*( ScriptClass** )params = FamilyInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -423,7 +423,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.UpdateHandsMesh" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = FamilyInfo;
+				*( ScriptClass** )params = FamilyInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -496,7 +496,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ClientWeaponSet" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bOptionalSet;
+				*( bool* )params = bOptionalSet;
 				*( bool* )( params + 4 ) = bDoNotActivate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -506,7 +506,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.PlayFireEffects" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				*( Vector* )( params + 4 ) = HitLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -516,7 +516,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.PlayFireAnimation" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -551,7 +551,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.SpawnTracerBeam" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = Start;
+				*( Vector* )params = Start;
 				*( Vector* )( params + 12 ) = End;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -561,7 +561,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.SpawnTracerEffect" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = HitLocation;
+				*( Vector* )params = HitLocation;
 				*( float* )( params + 12 ) = HitDistance;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -572,7 +572,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.GetTracer" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = SpawnLocation;
+				*( Vector* )params = SpawnLocation;
 				*( Rotator* )( params + 12 ) = SpawnRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -592,7 +592,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.HasAmmo" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				*( int* )( params + 4 ) = Amount;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -612,7 +612,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.AllowSwitchTo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = NewWeapon;
+				*( class Weapon** )params = NewWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -622,7 +622,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.CalculateRangeDamageFalloff" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Dist;
+				*( float* )params = Dist;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -640,7 +640,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ProcessInstantHit" );
 				byte *params = ( byte* )( malloc( 85 ) );
-				*( byte* )( params + 0 ) = FiringMode;
+				*( byte* )params = FiringMode;
 				*( void** )( params + 4 ) = Impact;
 				*( int* )( params + 84 ) = NumHits;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -651,7 +651,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ServerNotifyHit" );
 				byte *params = ( byte* )( malloc( 85 ) );
-				*( byte* )( params + 0 ) = FiringMode;
+				*( byte* )params = FiringMode;
 				*( void** )( params + 4 ) = Impact;
 				*( bool* )( params + 84 ) = bHeadShot;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -662,7 +662,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ProcessInstantHit_Internal" );
 				byte *params = ( byte* )( malloc( 85 ) );
-				*( byte* )( params + 0 ) = FiringMode;
+				*( byte* )params = FiringMode;
 				*( void** )( params + 4 ) = Impact;
 				*( bool* )( params + 84 ) = bHeadShot;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -673,7 +673,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ModifyInstantHitDamage" );
 				byte *params = ( byte* )( malloc( 85 ) );
-				*( byte* )( params + 0 ) = FiringMode;
+				*( byte* )params = FiringMode;
 				*( void** )( params + 4 ) = Impact;
 				*( float* )( params + 84 ) = Damage;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -685,7 +685,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ProcessEffect" );
 				byte *params = ( byte* )( malloc( 10 ) );
-				*( class Actor** )( params + 0 ) = Target;
+				*( class Actor** )params = Target;
 				*( byte* )( params + 4 ) = FiringMode;
 				*( byte* )( params + 5 ) = efType;
 				*( bool* )( params + 8 ) = bRemove;
@@ -706,7 +706,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.IsDeviceCoolingDown" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -764,7 +764,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.AddSpreadWithAccuracy" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Rotator* )( params + 0 ) = BaseAim;
+				*( Rotator* )params = BaseAim;
 				*( float* )( params + 12 ) = fAccuracy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -775,7 +775,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ApplyKickbackToAim" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Rotator* )( params + 0 ) = Aim;
+				*( Rotator* )params = Aim;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Rotator* )( params + function->return_val_offset() );
@@ -803,7 +803,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.GetAdjustedAim" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = StartFireLoc;
+				*( Vector* )params = StartFireLoc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Rotator* )( params + function->return_val_offset() );
@@ -857,7 +857,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.GetClientSideProjectileFireStartLoc" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = AimDir;
+				*( Vector* )params = AimDir;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -876,7 +876,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.DestroyOldestProjectileOverLimit" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Projectile** )( params + 0 ) = newProjectile;
+				*( class Projectile** )params = newProjectile;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -911,7 +911,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.GetAimForCamera" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = StartFireLoc;
+				*( Vector* )params = StartFireLoc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Rotator* )( params + function->return_val_offset() );
@@ -938,7 +938,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.GetReloadTime" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class PlayerReplicationInfo** )params = PRI;
 				*( byte* )( params + 4 ) = EquipPoint;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -965,7 +965,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.SuppressAnimNotifies" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bSuppress;
+				*( bool* )params = bSuppress;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1064,7 +1064,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.AddCarriedAmmo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Amount;
+				*( int* )params = Amount;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -1090,7 +1090,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.StopFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1099,7 +1099,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.BeginFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1167,7 +1167,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.SetPosition" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UDKPawn** )( params + 0 ) = Holder;
+				*( class UDKPawn** )params = Holder;
 				*( float* )( params + 4 ) = DeltaSeconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1177,7 +1177,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.LagRot" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = NewValue;
+				*( int* )params = NewValue;
 				*( int* )( params + 4 ) = LastValue;
 				*( float* )( params + 8 ) = MaxDiff;
 				*( int* )( params + 12 ) = Index;
@@ -1200,7 +1200,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.StartFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1217,7 +1217,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.AnnounceInvalidPickup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPawn** )( params + 0 ) = Other;
+				*( class TrPawn** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1226,7 +1226,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.DenyPickupQuery" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = ItemClass;
+				*( ScriptClass** )params = ItemClass;
 				*( class Actor** )( params + 4 ) = Pickup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1278,7 +1278,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.WeaponPlaySoundLocal" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class SoundCue** )( params + 0 ) = Sound;
+				*( class SoundCue** )params = Sound;
 				*( float* )( params + 4 ) = NoiseLoudness;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1296,7 +1296,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.UpdateShotsFired" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = Reset;
+				*( bool* )params = Reset;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1305,7 +1305,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.StartZoom" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPlayerController** )( params + 0 ) = PC;
+				*( class UTPlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1314,7 +1314,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.EndZoom" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTPlayerController** )( params + 0 ) = PC;
+				*( class UTPlayerController** )params = PC;
 				*( bool* )( params + 4 ) = bReturningTo3P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1349,7 +1349,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.CalcWeaponFire" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( Vector* )( params + 0 ) = StartTrace;
+				*( Vector* )params = StartTrace;
 				*( Vector* )( params + 12 ) = EndTrace;
 				*( Vector* )( params + 36 ) = Extent;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1369,7 +1369,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.BuffMaxCarriedAmmo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Amount;
+				*( int* )params = Amount;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1396,7 +1396,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice.ServerStartFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

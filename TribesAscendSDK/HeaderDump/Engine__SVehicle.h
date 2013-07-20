@@ -74,7 +74,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.AddForce" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = Force;
+				*( Vector* )params = Force;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -83,7 +83,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.AddImpulse" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = Impulse;
+				*( Vector* )params = Impulse;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -92,7 +92,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.AddTorque" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = Torque;
+				*( Vector* )params = Torque;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -110,7 +110,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.SetWheelCollision" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = WheelNum;
+				*( int* )params = WheelNum;
 				*( bool* )( params + 4 ) = bCollision;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -160,7 +160,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.TakeRadiusDamage" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( class Controller** )( params + 0 ) = InstigatedBy;
+				*( class Controller** )params = InstigatedBy;
 				*( float* )( params + 4 ) = BaseDamage;
 				*( float* )( params + 8 ) = DamageRadius;
 				*( ScriptClass** )( params + 12 ) = DamageType;
@@ -177,7 +177,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.InitVehicleRagdoll" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class SkeletalMesh** )( params + 0 ) = RagdollMesh;
+				*( class SkeletalMesh** )params = RagdollMesh;
 				*( class PhysicsAsset** )( params + 4 ) = RagdollPhysAsset;
 				*( Vector* )( params + 8 ) = ActorMove;
 				*( bool* )( params + 20 ) = bClearAnimTree;
@@ -189,7 +189,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.AddVelocity" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( Vector* )( params + 0 ) = NewVelocity;
+				*( Vector* )params = NewVelocity;
 				*( Vector* )( params + 12 ) = HitLocation;
 				*( ScriptClass** )( params + 24 ) = DamageType;
 				*( void** )( params + 28 ) = HitInfo;
@@ -201,7 +201,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.Died" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Controller** )( params + 0 ) = Killer;
+				*( class Controller** )params = Killer;
 				*( ScriptClass** )( params + 4 ) = DamageType;
 				*( Vector* )( params + 8 ) = HitLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -213,7 +213,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.CalcCamera" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( float* )( params + 0 ) = fDeltaTime;
+				*( float* )params = fDeltaTime;
 				*( Vector* )( params + 4 ) = out_CamLoc;
 				*( Rotator* )( params + 16 ) = out_CamRot;
 				*( float* )( params + 28 ) = out_FOV;
@@ -229,7 +229,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.GetDefaultCameraMode" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = RequestedBy;
+				*( class PlayerController** )params = RequestedBy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptName* )( params + function->return_val_offset() );
@@ -239,7 +239,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.TryToDrive" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -325,7 +325,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.SuspensionHeavyShift" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Delta;
+				*( float* )params = Delta;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -334,7 +334,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.PostTeleport" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Teleporter** )( params + 0 ) = OutTeleporter;
+				*( class Teleporter** )params = OutTeleporter;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -343,7 +343,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.DisplayDebug" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				*( float* )( params + 4 ) = out_YL;
 				*( float* )( params + 8 ) = out_YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -356,7 +356,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.DisplayWheelsDebug" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				*( float* )( params + 4 ) = YL;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -366,7 +366,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SVehicle.HermiteEval" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Slip;
+				*( float* )params = Slip;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );

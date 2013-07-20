@@ -56,7 +56,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InterpActor.EncroachingOn" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InterpActor.RanInto" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -75,7 +75,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InterpActor.Attach" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InterpActor.Detach" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -109,7 +109,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InterpActor.PlayMovingSound" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bClosing;
+				*( bool* )params = bClosing;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -118,7 +118,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InterpActor.InterpolationStarted" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class SeqAct_Interp** )( params + 0 ) = InterpAction;
+				*( class SeqAct_Interp** )params = InterpAction;
 				*( class InterpGroupInst** )( params + 4 ) = GroupInst;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -128,7 +128,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InterpActor.InterpolationFinished" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Interp** )( params + 0 ) = InterpAction;
+				*( class SeqAct_Interp** )params = InterpAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -137,7 +137,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InterpActor.InterpolationChanged" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Interp** )( params + 0 ) = InterpAction;
+				*( class SeqAct_Interp** )params = InterpAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -163,20 +163,20 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InterpActor.CreateCheckpointRecord" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( void** )( params + 0 ) = Record;
+				*( void** )params = Record;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Record = *( void** )( params + 0 );
+				Record = *( void** )params;
 			}
 
 			void ApplyCheckpointRecord( void* &Record )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.InterpActor.ApplyCheckpointRecord" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( void** )( params + 0 ) = Record;
+				*( void** )params = Record;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Record = *( void** )( params + 0 );
+				Record = *( void** )params;
 			}
 
 	};

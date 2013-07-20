@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.AllControllers" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = BaseClass;
+				*( ScriptClass** )params = BaseClass;
 				*( class Controller** )( params + 4 ) = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.IsConsoleBuild" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = ConsoleType;
+				*( byte* )params = ConsoleType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.GetMapName" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bIncludePrefix;
+				*( bool* )params = bIncludePrefix;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -91,7 +91,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.AllNavigationPoints" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = BaseClass;
+				*( ScriptClass** )params = BaseClass;
 				*( class NavigationPoint** )( params + 4 ) = N;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -103,7 +103,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.ForceGarbageCollection" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bFullPurge;
+				*( bool* )params = bFullPurge;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -158,7 +158,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.GetNavMeshPathConstraintFromCache" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = ConstraintClass;
+				*( ScriptClass** )params = ConstraintClass;
 				*( class NavigationHandle** )( params + 4 ) = Requestor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -169,7 +169,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.GetNavMeshPathGoalEvaluatorFromCache" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = GoalEvalClass;
+				*( ScriptClass** )params = GoalEvalClass;
 				*( class NavigationHandle** )( params + 4 ) = Requestor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -180,7 +180,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.ReplicatedEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = VarName;
+				*( ScriptName* )params = VarName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -189,7 +189,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.UpdateMusicTrack" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( void** )( params + 0 ) = NewMusicTrack;
+				*( void** )params = NewMusicTrack;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -198,7 +198,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.AddOnScreenDebugMessage" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( int* )( params + 0 ) = Key;
+				*( int* )params = Key;
 				*( float* )( params + 4 ) = TimeToDisplay;
 				*( void** )( params + 8 ) = DisplayColor;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = DebugMessage;
@@ -210,7 +210,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.IsMenuLevel" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = MapName;
+				*( ScriptArray< wchar_t >* )params = MapName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -238,7 +238,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.SetLevelRBGravity" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = NewGrav;
+				*( Vector* )params = NewGrav;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -300,7 +300,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.ServerTravel" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				*( ScriptArray< wchar_t >* )params = URL;
 				*( bool* )( params + 12 ) = bAbsolute;
 				*( bool* )( params + 16 ) = bShouldSkipGameNotify;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -323,7 +323,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.ThisIsNeverExecuted" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class DefaultPhysicsVolume** )( params + 0 ) = P;
+				*( class DefaultPhysicsVolume** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -364,7 +364,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.RadiusNavigationPoints" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptClass** )( params + 0 ) = BaseClass;
+				*( ScriptClass** )params = BaseClass;
 				*( class NavigationPoint** )( params + 4 ) = N;
 				*( Vector* )( params + 8 ) = Point;
 				*( float* )( params + 20 ) = Radius;
@@ -377,7 +377,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.NavigationPointCheck" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( Vector* )( params + 0 ) = Point;
+				*( Vector* )params = Point;
 				*( Vector* )( params + 12 ) = Extent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -387,7 +387,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.AllPawns" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptClass** )( params + 0 ) = BaseClass;
+				*( ScriptClass** )params = BaseClass;
 				*( class Pawn** )( params + 4 ) = P;
 				*( Vector* )( params + 8 ) = TestLocation;
 				*( float* )( params + 20 ) = TestRadius;
@@ -400,7 +400,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.NotifyMatchStarted" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( bool* )( params + 0 ) = bShouldActivateLevelStartupEvents;
+				*( bool* )params = bShouldActivateLevelStartupEvents;
 				*( bool* )( params + 4 ) = bShouldActivateLevelBeginningEvents;
 				*( bool* )( params + 8 ) = bShouldActivateLevelLoadedEvents;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -420,7 +420,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.SeamlessTravel" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				*( ScriptArray< wchar_t >* )params = URL;
 				*( bool* )( params + 12 ) = bAbsolute;
 				*( void** )( params + 16 ) = MapPackageGuid;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -431,7 +431,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.SetSeamlessTravelMidpointPause" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNowPaused;
+				*( bool* )params = bNowPaused;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -449,7 +449,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.SetMapInfo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class MapInfo** )( params + 0 ) = NewMapInfo;
+				*( class MapInfo** )params = NewMapInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -485,11 +485,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.GetDemoFrameInfo" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = CurrentFrame;
+				*( int* )params = CurrentFrame;
 				*( int* )( params + 4 ) = TotalFrames;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				CurrentFrame = *( int* )( params + 0 );
+				CurrentFrame = *( int* )params;
 				TotalFrames = *( int* )( params + 4 );
 			}
 
@@ -523,7 +523,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.FindEnvironmentVolume" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = TestLocation;
+				*( Vector* )params = TestLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class EnvironmentVolume** )( params + function->return_val_offset() );
@@ -542,7 +542,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.WorldInfo.ToggleHostMigration" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnabled;
+				*( bool* )params = bEnabled;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

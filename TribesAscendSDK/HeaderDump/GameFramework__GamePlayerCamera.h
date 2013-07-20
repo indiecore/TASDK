@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerCamera.CreateCamera" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = CameraClass;
+				*( ScriptClass** )params = CameraClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class GameCameraBase** )( params + function->return_val_offset() );
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerCamera.CacheLastTargetBaseInfo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = TargetBase;
+				*( class Actor** )params = TargetBase;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -70,7 +70,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerCamera.FindBestCameraType" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = CameraTarget;
+				*( class Actor** )params = CameraTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class GameCameraBase** )( params + function->return_val_offset() );
@@ -89,18 +89,18 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerCamera.UpdateViewTarget" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( void** )( params + 0 ) = OutVT;
+				*( void** )params = OutVT;
 				*( float* )( params + 44 ) = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				OutVT = *( void** )( params + 0 );
+				OutVT = *( void** )params;
 			}
 
 			float AdjustFOVForViewport( float inHorizFOV, class Pawn* CameraTargetPawn )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerCamera.AdjustFOVForViewport" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = inHorizFOV;
+				*( float* )params = inHorizFOV;
 				*( class Pawn** )( params + 4 ) = CameraTargetPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -111,17 +111,17 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerCamera.UpdateCameraLensEffects" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( void** )( params + 0 ) = OutVT;
+				*( void** )params = OutVT;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				OutVT = *( void** )( params + 0 );
+				OutVT = *( void** )params;
 			}
 
 			void DisplayDebug( class HUD* HUD, float &out_YL, float &out_YPos )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerCamera.DisplayDebug" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				*( float* )( params + 4 ) = out_YL;
 				*( float* )( params + 8 ) = out_YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -134,7 +134,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerCamera.SetColorScale" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = NewColorScale;
+				*( Vector* )params = NewColorScale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -151,7 +151,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerCamera.ProcessViewRotation" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				*( Rotator* )( params + 4 ) = out_ViewRotation;
 				*( Rotator* )( params + 16 ) = out_DeltaRot;
 				ScriptObject *object = ( ScriptObject* )( this );

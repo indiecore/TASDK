@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.GetCurrentControlValue" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = Index;
+				*( byte* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.StoreSetting" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SettingId;
+				*( int* )params = SettingId;
 				*( int* )( params + 4 ) = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -53,7 +53,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.ReadSetting" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SettingId;
+				*( int* )params = SettingId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -71,7 +71,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.LoadControlSettings" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GFxObject** )( params + 0 ) = List;
+				*( class GFxObject** )params = List;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -80,7 +80,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.AddControlSetting" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ControlName;
+				*( ScriptArray< wchar_t >* )params = ControlName;
 				*( float* )( params + 12 ) = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -90,7 +90,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.SaveControlSetting" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( float* )( params + 4 ) = val;
 				*( bool* )( params + 8 ) = bStore;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -101,7 +101,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.GetControlTypeFromName" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ControlName;
+				*( ScriptArray< wchar_t >* )params = ControlName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -111,7 +111,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.GetControlNameFromType" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = Index;
+				*( byte* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -130,7 +130,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.UpdateRuntimePlayer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerInput** )( params + 0 ) = EngineInput;
+				*( class PlayerInput** )params = EngineInput;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -139,7 +139,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.SaveTinyWeaponValue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -166,7 +166,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.SaveAlienFXValue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -175,7 +175,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.SaveChatFilterValue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -193,7 +193,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.SaveHUDFriendStateNotificationsValue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -211,7 +211,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.SaveWhisperNotificationsValue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -229,7 +229,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.SaveHelpTextValue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -247,7 +247,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.SaveSimulatedProjectilesValue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -265,7 +265,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.SaveDamageCounterValue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -283,7 +283,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrControlSettings.SaveHUDObjectivesValue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

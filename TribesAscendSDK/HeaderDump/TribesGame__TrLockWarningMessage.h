@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrLockWarningMessage.AnnouncementLevel" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = MessageIndex;
+				*( byte* )params = MessageIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrLockWarningMessage.GetString" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				*( bool* )( params + 4 ) = bPRI1HUD;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrLockWarningMessage.GetColor" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				*( class PlayerReplicationInfo** )( params + 4 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI_;
 				*( class Object** )( params + 12 ) = OptionalObject;

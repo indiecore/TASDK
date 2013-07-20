@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider.OnDataProviderPropertyChange" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class UIDataProvider** )( params + 0 ) = SourceProvider;
+				*( class UIDataProvider** )params = SourceProvider;
 				*( ScriptName* )( params + 4 ) = PropTag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider.GetProviderFieldType" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = DataTag;
+				*( ScriptArray< wchar_t >* )params = DataTag;
 				*( byte* )( params + 12 ) = out_ProviderFieldType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -46,10 +46,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider.ParseArrayDelimiter" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = DataTag;
+				*( ScriptArray< wchar_t >* )params = DataTag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				DataTag = *( ScriptArray< wchar_t >* )( params + 0 );
+				DataTag = *( ScriptArray< wchar_t >* )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider.AllowPublishingToField" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = FieldName;
+				*( ScriptArray< wchar_t >* )params = FieldName;
 				*( int* )( params + 12 ) = ArrayIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -76,7 +76,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider.GetFieldValue" );
 				byte *params = ( byte* )( malloc( 100 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = FieldName;
+				*( ScriptArray< wchar_t >* )params = FieldName;
 				*( void** )( params + 12 ) = FieldValue;
 				*( int* )( params + 96 ) = ArrayIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider.SetFieldValue" );
 				byte *params = ( byte* )( malloc( 100 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = FieldName;
+				*( ScriptArray< wchar_t >* )params = FieldName;
 				*( void** )( params + 12 ) = FieldValue;
 				*( int* )( params + 96 ) = ArrayIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -102,7 +102,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider.GenerateScriptMarkupString" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = DataTag;
+				*( ScriptName* )params = DataTag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -112,7 +112,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider.GenerateFillerData" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = DataTag;
+				*( ScriptArray< wchar_t >* )params = DataTag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -131,7 +131,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider.IsCollectionDataType" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FieldType;
+				*( byte* )params = FieldType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -141,7 +141,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider.NotifyPropertyChanged" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = PropTag;
+				*( ScriptName* )params = PropTag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -169,10 +169,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider.ParseTagArrayDelimiter" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				FieldName = *( ScriptName* )( params + 0 );
+				FieldName = *( ScriptName* )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 

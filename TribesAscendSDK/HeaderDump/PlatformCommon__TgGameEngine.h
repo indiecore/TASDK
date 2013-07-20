@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.OnMarshalEvent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = pMarEvent;
+				*( void** )params = pMarEvent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.SetFunction" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = nFunction;
+				*( int* )params = nFunction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -42,7 +42,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.SetFieldInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = nToken;
+				*( int* )params = nToken;
 				*( int* )( params + 4 ) = IntValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -53,7 +53,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.SetFieldFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = nToken;
+				*( int* )params = nToken;
 				*( float* )( params + 4 ) = FloatValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -64,7 +64,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.SetFieldString" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = nToken;
+				*( int* )params = nToken;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = StrValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -83,7 +83,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.SendMarshal" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = qwPlayerId;
+				*( void** )params = qwPlayerId;
 				*( bool* )( params + 8 ) = bLowPriority;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.SendMarshalAll" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bLowPriority;
+				*( bool* )params = bLowPriority;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -102,7 +102,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.GetFieldInt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = nToken;
+				*( int* )params = nToken;
 				*( int* )( params + 4 ) = IntValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -114,7 +114,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.GetFieldFloat" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = nToken;
+				*( int* )params = nToken;
 				*( float* )( params + 4 ) = FloatValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -126,7 +126,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.GetFieldString" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = nToken;
+				*( int* )params = nToken;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = StrValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -154,7 +154,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.SendCtrlRequest" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = fsRequest;
+				*( ScriptArray< wchar_t >* )params = fsRequest;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -163,7 +163,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.SendGameRequest" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = fsRequest;
+				*( ScriptArray< wchar_t >* )params = fsRequest;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -172,7 +172,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function PlatformCommon.TgGameEngine.HandlePlayerCommandInput" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = FSCommand;
+				*( ScriptArray< wchar_t >* )params = FSCommand;
 				*( class PlayerController** )( params + 12 ) = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

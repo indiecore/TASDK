@@ -72,7 +72,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.FaceActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = StrafingModifier;
+				*( float* )params = StrafingModifier;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Actor** )( params + function->return_val_offset() );
@@ -90,7 +90,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.ReceiveRunOverWarning" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class UDKVehicle** )( params + 0 ) = V;
+				*( class UDKVehicle** )params = V;
 				*( float* )( params + 4 ) = projSpeed;
 				*( Vector* )( params + 8 ) = VehicleDir;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -117,7 +117,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.CanMakePathTo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = A;
+				*( class Actor** )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -127,10 +127,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.FindBestInventoryPath" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = MinWeight;
+				*( float* )params = MinWeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				MinWeight = *( float* )( params + 0 );
+				MinWeight = *( float* )params;
 				return *( class Actor** )( params + function->return_val_offset() );
 			}
 
@@ -138,7 +138,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.FindPathToSquadRoute" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWeightDetours;
+				*( bool* )params = bWeightDetours;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Actor** )( params + function->return_val_offset() );
@@ -156,7 +156,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.FindBestSuperPickup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = MaxDist;
+				*( float* )params = MaxDist;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Actor** )( params + function->return_val_offset() );
@@ -198,7 +198,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.SpecialJumpCost" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = RequiredJumpZ;
+				*( float* )params = RequiredJumpZ;
 				*( float* )( params + 4 ) = Cost;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -210,7 +210,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.SuperDesireability" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PickupFactory** )( params + 0 ) = P;
+				*( class PickupFactory** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -220,7 +220,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKBot.AdjustAimError" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = TargetDist;
+				*( float* )params = TargetDist;
 				*( bool* )( params + 4 ) = bInstantProj;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDummyPawn.WeaponFired" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( bool* )( params + 4 ) = bViaReplication;
 				*( Vector* )( params + 8 ) = HitLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDummyPawn.SetPawnAmbientSound" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SoundCue** )( params + 0 ) = NewAmbientSound;
+				*( class SoundCue** )params = NewAmbientSound;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDummyPawn.SetWeaponAmbientSound" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SoundCue** )( params + 0 ) = NewAmbientSound;
+				*( class SoundCue** )params = NewAmbientSound;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDummyPawn.GetAdjustedAimFor" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( Vector* )( params + 4 ) = projStart;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -80,7 +80,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDummyPawn.GetWeaponStartTraceLocation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = CurrentWeapon;
+				*( class Weapon** )params = CurrentWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDummyPawn.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

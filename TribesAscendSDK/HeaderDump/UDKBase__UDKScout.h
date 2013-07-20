@@ -27,13 +27,13 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKScout.SuggestJumpVelocity" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( Vector* )( params + 0 ) = JumpVelocity;
+				*( Vector* )params = JumpVelocity;
 				*( Vector* )( params + 12 ) = Destination;
 				*( Vector* )( params + 24 ) = Start;
 				*( bool* )( params + 36 ) = bRequireFallLanding;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				JumpVelocity = *( Vector* )( params + 0 );
+				JumpVelocity = *( Vector* )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 

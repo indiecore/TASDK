@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FileWriter.OpenFile" );
 				byte *params = ( byte* )( malloc( 33 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InFilename;
+				*( ScriptArray< wchar_t >* )params = InFilename;
 				*( byte* )( params + 12 ) = InFileType;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = InExtension;
 				*( bool* )( params + 28 ) = bUnique;
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FileWriter.Logf" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = logString;
+				*( ScriptArray< wchar_t >* )params = logString;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

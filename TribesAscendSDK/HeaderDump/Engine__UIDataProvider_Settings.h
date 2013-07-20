@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_Settings.ArrayProviderPropertyChanged" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class UIDataProvider** )( params + 0 ) = SourceProvider;
+				*( class UIDataProvider** )params = SourceProvider;
 				*( ScriptName* )( params + 4 ) = PropTag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataProvider_Settings.OnSettingValueUpdated" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = SettingName;
+				*( ScriptName* )params = SettingName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

@@ -30,7 +30,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFeedbackManager.PlayForceFeedbackWaveform" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class ForceFeedbackWaveform** )( params + 0 ) = WaveForm;
+				*( class ForceFeedbackWaveform** )params = WaveForm;
 				*( class Actor** )( params + 4 ) = WaveInstigator;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFeedbackManager.StopForceFeedbackWaveform" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class ForceFeedbackWaveform** )( params + 0 ) = WaveForm;
+				*( class ForceFeedbackWaveform** )params = WaveForm;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ForceFeedbackManager.PauseWaveform" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bPause;
+				*( bool* )params = bPause;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

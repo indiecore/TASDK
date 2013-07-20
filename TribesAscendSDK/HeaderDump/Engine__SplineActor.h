@@ -48,7 +48,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.UpdateConnectedSplineComponents" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bFinish;
+				*( bool* )params = bFinish;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.AddConnectionTo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SplineActor** )( params + 0 ) = NextActor;
+				*( class SplineActor** )params = NextActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.IsConnectedTo" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class SplineActor** )( params + 0 ) = NextActor;
+				*( class SplineActor** )params = NextActor;
 				*( bool* )( params + 4 ) = bCheckForDisableDestination;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.FindSplineComponentTo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SplineActor** )( params + 0 ) = NextActor;
+				*( class SplineActor** )params = NextActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -96,7 +96,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.BreakConnectionTo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SplineActor** )( params + 0 ) = NextActor;
+				*( class SplineActor** )params = NextActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -121,7 +121,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.GetRandomConnection" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bUseLinksFrom;
+				*( bool* )params = bUseLinksFrom;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class SplineActor** )( params + function->return_val_offset() );
@@ -131,7 +131,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.GetBestConnectionInDirection" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = DesiredDir;
+				*( Vector* )params = DesiredDir;
 				*( bool* )( params + 12 ) = bUseLinksFrom;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -142,7 +142,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.FindSplinePathTo" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class SplineActor** )( params + 0 ) = Goal;
+				*( class SplineActor** )params = Goal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -160,7 +160,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.OnToggle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Toggle** )( params + 0 ) = inAction;
+				*( class SeqAct_Toggle** )params = inAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -169,7 +169,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SplineActor.OnToggleHidden" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_ToggleHidden** )( params + 0 ) = Action;
+				*( class SeqAct_ToggleHidden** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

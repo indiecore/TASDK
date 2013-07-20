@@ -74,7 +74,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.KActorFromStatic.ApplyImpulse" );
 				byte *params = ( byte* )( malloc( 60 ) );
-				*( Vector* )( params + 0 ) = ImpulseDir;
+				*( Vector* )params = ImpulseDir;
 				*( float* )( params + 12 ) = ImpulseMag;
 				*( Vector* )( params + 16 ) = HitLocation;
 				*( void** )( params + 28 ) = HitInfo;
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.KActorFromStatic.ReceiveImpulse" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				*( Vector* )( params + 4 ) = HitLocation;
 				*( Vector* )( params + 16 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -98,7 +98,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.KActorFromStatic.Bump" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				*( Vector* )( params + 8 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -108,7 +108,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.KActorFromStatic.Touch" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -119,7 +119,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.KActorFromStatic.TakeRadiusDamage" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( class Controller** )( params + 0 ) = InstigatedBy;
+				*( class Controller** )params = InstigatedBy;
 				*( float* )( params + 4 ) = BaseDamage;
 				*( float* )( params + 8 ) = DamageRadius;
 				*( ScriptClass** )( params + 12 ) = DamageType;

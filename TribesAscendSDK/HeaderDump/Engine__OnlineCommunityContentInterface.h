@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.ReadContentList" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = PlayerNum;
+				*( byte* )params = PlayerNum;
 				*( int* )( params + 4 ) = StartAt;
 				*( int* )( params + 8 ) = NumToRead;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.OnReadContentListComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.OnGetContentPayloadComplete" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				*( void** )( params + 4 ) = FileDownloaded;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -71,7 +71,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.OnDownloadContentComplete" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				*( void** )( params + 4 ) = FileDownloaded;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -81,7 +81,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.OnUploadContentComplete" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				*( void** )( params + 4 ) = UploadedFile;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -91,7 +91,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.OnReadFriendsContentListComplete" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -116,7 +116,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.GetContentList" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = PlayerNum;
+				*( byte* )params = PlayerNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -126,7 +126,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.ReadFriendsContentList" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( byte* )( params + 0 ) = PlayerNum;
+				*( byte* )params = PlayerNum;
 				*( int* )( params + 16 ) = StartAt;
 				*( int* )( params + 20 ) = NumToRead;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -154,7 +154,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.GetFriendsContentList" );
 				byte *params = ( byte* )( malloc( 61 ) );
-				*( byte* )( params + 0 ) = PlayerNum;
+				*( byte* )params = PlayerNum;
 				*( void** )( params + 4 ) = Friend;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -166,7 +166,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.UploadContent" );
 				byte *params = ( byte* )( malloc( 29 ) );
-				*( byte* )( params + 0 ) = PlayerNum;
+				*( byte* )params = PlayerNum;
 				*( void** )( params + 16 ) = MetaData;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -194,7 +194,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.DownloadContent" );
 				byte *params = ( byte* )( malloc( 53 ) );
-				*( byte* )( params + 0 ) = PlayerNum;
+				*( byte* )params = PlayerNum;
 				*( void** )( params + 4 ) = FileToDownload;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -222,7 +222,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.GetContentPayload" );
 				byte *params = ( byte* )( malloc( 53 ) );
-				*( byte* )( params + 0 ) = PlayerNum;
+				*( byte* )params = PlayerNum;
 				*( void** )( params + 4 ) = FileDownloaded;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -250,7 +250,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineCommunityContentInterface.RateContent" );
 				byte *params = ( byte* )( malloc( 57 ) );
-				*( byte* )( params + 0 ) = PlayerNum;
+				*( byte* )params = PlayerNum;
 				*( void** )( params + 4 ) = FileToRate;
 				*( int* )( params + 56 ) = NewRating;
 				ScriptObject *object = ( ScriptObject* )( this );

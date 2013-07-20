@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActorMAT.MAT_SetMorphWeight" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = MorphNodeName;
+				*( ScriptName* )params = MorphNodeName;
 				*( float* )( params + 8 ) = MorphWeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActorMAT.MAT_SetSkelControlScale" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = SkelControlName;
+				*( ScriptName* )params = SkelControlName;
 				*( float* )( params + 8 ) = Scale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -83,7 +83,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActorMAT.SetAnimPosition" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptName* )( params + 0 ) = SlotName;
+				*( ScriptName* )params = SlotName;
 				*( int* )( params + 8 ) = ChannelIndex;
 				*( ScriptName* )( params + 12 ) = InAnimSeqName;
 				*( float* )( params + 20 ) = InPosition;
@@ -98,7 +98,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActorMAT.MAT_SetAnimPosition" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptName* )( params + 0 ) = SlotName;
+				*( ScriptName* )params = SlotName;
 				*( int* )( params + 8 ) = ChannelIndex;
 				*( ScriptName* )( params + 12 ) = InAnimSeqName;
 				*( float* )( params + 20 ) = InPosition;
@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActorMAT.FinishAnimControl" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class InterpGroup** )( params + 0 ) = InInterpGroup;
+				*( class InterpGroup** )params = InInterpGroup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -122,7 +122,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActorMAT.SetMorphWeight" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = MorphNodeName;
+				*( ScriptName* )params = MorphNodeName;
 				*( float* )( params + 8 ) = MorphWeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -132,7 +132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkeletalMeshActorMAT.SetSkelControlScale" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = SkelControlName;
+				*( ScriptName* )params = SkelControlName;
 				*( float* )( params + 8 ) = Scale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

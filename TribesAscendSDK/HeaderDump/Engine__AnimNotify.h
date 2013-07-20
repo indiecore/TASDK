@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNotify.FindNextNotifyOfClass" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class AnimNodeSequence** )( params + 0 ) = AnimSeqInstigator;
+				*( class AnimNodeSequence** )params = AnimSeqInstigator;
 				*( ScriptClass** )( params + 4 ) = NotifyClass;
 				*( void** )( params + 8 ) = OutEvent;
 				ScriptObject *object = ( ScriptObject* )( this );

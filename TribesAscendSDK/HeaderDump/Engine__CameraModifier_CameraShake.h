@@ -24,10 +24,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier_CameraShake.InitializeOffset" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = Param;
+				*( void** )params = Param;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Param = *( void** )( params + 0 );
+				Param = *( void** )params;
 				return *( float* )( params + function->return_val_offset() );
 			}
 
@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier_CameraShake.ReinitShake" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ActiveShakeIdx;
+				*( int* )params = ActiveShakeIdx;
 				*( float* )( params + 4 ) = Scale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier_CameraShake.InitializeShake" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( class CameraShake** )( params + 0 ) = NewShake;
+				*( class CameraShake** )params = NewShake;
 				*( float* )( params + 4 ) = Scale;
 				*( byte* )( params + 8 ) = PlaySpace;
 				*( Rotator* )( params + 12 ) = UserPlaySpaceRot;
@@ -58,7 +58,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier_CameraShake.AddCameraShake" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( class CameraShake** )( params + 0 ) = NewShake;
+				*( class CameraShake** )params = NewShake;
 				*( float* )( params + 4 ) = Scale;
 				*( byte* )( params + 8 ) = PlaySpace;
 				*( Rotator* )( params + 12 ) = UserPlaySpaceRot;
@@ -70,7 +70,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier_CameraShake.RemoveCameraShake" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class CameraShake** )( params + 0 ) = Shake;
+				*( class CameraShake** )params = Shake;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier_CameraShake.UpdateCameraShake" );
 				byte *params = ( byte* )( malloc( 176 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				*( void** )( params + 16 ) = Shake;
 				*( void** )( params + 160 ) = OutPOV;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -100,7 +100,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier_CameraShake.ModifyCamera" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( class Camera** )( params + 0 ) = Camera;
+				*( class Camera** )params = Camera;
 				*( float* )( params + 4 ) = DeltaTime;
 				*( void** )( params + 8 ) = OutPOV;
 				ScriptObject *object = ( ScriptObject* )( this );

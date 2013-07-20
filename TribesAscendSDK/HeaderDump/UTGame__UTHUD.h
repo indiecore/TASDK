@@ -172,7 +172,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DrawTileCentered" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( class Texture2D** )( params + 0 ) = Tex;
+				*( class Texture2D** )params = Tex;
 				*( float* )( params + 4 ) = XL;
 				*( float* )( params + 8 ) = YL;
 				*( float* )( params + 12 ) = U;
@@ -188,7 +188,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.SetDisplayedOrders" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = OrderText;
+				*( ScriptArray< wchar_t >* )params = OrderText;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -205,7 +205,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.Message" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class PlayerReplicationInfo** )params = PRI;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = msg;
 				*( ScriptName* )( params + 16 ) = MsgType;
 				*( float* )( params + 24 ) = Lifetime;
@@ -217,7 +217,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.ResolveHUDPosition" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = Position;
+				*( void** )params = Position;
 				*( float* )( params + 8 ) = Width;
 				*( float* )( params + 12 ) = Height;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -229,7 +229,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.GetScreenCoords" );
 				byte *params = ( byte* )( malloc( 76 ) );
-				*( float* )( params + 0 ) = PosY;
+				*( float* )params = PosY;
 				*( float* )( params + 4 ) = ScreenX;
 				*( float* )( params + 8 ) = ScreenY;
 				*( void** )( params + 12 ) = InMessage;
@@ -244,7 +244,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DrawMessageText" );
 				byte *params = ( byte* )( malloc( 72 ) );
-				*( void** )( params + 0 ) = LocalMessage;
+				*( void** )params = LocalMessage;
 				*( float* )( params + 64 ) = ScreenX;
 				*( float* )( params + 68 ) = ScreenY;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -335,10 +335,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.GetUIController" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LocalPlayer** )( params + 0 ) = LP;
+				*( class LocalPlayer** )params = LP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				LP = *( class LocalPlayer** )( params + 0 );
+				LP = *( class LocalPlayer** )params;
 				return *( class UIInteraction** )( params + function->return_val_offset() );
 			}
 
@@ -354,7 +354,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.GetTeamColor" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( int* )( params + 0 ) = TeamIndex;
+				*( int* )params = TeamIndex;
 				*( void** )( params + 4 ) = ImageColor;
 				*( void** )( params + 20 ) = TextColor;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -367,7 +367,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DisplayHit" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Vector* )( params + 0 ) = HitDir;
+				*( Vector* )params = HitDir;
 				*( int* )( params + 12 ) = Damage;
 				*( ScriptClass** )( params + 16 ) = DamageType;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -378,7 +378,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.FlashDamage" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = FlashPosition;
+				*( float* )params = FlashPosition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -403,7 +403,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DrawBackground" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( float* )( params + 0 ) = X;
+				*( float* )params = X;
 				*( float* )( params + 4 ) = Y;
 				*( float* )( params + 8 ) = Width;
 				*( float* )( params + 12 ) = Height;
@@ -417,7 +417,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DrawBeaconBackground" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( float* )( params + 0 ) = X;
+				*( float* )params = X;
 				*( float* )( params + 4 ) = Y;
 				*( float* )( params + 8 ) = Width;
 				*( float* )( params + 12 ) = Height;
@@ -431,7 +431,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DrawHealth" );
 				byte *params = ( byte* )( malloc( 25 ) );
-				*( float* )( params + 0 ) = X;
+				*( float* )params = X;
 				*( float* )( params + 4 ) = Y;
 				*( float* )( params + 8 ) = Width;
 				*( float* )( params + 12 ) = MaxWidth;
@@ -446,7 +446,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DrawBarGraph" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( float* )( params + 0 ) = X;
+				*( float* )params = X;
 				*( float* )( params + 4 ) = Y;
 				*( float* )( params + 8 ) = Width;
 				*( float* )( params + 12 ) = MaxWidth;
@@ -462,7 +462,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.FormatTime" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Seconds;
+				*( int* )params = Seconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -472,7 +472,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.GetFontSizeIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = FontSize;
+				*( int* )params = FontSize;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Font** )( params + function->return_val_offset() );
@@ -482,7 +482,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.ShowPortrait" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class UTPlayerReplicationInfo** )( params + 0 ) = ShowPRI;
+				*( class UTPlayerReplicationInfo** )params = ShowPRI;
 				*( float* )( params + 4 ) = PortraitDuration;
 				*( bool* )( params + 8 ) = bOverrideCurrentSpeaker;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -501,7 +501,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DisplayPortrait" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -510,7 +510,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DisplayHUDMessage" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Message;
+				*( ScriptArray< wchar_t >* )params = Message;
 				*( float* )( params + 12 ) = XOffsetPct;
 				*( float* )( params + 16 ) = YOffsetPct;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -537,7 +537,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DisplayAmmo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTWeapon** )( params + 0 ) = Weapon;
+				*( class UTWeapon** )params = Weapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -562,7 +562,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DisplayFragCount" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = pos;
+				*( void** )params = pos;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -571,7 +571,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DrawNameplateBackground" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( void** )( params + 0 ) = pos;
+				*( void** )params = pos;
 				*( float* )( params + 8 ) = WordWidth;
 				*( void** )( params + 12 ) = NameplateColor;
 				*( float* )( params + 28 ) = WordHeight;
@@ -583,7 +583,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHUD.DisplayLeaderBoard" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = pos;
+				*( void** )params = pos;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

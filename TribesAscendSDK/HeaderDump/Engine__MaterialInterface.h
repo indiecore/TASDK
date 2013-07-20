@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetParameterDesc" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = OutDesc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -107,7 +107,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetFontParameterValue" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( class Font** )( params + 8 ) = OutFontValue;
 				*( int* )( params + 12 ) = OutFontPage;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -121,7 +121,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetScalarParameterValue" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( float* )( params + 8 ) = OutValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -133,7 +133,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetScalarCurveParameterValue" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( void** )( params + 8 ) = OutValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -145,7 +145,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetTextureParameterValue" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( class Texture** )( params + 8 ) = OutValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -157,7 +157,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetVectorParameterValue" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( void** )( params + 8 ) = OutValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -169,7 +169,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.GetVectorCurveParameterValue" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = ParameterName;
+				*( ScriptName* )params = ParameterName;
 				*( void** )( params + 8 ) = OutValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -181,7 +181,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MaterialInterface.SetForceMipLevelsToBeResident" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = OverrideForceMiplevelsToBeResident;
+				*( bool* )params = OverrideForceMiplevelsToBeResident;
 				*( bool* )( params + 4 ) = bForceMiplevelsToBeResidentValue;
 				*( float* )( params + 8 ) = ForceDuration;
 				*( int* )( params + 12 ) = CinematicTextureGroups;

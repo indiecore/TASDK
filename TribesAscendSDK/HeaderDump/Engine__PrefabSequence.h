@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrefabSequence.SetOwnerPrefab" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PrefabInstance** )( params + 0 ) = InOwner;
+				*( class PrefabInstance** )params = InOwner;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

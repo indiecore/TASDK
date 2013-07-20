@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCapturePortalComponent.SetCaptureParameters" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class TextureRenderTarget2D** )( params + 0 ) = NewTextureTarget;
+				*( class TextureRenderTarget2D** )params = NewTextureTarget;
 				*( float* )( params + 4 ) = NewScaleFOV;
 				*( class Actor** )( params + 8 ) = NewViewDest;
 				ScriptObject *object = ( ScriptObject* )( this );

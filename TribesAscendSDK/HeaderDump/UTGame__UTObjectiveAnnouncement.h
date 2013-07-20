@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTObjectiveAnnouncement.GetObjectiveAnnouncement" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = MessageIndex;
+				*( byte* )params = MessageIndex;
 				*( class Object** )( params + 4 ) = Objective;
 				*( class PlayerController** )( params + 8 ) = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTObjectiveAnnouncement.ShouldBeRemoved" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class UTQueuedAnnouncement** )( params + 0 ) = MyAnnouncement;
+				*( class UTQueuedAnnouncement** )params = MyAnnouncement;
 				*( ScriptClass** )( params + 4 ) = NewAnnouncementClass;
 				*( int* )( params + 8 ) = NewMessageIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTObjectiveAnnouncement.SetHUDDisplay" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class PlayerController** )( params + 0 ) = P;
+				*( class PlayerController** )params = P;
 				*( int* )( params + 4 ) = Switch;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = Text;
 				*( class PlayerReplicationInfo** )( params + 20 ) = RelatedPRI;

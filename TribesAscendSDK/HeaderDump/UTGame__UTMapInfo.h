@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMapInfo.RenderLinks" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				*( class UTPlayerController** )( params + 4 ) = PlayerOwner;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMapInfo.RenderAdditionalInformation" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				*( class UTPlayerController** )( params + 4 ) = PlayerOwner;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -88,7 +88,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMapInfo.UpdateNodes" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPlayerController** )( params + 0 ) = PlayerOwner;
+				*( class UTPlayerController** )params = PlayerOwner;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -97,7 +97,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMapInfo.DrawMap" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				*( class UTPlayerController** )( params + 4 ) = PlayerOwner;
 				*( float* )( params + 8 ) = XPos;
 				*( float* )( params + 12 ) = YPos;
@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMapInfo.AddKeyVehicle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTVehicle** )( params + 0 ) = V;
+				*( class UTVehicle** )params = V;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -122,7 +122,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMapInfo.DrawRotatedTile" );
 				byte *params = ( byte* )( malloc( 60 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				*( class Texture2D** )( params + 4 ) = T;
 				*( Vector* )( params + 8 ) = MapLocation;
 				*( int* )( params + 20 ) = InYaw;
@@ -137,7 +137,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMapInfo.DrawRotatedMaterialTile" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				*( class MaterialInstanceConstant** )( params + 4 ) = M;
 				*( Vector* )( params + 8 ) = MapLocation;
 				*( int* )( params + 20 ) = InYaw;
@@ -155,7 +155,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMapInfo.UpdateHUDLocation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = InLocation;
+				*( Vector* )params = InLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -165,7 +165,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMapInfo.ChangeMapRotation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Rotator* )( params + 0 ) = NewMapRotation;
+				*( Rotator* )params = NewMapRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -174,7 +174,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMapInfo.DrawMapImage" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				*( float* )( params + 4 ) = X;
 				*( float* )( params + 8 ) = Y;
 				*( float* )( params + 12 ) = W;
@@ -189,7 +189,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTMapInfo.GetActorHudLocation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = CActor;
+				*( class Actor** )params = CActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );

@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTFamilyInfo.GetFirstPersonArmsMaterial" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TeamNum;
+				*( int* )params = TeamNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class MaterialInterface** )( params + function->return_val_offset() );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTFamilyInfo.GetCharPortrait" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TeamNum;
+				*( int* )params = TeamNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Texture** )( params + function->return_val_offset() );
@@ -71,7 +71,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTFamilyInfo.GetEmoteIndex" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = EmoteTag;
+				*( ScriptName* )params = EmoteTag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -102,7 +102,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTFamilyInfo.GetTeamMaterials" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = TeamNum;
+				*( int* )params = TeamNum;
 				*( class MaterialInterface** )( params + 4 ) = TeamMaterialHead;
 				*( class MaterialInterface** )( params + 8 ) = TeamMaterialBody;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -115,7 +115,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTFamilyInfo.GetEmoteGroupCnt" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = Category;
+				*( ScriptName* )params = Category;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -125,7 +125,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTFamilyInfo.GetEmotes" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( ScriptName* )( params + 0 ) = Category;
+				*( ScriptName* )params = Category;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

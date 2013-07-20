@@ -27,7 +27,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineRecentPlayersList.AddPlayerToRecentPlayers" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = NewPlayer;
+				*( void** )params = NewPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineRecentPlayersList.AddPartyToRecentParties" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = PartyLeader;
+				*( void** )params = PartyLeader;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineRecentPlayersList.GetSkillForCurrentPlayer" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = Player;
+				*( void** )params = Player;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineRecentPlayersList.GetTeamForCurrentPlayer" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = Player;
+				*( void** )params = Player;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -97,7 +97,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineRecentPlayersList.SetLastParty" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = PartyLeader;
+				*( void** )params = PartyLeader;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -106,7 +106,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineRecentPlayersList.ShowRecentPlayerList" );
 				byte *params = ( byte* )( malloc( 25 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Title;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Description;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -118,7 +118,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineRecentPlayersList.ShowRecentPartiesPlayerList" );
 				byte *params = ( byte* )( malloc( 25 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Title;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Description;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -130,7 +130,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineRecentPlayersList.ShowLastPartyPlayerList" );
 				byte *params = ( byte* )( malloc( 25 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Title;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Description;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -142,7 +142,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineRecentPlayersList.ShowCurrentPlayersList" );
 				byte *params = ( byte* )( malloc( 25 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Title;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Description;
 				ScriptObject *object = ( ScriptObject* )( this );

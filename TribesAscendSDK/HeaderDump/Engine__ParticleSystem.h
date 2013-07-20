@@ -42,7 +42,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystem.GetLODDistance" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = LODLevelIndex;
+				*( int* )params = LODLevelIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystem.SetCurrentLODMethod" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = InMethod;
+				*( byte* )params = InMethod;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ParticleSystem.SetLODDistance" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = LODLevelIndex;
+				*( int* )params = LODLevelIndex;
 				*( float* )( params + 4 ) = InDistance;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

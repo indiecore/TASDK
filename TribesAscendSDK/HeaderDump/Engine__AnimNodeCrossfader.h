@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeCrossfader.PlayOneShotAnim" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = AnimSeqName;
+				*( ScriptName* )params = AnimSeqName;
 				*( float* )( params + 8 ) = BlendInTime;
 				*( float* )( params + 12 ) = BlendOutTime;
 				*( bool* )( params + 16 ) = bDontBlendOut;
@@ -39,7 +39,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeCrossfader.BlendToLoopingAnim" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = AnimSeqName;
+				*( ScriptName* )params = AnimSeqName;
 				*( float* )( params + 8 ) = BlendInTime;
 				*( float* )( params + 12 ) = Rate;
 				ScriptObject *object = ( ScriptObject* )( this );

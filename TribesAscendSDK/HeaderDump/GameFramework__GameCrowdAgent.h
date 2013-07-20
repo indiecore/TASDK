@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.FellOutOfWorld" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = dmgType;
+				*( ScriptClass** )params = dmgType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -131,7 +131,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.SetPanic" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = PanicActor;
+				*( class Actor** )params = PanicActor;
 				*( bool* )( params + 4 ) = bNewPanic;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -149,7 +149,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.SetCurrentDestination" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdDestination** )( params + 0 ) = NewDest;
+				*( class GameCrowdDestination** )params = NewDest;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -198,7 +198,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.DisplayDebug" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				*( float* )( params + 4 ) = out_YL;
 				*( float* )( params + 8 ) = out_YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -211,7 +211,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.SetLighting" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( bool* )( params + 0 ) = bEnableLightEnvironment;
+				*( bool* )params = bEnableLightEnvironment;
 				*( void** )( params + 4 ) = AgentLightingChannel;
 				*( bool* )( params + 8 ) = bCastShadows;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -222,7 +222,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.InitializeAgent" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class Actor** )( params + 0 ) = SpawnLoc;
+				*( class Actor** )params = SpawnLoc;
 				*( class GameCrowdAgent** )( params + 4 ) = AgentTemplate;
 				*( class GameCrowdGroup** )( params + 8 ) = NewGroup;
 				*( float* )( params + 12 ) = AgentWarmupTime;
@@ -236,7 +236,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.OnPlayAgentAnimation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_PlayAgentAnimation** )( params + 0 ) = Action;
+				*( class SeqAct_PlayAgentAnimation** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -277,7 +277,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.NotifySeePlayer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -302,7 +302,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.ActivateBehavior" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class GameCrowdAgentBehavior** )( params + 0 ) = NewBehaviorArchetype;
+				*( class GameCrowdAgentBehavior** )params = NewBehaviorArchetype;
 				*( class Actor** )( params + 4 ) = LookAtActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -312,7 +312,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.SetCurrentBehavior" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdAgentBehavior** )( params + 0 ) = BehaviorArchetype;
+				*( class GameCrowdAgentBehavior** )params = BehaviorArchetype;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -321,7 +321,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.ActivateInstancedBehavior" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdAgentBehavior** )( params + 0 ) = NewBehaviorObject;
+				*( class GameCrowdAgentBehavior** )params = NewBehaviorObject;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -347,7 +347,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.CalcCamera" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( float* )( params + 0 ) = fDeltaTime;
+				*( float* )params = fDeltaTime;
 				*( Vector* )( params + 4 ) = out_CamLoc;
 				*( Rotator* )( params + 16 ) = out_CamRot;
 				*( float* )( params + 28 ) = out_FOV;
@@ -363,7 +363,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.UpdateIntermediatePoint" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = DestinationActor;
+				*( class Actor** )params = DestinationActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -372,7 +372,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.PlayDeath" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = KillMomentum;
+				*( Vector* )params = KillMomentum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -389,7 +389,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.TakeDamage" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( int* )( params + 0 ) = DamageAmount;
+				*( int* )params = DamageAmount;
 				*( class Controller** )( params + 4 ) = EventInstigator;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = Momentum;
@@ -404,7 +404,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.OverlappedActorEvent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = A;
+				*( class Actor** )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -421,7 +421,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.GeneratePathToActor" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Actor** )( params + 0 ) = Goal;
+				*( class Actor** )params = Goal;
 				*( float* )( params + 4 ) = WithinDistance;
 				*( bool* )( params + 8 ) = bAllowPartialPath;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -433,7 +433,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.NativePostRenderFor" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( class Canvas** )( params + 4 ) = Canvas;
 				*( Vector* )( params + 8 ) = CameraPosition;
 				*( Vector* )( params + 20 ) = CameraDir;
@@ -445,7 +445,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameCrowdAgent.PostRenderFor" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( class Canvas** )( params + 4 ) = Canvas;
 				*( Vector* )( params + 8 ) = CameraPosition;
 				*( Vector* )( params + 20 ) = CameraDir;

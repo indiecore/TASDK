@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_OnlinePlaylists.GetProviderCount" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = ProviderTag;
+				*( ScriptName* )params = ProviderTag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_OnlinePlaylists.GetResourceProviders" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = ProviderTag;
+				*( ScriptName* )params = ProviderTag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_OnlinePlaylists.GetResourceProviderFields" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = ProviderTag;
+				*( ScriptName* )params = ProviderTag;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_OnlinePlaylists.GetProviderFieldValue" );
 				byte *params = ( byte* )( malloc( 104 ) );
-				*( ScriptName* )( params + 0 ) = ProviderTag;
+				*( ScriptName* )params = ProviderTag;
 				*( ScriptName* )( params + 8 ) = SearchField;
 				*( int* )( params + 16 ) = ProviderIndex;
 				*( void** )( params + 20 ) = out_FieldValue;
@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_OnlinePlaylists.FindProviderIndexByFieldValue" );
 				byte *params = ( byte* )( malloc( 100 ) );
-				*( ScriptName* )( params + 0 ) = ProviderTag;
+				*( ScriptName* )params = ProviderTag;
 				*( ScriptName* )( params + 8 ) = SearchField;
 				*( void** )( params + 16 ) = ValueToSearchFor;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -82,7 +82,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_OnlinePlaylists.GetPlaylistProvider" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = ProviderTag;
+				*( ScriptName* )params = ProviderTag;
 				*( int* )( params + 8 ) = ProviderIndex;
 				*( class UIResourceDataProvider** )( params + 12 ) = out_Provider;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_OnlinePlaylists.GetOnlinePlaylistProvider" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = ProviderTag;
+				*( ScriptName* )params = ProviderTag;
 				*( int* )( params + 8 ) = PlaylistId;
 				*( int* )( params + 12 ) = ProviderIndex;
 				ScriptObject *object = ( ScriptObject* )( this );

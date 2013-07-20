@@ -23,51 +23,51 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.UpdateFromURL" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				*( ScriptArray< wchar_t >* )params = URL;
 				*( class GameInfo** )( params + 12 ) = Game;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				URL = *( ScriptArray< wchar_t >* )( params + 0 );
+				URL = *( ScriptArray< wchar_t >* )params;
 			}
 
 			void BuildURL( ScriptArray< wchar_t > &URL )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.BuildURL" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				*( ScriptArray< wchar_t >* )params = URL;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				URL = *( ScriptArray< wchar_t >* )( params + 0 );
+				URL = *( ScriptArray< wchar_t >* )params;
 			}
 
 			void AppendContextsToURL( ScriptArray< wchar_t > &URL )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.AppendContextsToURL" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				*( ScriptArray< wchar_t >* )params = URL;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				URL = *( ScriptArray< wchar_t >* )( params + 0 );
+				URL = *( ScriptArray< wchar_t >* )params;
 			}
 
 			void AppendPropertiesToURL( ScriptArray< wchar_t > &URL )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.AppendPropertiesToURL" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				*( ScriptArray< wchar_t >* )params = URL;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				URL = *( ScriptArray< wchar_t >* )( params + 0 );
+				URL = *( ScriptArray< wchar_t >* )params;
 			}
 
 			void AppendDataBindingsToURL( ScriptArray< wchar_t > &URL )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.AppendDataBindingsToURL" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				*( ScriptArray< wchar_t >* )params = URL;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				URL = *( ScriptArray< wchar_t >* )( params + 0 );
+				URL = *( ScriptArray< wchar_t >* )params;
 			}
 
 			void GetQoSAdvertisedStringSettings(  )
@@ -90,7 +90,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetRangedPropertyValue" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				*( float* )( params + 4 ) = OutValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -102,7 +102,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetRangedPropertyValue" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				*( float* )( params + 4 ) = NewValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetPropertyRange" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				*( float* )( params + 4 ) = OutMinValue;
 				*( float* )( params + 8 ) = OutMaxValue;
 				*( float* )( params + 12 ) = RangeIncrement;
@@ -131,7 +131,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetPropertyMappingType" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				*( byte* )( params + 4 ) = OutType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -143,7 +143,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.HasStringSetting" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SettingId;
+				*( int* )params = SettingId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -153,7 +153,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.HasProperty" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -181,7 +181,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetPropertyType" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -191,7 +191,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetPropertyValueId" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				*( int* )( params + 4 ) = ValueId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -203,7 +203,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetPropertyValueId" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				*( int* )( params + 4 ) = ValueId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -214,7 +214,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetStringProperty" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -226,7 +226,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetStringProperty" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -236,7 +236,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetIntProperty" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				*( int* )( params + 4 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -248,7 +248,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetIntProperty" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				*( int* )( params + 4 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -258,7 +258,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetFloatProperty" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				*( float* )( params + 4 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -270,7 +270,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetFloatProperty" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				*( float* )( params + 4 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -280,7 +280,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetPropertyFromStringByName" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = PropertyName;
+				*( ScriptName* )params = PropertyName;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = NewValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -292,7 +292,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetPropertyAsStringByName" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = PropertyName;
+				*( ScriptName* )params = PropertyName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -302,7 +302,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetPropertyAsString" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -312,7 +312,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetPropertyColumnHeader" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -322,7 +322,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetPropertyName" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PropertyId;
+				*( int* )params = PropertyId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptName* )( params + function->return_val_offset() );
@@ -332,7 +332,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetPropertyId" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = PropertyName;
+				*( ScriptName* )params = PropertyName;
 				*( int* )( params + 8 ) = PropertyId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -344,7 +344,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetStringSettingValueFromStringByName" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = StringSettingName;
+				*( ScriptName* )params = StringSettingName;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = NewValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -356,7 +356,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetStringSettingValueNameByName" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = StringSettingName;
+				*( ScriptName* )params = StringSettingName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptName* )( params + function->return_val_offset() );
@@ -366,7 +366,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetStringSettingValueName" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = StringSettingId;
+				*( int* )params = StringSettingId;
 				*( int* )( params + 4 ) = ValueIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -377,7 +377,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.IsWildcardStringSetting" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = StringSettingId;
+				*( int* )params = StringSettingId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -387,7 +387,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetStringSettingColumnHeader" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = StringSettingId;
+				*( int* )params = StringSettingId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -397,7 +397,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetStringSettingName" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = StringSettingId;
+				*( int* )params = StringSettingId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptName* )( params + function->return_val_offset() );
@@ -407,7 +407,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetStringSettingId" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = StringSettingName;
+				*( ScriptName* )params = StringSettingName;
 				*( int* )( params + 8 ) = StringSettingId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -419,7 +419,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetStringSettingValueByName" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = StringSettingName;
+				*( ScriptName* )params = StringSettingName;
 				*( int* )( params + 8 ) = ValueIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -431,7 +431,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetStringSettingValueByName" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = StringSettingName;
+				*( ScriptName* )params = StringSettingName;
 				*( int* )( params + 8 ) = ValueIndex;
 				*( bool* )( params + 12 ) = bShouldAutoAdd;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -442,7 +442,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetStringSettingValueNames" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = StringSettingId;
+				*( int* )params = StringSettingId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -452,7 +452,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.IncrementStringSettingValue" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = StringSettingId;
+				*( int* )params = StringSettingId;
 				*( int* )( params + 4 ) = Direction;
 				*( bool* )( params + 8 ) = bShouldWrap;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -464,7 +464,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetStringSettingValue" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = StringSettingId;
+				*( int* )params = StringSettingId;
 				*( int* )( params + 4 ) = ValueIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -476,7 +476,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetStringSettingValue" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = StringSettingId;
+				*( int* )params = StringSettingId;
 				*( int* )( params + 4 ) = ValueIndex;
 				*( bool* )( params + 8 ) = bShouldAutoAdd;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -487,12 +487,12 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetSettingsDataDateTime" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				*( int* )( params + 12 ) = OutInt1;
 				*( int* )( params + 16 ) = OutInt2;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Data = *( void** )( params + 0 );
+				Data = *( void** )params;
 				OutInt1 = *( int* )( params + 12 );
 				OutInt2 = *( int* )( params + 16 );
 			}
@@ -501,20 +501,20 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetSettingsDataBlob" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Data = *( void** )( params + 0 );
+				Data = *( void** )params;
 			}
 
 			int GetSettingsDataInt( void* &Data )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetSettingsDataInt" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Data = *( void** )( params + 0 );
+				Data = *( void** )params;
 				return *( int* )( params + function->return_val_offset() );
 			}
 
@@ -522,10 +522,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetSettingsDataFloat" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Data = *( void** )( params + 0 );
+				Data = *( void** )params;
 				return *( float* )( params + function->return_val_offset() );
 			}
 
@@ -533,10 +533,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.GetSettingsDataString" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Data = *( void** )( params + 0 );
+				Data = *( void** )params;
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
 			}
 
@@ -544,21 +544,21 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.EmptySettingsData" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Data = *( void** )( params + 0 );
+				Data = *( void** )params;
 			}
 
 			void SetSettingsData( void* &Data, void* &Data2Copy )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetSettingsData" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				*( void** )( params + 12 ) = Data2Copy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Data = *( void** )( params + 0 );
+				Data = *( void** )params;
 				Data2Copy = *( void** )( params + 12 );
 			}
 
@@ -566,55 +566,55 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetSettingsDataBlob" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Data = *( void** )( params + 0 );
+				Data = *( void** )params;
 			}
 
 			void SetSettingsDataDateTime( void* &Data, int InInt1, int InInt2 )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetSettingsDataDateTime" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				*( int* )( params + 12 ) = InInt1;
 				*( int* )( params + 16 ) = InInt2;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Data = *( void** )( params + 0 );
+				Data = *( void** )params;
 			}
 
 			void SetSettingsDataInt( void* &Data, int InInt )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetSettingsDataInt" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				*( int* )( params + 12 ) = InInt;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Data = *( void** )( params + 0 );
+				Data = *( void** )params;
 			}
 
 			void SetSettingsDataFloat( void* &Data, float InFloat )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetSettingsDataFloat" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				*( float* )( params + 12 ) = InFloat;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Data = *( void** )( params + 0 );
+				Data = *( void** )params;
 			}
 
 			void SetSettingsDataString( void* &Data, ScriptArray< wchar_t > InString )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Settings.SetSettingsDataString" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( void** )( params + 0 ) = Data;
+				*( void** )params = Data;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = InString;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Data = *( void** )( params + 0 );
+				Data = *( void** )params;
 			}
 
 	};

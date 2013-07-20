@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier.AddCameraModifier" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Camera** )( params + 0 ) = Camera;
+				*( class Camera** )params = Camera;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier.ProcessViewRotation" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class Actor** )( params + 0 ) = ViewTarget;
+				*( class Actor** )params = ViewTarget;
 				*( float* )( params + 4 ) = DeltaTime;
 				*( Rotator* )( params + 8 ) = out_ViewRotation;
 				*( Rotator* )( params + 20 ) = out_DeltaRot;
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier.ModifyCamera" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( class Camera** )( params + 0 ) = Camera;
+				*( class Camera** )params = Camera;
 				*( float* )( params + 4 ) = DeltaTime;
 				*( void** )( params + 8 ) = OutPOV;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -88,7 +88,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier.RemoveCameraModifier" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Camera** )( params + 0 ) = Camera;
+				*( class Camera** )params = Camera;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -98,7 +98,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier.DisableModifier" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bImmediate;
+				*( bool* )params = bImmediate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -123,7 +123,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CameraModifier.UpdateAlpha" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Camera** )( params + 0 ) = Camera;
+				*( class Camera** )params = Camera;
 				*( float* )( params + 4 ) = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

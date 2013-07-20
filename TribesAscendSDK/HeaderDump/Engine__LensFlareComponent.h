@@ -36,7 +36,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LensFlareComponent.SetTemplate" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class LensFlare** )( params + 0 ) = NewTemplate;
+				*( class LensFlare** )params = NewTemplate;
 				*( bool* )( params + 4 ) = bForceSet;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -46,7 +46,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LensFlareComponent.SetSourceColor" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = InSourceColor;
+				*( void** )params = InSourceColor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LensFlareComponent.SetIsActive" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bInIsActive;
+				*( bool* )params = bInIsActive;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVGSNode.ProcessKeyInput" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = Key;
+				*( ScriptName* )params = Key;
 				*( class TrPlayerInput** )( params + 8 ) = PlayerInput;
 				*( ScriptClass** )( params + 12 ) = GameClass;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -38,7 +38,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVGSNode.VerifyVGSCommandEntry" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = Command;
+				*( byte* )params = Command;
 				*( ScriptClass** )( params + 4 ) = GameClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -53,7 +53,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVGSNode.VerifyVGSChild" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = VGSNodeClass;
+				*( ScriptClass** )params = VGSNodeClass;
 				*( ScriptClass** )( params + 4 ) = GameClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

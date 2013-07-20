@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.PlayerCollectorGame.Login" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Portal;
+				*( ScriptArray< wchar_t >* )params = Portal;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Options;
 				*( void** )( params + 24 ) = UniqueId;
 				*( ScriptArray< wchar_t >* )( params + 32 ) = ErrorMessage;
@@ -39,7 +39,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.PlayerCollectorGame.GetSeamlessTravelActorList" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bToEntry;
+				*( bool* )params = bToEntry;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

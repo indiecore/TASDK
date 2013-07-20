@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ScriptedTexture.Render" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Canvas** )( params + 0 ) = C;
+				*( class Canvas** )params = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

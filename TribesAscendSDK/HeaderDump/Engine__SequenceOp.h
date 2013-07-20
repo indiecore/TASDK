@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceOp.HasLinkedOps" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bConsiderInputLinks;
+				*( bool* )params = bConsiderInputLinks;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -83,7 +83,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceOp.LinkedVariables" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptClass** )( params + 0 ) = VarClass;
+				*( ScriptClass** )params = VarClass;
 				*( class SequenceVariable** )( params + 4 ) = OutVariable;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = inDesc;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceOp.ActivateOutputLink" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = OutputIdx;
+				*( int* )params = OutputIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -105,7 +105,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceOp.ActivateNamedOutputLink" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = LinkDesc;
+				*( ScriptArray< wchar_t >* )params = LinkDesc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -131,7 +131,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceOp.VersionUpdated" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = OldVersion;
+				*( int* )params = OldVersion;
 				*( int* )( params + 4 ) = NewVersion;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -165,7 +165,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceOp.GetPawn" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = TheActor;
+				*( class Actor** )params = TheActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Pawn** )( params + function->return_val_offset() );
@@ -175,7 +175,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceOp.GetController" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = TheActor;
+				*( class Actor** )params = TheActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Controller** )( params + function->return_val_offset() );
@@ -185,7 +185,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceOp.ForceActivateInput" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = InputIdx;
+				*( int* )params = InputIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -194,7 +194,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceOp.ForceActivateOutput" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = OutputIdx;
+				*( int* )params = OutputIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

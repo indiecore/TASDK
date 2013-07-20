@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.registerMiniMapView" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class GFxMinimap** )( params + 0 ) = MC;
+				*( class GFxMinimap** )params = MC;
 				*( float* )( params + 4 ) = R;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.SetAmmoCountTF" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Weapon** )( params + 0 ) = Wep;
+				*( class Weapon** )params = Wep;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Ammo;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.Init" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LocalPlayer** )( params + 0 ) = Player;
+				*( class LocalPlayer** )params = Player;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -102,42 +102,42 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.LoadHeEn" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( void** )( params + 0 ) = Info;
+				*( void** )params = Info;
 				*( ScriptArray< wchar_t >* )( params + 36 ) = Base;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Info = *( void** )( params + 0 );
+				Info = *( void** )params;
 			}
 
 			void UpdateHealth( void* &Info, float NewHealth, float HealthMax )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.UpdateHealth" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( void** )( params + 0 ) = Info;
+				*( void** )params = Info;
 				*( float* )( params + 36 ) = NewHealth;
 				*( float* )( params + 40 ) = HealthMax;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Info = *( void** )( params + 0 );
+				Info = *( void** )params;
 			}
 
 			void UpdateEnergy( void* &Info, float NewEnergy, float EnergyMax )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.UpdateEnergy" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( void** )( params + 0 ) = Info;
+				*( void** )params = Info;
 				*( float* )( params + 36 ) = NewEnergy;
 				*( float* )( params + 40 ) = EnergyMax;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Info = *( void** )( params + 0 );
+				Info = *( void** )params;
 			}
 
 			ScriptArray< wchar_t > FormatTime( int Seconds )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.FormatTime" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Seconds;
+				*( int* )params = Seconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -147,7 +147,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.ClearStats" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = clearScores;
+				*( bool* )params = clearScores;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -164,7 +164,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.AddMessage" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Type;
+				*( ScriptArray< wchar_t >* )params = Type;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = msg;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -174,7 +174,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.UpdateGameHUD" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class UTPlayerReplicationInfo** )params = PRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -183,7 +183,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.TickHud" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -192,7 +192,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.ToggleCrosshair" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bToggle;
+				*( bool* )params = bToggle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -217,7 +217,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.DisplayHit" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Vector* )( params + 0 ) = HitDir;
+				*( Vector* )params = HitDir;
 				*( int* )( params + 12 ) = Damage;
 				*( ScriptClass** )( params + 16 ) = DamageType;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -228,7 +228,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.ShowMultiKill" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = N;
+				*( int* )params = N;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = msg;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -238,7 +238,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.SetCenterText" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Text;
+				*( ScriptArray< wchar_t >* )params = Text;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -247,7 +247,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.GetRank" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class PlayerReplicationInfo** )params = PRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -257,7 +257,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.GFxMinimapHud.AddDeathMessage" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = Killer;
+				*( class PlayerReplicationInfo** )params = Killer;
 				*( class PlayerReplicationInfo** )( params + 4 ) = Killed;
 				*( ScriptClass** )( params + 8 ) = Dmg;
 				ScriptObject *object = ( ScriptObject* )( this );

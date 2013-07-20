@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.ShouldDisplayDebug" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = DebugType;
+				*( ScriptName* )params = DebugType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.Draw3DLine" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( Vector* )( params + 0 ) = Start;
+				*( Vector* )params = Start;
 				*( Vector* )( params + 12 ) = End;
 				*( void** )( params + 24 ) = LineColor;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.Draw2DLine" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = X1;
+				*( int* )params = X1;
 				*( int* )( params + 4 ) = Y1;
 				*( int* )( params + 8 ) = X2;
 				*( int* )( params + 12 ) = Y2;
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.DrawActorOverlays" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = ViewPoint;
+				*( Vector* )params = ViewPoint;
 				*( Rotator* )( params + 12 ) = ViewRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.RemovePostRenderedActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = A;
+				*( class Actor** )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -108,7 +108,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.AddPostRenderedActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = A;
+				*( class Actor** )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -141,7 +141,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.SetShowScores" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewValue;
+				*( bool* )params = bNewValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -150,7 +150,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.ShowDebug" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = DebugType;
+				*( ScriptName* )params = DebugType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -159,11 +159,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.ShowDebugInfo" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = out_YL;
+				*( float* )params = out_YL;
 				*( float* )( params + 4 ) = out_YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				out_YL = *( float* )( params + 0 );
+				out_YL = *( float* )params;
 				out_YPos = *( float* )( params + 4 );
 			}
 
@@ -171,7 +171,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.DrawRoute" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Target;
+				*( class Pawn** )params = Target;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -212,17 +212,17 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.ClearMessage" );
 				byte *params = ( byte* )( malloc( 64 ) );
-				*( void** )( params + 0 ) = M;
+				*( void** )params = M;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				M = *( void** )( params + 0 );
+				M = *( void** )params;
 			}
 
 			void Message( class PlayerReplicationInfo* PRI, ScriptArray< wchar_t > msg, ScriptName MsgType, float Lifetime )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.Message" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class PlayerReplicationInfo** )params = PRI;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = msg;
 				*( ScriptName* )( params + 16 ) = MsgType;
 				*( float* )( params + 24 ) = Lifetime;
@@ -242,7 +242,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.AddConsoleMessage" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = M;
+				*( ScriptArray< wchar_t >* )params = M;
 				*( ScriptClass** )( params + 12 ) = InMessageClass;
 				*( class PlayerReplicationInfo** )( params + 16 ) = PRI;
 				*( float* )( params + 20 ) = Lifetime;
@@ -254,7 +254,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.LocalizedMessage" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( ScriptClass** )( params + 0 ) = InMessageClass;
+				*( ScriptClass** )params = InMessageClass;
 				*( class PlayerReplicationInfo** )( params + 4 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI_;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = CriticalString;
@@ -272,7 +272,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.AddLocalizedMessage" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( ScriptClass** )( params + 4 ) = InMessageClass;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = CriticalString;
 				*( int* )( params + 20 ) = Switch;
@@ -290,7 +290,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.GetScreenCoords" );
 				byte *params = ( byte* )( malloc( 76 ) );
-				*( float* )( params + 0 ) = PosY;
+				*( float* )params = PosY;
 				*( float* )( params + 4 ) = ScreenX;
 				*( float* )( params + 8 ) = ScreenY;
 				*( void** )( params + 12 ) = InMessage;
@@ -305,7 +305,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.DrawMessage" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = I;
+				*( int* )params = I;
 				*( float* )( params + 4 ) = PosY;
 				*( float* )( params + 8 ) = DX;
 				*( float* )( params + 12 ) = DY;
@@ -319,7 +319,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.DrawMessageText" );
 				byte *params = ( byte* )( malloc( 72 ) );
-				*( void** )( params + 0 ) = LocalMessage;
+				*( void** )params = LocalMessage;
 				*( float* )( params + 64 ) = ScreenX;
 				*( float* )( params + 68 ) = ScreenY;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -346,7 +346,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.DrawText" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Text;
+				*( ScriptArray< wchar_t >* )params = Text;
 				*( void** )( params + 12 ) = Position;
 				*( class Font** )( params + 20 ) = TextFont;
 				*( void** )( params + 24 ) = FontScale;
@@ -359,7 +359,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.GetFontSizeIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = FontSize;
+				*( int* )params = FontSize;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Font** )( params + function->return_val_offset() );
@@ -377,7 +377,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.HUD.OnLostFocusPause" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnable;
+				*( bool* )params = bEnable;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

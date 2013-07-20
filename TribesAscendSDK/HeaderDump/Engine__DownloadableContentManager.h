@@ -24,10 +24,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DownloadableContentManager.InstallDLC" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( void** )( params + 0 ) = DLCBundle;
+				*( void** )params = DLCBundle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				DLCBundle = *( void** )( params + 0 );
+				DLCBundle = *( void** )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -51,7 +51,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DownloadableContentManager.GetDLCTextureCachePath" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = TextureCacheName;
+				*( ScriptName* )params = TextureCacheName;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = Path;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -63,7 +63,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DownloadableContentManager.AddSectionToObjectList" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Section;
+				*( ScriptArray< wchar_t >* )params = Section;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -72,7 +72,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DownloadableContentManager.MarkPerObjectConfigPendingKill" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Section;
+				*( ScriptArray< wchar_t >* )params = Section;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -89,20 +89,20 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DownloadableContentManager.InstallPackages" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( void** )( params + 0 ) = DLCBundle;
+				*( void** )params = DLCBundle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				DLCBundle = *( void** )( params + 0 );
+				DLCBundle = *( void** )params;
 			}
 
 			void InstallNonPackageFiles( void* &DLCBundle )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DownloadableContentManager.InstallNonPackageFiles" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( void** )( params + 0 ) = DLCBundle;
+				*( void** )params = DLCBundle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				DLCBundle = *( void** )( params + 0 );
+				DLCBundle = *( void** )params;
 			}
 
 			void Init(  )
@@ -117,7 +117,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DownloadableContentManager.OnLoginChange" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -158,7 +158,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DownloadableContentManager.AddPackagesToFullyLoad" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Filename;
+				*( ScriptArray< wchar_t >* )params = Filename;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

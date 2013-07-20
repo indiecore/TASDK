@@ -23,20 +23,20 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineMatchmakingStats.StartTimer" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = Timer;
+				*( void** )params = Timer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Timer = *( void** )( params + 0 );
+				Timer = *( void** )params;
 			}
 
 			void StopTimer( void* &Timer )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineMatchmakingStats.StopTimer" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( void** )( params + 0 ) = Timer;
+				*( void** )params = Timer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Timer = *( void** )( params + 0 );
+				Timer = *( void** )params;
 			}
 
 	};

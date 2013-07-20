@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AudioComponent.FadeIn" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = FadeInDuration;
+				*( float* )params = FadeInDuration;
 				*( float* )( params + 4 ) = FadeVolumeLevel;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -58,7 +58,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AudioComponent.FadeOut" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = FadeOutDuration;
+				*( float* )params = FadeOutDuration;
 				*( float* )( params + 4 ) = FadeVolumeLevel;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -156,7 +156,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AudioComponent.AdjustVolume" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = AdjustVolumeDuration;
+				*( float* )params = AdjustVolumeDuration;
 				*( float* )( params + 4 ) = AdjustVolumeLevel;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -166,7 +166,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AudioComponent.SetFloatParameter" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = InName;
+				*( ScriptName* )params = InName;
 				*( float* )( params + 8 ) = InFloat;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -176,7 +176,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AudioComponent.SetWaveParameter" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = InName;
+				*( ScriptName* )params = InName;
 				*( class SoundNodeWave** )( params + 8 ) = InWave;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -186,7 +186,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AudioComponent.OcclusionChanged" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNowOccluded;
+				*( bool* )params = bNowOccluded;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

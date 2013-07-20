@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoalFilter_OutSideOfDotProductWedge.OutsideOfDotProductWedge" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class NavMeshGoal_GenericFilterContainer** )( params + 0 ) = FilterContainer;
+				*( class NavMeshGoal_GenericFilterContainer** )params = FilterContainer;
 				*( Vector* )( params + 4 ) = InLocation;
 				*( Rotator* )( params + 16 ) = InRotation;
 				*( float* )( params + 28 ) = InEpsilon;

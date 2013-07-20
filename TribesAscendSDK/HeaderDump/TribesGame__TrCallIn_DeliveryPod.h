@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCallIn_DeliveryPod.Init" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrCallIn_CrashLandInfo** )( params + 0 ) = CrashInfo;
+				*( class TrCallIn_CrashLandInfo** )params = CrashInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

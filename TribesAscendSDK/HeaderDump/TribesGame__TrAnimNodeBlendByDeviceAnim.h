@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByDeviceAnim.SetActiveChild" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ChildIndex;
+				*( int* )params = ChildIndex;
 				*( float* )( params + 4 ) = BlendTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayBuildup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = BuildupTime;
+				*( float* )params = BuildupTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -82,7 +82,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayFire" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = SocketIndex;
+				*( int* )params = SocketIndex;
 				*( float* )( params + 4 ) = RefireTime;
 				*( int* )( params + 8 ) = RoundsRemainingInClip;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayPutaway" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = PutAwayTime;
+				*( float* )params = PutAwayTime;
 				*( float* )( params + 4 ) = ForcedRateBuff;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -103,7 +103,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayRetrieve" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = RetrieveTime;
+				*( float* )params = RetrieveTime;
 				*( float* )( params + 4 ) = ForcedRateBuff;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayReload" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = ReloadTime;
+				*( float* )params = ReloadTime;
 				*( int* )( params + 4 ) = RoundsRemainingInClip;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -123,7 +123,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayOffhand" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Rate;
+				*( float* )params = Rate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

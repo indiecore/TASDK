@@ -28,7 +28,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CylinderComponent.SetCylinderSize" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = NewRadius;
+				*( float* )params = NewRadius;
 				*( float* )( params + 4 ) = NewHeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

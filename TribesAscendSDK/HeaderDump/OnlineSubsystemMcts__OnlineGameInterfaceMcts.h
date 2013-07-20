@@ -23,17 +23,17 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.OnGameInviteAccepted" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = InviteResult;
+				*( void** )params = InviteResult;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				InviteResult = *( void** )( params + 0 );
+				InviteResult = *( void** )params;
 			}
 
 			void OnRegisterPlayerComplete( ScriptName SessionName, void* PlayerID, bool bWasSuccessful )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.OnRegisterPlayerComplete" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( void** )( params + 8 ) = PlayerID;
 				*( bool* )( params + 16 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.OnUnregisterPlayerComplete" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( void** )( params + 8 ) = PlayerID;
 				*( bool* )( params + 16 ) = bWasSuccessful;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -58,7 +58,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.SealMatch" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bSeal;
+				*( bool* )params = bSeal;
 				*( bool* )( params + 4 ) = bLateSeal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.HoldInvites" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bHold;
+				*( bool* )params = bHold;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.EndGame" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = nWaitSeconds;
+				*( int* )params = nWaitSeconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.MatchQueueJoin" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = nQueueId;
+				*( int* )params = nQueueId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -96,7 +96,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.MatchQueueLeave" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = nQueueId;
+				*( int* )params = nQueueId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -106,7 +106,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.MatchChooseClass" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = nClassId;
+				*( int* )params = nClassId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -116,7 +116,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.MatchChooseSkin" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = nSkinId;
+				*( int* )params = nSkinId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -144,7 +144,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.MatchLobbyEquipItems" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = eType;
+				*( int* )params = eType;
 				*( int* )( params + 4 ) = nItem1;
 				*( int* )( params + 8 ) = nItem2;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -156,7 +156,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.UpdateOnlineGame" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( class OnlineGameSettings** )( params + 8 ) = UpdatedGameSettings;
 				*( bool* )( params + 12 ) = bShouldRefreshOnlineData;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -168,7 +168,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.GetGameSettings" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class OnlineGameSettings** )( params + function->return_val_offset() );
@@ -178,7 +178,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.AddGameInviteAcceptedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -187,7 +187,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.ClearGameInviteAcceptedDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -196,7 +196,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.AcceptGameInvite" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( byte* )( params + 0 ) = LocalUserNum;
+				*( byte* )params = LocalUserNum;
 				*( ScriptName* )( params + 4 ) = SessionName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -207,7 +207,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.RegisterPlayer" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( void** )( params + 8 ) = PlayerID;
 				*( bool* )( params + 16 ) = bWasInvited;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -235,7 +235,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.UnregisterPlayer" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( void** )( params + 8 ) = PlayerID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -262,7 +262,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function OnlineSubsystemMcts.OnlineGameInterfaceMcts.QueryNonAdvertisedData" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = StartAt;
+				*( int* )params = StartAt;
 				*( int* )( params + 4 ) = NumberToQuery;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

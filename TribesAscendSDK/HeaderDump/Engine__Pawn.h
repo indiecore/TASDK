@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.IsHumanControlled" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = PawnController;
+				*( class Controller** )params = PawnController;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.IsLocallyControlled" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = PawnController;
+				*( class Controller** )params = PawnController;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.PlayActorFaceFXAnim" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class FaceFXAnimSet** )( params + 0 ) = AnimSet;
+				*( class FaceFXAnimSet** )params = AnimSet;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = GroupName;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = SeqName;
 				*( class SoundCue** )( params + 28 ) = SoundCueToPlay;
@@ -91,7 +91,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.Died" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Controller** )( params + 0 ) = Killer;
+				*( class Controller** )params = Killer;
 				*( ScriptClass** )( params + 4 ) = DamageType;
 				*( Vector* )( params + 8 ) = HitLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -103,7 +103,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.GetDefaultCameraMode" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = RequestedBy;
+				*( class PlayerController** )params = RequestedBy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptName* )( params + function->return_val_offset() );
@@ -136,7 +136,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetDesiredRotation" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( Rotator* )( params + 0 ) = TargetDesiredRotation;
+				*( Rotator* )params = TargetDesiredRotation;
 				*( bool* )( params + 12 ) = InLockDesiredRotation;
 				*( bool* )( params + 16 ) = InUnlockWhenReached;
 				*( float* )( params + 20 ) = InterpolationTime;
@@ -150,7 +150,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.DoJump" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bUpdating;
+				*( bool* )params = bUpdating;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -160,7 +160,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetRemoteViewPitch" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = NewRemoteViewPitch;
+				*( int* )params = NewRemoteViewPitch;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -182,10 +182,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.CheckWaterJump" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = WallNormal;
+				*( Vector* )params = WallNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				WallNormal = *( Vector* )( params + 0 );
+				WallNormal = *( Vector* )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -203,7 +203,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.ReachedDestination" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Goal;
+				*( class Actor** )params = Goal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -213,7 +213,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SpecialMoveTo" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class NavigationPoint** )( params + 0 ) = Start;
+				*( class NavigationPoint** )params = Start;
 				*( class NavigationPoint** )( params + 4 ) = End;
 				*( class Actor** )( params + 8 ) = Next;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -373,10 +373,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetScalarParameterInterp" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( void** )( params + 0 ) = ScalarParameterInterp;
+				*( void** )params = ScalarParameterInterp;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				ScalarParameterInterp = *( void** )( params + 0 );
+				ScalarParameterInterp = *( void** )params;
 			}
 
 			bool CheatFly(  )
@@ -419,7 +419,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.FindInventoryType" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = DesiredClass;
+				*( ScriptClass** )params = DesiredClass;
 				*( bool* )( params + 4 ) = bAllowSubclass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -430,7 +430,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.CreateInventory" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = NewInvClass;
+				*( ScriptClass** )params = NewInvClass;
 				*( bool* )( params + 4 ) = bDoNotActivate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -459,7 +459,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.GetBestAnchor" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Actor** )( params + 0 ) = TestActor;
+				*( class Actor** )params = TestActor;
 				*( Vector* )( params + 4 ) = TestLocation;
 				*( bool* )( params + 16 ) = bStartPoint;
 				*( bool* )( params + 20 ) = bOnlyCheckVisible;
@@ -474,7 +474,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.CreatePathGoalEvaluator" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = GoalEvalClass;
+				*( ScriptClass** )params = GoalEvalClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class PathGoalEvaluator** )( params + function->return_val_offset() );
@@ -520,7 +520,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.LineOfSightTo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -530,7 +530,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.PickWallAdjust" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = WallHitNormal;
+				*( Vector* )params = WallHitNormal;
 				*( class Actor** )( params + 12 ) = HitActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -541,7 +541,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.LockDesiredRotation" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = Lock;
+				*( bool* )params = Lock;
 				*( bool* )( params + 4 ) = InUnlockWhenReached;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -650,7 +650,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.BeginAnimControl" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class InterpGroup** )( params + 0 ) = InInterpGroup;
+				*( class InterpGroup** )params = InInterpGroup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -659,7 +659,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.MAT_BeginAnimControl" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class InterpGroup** )( params + 0 ) = InInterpGroup;
+				*( class InterpGroup** )params = InInterpGroup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -668,7 +668,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.FinishAnimControl" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class InterpGroup** )( params + 0 ) = InInterpGroup;
+				*( class InterpGroup** )params = InInterpGroup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -677,7 +677,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.MAT_FinishAnimControl" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class InterpGroup** )( params + 0 ) = InInterpGroup;
+				*( class InterpGroup** )params = InInterpGroup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -686,7 +686,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetAnimPosition" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptName* )( params + 0 ) = SlotName;
+				*( ScriptName* )params = SlotName;
 				*( int* )( params + 8 ) = ChannelIndex;
 				*( ScriptName* )( params + 12 ) = InAnimSeqName;
 				*( float* )( params + 20 ) = InPosition;
@@ -701,7 +701,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.MAT_SetAnimPosition" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptName* )( params + 0 ) = SlotName;
+				*( ScriptName* )params = SlotName;
 				*( int* )( params + 8 ) = ChannelIndex;
 				*( ScriptName* )( params + 12 ) = InAnimSeqName;
 				*( float* )( params + 20 ) = InPosition;
@@ -724,7 +724,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.MAT_SetMorphWeight" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = MorphNodeName;
+				*( ScriptName* )params = MorphNodeName;
 				*( float* )( params + 8 ) = MorphWeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -734,7 +734,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.MAT_SetSkelControlScale" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = SkelControlName;
+				*( ScriptName* )params = SkelControlName;
 				*( float* )( params + 8 ) = Scale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -744,7 +744,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.InterpolationStarted" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class SeqAct_Interp** )( params + 0 ) = InterpAction;
+				*( class SeqAct_Interp** )params = InterpAction;
 				*( class InterpGroupInst** )( params + 4 ) = GroupInst;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -754,7 +754,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.InterpolationFinished" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Interp** )( params + 0 ) = InterpAction;
+				*( class SeqAct_Interp** )params = InterpAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -763,7 +763,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.MAT_BeginAIGroup" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = StartLoc;
+				*( Vector* )params = StartLoc;
 				*( Rotator* )( params + 12 ) = StartRot;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -816,7 +816,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.OnPlayFaceFXAnim" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_PlayFaceFXAnim** )( params + 0 ) = inAction;
+				*( class SeqAct_PlayFaceFXAnim** )params = inAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -842,7 +842,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetMorphWeight" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = MorphNodeName;
+				*( ScriptName* )params = MorphNodeName;
 				*( float* )( params + 8 ) = MorphWeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -852,7 +852,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetSkelControlScale" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = SkelControlName;
+				*( ScriptName* )params = SkelControlName;
 				*( float* )( params + 8 ) = Scale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -862,7 +862,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.ReplicatedEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = VarName;
+				*( ScriptName* )params = VarName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -880,7 +880,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.AdjustDestination" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Actor** )( params + 0 ) = GoalActor;
+				*( class Actor** )params = GoalActor;
 				*( Vector* )( params + 4 ) = Dest;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -891,13 +891,13 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SuggestJumpVelocity" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( Vector* )( params + 0 ) = JumpVelocity;
+				*( Vector* )params = JumpVelocity;
 				*( Vector* )( params + 12 ) = Destination;
 				*( Vector* )( params + 24 ) = Start;
 				*( bool* )( params + 36 ) = bRequireFallLanding;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				JumpVelocity = *( Vector* )( params + 0 );
+				JumpVelocity = *( Vector* )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -914,7 +914,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.IsValidEnemyTargetFor" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = PRI;
+				*( class PlayerReplicationInfo** )params = PRI;
 				*( bool* )( params + 4 ) = bNoPRIisEnemy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -934,7 +934,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetAnchor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class NavigationPoint** )( params + 0 ) = NewAnchor;
+				*( class NavigationPoint** )params = NewAnchor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -943,7 +943,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.ReachedPoint" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = Point;
+				*( Vector* )params = Point;
 				*( class Actor** )( params + 12 ) = NewAnchor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -962,7 +962,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetPushesRigidBodies" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = NewPush;
+				*( bool* )params = NewPush;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -980,11 +980,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.GetBoundingCylinder" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = CollisionRadius;
+				*( float* )params = CollisionRadius;
 				*( float* )( params + 4 ) = CollisionHeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				CollisionRadius = *( float* )( params + 0 );
+				CollisionRadius = *( float* )params;
 				CollisionHeight = *( float* )( params + 4 );
 			}
 
@@ -1010,7 +1010,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SpecialMoveThruEdge" );
 				byte *params = ( byte* )( malloc( 37 ) );
-				*( byte* )( params + 0 ) = Type;
+				*( byte* )params = Type;
 				*( int* )( params + 4 ) = Dir;
 				*( Vector* )( params + 8 ) = MoveStart;
 				*( Vector* )( params + 20 ) = MoveDest;
@@ -1049,7 +1049,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.StartFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1058,7 +1058,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.StopFire" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = FireModeNum;
+				*( byte* )params = FireModeNum;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1067,7 +1067,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.GetWeaponFiringMode" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -1077,7 +1077,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetFiringMode" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( byte* )( params + 4 ) = InFiringMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1087,7 +1087,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.FiringModeUpdated" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( byte* )( params + 4 ) = InFiringMode;
 				*( bool* )( params + 8 ) = bViaReplication;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1098,7 +1098,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.IncrementFlashCount" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( byte* )( params + 4 ) = InFiringMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1108,7 +1108,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.FlashCountUpdated" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( byte* )( params + 4 ) = InFlashCount;
 				*( bool* )( params + 8 ) = bViaReplication;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1119,7 +1119,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.ClearFlashCount" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1128,7 +1128,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetFlashLocation" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( byte* )( params + 4 ) = InFiringMode;
 				*( Vector* )( params + 8 ) = NewLoc;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1139,7 +1139,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.ClearFlashLocation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1148,7 +1148,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.FlashLocationUpdated" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( Vector* )( params + 4 ) = InFlashLocation;
 				*( bool* )( params + 16 ) = bViaReplication;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1159,7 +1159,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.WeaponFired" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( bool* )( params + 4 ) = bViaReplication;
 				*( Vector* )( params + 8 ) = HitLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1170,7 +1170,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.WeaponStoppedFiring" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Weapon** )( params + 0 ) = InWeapon;
+				*( class Weapon** )params = InWeapon;
 				*( bool* )( params + 4 ) = bViaReplication;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1180,7 +1180,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.BotFire" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bFinished;
+				*( bool* )params = bFinished;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1190,7 +1190,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.CanAttack" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1200,7 +1200,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.TooCloseToAttack" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1237,7 +1237,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.NeedToTurn" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = targ;
+				*( Vector* )params = targ;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1247,7 +1247,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.PlayTeleportEffect" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bOut;
+				*( bool* )params = bOut;
 				*( bool* )( params + 4 ) = bSound;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1265,7 +1265,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.PossessedBy" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Controller** )( params + 0 ) = C;
+				*( class Controller** )params = C;
 				*( bool* )( params + 4 ) = bVehicleTransition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1275,7 +1275,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.UpdateControllerOnPossess" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bVehicleTransition;
+				*( bool* )params = bVehicleTransition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1318,7 +1318,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetWalking" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewIsWalking;
+				*( bool* )params = bNewIsWalking;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1336,7 +1336,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.EndClimbLadder" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LadderVolume** )( params + 0 ) = OldLadder;
+				*( class LadderVolume** )params = OldLadder;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1345,7 +1345,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.ClimbLadder" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LadderVolume** )( params + 0 ) = L;
+				*( class LadderVolume** )params = L;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1354,7 +1354,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.DisplayDebug" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class HUD** )( params + 0 ) = HUD;
+				*( class HUD** )params = HUD;
 				*( float* )( params + 4 ) = out_YL;
 				*( float* )( params + 8 ) = out_YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1376,7 +1376,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.ProcessViewRotation" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				*( Rotator* )( params + 4 ) = out_ViewRotation;
 				*( Rotator* )( params + 16 ) = out_DeltaRot;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1389,11 +1389,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.GetActorEyesViewPoint" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = out_Location;
+				*( Vector* )params = out_Location;
 				*( Rotator* )( params + 12 ) = out_Rotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				out_Location = *( Vector* )( params + 0 );
+				out_Location = *( Vector* )params;
 				out_Rotation = *( Rotator* )( params + 12 );
 			}
 
@@ -1410,7 +1410,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.GetWeaponStartTraceLocation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = CurrentWeapon;
+				*( class Weapon** )params = CurrentWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -1429,7 +1429,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.GetAdjustedAimFor" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Weapon** )( params + 0 ) = W;
+				*( class Weapon** )params = W;
 				*( Vector* )( params + 4 ) = StartFireLoc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1440,7 +1440,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetViewRotation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Rotator* )( params + 0 ) = NewRotation;
+				*( Rotator* )params = NewRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1449,7 +1449,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetMoveTarget" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = NewTarget;
+				*( class Actor** )params = NewTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1458,7 +1458,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.HandlePickup" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Inventory** )( params + 0 ) = Inv;
+				*( class Inventory** )params = Inv;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1467,7 +1467,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.ClientMessage" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = S;
+				*( ScriptArray< wchar_t >* )params = S;
 				*( ScriptName* )( params + 12 ) = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1477,7 +1477,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.FellOutOfWorld" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = dmgType;
+				*( ScriptClass** )params = dmgType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1502,7 +1502,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.ShouldCrouch" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bCrouch;
+				*( bool* )params = bCrouch;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1511,7 +1511,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.EndCrouch" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = HeightAdjust;
+				*( float* )params = HeightAdjust;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1520,7 +1520,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.StartCrouch" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = HeightAdjust;
+				*( float* )params = HeightAdjust;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1529,7 +1529,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.HandleMomentum" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( Vector* )( params + 0 ) = Momentum;
+				*( Vector* )params = Momentum;
 				*( Vector* )( params + 12 ) = HitLocation;
 				*( ScriptClass** )( params + 24 ) = DamageType;
 				*( void** )( params + 28 ) = HitInfo;
@@ -1541,7 +1541,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.AddVelocity" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( Vector* )( params + 0 ) = NewVelocity;
+				*( Vector* )params = NewVelocity;
 				*( Vector* )( params + 12 ) = HitLocation;
 				*( ScriptClass** )( params + 24 ) = DamageType;
 				*( void** )( params + 28 ) = HitInfo;
@@ -1553,7 +1553,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.KilledBy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = EventInstigator;
+				*( class Pawn** )params = EventInstigator;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1586,7 +1586,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.ClientSetRotation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Rotator* )( params + 0 ) = NewRotation;
+				*( Rotator* )params = NewRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1595,7 +1595,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.UpdatePawnRotation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Rotator* )( params + 0 ) = NewRotation;
+				*( Rotator* )params = NewRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1604,7 +1604,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.FaceRotation" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Rotator* )( params + 0 ) = NewRotation;
+				*( Rotator* )params = NewRotation;
 				*( float* )( params + 12 ) = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1614,7 +1614,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.EncroachingOn" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1624,7 +1624,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.EncroachedBy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1633,7 +1633,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.gibbedBy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = Other;
+				*( class Actor** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1650,7 +1650,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.StuckOnPawn" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = OtherPawn;
+				*( class Pawn** )params = OtherPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1667,7 +1667,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.CanBeBaseForPawn" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = aPawn;
+				*( class Pawn** )params = aPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1677,7 +1677,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.CrushedBy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = OtherPawn;
+				*( class Pawn** )params = OtherPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1686,7 +1686,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.DetachFromController" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bDestroyController;
+				*( bool* )params = bDestroyController;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1727,7 +1727,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.ReceivedNewEvent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SequenceEvent** )( params + 0 ) = Evt;
+				*( class SequenceEvent** )params = Evt;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1736,7 +1736,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.OnAssignController" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_AssignController** )( params + 0 ) = inAction;
+				*( class SeqAct_AssignController** )params = inAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1745,7 +1745,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.OnGiveInventory" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_GiveInventory** )( params + 0 ) = inAction;
+				*( class SeqAct_GiveInventory** )params = inAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1770,7 +1770,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.AdjustDamage" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( int* )( params + 0 ) = InDamage;
+				*( int* )params = InDamage;
 				*( Vector* )( params + 4 ) = Momentum;
 				*( class Controller** )( params + 16 ) = InstigatedBy;
 				*( Vector* )( params + 20 ) = HitLocation;
@@ -1779,7 +1779,7 @@ namespace UnrealScript
 				*( class Actor** )( params + 64 ) = DamageCauser;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				InDamage = *( int* )( params + 0 );
+				InDamage = *( int* )params;
 				Momentum = *( Vector* )( params + 4 );
 			}
 
@@ -1787,7 +1787,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.HealDamage" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = Amount;
+				*( int* )params = Amount;
 				*( class Controller** )( params + 4 ) = Healer;
 				*( ScriptClass** )( params + 8 ) = DamageType;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1807,7 +1807,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.TakeRadiusDamageOnBones" );
 				byte *params = ( byte* )( malloc( 52 ) );
-				*( class Controller** )( params + 0 ) = InstigatedBy;
+				*( class Controller** )params = InstigatedBy;
 				*( float* )( params + 4 ) = BaseDamage;
 				*( float* )( params + 8 ) = DamageRadius;
 				*( ScriptClass** )( params + 12 ) = DamageType;
@@ -1824,7 +1824,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.NotifyTakeHit" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( class Controller** )( params + 0 ) = InstigatedBy;
+				*( class Controller** )params = InstigatedBy;
 				*( Vector* )( params + 4 ) = HitLocation;
 				*( int* )( params + 16 ) = Damage;
 				*( ScriptClass** )( params + 20 ) = DamageType;
@@ -1837,7 +1837,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetKillInstigator" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Controller** )( params + 0 ) = InstigatedBy;
+				*( class Controller** )params = InstigatedBy;
 				*( ScriptClass** )( params + 4 ) = DamageType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1848,7 +1848,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.TakeDamage" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( int* )( params + 0 ) = Damage;
+				*( int* )params = Damage;
 				*( class Controller** )( params + 4 ) = InstigatedBy;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( Vector* )( params + 20 ) = Momentum;
@@ -1881,7 +1881,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.IsSameTeam" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -1915,7 +1915,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.Landed" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = HitNormal;
+				*( Vector* )params = HitNormal;
 				*( class Actor** )( params + 12 ) = FloorActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1925,7 +1925,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.TickSpecial" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1934,7 +1934,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.HeadVolumeChange" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PhysicsVolume** )( params + 0 ) = newHeadVolume;
+				*( class PhysicsVolume** )params = newHeadVolume;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1967,7 +1967,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.PlayHit" );
 				byte *params = ( byte* )( malloc( 64 ) );
-				*( float* )( params + 0 ) = Damage;
+				*( float* )params = Damage;
 				*( class Controller** )( params + 4 ) = InstigatedBy;
 				*( Vector* )( params + 8 ) = HitLocation;
 				*( ScriptClass** )( params + 20 ) = DamageType;
@@ -1997,7 +1997,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.PlayDying" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptClass** )( params + 0 ) = DamageType;
+				*( ScriptClass** )params = DamageType;
 				*( Vector* )( params + 4 ) = HitLoc;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2015,7 +2015,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.PlayFootStepSound" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = FootDown;
+				*( int* )params = FootDown;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2024,7 +2024,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.PlayLanded" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = ImpactVel;
+				*( float* )params = ImpactVel;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2050,7 +2050,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.StartDriving" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Vehicle** )( params + 0 ) = V;
+				*( class Vehicle** )params = V;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2059,7 +2059,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.StopDriving" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Vehicle** )( params + 0 ) = V;
+				*( class Vehicle** )params = V;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2076,7 +2076,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.DrawHUD" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class HUD** )( params + 0 ) = H;
+				*( class HUD** )params = H;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2085,7 +2085,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.ThrowActiveWeapon" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bDestroyWeap;
+				*( bool* )params = bDestroyWeap;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2094,7 +2094,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.TossInventory" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Inventory** )( params + 0 ) = Inv;
+				*( class Inventory** )params = Inv;
 				*( Vector* )( params + 4 ) = ForceVelocity;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2104,7 +2104,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetActiveWeapon" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Weapon** )( params + 0 ) = NewWeapon;
+				*( class Weapon** )params = NewWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2113,7 +2113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.PlayWeaponSwitch" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Weapon** )( params + 0 ) = OldWeapon;
+				*( class Weapon** )params = OldWeapon;
 				*( class Weapon** )( params + 4 ) = NewWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2149,7 +2149,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.DoKismetAttachment" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = Attachment;
+				*( class Actor** )params = Attachment;
 				*( class SeqAct_AttachToActor** )( params + 4 ) = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2168,7 +2168,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.OnSetMaterial" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_SetMaterial** )( params + 0 ) = Action;
+				*( class SeqAct_SetMaterial** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2177,7 +2177,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.OnTeleport" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Teleport** )( params + 0 ) = Action;
+				*( class SeqAct_Teleport** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2186,7 +2186,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.MessagePlayer" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = msg;
+				*( ScriptArray< wchar_t >* )params = msg;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2195,7 +2195,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.BecomeViewTarget" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2220,7 +2220,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.AddPathConstraint" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PathConstraint** )( params + 0 ) = Constraint;
+				*( class PathConstraint** )params = Constraint;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2229,7 +2229,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.AddGoalEvaluator" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PathGoalEvaluator** )( params + 0 ) = Evaluator;
+				*( class PathGoalEvaluator** )params = Evaluator;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2238,7 +2238,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.CreatePathConstraint" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = ConstraintClass;
+				*( ScriptClass** )params = ConstraintClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class PathConstraint** )( params + function->return_val_offset() );
@@ -2248,7 +2248,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.IncrementPathStep" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = Cnt;
+				*( int* )params = Cnt;
 				*( class Canvas** )( params + 4 ) = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2258,7 +2258,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.IncrementPathChild" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = Cnt;
+				*( int* )params = Cnt;
 				*( class Canvas** )( params + 4 ) = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -2268,7 +2268,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.DrawPathStep" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Canvas** )( params + 0 ) = C;
+				*( class Canvas** )params = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2293,7 +2293,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetCinematicMode" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bInCinematicMode;
+				*( bool* )params = bInCinematicMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2302,7 +2302,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.SetRootMotionInterpCurrentTime" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( float* )( params + 0 ) = inTime;
+				*( float* )params = inTime;
 				*( float* )( params + 4 ) = DeltaTime;
 				*( bool* )( params + 8 ) = bUpdateSkelPose;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -2313,7 +2313,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.Speak" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SoundCue** )( params + 0 ) = Cue;
+				*( class SoundCue** )params = Cue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2322,7 +2322,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.OnSetVelocity" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_SetVelocity** )( params + 0 ) = Action;
+				*( class SeqAct_SetVelocity** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -2331,7 +2331,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Pawn.CheckClotheslineDamage" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = PawnHittingMe;
+				*( class Pawn** )params = PawnHittingMe;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

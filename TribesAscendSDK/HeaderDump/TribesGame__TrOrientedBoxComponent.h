@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrOrientedBoxComponent.SetBoxSize" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = NewHeight;
+				*( float* )params = NewHeight;
 				*( float* )( params + 4 ) = NewLength;
 				*( float* )( params + 8 ) = NewWidth;
 				*( bool* )( params + 12 ) = IsRadii;

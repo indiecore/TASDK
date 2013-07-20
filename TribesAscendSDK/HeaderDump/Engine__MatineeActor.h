@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.MatineeActor.AddAIGroupActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class InterpGroupInstAI** )( params + 0 ) = AIGroupInst;
+				*( class InterpGroupInstAI** )params = AIGroupInst;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

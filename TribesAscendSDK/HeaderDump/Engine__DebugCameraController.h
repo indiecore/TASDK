@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DebugCameraController.PrimarySelect" );
 				byte *params = ( byte* )( malloc( 52 ) );
-				*( Vector* )( params + 0 ) = HitLoc;
+				*( Vector* )params = HitLoc;
 				*( Vector* )( params + 12 ) = HitNormal;
 				*( void** )( params + 24 ) = HitInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -42,7 +42,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DebugCameraController.SecondarySelect" );
 				byte *params = ( byte* )( malloc( 52 ) );
-				*( Vector* )( params + 0 ) = HitLoc;
+				*( Vector* )params = HitLoc;
 				*( Vector* )( params + 12 ) = HitNormal;
 				*( void** )( params + 24 ) = HitInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DebugCameraController.OnActivate" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DebugCameraController.ConsoleCommand" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Command;
+				*( ScriptArray< wchar_t >* )params = Command;
 				*( bool* )( params + 12 ) = bWriteToLog;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DebugCameraController.OnDeactivate" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -106,7 +106,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DebugCameraController.NativeInputKey" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( int* )( params + 0 ) = ControllerId;
+				*( int* )params = ControllerId;
 				*( ScriptName* )( params + 4 ) = Key;
 				*( byte* )( params + 12 ) = Event;
 				*( float* )( params + 16 ) = AmountDepressed;

@@ -56,7 +56,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Handle.SetLocation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = NewLocation;
+				*( Vector* )params = NewLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Handle.SetSmoothLocation" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = NewLocation;
+				*( Vector* )params = NewLocation;
 				*( float* )( params + 12 ) = MoveTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -75,20 +75,20 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Handle.UpdateSmoothLocation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = NewLocation;
+				*( Vector* )params = NewLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				NewLocation = *( Vector* )( params + 0 );
+				NewLocation = *( Vector* )params;
 			}
 
 			void SetOrientation( void* &NewOrientation )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_Handle.SetOrientation" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = NewOrientation;
+				*( void** )params = NewOrientation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				NewOrientation = *( void** )( params + 0 );
+				NewOrientation = *( void** )params;
 			}
 
 			void* GetOrientation(  )

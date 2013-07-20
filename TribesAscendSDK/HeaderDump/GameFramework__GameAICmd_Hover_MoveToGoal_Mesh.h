@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.HoverToGoal" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class GameAIController** )( params + 0 ) = AI;
+				*( class GameAIController** )params = AI;
 				*( class Actor** )( params + 4 ) = InGoal;
 				*( float* )( params + 8 ) = InGoalDistance;
 				*( float* )( params + 12 ) = InHoverHeight;
@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.HoverToPoint" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class GameAIController** )( params + 0 ) = AI;
+				*( class GameAIController** )params = AI;
 				*( Vector* )( params + 4 ) = InPoint;
 				*( float* )( params + 16 ) = InGoalDistance;
 				*( float* )( params + 20 ) = InHoverHeight;
@@ -79,7 +79,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.HandlePathObstruction" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = BlockedBy;
+				*( class Actor** )params = BlockedBy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.IsEnemyBasedOnInterpActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = InEnemy;
+				*( class Pawn** )params = InEnemy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.DrawDebug" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class HUD** )( params + 0 ) = H;
+				*( class HUD** )params = H;
 				*( ScriptName* )( params + 4 ) = Category;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

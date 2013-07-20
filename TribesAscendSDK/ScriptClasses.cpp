@@ -1,6 +1,12 @@
 #include "TASDK.h"
 #include <deque>
 
+// Altimor
+//#define REPO_ROOT "..\\..\\..\\src\\"
+
+// Orvid
+#define REPO_ROOT "..\\..\\..\\AltimorTASDK\\"
+
 void ScriptObject::LogAll()
 {
 	OutputLog( "ScriptObject.LogAll output: \n" );
@@ -56,9 +62,9 @@ void ScriptObject::GenerateHeader()
 		file_name.insert( 0, outer->GetName() );
 	}
 
-	OutputLogTo( "..\\..\\..\\src\\TribesAscendSDK\\HeaderDump\\HeaderDump.h", "#include \"%s\"\n", file_name.c_str() );
+	OutputLogTo( REPO_ROOT "TribesAscendSDK\\HeaderDump\\HeaderDump.h", "#include \"%s\"\n", file_name.c_str() );
 
-	file_name.insert( 0, "..\\..\\..\\src\\TribesAscendSDK\\HeaderDump\\" );
+	file_name.insert( 0, REPO_ROOT "TribesAscendSDK\\HeaderDump\\" );
 	InitLoggingTo( file_name.c_str() );
 
 	OutputLogTo( file_name.c_str(), "#pragma once\n" );
@@ -250,7 +256,10 @@ void ScriptObject::GenerateHeader()
 
 				for( DWORD i = 0; i < arg_list.size(); i++ )
 				{
-					OutputLogTo( file_name.c_str(), "\t\t\t\t*( %s* )( params + %i ) = %s;\n", arg_list[ i ].type.c_str(), arg_list[ i ].offset, arg_list[ i ].name.c_str() );
+					if ( arg_list[ i ].offset > 0 )
+						OutputLogTo( file_name.c_str(), "\t\t\t\t*( %s* )( params + %i ) = %s;\n", arg_list[ i ].type.c_str(), arg_list[ i ].offset, arg_list[ i ].name.c_str() );
+					else
+						OutputLogTo( file_name.c_str(), "\t\t\t\t*( %s* )params = %s;\n", arg_list[ i ].type.c_str(), arg_list[ i ].name.c_str() );
 				}
 
 				OutputLogTo( file_name.c_str(), "\t\t\t\tScriptObject *object = ( ScriptObject* )( this );\n" );
@@ -259,7 +268,12 @@ void ScriptObject::GenerateHeader()
 				for( DWORD i = 0; i < arg_list.size(); i++ )
 				{
 					if( arg_list[ i ].out_param )
-						OutputLogTo( file_name.c_str(), "\t\t\t\t%s = *( %s* )( params + %i );\n", arg_list[ i ].name.c_str(), arg_list[ i ].type.c_str(), arg_list[ i ].offset );
+					{
+						if ( arg_list[ i ].offset > 0 )
+							OutputLogTo( file_name.c_str(), "\t\t\t\t%s = *( %s* )( params + %i );\n", arg_list[ i ].name.c_str(), arg_list[ i ].type.c_str(), arg_list[ i ].offset );
+						else
+							OutputLogTo( file_name.c_str(), "\t\t\t\t%s = *( %s* )params;\n", arg_list[ i ].name.c_str(), arg_list[ i ].type.c_str() );
+					}
 				}
 
 				if( return_val )

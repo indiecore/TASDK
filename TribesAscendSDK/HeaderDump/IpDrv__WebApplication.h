@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.WebApplication.PreQuery" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class WebRequest** )( params + 0 ) = Request;
+				*( class WebRequest** )params = Request;
 				*( class WebResponse** )( params + 4 ) = Response;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.WebApplication.Query" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class WebRequest** )( params + 0 ) = Request;
+				*( class WebRequest** )params = Request;
 				*( class WebResponse** )( params + 4 ) = Response;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -71,7 +71,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.WebApplication.PostQuery" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class WebRequest** )( params + 0 ) = Request;
+				*( class WebRequest** )params = Request;
 				*( class WebResponse** )( params + 4 ) = Response;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicleSimHoverboard.InitWheels" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UDKVehicle** )( params + 0 ) = Vehicle;
+				*( class UDKVehicle** )params = Vehicle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -59,7 +59,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicleSimHoverboard.UpdateLeanConstraint" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class RB_ConstraintInstance** )( params + 0 ) = LeanUprightConstraintInstance;
+				*( class RB_ConstraintInstance** )params = LeanUprightConstraintInstance;
 				*( Vector* )( params + 4 ) = LeanY;
 				*( Vector* )( params + 16 ) = LeanZ;
 				ScriptObject *object = ( ScriptObject* )( this );

@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Interface_Speaker.Speak" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SoundCue** )( params + 0 ) = Cue;
+				*( class SoundCue** )params = Cue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

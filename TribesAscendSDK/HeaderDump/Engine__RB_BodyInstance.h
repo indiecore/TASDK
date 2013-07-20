@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_BodyInstance.SetFixed" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewFixed;
+				*( bool* )params = bNewFixed;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -122,7 +122,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_BodyInstance.GetUnrealWorldVelocityAtPoint" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = Point;
+				*( Vector* )params = Point;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -132,7 +132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_BodyInstance.EnableBoneSpring" );
 				byte *params = ( byte* )( malloc( 72 ) );
-				*( bool* )( params + 0 ) = bInEnableLinear;
+				*( bool* )params = bInEnableLinear;
 				*( bool* )( params + 4 ) = bInEnableAngular;
 				*( void** )( params + 16 ) = InBoneTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -144,7 +144,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_BodyInstance.SetBoneSpringParams" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = InLinearSpring;
+				*( float* )params = InLinearSpring;
 				*( float* )( params + 4 ) = InLinearDamping;
 				*( float* )( params + 8 ) = InAngularSpring;
 				*( float* )( params + 12 ) = InAngularDamping;
@@ -156,18 +156,18 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_BodyInstance.SetBoneSpringTarget" );
 				byte *params = ( byte* )( malloc( 68 ) );
-				*( void** )( params + 0 ) = InBoneTarget;
+				*( void** )params = InBoneTarget;
 				*( bool* )( params + 64 ) = bTeleport;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				InBoneTarget = *( void** )( params + 0 );
+				InBoneTarget = *( void** )params;
 			}
 
 			void SetBlockRigidBody( bool bNewBlockRigidBody )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_BodyInstance.SetBlockRigidBody" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewBlockRigidBody;
+				*( bool* )params = bNewBlockRigidBody;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -176,7 +176,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_BodyInstance.SetPhysMaterialOverride" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PhysicalMaterial** )( params + 0 ) = NewPhysMaterial;
+				*( class PhysicalMaterial** )params = NewPhysMaterial;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -185,7 +185,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_BodyInstance.EnableCollisionResponse" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnableResponse;
+				*( bool* )params = bEnableResponse;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -194,7 +194,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_BodyInstance.SetContactReportForceThreshold" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Threshold;
+				*( float* )params = Threshold;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -203,7 +203,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_BodyInstance.UpdateMassProperties" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class RB_BodySetup** )( params + 0 ) = Setup;
+				*( class RB_BodySetup** )params = Setup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

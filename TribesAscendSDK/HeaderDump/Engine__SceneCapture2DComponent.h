@@ -28,7 +28,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCapture2DComponent.SetCaptureParameters" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class TextureRenderTarget2D** )( params + 0 ) = NewTextureTarget;
+				*( class TextureRenderTarget2D** )params = NewTextureTarget;
 				*( float* )( params + 4 ) = NewFOV;
 				*( float* )( params + 8 ) = NewNearPlane;
 				*( float* )( params + 12 ) = NewFarPlane;
@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCapture2DComponent.SetView" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = NewLocation;
+				*( Vector* )params = NewLocation;
 				*( Rotator* )( params + 12 ) = NewRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

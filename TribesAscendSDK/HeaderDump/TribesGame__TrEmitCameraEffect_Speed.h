@@ -28,12 +28,12 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEmitCameraEffect_Speed.UpdateLocation" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( Vector* )( params + 0 ) = CamLoc;
+				*( Vector* )params = CamLoc;
 				*( Rotator* )( params + 12 ) = CamRot;
 				*( float* )( params + 24 ) = CamFOVDeg;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				CamLoc = *( Vector* )( params + 0 );
+				CamLoc = *( Vector* )params;
 				CamRot = *( Rotator* )( params + 12 );
 			}
 

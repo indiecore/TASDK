@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoalFilter_MinPathDistance.MustBeLongerPathThan" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class NavMeshGoal_GenericFilterContainer** )( params + 0 ) = FilterContainer;
+				*( class NavMeshGoal_GenericFilterContainer** )params = FilterContainer;
 				*( int* )( params + 4 ) = InMinDistancePathShouldBe;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

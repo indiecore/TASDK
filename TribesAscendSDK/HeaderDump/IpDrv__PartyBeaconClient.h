@@ -39,7 +39,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.PartyBeaconClient.OnTravelRequestReceived" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( ScriptClass** )( params + 8 ) = SearchClass;
 				*( byte* )( params + 12 ) = PlatformSpecificInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.PartyBeaconClient.OnReservationCountUpdated" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ReservationRemaining;
+				*( int* )params = ReservationRemaining;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -59,7 +59,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.PartyBeaconClient.OnReservationRequestComplete" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = ReservationResult;
+				*( byte* )params = ReservationResult;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -75,11 +75,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.PartyBeaconClient.RequestReservation" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( void** )( params + 0 ) = DesiredHost;
+				*( void** )params = DesiredHost;
 				*( void** )( params + 8 ) = RequestingPartyLeader;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				DesiredHost = *( void** )( params + 0 );
+				DesiredHost = *( void** )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -87,11 +87,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.PartyBeaconClient.RequestReservationUpdate" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( void** )( params + 0 ) = DesiredHost;
+				*( void** )params = DesiredHost;
 				*( void** )( params + 8 ) = RequestingPartyLeader;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				DesiredHost = *( void** )( params + 0 );
+				DesiredHost = *( void** )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.PartyBeaconClient.CancelReservation" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = CancellingPartyLeader;
+				*( void** )params = CancellingPartyLeader;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

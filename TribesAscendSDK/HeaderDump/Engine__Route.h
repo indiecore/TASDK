@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Route.ResolveRouteIndex" );
 				byte *params = ( byte* )( malloc( 7 ) );
-				*( int* )( params + 0 ) = Idx;
+				*( int* )params = Idx;
 				*( byte* )( params + 4 ) = RouteDirection;
 				*( byte* )( params + 5 ) = out_bComplete;
 				*( byte* )( params + 6 ) = out_bReverse;
@@ -39,7 +39,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Route.MoveOntoRoutePath" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( byte* )( params + 4 ) = RouteDirection;
 				*( float* )( params + 8 ) = DistFudgeFactor;
 				ScriptObject *object = ( ScriptObject* )( this );

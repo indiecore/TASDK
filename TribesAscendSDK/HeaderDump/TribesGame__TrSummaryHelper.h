@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSummaryHelper.MVPSort" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 12 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -51,7 +51,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSummaryHelper.AwardSort" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = A;
+				*( void** )params = A;
 				*( void** )( params + 8 ) = B;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -62,7 +62,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSummaryHelper.GetAwardFromId" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = AwardId;
+				*( int* )params = AwardId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptClass** )( params + function->return_val_offset() );
@@ -72,7 +72,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSummaryHelper.GetTierTitle" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = val;
+				*( int* )params = val;
 				*( ScriptClass** )( params + 4 ) = award;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -83,7 +83,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSummaryHelper.GetAccoladeFromId" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = AccoladeId;
+				*( int* )params = AccoladeId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptClass** )( params + function->return_val_offset() );
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSummaryHelper.GetRankFromXP" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = XP;
+				*( int* )params = XP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptClass** )( params + function->return_val_offset() );
@@ -103,7 +103,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSummaryHelper.GetNextRank" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = Rank;
+				*( ScriptClass** )params = Rank;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptClass** )( params + function->return_val_offset() );
@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSummaryHelper.GetMinTierValue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = AwardId;
+				*( int* )params = AwardId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -123,7 +123,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSummaryHelper.GetTieredWeight" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = AwardId;
+				*( int* )params = AwardId;
 				*( int* )( params + 4 ) = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

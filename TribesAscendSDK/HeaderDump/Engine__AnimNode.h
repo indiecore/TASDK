@@ -63,7 +63,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNode.FindAnimNode" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = InNodeName;
+				*( ScriptName* )params = InNodeName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class AnimNode** )( params + function->return_val_offset() );
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNode.PlayAnim" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( bool* )( params + 0 ) = bLoop;
+				*( bool* )params = bLoop;
 				*( float* )( params + 4 ) = Rate;
 				*( float* )( params + 8 ) = StartTime;
 				ScriptObject *object = ( ScriptObject* )( this );

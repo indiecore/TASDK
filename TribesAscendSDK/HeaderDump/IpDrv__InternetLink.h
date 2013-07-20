@@ -38,7 +38,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.InternetLink.ParseURL" );
 				byte *params = ( byte* )( malloc( 52 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				*( ScriptArray< wchar_t >* )params = URL;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Addr;
 				*( int* )( params + 24 ) = PortNum;
 				*( ScriptArray< wchar_t >* )( params + 28 ) = LevelName;
@@ -56,7 +56,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.InternetLink.Resolve" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Domain;
+				*( ScriptArray< wchar_t >* )params = Domain;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -74,7 +74,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.InternetLink.IpAddrToString" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = Arg;
+				*( void** )params = Arg;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.InternetLink.StringToIpAddr" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Str;
+				*( ScriptArray< wchar_t >* )params = Str;
 				*( void** )( params + 12 ) = Addr;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -96,17 +96,17 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.InternetLink.GetLocalIP" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = Arg;
+				*( void** )params = Arg;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Arg = *( void** )( params + 0 );
+				Arg = *( void** )params;
 			}
 
 			void Resolved( void* Addr )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.InternetLink.Resolved" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = Addr;
+				*( void** )params = Addr;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

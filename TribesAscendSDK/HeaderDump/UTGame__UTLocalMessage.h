@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTLocalMessage.AnnouncementSound" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = MessageIndex;
+				*( int* )params = MessageIndex;
 				*( class Object** )( params + 4 ) = OptionalObject;
 				*( class PlayerController** )( params + 8 ) = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTLocalMessage.AnnouncementLevel" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = MessageIndex;
+				*( byte* )params = MessageIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -48,7 +48,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTLocalMessage.AddAnnouncement" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class UTAnnouncer** )( params + 0 ) = Announcer;
+				*( class UTAnnouncer** )params = Announcer;
 				*( int* )( params + 4 ) = MessageIndex;
 				*( class PlayerReplicationInfo** )( params + 8 ) = PRI;
 				*( class Object** )( params + 12 ) = OptionalObject;
@@ -63,7 +63,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTLocalMessage.ShouldBeRemoved" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class UTQueuedAnnouncement** )( params + 0 ) = MyAnnouncement;
+				*( class UTQueuedAnnouncement** )params = MyAnnouncement;
 				*( ScriptClass** )( params + 4 ) = NewAnnouncementClass;
 				*( int* )( params + 8 ) = NewMessageIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -75,7 +75,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTLocalMessage.GetPos" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = Switch;
+				*( int* )params = Switch;
 				*( class HUD** )( params + 4 ) = myHUD;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTLocalMessage.KilledByVictoryMessage" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = AnnouncementIndex;
+				*( int* )params = AnnouncementIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

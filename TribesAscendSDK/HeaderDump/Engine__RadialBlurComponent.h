@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.SetMaterial" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class MaterialInterface** )( params + 0 ) = InMaterial;
+				*( class MaterialInterface** )params = InMaterial;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.SetBlurScale" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = InBlurScale;
+				*( float* )params = InBlurScale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.SetBlurFalloffExponent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = InBlurFalloffExponent;
+				*( float* )params = InBlurFalloffExponent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -59,7 +59,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.SetBlurOpacity" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = InBlurOpacity;
+				*( float* )params = InBlurOpacity;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RadialBlurComponent.SetEnabled" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bInEnabled;
+				*( bool* )params = bInEnabled;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

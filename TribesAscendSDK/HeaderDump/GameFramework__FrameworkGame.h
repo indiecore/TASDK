@@ -23,37 +23,37 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.FrameworkGame.TgStartGame" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Reason;
+				*( ScriptArray< wchar_t >* )params = Reason;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Reason = *( ScriptArray< wchar_t >* )( params + 0 );
+				Reason = *( ScriptArray< wchar_t >* )params;
 			}
 
 			void TgEndGame( ScriptArray< wchar_t > &Reason )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.FrameworkGame.TgEndGame" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Reason;
+				*( ScriptArray< wchar_t >* )params = Reason;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Reason = *( ScriptArray< wchar_t >* )( params + 0 );
+				Reason = *( ScriptArray< wchar_t >* )params;
 			}
 
 			void TgTimer( ScriptArray< wchar_t > &sTimerCommand )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.FrameworkGame.TgTimer" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = sTimerCommand;
+				*( ScriptArray< wchar_t >* )params = sTimerCommand;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				sTimerCommand = *( ScriptArray< wchar_t >* )( params + 0 );
+				sTimerCommand = *( ScriptArray< wchar_t >* )params;
 			}
 
 			void TgChangeScore( int nTeam, int nCount )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.FrameworkGame.TgChangeScore" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = nTeam;
+				*( int* )params = nTeam;
 				*( int* )( params + 4 ) = nCount;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -63,7 +63,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.FrameworkGame.TgChangeTime" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = nSeconds;
+				*( int* )params = nSeconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

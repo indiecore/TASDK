@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKAnimNodeSequence.PlayAnimation" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = Sequence;
+				*( ScriptName* )params = Sequence;
 				*( float* )( params + 8 ) = SeqRate;
 				*( bool* )( params + 12 ) = bSeqLoop;
 				ScriptObject *object = ( ScriptObject* )( this );

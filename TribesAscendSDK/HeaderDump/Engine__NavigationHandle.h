@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.AddPathConstraint" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class NavMeshPathConstraint** )( params + 0 ) = Constraint;
+				*( class NavMeshPathConstraint** )params = Constraint;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.AddGoalEvaluator" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class NavMeshPathGoalEvaluator** )( params + 0 ) = Evaluator;
+				*( class NavMeshPathGoalEvaluator** )params = Evaluator;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -58,7 +58,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.CreatePathConstraint" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = ConstraintClass;
+				*( ScriptClass** )params = ConstraintClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class NavMeshPathConstraint** )( params + function->return_val_offset() );
@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.CreatePathGoalEvaluator" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = GoalEvalClass;
+				*( ScriptClass** )params = GoalEvalClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class NavMeshPathGoalEvaluator** )( params + function->return_val_offset() );
@@ -104,7 +104,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.PathCache_RemoveIndex" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = InIdx;
+				*( int* )params = InIdx;
 				*( int* )( params + 4 ) = Count;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -132,7 +132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.GetPylonFromPos" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = Position;
+				*( Vector* )params = Position;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Pylon** )( params + function->return_val_offset() );
@@ -142,11 +142,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.GetNextMoveLocation" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = out_MoveDest;
+				*( Vector* )params = out_MoveDest;
 				*( float* )( params + 12 ) = ArrivalDistance;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				out_MoveDest = *( Vector* )( params + 0 );
+				out_MoveDest = *( Vector* )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -154,7 +154,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.SetFinalDestination" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = FinalDest;
+				*( Vector* )params = FinalDest;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -164,10 +164,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.ComputeValidFinalDestination" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = out_ComputedPosition;
+				*( Vector* )params = out_ComputedPosition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				out_ComputedPosition = *( Vector* )( params + 0 );
+				out_ComputedPosition = *( Vector* )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -175,11 +175,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.FindPath" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = out_DestActor;
+				*( class Actor** )params = out_DestActor;
 				*( int* )( params + 4 ) = out_DestItem;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				out_DestActor = *( class Actor** )( params + 0 );
+				out_DestActor = *( class Actor** )params;
 				out_DestItem = *( int* )( params + 4 );
 				return *( bool* )( params + function->return_val_offset() );
 			}
@@ -188,11 +188,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.SuggestMovePreparation" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = MovePt;
+				*( Vector* )params = MovePt;
 				*( class Controller** )( params + 12 ) = C;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				MovePt = *( Vector* )( params + 0 );
+				MovePt = *( Vector* )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -200,7 +200,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.ObstacleLineCheck" );
 				byte *params = ( byte* )( malloc( 60 ) );
-				*( Vector* )( params + 0 ) = Start;
+				*( Vector* )params = Start;
 				*( Vector* )( params + 12 ) = End;
 				*( Vector* )( params + 24 ) = Extent;
 				*( Vector* )( params + 36 ) = out_HitLoc;
@@ -216,7 +216,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.ObstaclePointCheck" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = Pt;
+				*( Vector* )params = Pt;
 				*( Vector* )( params + 12 ) = Extent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -227,7 +227,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.LineCheck" );
 				byte *params = ( byte* )( malloc( 60 ) );
-				*( Vector* )( params + 0 ) = Start;
+				*( Vector* )params = Start;
 				*( Vector* )( params + 12 ) = End;
 				*( Vector* )( params + 24 ) = Extent;
 				*( Vector* )( params + 36 ) = out_HitLocation;
@@ -243,7 +243,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.PointCheck" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = Pt;
+				*( Vector* )params = Pt;
 				*( Vector* )( params + 12 ) = Extent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -254,7 +254,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.PointReachable" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( Vector* )( params + 0 ) = Point;
+				*( Vector* )params = Point;
 				*( Vector* )( params + 12 ) = OverrideStartPoint;
 				*( bool* )( params + 24 ) = bAllowHitsInEndCollisionBox;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -266,7 +266,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.ActorReachable" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = A;
+				*( class Actor** )params = A;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -276,7 +276,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.DrawPathCache" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Vector* )( params + 0 ) = DrawOffset;
+				*( Vector* )params = DrawOffset;
 				*( bool* )( params + 12 ) = bPersistent;
 				*( void** )( params + 16 ) = DrawColor;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -313,7 +313,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.GetAllPolyCentersWithinBounds" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( Vector* )( params + 0 ) = pos;
+				*( Vector* )params = pos;
 				*( Vector* )( params + 12 ) = Extent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -323,7 +323,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.GetValidPositionsForBox" );
 				byte *params = ( byte* )( malloc( 64 ) );
-				*( Vector* )( params + 0 ) = pos;
+				*( Vector* )params = pos;
 				*( float* )( params + 12 ) = Radius;
 				*( Vector* )( params + 16 ) = Extent;
 				*( bool* )( params + 28 ) = bMustBeReachableFromStartPos;
@@ -338,7 +338,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.LimitPathCacheDistance" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = MaxDist;
+				*( float* )params = MaxDist;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -365,7 +365,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.CalculatePathDistance" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = FinalDest;
+				*( Vector* )params = FinalDest;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -375,7 +375,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.MoveToDesiredHeightAboveMesh" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = Point;
+				*( Vector* )params = Point;
 				*( float* )( params + 12 ) = Height;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -395,7 +395,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavigationHandle.GetAllCoverSlotsInRadius" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( Vector* )( params + 0 ) = FromLoc;
+				*( Vector* )params = FromLoc;
 				*( float* )( params + 12 ) = Radius;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

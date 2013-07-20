@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.GetCurrentBind" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = Key;
+				*( byte* )params = Key;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.SaveKeyBind" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = KeyName;
 				*( bool* )( params + 16 ) = bStore;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.ClearSettingById" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SettingId;
+				*( int* )params = SettingId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.ClearSettingByValue" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = StrValue;
+				*( ScriptArray< wchar_t >* )params = StrValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.StoreSetting" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = SettingId;
+				*( int* )params = SettingId;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = KeyBind;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -97,7 +97,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.ReadSetting" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SettingId;
+				*( int* )params = SettingId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -115,7 +115,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.ResetDefaultKeyBindings" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerInput** )( params + 0 ) = pInput;
+				*( class PlayerInput** )params = pInput;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -124,7 +124,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.ResetDefaultSpectatorBindings" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPlayerInput_Spectator** )( params + 0 ) = pInput;
+				*( class TrPlayerInput_Spectator** )params = pInput;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -141,7 +141,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.AddBinding" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Command;
+				*( ScriptArray< wchar_t >* )params = Command;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = KeyName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -151,7 +151,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.ApplyKeyBinding" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = val;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -161,7 +161,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.SavePlayerKeyBind" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = KeyName;
 				*( bool* )( params + 16 ) = bStore;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -173,7 +173,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.SaveSpectatorKeyBind" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = KeyName;
 				*( bool* )( params + 16 ) = bStore;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -185,7 +185,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.UnbindPlayerCommand" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class PlayerInput** )( params + 0 ) = pInput;
+				*( class PlayerInput** )params = pInput;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Command;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -195,7 +195,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.UnbindSpectatorCommand" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class TrPlayerInput_Spectator** )( params + 0 ) = pInput;
+				*( class TrPlayerInput_Spectator** )params = pInput;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Command;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -205,7 +205,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.GetCurrentBinding" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class PlayerInput** )( params + 0 ) = pInput;
+				*( class PlayerInput** )params = pInput;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Command;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -216,7 +216,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.GetCommandName" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = Index;
+				*( byte* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -252,7 +252,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.UpdateRuntimePlayer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerInput** )( params + 0 ) = EngineInput;
+				*( class PlayerInput** )params = EngineInput;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -261,7 +261,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrKeyBindings.UpdateRuntimeSpectator" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPlayerInput_Spectator** )( params + 0 ) = SpecInput;
+				*( class TrPlayerInput_Spectator** )params = SpecInput;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

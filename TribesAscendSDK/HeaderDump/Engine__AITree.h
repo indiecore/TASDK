@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AITree.SetActiveRoot" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( ScriptName* )( params + 0 ) = InName;
+				*( ScriptName* )params = InName;
 				*( void** )( params + 8 ) = Handle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -36,7 +36,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AITree.EvaluateTree" );
 				byte *params = ( byte* )( malloc( 52 ) );
-				*( class AIController** )( params + 0 ) = InAI;
+				*( class AIController** )params = InAI;
 				*( void** )( params + 4 ) = Handle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

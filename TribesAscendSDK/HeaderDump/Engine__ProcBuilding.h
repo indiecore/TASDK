@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ProcBuilding.FindEdgeForTopLevelScope" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( int* )( params + 0 ) = TopLevelScopeIndex;
+				*( int* )params = TopLevelScopeIndex;
 				*( byte* )( params + 4 ) = Edge;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.ProcBuilding.FindComponentsForTopLevelScope" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TopLevelScopeIndex;
+				*( int* )params = TopLevelScopeIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );

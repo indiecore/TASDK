@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SeqVar_ObjectList.SetObjectValue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewValue;
+				*( class Object** )params = NewValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

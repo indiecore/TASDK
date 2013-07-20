@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBotAIController.OnAIStartJetting" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrSeqAct_AIStartJetting** )( params + 0 ) = Action;
+				*( class TrSeqAct_AIStartJetting** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBotAIController.OnAIStopJetting" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrSeqAct_AIStopJetting** )( params + 0 ) = Action;
+				*( class TrSeqAct_AIStopJetting** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBotAIController.OnAIStartSkiing" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrSeqAct_AIStartSkiing** )( params + 0 ) = Action;
+				*( class TrSeqAct_AIStartSkiing** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBotAIController.OnAIStopSkiing" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrSeqAct_AIStopSkiing** )( params + 0 ) = Action;
+				*( class TrSeqAct_AIStopSkiing** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -59,7 +59,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBotAIController.OnAIMoveToActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_AIMoveToActor** )( params + 0 ) = Action;
+				*( class SeqAct_AIMoveToActor** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBotAIController.StartJetting" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = Direction;
+				*( Vector* )params = Direction;
 				*( float* )( params + 12 ) = Magnitude;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBotAIController.Possess" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = aPawn;
+				*( class Pawn** )params = aPawn;
 				*( bool* )( params + 4 ) = bVehicleTransition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

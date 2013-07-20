@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Goal_AtActor.AtActor" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( class Actor** )( params + 4 ) = Goal;
 				*( float* )( params + 8 ) = Dist;
 				*( bool* )( params + 12 ) = bReturnPartial;

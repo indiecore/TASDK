@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKEmitterPool.SpawnEmitter" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( class ParticleSystem** )( params + 0 ) = EmitterTemplate;
+				*( class ParticleSystem** )params = EmitterTemplate;
 				*( Vector* )( params + 4 ) = SpawnLocation;
 				*( Rotator* )( params + 16 ) = SpawnRotation;
 				*( class Actor** )( params + 28 ) = AttachToActor;
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKEmitterPool.SpawnExplosionLight" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptClass** )( params + 0 ) = LightClass;
+				*( ScriptClass** )params = LightClass;
 				*( Vector* )( params + 4 ) = SpawnLocation;
 				*( class Actor** )( params + 16 ) = AttachToActor;
 				ScriptObject *object = ( ScriptObject* )( this );

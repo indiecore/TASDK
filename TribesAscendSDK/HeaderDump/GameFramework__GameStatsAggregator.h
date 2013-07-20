@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameStatsAggregator.GetAggregateMappingIDs" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( int* )( params + 4 ) = AggregateID;
 				*( int* )( params + 8 ) = TargetAggregateID;
 				ScriptObject *object = ( ScriptObject* )( this );

@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetDebugSpewLevel" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = DebugSpewLevel;
+				*( int* )params = DebugSpewLevel;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -48,7 +48,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.DumpGameSettings" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class OnlineGameSettings** )( params + 0 ) = GameSettings;
+				*( class OnlineGameSettings** )params = GameSettings;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -75,7 +75,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.StringToUniqueNetId" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = UniqueNetIdString;
+				*( ScriptArray< wchar_t >* )params = UniqueNetIdString;
 				*( void** )( params + 12 ) = out_UniqueId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -87,10 +87,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.UniqueNetIdToString" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = IdToConvert;
+				*( void** )params = IdToConvert;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				IdToConvert = *( void** )( params + 0 );
+				IdToConvert = *( void** )params;
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
 			}
 
@@ -98,7 +98,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.GetNamedInterface" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = InterfaceName;
+				*( ScriptName* )params = InterfaceName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class Object** )( params + function->return_val_offset() );
@@ -108,7 +108,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetNamedInterface" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = InterfaceName;
+				*( ScriptName* )params = InterfaceName;
 				*( class Object** )( params + 8 ) = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -118,7 +118,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetGameChatInterface" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewInterface;
+				*( class Object** )params = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -128,7 +128,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetTitleFileInterface" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewInterface;
+				*( class Object** )params = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -138,7 +138,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetPartyChatInterface" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewInterface;
+				*( class Object** )params = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -148,7 +148,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetNewsInterface" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewInterface;
+				*( class Object** )params = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -158,7 +158,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetStatsInterface" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewInterface;
+				*( class Object** )params = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -168,7 +168,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetVoiceInterface" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewInterface;
+				*( class Object** )params = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -178,7 +178,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetContentInterface" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewInterface;
+				*( class Object** )params = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -188,7 +188,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetGameInterface" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewInterface;
+				*( class Object** )params = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -198,7 +198,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetSystemInterface" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewInterface;
+				*( class Object** )params = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -208,7 +208,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetPlayerInterfaceEx" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewInterface;
+				*( class Object** )params = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -218,7 +218,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetPlayerInterface" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewInterface;
+				*( class Object** )params = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -228,7 +228,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineSubsystem.SetAccountInterface" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = NewInterface;
+				*( class Object** )params = NewInterface;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

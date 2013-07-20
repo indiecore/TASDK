@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerController.NotifyCrowdAgentInRadius" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCrowdAgent** )( params + 0 ) = Agent;
+				*( class GameCrowdAgent** )params = Agent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -54,7 +54,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerController.DoForceFeedbackForScreenShake" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class CameraShake** )( params + 0 ) = ShakeData;
+				*( class CameraShake** )params = ShakeData;
 				*( float* )( params + 4 ) = Scale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -64,7 +64,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerController.SetSoundMode" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = InSoundModeName;
+				*( ScriptName* )params = InSoundModeName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerController.ShowLoadingMovie" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( bool* )( params + 0 ) = bShowMovie;
+				*( bool* )params = bShowMovie;
 				*( bool* )( params + 4 ) = bPauseAfterHide;
 				*( float* )( params + 8 ) = PauseDuration;
 				*( float* )( params + 12 ) = KeepPlayingDuration;
@@ -94,7 +94,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerController.ClientPlayMovie" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = MovieName;
+				*( ScriptArray< wchar_t >* )params = MovieName;
 				*( int* )( params + 12 ) = InStartOfRenderingMovieFrame;
 				*( int* )( params + 16 ) = InEndOfRenderingMovieFrame;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -105,7 +105,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerController.ClientStopMovie" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = DelayInSeconds;
+				*( float* )params = DelayInSeconds;
 				*( bool* )( params + 4 ) = bAllowMovieToFinish;
 				*( bool* )( params + 8 ) = bForceStopNonSkippable;
 				*( bool* )( params + 12 ) = bForceStopLoadingMovie;
@@ -117,10 +117,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerController.GetCurrentMovie" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = MovieName;
+				*( ScriptArray< wchar_t >* )params = MovieName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				MovieName = *( ScriptArray< wchar_t >* )( params + 0 );
+				MovieName = *( ScriptArray< wchar_t >* )params;
 			}
 
 			bool CanUnpauseWarmup(  )
@@ -136,7 +136,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerController.WarmupPause" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bDesiredPauseState;
+				*( bool* )params = bDesiredPauseState;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -145,7 +145,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerController.DoMemLeakChecking" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = InTimeBetweenMemLeakChecks;
+				*( float* )params = InTimeBetweenMemLeakChecks;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -170,7 +170,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GamePlayerController.ClientColorFade" );
 				byte *params = ( byte* )( malloc( 10 ) );
-				*( void** )( params + 0 ) = FadeColor;
+				*( void** )params = FadeColor;
 				*( byte* )( params + 4 ) = FromAlpha;
 				*( byte* )( params + 5 ) = ToAlpha;
 				*( float* )( params + 8 ) = FadeTime;

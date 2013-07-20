@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTPowerupPickupFactory.AddWeaponOverlay" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTGameReplicationInfo** )( params + 0 ) = GRI;
+				*( class UTGameReplicationInfo** )params = GRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTPowerupPickupFactory.SpawnCopyFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = Recipient;
+				*( class Pawn** )params = Recipient;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

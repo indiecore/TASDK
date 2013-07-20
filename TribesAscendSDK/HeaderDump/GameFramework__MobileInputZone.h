@@ -30,7 +30,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.OnPreDrawZone" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( class MobileInputZone** )params = Zone;
 				*( class Canvas** )( params + 4 ) = Canvas;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.OnPostDrawZone" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( class MobileInputZone** )params = Zone;
 				*( class Canvas** )( params + 4 ) = Canvas;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.OnProcessSlide" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( class MobileInputZone** )params = Zone;
 				*( byte* )( params + 4 ) = EventType;
 				*( int* )( params + 8 ) = SlideValue;
 				*( void** )( params + 12 ) = ViewportSize;
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.OnDoubleTapDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( class MobileInputZone** )params = Zone;
 				*( byte* )( params + 4 ) = EventType;
 				*( void** )( params + 8 ) = TouchLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -90,7 +90,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.OnTapDelegate" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( class MobileInputZone** )params = Zone;
 				*( byte* )( params + 4 ) = EventType;
 				*( void** )( params + 8 ) = TouchLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -102,7 +102,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.OnProcessInputDelegate" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( class MobileInputZone** )params = Zone;
 				*( float* )( params + 4 ) = DeltaTime;
 				*( int* )( params + 8 ) = Handle;
 				*( byte* )( params + 12 ) = EventType;
@@ -169,7 +169,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileInputZone.AddKismetEventHandler" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqEvent_MobileZoneBase** )( params + 0 ) = NewHandler;
+				*( class SeqEvent_MobileZoneBase** )params = NewHandler;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

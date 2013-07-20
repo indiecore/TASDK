@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.HelloWeb.Query" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class WebRequest** )( params + 0 ) = Request;
+				*( class WebRequest** )params = Request;
 				*( class WebResponse** )( params + 4 ) = Response;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

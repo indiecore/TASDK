@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVehicle_Shrike.SitDriver" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTPawn** )( params + 0 ) = UTP;
+				*( class UTPawn** )params = UTP;
 				*( int* )( params + 4 ) = SeatIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

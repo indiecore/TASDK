@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicalMaterial.FindPhysEffectInfo" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = Type;
+				*( byte* )params = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( void** )( params + function->return_val_offset() );
@@ -34,11 +34,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicalMaterial.FindFractureSounds" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class SoundCue** )( params + 0 ) = OutSoundExplosion;
+				*( class SoundCue** )params = OutSoundExplosion;
 				*( class SoundCue** )( params + 4 ) = OutSoundSingle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				OutSoundExplosion = *( class SoundCue** )( params + 0 );
+				OutSoundExplosion = *( class SoundCue** )params;
 				OutSoundSingle = *( class SoundCue** )( params + 4 );
 			}
 
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PhysicalMaterial.GetPhysicalMaterialProperty" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = DesiredClass;
+				*( ScriptClass** )params = DesiredClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class PhysicalMaterialPropertyBase** )( params + function->return_val_offset() );

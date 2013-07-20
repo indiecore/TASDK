@@ -30,7 +30,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Font.GetResolutionPageIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = HeightTest;
+				*( float* )params = HeightTest;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Font.GetScalingFactor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = HeightTest;
+				*( float* )params = HeightTest;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Font.GetAuthoredViewportHeight" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = ViewportHeight;
+				*( float* )params = ViewportHeight;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -69,12 +69,12 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Font.GetStringHeightAndWidth" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InString;
+				*( ScriptArray< wchar_t >* )params = InString;
 				*( int* )( params + 12 ) = Height;
 				*( int* )( params + 16 ) = Width;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				InString = *( ScriptArray< wchar_t >* )( params + 0 );
+				InString = *( ScriptArray< wchar_t >* )params;
 				Height = *( int* )( params + 12 );
 				Width = *( int* )( params + 16 );
 			}

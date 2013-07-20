@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.BroadcastHandler.AllowsBroadcast" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = broadcaster;
+				*( class Actor** )params = broadcaster;
 				*( int* )( params + 4 ) = InLen;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.BroadcastHandler.BroadcastText" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = SenderPRI;
+				*( class PlayerReplicationInfo** )params = SenderPRI;
 				*( class PlayerController** )( params + 4 ) = Receiver;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = msg;
 				*( ScriptName* )( params + 20 ) = Type;
@@ -56,7 +56,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.BroadcastHandler.BroadcastLocalized" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Actor** )( params + 0 ) = Sender;
+				*( class Actor** )params = Sender;
 				*( class PlayerController** )( params + 4 ) = Receiver;
 				*( ScriptClass** )( params + 8 ) = Message;
 				*( int* )( params + 12 ) = Switch;
@@ -71,7 +71,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.BroadcastHandler.Broadcast" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class Actor** )( params + 0 ) = Sender;
+				*( class Actor** )params = Sender;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = msg;
 				*( ScriptName* )( params + 16 ) = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -82,7 +82,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.BroadcastHandler.BroadcastTeam" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class Controller** )( params + 0 ) = Sender;
+				*( class Controller** )params = Sender;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = msg;
 				*( ScriptName* )( params + 16 ) = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.BroadcastHandler.AllowBroadcastLocalized" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class Actor** )( params + 0 ) = Sender;
+				*( class Actor** )params = Sender;
 				*( ScriptClass** )( params + 4 ) = Message;
 				*( int* )( params + 8 ) = Switch;
 				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI;
@@ -107,7 +107,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.BroadcastHandler.AllowBroadcastLocalizedTeam" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( int* )( params + 0 ) = TeamIndex;
+				*( int* )params = TeamIndex;
 				*( class Actor** )( params + 4 ) = Sender;
 				*( ScriptClass** )( params + 8 ) = Message;
 				*( int* )( params + 12 ) = Switch;

@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.SetLinearPositionDrive" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( bool* )( params + 0 ) = bEnableXDrive;
+				*( bool* )params = bEnableXDrive;
 				*( bool* )( params + 4 ) = bEnableYDrive;
 				*( bool* )( params + 8 ) = bEnableZDrive;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -97,7 +97,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.SetLinearVelocityDrive" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( bool* )( params + 0 ) = bEnableXDrive;
+				*( bool* )params = bEnableXDrive;
 				*( bool* )( params + 4 ) = bEnableYDrive;
 				*( bool* )( params + 8 ) = bEnableZDrive;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -108,7 +108,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.SetAngularPositionDrive" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bEnableSwingDrive;
+				*( bool* )params = bEnableSwingDrive;
 				*( bool* )( params + 4 ) = bEnableTwistDrive;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -118,7 +118,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.SetAngularVelocityDrive" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bEnableSwingDrive;
+				*( bool* )params = bEnableSwingDrive;
 				*( bool* )( params + 4 ) = bEnableTwistDrive;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -128,7 +128,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.SetLinearPositionTarget" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = InPosTarget;
+				*( Vector* )params = InPosTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -137,7 +137,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.SetLinearVelocityTarget" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = InVelTarget;
+				*( Vector* )params = InVelTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -146,7 +146,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.SetLinearDriveParams" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( float* )( params + 0 ) = InSpring;
+				*( float* )params = InSpring;
 				*( float* )( params + 4 ) = InDamping;
 				*( float* )( params + 8 ) = InForceLimit;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -157,17 +157,17 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.SetAngularPositionTarget" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = InPosTarget;
+				*( void** )params = InPosTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				InPosTarget = *( void** )( params + 0 );
+				InPosTarget = *( void** )params;
 			}
 
 			void SetAngularVelocityTarget( Vector InVelTarget )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.SetAngularVelocityTarget" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = InVelTarget;
+				*( Vector* )params = InVelTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -176,7 +176,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.SetAngularDriveParams" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( float* )( params + 0 ) = InSpring;
+				*( float* )params = InSpring;
 				*( float* )( params + 4 ) = InDamping;
 				*( float* )( params + 8 ) = InForceLimit;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -187,7 +187,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.SetAngularDOFLimitScale" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( float* )( params + 0 ) = InSwing1LimitScale;
+				*( float* )params = InSwing1LimitScale;
 				*( float* )( params + 4 ) = InSwing2LimitScale;
 				*( float* )( params + 8 ) = InTwistLimitScale;
 				*( class RB_ConstraintSetup** )( params + 12 ) = InSetup;
@@ -199,7 +199,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.SetLinearLimitSize" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = NewLimitSize;
+				*( float* )params = NewLimitSize;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -208,10 +208,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintInstance.MoveKinActorTransform" );
 				byte *params = ( byte* )( malloc( 64 ) );
-				*( void** )( params + 0 ) = NewTM;
+				*( void** )params = NewTM;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				NewTM = *( void** )( params + 0 );
+				NewTM = *( void** )params;
 			}
 
 	};

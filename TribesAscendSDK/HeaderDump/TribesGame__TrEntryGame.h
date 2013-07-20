@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEntryGame.SetGameType" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = MapName;
+				*( ScriptArray< wchar_t >* )params = MapName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Options;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = Portal;
 				ScriptObject *object = ( ScriptObject* )( this );

@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.GetDeathCameraEffectInstigator" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPawn** )( params + 0 ) = UTP;
+				*( class UTPawn** )params = UTP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptClass** )( params + function->return_val_offset() );
@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.GetHitEffectDuration" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( float* )( params + 4 ) = Damage;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -48,7 +48,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.ShouldGib" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPawn** )( params + 0 ) = DeadPawn;
+				*( class UTPawn** )params = DeadPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -59,7 +59,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.GetDeathCameraEffectVictim" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPawn** )( params + 0 ) = UTP;
+				*( class UTPawn** )params = UTP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptClass** )( params + function->return_val_offset() );
@@ -115,7 +115,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.DeathMessage" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = Killer;
+				*( class PlayerReplicationInfo** )params = Killer;
 				*( class PlayerReplicationInfo** )( params + 4 ) = Victim;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -126,7 +126,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.SuicideMessage" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = Victim;
+				*( class PlayerReplicationInfo** )params = Victim;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -136,7 +136,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.SpawnHitEffect" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( float* )( params + 4 ) = Damage;
 				*( Vector* )( params + 8 ) = Momentum;
 				*( ScriptName* )( params + 20 ) = BoneName;
@@ -149,7 +149,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.IncrementKills" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPlayerReplicationInfo** )( params + 0 ) = KillerPRI;
+				*( class UTPlayerReplicationInfo** )params = KillerPRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -159,7 +159,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.IncrementDeaths" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPlayerReplicationInfo** )( params + 0 ) = KilledPRI;
+				*( class UTPlayerReplicationInfo** )params = KilledPRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -168,7 +168,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.IncrementSuicides" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPlayerReplicationInfo** )( params + 0 ) = KilledPRI;
+				*( class UTPlayerReplicationInfo** )params = KilledPRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -177,7 +177,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.GetStatsName" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = StatType;
+				*( ScriptName* )params = StatType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptName* )( params + function->return_val_offset() );
@@ -187,7 +187,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.ScoreKill" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class UTPlayerReplicationInfo** )( params + 0 ) = KillerPRI;
+				*( class UTPlayerReplicationInfo** )params = KillerPRI;
 				*( class UTPlayerReplicationInfo** )( params + 4 ) = KilledPRI;
 				*( class Pawn** )( params + 8 ) = KilledPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -198,7 +198,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.PawnTornOff" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPawn** )( params + 0 ) = DeadPawn;
+				*( class UTPawn** )params = DeadPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -207,7 +207,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.SpawnGibEffects" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTGib** )( params + 0 ) = Gib;
+				*( class UTGib** )params = Gib;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -216,7 +216,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.DoCustomDamageEffects" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( class UTPawn** )( params + 0 ) = ThePawn;
+				*( class UTPawn** )params = ThePawn;
 				*( ScriptClass** )( params + 4 ) = TheDamageType;
 				*( void** )( params + 8 ) = HitInfo;
 				*( Vector* )( params + 36 ) = HitLocation;
@@ -229,7 +229,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.CreateDeathSkeleton" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( class UTPawn** )( params + 0 ) = ThePawn;
+				*( class UTPawn** )params = ThePawn;
 				*( ScriptClass** )( params + 4 ) = TheDamageType;
 				*( void** )( params + 8 ) = HitInfo;
 				*( Vector* )( params + 36 ) = HitLocation;
@@ -242,7 +242,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.BoneBreaker" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( class UTPawn** )( params + 0 ) = ThePawn;
+				*( class UTPawn** )params = ThePawn;
 				*( Vector* )( params + 8 ) = Impulse;
 				*( Vector* )( params + 20 ) = HitLocation;
 				*( ScriptName* )( params + 32 ) = BoneName;
@@ -254,7 +254,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.CreateDeathGoreChunks" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( class UTPawn** )( params + 0 ) = ThePawn;
+				*( class UTPawn** )params = ThePawn;
 				*( ScriptClass** )( params + 4 ) = TheDamageType;
 				*( void** )( params + 8 ) = HitInfo;
 				*( Vector* )( params + 36 ) = HitLocation;
@@ -267,7 +267,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.SpawnExtraGibEffects" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTGib** )( params + 0 ) = TheGib;
+				*( class UTGib** )params = TheGib;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -276,7 +276,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.DrawKillIcon" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				*( float* )( params + 4 ) = ScreenX;
 				*( float* )( params + 8 ) = ScreenY;
 				*( float* )( params + 12 ) = HUDScaleX;
@@ -289,7 +289,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDamageType.CalcDeathCamera" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( class UTPawn** )( params + 0 ) = P;
+				*( class UTPawn** )params = P;
 				*( float* )( params + 4 ) = DeltaTime;
 				*( Vector* )( params + 8 ) = CameraLocation;
 				*( Rotator* )( params + 20 ) = CameraRotation;

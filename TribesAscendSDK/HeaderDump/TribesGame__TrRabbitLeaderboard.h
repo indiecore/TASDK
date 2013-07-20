@@ -30,7 +30,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.Initialize" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class TrPlayerController** )( params + 0 ) = PC;
+				*( class TrPlayerController** )params = PC;
 				*( class GfxTrHud** )( params + 4 ) = MP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -64,7 +64,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.UpdatePlayers" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				*( class TrGameReplicationInfo** )params = GRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.UpdateLeaderboard" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( ScriptName* )( params + 4 ) = PRIName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = PlayerName;
 				*( int* )( params + 24 ) = Score;
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.UpdateTime" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrGameReplicationInfo** )( params + 0 ) = GRI;
+				*( class TrGameReplicationInfo** )params = GRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrRabbitLeaderboard.FormatTime" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Seconds;
+				*( int* )params = Seconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );

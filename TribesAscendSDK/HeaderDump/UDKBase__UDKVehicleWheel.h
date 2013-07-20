@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKVehicleWheel.SetParticleEffect" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UDKVehicle** )( params + 0 ) = OwnerVehicle;
+				*( class UDKVehicle** )params = OwnerVehicle;
 				*( class ParticleSystem** )( params + 4 ) = NewTemplate;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

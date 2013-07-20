@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameFixedCamera.UpdateCamera" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( class GamePlayerCamera** )( params + 4 ) = CameraActor;
 				*( float* )( params + 8 ) = DeltaTime;
 				*( void** )( params + 12 ) = OutVT;
@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameFixedCamera.OnBecomeActive" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCameraBase** )( params + 0 ) = OldCamera;
+				*( class GameCameraBase** )params = OldCamera;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

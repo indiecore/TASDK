@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrProj_HavocPilot.CalculateHijackMetric" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrProj_TrackingMissile** )( params + 0 ) = Tracker;
+				*( class TrProj_TrackingMissile** )params = Tracker;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );

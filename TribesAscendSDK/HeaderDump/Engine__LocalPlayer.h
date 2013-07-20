@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalPlayer.SpawnPlayActor" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = URL;
+				*( ScriptArray< wchar_t >* )params = URL;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = OutError;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalPlayer.GetActorVisibility" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = TestActor;
+				*( class Actor** )params = TestActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -62,7 +62,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalPlayer.OverridePostProcessSettings" );
 				byte *params = ( byte* )( malloc( 224 ) );
-				*( void** )( params + 0 ) = OverrideSettings;
+				*( void** )params = OverrideSettings;
 				*( float* )( params + 220 ) = BlendInTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -72,7 +72,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalPlayer.ClearPostProcessSettingsOverride" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = BlendOutTime;
+				*( float* )params = BlendOutTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -81,7 +81,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalPlayer.SetControllerId" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = NewControllerId;
+				*( int* )params = NewControllerId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalPlayer.InsertPostProcessingChain" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class PostProcessChain** )( params + 0 ) = InChain;
+				*( class PostProcessChain** )params = InChain;
 				*( int* )( params + 4 ) = InIndex;
 				*( bool* )( params + 8 ) = bInClone;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -111,7 +111,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalPlayer.RemovePostProcessingChain" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = InIndex;
+				*( int* )params = InIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -130,7 +130,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalPlayer.GetPostProcessChain" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = InIndex;
+				*( int* )params = InIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class PostProcessChain** )( params + function->return_val_offset() );
@@ -148,7 +148,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.LocalPlayer.DeProject" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( void** )( params + 0 ) = RelativeScreenPos;
+				*( void** )params = RelativeScreenPos;
 				*( Vector* )( params + 8 ) = WorldOrigin;
 				*( Vector* )( params + 20 ) = WorldDirection;
 				ScriptObject *object = ( ScriptObject* )( this );

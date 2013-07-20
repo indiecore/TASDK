@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.IsClassOwned" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.IsLoadoutOwned" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Loadout;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetLoadoutName" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Loadout;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetClassUnlockPercent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetClassPrice" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Currency;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -94,7 +94,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetBundleParent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = BundleId;
+				*( int* )params = BundleId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -104,7 +104,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.IsBundleOwned" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = BundleId;
+				*( int* )params = BundleId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -114,7 +114,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetVendorSize" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = VendorId;
+				*( int* )params = VendorId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -124,7 +124,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetVendorItemId" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = VendorId;
+				*( int* )params = VendorId;
 				*( int* )( params + 4 ) = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -135,7 +135,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetVendorItemPrice" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = VendorId;
+				*( int* )params = VendorId;
 				*( int* )( params + 4 ) = VendorItemId;
 				*( int* )( params + 8 ) = Currency;
 				*( int* )( params + 12 ) = Price;
@@ -149,7 +149,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetVendorItemInfo" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( int* )( params + 0 ) = VendorId;
+				*( int* )params = VendorId;
 				*( int* )( params + 4 ) = VendorItemId;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = ItemName;
 				*( ScriptArray< wchar_t >* )( params + 20 ) = itemDescr;
@@ -166,7 +166,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.RequestPurchaseGeneral" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( int* )( params + 0 ) = VendorId;
+				*( int* )params = VendorId;
 				*( int* )( params + 4 ) = VendorItemId;
 				*( int* )( params + 8 ) = Currency;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = UserCustomInput;
@@ -179,7 +179,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetActiveEquipId" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = Loadout;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -191,7 +191,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetEquipCount" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -202,7 +202,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetEquipId" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -214,7 +214,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.SetLoadoutName" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Loadout;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = loadoutName;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -235,7 +235,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetNextClassId" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PrevClass;
+				*( int* )params = PrevClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -245,7 +245,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetClassId" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -255,7 +255,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.RequestPurchaseClass" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Currency;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -266,7 +266,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetReticuleValue" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( int* )( params + 0 ) = EquipId;
+				*( int* )params = EquipId;
 				*( byte* )( params + 4 ) = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -277,7 +277,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetReticuleString" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( int* )( params + 0 ) = EquipId;
+				*( int* )params = EquipId;
 				*( byte* )( params + 4 ) = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -288,7 +288,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.SetActiveEquipId" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = Loadout;
 				*( int* )( params + 12 ) = equip;
@@ -301,7 +301,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.IsEquipOwned" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = equip;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -313,7 +313,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.IsEquipMaxed" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = equip;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -325,7 +325,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetEquipLevel" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = equip;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -337,7 +337,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.HasReticule" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = EquipId;
+				*( int* )params = EquipId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -347,7 +347,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetMasteryPrice" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = equip;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -359,7 +359,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetEquipPrice" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = equip;
 				*( int* )( params + 12 ) = Currency;
@@ -372,7 +372,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.RequestPurchaseMastery" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = equip;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -384,7 +384,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.RequestPurchaseEquip" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = equip;
 				*( int* )( params + 12 ) = Currency;
@@ -397,7 +397,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.SetReticuleValue" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( int* )( params + 0 ) = EquipId;
+				*( int* )params = EquipId;
 				*( byte* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = nValue;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -409,7 +409,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.SetReticuleString" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( int* )( params + 0 ) = EquipId;
+				*( int* )params = EquipId;
 				*( byte* )( params + 4 ) = Type;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = sValue;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -421,7 +421,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetLoadoutPrice" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Loadout;
 				*( int* )( params + 8 ) = Currency;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -433,7 +433,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.RequestPurchaseLoadout" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Loadout;
 				*( int* )( params + 8 ) = Currency;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -508,7 +508,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.RequestPurchaseDeal" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Currency;
+				*( int* )params = Currency;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -518,7 +518,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.OwnsReticule" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = EquipId;
+				*( int* )params = EquipId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -528,7 +528,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.DelegateOnMarshalEvent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = pMarEvent;
+				*( void** )params = pMarEvent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -546,7 +546,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.InitClass" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -555,7 +555,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.SetDefaultEquip" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = equip;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -566,7 +566,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.OnMarshalEvent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = pMarEvent;
+				*( void** )params = pMarEvent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -593,7 +593,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetClassRibbon" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -603,7 +603,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetNextEquipId" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = PrevClass;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -615,7 +615,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetEquipRibbon" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = equip;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -627,7 +627,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetFirstEquipId" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -655,7 +655,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.GetUpgradePrice" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = equip;
 				*( int* )( params + 12 ) = Upgrade;
@@ -669,7 +669,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.RequestPurchaseReticule" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = equip;
 				*( int* )( params + 12 ) = Currency;
@@ -682,7 +682,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrEquipInterface.RequestPurchaseUpgrade" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = ClassId;
+				*( int* )params = ClassId;
 				*( int* )( params + 4 ) = Type;
 				*( int* )( params + 8 ) = equip;
 				*( int* )( params + 12 ) = Upgrade;

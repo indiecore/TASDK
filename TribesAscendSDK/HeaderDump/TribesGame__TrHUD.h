@@ -30,7 +30,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.DrawMarkerText" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ShowText;
+				*( ScriptArray< wchar_t >* )params = ShowText;
 				*( bool* )( params + 12 ) = bFriend;
 				*( Vector* )( params + 16 ) = Placement;
 				*( class Canvas** )( params + 28 ) = DrawCanvas;
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.DrawMICMarker" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( class MaterialInstanceConstant** )( params + 0 ) = MarkerMIC;
+				*( class MaterialInstanceConstant** )params = MarkerMIC;
 				*( Vector* )( params + 4 ) = Placement;
 				*( class Canvas** )( params + 16 ) = DrawCanvas;
 				*( void** )( params + 20 ) = MarkerSize;
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.GetEdgeScreenCoordinates" );
 				byte *params = ( byte* )( malloc( 52 ) );
-				*( class Canvas** )( params + 0 ) = inCanvas;
+				*( class Canvas** )params = inCanvas;
 				*( Vector* )( params + 4 ) = CameraPosition;
 				*( Vector* )( params + 16 ) = CameraDir;
 				*( Vector* )( params + 28 ) = ObjectLocation;
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.DrawMarker" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( class Texture2D** )( params + 0 ) = Marker;
+				*( class Texture2D** )params = Marker;
 				*( Vector* )( params + 4 ) = Placement;
 				*( class Canvas** )( params + 16 ) = DrawCanvas;
 				*( ScriptArray< wchar_t >* )( params + 20 ) = markText;
@@ -117,7 +117,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.DrawRotatedMarker" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( class Texture2D** )( params + 0 ) = Marker;
+				*( class Texture2D** )params = Marker;
 				*( Vector* )( params + 4 ) = Placement;
 				*( Rotator* )( params + 16 ) = Rot;
 				*( class Canvas** )( params + 28 ) = DrawCanvas;
@@ -302,11 +302,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.ShowDebugInfo" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = out_YL;
+				*( float* )params = out_YL;
 				*( float* )( params + 4 ) = out_YPos;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				out_YL = *( float* )( params + 0 );
+				out_YL = *( float* )params;
 				out_YPos = *( float* )( params + 4 );
 			}
 
@@ -322,7 +322,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.ShowSpectatorControls" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bForceEnabled;
+				*( bool* )params = bForceEnabled;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -331,7 +331,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.SetShowScores" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnableShowScores;
+				*( bool* )params = bEnableShowScores;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -364,7 +364,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.Fade" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( float* )( params + 0 ) = FadeTarget;
+				*( float* )params = FadeTarget;
 				*( float* )( params + 4 ) = FadeSpeed;
 				*( float* )( params + 8 ) = bForceFadeInStartAlpha;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -375,7 +375,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.PlayRoundOver" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = WinningTeam;
+				*( int* )params = WinningTeam;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -392,7 +392,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.PlayMatchOver" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Winner;
+				*( int* )params = Winner;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = WinnerName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -418,7 +418,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.ScaleformJoystickInputEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = leftAngle;
+				*( float* )params = leftAngle;
 				*( float* )( params + 4 ) = rightAngle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -428,7 +428,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.ToggleSkiEffect" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bEnabled;
+				*( bool* )params = bEnabled;
 				*( float* )( params + 4 ) = fSpeed;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -470,7 +470,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.SetPowerOscillation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bEnable;
+				*( bool* )params = bEnable;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -479,7 +479,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.AddUpdateToCombatLog" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( int* )( params + 0 ) = CombatType;
+				*( int* )params = CombatType;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Aggressor;
 				*( int* )( params + 16 ) = WeaponIcon;
 				*( ScriptArray< wchar_t >* )( params + 20 ) = Victim;
@@ -491,7 +491,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.AddToPromptPanel" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Message;
+				*( ScriptArray< wchar_t >* )params = Message;
 				*( byte* )( params + 12 ) = Priority;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -501,7 +501,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.AddToPromptPanelTime" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Message;
+				*( ScriptArray< wchar_t >* )params = Message;
 				*( float* )( params + 12 ) = EndTime;
 				*( byte* )( params + 16 ) = Priority;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -520,7 +520,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.AddToHeroStatus" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Message;
+				*( ScriptArray< wchar_t >* )params = Message;
 				*( float* )( params + 12 ) = ShowTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -538,7 +538,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.ClearPromptPanelMessage" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Message;
+				*( ScriptArray< wchar_t >* )params = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -563,7 +563,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.AddToHelpText" );
 				byte *params = ( byte* )( malloc( 52 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Title;
+				*( ScriptArray< wchar_t >* )params = Title;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Body;
 				*( float* )( params + 24 ) = PictureIndex;
 				*( ScriptArray< wchar_t >* )( params + 28 ) = footer;
@@ -584,7 +584,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.AddUpdateToKillMessage" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( int* )( params + 0 ) = RankIcon;
+				*( int* )params = RankIcon;
 				*( int* )( params + 4 ) = PlayerIcon;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = PlayerName;
 				*( ScriptArray< wchar_t >* )( params + 20 ) = Message;
@@ -596,7 +596,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.AddFlyingIcon" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( int* )( params + 0 ) = iconNumber;
+				*( int* )params = iconNumber;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Description;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Points;
 				*( int* )( params + 28 ) = bIsBadge;
@@ -608,7 +608,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.OnSpectate" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bUpdateTeamState;
+				*( bool* )params = bUpdateTeamState;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -633,7 +633,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.HideHUDElements" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = bShowStats;
+				*( bool* )params = bShowStats;
 				*( bool* )( params + 4 ) = bForceCredits;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -659,7 +659,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.ShowCenterHUDElements" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bShow;
+				*( bool* )params = bShow;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -668,7 +668,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.UpdateRespawnText" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Text;
+				*( ScriptArray< wchar_t >* )params = Text;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -677,7 +677,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.UpdateRespawnTimer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = TimeRemaining;
+				*( int* )params = TimeRemaining;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -686,7 +686,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.UpdateHUDCredits" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = changeAmount;
+				*( int* )params = changeAmount;
 				*( int* )( params + 4 ) = newTotal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -696,7 +696,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.TeamScoreboardShow" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bVisible;
+				*( bool* )params = bVisible;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -705,7 +705,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.RabbitScoreboardShow" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bVisible;
+				*( bool* )params = bVisible;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -714,7 +714,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.TeamScoreboardUpdateSlot" );
 				byte *params = ( byte* )( malloc( 84 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = PlayerName;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Score;
 				*( ScriptArray< wchar_t >* )( params + 28 ) = Kills;
@@ -731,7 +731,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.RabbitScoreboardUpdateSlot" );
 				byte *params = ( byte* )( malloc( 84 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = PlayerName;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Score;
 				*( ScriptArray< wchar_t >* )( params + 28 ) = Kills;
@@ -748,7 +748,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.TeamScoreboardUpdateTeamScore" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( int* )( params + 4 ) = Score;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -758,7 +758,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.TeamScoreboardUpdateTime" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Time;
+				*( ScriptArray< wchar_t >* )params = Time;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -767,7 +767,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.RabbitScoreboardUpdateTime" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Time;
+				*( ScriptArray< wchar_t >* )params = Time;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -776,7 +776,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.TeamScoreboardActivePlayer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -785,7 +785,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.RabbitScoreboardActivePlayer" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( bool* )( params + 4 ) = bVisible;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -860,7 +860,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.DrawColoredMarkerText" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ShowText;
+				*( ScriptArray< wchar_t >* )params = ShowText;
 				*( void** )( params + 12 ) = TextColor;
 				*( Vector* )( params + 16 ) = Placement;
 				*( class Canvas** )( params + 28 ) = DrawCanvas;
@@ -875,7 +875,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.DrawSmallText" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ShowText;
+				*( ScriptArray< wchar_t >* )params = ShowText;
 				*( bool* )( params + 12 ) = bFriend;
 				*( Vector* )( params + 16 ) = Placement;
 				*( class Canvas** )( params + 28 ) = DrawCanvas;
@@ -887,7 +887,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.DrawHealthBar" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( class MaterialInstanceConstant** )( params + 0 ) = HealthBarMIC;
+				*( class MaterialInstanceConstant** )params = HealthBarMIC;
 				*( bool* )( params + 4 ) = bFriend;
 				*( Vector* )( params + 8 ) = Placement;
 				*( class Canvas** )( params + 20 ) = DrawCanvas;
@@ -945,7 +945,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.PulsePickupFlashEffect" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = PulseAmount;
+				*( float* )params = PulseAmount;
 				*( float* )( params + 4 ) = PulseSpeed;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -995,7 +995,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.FumbleFlag" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = Speed;
+				*( float* )params = Speed;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1012,7 +1012,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.Whiteout" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = Speed;
+				*( float* )params = Speed;
 				*( float* )( params + 4 ) = Amount;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1038,7 +1038,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.LocalizedMessage" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( ScriptClass** )( params + 0 ) = InMessageClass;
+				*( ScriptClass** )params = InMessageClass;
 				*( class PlayerReplicationInfo** )( params + 4 ) = RelatedPRI;
 				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI_;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = CriticalString;
@@ -1056,7 +1056,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.ChatMessageReceived" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( int* )( params + 0 ) = Channel;
+				*( int* )params = Channel;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Sender;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1067,7 +1067,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.StripTag" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = sValue;
+				*( ScriptArray< wchar_t >* )params = sValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -1077,7 +1077,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.SendLocalMessageToGlobalAlert" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Message;
+				*( ScriptArray< wchar_t >* )params = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1086,7 +1086,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.SendLocalMessageToChat" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Message;
+				*( ScriptArray< wchar_t >* )params = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1095,7 +1095,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.SetPlayerClassObjects" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ClassName;
+				*( ScriptArray< wchar_t >* )params = ClassName;
 				*( int* )( params + 12 ) = PerkIcon1;
 				*( int* )( params + 16 ) = PerkIcon2;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -1114,7 +1114,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.KickVoteMessage" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bComplete;
+				*( bool* )params = bComplete;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Message;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1148,7 +1148,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.UpdateSpectatorPlayerPanel" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPawn** )( params + 0 ) = ViewTargetTrPawn;
+				*( class TrPawn** )params = ViewTargetTrPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1173,7 +1173,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.UpdateSpectatorVehiclePanel" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrVehicle** )( params + 0 ) = ViewTargetVehicle;
+				*( class TrVehicle** )params = ViewTargetVehicle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1198,7 +1198,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.UpdateSpectatorBookmarkPanel" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrCamera_SpectatorBookmark** )( params + 0 ) = BookMark;
+				*( class TrCamera_SpectatorBookmark** )params = BookMark;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1223,7 +1223,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.UpdateSpectatorObjectivePanel" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = ObjectiveActor;
+				*( class Actor** )params = ObjectiveActor;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1264,7 +1264,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.OnViewTargetChange" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = NewViewTarget;
+				*( class Actor** )params = NewViewTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1273,7 +1273,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.TestNumber" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Value;
+				*( int* )params = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1282,7 +1282,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.AddOverheadNumber" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = Value;
+				*( int* )params = Value;
 				*( void** )( params + 16 ) = WorldLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -1292,7 +1292,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.UpdateOverheadNumbers" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1301,7 +1301,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1310,7 +1310,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.PostRenderFor" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				*( class Canvas** )( params + 4 ) = DrawCanvas;
 				*( Vector* )( params + 8 ) = CameraPosition;
 				*( Vector* )( params + 20 ) = CameraDir;
@@ -1322,7 +1322,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.PlayAward" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Canvas** )( params + 0 ) = DrawCanvas;
+				*( class Canvas** )params = DrawCanvas;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1331,7 +1331,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.QueueAccolade" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( int* )( params + 0 ) = Icon;
+				*( int* )params = Icon;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Title;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = Subtitle;
 				*( bool* )( params + 28 ) = bIsBadge;
@@ -1351,7 +1351,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.RunQueuedAccoladesTimer" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bIsBadge;
+				*( bool* )params = bIsBadge;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1368,7 +1368,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.DeployableReplicated" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrDeployable** )( params + 0 ) = NewDep;
+				*( class TrDeployable** )params = NewDep;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -1377,7 +1377,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrHUD.MineReplicated" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrProj_Mine** )( params + 0 ) = NewMine;
+				*( class TrProj_Mine** )params = NewMine;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

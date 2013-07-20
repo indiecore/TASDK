@@ -29,7 +29,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshPath_WithinDistanceEnvelope.StayWithinEnvelopeToLoc" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( class NavigationHandle** )params = NavHandle;
 				*( Vector* )( params + 4 ) = InEnvelopeTestPoint;
 				*( float* )( params + 16 ) = InMaxDistance;
 				*( float* )( params + 20 ) = InMinDistance;

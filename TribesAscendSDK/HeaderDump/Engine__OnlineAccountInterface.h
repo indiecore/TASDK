@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineAccountInterface.CreateOnlineAccount" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = UserName;
+				*( ScriptArray< wchar_t >* )params = UserName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Password;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = EmailAddress;
 				*( ScriptArray< wchar_t >* )( params + 36 ) = ProductKey;
@@ -36,7 +36,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineAccountInterface.OnCreateOnlineAccountCompleted" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = ErrorStatus;
+				*( byte* )params = ErrorStatus;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineAccountInterface.CreateLocalAccount" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = UserName;
+				*( ScriptArray< wchar_t >* )params = UserName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Password;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -72,7 +72,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineAccountInterface.RenameLocalAccount" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = NewUserName;
+				*( ScriptArray< wchar_t >* )params = NewUserName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = OldUserName;
 				*( ScriptArray< wchar_t >* )( params + 24 ) = Password;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -84,7 +84,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineAccountInterface.DeleteLocalAccount" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = UserName;
+				*( ScriptArray< wchar_t >* )params = UserName;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = Password;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

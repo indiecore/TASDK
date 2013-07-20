@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVehicle_BaseFlying.SetInputs" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( float* )( params + 0 ) = InForward;
+				*( float* )params = InForward;
 				*( float* )( params + 4 ) = InStrafe;
 				*( float* )( params + 8 ) = InUp;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -56,7 +56,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVehicle_BaseFlying.VehicleCalcCamera" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				*( int* )( params + 4 ) = SeatIndex;
 				*( Vector* )( params + 8 ) = out_CamLoc;
 				*( Rotator* )( params + 20 ) = out_CamRot;

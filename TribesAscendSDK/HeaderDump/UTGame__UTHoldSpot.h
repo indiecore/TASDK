@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHoldSpot.SpecifyEndAnchor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = RouteFinder;
+				*( class Pawn** )params = RouteFinder;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class NavigationPoint** )( params + function->return_val_offset() );
@@ -60,7 +60,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTHoldSpot.NotifyAnchorFindingResult" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class NavigationPoint** )( params + 0 ) = EndAnchor;
+				*( class NavigationPoint** )params = EndAnchor;
 				*( class Pawn** )( params + 4 ) = RouteFinder;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

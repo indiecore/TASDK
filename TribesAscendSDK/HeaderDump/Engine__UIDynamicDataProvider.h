@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicDataProvider.BindProviderInstance" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = DataSourceInstance;
+				*( class Object** )params = DataSourceInstance;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicDataProvider.ProviderInstanceBound" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = DataSourceInstance;
+				*( class Object** )params = DataSourceInstance;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -53,7 +53,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicDataProvider.ProviderInstanceUnbound" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Object** )( params + 0 ) = DataSourceInstance;
+				*( class Object** )params = DataSourceInstance;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -62,7 +62,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicDataProvider.IsValidDataSourceClass" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = PotentialDataSourceClass;
+				*( ScriptClass** )params = PotentialDataSourceClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

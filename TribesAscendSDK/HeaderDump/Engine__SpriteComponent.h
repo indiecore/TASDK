@@ -30,7 +30,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SpriteComponent.SetSprite" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Texture2D** )( params + 0 ) = NewSprite;
+				*( class Texture2D** )params = NewSprite;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -39,7 +39,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SpriteComponent.SetUV" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = NewU;
+				*( int* )params = NewU;
 				*( int* )( params + 4 ) = NewUL;
 				*( int* )( params + 8 ) = NewV;
 				*( int* )( params + 12 ) = NewVL;
@@ -51,7 +51,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SpriteComponent.SetSpriteAndUV" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Texture2D** )( params + 0 ) = NewSprite;
+				*( class Texture2D** )params = NewSprite;
 				*( int* )( params + 4 ) = NewU;
 				*( int* )( params + 8 ) = NewUL;
 				*( int* )( params + 12 ) = NewV;

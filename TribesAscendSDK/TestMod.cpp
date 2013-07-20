@@ -222,5 +222,5 @@ void ModInit()
 
 	//script_hooks::AddHook( "Function TribesGame.TrPlayerController.PlayerWalking.PlayerMove", PlayerMove );
 
-	//ScriptObject::GenerateHeaders();
+	ScriptObject::GenerateHeaders();
 }

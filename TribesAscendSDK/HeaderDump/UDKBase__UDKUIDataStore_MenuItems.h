@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_MenuItems.GetProviderCount" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_MenuItems.IsProviderFiltered" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( int* )( params + 8 ) = ProviderIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -46,7 +46,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_MenuItems.GetAllResourceDataProviders" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptClass** )( params + 0 ) = ProviderClass;
+				*( ScriptClass** )params = ProviderClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_MenuItems.FindValueInProviderSet" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptName* )( params + 0 ) = ProviderFieldName;
+				*( ScriptName* )params = ProviderFieldName;
 				*( ScriptName* )( params + 8 ) = SearchTag;
 				*( ScriptArray< wchar_t >* )( params + 16 ) = SearchValue;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -67,7 +67,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_MenuItems.GetValueFromProviderSet" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( ScriptName* )( params + 0 ) = ProviderFieldName;
+				*( ScriptName* )params = ProviderFieldName;
 				*( ScriptName* )( params + 8 ) = SearchTag;
 				*( int* )( params + 16 ) = ListIndex;
 				*( ScriptArray< wchar_t >* )( params + 20 ) = OutValue;
@@ -81,7 +81,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_MenuItems.GetProviderSet" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = ProviderFieldName;
+				*( ScriptName* )params = ProviderFieldName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -99,7 +99,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_MenuItems.RemoveListElementProvidersKey" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = KeyName;
+				*( ScriptName* )params = KeyName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -108,7 +108,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKUIDataStore_MenuItems.AddListElementProvidersKey" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = KeyName;
+				*( ScriptName* )params = KeyName;
 				*( class UDKUIResourceDataProvider** )( params + 8 ) = Provider;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

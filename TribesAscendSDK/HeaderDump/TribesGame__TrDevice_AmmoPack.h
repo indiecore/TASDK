@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_AmmoPack.AddAmmoBuff" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class TrDevice** )( params + 0 ) = Dev;
+				*( class TrDevice** )params = Dev;
 				*( float* )( params + 4 ) = Mult;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

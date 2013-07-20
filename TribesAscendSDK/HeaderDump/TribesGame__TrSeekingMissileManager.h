@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.AddSaberLauncher" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class TrDevice_SaberLauncher** )( params + 0 ) = SaberLauncherToAdd;
+				*( class TrDevice_SaberLauncher** )params = SaberLauncherToAdd;
 				*( byte* )( params + 4 ) = MissileLockValue;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -42,7 +42,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.RemoveSaberLauncher" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrDevice_SaberLauncher** )( params + 0 ) = SaberLauncherToRemove;
+				*( class TrDevice_SaberLauncher** )params = SaberLauncherToRemove;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -51,7 +51,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.GetNumSaberLaunchersTargetingController" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class TrPlayerController** )( params + 0 ) = Controller;
+				*( class TrPlayerController** )params = Controller;
 				*( bool* )( params + 4 ) = bOnlyClientNotified;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -62,7 +62,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.GetNumSaberLaunchersTargetingVehicle" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class TrVehicle** )( params + 0 ) = targetVehicle;
+				*( class TrVehicle** )params = targetVehicle;
 				*( bool* )( params + 4 ) = bOnlyClientNotified;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.AddMissile" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrProj_TrackingMissile** )( params + 0 ) = MissileToAdd;
+				*( class TrProj_TrackingMissile** )params = MissileToAdd;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -82,7 +82,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.RemoveMissile" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrProj_TrackingMissile** )( params + 0 ) = MissileToRemove;
+				*( class TrProj_TrackingMissile** )params = MissileToRemove;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -91,7 +91,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.GetNumMissilesTrackingController" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPlayerController** )( params + 0 ) = Controller;
+				*( class TrPlayerController** )params = Controller;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -101,7 +101,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.GetNumMissilesTrackingVehicle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrVehicle** )( params + 0 ) = targetVehicle;
+				*( class TrVehicle** )params = targetVehicle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -111,7 +111,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.VictimControllerUpdated" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class TrPlayerController** )( params + 0 ) = VictimController;
+				*( class TrPlayerController** )params = VictimController;
 				*( byte* )( params + 4 ) = MissileEvent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -121,7 +121,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.TargetVehicleUpdated" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class TrVehicle** )( params + 0 ) = targetVehicle;
+				*( class TrVehicle** )params = targetVehicle;
 				*( byte* )( params + 4 ) = MissileEvent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -131,7 +131,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.BeginSaberLauncherTargeting" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPlayerController** )( params + 0 ) = VictimController;
+				*( class TrPlayerController** )params = VictimController;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -140,7 +140,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.StopSaberLauncherTargeting" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPlayerController** )( params + 0 ) = VictimController;
+				*( class TrPlayerController** )params = VictimController;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -149,7 +149,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.BeginMissileTracking" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPlayerController** )( params + 0 ) = VictimController;
+				*( class TrPlayerController** )params = VictimController;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -158,7 +158,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.StopMissileTracking" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrPlayerController** )( params + 0 ) = VictimController;
+				*( class TrPlayerController** )params = VictimController;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -167,7 +167,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.PawnLeftVehicle" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = LeavingPawn;
+				*( class Pawn** )params = LeavingPawn;
 				*( class TrVehicle** )( params + 4 ) = Vehicle;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -177,7 +177,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrSeekingMissileManager.PawnEnteredVehicle" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Pawn** )( params + 0 ) = EnteringPawn;
+				*( class Pawn** )params = EnteringPawn;
 				*( class TrVehicle** )( params + 4 ) = Vehicle;
 				*( int* )( params + 8 ) = SeatIndex;
 				ScriptObject *object = ( ScriptObject* )( this );

@@ -39,7 +39,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ClientSetOwner" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PlayerController** )( params + 0 ) = PC;
+				*( class PlayerController** )params = PC;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -48,7 +48,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ServerSendInitialCoverReplicationInfo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ClientReceiveInitialCoverReplicationInfo" );
 				byte *params = ( byte* )( malloc( 27 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( class CoverLink** )( params + 4 ) = Link;
 				*( bool* )( params + 8 ) = bLinkDisabled;
 				*( byte* )( params + 12 ) = NumSlotsEnabled;
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.NotifyEnabledSlots" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class CoverLink** )( params + 0 ) = Link;
+				*( class CoverLink** )params = Link;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ServerSendEnabledSlots" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ClientReceiveEnabledSlots" );
 				byte *params = ( byte* )( malloc( 14 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( class CoverLink** )( params + 4 ) = Link;
 				*( byte* )( params + 8 ) = NumSlotsEnabled;
 				*( byte* )( params + 9 ) = SlotsEnabled;
@@ -108,7 +108,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.NotifyDisabledSlots" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class CoverLink** )( params + 0 ) = Link;
+				*( class CoverLink** )params = Link;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -117,7 +117,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ServerSendDisabledSlots" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -126,7 +126,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ClientReceiveDisabledSlots" );
 				byte *params = ( byte* )( malloc( 14 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( class CoverLink** )( params + 4 ) = Link;
 				*( byte* )( params + 8 ) = NumSlotsDisabled;
 				*( byte* )( params + 9 ) = SlotsDisabled;
@@ -139,7 +139,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.NotifyAutoAdjustSlots" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class CoverLink** )( params + 0 ) = Link;
+				*( class CoverLink** )params = Link;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -148,7 +148,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ServerSendAdjustedSlots" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -157,7 +157,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ClientReceiveAdjustedSlots" );
 				byte *params = ( byte* )( malloc( 14 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( class CoverLink** )( params + 4 ) = Link;
 				*( byte* )( params + 8 ) = NumSlotsAdjusted;
 				*( byte* )( params + 9 ) = SlotsAdjusted;
@@ -170,7 +170,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.NotifySetManualCoverTypeForSlots" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( class CoverLink** )( params + 0 ) = Link;
+				*( class CoverLink** )params = Link;
 				*( byte* )( params + 16 ) = NewCoverType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -180,7 +180,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ServerSendManualCoverTypeSlots" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -189,7 +189,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ClientReceiveManualCoverTypeSlots" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( class CoverLink** )( params + 4 ) = Link;
 				*( byte* )( params + 8 ) = NumCoverTypesChanged;
 				*( void** )( params + 12 ) = SlotsCoverTypeChanged;
@@ -202,7 +202,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.NotifyLinkDisabledStateChange" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class CoverLink** )( params + 0 ) = Link;
+				*( class CoverLink** )params = Link;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -211,7 +211,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ServerSendLinkDisabledState" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -220,7 +220,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverReplicator.ClientReceiveLinkDisabledState" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = Index;
+				*( int* )params = Index;
 				*( class CoverLink** )( params + 4 ) = Link;
 				*( bool* )( params + 8 ) = bLinkDisabled;
 				ScriptObject *object = ( ScriptObject* )( this );

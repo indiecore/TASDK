@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_At.AtActor" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( class NavigationHandle** )params = NavHandle;
 				*( class Actor** )( params + 4 ) = GoalActor;
 				*( float* )( params + 8 ) = Dist;
 				*( bool* )( params + 12 ) = bReturnPartial;
@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_At.AtLocation" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class NavigationHandle** )( params + 0 ) = NavHandle;
+				*( class NavigationHandle** )params = NavHandle;
 				*( Vector* )( params + 4 ) = GoalLocation;
 				*( float* )( params + 16 ) = Dist;
 				*( bool* )( params + 20 ) = bReturnPartial;

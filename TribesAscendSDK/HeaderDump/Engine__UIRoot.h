@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIRoot.GetDataStoreStringValue" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InDataStoreMarkup;
+				*( ScriptArray< wchar_t >* )params = InDataStoreMarkup;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = OutStringValue;
 				*( class LocalPlayer** )( params + 24 ) = OwnerPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -36,7 +36,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIRoot.SetDataStoreStringValue" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InDataStoreMarkup;
+				*( ScriptArray< wchar_t >* )params = InDataStoreMarkup;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = InStringValue;
 				*( class LocalPlayer** )( params + 24 ) = OwnerPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -48,7 +48,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIRoot.GetInputPlatformType" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LocalPlayer** )( params + 0 ) = OwningPlayer;
+				*( class LocalPlayer** )params = OwningPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );
@@ -76,7 +76,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIRoot.StaticResolveDataStore" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = DataStoreTag;
+				*( ScriptName* )params = DataStoreTag;
 				*( class LocalPlayer** )( params + 8 ) = InPlayerOwner;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -87,7 +87,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIRoot.SetDataStoreFieldValue" );
 				byte *params = ( byte* )( malloc( 104 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InDataStoreMarkup;
+				*( ScriptArray< wchar_t >* )params = InDataStoreMarkup;
 				*( void** )( params + 12 ) = InFieldValue;
 				*( class LocalPlayer** )( params + 100 ) = OwnerPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -100,7 +100,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIRoot.GetDataStoreFieldValue" );
 				byte *params = ( byte* )( malloc( 104 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InDataStoreMarkup;
+				*( ScriptArray< wchar_t >* )params = InDataStoreMarkup;
 				*( void** )( params + 12 ) = OutFieldValue;
 				*( class LocalPlayer** )( params + 100 ) = OwnerPlayer;
 				ScriptObject *object = ( ScriptObject* )( this );

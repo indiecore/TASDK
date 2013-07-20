@@ -25,7 +25,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FaceFXAsset.MountFaceFXAnimSet" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class FaceFXAnimSet** )( params + 0 ) = AnimSet;
+				*( class FaceFXAnimSet** )params = AnimSet;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FaceFXAsset.UnmountFaceFXAnimSet" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class FaceFXAnimSet** )( params + 0 ) = AnimSet;
+				*( class FaceFXAnimSet** )params = AnimSet;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

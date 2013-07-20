@@ -47,7 +47,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FractureManager.SpawnChunkDestroyEffect" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( class ParticleSystem** )( params + 0 ) = Effect;
+				*( class ParticleSystem** )params = Effect;
 				*( void** )( params + 4 ) = ChunkBox;
 				*( Vector* )( params + 32 ) = ChunkDir;
 				*( float* )( params + 44 ) = Scale;
@@ -117,7 +117,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FractureManager.GetFSMPart" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class FracturedStaticMeshActor** )( params + 0 ) = Parent;
+				*( class FracturedStaticMeshActor** )params = Parent;
 				*( Vector* )( params + 4 ) = SpawnLocation;
 				*( Rotator* )( params + 16 ) = SpawnRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -129,7 +129,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FractureManager.SpawnPartActor" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class FracturedStaticMeshActor** )( params + 0 ) = Parent;
+				*( class FracturedStaticMeshActor** )params = Parent;
 				*( Vector* )( params + 4 ) = SpawnLocation;
 				*( Rotator* )( params + 16 ) = SpawnRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -141,7 +141,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FractureManager.ReturnPartActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class FracturedStaticMeshPart** )( params + 0 ) = Part;
+				*( class FracturedStaticMeshPart** )params = Part;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -150,7 +150,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.FractureManager.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

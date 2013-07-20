@@ -23,11 +23,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKGameSettingsCommon.StringToBlob" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InString;
+				*( ScriptArray< wchar_t >* )params = InString;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = OutBlob;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				InString = *( ScriptArray< wchar_t >* )( params + 0 );
+				InString = *( ScriptArray< wchar_t >* )params;
 				OutBlob = *( ScriptArray< wchar_t >* )( params + 12 );
 				return *( bool* )( params + function->return_val_offset() );
 			}
@@ -36,10 +36,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKGameSettingsCommon.BlobToString" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = InBlob;
+				*( ScriptArray< wchar_t >* )params = InBlob;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				InBlob = *( ScriptArray< wchar_t >* )( params + 0 );
+				InBlob = *( ScriptArray< wchar_t >* )params;
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
 			}
 

@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.MeshBeaconClient.OnCreateNewSessionRequestReceived" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( ScriptClass** )( params + 8 ) = SearchClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.MeshBeaconClient.OnTravelRequestReceived" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( ScriptName* )( params + 0 ) = SessionName;
+				*( ScriptName* )params = SessionName;
 				*( ScriptClass** )( params + 8 ) = SearchClass;
 				*( byte* )( params + 12 ) = PlatformSpecificInfo;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.MeshBeaconClient.OnReceivedBandwidthTestResults" );
 				byte *params = ( byte* )( malloc( 14 ) );
-				*( byte* )( params + 0 ) = TestType;
+				*( byte* )params = TestType;
 				*( byte* )( params + 1 ) = TestResult;
 				*( void** )( params + 4 ) = BandwidthStats;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.MeshBeaconClient.OnReceivedBandwidthTestRequest" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = TestType;
+				*( byte* )params = TestType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.MeshBeaconClient.OnConnectionRequestResult" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = ConnectionResult;
+				*( byte* )params = ConnectionResult;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -91,12 +91,12 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.MeshBeaconClient.RequestConnection" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( void** )( params + 0 ) = DesiredHost;
+				*( void** )params = DesiredHost;
 				*( void** )( params + 8 ) = ClientRequest;
 				*( bool* )( params + 44 ) = bRegisterSecureAddress;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				DesiredHost = *( void** )( params + 0 );
+				DesiredHost = *( void** )params;
 				ClientRequest = *( void** )( params + 8 );
 				return *( bool* )( params + function->return_val_offset() );
 			}
@@ -105,7 +105,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.MeshBeaconClient.BeginBandwidthTest" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = TestType;
+				*( byte* )params = TestType;
 				*( int* )( params + 4 ) = TestBufferSize;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -116,7 +116,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.MeshBeaconClient.SendHostNewGameSessionResponse" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( bool* )( params + 0 ) = bSuccess;
+				*( bool* )params = bSuccess;
 				*( ScriptName* )( params + 4 ) = SessionName;
 				*( ScriptClass** )( params + 12 ) = SearchClass;
 				*( byte* )( params + 16 ) = PlatformSpecificInfo;

@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDmgType_Base.CalculateRangeDamageFalloff" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( float* )( params + 0 ) = Dist;
+				*( float* )params = Dist;
 				*( float* )( params + 4 ) = damageRange;
 				*( class TrPlayerController** )( params + 8 ) = TrPCDamager;
 				*( byte* )( params + 12 ) = EquipPoint;
@@ -38,7 +38,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDmgType_Base.GetActorCausingDamage" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Controller** )( params + 0 ) = EventInstigator;
+				*( class Controller** )params = EventInstigator;
 				*( class Actor** )( params + 4 ) = DamageCauser;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDmgType_Base.ModifyOverheadNumberLocation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = InLocation;
+				*( Vector* )params = InLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Vector* )( params + function->return_val_offset() );
@@ -59,7 +59,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDmgType_Base.GetDamageScale" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Actor** )( params + 0 ) = DamageCauser;
+				*( class Actor** )params = DamageCauser;
 				*( float* )( params + 4 ) = Dist;
 				*( ScriptClass** )( params + 8 ) = dmgType;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -103,7 +103,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDmgType_Base.VehicleDamageScalingFor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Vehicle** )( params + 0 ) = V;
+				*( class Vehicle** )params = V;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -113,7 +113,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDmgType_Base.GetCameraShake" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = Damage;
+				*( int* )params = Damage;
 				*( ScriptName* )( params + 4 ) = outCameraShakeName;
 				*( float* )( params + 12 ) = outScale;
 				ScriptObject *object = ( ScriptObject* )( this );

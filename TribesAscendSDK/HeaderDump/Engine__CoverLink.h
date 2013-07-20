@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.GetFireLinkTargetCoverInfo" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( int* )( params + 4 ) = FireLinkIdx;
 				*( void** )( params + 8 ) = out_Info;
 				*( byte* )( params + 16 ) = ArrayID;
@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.PackFireLinkInteractionInfo" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( byte* )( params + 0 ) = SrcType;
+				*( byte* )params = SrcType;
 				*( byte* )( params + 1 ) = SrcAction;
 				*( byte* )( params + 2 ) = DestType;
 				*( byte* )( params + 3 ) = DestAction;
@@ -50,7 +50,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.UnPackFireLinkInteractionInfo" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = PackedByte;
+				*( byte* )params = PackedByte;
 				*( byte* )( params + 1 ) = SrcType;
 				*( byte* )( params + 2 ) = SrcAction;
 				*( byte* )( params + 3 ) = DestType;
@@ -67,7 +67,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.GetSlotLocation" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( bool* )( params + 4 ) = bForceUseOffset;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.GetSlotRotation" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( bool* )( params + 4 ) = bForceUseOffset;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.GetSlotViewPoint" );
 				byte *params = ( byte* )( malloc( 6 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( byte* )( params + 4 ) = Type;
 				*( byte* )( params + 5 ) = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -101,7 +101,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.IsExposedTo" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( void** )( params + 4 ) = ChkSlot;
 				*( float* )( params + 12 ) = out_ExposedScale;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -114,7 +114,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.SetInvalidUntil" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( float* )( params + 4 ) = TimeToBecomeValid;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -124,7 +124,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.Claim" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = NewClaim;
+				*( class Pawn** )params = NewClaim;
 				*( int* )( params + 4 ) = SlotIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -136,7 +136,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.UnClaim" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( class Pawn** )( params + 0 ) = OldClaim;
+				*( class Pawn** )params = OldClaim;
 				*( int* )( params + 4 ) = SlotIdx;
 				*( bool* )( params + 8 ) = bUnclaimAll;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -148,7 +148,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.IsValidClaim" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Pawn** )( params + 0 ) = ChkClaim;
+				*( class Pawn** )params = ChkClaim;
 				*( int* )( params + 4 ) = SlotIdx;
 				*( bool* )( params + 8 ) = bSkipTeamCheck;
 				*( bool* )( params + 12 ) = bSkipOverlapCheck;
@@ -161,7 +161,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.IsValidClaimBetween" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Pawn** )( params + 0 ) = ChkClaim;
+				*( class Pawn** )params = ChkClaim;
 				*( int* )( params + 4 ) = StartSlotIdx;
 				*( int* )( params + 8 ) = EndSlotIdx;
 				*( bool* )( params + 12 ) = bSkipTeamCheck;
@@ -175,7 +175,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.IsStationarySlot" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -186,7 +186,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.IsEdgeSlot" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( bool* )( params + 4 ) = bIgnoreLeans;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -197,7 +197,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.FindSlots" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = CheckLocation;
+				*( Vector* )params = CheckLocation;
 				*( float* )( params + 12 ) = MaxDistance;
 				*( int* )( params + 16 ) = LeftSlotIdx;
 				*( int* )( params + 20 ) = RightSlotIdx;
@@ -212,7 +212,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.IsLeftEdgeSlot" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( bool* )( params + 4 ) = bIgnoreLeans;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -223,7 +223,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.IsRightEdgeSlot" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( bool* )( params + 4 ) = bIgnoreLeans;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -234,7 +234,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.GetSlotIdxToLeft" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( int* )( params + 4 ) = Cnt;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -245,7 +245,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.GetSlotIdxToRight" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( int* )( params + 4 ) = Cnt;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -256,7 +256,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.AllowRightTransition" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -266,7 +266,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.AllowLeftTransition" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -276,7 +276,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.GetFireLinkTo" );
 				byte *params = ( byte* )( malloc( 30 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( void** )( params + 4 ) = ChkCover;
 				*( byte* )( params + 12 ) = ChkAction;
 				*( byte* )( params + 13 ) = ChkType;
@@ -291,7 +291,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.HasFireLinkTo" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( void** )( params + 4 ) = ChkCover;
 				*( bool* )( params + 12 ) = bAllowFallbackLinks;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -303,7 +303,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.GetSlotActions" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -312,7 +312,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.SetDisabled" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewDisabled;
+				*( bool* )params = bNewDisabled;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -322,7 +322,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.SetSlotEnabled" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( bool* )( params + 4 ) = bEnable;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -332,7 +332,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.NotifySlotOwnerCoverDisabled" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( bool* )( params + 4 ) = bAIOnly;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -342,7 +342,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.SetSlotPlayerOnly" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( bool* )( params + 4 ) = bInPlayerOnly;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -352,7 +352,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.OnModifyCover" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_ModifyCover** )( params + 0 ) = Action;
+				*( class SeqAct_ModifyCover** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -361,7 +361,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.AutoAdjustSlot" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( bool* )( params + 4 ) = bOnlyCheckLeans;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -381,7 +381,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.OnToggle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Toggle** )( params + 0 ) = inAction;
+				*( class SeqAct_Toggle** )params = inAction;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -390,20 +390,20 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.CreateCheckpointRecord" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = Record;
+				*( void** )params = Record;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Record = *( void** )( params + 0 );
+				Record = *( void** )params;
 			}
 
 			void ApplyCheckpointRecord( void* &Record )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.ApplyCheckpointRecord" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = Record;
+				*( void** )params = Record;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				Record = *( void** )( params + 0 );
+				Record = *( void** )params;
 			}
 
 			void ShutDown(  )
@@ -418,7 +418,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.GetSwatTurnTarget" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				*( int* )( params + 4 ) = Direction;
 				*( void** )( params + 8 ) = out_Info;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -431,7 +431,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.BreakFracturedMeshes" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = Origin;
+				*( Vector* )params = Origin;
 				*( float* )( params + 12 ) = Radius;
 				*( float* )( params + 16 ) = RBStrength;
 				*( ScriptClass** )( params + 20 ) = DamageType;
@@ -444,7 +444,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.AddCoverSlot" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( Vector* )( params + 0 ) = SlotLocation;
+				*( Vector* )params = SlotLocation;
 				*( Rotator* )( params + 12 ) = SlotRotation;
 				*( int* )( params + 24 ) = SlotIdx;
 				*( bool* )( params + 28 ) = bForceSlotUpdate;
@@ -458,7 +458,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.GetDebugString" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -468,7 +468,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.CoverLink.GetLocationDescription" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = SlotIdx;
+				*( int* )params = SlotIdx;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( byte* )( params + function->return_val_offset() );

@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrVehicle_Havoc.GetWeaponAim" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTVehicleWeapon** )( params + 0 ) = VWeapon;
+				*( class UTVehicleWeapon** )params = VWeapon;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( Rotator* )( params + function->return_val_offset() );

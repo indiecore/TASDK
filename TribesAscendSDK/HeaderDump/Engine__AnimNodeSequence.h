@@ -27,7 +27,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSequence.SetAnim" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = Sequence;
+				*( ScriptName* )params = Sequence;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -36,7 +36,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSequence.PlayAnim" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( bool* )( params + 0 ) = bLoop;
+				*( bool* )params = bLoop;
 				*( float* )( params + 4 ) = InRate;
 				*( float* )( params + 8 ) = StartTime;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -63,7 +63,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSequence.SetPosition" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = NewTime;
+				*( float* )params = NewTime;
 				*( bool* )( params + 4 ) = bFireNotifies;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -82,7 +82,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSequence.FindGroupRelativePosition" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = GroupRelativePosition;
+				*( float* )params = GroupRelativePosition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -92,7 +92,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSequence.FindGroupPosition" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = GroupRelativePosition;
+				*( float* )params = GroupRelativePosition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -138,7 +138,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSequence.SetRootBoneAxisOption" );
 				byte *params = ( byte* )( malloc( 3 ) );
-				*( byte* )( params + 0 ) = AxisX;
+				*( byte* )params = AxisX;
 				*( byte* )( params + 1 ) = AxisY;
 				*( byte* )( params + 2 ) = AxisZ;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -150,7 +150,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimNodeSequence.SetRootBoneRotationOption" );
 				byte *params = ( byte* )( malloc( 3 ) );
-				*( byte* )( params + 0 ) = AxisX;
+				*( byte* )params = AxisX;
 				*( byte* )( params + 1 ) = AxisY;
 				*( byte* )( params + 2 ) = AxisZ;
 				ScriptObject *object = ( ScriptObject* )( this );

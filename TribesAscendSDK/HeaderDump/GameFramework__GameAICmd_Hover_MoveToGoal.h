@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAICmd_Hover_MoveToGoal.MoveToGoal" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class GameAIController** )( params + 0 ) = AI;
+				*( class GameAIController** )params = AI;
 				*( class Actor** )( params + 4 ) = InGoal;
 				*( float* )( params + 8 ) = InGoalDistance;
 				*( float* )( params + 12 ) = InHoverHeight;
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAICmd_Hover_MoveToGoal.HandlePathObstruction" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Actor** )( params + 0 ) = BlockedBy;
+				*( class Actor** )params = BlockedBy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAICmd_Hover_MoveToGoal.IsEnemyBasedOnInterpActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = InEnemy;
+				*( class Pawn** )params = InEnemy;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

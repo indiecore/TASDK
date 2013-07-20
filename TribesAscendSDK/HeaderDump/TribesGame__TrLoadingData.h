@@ -35,7 +35,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrLoadingData.GetRandomTip" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = GameIndex;
+				*( int* )params = GameIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );

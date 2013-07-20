@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.TranslationContext.RegisterTranslatorTag" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TranslatorTag** )( params + 0 ) = InTagHandler;
+				*( class TranslatorTag** )params = InTagHandler;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );

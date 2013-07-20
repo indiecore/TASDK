@@ -54,7 +54,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.OpenMenuScene" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptClass** )( params + 0 ) = SceneClass;
+				*( ScriptClass** )params = SceneClass;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Mode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -65,7 +65,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.OnInputTouch" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( int* )( params + 0 ) = Handle;
+				*( int* )params = Handle;
 				*( byte* )( params + 4 ) = Type;
 				*( void** )( params + 8 ) = TouchLocation;
 				*( float* )( params + 16 ) = DeviceTimestamp;
@@ -77,7 +77,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.OnPreviewTouch" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = X;
+				*( float* )params = X;
 				*( float* )( params + 4 ) = Y;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -96,7 +96,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.OnMobileMotion" );
 				byte *params = ( byte* )( malloc( 52 ) );
-				*( class PlayerInput** )( params + 0 ) = PlayerInput;
+				*( class PlayerInput** )params = PlayerInput;
 				*( Vector* )( params + 4 ) = CurrentAttitude;
 				*( Vector* )( params + 16 ) = CurrentRotationRate;
 				*( Vector* )( params + 28 ) = CurrentGravity;
@@ -140,7 +140,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.SendInputKey" );
 				byte *params = ( byte* )( malloc( 13 ) );
-				*( ScriptName* )( params + 0 ) = Key;
+				*( ScriptName* )params = Key;
 				*( byte* )( params + 8 ) = Event;
 				*( float* )( params + 12 ) = AmountDepressed;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -151,7 +151,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.SendInputAxis" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptName* )( params + 0 ) = Key;
+				*( ScriptName* )params = Key;
 				*( float* )( params + 8 ) = Delta;
 				*( float* )( params + 12 ) = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -202,7 +202,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.AddKismetEventHandler" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqEvent_MobileBase** )( params + 0 ) = NewHandler;
+				*( class SeqEvent_MobileBase** )params = NewHandler;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -211,7 +211,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.AddKismetRawInputEventHandler" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqEvent_MobileRawInput** )( params + 0 ) = NewHandler;
+				*( class SeqEvent_MobileRawInput** )params = NewHandler;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -220,7 +220,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.FindZone" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ZoneName;
+				*( ScriptArray< wchar_t >* )params = ZoneName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class MobileInputZone** )( params + function->return_val_offset() );
@@ -230,7 +230,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.FindorAddZone" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = ZoneName;
+				*( ScriptArray< wchar_t >* )params = ZoneName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class MobileInputZone** )( params + function->return_val_offset() );
@@ -240,7 +240,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.CloseMenuScene" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class MobileMenuScene** )( params + 0 ) = SceneToClose;
+				*( class MobileMenuScene** )params = SceneToClose;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -257,7 +257,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.RenderMenus" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Canvas** )( params + 0 ) = Canvas;
+				*( class Canvas** )params = Canvas;
 				*( float* )( params + 4 ) = RenderDelta;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -267,7 +267,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobilePlayerInput.PreClientTravel" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PendingURL;
+				*( ScriptArray< wchar_t >* )params = PendingURL;
 				*( byte* )( params + 12 ) = TravelType;
 				*( bool* )( params + 16 ) = bIsSeamlessTravel;
 				ScriptObject *object = ( ScriptObject* )( this );

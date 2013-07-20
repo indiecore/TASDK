@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkelControlLookAt.SetTargetLocation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = NewTargetLocation;
+				*( Vector* )params = NewTargetLocation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -64,7 +64,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkelControlLookAt.InterpolateTargetLocation" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -73,7 +73,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkelControlLookAt.SetLookAtAlpha" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( float* )( params + 0 ) = DesiredAlpha;
+				*( float* )params = DesiredAlpha;
 				*( float* )( params + 4 ) = DesiredBlendTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -83,7 +83,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SkelControlLookAt.CanLookAtPoint" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = PointLoc;
+				*( Vector* )params = PointLoc;
 				*( bool* )( params + 12 ) = bDrawDebugInfo;
 				*( bool* )( params + 16 ) = bDebugUsePersistentLines;
 				*( bool* )( params + 20 ) = bDebugFlushLinesFirst;

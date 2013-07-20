@@ -56,7 +56,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTAnnouncer.PlayAnnouncementNow" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptClass** )( params + 0 ) = InMessageClass;
+				*( ScriptClass** )params = InMessageClass;
 				*( int* )( params + 4 ) = MessageIndex;
 				*( class PlayerReplicationInfo** )( params + 8 ) = PRI;
 				*( class Object** )( params + 12 ) = OptionalObject;
@@ -76,7 +76,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTAnnouncer.PlayAnnouncement" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptClass** )( params + 0 ) = InMessageClass;
+				*( ScriptClass** )params = InMessageClass;
 				*( int* )( params + 4 ) = MessageIndex;
 				*( class PlayerReplicationInfo** )( params + 8 ) = PRI;
 				*( class Object** )( params + 12 ) = OptionalObject;

@@ -89,7 +89,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDeployable_BackupGenerator.DoPowerUpdate" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrDeployable** )( params + 0 ) = dep;
+				*( class TrDeployable** )params = dep;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

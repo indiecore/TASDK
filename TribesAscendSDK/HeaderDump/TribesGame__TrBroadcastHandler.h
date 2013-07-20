@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBroadcastHandler.TeamBroadcastVGSCommand" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = SenderPRI;
+				*( class PlayerReplicationInfo** )params = SenderPRI;
 				*( byte* )( params + 4 ) = VGSCommandIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBroadcastHandler.GlobalBroadcastVGSCommand" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = SenderPRI;
+				*( class PlayerReplicationInfo** )params = SenderPRI;
 				*( byte* )( params + 4 ) = VGSCommandIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBroadcastHandler.TeamBroadcastVGSContextCommand" );
 				byte *params = ( byte* )( malloc( 10 ) );
-				*( class PlayerReplicationInfo** )( params + 0 ) = SenderPRI;
+				*( class PlayerReplicationInfo** )params = SenderPRI;
 				*( byte* )( params + 4 ) = ContextActor;
 				*( byte* )( params + 5 ) = ContextLocation;
 				*( bool* )( params + 8 ) = bEnemyLocation;
@@ -56,7 +56,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrBroadcastHandler.OnActorSpotted" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Actor** )( params + 0 ) = SpottedActor;
+				*( class Actor** )params = SpottedActor;
 				*( ScriptClass** )( params + 4 ) = SpottedTargetClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore.OnDataStoreValueUpdated" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class UIDataStore** )( params + 0 ) = SourceDataStore;
+				*( class UIDataStore** )params = SourceDataStore;
 				*( bool* )( params + 4 ) = bValuesInvalidated;
 				*( ScriptName* )( params + 8 ) = PropertyTag;
 				*( class UIDataProvider** )( params + 16 ) = SourceProvider;
@@ -46,7 +46,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore.Registered" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LocalPlayer** )( params + 0 ) = PlayerOwner;
+				*( class LocalPlayer** )params = PlayerOwner;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore.Unregistered" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class LocalPlayer** )( params + 0 ) = PlayerOwner;
+				*( class LocalPlayer** )params = PlayerOwner;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -80,7 +80,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore.RefreshSubscribers" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = PropertyTag;
+				*( ScriptName* )params = PropertyTag;
 				*( bool* )( params + 8 ) = bInvalidateValues;
 				*( class UIDataProvider** )( params + 12 ) = SourceProvider;
 				*( int* )( params + 16 ) = ArrayIndex;

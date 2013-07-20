@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SequenceEvent.CheckActivate" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Actor** )( params + 0 ) = InOriginator;
+				*( class Actor** )params = InOriginator;
 				*( class Actor** )( params + 4 ) = InInstigator;
 				*( bool* )( params + 8 ) = bTest;
 				*( bool* )( params + 24 ) = bPushTop;

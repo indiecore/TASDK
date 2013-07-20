@@ -85,7 +85,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.DecalManager.SpawnDecal" );
 				byte *params = ( byte* )( malloc( 96 ) );
-				*( class MaterialInterface** )( params + 0 ) = DecalMaterial;
+				*( class MaterialInterface** )params = DecalMaterial;
 				*( Vector* )( params + 4 ) = DecalLocation;
 				*( Rotator* )( params + 16 ) = DecalOrientation;
 				*( float* )( params + 28 ) = Width;

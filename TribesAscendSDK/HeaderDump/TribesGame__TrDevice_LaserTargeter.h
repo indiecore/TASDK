@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_LaserTargeter.IsValidCallIn" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = CallInIndex;
+				*( byte* )params = CallInIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_LaserTargeter.IsValidTargetLocation" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( Vector* )( params + 0 ) = CurrentTarget;
+				*( Vector* )params = CurrentTarget;
 				*( Vector* )( params + 12 ) = PreviousTarget;
 				*( class Actor** )( params + 24 ) = HitTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_LaserTargeter.ReplicatedEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = VarName;
+				*( ScriptName* )params = VarName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -103,7 +103,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_LaserTargeter.SetActiveCallIn" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = CallInIndex;
+				*( byte* )params = CallInIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -128,12 +128,12 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_LaserTargeter.GetLaserStartAndEnd" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( Vector* )( params + 0 ) = StartLocation;
+				*( Vector* )params = StartLocation;
 				*( Vector* )( params + 12 ) = EndLocation;
 				*( Vector* )( params + 24 ) = EndLocationNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				StartLocation = *( Vector* )( params + 0 );
+				StartLocation = *( Vector* )params;
 				EndLocation = *( Vector* )( params + 12 );
 				EndLocationNormal = *( Vector* )( params + 24 );
 				return *( bool* )( params + function->return_val_offset() );
@@ -159,7 +159,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_LaserTargeter.UpdateLaserEffect" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -176,7 +176,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_LaserTargeter.ServerPerformCallIn" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Vector* )( params + 0 ) = EndLocation;
+				*( Vector* )params = EndLocation;
 				*( Vector* )( params + 12 ) = HitNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -186,7 +186,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrDevice_LaserTargeter.UpdateTarget" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( bool* )( params + 0 ) = hasHitSomething;
+				*( bool* )params = hasHitSomething;
 				*( Vector* )( params + 4 ) = End;
 				*( float* )( params + 16 ) = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );

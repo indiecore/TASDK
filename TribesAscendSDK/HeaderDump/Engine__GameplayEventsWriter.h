@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.ResolvePlayerIndex" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Controller** )( params + 0 ) = Player;
+				*( class Controller** )params = Player;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.StartLogging" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = HeartbeatDelta;
+				*( float* )params = HeartbeatDelta;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.ResetLogging" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = HeartbeatDelta;
+				*( float* )params = HeartbeatDelta;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.OpenStatsFile" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = Filename;
+				*( ScriptArray< wchar_t >* )params = Filename;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -122,7 +122,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogGameIntEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( int* )( params + 4 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -132,7 +132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogGameStringEvent" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -142,7 +142,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogGameFloatEvent" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( float* )( params + 4 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -152,7 +152,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogGamePositionEvent" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( Vector* )( params + 4 ) = Position;
 				*( float* )( params + 16 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -164,7 +164,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogTeamIntEvent" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( class TeamInfo** )( params + 4 ) = Team;
 				*( int* )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -175,7 +175,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogTeamFloatEvent" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( class TeamInfo** )( params + 4 ) = Team;
 				*( float* )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -186,7 +186,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogTeamStringEvent" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( class TeamInfo** )( params + 4 ) = Team;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -197,7 +197,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogPlayerIntEvent" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( class Controller** )( params + 4 ) = Player;
 				*( int* )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -208,7 +208,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogPlayerFloatEvent" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( class Controller** )( params + 4 ) = Player;
 				*( float* )( params + 8 ) = Value;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -219,7 +219,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogPlayerStringEvent" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( class Controller** )( params + 4 ) = Player;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = EventString;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -230,7 +230,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogPlayerSpawnEvent" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( class Controller** )( params + 4 ) = Player;
 				*( ScriptClass** )( params + 8 ) = PawnClass;
 				*( int* )( params + 12 ) = TeamID;
@@ -242,7 +242,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogPlayerLoginChange" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( class Controller** )( params + 4 ) = Player;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = PlayerName;
 				*( void** )( params + 20 ) = PlayerID;
@@ -255,7 +255,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogAllPlayerPositionsEvent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -264,7 +264,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogPlayerKillDeath" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( int* )( params + 4 ) = KillType;
 				*( class Controller** )( params + 8 ) = Killer;
 				*( ScriptClass** )( params + 12 ) = dmgType;
@@ -277,7 +277,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogPlayerPlayerEvent" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( class Controller** )( params + 4 ) = Player;
 				*( class Controller** )( params + 8 ) = Target;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -288,7 +288,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogWeaponIntEvent" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( class Controller** )( params + 4 ) = Player;
 				*( ScriptClass** )( params + 8 ) = WeaponClass;
 				*( int* )( params + 12 ) = Value;
@@ -300,7 +300,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogDamageEvent" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( class Controller** )( params + 4 ) = Player;
 				*( ScriptClass** )( params + 8 ) = dmgType;
 				*( class Controller** )( params + 12 ) = Target;
@@ -313,7 +313,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.LogProjectileIntEvent" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = EventID;
+				*( int* )params = EventID;
 				*( class Controller** )( params + 4 ) = Player;
 				*( ScriptClass** )( params + 8 ) = Proj;
 				*( int* )( params + 12 ) = Value;
@@ -342,7 +342,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.RecordAIPathFail" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Controller** )( params + 0 ) = AI;
+				*( class Controller** )params = AI;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Reason;
 				*( Vector* )( params + 16 ) = Dest;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -353,7 +353,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.GameplayEventsWriter.RecordCoverLinkFireLinks" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class CoverLink** )( params + 0 ) = Link;
+				*( class CoverLink** )params = Link;
 				*( class Controller** )( params + 4 ) = Player;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

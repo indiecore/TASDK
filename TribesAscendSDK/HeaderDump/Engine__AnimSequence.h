@@ -26,7 +26,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.AnimSequence.GetNotifyTimeByClass" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptClass** )( params + 0 ) = NotifyClass;
+				*( ScriptClass** )params = NotifyClass;
 				*( float* )( params + 4 ) = PlayRate;
 				*( float* )( params + 8 ) = StartPosition;
 				*( class AnimNotify** )( params + 12 ) = out_Notify;

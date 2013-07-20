@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTEmitter.SetTemplate" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class ParticleSystem** )( params + 0 ) = NewTemplate;
+				*( class ParticleSystem** )params = NewTemplate;
 				*( bool* )( params + 4 ) = bDestroyOnFinish;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

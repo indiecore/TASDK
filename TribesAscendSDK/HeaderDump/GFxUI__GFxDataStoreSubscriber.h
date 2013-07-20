@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxDataStoreSubscriber.SetDataStoreBinding" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = MarkupText;
+				*( ScriptArray< wchar_t >* )params = MarkupText;
 				*( int* )( params + 12 ) = BindingIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -42,7 +42,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxDataStoreSubscriber.GetDataStoreBinding" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = BindingIndex;
+				*( int* )params = BindingIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxDataStoreSubscriber.RefreshSubscriberValue" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = BindingIndex;
+				*( int* )params = BindingIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -62,7 +62,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxDataStoreSubscriber.NotifyDataStoreValueUpdated" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( class UIDataStore** )( params + 0 ) = SourceDataStore;
+				*( class UIDataStore** )params = SourceDataStore;
 				*( bool* )( params + 4 ) = bValuesInvalidated;
 				*( ScriptName* )( params + 8 ) = PropertyTag;
 				*( class UIDataProvider** )( params + 16 ) = SourceProvider;

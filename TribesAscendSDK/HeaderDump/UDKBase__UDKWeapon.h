@@ -62,7 +62,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UDKBase.UDKWeapon.SetPosition" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UDKPawn** )( params + 0 ) = Holder;
+				*( class UDKPawn** )params = Holder;
 				*( float* )( params + 4 ) = DeltaSeconds;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

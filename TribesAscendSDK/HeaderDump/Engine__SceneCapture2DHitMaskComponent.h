@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCapture2DHitMaskComponent.SetCaptureTargetTexture" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TextureRenderTarget2D** )( params + 0 ) = InTextureTarget;
+				*( class TextureRenderTarget2D** )params = InTextureTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCapture2DHitMaskComponent.SetCaptureParameters" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( Vector* )( params + 0 ) = InMaskPosition;
+				*( Vector* )params = InMaskPosition;
 				*( float* )( params + 12 ) = InMaskRadius;
 				*( Vector* )( params + 16 ) = InStartupPosition;
 				*( bool* )( params + 28 ) = bOnlyWhenFacing;
@@ -52,7 +52,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.SceneCapture2DHitMaskComponent.SetFadingStartTimeSinceHit" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = InFadingStartTimeSinceHit;
+				*( float* )params = InFadingStartTimeSinceHit;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

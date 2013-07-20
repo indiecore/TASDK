@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.GetDesiredFOV" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = ViewedPawn;
+				*( class Pawn** )params = ViewedPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.SetFocusPoint" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = ViewedPawn;
+				*( class Pawn** )params = ViewedPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -104,7 +104,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.OnBecomeActive" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = TargetPawn;
+				*( class Pawn** )params = TargetPawn;
 				*( class GameThirdPersonCameraMode** )( params + 4 ) = PrevMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -114,7 +114,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.OnBecomeInActive" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Pawn** )( params + 0 ) = TargetPawn;
+				*( class Pawn** )params = TargetPawn;
 				*( class GameThirdPersonCameraMode** )( params + 4 ) = NewMode;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -124,7 +124,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.AdjustViewOffset" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( Vector* )( params + 4 ) = Offset;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -135,7 +135,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.GetCameraWorstCaseLoc" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( class Pawn** )( params + 0 ) = TargetPawn;
+				*( class Pawn** )params = TargetPawn;
 				*( void** )( params + 4 ) = CurrentViewTarget;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -146,7 +146,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.ProcessViewRotation" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				*( class Actor** )( params + 4 ) = ViewTarget;
 				*( Rotator* )( params + 8 ) = out_ViewRotation;
 				*( Rotator* )( params + 20 ) = out_DeltaRot;
@@ -160,7 +160,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.GetDOFFocusLoc" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Actor** )( params + 0 ) = TraceOwner;
+				*( class Actor** )params = TraceOwner;
 				*( Vector* )( params + 4 ) = StartTrace;
 				*( Vector* )( params + 16 ) = EndTrace;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -172,7 +172,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.DOFTrace" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Actor** )( params + 0 ) = TraceOwner;
+				*( class Actor** )params = TraceOwner;
 				*( Vector* )( params + 4 ) = StartTrace;
 				*( Vector* )( params + 16 ) = EndTrace;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -184,31 +184,31 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.UpdatePostProcess" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( void** )( params + 0 ) = VT;
+				*( void** )params = VT;
 				*( float* )( params + 44 ) = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				VT = *( void** )( params + 0 );
+				VT = *( void** )params;
 			}
 
 			void ModifyPostProcessSettings( void* &PP )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.ModifyPostProcessSettings" );
 				byte *params = ( byte* )( malloc( 220 ) );
-				*( void** )( params + 0 ) = PP;
+				*( void** )params = PP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				PP = *( void** )( params + 0 );
+				PP = *( void** )params;
 			}
 
 			void SetViewOffset( void* &NewViewOffset )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCameraMode.SetViewOffset" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( void** )( params + 0 ) = NewViewOffset;
+				*( void** )params = NewViewOffset;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				NewViewOffset = *( void** )( params + 0 );
+				NewViewOffset = *( void** )params;
 			}
 
 	};

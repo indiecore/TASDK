@@ -29,7 +29,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.TextureRenderTarget2D.Create" );
 				byte *params = ( byte* )( malloc( 29 ) );
-				*( int* )( params + 0 ) = InSizeX;
+				*( int* )params = InSizeX;
 				*( int* )( params + 4 ) = InSizeY;
 				*( byte* )( params + 8 ) = InFormat;
 				*( void** )( params + 12 ) = InClearColor;

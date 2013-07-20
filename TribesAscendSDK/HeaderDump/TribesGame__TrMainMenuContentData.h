@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrMainMenuContentData.SendPaperDollANewMesh" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( class TrPaperDollMainMenu** )( params + 0 ) = MainMenuPaperDoll;
+				*( class TrPaperDollMainMenu** )params = MainMenuPaperDoll;
 				*( byte* )( params + 4 ) = ContentDataType;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -33,7 +33,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrMainMenuContentData.PreloadTextures" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = ForceDuration;
+				*( float* )params = ForceDuration;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

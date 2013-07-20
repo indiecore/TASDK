@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.Interface_TrTripNotifier.AddTripActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrTripActor** )( params + 0 ) = NewTrip;
+				*( class TrTripActor** )params = NewTrip;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.Interface_TrTripNotifier.RemoveTripActor" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrTripActor** )( params + 0 ) = RemoveTrip;
+				*( class TrTripActor** )params = RemoveTrip;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.Interface_TrTripNotifier.TripActivated" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class Pawn** )( params + 0 ) = Other;
+				*( class Pawn** )params = Other;
 				*( Vector* )( params + 4 ) = ActivateLocation;
 				*( class TrTripActor** )( params + 16 ) = TripActor;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.Interface_TrTripNotifier.GetTripSocketPosition" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bIsLeft;
+				*( bool* )params = bIsLeft;
 				*( Vector* )( params + 4 ) = SocketPosition;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

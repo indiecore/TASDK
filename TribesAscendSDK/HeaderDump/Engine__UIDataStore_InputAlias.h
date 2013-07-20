@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_InputAlias.GetAliasFontMarkup" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( ScriptName* )( params + 0 ) = DesiredAlias;
+				*( ScriptName* )params = DesiredAlias;
 				*( byte* )( params + 8 ) = OverridePlatform;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_InputAlias.GetAliasFontMarkupByIndex" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( int* )( params + 0 ) = AliasIndex;
+				*( int* )params = AliasIndex;
 				*( byte* )( params + 4 ) = OverridePlatform;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_InputAlias.GetAliasInputKeyName" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( ScriptName* )( params + 0 ) = DesiredAlias;
+				*( ScriptName* )params = DesiredAlias;
 				*( byte* )( params + 8 ) = OverridePlatform;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -56,7 +56,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_InputAlias.GetAliasInputKeyNameByIndex" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( int* )( params + 0 ) = AliasIndex;
+				*( int* )params = AliasIndex;
 				*( byte* )( params + 4 ) = OverridePlatform;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -67,12 +67,12 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_InputAlias.GetAliasInputKeyData" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( void** )( params + 0 ) = out_InputKeyData;
+				*( void** )params = out_InputKeyData;
 				*( ScriptName* )( params + 12 ) = DesiredAlias;
 				*( byte* )( params + 20 ) = OverridePlatform;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				out_InputKeyData = *( void** )( params + 0 );
+				out_InputKeyData = *( void** )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -80,12 +80,12 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_InputAlias.GetAliasInputKeyDataByIndex" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( void** )( params + 0 ) = out_InputKeyData;
+				*( void** )params = out_InputKeyData;
 				*( int* )( params + 12 ) = AliasIndex;
 				*( byte* )( params + 16 ) = OverridePlatform;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				out_InputKeyData = *( void** )( params + 0 );
+				out_InputKeyData = *( void** )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_InputAlias.FindInputAliasIndex" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = DesiredAlias;
+				*( ScriptName* )params = DesiredAlias;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -103,7 +103,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDataStore_InputAlias.HasAliasMappingForPlatform" );
 				byte *params = ( byte* )( malloc( 9 ) );
-				*( ScriptName* )( params + 0 ) = DesiredAlias;
+				*( ScriptName* )params = DesiredAlias;
 				*( byte* )( params + 8 ) = DesiredPlatform;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrAnnouncer.PlayAnnouncement" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class SoundCue** )( params + 0 ) = AnnouncementCue;
+				*( class SoundCue** )params = AnnouncementCue;
 				*( bool* )( params + 4 ) = bPlayRightNow;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

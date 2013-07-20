@@ -40,7 +40,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCallIn.Initialize" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = NewPrice;
+				*( int* )params = NewPrice;
 				*( int* )( params + 4 ) = NewBuildup;
 				*( int* )( params + 8 ) = NewCooldown;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -78,7 +78,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCallIn.FireCompletedCallIn" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( int* )( params + 0 ) = CallInOffs;
+				*( int* )params = CallInOffs;
 				*( Vector* )( params + 4 ) = TargetLocation;
 				*( Vector* )( params + 16 ) = TargetNormal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -90,7 +90,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrCallIn.Tick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

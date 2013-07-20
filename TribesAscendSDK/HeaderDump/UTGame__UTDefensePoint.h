@@ -38,7 +38,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDefensePoint.HigherPriorityThan" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( class UTDefensePoint** )( params + 0 ) = S;
+				*( class UTDefensePoint** )params = S;
 				*( class UTBot** )( params + 4 ) = B;
 				*( bool* )( params + 8 ) = bAutoPointsInUse;
 				*( bool* )( params + 12 ) = bPrioritizeSameGroup;

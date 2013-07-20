@@ -24,7 +24,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDmgType_RanOver.IncrementKills" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class UTPlayerReplicationInfo** )( params + 0 ) = KillerPRI;
+				*( class UTPlayerReplicationInfo** )params = KillerPRI;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );
@@ -34,7 +34,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDmgType_RanOver.SmallReward" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class UTPlayerController** )( params + 0 ) = Killer;
+				*( class UTPlayerController** )params = Killer;
 				*( int* )( params + 4 ) = KillCount;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -44,7 +44,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function UTGame.UTDmgType_RanOver.SpawnHitEffect" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( float* )( params + 4 ) = Damage;
 				*( Vector* )( params + 8 ) = Momentum;
 				*( ScriptName* )( params + 20 ) = BoneName;

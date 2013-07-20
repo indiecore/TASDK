@@ -69,7 +69,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.CreateCameraMode" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = ModeClass;
+				*( ScriptClass** )params = ModeClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class GameThirdPersonCameraMode** )( params + function->return_val_offset() );
@@ -95,7 +95,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.GetDesiredFOV" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = ViewedPawn;
+				*( class Pawn** )params = ViewedPawn;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( float* )( params + function->return_val_offset() );
@@ -105,7 +105,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.UpdateCamera" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( class GamePlayerCamera** )( params + 4 ) = CameraActor;
 				*( float* )( params + 8 ) = DeltaTime;
 				*( void** )( params + 12 ) = OutVT;
@@ -118,7 +118,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.UpdateCameraMode" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -127,7 +127,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.PlayerUpdateCamera" );
 				byte *params = ( byte* )( malloc( 56 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				*( class GamePlayerCamera** )( params + 4 ) = CameraActor;
 				*( float* )( params + 8 ) = DeltaTime;
 				*( void** )( params + 12 ) = OutVT;
@@ -140,7 +140,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.BeginTurn" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )( params + 0 ) = StartAngle;
+				*( int* )params = StartAngle;
 				*( int* )( params + 4 ) = EndAngle;
 				*( float* )( params + 8 ) = TimeSec;
 				*( float* )( params + 12 ) = DelaySec;
@@ -161,7 +161,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.AdjustTurn" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = AngleOffset;
+				*( int* )params = AngleOffset;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -170,7 +170,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.SetFocusOnLoc" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( Vector* )( params + 0 ) = FocusWorldLoc;
+				*( Vector* )params = FocusWorldLoc;
 				*( void** )( params + 12 ) = InterpSpeedRange;
 				*( void** )( params + 20 ) = InFocusFOV;
 				*( float* )( params + 28 ) = CameraFOV;
@@ -186,7 +186,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.SetFocusOnActor" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( class Actor** )( params + 0 ) = FocusActor;
+				*( class Actor** )params = FocusActor;
 				*( ScriptName* )( params + 4 ) = FocusBoneName;
 				*( void** )( params + 12 ) = InterpSpeedRange;
 				*( void** )( params + 20 ) = InFocusFOV;
@@ -212,7 +212,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.ClearFocusPoint" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bLeaveCameraRotation;
+				*( bool* )params = bLeaveCameraRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -221,7 +221,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.UpdateFocusPoint" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -239,7 +239,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.AdjustFocusPointInterpolation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Rotator* )( params + 0 ) = Delta;
+				*( Rotator* )params = Delta;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -248,7 +248,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.FindBestCameraMode" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Pawn** )( params + 0 ) = P;
+				*( class Pawn** )params = P;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class GameThirdPersonCameraMode** )( params + function->return_val_offset() );
@@ -258,7 +258,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.ProcessViewRotation" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( float* )( params + 0 ) = DeltaTime;
+				*( float* )params = DeltaTime;
 				*( class Actor** )( params + 4 ) = ViewTarget;
 				*( Rotator* )( params + 8 ) = out_ViewRotation;
 				*( Rotator* )( params + 20 ) = out_DeltaRot;
@@ -272,7 +272,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.OnBecomeActive" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameCameraBase** )( params + 0 ) = OldCamera;
+				*( class GameCameraBase** )params = OldCamera;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -281,10 +281,10 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameThirdPersonCamera.ModifyPostProcessSettings" );
 				byte *params = ( byte* )( malloc( 220 ) );
-				*( void** )( params + 0 ) = PP;
+				*( void** )params = PP;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				PP = *( void** )( params + 0 );
+				PP = *( void** )params;
 			}
 
 			void ResetInterpolation(  )

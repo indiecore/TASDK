@@ -31,7 +31,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.AddField" );
 				byte *params = ( byte* )( malloc( 17 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( byte* )( params + 8 ) = FieldType;
 				*( bool* )( params + 12 ) = bPersistent;
 				*( int* )( params + 16 ) = out_InsertPosition;
@@ -45,7 +45,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.RemoveField" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.FindFieldIndex" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( bool* )( params + 8 ) = bSearchPersistentFields;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.ClearFields" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bReinitializeRuntimeFields;
+				*( bool* )params = bReinitializeRuntimeFields;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -76,7 +76,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.GetField" );
 				byte *params = ( byte* )( malloc( 92 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( void** )( params + 8 ) = out_Field;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -88,7 +88,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.SetField" );
 				byte *params = ( byte* )( malloc( 96 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( void** )( params + 8 ) = FieldValue;
 				*( bool* )( params + 92 ) = bChangeExistingOnly;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -109,7 +109,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.GetCollectionValueSchema" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( bool* )( params + 20 ) = bPersistent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -120,7 +120,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.GetCollectionValueArray" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( bool* )( params + 20 ) = bPersistent;
 				*( ScriptName* )( params + 24 ) = CellTag;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -132,7 +132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.SetCollectionValueArray" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( bool* )( params + 20 ) = bClearExisting;
 				*( int* )( params + 24 ) = InsertIndex;
 				*( bool* )( params + 28 ) = bPersistent;
@@ -146,7 +146,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.InsertCollectionValue" );
 				byte *params = ( byte* )( malloc( 40 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = NewValue;
 				*( int* )( params + 20 ) = InsertIndex;
 				*( bool* )( params + 24 ) = bPersistent;
@@ -162,7 +162,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.RemoveCollectionValue" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = ValueToRemove;
 				*( bool* )( params + 20 ) = bPersistent;
 				*( ScriptName* )( params + 24 ) = CellTag;
@@ -176,7 +176,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.RemoveCollectionValueByIndex" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( int* )( params + 8 ) = ValueIndex;
 				*( bool* )( params + 12 ) = bPersistent;
 				*( ScriptName* )( params + 16 ) = CellTag;
@@ -189,7 +189,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.ReplaceCollectionValue" );
 				byte *params = ( byte* )( malloc( 44 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = CurrentValue;
 				*( ScriptArray< wchar_t >* )( params + 20 ) = NewValue;
 				*( bool* )( params + 32 ) = bPersistent;
@@ -205,7 +205,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.ReplaceCollectionValueByIndex" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( int* )( params + 8 ) = ValueIndex;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = NewValue;
 				*( bool* )( params + 24 ) = bPersistent;
@@ -220,7 +220,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.ClearCollectionValueArray" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( bool* )( params + 8 ) = bPersistent;
 				*( ScriptName* )( params + 12 ) = CellTag;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -232,7 +232,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.GetCollectionValue" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( int* )( params + 8 ) = ValueIndex;
 				*( ScriptArray< wchar_t >* )( params + 12 ) = out_Value;
 				*( bool* )( params + 24 ) = bPersistent;
@@ -247,7 +247,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIDynamicFieldProvider.FindCollectionValueIndex" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( ScriptName* )( params + 0 ) = FieldName;
+				*( ScriptName* )params = FieldName;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = ValueToFind;
 				*( bool* )( params + 20 ) = bPersistent;
 				*( ScriptName* )( params + 24 ) = CellTag;

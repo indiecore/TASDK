@@ -37,7 +37,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAIController.AllCommands" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptClass** )( params + 0 ) = BaseClass;
+				*( ScriptClass** )params = BaseClass;
 				*( class GameAICommand** )( params + 4 ) = Cmd;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -48,7 +48,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAIController.PushCommand" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameAICommand** )( params + 0 ) = NewCommand;
+				*( class GameAICommand** )params = NewCommand;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAIController.PopCommand" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class GameAICommand** )( params + 0 ) = ToBePoppedCommand;
+				*( class GameAICommand** )params = ToBePoppedCommand;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -66,7 +66,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAIController.AbortCommand" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( class GameAICommand** )( params + 0 ) = AbortCmd;
+				*( class GameAICommand** )params = AbortCmd;
 				*( ScriptClass** )( params + 4 ) = AbortClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -102,7 +102,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAIController.FindCommandOfClass" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = SearchClass;
+				*( ScriptClass** )params = SearchClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class GameAICommand** )( params + function->return_val_offset() );
@@ -112,7 +112,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAIController.GetAICommandInStack" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )( params + 0 ) = InClass;
+				*( ScriptClass** )params = InClass;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( class GameAICommand** )( params + function->return_val_offset() );
@@ -155,7 +155,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAIController.RecordDemoAILog" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = LogText;
+				*( ScriptArray< wchar_t >* )params = LogText;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -164,7 +164,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAIController.AILog_Internal" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = LogText;
+				*( ScriptArray< wchar_t >* )params = LogText;
 				*( ScriptName* )( params + 12 ) = LogCategory;
 				*( bool* )( params + 20 ) = bForce;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -175,7 +175,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.GameAIController.SetDesiredRotation" );
 				byte *params = ( byte* )( malloc( 24 ) );
-				*( Rotator* )( params + 0 ) = TargetDesiredRotation;
+				*( Rotator* )params = TargetDesiredRotation;
 				*( bool* )( params + 12 ) = InLockDesiredRotation;
 				*( bool* )( params + 16 ) = InUnlockWhenReached;
 				*( float* )( params + 20 ) = InterpolationTime;

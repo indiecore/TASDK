@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintActor.SetDisableCollision" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = NewDisableCollision;
+				*( bool* )params = NewDisableCollision;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -41,7 +41,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintActor.InitConstraint" );
 				byte *params = ( byte* )( malloc( 28 ) );
-				*( class Actor** )( params + 0 ) = Actor1;
+				*( class Actor** )params = Actor1;
 				*( class Actor** )( params + 4 ) = Actor2;
 				*( ScriptName* )( params + 8 ) = Actor1Bone;
 				*( ScriptName* )( params + 16 ) = Actor2Bone;
@@ -62,7 +62,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintActor.OnDestroy" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Destroy** )( params + 0 ) = Action;
+				*( class SeqAct_Destroy** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -71,7 +71,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintActor.OnToggle" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_Toggle** )( params + 0 ) = Action;
+				*( class SeqAct_Toggle** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -80,7 +80,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.RB_ConstraintActor.OnToggleConstraintDrive" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqAct_ToggleConstraintDrive** )( params + 0 ) = Action;
+				*( class SeqAct_ToggleConstraintDrive** )params = Action;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}

@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.OnReadTitleFileComplete" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Filename;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.GetGameSettings" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PlaylistId;
+				*( int* )params = PlaylistId;
 				*( int* )( params + 4 ) = GameSettingsId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -97,7 +97,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.HasAnyGameSettings" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PlaylistId;
+				*( int* )params = PlaylistId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -107,7 +107,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.PlaylistSupportsDedicatedServers" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PlaylistId;
+				*( int* )params = PlaylistId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -117,7 +117,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.GetTeamInfoFromPlaylist" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = PlaylistId;
+				*( int* )params = PlaylistId;
 				*( int* )( params + 4 ) = TeamSize;
 				*( int* )( params + 8 ) = TeamCount;
 				*( int* )( params + 12 ) = MaxPartySize;
@@ -132,7 +132,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.GetLoadBalanceIdFromPlaylist" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PlaylistId;
+				*( int* )params = PlaylistId;
 				*( int* )( params + 4 ) = LoadBalanceId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -143,7 +143,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.IsPlaylistArbitrated" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PlaylistId;
+				*( int* )params = PlaylistId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -153,7 +153,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.GetUrlFromPlaylist" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = PlaylistId;
+				*( int* )params = PlaylistId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
@@ -163,7 +163,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.GetMapCycleFromPlaylist" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = PlaylistId;
+				*( int* )params = PlaylistId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -172,7 +172,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.GetInventorySwapFromPlaylist" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( int* )( params + 0 ) = PlaylistId;
+				*( int* )params = PlaylistId;
 				*( ScriptClass** )( params + 4 ) = SourceInventory;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -183,7 +183,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.GetContentIdsFromPlaylist" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( int* )( params + 0 ) = PlaylistId;
+				*( int* )params = PlaylistId;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -208,7 +208,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.OnReadPlaylistPopulationComplete" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Filename;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -226,7 +226,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.GetPopulationInfoFromPlaylist" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( int* )( params + 0 ) = PlaylistId;
+				*( int* )params = PlaylistId;
 				*( int* )( params + 4 ) = WorldwideTotal;
 				*( int* )( params + 8 ) = RegionTotal;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -239,7 +239,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.SendPlaylistPopulationUpdate" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( int* )( params + 0 ) = NumPlayers;
+				*( int* )params = NumPlayers;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -256,7 +256,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function IpDrv.OnlinePlaylistManager.OnReadDataCenterIdComplete" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( bool* )( params + 0 ) = bWasSuccessful;
+				*( bool* )params = bWasSuccessful;
 				*( ScriptArray< wchar_t >* )( params + 4 ) = Filename;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );

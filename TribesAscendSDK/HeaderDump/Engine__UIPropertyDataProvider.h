@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIPropertyDataProvider.CanSupportComplexPropertyType" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class Property** )( params + 0 ) = UnsupportedProperty;
+				*( class Property** )params = UnsupportedProperty;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -33,11 +33,11 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.UIPropertyDataProvider.GetCustomPropertyValue" );
 				byte *params = ( byte* )( malloc( 88 ) );
-				*( void** )( params + 0 ) = PropertyValue;
+				*( void** )params = PropertyValue;
 				*( int* )( params + 84 ) = ArrayIndex;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				PropertyValue = *( void** )( params + 0 );
+				PropertyValue = *( void** )params;
 				return *( bool* )( params + function->return_val_offset() );
 			}
 

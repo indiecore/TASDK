@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetBlockRigidBody" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewBlockRigidBody;
+				*( bool* )params = bNewBlockRigidBody;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -32,7 +32,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetRBLinearVelocity" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = NewVel;
+				*( Vector* )params = NewVel;
 				*( bool* )( params + 12 ) = bAddToCurrent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -43,7 +43,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.AddImpulse" );
 				byte *params = ( byte* )( malloc( 36 ) );
-				*( Vector* )( params + 0 ) = Impulse;
+				*( Vector* )params = Impulse;
 				*( Vector* )( params + 12 ) = Position;
 				*( ScriptName* )( params + 24 ) = BoneName;
 				*( bool* )( params + 32 ) = bVelChange;
@@ -55,7 +55,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.AddRadialImpulse" );
 				byte *params = ( byte* )( malloc( 25 ) );
-				*( Vector* )( params + 0 ) = Origin;
+				*( Vector* )params = Origin;
 				*( float* )( params + 12 ) = Radius;
 				*( float* )( params + 16 ) = Strength;
 				*( byte* )( params + 20 ) = Falloff;
@@ -68,7 +68,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.AddForce" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( Vector* )( params + 0 ) = Force;
+				*( Vector* )params = Force;
 				*( Vector* )( params + 12 ) = Position;
 				*( ScriptName* )( params + 24 ) = BoneName;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -79,7 +79,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.AddRadialForce" );
 				byte *params = ( byte* )( malloc( 21 ) );
-				*( Vector* )( params + 0 ) = Origin;
+				*( Vector* )params = Origin;
 				*( float* )( params + 12 ) = Radius;
 				*( float* )( params + 16 ) = Strength;
 				*( byte* )( params + 20 ) = Falloff;
@@ -91,7 +91,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.AddTorque" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Vector* )( params + 0 ) = Torque;
+				*( Vector* )params = Torque;
 				*( ScriptName* )( params + 12 ) = BoneName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -101,7 +101,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetRBAngularVelocity" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = NewAngVel;
+				*( Vector* )params = NewAngVel;
 				*( bool* )( params + 12 ) = bAddToCurrent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -111,7 +111,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.RetardRBLinearVelocity" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( Vector* )( params + 0 ) = RetardDir;
+				*( Vector* )params = RetardDir;
 				*( float* )( params + 12 ) = VelScale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -121,7 +121,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetRBPosition" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Vector* )( params + 0 ) = NewPos;
+				*( Vector* )params = NewPos;
 				*( ScriptName* )( params + 12 ) = BoneName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -131,7 +131,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetRBRotation" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( Rotator* )( params + 0 ) = NewRot;
+				*( Rotator* )params = NewRot;
 				*( ScriptName* )( params + 12 ) = BoneName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -141,7 +141,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.WakeRigidBody" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = BoneName;
+				*( ScriptName* )params = BoneName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -150,7 +150,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.PutRigidBodyToSleep" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = BoneName;
+				*( ScriptName* )params = BoneName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -159,7 +159,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.RigidBodyIsAwake" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( ScriptName* )( params + 0 ) = BoneName;
+				*( ScriptName* )params = BoneName;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( bool* )( params + function->return_val_offset() );
@@ -169,7 +169,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetRBCollidesWithChannel" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( byte* )( params + 0 ) = Channel;
+				*( byte* )params = Channel;
 				*( bool* )( params + 4 ) = bNewCollides;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -179,7 +179,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetRBCollisionChannels" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = Channels;
+				*( void** )params = Channels;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -188,7 +188,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetRBChannel" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = Channel;
+				*( byte* )params = Channel;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -197,7 +197,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetNotifyRigidBodyCollision" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewNotifyRigidBodyCollision;
+				*( bool* )params = bNewNotifyRigidBodyCollision;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -214,7 +214,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetPhysMaterialOverride" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class PhysicalMaterial** )( params + 0 ) = NewPhysMaterial;
+				*( class PhysicalMaterial** )params = NewPhysMaterial;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -232,7 +232,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetRBDominanceGroup" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = InDomGroup;
+				*( byte* )params = InDomGroup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -250,7 +250,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetHidden" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = NewHidden;
+				*( bool* )params = NewHidden;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -259,7 +259,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetOwnerNoSee" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewOwnerNoSee;
+				*( bool* )params = bNewOwnerNoSee;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -268,7 +268,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetOnlyOwnerSee" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewOnlyOwnerSee;
+				*( bool* )params = bNewOnlyOwnerSee;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -277,7 +277,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetIgnoreOwnerHidden" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( bool* )( params + 0 ) = bNewIgnoreOwnerHidden;
+				*( bool* )params = bNewIgnoreOwnerHidden;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -302,7 +302,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetCullDistance" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = NewCullDistance;
+				*( float* )params = NewCullDistance;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -311,7 +311,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetLightingChannels" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( void** )( params + 0 ) = NewLightingChannels;
+				*( void** )params = NewLightingChannels;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -320,7 +320,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetDepthPriorityGroup" );
 				byte *params = ( byte* )( malloc( 1 ) );
-				*( byte* )( params + 0 ) = NewDepthPriorityGroup;
+				*( byte* )params = NewDepthPriorityGroup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -329,7 +329,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetViewOwnerDepthPriorityGroup" );
 				byte *params = ( byte* )( malloc( 5 ) );
-				*( bool* )( params + 0 ) = bNewUseViewOwnerDepthPriorityGroup;
+				*( bool* )params = bNewUseViewOwnerDepthPriorityGroup;
 				*( byte* )( params + 4 ) = NewViewOwnerDepthPriorityGroup;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -339,7 +339,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetTraceBlocking" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( bool* )( params + 0 ) = NewBlockZeroExtent;
+				*( bool* )params = NewBlockZeroExtent;
 				*( bool* )( params + 4 ) = NewBlockNonZeroExtent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -349,7 +349,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetActorCollision" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( bool* )( params + 0 ) = NewCollideActors;
+				*( bool* )params = NewCollideActors;
 				*( bool* )( params + 4 ) = NewBlockActors;
 				*( bool* )( params + 8 ) = NewAlwaysCheckCollision;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -360,7 +360,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetTranslation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = NewTranslation;
+				*( Vector* )params = NewTranslation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -369,7 +369,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetRotation" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Rotator* )( params + 0 ) = NewRotation;
+				*( Rotator* )params = NewRotation;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -378,7 +378,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetScale" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( float* )( params + 0 ) = NewScale;
+				*( float* )params = NewScale;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -387,7 +387,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetScale3D" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( Vector* )( params + 0 ) = NewScale3D;
+				*( Vector* )params = NewScale3D;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -396,7 +396,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.SetAbsolute" );
 				byte *params = ( byte* )( malloc( 12 ) );
-				*( bool* )( params + 0 ) = NewAbsoluteTranslation;
+				*( bool* )params = NewAbsoluteTranslation;
 				*( bool* )( params + 4 ) = NewAbsoluteRotation;
 				*( bool* )( params + 8 ) = NewAbsoluteScale;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -425,13 +425,13 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PrimitiveComponent.ClosestPointOnComponentToPoint" );
 				byte *params = ( byte* )( malloc( 48 ) );
-				*( Vector* )( params + 0 ) = POI;
+				*( Vector* )params = POI;
 				*( Vector* )( params + 12 ) = Extent;
 				*( Vector* )( params + 24 ) = OutPointA;
 				*( Vector* )( params + 36 ) = OutPointB;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-				POI = *( Vector* )( params + 0 );
+				POI = *( Vector* )params;
 				Extent = *( Vector* )( params + 12 );
 				OutPointA = *( Vector* )( params + 24 );
 				OutPointB = *( Vector* )( params + 36 );

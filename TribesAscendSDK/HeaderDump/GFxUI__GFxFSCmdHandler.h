@@ -23,7 +23,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GFxUI.GFxFSCmdHandler.FSCommand" );
 				byte *params = ( byte* )( malloc( 32 ) );
-				*( class GFxMoviePlayer** )( params + 0 ) = Movie;
+				*( class GFxMoviePlayer** )params = Movie;
 				*( class GFxEvent_FSCommand** )( params + 4 ) = Event;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = Cmd;
 				*( ScriptArray< wchar_t >* )( params + 20 ) = Arg;

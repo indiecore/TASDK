@@ -36,7 +36,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.GetIntStatValueForPlayer" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = PlayerID;
+				*( void** )params = PlayerID;
 				*( int* )( params + 8 ) = StatColumnNo;
 				*( int* )( params + 12 ) = StatValue;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -49,7 +49,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.SetIntStatValueForPlayer" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = PlayerID;
+				*( void** )params = PlayerID;
 				*( int* )( params + 8 ) = StatColumnNo;
 				*( int* )( params + 12 ) = StatValue;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -61,7 +61,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.GetFloatStatValueForPlayer" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = PlayerID;
+				*( void** )params = PlayerID;
 				*( int* )( params + 8 ) = StatColumnNo;
 				*( float* )( params + 12 ) = StatValue;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -74,7 +74,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.SetFloatStatValueForPlayer" );
 				byte *params = ( byte* )( malloc( 16 ) );
-				*( void** )( params + 0 ) = PlayerID;
+				*( void** )params = PlayerID;
 				*( int* )( params + 8 ) = StatColumnNo;
 				*( float* )( params + 12 ) = StatValue;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -86,7 +86,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.AddPlayer" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( ScriptArray< wchar_t >* )( params + 0 ) = PlayerName;
+				*( ScriptArray< wchar_t >* )params = PlayerName;
 				*( void** )( params + 12 ) = PlayerID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
@@ -96,7 +96,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.OnlineStatsRead.GetRankForPlayer" );
 				byte *params = ( byte* )( malloc( 8 ) );
-				*( void** )( params + 0 ) = PlayerID;
+				*( void** )params = PlayerID;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 				return *( int* )( params + function->return_val_offset() );

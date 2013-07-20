@@ -57,7 +57,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawMobileDebugString" );
 				byte *params = ( byte* )( malloc( 20 ) );
-				*( float* )( params + 0 ) = XPos;
+				*( float* )params = XPos;
 				*( float* )( params + 4 ) = YPos;
 				*( ScriptArray< wchar_t >* )( params + 8 ) = Str;
 				ScriptObject *object = ( ScriptObject* )( this );
@@ -93,7 +93,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawMobileZone_Button" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( class MobileInputZone** )params = Zone;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -102,7 +102,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawMobileZone_Joystick" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( class MobileInputZone** )params = Zone;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -111,7 +111,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawMobileZone_Trackball" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( class MobileInputZone** )params = Zone;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -120,7 +120,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawMobileTilt" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class MobilePlayerInput** )( params + 0 ) = MobileInput;
+				*( class MobilePlayerInput** )params = MobileInput;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -129,7 +129,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.DrawMobileZone_Slider" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class MobileInputZone** )( params + 0 ) = Zone;
+				*( class MobileInputZone** )params = Zone;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
@@ -146,7 +146,7 @@ namespace UnrealScript
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function GameFramework.MobileHUD.AddKismetRenderEvent" );
 				byte *params = ( byte* )( malloc( 4 ) );
-				*( class SeqEvent_HudRender** )( params + 0 ) = NewEvent;
+				*( class SeqEvent_HudRender** )params = NewEvent;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
 			}
