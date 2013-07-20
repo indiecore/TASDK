@@ -27,14 +27,14 @@ namespace UnrealScript
 				object->ProcessEvent( function, params, NULL );
 			}
 
-			void Admin( ScriptArray< wchar_t > CommandLine )
+			/*void Admin( ScriptArray< wchar_t > CommandLine )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.Admin.Admin" );
 				byte *params = ( byte* )( malloc( 12 ) );
 				*( ScriptArray< wchar_t >* )params = CommandLine;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-			}
+			}*/
 
 			void ServerAdmin( ScriptArray< wchar_t > CommandLine )
 			{

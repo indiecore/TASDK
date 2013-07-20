@@ -49,7 +49,7 @@ namespace UnrealScript
 				return *( class Actor** )( params + function->return_val_offset() );
 			}
 
-			ADD_OBJECT( Camera, PlayerCamera )
+			//ADD_OBJECT( Camera, PlayerCamera )
 			bool IsPrimaryPlayer(  )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerController.IsPrimaryPlayer" );

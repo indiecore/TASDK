@@ -156,14 +156,14 @@ namespace UnrealScript
 				return *( bool* )( params + function->return_val_offset() );
 			}
 
-			void PlayerInput( float DeltaTime )
+			/*void PlayerInput( float DeltaTime )
 			{
 				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.PlayerInput.PlayerInput" );
 				byte *params = ( byte* )( malloc( 4 ) );
 				*( float* )params = DeltaTime;
 				ScriptObject *object = ( ScriptObject* )( this );
 				object->ProcessEvent( function, params, NULL );
-			}
+			}*/
 
 			void ProcessInputMatching( float DeltaTime )
 			{
