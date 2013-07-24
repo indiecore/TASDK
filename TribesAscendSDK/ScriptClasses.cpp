@@ -217,35 +217,38 @@ struct ClassDescription
 		
 		if (primitivePropertyCount > 0)
 		{
-			wtr->WriteLine("#define ADD_VAR(x, y, z) (##x) var_##y() \\");
+			wtr->WriteLine("#define ADD_VAR(x, y, z) (##x) get_##y() \\");
 			wtr->WriteLine("{ \\");
 			wtr->Indent++;
 			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x \" %s.%s.\" #y); \\", originalClass->outer()->GetName(), originalClass->GetName());
 			wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
 			wtr->Indent--;
-			wtr->WriteLine("}");
+			wtr->WriteLine("} \\");
+			wtr->WriteLine("__declspec(property(get=get_##y)) (##x) ##y;");
 		}
 
 		if (structPropertyCount > 0)
 		{
-			wtr->WriteLine("#define ADD_STRUCT(x, y, z) (##x) var_##y() \\");
+			wtr->WriteLine("#define ADD_STRUCT(x, y, z) (##x) get_##y() \\");
 			wtr->WriteLine("{ \\");
 			wtr->Indent++;
 			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"StructProperty %s.%s.\" #y); \\", originalClass->outer()->GetName(), originalClass->GetName());
 			wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
 			wtr->Indent--;
-			wtr->WriteLine("}");
+			wtr->WriteLine("} \\");
+			wtr->WriteLine("__declspec(property(get=get_##y)) (##x) ##y;");
 		}
 
 		if (objectPropertyCount > 0)
 		{
-			wtr->WriteLine("#define ADD_OBJECT(x, y) (class x*) var_##y() \\");
+			wtr->WriteLine("#define ADD_OBJECT(x, y) (class x*) get_##y() \\");
 			wtr->WriteLine("{ \\");
 			wtr->Indent++;
 			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"ObjectProperty %s.%s.\" #y); \\", originalClass->outer()->GetName(), originalClass->GetName());
 			wtr->WriteLine("return *(x**)(this + script_property->offset); \\");
 			wtr->Indent--;
-			wtr->WriteLine("}");
+			wtr->WriteLine("} \\");
+			wtr->WriteLine("__declspec(property(get=get_##y)) (class x*) ##y;");
 		}
 
 		wtr->WriteLine("namespace UnrealScript");
