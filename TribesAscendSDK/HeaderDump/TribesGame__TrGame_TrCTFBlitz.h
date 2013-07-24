@@ -1,66 +1,25 @@
 #pragma once
-#define ADD_VAR( x, y, z ) ( ##x ) var_##y() \
+#define ADD_VAR(x, y, z) (x) get_##y() \
 { \
-	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( #x " TribesGame.TrGame_TrCTFBlitz." #y ); \
-	return ( ##x( this, script_property->offset, z ) ); \
-}
-#define ADD_STRUCT( x, y, z ) ( ##x ) var_##y() \
+	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrGame_TrCTFBlitz." #y); \
+	return (##x(this, script_property->offset, z)); \
+} \
+__declspec(property(get=get_##y)) x y;
+#define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
-	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( "StructProperty TribesGame.TrGame_TrCTFBlitz." #y ); \
-	return ( ##x( this, script_property->offset, z ) ); \
-}
-#define ADD_OBJECT( x, y ) ( class x* ) var_##y() \
-{ \
-	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( "ObjectProperty TribesGame.TrGame_TrCTFBlitz." #y ); \
-	return *( x** )( this + script_property->offset ); \
-}
+	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrGame_TrCTFBlitz." #y); \
+	return *(x**)(this + script_property->offset); \
+} \
+__declspec(property(get=get_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrGame_TrCTFBlitz : public TrGame_TRCTF
 	{
 	public:
-			ADD_VAR( ::BoolProperty, m_bRotateBothFlagsOnCapture, 0x1 )
-			ADD_OBJECT( TrCTFBase_DiamondSword, DiamondSwordFlagStands )
-			ADD_OBJECT( TrCTFBase_BloodEagle, BloodEagleFlagStands )
-			void ApplyServerSettings(  )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrCTFBlitz.ApplyServerSettings" );
-				byte *params = ( byte* )( malloc( 0 ) );
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-			}
-
-			void RegisterFlagBase( class TrCTFBase* FlagBase )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrCTFBlitz.RegisterFlagBase" );
-				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrCTFBase** )params = FlagBase;
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-			}
-
-			void ScoreFlag( class Controller* Scorer, class TrFlagBase* theFlag )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrCTFBlitz.ScoreFlag" );
-				byte *params = ( byte* )( malloc( 8 ) );
-				*( class Controller** )params = Scorer;
-				*( class TrFlagBase** )( params + 4 ) = theFlag;
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-			}
-
-			void RotateFlag( class TrFlagBase* theFlag )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGame_TrCTFBlitz.RotateFlag" );
-				byte *params = ( byte* )( malloc( 4 ) );
-				*( class TrFlagBase** )params = theFlag;
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-			}
-
+		ADD_VAR(::BoolProperty, m_bRotateBothFlagsOnCapture, 0x1)
+		ADD_OBJECT(TrCTFBase_DiamondSword, DiamondSwordFlagStands)
+		ADD_OBJECT(TrCTFBase_BloodEagle, BloodEagleFlagStands)
 	};
 }
-
 #undef ADD_VAR
-#undef ADD_STRUCT
 #undef ADD_OBJECT

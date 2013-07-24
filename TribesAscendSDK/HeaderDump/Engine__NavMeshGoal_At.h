@@ -1,72 +1,27 @@
 #pragma once
-#define ADD_VAR( x, y, z ) ( ##x ) var_##y() \
+#define ADD_VAR(x, y, z) (x) get_##y() \
 { \
-	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( #x " Engine.NavMeshGoal_At." #y ); \
-	return ( ##x( this, script_property->offset, z ) ); \
-}
-#define ADD_STRUCT( x, y, z ) ( ##x ) var_##y() \
+	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NavMeshGoal_At." #y); \
+	return (##x(this, script_property->offset, z)); \
+} \
+__declspec(property(get=get_##y)) x y;
+#define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
-	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( "StructProperty Engine.NavMeshGoal_At." #y ); \
-	return ( ##x( this, script_property->offset, z ) ); \
-}
-#define ADD_OBJECT( x, y ) ( class x* ) var_##y() \
-{ \
-	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( "ObjectProperty Engine.NavMeshGoal_At." #y ); \
-	return *( x** )( this + script_property->offset ); \
-}
+	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NavMeshGoal_At." #y); \
+	return (##x(this, script_property->offset, z)); \
+} \
+__declspec(property(get=get_##y)) x y;
 namespace UnrealScript
 {
 	class NavMeshGoal_At : public NavMeshPathGoalEvaluator
 	{
 	public:
-			ADD_VAR( ::BoolProperty, bKeepPartial, 0x1 )
-			ADD_VAR( ::FloatProperty, GoalDist, 0xFFFFFFFF )
-			ADD_STRUCT( ::VectorProperty, Goal, 0xFFFFFFFF )
-			void RecycleNative(  )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_At.RecycleNative" );
-				byte *params = ( byte* )( malloc( 0 ) );
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-			}
-
-			bool AtActor( class NavigationHandle* NavHandle, class Actor* GoalActor, float Dist, bool bReturnPartial )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_At.AtActor" );
-				byte *params = ( byte* )( malloc( 16 ) );
-				*( class NavigationHandle** )params = NavHandle;
-				*( class Actor** )( params + 4 ) = GoalActor;
-				*( float* )( params + 8 ) = Dist;
-				*( bool* )( params + 12 ) = bReturnPartial;
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-				return *( bool* )( params + function->return_val_offset() );
-			}
-
-			bool AtLocation( class NavigationHandle* NavHandle, Vector GoalLocation, float Dist, bool bReturnPartial )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_At.AtLocation" );
-				byte *params = ( byte* )( malloc( 24 ) );
-				*( class NavigationHandle** )params = NavHandle;
-				*( Vector* )( params + 4 ) = GoalLocation;
-				*( float* )( params + 16 ) = Dist;
-				*( bool* )( params + 20 ) = bReturnPartial;
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-				return *( bool* )( params + function->return_val_offset() );
-			}
-
-			void Recycle(  )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_At.Recycle" );
-				byte *params = ( byte* )( malloc( 0 ) );
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-			}
-
+		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'PartialGoal'!
+		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'GoalPoly'!
+		ADD_VAR(::BoolProperty, bKeepPartial, 0x1)
+		ADD_VAR(::FloatProperty, GoalDist, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Goal, 0xFFFFFFFF
 	};
 }
-
 #undef ADD_VAR
 #undef ADD_STRUCT
-#undef ADD_OBJECT

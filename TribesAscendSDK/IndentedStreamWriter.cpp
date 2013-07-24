@@ -16,7 +16,7 @@ void IndentedStreamWriter::Write(const char* message, ...)
 
 	if (!this->curIndented)
 	{
-		this->innerStream << &this->currentIndent;
+		this->innerStream << (const char*)&this->currentIndent;
 		this->curIndented = true;
 	}
 	this->innerStream << buffer;
@@ -33,7 +33,7 @@ void IndentedStreamWriter::WriteLine(const char* message, ...)
 	
 	if (!this->curIndented)
 	{
-		this->innerStream << &this->currentIndent;
+		this->innerStream << (const char*)&this->currentIndent;
 		this->curIndented = true;
 	}
 	this->innerStream << buffer;

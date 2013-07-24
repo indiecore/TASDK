@@ -1,66 +1,24 @@
 #pragma once
-#define ADD_VAR( x, y, z ) ( ##x ) var_##y() \
+#define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
-	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( #x " Engine.NavMeshGoal_GenericFilterContainer." #y ); \
-	return ( ##x( this, script_property->offset, z ) ); \
-}
-#define ADD_STRUCT( x, y, z ) ( ##x ) var_##y() \
+	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NavMeshGoal_GenericFilterContainer." #y); \
+	return (##x(this, script_property->offset, z)); \
+} \
+__declspec(property(get=get_##y)) x y;
+#define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
-	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( "StructProperty Engine.NavMeshGoal_GenericFilterContainer." #y ); \
-	return ( ##x( this, script_property->offset, z ) ); \
-}
-#define ADD_OBJECT( x, y ) ( class x* ) var_##y() \
-{ \
-	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( "ObjectProperty Engine.NavMeshGoal_GenericFilterContainer." #y ); \
-	return *( x** )( this + script_property->offset ); \
-}
+	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.NavMeshGoal_GenericFilterContainer." #y); \
+	return *(x**)(this + script_property->offset); \
+} \
+__declspec(property(get=get_##y)) class x* y;
 namespace UnrealScript
 {
 	class NavMeshGoal_GenericFilterContainer : public NavMeshPathGoalEvaluator
 	{
 	public:
-			ADD_OBJECT( NavigationHandle, MyNavigationHandle )
-			class NavMeshGoal_GenericFilterContainer* CreateAndAddFilterToNavHandle( class NavigationHandle* NavHandle, int InMaxPathVisits )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_GenericFilterContainer.CreateAndAddFilterToNavHandle" );
-				byte *params = ( byte* )( malloc( 8 ) );
-				*( class NavigationHandle** )params = NavHandle;
-				*( int* )( params + 4 ) = InMaxPathVisits;
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-				return *( class NavMeshGoal_GenericFilterContainer** )( params + function->return_val_offset() );
-			}
-
-			class NavMeshGoal_Filter* GetFilterOfType( ScriptClass* Filter_Class )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_GenericFilterContainer.GetFilterOfType" );
-				byte *params = ( byte* )( malloc( 4 ) );
-				*( ScriptClass** )params = Filter_Class;
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-				return *( class NavMeshGoal_Filter** )( params + function->return_val_offset() );
-			}
-
-			Vector GetGoalPoint(  )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_GenericFilterContainer.GetGoalPoint" );
-				byte *params = ( byte* )( malloc( 0 ) );
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-				return *( Vector* )( params + function->return_val_offset() );
-			}
-
-			void Recycle(  )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function Engine.NavMeshGoal_GenericFilterContainer.Recycle" );
-				byte *params = ( byte* )( malloc( 0 ) );
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-			}
-
+		ADD_OBJECT(NavigationHandle, MyNavigationHandle)
+		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SuccessfulGoal'!
 	};
 }
-
-#undef ADD_VAR
 #undef ADD_STRUCT
 #undef ADD_OBJECT

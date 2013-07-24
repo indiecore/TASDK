@@ -1,59 +1,27 @@
 #pragma once
-#define ADD_VAR( x, y, z ) ( ##x ) var_##y() \
+#define ADD_VAR(x, y, z) (x) get_##y() \
 { \
-	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( #x " TribesGame.TrGeneratorMessage." #y ); \
-	return ( ##x( this, script_property->offset, z ) ); \
-}
-#define ADD_STRUCT( x, y, z ) ( ##x ) var_##y() \
+	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrGeneratorMessage." #y); \
+	return (##x(this, script_property->offset, z)); \
+} \
+__declspec(property(get=get_##y)) x y;
+#define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
-	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( "StructProperty TribesGame.TrGeneratorMessage." #y ); \
-	return ( ##x( this, script_property->offset, z ) ); \
-}
-#define ADD_OBJECT( x, y ) ( class x* ) var_##y() \
-{ \
-	static ScriptProperty *script_property = ScriptObject::Find< ScriptProperty >( "ObjectProperty TribesGame.TrGeneratorMessage." #y ); \
-	return *( x** )( this + script_property->offset ); \
-}
+	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrGeneratorMessage." #y); \
+	return *(x**)(this + script_property->offset); \
+} \
+__declspec(property(get=get_##y)) class x* y;
 namespace UnrealScript
 {
 	class TrGeneratorMessage : public UTLocalMessage
 	{
 	public:
-			ADD_VAR( ::StrProperty, OurGeneratorRestored, 0xFFFFFFFF )
-			ADD_VAR( ::StrProperty, EnemyGeneratorDestroyed, 0xFFFFFFFF )
-			ADD_VAR( ::StrProperty, OurGeneratorDestroyed, 0xFFFFFFFF )
-			ADD_OBJECT( SoundCue, DiamondSwordSounds )
-			ADD_OBJECT( SoundCue, BloodEagleSounds )
-			ScriptArray< wchar_t > GetString( int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI_, class Object* OptionalObject )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGeneratorMessage.GetString" );
-				byte *params = ( byte* )( malloc( 20 ) );
-				*( int* )params = Switch;
-				*( bool* )( params + 4 ) = bPRI1HUD;
-				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
-				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
-				*( class Object** )( params + 16 ) = OptionalObject;
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-				return *( ScriptArray< wchar_t >* )( params + function->return_val_offset() );
-			}
-
-			void ClientReceive( class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI_, class Object* OptionalObject )
-			{
-				static ScriptFunction *function = ScriptObject::Find< ScriptFunction >( "Function TribesGame.TrGeneratorMessage.ClientReceive" );
-				byte *params = ( byte* )( malloc( 20 ) );
-				*( class PlayerController** )params = P;
-				*( int* )( params + 4 ) = Switch;
-				*( class PlayerReplicationInfo** )( params + 8 ) = RelatedPRI;
-				*( class PlayerReplicationInfo** )( params + 12 ) = RelatedPRI_;
-				*( class Object** )( params + 16 ) = OptionalObject;
-				ScriptObject *object = ( ScriptObject* )( this );
-				object->ProcessEvent( function, params, NULL );
-			}
-
+		ADD_VAR(::StrProperty, OurGeneratorRestored, 0xFFFFFFFF)
+		ADD_VAR(::StrProperty, EnemyGeneratorDestroyed, 0xFFFFFFFF)
+		ADD_VAR(::StrProperty, OurGeneratorDestroyed, 0xFFFFFFFF)
+		ADD_OBJECT(SoundCue, DiamondSwordSounds)
+		ADD_OBJECT(SoundCue, BloodEagleSounds)
 	};
 }
-
 #undef ADD_VAR
-#undef ADD_STRUCT
 #undef ADD_OBJECT

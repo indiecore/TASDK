@@ -12,7 +12,10 @@ private:
 public:
 	IndentedStreamWriter::IndentedStreamWriter(const char* fileName)
 	{
-		this->innerStream.open(fileName, std::ios::app);
+		indent = 0;
+		curIndented = false;
+		memset(&currentIndent, '\0', 64);
+		this->innerStream.open(fileName, std::ios::trunc);
 	}
 	~IndentedStreamWriter()
 	{
@@ -26,7 +29,7 @@ public:
 		{
 			indent = indent_;
 			memset(&currentIndent, '\t', indent);
-			currentIndent[indent + 1] = '\0';
+			currentIndent[indent] = '\0';
 		}
 	}
 	__declspec(property(put=SetIndent, get=GetIndent)) int Indent;

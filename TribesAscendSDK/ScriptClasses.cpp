@@ -114,7 +114,7 @@ struct PropertyDescription
 			else if (!strcmp(objectProperty->property_class->GetName(), "Rotator"))
 				writer->WriteLine("ADD_STRUCT(::RotatorProperty, %s, 0xFFFFFFFF", originalProperty->GetName());
 			else
-				writer->WriteLine("// WARNING: Unknown structure type '%s' for the propery named '%s'!", objectProperty->property_class->GetFullName(), originalProperty->GetName());
+				writer->WriteLine("// WARNING: Unknown structure type '%s' for the property named '%s'!", objectProperty->property_class->GetFullName(), originalProperty->GetName());
 		}
 		else
 			writer->WriteLine("// ERROR: Unknown object class '%s' for the property named '%s'!", originalProperty->object_class()->GetName(), originalProperty->GetName());
@@ -217,26 +217,26 @@ struct ClassDescription
 		
 		if (primitivePropertyCount > 0)
 		{
-			wtr->WriteLine("#define ADD_VAR(x, y, z) (##x) get_##y() \\");
+			wtr->WriteLine("#define ADD_VAR(x, y, z) (x) get_##y() \\");
 			wtr->WriteLine("{ \\");
 			wtr->Indent++;
 			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x \" %s.%s.\" #y); \\", originalClass->outer()->GetName(), originalClass->GetName());
 			wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
 			wtr->Indent--;
 			wtr->WriteLine("} \\");
-			wtr->WriteLine("__declspec(property(get=get_##y)) (##x) ##y;");
+			wtr->WriteLine("__declspec(property(get=get_##y)) x y;");
 		}
 
 		if (structPropertyCount > 0)
 		{
-			wtr->WriteLine("#define ADD_STRUCT(x, y, z) (##x) get_##y() \\");
+			wtr->WriteLine("#define ADD_STRUCT(x, y, z) (x) get_##y() \\");
 			wtr->WriteLine("{ \\");
 			wtr->Indent++;
 			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"StructProperty %s.%s.\" #y); \\", originalClass->outer()->GetName(), originalClass->GetName());
 			wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
 			wtr->Indent--;
 			wtr->WriteLine("} \\");
-			wtr->WriteLine("__declspec(property(get=get_##y)) (##x) ##y;");
+			wtr->WriteLine("__declspec(property(get=get_##y)) x y;");
 		}
 
 		if (objectPropertyCount > 0)
@@ -248,7 +248,7 @@ struct ClassDescription
 			wtr->WriteLine("return *(x**)(this + script_property->offset); \\");
 			wtr->Indent--;
 			wtr->WriteLine("} \\");
-			wtr->WriteLine("__declspec(property(get=get_##y)) (class x*) ##y;");
+			wtr->WriteLine("__declspec(property(get=get_##y)) class x* y;");
 		}
 
 		wtr->WriteLine("namespace UnrealScript");
@@ -266,13 +266,13 @@ struct ClassDescription
 
 		wtr->Indent++;
 
-		for (std::vector<PropertyDescription>::size_type i = 0; i < properties.size(); i++)
+		for (unsigned int i = 0; i < properties.size(); i++)
 			properties[i].WriteToStream(wtr);
-		//for (int i = 0; i < functions.size(); i++)
+		//for (unsigned int i = 0; i < functions.size(); i++)
 		//	functions[i].WriteToStream(wtr);
 
 		wtr->Indent--;
-		wtr->WriteLine("}");
+		wtr->WriteLine("};");
 
 		wtr->Indent--;
 		wtr->WriteLine("}");
