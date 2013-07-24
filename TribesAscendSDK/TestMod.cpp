@@ -1,4 +1,5 @@
 #include "TASDK.h"
+#include "HeaderDump/TribesGame__TrEquipInterface.h"
 //#include "Armor.h"
 
 const char *kLogName = "SDKTest.log";

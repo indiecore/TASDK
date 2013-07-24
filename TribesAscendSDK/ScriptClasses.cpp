@@ -266,10 +266,10 @@ struct ClassDescription
 
 		wtr->Indent++;
 
-		for (int i = 0; i < properties.size(); i++)
+		for (std::vector<PropertyDescription>::size_type i = 0; i < properties.size(); i++)
 			properties[i].WriteToStream(wtr);
-		for (int i = 0; i < functions.size(); i++)
-			functions[i].WriteToStream(wtr);
+		//for (int i = 0; i < functions.size(); i++)
+		//	functions[i].WriteToStream(wtr);
 
 		wtr->Indent--;
 		wtr->WriteLine("}");
@@ -308,7 +308,11 @@ void ScriptObject::GenerateHeader()
 {
 	ScriptClass *class_scriptclass = ( ScriptClass* )( this );
 
-	std::string file_name = this->GetName();
+	auto cd = new ClassDescription(class_scriptclass);
+	cd->Write();
+	delete cd;
+
+	/*std::string file_name = this->GetName();
 	file_name.append( ".h" );
 
 	for( ScriptObject *outer = this->outer(); outer; outer = outer->outer() )
@@ -546,7 +550,7 @@ void ScriptObject::GenerateHeader()
 
 	OutputLogTo( file_name.c_str(), "#undef ADD_VAR\n" );
 	OutputLogTo( file_name.c_str(), "#undef ADD_STRUCT\n" );
-	OutputLogTo( file_name.c_str(), "#undef ADD_OBJECT\n" );
+	OutputLogTo( file_name.c_str(), "#undef ADD_OBJECT\n" );*/
 
 	ScriptClass *core_class = ScriptObject::Find< ScriptClass >( "Class Core.Class" );
 	for( int i = 0; i < object_array()->count(); i++ )

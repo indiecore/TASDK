@@ -8,16 +8,6 @@ private:
 	char currentIndent[64];
 	bool curIndented;
 	int indent;
-	int GetIndent() { return indent; }
-	void SetIndent(int indent_) 
-	{
-		if (indent != indent_)
-		{
-			indent = indent_;
-			memset(&currentIndent, '\t', indent);
-			currentIndent[indent + 1] = '\0';
-		}
-	}
 
 public:
 	IndentedStreamWriter::IndentedStreamWriter(const char* fileName)
@@ -28,7 +18,17 @@ public:
 	{
 		this->Close();
 	}
-
+	
+	int GetIndent() { return indent; }
+	void SetIndent(int indent_) 
+	{
+		if (indent != indent_)
+		{
+			indent = indent_;
+			memset(&currentIndent, '\t', indent);
+			currentIndent[indent + 1] = '\0';
+		}
+	}
 	__declspec(property(put=SetIndent, get=GetIndent)) int Indent;
 	
 	void Close()
