@@ -35,6 +35,22 @@ bool ScriptObject::IsA( ScriptClass *script_class )
 	return false;
 }
 
+
+std::string GetHeaderName(ScriptObject* obj)
+{
+	std::string file_name = obj->GetName();
+	file_name.append( ".h" );
+
+	for(ScriptObject* outer = obj->outer(); outer; outer = outer->outer())
+	{
+		file_name.insert(0, "__");
+		file_name.insert(0, outer->GetName());
+	}
+
+	file_name.insert(0, REPO_ROOT "TribesAscendSDK\\HeaderDump\\");
+	return file_name;
+}
+
 struct PropertyDescription
 {
 	ScriptProperty* originalProperty;
@@ -70,7 +86,7 @@ struct PropertyDescription
 		return !strcmp(originalProperty->object_class()->GetName(), "StructProperty");
 	}
 
-	void WriteToStream(IndentedStreamWriter& writer)
+	void WriteToStream(IndentedStreamWriter* writer)
 	{
 		if (
 			   !strcmp(originalProperty->object_class()->GetName(), "ByteProperty")
@@ -80,28 +96,28 @@ struct PropertyDescription
 			|| !strcmp(originalProperty->object_class()->GetName(), "NameProperty")
 		)
 		{
-			writer.WriteLine("ADD_VAR(::%s, %s, 0xFFFFFFFF)", originalProperty->object_class()->GetName(), originalProperty->GetName());
+			writer->WriteLine("ADD_VAR(::%s, %s, 0xFFFFFFFF)", originalProperty->object_class()->GetName(), originalProperty->GetName());
 		}
 		else if (!strcmp(originalProperty->object_class()->GetName(), "BoolProperty"))
-			writer.WriteLine("ADD_VAR(::%s, %s, 0x%X)", originalProperty->object_class()->GetName(), originalProperty->GetName(), ((ScriptBoolProperty*)originalProperty)->bit_mask);
+			writer->WriteLine("ADD_VAR(::%s, %s, 0x%X)", originalProperty->object_class()->GetName(), originalProperty->GetName(), ((ScriptBoolProperty*)originalProperty)->bit_mask);
 		else if (!strcmp(originalProperty->object_class()->GetName(), "ObjectProperty"))
-			writer.WriteLine("ADD_OBJECT(%s, %s)", ((ScriptObjectProperty*)originalProperty)->property_class->GetName(), originalProperty->GetName());
+			writer->WriteLine("ADD_OBJECT(%s, %s)", ((ScriptObjectProperty*)originalProperty)->property_class->GetName(), originalProperty->GetName());
 		else if (!strcmp(originalProperty->object_class()->GetName(), "StringRefProperty"))
-			writer.WriteLine("ADD_OBJECT(void, %s)", originalProperty->GetName());
+			writer->WriteLine("ADD_OBJECT(void, %s)", originalProperty->GetName());
 		else if (!strcmp(originalProperty->object_class()->GetName(), "ClassProperty"))
-			writer.WriteLine("ADD_OBJECT(ScriptClass, %s)", originalProperty->GetName());
+			writer->WriteLine("ADD_OBJECT(ScriptClass, %s)", originalProperty->GetName());
 		else if (!strcmp(originalProperty->object_class()->GetName(), "StructProperty"))
 		{
 			auto objectProperty = (ScriptObjectProperty*)originalProperty;
 			if (!strcmp(objectProperty->property_class->GetName(), "Vector"))
-				writer.WriteLine("ADD_STRUCT(::VectorProperty, %s, 0xFFFFFFFF", originalProperty->GetName());
+				writer->WriteLine("ADD_STRUCT(::VectorProperty, %s, 0xFFFFFFFF", originalProperty->GetName());
 			else if (!strcmp(objectProperty->property_class->GetName(), "Rotator"))
-				writer.WriteLine("ADD_STRUCT(::RotatorProperty, %s, 0xFFFFFFFF", originalProperty->GetName());
+				writer->WriteLine("ADD_STRUCT(::RotatorProperty, %s, 0xFFFFFFFF", originalProperty->GetName());
 			else
-				writer.WriteLine("// WARNING: Unknown structure type '%s' for the propery named '%s'!", objectProperty->property_class->GetFullName(), originalProperty->GetName());
+				writer->WriteLine("// WARNING: Unknown structure type '%s' for the propery named '%s'!", objectProperty->property_class->GetFullName(), originalProperty->GetName());
 		}
 		else
-			writer.WriteLine("// ERROR: Unknown object class '%s' for the property named '%s'!", originalProperty->object_class()->GetName(), originalProperty->GetName());
+			writer->WriteLine("// ERROR: Unknown object class '%s' for the property named '%s'!", originalProperty->object_class()->GetName(), originalProperty->GetName());
 	}
 };
 
@@ -124,7 +140,7 @@ struct FunctionArgumentDescription
 struct FunctionDescription
 {
 	ScriptFunction* originalFunction;
-	std::vector<FunctionArgumentDescription*> arguments;
+	std::vector<FunctionArgumentDescription> arguments;
 	ScriptProperty* returnProperty;
 
 	FunctionDescription(ScriptFunction* originalFunction_)
@@ -132,12 +148,12 @@ struct FunctionDescription
 		originalFunction = originalFunction_;
 		returnProperty = NULL;
 
-		for(ScriptProperty* functionArgument = (ScriptProperty*)originalFunction->children(); functionArgument; functionArgument = (ScriptProperty*)functionArgument->next())
+		for (ScriptProperty* functionArgument = (ScriptProperty*)originalFunction->children(); functionArgument; functionArgument = (ScriptProperty*)functionArgument->next())
 		{
 			if (functionArgument->property_flags & ScriptProperty::kPropReturnParm)
 				returnProperty = functionArgument;
 			else if (functionArgument->property_flags & ScriptProperty::kPropParm)
-				arguments.push_back(new FunctionArgumentDescription(functionArgument));
+				arguments.push_back(FunctionArgumentDescription(functionArgument));
 			else
 			{
 				// Well, something is odd at this point....
@@ -161,6 +177,111 @@ struct ClassDescription
 		primitivePropertyCount = 0;
 		structPropertyCount = 0;
 		objectPropertyCount = 0;
+
+		for (int i = 0; i < originalClass->object_array()->count(); i++)
+		{
+			ScriptObject* object = (*originalClass->object_array())(i);
+		
+			if(object && object->outer() == originalClass)
+			{
+				if (!strcmp(object->object_class()->GetName(), "Function"))
+					functions.push_back(FunctionDescription((ScriptFunction*)object));
+				else
+				{
+					auto prop = PropertyDescription((ScriptProperty*)object);
+					bool unknownProperty = false;
+					if (prop.IsPrimitiveProperty())
+						primitivePropertyCount++;
+					else if (prop.IsStructProperty())
+						structPropertyCount++;
+					else if (prop.IsObjectProperty())
+						objectPropertyCount++;
+					else
+					{
+						// This isn't good, but we'll figure it out eventually.
+						printf("Unknown property!");
+						unknownProperty = true;
+					}
+					if (!unknownProperty)
+						properties.push_back(prop);
+				}
+			}
+		}
+	}
+
+	void Write()
+	{
+		auto wtr = new IndentedStreamWriter(GetHeaderName(originalClass).c_str());
+
+		wtr->WriteLine("#pragma once");
+		
+		if (primitivePropertyCount > 0)
+		{
+			wtr->WriteLine("#define ADD_VAR(x, y, z) (##x) var_##y() \\");
+			wtr->WriteLine("{ \\");
+			wtr->Indent++;
+			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x \" %s.%s.\" #y); \\", originalClass->outer()->GetName(), originalClass->GetName());
+			wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
+			wtr->Indent--;
+			wtr->WriteLine("}");
+		}
+
+		if (structPropertyCount > 0)
+		{
+			wtr->WriteLine("#define ADD_STRUCT(x, y, z) (##x) var_##y() \\");
+			wtr->WriteLine("{ \\");
+			wtr->Indent++;
+			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"StructProperty %s.%s.\" #y); \\", originalClass->outer()->GetName(), originalClass->GetName());
+			wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
+			wtr->Indent--;
+			wtr->WriteLine("}");
+		}
+
+		if (objectPropertyCount > 0)
+		{
+			wtr->WriteLine("#define ADD_OBJECT(x, y) (class x*) var_##y() \\");
+			wtr->WriteLine("{ \\");
+			wtr->Indent++;
+			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"ObjectProperty %s.%s.\" #y); \\", originalClass->outer()->GetName(), originalClass->GetName());
+			wtr->WriteLine("return *(x**)(this + script_property->offset); \\");
+			wtr->Indent--;
+			wtr->WriteLine("}");
+		}
+
+		wtr->WriteLine("namespace UnrealScript");
+		wtr->WriteLine("{");
+		wtr->Indent++;
+
+		if (originalClass->super())
+			wtr->WriteLine("class %s : public %s", originalClass->GetName(), originalClass->super()->GetName());
+		else
+			wtr->WriteLine("class %s", originalClass->GetName());
+		wtr->WriteLine("{");
+
+		if (properties.size() > 0 || functions.size() > 0)
+			wtr->WriteLine("public:");
+
+		wtr->Indent++;
+
+		for (int i = 0; i < properties.size(); i++)
+			properties[i].WriteToStream(wtr);
+		for (int i = 0; i < functions.size(); i++)
+			functions[i].WriteToStream(wtr);
+
+		wtr->Indent--;
+		wtr->WriteLine("}");
+
+		wtr->Indent--;
+		wtr->WriteLine("}");
+
+		if (primitivePropertyCount > 0)
+			wtr->WriteLine("#undef ADD_VAR");
+		if (structPropertyCount > 0)
+			wtr->WriteLine("#undef ADD_STRUCT");
+		if (objectPropertyCount > 0)
+			wtr->WriteLine("#undef ADD_OBJECT");
+
+		delete wtr;
 	}
 };
 
