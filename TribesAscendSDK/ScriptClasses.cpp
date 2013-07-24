@@ -1,5 +1,7 @@
 #include "TASDK.h"
 #include <deque>
+#include <vector>
+#include "IndentedStreamWriter.h"
 
 // Altimor
 //#define REPO_ROOT "..\\..\\..\\src\\"
@@ -32,6 +34,135 @@ bool ScriptObject::IsA( ScriptClass *script_class )
 
 	return false;
 }
+
+struct PropertyDescription
+{
+	ScriptProperty* originalProperty;
+
+	PropertyDescription(ScriptProperty* originalProperty_)
+	{
+		originalProperty = originalProperty_;
+	}
+
+	bool IsPrimitiveProperty()
+	{
+		return
+			   !strcmp(originalProperty->object_class()->GetName(), "ByteProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "IntProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "FloatProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "BoolProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "StrProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "NameProperty")
+		;
+	}
+
+	bool IsObjectProperty()
+	{
+		return
+			   !strcmp(originalProperty->object_class()->GetName(), "ObjectProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "StringRefProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "NameProperty")
+		;
+	}
+
+	bool IsStructProperty()
+	{
+		return !strcmp(originalProperty->object_class()->GetName(), "StructProperty");
+	}
+
+	void WriteToStream(IndentedStreamWriter& writer)
+	{
+		if (
+			   !strcmp(originalProperty->object_class()->GetName(), "ByteProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "IntProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "FloatProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "StrProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "NameProperty")
+		)
+		{
+			writer.WriteLine("ADD_VAR(::%s, %s, 0xFFFFFFFF)", originalProperty->object_class()->GetName(), originalProperty->GetName());
+		}
+		else if (!strcmp(originalProperty->object_class()->GetName(), "BoolProperty"))
+			writer.WriteLine("ADD_VAR(::%s, %s, 0x%X)", originalProperty->object_class()->GetName(), originalProperty->GetName(), ((ScriptBoolProperty*)originalProperty)->bit_mask);
+		else if (!strcmp(originalProperty->object_class()->GetName(), "ObjectProperty"))
+			writer.WriteLine("ADD_OBJECT(%s, %s)", ((ScriptObjectProperty*)originalProperty)->property_class->GetName(), originalProperty->GetName());
+		else if (!strcmp(originalProperty->object_class()->GetName(), "StringRefProperty"))
+			writer.WriteLine("ADD_OBJECT(void, %s)", originalProperty->GetName());
+		else if (!strcmp(originalProperty->object_class()->GetName(), "ClassProperty"))
+			writer.WriteLine("ADD_OBJECT(ScriptClass, %s)", originalProperty->GetName());
+		else if (!strcmp(originalProperty->object_class()->GetName(), "StructProperty"))
+		{
+			auto objectProperty = (ScriptObjectProperty*)originalProperty;
+			if (!strcmp(objectProperty->property_class->GetName(), "Vector"))
+				writer.WriteLine("ADD_STRUCT(::VectorProperty, %s, 0xFFFFFFFF", originalProperty->GetName());
+			else if (!strcmp(objectProperty->property_class->GetName(), "Rotator"))
+				writer.WriteLine("ADD_STRUCT(::RotatorProperty, %s, 0xFFFFFFFF", originalProperty->GetName());
+			else
+				writer.WriteLine("// WARNING: Unknown structure type '%s' for the propery named '%s'!", objectProperty->property_class->GetFullName(), originalProperty->GetName());
+		}
+		else
+			writer.WriteLine("// ERROR: Unknown object class '%s' for the property named '%s'!", originalProperty->object_class()->GetName(), originalProperty->GetName());
+	}
+};
+
+struct FunctionArgumentDescription
+{
+	ScriptProperty* originalProperty;
+	std::string name;
+	int offset;
+	bool out_param;
+
+	FunctionArgumentDescription(ScriptProperty* originalProperty_)
+	{
+		originalProperty = originalProperty_;
+		name = originalProperty->GetName();
+		offset = originalProperty->offset;
+		out_param = (originalProperty->property_flags & ScriptProperty::kPropOutParm) != 0;
+	}
+};
+
+struct FunctionDescription
+{
+	ScriptFunction* originalFunction;
+	std::vector<FunctionArgumentDescription*> arguments;
+	ScriptProperty* returnProperty;
+
+	FunctionDescription(ScriptFunction* originalFunction_)
+	{
+		originalFunction = originalFunction_;
+		returnProperty = NULL;
+
+		for(ScriptProperty* functionArgument = (ScriptProperty*)originalFunction->children(); functionArgument; functionArgument = (ScriptProperty*)functionArgument->next())
+		{
+			if (functionArgument->property_flags & ScriptProperty::kPropReturnParm)
+				returnProperty = functionArgument;
+			else if (functionArgument->property_flags & ScriptProperty::kPropParm)
+				arguments.push_back(new FunctionArgumentDescription(functionArgument));
+			else
+			{
+				// Well, something is odd at this point....
+			}
+		}
+	}
+};
+
+struct ClassDescription
+{
+	ScriptClass* originalClass;
+	int primitivePropertyCount;
+	int structPropertyCount;
+	int objectPropertyCount;
+	std::vector<PropertyDescription> properties;
+	std::vector<FunctionDescription> functions;
+
+	ClassDescription(ScriptClass* originalClass_)
+	{
+		originalClass = originalClass_; 
+		primitivePropertyCount = 0;
+		structPropertyCount = 0;
+		objectPropertyCount = 0;
+	}
+};
 
 struct FuncArg
 {

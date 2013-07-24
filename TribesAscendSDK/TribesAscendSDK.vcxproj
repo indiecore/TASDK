@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="IndentedStreamWriter.cpp" />
     <ClCompile Include="Logging.cpp" />
     <ClCompile Include="ScriptClasses.cpp" />
     <ClCompile Include="ScriptHooks.cpp" />
@@ -89,6 +90,7 @@
   <ItemGroup>
     <ClInclude Include="Armor.h" />
     <ClInclude Include="DynamicClasses.h" />
+    <ClInclude Include="IndentedStreamWriter.h" />
     <ClInclude Include="Logging.h" />
     <ClInclude Include="ScriptHooks.h" />
     <ClInclude Include="ScriptClasses.h" />

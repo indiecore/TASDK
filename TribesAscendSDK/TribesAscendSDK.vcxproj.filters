@@ -42,6 +42,9 @@
     <ClCompile Include="ScriptHooks.cpp">
       <Filter>Source Files\SDK</Filter>
     </ClCompile>
+    <ClCompile Include="IndentedStreamWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ScriptHooks.h">
@@ -64,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="Armor.h">
       <Filter>Header Files\Tribes Classic</Filter>
+    </ClInclude>
+    <ClInclude Include="IndentedStreamWriter.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
