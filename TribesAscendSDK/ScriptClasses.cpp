@@ -48,7 +48,6 @@ std::string GetHeaderName(ScriptObject* obj)
 		file_name.insert(0, outer->GetName());
 	}
 
-	file_name.insert(0, REPO_ROOT "TribesAscendSDK\\HeaderDump\\");
 	return file_name;
 }
 
@@ -211,17 +210,21 @@ struct ClassDescription
 		}
 
 		if (originalClass->super())
-			RequireType((ScriptObject*)originalClass->super());
+			RequireType(originalClass->super());
 	}
 
 	void RequireType(ScriptObject* objType)
 	{
-		requiredHeaders[GetHeaderName(objType).c_str()] = 1;
+		static std::string headerName;
+		headerName = GetHeaderName(objType);
+		requiredHeaders[headerName.c_str()] = 1;
 	}
 
 	void Write()
 	{
-		auto wtr = new IndentedStreamWriter(GetHeaderName(originalClass).c_str());
+		auto headerName = GetHeaderName(originalClass);
+		headerName.insert(0, REPO_ROOT "TribesAscendSDK\\HeaderDump\\");
+		auto wtr = new IndentedStreamWriter(headerName.c_str());
 
 		wtr->WriteLine("#pragma once");
 		
