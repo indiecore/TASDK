@@ -201,9 +201,9 @@ struct PropertyDescription
 		{
 			auto objectProperty = (ScriptObjectProperty*)originalProperty;
 			if (!strcmp(objectProperty->property_class->GetName(), "Vector"))
-				writer->WriteLine("ADD_STRUCT(::VectorProperty, %s, 0xFFFFFFFF", originalProperty->GetName());
+				writer->WriteLine("ADD_STRUCT(::VectorProperty, %s, 0xFFFFFFFF)", originalProperty->GetName());
 			else if (!strcmp(objectProperty->property_class->GetName(), "Rotator"))
-				writer->WriteLine("ADD_STRUCT(::RotatorProperty, %s, 0xFFFFFFFF", originalProperty->GetName());
+				writer->WriteLine("ADD_STRUCT(::RotatorProperty, %s, 0xFFFFFFFF)", originalProperty->GetName());
 			else
 				writer->WriteLine("// WARNING: Unknown structure type '%s' for the property named '%s'!", objectProperty->property_class->GetFullName(), originalProperty->GetName());
 		}
