@@ -303,6 +303,8 @@ struct FunctionDescription
 			if (i != arguments.size() - 1)
 				wtr->Write(", ");
 		}
+		if (returnProperty)
+			paramSize += returnProperty->element_size;
 
 		wtr->WriteLine(")");
 		wtr->WriteLine("{");
@@ -326,7 +328,7 @@ struct FunctionDescription
 			arguments[i].WriteLoadFromBuffer(wtr, "params");
 
 		if (returnProperty)
-			wtr->WriteLine("return *(%s*)(params + function->return_val_offset());", GetTypeNameForProperty(returnProperty).c_str());
+			wtr->WriteLine("return *(%s*)(params + %i);", GetTypeNameForProperty(returnProperty).c_str(), originalFunction->return_val_offset());
 
 		wtr->Indent--;
 		wtr->WriteLine("}");
