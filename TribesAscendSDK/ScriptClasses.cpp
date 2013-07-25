@@ -243,14 +243,14 @@ struct FunctionArgumentDescription
 			if (!strcmp(tnfp.c_str(), "byte"))
 				wtr->WriteLine("*(%s + %i) = %s;", bufName, offset, name.c_str());
 			else
-				wtr->WriteLine("*(%s*)(%s + %i) = %s;", tnfp, bufName, offset, name.c_str());
+				wtr->WriteLine("*(%s*)(%s + %i) = %s;", tnfp.c_str(), bufName, offset, name.c_str());
 		}
 		else
 		{
 			if (!strcmp(tnfp.c_str(), "byte"))
 				wtr->WriteLine("*%s = %s;", bufName, name.c_str());
 			else
-				wtr->WriteLine("*(%s*)%s = %s;", tnfp, bufName, name.c_str());
+				wtr->WriteLine("*(%s*)%s = %s;", tnfp.c_str(), bufName, name.c_str());
 		}
 	}
 
@@ -264,14 +264,14 @@ struct FunctionArgumentDescription
 				if (!strcmp(tnfp.c_str(), "byte"))
 					wtr->WriteLine("%s = *(%s + %i);", name.c_str(), bufName, offset);
 				else
-					wtr->WriteLine("%s = *(%s*)(%s + %i);", name.c_str(), tnfp, bufName, offset);
+					wtr->WriteLine("%s = *(%s*)(%s + %i);", name.c_str(), tnfp.c_str(), bufName, offset);
 			}
 			else
 			{
 				if (!strcmp(tnfp.c_str(), "byte"))
 					wtr->WriteLine("%s = *%s;", name.c_str(), bufName);
 				else
-					wtr->WriteLine("%s = *(%s*)%s;", name.c_str(), tnfp, bufName);
+					wtr->WriteLine("%s = *(%s*)%s;", name.c_str(), tnfp.c_str(), bufName);
 			}
 		}
 	}
@@ -357,14 +357,14 @@ struct FunctionDescription
 				if (!strcmp(tnfp.c_str(), "byte"))
 					wtr->WriteLine("return *(params + %i);", originalFunction->return_val_offset());
 				else
-					wtr->WriteLine("return *(%s*)(params + %i);", tnfp, originalFunction->return_val_offset());
+					wtr->WriteLine("return *(%s*)(params + %i);", tnfp.c_str(), originalFunction->return_val_offset());
 			}
 			else
 			{
 				if (!strcmp(tnfp.c_str(), "byte"))
 					wtr->WriteLine("return *params;");
 				else
-					wtr->WriteLine("return *(%s*)params;", tnfp);
+					wtr->WriteLine("return *(%s*)params;", tnfp.c_str());
 			}
 		}
 
