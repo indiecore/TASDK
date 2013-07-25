@@ -118,7 +118,8 @@ struct PropertyDescription
 
 	void RequireTypes(ClassDependencyManager* classDepMgr)
 	{
-		if (IsObjectProperty() || IsStructProperty())
+		// TODO: Once child structs are dumped, add those headers as dependencies as well.
+		if (!strcmp(originalProperty->object_class()->GetName(), "ObjectProperty"))
 			classDepMgr->RequireType(((ScriptObjectProperty*)originalProperty)->property_class);
 	}
 
