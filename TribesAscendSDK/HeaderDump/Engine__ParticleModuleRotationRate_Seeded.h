@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__ParticleModuleRotationRate.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleRotationRate_Seeded." #y); \

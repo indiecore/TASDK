@@ -1,4 +1,5 @@
 #pragma once
+#include "GameFramework__SeqEvent_MobileZoneBase.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqEvent_MobileLook." #y); \

@@ -1,4 +1,5 @@
 #pragma once
+#include "UTGame__UTDataStore_GameSearchPersonal.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTDataStore_GameSearchFavorites." #y); \

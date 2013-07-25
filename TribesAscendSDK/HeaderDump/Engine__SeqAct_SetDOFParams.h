@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__SeqAct_Latent.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_SetDOFParams." #y); \

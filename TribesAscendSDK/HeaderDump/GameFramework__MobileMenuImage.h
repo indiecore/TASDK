@@ -1,4 +1,5 @@
 #pragma once
+#include "GameFramework__MobileMenuObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.MobileMenuImage." #y); \

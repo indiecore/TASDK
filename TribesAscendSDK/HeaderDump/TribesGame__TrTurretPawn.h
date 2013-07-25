@@ -1,4 +1,5 @@
 #pragma once
+#include "TribesGame__TrPawn.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrTurretPawn." #y); \

@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__TextureRenderTarget.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.TextureRenderTarget2D." #y); \

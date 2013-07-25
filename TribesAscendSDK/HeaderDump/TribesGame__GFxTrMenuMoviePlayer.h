@@ -1,4 +1,5 @@
 #pragma once
+#include "GFxUI__GFxMoviePlayer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrMenuMoviePlayer." #y); \

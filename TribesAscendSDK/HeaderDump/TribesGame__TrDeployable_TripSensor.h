@@ -1,4 +1,5 @@
 #pragma once
+#include "TribesGame__TrDeployable_Sensor.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrDeployable_TripSensor." #y); \

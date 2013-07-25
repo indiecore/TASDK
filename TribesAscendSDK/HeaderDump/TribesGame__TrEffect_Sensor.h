@@ -1,4 +1,5 @@
 #pragma once
+#include "TribesGame__TrEffect_Managed.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrEffect_Sensor." #y); \

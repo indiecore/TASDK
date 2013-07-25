@@ -1,4 +1,5 @@
 #pragma once
+#include "UDKBase__UDKDataStore_GameSearchBase.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTDataStore_GameSearchPersonal." #y); \

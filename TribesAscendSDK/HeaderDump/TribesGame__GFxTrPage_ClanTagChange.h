@@ -1,4 +1,5 @@
 #pragma once
+#include "TribesGame__GFxTrPage_VendorTable.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrPage_ClanTagChange." #y); \

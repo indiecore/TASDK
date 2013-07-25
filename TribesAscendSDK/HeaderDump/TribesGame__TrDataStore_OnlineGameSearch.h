@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__UIDataStore_OnlineGameSearch.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrDataStore_OnlineGameSearch." #y); \

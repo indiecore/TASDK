@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__SeqAct_SetSequenceVariable.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.SeqAct_SetObject." #y); \
