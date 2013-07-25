@@ -1,7 +1,8 @@
 #include "TASDK.h"
-#include <deque>
-#include <vector>
 #include "IndentedStreamWriter.h"
+#include <deque>
+#include <unordered_map>
+#include <vector>
 
 // Altimor
 //#define REPO_ROOT "..\\..\\..\\src\\"
@@ -170,6 +171,7 @@ struct ClassDescription
 	int objectPropertyCount;
 	std::vector<PropertyDescription> properties;
 	std::vector<FunctionDescription> functions;
+	std::unordered_map<std::string, int> requiredHeaders;
 
 	ClassDescription(ScriptClass* originalClass_)
 	{
@@ -207,6 +209,14 @@ struct ClassDescription
 				}
 			}
 		}
+
+		if (originalClass->super())
+			RequireType((ScriptObject*)originalClass->super());
+	}
+
+	void RequireType(ScriptObject* objType)
+	{
+		requiredHeaders[GetHeaderName(objType)] = 1;
 	}
 
 	void Write()
@@ -215,6 +225,9 @@ struct ClassDescription
 
 		wtr->WriteLine("#pragma once");
 		
+		for each (auto h in requiredHeaders)
+			wtr->WriteLine("#include \"%s\"", h.first);
+
 		if (primitivePropertyCount > 0)
 		{
 			wtr->WriteLine("#define ADD_VAR(x, y, z) (x) get_##y() \\");
