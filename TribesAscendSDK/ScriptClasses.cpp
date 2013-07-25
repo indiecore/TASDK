@@ -51,8 +51,8 @@ std::string GetTypeNameForProperty(ScriptProperty* prop)
 		auto objProp = (ScriptObjectProperty*)prop;
 		if (!strcmp(objProp->property_class->GetName(), "Vector"))
 			return "Vector";
-		else if (!strcmp(objProp->property_class->GetName(), "Vector"))
-			return "Vector";
+		else if (!strcmp(objProp->property_class->GetName(), "Rotator"))
+			return "Rotator";
 		else
 		{
 			std::string tp = "\n// WARNING: Unknown structure type '";
@@ -74,7 +74,7 @@ std::string GetTypeNameForProperty(ScriptProperty* prop)
 	else if (!strcmp(prop->object_class()->GetName(), "StringRefProperty"))
 		return "void*";
 	else if (!strcmp(prop->object_class()->GetName(), "NameProperty"))
-		return "ScripName";
+		return "ScriptName";
 	else if (!strcmp(prop->object_class()->GetName(), "ClassProperty"))
 		return "ScriptClass*";
 	else
@@ -229,7 +229,29 @@ struct FunctionArgumentDescription
 
 	void WriteDeclaration(IndentedStreamWriter* wtr)
 	{
-		wtr->Write("%s %s", GetTypeNameForProperty(originalProperty).c_str(), name.c_str());
+		if (out_param)
+			wtr->Write("%s& %s", GetTypeNameForProperty(originalProperty).c_str(), name.c_str());
+		else
+			wtr->Write("%s %s", GetTypeNameForProperty(originalProperty).c_str(), name.c_str());
+	}
+
+	void WriteLoadToBuffer(IndentedStreamWriter* wtr, const char* bufName)
+	{
+		if (offset > 0)
+			wtr->WriteLine("*(%s*)(%s + %i) = %s;", GetTypeNameForProperty(originalProperty).c_str(), bufName, offset, name.c_str());
+		else
+			wtr->WriteLine("*(%s*)%s = %s;", GetTypeNameForProperty(originalProperty).c_str(), bufName, name.c_str());
+	}
+
+	void WriteLoadFromBuffer(IndentedStreamWriter* wtr, const char* bufName)
+	{
+		if (out_param)
+		{
+			if (offset > 0)
+				wtr->WriteLine("%s = *(%s*)(%s + %i);", name.c_str(), GetTypeNameForProperty(originalProperty).c_str(), bufName, offset);
+			else
+				wtr->WriteLine("%s = *(%s*)%s;", name.c_str(), GetTypeNameForProperty(originalProperty).c_str(), bufName);
+		}
 	}
 };
 
@@ -273,14 +295,41 @@ struct FunctionDescription
 			wtr->Write("void");
 		wtr->Write(" %s(", originalFunction->GetName());
 
+		int paramSize = 0;
 		for (unsigned int i = 0; i < arguments.size(); i++)
 		{
 			arguments[i].WriteDeclaration(wtr);
+			paramSize += arguments[i].originalProperty->element_size;
 			if (i != arguments.size() - 1)
 				wtr->Write(", ");
 		}
 
-		wtr->WriteLine(");");
+		wtr->WriteLine(")");
+		wtr->WriteLine("{");
+		wtr->Indent++;
+
+		wtr->WriteLine("static ScriptFunction* function = ScriptObject::Find<ScriptFunction>(\"%s\");", originalFunction->GetFullName());
+		if (paramSize > 0)
+			wtr->WriteLine("byte* params = (byte*)malloc(%i);", paramSize);
+
+		for (unsigned int i = 0; i < arguments.size(); i++)
+			arguments[i].WriteLoadToBuffer(wtr, "params");
+
+		wtr->Write("((ScriptObject*)this)->ProcessEvent(function, ");
+		if (paramSize > 0)
+			wtr->Write("params");
+		else
+			wtr->Write("NULL");
+		wtr->WriteLine(", NULL);");
+
+		for (unsigned int i = 0; i < arguments.size(); i++)
+			arguments[i].WriteLoadFromBuffer(wtr, "params");
+
+		if (returnProperty)
+			wtr->WriteLine("return *(%s*)(params + function->return_val_offset());", GetTypeNameForProperty(returnProperty).c_str());
+
+		wtr->Indent--;
+		wtr->WriteLine("}");
 	}
 };
 
