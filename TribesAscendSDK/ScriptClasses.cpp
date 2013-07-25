@@ -37,6 +37,55 @@ bool ScriptObject::IsA( ScriptClass *script_class )
 }
 
 
+std::string GetTypeNameForProperty(ScriptProperty* prop)
+{
+	if (!strcmp(prop->object_class()->GetName(), "ObjectProperty"))
+	{
+		std::string tp = "class ";
+		tp += ((ScriptObjectProperty*)prop)->property_class->GetName();
+		tp += "*";
+		return tp;
+	}
+	else if (!strcmp(prop->object_class()->GetName(), "StructProperty"))
+	{
+		auto objProp = (ScriptObjectProperty*)prop;
+		if (!strcmp(objProp->property_class->GetName(), "Vector"))
+			return "Vector";
+		else if (!strcmp(objProp->property_class->GetName(), "Vector"))
+			return "Vector";
+		else
+		{
+			std::string tp = "\n// WARNING: Unknown structure type '";
+			tp += objProp->property_class->GetFullName();
+			tp += "'!\nvoid*";
+			return tp;
+		}
+	}
+	else if (!strcmp(prop->object_class()->GetName(), "ByteProperty"))
+		return "byte";
+	else if (!strcmp(prop->object_class()->GetName(), "IntProperty"))
+		return "int";
+	else if (!strcmp(prop->object_class()->GetName(), "FloatProperty"))
+		return "float";
+	else if (!strcmp(prop->object_class()->GetName(), "BoolProperty"))
+		return "bool";
+	else if (!strcmp(prop->object_class()->GetName(), "StrProperty"))
+		return "ScriptArray<wchar_t>";
+	else if (!strcmp(prop->object_class()->GetName(), "StringRefProperty"))
+		return "void*";
+	else if (!strcmp(prop->object_class()->GetName(), "NameProperty"))
+		return "ScripName";
+	else if (!strcmp(prop->object_class()->GetName(), "ClassProperty"))
+		return "ScriptClass*";
+	else
+	{
+			std::string tp = "\n// ERROR: Unknown object class '";
+			tp += prop->object_class()->GetFullName();
+			tp += "'!\nvoid*";
+			return tp;
+	}
+}
+
 std::string GetHeaderName(ScriptObject* obj)
 {
 	std::string file_name = obj->GetName();
@@ -177,6 +226,11 @@ struct FunctionArgumentDescription
 		offset = originalProperty->offset;
 		out_param = (originalProperty->property_flags & ScriptProperty::kPropOutParm) != 0;
 	}
+
+	void WriteDeclaration(IndentedStreamWriter* wtr)
+	{
+		wtr->Write("%s %s", GetTypeNameForProperty(originalProperty).c_str(), name.c_str());
+	}
 };
 
 struct FunctionDescription
@@ -213,7 +267,20 @@ struct FunctionDescription
 
 	void WriteToStream(IndentedStreamWriter* wtr)
 	{
-		wtr->WriteLine("// Here lies the not-yet-implemented method '%s'", originalFunction->GetName());
+		if (returnProperty)
+			wtr->Write("%s", GetTypeNameForProperty(returnProperty).c_str());
+		else
+			wtr->Write("void");
+		wtr->Write(" %s(", originalFunction->GetName());
+
+		for (unsigned int i = 0; i < arguments.size(); i++)
+		{
+			arguments[i].WriteDeclaration(wtr);
+			if (i != arguments.size() - 1)
+				wtr->Write(", ");
+		}
+
+		wtr->WriteLine(");");
 	}
 };
 
@@ -621,7 +688,7 @@ void ScriptObject::GenerateHeader()
 	OutputLogTo( file_name.c_str(), "#undef ADD_STRUCT\n" );
 	OutputLogTo( file_name.c_str(), "#undef ADD_OBJECT\n" );*/
 
-	ScriptClass *core_class = ScriptObject::Find< ScriptClass >( "Class Core.Class" );
+	static ScriptClass *core_class = ScriptObject::Find< ScriptClass >( "Class Core.Class" );
 	for( int i = 0; i < object_array()->count(); i++ )
 	{
 		ScriptObject *class_object = ( *object_array() )( i );
