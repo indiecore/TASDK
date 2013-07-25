@@ -171,7 +171,7 @@ struct ClassDescription
 	int objectPropertyCount;
 	std::vector<PropertyDescription> properties;
 	std::vector<FunctionDescription> functions;
-	std::unordered_map<std::string, int> requiredHeaders;
+	std::unordered_map<const char*, int> requiredHeaders;
 
 	ClassDescription(ScriptClass* originalClass_)
 	{
@@ -216,7 +216,7 @@ struct ClassDescription
 
 	void RequireType(ScriptObject* objType)
 	{
-		requiredHeaders[GetHeaderName(objType)] = 1;
+		requiredHeaders[GetHeaderName(objType).c_str()] = 1;
 	}
 
 	void Write()
