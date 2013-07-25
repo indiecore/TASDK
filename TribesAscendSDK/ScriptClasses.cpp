@@ -62,6 +62,13 @@ struct ClassDependencyManager
 			h.first.~basic_string();
 	}
 
+	void ProcessProperty(ScriptProperty* prop)
+	{
+		// TODO: Once child structs are dumped, add those headers as dependencies as well.
+		if (!strcmp(prop->object_class()->GetName(), "ObjectProperty"))
+			RequireType(((ScriptObjectProperty*)prop)->property_class);
+	}
+
 	void RequireType(ScriptObject* objType)
 	{
 		if (objType == parentClass)
@@ -118,9 +125,7 @@ struct PropertyDescription
 
 	void RequireTypes(ClassDependencyManager* classDepMgr)
 	{
-		// TODO: Once child structs are dumped, add those headers as dependencies as well.
-		if (!strcmp(originalProperty->object_class()->GetName(), "ObjectProperty"))
-			classDepMgr->RequireType(((ScriptObjectProperty*)originalProperty)->property_class);
+		classDepMgr->ProcessProperty(originalProperty);
 	}
 
 	void WriteToStream(IndentedStreamWriter* writer)
@@ -197,6 +202,19 @@ struct FunctionDescription
 			}
 		}
 	}
+
+	void RequireTypes(ClassDependencyManager* classDepMgr)
+	{
+		if (returnProperty)
+			classDepMgr->ProcessProperty(returnProperty);
+		for (unsigned int i = 0; i < arguments.size(); i++)
+			classDepMgr->ProcessProperty(arguments[i].originalProperty);
+	}
+
+	void WriteToStream(IndentedStreamWriter* wtr)
+	{
+		wtr->WriteLine("// Here lies the not-yet-implemented method '%s'", originalFunction->GetName());
+	}
 };
 
 struct ClassDescription
@@ -252,8 +270,8 @@ struct ClassDescription
 
 		for (unsigned int i = 0; i < properties.size(); i++)
 			properties[i].RequireTypes(&dependencyManager);
-		//for (unsigned int i = 0; i < functions.size(); i++)
-		//	functions[i].RequireTypes(this);
+		for (unsigned int i = 0; i < functions.size(); i++)
+			functions[i].RequireTypes(&dependencyManager);
 	}
 
 	void Write()
@@ -319,8 +337,8 @@ struct ClassDescription
 
 		for (unsigned int i = 0; i < properties.size(); i++)
 			properties[i].WriteToStream(wtr);
-		//for (unsigned int i = 0; i < functions.size(); i++)
-		//	functions[i].WriteToStream(wtr);
+		for (unsigned int i = 0; i < functions.size(); i++)
+			functions[i].WriteToStream(wtr);
 
 		wtr->Indent--;
 		wtr->WriteLine("};");
