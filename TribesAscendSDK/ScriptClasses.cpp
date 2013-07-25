@@ -355,18 +355,24 @@ struct FunctionDescription
 			if (originalFunction->return_val_offset() != 0)
 			{
 				if (!strcmp(tnfp.c_str(), "byte"))
-					wtr->WriteLine("return *(params + %i);", originalFunction->return_val_offset());
+					wtr->WriteLine("auto returnVal = *(params + %i);", originalFunction->return_val_offset());
 				else
-					wtr->WriteLine("return *(%s*)(params + %i);", tnfp.c_str(), originalFunction->return_val_offset());
+					wtr->WriteLine("auto returnVal = *(%s*)(params + %i);", tnfp.c_str(), originalFunction->return_val_offset());
 			}
 			else
 			{
 				if (!strcmp(tnfp.c_str(), "byte"))
-					wtr->WriteLine("return *params;");
+					wtr->WriteLine("auto returnVal = *params;");
 				else
-					wtr->WriteLine("return *(%s*)params;", tnfp.c_str());
+					wtr->WriteLine("auto returnVal = *(%s*)params;", tnfp.c_str());
 			}
 		}
+		
+		if (paramSize > 0)
+			wtr->WriteLine("free(params);");
+
+		if (returnProperty)
+			wtr->WriteLine("return returnVal;");
 
 		wtr->Indent--;
 		wtr->WriteLine("}");
