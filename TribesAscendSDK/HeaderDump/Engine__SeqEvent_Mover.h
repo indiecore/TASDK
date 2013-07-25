@@ -13,11 +13,40 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, StayOpenTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'RegisterEvent'
-		// Here lies the not-yet-implemented method 'NotifyEncroachingOn'
-		// Here lies the not-yet-implemented method 'NotifyAttached'
-		// Here lies the not-yet-implemented method 'NotifyDetached'
-		// Here lies the not-yet-implemented method 'NotifyFinishedOpen'
+		void RegisterEvent()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.RegisterEvent");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void NotifyEncroachingOn(class Actor* Hit)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.NotifyEncroachingOn");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Hit;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyAttached(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.NotifyAttached");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyDetached(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.NotifyDetached");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyFinishedOpen()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.NotifyFinishedOpen");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

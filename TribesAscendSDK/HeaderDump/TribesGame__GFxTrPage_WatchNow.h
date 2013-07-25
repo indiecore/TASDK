@@ -21,14 +21,67 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumTrainVideos, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumHiRezVideos, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumLiveStreams, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'ShowModel'
-		// Here lies the not-yet-implemented method 'SpecialAction'
-		// Here lies the not-yet-implemented method 'UpdateStreams'
-		// Here lies the not-yet-implemented method 'FillData'
-		// Here lies the not-yet-implemented method 'FillOption'
-		// Here lies the not-yet-implemented method 'FillDescription'
-		// Here lies the not-yet-implemented method 'IsFeatured'
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShowModel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.ShowModel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SpecialAction(class GFxTrAction* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.SpecialAction");
+			byte* params = (byte*)malloc(4);
+			*(class GFxTrAction**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateStreams()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.UpdateStreams");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FillData(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.FillData");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class GFxObject* FillOption(int ActionIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.FillOption");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class GFxObject* FillDescription(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.FillDescription");
+			byte* params = (byte*)malloc(8);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool IsFeatured(int Num)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.IsFeatured");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Num;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

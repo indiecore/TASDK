@@ -33,10 +33,47 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IntPoint' for the property named 'MousePosition'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'RenderViewport'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FExec'!
-		// Here lies the not-yet-implemented method 'IsUIActive'
-		// Here lies the not-yet-implemented method 'GetCanvasToScreen'
-		// Here lies the not-yet-implemented method 'GetInverseCanvasToScreen'
-		// Here lies the not-yet-implemented method 'InitializeSceneClient'
+		bool IsUIActive(int Flags)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UISceneClient.IsUIActive");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Flags;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
+void* GetCanvasToScreen()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UISceneClient.GetCanvasToScreen");
+			byte* params = (byte*)malloc(64);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
+void**)params;
+			free(params);
+			return returnVal;
+		}
+		
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
+void* GetInverseCanvasToScreen()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UISceneClient.GetInverseCanvasToScreen");
+			byte* params = (byte*)malloc(64);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
+void**)params;
+			free(params);
+			return returnVal;
+		}
+		void InitializeSceneClient()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UISceneClient.InitializeSceneClient");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

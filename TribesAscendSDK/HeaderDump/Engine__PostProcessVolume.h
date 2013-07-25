@@ -28,7 +28,14 @@ namespace UnrealScript
 		ADD_OBJECT(PostProcessVolume, NextLowerPriorityVolume)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'Settings'!
 		ADD_VAR(::FloatProperty, Priority, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'OnToggle'
+		void OnToggle(class SeqAct_Toggle* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PostProcessVolume.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

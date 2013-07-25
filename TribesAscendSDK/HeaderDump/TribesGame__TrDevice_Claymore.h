@@ -13,8 +13,25 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, m_fWorldZPlacementOffset, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetPhysicalFireStartLoc'
-		// Here lies the not-yet-implemented method 'ProjectileFire'
+		Vector GetPhysicalFireStartLoc(Vector AimDir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Claymore.GetPhysicalFireStartLoc");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = AimDir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		class Projectile* ProjectileFire()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Claymore.ProjectileFire");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Projectile**)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

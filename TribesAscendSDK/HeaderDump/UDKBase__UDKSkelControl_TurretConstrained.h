@@ -33,9 +33,42 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bConstrainRoll, 0x4)
 		ADD_VAR(::BoolProperty, bConstrainYaw, 0x2)
 		ADD_VAR(::BoolProperty, bConstrainPitch, 0x1)
-		// Here lies the not-yet-implemented method 'OnTurretStatusChange'
-		// Here lies the not-yet-implemented method 'InitTurret'
-		// Here lies the not-yet-implemented method 'WouldConstrainPitch'
+		void OnTurretStatusChange(bool bIsMoving)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_TurretConstrained.OnTurretStatusChange");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bIsMoving;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InitTurret(Rotator InitRot, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_TurretConstrained.InitTurret");
+			byte* params = (byte*)malloc(16);
+			*(Rotator*)params = InitRot;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 12) = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool WouldConstrainPitch(int TestPitch, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_TurretConstrained.WouldConstrainPitch");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = TestPitch;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

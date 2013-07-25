@@ -32,7 +32,15 @@ namespace UnrealScript
 		ADD_OBJECT(SoundNode, FirstNode)
 		ADD_VAR(::ByteProperty, SoundClassName, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, SoundClass, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetCueDuration'
+		float GetCueDuration()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SoundCue.GetCueDuration");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

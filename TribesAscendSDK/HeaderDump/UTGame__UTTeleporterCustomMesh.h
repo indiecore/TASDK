@@ -23,8 +23,32 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastTime, 0xFFFFFFFF)
 		ADD_OBJECT(UTPawn, LastPawn)
 		ADD_OBJECT(SoundCue, TeleportingSound)
-		// Here lies the not-yet-implemented method 'Accept'
-		// Here lies the not-yet-implemented method 'Touch'
+		bool Accept(class Actor* Incoming, class Actor* Source)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeleporterCustomMesh.Accept");
+			byte* params = (byte*)malloc(12);
+			*(class Actor**)params = Incoming;
+			*(class Actor**)(params + 4) = Source;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void Touch(class Actor* Other, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* OtherComp, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeleporterCustomMesh.Touch");
+			byte* params = (byte*)malloc(32);
+			*(class Actor**)params = Other;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = OtherComp;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

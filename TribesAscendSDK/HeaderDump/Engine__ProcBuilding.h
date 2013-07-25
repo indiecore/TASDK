@@ -43,12 +43,74 @@ namespace UnrealScript
 		ADD_OBJECT(StaticMeshActor, LowLODPersistentActor)
 		ADD_OBJECT(Actor, CurrentSimpleMeshActor)
 		ADD_VAR(::IntProperty, BuildingInstanceVersion, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'FindEdgeForTopLevelScope'
-		// Here lies the not-yet-implemented method 'BreakFractureComponent'
-		// Here lies the not-yet-implemented method 'GetAllGroupedProcBuildings'
-		// Here lies the not-yet-implemented method 'GetBaseMostBuilding'
-		// Here lies the not-yet-implemented method 'FindComponentsForTopLevelScope'
-		// Here lies the not-yet-implemented method 'ClearBuildingMeshes'
+		int FindEdgeForTopLevelScope(int TopLevelScopeIndex, byte Edge)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ProcBuilding.FindEdgeForTopLevelScope");
+			byte* params = (byte*)malloc(9);
+			*(int*)params = TopLevelScopeIndex;
+			*(params + 4) = Edge;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void BreakFractureComponent(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* Comp, Vector BoxMin, Vector BoxMax)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ProcBuilding.BreakFractureComponent");
+			byte* params = (byte*)malloc(28);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = Comp;
+			*(Vector*)(params + 4) = BoxMin;
+			*(Vector*)(params + 16) = BoxMax;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void GetAllGroupedProcBuildings(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void*& OutSet)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ProcBuilding.GetAllGroupedProcBuildings");
+			byte* params = (byte*)malloc(12);
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)params = OutSet;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutSet = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)params;
+			free(params);
+		}
+		class ProcBuilding* GetBaseMostBuilding()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ProcBuilding.GetBaseMostBuilding");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class ProcBuilding**)params;
+			free(params);
+			return returnVal;
+		}
+		
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void* FindComponentsForTopLevelScope(int TopLevelScopeIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ProcBuilding.FindComponentsForTopLevelScope");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = TopLevelScopeIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void ClearBuildingMeshes()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ProcBuilding.ClearBuildingMeshes");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

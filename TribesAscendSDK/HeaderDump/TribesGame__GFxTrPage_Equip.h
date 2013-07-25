@@ -22,32 +22,237 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ViewedEquip, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, GoldPrice, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, xpPrice, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SpecialAction'
-		// Here lies the not-yet-implemented method 'ShowReticule'
-		// Here lies the not-yet-implemented method 'HideReticule'
-		// Here lies the not-yet-implemented method 'OnPurchaseSuccess'
-		// Here lies the not-yet-implemented method 'SetActiveEquip'
-		// Here lies the not-yet-implemented method 'TakeAction'
-		// Here lies the not-yet-implemented method 'TakeFocus'
-		// Here lies the not-yet-implemented method 'FillData'
-		// Here lies the not-yet-implemented method 'FillOption'
-		// Here lies the not-yet-implemented method 'FillSkin'
-		// Here lies the not-yet-implemented method 'CheckUpgrades'
-		// Here lies the not-yet-implemented method 'FillUpgrades'
-		// Here lies the not-yet-implemented method 'CheckPricing'
-		// Here lies the not-yet-implemented method 'FillPricing'
-		// Here lies the not-yet-implemented method 'FillPricingSkin'
-		// Here lies the not-yet-implemented method 'CheckDescription'
-		// Here lies the not-yet-implemented method 'FillDescription'
-		// Here lies the not-yet-implemented method 'CheckPurchasable'
-		// Here lies the not-yet-implemented method 'IsEquipMaxed'
-		// Here lies the not-yet-implemented method 'IsOwned'
-		// Here lies the not-yet-implemented method 'ModifyAction'
-		// Here lies the not-yet-implemented method 'PopupData'
-		// Here lies the not-yet-implemented method 'PopupDataSkin'
-		// Here lies the not-yet-implemented method 'PopupComplete'
-		// Here lies the not-yet-implemented method 'SaveReticule'
-		// Here lies the not-yet-implemented method 'OnClose'
+		void SpecialAction(class GFxTrAction* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.SpecialAction");
+			byte* params = (byte*)malloc(4);
+			*(class GFxTrAction**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ShowReticule(int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.ShowReticule");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void HideReticule()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.HideReticule");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnPurchaseSuccess()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.OnPurchaseSuccess");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetActiveEquip(int EquipId, bool bShowStatus)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.SetActiveEquip");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = EquipId;
+			*(bool*)(params + 4) = bShowStatus;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int TakeAction(int ActionIndex, class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.TakeAction");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = ActionIndex;
+			*(class GFxObject**)(params + 4) = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		int TakeFocus(int ActionIndex, class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.TakeFocus");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = ActionIndex;
+			*(class GFxObject**)(params + 4) = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void FillData(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.FillData");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class GFxObject* FillOption(int ActionIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.FillOption");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class GFxObject* FillSkin(int ActionIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.FillSkin");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool CheckUpgrades(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.CheckUpgrades");
+			byte* params = (byte*)malloc(8);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class GFxObject* FillUpgrades(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.FillUpgrades");
+			byte* params = (byte*)malloc(8);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool CheckPricing(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.CheckPricing");
+			byte* params = (byte*)malloc(8);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class GFxObject* FillPricing(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.FillPricing");
+			byte* params = (byte*)malloc(8);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class GFxObject* FillPricingSkin(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.FillPricingSkin");
+			byte* params = (byte*)malloc(8);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void CheckDescription(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.CheckDescription");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class GFxObject* FillDescription(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.FillDescription");
+			byte* params = (byte*)malloc(8);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool CheckPurchasable()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.CheckPurchasable");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsEquipMaxed(int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.IsEquipMaxed");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool IsOwned(int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.IsOwned");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		int ModifyAction(int ActionIndex, class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.ModifyAction");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = ActionIndex;
+			*(class GFxObject**)(params + 4) = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void PopupData(class GFxObject* Obj)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.PopupData");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = Obj;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PopupDataSkin(class GFxObject* Obj)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.PopupDataSkin");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = Obj;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PopupComplete(int Action, ScriptArray<wchar_t> TextInput)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.PopupComplete");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = Action;
+			*(ScriptArray<wchar_t>*)(params + 4) = TextInput;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SaveReticule(class GFxObject* Data)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.SaveReticule");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = Data;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnClose()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Equip.OnClose");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

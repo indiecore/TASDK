@@ -18,10 +18,47 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bOnlyUpgrades, 0x10)
 		ADD_VAR(::IntProperty, PreviousGold, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PreviousXP, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetClassRibbon'
-		// Here lies the not-yet-implemented method 'GetTypeRibbon'
-		// Here lies the not-yet-implemented method 'GetEquipRibbon'
-		// Here lies the not-yet-implemented method 'CalculateRibbons'
+		int GetClassRibbon(int ClassId)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRibbonManager.GetClassRibbon");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ClassId;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		int GetTypeRibbon(int ClassId, int Type)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRibbonManager.GetTypeRibbon");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = ClassId;
+			*(int*)(params + 4) = Type;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		int GetEquipRibbon(int EquipId)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRibbonManager.GetEquipRibbon");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = EquipId;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void CalculateRibbons(int Gold, int XP, bool bForce)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRibbonManager.CalculateRibbons");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = Gold;
+			*(int*)(params + 4) = XP;
+			*(bool*)(params + 8) = bForce;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

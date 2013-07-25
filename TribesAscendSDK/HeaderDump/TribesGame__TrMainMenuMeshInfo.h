@@ -19,7 +19,14 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::NameProperty, ParentSocketName, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'MeshInfo'!
-		// Here lies the not-yet-implemented method 'PreloadTextures'
+		void PreloadTextures(float ForceDuration)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMainMenuMeshInfo.PreloadTextures");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = ForceDuration;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

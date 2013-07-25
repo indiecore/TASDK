@@ -30,7 +30,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, SwirlStrength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ForceRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ForceStrength, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'OnToggle'
+		void OnToggle(class SeqAct_Toggle* inAction)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_RadialForceActor.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = inAction;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -6,6 +6,13 @@ namespace UnrealScript
 	class Interface_Speaker : public Interface
 	{
 	public:
-		// Here lies the not-yet-implemented method 'Speak'
+		void Speak(class SoundCue* Cue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interface_Speaker.Speak");
+			byte* params = (byte*)malloc(4);
+			*(class SoundCue**)params = Cue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }

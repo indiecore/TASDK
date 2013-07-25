@@ -14,8 +14,26 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TrPlayerController, m_SpawnedFromController)
-		// Here lies the not-yet-implemented method 'CanFireWeapon'
-		// Here lies the not-yet-implemented method 'ScriptGetTeamNum'
+		bool CanFireWeapon(class Weapon* Wpn, byte FireModeNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableController.CanFireWeapon");
+			byte* params = (byte*)malloc(9);
+			*(class Weapon**)params = Wpn;
+			*(params + 4) = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		byte ScriptGetTeamNum()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableController.ScriptGetTeamNum");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_OBJECT

@@ -24,8 +24,34 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'CamOverridePostProcess'!
 		ADD_VAR(::FloatProperty, FOVAngle, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bCamOverridePostProcess, 0x2)
-		// Here lies the not-yet-implemented method 'GetCameraView'
-		// Here lies the not-yet-implemented method 'DisplayDebug'
+		void GetCameraView(float DeltaTime, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
+void*& OutPOV)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraActor.GetCameraView");
+			byte* params = (byte*)malloc(32);
+			*(float*)params = DeltaTime;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
+void**)(params + 4) = OutPOV;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutPOV = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
+void**)(params + 4);
+			free(params);
+		}
+		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraActor.DisplayDebug");
+			byte* params = (byte*)malloc(12);
+			*(class HUD**)params = HUD;
+			*(float*)(params + 4) = out_YL;
+			*(float*)(params + 8) = out_YPos;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_YL = *(float*)(params + 4);
+			out_YPos = *(float*)(params + 8);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

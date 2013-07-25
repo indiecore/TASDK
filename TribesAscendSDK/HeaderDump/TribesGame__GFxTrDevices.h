@@ -22,11 +22,42 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bNeedsUpdateData, 0x1)
 		ADD_OBJECT(WorldInfo, ThisWorld)
 		ADD_OBJECT(GFxMinimapHud, HUD)
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'GetAmmonClip'
-		// Here lies the not-yet-implemented method 'GetAmmonPool'
-		// Here lies the not-yet-implemented method 'UpdateData'
-		// Here lies the not-yet-implemented method 'Update'
+		void Init(class GFxMinimapHud* H)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrDevices.Init");
+			byte* params = (byte*)malloc(4);
+			*(class GFxMinimapHud**)params = H;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class GFxObject* GetAmmonClip()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrDevices.GetAmmonClip");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)params;
+			free(params);
+			return returnVal;
+		}
+		class GFxObject* GetAmmonPool()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrDevices.GetAmmonPool");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)params;
+			free(params);
+			return returnVal;
+		}
+		void UpdateData()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrDevices.UpdateData");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Update()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrDevices.Update");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

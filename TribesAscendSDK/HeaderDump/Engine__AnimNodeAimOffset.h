@@ -33,8 +33,22 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bForceAimDir, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'AngleOffset'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'Aim'!
-		// Here lies the not-yet-implemented method 'SetActiveProfileByName'
-		// Here lies the not-yet-implemented method 'SetActiveProfileByIndex'
+		void SetActiveProfileByName(ScriptName ProfileName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeAimOffset.SetActiveProfileByName");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = ProfileName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetActiveProfileByIndex(int ProfileIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeAimOffset.SetActiveProfileByIndex");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = ProfileIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

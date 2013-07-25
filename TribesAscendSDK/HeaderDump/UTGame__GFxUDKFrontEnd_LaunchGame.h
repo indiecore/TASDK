@@ -50,21 +50,118 @@ namespace UnrealScript
 		ADD_OBJECT(UTUIDataStore_MenuItems, MenuDataStore)
 		ADD_OBJECT(UTUIDataStore_StringList, StringListDataStore)
 		ADD_OBJECT(UIDataStore_OnlineGameSettings, SettingsDataStore)
-		// Here lies the not-yet-implemented method 'GetGameModeFriendlyString'
-		// Here lies the not-yet-implemented method 'OnViewLoaded'
-		// Here lies the not-yet-implemented method 'OnViewActivated'
-		// Here lies the not-yet-implemented method 'DisableSubComponents'
-		// Here lies the not-yet-implemented method 'OnTopMostView'
-		// Here lies the not-yet-implemented method 'UpdateGameSettingsPanel'
-		// Here lies the not-yet-implemented method 'PlayOpenAnimation'
-		// Here lies the not-yet-implemented method 'PlayCloseAnimation'
-		// Here lies the not-yet-implemented method 'OnStartGame_Confirm'
-		// Here lies the not-yet-implemented method 'OnListItemPress'
-		// Here lies the not-yet-implemented method 'OnListChange'
-		// Here lies the not-yet-implemented method 'UpdateDescription'
-		// Here lies the not-yet-implemented method 'UpdateListDataProvider'
-		// Here lies the not-yet-implemented method 'WidgetInitialized'
-		// Here lies the not-yet-implemented method 'GetStringFromMarkup'
+		ScriptArray<wchar_t> GetGameModeFriendlyString(ScriptArray<wchar_t> InGameMode)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.GetGameModeFriendlyString");
+			byte* params = (byte*)malloc(24);
+			*(ScriptArray<wchar_t>*)params = InGameMode;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void OnViewLoaded()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnViewLoaded");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnViewActivated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnViewActivated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisableSubComponents(bool bDisableComponents)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.DisableSubComponents");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bDisableComponents;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnTopMostView(bool bPlayOpenAnimation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnTopMostView");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bPlayOpenAnimation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateGameSettingsPanel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.UpdateGameSettingsPanel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayOpenAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.PlayOpenAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayCloseAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.PlayCloseAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnStartGame_Confirm()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnStartGame_Confirm");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnListItemPress(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnListItemPress");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnListChange(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnListChange");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateDescription()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.UpdateDescription");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateListDataProvider()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.UpdateListDataProvider");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.WidgetInitialized");
+			byte* params = (byte*)malloc(24);
+			*(ScriptName*)params = WidgetName;
+			*(ScriptName*)(params + 8) = WidgetPath;
+			*(class GFxObject**)(params + 16) = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetStringFromMarkup(ScriptArray<wchar_t> MarkupString)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.GetStringFromMarkup");
+			byte* params = (byte*)malloc(24);
+			*(ScriptArray<wchar_t>*)params = MarkupString;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

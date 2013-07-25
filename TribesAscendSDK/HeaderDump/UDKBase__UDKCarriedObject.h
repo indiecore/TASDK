@@ -36,10 +36,36 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastValidAnchorTime, 0xFFFFFFFF)
 		ADD_OBJECT(NavigationPoint, LastAnchor)
 		ADD_OBJECT(TeamInfo, Team)
-		// Here lies the not-yet-implemented method 'SetHUDLocation'
-		// Here lies the not-yet-implemented method 'NotReachableBy'
-		// Here lies the not-yet-implemented method 'OnBaseChainChanged'
-		// Here lies the not-yet-implemented method 'GetTeamNum'
+		void SetHUDLocation(Vector NewHUDLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKCarriedObject.SetHUDLocation");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = NewHUDLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotReachableBy(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKCarriedObject.NotReachableBy");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnBaseChainChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKCarriedObject.OnBaseChainChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		byte GetTeamNum()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKCarriedObject.GetTeamNum");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

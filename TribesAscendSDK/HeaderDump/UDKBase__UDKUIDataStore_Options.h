@@ -12,9 +12,39 @@ namespace UnrealScript
 	{
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.MultiMap_Mirror' for the property named 'OptionProviders'!
-		// Here lies the not-yet-implemented method 'ClearSet'
-		// Here lies the not-yet-implemented method 'AppendToSet'
-		// Here lies the not-yet-implemented method 'GetSet'
+		void ClearSet(ScriptName SetName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_Options.ClearSet");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = SetName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AppendToSet(ScriptName SetName, int NumOptions)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_Options.AppendToSet");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = SetName;
+			*(int*)(params + 8) = NumOptions;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void GetSet(ScriptName SetName, 
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void*& OutProviders)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_Options.GetSet");
+			byte* params = (byte*)malloc(20);
+			*(ScriptName*)params = SetName;
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 8) = OutProviders;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutProviders = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 8);
+			free(params);
+		}
 	};
 }
 #undef ADD_STRUCT

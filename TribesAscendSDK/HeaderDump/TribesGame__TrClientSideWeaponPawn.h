@@ -6,6 +6,13 @@ namespace UnrealScript
 	class TrClientSideWeaponPawn : public UTClientSideWeaponPawn
 	{
 	public:
-		// Here lies the not-yet-implemented method 'DetachDriver'
+		void DetachDriver(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrClientSideWeaponPawn.DetachDriver");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }

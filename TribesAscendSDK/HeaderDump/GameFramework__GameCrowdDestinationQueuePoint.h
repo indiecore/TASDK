@@ -27,14 +27,73 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bClearingQueue, 0x1)
 		ADD_OBJECT(GameCrowdDestination, QueueDestination)
 		ADD_OBJECT(GameCrowdInteractionPoint, PreviousQueuePosition)
-		// Here lies the not-yet-implemented method 'HasCustomer'
-		// Here lies the not-yet-implemented method 'HasSpace'
-		// Here lies the not-yet-implemented method 'QueueReachedBy'
-		// Here lies the not-yet-implemented method 'ReachedDestination'
-		// Here lies the not-yet-implemented method 'AdvanceCustomerTo'
-		// Here lies the not-yet-implemented method 'ActuallyAdvance'
-		// Here lies the not-yet-implemented method 'AddCustomer'
-		// Here lies the not-yet-implemented method 'ClearQueue'
+		bool HasCustomer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.HasCustomer");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool HasSpace()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.HasSpace");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool QueueReachedBy(class GameCrowdAgent* Agent, Vector TestPosition)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.QueueReachedBy");
+			byte* params = (byte*)malloc(20);
+			*(class GameCrowdAgent**)params = Agent;
+			*(Vector*)(params + 4) = TestPosition;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void ReachedDestination(class GameCrowdAgent* Agent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.ReachedDestination");
+			byte* params = (byte*)malloc(4);
+			*(class GameCrowdAgent**)params = Agent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AdvanceCustomerTo(class GameCrowdInteractionPoint* FrontPosition)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.AdvanceCustomerTo");
+			byte* params = (byte*)malloc(4);
+			*(class GameCrowdInteractionPoint**)params = FrontPosition;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ActuallyAdvance()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.ActuallyAdvance");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AddCustomer(class GameCrowdAgent* NewCustomer, class GameCrowdInteractionPoint* PreviousPosition)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.AddCustomer");
+			byte* params = (byte*)malloc(8);
+			*(class GameCrowdAgent**)params = NewCustomer;
+			*(class GameCrowdInteractionPoint**)(params + 4) = PreviousPosition;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearQueue(class GameCrowdAgent* OldCustomer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.ClearQueue");
+			byte* params = (byte*)malloc(4);
+			*(class GameCrowdAgent**)params = OldCustomer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

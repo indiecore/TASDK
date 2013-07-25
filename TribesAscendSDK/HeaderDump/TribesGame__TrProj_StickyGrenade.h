@@ -20,11 +20,52 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Actor, m_OldBase)
 		ADD_VAR(::BoolProperty, m_bHasStuckToTarget, 0x1)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'HitWall'
-		// Here lies the not-yet-implemented method 'ProcessTouch'
-		// Here lies the not-yet-implemented method 'StickToTarget'
-		// Here lies the not-yet-implemented method 'OnBaseChanged'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_StickyGrenade.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HitWall(Vector HitNormal, class Actor* Wall, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* WallComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_StickyGrenade.HitWall");
+			byte* params = (byte*)malloc(20);
+			*(Vector*)params = HitNormal;
+			*(class Actor**)(params + 12) = Wall;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 16) = WallComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProcessTouch(class Actor* Other, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_StickyGrenade.ProcessTouch");
+			byte* params = (byte*)malloc(28);
+			*(class Actor**)params = Other;
+			*(Vector*)(params + 4) = HitLocation;
+			*(Vector*)(params + 16) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool StickToTarget(class Actor* Target, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_StickyGrenade.StickToTarget");
+			byte* params = (byte*)malloc(32);
+			*(class Actor**)params = Target;
+			*(Vector*)(params + 4) = HitLocation;
+			*(Vector*)(params + 16) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		void OnBaseChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_StickyGrenade.OnBaseChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

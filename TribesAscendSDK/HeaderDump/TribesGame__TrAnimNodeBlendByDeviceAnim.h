@@ -36,19 +36,98 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, m_nmBuildupFireSpinControlName, 0xFFFFFFFF)
 		ADD_OBJECT(TrDevice, m_Device)
 		ADD_OBJECT(TrPawn, m_TrPawn)
-		// Here lies the not-yet-implemented method 'StopAnim'
-		// Here lies the not-yet-implemented method 'SetActiveChild'
-		// Here lies the not-yet-implemented method 'PlayIdle'
-		// Here lies the not-yet-implemented method 'PlayAltIdle'
-		// Here lies the not-yet-implemented method 'PlayBuildup'
-		// Here lies the not-yet-implemented method 'PlayFire'
-		// Here lies the not-yet-implemented method 'PlayPutaway'
-		// Here lies the not-yet-implemented method 'PlayRetrieve'
-		// Here lies the not-yet-implemented method 'PlayReload'
-		// Here lies the not-yet-implemented method 'PlayOffhand'
-		// Here lies the not-yet-implemented method 'OnStopFire'
-		// Here lies the not-yet-implemented method 'PlayDryFire'
-		// Here lies the not-yet-implemented method 'PlayQuickRetrieve'
+		void StopAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.StopAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetActiveChild(int ChildIndex, float BlendTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.SetActiveChild");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ChildIndex;
+			*(float*)(params + 4) = BlendTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayIdle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayIdle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayAltIdle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayAltIdle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayBuildup(float BuildupTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayBuildup");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = BuildupTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayFire(int SocketIndex, float RefireTime, int RoundsRemainingInClip)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayFire");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = SocketIndex;
+			*(float*)(params + 4) = RefireTime;
+			*(int*)(params + 8) = RoundsRemainingInClip;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayPutaway(float PutAwayTime, float ForcedRateBuff)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayPutaway");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = PutAwayTime;
+			*(float*)(params + 4) = ForcedRateBuff;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayRetrieve(float RetrieveTime, float ForcedRateBuff)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayRetrieve");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = RetrieveTime;
+			*(float*)(params + 4) = ForcedRateBuff;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayReload(float ReloadTime, int RoundsRemainingInClip)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayReload");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = ReloadTime;
+			*(int*)(params + 4) = RoundsRemainingInClip;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayOffhand(float Rate)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayOffhand");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = Rate;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnStopFire()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.OnStopFire");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayDryFire()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayDryFire");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayQuickRetrieve()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayQuickRetrieve");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

@@ -14,10 +14,29 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, AutoSelectHeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AutoSelectRadius, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'EnableGroup'
-		// Here lies the not-yet-implemented method 'DisableGroup'
-		// Here lies the not-yet-implemented method 'ToggleGroup'
-		// Here lies the not-yet-implemented method 'OnToggle'
+		void EnableGroup()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverGroup.EnableGroup");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisableGroup()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverGroup.DisableGroup");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ToggleGroup()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverGroup.ToggleGroup");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnToggle(class SeqAct_Toggle* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverGroup.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

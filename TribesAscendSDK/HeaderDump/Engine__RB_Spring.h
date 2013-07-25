@@ -31,8 +31,32 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, SceneIndex, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BoneName2, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BoneName1, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetComponents'
-		// Here lies the not-yet-implemented method 'Clear'
+		void SetComponents(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* InComponent1, ScriptName InBoneName1, Vector Position1, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* InComponent2, ScriptName InBoneName2, Vector Position2)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Spring.SetComponents");
+			byte* params = (byte*)malloc(48);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = InComponent1;
+			*(ScriptName*)(params + 4) = InBoneName1;
+			*(Vector*)(params + 12) = Position1;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 24) = InComponent2;
+			*(ScriptName*)(params + 28) = InBoneName2;
+			*(Vector*)(params + 36) = Position2;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Clear()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Spring.Clear");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

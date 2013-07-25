@@ -5,8 +5,26 @@ namespace UnrealScript
 	class TrBotPawn : public TrPlayerPawn
 	{
 	public:
-		// Here lies the not-yet-implemented method 'SetMovementPhysics'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'RechargeHealthPool'
+		void SetMovementPhysics()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBotPawn.SetMovementPhysics");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBotPawn.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RechargeHealthPool(float DeltaSeconds)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBotPawn.RechargeHealthPool");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaSeconds;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }

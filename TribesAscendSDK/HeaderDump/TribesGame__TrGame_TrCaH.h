@@ -23,23 +23,144 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, m_4PointGoalScore, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_3PointGoalScore, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nRemainingTicketTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PreBeginPlay'
-		// Here lies the not-yet-implemented method 'ApplyServerSettings'
-		// Here lies the not-yet-implemented method 'SetTeam'
-		// Here lies the not-yet-implemented method 'Logout'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'ResetLevel'
-		// Here lies the not-yet-implemented method 'ScoreKill'
-		// Here lies the not-yet-implemented method 'CheckScore'
-		// Here lies the not-yet-implemented method 'GotoPendingRoundStartTimer'
-		// Here lies the not-yet-implemented method 'CheckEndGame'
-		// Here lies the not-yet-implemented method 'AwardPoint'
-		// Here lies the not-yet-implemented method 'RestartPlayer'
-		// Here lies the not-yet-implemented method 'GetGameTypeId'
-		// Here lies the not-yet-implemented method 'OnCapturePointHeld'
-		// Here lies the not-yet-implemented method 'OnCapturePointOwnershipChanged'
-		// Here lies the not-yet-implemented method 'RatePlayerStart'
-		// Here lies the not-yet-implemented method 'ChoosePlayerStart'
+		void PreBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.PreBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ApplyServerSettings()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.ApplyServerSettings");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetTeam(class Controller* Other, class UTTeamInfo* NewTeam, bool bNewTeam)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.SetTeam");
+			byte* params = (byte*)malloc(12);
+			*(class Controller**)params = Other;
+			*(class UTTeamInfo**)(params + 4) = NewTeam;
+			*(bool*)(params + 8) = bNewTeam;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Logout(class Controller* Exiting)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.Logout");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = Exiting;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ResetLevel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.ResetLevel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ScoreKill(class Controller* Killer, class Controller* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.ScoreKill");
+			byte* params = (byte*)malloc(8);
+			*(class Controller**)params = Killer;
+			*(class Controller**)(params + 4) = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool CheckScore(class PlayerReplicationInfo* Scorer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.CheckScore");
+			byte* params = (byte*)malloc(8);
+			*(class PlayerReplicationInfo**)params = Scorer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void GotoPendingRoundStartTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.GotoPendingRoundStartTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool CheckEndGame(class PlayerReplicationInfo* Winner, ScriptArray<wchar_t> Reason)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.CheckEndGame");
+			byte* params = (byte*)malloc(20);
+			*(class PlayerReplicationInfo**)params = Winner;
+			*(ScriptArray<wchar_t>*)(params + 4) = Reason;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void AwardPoint(byte TeamIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.AwardPoint");
+			byte* params = (byte*)malloc(1);
+			*params = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RestartPlayer(class Controller* NewPlayer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.RestartPlayer");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = NewPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int GetGameTypeId()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.GetGameTypeId");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		void OnCapturePointHeld(class TrCaHCapturePoint* HeldPoint)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.OnCapturePointHeld");
+			byte* params = (byte*)malloc(4);
+			*(class TrCaHCapturePoint**)params = HeldPoint;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnCapturePointOwnershipChanged(class TrCaHCapturePoint* PointThatChanged, class TrPawn* TRP)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.OnCapturePointOwnershipChanged");
+			byte* params = (byte*)malloc(8);
+			*(class TrCaHCapturePoint**)params = PointThatChanged;
+			*(class TrPawn**)(params + 4) = TRP;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		float RatePlayerStart(class PlayerStart* P, byte Team, class Controller* Player)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.RatePlayerStart");
+			byte* params = (byte*)malloc(13);
+			*(class PlayerStart**)params = P;
+			*(params + 4) = Team;
+			*(class Controller**)(params + 8) = Player;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		class PlayerStart* ChoosePlayerStart(class Controller* Player, byte InTeam)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCaH.ChoosePlayerStart");
+			byte* params = (byte*)malloc(9);
+			*(class Controller**)params = Player;
+			*(params + 4) = InTeam;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class PlayerStart**)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

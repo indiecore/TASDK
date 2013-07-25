@@ -35,7 +35,15 @@ namespace UnrealScript
 		ADD_OBJECT(Texture2D, DisplayTexture)
 		ADD_STRUCT(::VectorProperty, DisplayLocation, 0xFFFFFFFF
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'DisplayColor'!
-		// Here lies the not-yet-implemented method 'Render'
+		void Render(class Canvas* TargetCanvas, class HUD* TargetHud)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_HudRenderImage.Render");
+			byte* params = (byte*)malloc(8);
+			*(class Canvas**)params = TargetCanvas;
+			*(class HUD**)(params + 4) = TargetHud;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

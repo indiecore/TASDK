@@ -13,7 +13,14 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(PhysicsVolume, LastPhysicsVolume)
-		// Here lies the not-yet-implemented method 'PhysicsVolumeChanged'
+		void PhysicsVolumeChanged(class PhysicsVolume* NewVolume)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendByPhysicsVolume.PhysicsVolumeChanged");
+			byte* params = (byte*)malloc(4);
+			*(class PhysicsVolume**)params = NewVolume;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_OBJECT

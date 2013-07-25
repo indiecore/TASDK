@@ -35,12 +35,61 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fMarkerOpacity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMarkerZOffset, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, m_CachedTeamIndex, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'SetSpottedActor'
-		// Here lies the not-yet-implemented method 'PostRenderFor'
-		// Here lies the not-yet-implemented method 'ShouldRenderMarker'
-		// Here lies the not-yet-implemented method 'GetMarker'
-		// Here lies the not-yet-implemented method 'GetMarkerColor'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSpottedTarget.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetSpottedActor(class Actor* NewSpottedActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSpottedTarget.SetSpottedActor");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = NewSpottedActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSpottedTarget.PostRenderFor");
+			byte* params = (byte*)malloc(32);
+			*(class PlayerController**)params = PC;
+			*(class Canvas**)(params + 4) = Canvas;
+			*(Vector*)(params + 8) = CameraPosition;
+			*(Vector*)(params + 20) = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool ShouldRenderMarker()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSpottedTarget.ShouldRenderMarker");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		class Texture2D* GetMarker()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSpottedTarget.GetMarker");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Texture2D**)params;
+			free(params);
+			return returnVal;
+		}
+		
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void* GetMarkerColor()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSpottedTarget.GetMarkerColor");
+			byte* params = (byte*)malloc(16);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

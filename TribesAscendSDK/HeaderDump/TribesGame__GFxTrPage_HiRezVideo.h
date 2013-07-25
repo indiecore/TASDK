@@ -14,12 +14,52 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bValid, 0x1)
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'ShowModel'
-		// Here lies the not-yet-implemented method 'SpecialAction'
-		// Here lies the not-yet-implemented method 'FillData'
-		// Here lies the not-yet-implemented method 'FillOption'
-		// Here lies the not-yet-implemented method 'FillDescription'
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_HiRezVideo.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShowModel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_HiRezVideo.ShowModel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SpecialAction(class GFxTrAction* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_HiRezVideo.SpecialAction");
+			byte* params = (byte*)malloc(4);
+			*(class GFxTrAction**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void FillData(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_HiRezVideo.FillData");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class GFxObject* FillOption(int ActionIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_HiRezVideo.FillOption");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class GFxObject* FillDescription(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_HiRezVideo.FillDescription");
+			byte* params = (byte*)malloc(8);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

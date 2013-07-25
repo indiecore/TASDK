@@ -106,11 +106,41 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, IconId, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Description, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, FriendlyName, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Reset'
-		// Here lies the not-yet-implemented method 'Merge'
-		// Here lies the not-yet-implemented method 'MergeClass'
-		// Here lies the not-yet-implemented method 'MergeModification'
-		// Here lies the not-yet-implemented method 'LogModifiedValues'
+		void Reset()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrValueModifier.Reset");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Merge(class TrValueModifier* ModifierToMerge)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrValueModifier.Merge");
+			byte* params = (byte*)malloc(4);
+			*(class TrValueModifier**)params = ModifierToMerge;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void MergeClass(ScriptClass* ModifierClassToMerge)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrValueModifier.MergeClass");
+			byte* params = (byte*)malloc(4);
+			*(ScriptClass**)params = ModifierClassToMerge;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void MergeModification(int ModType, float Value)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrValueModifier.MergeModification");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ModType;
+			*(float*)(params + 4) = Value;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void LogModifiedValues()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrValueModifier.LogModifiedValues");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

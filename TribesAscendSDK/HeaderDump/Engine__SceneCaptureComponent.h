@@ -41,8 +41,22 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUseMainScenePostProcessSettings, 0x8)
 		ADD_VAR(::BoolProperty, bEnableFog, 0x4)
 		ADD_VAR(::BoolProperty, bEnablePostProcess, 0x2)
-		// Here lies the not-yet-implemented method 'SetEnabled'
-		// Here lies the not-yet-implemented method 'SetFrameRate'
+		void SetEnabled(bool bEnable)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SceneCaptureComponent.SetEnabled");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnable;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetFrameRate(float NewFrameRate)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SceneCaptureComponent.SetFrameRate");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = NewFrameRate;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

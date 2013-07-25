@@ -58,7 +58,11 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ShadowInterpolationSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinTimeBetweenFullUpdates, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InvisibleUpdateTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'ResetEnvironment'
+		void ResetEnvironment()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicLightEnvironmentComponent.ResetEnvironment");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

@@ -44,7 +44,22 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, EncodingPkgVersion, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, CompressCommandletVersion, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, UseScore, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetNotifyTimeByClass'
+		float GetNotifyTimeByClass(ScriptClass* NotifyClass, float PlayRate, float StartPosition, class AnimNotify*& out_Notify, float& out_Duration)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimSequence.GetNotifyTimeByClass");
+			byte* params = (byte*)malloc(24);
+			*(ScriptClass**)params = NotifyClass;
+			*(float*)(params + 4) = PlayRate;
+			*(float*)(params + 8) = StartPosition;
+			*(class AnimNotify**)(params + 12) = out_Notify;
+			*(float*)(params + 16) = out_Duration;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_Notify = *(class AnimNotify**)(params + 12);
+			out_Duration = *(float*)(params + 16);
+			auto returnVal = *(float*)(params + 20);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

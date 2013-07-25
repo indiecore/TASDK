@@ -21,10 +21,41 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(NavigationHandle, MyNavigationHandle)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SuccessfulGoal'!
-		// Here lies the not-yet-implemented method 'CreateAndAddFilterToNavHandle'
-		// Here lies the not-yet-implemented method 'GetFilterOfType'
-		// Here lies the not-yet-implemented method 'GetGoalPoint'
-		// Here lies the not-yet-implemented method 'Recycle'
+		class NavMeshGoal_GenericFilterContainer* CreateAndAddFilterToNavHandle(class NavigationHandle* NavHandle, int InMaxPathVisits)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_GenericFilterContainer.CreateAndAddFilterToNavHandle");
+			byte* params = (byte*)malloc(12);
+			*(class NavigationHandle**)params = NavHandle;
+			*(int*)(params + 4) = InMaxPathVisits;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class NavMeshGoal_GenericFilterContainer**)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		class NavMeshGoal_Filter* GetFilterOfType(ScriptClass* Filter_Class)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_GenericFilterContainer.GetFilterOfType");
+			byte* params = (byte*)malloc(8);
+			*(ScriptClass**)params = Filter_Class;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class NavMeshGoal_Filter**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		Vector GetGoalPoint()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_GenericFilterContainer.GetGoalPoint");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)params;
+			free(params);
+			return returnVal;
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_GenericFilterContainer.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_STRUCT

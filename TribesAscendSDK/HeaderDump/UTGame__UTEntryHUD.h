@@ -5,6 +5,10 @@ namespace UnrealScript
 	class UTEntryHUD : public HUD
 	{
 	public:
-		// Here lies the not-yet-implemented method 'PostRender'
+		void PostRender()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryHUD.PostRender");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

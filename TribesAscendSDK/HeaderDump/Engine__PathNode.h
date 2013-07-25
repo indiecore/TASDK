@@ -5,6 +5,14 @@ namespace UnrealScript
 	class PathNode : public NavigationPoint
 	{
 	public:
-		// Here lies the not-yet-implemented method 'GetDebugAbbrev'
+		ScriptArray<wchar_t> GetDebugAbbrev()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PathNode.GetDebugAbbrev");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }

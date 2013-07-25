@@ -14,9 +14,27 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ScriptClass, InitialSceneToDisplayClass)
-		// Here lies the not-yet-implemented method 'PostLogin'
-		// Here lies the not-yet-implemented method 'StartMatch'
-		// Here lies the not-yet-implemented method 'RestartPlayer'
+		void PostLogin(class PlayerController* NewPlayer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuGame.PostLogin");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerController**)params = NewPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StartMatch()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuGame.StartMatch");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RestartPlayer(class Controller* NewPlayer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuGame.RestartPlayer");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = NewPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_OBJECT

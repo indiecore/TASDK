@@ -69,37 +69,237 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, MainMC)
 		ADD_OBJECT(GFxObject, Window)
 		ADD_OBJECT(GFxObject, Root)
-		// Here lies the not-yet-implemented method 'Start'
-		// Here lies the not-yet-implemented method 'ConfigureInventory'
-		// Here lies the not-yet-implemented method 'AddCaptureKeys'
-		// Here lies the not-yet-implemented method 'StartCloseAnimation'
-		// Here lies the not-yet-implemented method 'OnCloseAnimComplete'
-		// Here lies the not-yet-implemented method 'SetupBG'
-		// Here lies the not-yet-implemented method 'SetupBorder'
-		// Here lies the not-yet-implemented method 'SetupArsenal'
-		// Here lies the not-yet-implemented method 'SetupBackpack'
-		// Here lies the not-yet-implemented method 'SetupInfo'
-		// Here lies the not-yet-implemented method 'PopulateBackpackFake'
-		// Here lies the not-yet-implemented method 'SetupArsenalButtons'
-		// Here lies the not-yet-implemented method 'SetupBackpackButtons'
-		// Here lies the not-yet-implemented method 'SwitchWeapon'
-		// Here lies the not-yet-implemented method 'OnFocusInSelection'
-		// Here lies the not-yet-implemented method 'OnFocusOutSelection'
-		// Here lies the not-yet-implemented method 'OnClickWeaponButton'
-		// Here lies the not-yet-implemented method 'OnFocusUpdateInfo'
-		// Here lies the not-yet-implemented method 'OnFocusArsenalTab'
-		// Here lies the not-yet-implemented method 'OnFocusBackpackTab'
-		// Here lies the not-yet-implemented method 'OnClickFakeItem'
-		// Here lies the not-yet-implemented method 'SetInfo'
-		// Here lies the not-yet-implemented method 'PopulateArsenal'
-		// Here lies the not-yet-implemented method 'FakeUpdateEquippedWeapon'
-		// Here lies the not-yet-implemented method 'UpdateEquippedWeapon'
-		// Here lies the not-yet-implemented method 'ProcessTweenCallback'
-		// Here lies the not-yet-implemented method 'TweenTurbines'
-		// Here lies the not-yet-implemented method 'FloatSelectionUp'
-		// Here lies the not-yet-implemented method 'FloatSelectionDown'
-		// Here lies the not-yet-implemented method 'UpdatePos'
-		// Here lies the not-yet-implemented method 'CreateItemData'
+		bool Start(bool StartPaused)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.Start");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = StartPaused;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void ConfigureInventory()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.ConfigureInventory");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AddCaptureKeys()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.AddCaptureKeys");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StartCloseAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.StartCloseAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnCloseAnimComplete()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnCloseAnimComplete");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetupBG()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupBG");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetupBorder()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupBorder");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetupArsenal()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupArsenal");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetupBackpack()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupBackpack");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetupInfo()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupInfo");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PopulateBackpackFake()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.PopulateBackpackFake");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetupArsenalButtons()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupArsenalButtons");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetupBackpackButtons()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupBackpackButtons");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SwitchWeapon(byte Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SwitchWeapon");
+			byte* params = (byte*)malloc(1);
+			*params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnFocusInSelection(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusInSelection");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnFocusOutSelection(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusOutSelection");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnClickWeaponButton(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnClickWeaponButton");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnFocusUpdateInfo(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusUpdateInfo");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnFocusArsenalTab(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusArsenalTab");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnFocusBackpackTab(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusBackpackTab");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnClickFakeItem(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnClickFakeItem");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetInfo(int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetInfo");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PopulateArsenal()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.PopulateArsenal");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FakeUpdateEquippedWeapon(int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.FakeUpdateEquippedWeapon");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateEquippedWeapon()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.UpdateEquippedWeapon");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ProcessTweenCallback(ScriptArray<wchar_t> Callback, class GFxObject* TargetMC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.ProcessTweenCallback");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = Callback;
+			*(class GFxObject**)(params + 12) = TargetMC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TweenTurbines(bool Toggle)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.TweenTurbines");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = Toggle;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void FloatSelectionUp(class GFxObject* ButtonIconMC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.FloatSelectionUp");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = ButtonIconMC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void FloatSelectionDown(class GFxObject* ButtonIconMC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.FloatSelectionDown");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = ButtonIconMC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdatePos()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.UpdatePos");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CreateItemData()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.CreateItemData");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

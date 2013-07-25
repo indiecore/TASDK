@@ -21,7 +21,16 @@ namespace UnrealScript
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Array_Mirror' for the property named 'RawWedgePointIndices'!
 		ADD_OBJECT(SkeletalMesh, BaseSkelMesh)
-		// Here lies the not-yet-implemented method 'FindMorphTarget'
+		class MorphTarget* FindMorphTarget(ScriptName MorphTargetName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MorphTargetSet.FindMorphTarget");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = MorphTargetName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class MorphTarget**)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_STRUCT

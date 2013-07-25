@@ -32,7 +32,14 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
 		ADD_OBJECT(MaterialInterface, DefaultFogVolumeMaterial)
 		ADD_OBJECT(MaterialInterface, FogMaterial)
-		// Here lies the not-yet-implemented method 'SetEnabled'
+		void SetEnabled(bool bSetEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityComponent.SetEnabled");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bSetEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

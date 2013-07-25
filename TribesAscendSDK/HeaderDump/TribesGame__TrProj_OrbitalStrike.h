@@ -5,6 +5,10 @@ namespace UnrealScript
 	class TrProj_OrbitalStrike : public TrProj_CallInBase
 	{
 	public:
-		// Here lies the not-yet-implemented method 'SpawnFlightEffects'
+		void SpawnFlightEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_OrbitalStrike.SpawnFlightEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

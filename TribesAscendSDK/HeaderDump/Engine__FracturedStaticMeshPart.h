@@ -37,13 +37,66 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bHasBeenRecycled, 0x1)
 		ADD_OBJECT(FracturedStaticMeshActor, BaseFracturedMeshActor)
 		ADD_VAR(::FloatProperty, DestroyPartRadiusFactor, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'RecyclePart'
-		// Here lies the not-yet-implemented method 'TakeDamage'
-		// Here lies the not-yet-implemented method 'TryToCleanUp'
-		// Here lies the not-yet-implemented method 'FellOutOfWorld'
-		// Here lies the not-yet-implemented method 'Explode'
-		// Here lies the not-yet-implemented method 'BreakOffPartsInRadius'
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RecyclePart(bool bAddToFreePool)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.RecyclePart");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bAddToFreePool;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void* HitInfo, class Actor* DamageCauser)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.TakeDamage");
+			byte* params = (byte*)malloc(68);
+			*(int*)params = Damage;
+			*(class Controller**)(params + 4) = EventInstigator;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = Momentum;
+			*(ScriptClass**)(params + 32) = DamageType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 36) = HitInfo;
+			*(class Actor**)(params + 64) = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TryToCleanUp()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.TryToCleanUp");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FellOutOfWorld(ScriptClass* dmgType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.FellOutOfWorld");
+			byte* params = (byte*)malloc(4);
+			*(ScriptClass**)params = dmgType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Explode()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.Explode");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void BreakOffPartsInRadius(Vector Origin, float Radius, float RBStrength, bool bWantPhysChunksAndParticles)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.BreakOffPartsInRadius");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = Origin;
+			*(float*)(params + 12) = Radius;
+			*(float*)(params + 16) = RBStrength;
+			*(bool*)(params + 20) = bWantPhysChunksAndParticles;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

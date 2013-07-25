@@ -14,15 +14,92 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::NameProperty, Tag, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'NotifyGameSessionEnded'
-		// Here lies the not-yet-implemented method 'OnDataStoreValueUpdated'
-		// Here lies the not-yet-implemented method 'Registered'
-		// Here lies the not-yet-implemented method 'Unregistered'
-		// Here lies the not-yet-implemented method 'SubscriberAttached'
-		// Here lies the not-yet-implemented method 'SubscriberDetached'
-		// Here lies the not-yet-implemented method 'RefreshSubscribers'
-		// Here lies the not-yet-implemented method 'OnCommit'
-		// Here lies the not-yet-implemented method 'GetDataStoreClient'
+		bool NotifyGameSessionEnded()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore.NotifyGameSessionEnded");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void OnDataStoreValueUpdated(class UIDataStore* SourceDataStore, bool bValuesInvalidated, ScriptName PropertyTag, class UIDataProvider* SourceProvider, int ArrayIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore.OnDataStoreValueUpdated");
+			byte* params = (byte*)malloc(24);
+			*(class UIDataStore**)params = SourceDataStore;
+			*(bool*)(params + 4) = bValuesInvalidated;
+			*(ScriptName*)(params + 8) = PropertyTag;
+			*(class UIDataProvider**)(params + 16) = SourceProvider;
+			*(int*)(params + 20) = ArrayIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Registered(class LocalPlayer* PlayerOwner)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore.Registered");
+			byte* params = (byte*)malloc(4);
+			*(class LocalPlayer**)params = PlayerOwner;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Unregistered(class LocalPlayer* PlayerOwner)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore.Unregistered");
+			byte* params = (byte*)malloc(4);
+			*(class LocalPlayer**)params = PlayerOwner;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SubscriberAttached(
+// ERROR: Unknown object class 'Class Core.InterfaceProperty'!
+void* Subscriber)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore.SubscriberAttached");
+			byte* params = (byte*)malloc(8);
+			*(
+// ERROR: Unknown object class 'Class Core.InterfaceProperty'!
+void**)params = Subscriber;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SubscriberDetached(
+// ERROR: Unknown object class 'Class Core.InterfaceProperty'!
+void* Subscriber)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore.SubscriberDetached");
+			byte* params = (byte*)malloc(8);
+			*(
+// ERROR: Unknown object class 'Class Core.InterfaceProperty'!
+void**)params = Subscriber;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RefreshSubscribers(ScriptName PropertyTag, bool bInvalidateValues, class UIDataProvider* SourceProvider, int ArrayIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore.RefreshSubscribers");
+			byte* params = (byte*)malloc(20);
+			*(ScriptName*)params = PropertyTag;
+			*(bool*)(params + 8) = bInvalidateValues;
+			*(class UIDataProvider**)(params + 12) = SourceProvider;
+			*(int*)(params + 16) = ArrayIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnCommit()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore.OnCommit");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class DataStoreClient* GetDataStoreClient()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore.GetDataStoreClient");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class DataStoreClient**)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

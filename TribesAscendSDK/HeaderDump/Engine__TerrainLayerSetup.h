@@ -5,6 +5,10 @@ namespace UnrealScript
 	class TerrainLayerSetup : public Object
 	{
 	public:
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TerrainLayerSetup.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

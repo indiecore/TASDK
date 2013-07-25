@@ -28,7 +28,14 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, m_nmClassPropertyName, 0xFFFFFFFF)
 		ADD_OBJECT(TrGameObjective, m_Owner)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'm_ClassPropertyPointer'!
-		// Here lies the not-yet-implemented method 'InitUpgrade'
+		void InitUpgrade(class TrGameObjective* OwnerObject)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGameObjectiveUpgrade.InitUpgrade");
+			byte* params = (byte*)malloc(4);
+			*(class TrGameObjective**)params = OwnerObject;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

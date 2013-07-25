@@ -12,7 +12,15 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, NumNeededLoggedIn, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'CheckLogins'
+		bool CheckLogins()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqCond_IsLoggedIn.CheckLogins");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

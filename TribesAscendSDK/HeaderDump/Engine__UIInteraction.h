@@ -44,23 +44,168 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FCallbackEventDevice'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FGlobalDataStoreClientManager'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FExec'!
-		// Here lies the not-yet-implemented method 'GetDataStoreClient'
-		// Here lies the not-yet-implemented method 'IsLoggedIn'
-		// Here lies the not-yet-implemented method 'IsGamepadConnected'
-		// Here lies the not-yet-implemented method 'GetPlayerCount'
-		// Here lies the not-yet-implemented method 'GetPlayerIndex'
-		// Here lies the not-yet-implemented method 'GetPlayerControllerId'
-		// Here lies the not-yet-implemented method 'GetLocalPlayer'
-		// Here lies the not-yet-implemented method 'NotifyPlayerAdded'
-		// Here lies the not-yet-implemented method 'NotifyPlayerRemoved'
-		// Here lies the not-yet-implemented method 'GetLoginStatus'
-		// Here lies the not-yet-implemented method 'GetLowestLoginStatusOfControllers'
-		// Here lies the not-yet-implemented method 'HasLinkConnection'
-		// Here lies the not-yet-implemented method 'GetLoggedInPlayerCount'
-		// Here lies the not-yet-implemented method 'GetNumGuestsLoggedIn'
-		// Here lies the not-yet-implemented method 'GetConnectedGamepadCount'
-		// Here lies the not-yet-implemented method 'GetNATType'
-		// Here lies the not-yet-implemented method 'NotifyGameSessionEnded'
+		class DataStoreClient* GetDataStoreClient()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetDataStoreClient");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class DataStoreClient**)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsLoggedIn(int ControllerId, bool bRequireOnlineLogin)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.IsLoggedIn");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = ControllerId;
+			*(bool*)(params + 4) = bRequireOnlineLogin;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		bool IsGamepadConnected(int ControllerId)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.IsGamepadConnected");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ControllerId;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		int GetPlayerCount()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetPlayerCount");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		int GetPlayerIndex(int ControllerId)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetPlayerIndex");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ControllerId;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		int GetPlayerControllerId(int PlayerIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetPlayerControllerId");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = PlayerIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class LocalPlayer* GetLocalPlayer(int PlayerIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetLocalPlayer");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = PlayerIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class LocalPlayer**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void NotifyPlayerAdded(int PlayerIndex, class LocalPlayer* AddedPlayer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.NotifyPlayerAdded");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = PlayerIndex;
+			*(class LocalPlayer**)(params + 4) = AddedPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyPlayerRemoved(int PlayerIndex, class LocalPlayer* RemovedPlayer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.NotifyPlayerRemoved");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = PlayerIndex;
+			*(class LocalPlayer**)(params + 4) = RemovedPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		byte GetLoginStatus(int ControllerId)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetLoginStatus");
+			byte* params = (byte*)malloc(5);
+			*(int*)params = ControllerId;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(params + 4);
+			free(params);
+			return returnVal;
+		}
+		byte GetLowestLoginStatusOfControllers()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetLowestLoginStatusOfControllers");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
+		bool HasLinkConnection()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.HasLinkConnection");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		int GetLoggedInPlayerCount(bool bRequireOnlineLogin)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetLoggedInPlayerCount");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bRequireOnlineLogin;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		int GetNumGuestsLoggedIn()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetNumGuestsLoggedIn");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		int GetConnectedGamepadCount(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void* ControllerConnectionStatusOverrides)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetConnectedGamepadCount");
+			byte* params = (byte*)malloc(16);
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)params = ControllerConnectionStatusOverrides;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		byte GetNATType()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetNATType");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
+		void NotifyGameSessionEnded()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.NotifyGameSessionEnded");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

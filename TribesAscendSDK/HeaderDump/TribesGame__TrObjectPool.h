@@ -13,14 +13,60 @@ namespace UnrealScript
 	{
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObjectPool.TracerCacheInfo' for the property named 'm_TracerCache'!
-		// Here lies the not-yet-implemented method 'GetTracer'
-		// Here lies the not-yet-implemented method 'PreBeginPlay'
-		// Here lies the not-yet-implemented method 'CreatePools'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'CleanUpPools'
-		// Here lies the not-yet-implemented method 'CreateTracers'
-		// Here lies the not-yet-implemented method 'CleanupTracers'
-		// Here lies the not-yet-implemented method 'CreateTracer'
+		class TrProj_Tracer* GetTracer(byte TracerType, byte ActiveReloadTier, Vector SpawnLocation, Rotator SpawnRotation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrObjectPool.GetTracer");
+			byte* params = (byte*)malloc(30);
+			*params = TracerType;
+			*(params + 1) = ActiveReloadTier;
+			*(Vector*)(params + 4) = SpawnLocation;
+			*(Rotator*)(params + 16) = SpawnRotation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class TrProj_Tracer**)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		void PreBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrObjectPool.PreBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CreatePools()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrObjectPool.CreatePools");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrObjectPool.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CleanUpPools()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrObjectPool.CleanUpPools");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CreateTracers()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrObjectPool.CreateTracers");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CleanupTracers()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrObjectPool.CleanupTracers");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CreateTracer(byte TracerType, ScriptClass* TracerClass, int Idx, bool bForceCreate)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrObjectPool.CreateTracer");
+			byte* params = (byte*)malloc(13);
+			*params = TracerType;
+			*(ScriptClass**)(params + 4) = TracerClass;
+			*(int*)(params + 8) = Idx;
+			*(bool*)(params + 12) = bForceCreate;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_STRUCT

@@ -32,9 +32,39 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, JumpSound)
 		ADD_OBJECT(PathNode, JumpTarget)
 		ADD_STRUCT(::VectorProperty, JumpVelocity, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'Touch'
-		// Here lies the not-yet-implemented method 'PostTouch'
-		// Here lies the not-yet-implemented method 'SuggestMovePreparation'
+		void Touch(class Actor* Other, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* OtherComp, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKJumpPad.Touch");
+			byte* params = (byte*)malloc(32);
+			*(class Actor**)params = Other;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = OtherComp;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostTouch(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKJumpPad.PostTouch");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool SuggestMovePreparation(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKJumpPad.SuggestMovePreparation");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

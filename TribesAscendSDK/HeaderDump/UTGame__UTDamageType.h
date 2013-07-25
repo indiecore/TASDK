@@ -84,27 +84,247 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bNeverGibs, 0x8)
 		ADD_VAR(::BoolProperty, bAlwaysGibs, 0x4)
 		ADD_VAR(::FloatProperty, DeathOverlayTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetDeathCameraEffectInstigator'
-		// Here lies the not-yet-implemented method 'GetHitEffectDuration'
-		// Here lies the not-yet-implemented method 'ShouldGib'
-		// Here lies the not-yet-implemented method 'GetDeathCameraEffectVictim'
-		// Here lies the not-yet-implemented method 'DeathMessage'
-		// Here lies the not-yet-implemented method 'SuicideMessage'
-		// Here lies the not-yet-implemented method 'SpawnHitEffect'
-		// Here lies the not-yet-implemented method 'IncrementKills'
-		// Here lies the not-yet-implemented method 'IncrementDeaths'
-		// Here lies the not-yet-implemented method 'IncrementSuicides'
-		// Here lies the not-yet-implemented method 'GetStatsName'
-		// Here lies the not-yet-implemented method 'ScoreKill'
-		// Here lies the not-yet-implemented method 'PawnTornOff'
-		// Here lies the not-yet-implemented method 'SpawnGibEffects'
-		// Here lies the not-yet-implemented method 'DoCustomDamageEffects'
-		// Here lies the not-yet-implemented method 'CreateDeathSkeleton'
-		// Here lies the not-yet-implemented method 'BoneBreaker'
-		// Here lies the not-yet-implemented method 'CreateDeathGoreChunks'
-		// Here lies the not-yet-implemented method 'SpawnExtraGibEffects'
-		// Here lies the not-yet-implemented method 'DrawKillIcon'
-		// Here lies the not-yet-implemented method 'CalcDeathCamera'
+		ScriptClass* GetDeathCameraEffectInstigator(class UTPawn* UTP)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.GetDeathCameraEffectInstigator");
+			byte* params = (byte*)malloc(8);
+			*(class UTPawn**)params = UTP;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptClass**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		float GetHitEffectDuration(class Pawn* P, float Damage)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.GetHitEffectDuration");
+			byte* params = (byte*)malloc(12);
+			*(class Pawn**)params = P;
+			*(float*)(params + 4) = Damage;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		bool ShouldGib(class UTPawn* DeadPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.ShouldGib");
+			byte* params = (byte*)malloc(8);
+			*(class UTPawn**)params = DeadPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		ScriptClass* GetDeathCameraEffectVictim(class UTPawn* UTP)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.GetDeathCameraEffectVictim");
+			byte* params = (byte*)malloc(8);
+			*(class UTPawn**)params = UTP;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptClass**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> DeathMessage(class PlayerReplicationInfo* Killer, class PlayerReplicationInfo* Victim)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.DeathMessage");
+			byte* params = (byte*)malloc(20);
+			*(class PlayerReplicationInfo**)params = Killer;
+			*(class PlayerReplicationInfo**)(params + 4) = Victim;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> SuicideMessage(class PlayerReplicationInfo* Victim)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.SuicideMessage");
+			byte* params = (byte*)malloc(16);
+			*(class PlayerReplicationInfo**)params = Victim;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void SpawnHitEffect(class Pawn* P, float Damage, Vector Momentum, ScriptName BoneName, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.SpawnHitEffect");
+			byte* params = (byte*)malloc(40);
+			*(class Pawn**)params = P;
+			*(float*)(params + 4) = Damage;
+			*(Vector*)(params + 8) = Momentum;
+			*(ScriptName*)(params + 20) = BoneName;
+			*(Vector*)(params + 28) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int IncrementKills(class UTPlayerReplicationInfo* KillerPRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.IncrementKills");
+			byte* params = (byte*)malloc(8);
+			*(class UTPlayerReplicationInfo**)params = KillerPRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void IncrementDeaths(class UTPlayerReplicationInfo* KilledPRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.IncrementDeaths");
+			byte* params = (byte*)malloc(4);
+			*(class UTPlayerReplicationInfo**)params = KilledPRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void IncrementSuicides(class UTPlayerReplicationInfo* KilledPRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.IncrementSuicides");
+			byte* params = (byte*)malloc(4);
+			*(class UTPlayerReplicationInfo**)params = KilledPRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		ScriptName GetStatsName(ScriptName StatType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.GetStatsName");
+			byte* params = (byte*)malloc(16);
+			*(ScriptName*)params = StatType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptName*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void ScoreKill(class UTPlayerReplicationInfo* KillerPRI, class UTPlayerReplicationInfo* KilledPRI, class Pawn* KilledPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.ScoreKill");
+			byte* params = (byte*)malloc(12);
+			*(class UTPlayerReplicationInfo**)params = KillerPRI;
+			*(class UTPlayerReplicationInfo**)(params + 4) = KilledPRI;
+			*(class Pawn**)(params + 8) = KilledPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PawnTornOff(class UTPawn* DeadPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.PawnTornOff");
+			byte* params = (byte*)malloc(4);
+			*(class UTPawn**)params = DeadPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SpawnGibEffects(class UTGib* Gib)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.SpawnGibEffects");
+			byte* params = (byte*)malloc(4);
+			*(class UTGib**)params = Gib;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DoCustomDamageEffects(class UTPawn* ThePawn, ScriptClass* TheDamageType, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void*& HitInfo, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.DoCustomDamageEffects");
+			byte* params = (byte*)malloc(48);
+			*(class UTPawn**)params = ThePawn;
+			*(ScriptClass**)(params + 4) = TheDamageType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 8) = HitInfo;
+			*(Vector*)(params + 36) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			HitInfo = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 8);
+			free(params);
+		}
+		void CreateDeathSkeleton(class UTPawn* ThePawn, ScriptClass* TheDamageType, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void*& HitInfo, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.CreateDeathSkeleton");
+			byte* params = (byte*)malloc(48);
+			*(class UTPawn**)params = ThePawn;
+			*(ScriptClass**)(params + 4) = TheDamageType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 8) = HitInfo;
+			*(Vector*)(params + 36) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			HitInfo = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 8);
+			free(params);
+		}
+		void BoneBreaker(class UTPawn* ThePawn, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* TheMesh, Vector Impulse, Vector HitLocation, ScriptName BoneName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.BoneBreaker");
+			byte* params = (byte*)malloc(40);
+			*(class UTPawn**)params = ThePawn;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = TheMesh;
+			*(Vector*)(params + 8) = Impulse;
+			*(Vector*)(params + 20) = HitLocation;
+			*(ScriptName*)(params + 32) = BoneName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CreateDeathGoreChunks(class UTPawn* ThePawn, ScriptClass* TheDamageType, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void*& HitInfo, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.CreateDeathGoreChunks");
+			byte* params = (byte*)malloc(48);
+			*(class UTPawn**)params = ThePawn;
+			*(ScriptClass**)(params + 4) = TheDamageType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 8) = HitInfo;
+			*(Vector*)(params + 36) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			HitInfo = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 8);
+			free(params);
+		}
+		void SpawnExtraGibEffects(class UTGib* TheGib)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.SpawnExtraGibEffects");
+			byte* params = (byte*)malloc(4);
+			*(class UTGib**)params = TheGib;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DrawKillIcon(class Canvas* Canvas, float ScreenX, float ScreenY, float HUDScaleX, float HUDScaleY)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.DrawKillIcon");
+			byte* params = (byte*)malloc(20);
+			*(class Canvas**)params = Canvas;
+			*(float*)(params + 4) = ScreenX;
+			*(float*)(params + 8) = ScreenY;
+			*(float*)(params + 12) = HUDScaleX;
+			*(float*)(params + 16) = HUDScaleY;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CalcDeathCamera(class UTPawn* P, float DeltaTime, Vector& CameraLocation, Rotator& CameraRotation, float& CameraFOV)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.CalcDeathCamera");
+			byte* params = (byte*)malloc(36);
+			*(class UTPawn**)params = P;
+			*(float*)(params + 4) = DeltaTime;
+			*(Vector*)(params + 8) = CameraLocation;
+			*(Rotator*)(params + 20) = CameraRotation;
+			*(float*)(params + 32) = CameraFOV;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			CameraLocation = *(Vector*)(params + 8);
+			CameraRotation = *(Rotator*)(params + 20);
+			CameraFOV = *(float*)(params + 32);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

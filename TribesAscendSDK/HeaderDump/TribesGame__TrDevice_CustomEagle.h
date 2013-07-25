@@ -5,6 +5,10 @@ namespace UnrealScript
 	class TrDevice_CustomEagle : public TrDevice
 	{
 	public:
-		// Here lies the not-yet-implemented method 'InstantFire'
+		void InstantFire()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_CustomEagle.InstantFire");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

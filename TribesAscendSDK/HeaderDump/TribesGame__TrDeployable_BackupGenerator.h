@@ -13,17 +13,68 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TrGameObjective, m_PoweredFriend)
-		// Here lies the not-yet-implemented method 'DeployComplete'
-		// Here lies the not-yet-implemented method 'MainGeneratorIsOnline'
-		// Here lies the not-yet-implemented method 'PowerNearestFriend'
-		// Here lies the not-yet-implemented method 'ReleasePoweredFriend'
-		// Here lies the not-yet-implemented method 'PulseBackupGenerators'
-		// Here lies the not-yet-implemented method 'AsynchPowerCheck'
-		// Here lies the not-yet-implemented method 'DoPowerCheck'
-		// Here lies the not-yet-implemented method 'OnPowerStatusChanged'
-		// Here lies the not-yet-implemented method 'DoPowerUpdate'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		void DeployComplete()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.DeployComplete");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool MainGeneratorIsOnline()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.MainGeneratorIsOnline");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void PowerNearestFriend()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.PowerNearestFriend");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReleasePoweredFriend()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.ReleasePoweredFriend");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PulseBackupGenerators()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.PulseBackupGenerators");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AsynchPowerCheck()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.AsynchPowerCheck");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DoPowerCheck()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.DoPowerCheck");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnPowerStatusChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.OnPowerStatusChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DoPowerUpdate(class TrDeployable* dep)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.DoPowerUpdate");
+			byte* params = (byte*)malloc(4);
+			*(class TrDeployable**)params = dep;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BackupGenerator.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

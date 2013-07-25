@@ -22,10 +22,34 @@ namespace UnrealScript
 		ADD_OBJECT(AnimNodeSequence, m_FireAnimSeqNode)
 		ADD_VAR(::NameProperty, m_nmFireAnimSeqNodeName, 0xFFFFFFFF)
 		ADD_OBJECT(TrPawn, m_TrPawn)
-		// Here lies the not-yet-implemented method 'PlayIdle'
-		// Here lies the not-yet-implemented method 'PlayFire'
-		// Here lies the not-yet-implemented method 'PlayReload'
-		// Here lies the not-yet-implemented method 'PlayOffhand'
+		void PlayIdle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayIdle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayFire(float RefireTime, ScriptName FireAnimName, float ReloadTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayFire");
+			byte* params = (byte*)malloc(16);
+			*(float*)params = RefireTime;
+			*(ScriptName*)(params + 4) = FireAnimName;
+			*(float*)(params + 12) = ReloadTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayReload(float ReloadTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayReload");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = ReloadTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayOffhand()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayOffhand");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

@@ -20,10 +20,42 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, m_nSecondaryExplosions, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, m_SecondaryProjectile)
-		// Here lies the not-yet-implemented method 'GetRandomSpread'
-		// Here lies the not-yet-implemented method 'SpawnSecondaryProjectile'
-		// Here lies the not-yet-implemented method 'Explode'
-		// Here lies the not-yet-implemented method 'Bounce'
+		Rotator GetRandomSpread(Rotator BaseDirection)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MIRVLauncher.GetRandomSpread");
+			byte* params = (byte*)malloc(24);
+			*(Rotator*)params = BaseDirection;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Rotator*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void SpawnSecondaryProjectile(Vector Direction)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MIRVLauncher.SpawnSecondaryProjectile");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = Direction;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Explode(Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MIRVLauncher.Explode");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = HitLocation;
+			*(Vector*)(params + 12) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Bounce(class Actor* Other, Vector WallNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MIRVLauncher.Bounce");
+			byte* params = (byte*)malloc(16);
+			*(class Actor**)params = Other;
+			*(Vector*)(params + 4) = WallNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

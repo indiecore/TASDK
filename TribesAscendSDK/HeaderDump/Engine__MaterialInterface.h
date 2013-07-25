@@ -89,16 +89,139 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, PreviewMesh, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialInterface.LightmassMaterialInterfaceSettings' for the property named 'LightmassSettings'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.RenderCommandFence_Mirror' for the property named 'ParentRefFence'!
-		// Here lies the not-yet-implemented method 'GetMaterial'
-		// Here lies the not-yet-implemented method 'GetPhysicalMaterial'
-		// Here lies the not-yet-implemented method 'GetParameterDesc'
-		// Here lies the not-yet-implemented method 'GetFontParameterValue'
-		// Here lies the not-yet-implemented method 'GetScalarParameterValue'
-		// Here lies the not-yet-implemented method 'GetScalarCurveParameterValue'
-		// Here lies the not-yet-implemented method 'GetTextureParameterValue'
-		// Here lies the not-yet-implemented method 'GetVectorParameterValue'
-		// Here lies the not-yet-implemented method 'GetVectorCurveParameterValue'
-		// Here lies the not-yet-implemented method 'SetForceMipLevelsToBeResident'
+		class Material* GetMaterial()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetMaterial");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Material**)params;
+			free(params);
+			return returnVal;
+		}
+		class PhysicalMaterial* GetPhysicalMaterial()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetPhysicalMaterial");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class PhysicalMaterial**)params;
+			free(params);
+			return returnVal;
+		}
+		bool GetParameterDesc(ScriptName ParameterName, ScriptArray<wchar_t>& OutDesc)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetParameterDesc");
+			byte* params = (byte*)malloc(24);
+			*(ScriptName*)params = ParameterName;
+			*(ScriptArray<wchar_t>*)(params + 8) = OutDesc;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutDesc = *(ScriptArray<wchar_t>*)(params + 8);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
+		bool GetFontParameterValue(ScriptName ParameterName, class Font*& OutFontValue, int& OutFontPage)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetFontParameterValue");
+			byte* params = (byte*)malloc(20);
+			*(ScriptName*)params = ParameterName;
+			*(class Font**)(params + 8) = OutFontValue;
+			*(int*)(params + 12) = OutFontPage;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutFontValue = *(class Font**)(params + 8);
+			OutFontPage = *(int*)(params + 12);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		bool GetScalarParameterValue(ScriptName ParameterName, float& OutValue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetScalarParameterValue");
+			byte* params = (byte*)malloc(16);
+			*(ScriptName*)params = ParameterName;
+			*(float*)(params + 8) = OutValue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutValue = *(float*)(params + 8);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		bool GetScalarCurveParameterValue(ScriptName ParameterName, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
+void*& OutValue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetScalarCurveParameterValue");
+			byte* params = (byte*)malloc(28);
+			*(ScriptName*)params = ParameterName;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
+void**)(params + 8) = OutValue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutValue = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
+void**)(params + 8);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		bool GetTextureParameterValue(ScriptName ParameterName, class Texture*& OutValue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetTextureParameterValue");
+			byte* params = (byte*)malloc(16);
+			*(ScriptName*)params = ParameterName;
+			*(class Texture**)(params + 8) = OutValue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutValue = *(class Texture**)(params + 8);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		bool GetVectorParameterValue(ScriptName ParameterName, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void*& OutValue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetVectorParameterValue");
+			byte* params = (byte*)malloc(28);
+			*(ScriptName*)params = ParameterName;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)(params + 8) = OutValue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutValue = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)(params + 8);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		bool GetVectorCurveParameterValue(ScriptName ParameterName, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector'!
+void*& OutValue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetVectorCurveParameterValue");
+			byte* params = (byte*)malloc(28);
+			*(ScriptName*)params = ParameterName;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector'!
+void**)(params + 8) = OutValue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutValue = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector'!
+void**)(params + 8);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		void SetForceMipLevelsToBeResident(bool OverrideForceMiplevelsToBeResident, bool bForceMiplevelsToBeResidentValue, float ForceDuration, int CinematicTextureGroups)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.SetForceMipLevelsToBeResident");
+			byte* params = (byte*)malloc(16);
+			*(bool*)params = OverrideForceMiplevelsToBeResident;
+			*(bool*)(params + 4) = bForceMiplevelsToBeResidentValue;
+			*(float*)(params + 8) = ForceDuration;
+			*(int*)(params + 12) = CinematicTextureGroups;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -25,9 +25,37 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ScreenSize, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsScreenSizeScaled, 0x1)
 		ADD_OBJECT(Texture2D, Sprite)
-		// Here lies the not-yet-implemented method 'SetSprite'
-		// Here lies the not-yet-implemented method 'SetUV'
-		// Here lies the not-yet-implemented method 'SetSpriteAndUV'
+		void SetSprite(class Texture2D* NewSprite)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SpriteComponent.SetSprite");
+			byte* params = (byte*)malloc(4);
+			*(class Texture2D**)params = NewSprite;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetUV(int NewU, int NewUL, int NewV, int NewVL)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SpriteComponent.SetUV");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = NewU;
+			*(int*)(params + 4) = NewUL;
+			*(int*)(params + 8) = NewV;
+			*(int*)(params + 12) = NewVL;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetSpriteAndUV(class Texture2D* NewSprite, int NewU, int NewUL, int NewV, int NewVL)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SpriteComponent.SetSpriteAndUV");
+			byte* params = (byte*)malloc(20);
+			*(class Texture2D**)params = NewSprite;
+			*(int*)(params + 4) = NewU;
+			*(int*)(params + 8) = NewUL;
+			*(int*)(params + 12) = NewV;
+			*(int*)(params + 16) = NewVL;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

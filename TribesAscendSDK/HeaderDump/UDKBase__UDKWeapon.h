@@ -17,11 +17,43 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, AmmoCount, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bConsiderProjectileAcceleration, 0x2)
 		ADD_VAR(::BoolProperty, bLeadTarget, 0x1)
-		// Here lies the not-yet-implemented method 'IsAimCorrect'
-		// Here lies the not-yet-implemented method 'BestMode'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'EnsureWeaponOverlayComponentLast'
-		// Here lies the not-yet-implemented method 'SetPosition'
+		bool IsAimCorrect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKWeapon.IsAimCorrect");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		byte BestMode()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKWeapon.BestMode");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKWeapon.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void EnsureWeaponOverlayComponentLast()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKWeapon.EnsureWeaponOverlayComponentLast");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetPosition(class UDKPawn* Holder, float DeltaSeconds)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKWeapon.SetPosition");
+			byte* params = (byte*)malloc(8);
+			*(class UDKPawn**)params = Holder;
+			*(float*)(params + 4) = DeltaSeconds;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

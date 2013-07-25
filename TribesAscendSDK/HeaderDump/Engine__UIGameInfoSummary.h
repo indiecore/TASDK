@@ -19,7 +19,15 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, MapPrefix, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, GameAcronym, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ClassName, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'IsProviderDisabled'
+		bool IsProviderDisabled()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIGameInfoSummary.IsProviderDisabled");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

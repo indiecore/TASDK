@@ -95,18 +95,108 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bStopWhenOwnerDestroyed, 0x8)
 		ADD_VAR(::BoolProperty, bAutoPlay, 0x2)
 		ADD_OBJECT(SoundNode, CueFirstNode)
-		// Here lies the not-yet-implemented method 'ResetToDefaults'
-		// Here lies the not-yet-implemented method 'Play'
-		// Here lies the not-yet-implemented method 'FadeIn'
-		// Here lies the not-yet-implemented method 'FadeOut'
-		// Here lies the not-yet-implemented method 'OnQueueSubtitles'
-		// Here lies the not-yet-implemented method 'OnAudioFinished'
-		// Here lies the not-yet-implemented method 'Stop'
-		// Here lies the not-yet-implemented method 'IsPlaying'
-		// Here lies the not-yet-implemented method 'AdjustVolume'
-		// Here lies the not-yet-implemented method 'SetFloatParameter'
-		// Here lies the not-yet-implemented method 'SetWaveParameter'
-		// Here lies the not-yet-implemented method 'OcclusionChanged'
+		void ResetToDefaults()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.ResetToDefaults");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Play()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.Play");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FadeIn(float FadeInDuration, float FadeVolumeLevel)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.FadeIn");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = FadeInDuration;
+			*(float*)(params + 4) = FadeVolumeLevel;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void FadeOut(float FadeOutDuration, float FadeVolumeLevel)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.FadeOut");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = FadeOutDuration;
+			*(float*)(params + 4) = FadeVolumeLevel;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnQueueSubtitles(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void* Subtitles, float CueDuration)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.OnQueueSubtitles");
+			byte* params = (byte*)malloc(16);
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)params = Subtitles;
+			*(float*)(params + 12) = CueDuration;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnAudioFinished(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* AC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.OnAudioFinished");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = AC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Stop()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.Stop");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool IsPlaying()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.IsPlaying");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void AdjustVolume(float AdjustVolumeDuration, float AdjustVolumeLevel)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.AdjustVolume");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = AdjustVolumeDuration;
+			*(float*)(params + 4) = AdjustVolumeLevel;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetFloatParameter(ScriptName InName, float InFloat)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.SetFloatParameter");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = InName;
+			*(float*)(params + 8) = InFloat;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetWaveParameter(ScriptName InName, class SoundNodeWave* InWave)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.SetWaveParameter");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = InName;
+			*(class SoundNodeWave**)(params + 8) = InWave;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OcclusionChanged(bool bNowOccluded)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.OcclusionChanged");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNowOccluded;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

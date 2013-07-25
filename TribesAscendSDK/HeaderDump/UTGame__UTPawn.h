@@ -173,176 +173,1461 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TeamBeaconPlayerInfoMaxDist, 0xFFFFFFFF)
 		ADD_OBJECT(Texture, SpeakingBeaconTexture)
 		ADD_VAR(::FloatProperty, DesiredMeshScale, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'CanDoubleJump'
-		// Here lies the not-yet-implemented method 'WeaponBob'
-		// Here lies the not-yet-implemented method 'GetEyeHeight'
-		// Here lies the not-yet-implemented method 'IsFirstPerson'
-		// Here lies the not-yet-implemented method 'AdjustPPEffects'
-		// Here lies the not-yet-implemented method 'AdjustedStrength'
-		// Here lies the not-yet-implemented method 'GetUTPlayerReplicationInfo'
-		// Here lies the not-yet-implemented method 'FellOutOfWorld'
-		// Here lies the not-yet-implemented method 'HeadVolumeChange'
-		// Here lies the not-yet-implemented method 'PoweredUp'
-		// Here lies the not-yet-implemented method 'InCombat'
-		// Here lies the not-yet-implemented method 'RenderMapIcon'
-		// Here lies the not-yet-implemented method 'SetWalking'
-		// Here lies the not-yet-implemented method 'ClearBodyMatColor'
-		// Here lies the not-yet-implemented method 'SetBodyMatColor'
-		// Here lies the not-yet-implemented method 'SetInvisible'
-		// Here lies the not-yet-implemented method 'SetSkin'
-		// Here lies the not-yet-implemented method 'SetArmsSkin'
-		// Here lies the not-yet-implemented method 'VerifyBodyMaterialInstance'
-		// Here lies the not-yet-implemented method 'SetCharacterClassFromInfo'
-		// Here lies the not-yet-implemented method 'SetCharacterMeshInfo'
-		// Here lies the not-yet-implemented method 'SetPawnRBChannels'
-		// Here lies the not-yet-implemented method 'ResetCharPhysState'
-		// Here lies the not-yet-implemented method 'NotifyTeamChanged'
-		// Here lies the not-yet-implemented method 'SetFirstPersonArmsInfo'
-		// Here lies the not-yet-implemented method 'SetTeamColor'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'UpdateShadowSettings'
-		// Here lies the not-yet-implemented method 'ReattachMesh'
-		// Here lies the not-yet-implemented method 'PostInitAnimTree'
-		// Here lies the not-yet-implemented method 'SetHandIKEnabled'
-		// Here lies the not-yet-implemented method 'SetAnimRateScale'
-		// Here lies the not-yet-implemented method 'SetWeapAnimType'
-		// Here lies the not-yet-implemented method 'LeaveABloodSplatterDecal'
-		// Here lies the not-yet-implemented method 'PerformEmoteCommand'
-		// Here lies the not-yet-implemented method 'DoPlayEmote'
-		// Here lies the not-yet-implemented method 'ServerPlayEmote'
-		// Here lies the not-yet-implemented method 'PlayEmote'
-		// Here lies the not-yet-implemented method 'OnPlayAnim'
-		// Here lies the not-yet-implemented method 'SpawnDefaultController'
-		// Here lies the not-yet-implemented method 'TurnOff'
-		// Here lies the not-yet-implemented method 'EncroachingOn'
-		// Here lies the not-yet-implemented method 'EncroachedBy'
-		// Here lies the not-yet-implemented method 'gibbedBy'
-		// Here lies the not-yet-implemented method 'JumpOffPawn'
-		// Here lies the not-yet-implemented method 'StuckOnPawn'
-		// Here lies the not-yet-implemented method 'Falling'
-		// Here lies the not-yet-implemented method 'AddVelocity'
-		// Here lies the not-yet-implemented method 'Died'
-		// Here lies the not-yet-implemented method 'StartFire'
-		// Here lies the not-yet-implemented method 'StopFiring'
-		// Here lies the not-yet-implemented method 'BotFire'
-		// Here lies the not-yet-implemented method 'StopWeaponFiring'
-		// Here lies the not-yet-implemented method 'ChooseFireMode'
-		// Here lies the not-yet-implemented method 'RecommendLongRangedAttack'
-		// Here lies the not-yet-implemented method 'RangedAttackTime'
-		// Here lies the not-yet-implemented method 'PlayVictoryAnimation'
-		// Here lies the not-yet-implemented method 'OnModifyHealth'
-		// Here lies the not-yet-implemented method 'GetScreenName'
-		// Here lies the not-yet-implemented method 'FaceRotation'
-		// Here lies the not-yet-implemented method 'UpdateEyeHeight'
-		// Here lies the not-yet-implemented method 'GetPawnViewLocation'
-		// Here lies the not-yet-implemented method 'BecomeViewTarget'
-		// Here lies the not-yet-implemented method 'EndViewTarget'
-		// Here lies the not-yet-implemented method 'SetWeaponVisibility'
-		// Here lies the not-yet-implemented method 'SetWeaponAttachmentVisibility'
-		// Here lies the not-yet-implemented method 'SetMeshVisibility'
-		// Here lies the not-yet-implemented method 'DeactivateSpawnProtection'
-		// Here lies the not-yet-implemented method 'PlayTeleportEffect'
-		// Here lies the not-yet-implemented method 'SpawnTransEffect'
-		// Here lies the not-yet-implemented method 'StartDriving'
-		// Here lies the not-yet-implemented method 'StopDriving'
-		// Here lies the not-yet-implemented method 'ClientRestart'
-		// Here lies the not-yet-implemented method 'GetShieldStrength'
-		// Here lies the not-yet-implemented method 'AbsorbDamage'
-		// Here lies the not-yet-implemented method 'ShieldAbsorb'
-		// Here lies the not-yet-implemented method 'AdjustDamage'
-		// Here lies the not-yet-implemented method 'DropFlag'
-		// Here lies the not-yet-implemented method 'EnableInventoryPickup'
-		// Here lies the not-yet-implemented method 'HoldGameObject'
-		// Here lies the not-yet-implemented method 'GiveHealth'
-		// Here lies the not-yet-implemented method 'GetDebugName'
-		// Here lies the not-yet-implemented method 'PlayFootStepSound'
-		// Here lies the not-yet-implemented method 'ActuallyPlayFootstepSound'
-		// Here lies the not-yet-implemented method 'GetMaterialBelowFeet'
-		// Here lies the not-yet-implemented method 'PlayLandingSound'
-		// Here lies the not-yet-implemented method 'PlayJumpingSound'
-		// Here lies the not-yet-implemented method 'ShouldGib'
-		// Here lies the not-yet-implemented method 'SpawnHeadGib'
-		// Here lies the not-yet-implemented method 'SpawnGib'
-		// Here lies the not-yet-implemented method 'SpawnGibs'
-		// Here lies the not-yet-implemented method 'TurnOffPawn'
-		// Here lies the not-yet-implemented method 'PlayDying'
-		// Here lies the not-yet-implemented method 'DoingDeathAnim'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'AddDefaultInventory'
-		// Here lies the not-yet-implemented method 'CalcCamera'
-		// Here lies the not-yet-implemented method 'SetThirdPersonCamera'
-		// Here lies the not-yet-implemented method 'FindGoodEndView'
-		// Here lies the not-yet-implemented method 'TryNewCamRot'
-		// Here lies the not-yet-implemented method 'SetHeroCam'
-		// Here lies the not-yet-implemented method 'CalcThirdPersonCam'
-		// Here lies the not-yet-implemented method 'GetWeaponStartTraceLocation'
-		// Here lies the not-yet-implemented method 'Dodge'
-		// Here lies the not-yet-implemented method 'BotDodge'
-		// Here lies the not-yet-implemented method 'PerformDodge'
-		// Here lies the not-yet-implemented method 'DoDoubleJump'
-		// Here lies the not-yet-implemented method 'Gasp'
-		// Here lies the not-yet-implemented method 'StartFlying'
-		// Here lies the not-yet-implemented method 'StopFlying'
-		// Here lies the not-yet-implemented method 'DoJump'
-		// Here lies the not-yet-implemented method 'Landed'
-		// Here lies the not-yet-implemented method 'JumpOutOfWater'
-		// Here lies the not-yet-implemented method 'CanMultiJump'
-		// Here lies the not-yet-implemented method 'PlayDyingSound'
-		// Here lies the not-yet-implemented method 'DisplayDebug'
-		// Here lies the not-yet-implemented method 'SetPawnAmbientSound'
-		// Here lies the not-yet-implemented method 'GetPawnAmbientSound'
-		// Here lies the not-yet-implemented method 'SetWeaponAmbientSound'
-		// Here lies the not-yet-implemented method 'GetWeaponAmbientSound'
-		// Here lies the not-yet-implemented method 'SetOverlayMaterial'
-		// Here lies the not-yet-implemented method 'GetShieldMaterialInstance'
-		// Here lies the not-yet-implemented method 'GetOverlayMaterial'
-		// Here lies the not-yet-implemented method 'SetWeaponOverlayFlag'
-		// Here lies the not-yet-implemented method 'ClearWeaponOverlayFlag'
-		// Here lies the not-yet-implemented method 'ApplyWeaponOverlayFlags'
-		// Here lies the not-yet-implemented method 'StartFeignDeathRecoveryAnim'
-		// Here lies the not-yet-implemented method 'FeignDeathDelayTimer'
-		// Here lies the not-yet-implemented method 'PlayFeignDeath'
-		// Here lies the not-yet-implemented method 'SetFeignEndLocation'
-		// Here lies the not-yet-implemented method 'CheckValidLocation'
-		// Here lies the not-yet-implemented method 'ServerFeignDeath'
-		// Here lies the not-yet-implemented method 'FeignDeath'
-		// Here lies the not-yet-implemented method 'ForceRagdoll'
-		// Here lies the not-yet-implemented method 'FiringModeUpdated'
-		// Here lies the not-yet-implemented method 'SetBigHead'
-		// Here lies the not-yet-implemented method 'FireRateChanged'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'SetHeadScale'
-		// Here lies the not-yet-implemented method 'SetPuttingDownWeapon'
-		// Here lies the not-yet-implemented method 'GetPuttingDownWeapon'
-		// Here lies the not-yet-implemented method 'TakeDamage'
-		// Here lies the not-yet-implemented method 'WeaponFired'
-		// Here lies the not-yet-implemented method 'WeaponStoppedFiring'
-		// Here lies the not-yet-implemented method 'WeaponChanged'
-		// Here lies the not-yet-implemented method 'WeaponAttachmentChanged'
-		// Here lies the not-yet-implemented method 'PlayHit'
-		// Here lies the not-yet-implemented method 'PlayTakeHitEffects'
-		// Here lies the not-yet-implemented method 'TakeHitBlendedOut'
-		// Here lies the not-yet-implemented method 'ServerHoverboard'
-		// Here lies the not-yet-implemented method 'OnUseHoverboard'
-		// Here lies the not-yet-implemented method 'SwitchWeapon'
-		// Here lies the not-yet-implemented method 'TakeDrowningDamage'
-		// Here lies the not-yet-implemented method 'IsLocationOnHead'
-		// Here lies the not-yet-implemented method 'ModifyRotForDebugFreeCam'
-		// Here lies the not-yet-implemented method 'AdjustCameraScale'
-		// Here lies the not-yet-implemented method 'GetViewRotation'
-		// Here lies the not-yet-implemented method 'TornOff'
-		// Here lies the not-yet-implemented method 'SetOverlayVisibility'
-		// Here lies the not-yet-implemented method 'TakeFallingDamage'
-		// Here lies the not-yet-implemented method 'RigidBodyCollision'
-		// Here lies the not-yet-implemented method 'OnRanOver'
-		// Here lies the not-yet-implemented method 'StuckFalling'
-		// Here lies the not-yet-implemented method 'OnExitVehicle'
-		// Here lies the not-yet-implemented method 'OnInfiniteAmmo'
-		// Here lies the not-yet-implemented method 'PossessedBy'
-		// Here lies the not-yet-implemented method 'NeedToTurn'
-		// Here lies the not-yet-implemented method 'GetFamilyInfo'
-		// Here lies the not-yet-implemented method 'PostTeleport'
-		// Here lies the not-yet-implemented method 'PostBigTeleport'
+		bool CanDoubleJump()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.CanDoubleJump");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		Vector WeaponBob(float BobDamping, float JumpDamping)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.WeaponBob");
+			byte* params = (byte*)malloc(20);
+			*(float*)params = BobDamping;
+			*(float*)(params + 4) = JumpDamping;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		float GetEyeHeight()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetEyeHeight");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsFirstPerson()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.IsFirstPerson");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void AdjustPPEffects(class UTPlayerController* PC, bool bRemove)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.AdjustPPEffects");
+			byte* params = (byte*)malloc(8);
+			*(class UTPlayerController**)params = PC;
+			*(bool*)(params + 4) = bRemove;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		float AdjustedStrength()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.AdjustedStrength");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		class UTPlayerReplicationInfo* GetUTPlayerReplicationInfo()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetUTPlayerReplicationInfo");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class UTPlayerReplicationInfo**)params;
+			free(params);
+			return returnVal;
+		}
+		void FellOutOfWorld(ScriptClass* dmgType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.FellOutOfWorld");
+			byte* params = (byte*)malloc(4);
+			*(ScriptClass**)params = dmgType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void HeadVolumeChange(class PhysicsVolume* newHeadVolume)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.HeadVolumeChange");
+			byte* params = (byte*)malloc(4);
+			*(class PhysicsVolume**)params = newHeadVolume;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool PoweredUp()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PoweredUp");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool InCombat()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.InCombat");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void RenderMapIcon(class UTMapInfo* MP, class Canvas* Canvas, class UTPlayerController* PlayerOwner, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void* FinalColor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.RenderMapIcon");
+			byte* params = (byte*)malloc(28);
+			*(class UTMapInfo**)params = MP;
+			*(class Canvas**)(params + 4) = Canvas;
+			*(class UTPlayerController**)(params + 8) = PlayerOwner;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)(params + 12) = FinalColor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetWalking(bool bNewIsWalking)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetWalking");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNewIsWalking;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearBodyMatColor()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ClearBodyMatColor");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetBodyMatColor(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void* NewBodyMatColor, float NewOverlayDuration)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetBodyMatColor");
+			byte* params = (byte*)malloc(20);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)params = NewBodyMatColor;
+			*(float*)(params + 16) = NewOverlayDuration;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetInvisible(bool bNowInvisible)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetInvisible");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNowInvisible;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetSkin(class Material* NewMaterial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetSkin");
+			byte* params = (byte*)malloc(4);
+			*(class Material**)params = NewMaterial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetArmsSkin(class MaterialInterface* NewMaterial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetArmsSkin");
+			byte* params = (byte*)malloc(4);
+			*(class MaterialInterface**)params = NewMaterial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool VerifyBodyMaterialInstance()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.VerifyBodyMaterialInstance");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void SetCharacterClassFromInfo(ScriptClass* Info, bool bForce)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetCharacterClassFromInfo");
+			byte* params = (byte*)malloc(8);
+			*(ScriptClass**)params = Info;
+			*(bool*)(params + 4) = bForce;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetCharacterMeshInfo(class SkeletalMesh* SkelMesh, class MaterialInterface* HeadMaterial, class MaterialInterface* BodyMaterial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetCharacterMeshInfo");
+			byte* params = (byte*)malloc(12);
+			*(class SkeletalMesh**)params = SkelMesh;
+			*(class MaterialInterface**)(params + 4) = HeadMaterial;
+			*(class MaterialInterface**)(params + 8) = BodyMaterial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetPawnRBChannels(bool bRagdollMode)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetPawnRBChannels");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bRagdollMode;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ResetCharPhysState()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ResetCharPhysState");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void NotifyTeamChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.NotifyTeamChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetFirstPersonArmsInfo(class SkeletalMesh* FirstPersonArmMesh, class MaterialInterface* ArmMaterial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetFirstPersonArmsInfo");
+			byte* params = (byte*)malloc(8);
+			*(class SkeletalMesh**)params = FirstPersonArmMesh;
+			*(class MaterialInterface**)(params + 4) = ArmMaterial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetTeamColor()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetTeamColor");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateShadowSettings(bool bWantShadow)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.UpdateShadowSettings");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bWantShadow;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ReattachMesh()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ReattachMesh");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostInitAnimTree(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PostInitAnimTree");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetHandIKEnabled(bool bEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetHandIKEnabled");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetAnimRateScale(float RateScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetAnimRateScale");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = RateScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetWeapAnimType(byte AnimType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetWeapAnimType");
+			byte* params = (byte*)malloc(1);
+			*params = AnimType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void LeaveABloodSplatterDecal(Vector HitLoc, Vector HitNorm)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.LeaveABloodSplatterDecal");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = HitLoc;
+			*(Vector*)(params + 12) = HitNorm;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PerformEmoteCommand(
+// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.EmoteInfo'!
+void* EInfo, int PlayerID)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PerformEmoteCommand");
+			byte* params = (byte*)malloc(56);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.EmoteInfo'!
+void**)params = EInfo;
+			*(int*)(params + 52) = PlayerID;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DoPlayEmote(ScriptName InEmoteTag, int InPlayerID)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.DoPlayEmote");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = InEmoteTag;
+			*(int*)(params + 8) = InPlayerID;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ServerPlayEmote(ScriptName InEmoteTag, int InPlayerID)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ServerPlayEmote");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = InEmoteTag;
+			*(int*)(params + 8) = InPlayerID;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayEmote(ScriptName InEmoteTag, int InPlayerID)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PlayEmote");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = InEmoteTag;
+			*(int*)(params + 8) = InPlayerID;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnPlayAnim(class UTSeqAct_PlayAnim* inAction)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.OnPlayAnim");
+			byte* params = (byte*)malloc(4);
+			*(class UTSeqAct_PlayAnim**)params = inAction;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SpawnDefaultController()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SpawnDefaultController");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TurnOff()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.TurnOff");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool EncroachingOn(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.EncroachingOn");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void EncroachedBy(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.EncroachedBy");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void gibbedBy(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.gibbedBy");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void JumpOffPawn()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.JumpOffPawn");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StuckOnPawn(class Pawn* OtherPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.StuckOnPawn");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = OtherPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Falling()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.Falling");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AddVelocity(Vector NewVelocity, Vector HitLocation, ScriptClass* DamageType, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void* HitInfo)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.AddVelocity");
+			byte* params = (byte*)malloc(56);
+			*(Vector*)params = NewVelocity;
+			*(Vector*)(params + 12) = HitLocation;
+			*(ScriptClass**)(params + 24) = DamageType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 28) = HitInfo;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool Died(class Controller* Killer, ScriptClass* DamageType, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.Died");
+			byte* params = (byte*)malloc(24);
+			*(class Controller**)params = Killer;
+			*(ScriptClass**)(params + 4) = DamageType;
+			*(Vector*)(params + 8) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
+		void StartFire(byte FireModeNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.StartFire");
+			byte* params = (byte*)malloc(1);
+			*params = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool StopFiring()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.StopFiring");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool BotFire(bool bFinished)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.BotFire");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bFinished;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool StopWeaponFiring()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.StopWeaponFiring");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		byte ChooseFireMode()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ChooseFireMode");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
+		bool RecommendLongRangedAttack()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.RecommendLongRangedAttack");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		float RangedAttackTime()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.RangedAttackTime");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		void PlayVictoryAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PlayVictoryAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnModifyHealth(class SeqAct_ModifyHealth* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.OnModifyHealth");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_ModifyHealth**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		ScriptArray<wchar_t> GetScreenName()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetScreenName");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
+		void FaceRotation(Rotator NewRotation, float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.FaceRotation");
+			byte* params = (byte*)malloc(16);
+			*(Rotator*)params = NewRotation;
+			*(float*)(params + 12) = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateEyeHeight(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.UpdateEyeHeight");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		Vector GetPawnViewLocation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetPawnViewLocation");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)params;
+			free(params);
+			return returnVal;
+		}
+		void BecomeViewTarget(class PlayerController* PC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.BecomeViewTarget");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerController**)params = PC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void EndViewTarget(class PlayerController* PC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.EndViewTarget");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerController**)params = PC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetWeaponVisibility(bool bWeaponVisible)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetWeaponVisibility");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bWeaponVisible;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetWeaponAttachmentVisibility(bool bAttachmentVisible)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetWeaponAttachmentVisibility");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bAttachmentVisible;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetMeshVisibility(bool bVisible)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetMeshVisibility");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bVisible;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DeactivateSpawnProtection()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.DeactivateSpawnProtection");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayTeleportEffect(bool bOut, bool bSound)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PlayTeleportEffect");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bOut;
+			*(bool*)(params + 4) = bSound;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SpawnTransEffect(int TeamNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SpawnTransEffect");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = TeamNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StartDriving(class Vehicle* V)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.StartDriving");
+			byte* params = (byte*)malloc(4);
+			*(class Vehicle**)params = V;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopDriving(class Vehicle* V)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.StopDriving");
+			byte* params = (byte*)malloc(4);
+			*(class Vehicle**)params = V;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClientRestart()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ClientRestart");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int GetShieldStrength()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetShieldStrength");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		int AbsorbDamage(int& Damage, int CurrentShieldStrength, float AbsorptionRate)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.AbsorbDamage");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = Damage;
+			*(int*)(params + 4) = CurrentShieldStrength;
+			*(float*)(params + 8) = AbsorptionRate;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Damage = *(int*)params;
+			auto returnVal = *(int*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		int ShieldAbsorb(int Damage)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ShieldAbsorb");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Damage;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void AdjustDamage(int& InDamage, Vector& Momentum, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void* HitInfo, class Actor* DamageCauser)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.AdjustDamage");
+			byte* params = (byte*)malloc(68);
+			*(int*)params = InDamage;
+			*(Vector*)(params + 4) = Momentum;
+			*(class Controller**)(params + 16) = InstigatedBy;
+			*(Vector*)(params + 20) = HitLocation;
+			*(ScriptClass**)(params + 32) = DamageType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 36) = HitInfo;
+			*(class Actor**)(params + 64) = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			InDamage = *(int*)params;
+			Momentum = *(Vector*)(params + 4);
+			free(params);
+		}
+		void DropFlag(class Controller* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.DropFlag");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void EnableInventoryPickup()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.EnableInventoryPickup");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HoldGameObject(class UDKCarriedObject* GameObj)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.HoldGameObject");
+			byte* params = (byte*)malloc(4);
+			*(class UDKCarriedObject**)params = GameObj;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool GiveHealth(int HealAmount, int HealMax)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GiveHealth");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = HealAmount;
+			*(int*)(params + 4) = HealMax;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetDebugName()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetDebugName");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
+		void PlayFootStepSound(int FootDown)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PlayFootStepSound");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = FootDown;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ActuallyPlayFootstepSound(int FootDown)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ActuallyPlayFootstepSound");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = FootDown;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		ScriptName GetMaterialBelowFeet()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetMaterialBelowFeet");
+			byte* params = (byte*)malloc(8);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptName*)params;
+			free(params);
+			return returnVal;
+		}
+		void PlayLandingSound()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PlayLandingSound");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayJumpingSound()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PlayJumpingSound");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool ShouldGib(ScriptClass* UTDamageType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ShouldGib");
+			byte* params = (byte*)malloc(8);
+			*(ScriptClass**)params = UTDamageType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void SpawnHeadGib(ScriptClass* UTDamageType, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SpawnHeadGib");
+			byte* params = (byte*)malloc(16);
+			*(ScriptClass**)params = UTDamageType;
+			*(Vector*)(params + 4) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class UTGib* SpawnGib(ScriptClass* GibClass, ScriptName BoneName, ScriptClass* UTDamageType, Vector HitLocation, bool bSpinGib)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SpawnGib");
+			byte* params = (byte*)malloc(36);
+			*(ScriptClass**)params = GibClass;
+			*(ScriptName*)(params + 4) = BoneName;
+			*(ScriptClass**)(params + 12) = UTDamageType;
+			*(Vector*)(params + 16) = HitLocation;
+			*(bool*)(params + 28) = bSpinGib;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class UTGib**)(params + 32);
+			free(params);
+			return returnVal;
+		}
+		void SpawnGibs(ScriptClass* UTDamageType, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SpawnGibs");
+			byte* params = (byte*)malloc(16);
+			*(ScriptClass**)params = UTDamageType;
+			*(Vector*)(params + 4) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TurnOffPawn()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.TurnOffPawn");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayDying(ScriptClass* DamageType, Vector HitLoc)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PlayDying");
+			byte* params = (byte*)malloc(16);
+			*(ScriptClass**)params = DamageType;
+			*(Vector*)(params + 4) = HitLoc;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DoingDeathAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.DoingDeathAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AddDefaultInventory()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.AddDefaultInventory");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool CalcCamera(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.CalcCamera");
+			byte* params = (byte*)malloc(36);
+			*(float*)params = fDeltaTime;
+			*(Vector*)(params + 4) = out_CamLoc;
+			*(Rotator*)(params + 16) = out_CamRot;
+			*(float*)(params + 28) = out_FOV;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_CamLoc = *(Vector*)(params + 4);
+			out_CamRot = *(Rotator*)(params + 16);
+			out_FOV = *(float*)(params + 28);
+			auto returnVal = *(bool*)(params + 32);
+			free(params);
+			return returnVal;
+		}
+		void SetThirdPersonCamera(bool bNewBehindView)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetThirdPersonCamera");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNewBehindView;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void FindGoodEndView(class PlayerController* InPC, Rotator& GoodRotation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.FindGoodEndView");
+			byte* params = (byte*)malloc(16);
+			*(class PlayerController**)params = InPC;
+			*(Rotator*)(params + 4) = GoodRotation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			GoodRotation = *(Rotator*)(params + 4);
+			free(params);
+		}
+		bool TryNewCamRot(class UTPlayerController* PC, Rotator ViewRotation, float& CamDist)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.TryNewCamRot");
+			byte* params = (byte*)malloc(24);
+			*(class UTPlayerController**)params = PC;
+			*(Rotator*)(params + 4) = ViewRotation;
+			*(float*)(params + 16) = CamDist;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			CamDist = *(float*)(params + 16);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
+		void SetHeroCam(Rotator& out_CamRot)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetHeroCam");
+			byte* params = (byte*)malloc(12);
+			*(Rotator*)params = out_CamRot;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_CamRot = *(Rotator*)params;
+			free(params);
+		}
+		bool CalcThirdPersonCam(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.CalcThirdPersonCam");
+			byte* params = (byte*)malloc(36);
+			*(float*)params = fDeltaTime;
+			*(Vector*)(params + 4) = out_CamLoc;
+			*(Rotator*)(params + 16) = out_CamRot;
+			*(float*)(params + 28) = out_FOV;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_CamLoc = *(Vector*)(params + 4);
+			out_CamRot = *(Rotator*)(params + 16);
+			out_FOV = *(float*)(params + 28);
+			auto returnVal = *(bool*)(params + 32);
+			free(params);
+			return returnVal;
+		}
+		Vector GetWeaponStartTraceLocation(class Weapon* CurrentWeapon)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetWeaponStartTraceLocation");
+			byte* params = (byte*)malloc(16);
+			*(class Weapon**)params = CurrentWeapon;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool Dodge(byte DoubleClickMove)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.Dodge");
+			byte* params = (byte*)malloc(5);
+			*params = DoubleClickMove;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		Vector BotDodge(Vector Dir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.BotDodge");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = Dir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		bool PerformDodge(byte DoubleClickMove, Vector Dir, Vector Cross)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PerformDodge");
+			byte* params = (byte*)malloc(29);
+			*params = DoubleClickMove;
+			*(Vector*)(params + 4) = Dir;
+			*(Vector*)(params + 16) = Cross;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		void DoDoubleJump(bool bUpdating)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.DoDoubleJump");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bUpdating;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Gasp()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.Gasp");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StartFlying()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.StartFlying");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StopFlying()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.StopFlying");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool DoJump(bool bUpdating)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.DoJump");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bUpdating;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void Landed(Vector HitNormal, class Actor* FloorActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.Landed");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = HitNormal;
+			*(class Actor**)(params + 12) = FloorActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void JumpOutOfWater(Vector JumpDir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.JumpOutOfWater");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = JumpDir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool CanMultiJump()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.CanMultiJump");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void PlayDyingSound()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PlayDyingSound");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.DisplayDebug");
+			byte* params = (byte*)malloc(12);
+			*(class HUD**)params = HUD;
+			*(float*)(params + 4) = out_YL;
+			*(float*)(params + 8) = out_YPos;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_YL = *(float*)(params + 4);
+			out_YPos = *(float*)(params + 8);
+			free(params);
+		}
+		void SetPawnAmbientSound(class SoundCue* NewAmbientSound)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetPawnAmbientSound");
+			byte* params = (byte*)malloc(4);
+			*(class SoundCue**)params = NewAmbientSound;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class SoundCue* GetPawnAmbientSound()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetPawnAmbientSound");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class SoundCue**)params;
+			free(params);
+			return returnVal;
+		}
+		void SetWeaponAmbientSound(class SoundCue* NewAmbientSound)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetWeaponAmbientSound");
+			byte* params = (byte*)malloc(4);
+			*(class SoundCue**)params = NewAmbientSound;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class SoundCue* GetWeaponAmbientSound()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetWeaponAmbientSound");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class SoundCue**)params;
+			free(params);
+			return returnVal;
+		}
+		void SetOverlayMaterial(class MaterialInterface* NewOverlay)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetOverlayMaterial");
+			byte* params = (byte*)malloc(4);
+			*(class MaterialInterface**)params = NewOverlay;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class MaterialInterface* GetShieldMaterialInstance(bool bTeamGame)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetShieldMaterialInstance");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bTeamGame;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class MaterialInterface**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class MaterialInterface* GetOverlayMaterial()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetOverlayMaterial");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class MaterialInterface**)params;
+			free(params);
+			return returnVal;
+		}
+		void SetWeaponOverlayFlag(byte FlagToSet)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetWeaponOverlayFlag");
+			byte* params = (byte*)malloc(1);
+			*params = FlagToSet;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearWeaponOverlayFlag(byte FlagToClear)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ClearWeaponOverlayFlag");
+			byte* params = (byte*)malloc(1);
+			*params = FlagToClear;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ApplyWeaponOverlayFlags(byte NewFlags)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ApplyWeaponOverlayFlags");
+			byte* params = (byte*)malloc(1);
+			*params = NewFlags;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StartFeignDeathRecoveryAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.StartFeignDeathRecoveryAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FeignDeathDelayTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.FeignDeathDelayTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayFeignDeath()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PlayFeignDeath");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool SetFeignEndLocation(Vector HitLocation, Vector FeignLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetFeignEndLocation");
+			byte* params = (byte*)malloc(28);
+			*(Vector*)params = HitLocation;
+			*(Vector*)(params + 12) = FeignLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		bool CheckValidLocation(Vector FeignLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.CheckValidLocation");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = FeignLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void ServerFeignDeath()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ServerFeignDeath");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FeignDeath()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.FeignDeath");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ForceRagdoll()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ForceRagdoll");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FiringModeUpdated(class Weapon* InWeapon, byte InFiringMode, bool bViaReplication)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.FiringModeUpdated");
+			byte* params = (byte*)malloc(9);
+			*(class Weapon**)params = InWeapon;
+			*(params + 4) = InFiringMode;
+			*(bool*)(params + 8) = bViaReplication;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetBigHead()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetBigHead");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FireRateChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.FireRateChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetHeadScale(float NewScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetHeadScale");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = NewScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetPuttingDownWeapon(bool bNowPuttingDownWeapon)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetPuttingDownWeapon");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNowPuttingDownWeapon;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool GetPuttingDownWeapon()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetPuttingDownWeapon");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void* HitInfo, class Actor* DamageCauser)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.TakeDamage");
+			byte* params = (byte*)malloc(68);
+			*(int*)params = Damage;
+			*(class Controller**)(params + 4) = EventInstigator;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = Momentum;
+			*(ScriptClass**)(params + 32) = DamageType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 36) = HitInfo;
+			*(class Actor**)(params + 64) = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void WeaponFired(class Weapon* InWeapon, bool bViaReplication, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.WeaponFired");
+			byte* params = (byte*)malloc(20);
+			*(class Weapon**)params = InWeapon;
+			*(bool*)(params + 4) = bViaReplication;
+			*(Vector*)(params + 8) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void WeaponStoppedFiring(class Weapon* InWeapon, bool bViaReplication)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.WeaponStoppedFiring");
+			byte* params = (byte*)malloc(8);
+			*(class Weapon**)params = InWeapon;
+			*(bool*)(params + 4) = bViaReplication;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void WeaponChanged(class UTWeapon* NewWeapon)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.WeaponChanged");
+			byte* params = (byte*)malloc(4);
+			*(class UTWeapon**)params = NewWeapon;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void WeaponAttachmentChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.WeaponAttachmentChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayHit(float Damage, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, Vector Momentum, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void* HitInfo)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PlayHit");
+			byte* params = (byte*)malloc(64);
+			*(float*)params = Damage;
+			*(class Controller**)(params + 4) = InstigatedBy;
+			*(Vector*)(params + 8) = HitLocation;
+			*(ScriptClass**)(params + 20) = DamageType;
+			*(Vector*)(params + 24) = Momentum;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 36) = HitInfo;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayTakeHitEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PlayTakeHitEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TakeHitBlendedOut()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.TakeHitBlendedOut");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ServerHoverboard()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ServerHoverboard");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnUseHoverboard(class UTSeqAct_UseHoverboard* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.OnUseHoverboard");
+			byte* params = (byte*)malloc(4);
+			*(class UTSeqAct_UseHoverboard**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SwitchWeapon(byte NewGroup)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SwitchWeapon");
+			byte* params = (byte*)malloc(1);
+			*params = NewGroup;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TakeDrowningDamage()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.TakeDrowningDamage");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool IsLocationOnHead(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
+void*& Impact, float AdditionalScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.IsLocationOnHead");
+			byte* params = (byte*)malloc(88);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
+void**)params = Impact;
+			*(float*)(params + 80) = AdditionalScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Impact = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
+void**)params;
+			auto returnVal = *(bool*)(params + 84);
+			free(params);
+			return returnVal;
+		}
+		void ModifyRotForDebugFreeCam(Rotator& out_CamRot)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ModifyRotForDebugFreeCam");
+			byte* params = (byte*)malloc(12);
+			*(Rotator*)params = out_CamRot;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_CamRot = *(Rotator*)params;
+			free(params);
+		}
+		void AdjustCameraScale(bool bMoveCameraIn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.AdjustCameraScale");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bMoveCameraIn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		Rotator GetViewRotation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetViewRotation");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Rotator*)params;
+			free(params);
+			return returnVal;
+		}
+		void TornOff()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.TornOff");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetOverlayVisibility(bool bVisible)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetOverlayVisibility");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bVisible;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TakeFallingDamage()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.TakeFallingDamage");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RigidBodyCollision(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* HitComponent, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* OtherComponent, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
+void*& RigidCollisionData, int ContactIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.RigidBodyCollision");
+			byte* params = (byte*)malloc(48);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = HitComponent;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = OtherComponent;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
+void**)(params + 8) = RigidCollisionData;
+			*(int*)(params + 44) = ContactIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			RigidCollisionData = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
+void**)(params + 8);
+			free(params);
+		}
+		void OnRanOver(class SVehicle* Vehicle, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* RunOverComponent, int WheelIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.OnRanOver");
+			byte* params = (byte*)malloc(12);
+			*(class SVehicle**)params = Vehicle;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = RunOverComponent;
+			*(int*)(params + 8) = WheelIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StuckFalling()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.StuckFalling");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnExitVehicle(class UTSeqAct_ExitVehicle* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.OnExitVehicle");
+			byte* params = (byte*)malloc(4);
+			*(class UTSeqAct_ExitVehicle**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnInfiniteAmmo(class UTSeqAct_InfiniteAmmo* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.OnInfiniteAmmo");
+			byte* params = (byte*)malloc(4);
+			*(class UTSeqAct_InfiniteAmmo**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PossessedBy(class Controller* C, bool bVehicleTransition)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PossessedBy");
+			byte* params = (byte*)malloc(8);
+			*(class Controller**)params = C;
+			*(bool*)(params + 4) = bVehicleTransition;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool NeedToTurn(Vector targ)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.NeedToTurn");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = targ;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		ScriptClass* GetFamilyInfo()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.GetFamilyInfo");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptClass**)params;
+			free(params);
+			return returnVal;
+		}
+		void PostTeleport(class Teleporter* OutTeleporter)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PostTeleport");
+			byte* params = (byte*)malloc(4);
+			*(class Teleporter**)params = OutTeleporter;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostBigTeleport()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PostBigTeleport");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

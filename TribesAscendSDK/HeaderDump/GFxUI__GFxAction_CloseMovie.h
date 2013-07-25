@@ -20,7 +20,15 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bUnload, 0x1)
 		ADD_OBJECT(GFxMoviePlayer, Movie)
-		// Here lies the not-yet-implemented method 'IsValidLevelSequenceObject'
+		bool IsValidLevelSequenceObject()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxAction_CloseMovie.IsValidLevelSequenceObject");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

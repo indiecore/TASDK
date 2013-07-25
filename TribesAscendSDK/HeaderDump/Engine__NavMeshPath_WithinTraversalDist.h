@@ -15,8 +15,23 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, SoftStartPenalty, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSoft, 0x1)
 		ADD_VAR(::FloatProperty, MaxTraversalDist, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'DontExceedMaxDist'
-		// Here lies the not-yet-implemented method 'Recycle'
+		bool DontExceedMaxDist(class NavigationHandle* NavHandle, float InMaxTraversalDist, bool bInSoft)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_WithinTraversalDist.DontExceedMaxDist");
+			byte* params = (byte*)malloc(16);
+			*(class NavigationHandle**)params = NavHandle;
+			*(float*)(params + 4) = InMaxTraversalDist;
+			*(bool*)(params + 8) = bInSoft;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_WithinTraversalDist.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

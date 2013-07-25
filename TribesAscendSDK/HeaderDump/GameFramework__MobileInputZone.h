@@ -95,15 +95,111 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, TapInputKey, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, HorizontalInputKey, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, InputKey, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'OnPreDrawZone'
-		// Here lies the not-yet-implemented method 'OnPostDrawZone'
-		// Here lies the not-yet-implemented method 'OnProcessSlide'
-		// Here lies the not-yet-implemented method 'OnDoubleTapDelegate'
-		// Here lies the not-yet-implemented method 'OnTapDelegate'
-		// Here lies the not-yet-implemented method 'OnProcessInputDelegate'
-		// Here lies the not-yet-implemented method 'ActivateZone'
-		// Here lies the not-yet-implemented method 'DeactivateZone'
-		// Here lies the not-yet-implemented method 'AddKismetEventHandler'
+		bool OnPreDrawZone(class MobileInputZone* Zone, class Canvas* Canvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnPreDrawZone");
+			byte* params = (byte*)malloc(12);
+			*(class MobileInputZone**)params = Zone;
+			*(class Canvas**)(params + 4) = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void OnPostDrawZone(class MobileInputZone* Zone, class Canvas* Canvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnPostDrawZone");
+			byte* params = (byte*)malloc(8);
+			*(class MobileInputZone**)params = Zone;
+			*(class Canvas**)(params + 4) = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool OnProcessSlide(class MobileInputZone* Zone, byte EventType, int SlideValue, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void* ViewportSize)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnProcessSlide");
+			byte* params = (byte*)malloc(21);
+			*(class MobileInputZone**)params = Zone;
+			*(params + 4) = EventType;
+			*(int*)(params + 8) = SlideValue;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void**)(params + 12) = ViewportSize;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
+		bool OnDoubleTapDelegate(class MobileInputZone* Zone, byte EventType, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void* TouchLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnDoubleTapDelegate");
+			byte* params = (byte*)malloc(17);
+			*(class MobileInputZone**)params = Zone;
+			*(params + 4) = EventType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void**)(params + 8) = TouchLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		bool OnTapDelegate(class MobileInputZone* Zone, byte EventType, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void* TouchLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnTapDelegate");
+			byte* params = (byte*)malloc(17);
+			*(class MobileInputZone**)params = Zone;
+			*(params + 4) = EventType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void**)(params + 8) = TouchLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		bool OnProcessInputDelegate(class MobileInputZone* Zone, float DeltaTime, int Handle, byte EventType, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void* TouchLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnProcessInputDelegate");
+			byte* params = (byte*)malloc(25);
+			*(class MobileInputZone**)params = Zone;
+			*(float*)(params + 4) = DeltaTime;
+			*(int*)(params + 8) = Handle;
+			*(params + 12) = EventType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void**)(params + 16) = TouchLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		void ActivateZone()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.ActivateZone");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DeactivateZone()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.DeactivateZone");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AddKismetEventHandler(class SeqEvent_MobileZoneBase* NewHandler)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.AddKismetEventHandler");
+			byte* params = (byte*)malloc(4);
+			*(class SeqEvent_MobileZoneBase**)params = NewHandler;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

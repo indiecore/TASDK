@@ -25,8 +25,19 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'CollideWithChannels'!
 		ADD_VAR(::BoolProperty, bForceActive, 0x1)
 		ADD_VAR(::IntProperty, ExcludeChannel, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'DoInitRBPhys'
-		// Here lies the not-yet-implemented method 'OnToggle'
+		void DoInitRBPhys()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxForceField.DoInitRBPhys");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnToggle(class SeqAct_Toggle* inAction)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxForceField.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = inAction;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

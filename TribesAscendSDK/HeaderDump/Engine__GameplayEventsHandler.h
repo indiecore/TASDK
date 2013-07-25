@@ -13,13 +13,55 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(GameplayEventsReader, Reader)
-		// Here lies the not-yet-implemented method 'SetReader'
-		// Here lies the not-yet-implemented method 'PreProcessStream'
-		// Here lies the not-yet-implemented method 'PostProcessStream'
-		// Here lies the not-yet-implemented method 'ResolveGroupFilters'
-		// Here lies the not-yet-implemented method 'AddFilter'
-		// Here lies the not-yet-implemented method 'RemoveFilter'
-		// Here lies the not-yet-implemented method 'IsEventFiltered'
+		void SetReader(class GameplayEventsReader* NewReader)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.SetReader");
+			byte* params = (byte*)malloc(4);
+			*(class GameplayEventsReader**)params = NewReader;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PreProcessStream()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.PreProcessStream");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostProcessStream()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.PostProcessStream");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ResolveGroupFilters()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.ResolveGroupFilters");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AddFilter(int EventID)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.AddFilter");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = EventID;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RemoveFilter(int EventID)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.RemoveFilter");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = EventID;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool IsEventFiltered(int EventID)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.IsEventFiltered");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = EventID;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_OBJECT

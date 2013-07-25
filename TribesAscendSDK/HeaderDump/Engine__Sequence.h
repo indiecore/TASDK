@@ -22,10 +22,54 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, DefaultViewX, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'LogFile'!
-		// Here lies the not-yet-implemented method 'FindSeqObjectsByClass'
-		// Here lies the not-yet-implemented method 'FindSeqObjectsByName'
-		// Here lies the not-yet-implemented method 'Reset'
-		// Here lies the not-yet-implemented method 'SetEnabled'
+		void FindSeqObjectsByClass(ScriptClass* DesiredClass, bool bRecursive, 
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void*& OutputObjects)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Sequence.FindSeqObjectsByClass");
+			byte* params = (byte*)malloc(20);
+			*(ScriptClass**)params = DesiredClass;
+			*(bool*)(params + 4) = bRecursive;
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 8) = OutputObjects;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutputObjects = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 8);
+			free(params);
+		}
+		void FindSeqObjectsByName(ScriptArray<wchar_t> SeqObjName, bool bCheckComment, 
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void*& OutputObjects, bool bRecursive)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Sequence.FindSeqObjectsByName");
+			byte* params = (byte*)malloc(32);
+			*(ScriptArray<wchar_t>*)params = SeqObjName;
+			*(bool*)(params + 12) = bCheckComment;
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 16) = OutputObjects;
+			*(bool*)(params + 28) = bRecursive;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutputObjects = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 16);
+			free(params);
+		}
+		void Reset()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Sequence.Reset");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetEnabled(bool bInEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Sequence.SetEnabled");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bInEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

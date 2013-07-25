@@ -20,7 +20,16 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Pawn, PawnOwner)
 		ADD_VAR(::ByteProperty, RotationBlendType, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetMaskWeight'
+		void SetMaskWeight(int MaskIndex, float DesiredWeight, float BlendTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNode_MultiBlendPerBone.SetMaskWeight");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = MaskIndex;
+			*(float*)(params + 4) = DesiredWeight;
+			*(float*)(params + 8) = BlendTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

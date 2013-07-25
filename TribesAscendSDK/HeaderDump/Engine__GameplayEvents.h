@@ -21,9 +21,30 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.GameplayEvents.GameplayEventsHeader' for the property named 'Header'!
 		ADD_VAR(::StrProperty, StatsFileName, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Archive'!
-		// Here lies the not-yet-implemented method 'OpenStatsFile'
-		// Here lies the not-yet-implemented method 'CloseStatsFile'
-		// Here lies the not-yet-implemented method 'GetFilename'
+		bool OpenStatsFile(ScriptArray<wchar_t> Filename)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEvents.OpenStatsFile");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = Filename;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void CloseStatsFile()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEvents.CloseStatsFile");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		ScriptArray<wchar_t> GetFilename()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEvents.GetFilename");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

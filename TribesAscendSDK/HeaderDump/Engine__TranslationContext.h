@@ -6,6 +6,15 @@ namespace UnrealScript
 	class TranslationContext : public Object
 	{
 	public:
-		// Here lies the not-yet-implemented method 'RegisterTranslatorTag'
+		bool RegisterTranslatorTag(class TranslatorTag* InTagHandler)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TranslationContext.RegisterTranslatorTag");
+			byte* params = (byte*)malloc(8);
+			*(class TranslatorTag**)params = InTagHandler;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }

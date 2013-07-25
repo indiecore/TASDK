@@ -14,14 +14,64 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(SoundCue, m_SpinfusorIdleSound)
-		// Here lies the not-yet-implemented method 'PostInitAnimTree'
-		// Here lies the not-yet-implemented method 'OnAnimPlay'
-		// Here lies the not-yet-implemented method 'OnAnimEnd'
-		// Here lies the not-yet-implemented method 'SetDiscSpinning'
-		// Here lies the not-yet-implemented method 'PlayWeaponEquip'
-		// Here lies the not-yet-implemented method 'PlayWeaponPutDown'
-		// Here lies the not-yet-implemented method 'PutDownFast'
-		// Here lies the not-yet-implemented method 'OnSwitchAwayFromWeapon'
+		void PostInitAnimTree(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Twinfusor.PostInitAnimTree");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnAnimPlay(class AnimNodeSequence* SeqNode)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Twinfusor.OnAnimPlay");
+			byte* params = (byte*)malloc(4);
+			*(class AnimNodeSequence**)params = SeqNode;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnAnimEnd(class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Twinfusor.OnAnimEnd");
+			byte* params = (byte*)malloc(12);
+			*(class AnimNodeSequence**)params = SeqNode;
+			*(float*)(params + 4) = PlayedTime;
+			*(float*)(params + 8) = ExcessTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetDiscSpinning(bool bEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Twinfusor.SetDiscSpinning");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayWeaponEquip()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Twinfusor.PlayWeaponEquip");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayWeaponPutDown()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Twinfusor.PlayWeaponPutDown");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PutDownFast()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Twinfusor.PutDownFast");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnSwitchAwayFromWeapon()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Twinfusor.OnSwitchAwayFromWeapon");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

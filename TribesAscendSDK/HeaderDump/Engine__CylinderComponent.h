@@ -23,7 +23,15 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'CylinderColor'!
 		ADD_VAR(::FloatProperty, CollisionRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CollisionHeight, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetCylinderSize'
+		void SetCylinderSize(float NewRadius, float NewHeight)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CylinderComponent.SetCylinderSize");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = NewRadius;
+			*(float*)(params + 4) = NewHeight;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

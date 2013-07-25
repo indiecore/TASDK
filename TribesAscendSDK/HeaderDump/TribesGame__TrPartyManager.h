@@ -14,25 +14,170 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bCreatedParty, 0x1)
 		ADD_VAR(::StrProperty, InvitingPlayer, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'InParty'
-		// Here lies the not-yet-implemented method 'AmLeader'
-		// Here lies the not-yet-implemented method 'CanInvite'
-		// Here lies the not-yet-implemented method 'GetMemberCap'
-		// Here lies the not-yet-implemented method 'GetMemberCount'
-		// Here lies the not-yet-implemented method 'Kick'
-		// Here lies the not-yet-implemented method 'SendInvite'
-		// Here lies the not-yet-implemented method 'GetMemberId'
-		// Here lies the not-yet-implemented method 'GetMemberName'
-		// Here lies the not-yet-implemented method 'ActiveMember'
-		// Here lies the not-yet-implemented method 'Leave'
-		// Here lies the not-yet-implemented method 'AcceptInvite'
-		// Here lies the not-yet-implemented method 'GetLeaderName'
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'ShowInvitation'
-		// Here lies the not-yet-implemented method 'InvitationPopup'
-		// Here lies the not-yet-implemented method 'InvitationComplete'
-		// Here lies the not-yet-implemented method 'OnUpdate'
-		// Here lies the not-yet-implemented method 'LeaveParty'
+		bool InParty()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.InParty");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool AmLeader()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.AmLeader");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool CanInvite()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.CanInvite");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		int GetMemberCap()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.GetMemberCap");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		int GetMemberCount()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.GetMemberCount");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		bool Kick(ScriptArray<wchar_t> PlayerName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.Kick");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		bool SendInvite(ScriptArray<wchar_t> PlayerName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.SendInvite");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		int GetMemberId(int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.GetMemberId");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetMemberName(int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.GetMemberName");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool ActiveMember(int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.ActiveMember");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool Leave()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.Leave");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool AcceptInvite()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.AcceptInvite");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetLeaderName()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.GetLeaderName");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShowInvitation(ScriptArray<wchar_t> LeaderName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.ShowInvitation");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = LeaderName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InvitationPopup(class GFxObject* Obj)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.InvitationPopup");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = Obj;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InvitationComplete(int Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.InvitationComplete");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnUpdate()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.OnUpdate");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void LeaveParty(bool bHandle)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.LeaveParty");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bHandle;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -16,9 +16,29 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, MaxFallSpeed, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Height, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Radius, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'CachePawnReacFlags'
-		// Here lies the not-yet-implemented method 'DontGetStuck'
-		// Here lies the not-yet-implemented method 'Recycle'
+		void CachePawnReacFlags(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AvoidInEscapableNodes.CachePawnReacFlags");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool DontGetStuck(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AvoidInEscapableNodes.DontGetStuck");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AvoidInEscapableNodes.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

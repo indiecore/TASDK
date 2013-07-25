@@ -15,16 +15,77 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_YouHaveTheFlagReminderTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_ReturnedTimeLimit, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_LastReturnedTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'LogTaken'
-		// Here lies the not-yet-implemented method 'LogDropped'
-		// Here lies the not-yet-implemented method 'ClearHolder'
-		// Here lies the not-yet-implemented method 'SendHome'
-		// Here lies the not-yet-implemented method 'RemindPlayerAboutFlagTimer'
-		// Here lies the not-yet-implemented method 'BroadcastTakenFromBaseMessage'
-		// Here lies the not-yet-implemented method 'BroadcastTakenDroppedMessage'
-		// Here lies the not-yet-implemented method 'BroadcastCapturedMessage'
-		// Here lies the not-yet-implemented method 'BroadcastReturnedMessage'
-		// Here lies the not-yet-implemented method 'BroadcastDroppedMessage'
+		void LogTaken(class Controller* EventInstigator)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.LogTaken");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = EventInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void LogDropped(class Controller* EventInstigator)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.LogDropped");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = EventInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearHolder()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.ClearHolder");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SendHome(class Controller* Returner)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.SendHome");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = Returner;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RemindPlayerAboutFlagTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.RemindPlayerAboutFlagTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void BroadcastTakenFromBaseMessage(class Controller* EventInstigator)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastTakenFromBaseMessage");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = EventInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void BroadcastTakenDroppedMessage(class Controller* EventInstigator)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastTakenDroppedMessage");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = EventInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void BroadcastCapturedMessage(class Controller* EventInstigator)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastCapturedMessage");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = EventInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void BroadcastReturnedMessage()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastReturnedMessage");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void BroadcastDroppedMessage(class Controller* EventInstigator)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastDroppedMessage");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = EventInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

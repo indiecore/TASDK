@@ -12,9 +12,28 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, MaxTextureSize, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SourceTexturesFullyStreamedIn'
-		// Here lies the not-yet-implemented method 'UpdateCompositeTexture'
-		// Here lies the not-yet-implemented method 'ResetSourceRegions'
+		bool SourceTexturesFullyStreamedIn()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2DComposite.SourceTexturesFullyStreamedIn");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void UpdateCompositeTexture(int NumMipsToGenerate)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2DComposite.UpdateCompositeTexture");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = NumMipsToGenerate;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ResetSourceRegions()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2DComposite.ResetSourceRegions");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

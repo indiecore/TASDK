@@ -31,8 +31,31 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, PulseSplit, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PulseDuration, 0xFFFFFFFF)
 		ADD_OBJECT(Font, GlowFonts)
-		// Here lies the not-yet-implemented method 'DrawGlowText'
-		// Here lies the not-yet-implemented method 'TranslateBindToFont'
+		void DrawGlowText(ScriptArray<wchar_t> Text, float X, float Y, float MaxHeightInPixels, float PulseTime, bool bRightJustified)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKHUD.DrawGlowText");
+			byte* params = (byte*)malloc(32);
+			*(ScriptArray<wchar_t>*)params = Text;
+			*(float*)(params + 12) = X;
+			*(float*)(params + 16) = Y;
+			*(float*)(params + 20) = MaxHeightInPixels;
+			*(float*)(params + 24) = PulseTime;
+			*(bool*)(params + 28) = bRightJustified;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TranslateBindToFont(ScriptArray<wchar_t> InBindStr, class Font*& DrawFont, ScriptArray<wchar_t>& OutBindStr)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKHUD.TranslateBindToFont");
+			byte* params = (byte*)malloc(28);
+			*(ScriptArray<wchar_t>*)params = InBindStr;
+			*(class Font**)(params + 12) = DrawFont;
+			*(ScriptArray<wchar_t>*)(params + 16) = OutBindStr;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			DrawFont = *(class Font**)(params + 12);
+			OutBindStr = *(ScriptArray<wchar_t>*)(params + 16);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

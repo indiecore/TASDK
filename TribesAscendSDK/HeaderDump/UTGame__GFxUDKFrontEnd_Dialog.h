@@ -18,16 +18,93 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, InfoTxt)
 		ADD_OBJECT(GFxObject, TitleTxt)
 		ADD_OBJECT(GFxObject, DialogMC)
-		// Here lies the not-yet-implemented method 'AcceptDelegate'
-		// Here lies the not-yet-implemented method 'OnViewClosed'
-		// Here lies the not-yet-implemented method 'DisableSubComponents'
-		// Here lies the not-yet-implemented method 'OnTopMostView'
-		// Here lies the not-yet-implemented method 'PlayOpenAnimation'
-		// Here lies the not-yet-implemented method 'PlayCloseAnimation'
-		// Here lies the not-yet-implemented method 'SetBackButton'
-		// Here lies the not-yet-implemented method 'SetBackButton_OnPress'
-		// Here lies the not-yet-implemented method 'Select_Back'
-		// Here lies the not-yet-implemented method 'WidgetInitialized'
+		void AcceptDelegate(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Dialog.AcceptDelegate");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnViewClosed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Dialog.OnViewClosed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisableSubComponents(bool bDisableComponents)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Dialog.DisableSubComponents");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bDisableComponents;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnTopMostView(bool bPlayOpenAnimation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Dialog.OnTopMostView");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bPlayOpenAnimation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayOpenAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Dialog.PlayOpenAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayCloseAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Dialog.PlayCloseAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetBackButton(class GFxObject* InBackButton)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Dialog.SetBackButton");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = InBackButton;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetBackButton_OnPress(
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void* EventListener)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Dialog.SetBackButton_OnPress");
+			byte* params = (byte*)malloc(12);
+			*(
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void**)params = EventListener;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Select_Back(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Dialog.Select_Back");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Dialog.WidgetInitialized");
+			byte* params = (byte*)malloc(24);
+			*(ScriptName*)params = WidgetName;
+			*(ScriptName*)(params + 8) = WidgetPath;
+			*(class GFxObject**)(params + 16) = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_OBJECT

@@ -43,11 +43,42 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bLooping, 0x8)
 		ADD_VAR(::BoolProperty, bIsBeingEdited, 0x4)
 		ADD_VAR(::FloatProperty, ForceStartPosition, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'AddPlayerToDirectorTracks'
-		// Here lies the not-yet-implemented method 'SetPosition'
-		// Here lies the not-yet-implemented method 'Stop'
-		// Here lies the not-yet-implemented method 'Reset'
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		void AddPlayerToDirectorTracks(class PlayerController* PC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Interp.AddPlayerToDirectorTracks");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerController**)params = PC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetPosition(float NewPosition, bool bJump)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Interp.SetPosition");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = NewPosition;
+			*(bool*)(params + 4) = bJump;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Stop()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Interp.Stop");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Reset()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Interp.Reset");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Interp.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

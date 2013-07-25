@@ -24,13 +24,53 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bIsCurrentlyFiring, 0x4)
 		ADD_VAR(::BoolProperty, m_bHasLoopingFireAnim, 0x2)
 		ADD_VAR(::BoolProperty, m_bSoundLinkedWithState, 0x1)
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'OnEndConstantFire'
-		// Here lies the not-yet-implemented method 'OnStartConstantFire'
-		// Here lies the not-yet-implemented method 'OnTickConstantFire'
-		// Here lies the not-yet-implemented method 'EndFire'
-		// Here lies the not-yet-implemented method 'StartFire'
-		// Here lies the not-yet-implemented method 'PlayFireAnimation'
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnEndConstantFire()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.OnEndConstantFire");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnStartConstantFire()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.OnStartConstantFire");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnTickConstantFire()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.OnTickConstantFire");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void EndFire(byte FireModeNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.EndFire");
+			byte* params = (byte*)malloc(1);
+			*params = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StartFire(byte FireModeNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.StartFire");
+			byte* params = (byte*)malloc(1);
+			*params = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayFireAnimation(byte FireModeNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.PlayFireAnimation");
+			byte* params = (byte*)malloc(1);
+			*params = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

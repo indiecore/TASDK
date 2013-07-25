@@ -22,7 +22,16 @@ namespace UnrealScript
 		ADD_OBJECT(PhysicsAssetInstance, DefaultInstance)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'BodySetupIndexMap'!
 		ADD_OBJECT(SkeletalMesh, DefaultSkelMesh)
-		// Here lies the not-yet-implemented method 'FindBodyIndex'
+		int FindBodyIndex(ScriptName BodyName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAsset.FindBodyIndex");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = BodyName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_STRUCT

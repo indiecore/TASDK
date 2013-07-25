@@ -32,12 +32,50 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, StatsReadName, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementProvider'!
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'SetStatsReadInfo'
-		// Here lies the not-yet-implemented method 'RefreshStats'
-		// Here lies the not-yet-implemented method 'ShowGamercard'
-		// Here lies the not-yet-implemented method 'OnReadComplete'
-		// Here lies the not-yet-implemented method 'SortResultsByRank'
+		void Init()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.Init");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetStatsReadInfo()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.SetStatsReadInfo");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool RefreshStats(byte ControllerIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.RefreshStats");
+			byte* params = (byte*)malloc(5);
+			*params = ControllerIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool ShowGamercard(byte ConrollerIndex, int ListIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.ShowGamercard");
+			byte* params = (byte*)malloc(9);
+			*params = ConrollerIndex;
+			*(int*)(params + 4) = ListIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void OnReadComplete(bool bWasSuccessful)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.OnReadComplete");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bWasSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SortResultsByRank()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.SortResultsByRank");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

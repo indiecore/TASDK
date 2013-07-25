@@ -26,9 +26,31 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, CurrentSample, 0xFFFFFFFF)
 		ADD_OBJECT(ForceFeedbackWaveform, FFWaveform)
 		ADD_VAR(::BoolProperty, bIsPaused, 0x2)
-		// Here lies the not-yet-implemented method 'PlayForceFeedbackWaveform'
-		// Here lies the not-yet-implemented method 'StopForceFeedbackWaveform'
-		// Here lies the not-yet-implemented method 'PauseWaveform'
+		void PlayForceFeedbackWaveform(class ForceFeedbackWaveform* WaveForm, class Actor* WaveInstigator)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFeedbackManager.PlayForceFeedbackWaveform");
+			byte* params = (byte*)malloc(8);
+			*(class ForceFeedbackWaveform**)params = WaveForm;
+			*(class Actor**)(params + 4) = WaveInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopForceFeedbackWaveform(class ForceFeedbackWaveform* WaveForm)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFeedbackManager.StopForceFeedbackWaveform");
+			byte* params = (byte*)malloc(4);
+			*(class ForceFeedbackWaveform**)params = WaveForm;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PauseWaveform(bool bPause)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFeedbackManager.PauseWaveform");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bPause;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

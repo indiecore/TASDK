@@ -49,12 +49,52 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ObstacleMesh'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'NavMeshPtr'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IEditorLinkSelectionInterface'!
-		// Here lies the not-yet-implemented method 'OnPylonStatusChange'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'SetEnabled'
-		// Here lies the not-yet-implemented method 'IsEnabled'
-		// Here lies the not-yet-implemented method 'OnToggle'
-		// Here lies the not-yet-implemented method 'CanReachPylon'
+		void OnPylonStatusChange()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.OnPylonStatusChange");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetEnabled(bool bEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.SetEnabled");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool IsEnabled()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.IsEnabled");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void OnToggle(class SeqAct_Toggle* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool CanReachPylon(class Pylon* DestPylon, class Controller* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.CanReachPylon");
+			byte* params = (byte*)malloc(12);
+			*(class Pylon**)params = DestPylon;
+			*(class Controller**)(params + 4) = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

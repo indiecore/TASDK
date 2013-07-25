@@ -12,11 +12,40 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, m_bIsTracerActive, 0x1)
-		// Here lies the not-yet-implemented method 'KillLaserEffect'
-		// Here lies the not-yet-implemented method 'SpawnLaserEffect'
-		// Here lies the not-yet-implemented method 'UpdateLaserEffect'
-		// Here lies the not-yet-implemented method 'ThirdPersonFireEffects'
-		// Here lies the not-yet-implemented method 'StopThirdPersonFireEffects'
+		void KillLaserEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.KillLaserEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SpawnLaserEffect(Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.SpawnLaserEffect");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateLaserEffect(Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.UpdateLaserEffect");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ThirdPersonFireEffects(Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.ThirdPersonFireEffects");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopThirdPersonFireEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.StopThirdPersonFireEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

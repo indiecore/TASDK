@@ -12,7 +12,15 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bForceLocalSpaceBlend, 0x1)
-		// Here lies the not-yet-implemented method 'SetBlendTarget'
+		void SetBlendTarget(float BlendTarget, float BlendTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeBlendPerBone.SetBlendTarget");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = BlendTarget;
+			*(float*)(params + 4) = BlendTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

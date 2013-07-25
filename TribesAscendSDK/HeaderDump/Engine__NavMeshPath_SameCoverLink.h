@@ -14,8 +14,20 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(CoverLink, TestLink)
-		// Here lies the not-yet-implemented method 'SameCoverLink'
-		// Here lies the not-yet-implemented method 'Recycle'
+		void SameCoverLink(class NavigationHandle* NavHandle, class CoverLink* InLink)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_SameCoverLink.SameCoverLink");
+			byte* params = (byte*)malloc(8);
+			*(class NavigationHandle**)params = NavHandle;
+			*(class CoverLink**)(params + 4) = InLink;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_SameCoverLink.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

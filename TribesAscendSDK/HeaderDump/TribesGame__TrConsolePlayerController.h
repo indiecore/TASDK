@@ -14,15 +14,70 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bDebugTargetAdhesion, 0x2)
 		ADD_VAR(::BoolProperty, bTargetAdhesionEnabled, 0x1)
-		// Here lies the not-yet-implemented method 'UpdateRotation'
-		// Here lies the not-yet-implemented method 'AimingHelp'
-		// Here lies the not-yet-implemented method 'AimHelpModifier'
-		// Here lies the not-yet-implemented method 'PerformedUseAction'
-		// Here lies the not-yet-implemented method 'ClientSmartUse'
-		// Here lies the not-yet-implemented method 'ClientRestart'
-		// Here lies the not-yet-implemented method 'PrevWeapon'
-		// Here lies the not-yet-implemented method 'NextWeapon'
-		// Here lies the not-yet-implemented method 'ResetPlayerMovementInput'
+		void UpdateRotation(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.UpdateRotation");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool AimingHelp(bool bInstantHit)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.AimingHelp");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bInstantHit;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		float AimHelpModifier()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.AimHelpModifier");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		bool PerformedUseAction()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.PerformedUseAction");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void ClientSmartUse()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.ClientSmartUse");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClientRestart(class Pawn* NewPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.ClientRestart");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = NewPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PrevWeapon()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.PrevWeapon");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void NextWeapon()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.NextWeapon");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ResetPlayerMovementInput()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.ResetPlayerMovementInput");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

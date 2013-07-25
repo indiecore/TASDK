@@ -21,9 +21,34 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bExitOnly, 0x1)
 		ADD_OBJECT(LiftCenter, MyLiftCenter)
-		// Here lies the not-yet-implemented method 'CanBeReachedFromLiftBy'
-		// Here lies the not-yet-implemented method 'WaitForLift'
-		// Here lies the not-yet-implemented method 'SuggestMovePreparation'
+		bool CanBeReachedFromLiftBy(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftExit.CanBeReachedFromLiftBy");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void WaitForLift(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftExit.WaitForLift");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool SuggestMovePreparation(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftExit.SuggestMovePreparation");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

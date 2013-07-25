@@ -22,10 +22,38 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, FileType, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bFlushEachWrite, 0x1)
 		ADD_VAR(::BoolProperty, bWantsAsyncWrites, 0x2)
-		// Here lies the not-yet-implemented method 'OpenFile'
-		// Here lies the not-yet-implemented method 'CloseFile'
-		// Here lies the not-yet-implemented method 'Logf'
-		// Here lies the not-yet-implemented method 'Destroyed'
+		bool OpenFile(ScriptArray<wchar_t> InFilename, byte InFileType, ScriptArray<wchar_t> InExtension, bool bUnique, bool bIncludeTimeStamp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FileWriter.OpenFile");
+			byte* params = (byte*)malloc(37);
+			*(ScriptArray<wchar_t>*)params = InFilename;
+			*(params + 12) = InFileType;
+			*(ScriptArray<wchar_t>*)(params + 16) = InExtension;
+			*(bool*)(params + 28) = bUnique;
+			*(bool*)(params + 32) = bIncludeTimeStamp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 36);
+			free(params);
+			return returnVal;
+		}
+		void CloseFile()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FileWriter.CloseFile");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Logf(ScriptArray<wchar_t> logString)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FileWriter.Logf");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = logString;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FileWriter.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

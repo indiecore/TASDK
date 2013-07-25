@@ -13,7 +13,17 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, MinDistancePathShouldBe, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'MustBeLongerPathThan'
+		bool MustBeLongerPathThan(class NavMeshGoal_GenericFilterContainer* FilterContainer, int InMinDistancePathShouldBe)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoalFilter_MinPathDistance.MustBeLongerPathThan");
+			byte* params = (byte*)malloc(12);
+			*(class NavMeshGoal_GenericFilterContainer**)params = FilterContainer;
+			*(int*)(params + 4) = InMinDistancePathShouldBe;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

@@ -14,10 +14,45 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ScriptClass, KillZDamageType)
-		// Here lies the not-yet-implemented method 'ActorEnteredVolume'
-		// Here lies the not-yet-implemented method 'PawnEnteredVolume'
-		// Here lies the not-yet-implemented method 'Touch'
-		// Here lies the not-yet-implemented method 'KillActor'
+		void ActorEnteredVolume(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTKillZVolume.ActorEnteredVolume");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PawnEnteredVolume(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTKillZVolume.PawnEnteredVolume");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Touch(class Actor* Other, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* OtherComp, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTKillZVolume.Touch");
+			byte* params = (byte*)malloc(32);
+			*(class Actor**)params = Other;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = OtherComp;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void KillActor(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTKillZVolume.KillActor");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_OBJECT

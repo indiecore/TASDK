@@ -21,9 +21,33 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(::VectorProperty, GoalPoint, 0xFFFFFFFF
 		ADD_OBJECT(Actor, GoalActor)
-		// Here lies the not-yet-implemented method 'TowardGoal'
-		// Here lies the not-yet-implemented method 'TowardPoint'
-		// Here lies the not-yet-implemented method 'Recycle'
+		bool TowardGoal(class NavigationHandle* NavHandle, class Actor* Goal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_Toward.TowardGoal");
+			byte* params = (byte*)malloc(12);
+			*(class NavigationHandle**)params = NavHandle;
+			*(class Actor**)(params + 4) = Goal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		bool TowardPoint(class NavigationHandle* NavHandle, Vector Point)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_Toward.TowardPoint");
+			byte* params = (byte*)malloc(20);
+			*(class NavigationHandle**)params = NavHandle;
+			*(Vector*)(params + 4) = Point;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_Toward.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_STRUCT

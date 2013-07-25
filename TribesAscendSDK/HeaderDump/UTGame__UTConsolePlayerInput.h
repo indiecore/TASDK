@@ -78,15 +78,83 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAutoCenterPitch, 0x1)
 		ADD_VAR(::FloatProperty, TurningAccelerationMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SensitivityMultiplier, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'PreProcessInput'
-		// Here lies the not-yet-implemented method 'ApplyViewAutoPitchCentering'
-		// Here lies the not-yet-implemented method 'ApplyViewAutoVehiclePitchCentering'
-		// Here lies the not-yet-implemented method 'ApplyViewAcceleration'
-		// Here lies the not-yet-implemented method 'ApplyTargetAdhesion'
-		// Here lies the not-yet-implemented method 'AdjustMouseSensitivity'
-		// Here lies the not-yet-implemented method 'ApplyTargetFriction'
-		// Here lies the not-yet-implemented method 'CheckForDoubleClickMove'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerInput.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PreProcessInput(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerInput.PreProcessInput");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ApplyViewAutoPitchCentering(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerInput.ApplyViewAutoPitchCentering");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ApplyViewAutoVehiclePitchCentering(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerInput.ApplyViewAutoVehiclePitchCentering");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ApplyViewAcceleration(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerInput.ApplyViewAcceleration");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ApplyTargetAdhesion(float DeltaTime, class UTWeapon* W, int& out_YawRot, int& out_PitchRot)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerInput.ApplyTargetAdhesion");
+			byte* params = (byte*)malloc(16);
+			*(float*)params = DeltaTime;
+			*(class UTWeapon**)(params + 4) = W;
+			*(int*)(params + 8) = out_YawRot;
+			*(int*)(params + 12) = out_PitchRot;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_YawRot = *(int*)(params + 8);
+			out_PitchRot = *(int*)(params + 12);
+			free(params);
+		}
+		void AdjustMouseSensitivity(float FOVScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerInput.AdjustMouseSensitivity");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = FOVScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ApplyTargetFriction(float DeltaTime, class UTWeapon* W)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerInput.ApplyTargetFriction");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = DeltaTime;
+			*(class UTWeapon**)(params + 4) = W;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		byte CheckForDoubleClickMove(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerInput.CheckForDoubleClickMove");
+			byte* params = (byte*)malloc(5);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

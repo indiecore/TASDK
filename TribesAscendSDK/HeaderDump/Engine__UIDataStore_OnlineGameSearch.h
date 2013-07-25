@@ -31,22 +31,151 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, SearchResultsName, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementProvider'!
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'InvalidateCurrentSearchResults'
-		// Here lies the not-yet-implemented method 'SubmitGameSearch'
-		// Here lies the not-yet-implemented method 'OverrideQuerySubmission'
-		// Here lies the not-yet-implemented method 'OnSearchComplete'
-		// Here lies the not-yet-implemented method 'GetSearchResultFromIndex'
-		// Here lies the not-yet-implemented method 'ShowHostGamercard'
-		// Here lies the not-yet-implemented method 'BuildSearchResults'
-		// Here lies the not-yet-implemented method 'GetCurrentGameSearch'
-		// Here lies the not-yet-implemented method 'GetActiveGameSearch'
-		// Here lies the not-yet-implemented method 'FindSearchConfigurationIndex'
-		// Here lies the not-yet-implemented method 'SetCurrentByIndex'
-		// Here lies the not-yet-implemented method 'SetCurrentByName'
-		// Here lies the not-yet-implemented method 'MoveToNext'
-		// Here lies the not-yet-implemented method 'MoveToPrevious'
-		// Here lies the not-yet-implemented method 'ClearAllSearchResults'
+		void Init()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.Init");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool InvalidateCurrentSearchResults()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.InvalidateCurrentSearchResults");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool SubmitGameSearch(byte ControllerIndex, bool bInvalidateExistingSearchResults)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.SubmitGameSearch");
+			byte* params = (byte*)malloc(9);
+			*params = ControllerIndex;
+			*(bool*)(params + 4) = bInvalidateExistingSearchResults;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		bool OverrideQuerySubmission(byte ControllerId, class OnlineGameSearch* Search)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.OverrideQuerySubmission");
+			byte* params = (byte*)malloc(9);
+			*params = ControllerId;
+			*(class OnlineGameSearch**)(params + 4) = Search;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void OnSearchComplete(bool bWasSuccessful)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.OnSearchComplete");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bWasSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool GetSearchResultFromIndex(int ListIndex, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
+void*& Result)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.GetSearchResultFromIndex");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = ListIndex;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
+void**)(params + 4) = Result;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Result = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
+void**)(params + 4);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		bool ShowHostGamercard(byte ControllerIndex, int ListIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.ShowHostGamercard");
+			byte* params = (byte*)malloc(9);
+			*params = ControllerIndex;
+			*(int*)(params + 4) = ListIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void BuildSearchResults()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.BuildSearchResults");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class OnlineGameSearch* GetCurrentGameSearch()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.GetCurrentGameSearch");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class OnlineGameSearch**)params;
+			free(params);
+			return returnVal;
+		}
+		class OnlineGameSearch* GetActiveGameSearch()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.GetActiveGameSearch");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class OnlineGameSearch**)params;
+			free(params);
+			return returnVal;
+		}
+		int FindSearchConfigurationIndex(ScriptName SearchTag)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.FindSearchConfigurationIndex");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = SearchTag;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void SetCurrentByIndex(int NewIndex, bool bInvalidateExistingSearchResults)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.SetCurrentByIndex");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = NewIndex;
+			*(bool*)(params + 4) = bInvalidateExistingSearchResults;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetCurrentByName(ScriptName SearchName, bool bInvalidateExistingSearchResults)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.SetCurrentByName");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = SearchName;
+			*(bool*)(params + 8) = bInvalidateExistingSearchResults;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void MoveToNext(bool bInvalidateExistingSearchResults)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.MoveToNext");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bInvalidateExistingSearchResults;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void MoveToPrevious(bool bInvalidateExistingSearchResults)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.MoveToPrevious");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bInvalidateExistingSearchResults;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearAllSearchResults()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.ClearAllSearchResults");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

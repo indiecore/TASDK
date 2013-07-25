@@ -37,11 +37,51 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fPawnZOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCameraDistanceInterpSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fInterpedCameraDistance, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'InitializeFor'
-		// Here lies the not-yet-implemented method 'UpdateCamera'
-		// Here lies the not-yet-implemented method 'UpdateViewTarget'
-		// Here lies the not-yet-implemented method 'ShowHiddenPawn'
-		// Here lies the not-yet-implemented method 'SetFOV'
+		void InitializeFor(class PlayerController* PC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCamera_Spectator.InitializeFor");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerController**)params = PC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateCamera(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCamera_Spectator.UpdateCamera");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateViewTarget(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
+void*& OutVT, float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCamera_Spectator.UpdateViewTarget");
+			byte* params = (byte*)malloc(48);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
+void**)params = OutVT;
+			*(float*)(params + 44) = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutVT = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
+void**)params;
+			free(params);
+		}
+		void ShowHiddenPawn()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCamera_Spectator.ShowHiddenPawn");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetFOV(float NewFOV)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCamera_Spectator.SetFOV");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = NewFOV;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -15,9 +15,37 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, NumMessages, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'IncrementKills'
-		// Here lies the not-yet-implemented method 'SmallReward'
-		// Here lies the not-yet-implemented method 'SpawnHitEffect'
+		int IncrementKills(class UTPlayerReplicationInfo* KillerPRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDmgType_RanOver.IncrementKills");
+			byte* params = (byte*)malloc(8);
+			*(class UTPlayerReplicationInfo**)params = KillerPRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void SmallReward(class UTPlayerController* Killer, int KillCount)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDmgType_RanOver.SmallReward");
+			byte* params = (byte*)malloc(8);
+			*(class UTPlayerController**)params = Killer;
+			*(int*)(params + 4) = KillCount;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SpawnHitEffect(class Pawn* P, float Damage, Vector Momentum, ScriptName BoneName, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDmgType_RanOver.SpawnHitEffect");
+			byte* params = (byte*)malloc(40);
+			*(class Pawn**)params = P;
+			*(float*)(params + 4) = Damage;
+			*(Vector*)(params + 8) = Momentum;
+			*(ScriptName*)(params + 20) = BoneName;
+			*(Vector*)(params + 28) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

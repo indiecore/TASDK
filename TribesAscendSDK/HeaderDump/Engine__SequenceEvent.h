@@ -30,10 +30,42 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ActivationTime, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, Instigator)
 		ADD_OBJECT(Actor, Originator)
-		// Here lies the not-yet-implemented method 'CheckActivate'
-		// Here lies the not-yet-implemented method 'RegisterEvent'
-		// Here lies the not-yet-implemented method 'Reset'
-		// Here lies the not-yet-implemented method 'Toggled'
+		bool CheckActivate(class Actor* InOriginator, class Actor* InInstigator, bool bTest, 
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void*& ActivateIndices, bool bPushTop)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceEvent.CheckActivate");
+			byte* params = (byte*)malloc(32);
+			*(class Actor**)params = InOriginator;
+			*(class Actor**)(params + 4) = InInstigator;
+			*(bool*)(params + 8) = bTest;
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 12) = ActivateIndices;
+			*(bool*)(params + 24) = bPushTop;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			ActivateIndices = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 12);
+			auto returnVal = *(bool*)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		void RegisterEvent()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceEvent.RegisterEvent");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Reset()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceEvent.Reset");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Toggled()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceEvent.Toggled");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

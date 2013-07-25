@@ -33,8 +33,27 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchQuery' for the property named 'FilterQuery'!
 		ADD_VAR(::StrProperty, AdditionalSearchCriteria, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PingBucketSize, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SortSearchResults'
-		// Here lies the not-yet-implemented method 'SetSkillOverride'
+		void SortSearchResults()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineGameSearch.SortSearchResults");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetSkillOverride(int LeaderboardId, 
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void*& Players)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineGameSearch.SetSkillOverride");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = LeaderboardId;
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 4) = Players;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Players = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 4);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

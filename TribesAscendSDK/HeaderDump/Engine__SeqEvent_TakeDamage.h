@@ -16,11 +16,46 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CurrentDamage, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DamageThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinDamageAmount, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'IsValidDamageType'
-		// Here lies the not-yet-implemented method 'HandleDamage'
-		// Here lies the not-yet-implemented method 'Reset'
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
-		// Here lies the not-yet-implemented method 'Toggled'
+		bool IsValidDamageType(ScriptClass* inDamageType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_TakeDamage.IsValidDamageType");
+			byte* params = (byte*)malloc(8);
+			*(ScriptClass**)params = inDamageType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void HandleDamage(class Actor* InOriginator, class Actor* InInstigator, ScriptClass* inDamageType, int inAmount)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_TakeDamage.HandleDamage");
+			byte* params = (byte*)malloc(16);
+			*(class Actor**)params = InOriginator;
+			*(class Actor**)(params + 4) = InInstigator;
+			*(ScriptClass**)(params + 8) = inDamageType;
+			*(int*)(params + 12) = inAmount;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Reset()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_TakeDamage.Reset");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_TakeDamage.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		void Toggled()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_TakeDamage.Toggled");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

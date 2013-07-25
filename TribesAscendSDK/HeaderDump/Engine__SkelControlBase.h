@@ -40,9 +40,36 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BlendInTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ControlStrength, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, ControlName, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetSkelControlActive'
-		// Here lies the not-yet-implemented method 'SetSkelControlStrength'
-		// Here lies the not-yet-implemented method 'TickSkelControl'
+		void SetSkelControlActive(bool bInActive)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlBase.SetSkelControlActive");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bInActive;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetSkelControlStrength(float NewStrength, float InBlendTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlBase.SetSkelControlStrength");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = NewStrength;
+			*(float*)(params + 4) = InBlendTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TickSkelControl(float DeltaTime, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlBase.TickSkelControl");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = DeltaTime;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

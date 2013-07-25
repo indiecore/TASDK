@@ -5,21 +5,127 @@ namespace UnrealScript
 	class TrChatConsoleCommands : public Object
 	{
 	public:
-		// Here lies the not-yet-implemented method 'ChatConsoleCommand'
-		// Here lies the not-yet-implemented method 'ReportPlayer'
-		// Here lies the not-yet-implemented method 'Say'
-		// Here lies the not-yet-implemented method 'TeamSay'
-		// Here lies the not-yet-implemented method 'Mute'
-		// Here lies the not-yet-implemented method 'Unmute'
-		// Here lies the not-yet-implemented method 'Votekick'
-		// Here lies the not-yet-implemented method 'Report'
-		// Here lies the not-yet-implemented method 'Tell'
-		// Here lies the not-yet-implemented method 'Exit'
-		// Here lies the not-yet-implemented method 'Quit'
-		// Here lies the not-yet-implemented method 'GiveCredits'
-		// Here lies the not-yet-implemented method 'SC'
-		// Here lies the not-yet-implemented method 'SendCtrlRequest'
-		// Here lies the not-yet-implemented method 'SendGameRequest'
-		// Here lies the not-yet-implemented method 'SpecList'
+		void ChatConsoleCommand(ScriptArray<wchar_t> Command)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.ChatConsoleCommand");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Command;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ReportPlayer(ScriptArray<wchar_t> PlayerName, ScriptArray<wchar_t> Reason)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.ReportPlayer");
+			byte* params = (byte*)malloc(24);
+			*(ScriptArray<wchar_t>*)params = PlayerName;
+			*(ScriptArray<wchar_t>*)(params + 12) = Reason;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Say(ScriptArray<wchar_t> msg)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Say");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = msg;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TeamSay(ScriptArray<wchar_t> msg)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.TeamSay");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = msg;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Mute(ScriptArray<wchar_t> PlayerName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Mute");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Unmute(ScriptArray<wchar_t> PlayerName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Unmute");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Votekick(ScriptArray<wchar_t> PlayerName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Votekick");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Report(ScriptArray<wchar_t> PlayerName, ScriptArray<wchar_t> Reason)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Report");
+			byte* params = (byte*)malloc(24);
+			*(ScriptArray<wchar_t>*)params = PlayerName;
+			*(ScriptArray<wchar_t>*)(params + 12) = Reason;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Tell(ScriptArray<wchar_t> PlayerName, ScriptArray<wchar_t> Message)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Tell");
+			byte* params = (byte*)malloc(24);
+			*(ScriptArray<wchar_t>*)params = PlayerName;
+			*(ScriptArray<wchar_t>*)(params + 12) = Message;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Exit()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Exit");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Quit()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Quit");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void GiveCredits(int Count)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.GiveCredits");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = Count;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SC(ScriptArray<wchar_t> fsRequest)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.SC");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = fsRequest;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SendCtrlRequest(ScriptArray<wchar_t> fsRequest)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.SendCtrlRequest");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = fsRequest;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SendGameRequest(ScriptArray<wchar_t> fsRequest)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.SendGameRequest");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = fsRequest;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SpecList()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.SpecList");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

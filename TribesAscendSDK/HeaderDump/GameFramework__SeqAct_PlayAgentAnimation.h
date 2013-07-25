@@ -28,8 +28,23 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUseRootMotion, 0x1)
 		ADD_VAR(::FloatProperty, BlendOutTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BlendInTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
-		// Here lies the not-yet-implemented method 'SetCurrentAnimationActionFor'
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_PlayAgentAnimation.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		void SetCurrentAnimationActionFor(class GameCrowdAgentSkeletal* Agent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_PlayAgentAnimation.SetCurrentAnimationActionFor");
+			byte* params = (byte*)malloc(4);
+			*(class GameCrowdAgentSkeletal**)params = Agent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

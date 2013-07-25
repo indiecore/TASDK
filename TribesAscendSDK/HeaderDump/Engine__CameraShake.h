@@ -38,8 +38,24 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, AnimBlendInTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AnimBlendOutTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RandomAnimSegmentDuration, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetLocOscillationMagnitude'
-		// Here lies the not-yet-implemented method 'GetRotOscillationMagnitude'
+		float GetLocOscillationMagnitude()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraShake.GetLocOscillationMagnitude");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		float GetRotOscillationMagnitude()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraShake.GetRotOscillationMagnitude");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

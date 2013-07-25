@@ -46,12 +46,60 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, InGameAdManagerClassName, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, PendingMapChangeFailureDescription, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxDeltaTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetOnlineSubsystem'
-		// Here lies the not-yet-implemented method 'GetDLCManager'
-		// Here lies the not-yet-implemented method 'GetDLCEnumerator'
-		// Here lies the not-yet-implemented method 'CreateNamedNetDriver'
-		// Here lies the not-yet-implemented method 'DestroyNamedNetDriver'
-		// Here lies the not-yet-implemented method 'GetAdManager'
+		class OnlineSubsystem* GetOnlineSubsystem()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameEngine.GetOnlineSubsystem");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class OnlineSubsystem**)params;
+			free(params);
+			return returnVal;
+		}
+		class DownloadableContentManager* GetDLCManager()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameEngine.GetDLCManager");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class DownloadableContentManager**)params;
+			free(params);
+			return returnVal;
+		}
+		class DownloadableContentEnumerator* GetDLCEnumerator()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameEngine.GetDLCEnumerator");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class DownloadableContentEnumerator**)params;
+			free(params);
+			return returnVal;
+		}
+		bool CreateNamedNetDriver(ScriptName NetDriverName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameEngine.CreateNamedNetDriver");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = NetDriverName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void DestroyNamedNetDriver(ScriptName NetDriverName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameEngine.DestroyNamedNetDriver");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = NetDriverName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class InGameAdManager* GetAdManager()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameEngine.GetAdManager");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class InGameAdManager**)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

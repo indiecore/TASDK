@@ -5,6 +5,14 @@ namespace UnrealScript
 	class PathTargetPoint : public Keypoint
 	{
 	public:
-		// Here lies the not-yet-implemented method 'ShouldBeHiddenBySHOW_NavigationNodes'
+		bool ShouldBeHiddenBySHOW_NavigationNodes()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PathTargetPoint.ShouldBeHiddenBySHOW_NavigationNodes");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }

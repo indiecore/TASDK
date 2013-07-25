@@ -6,9 +6,34 @@ namespace UnrealScript
 	class UTClientSideWeaponPawn : public UTWeaponPawn
 	{
 	public:
-		// Here lies the not-yet-implemented method 'PreBeginPlay'
-		// Here lies the not-yet-implemented method 'AttachDriver'
-		// Here lies the not-yet-implemented method 'DetachDriver'
-		// Here lies the not-yet-implemented method 'Tick'
+		void PreBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTClientSideWeaponPawn.PreBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AttachDriver(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTClientSideWeaponPawn.AttachDriver");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DetachDriver(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTClientSideWeaponPawn.DetachDriver");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTClientSideWeaponPawn.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }

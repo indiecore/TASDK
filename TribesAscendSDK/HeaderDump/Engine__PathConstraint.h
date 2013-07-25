@@ -19,8 +19,20 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(PathConstraint, NextConstraint)
 		ADD_VAR(::IntProperty, CacheIdx, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Recycle'
-		// Here lies the not-yet-implemented method 'GetDumpString'
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PathConstraint.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		ScriptArray<wchar_t> GetDumpString()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PathConstraint.GetDumpString");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

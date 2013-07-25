@@ -21,11 +21,38 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, m_nOldInvalidDeployReason, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, m_RuntimeMIC)
 		ADD_OBJECT(MaterialInstanceConstant, m_HologramMaterial)
-		// Here lies the not-yet-implemented method 'SetValidDeployableLocation'
-		// Here lies the not-yet-implemented method 'ClearAllMessages'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'PreBeginPlay'
-		// Here lies the not-yet-implemented method 'Init'
+		void SetValidDeployableLocation(bool bValidLocation, int InvalidDeployReason)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableHologram.SetValidDeployableLocation");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bValidLocation;
+			*(int*)(params + 4) = InvalidDeployReason;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearAllMessages()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableHologram.ClearAllMessages");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableHologram.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PreBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableHologram.PreBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Init(ScriptClass* DeployableClass)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableHologram.Init");
+			byte* params = (byte*)malloc(4);
+			*(ScriptClass**)params = DeployableClass;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -20,7 +20,16 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(ScriptClass, DMSquadClass)
 		ADD_VAR(::IntProperty, Position, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'AddToTeam'
+		bool AddToTeam(class Controller* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDMRoster.AddToTeam");
+			byte* params = (byte*)malloc(8);
+			*(class Controller**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

@@ -16,8 +16,23 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, HighDetailFrameTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bInitialized, 0x2)
 		ADD_VAR(::BoolProperty, bCheckFrameRate, 0x1)
-		// Here lies the not-yet-implemented method 'OnLightFinished'
-		// Here lies the not-yet-implemented method 'ResetLight'
+		void OnLightFinished(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* Light)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKExplosionLight.OnLightFinished");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = Light;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ResetLight()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKExplosionLight.ResetLight");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

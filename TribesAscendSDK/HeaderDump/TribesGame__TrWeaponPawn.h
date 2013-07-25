@@ -22,11 +22,45 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, r_nFlashReload, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, r_scFiringLoop)
 		ADD_VAR(::BoolProperty, r_bFiringLoopSound, 0x1)
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'PlayReload'
-		// Here lies the not-yet-implemented method 'ProcessViewRotation'
-		// Here lies the not-yet-implemented method 'ClientPlayLoopSound'
-		// Here lies the not-yet-implemented method 'PlayLoopingSound'
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrWeaponPawn.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayReload()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrWeaponPawn.PlayReload");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ProcessViewRotation(float DeltaTime, Rotator& out_ViewRotation, Rotator& out_DeltaRot)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrWeaponPawn.ProcessViewRotation");
+			byte* params = (byte*)malloc(28);
+			*(float*)params = DeltaTime;
+			*(Rotator*)(params + 4) = out_ViewRotation;
+			*(Rotator*)(params + 16) = out_DeltaRot;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_ViewRotation = *(Rotator*)(params + 4);
+			out_DeltaRot = *(Rotator*)(params + 16);
+			free(params);
+		}
+		void ClientPlayLoopSound()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrWeaponPawn.ClientPlayLoopSound");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayLoopingSound(class SoundCue* InSound, bool Play)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrWeaponPawn.PlayLoopingSound");
+			byte* params = (byte*)malloc(8);
+			*(class SoundCue**)params = InSound;
+			*(bool*)(params + 4) = Play;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

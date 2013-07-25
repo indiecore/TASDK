@@ -14,14 +14,64 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(SoundCue, m_SpikeIdleSound)
-		// Here lies the not-yet-implemented method 'SetSpikeIdle'
-		// Here lies the not-yet-implemented method 'PostInitAnimTree'
-		// Here lies the not-yet-implemented method 'OnAnimPlay'
-		// Here lies the not-yet-implemented method 'OnAnimEnd'
-		// Here lies the not-yet-implemented method 'PlayWeaponEquip'
-		// Here lies the not-yet-implemented method 'PlayWeaponPutDown'
-		// Here lies the not-yet-implemented method 'PutDownFast'
-		// Here lies the not-yet-implemented method 'OnSwitchAwayFromWeapon'
+		void SetSpikeIdle(bool bEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_SpikeLauncher.SetSpikeIdle");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostInitAnimTree(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_SpikeLauncher.PostInitAnimTree");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnAnimPlay(class AnimNodeSequence* SeqNode)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_SpikeLauncher.OnAnimPlay");
+			byte* params = (byte*)malloc(4);
+			*(class AnimNodeSequence**)params = SeqNode;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnAnimEnd(class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_SpikeLauncher.OnAnimEnd");
+			byte* params = (byte*)malloc(12);
+			*(class AnimNodeSequence**)params = SeqNode;
+			*(float*)(params + 4) = PlayedTime;
+			*(float*)(params + 8) = ExcessTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayWeaponEquip()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_SpikeLauncher.PlayWeaponEquip");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayWeaponPutDown()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_SpikeLauncher.PlayWeaponPutDown");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PutDownFast()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_SpikeLauncher.PutDownFast");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnSwitchAwayFromWeapon()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_SpikeLauncher.OnSwitchAwayFromWeapon");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

@@ -14,7 +14,20 @@ namespace UnrealScript
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BlueTeamColor'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'RedTeamColor'!
-		// Here lies the not-yet-implemented method 'GetConsoleColor'
+		
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void* GetConsoleColor(class PlayerReplicationInfo* RelatedPRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSayMsg.GetConsoleColor");
+			byte* params = (byte*)malloc(8);
+			*(class PlayerReplicationInfo**)params = RelatedPRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void**)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_STRUCT

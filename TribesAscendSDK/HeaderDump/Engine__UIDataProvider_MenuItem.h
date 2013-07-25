@@ -36,7 +36,15 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, DescriptionMarkup, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, DataStoreMarkup, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, OptionType, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'IsFiltered'
+		bool IsFiltered()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_MenuItem.IsFiltered");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

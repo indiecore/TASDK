@@ -26,9 +26,24 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, FalloffExponent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Radius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ShadowRadiusMultiplier, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetTranslation'
-		// Here lies the not-yet-implemented method 'OnUpdatePropertyLightColor'
-		// Here lies the not-yet-implemented method 'OnUpdatePropertyBrightness'
+		void SetTranslation(Vector NewTranslation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PointLightComponent.SetTranslation");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = NewTranslation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnUpdatePropertyLightColor()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PointLightComponent.OnUpdatePropertyLightColor");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnUpdatePropertyBrightness()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PointLightComponent.OnUpdatePropertyBrightness");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

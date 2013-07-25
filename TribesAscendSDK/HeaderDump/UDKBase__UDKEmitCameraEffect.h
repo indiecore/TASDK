@@ -20,12 +20,46 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(UDKPlayerController, Cam)
 		ADD_VAR(::FloatProperty, DistFromCamera, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'RegisterCamera'
-		// Here lies the not-yet-implemented method 'Activate'
-		// Here lies the not-yet-implemented method 'Deactivate'
-		// Here lies the not-yet-implemented method 'UpdateLocation'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RegisterCamera(class UDKPlayerController* inCam)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.RegisterCamera");
+			byte* params = (byte*)malloc(4);
+			*(class UDKPlayerController**)params = inCam;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Activate()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.Activate");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Deactivate()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.Deactivate");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateLocation(Vector& CamLoc, Rotator& CamRot, float CamFOVDeg)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.UpdateLocation");
+			byte* params = (byte*)malloc(28);
+			*(Vector*)params = CamLoc;
+			*(Rotator*)(params + 12) = CamRot;
+			*(float*)(params + 24) = CamFOVDeg;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			CamLoc = *(Vector*)params;
+			CamRot = *(Rotator*)(params + 12);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

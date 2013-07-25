@@ -25,9 +25,28 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fLastActivationTimestamp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCooldownTime, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, m_vBlinkImpulse, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'GetBlinkImpulse'
-		// Here lies the not-yet-implemented method 'ToggleActivate'
-		// Here lies the not-yet-implemented method 'OnBlink'
+		Vector GetBlinkImpulse()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Blink.GetBlinkImpulse");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)params;
+			free(params);
+			return returnVal;
+		}
+		void ToggleActivate()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Blink.ToggleActivate");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnBlink(float PercentEffectiveness)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Blink.OnBlink");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = PercentEffectiveness;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

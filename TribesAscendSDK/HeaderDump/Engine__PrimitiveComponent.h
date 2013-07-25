@@ -120,50 +120,424 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastSubmitTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastRenderTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ScriptRigidBodyCollisionThreshold, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetBlockRigidBody'
-		// Here lies the not-yet-implemented method 'SetRBLinearVelocity'
-		// Here lies the not-yet-implemented method 'AddImpulse'
-		// Here lies the not-yet-implemented method 'AddRadialImpulse'
-		// Here lies the not-yet-implemented method 'AddForce'
-		// Here lies the not-yet-implemented method 'AddRadialForce'
-		// Here lies the not-yet-implemented method 'AddTorque'
-		// Here lies the not-yet-implemented method 'SetRBAngularVelocity'
-		// Here lies the not-yet-implemented method 'RetardRBLinearVelocity'
-		// Here lies the not-yet-implemented method 'SetRBPosition'
-		// Here lies the not-yet-implemented method 'SetRBRotation'
-		// Here lies the not-yet-implemented method 'WakeRigidBody'
-		// Here lies the not-yet-implemented method 'PutRigidBodyToSleep'
-		// Here lies the not-yet-implemented method 'RigidBodyIsAwake'
-		// Here lies the not-yet-implemented method 'SetRBCollidesWithChannel'
-		// Here lies the not-yet-implemented method 'SetRBCollisionChannels'
-		// Here lies the not-yet-implemented method 'SetRBChannel'
-		// Here lies the not-yet-implemented method 'SetNotifyRigidBodyCollision'
-		// Here lies the not-yet-implemented method 'InitRBPhys'
-		// Here lies the not-yet-implemented method 'SetPhysMaterialOverride'
-		// Here lies the not-yet-implemented method 'GetRootBodyInstance'
-		// Here lies the not-yet-implemented method 'SetRBDominanceGroup'
-		// Here lies the not-yet-implemented method 'ShouldComponentAddToScene'
-		// Here lies the not-yet-implemented method 'SetHidden'
-		// Here lies the not-yet-implemented method 'SetOwnerNoSee'
-		// Here lies the not-yet-implemented method 'SetOnlyOwnerSee'
-		// Here lies the not-yet-implemented method 'SetIgnoreOwnerHidden'
-		// Here lies the not-yet-implemented method 'SetShadowParent'
-		// Here lies the not-yet-implemented method 'SetLightEnvironment'
-		// Here lies the not-yet-implemented method 'SetCullDistance'
-		// Here lies the not-yet-implemented method 'SetLightingChannels'
-		// Here lies the not-yet-implemented method 'SetDepthPriorityGroup'
-		// Here lies the not-yet-implemented method 'SetViewOwnerDepthPriorityGroup'
-		// Here lies the not-yet-implemented method 'SetTraceBlocking'
-		// Here lies the not-yet-implemented method 'SetActorCollision'
-		// Here lies the not-yet-implemented method 'SetTranslation'
-		// Here lies the not-yet-implemented method 'SetRotation'
-		// Here lies the not-yet-implemented method 'SetScale'
-		// Here lies the not-yet-implemented method 'SetScale3D'
-		// Here lies the not-yet-implemented method 'SetAbsolute'
-		// Here lies the not-yet-implemented method 'GetPosition'
-		// Here lies the not-yet-implemented method 'GetRotation'
-		// Here lies the not-yet-implemented method 'ClosestPointOnComponentToPoint'
-		// Here lies the not-yet-implemented method 'ClosestPointOnComponentToComponent'
+		void SetBlockRigidBody(bool bNewBlockRigidBody)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetBlockRigidBody");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNewBlockRigidBody;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetRBLinearVelocity(Vector NewVel, bool bAddToCurrent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBLinearVelocity");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = NewVel;
+			*(bool*)(params + 12) = bAddToCurrent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AddImpulse(Vector Impulse, Vector Position, ScriptName BoneName, bool bVelChange)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.AddImpulse");
+			byte* params = (byte*)malloc(36);
+			*(Vector*)params = Impulse;
+			*(Vector*)(params + 12) = Position;
+			*(ScriptName*)(params + 24) = BoneName;
+			*(bool*)(params + 32) = bVelChange;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AddRadialImpulse(Vector Origin, float Radius, float Strength, byte Falloff, bool bVelChange)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.AddRadialImpulse");
+			byte* params = (byte*)malloc(25);
+			*(Vector*)params = Origin;
+			*(float*)(params + 12) = Radius;
+			*(float*)(params + 16) = Strength;
+			*(params + 20) = Falloff;
+			*(bool*)(params + 24) = bVelChange;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AddForce(Vector Force, Vector Position, ScriptName BoneName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.AddForce");
+			byte* params = (byte*)malloc(32);
+			*(Vector*)params = Force;
+			*(Vector*)(params + 12) = Position;
+			*(ScriptName*)(params + 24) = BoneName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AddRadialForce(Vector Origin, float Radius, float Strength, byte Falloff)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.AddRadialForce");
+			byte* params = (byte*)malloc(21);
+			*(Vector*)params = Origin;
+			*(float*)(params + 12) = Radius;
+			*(float*)(params + 16) = Strength;
+			*(params + 20) = Falloff;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AddTorque(Vector Torque, ScriptName BoneName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.AddTorque");
+			byte* params = (byte*)malloc(20);
+			*(Vector*)params = Torque;
+			*(ScriptName*)(params + 12) = BoneName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetRBAngularVelocity(Vector NewAngVel, bool bAddToCurrent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBAngularVelocity");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = NewAngVel;
+			*(bool*)(params + 12) = bAddToCurrent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RetardRBLinearVelocity(Vector RetardDir, float VelScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.RetardRBLinearVelocity");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = RetardDir;
+			*(float*)(params + 12) = VelScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetRBPosition(Vector NewPos, ScriptName BoneName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBPosition");
+			byte* params = (byte*)malloc(20);
+			*(Vector*)params = NewPos;
+			*(ScriptName*)(params + 12) = BoneName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetRBRotation(Rotator NewRot, ScriptName BoneName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBRotation");
+			byte* params = (byte*)malloc(20);
+			*(Rotator*)params = NewRot;
+			*(ScriptName*)(params + 12) = BoneName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void WakeRigidBody(ScriptName BoneName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.WakeRigidBody");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = BoneName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PutRigidBodyToSleep(ScriptName BoneName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.PutRigidBodyToSleep");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = BoneName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool RigidBodyIsAwake(ScriptName BoneName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.RigidBodyIsAwake");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = BoneName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void SetRBCollidesWithChannel(byte Channel, bool bNewCollides)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBCollidesWithChannel");
+			byte* params = (byte*)malloc(5);
+			*params = Channel;
+			*(bool*)(params + 4) = bNewCollides;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetRBCollisionChannels(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer'!
+void* Channels)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBCollisionChannels");
+			byte* params = (byte*)malloc(4);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer'!
+void**)params = Channels;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetRBChannel(byte Channel)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBChannel");
+			byte* params = (byte*)malloc(1);
+			*params = Channel;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetNotifyRigidBodyCollision(bool bNewNotifyRigidBodyCollision)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetNotifyRigidBodyCollision");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNewNotifyRigidBodyCollision;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InitRBPhys()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.InitRBPhys");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetPhysMaterialOverride(class PhysicalMaterial* NewPhysMaterial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetPhysMaterialOverride");
+			byte* params = (byte*)malloc(4);
+			*(class PhysicalMaterial**)params = NewPhysMaterial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class RB_BodyInstance* GetRootBodyInstance()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.GetRootBodyInstance");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class RB_BodyInstance**)params;
+			free(params);
+			return returnVal;
+		}
+		void SetRBDominanceGroup(byte InDomGroup)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBDominanceGroup");
+			byte* params = (byte*)malloc(1);
+			*params = InDomGroup;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool ShouldComponentAddToScene()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.ShouldComponentAddToScene");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void SetHidden(bool NewHidden)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetHidden");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = NewHidden;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetOwnerNoSee(bool bNewOwnerNoSee)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetOwnerNoSee");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNewOwnerNoSee;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetOnlyOwnerSee(bool bNewOnlyOwnerSee)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetOnlyOwnerSee");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNewOnlyOwnerSee;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetIgnoreOwnerHidden(bool bNewIgnoreOwnerHidden)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetIgnoreOwnerHidden");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNewIgnoreOwnerHidden;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetShadowParent(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* NewShadowParent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetShadowParent");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = NewShadowParent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetLightEnvironment(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* NewLightEnvironment)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetLightEnvironment");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = NewLightEnvironment;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetCullDistance(float NewCullDistance)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetCullDistance");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = NewCullDistance;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetLightingChannels(
+// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer'!
+void* NewLightingChannels)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetLightingChannels");
+			byte* params = (byte*)malloc(4);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer'!
+void**)params = NewLightingChannels;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetDepthPriorityGroup(byte NewDepthPriorityGroup)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetDepthPriorityGroup");
+			byte* params = (byte*)malloc(1);
+			*params = NewDepthPriorityGroup;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetViewOwnerDepthPriorityGroup(bool bNewUseViewOwnerDepthPriorityGroup, byte NewViewOwnerDepthPriorityGroup)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetViewOwnerDepthPriorityGroup");
+			byte* params = (byte*)malloc(5);
+			*(bool*)params = bNewUseViewOwnerDepthPriorityGroup;
+			*(params + 4) = NewViewOwnerDepthPriorityGroup;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetTraceBlocking(bool NewBlockZeroExtent, bool NewBlockNonZeroExtent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetTraceBlocking");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = NewBlockZeroExtent;
+			*(bool*)(params + 4) = NewBlockNonZeroExtent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetActorCollision(bool NewCollideActors, bool NewBlockActors, bool NewAlwaysCheckCollision)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetActorCollision");
+			byte* params = (byte*)malloc(12);
+			*(bool*)params = NewCollideActors;
+			*(bool*)(params + 4) = NewBlockActors;
+			*(bool*)(params + 8) = NewAlwaysCheckCollision;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetTranslation(Vector NewTranslation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetTranslation");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = NewTranslation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetRotation(Rotator NewRotation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRotation");
+			byte* params = (byte*)malloc(12);
+			*(Rotator*)params = NewRotation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetScale(float NewScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetScale");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = NewScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetScale3D(Vector NewScale3D)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetScale3D");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = NewScale3D;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetAbsolute(bool NewAbsoluteTranslation, bool NewAbsoluteRotation, bool NewAbsoluteScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetAbsolute");
+			byte* params = (byte*)malloc(12);
+			*(bool*)params = NewAbsoluteTranslation;
+			*(bool*)(params + 4) = NewAbsoluteRotation;
+			*(bool*)(params + 8) = NewAbsoluteScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		Vector GetPosition()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.GetPosition");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)params;
+			free(params);
+			return returnVal;
+		}
+		Rotator GetRotation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.GetRotation");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Rotator*)params;
+			free(params);
+			return returnVal;
+		}
+		byte ClosestPointOnComponentToPoint(Vector& POI, Vector& Extent, Vector& OutPointA, Vector& OutPointB)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.ClosestPointOnComponentToPoint");
+			byte* params = (byte*)malloc(49);
+			*(Vector*)params = POI;
+			*(Vector*)(params + 12) = Extent;
+			*(Vector*)(params + 24) = OutPointA;
+			*(Vector*)(params + 36) = OutPointB;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			POI = *(Vector*)params;
+			Extent = *(Vector*)(params + 12);
+			OutPointA = *(Vector*)(params + 24);
+			OutPointB = *(Vector*)(params + 36);
+			auto returnVal = *(params + 48);
+			free(params);
+			return returnVal;
+		}
+		byte ClosestPointOnComponentToComponent(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void*& OtherComponent, Vector& PointOnComponentA, Vector& PointOnComponentB)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.ClosestPointOnComponentToComponent");
+			byte* params = (byte*)malloc(29);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = OtherComponent;
+			*(Vector*)(params + 4) = PointOnComponentA;
+			*(Vector*)(params + 16) = PointOnComponentB;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OtherComponent = *(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params;
+			PointOnComponentA = *(Vector*)(params + 4);
+			PointOnComponentB = *(Vector*)(params + 16);
+			auto returnVal = *(params + 28);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

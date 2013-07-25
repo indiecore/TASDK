@@ -21,10 +21,33 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fBackdropFadeRemainingTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fBackdropFadeTime, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, m_BackdropMIC)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'FadeInBackdrop'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'SetPosition'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollTransient.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FadeInBackdrop()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollTransient.FadeInBackdrop");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollTransient.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetPosition(Vector ViewPos, Rotator ViewRot)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollTransient.SetPosition");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = ViewPos;
+			*(Rotator*)(params + 12) = ViewRot;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

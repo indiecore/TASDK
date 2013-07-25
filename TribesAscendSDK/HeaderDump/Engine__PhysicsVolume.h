@@ -57,26 +57,183 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAIShouldIgnorePain, 0x4)
 		ADD_VAR(::BoolProperty, bVelocityAffectsWalking, 0x1)
 		ADD_STRUCT(::VectorProperty, ZoneVelocity, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'GetGravityZ'
-		// Here lies the not-yet-implemented method 'GetZoneVelocityForActor'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'Reset'
-		// Here lies the not-yet-implemented method 'PhysicsChangedFor'
-		// Here lies the not-yet-implemented method 'ActorEnteredVolume'
-		// Here lies the not-yet-implemented method 'ActorLeavingVolume'
-		// Here lies the not-yet-implemented method 'PawnEnteredVolume'
-		// Here lies the not-yet-implemented method 'PawnLeavingVolume'
-		// Here lies the not-yet-implemented method 'OnToggle'
-		// Here lies the not-yet-implemented method 'CollisionChanged'
-		// Here lies the not-yet-implemented method 'TimerPop'
-		// Here lies the not-yet-implemented method 'Touch'
-		// Here lies the not-yet-implemented method 'CausePainTo'
-		// Here lies the not-yet-implemented method 'ModifyPlayer'
-		// Here lies the not-yet-implemented method 'NotifyPawnBecameViewTarget'
-		// Here lies the not-yet-implemented method 'OnSetDamageInstigator'
-		// Here lies the not-yet-implemented method 'ShouldSaveForCheckpoint'
-		// Here lies the not-yet-implemented method 'CreateCheckpointRecord'
-		// Here lies the not-yet-implemented method 'ApplyCheckpointRecord'
+		float GetGravityZ()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.GetGravityZ");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		Vector GetZoneVelocityForActor(class Actor* TheActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.GetZoneVelocityForActor");
+			byte* params = (byte*)malloc(16);
+			*(class Actor**)params = TheActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Reset()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.Reset");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PhysicsChangedFor(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.PhysicsChangedFor");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ActorEnteredVolume(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.ActorEnteredVolume");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ActorLeavingVolume(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.ActorLeavingVolume");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PawnEnteredVolume(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.PawnEnteredVolume");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PawnLeavingVolume(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.PawnLeavingVolume");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnToggle(class SeqAct_Toggle* inAction)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = inAction;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CollisionChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.CollisionChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TimerPop(class VolumeTimer* T)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.TimerPop");
+			byte* params = (byte*)malloc(4);
+			*(class VolumeTimer**)params = T;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Touch(class Actor* Other, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* OtherComp, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.Touch");
+			byte* params = (byte*)malloc(32);
+			*(class Actor**)params = Other;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = OtherComp;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CausePainTo(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.CausePainTo");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ModifyPlayer(class Pawn* PlayerPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.ModifyPlayer");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = PlayerPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyPawnBecameViewTarget(class Pawn* P, class PlayerController* PC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.NotifyPawnBecameViewTarget");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = P;
+			*(class PlayerController**)(params + 4) = PC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnSetDamageInstigator(class SeqAct_SetDamageInstigator* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.OnSetDamageInstigator");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_SetDamageInstigator**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool ShouldSaveForCheckpoint()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.ShouldSaveForCheckpoint");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void CreateCheckpointRecord(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PhysicsVolume.CheckpointRecord'!
+void*& Record)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.CreateCheckpointRecord");
+			byte* params = (byte*)malloc(4);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PhysicsVolume.CheckpointRecord'!
+void**)params = Record;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Record = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PhysicsVolume.CheckpointRecord'!
+void**)params;
+			free(params);
+		}
+		void ApplyCheckpointRecord(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PhysicsVolume.CheckpointRecord'!
+void*& Record)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.ApplyCheckpointRecord");
+			byte* params = (byte*)malloc(4);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PhysicsVolume.CheckpointRecord'!
+void**)params = Record;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Record = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PhysicsVolume.CheckpointRecord'!
+void**)params;
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

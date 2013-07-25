@@ -40,11 +40,51 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ObjPosY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ObjPosX, 0xFFFFFFFF)
 		ADD_OBJECT(Sequence, ParentSequence)
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
-		// Here lies the not-yet-implemented method 'ScriptLog'
-		// Here lies the not-yet-implemented method 'GetWorldInfo'
-		// Here lies the not-yet-implemented method 'IsValidLevelSequenceObject'
-		// Here lies the not-yet-implemented method 'IsPastingIntoLevelSequenceAllowed'
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceObject.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		void ScriptLog(ScriptArray<wchar_t> LogText, bool bWarning)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceObject.ScriptLog");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = LogText;
+			*(bool*)(params + 12) = bWarning;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class WorldInfo* GetWorldInfo()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceObject.GetWorldInfo");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class WorldInfo**)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsValidLevelSequenceObject()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceObject.IsValidLevelSequenceObject");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsPastingIntoLevelSequenceAllowed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceObject.IsPastingIntoLevelSequenceAllowed");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

@@ -28,8 +28,16 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BurnDuration, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BurnName, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, LoopedSound)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'ActivateGibExplosionEffect'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib_Vehicle.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ActivateGibExplosionEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib_Vehicle.ActivateGibExplosionEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

@@ -58,16 +58,92 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAllowAsPreviousDestination, 0x2)
 		ADD_VAR(::BoolProperty, bKillWhenReached, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IEditorLinkSelectionInterface'!
-		// Here lies the not-yet-implemented method 'ReachedByAgent'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'ReachedDestination'
-		// Here lies the not-yet-implemented method 'PickNewDestinationFor'
-		// Here lies the not-yet-implemented method 'AllowableDestinationFor'
-		// Here lies the not-yet-implemented method 'DecrementCustomerCount'
-		// Here lies the not-yet-implemented method 'IncrementCustomerCount'
-		// Here lies the not-yet-implemented method 'AtCapacity'
-		// Here lies the not-yet-implemented method 'GetSpawnPosition'
+		bool ReachedByAgent(class GameCrowdAgent* Agent, Vector TestPosition, bool bTestExactly)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestination.ReachedByAgent");
+			byte* params = (byte*)malloc(24);
+			*(class GameCrowdAgent**)params = Agent;
+			*(Vector*)(params + 4) = TestPosition;
+			*(bool*)(params + 16) = bTestExactly;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestination.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestination.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReachedDestination(class GameCrowdAgent* Agent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestination.ReachedDestination");
+			byte* params = (byte*)malloc(4);
+			*(class GameCrowdAgent**)params = Agent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PickNewDestinationFor(class GameCrowdAgent* Agent, bool bIgnoreRestrictions)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestination.PickNewDestinationFor");
+			byte* params = (byte*)malloc(8);
+			*(class GameCrowdAgent**)params = Agent;
+			*(bool*)(params + 4) = bIgnoreRestrictions;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool AllowableDestinationFor(class GameCrowdAgent* Agent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestination.AllowableDestinationFor");
+			byte* params = (byte*)malloc(8);
+			*(class GameCrowdAgent**)params = Agent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void DecrementCustomerCount(class GameCrowdAgent* DepartingAgent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestination.DecrementCustomerCount");
+			byte* params = (byte*)malloc(4);
+			*(class GameCrowdAgent**)params = DepartingAgent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void IncrementCustomerCount(class GameCrowdAgent* ArrivingAgent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestination.IncrementCustomerCount");
+			byte* params = (byte*)malloc(4);
+			*(class GameCrowdAgent**)params = ArrivingAgent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool AtCapacity()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestination.AtCapacity");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void GetSpawnPosition(class SeqAct_GameCrowdSpawner* Spawner, Vector& SpawnPos, Rotator& SpawnRot)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestination.GetSpawnPosition");
+			byte* params = (byte*)malloc(28);
+			*(class SeqAct_GameCrowdSpawner**)params = Spawner;
+			*(Vector*)(params + 4) = SpawnPos;
+			*(Rotator*)(params + 16) = SpawnRot;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			SpawnPos = *(Vector*)(params + 4);
+			SpawnRot = *(Rotator*)(params + 16);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

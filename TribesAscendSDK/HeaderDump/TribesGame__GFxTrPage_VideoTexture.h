@@ -15,11 +15,42 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, CurrGraphics, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SettingIndex, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'FillData'
-		// Here lies the not-yet-implemented method 'SpecialAction'
-		// Here lies the not-yet-implemented method 'PerformChange'
-		// Here lies the not-yet-implemented method 'FillOption'
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_VideoTexture.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FillData(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_VideoTexture.FillData");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SpecialAction(class GFxTrAction* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_VideoTexture.SpecialAction");
+			byte* params = (byte*)malloc(4);
+			*(class GFxTrAction**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PerformChange()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_VideoTexture.PerformChange");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class GFxObject* FillOption(int ActionIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_VideoTexture.FillOption");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

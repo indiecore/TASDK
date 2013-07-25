@@ -12,11 +12,31 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bMoving, 0x1)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'RebuildDynamicEdges'
-		// Here lies the not-yet-implemented method 'FlushDynamicEdges'
-		// Here lies the not-yet-implemented method 'StartedMoving'
-		// Here lies the not-yet-implemented method 'StoppedMoving'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicPylon.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RebuildDynamicEdges()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicPylon.RebuildDynamicEdges");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FlushDynamicEdges()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicPylon.FlushDynamicEdges");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StartedMoving()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicPylon.StartedMoving");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StoppedMoving()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicPylon.StoppedMoving");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

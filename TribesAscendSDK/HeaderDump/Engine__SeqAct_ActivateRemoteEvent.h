@@ -21,7 +21,15 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bStatusIsOk, 0x1)
 		ADD_VAR(::NameProperty, EventName, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, Instigator)
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_ActivateRemoteEvent.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

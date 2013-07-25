@@ -27,20 +27,95 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bScaledUp, 0x1)
 		ADD_VAR(::FloatProperty, m_fMeshScaleUpTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fAccelRate, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'CalcTracerAccel'
-		// Here lies the not-yet-implemented method 'InitTracer'
-		// Here lies the not-yet-implemented method 'KillProjectile'
-		// Here lies the not-yet-implemented method 'ScaleDownFinishedNotify'
-		// Here lies the not-yet-implemented method 'ScaleUpFinishedNotify'
-		// Here lies the not-yet-implemented method 'OutsideWorldBounds'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'Explode'
-		// Here lies the not-yet-implemented method 'Recycle'
-		// Here lies the not-yet-implemented method 'Reset'
-		// Here lies the not-yet-implemented method 'WakeProjectile'
-		// Here lies the not-yet-implemented method 'ProcessTouch'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CalcTracerAccel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.CalcTracerAccel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void InitTracer(Vector Start, Vector End)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.InitTracer");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = Start;
+			*(Vector*)(params + 12) = End;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void KillProjectile()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.KillProjectile");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ScaleDownFinishedNotify()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.ScaleDownFinishedNotify");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ScaleUpFinishedNotify()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.ScaleUpFinishedNotify");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OutsideWorldBounds()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.OutsideWorldBounds");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Explode(Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.Explode");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = HitLocation;
+			*(Vector*)(params + 12) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Reset()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.Reset");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void WakeProjectile()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.WakeProjectile");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ProcessTouch(class Actor* Other, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Tracer.ProcessTouch");
+			byte* params = (byte*)malloc(28);
+			*(class Actor**)params = Other;
+			*(Vector*)(params + 4) = HitLocation;
+			*(Vector*)(params + 16) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

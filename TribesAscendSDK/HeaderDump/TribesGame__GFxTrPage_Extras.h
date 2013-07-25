@@ -21,11 +21,41 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bWaitingForCheatCodePopup, 0x1)
 		ADD_VAR(::IntProperty, CheatCodeAction, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ClaimPromotionAction, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'ShowModel'
-		// Here lies the not-yet-implemented method 'SpecialAction'
-		// Here lies the not-yet-implemented method 'PopupData'
-		// Here lies the not-yet-implemented method 'PopupComplete'
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Extras.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShowModel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Extras.ShowModel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SpecialAction(class GFxTrAction* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Extras.SpecialAction");
+			byte* params = (byte*)malloc(4);
+			*(class GFxTrAction**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PopupData(class GFxObject* Obj)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Extras.PopupData");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = Obj;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PopupComplete(int Action, ScriptArray<wchar_t> TextInput)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Extras.PopupComplete");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = Action;
+			*(ScriptArray<wchar_t>*)(params + 4) = TextInput;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -21,11 +21,48 @@ namespace UnrealScript
 		ADD_OBJECT(TrGameObjective, r_DeployedItem)
 		ADD_VAR(::ByteProperty, DefenderTeamIndex, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, ItemAttachPointName, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetBoundingCylinder'
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'ScriptGetTeamNum'
-		// Here lies the not-yet-implemented method 'HideMesh'
-		// Here lies the not-yet-implemented method 'Tick'
+		void GetBoundingCylinder(float& CollisionRadius, float& CollisionHeight)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_SupportItemPlatform.GetBoundingCylinder");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = CollisionRadius;
+			*(float*)(params + 4) = CollisionHeight;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			CollisionRadius = *(float*)params;
+			CollisionHeight = *(float*)(params + 4);
+			free(params);
+		}
+		void Init(class Actor* DeployableOwner, ScriptClass* GameObjectiveClass)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_SupportItemPlatform.Init");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = DeployableOwner;
+			*(ScriptClass**)(params + 4) = GameObjectiveClass;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		byte ScriptGetTeamNum()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_SupportItemPlatform.ScriptGetTeamNum");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
+		void HideMesh()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_SupportItemPlatform.HideMesh");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_SupportItemPlatform.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

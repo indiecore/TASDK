@@ -20,7 +20,15 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bBlockAll, 0x2)
 		ADD_VAR(::BoolProperty, bDoOcclusionTest, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PBRuleNodeMesh.BuildingMeshInfo' for the property named 'PartialOccludedBuildingMesh'!
-		// Here lies the not-yet-implemented method 'PickRandomBuildingMesh'
+		int PickRandomBuildingMesh()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PBRuleNodeMesh.PickRandomBuildingMesh");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

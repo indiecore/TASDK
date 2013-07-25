@@ -15,8 +15,25 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAnchorMustBeReachable, 0x4)
 		ADD_VAR(::BoolProperty, bScriptNotifyAnchorFindingResult, 0x2)
 		ADD_VAR(::BoolProperty, bScriptSpecifyEndAnchor, 0x1)
-		// Here lies the not-yet-implemented method 'SpecifyEndAnchor'
-		// Here lies the not-yet-implemented method 'NotifyAnchorFindingResult'
+		class NavigationPoint* SpecifyEndAnchor(class Pawn* RouteFinder)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKScriptedNavigationPoint.SpecifyEndAnchor");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = RouteFinder;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class NavigationPoint**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void NotifyAnchorFindingResult(class NavigationPoint* EndAnchor, class Pawn* RouteFinder)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKScriptedNavigationPoint.NotifyAnchorFindingResult");
+			byte* params = (byte*)malloc(8);
+			*(class NavigationPoint**)params = EndAnchor;
+			*(class Pawn**)(params + 4) = RouteFinder;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

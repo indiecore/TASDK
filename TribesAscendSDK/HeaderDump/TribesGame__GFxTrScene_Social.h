@@ -5,6 +5,10 @@ namespace UnrealScript
 	class GFxTrScene_Social : public GFxTrScene
 	{
 	public:
-		// Here lies the not-yet-implemented method 'Initialize'
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_Social.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

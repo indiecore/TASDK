@@ -14,12 +14,54 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, CurrResolution, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SpecialAction'
-		// Here lies the not-yet-implemented method 'FillData'
-		// Here lies the not-yet-implemented method 'FillOption'
-		// Here lies the not-yet-implemented method 'PopupData'
-		// Here lies the not-yet-implemented method 'PopupComplete'
-		// Here lies the not-yet-implemented method 'RevertSetting'
+		void SpecialAction(class GFxTrAction* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_VideoResolution.SpecialAction");
+			byte* params = (byte*)malloc(4);
+			*(class GFxTrAction**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void FillData(class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_VideoResolution.FillData");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class GFxObject* FillOption(int ActionIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_VideoResolution.FillOption");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void PopupData(class GFxObject* Obj)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_VideoResolution.PopupData");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = Obj;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PopupComplete(int Action, ScriptArray<wchar_t> TextInput)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_VideoResolution.PopupComplete");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = Action;
+			*(ScriptArray<wchar_t>*)(params + 4) = TextInput;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RevertSetting()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_VideoResolution.RevertSetting");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

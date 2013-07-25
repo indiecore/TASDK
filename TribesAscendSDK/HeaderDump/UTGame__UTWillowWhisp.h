@@ -21,11 +21,38 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, Position, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumPoints, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, WayPoints, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'SetInitialState'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'SetTemplate'
-		// Here lies the not-yet-implemented method 'StartNextPath'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWillowWhisp.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetInitialState()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWillowWhisp.SetInitialState");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWillowWhisp.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetTemplate(class ParticleSystem* NewTemplate, bool bDestroyOnFinish)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWillowWhisp.SetTemplate");
+			byte* params = (byte*)malloc(8);
+			*(class ParticleSystem**)params = NewTemplate;
+			*(bool*)(params + 4) = bDestroyOnFinish;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StartNextPath()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWillowWhisp.StartNextPath");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

@@ -35,12 +35,48 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, r_bPodLanded, 0x1)
 		ADD_OBJECT(Controller, m_Owner)
 		ADD_OBJECT(ScriptClass, m_ItemToDeploy)
-		// Here lies the not-yet-implemented method 'SpawnCrashLandInfo'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'InitTimer'
-		// Here lies the not-yet-implemented method 'DeliveryPodLanded'
-		// Here lies the not-yet-implemented method 'MoveSameTeamPawn'
-		// Here lies the not-yet-implemented method 'PerformLandingDamage'
+		bool SpawnCrashLandInfo(class Controller* Initializer, float CrashLandTime, Vector CrashLandPoint, Vector CrashLandNormal, ScriptClass* ItemInDeliveryPod)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.SpawnCrashLandInfo");
+			byte* params = (byte*)malloc(40);
+			*(class Controller**)params = Initializer;
+			*(float*)(params + 4) = CrashLandTime;
+			*(Vector*)(params + 8) = CrashLandPoint;
+			*(Vector*)(params + 20) = CrashLandNormal;
+			*(ScriptClass**)(params + 32) = ItemInDeliveryPod;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 36);
+			free(params);
+			return returnVal;
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void InitTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.InitTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DeliveryPodLanded()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.DeliveryPodLanded");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void MoveSameTeamPawn(class TrPawn* PawnToMove)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.MoveSameTeamPawn");
+			byte* params = (byte*)malloc(4);
+			*(class TrPawn**)params = PawnToMove;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PerformLandingDamage()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.PerformLandingDamage");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

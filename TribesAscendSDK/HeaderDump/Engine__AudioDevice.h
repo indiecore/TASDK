@@ -62,8 +62,26 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LowPassFilterResonance, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, CommonAudioPoolSize, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxChannels, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetSoundMode'
-		// Here lies the not-yet-implemented method 'FindSoundClass'
+		bool SetSoundMode(ScriptName NewMode)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioDevice.SetSoundMode");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = NewMode;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		class SoundClass* FindSoundClass(ScriptName SoundClassName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioDevice.FindSoundClass");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = SoundClassName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class SoundClass**)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

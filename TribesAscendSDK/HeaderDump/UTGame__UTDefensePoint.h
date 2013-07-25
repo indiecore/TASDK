@@ -31,12 +31,54 @@ namespace UnrealScript
 		ADD_OBJECT(Controller, CurrentUser)
 		ADD_VAR(::ByteProperty, DefensePriority, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bOnlySkilled, 0x8)
-		// Here lies the not-yet-implemented method 'GetMoveTarget'
-		// Here lies the not-yet-implemented method 'HigherPriorityThan'
-		// Here lies the not-yet-implemented method 'Reset'
-		// Here lies the not-yet-implemented method 'FreePoint'
-		// Here lies the not-yet-implemented method 'CheckForErrors'
-		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		class Actor* GetMoveTarget()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.GetMoveTarget");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Actor**)params;
+			free(params);
+			return returnVal;
+		}
+		bool HigherPriorityThan(class UTDefensePoint* S, class UTBot* B, bool bAutoPointsInUse, bool bPrioritizeSameGroup, int& NumChecked)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.HigherPriorityThan");
+			byte* params = (byte*)malloc(24);
+			*(class UTDefensePoint**)params = S;
+			*(class UTBot**)(params + 4) = B;
+			*(bool*)(params + 8) = bAutoPointsInUse;
+			*(bool*)(params + 12) = bPrioritizeSameGroup;
+			*(int*)(params + 16) = NumChecked;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			NumChecked = *(int*)(params + 16);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
+		void Reset()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.Reset");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FreePoint()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.FreePoint");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool CheckForErrors()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.CheckForErrors");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void PreBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.PreBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

@@ -14,9 +14,29 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, ArenaWeaponClassPath, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'CheckReplacement'
-		// Here lies the not-yet-implemented method 'ModifyPlayer'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_Arena.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool CheckReplacement(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_Arena.CheckReplacement");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void ModifyPlayer(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_Arena.ModifyPlayer");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

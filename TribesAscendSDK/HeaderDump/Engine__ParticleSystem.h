@@ -62,11 +62,53 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, MacroUVPosition, 0xFFFFFFFF
 		ADD_VAR(::FloatProperty, MacroUVRadius, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box' for the property named 'CustomOcclusionBounds'!
-		// Here lies the not-yet-implemented method 'GetCurrentLODMethod'
-		// Here lies the not-yet-implemented method 'GetLODLevelCount'
-		// Here lies the not-yet-implemented method 'GetLODDistance'
-		// Here lies the not-yet-implemented method 'SetCurrentLODMethod'
-		// Here lies the not-yet-implemented method 'SetLODDistance'
+		byte GetCurrentLODMethod()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystem.GetCurrentLODMethod");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
+		int GetLODLevelCount()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystem.GetLODLevelCount");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		float GetLODDistance(int LODLevelIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystem.GetLODDistance");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = LODLevelIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void SetCurrentLODMethod(byte InMethod)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystem.SetCurrentLODMethod");
+			byte* params = (byte*)malloc(1);
+			*params = InMethod;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool SetLODDistance(int LODLevelIndex, float InDistance)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystem.SetLODDistance");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = LODLevelIndex;
+			*(float*)(params + 4) = InDistance;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

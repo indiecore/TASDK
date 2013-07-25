@@ -43,17 +43,90 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fFractalTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRemainingFractalTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bStartedFractal, 0x1)
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'PostInitAnimTree'
-		// Here lies the not-yet-implemented method 'InitProjectile'
-		// Here lies the not-yet-implemented method 'Explode'
-		// Here lies the not-yet-implemented method 'ClientReceivedExplosionLocation'
-		// Here lies the not-yet-implemented method 'IsFractalActive'
-		// Here lies the not-yet-implemented method 'StartFractalShots'
-		// Here lies the not-yet-implemented method 'ShootFractalShot'
-		// Here lies the not-yet-implemented method 'SpawnFractalExplosionEffects'
-		// Here lies the not-yet-implemented method 'EndFractal'
-		// Here lies the not-yet-implemented method 'SpawnExplosionEffects'
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostInitAnimTree(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.PostInitAnimTree");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InitProjectile(Vector Direction, ScriptClass* ClassToInherit)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.InitProjectile");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = Direction;
+			*(ScriptClass**)(params + 12) = ClassToInherit;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Explode(Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.Explode");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = HitLocation;
+			*(Vector*)(params + 12) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClientReceivedExplosionLocation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.ClientReceivedExplosionLocation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool IsFractalActive()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.IsFractalActive");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void StartFractalShots()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.StartFractalShots");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShootFractalShot()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.ShootFractalShot");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SpawnFractalExplosionEffects(Vector ShotLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.SpawnFractalExplosionEffects");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = ShotLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void EndFractal()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.EndFractal");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SpawnExplosionEffects(Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.SpawnExplosionEffects");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = HitLocation;
+			*(Vector*)(params + 12) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -6,6 +6,14 @@ namespace UnrealScript
 	class UISoundTheme : public Object
 	{
 	public:
-		// Here lies the not-yet-implemented method 'ProcessSoundEvent'
+		void ProcessSoundEvent(ScriptName SoundEventName, class PlayerController* SoundOwner)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UISoundTheme.ProcessSoundEvent");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = SoundEventName;
+			*(class PlayerController**)(params + 8) = SoundOwner;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }

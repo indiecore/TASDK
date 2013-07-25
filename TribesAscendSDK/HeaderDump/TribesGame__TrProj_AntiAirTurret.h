@@ -5,6 +5,10 @@ namespace UnrealScript
 	class TrProj_AntiAirTurret : public TrProjectile
 	{
 	public:
-		// Here lies the not-yet-implemented method 'Destroyed'
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_AntiAirTurret.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

@@ -28,11 +28,55 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, TextureResolutionY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, TextureResolutionX, 0xFFFFFFFF)
 		ADD_OBJECT(PortalTeleporter, SisterPortal)
-		// Here lies the not-yet-implemented method 'TransformActor'
-		// Here lies the not-yet-implemented method 'TransformVectorDir'
-		// Here lies the not-yet-implemented method 'TransformHitLocation'
-		// Here lies the not-yet-implemented method 'CreatePortalTexture'
-		// Here lies the not-yet-implemented method 'StopsProjectile'
+		bool TransformActor(class Actor* A)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PortalTeleporter.TransformActor");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = A;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		Vector TransformVectorDir(Vector V)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PortalTeleporter.TransformVectorDir");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = V;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		Vector TransformHitLocation(Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PortalTeleporter.TransformHitLocation");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		class TextureRenderTarget2D* CreatePortalTexture()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PortalTeleporter.CreatePortalTexture");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class TextureRenderTarget2D**)params;
+			free(params);
+			return returnVal;
+		}
+		bool StopsProjectile(class Projectile* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PortalTeleporter.StopsProjectile");
+			byte* params = (byte*)malloc(8);
+			*(class Projectile**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

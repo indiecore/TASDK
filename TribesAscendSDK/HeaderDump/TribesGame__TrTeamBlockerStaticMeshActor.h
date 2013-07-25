@@ -22,11 +22,34 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bDisableBlockingOnSiegePhase0Ends, 0x1)
 		ADD_OBJECT(Material, m_BaseMaterial)
 		ADD_VAR(::ByteProperty, m_DefenderTeamIndex, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'DisableBlocking'
-		// Here lies the not-yet-implemented method 'EnableBlocking'
-		// Here lies the not-yet-implemented method 'UpdateMaterialForPawn'
-		// Here lies the not-yet-implemented method 'CreateMICs'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamBlockerStaticMeshActor.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisableBlocking()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamBlockerStaticMeshActor.DisableBlocking");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void EnableBlocking()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamBlockerStaticMeshActor.EnableBlocking");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateMaterialForPawn(class TrPawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamBlockerStaticMeshActor.UpdateMaterialForPawn");
+			byte* params = (byte*)malloc(4);
+			*(class TrPawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CreateMICs()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamBlockerStaticMeshActor.CreateMICs");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

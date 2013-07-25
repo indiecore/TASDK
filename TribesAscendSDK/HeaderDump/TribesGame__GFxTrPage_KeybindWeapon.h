@@ -5,6 +5,10 @@ namespace UnrealScript
 	class GFxTrPage_KeybindWeapon : public GFxTrPage_KeybindAction
 	{
 	public:
-		// Here lies the not-yet-implemented method 'Initialize'
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_KeybindWeapon.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

@@ -16,14 +16,77 @@ namespace UnrealScript
 		ADD_OBJECT(GFxClikWidget, JoinBtn)
 		ADD_OBJECT(GFxObject, PasswordTextField)
 		ADD_OBJECT(GFxClikWidget, PasswordRendererMC)
-		// Here lies the not-yet-implemented method 'GetPassword'
-		// Here lies the not-yet-implemented method 'OnTopMostView'
-		// Here lies the not-yet-implemented method 'ClearPasswordRenderer'
-		// Here lies the not-yet-implemented method 'OnViewClosed'
-		// Here lies the not-yet-implemented method 'DisableSubComponents'
-		// Here lies the not-yet-implemented method 'SetBackButtonListener'
-		// Here lies the not-yet-implemented method 'SetOKButtonListener'
-		// Here lies the not-yet-implemented method 'WidgetInitialized'
+		ScriptArray<wchar_t> GetPassword()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_PasswordDialog.GetPassword");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
+		void OnTopMostView(bool bPlayOpenAnimation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_PasswordDialog.OnTopMostView");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bPlayOpenAnimation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearPasswordRenderer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_PasswordDialog.ClearPasswordRenderer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnViewClosed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_PasswordDialog.OnViewClosed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisableSubComponents(bool bEnableComponents)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_PasswordDialog.DisableSubComponents");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnableComponents;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetBackButtonListener(
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void* DelegateListener)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_PasswordDialog.SetBackButtonListener");
+			byte* params = (byte*)malloc(12);
+			*(
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void**)params = DelegateListener;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetOKButtonListener(
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void* DelegateListener)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_PasswordDialog.SetOKButtonListener");
+			byte* params = (byte*)malloc(12);
+			*(
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void**)params = DelegateListener;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_PasswordDialog.WidgetInitialized");
+			byte* params = (byte*)malloc(24);
+			*(ScriptName*)params = WidgetName;
+			*(ScriptName*)(params + 8) = WidgetPath;
+			*(class GFxObject**)(params + 16) = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_OBJECT

@@ -27,15 +27,90 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, UnselectKey, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, SecondaryKey, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, PrimaryKey, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PrimarySelect'
-		// Here lies the not-yet-implemented method 'SecondarySelect'
-		// Here lies the not-yet-implemented method 'Unselect'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'OnActivate'
-		// Here lies the not-yet-implemented method 'ConsoleCommand'
-		// Here lies the not-yet-implemented method 'OnDeactivate'
-		// Here lies the not-yet-implemented method 'DisableDebugCamera'
-		// Here lies the not-yet-implemented method 'NativeInputKey'
+		void PrimarySelect(Vector HitLoc, Vector HitNormal, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void* HitInfo)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraController.PrimarySelect");
+			byte* params = (byte*)malloc(52);
+			*(Vector*)params = HitLoc;
+			*(Vector*)(params + 12) = HitNormal;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 24) = HitInfo;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SecondarySelect(Vector HitLoc, Vector HitNormal, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void* HitInfo)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraController.SecondarySelect");
+			byte* params = (byte*)malloc(52);
+			*(Vector*)params = HitLoc;
+			*(Vector*)(params + 12) = HitNormal;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 24) = HitInfo;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Unselect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraController.Unselect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraController.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnActivate(class PlayerController* PC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraController.OnActivate");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerController**)params = PC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		ScriptArray<wchar_t> ConsoleCommand(ScriptArray<wchar_t> Command, bool bWriteToLog)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraController.ConsoleCommand");
+			byte* params = (byte*)malloc(28);
+			*(ScriptArray<wchar_t>*)params = Command;
+			*(bool*)(params + 12) = bWriteToLog;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void OnDeactivate(class PlayerController* PC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraController.OnDeactivate");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerController**)params = PC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DisableDebugCamera()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraController.DisableDebugCamera");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool NativeInputKey(int ControllerId, ScriptName Key, byte Event, float AmountDepressed, bool bGamepad)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraController.NativeInputKey");
+			byte* params = (byte*)malloc(25);
+			*(int*)params = ControllerId;
+			*(ScriptName*)(params + 4) = Key;
+			*(params + 12) = Event;
+			*(float*)(params + 16) = AmountDepressed;
+			*(bool*)(params + 20) = bGamepad;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

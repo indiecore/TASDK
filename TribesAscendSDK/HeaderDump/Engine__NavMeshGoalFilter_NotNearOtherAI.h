@@ -13,7 +13,17 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, DistanceToCheck, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'NotNearOtherAI'
+		bool NotNearOtherAI(class NavMeshGoal_GenericFilterContainer* FilterContainer, float InDistanceToCheck)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoalFilter_NotNearOtherAI.NotNearOtherAI");
+			byte* params = (byte*)malloc(12);
+			*(class NavMeshGoal_GenericFilterContainer**)params = FilterContainer;
+			*(float*)(params + 4) = InDistanceToCheck;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

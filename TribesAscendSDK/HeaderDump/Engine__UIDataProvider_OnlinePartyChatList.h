@@ -26,10 +26,32 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, NatTypeCol, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, NickNameCol, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
-		// Here lies the not-yet-implemented method 'OnRegister'
-		// Here lies the not-yet-implemented method 'OnUnregister'
-		// Here lies the not-yet-implemented method 'OnLoginChange'
-		// Here lies the not-yet-implemented method 'RefreshMembersList'
+		void OnRegister(class LocalPlayer* InPlayer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePartyChatList.OnRegister");
+			byte* params = (byte*)malloc(4);
+			*(class LocalPlayer**)params = InPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnUnregister()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePartyChatList.OnUnregister");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnLoginChange(byte LocalUserNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePartyChatList.OnLoginChange");
+			byte* params = (byte*)malloc(1);
+			*params = LocalUserNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RefreshMembersList()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePartyChatList.RefreshMembersList");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

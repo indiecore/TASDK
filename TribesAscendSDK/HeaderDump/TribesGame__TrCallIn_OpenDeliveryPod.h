@@ -21,8 +21,16 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceTimeVarying, PodFadeMaterial)
 		ADD_VAR(::FloatProperty, TimeToFade, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TimeToDelete, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'RemovePod'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_OpenDeliveryPod.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RemovePod()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_OpenDeliveryPod.RemovePod");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

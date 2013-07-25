@@ -221,190 +221,1467 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bRefreshInventoryWasRespawn, 0x2)
 		ADD_VAR(::BoolProperty, m_bInitialized, 0x1)
 		ADD_VAR(::NameProperty, m_nmMakeVisible, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetCurrentPowerPool'
-		// Here lies the not-yet-implemented method 'GetMaxPowerPool'
-		// Here lies the not-yet-implemented method 'CalculatePawnSpeed'
-		// Here lies the not-yet-implemented method 'GetCurrCharClassInfo'
-		// Here lies the not-yet-implemented method 'IsFirstPerson'
-		// Here lies the not-yet-implemented method 'GetHandsMesh'
-		// Here lies the not-yet-implemented method 'GetTribesReplicationInfo'
-		// Here lies the not-yet-implemented method 'CheckHeadShot'
-		// Here lies the not-yet-implemented method 'GetPawnViewLocation'
-		// Here lies the not-yet-implemented method 'GetTrHud'
-		// Here lies the not-yet-implemented method 'IsPulseStealthed'
-		// Here lies the not-yet-implemented method 'IsJammedByFriendOrSelf'
-		// Here lies the not-yet-implemented method 'CheckGrabSpeed'
-		// Here lies the not-yet-implemented method 'NativeGetCollisionHeight'
-		// Here lies the not-yet-implemented method 'NativeGetCollisionRadius'
-		// Here lies the not-yet-implemented method 'SyncClientCurrentPowerPool'
-		// Here lies the not-yet-implemented method 'ConsumePowerPool'
-		// Here lies the not-yet-implemented method 'RegainPowerPool'
-		// Here lies the not-yet-implemented method 'GetPowerPoolPercent'
-		// Here lies the not-yet-implemented method 'GetCurrentDeviceAccuracyInfo'
-		// Here lies the not-yet-implemented method 'SetOverlayMaterial'
-		// Here lies the not-yet-implemented method 'ServerUpdateLockedTarget'
-		// Here lies the not-yet-implemented method 'NativePostRenderFor'
-		// Here lies the not-yet-implemented method 'GetTargetLocation'
-		// Here lies the not-yet-implemented method 'SetFlashNormal'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'PostInitAnimTree'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'GetCurrentCredits'
-		// Here lies the not-yet-implemented method 'ClientRestart'
-		// Here lies the not-yet-implemented method 'CurrentDeployedCount'
-		// Here lies the not-yet-implemented method 'ExitDeployMode'
-		// Here lies the not-yet-implemented method 'GetArmorType'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'ReplicateMultiFlashLocation'
-		// Here lies the not-yet-implemented method 'EquipBestPossibleDevice'
-		// Here lies the not-yet-implemented method 'InitDefaultAnims'
-		// Here lies the not-yet-implemented method 'SetCharacterClassFromInfo'
-		// Here lies the not-yet-implemented method 'ActivatePendingClass'
-		// Here lies the not-yet-implemented method 'RefreshInventoryTimer'
-		// Here lies the not-yet-implemented method 'SetValuesFromCurrentFamilyInfo'
-		// Here lies the not-yet-implemented method 'RefreshInventory'
-		// Here lies the not-yet-implemented method 'ActivateSelectedDeployable'
-		// Here lies the not-yet-implemented method 'RemoveEffectByClass'
-		// Here lies the not-yet-implemented method 'ProcessEffectForm'
-		// Here lies the not-yet-implemented method 'GetShieldStrength'
-		// Here lies the not-yet-implemented method 'AdjustAmmoPool'
-		// Here lies the not-yet-implemented method 'AdjustMaxPowerPool'
-		// Here lies the not-yet-implemented method 'SetMaxPowerPool'
-		// Here lies the not-yet-implemented method 'SetMaxHealthPool'
-		// Here lies the not-yet-implemented method 'ClientUpdateHUDHealth'
-		// Here lies the not-yet-implemented method 'ShouldRechargePowerPool'
-		// Here lies the not-yet-implemented method 'ForceHealthRegen'
-		// Here lies the not-yet-implemented method 'RechargeHealthPool'
-		// Here lies the not-yet-implemented method 'GetJetpackAirControl'
-		// Here lies the not-yet-implemented method 'UpdateSkiEffects'
-		// Here lies the not-yet-implemented method 'PlayJetpackEffects'
-		// Here lies the not-yet-implemented method 'UpdateJetpackEffects'
-		// Here lies the not-yet-implemented method 'StopJetpackEffects'
-		// Here lies the not-yet-implemented method 'PlayLandingSound'
-		// Here lies the not-yet-implemented method 'PlayJumpingSound'
-		// Here lies the not-yet-implemented method 'RememberLastDamager'
-		// Here lies the not-yet-implemented method 'GetHealthPct'
-		// Here lies the not-yet-implemented method 'CreateAssistRecord'
-		// Here lies the not-yet-implemented method 'GetLastDamager'
-		// Here lies the not-yet-implemented method 'ProcessKillAssists'
-		// Here lies the not-yet-implemented method 'GetUnshieldedDamage'
-		// Here lies the not-yet-implemented method 'GetPawnCausingDamage'
-		// Here lies the not-yet-implemented method 'GetDamageScale'
-		// Here lies the not-yet-implemented method 'DoRepairs'
-		// Here lies the not-yet-implemented method 'CheckTribesTurretInstigator'
-		// Here lies the not-yet-implemented method 'TakeDamage'
-		// Here lies the not-yet-implemented method 'PlayWhiteoutEffect'
-		// Here lies the not-yet-implemented method 'TakeRadiusDamage'
-		// Here lies the not-yet-implemented method 'RecentlyGrabbedFlag'
-		// Here lies the not-yet-implemented method 'GetShowDistanceThreshold'
-		// Here lies the not-yet-implemented method 'PostRenderFor'
-		// Here lies the not-yet-implemented method 'DisplayDebug'
-		// Here lies the not-yet-implemented method 'Landed'
-		// Here lies the not-yet-implemented method 'TakeFallingDamage'
-		// Here lies the not-yet-implemented method 'PlayHardLandingEffect'
-		// Here lies the not-yet-implemented method 'PlaySonicPunchEffect'
-		// Here lies the not-yet-implemented method 'TakeFallDamage'
-		// Here lies the not-yet-implemented method 'ProcessCreditEvent'
-		// Here lies the not-yet-implemented method 'FlashLocationUpdated'
-		// Here lies the not-yet-implemented method 'WeaponFired'
-		// Here lies the not-yet-implemented method 'Dodge'
-		// Here lies the not-yet-implemented method 'PerformDodge'
-		// Here lies the not-yet-implemented method 'gibbedBy'
-		// Here lies the not-yet-implemented method 'EncroachedBy'
-		// Here lies the not-yet-implemented method 'ShouldGib'
-		// Here lies the not-yet-implemented method 'SetHandIKEnabled'
-		// Here lies the not-yet-implemented method 'PlayDamageCameraShake'
-		// Here lies the not-yet-implemented method 'IsLastHitFromNinjaSmoke'
-		// Here lies the not-yet-implemented method 'PlayTakeHitEffects'
-		// Here lies the not-yet-implemented method 'FellOutOfWorld'
-		// Here lies the not-yet-implemented method 'Died'
-		// Here lies the not-yet-implemented method 'StopLocalEffectsAndSounds'
-		// Here lies the not-yet-implemented method 'SetOverlayMeshHidden'
-		// Here lies the not-yet-implemented method 'PlayDying'
-		// Here lies the not-yet-implemented method 'NotifyTeamChanged'
-		// Here lies the not-yet-implemented method 'UpdateTeamBlockerMaterials'
-		// Here lies the not-yet-implemented method 'PossessedBy'
-		// Here lies the not-yet-implemented method 'ResetSkin'
-		// Here lies the not-yet-implemented method 'SetSkin'
-		// Here lies the not-yet-implemented method 'InitializeOverlayMaterials'
-		// Here lies the not-yet-implemented method 'ClientPlayHealthRegenEffect'
-		// Here lies the not-yet-implemented method 'SetShieldPackActive'
-		// Here lies the not-yet-implemented method 'PlayShieldPackEffect'
-		// Here lies the not-yet-implemented method 'SetStealthPackActive'
-		// Here lies the not-yet-implemented method 'PlayStealthPackEffect'
-		// Here lies the not-yet-implemented method 'PulseStealth'
-		// Here lies the not-yet-implemented method 'SetRagePerkActive'
-		// Here lies the not-yet-implemented method 'ClearRagePerk'
-		// Here lies the not-yet-implemented method 'PlayRageEffect'
-		// Here lies the not-yet-implemented method 'PlayInvulnerabilityEffect'
-		// Here lies the not-yet-implemented method 'StartRidingInVehicle'
-		// Here lies the not-yet-implemented method 'StopRidingInVehicle'
-		// Here lies the not-yet-implemented method 'StartDriving'
-		// Here lies the not-yet-implemented method 'StopDriving'
-		// Here lies the not-yet-implemented method 'OnRanOver'
-		// Here lies the not-yet-implemented method 'EnableJamming'
-		// Here lies the not-yet-implemented method 'DisableJamming'
-		// Here lies the not-yet-implemented method 'DisableJammingOtherPawns'
-		// Here lies the not-yet-implemented method 'EnteredFriendJammingRadius'
-		// Here lies the not-yet-implemented method 'ExitFriendJammingRadius'
-		// Here lies the not-yet-implemented method 'EnteredEnemyJammingRadius'
-		// Here lies the not-yet-implemented method 'ExitEnemyJammingRadius'
-		// Here lies the not-yet-implemented method 'IsJammedByEnemy'
-		// Here lies the not-yet-implemented method 'PlayJammerPackEffect'
-		// Here lies the not-yet-implemented method 'PlayJammingByFriendEffect'
-		// Here lies the not-yet-implemented method 'PlayEnemyJammerPackEffect'
-		// Here lies the not-yet-implemented method 'OnPawnDetectedByCollisionProxy'
-		// Here lies the not-yet-implemented method 'OnPawnExitedCollisionProxy'
-		// Here lies the not-yet-implemented method 'OnEnteredDropJammer'
-		// Here lies the not-yet-implemented method 'OnExitedDropJammer'
-		// Here lies the not-yet-implemented method 'UpdateEnemyDropJammer'
-		// Here lies the not-yet-implemented method 'UpdateFriendlyDropJammer'
-		// Here lies the not-yet-implemented method 'PlayJammingByEnemyDropJammerEffect'
-		// Here lies the not-yet-implemented method 'PlayJammingByFriendlyDropJammerEffect'
-		// Here lies the not-yet-implemented method 'OnChangeJammingTeam'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'SetMeshVisibility'
-		// Here lies the not-yet-implemented method 'SetFirstPersonBodyVisibility'
-		// Here lies the not-yet-implemented method 'WeaponAttachmentChanged'
-		// Here lies the not-yet-implemented method 'ForceCrouch'
-		// Here lies the not-yet-implemented method 'FindClosestStickyGrenadeSocketIndex'
-		// Here lies the not-yet-implemented method 'StickGrenadeToPawn'
-		// Here lies the not-yet-implemented method 'UpdateStickyGrenades'
-		// Here lies the not-yet-implemented method 'SetSkiing'
-		// Here lies the not-yet-implemented method 'PlaySkiEffects'
-		// Here lies the not-yet-implemented method 'StopSkiEffects'
-		// Here lies the not-yet-implemented method 'PlaySkiEffectsSound'
-		// Here lies the not-yet-implemented method 'StopSkiEffectsSound'
-		// Here lies the not-yet-implemented method 'FaceRotation'
-		// Here lies the not-yet-implemented method 'PlayDyingSound'
-		// Here lies the not-yet-implemented method 'HoldGameObject'
-		// Here lies the not-yet-implemented method 'AdjustDamage'
-		// Here lies the not-yet-implemented method 'GoInvulnerable'
-		// Here lies the not-yet-implemented method 'ClearInvulnerability'
-		// Here lies the not-yet-implemented method 'SetMovementPhysics'
-		// Here lies the not-yet-implemented method 'OnAnimEnd'
-		// Here lies the not-yet-implemented method 'PlayTeleportEffect'
-		// Here lies the not-yet-implemented method 'TurnOff'
-		// Here lies the not-yet-implemented method 'SetDetectedByEnemyScanner'
-		// Here lies the not-yet-implemented method 'GetDetectedByEnemyScanner'
-		// Here lies the not-yet-implemented method 'SetScannerDetect'
-		// Here lies the not-yet-implemented method 'GetFamilyInfo'
-		// Here lies the not-yet-implemented method 'LockedOutFromFlagPickupTimer'
-		// Here lies the not-yet-implemented method 'LockFromFlagPickup'
-		// Here lies the not-yet-implemented method 'Blink'
-		// Here lies the not-yet-implemented method 'PlayBlinkPackEffect'
-		// Here lies the not-yet-implemented method 'DoJump'
-		// Here lies the not-yet-implemented method 'CheckClotheslineDamage'
-		// Here lies the not-yet-implemented method 'GetSpectatorName'
-		// Here lies the not-yet-implemented method 'CrushedBy'
-		// Here lies the not-yet-implemented method 'StuckOnPawn'
-		// Here lies the not-yet-implemented method 'SetPending3PSkin'
-		// Here lies the not-yet-implemented method 'CheckApplyPending3PSkin'
-		// Here lies the not-yet-implemented method 'ThrowActiveWeapon'
-		// Here lies the not-yet-implemented method 'ThrowWeaponOnDeath'
-		// Here lies the not-yet-implemented method 'ClearSkiParticleEffects'
-		// Here lies the not-yet-implemented method 'ClearJetpackParticleEffects'
-		// Here lies the not-yet-implemented method 'AlienFXOverlay'
+		float GetCurrentPowerPool()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetCurrentPowerPool");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		float GetMaxPowerPool()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetMaxPowerPool");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		int CalculatePawnSpeed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.CalculatePawnSpeed");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		ScriptClass* GetCurrCharClassInfo()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetCurrCharClassInfo");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptClass**)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsFirstPerson()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.IsFirstPerson");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		class SkeletalMesh* GetHandsMesh(ScriptClass* FamilyInfo)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetHandsMesh");
+			byte* params = (byte*)malloc(8);
+			*(ScriptClass**)params = FamilyInfo;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class SkeletalMesh**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class TrPlayerReplicationInfo* GetTribesReplicationInfo()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetTribesReplicationInfo");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class TrPlayerReplicationInfo**)params;
+			free(params);
+			return returnVal;
+		}
+		bool CheckHeadShot(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
+void*& Impact)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.CheckHeadShot");
+			byte* params = (byte*)malloc(84);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
+void**)params = Impact;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Impact = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
+void**)params;
+			auto returnVal = *(bool*)(params + 80);
+			free(params);
+			return returnVal;
+		}
+		Vector GetPawnViewLocation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetPawnViewLocation");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)params;
+			free(params);
+			return returnVal;
+		}
+		class TrHUD* GetTrHud()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetTrHud");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class TrHUD**)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsPulseStealthed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.IsPulseStealthed");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsJammedByFriendOrSelf()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.IsJammedByFriendOrSelf");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void CheckGrabSpeed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.CheckGrabSpeed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		float NativeGetCollisionHeight()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.NativeGetCollisionHeight");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		float NativeGetCollisionRadius()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.NativeGetCollisionRadius");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		void SyncClientCurrentPowerPool()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SyncClientCurrentPowerPool");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ConsumePowerPool(float fAmount)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ConsumePowerPool");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = fAmount;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RegainPowerPool(float fDeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.RegainPowerPool");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = fDeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		float GetPowerPoolPercent()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetPowerPoolPercent");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		void GetCurrentDeviceAccuracyInfo(float& fAccuracy, float& fAmountCurrentlyOffOfTargetAccuray)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetCurrentDeviceAccuracyInfo");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = fAccuracy;
+			*(float*)(params + 4) = fAmountCurrentlyOffOfTargetAccuray;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			fAccuracy = *(float*)params;
+			fAmountCurrentlyOffOfTargetAccuray = *(float*)(params + 4);
+			free(params);
+		}
+		void SetOverlayMaterial(class MaterialInterface* NewOverlay)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetOverlayMaterial");
+			byte* params = (byte*)malloc(4);
+			*(class MaterialInterface**)params = NewOverlay;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool ServerUpdateLockedTarget(class Actor* Locked)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ServerUpdateLockedTarget");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = Locked;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void NativePostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.NativePostRenderFor");
+			byte* params = (byte*)malloc(32);
+			*(class PlayerController**)params = PC;
+			*(class Canvas**)(params + 4) = Canvas;
+			*(Vector*)(params + 8) = CameraPosition;
+			*(Vector*)(params + 20) = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		Vector GetTargetLocation(class Actor* RequestedBy, bool bRequestAlternateLoc)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetTargetLocation");
+			byte* params = (byte*)malloc(20);
+			*(class Actor**)params = RequestedBy;
+			*(bool*)(params + 4) = bRequestAlternateLoc;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void SetFlashNormal(Vector FlashNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetFlashNormal");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = FlashNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostInitAnimTree(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PostInitAnimTree");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int GetCurrentCredits()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetCurrentCredits");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		void ClientRestart()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ClientRestart");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int CurrentDeployedCount(ScriptClass* DeviceClass)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.CurrentDeployedCount");
+			byte* params = (byte*)malloc(8);
+			*(ScriptClass**)params = DeviceClass;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void ExitDeployMode()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ExitDeployMode");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		byte GetArmorType()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetArmorType");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ReplicateMultiFlashLocation(int shotNumber, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ReplicateMultiFlashLocation");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = shotNumber;
+			*(Vector*)(params + 4) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void EquipBestPossibleDevice(byte eqpPoint)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.EquipBestPossibleDevice");
+			byte* params = (byte*)malloc(1);
+			*params = eqpPoint;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InitDefaultAnims(ScriptClass* Info)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.InitDefaultAnims");
+			byte* params = (byte*)malloc(4);
+			*(ScriptClass**)params = Info;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetCharacterClassFromInfo(ScriptClass* Info, bool bForce)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetCharacterClassFromInfo");
+			byte* params = (byte*)malloc(8);
+			*(ScriptClass**)params = Info;
+			*(bool*)(params + 4) = bForce;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ActivatePendingClass(bool bIsRespawn, bool bCallin)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ActivatePendingClass");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bIsRespawn;
+			*(bool*)(params + 4) = bCallin;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RefreshInventoryTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.RefreshInventoryTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetValuesFromCurrentFamilyInfo()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetValuesFromCurrentFamilyInfo");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RefreshInventory(bool bIsRespawn, bool bCallin)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.RefreshInventory");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bIsRespawn;
+			*(bool*)(params + 4) = bCallin;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ActivateSelectedDeployable()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ActivateSelectedDeployable");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RemoveEffectByClass(ScriptClass* efClass)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.RemoveEffectByClass");
+			byte* params = (byte*)malloc(4);
+			*(ScriptClass**)params = efClass;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProcessEffectForm(ScriptClass* efClass, bool bRemove)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ProcessEffectForm");
+			byte* params = (byte*)malloc(8);
+			*(ScriptClass**)params = efClass;
+			*(bool*)(params + 4) = bRemove;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int GetShieldStrength()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetShieldStrength");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		void AdjustAmmoPool(float Change)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.AdjustAmmoPool");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = Change;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AdjustMaxPowerPool(float Change)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.AdjustMaxPowerPool");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = Change;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetMaxPowerPool(int Value)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetMaxPowerPool");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = Value;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetMaxHealthPool(int Value)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetMaxHealthPool");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = Value;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClientUpdateHUDHealth(int NewHealth, int NewHealthMax)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ClientUpdateHUDHealth");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = NewHealth;
+			*(int*)(params + 4) = NewHealthMax;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool ShouldRechargePowerPool()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ShouldRechargePowerPool");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void ForceHealthRegen()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ForceHealthRegen");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RechargeHealthPool(float DeltaSeconds)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.RechargeHealthPool");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaSeconds;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		Vector GetJetpackAirControl(Vector InAcceleration, Vector ZAxis)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetJetpackAirControl");
+			byte* params = (byte*)malloc(36);
+			*(Vector*)params = InAcceleration;
+			*(Vector*)(params + 12) = ZAxis;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		void UpdateSkiEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.UpdateSkiEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayJetpackEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayJetpackEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateJetpackEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.UpdateJetpackEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StopJetpackEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.StopJetpackEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayLandingSound()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayLandingSound");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayJumpingSound()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayJumpingSound");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RememberLastDamager(class Controller* Damager, int DamageAmount, class Actor* DamagingActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.RememberLastDamager");
+			byte* params = (byte*)malloc(12);
+			*(class Controller**)params = Damager;
+			*(int*)(params + 4) = DamageAmount;
+			*(class Actor**)(params + 8) = DamagingActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		float GetHealthPct()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetHealthPct");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		
+// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrPawn.AssistInfo'!
+void* CreateAssistRecord(class Controller* Damager, int DamageAmount)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.CreateAssistRecord");
+			byte* params = (byte*)malloc(20);
+			*(class Controller**)params = Damager;
+			*(int*)(params + 4) = DamageAmount;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrPawn.AssistInfo'!
+void**)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		class TrPlayerController* GetLastDamager()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetLastDamager");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class TrPlayerController**)params;
+			free(params);
+			return returnVal;
+		}
+		void ProcessKillAssists(class Controller* Killer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ProcessKillAssists");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = Killer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		float GetUnshieldedDamage(float inputDamage)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetUnshieldedDamage");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = inputDamage;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class TrPawn* GetPawnCausingDamage(class Controller* EventInstigator, class Actor* DamageCauser)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetPawnCausingDamage");
+			byte* params = (byte*)malloc(12);
+			*(class Controller**)params = EventInstigator;
+			*(class Actor**)(params + 4) = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class TrPawn**)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		float GetDamageScale(class Actor* DamageCauser, float Dist, ScriptClass* dmgType, class Controller* EventInstigator, class TrValueModifier* VM, float& DamageScaleWithoutNewPlayerAssist)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetDamageScale");
+			byte* params = (byte*)malloc(28);
+			*(class Actor**)params = DamageCauser;
+			*(float*)(params + 4) = Dist;
+			*(ScriptClass**)(params + 8) = dmgType;
+			*(class Controller**)(params + 12) = EventInstigator;
+			*(class TrValueModifier**)(params + 16) = VM;
+			*(float*)(params + 20) = DamageScaleWithoutNewPlayerAssist;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			DamageScaleWithoutNewPlayerAssist = *(float*)(params + 20);
+			auto returnVal = *(float*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		void DoRepairs(int HealAmount, class Controller* EventInstigator, class Actor* DamageCauser, ScriptClass* DamageType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.DoRepairs");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = HealAmount;
+			*(class Controller**)(params + 4) = EventInstigator;
+			*(class Actor**)(params + 8) = DamageCauser;
+			*(ScriptClass**)(params + 12) = DamageType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class Controller* CheckTribesTurretInstigator(class Controller* EventInstigator, class Actor* DamageCauser)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.CheckTribesTurretInstigator");
+			byte* params = (byte*)malloc(12);
+			*(class Controller**)params = EventInstigator;
+			*(class Actor**)(params + 4) = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Controller**)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void* HitInfo, class Actor* DamageCauser)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.TakeDamage");
+			byte* params = (byte*)malloc(68);
+			*(int*)params = DamageAmount;
+			*(class Controller**)(params + 4) = EventInstigator;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = Momentum;
+			*(ScriptClass**)(params + 32) = DamageType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 36) = HitInfo;
+			*(class Actor**)(params + 64) = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayWhiteoutEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayWhiteoutEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TakeRadiusDamage(class Controller* EventInstigator, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.TakeRadiusDamage");
+			byte* params = (byte*)malloc(44);
+			*(class Controller**)params = EventInstigator;
+			*(float*)(params + 4) = BaseDamage;
+			*(float*)(params + 8) = DamageRadius;
+			*(ScriptClass**)(params + 12) = DamageType;
+			*(float*)(params + 16) = Momentum;
+			*(Vector*)(params + 20) = HurtOrigin;
+			*(bool*)(params + 32) = bFullDamage;
+			*(class Actor**)(params + 36) = DamageCauser;
+			*(float*)(params + 40) = DamageFalloffExponent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool RecentlyGrabbedFlag()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.RecentlyGrabbedFlag");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		float GetShowDistanceThreshold(bool bIsEnemy)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetShowDistanceThreshold");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bIsEnemy;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PostRenderFor");
+			byte* params = (byte*)malloc(32);
+			*(class PlayerController**)params = PC;
+			*(class Canvas**)(params + 4) = Canvas;
+			*(Vector*)(params + 8) = CameraPosition;
+			*(Vector*)(params + 20) = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.DisplayDebug");
+			byte* params = (byte*)malloc(12);
+			*(class HUD**)params = HUD;
+			*(float*)(params + 4) = out_YL;
+			*(float*)(params + 8) = out_YPos;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_YL = *(float*)(params + 4);
+			out_YPos = *(float*)(params + 8);
+			free(params);
+		}
+		void Landed(Vector HitNormal, class Actor* FloorActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.Landed");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = HitNormal;
+			*(class Actor**)(params + 12) = FloorActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TakeFallingDamage()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.TakeFallingDamage");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayHardLandingEffect(Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayHardLandingEffect");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlaySonicPunchEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlaySonicPunchEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TakeFallDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.TakeFallDamage");
+			byte* params = (byte*)malloc(32);
+			*(int*)params = DamageAmount;
+			*(class Controller**)(params + 4) = EventInstigator;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = Momentum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProcessCreditEvent(byte EventType, bool bProxyEvent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ProcessCreditEvent");
+			byte* params = (byte*)malloc(5);
+			*params = EventType;
+			*(bool*)(params + 4) = bProxyEvent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void FlashLocationUpdated(class Weapon* InWeapon, Vector InFlashLocation, bool bViaReplication)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.FlashLocationUpdated");
+			byte* params = (byte*)malloc(20);
+			*(class Weapon**)params = InWeapon;
+			*(Vector*)(params + 4) = InFlashLocation;
+			*(bool*)(params + 16) = bViaReplication;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void WeaponFired(class Weapon* InWeapon, bool bViaReplication, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.WeaponFired");
+			byte* params = (byte*)malloc(20);
+			*(class Weapon**)params = InWeapon;
+			*(bool*)(params + 4) = bViaReplication;
+			*(Vector*)(params + 8) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool Dodge(byte DoubleClickMove)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.Dodge");
+			byte* params = (byte*)malloc(5);
+			*params = DoubleClickMove;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool PerformDodge(byte DoubleClickMove, Vector Dir, Vector Cross)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PerformDodge");
+			byte* params = (byte*)malloc(29);
+			*params = DoubleClickMove;
+			*(Vector*)(params + 4) = Dir;
+			*(Vector*)(params + 16) = Cross;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		void gibbedBy(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.gibbedBy");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void EncroachedBy(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.EncroachedBy");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool ShouldGib(ScriptClass* UTDamageType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ShouldGib");
+			byte* params = (byte*)malloc(8);
+			*(ScriptClass**)params = UTDamageType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void SetHandIKEnabled(bool bEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetHandIKEnabled");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayDamageCameraShake()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayDamageCameraShake");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool IsLastHitFromNinjaSmoke()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.IsLastHitFromNinjaSmoke");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void PlayTakeHitEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayTakeHitEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FellOutOfWorld(ScriptClass* dmgType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.FellOutOfWorld");
+			byte* params = (byte*)malloc(4);
+			*(ScriptClass**)params = dmgType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool Died(class Controller* Killer, ScriptClass* DamageType, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.Died");
+			byte* params = (byte*)malloc(24);
+			*(class Controller**)params = Killer;
+			*(ScriptClass**)(params + 4) = DamageType;
+			*(Vector*)(params + 8) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
+		void StopLocalEffectsAndSounds()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.StopLocalEffectsAndSounds");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetOverlayMeshHidden(bool bNewHidden)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetOverlayMeshHidden");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNewHidden;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayDying(ScriptClass* DamageType, Vector HitLoc)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayDying");
+			byte* params = (byte*)malloc(16);
+			*(ScriptClass**)params = DamageType;
+			*(Vector*)(params + 4) = HitLoc;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyTeamChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.NotifyTeamChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateTeamBlockerMaterials()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.UpdateTeamBlockerMaterials");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PossessedBy(class Controller* C, bool bVehicleTransition)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PossessedBy");
+			byte* params = (byte*)malloc(8);
+			*(class Controller**)params = C;
+			*(bool*)(params + 4) = bVehicleTransition;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ResetSkin()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ResetSkin");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetSkin(class Material* NewMaterial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetSkin");
+			byte* params = (byte*)malloc(4);
+			*(class Material**)params = NewMaterial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InitializeOverlayMaterials()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.InitializeOverlayMaterials");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClientPlayHealthRegenEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ClientPlayHealthRegenEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetShieldPackActive(bool bActive)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetShieldPackActive");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bActive;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayShieldPackEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayShieldPackEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetStealthPackActive(bool bActive)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetStealthPackActive");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bActive;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayStealthPackEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayStealthPackEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PulseStealth(bool bOverrideIgnore)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PulseStealth");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bOverrideIgnore;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetRagePerkActive()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetRagePerkActive");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClearRagePerk()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ClearRagePerk");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayRageEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayRageEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayInvulnerabilityEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayInvulnerabilityEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StartRidingInVehicle(class TrVehicle* V, int SeatIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.StartRidingInVehicle");
+			byte* params = (byte*)malloc(8);
+			*(class TrVehicle**)params = V;
+			*(int*)(params + 4) = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopRidingInVehicle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.StopRidingInVehicle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StartDriving(class Vehicle* V)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.StartDriving");
+			byte* params = (byte*)malloc(4);
+			*(class Vehicle**)params = V;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopDriving(class Vehicle* V)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.StopDriving");
+			byte* params = (byte*)malloc(4);
+			*(class Vehicle**)params = V;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnRanOver(class SVehicle* Vehicle, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* RunOverComponent, int WheelIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.OnRanOver");
+			byte* params = (byte*)malloc(12);
+			*(class SVehicle**)params = Vehicle;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = RunOverComponent;
+			*(int*)(params + 8) = WheelIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void EnableJamming()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.EnableJamming");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisableJamming()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.DisableJamming");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisableJammingOtherPawns()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.DisableJammingOtherPawns");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void EnteredFriendJammingRadius(class TrPawn* JammingFriend)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.EnteredFriendJammingRadius");
+			byte* params = (byte*)malloc(4);
+			*(class TrPawn**)params = JammingFriend;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ExitFriendJammingRadius(class TrPawn* JammingFriend)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ExitFriendJammingRadius");
+			byte* params = (byte*)malloc(4);
+			*(class TrPawn**)params = JammingFriend;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void EnteredEnemyJammingRadius()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.EnteredEnemyJammingRadius");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ExitEnemyJammingRadius()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ExitEnemyJammingRadius");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool IsJammedByEnemy()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.IsJammedByEnemy");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void PlayJammerPackEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayJammerPackEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayJammingByFriendEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayJammingByFriendEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayEnemyJammerPackEffect(bool enteredJammingRadius)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayEnemyJammerPackEffect");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = enteredJammingRadius;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnPawnDetectedByCollisionProxy(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.OnPawnDetectedByCollisionProxy");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnPawnExitedCollisionProxy(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.OnPawnExitedCollisionProxy");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnEnteredDropJammer(class TrDeployable_DropJammer* DropJammer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.OnEnteredDropJammer");
+			byte* params = (byte*)malloc(4);
+			*(class TrDeployable_DropJammer**)params = DropJammer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnExitedDropJammer(class TrDeployable_DropJammer* DropJammer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.OnExitedDropJammer");
+			byte* params = (byte*)malloc(4);
+			*(class TrDeployable_DropJammer**)params = DropJammer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateEnemyDropJammer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.UpdateEnemyDropJammer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateFriendlyDropJammer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.UpdateFriendlyDropJammer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayJammingByEnemyDropJammerEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayJammingByEnemyDropJammerEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayJammingByFriendlyDropJammerEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayJammingByFriendlyDropJammerEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnChangeJammingTeam()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.OnChangeJammingTeam");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetMeshVisibility(bool bVisible)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetMeshVisibility");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bVisible;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetFirstPersonBodyVisibility(bool bHide)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetFirstPersonBodyVisibility");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bHide;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void WeaponAttachmentChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.WeaponAttachmentChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ForceCrouch()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ForceCrouch");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int FindClosestStickyGrenadeSocketIndex(Vector ProjectileLocation, bool bOnlyFindAvailableSlots)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.FindClosestStickyGrenadeSocketIndex");
+			byte* params = (byte*)malloc(20);
+			*(Vector*)params = ProjectileLocation;
+			*(bool*)(params + 12) = bOnlyFindAvailableSlots;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void StickGrenadeToPawn(class TrProjectile* Projectile)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.StickGrenadeToPawn");
+			byte* params = (byte*)malloc(4);
+			*(class TrProjectile**)params = Projectile;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateStickyGrenades(float DeltaSeconds)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.UpdateStickyGrenades");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaSeconds;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetSkiing(bool bEnabled, bool bJump)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetSkiing");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bEnabled;
+			*(bool*)(params + 4) = bJump;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlaySkiEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlaySkiEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StopSkiEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.StopSkiEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlaySkiEffectsSound()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlaySkiEffectsSound");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StopSkiEffectsSound()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.StopSkiEffectsSound");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FaceRotation(Rotator NewRotation, float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.FaceRotation");
+			byte* params = (byte*)malloc(16);
+			*(Rotator*)params = NewRotation;
+			*(float*)(params + 12) = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayDyingSound()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayDyingSound");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HoldGameObject(class UDKCarriedObject* GameObj)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.HoldGameObject");
+			byte* params = (byte*)malloc(4);
+			*(class UDKCarriedObject**)params = GameObj;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AdjustDamage(int& InDamage, Vector& Momentum, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void* HitInfo, class Actor* DamageCauser)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.AdjustDamage");
+			byte* params = (byte*)malloc(68);
+			*(int*)params = InDamage;
+			*(Vector*)(params + 4) = Momentum;
+			*(class Controller**)(params + 16) = InstigatedBy;
+			*(Vector*)(params + 20) = HitLocation;
+			*(ScriptClass**)(params + 32) = DamageType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 36) = HitInfo;
+			*(class Actor**)(params + 64) = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			InDamage = *(int*)params;
+			Momentum = *(Vector*)(params + 4);
+			free(params);
+		}
+		void GoInvulnerable(float InvulnerableTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GoInvulnerable");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = InvulnerableTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearInvulnerability()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ClearInvulnerability");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetMovementPhysics()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetMovementPhysics");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnAnimEnd(class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.OnAnimEnd");
+			byte* params = (byte*)malloc(12);
+			*(class AnimNodeSequence**)params = SeqNode;
+			*(float*)(params + 4) = PlayedTime;
+			*(float*)(params + 8) = ExcessTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayTeleportEffect(bool bOut, bool bSound)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayTeleportEffect");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bOut;
+			*(bool*)(params + 4) = bSound;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TurnOff()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.TurnOff");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetDetectedByEnemyScanner(bool detected)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetDetectedByEnemyScanner");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = detected;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool GetDetectedByEnemyScanner()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetDetectedByEnemyScanner");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool SetScannerDetect(bool detected)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetScannerDetect");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = detected;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		ScriptClass* GetFamilyInfo()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetFamilyInfo");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptClass**)params;
+			free(params);
+			return returnVal;
+		}
+		void LockedOutFromFlagPickupTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.LockedOutFromFlagPickupTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void LockFromFlagPickup(float TimeToLock)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.LockFromFlagPickup");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = TimeToLock;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Blink(Vector Impulse, float MinZ, float PctEffectiveness)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.Blink");
+			byte* params = (byte*)malloc(20);
+			*(Vector*)params = Impulse;
+			*(float*)(params + 12) = MinZ;
+			*(float*)(params + 16) = PctEffectiveness;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayBlinkPackEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.PlayBlinkPackEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool DoJump(bool bUpdating)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.DoJump");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bUpdating;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool CheckClotheslineDamage(class Pawn* PawnHittingMe)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.CheckClotheslineDamage");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = PawnHittingMe;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetSpectatorName()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.GetSpectatorName");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
+		void CrushedBy(class Pawn* OtherPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.CrushedBy");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = OtherPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StuckOnPawn(class Pawn* OtherPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.StuckOnPawn");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = OtherPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetPending3PSkin(ScriptClass* NewPendingSkin)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.SetPending3PSkin");
+			byte* params = (byte*)malloc(4);
+			*(ScriptClass**)params = NewPendingSkin;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CheckApplyPending3PSkin()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.CheckApplyPending3PSkin");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ThrowActiveWeapon(bool bDestroyWeap)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ThrowActiveWeapon");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bDestroyWeap;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ThrowWeaponOnDeath()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ThrowWeaponOnDeath");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClearSkiParticleEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ClearSkiParticleEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClearJetpackParticleEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.ClearJetpackParticleEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AlienFXOverlay(byte Type)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.AlienFXOverlay");
+			byte* params = (byte*)malloc(1);
+			*params = Type;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -25,10 +25,36 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bRotateBothFlagsOnCapture, 0x1)
 		ADD_OBJECT(TrCTFBase_DiamondSword, DiamondSwordFlagStands)
 		ADD_OBJECT(TrCTFBase_BloodEagle, BloodEagleFlagStands)
-		// Here lies the not-yet-implemented method 'ApplyServerSettings'
-		// Here lies the not-yet-implemented method 'RegisterFlagBase'
-		// Here lies the not-yet-implemented method 'ScoreFlag'
-		// Here lies the not-yet-implemented method 'RotateFlag'
+		void ApplyServerSettings()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCTFBlitz.ApplyServerSettings");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RegisterFlagBase(class TrCTFBase* FlagBase)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCTFBlitz.RegisterFlagBase");
+			byte* params = (byte*)malloc(4);
+			*(class TrCTFBase**)params = FlagBase;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ScoreFlag(class Controller* Scorer, class TrFlagBase* theFlag)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCTFBlitz.ScoreFlag");
+			byte* params = (byte*)malloc(8);
+			*(class Controller**)params = Scorer;
+			*(class TrFlagBase**)(params + 4) = theFlag;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RotateFlag(class TrFlagBase* theFlag)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCTFBlitz.RotateFlag");
+			byte* params = (byte*)malloc(4);
+			*(class TrFlagBase**)params = theFlag;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

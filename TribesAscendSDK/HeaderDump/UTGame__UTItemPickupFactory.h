@@ -25,12 +25,56 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, UseHintMessage, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RespawnTime, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, PickupSound)
-		// Here lies the not-yet-implemented method 'InitializePickup'
-		// Here lies the not-yet-implemented method 'GetLocalString'
-		// Here lies the not-yet-implemented method 'SpawnCopyFor'
-		// Here lies the not-yet-implemented method 'SetRespawn'
-		// Here lies the not-yet-implemented method 'GetRespawnTime'
-		// Here lies the not-yet-implemented method 'BotDesireability'
+		void InitializePickup()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.InitializePickup");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		ScriptArray<wchar_t> GetLocalString(int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.GetLocalString");
+			byte* params = (byte*)malloc(24);
+			*(int*)params = Switch;
+			*(class PlayerReplicationInfo**)(params + 4) = RelatedPRI;
+			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void SpawnCopyFor(class Pawn* Recipient)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.SpawnCopyFor");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = Recipient;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetRespawn()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.SetRespawn");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		float GetRespawnTime()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.GetRespawnTime");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		float BotDesireability(class Pawn* P, class Controller* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.BotDesireability");
+			byte* params = (byte*)malloc(12);
+			*(class Pawn**)params = P;
+			*(class Controller**)(params + 4) = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

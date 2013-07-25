@@ -27,8 +27,24 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, ReachSpecClass)
 		ADD_STRUCT(::VectorProperty, InitLocation, 0xFFFFFFFF
 		ADD_VAR(::FloatProperty, MinDistBetweenSpecTypes, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'EnforceMinDist'
-		// Here lies the not-yet-implemented method 'Recycle'
+		bool EnforceMinDist(class Pawn* P, float InMinDist, ScriptClass* InSpecClass, Vector LastLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_MinDistBetweenSpecsOfType.EnforceMinDist");
+			byte* params = (byte*)malloc(28);
+			*(class Pawn**)params = P;
+			*(float*)(params + 4) = InMinDist;
+			*(ScriptClass**)(params + 8) = InSpecClass;
+			*(Vector*)(params + 12) = LastLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_MinDistBetweenSpecsOfType.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

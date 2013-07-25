@@ -22,7 +22,11 @@ namespace UnrealScript
 		ADD_OBJECT(GFxTrMenuMoviePlayer, TrOuter)
 		ADD_OBJECT(OnlineSubsystem, OnlineSub)
 		ADD_VAR(::BoolProperty, bSceneCreated, 0x1)
-		// Here lies the not-yet-implemented method 'Initialize'
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

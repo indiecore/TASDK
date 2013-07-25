@@ -13,11 +13,31 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TrPawn, m_TrPawn)
-		// Here lies the not-yet-implemented method 'PlayNoVehicleAnim'
-		// Here lies the not-yet-implemented method 'PlayDrivingAnim'
-		// Here lies the not-yet-implemented method 'PlayEnterAnim'
-		// Here lies the not-yet-implemented method 'PlayExitAnim'
-		// Here lies the not-yet-implemented method 'PlayChangeSeatAnim'
+		void PlayNoVehicleAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByVehicle.PlayNoVehicleAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayDrivingAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByVehicle.PlayDrivingAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayEnterAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByVehicle.PlayEnterAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayExitAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByVehicle.PlayExitAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayChangeSeatAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByVehicle.PlayChangeSeatAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

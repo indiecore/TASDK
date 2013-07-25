@@ -31,16 +31,71 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsActive, 0x1)
 		ADD_VAR(::IntProperty, RemainingTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MyTeam, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'ReadyToPlay'
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'Show'
-		// Here lies the not-yet-implemented method 'Hide'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'UpdateTeam'
-		// Here lies the not-yet-implemented method 'UpdateCapturePointData'
-		// Here lies the not-yet-implemented method 'UpdateTeamScore'
-		// Here lies the not-yet-implemented method 'FormatTime'
-		// Here lies the not-yet-implemented method 'ForceUpdate'
+		void ReadyToPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHStats.ReadyToPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Initialize(class TrPlayerController* PC, class GfxTrHud* MP)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHStats.Initialize");
+			byte* params = (byte*)malloc(8);
+			*(class TrPlayerController**)params = PC;
+			*(class GfxTrHud**)(params + 4) = MP;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Show()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHStats.Show");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Hide()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHStats.Hide");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Tick()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHStats.Tick");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateTeam()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHStats.UpdateTeam");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateCapturePointData(class TrGameReplicationInfo* GRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHStats.UpdateCapturePointData");
+			byte* params = (byte*)malloc(4);
+			*(class TrGameReplicationInfo**)params = GRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateTeamScore(class TrGameReplicationInfo* GRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHStats.UpdateTeamScore");
+			byte* params = (byte*)malloc(4);
+			*(class TrGameReplicationInfo**)params = GRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		ScriptArray<wchar_t> FormatTime(int Seconds)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHStats.FormatTime");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = Seconds;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void ForceUpdate()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHStats.ForceUpdate");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

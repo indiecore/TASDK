@@ -46,17 +46,114 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bParentNodeArrayBuilt, 0x4)
 		ADD_VAR(::BoolProperty, bBeingEdited, 0x2)
 		ADD_VAR(::BoolProperty, bUseSavedPose, 0x1)
-		// Here lies the not-yet-implemented method 'FindSkelControl'
-		// Here lies the not-yet-implemented method 'FindMorphNode'
-		// Here lies the not-yet-implemented method 'SetUseSavedPose'
-		// Here lies the not-yet-implemented method 'SetAnimGroupForNode'
-		// Here lies the not-yet-implemented method 'GetGroupSynchMaster'
-		// Here lies the not-yet-implemented method 'GetGroupNotifyMaster'
-		// Here lies the not-yet-implemented method 'ForceGroupRelativePosition'
-		// Here lies the not-yet-implemented method 'GetGroupRelativePosition'
-		// Here lies the not-yet-implemented method 'SetGroupRateScale'
-		// Here lies the not-yet-implemented method 'GetGroupRateScale'
-		// Here lies the not-yet-implemented method 'GetGroupIndex'
+		class SkelControlBase* FindSkelControl(ScriptName InControlName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimTree.FindSkelControl");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = InControlName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class SkelControlBase**)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		class MorphNodeBase* FindMorphNode(ScriptName InNodeName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimTree.FindMorphNode");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = InNodeName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class MorphNodeBase**)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void SetUseSavedPose(bool bUseSaved)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimTree.SetUseSavedPose");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bUseSaved;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool SetAnimGroupForNode(class AnimNodeSequence* SeqNode, ScriptName GroupName, bool bCreateIfNotFound)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimTree.SetAnimGroupForNode");
+			byte* params = (byte*)malloc(20);
+			*(class AnimNodeSequence**)params = SeqNode;
+			*(ScriptName*)(params + 4) = GroupName;
+			*(bool*)(params + 12) = bCreateIfNotFound;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		class AnimNodeSequence* GetGroupSynchMaster(ScriptName GroupName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimTree.GetGroupSynchMaster");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = GroupName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class AnimNodeSequence**)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		class AnimNodeSequence* GetGroupNotifyMaster(ScriptName GroupName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimTree.GetGroupNotifyMaster");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = GroupName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class AnimNodeSequence**)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void ForceGroupRelativePosition(ScriptName GroupName, float RelativePosition)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimTree.ForceGroupRelativePosition");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = GroupName;
+			*(float*)(params + 8) = RelativePosition;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		float GetGroupRelativePosition(ScriptName GroupName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimTree.GetGroupRelativePosition");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = GroupName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void SetGroupRateScale(ScriptName GroupName, float NewRateScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimTree.SetGroupRateScale");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = GroupName;
+			*(float*)(params + 8) = NewRateScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		float GetGroupRateScale(ScriptName GroupName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimTree.GetGroupRateScale");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = GroupName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		int GetGroupIndex(ScriptName GroupName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimTree.GetGroupIndex");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = GroupName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

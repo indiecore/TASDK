@@ -29,7 +29,14 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobileMenuObject.UVCoords' for the property named 'ImageUVs'!
 		ADD_VAR(::ByteProperty, ImageDrawStyle, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, Image)
-		// Here lies the not-yet-implemented method 'RenderObject'
+		void RenderObject(class Canvas* Canvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuImage.RenderObject");
+			byte* params = (byte*)malloc(4);
+			*(class Canvas**)params = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

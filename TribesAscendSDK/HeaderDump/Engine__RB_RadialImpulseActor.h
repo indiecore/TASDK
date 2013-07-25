@@ -13,8 +13,22 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::ByteProperty, ImpulseCount, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'OnToggle'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		void OnToggle(class SeqAct_Toggle* inAction)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_RadialImpulseActor.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = inAction;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_RadialImpulseActor.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

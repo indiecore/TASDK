@@ -6,6 +6,13 @@ namespace UnrealScript
 	class UTScriptedBotVolume : public PhysicsVolume
 	{
 	public:
-		// Here lies the not-yet-implemented method 'PawnLeavingVolume'
+		void PawnLeavingVolume(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTScriptedBotVolume.PawnLeavingVolume");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }

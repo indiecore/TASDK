@@ -19,13 +19,67 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIgnoreAutoPlay, 0x4)
 		ADD_VAR(::BoolProperty, bFadeOnToggle, 0x2)
 		ADD_VAR(::BoolProperty, bCurrentlyPlaying, 0x1)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'StartPlaying'
-		// Here lies the not-yet-implemented method 'StopPlaying'
-		// Here lies the not-yet-implemented method 'OnToggle'
-		// Here lies the not-yet-implemented method 'CreateCheckpointRecord'
-		// Here lies the not-yet-implemented method 'ApplyCheckpointRecord'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StartPlaying()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.StartPlaying");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StopPlaying()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.StopPlaying");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnToggle(class SeqAct_Toggle* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CreateCheckpointRecord(
+// WARNING: Unknown structure type 'ScriptStruct Engine.AmbientSoundSimpleToggleable.CheckpointRecord'!
+void*& Record)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.CreateCheckpointRecord");
+			byte* params = (byte*)malloc(4);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.AmbientSoundSimpleToggleable.CheckpointRecord'!
+void**)params = Record;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Record = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.AmbientSoundSimpleToggleable.CheckpointRecord'!
+void**)params;
+			free(params);
+		}
+		void ApplyCheckpointRecord(
+// WARNING: Unknown structure type 'ScriptStruct Engine.AmbientSoundSimpleToggleable.CheckpointRecord'!
+void*& Record)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.ApplyCheckpointRecord");
+			byte* params = (byte*)malloc(4);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.AmbientSoundSimpleToggleable.CheckpointRecord'!
+void**)params = Record;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Record = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.AmbientSoundSimpleToggleable.CheckpointRecord'!
+void**)params;
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

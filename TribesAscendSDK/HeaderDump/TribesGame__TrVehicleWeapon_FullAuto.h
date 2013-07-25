@@ -20,7 +20,11 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::NameProperty, m_PostFireState, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, m_FireTail)
-		// Here lies the not-yet-implemented method 'RefireCheckTimer'
+		void RefireCheckTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon_FullAuto.RefireCheckTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

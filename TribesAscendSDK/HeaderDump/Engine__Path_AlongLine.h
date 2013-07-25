@@ -13,8 +13,22 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'AlongLine'
-		// Here lies the not-yet-implemented method 'Recycle'
+		bool AlongLine(class Pawn* P, Vector Dir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AlongLine.AlongLine");
+			byte* params = (byte*)malloc(20);
+			*(class Pawn**)params = P;
+			*(Vector*)(params + 4) = Dir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AlongLine.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_STRUCT

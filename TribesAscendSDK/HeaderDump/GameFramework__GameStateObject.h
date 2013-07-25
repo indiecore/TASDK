@@ -24,8 +24,16 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, SessionType, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Array_Mirror' for the property named 'PlayerStates'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Array_Mirror' for the property named 'TeamStates'!
-		// Here lies the not-yet-implemented method 'PreProcessStream'
-		// Here lies the not-yet-implemented method 'Reset'
+		void PreProcessStream()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameStateObject.PreProcessStream");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Reset()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameStateObject.Reset");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

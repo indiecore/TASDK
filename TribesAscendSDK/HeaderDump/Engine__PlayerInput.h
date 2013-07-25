@@ -67,25 +67,153 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bInvertAirVehicles, 0x8)
 		ADD_VAR(::BoolProperty, bInvertTurn, 0x4)
 		ADD_VAR(::BoolProperty, bInvertMouse, 0x2)
-		// Here lies the not-yet-implemented method 'CheckForDoubleClickMove'
-		// Here lies the not-yet-implemented method 'InvertMouse'
-		// Here lies the not-yet-implemented method 'InvertTurn'
-		// Here lies the not-yet-implemented method 'SetSensitivity'
-		// Here lies the not-yet-implemented method 'DrawHUD'
-		// Here lies the not-yet-implemented method 'PreProcessInput'
-		// Here lies the not-yet-implemented method 'PostProcessInput'
-		// Here lies the not-yet-implemented method 'AdjustMouseSensitivity'
-		// Here lies the not-yet-implemented method 'IsMouseSmoothEnabled'
-		// Here lies the not-yet-implemented method 'PlayerInput'
-		// Here lies the not-yet-implemented method 'ProcessInputMatching'
-		// Here lies the not-yet-implemented method 'CatchDoubleClickInput'
-		// Here lies the not-yet-implemented method 'Jump'
-		// Here lies the not-yet-implemented method 'SmartJump'
-		// Here lies the not-yet-implemented method 'ClearSmoothing'
-		// Here lies the not-yet-implemented method 'SmoothMouse'
-		// Here lies the not-yet-implemented method 'InitInputSystem'
-		// Here lies the not-yet-implemented method 'ClientInitInputSystem'
-		// Here lies the not-yet-implemented method 'PreClientTravel'
+		byte CheckForDoubleClickMove(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.CheckForDoubleClickMove");
+			byte* params = (byte*)malloc(5);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool InvertMouse()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.InvertMouse");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool InvertTurn()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.InvertTurn");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void SetSensitivity(float F)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.SetSensitivity");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = F;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DrawHUD(class HUD* H)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.DrawHUD");
+			byte* params = (byte*)malloc(4);
+			*(class HUD**)params = H;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PreProcessInput(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.PreProcessInput");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostProcessInput(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.PostProcessInput");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AdjustMouseSensitivity(float FOVScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.AdjustMouseSensitivity");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = FOVScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool IsMouseSmoothEnabled()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.IsMouseSmoothEnabled");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void PlayerInput(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.PlayerInput");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProcessInputMatching(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.ProcessInputMatching");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CatchDoubleClickInput()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.CatchDoubleClickInput");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Jump()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.Jump");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SmartJump()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.SmartJump");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClearSmoothing()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.ClearSmoothing");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		float SmoothMouse(float aMouse, float DeltaTime, byte& SampleCount, int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.SmoothMouse");
+			byte* params = (byte*)malloc(17);
+			*(float*)params = aMouse;
+			*(float*)(params + 4) = DeltaTime;
+			*(params + 8) = SampleCount;
+			*(int*)(params + 12) = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			SampleCount = *(params + 8);
+			auto returnVal = *(float*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void InitInputSystem()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.InitInputSystem");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClientInitInputSystem()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.ClientInitInputSystem");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PreClientTravel(ScriptArray<wchar_t> PendingURL, byte TravelType, bool bIsSeamlessTravel)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.PreClientTravel");
+			byte* params = (byte*)malloc(17);
+			*(ScriptArray<wchar_t>*)params = PendingURL;
+			*(params + 12) = TravelType;
+			*(bool*)(params + 16) = bIsSeamlessTravel;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

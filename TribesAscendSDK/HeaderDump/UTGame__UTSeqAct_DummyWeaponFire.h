@@ -34,9 +34,26 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, WeaponClass)
 		ADD_VAR(::IntProperty, ShotsToFire, 0xFFFFFFFF)
 		ADD_OBJECT(UTDummyPawn, DummyPawn)
-		// Here lies the not-yet-implemented method 'Activated'
-		// Here lies the not-yet-implemented method 'NotifyDummyFire'
-		// Here lies the not-yet-implemented method 'Update'
+		void Activated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_DummyWeaponFire.Activated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void NotifyDummyFire()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_DummyWeaponFire.NotifyDummyFire");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool Update(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_DummyWeaponFire.Update");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

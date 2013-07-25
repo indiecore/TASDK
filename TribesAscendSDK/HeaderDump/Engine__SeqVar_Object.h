@@ -20,8 +20,23 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(::VectorProperty, ActorLocation, 0xFFFFFFFF
 		ADD_OBJECT(Object, ObjValue)
-		// Here lies the not-yet-implemented method 'GetObjectValue'
-		// Here lies the not-yet-implemented method 'SetObjectValue'
+		class Object* GetObjectValue()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqVar_Object.GetObjectValue");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Object**)params;
+			free(params);
+			return returnVal;
+		}
+		void SetObjectValue(class Object* NewValue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqVar_Object.SetObjectValue");
+			byte* params = (byte*)malloc(4);
+			*(class Object**)params = NewValue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_STRUCT

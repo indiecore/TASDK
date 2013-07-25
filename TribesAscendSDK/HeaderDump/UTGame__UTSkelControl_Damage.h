@@ -5,7 +5,23 @@ namespace UnrealScript
 	class UTSkelControl_Damage : public UDKSkelControl_Damage
 	{
 	public:
-		// Here lies the not-yet-implemented method 'BreakApart'
-		// Here lies the not-yet-implemented method 'BreakApartOnDeath'
+		void BreakApart(Vector PartLocation, bool bIsVisible)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSkelControl_Damage.BreakApart");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = PartLocation;
+			*(bool*)(params + 12) = bIsVisible;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void BreakApartOnDeath(Vector PartLocation, bool bIsVisible)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSkelControl_Damage.BreakApartOnDeath");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = PartLocation;
+			*(bool*)(params + 12) = bIsVisible;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }

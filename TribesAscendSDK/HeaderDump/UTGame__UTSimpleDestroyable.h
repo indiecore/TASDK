@@ -42,12 +42,59 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDestroyOnVehicleTouch, 0x4)
 		ADD_VAR(::BoolProperty, bDestroyOnPlayerTouch, 0x2)
 		ADD_VAR(::BoolProperty, bDestroyOnDamage, 0x1)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'GoBoom'
-		// Here lies the not-yet-implemented method 'RespawnDestructible'
-		// Here lies the not-yet-implemented method 'TakeDamage'
-		// Here lies the not-yet-implemented method 'Touch'
-		// Here lies the not-yet-implemented method 'CheckRespawn'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void GoBoom()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.GoBoom");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RespawnDestructible()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.RespawnDestructible");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void* HitInfo, class Actor* DamageCauser)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.TakeDamage");
+			byte* params = (byte*)malloc(68);
+			*(int*)params = DamageAmount;
+			*(class Controller**)(params + 4) = EventInstigator;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = Momentum;
+			*(ScriptClass**)(params + 32) = DamageType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 36) = HitInfo;
+			*(class Actor**)(params + 64) = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Touch(class Actor* Other, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* OtherComp, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.Touch");
+			byte* params = (byte*)malloc(32);
+			*(class Actor**)params = Other;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = OtherComp;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CheckRespawn()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.CheckRespawn");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

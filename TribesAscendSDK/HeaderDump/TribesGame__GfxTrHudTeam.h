@@ -18,11 +18,49 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, FlagCarrierTF)
 		ADD_OBJECT(GFxObject, ScoreTF)
 		ADD_OBJECT(GFxObject, ScoreBarMC)
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'InitMessageRow'
-		// Here lies the not-yet-implemented method 'ClearStats'
-		// Here lies the not-yet-implemented method 'UpdateGameHUD'
-		// Here lies the not-yet-implemented method 'GetRank'
+		void Init(class LocalPlayer* Player)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GfxTrHudTeam.Init");
+			byte* params = (byte*)malloc(4);
+			*(class LocalPlayer**)params = Player;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class GFxObject* InitMessageRow()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GfxTrHudTeam.InitMessageRow");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxObject**)params;
+			free(params);
+			return returnVal;
+		}
+		void ClearStats(bool clearScores)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GfxTrHudTeam.ClearStats");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = clearScores;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateGameHUD(class UTPlayerReplicationInfo* PRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GfxTrHudTeam.UpdateGameHUD");
+			byte* params = (byte*)malloc(4);
+			*(class UTPlayerReplicationInfo**)params = PRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		ScriptArray<wchar_t> GetRank(class PlayerReplicationInfo* PRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GfxTrHudTeam.GetRank");
+			byte* params = (byte*)malloc(16);
+			*(class PlayerReplicationInfo**)params = PRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_OBJECT

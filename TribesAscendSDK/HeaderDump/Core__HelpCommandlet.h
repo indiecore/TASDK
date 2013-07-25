@@ -5,6 +5,15 @@ namespace UnrealScript
 	class HelpCommandlet : public Commandlet
 	{
 	public:
-		// Here lies the not-yet-implemented method 'Main'
+		int Main(ScriptArray<wchar_t> Params)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.HelpCommandlet.Main");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = Params;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 12);
+			free(params);
+			return returnVal;
+		}
 	};
 }

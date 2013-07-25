@@ -33,8 +33,16 @@ namespace UnrealScript
 		ADD_OBJECT(StaticMesh, DeformMesh)
 		ADD_VAR(::FloatProperty, ScaleY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ScaleX, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'ClearLoftMesh'
-		// Here lies the not-yet-implemented method 'UpdateSplineParams'
+		void ClearLoftMesh()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineLoftActor.ClearLoftMesh");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateSplineParams()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineLoftActor.UpdateSplineParams");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

@@ -110,8 +110,26 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fJetpackPowerPoolTickRate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fJetpackPowerPoolCost, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fJetpackInitAccelMultiplier, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetDeviceClassByEquipPoint'
-		// Here lies the not-yet-implemented method 'GetContentDeviceClassStringByEquipPoint'
+		ScriptClass* GetDeviceClassByEquipPoint(byte EquipPoint)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFamilyInfo.GetDeviceClassByEquipPoint");
+			byte* params = (byte*)malloc(5);
+			*params = EquipPoint;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptClass**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetContentDeviceClassStringByEquipPoint(byte EquipPoint)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFamilyInfo.GetContentDeviceClassStringByEquipPoint");
+			byte* params = (byte*)malloc(13);
+			*params = EquipPoint;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

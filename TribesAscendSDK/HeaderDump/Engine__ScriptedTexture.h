@@ -14,7 +14,14 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bSkipNextClear, 0x2)
 		ADD_VAR(::BoolProperty, bNeedsUpdate, 0x1)
-		// Here lies the not-yet-implemented method 'Render'
+		void Render(class Canvas* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ScriptedTexture.Render");
+			byte* params = (byte*)malloc(4);
+			*(class Canvas**)params = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

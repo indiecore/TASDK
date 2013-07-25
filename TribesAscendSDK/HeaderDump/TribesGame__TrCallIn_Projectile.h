@@ -35,8 +35,23 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, FireTimeLength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CallRadius, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, ProjectileFireClass)
-		// Here lies the not-yet-implemented method 'FireCompletedCallIn'
-		// Here lies the not-yet-implemented method 'FireProjectile'
+		bool FireCompletedCallIn(int CallInOffs, Vector TargetLocation, Vector TargetNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_Projectile.FireCompletedCallIn");
+			byte* params = (byte*)malloc(32);
+			*(int*)params = CallInOffs;
+			*(Vector*)(params + 4) = TargetLocation;
+			*(Vector*)(params + 16) = TargetNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		void FireProjectile()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_Projectile.FireProjectile");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

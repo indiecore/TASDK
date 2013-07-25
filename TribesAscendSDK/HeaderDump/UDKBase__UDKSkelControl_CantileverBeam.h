@@ -23,7 +23,15 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, Velocity, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, InitialWorldSpaceGoalOffset, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, WorldSpaceGoal, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'EntireBeamVelocity'
+		Vector EntireBeamVelocity()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_CantileverBeam.EntireBeamVelocity");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

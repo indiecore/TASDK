@@ -47,7 +47,11 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TestMaxFallSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TestGroundSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TestJumpZ, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		void PreBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Scout.PreBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

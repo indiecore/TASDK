@@ -12,14 +12,66 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, DLCRootDir, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'OnFindDLCComplete'
-		// Here lies the not-yet-implemented method 'FindDLC'
-		// Here lies the not-yet-implemented method 'AddFindDLCDelegate'
-		// Here lies the not-yet-implemented method 'ClearFindDLCDelegate'
-		// Here lies the not-yet-implemented method 'DeleteDLC'
-		// Here lies the not-yet-implemented method 'InstallAllDLC'
-		// Here lies the not-yet-implemented method 'InstallDLC'
-		// Here lies the not-yet-implemented method 'TriggerFindDLCDelegates'
+		void OnFindDLCComplete()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.OnFindDLCComplete");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FindDLC()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.FindDLC");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AddFindDLCDelegate(
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void* InDelegate)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.AddFindDLCDelegate");
+			byte* params = (byte*)malloc(12);
+			*(
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void**)params = InDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearFindDLCDelegate(
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void* InDelegate)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.ClearFindDLCDelegate");
+			byte* params = (byte*)malloc(12);
+			*(
+// ERROR: Unknown object class 'Class Core.DelegateProperty'!
+void**)params = InDelegate;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DeleteDLC(ScriptArray<wchar_t> DLCName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.DeleteDLC");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = DLCName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InstallAllDLC()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.InstallAllDLC");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void InstallDLC(ScriptArray<wchar_t> DLCName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.InstallDLC");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = DLCName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TriggerFindDLCDelegates()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.TriggerFindDLCDelegates");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

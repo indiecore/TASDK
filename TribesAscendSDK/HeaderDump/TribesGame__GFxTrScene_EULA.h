@@ -12,10 +12,29 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, EULA, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'LoadEULA'
-		// Here lies the not-yet-implemented method 'AcceptEULA'
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'EULAReponse'
+		void LoadEULA()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_EULA.LoadEULA");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AcceptEULA()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_EULA.AcceptEULA");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_EULA.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void EULAReponse(bool bAccepted)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_EULA.EULAReponse");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bAccepted;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

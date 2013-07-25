@@ -12,7 +12,18 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, FakePlatform, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetStringWithFieldName'
+		int GetStringWithFieldName(ScriptArray<wchar_t> FieldName, ScriptArray<wchar_t>& MappedString)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringAliasMap.GetStringWithFieldName");
+			byte* params = (byte*)malloc(28);
+			*(ScriptArray<wchar_t>*)params = FieldName;
+			*(ScriptArray<wchar_t>*)(params + 12) = MappedString;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			MappedString = *(ScriptArray<wchar_t>*)(params + 12);
+			auto returnVal = *(int*)(params + 24);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

@@ -19,8 +19,23 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, MaxDeployedLimit, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, ItemInDeliveryPod)
-		// Here lies the not-yet-implemented method 'FireCompletedCallIn'
-		// Here lies the not-yet-implemented method 'DestroyOverLimit'
+		bool FireCompletedCallIn(int CallInOffs, Vector TargetLocation, Vector TargetNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_Support.FireCompletedCallIn");
+			byte* params = (byte*)malloc(32);
+			*(int*)params = CallInOffs;
+			*(Vector*)(params + 4) = TargetLocation;
+			*(Vector*)(params + 16) = TargetNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		void DestroyOverLimit()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_Support.DestroyOverLimit");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

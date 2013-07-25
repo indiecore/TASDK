@@ -13,7 +13,11 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::ByteProperty, BoneAxis, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BoneName, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'OnBecomeRelevant'
+		void OnBecomeRelevant()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimNodeSequenceByBoneRotation.OnBecomeRelevant");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

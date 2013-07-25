@@ -14,7 +14,16 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bAttractionFalloff, 0x1)
 		ADD_VAR(::FloatProperty, Attraction, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'AppliedForce'
+		Vector AppliedForce(class GameCrowdAgent* Agent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAttractor.AppliedForce");
+			byte* params = (byte*)malloc(16);
+			*(class GameCrowdAgent**)params = Agent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

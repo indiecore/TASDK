@@ -229,40 +229,244 @@ namespace UnrealScript
 		ADD_OBJECT(GFxTrPage_RoamRabbit, RoamRabbitPage)
 		ADD_OBJECT(GFxTrPage_Extras, ExtrasPage)
 		ADD_OBJECT(GFxTrPage_Queued, QueuedPage)
-		// Here lies the not-yet-implemented method 'GetActivePage'
-		// Here lies the not-yet-implemented method 'PopPage'
-		// Here lies the not-yet-implemented method 'NavigateGold'
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'PopupData'
-		// Here lies the not-yet-implemented method 'PopupComplete'
-		// Here lies the not-yet-implemented method 'TakeFocus'
-		// Here lies the not-yet-implemented method 'TakeAction'
-		// Here lies the not-yet-implemented method 'ActionUp'
-		// Here lies the not-yet-implemented method 'ActionDown'
-		// Here lies the not-yet-implemented method 'ModifyAction'
-		// Here lies the not-yet-implemented method 'ModifyFocus'
-		// Here lies the not-yet-implemented method 'HelpButton'
-		// Here lies the not-yet-implemented method 'ProfileUp'
-		// Here lies the not-yet-implemented method 'ProfileDown'
-		// Here lies the not-yet-implemented method 'PushPage'
-		// Here lies the not-yet-implemented method 'PushOpen'
-		// Here lies the not-yet-implemented method 'PopBack'
-		// Here lies the not-yet-implemented method 'ClearStack'
-		// Here lies the not-yet-implemented method 'PushOpenMain'
-		// Here lies the not-yet-implemented method 'PushOpenParty'
-		// Here lies the not-yet-implemented method 'PushOpenClassSelect'
-		// Here lies the not-yet-implemented method 'PushOpenLogin'
-		// Here lies the not-yet-implemented method 'TravelToMain'
-		// Here lies the not-yet-implemented method 'TravelToClasses'
-		// Here lies the not-yet-implemented method 'TravelToFriends'
-		// Here lies the not-yet-implemented method 'TravelToSettings'
-		// Here lies the not-yet-implemented method 'TravelToBundles'
-		// Here lies the not-yet-implemented method 'TravelToStore'
-		// Here lies the not-yet-implemented method 'ShowInGameModel'
-		// Here lies the not-yet-implemented method 'PromoAction'
-		// Here lies the not-yet-implemented method 'SelectedFeature'
-		// Here lies the not-yet-implemented method 'ShowReticule'
-		// Here lies the not-yet-implemented method 'SaveReticule'
+		class GFxTrPage* GetActivePage()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.GetActivePage");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxTrPage**)params;
+			free(params);
+			return returnVal;
+		}
+		class GFxTrPage* PopPage()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PopPage");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GFxTrPage**)params;
+			free(params);
+			return returnVal;
+		}
+		bool NavigateGold(bool bViaStore)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.NavigateGold");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bViaStore;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PopupData(class GFxObject* Obj)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PopupData");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = Obj;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PopupComplete(int Action, ScriptArray<wchar_t> TextInput)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PopupComplete");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = Action;
+			*(ScriptArray<wchar_t>*)(params + 4) = TextInput;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int TakeFocus(int Index, class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TakeFocus");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = Index;
+			*(class GFxObject**)(params + 4) = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		int TakeAction(int Index, class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TakeAction");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = Index;
+			*(class GFxObject**)(params + 4) = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void ActionUp()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ActionUp");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ActionDown()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ActionDown");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int ModifyAction(int ActionIndex, class GFxObject* DataList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ModifyAction");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = ActionIndex;
+			*(class GFxObject**)(params + 4) = DataList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void ModifyFocus(int ActionIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ModifyFocus");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void HelpButton(int ActionIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.HelpButton");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProfileUp(int ActionIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ProfileUp");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProfileDown(int ActionIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ProfileDown");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PushPage(class GFxTrPage* Page)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PushPage");
+			byte* params = (byte*)malloc(4);
+			*(class GFxTrPage**)params = Page;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PushOpen(class GFxTrPage* Page)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PushOpen");
+			byte* params = (byte*)malloc(4);
+			*(class GFxTrPage**)params = Page;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PopBack()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PopBack");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClearStack()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ClearStack");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PushOpenMain()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PushOpenMain");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PushOpenParty()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PushOpenParty");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PushOpenClassSelect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PushOpenClassSelect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PushOpenLogin()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PushOpenLogin");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TravelToMain()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TravelToMain");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TravelToClasses()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TravelToClasses");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TravelToFriends()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TravelToFriends");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TravelToSettings()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TravelToSettings");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TravelToBundles()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TravelToBundles");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TravelToStore()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TravelToStore");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShowInGameModel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ShowInGameModel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PromoAction(int ActionIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PromoAction");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SelectedFeature(int ActionIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.SelectedFeature");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = ActionIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ShowReticule(int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ShowReticule");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SaveReticule(class GFxObject* Data)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.SaveReticule");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = Data;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

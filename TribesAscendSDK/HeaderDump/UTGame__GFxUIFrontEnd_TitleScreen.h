@@ -32,12 +32,59 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, MenuButtonsMC)
 		ADD_OBJECT(GFxObject, MainMenuMC)
 		ADD_OBJECT(GFxObject, TitleScreenMC)
-		// Here lies the not-yet-implemented method 'Start'
-		// Here lies the not-yet-implemented method 'FilterButtonInput'
-		// Here lies the not-yet-implemented method 'OnMenuButtonPress'
-		// Here lies the not-yet-implemented method 'PlayCloseAnimation'
-		// Here lies the not-yet-implemented method 'OnCloseAnimationComplete'
-		// Here lies the not-yet-implemented method 'UT_ConsoleCommand'
+		bool Start(bool StartPaused)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIFrontEnd_TitleScreen.Start");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = StartPaused;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool FilterButtonInput(int ControllerId, ScriptName ButtonName, byte InputEvent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIFrontEnd_TitleScreen.FilterButtonInput");
+			byte* params = (byte*)malloc(17);
+			*(int*)params = ControllerId;
+			*(ScriptName*)(params + 4) = ButtonName;
+			*(params + 12) = InputEvent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void OnMenuButtonPress(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIFrontEnd_TitleScreen.OnMenuButtonPress");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayCloseAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIFrontEnd_TitleScreen.PlayCloseAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnCloseAnimationComplete()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIFrontEnd_TitleScreen.OnCloseAnimationComplete");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UT_ConsoleCommand(ScriptArray<wchar_t> Cmd, bool bWriteToLog)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIFrontEnd_TitleScreen.UT_ConsoleCommand");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = Cmd;
+			*(bool*)(params + 12) = bWriteToLog;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

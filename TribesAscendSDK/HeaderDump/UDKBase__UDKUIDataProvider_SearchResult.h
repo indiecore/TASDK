@@ -16,7 +16,15 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, ServerFlagsTag, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, GameModeFriendlyNameTag, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, PlayerRatioTag, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'IsPrivateServer'
+		bool IsPrivateServer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataProvider_SearchResult.IsPrivateServer");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

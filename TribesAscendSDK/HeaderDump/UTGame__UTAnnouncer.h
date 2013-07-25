@@ -31,12 +31,55 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, PlayingAnnouncementIndex, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, PlayingAnnouncementClass)
 		ADD_VAR(::ByteProperty, AnnouncerLevel, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'PlayNextAnnouncement'
-		// Here lies the not-yet-implemented method 'PlayAnnouncementNow'
-		// Here lies the not-yet-implemented method 'AnnouncementFinished'
-		// Here lies the not-yet-implemented method 'PlayAnnouncement'
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAnnouncer.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAnnouncer.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayNextAnnouncement()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAnnouncer.PlayNextAnnouncement");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayAnnouncementNow(ScriptClass* InMessageClass, int MessageIndex, class PlayerReplicationInfo* PRI, class Object* OptionalObject)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAnnouncer.PlayAnnouncementNow");
+			byte* params = (byte*)malloc(16);
+			*(ScriptClass**)params = InMessageClass;
+			*(int*)(params + 4) = MessageIndex;
+			*(class PlayerReplicationInfo**)(params + 8) = PRI;
+			*(class Object**)(params + 12) = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AnnouncementFinished(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* AC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAnnouncer.AnnouncementFinished");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = AC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayAnnouncement(ScriptClass* InMessageClass, int MessageIndex, class PlayerReplicationInfo* PRI, class Object* OptionalObject)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAnnouncer.PlayAnnouncement");
+			byte* params = (byte*)malloc(16);
+			*(ScriptClass**)params = InMessageClass;
+			*(int*)(params + 4) = MessageIndex;
+			*(class PlayerReplicationInfo**)(params + 8) = PRI;
+			*(class Object**)(params + 12) = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

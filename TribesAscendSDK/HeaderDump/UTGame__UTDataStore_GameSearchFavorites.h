@@ -13,7 +13,16 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(UTDataStore_GameSearchHistory, HistoryGameSearchDataStore)
-		// Here lies the not-yet-implemented method 'HasOutstandingQueries'
+		bool HasOutstandingQueries(bool bRestrictCheckToSelf)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchFavorites.HasOutstandingQueries");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bRestrictCheckToSelf;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_OBJECT

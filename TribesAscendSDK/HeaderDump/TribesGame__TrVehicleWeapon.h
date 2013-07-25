@@ -62,53 +62,362 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, m_ShotsFired, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nAltReticuleIndex, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DBWeaponId, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'HasReticuleCharge'
-		// Here lies the not-yet-implemented method 'CalculateReloadPercentRemaining'
-		// Here lies the not-yet-implemented method 'GetAccuracy'
-		// Here lies the not-yet-implemented method 'CanClientRequestReloadNow'
-		// Here lies the not-yet-implemented method 'CanViewZoom'
-		// Here lies the not-yet-implemented method 'GetTargetAccuracy'
-		// Here lies the not-yet-implemented method 'RestoreAccuracy'
-		// Here lies the not-yet-implemented method 'InitVehicleGun'
-		// Here lies the not-yet-implemented method 'CalculateReloadTime'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'StartFire'
-		// Here lies the not-yet-implemented method 'IsWeaponInFiringCone'
-		// Here lies the not-yet-implemented method 'ProjectileFire'
-		// Here lies the not-yet-implemented method 'GetProjectileClass'
-		// Here lies the not-yet-implemented method 'UpdateShotsFired'
-		// Here lies the not-yet-implemented method 'GetNumRoundsCurrentlyInClip'
-		// Here lies the not-yet-implemented method 'GetEffectLocation'
-		// Here lies the not-yet-implemented method 'AttachMuzzleFlash'
-		// Here lies the not-yet-implemented method 'MuzzleFlashTimer'
-		// Here lies the not-yet-implemented method 'CauseMuzzleFlash'
-		// Here lies the not-yet-implemented method 'StopMuzzleFlash'
-		// Here lies the not-yet-implemented method 'PlayFireEffects'
-		// Here lies the not-yet-implemented method 'ShakeView'
-		// Here lies the not-yet-implemented method 'ShouldFireTracer'
-		// Here lies the not-yet-implemented method 'ShouldFireTracerBeam'
-		// Here lies the not-yet-implemented method 'SpawnTracerBeam'
-		// Here lies the not-yet-implemented method 'SpawnTracerEffect'
-		// Here lies the not-yet-implemented method 'WeaponPlaySoundLocal'
-		// Here lies the not-yet-implemented method 'GetTracer'
-		// Here lies the not-yet-implemented method 'PayAccuracyForShot'
-		// Here lies the not-yet-implemented method 'AddSpreadWithAccuracy'
-		// Here lies the not-yet-implemented method 'GetAdjustedAim'
-		// Here lies the not-yet-implemented method 'AddSpread'
-		// Here lies the not-yet-implemented method 'FireAmmunition'
-		// Here lies the not-yet-implemented method 'BeginFire'
-		// Here lies the not-yet-implemented method 'PutDownWeapon'
-		// Here lies the not-yet-implemented method 'RequestReload'
-		// Here lies the not-yet-implemented method 'OnClientReloaded'
-		// Here lies the not-yet-implemented method 'ClientFinishedReload'
-		// Here lies the not-yet-implemented method 'OnReloadComplete'
-		// Here lies the not-yet-implemented method 'BeginAReload'
-		// Here lies the not-yet-implemented method 'AddCarriedAmmo'
-		// Here lies the not-yet-implemented method 'UpdateReplicatedCarriedAmmo'
-		// Here lies the not-yet-implemented method 'StartZoom'
-		// Here lies the not-yet-implemented method 'EndZoom'
-		// Here lies the not-yet-implemented method 'SetAltReticule'
-		// Here lies the not-yet-implemented method 'ResetAltReticule'
+		bool HasReticuleCharge()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.HasReticuleCharge");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		float CalculateReloadPercentRemaining()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.CalculateReloadPercentRemaining");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		float GetAccuracy()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.GetAccuracy");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		bool CanClientRequestReloadNow()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.CanClientRequestReloadNow");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool CanViewZoom()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.CanViewZoom");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		float GetTargetAccuracy()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.GetTargetAccuracy");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		void RestoreAccuracy(float fTimeStep)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.RestoreAccuracy");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = fTimeStep;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InitVehicleGun()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.InitVehicleGun");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		float CalculateReloadTime()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.CalculateReloadTime");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StartFire(byte FireModeNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.StartFire");
+			byte* params = (byte*)malloc(1);
+			*params = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool IsWeaponInFiringCone()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.IsWeaponInFiringCone");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		class Projectile* ProjectileFire()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.ProjectileFire");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Projectile**)params;
+			free(params);
+			return returnVal;
+		}
+		ScriptClass* GetProjectileClass()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.GetProjectileClass");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptClass**)params;
+			free(params);
+			return returnVal;
+		}
+		void UpdateShotsFired(bool Reset)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.UpdateShotsFired");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = Reset;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int GetNumRoundsCurrentlyInClip()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.GetNumRoundsCurrentlyInClip");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		Vector GetEffectLocation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.GetEffectLocation");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)params;
+			free(params);
+			return returnVal;
+		}
+		void AttachMuzzleFlash()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.AttachMuzzleFlash");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void MuzzleFlashTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.MuzzleFlashTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CauseMuzzleFlash()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.CauseMuzzleFlash");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StopMuzzleFlash()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.StopMuzzleFlash");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayFireEffects(byte FireModeNum, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.PlayFireEffects");
+			byte* params = (byte*)malloc(13);
+			*params = FireModeNum;
+			*(Vector*)(params + 4) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ShakeView()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.ShakeView");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool ShouldFireTracer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.ShouldFireTracer");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool ShouldFireTracerBeam()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.ShouldFireTracerBeam");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void SpawnTracerBeam(Vector Start, Vector End)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.SpawnTracerBeam");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = Start;
+			*(Vector*)(params + 12) = End;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class TrProj_Tracer* SpawnTracerEffect(Vector HitLocation, float HitDistance)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.SpawnTracerEffect");
+			byte* params = (byte*)malloc(20);
+			*(Vector*)params = HitLocation;
+			*(float*)(params + 12) = HitDistance;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class TrProj_Tracer**)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void WeaponPlaySoundLocal(class SoundCue* Sound, float NoiseLoudness, bool bStopWhenOwnerDestroyed)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.WeaponPlaySoundLocal");
+			byte* params = (byte*)malloc(12);
+			*(class SoundCue**)params = Sound;
+			*(float*)(params + 4) = NoiseLoudness;
+			*(bool*)(params + 8) = bStopWhenOwnerDestroyed;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class TrProj_Tracer* GetTracer(Vector SpawnLocation, Rotator SpawnRotation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.GetTracer");
+			byte* params = (byte*)malloc(28);
+			*(Vector*)params = SpawnLocation;
+			*(Rotator*)(params + 12) = SpawnRotation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class TrProj_Tracer**)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		void PayAccuracyForShot()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.PayAccuracyForShot");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		Rotator AddSpreadWithAccuracy(Rotator BaseAim, float fAccuracy)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.AddSpreadWithAccuracy");
+			byte* params = (byte*)malloc(28);
+			*(Rotator*)params = BaseAim;
+			*(float*)(params + 12) = fAccuracy;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Rotator*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		Rotator GetAdjustedAim(Vector StartFireLoc)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.GetAdjustedAim");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = StartFireLoc;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Rotator*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		Rotator AddSpread(Rotator BaseAim)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.AddSpread");
+			byte* params = (byte*)malloc(24);
+			*(Rotator*)params = BaseAim;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Rotator*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void FireAmmunition()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.FireAmmunition");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void BeginFire(byte FireModeNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.BeginFire");
+			byte* params = (byte*)malloc(1);
+			*params = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PutDownWeapon()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.PutDownWeapon");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RequestReload()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.RequestReload");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnClientReloaded()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.OnClientReloaded");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClientFinishedReload()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.ClientFinishedReload");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnReloadComplete()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.OnReloadComplete");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void BeginAReload()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.BeginAReload");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int AddCarriedAmmo(int Amount)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.AddCarriedAmmo");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Amount;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void UpdateReplicatedCarriedAmmo()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.UpdateReplicatedCarriedAmmo");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StartZoom(class UTPlayerController* PC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.StartZoom");
+			byte* params = (byte*)malloc(4);
+			*(class UTPlayerController**)params = PC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void EndZoom(class UTPlayerController* PC, bool bReturningTo3P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.EndZoom");
+			byte* params = (byte*)malloc(8);
+			*(class UTPlayerController**)params = PC;
+			*(bool*)(params + 4) = bReturningTo3P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetAltReticule()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.SetAltReticule");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ResetAltReticule()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon.ResetAltReticule");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

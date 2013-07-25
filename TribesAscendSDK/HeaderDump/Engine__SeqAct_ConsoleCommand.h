@@ -12,8 +12,24 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, Command, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'VersionUpdated'
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		void VersionUpdated(int OldVersion, int NewVersion)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_ConsoleCommand.VersionUpdated");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = OldVersion;
+			*(int*)(params + 4) = NewVersion;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_ConsoleCommand.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

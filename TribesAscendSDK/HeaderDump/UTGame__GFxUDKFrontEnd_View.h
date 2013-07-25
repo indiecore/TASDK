@@ -21,17 +21,81 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::NameProperty, ViewName, 0xFFFFFFFF)
 		ADD_OBJECT(GFxUDKFrontEnd, MenuManager)
-		// Here lies the not-yet-implemented method 'OnViewLoaded'
-		// Here lies the not-yet-implemented method 'OnTopMostView'
-		// Here lies the not-yet-implemented method 'OnViewActivated'
-		// Here lies the not-yet-implemented method 'OnViewClosed'
-		// Here lies the not-yet-implemented method 'DisableSubComponents'
-		// Here lies the not-yet-implemented method 'PlayOpenAnimation'
-		// Here lies the not-yet-implemented method 'PlayCloseAnimation'
-		// Here lies the not-yet-implemented method 'Select_Back'
-		// Here lies the not-yet-implemented method 'MoveBackImpl'
-		// Here lies the not-yet-implemented method 'OnEscapeKeyPress'
-		// Here lies the not-yet-implemented method 'WidgetInitialized'
+		void OnViewLoaded()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.OnViewLoaded");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnTopMostView(bool bPlayOpenAnimation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.OnTopMostView");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bPlayOpenAnimation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnViewActivated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.OnViewActivated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnViewClosed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.OnViewClosed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisableSubComponents(bool bDisableComponents)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.DisableSubComponents");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bDisableComponents;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayOpenAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.PlayOpenAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayCloseAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.PlayCloseAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Select_Back(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.Select_Back");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void MoveBackImpl()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.MoveBackImpl");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnEscapeKeyPress()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.OnEscapeKeyPress");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.WidgetInitialized");
+			byte* params = (byte*)malloc(24);
+			*(ScriptName*)params = WidgetName;
+			*(ScriptName*)(params + 8) = WidgetPath;
+			*(class GFxObject**)(params + 16) = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

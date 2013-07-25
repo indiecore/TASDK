@@ -39,9 +39,35 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsActive, 0x2)
 		ADD_VAR(::BoolProperty, bAutoActivate, 0x1)
 		ADD_OBJECT(LensFlare, Template)
-		// Here lies the not-yet-implemented method 'SetTemplate'
-		// Here lies the not-yet-implemented method 'SetSourceColor'
-		// Here lies the not-yet-implemented method 'SetIsActive'
+		void SetTemplate(class LensFlare* NewTemplate, bool bForceSet)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LensFlareComponent.SetTemplate");
+			byte* params = (byte*)malloc(8);
+			*(class LensFlare**)params = NewTemplate;
+			*(bool*)(params + 4) = bForceSet;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetSourceColor(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void* InSourceColor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LensFlareComponent.SetSourceColor");
+			byte* params = (byte*)malloc(16);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)params = InSourceColor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetIsActive(bool bInIsActive)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LensFlareComponent.SetIsActive");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bInIsActive;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

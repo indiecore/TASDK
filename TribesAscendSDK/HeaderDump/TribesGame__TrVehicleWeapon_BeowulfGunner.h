@@ -13,8 +13,16 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TrSkelControl_SpinControl, m_BarrelSpinControl)
-		// Here lies the not-yet-implemented method 'InitVehicleGun'
-		// Here lies the not-yet-implemented method 'Activate'
+		void InitVehicleGun()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon_BeowulfGunner.InitVehicleGun");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Activate()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon_BeowulfGunner.Activate");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

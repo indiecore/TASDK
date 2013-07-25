@@ -14,7 +14,19 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DesiredStrength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BlendRate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxForwardVelocity, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'TickSkelControl'
+		void TickSkelControl(float DeltaTime, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSkelControl_JetThruster.TickSkelControl");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = DeltaTime;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

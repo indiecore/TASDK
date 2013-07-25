@@ -27,23 +27,144 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, FlagState, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WeaponBerserk, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bForceDefaultCharacter, 0x2)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'InOrder'
-		// Here lies the not-yet-implemented method 'SortPRIArray'
-		// Here lies the not-yet-implemented method 'CharacterProcessingComplete'
-		// Here lies the not-yet-implemented method 'SetFlagHome'
-		// Here lies the not-yet-implemented method 'FlagIsHome'
-		// Here lies the not-yet-implemented method 'FlagsAreHome'
-		// Here lies the not-yet-implemented method 'SetFlagHeldFriendly'
-		// Here lies the not-yet-implemented method 'FlagIsHeldFriendly'
-		// Here lies the not-yet-implemented method 'SetFlagHeldEnemy'
-		// Here lies the not-yet-implemented method 'FlagIsHeldEnemy'
-		// Here lies the not-yet-implemented method 'SetFlagDown'
-		// Here lies the not-yet-implemented method 'FlagIsDown'
-		// Here lies the not-yet-implemented method 'Timer'
-		// Here lies the not-yet-implemented method 'ShowMidGameMenu'
-		// Here lies the not-yet-implemented method 'SetHudShowScores'
-		// Here lies the not-yet-implemented method 'AddGameRule'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool InOrder(class PlayerReplicationInfo* P1, class PlayerReplicationInfo* P2)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.InOrder");
+			byte* params = (byte*)malloc(12);
+			*(class PlayerReplicationInfo**)params = P1;
+			*(class PlayerReplicationInfo**)(params + 4) = P2;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void SortPRIArray()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.SortPRIArray");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CharacterProcessingComplete()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.CharacterProcessingComplete");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetFlagHome(int TeamIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.SetFlagHome");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool FlagIsHome(int TeamIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.FlagIsHome");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool FlagsAreHome()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.FlagsAreHome");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void SetFlagHeldFriendly(int TeamIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.SetFlagHeldFriendly");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool FlagIsHeldFriendly(int TeamIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.FlagIsHeldFriendly");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void SetFlagHeldEnemy(int TeamIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.SetFlagHeldEnemy");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool FlagIsHeldEnemy(int TeamIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.FlagIsHeldEnemy");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void SetFlagDown(int TeamIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.SetFlagDown");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool FlagIsDown(int TeamIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.FlagIsDown");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = TeamIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void Timer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.Timer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShowMidGameMenu(class UTPlayerController* InstigatorPC, ScriptName TabTag, bool bEnableInput)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.ShowMidGameMenu");
+			byte* params = (byte*)malloc(16);
+			*(class UTPlayerController**)params = InstigatorPC;
+			*(ScriptName*)(params + 4) = TabTag;
+			*(bool*)(params + 12) = bEnableInput;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetHudShowScores(bool bShow)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.SetHudShowScores");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bShow;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AddGameRule(ScriptArray<wchar_t> Rule)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameReplicationInfo.AddGameRule");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Rule;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

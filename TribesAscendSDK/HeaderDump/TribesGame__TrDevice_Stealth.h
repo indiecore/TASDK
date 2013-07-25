@@ -12,7 +12,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, m_fPulseSpeedThreshold, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Stealth.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

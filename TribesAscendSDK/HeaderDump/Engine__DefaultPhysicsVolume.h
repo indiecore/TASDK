@@ -5,6 +5,10 @@ namespace UnrealScript
 	class DefaultPhysicsVolume : public PhysicsVolume
 	{
 	public:
-		// Here lies the not-yet-implemented method 'Destroyed'
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DefaultPhysicsVolume.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

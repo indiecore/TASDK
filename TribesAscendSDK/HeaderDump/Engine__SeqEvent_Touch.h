@@ -16,11 +16,52 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAllowDeadPawns, 0x4)
 		ADD_VAR(::BoolProperty, bUseInstigator, 0x2)
 		ADD_VAR(::BoolProperty, bForceOverlapping, 0x1)
-		// Here lies the not-yet-implemented method 'CheckTouchActivate'
-		// Here lies the not-yet-implemented method 'CheckUnTouchActivate'
-		// Here lies the not-yet-implemented method 'Toggled'
-		// Here lies the not-yet-implemented method 'NotifyTouchingPawnDied'
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		bool CheckTouchActivate(class Actor* InOriginator, class Actor* InInstigator, bool bTest)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Touch.CheckTouchActivate");
+			byte* params = (byte*)malloc(16);
+			*(class Actor**)params = InOriginator;
+			*(class Actor**)(params + 4) = InInstigator;
+			*(bool*)(params + 8) = bTest;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		bool CheckUnTouchActivate(class Actor* InOriginator, class Actor* InInstigator, bool bTest)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Touch.CheckUnTouchActivate");
+			byte* params = (byte*)malloc(16);
+			*(class Actor**)params = InOriginator;
+			*(class Actor**)(params + 4) = InInstigator;
+			*(bool*)(params + 8) = bTest;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void Toggled()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Touch.Toggled");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void NotifyTouchingPawnDied(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Touch.NotifyTouchingPawnDied");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Touch.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

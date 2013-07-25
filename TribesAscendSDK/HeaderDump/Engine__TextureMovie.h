@@ -38,9 +38,21 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, AddressX, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, Format, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeY, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Play'
-		// Here lies the not-yet-implemented method 'Pause'
-		// Here lies the not-yet-implemented method 'Stop'
+		void Play()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureMovie.Play");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Pause()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureMovie.Pause");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Stop()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureMovie.Stop");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

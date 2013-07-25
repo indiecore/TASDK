@@ -13,8 +13,24 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bAborted, 0x1)
-		// Here lies the not-yet-implemented method 'AbortFor'
-		// Here lies the not-yet-implemented method 'Update'
+		void AbortFor(class Actor* latentActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Latent.AbortFor");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = latentActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool Update(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Latent.Update");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

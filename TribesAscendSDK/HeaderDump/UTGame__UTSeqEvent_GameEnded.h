@@ -14,8 +14,20 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Actor, ActualWinner)
 		ADD_OBJECT(Actor, Winner)
-		// Here lies the not-yet-implemented method 'Activated'
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		void Activated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqEvent_GameEnded.Activated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqEvent_GameEnded.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_OBJECT

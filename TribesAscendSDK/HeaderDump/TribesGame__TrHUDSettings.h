@@ -19,8 +19,25 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, SettingsCount, 0xFFFFFFFF)
 		ADD_OBJECT(GFxObject, SettingsList)
-		// Here lies the not-yet-implemented method 'GetCurrentValue'
-		// Here lies the not-yet-implemented method 'SaveSetting'
+		float GetCurrentValue(byte Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDSettings.GetCurrentValue");
+			byte* params = (byte*)malloc(5);
+			*params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void SaveSetting(int Index, float val)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDSettings.SaveSetting");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Index;
+			*(float*)(params + 4) = val;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

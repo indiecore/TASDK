@@ -116,45 +116,329 @@ namespace UnrealScript
 		ADD_OBJECT(GameCrowdDestination, CurrentDestination)
 		ADD_VAR(::FloatProperty, AvoidanceShare, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, PreferredVelocity, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'PickBehaviorFrom'
-		// Here lies the not-yet-implemented method 'FellOutOfWorld'
-		// Here lies the not-yet-implemented method 'IsPanicked'
-		// Here lies the not-yet-implemented method 'SetPanic'
-		// Here lies the not-yet-implemented method 'WaitForGroupMembers'
-		// Here lies the not-yet-implemented method 'SetCurrentDestination'
-		// Here lies the not-yet-implemented method 'SetMaxSpeed'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'KillAgent'
-		// Here lies the not-yet-implemented method 'ResetPooledAgent'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'DisplayDebug'
-		// Here lies the not-yet-implemented method 'SetLighting'
-		// Here lies the not-yet-implemented method 'InitializeAgent'
-		// Here lies the not-yet-implemented method 'OnPlayAgentAnimation'
-		// Here lies the not-yet-implemented method 'PlayIdleAnimation'
-		// Here lies the not-yet-implemented method 'StopIdleAnimation'
-		// Here lies the not-yet-implemented method 'HandlePotentialAgentEncounter'
-		// Here lies the not-yet-implemented method 'PlaySpawnBehavior'
-		// Here lies the not-yet-implemented method 'NotifySeePlayer'
-		// Here lies the not-yet-implemented method 'TryRandomBehavior'
-		// Here lies the not-yet-implemented method 'ResetSeePlayer'
-		// Here lies the not-yet-implemented method 'ActivateBehavior'
-		// Here lies the not-yet-implemented method 'SetCurrentBehavior'
-		// Here lies the not-yet-implemented method 'ActivateInstancedBehavior'
-		// Here lies the not-yet-implemented method 'StopBehavior'
-		// Here lies the not-yet-implemented method 'IsIdle'
-		// Here lies the not-yet-implemented method 'CalcCamera'
-		// Here lies the not-yet-implemented method 'UpdateIntermediatePoint'
-		// Here lies the not-yet-implemented method 'PlayDeath'
-		// Here lies the not-yet-implemented method 'FireDeathEvent'
-		// Here lies the not-yet-implemented method 'TakeDamage'
-		// Here lies the not-yet-implemented method 'OverlappedActorEvent'
-		// Here lies the not-yet-implemented method 'InitNavigationHandle'
-		// Here lies the not-yet-implemented method 'GeneratePathToActor'
-		// Here lies the not-yet-implemented method 'NativePostRenderFor'
-		// Here lies the not-yet-implemented method 'PostRenderFor'
-		// Here lies the not-yet-implemented method 'GetDestString'
-		// Here lies the not-yet-implemented method 'GetBehaviorString'
+		bool PickBehaviorFrom(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void* BehaviorList, Vector BestCameraLoc)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.PickBehaviorFrom");
+			byte* params = (byte*)malloc(28);
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)params = BehaviorList;
+			*(Vector*)(params + 12) = BestCameraLoc;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		void FellOutOfWorld(ScriptClass* dmgType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.FellOutOfWorld");
+			byte* params = (byte*)malloc(4);
+			*(ScriptClass**)params = dmgType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool IsPanicked()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.IsPanicked");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void SetPanic(class Actor* PanicActor, bool bNewPanic)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.SetPanic");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = PanicActor;
+			*(bool*)(params + 4) = bNewPanic;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void WaitForGroupMembers()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.WaitForGroupMembers");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetCurrentDestination(class GameCrowdDestination* NewDest)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.SetCurrentDestination");
+			byte* params = (byte*)malloc(4);
+			*(class GameCrowdDestination**)params = NewDest;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetMaxSpeed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.SetMaxSpeed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void KillAgent()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.KillAgent");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ResetPooledAgent()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.ResetPooledAgent");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.DisplayDebug");
+			byte* params = (byte*)malloc(12);
+			*(class HUD**)params = HUD;
+			*(float*)(params + 4) = out_YL;
+			*(float*)(params + 8) = out_YPos;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_YL = *(float*)(params + 4);
+			out_YPos = *(float*)(params + 8);
+			free(params);
+		}
+		void SetLighting(bool bEnableLightEnvironment, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer'!
+void* AgentLightingChannel, bool bCastShadows)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.SetLighting");
+			byte* params = (byte*)malloc(12);
+			*(bool*)params = bEnableLightEnvironment;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer'!
+void**)(params + 4) = AgentLightingChannel;
+			*(bool*)(params + 8) = bCastShadows;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InitializeAgent(class Actor* SpawnLoc, class GameCrowdAgent* AgentTemplate, class GameCrowdGroup* NewGroup, float AgentWarmupTime, bool bWarmupPosition, bool bCheckWarmupVisibility)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.InitializeAgent");
+			byte* params = (byte*)malloc(24);
+			*(class Actor**)params = SpawnLoc;
+			*(class GameCrowdAgent**)(params + 4) = AgentTemplate;
+			*(class GameCrowdGroup**)(params + 8) = NewGroup;
+			*(float*)(params + 12) = AgentWarmupTime;
+			*(bool*)(params + 16) = bWarmupPosition;
+			*(bool*)(params + 20) = bCheckWarmupVisibility;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnPlayAgentAnimation(class SeqAct_PlayAgentAnimation* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.OnPlayAgentAnimation");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_PlayAgentAnimation**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayIdleAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.PlayIdleAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StopIdleAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.StopIdleAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HandlePotentialAgentEncounter()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.HandlePotentialAgentEncounter");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlaySpawnBehavior()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.PlaySpawnBehavior");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void NotifySeePlayer(class PlayerController* PC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.NotifySeePlayer");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerController**)params = PC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TryRandomBehavior()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.TryRandomBehavior");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ResetSeePlayer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.ResetSeePlayer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ActivateBehavior(class GameCrowdAgentBehavior* NewBehaviorArchetype, class Actor* LookAtActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.ActivateBehavior");
+			byte* params = (byte*)malloc(8);
+			*(class GameCrowdAgentBehavior**)params = NewBehaviorArchetype;
+			*(class Actor**)(params + 4) = LookAtActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetCurrentBehavior(class GameCrowdAgentBehavior* BehaviorArchetype)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.SetCurrentBehavior");
+			byte* params = (byte*)malloc(4);
+			*(class GameCrowdAgentBehavior**)params = BehaviorArchetype;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ActivateInstancedBehavior(class GameCrowdAgentBehavior* NewBehaviorObject)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.ActivateInstancedBehavior");
+			byte* params = (byte*)malloc(4);
+			*(class GameCrowdAgentBehavior**)params = NewBehaviorObject;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopBehavior()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.StopBehavior");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool IsIdle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.IsIdle");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool CalcCamera(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.CalcCamera");
+			byte* params = (byte*)malloc(36);
+			*(float*)params = fDeltaTime;
+			*(Vector*)(params + 4) = out_CamLoc;
+			*(Rotator*)(params + 16) = out_CamRot;
+			*(float*)(params + 28) = out_FOV;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_CamLoc = *(Vector*)(params + 4);
+			out_CamRot = *(Rotator*)(params + 16);
+			out_FOV = *(float*)(params + 28);
+			auto returnVal = *(bool*)(params + 32);
+			free(params);
+			return returnVal;
+		}
+		void UpdateIntermediatePoint(class Actor* DestinationActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.UpdateIntermediatePoint");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = DestinationActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayDeath(Vector KillMomentum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.PlayDeath");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = KillMomentum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void FireDeathEvent()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.FireDeathEvent");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void* HitInfo, class Actor* DamageCauser)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.TakeDamage");
+			byte* params = (byte*)malloc(68);
+			*(int*)params = DamageAmount;
+			*(class Controller**)(params + 4) = EventInstigator;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = Momentum;
+			*(ScriptClass**)(params + 32) = DamageType;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 36) = HitInfo;
+			*(class Actor**)(params + 64) = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OverlappedActorEvent(class Actor* A)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.OverlappedActorEvent");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = A;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InitNavigationHandle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.InitNavigationHandle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		Vector GeneratePathToActor(class Actor* Goal, float WithinDistance, bool bAllowPartialPath)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.GeneratePathToActor");
+			byte* params = (byte*)malloc(24);
+			*(class Actor**)params = Goal;
+			*(float*)(params + 4) = WithinDistance;
+			*(bool*)(params + 8) = bAllowPartialPath;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void NativePostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.NativePostRenderFor");
+			byte* params = (byte*)malloc(32);
+			*(class PlayerController**)params = PC;
+			*(class Canvas**)(params + 4) = Canvas;
+			*(Vector*)(params + 8) = CameraPosition;
+			*(Vector*)(params + 20) = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.PostRenderFor");
+			byte* params = (byte*)malloc(32);
+			*(class PlayerController**)params = PC;
+			*(class Canvas**)(params + 4) = Canvas;
+			*(Vector*)(params + 8) = CameraPosition;
+			*(Vector*)(params + 20) = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		ScriptArray<wchar_t> GetDestString()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.GetDestString");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetBehaviorString()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.GetBehaviorString");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

@@ -13,7 +13,15 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(UIDynamicFieldProvider, RegistryDataProvider)
-		// Here lies the not-yet-implemented method 'GetDataProvider'
+		class UIDynamicFieldProvider* GetDataProvider()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_Registry.GetDataProvider");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class UIDynamicFieldProvider**)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_OBJECT

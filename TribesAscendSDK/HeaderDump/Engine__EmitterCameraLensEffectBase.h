@@ -25,12 +25,46 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BaseFOV, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, PS_CameraEffectNonExtremeContent)
 		ADD_OBJECT(ParticleSystem, PS_CameraEffect)
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'RegisterCamera'
-		// Here lies the not-yet-implemented method 'NotifyRetriggered'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'ActivateLensEffect'
-		// Here lies the not-yet-implemented method 'UpdateLocation'
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterCameraLensEffectBase.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RegisterCamera(class Camera* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterCameraLensEffectBase.RegisterCamera");
+			byte* params = (byte*)malloc(4);
+			*(class Camera**)params = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyRetriggered()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterCameraLensEffectBase.NotifyRetriggered");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterCameraLensEffectBase.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ActivateLensEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterCameraLensEffectBase.ActivateLensEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateLocation(Vector& CamLoc, Rotator& CamRot, float CamFOVDeg)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterCameraLensEffectBase.UpdateLocation");
+			byte* params = (byte*)malloc(28);
+			*(Vector*)params = CamLoc;
+			*(Rotator*)(params + 12) = CamRot;
+			*(float*)(params + 24) = CamFOVDeg;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			CamLoc = *(Vector*)params;
+			CamRot = *(Rotator*)(params + 12);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

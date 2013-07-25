@@ -14,14 +14,76 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::ByteProperty, m_nTeamId, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetTeamNum'
-		// Here lies the not-yet-implemented method 'GetTeamNum'
-		// Here lies the not-yet-implemented method 'UpdateLocation'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'PostRenderFor'
-		// Here lies the not-yet-implemented method 'RenderForOwner'
-		// Here lies the not-yet-implemented method 'RenderForTeammate'
+		void SetTeamNum(byte TeamID)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.SetTeamNum");
+			byte* params = (byte*)malloc(1);
+			*params = TeamID;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		byte GetTeamNum()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.GetTeamNum");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
+		void UpdateLocation(Vector NewLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.UpdateLocation");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = NewLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.PostRenderFor");
+			byte* params = (byte*)malloc(32);
+			*(class PlayerController**)params = PC;
+			*(class Canvas**)(params + 4) = Canvas;
+			*(Vector*)(params + 8) = CameraPosition;
+			*(Vector*)(params + 20) = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RenderForOwner(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir, float Distance)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.RenderForOwner");
+			byte* params = (byte*)malloc(36);
+			*(class PlayerController**)params = PC;
+			*(class Canvas**)(params + 4) = Canvas;
+			*(Vector*)(params + 8) = CameraPosition;
+			*(Vector*)(params + 20) = CameraDir;
+			*(float*)(params + 32) = Distance;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RenderForTeammate(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir, float Distance)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.RenderForTeammate");
+			byte* params = (byte*)malloc(36);
+			*(class PlayerController**)params = PC;
+			*(class Canvas**)(params + 4) = Canvas;
+			*(Vector*)(params + 8) = CameraPosition;
+			*(Vector*)(params + 20) = CameraDir;
+			*(float*)(params + 32) = Distance;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

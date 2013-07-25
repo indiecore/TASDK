@@ -15,13 +15,67 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(UTDataStore_GameSearchHistory, HistoryGameSearchDataStore)
 		ADD_OBJECT(ScriptClass, HistoryGameSearchDataStoreClass)
-		// Here lies the not-yet-implemented method 'Registered'
-		// Here lies the not-yet-implemented method 'SubmitGameSearch'
-		// Here lies the not-yet-implemented method 'HasOutstandingQueries'
-		// Here lies the not-yet-implemented method 'FindStoredSearchIndex'
-		// Here lies the not-yet-implemented method 'FindStoredSettingValueIndex'
-		// Here lies the not-yet-implemented method 'LoadGameSearchParameters'
-		// Here lies the not-yet-implemented method 'SaveGameSearchParameters'
+		void Registered(class LocalPlayer* PlayerOwner)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.Registered");
+			byte* params = (byte*)malloc(4);
+			*(class LocalPlayer**)params = PlayerOwner;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool SubmitGameSearch(byte ControllerIndex, bool bInvalidateExistingSearchResults)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.SubmitGameSearch");
+			byte* params = (byte*)malloc(9);
+			*params = ControllerIndex;
+			*(bool*)(params + 4) = bInvalidateExistingSearchResults;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		bool HasOutstandingQueries(bool bRestrictCheckToSelf)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.HasOutstandingQueries");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bRestrictCheckToSelf;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		int FindStoredSearchIndex(ScriptName GameSearchName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.FindStoredSearchIndex");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = GameSearchName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		int FindStoredSettingValueIndex(int StoredGameSearchIndex, int LocalizedSettingId, bool bAddIfNecessary)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.FindStoredSettingValueIndex");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = StoredGameSearchIndex;
+			*(int*)(params + 4) = LocalizedSettingId;
+			*(bool*)(params + 8) = bAddIfNecessary;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void LoadGameSearchParameters()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.LoadGameSearchParameters");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SaveGameSearchParameters()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.SaveGameSearchParameters");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

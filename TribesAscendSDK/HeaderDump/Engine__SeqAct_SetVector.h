@@ -12,7 +12,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(::VectorProperty, DefaultValue, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'Activated'
+		void Activated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_SetVector.Activated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_STRUCT

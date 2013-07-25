@@ -50,13 +50,63 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bRespawnDeadAgents, 0x4)
 		ADD_VAR(::BoolProperty, bCycleSpawnLocs, 0x2)
 		ADD_VAR(::BoolProperty, bSpawningActive, 0x1)
-		// Here lies the not-yet-implemented method 'SpawnedAgent'
-		// Here lies the not-yet-implemented method 'CacheSpawnerVars'
-		// Here lies the not-yet-implemented method 'KillAgents'
-		// Here lies the not-yet-implemented method 'UpdateSpawning'
-		// Here lies the not-yet-implemented method 'SpawnAgent'
-		// Here lies the not-yet-implemented method 'CreateNewAgent'
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		void SpawnedAgent(class GameCrowdAgent* NewAgent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.SpawnedAgent");
+			byte* params = (byte*)malloc(4);
+			*(class GameCrowdAgent**)params = NewAgent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CacheSpawnerVars()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.CacheSpawnerVars");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void KillAgents()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.KillAgents");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateSpawning(float DeltaSeconds)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.UpdateSpawning");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaSeconds;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class GameCrowdAgent* SpawnAgent(class Actor* SpawnLoc)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.SpawnAgent");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = SpawnLoc;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GameCrowdAgent**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class GameCrowdAgent* CreateNewAgent(class Actor* SpawnLoc, class GameCrowdAgent* AgentTemplate, class GameCrowdGroup* NewGroup)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.CreateNewAgent");
+			byte* params = (byte*)malloc(16);
+			*(class Actor**)params = SpawnLoc;
+			*(class GameCrowdAgent**)(params + 4) = AgentTemplate;
+			*(class GameCrowdGroup**)(params + 8) = NewGroup;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class GameCrowdAgent**)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

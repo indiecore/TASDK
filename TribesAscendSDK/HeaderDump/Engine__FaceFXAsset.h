@@ -28,8 +28,22 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumLoadErrors, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'FaceFXActor'!
 		ADD_OBJECT(SkeletalMesh, DefaultSkelMesh)
-		// Here lies the not-yet-implemented method 'MountFaceFXAnimSet'
-		// Here lies the not-yet-implemented method 'UnmountFaceFXAnimSet'
+		void MountFaceFXAnimSet(class FaceFXAnimSet* AnimSet)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FaceFXAsset.MountFaceFXAnimSet");
+			byte* params = (byte*)malloc(4);
+			*(class FaceFXAnimSet**)params = AnimSet;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UnmountFaceFXAnimSet(class FaceFXAnimSet* AnimSet)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FaceFXAsset.UnmountFaceFXAnimSet");
+			byte* params = (byte*)malloc(4);
+			*(class FaceFXAnimSet**)params = AnimSet;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

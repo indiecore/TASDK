@@ -26,15 +26,89 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, r_fSleepEndTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, r_bIsInitialized, 0x2)
 		ADD_VAR(::BoolProperty, r_bIsPowered, 0x1)
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'CreateTripComponent'
-		// Here lies the not-yet-implemented method 'ClientCreateVisualEffect'
-		// Here lies the not-yet-implemented method 'DestroyNotify'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'InitializeTripPhysics'
-		// Here lies the not-yet-implemented method 'GoToSleep'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'Touch'
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CreateTripComponent()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.CreateTripComponent");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClientCreateVisualEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.ClientCreateVisualEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DestroyNotify(
+// ERROR: Unknown object class 'Class Core.InterfaceProperty'!
+void* Notifier)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.DestroyNotify");
+			byte* params = (byte*)malloc(8);
+			*(
+// ERROR: Unknown object class 'Class Core.InterfaceProperty'!
+void**)params = Notifier;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void InitializeTripPhysics(
+// ERROR: Unknown object class 'Class Core.InterfaceProperty'!
+void* Left, 
+// ERROR: Unknown object class 'Class Core.InterfaceProperty'!
+void* Right)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.InitializeTripPhysics");
+			byte* params = (byte*)malloc(16);
+			*(
+// ERROR: Unknown object class 'Class Core.InterfaceProperty'!
+void**)params = Left;
+			*(
+// ERROR: Unknown object class 'Class Core.InterfaceProperty'!
+void**)(params + 8) = Right;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void GoToSleep(bool bIsPowered)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.GoToSleep");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bIsPowered;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Touch(class Actor* Other, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* OtherComp, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.Touch");
+			byte* params = (byte*)malloc(32);
+			*(class Actor**)params = Other;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = OtherComp;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

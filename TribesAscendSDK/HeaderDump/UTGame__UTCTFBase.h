@@ -33,15 +33,82 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MidFieldHighZOffset, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, FlagType)
 		ADD_OBJECT(UTCarriedObject, myFlag)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'GetBestViewTarget'
-		// Here lies the not-yet-implemented method 'GetLocationMessageIndex'
-		// Here lies the not-yet-implemented method 'GetLocationSpeechFor'
-		// Here lies the not-yet-implemented method 'ObjectiveChanged'
-		// Here lies the not-yet-implemented method 'GetFlag'
-		// Here lies the not-yet-implemented method 'SetAlarm'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'IsActive'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class Actor* GetBestViewTarget()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.GetBestViewTarget");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Actor**)params;
+			free(params);
+			return returnVal;
+		}
+		int GetLocationMessageIndex(class UTBot* B, class Pawn* StatusPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.GetLocationMessageIndex");
+			byte* params = (byte*)malloc(12);
+			*(class UTBot**)params = B;
+			*(class Pawn**)(params + 4) = StatusPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		class SoundNodeWave* GetLocationSpeechFor(class PlayerController* PC, int LocationSpeechOffset, int MessageIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.GetLocationSpeechFor");
+			byte* params = (byte*)malloc(16);
+			*(class PlayerController**)params = PC;
+			*(int*)(params + 4) = LocationSpeechOffset;
+			*(int*)(params + 8) = MessageIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class SoundNodeWave**)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void ObjectiveChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.ObjectiveChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class UTCarriedObject* GetFlag()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.GetFlag");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class UTCarriedObject**)params;
+			free(params);
+			return returnVal;
+		}
+		void SetAlarm(bool bNowOn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.SetAlarm");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNowOn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool IsActive()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.IsActive");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

@@ -36,12 +36,63 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BuildupTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DatabaseId, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, CallInId, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'GetCreditCost'
-		// Here lies the not-yet-implemented method 'VerifyCredits'
-		// Here lies the not-yet-implemented method 'VerifyPower'
-		// Here lies the not-yet-implemented method 'FireCompletedCallIn'
-		// Here lies the not-yet-implemented method 'Tick'
+		void Initialize(int NewPrice, int NewBuildup, int NewCooldown)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn.Initialize");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = NewPrice;
+			*(int*)(params + 4) = NewBuildup;
+			*(int*)(params + 8) = NewCooldown;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int GetCreditCost()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn.GetCreditCost");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
+		bool VerifyCredits()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn.VerifyCredits");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool VerifyPower()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn.VerifyPower");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool FireCompletedCallIn(int CallInOffs, Vector TargetLocation, Vector TargetNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn.FireCompletedCallIn");
+			byte* params = (byte*)malloc(32);
+			*(int*)params = CallInOffs;
+			*(Vector*)(params + 4) = TargetLocation;
+			*(Vector*)(params + 16) = TargetNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

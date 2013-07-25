@@ -23,9 +23,28 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, m_WeatherSound)
 		ADD_VAR(::BoolProperty, m_bUpdateLocationBasedOnVelocity, 0x2)
 		ADD_VAR(::BoolProperty, m_bUpdateRotation, 0x1)
-		// Here lies the not-yet-implemented method 'UpdateLocation'
-		// Here lies the not-yet-implemented method 'Activate'
-		// Here lies the not-yet-implemented method 'Deactivate'
+		void UpdateLocation(Vector& CamLoc, Rotator& CamRot, float CamFOVDeg)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEmitCameraEffect_Speed.UpdateLocation");
+			byte* params = (byte*)malloc(28);
+			*(Vector*)params = CamLoc;
+			*(Rotator*)(params + 12) = CamRot;
+			*(float*)(params + 24) = CamFOVDeg;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			CamLoc = *(Vector*)params;
+			CamRot = *(Rotator*)(params + 12);
+			free(params);
+		}
+		void Activate()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEmitCameraEffect_Speed.Activate");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Deactivate()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEmitCameraEffect_Speed.Deactivate");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

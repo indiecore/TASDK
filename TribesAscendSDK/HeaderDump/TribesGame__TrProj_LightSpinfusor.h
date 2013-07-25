@@ -5,6 +5,10 @@ namespace UnrealScript
 	class TrProj_LightSpinfusor : public TrProjectile
 	{
 	public:
-		// Here lies the not-yet-implemented method 'SpawnFlightEffects'
+		void SpawnFlightEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_LightSpinfusor.SpawnFlightEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

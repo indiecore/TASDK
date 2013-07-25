@@ -12,10 +12,33 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, BlockUIInputSemaphore, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'ShouldProcessUIInput'
-		// Here lies the not-yet-implemented method 'ClearUIInputBlocks'
-		// Here lies the not-yet-implemented method 'BlockUIInput'
-		// Here lies the not-yet-implemented method 'NotifyGameSessionEnded'
+		bool ShouldProcessUIInput()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameInteraction.ShouldProcessUIInput");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void ClearUIInputBlocks()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameInteraction.ClearUIInputBlocks");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void BlockUIInput(bool bBlock)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameInteraction.BlockUIInput");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bBlock;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyGameSessionEnded()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameInteraction.NotifyGameSessionEnded");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

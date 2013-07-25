@@ -24,8 +24,20 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, TeamIndex, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bForceTeam, 0x1)
 		ADD_VAR(::StrProperty, BotName, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Activated'
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		void Activated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_AddNamedBot.Activated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_AddNamedBot.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

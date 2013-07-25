@@ -54,15 +54,93 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ClassCounts, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxPlayers, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ScoreLimit, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetClassCount'
-		// Here lies the not-yet-implemented method 'IsCallinAllowed'
-		// Here lies the not-yet-implemented method 'IsClassAllowed'
-		// Here lies the not-yet-implemented method 'GetPropAsFloat'
-		// Here lies the not-yet-implemented method 'GetPropAsInt'
-		// Here lies the not-yet-implemented method 'GetPropAsString'
-		// Here lies the not-yet-implemented method 'ApplyServerSettings'
-		// Here lies the not-yet-implemented method 'LoadServerSettings'
-		// Here lies the not-yet-implemented method 'GetVehicleLimit'
+		int GetClassCount(byte ClassType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.GetClassCount");
+			byte* params = (byte*)malloc(5);
+			*params = ClassType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool IsCallinAllowed(int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.IsCallinAllowed");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool IsClassAllowed(byte ClassType, int CurrentCount)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.IsClassAllowed");
+			byte* params = (byte*)malloc(9);
+			*params = ClassType;
+			*(int*)(params + 4) = CurrentCount;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		bool GetPropAsFloat(int PropId, float& Value)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.GetPropAsFloat");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = PropId;
+			*(float*)(params + 4) = Value;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Value = *(float*)(params + 4);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		bool GetPropAsInt(int PropId, int& Value)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.GetPropAsInt");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = PropId;
+			*(int*)(params + 4) = Value;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Value = *(int*)(params + 4);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		bool GetPropAsString(int PropId, ScriptArray<wchar_t>& Value)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.GetPropAsString");
+			byte* params = (byte*)malloc(20);
+			*(int*)params = PropId;
+			*(ScriptArray<wchar_t>*)(params + 4) = Value;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Value = *(ScriptArray<wchar_t>*)(params + 4);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void ApplyServerSettings()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.ApplyServerSettings");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void LoadServerSettings()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.LoadServerSettings");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int GetVehicleLimit(int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.GetVehicleLimit");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

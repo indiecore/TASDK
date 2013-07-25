@@ -22,9 +22,33 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(ScriptClass, TargetWeapon)
 		ADD_VAR(::IntProperty, AmmoAmount, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SpawnCopyFor'
-		// Here lies the not-yet-implemented method 'UpdateHUD'
-		// Here lies the not-yet-implemented method 'BotDesireability'
+		void SpawnCopyFor(class Pawn* Recipient)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAmmoPickupFactory.SpawnCopyFor");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = Recipient;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateHUD(class UTHUD* H)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAmmoPickupFactory.UpdateHUD");
+			byte* params = (byte*)malloc(4);
+			*(class UTHUD**)params = H;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		float BotDesireability(class Pawn* P, class Controller* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAmmoPickupFactory.BotDesireability");
+			byte* params = (byte*)malloc(12);
+			*(class Pawn**)params = P;
+			*(class Controller**)(params + 4) = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

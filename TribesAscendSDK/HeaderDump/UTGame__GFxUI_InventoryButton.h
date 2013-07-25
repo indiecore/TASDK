@@ -20,8 +20,22 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(GFxObject, IconMC)
 		ADD_VAR(::StrProperty, Content, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetContent'
-		// Here lies the not-yet-implemented method 'SetIconMC'
+		void SetContent(ScriptArray<wchar_t> newContent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_InventoryButton.SetContent");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = newContent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetIconMC(class GFxObject* iconClip)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_InventoryButton.SetIconMC");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = iconClip;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

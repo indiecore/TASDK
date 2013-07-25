@@ -47,23 +47,143 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bBounceRequiredForExplode, 0x8)
 		ADD_VAR(::BoolProperty, m_bExplodeOnTouchEvent, 0x4)
 		ADD_VAR(::BoolProperty, m_bTimedExplosion, 0x2)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'InitProjectile'
-		// Here lies the not-yet-implemented method 'SpawnCollisionProxy'
-		// Here lies the not-yet-implemented method 'DestroyCollisionProxy'
-		// Here lies the not-yet-implemented method 'ShutDown'
-		// Here lies the not-yet-implemented method 'ApplyInheritance'
-		// Here lies the not-yet-implemented method 'Timer'
-		// Here lies the not-yet-implemented method 'HitWall'
-		// Here lies the not-yet-implemented method 'ProcessTouch'
-		// Here lies the not-yet-implemented method 'PhysicsVolumeChange'
-		// Here lies the not-yet-implemented method 'Explode'
-		// Here lies the not-yet-implemented method 'StickToTarget'
-		// Here lies the not-yet-implemented method 'PlayStuckOnEffects'
-		// Here lies the not-yet-implemented method 'MyOnParticleSystemFinished'
-		// Here lies the not-yet-implemented method 'PawnEnteredDetonationArea'
-		// Here lies the not-yet-implemented method 'PawnLeftDetonationArea'
-		// Here lies the not-yet-implemented method 'NativeExplode'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void InitProjectile(Vector Direction, ScriptClass* ClassToInherit)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.InitProjectile");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = Direction;
+			*(ScriptClass**)(params + 12) = ClassToInherit;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SpawnCollisionProxy()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.SpawnCollisionProxy");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DestroyCollisionProxy()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.DestroyCollisionProxy");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShutDown()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.ShutDown");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ApplyInheritance(Vector ProjectileDir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.ApplyInheritance");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = ProjectileDir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Timer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.Timer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HitWall(Vector HitNormal, class Actor* Wall, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* WallComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.HitWall");
+			byte* params = (byte*)malloc(20);
+			*(Vector*)params = HitNormal;
+			*(class Actor**)(params + 12) = Wall;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 16) = WallComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProcessTouch(class Actor* Other, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.ProcessTouch");
+			byte* params = (byte*)malloc(28);
+			*(class Actor**)params = Other;
+			*(Vector*)(params + 4) = HitLocation;
+			*(Vector*)(params + 16) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PhysicsVolumeChange(class PhysicsVolume* NewVolume)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.PhysicsVolumeChange");
+			byte* params = (byte*)malloc(4);
+			*(class PhysicsVolume**)params = NewVolume;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Explode(Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.Explode");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = HitLocation;
+			*(Vector*)(params + 12) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool StickToTarget(class Actor* Target, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.StickToTarget");
+			byte* params = (byte*)malloc(32);
+			*(class Actor**)params = Target;
+			*(Vector*)(params + 4) = HitLocation;
+			*(Vector*)(params + 16) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		void PlayStuckOnEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.PlayStuckOnEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void MyOnParticleSystemFinished(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* PSC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.MyOnParticleSystemFinished");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = PSC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PawnEnteredDetonationArea(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.PawnEnteredDetonationArea");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PawnLeftDetonationArea(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.PawnLeftDetonationArea");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NativeExplode(Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.NativeExplode");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = HitLocation;
+			*(Vector*)(params + 12) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

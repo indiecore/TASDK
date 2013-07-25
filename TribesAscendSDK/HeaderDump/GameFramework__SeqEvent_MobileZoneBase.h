@@ -13,7 +13,14 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, TargetZoneName, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'AddToMobileInput'
+		void AddToMobileInput(class MobilePlayerInput* MPI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_MobileZoneBase.AddToMobileInput");
+			byte* params = (byte*)malloc(4);
+			*(class MobilePlayerInput**)params = MPI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -54,15 +54,71 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, PlayerControllerId, 0xFFFFFFFF)
 		ADD_OBJECT(UIDataProvider_OnlineFriends, FriendsProvider)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementProvider'!
-		// Here lies the not-yet-implemented method 'OnSettingProviderChanged'
-		// Here lies the not-yet-implemented method 'OnRegister'
-		// Here lies the not-yet-implemented method 'OnUnregister'
-		// Here lies the not-yet-implemented method 'OnLoginChange'
-		// Here lies the not-yet-implemented method 'OnPlayerDataChange'
-		// Here lies the not-yet-implemented method 'RegisterDelegates'
-		// Here lies the not-yet-implemented method 'ClearDelegates'
-		// Here lies the not-yet-implemented method 'GetCachedPlayerProfile'
-		// Here lies the not-yet-implemented method 'GetCachedPlayerStorage'
+		void OnSettingProviderChanged(class UIDataProvider* SourceProvider, ScriptName SettingsName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnSettingProviderChanged");
+			byte* params = (byte*)malloc(12);
+			*(class UIDataProvider**)params = SourceProvider;
+			*(ScriptName*)(params + 4) = SettingsName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnRegister(class LocalPlayer* InPlayer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnRegister");
+			byte* params = (byte*)malloc(4);
+			*(class LocalPlayer**)params = InPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnUnregister()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnUnregister");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnLoginChange(byte LocalUserNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnLoginChange");
+			byte* params = (byte*)malloc(1);
+			*params = LocalUserNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnPlayerDataChange()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnPlayerDataChange");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RegisterDelegates()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.RegisterDelegates");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClearDelegates()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.ClearDelegates");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class OnlineProfileSettings* GetCachedPlayerProfile(int ControllerId)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.GetCachedPlayerProfile");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ControllerId;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class OnlineProfileSettings**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class OnlinePlayerStorage* GetCachedPlayerStorage(int ControllerId)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.GetCachedPlayerStorage");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = ControllerId;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class OnlinePlayerStorage**)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

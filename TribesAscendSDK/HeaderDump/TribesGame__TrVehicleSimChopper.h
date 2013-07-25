@@ -25,7 +25,14 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, m_nLastPitchInput, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ReverseSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HoverHeight, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetVehicleControls'
+		void SetVehicleControls(bool bInvert)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleSimChopper.SetVehicleControls");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bInvert;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

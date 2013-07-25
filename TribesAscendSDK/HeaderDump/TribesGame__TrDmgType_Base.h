@@ -55,13 +55,84 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fMaxDamageRangePct, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DBWeaponTypeId, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DBWeaponBaseId, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'CalculateRangeDamageFalloff'
-		// Here lies the not-yet-implemented method 'GetActorCausingDamage'
-		// Here lies the not-yet-implemented method 'ModifyOverheadNumberLocation'
-		// Here lies the not-yet-implemented method 'GetDamageScale'
-		// Here lies the not-yet-implemented method 'GetRandomDeathAnimName'
-		// Here lies the not-yet-implemented method 'VehicleDamageScalingFor'
-		// Here lies the not-yet-implemented method 'GetCameraShake'
+		float CalculateRangeDamageFalloff(float Dist, float damageRange, class TrPlayerController* TrPCDamager, byte EquipPoint, bool bMinDamageAlwaysApplied)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.CalculateRangeDamageFalloff");
+			byte* params = (byte*)malloc(21);
+			*(float*)params = Dist;
+			*(float*)(params + 4) = damageRange;
+			*(class TrPlayerController**)(params + 8) = TrPCDamager;
+			*(params + 12) = EquipPoint;
+			*(bool*)(params + 16) = bMinDamageAlwaysApplied;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 20);
+			free(params);
+			return returnVal;
+		}
+		class Actor* GetActorCausingDamage(class Controller* EventInstigator, class Actor* DamageCauser)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.GetActorCausingDamage");
+			byte* params = (byte*)malloc(12);
+			*(class Controller**)params = EventInstigator;
+			*(class Actor**)(params + 4) = DamageCauser;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Actor**)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		Vector ModifyOverheadNumberLocation(Vector InLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.ModifyOverheadNumberLocation");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = InLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		float GetDamageScale(class Actor* DamageCauser, float Dist, ScriptClass* dmgType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.GetDamageScale");
+			byte* params = (byte*)malloc(16);
+			*(class Actor**)params = DamageCauser;
+			*(float*)(params + 4) = Dist;
+			*(ScriptClass**)(params + 8) = dmgType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		ScriptName GetRandomDeathAnimName()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.GetRandomDeathAnimName");
+			byte* params = (byte*)malloc(8);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptName*)params;
+			free(params);
+			return returnVal;
+		}
+		float VehicleDamageScalingFor(class Vehicle* V)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.VehicleDamageScalingFor");
+			byte* params = (byte*)malloc(8);
+			*(class Vehicle**)params = V;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void GetCameraShake(int Damage, ScriptName& outCameraShakeName, float& outScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.GetCameraShake");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = Damage;
+			*(ScriptName*)(params + 4) = outCameraShakeName;
+			*(float*)(params + 12) = outScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			outCameraShakeName = *(ScriptName*)(params + 4);
+			outScale = *(float*)(params + 12);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

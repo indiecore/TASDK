@@ -21,7 +21,20 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, PrototypePawnClass)
 		ADD_VAR(::FloatProperty, MaxDoubleJumpHeight, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bRequiresDoubleJump, 0x1)
-		// Here lies the not-yet-implemented method 'SuggestJumpVelocity'
+		bool SuggestJumpVelocity(Vector& JumpVelocity, Vector Destination, Vector Start, bool bRequireFallLanding)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKScout.SuggestJumpVelocity");
+			byte* params = (byte*)malloc(44);
+			*(Vector*)params = JumpVelocity;
+			*(Vector*)(params + 12) = Destination;
+			*(Vector*)(params + 24) = Start;
+			*(bool*)(params + 36) = bRequireFallLanding;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			JumpVelocity = *(Vector*)params;
+			auto returnVal = *(bool*)(params + 40);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

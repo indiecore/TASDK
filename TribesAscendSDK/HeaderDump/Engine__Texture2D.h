@@ -43,8 +43,27 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, SizeX, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IndirectArray_Mirror' for the property named 'CachedPVRTCMips'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IndirectArray_Mirror' for the property named 'Mips'!
-		// Here lies the not-yet-implemented method 'SetForceMipLevelsToBeResident'
-		// Here lies the not-yet-implemented method 'Create'
+		void SetForceMipLevelsToBeResident(float Seconds, int CinematicTextureGroups)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2D.SetForceMipLevelsToBeResident");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = Seconds;
+			*(int*)(params + 4) = CinematicTextureGroups;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class Texture2D* Create(int InSizeX, int InSizeY, byte InFormat)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2D.Create");
+			byte* params = (byte*)malloc(13);
+			*(int*)params = InSizeX;
+			*(int*)(params + 4) = InSizeY;
+			*(params + 8) = InFormat;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Texture2D**)(params + 12);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

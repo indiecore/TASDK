@@ -26,12 +26,44 @@ namespace UnrealScript
 		ADD_OBJECT(TrDaDCore, m_Core)
 		ADD_OBJECT(Material, m_BaseMaterial)
 		ADD_VAR(::ByteProperty, m_DefenderTeamIndex, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'DisableBlocking'
-		// Here lies the not-yet-implemented method 'EnableBlocking'
-		// Here lies the not-yet-implemented method 'UpdateMaterialForPawn'
-		// Here lies the not-yet-implemented method 'CreateMICs'
+		void Init(int ShieldIndex, class TrDaDCore* Core, class TrDaDShell* Shell)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.Init");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = ShieldIndex;
+			*(class TrDaDCore**)(params + 4) = Core;
+			*(class TrDaDShell**)(params + 8) = Shell;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisableBlocking()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.DisableBlocking");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void EnableBlocking()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.EnableBlocking");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateMaterialForPawn(class TrPawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.UpdateMaterialForPawn");
+			byte* params = (byte*)malloc(4);
+			*(class TrPawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CreateMICs()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.CreateMICs");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

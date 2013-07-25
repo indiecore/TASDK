@@ -14,8 +14,25 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LOD3DisplayFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LOD2DisplayFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LOD1DisplayFactor, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'FindFamilyInfo'
-		// Here lies the not-yet-implemented method 'GetRandomCharClassName'
+		ScriptClass* FindFamilyInfo(ScriptArray<wchar_t> InFamilyID)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCharInfo.FindFamilyInfo");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = InFamilyID;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptClass**)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetRandomCharClassName()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCharInfo.GetRandomCharClassName");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

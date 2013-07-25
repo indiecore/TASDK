@@ -18,9 +18,27 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bVelChange, 0x1)
 		ADD_VAR(::FloatProperty, ImpulseRange, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ImpulseStrength, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'FireLineImpulse'
-		// Here lies the not-yet-implemented method 'OnToggle'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		void FireLineImpulse()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_LineImpulseActor.FireLineImpulse");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnToggle(class SeqAct_Toggle* inAction)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_LineImpulseActor.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = inAction;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_LineImpulseActor.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

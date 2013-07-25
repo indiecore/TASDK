@@ -24,7 +24,24 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, Format, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeX, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Create'
+		class TextureRenderTarget2D* Create(int InSizeX, int InSizeY, byte InFormat, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void* InClearColor, bool bOnlyRenderOnce)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureRenderTarget2D.Create");
+			byte* params = (byte*)malloc(33);
+			*(int*)params = InSizeX;
+			*(int*)(params + 4) = InSizeY;
+			*(params + 8) = InFormat;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)(params + 12) = InClearColor;
+			*(bool*)(params + 28) = bOnlyRenderOnce;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class TextureRenderTarget2D**)(params + 32);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

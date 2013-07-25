@@ -12,7 +12,15 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, m_fMaxPickupSpeed, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'DropFrom'
+		void DropFrom(Vector StartLocation, Vector StartVelocity)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventory.DropFrom");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = StartLocation;
+			*(Vector*)(params + 12) = StartVelocity;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

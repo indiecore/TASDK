@@ -6,6 +6,13 @@ namespace UnrealScript
 	class NxForceFieldSpawnable : public Actor
 	{
 	public:
-		// Here lies the not-yet-implemented method 'OnToggle'
+		void OnToggle(class SeqAct_Toggle* inAction)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxForceFieldSpawnable.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = inAction;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }

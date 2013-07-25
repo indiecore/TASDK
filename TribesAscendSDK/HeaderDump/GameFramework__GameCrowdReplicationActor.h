@@ -21,7 +21,14 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, DestroyAllCount, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSpawningActive, 0x1)
 		ADD_OBJECT(SeqAct_GameCrowdSpawner, Spawner)
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdReplicationActor.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -70,8 +70,24 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, CTFDSGeneratorRoom, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, CTFBEGeneratorRoom, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, DSBase, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetDescription'
-		// Here lies the not-yet-implemented method 'GetSpectatorName'
+		ScriptArray<wchar_t> GetDescription()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCamera_SpectatorBookmark.GetDescription");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetSpectatorName()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCamera_SpectatorBookmark.GetSpectatorName");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

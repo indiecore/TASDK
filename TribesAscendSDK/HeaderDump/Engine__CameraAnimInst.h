@@ -54,12 +54,68 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CurTime, 0xFFFFFFFF)
 		ADD_OBJECT(InterpGroupInst, InterpGroupInst)
 		ADD_OBJECT(CameraAnim, CamAnim)
-		// Here lies the not-yet-implemented method 'SetPlaySpace'
-		// Here lies the not-yet-implemented method 'Play'
-		// Here lies the not-yet-implemented method 'Update'
-		// Here lies the not-yet-implemented method 'AdvanceAnim'
-		// Here lies the not-yet-implemented method 'Stop'
-		// Here lies the not-yet-implemented method 'ApplyTransientScaling'
+		void SetPlaySpace(byte NewSpace, Rotator UserPlaySpace)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraAnimInst.SetPlaySpace");
+			byte* params = (byte*)malloc(13);
+			*params = NewSpace;
+			*(Rotator*)(params + 4) = UserPlaySpace;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Play(class CameraAnim* Anim, class Actor* CamActor, float InRate, float InScale, float InBlendInTime, float InBlendOutTime, bool bInLoop, bool bRandomStartTime, float Duration)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraAnimInst.Play");
+			byte* params = (byte*)malloc(36);
+			*(class CameraAnim**)params = Anim;
+			*(class Actor**)(params + 4) = CamActor;
+			*(float*)(params + 8) = InRate;
+			*(float*)(params + 12) = InScale;
+			*(float*)(params + 16) = InBlendInTime;
+			*(float*)(params + 20) = InBlendOutTime;
+			*(bool*)(params + 24) = bInLoop;
+			*(bool*)(params + 28) = bRandomStartTime;
+			*(float*)(params + 32) = Duration;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Update(float NewRate, float NewScale, float NewBlendInTime, float NewBlendOutTime, float NewDuration)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraAnimInst.Update");
+			byte* params = (byte*)malloc(20);
+			*(float*)params = NewRate;
+			*(float*)(params + 4) = NewScale;
+			*(float*)(params + 8) = NewBlendInTime;
+			*(float*)(params + 12) = NewBlendOutTime;
+			*(float*)(params + 16) = NewDuration;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AdvanceAnim(float DeltaTime, bool bJump)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraAnimInst.AdvanceAnim");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = DeltaTime;
+			*(bool*)(params + 4) = bJump;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Stop(bool bImmediate)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraAnimInst.Stop");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bImmediate;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ApplyTransientScaling(float Scalar)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraAnimInst.ApplyTransientScaling");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = Scalar;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

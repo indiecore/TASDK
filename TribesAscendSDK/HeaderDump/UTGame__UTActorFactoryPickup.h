@@ -13,7 +13,14 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ScriptClass, InventoryClass)
-		// Here lies the not-yet-implemented method 'PostCreateActor'
+		void PostCreateActor(class Actor* NewActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTActorFactoryPickup.PostCreateActor");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = NewActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_OBJECT

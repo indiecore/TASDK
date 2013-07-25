@@ -51,8 +51,25 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUseLeafMeshes, 0x2)
 		ADD_VAR(::BoolProperty, bUseLeafCards, 0x1)
 		ADD_OBJECT(SpeedTree, SpeedTree)
-		// Here lies the not-yet-implemented method 'GetMaterial'
-		// Here lies the not-yet-implemented method 'SetMaterial'
+		class MaterialInterface* GetMaterial(byte MeshType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SpeedTreeComponent.GetMaterial");
+			byte* params = (byte*)malloc(5);
+			*params = MeshType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class MaterialInterface**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void SetMaterial(byte MeshType, class MaterialInterface* Material)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SpeedTreeComponent.SetMaterial");
+			byte* params = (byte*)malloc(5);
+			*params = MeshType;
+			*(class MaterialInterface**)(params + 4) = Material;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

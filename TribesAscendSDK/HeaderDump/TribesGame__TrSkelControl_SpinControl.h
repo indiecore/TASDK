@@ -29,8 +29,24 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_PreviewStartStop, 0x1)
 		ADD_STRUCT(::VectorProperty, m_vAxis, 0xFFFFFFFF
 		ADD_VAR(::FloatProperty, m_fDegreesPerSecond, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Spin'
-		// Here lies the not-yet-implemented method 'SpinToTargetRotation'
+		void Spin(bool bEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSkelControl_SpinControl.Spin");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SpinToTargetRotation(Rotator TargetRotation, float Time, bool bReset)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSkelControl_SpinControl.SpinToTargetRotation");
+			byte* params = (byte*)malloc(20);
+			*(Rotator*)params = TargetRotation;
+			*(float*)(params + 12) = Time;
+			*(bool*)(params + 16) = bReset;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

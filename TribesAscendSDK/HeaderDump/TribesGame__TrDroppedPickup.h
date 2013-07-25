@@ -40,14 +40,74 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fMarkerZOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_PctAmmoToRefill, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, m_AmmoPickupSound)
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'GiveTo'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'DoBounce'
-		// Here lies the not-yet-implemented method 'HitWall'
-		// Here lies the not-yet-implemented method 'OnCollisionProxyTouched'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'PostRenderFor'
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void GiveTo(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.GiveTo");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DoBounce(class Actor* Other, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.DoBounce");
+			byte* params = (byte*)malloc(16);
+			*(class Actor**)params = Other;
+			*(Vector*)(params + 4) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void HitWall(Vector HitNormal, class Actor* Wall, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* WallComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.HitWall");
+			byte* params = (byte*)malloc(20);
+			*(Vector*)params = HitNormal;
+			*(class Actor**)(params + 12) = Wall;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 16) = WallComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnCollisionProxyTouched(class TrPawn* TRP)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.OnCollisionProxyTouched");
+			byte* params = (byte*)malloc(4);
+			*(class TrPawn**)params = TRP;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.PostRenderFor");
+			byte* params = (byte*)malloc(32);
+			*(class PlayerController**)params = PC;
+			*(class Canvas**)(params + 4) = Canvas;
+			*(Vector*)(params + 8) = CameraPosition;
+			*(Vector*)(params + 20) = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

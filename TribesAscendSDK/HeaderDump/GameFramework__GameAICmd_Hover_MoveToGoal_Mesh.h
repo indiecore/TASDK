@@ -41,13 +41,71 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, Goal)
 		ADD_OBJECT(Actor, Find)
 		ADD_STRUCT(::VectorProperty, Transient_FinalDest, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'HoverToGoal'
-		// Here lies the not-yet-implemented method 'HoverToPoint'
-		// Here lies the not-yet-implemented method 'Pushed'
-		// Here lies the not-yet-implemented method 'Popped'
-		// Here lies the not-yet-implemented method 'HandlePathObstruction'
-		// Here lies the not-yet-implemented method 'IsEnemyBasedOnInterpActor'
-		// Here lies the not-yet-implemented method 'DrawDebug'
+		bool HoverToGoal(class GameAIController* AI, class Actor* InGoal, float InGoalDistance, float InHoverHeight)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.HoverToGoal");
+			byte* params = (byte*)malloc(20);
+			*(class GameAIController**)params = AI;
+			*(class Actor**)(params + 4) = InGoal;
+			*(float*)(params + 8) = InGoalDistance;
+			*(float*)(params + 12) = InHoverHeight;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		bool HoverToPoint(class GameAIController* AI, Vector InPoint, float InGoalDistance, float InHoverHeight)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.HoverToPoint");
+			byte* params = (byte*)malloc(28);
+			*(class GameAIController**)params = AI;
+			*(Vector*)(params + 4) = InPoint;
+			*(float*)(params + 16) = InGoalDistance;
+			*(float*)(params + 20) = InHoverHeight;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		void Pushed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.Pushed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Popped()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.Popped");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool HandlePathObstruction(class Actor* BlockedBy)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.HandlePathObstruction");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = BlockedBy;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool IsEnemyBasedOnInterpActor(class Pawn* InEnemy)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.IsEnemyBasedOnInterpActor");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = InEnemy;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void DrawDebug(class HUD* H, ScriptName Category)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.DrawDebug");
+			byte* params = (byte*)malloc(12);
+			*(class HUD**)params = H;
+			*(ScriptName*)(params + 4) = Category;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -13,7 +13,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(UTVehicle, SpawnedVehicle)
-		// Here lies the not-yet-implemented method 'Activated'
+		void Activated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqEvent_VehicleFactory.Activated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

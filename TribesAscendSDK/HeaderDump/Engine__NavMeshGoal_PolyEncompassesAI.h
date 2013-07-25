@@ -13,8 +13,22 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(::VectorProperty, OverrideExtentToCheck, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'MakeSureAIFits'
-		// Here lies the not-yet-implemented method 'Recycle'
+		bool MakeSureAIFits(class NavigationHandle* NavHandle, Vector InOverrideExtentToCheck)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_PolyEncompassesAI.MakeSureAIFits");
+			byte* params = (byte*)malloc(20);
+			*(class NavigationHandle**)params = NavHandle;
+			*(Vector*)(params + 4) = InOverrideExtentToCheck;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_PolyEncompassesAI.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_STRUCT

@@ -13,7 +13,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TextureMovie, MovieTexture)
-		// Here lies the not-yet-implemented method 'Activated'
+		void Activated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_ControlMovieTexture.Activated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

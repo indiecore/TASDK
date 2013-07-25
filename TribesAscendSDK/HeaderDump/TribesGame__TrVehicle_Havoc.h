@@ -14,8 +14,21 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, m_fPitchAimAngleRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fPitchAimAngle, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'GetWeaponAim'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Havoc.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		Rotator GetWeaponAim(class UTVehicleWeapon* VWeapon)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Havoc.GetWeaponAim");
+			byte* params = (byte*)malloc(16);
+			*(class UTVehicleWeapon**)params = VWeapon;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Rotator*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

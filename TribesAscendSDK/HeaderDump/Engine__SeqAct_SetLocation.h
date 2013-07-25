@@ -29,7 +29,15 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, LocationValue, 0xFFFFFFFF
 		ADD_VAR(::BoolProperty, bSetRotation, 0x2)
 		ADD_VAR(::BoolProperty, bSetLocation, 0x1)
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_SetLocation.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

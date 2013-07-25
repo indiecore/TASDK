@@ -49,10 +49,44 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, LookAtAxis, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, TargetLocationSpace, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, TargetLocation, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'SetTargetLocation'
-		// Here lies the not-yet-implemented method 'InterpolateTargetLocation'
-		// Here lies the not-yet-implemented method 'SetLookAtAlpha'
-		// Here lies the not-yet-implemented method 'CanLookAtPoint'
+		void SetTargetLocation(Vector NewTargetLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.SetTargetLocation");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = NewTargetLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InterpolateTargetLocation(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.InterpolateTargetLocation");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetLookAtAlpha(float DesiredAlpha, float DesiredBlendTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.SetLookAtAlpha");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = DesiredAlpha;
+			*(float*)(params + 4) = DesiredBlendTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool CanLookAtPoint(Vector PointLoc, bool bDrawDebugInfo, bool bDebugUsePersistentLines, bool bDebugFlushLinesFirst)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.CanLookAtPoint");
+			byte* params = (byte*)malloc(28);
+			*(Vector*)params = PointLoc;
+			*(bool*)(params + 12) = bDrawDebugInfo;
+			*(bool*)(params + 16) = bDebugUsePersistentLines;
+			*(bool*)(params + 20) = bDebugFlushLinesFirst;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

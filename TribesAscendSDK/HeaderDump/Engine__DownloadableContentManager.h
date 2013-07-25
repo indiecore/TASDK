@@ -20,22 +20,147 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(GameEngine, GameEngine)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'TextureCachePathMap'!
-		// Here lies the not-yet-implemented method 'InstallDLC'
-		// Here lies the not-yet-implemented method 'InstallDLCs'
-		// Here lies the not-yet-implemented method 'ClearDLC'
-		// Here lies the not-yet-implemented method 'GetDLCTextureCachePath'
-		// Here lies the not-yet-implemented method 'AddSectionToObjectList'
-		// Here lies the not-yet-implemented method 'MarkPerObjectConfigPendingKill'
-		// Here lies the not-yet-implemented method 'UpdateObjectLists'
-		// Here lies the not-yet-implemented method 'InstallPackages'
-		// Here lies the not-yet-implemented method 'InstallNonPackageFiles'
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'OnLoginChange'
-		// Here lies the not-yet-implemented method 'OnStorageDeviceChange'
-		// Here lies the not-yet-implemented method 'OnContentChange'
-		// Here lies the not-yet-implemented method 'RefreshDLC'
-		// Here lies the not-yet-implemented method 'RefreshDLCEnumComplete'
-		// Here lies the not-yet-implemented method 'AddPackagesToFullyLoad'
+		bool InstallDLC(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
+void*& DLCBundle)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallDLC");
+			byte* params = (byte*)malloc(72);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
+void**)params = DLCBundle;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			DLCBundle = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
+void**)params;
+			auto returnVal = *(bool*)(params + 68);
+			free(params);
+			return returnVal;
+		}
+		void InstallDLCs(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void*& DLCBundles)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallDLCs");
+			byte* params = (byte*)malloc(12);
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)params = DLCBundles;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			DLCBundles = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)params;
+			free(params);
+		}
+		void ClearDLC()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.ClearDLC");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool GetDLCTextureCachePath(ScriptName TextureCacheName, ScriptArray<wchar_t>& Path)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.GetDLCTextureCachePath");
+			byte* params = (byte*)malloc(24);
+			*(ScriptName*)params = TextureCacheName;
+			*(ScriptArray<wchar_t>*)(params + 8) = Path;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Path = *(ScriptArray<wchar_t>*)(params + 8);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
+		void AddSectionToObjectList(ScriptArray<wchar_t> Section)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.AddSectionToObjectList");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Section;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void MarkPerObjectConfigPendingKill(ScriptArray<wchar_t> Section)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.MarkPerObjectConfigPendingKill");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Section;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateObjectLists()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.UpdateObjectLists");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void InstallPackages(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
+void*& DLCBundle)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallPackages");
+			byte* params = (byte*)malloc(68);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
+void**)params = DLCBundle;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			DLCBundle = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
+void**)params;
+			free(params);
+		}
+		void InstallNonPackageFiles(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
+void*& DLCBundle)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallNonPackageFiles");
+			byte* params = (byte*)malloc(68);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
+void**)params = DLCBundle;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			DLCBundle = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
+void**)params;
+			free(params);
+		}
+		void Init()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.Init");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnLoginChange(byte LocalUserNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.OnLoginChange");
+			byte* params = (byte*)malloc(1);
+			*params = LocalUserNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnStorageDeviceChange()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.OnStorageDeviceChange");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnContentChange()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.OnContentChange");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RefreshDLC()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.RefreshDLC");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RefreshDLCEnumComplete()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.RefreshDLCEnumComplete");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AddPackagesToFullyLoad(ScriptArray<wchar_t> Filename)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.AddPackagesToFullyLoad");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Filename;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_STRUCT

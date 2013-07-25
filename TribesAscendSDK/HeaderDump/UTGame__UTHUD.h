@@ -217,49 +217,421 @@ namespace UnrealScript
 		ADD_OBJECT(Texture2D, UT3GHudTexture)
 		ADD_OBJECT(Texture2D, TalkingTexture)
 		ADD_OBJECT(ScriptClass, WeaponSwitchMessage)
-		// Here lies the not-yet-implemented method 'DrawTileCentered'
-		// Here lies the not-yet-implemented method 'SetDisplayedOrders'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'Message'
-		// Here lies the not-yet-implemented method 'ResolveHUDPosition'
-		// Here lies the not-yet-implemented method 'GetScreenCoords'
-		// Here lies the not-yet-implemented method 'DrawMessageText'
-		// Here lies the not-yet-implemented method 'PostRender'
-		// Here lies the not-yet-implemented method 'DrawHUD'
-		// Here lies the not-yet-implemented method 'DrawGameHud'
-		// Here lies the not-yet-implemented method 'DrawMicIcon'
-		// Here lies the not-yet-implemented method 'DisplayLocalMessages'
-		// Here lies the not-yet-implemented method 'DrawLivingHud'
-		// Here lies the not-yet-implemented method 'DrawPostGameHud'
-		// Here lies the not-yet-implemented method 'DisplayWeaponBar'
-		// Here lies the not-yet-implemented method 'DisplayMap'
-		// Here lies the not-yet-implemented method 'DrawAIOverlays'
-		// Here lies the not-yet-implemented method 'GetUIController'
-		// Here lies the not-yet-implemented method 'StartMusic'
-		// Here lies the not-yet-implemented method 'GetTeamColor'
-		// Here lies the not-yet-implemented method 'DisplayHit'
-		// Here lies the not-yet-implemented method 'FlashDamage'
-		// Here lies the not-yet-implemented method 'UpdateDamage'
-		// Here lies the not-yet-implemented method 'DisplayDamage'
-		// Here lies the not-yet-implemented method 'DrawBackground'
-		// Here lies the not-yet-implemented method 'DrawBeaconBackground'
-		// Here lies the not-yet-implemented method 'DrawHealth'
-		// Here lies the not-yet-implemented method 'DrawBarGraph'
-		// Here lies the not-yet-implemented method 'FormatTime'
-		// Here lies the not-yet-implemented method 'GetFontSizeIndex'
-		// Here lies the not-yet-implemented method 'ShowPortrait'
-		// Here lies the not-yet-implemented method 'HidePortrait'
-		// Here lies the not-yet-implemented method 'DisplayPortrait'
-		// Here lies the not-yet-implemented method 'DisplayHUDMessage'
-		// Here lies the not-yet-implemented method 'DisplayClock'
-		// Here lies the not-yet-implemented method 'DisplayPawnDoll'
-		// Here lies the not-yet-implemented method 'DisplayAmmo'
-		// Here lies the not-yet-implemented method 'DisplayPowerups'
-		// Here lies the not-yet-implemented method 'DisplayScoring'
-		// Here lies the not-yet-implemented method 'DisplayFragCount'
-		// Here lies the not-yet-implemented method 'DrawNameplateBackground'
-		// Here lies the not-yet-implemented method 'DisplayLeaderBoard'
-		// Here lies the not-yet-implemented method 'DisplayConsoleMessages'
+		void DrawTileCentered(class Texture2D* Tex, float XL, float YL, float U, float V, float UL, float VL, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawTileCentered");
+			byte* params = (byte*)malloc(44);
+			*(class Texture2D**)params = Tex;
+			*(float*)(params + 4) = XL;
+			*(float*)(params + 8) = YL;
+			*(float*)(params + 12) = U;
+			*(float*)(params + 16) = V;
+			*(float*)(params + 20) = UL;
+			*(float*)(params + 24) = VL;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)(params + 28) = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetDisplayedOrders(ScriptArray<wchar_t> OrderText)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.SetDisplayedOrders");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = OrderText;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Message(class PlayerReplicationInfo* PRI, ScriptArray<wchar_t> msg, ScriptName MsgType, float Lifetime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.Message");
+			byte* params = (byte*)malloc(28);
+			*(class PlayerReplicationInfo**)params = PRI;
+			*(ScriptArray<wchar_t>*)(params + 4) = msg;
+			*(ScriptName*)(params + 16) = MsgType;
+			*(float*)(params + 24) = Lifetime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void* ResolveHUDPosition(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void* Position, float Width, float Height)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.ResolveHUDPosition");
+			byte* params = (byte*)malloc(24);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void**)params = Position;
+			*(float*)(params + 8) = Width;
+			*(float*)(params + 12) = Height;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void**)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void GetScreenCoords(float PosY, float& ScreenX, float& ScreenY, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
+void*& InMessage)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetScreenCoords");
+			byte* params = (byte*)malloc(76);
+			*(float*)params = PosY;
+			*(float*)(params + 4) = ScreenX;
+			*(float*)(params + 8) = ScreenY;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
+void**)(params + 12) = InMessage;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			ScreenX = *(float*)(params + 4);
+			ScreenY = *(float*)(params + 8);
+			InMessage = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
+void**)(params + 12);
+			free(params);
+		}
+		void DrawMessageText(
+// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
+void* LocalMessage, float ScreenX, float ScreenY)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawMessageText");
+			byte* params = (byte*)malloc(72);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
+void**)params = LocalMessage;
+			*(float*)(params + 64) = ScreenX;
+			*(float*)(params + 68) = ScreenY;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostRender()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.PostRender");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DrawHUD()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawHUD");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DrawGameHud()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawGameHud");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DrawMicIcon()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawMicIcon");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisplayLocalMessages()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayLocalMessages");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DrawLivingHud()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawLivingHud");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DrawPostGameHud()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawPostGameHud");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisplayWeaponBar()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayWeaponBar");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisplayMap()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayMap");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DrawAIOverlays()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawAIOverlays");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class UIInteraction* GetUIController(class LocalPlayer*& LP)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetUIController");
+			byte* params = (byte*)malloc(8);
+			*(class LocalPlayer**)params = LP;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			LP = *(class LocalPlayer**)params;
+			auto returnVal = *(class UIInteraction**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void StartMusic()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.StartMusic");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void GetTeamColor(int TeamIndex, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void*& ImageColor, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void*& TextColor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetTeamColor");
+			byte* params = (byte*)malloc(24);
+			*(int*)params = TeamIndex;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)(params + 4) = ImageColor;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void**)(params + 20) = TextColor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			ImageColor = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)(params + 4);
+			TextColor = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void**)(params + 20);
+			free(params);
+		}
+		void DisplayHit(Vector HitDir, int Damage, ScriptClass* DamageType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayHit");
+			byte* params = (byte*)malloc(20);
+			*(Vector*)params = HitDir;
+			*(int*)(params + 12) = Damage;
+			*(ScriptClass**)(params + 16) = DamageType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void FlashDamage(float FlashPosition)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.FlashDamage");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = FlashPosition;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateDamage()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.UpdateDamage");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisplayDamage()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayDamage");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DrawBackground(float X, float Y, float Width, float Height, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void* DrawColor, class Canvas* DrawCanvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawBackground");
+			byte* params = (byte*)malloc(36);
+			*(float*)params = X;
+			*(float*)(params + 4) = Y;
+			*(float*)(params + 8) = Width;
+			*(float*)(params + 12) = Height;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)(params + 16) = DrawColor;
+			*(class Canvas**)(params + 32) = DrawCanvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DrawBeaconBackground(float X, float Y, float Width, float Height, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void* DrawColor, class Canvas* DrawCanvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawBeaconBackground");
+			byte* params = (byte*)malloc(36);
+			*(float*)params = X;
+			*(float*)(params + 4) = Y;
+			*(float*)(params + 8) = Width;
+			*(float*)(params + 12) = Height;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)(params + 16) = DrawColor;
+			*(class Canvas**)(params + 32) = DrawCanvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DrawHealth(float X, float Y, float Width, float MaxWidth, float Height, class Canvas* DrawCanvas, byte Alpha)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawHealth");
+			byte* params = (byte*)malloc(25);
+			*(float*)params = X;
+			*(float*)(params + 4) = Y;
+			*(float*)(params + 8) = Width;
+			*(float*)(params + 12) = MaxWidth;
+			*(float*)(params + 16) = Height;
+			*(class Canvas**)(params + 20) = DrawCanvas;
+			*(params + 24) = Alpha;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DrawBarGraph(float X, float Y, float Width, float MaxWidth, float Height, class Canvas* DrawCanvas, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void* BarColor, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void* BackColor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawBarGraph");
+			byte* params = (byte*)malloc(32);
+			*(float*)params = X;
+			*(float*)(params + 4) = Y;
+			*(float*)(params + 8) = Width;
+			*(float*)(params + 12) = MaxWidth;
+			*(float*)(params + 16) = Height;
+			*(class Canvas**)(params + 20) = DrawCanvas;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void**)(params + 24) = BarColor;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void**)(params + 28) = BackColor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		ScriptArray<wchar_t> FormatTime(int Seconds)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.FormatTime");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = Seconds;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class Font* GetFontSizeIndex(int FontSize)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetFontSizeIndex");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = FontSize;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Font**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void ShowPortrait(class UTPlayerReplicationInfo* ShowPRI, float PortraitDuration, bool bOverrideCurrentSpeaker)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.ShowPortrait");
+			byte* params = (byte*)malloc(12);
+			*(class UTPlayerReplicationInfo**)params = ShowPRI;
+			*(float*)(params + 4) = PortraitDuration;
+			*(bool*)(params + 8) = bOverrideCurrentSpeaker;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void HidePortrait()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.HidePortrait");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisplayPortrait(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayPortrait");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DisplayHUDMessage(ScriptArray<wchar_t> Message, float XOffsetPct, float YOffsetPct)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayHUDMessage");
+			byte* params = (byte*)malloc(20);
+			*(ScriptArray<wchar_t>*)params = Message;
+			*(float*)(params + 12) = XOffsetPct;
+			*(float*)(params + 16) = YOffsetPct;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DisplayClock()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayClock");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisplayPawnDoll()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayPawnDoll");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisplayAmmo(class UTWeapon* Weapon)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayAmmo");
+			byte* params = (byte*)malloc(4);
+			*(class UTWeapon**)params = Weapon;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DisplayPowerups()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayPowerups");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisplayScoring()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayScoring");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisplayFragCount(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void* pos)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayFragCount");
+			byte* params = (byte*)malloc(8);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void**)params = pos;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DrawNameplateBackground(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void* pos, float WordWidth, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void* NameplateColor, float WordHeight)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawNameplateBackground");
+			byte* params = (byte*)malloc(32);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void**)params = pos;
+			*(float*)(params + 8) = WordWidth;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)(params + 12) = NameplateColor;
+			*(float*)(params + 28) = WordHeight;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DisplayLeaderBoard(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void* pos)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayLeaderBoard");
+			byte* params = (byte*)malloc(8);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void**)params = pos;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DisplayConsoleMessages()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayConsoleMessages");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

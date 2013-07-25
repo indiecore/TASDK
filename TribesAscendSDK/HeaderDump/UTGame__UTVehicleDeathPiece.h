@@ -5,6 +5,10 @@ namespace UnrealScript
 	class UTVehicleDeathPiece : public UTGib_Vehicle
 	{
 	public:
-		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		void PreBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleDeathPiece.PreBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

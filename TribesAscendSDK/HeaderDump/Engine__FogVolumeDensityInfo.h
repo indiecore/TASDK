@@ -13,12 +13,66 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'OnToggle'
-		// Here lies the not-yet-implemented method 'ShouldSaveForCheckpoint'
-		// Here lies the not-yet-implemented method 'CreateCheckpointRecord'
-		// Here lies the not-yet-implemented method 'ApplyCheckpointRecord'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityInfo.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityInfo.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnToggle(class SeqAct_Toggle* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityInfo.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool ShouldSaveForCheckpoint()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityInfo.ShouldSaveForCheckpoint");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void CreateCheckpointRecord(
+// WARNING: Unknown structure type 'ScriptStruct Engine.FogVolumeDensityInfo.CheckpointRecord'!
+void*& Record)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityInfo.CreateCheckpointRecord");
+			byte* params = (byte*)malloc(4);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.FogVolumeDensityInfo.CheckpointRecord'!
+void**)params = Record;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Record = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.FogVolumeDensityInfo.CheckpointRecord'!
+void**)params;
+			free(params);
+		}
+		void ApplyCheckpointRecord(
+// WARNING: Unknown structure type 'ScriptStruct Engine.FogVolumeDensityInfo.CheckpointRecord'!
+void*& Record)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FogVolumeDensityInfo.ApplyCheckpointRecord");
+			byte* params = (byte*)malloc(4);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.FogVolumeDensityInfo.CheckpointRecord'!
+void**)params = Record;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Record = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.FogVolumeDensityInfo.CheckpointRecord'!
+void**)params;
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

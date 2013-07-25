@@ -13,10 +13,26 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bScalingToZero, 0x2)
 		ADD_VAR(::BoolProperty, bRecycleScaleToZero, 0x1)
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'Recycle'
-		// Here lies the not-yet-implemented method 'RecycleInternal'
-		// Here lies the not-yet-implemented method 'ResetComponents'
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorSpawnable.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorSpawnable.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RecycleInternal()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorSpawnable.RecycleInternal");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ResetComponents()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorSpawnable.ResetComponents");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

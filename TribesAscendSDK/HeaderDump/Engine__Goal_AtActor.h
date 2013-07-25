@@ -22,8 +22,24 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bKeepPartial, 0x1)
 		ADD_VAR(::FloatProperty, GoalDist, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, GoalActor)
-		// Here lies the not-yet-implemented method 'AtActor'
-		// Here lies the not-yet-implemented method 'Recycle'
+		bool AtActor(class Pawn* P, class Actor* Goal, float Dist, bool bReturnPartial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Goal_AtActor.AtActor");
+			byte* params = (byte*)malloc(20);
+			*(class Pawn**)params = P;
+			*(class Actor**)(params + 4) = Goal;
+			*(float*)(params + 8) = Dist;
+			*(bool*)(params + 12) = bReturnPartial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Goal_AtActor.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

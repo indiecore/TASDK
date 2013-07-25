@@ -5,6 +5,10 @@ namespace UnrealScript
 	class Interface_NavigationHandle : public Interface
 	{
 	public:
-		// Here lies the not-yet-implemented method 'NotifyPathChanged'
+		void NotifyPathChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interface_NavigationHandle.NotifyPathChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

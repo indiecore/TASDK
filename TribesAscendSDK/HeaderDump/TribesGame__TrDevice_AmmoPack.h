@@ -15,8 +15,20 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, m_nAmmoPackMultBelt, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nAmmoPackMultSecondary, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nAmmoPackMultPrimary, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'AddAmmoBuff'
-		// Here lies the not-yet-implemented method 'ApplyAmmoBuff'
+		void AddAmmoBuff(class TrDevice* Dev, float Mult)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_AmmoPack.AddAmmoBuff");
+			byte* params = (byte*)malloc(8);
+			*(class TrDevice**)params = Dev;
+			*(float*)(params + 4) = Mult;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ApplyAmmoBuff()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_AmmoPack.ApplyAmmoBuff");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

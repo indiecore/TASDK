@@ -28,13 +28,72 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, EndPointParamName, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BeamSockets, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, BeamTemplate)
-		// Here lies the not-yet-implemented method 'AddBeamEmitter'
-		// Here lies the not-yet-implemented method 'KillBeamEmitter'
-		// Here lies the not-yet-implemented method 'SetBeamEmitterHidden'
-		// Here lies the not-yet-implemented method 'UpdateBeamEmitter'
-		// Here lies the not-yet-implemented method 'ProcessBeamHit'
-		// Here lies the not-yet-implemented method 'UpdateBeam'
-		// Here lies the not-yet-implemented method 'DisplayDebug'
+		void AddBeamEmitter()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeapon.AddBeamEmitter");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void KillBeamEmitter()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeapon.KillBeamEmitter");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetBeamEmitterHidden(bool bHide)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeapon.SetBeamEmitterHidden");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bHide;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateBeamEmitter(Vector FlashLocation, Vector HitNormal, class Actor* HitActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeapon.UpdateBeamEmitter");
+			byte* params = (byte*)malloc(28);
+			*(Vector*)params = FlashLocation;
+			*(Vector*)(params + 12) = HitNormal;
+			*(class Actor**)(params + 24) = HitActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProcessBeamHit(Vector StartTrace, Vector AimDir, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
+void*& TestImpact, float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeapon.ProcessBeamHit");
+			byte* params = (byte*)malloc(108);
+			*(Vector*)params = StartTrace;
+			*(Vector*)(params + 12) = AimDir;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
+void**)(params + 24) = TestImpact;
+			*(float*)(params + 104) = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			TestImpact = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
+void**)(params + 24);
+			free(params);
+		}
+		void UpdateBeam(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeapon.UpdateBeam");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeapon.DisplayDebug");
+			byte* params = (byte*)malloc(12);
+			*(class HUD**)params = HUD;
+			*(float*)(params + 4) = out_YL;
+			*(float*)(params + 8) = out_YPos;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_YL = *(float*)(params + 4);
+			out_YPos = *(float*)(params + 8);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -28,31 +28,253 @@ namespace UnrealScript
 		ADD_OBJECT(UTCTFFlag, FriendlyFlag)
 		ADD_OBJECT(NavigationPoint, HidePath)
 		ADD_VAR(::FloatProperty, LastSeeFlagCarrier, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'AllowDetourTo'
-		// Here lies the not-yet-implemented method 'ShouldUseAlternatePaths'
-		// Here lies the not-yet-implemented method 'SetAlternatePathTo'
-		// Here lies the not-yet-implemented method 'BeDevious'
-		// Here lies the not-yet-implemented method 'FindPathToObjective'
-		// Here lies the not-yet-implemented method 'GoPickupFlag'
-		// Here lies the not-yet-implemented method 'FormationCenter'
-		// Here lies the not-yet-implemented method 'VisibleToEnemiesOf'
-		// Here lies the not-yet-implemented method 'FindHidePathFor'
-		// Here lies the not-yet-implemented method 'CheckVehicle'
-		// Here lies the not-yet-implemented method 'OrdersForFlagCarrier'
-		// Here lies the not-yet-implemented method 'MustKeepEnemy'
-		// Here lies the not-yet-implemented method 'NearEnemyBase'
-		// Here lies the not-yet-implemented method 'NearHomeBase'
-		// Here lies the not-yet-implemented method 'FlagNearBase'
-		// Here lies the not-yet-implemented method 'OverrideFollowPlayer'
-		// Here lies the not-yet-implemented method 'CheckSquadObjectives'
-		// Here lies the not-yet-implemented method 'EnemyFlagTakenBy'
-		// Here lies the not-yet-implemented method 'AllowTaunt'
-		// Here lies the not-yet-implemented method 'ShouldDeferTo'
-		// Here lies the not-yet-implemented method 'PriorityObjective'
-		// Here lies the not-yet-implemented method 'ModifyThreat'
-		// Here lies the not-yet-implemented method 'AllowContinueOnFoot'
-		// Here lies the not-yet-implemented method 'ModifyAggression'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool AllowDetourTo(class UTBot* B, class NavigationPoint* N)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.AllowDetourTo");
+			byte* params = (byte*)malloc(12);
+			*(class UTBot**)params = B;
+			*(class NavigationPoint**)(params + 4) = N;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		bool ShouldUseAlternatePaths()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.ShouldUseAlternatePaths");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void SetAlternatePathTo(class NavigationPoint* NewRouteObjective, class UTBot* RouteMaker)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.SetAlternatePathTo");
+			byte* params = (byte*)malloc(8);
+			*(class NavigationPoint**)params = NewRouteObjective;
+			*(class UTBot**)(params + 4) = RouteMaker;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool BeDevious(class Pawn* Enemy)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.BeDevious");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = Enemy;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool FindPathToObjective(class UTBot* B, class Actor* O)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.FindPathToObjective");
+			byte* params = (byte*)malloc(12);
+			*(class UTBot**)params = B;
+			*(class Actor**)(params + 4) = O;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		bool GoPickupFlag(class UTBot* B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.GoPickupFlag");
+			byte* params = (byte*)malloc(8);
+			*(class UTBot**)params = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class Actor* FormationCenter(class Controller* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.FormationCenter");
+			byte* params = (byte*)malloc(8);
+			*(class Controller**)params = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Actor**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool VisibleToEnemiesOf(class Actor* A, class UTBot* B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.VisibleToEnemiesOf");
+			byte* params = (byte*)malloc(12);
+			*(class Actor**)params = A;
+			*(class UTBot**)(params + 4) = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		class NavigationPoint* FindHidePathFor(class UTBot* B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.FindHidePathFor");
+			byte* params = (byte*)malloc(8);
+			*(class UTBot**)params = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class NavigationPoint**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool CheckVehicle(class UTBot* B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.CheckVehicle");
+			byte* params = (byte*)malloc(8);
+			*(class UTBot**)params = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool OrdersForFlagCarrier(class UTBot* B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.OrdersForFlagCarrier");
+			byte* params = (byte*)malloc(8);
+			*(class UTBot**)params = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool MustKeepEnemy(class Pawn* E)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.MustKeepEnemy");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = E;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool NearEnemyBase(class UTBot* B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.NearEnemyBase");
+			byte* params = (byte*)malloc(8);
+			*(class UTBot**)params = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool NearHomeBase(class UTBot* B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.NearHomeBase");
+			byte* params = (byte*)malloc(8);
+			*(class UTBot**)params = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool FlagNearBase()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.FlagNearBase");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool OverrideFollowPlayer(class UTBot* B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.OverrideFollowPlayer");
+			byte* params = (byte*)malloc(8);
+			*(class UTBot**)params = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool CheckSquadObjectives(class UTBot* B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.CheckSquadObjectives");
+			byte* params = (byte*)malloc(8);
+			*(class UTBot**)params = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void EnemyFlagTakenBy(class Controller* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.EnemyFlagTakenBy");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool AllowTaunt(class UTBot* B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.AllowTaunt");
+			byte* params = (byte*)malloc(8);
+			*(class UTBot**)params = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool ShouldDeferTo(class Controller* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.ShouldDeferTo");
+			byte* params = (byte*)malloc(8);
+			*(class Controller**)params = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		byte PriorityObjective(class UTBot* B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.PriorityObjective");
+			byte* params = (byte*)malloc(5);
+			*(class UTBot**)params = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(params + 4);
+			free(params);
+			return returnVal;
+		}
+		float ModifyThreat(float Current, class Pawn* NewThreat, bool bThreatVisible, class UTBot* B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.ModifyThreat");
+			byte* params = (byte*)malloc(20);
+			*(float*)params = Current;
+			*(class Pawn**)(params + 4) = NewThreat;
+			*(bool*)(params + 8) = bThreatVisible;
+			*(class UTBot**)(params + 12) = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		bool AllowContinueOnFoot(class UTBot* B, class UTVehicle* V)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.AllowContinueOnFoot");
+			byte* params = (byte*)malloc(12);
+			*(class UTBot**)params = B;
+			*(class UTVehicle**)(params + 4) = V;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void ModifyAggression(class UTBot* B, float& Aggression)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.ModifyAggression");
+			byte* params = (byte*)malloc(8);
+			*(class UTBot**)params = B;
+			*(float*)(params + 4) = Aggression;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Aggression = *(float*)(params + 4);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

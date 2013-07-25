@@ -12,7 +12,14 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, NodeWeight, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetNodeWeight'
+		void SetNodeWeight(float NewWeight)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MorphNodeWeight.SetNodeWeight");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = NewWeight;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -31,8 +31,24 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, DisplayLocation, 0xFFFFFFFF
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'DisplayColor'!
 		ADD_OBJECT(Font, DisplayFont)
-		// Here lies the not-yet-implemented method 'Render'
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		void Render(class Canvas* TargetCanvas, class HUD* TargetHud)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_HudRenderText.Render");
+			byte* params = (byte*)malloc(8);
+			*(class Canvas**)params = TargetCanvas;
+			*(class HUD**)(params + 4) = TargetHud;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_HudRenderText.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

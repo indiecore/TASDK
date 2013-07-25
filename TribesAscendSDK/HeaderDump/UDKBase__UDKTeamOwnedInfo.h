@@ -13,7 +13,15 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TeamInfo, Team)
-		// Here lies the not-yet-implemented method 'GetTeamNum'
+		byte GetTeamNum()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKTeamOwnedInfo.GetTeamNum");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_OBJECT

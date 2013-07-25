@@ -14,7 +14,16 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(PortalTeleporter, MyPortal)
-		// Here lies the not-yet-implemented method 'CanTeleport'
+		bool CanTeleport(class Actor* A)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PortalMarker.CanTeleport");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = A;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_OBJECT

@@ -16,14 +16,63 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, LoginName, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, LoginPassword, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bWaitingForLoginWaitPopup, 0x2)
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'Login'
-		// Here lies the not-yet-implemented method 'OnUserLoginFailed'
-		// Here lies the not-yet-implemented method 'RetryLogin'
-		// Here lies the not-yet-implemented method 'Logout'
-		// Here lies the not-yet-implemented method 'SubmitPlayerName'
-		// Here lies the not-yet-implemented method 'LoginWaitPopup'
-		// Here lies the not-yet-implemented method 'PopupData'
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool Login(ScriptArray<wchar_t> UserName, ScriptArray<wchar_t> Password, bool bShouldRemember)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.Login");
+			byte* params = (byte*)malloc(32);
+			*(ScriptArray<wchar_t>*)params = UserName;
+			*(ScriptArray<wchar_t>*)(params + 12) = Password;
+			*(bool*)(params + 24) = bShouldRemember;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		void OnUserLoginFailed(byte LocalUserNum, byte ErrorCode)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.OnUserLoginFailed");
+			byte* params = (byte*)malloc(2);
+			*params = LocalUserNum;
+			*(params + 1) = ErrorCode;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RetryLogin()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.RetryLogin");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Logout()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.Logout");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SubmitPlayerName(ScriptArray<wchar_t> PlayerName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.SubmitPlayerName");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = PlayerName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void LoginWaitPopup()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.LoginWaitPopup");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PopupData(class GFxObject* Obj)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.PopupData");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = Obj;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

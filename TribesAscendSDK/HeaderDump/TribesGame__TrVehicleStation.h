@@ -42,25 +42,149 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, r_nSpawnedVehicles, 0xFFFFFFFF)
 		ADD_OBJECT(TrVehiclePad, m_VehiclePad)
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrVehicleStation.VehicleSpawnInfo' for the property named 'm_SpawnList'!
-		// Here lies the not-yet-implemented method 'RequestSpawnVehicle'
-		// Here lies the not-yet-implemented method 'GetNumVehiclesSpawnedByType'
-		// Here lies the not-yet-implemented method 'GetMaxVehicleCountAllowed'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'PostInitAnimTree'
-		// Here lies the not-yet-implemented method 'PawnEnteredStation'
-		// Here lies the not-yet-implemented method 'PawnLeftStation'
-		// Here lies the not-yet-implemented method 'PlayStationEnteredEffects'
-		// Here lies the not-yet-implemented method 'PlayStationLeftEffects'
-		// Here lies the not-yet-implemented method 'PlayRetractAnim'
-		// Here lies the not-yet-implemented method 'PlayVehiclePadDeployAnim'
-		// Here lies the not-yet-implemented method 'PlayVehiclePadCollapseAnim'
-		// Here lies the not-yet-implemented method 'SpawnVehicle'
-		// Here lies the not-yet-implemented method 'TeleportDriverToVehicle'
-		// Here lies the not-yet-implemented method 'Unlock'
-		// Here lies the not-yet-implemented method 'AbleToSpawnVehicleType'
-		// Here lies the not-yet-implemented method 'AddVehicleToPackedList'
-		// Here lies the not-yet-implemented method 'GetMarker'
-		// Here lies the not-yet-implemented method 'ShouldPostRenderForCaH'
+		bool RequestSpawnVehicle(byte VehicleType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.RequestSpawnVehicle");
+			byte* params = (byte*)malloc(5);
+			*params = VehicleType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		int GetNumVehiclesSpawnedByType(byte VehicleType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.GetNumVehiclesSpawnedByType");
+			byte* params = (byte*)malloc(5);
+			*params = VehicleType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		int GetMaxVehicleCountAllowed(byte VehicleType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.GetMaxVehicleCountAllowed");
+			byte* params = (byte*)malloc(5);
+			*params = VehicleType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostInitAnimTree(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PostInitAnimTree");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PawnEnteredStation(class TrPawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PawnEnteredStation");
+			byte* params = (byte*)malloc(4);
+			*(class TrPawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PawnLeftStation(class TrPawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PawnLeftStation");
+			byte* params = (byte*)malloc(4);
+			*(class TrPawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayStationEnteredEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PlayStationEnteredEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayStationLeftEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PlayStationLeftEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayRetractAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PlayRetractAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayVehiclePadDeployAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PlayVehiclePadDeployAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayVehiclePadCollapseAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PlayVehiclePadCollapseAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SpawnVehicle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.SpawnVehicle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TeleportDriverToVehicle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.TeleportDriverToVehicle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Unlock()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.Unlock");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool AbleToSpawnVehicleType(byte VehicleType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.AbleToSpawnVehicleType");
+			byte* params = (byte*)malloc(5);
+			*params = VehicleType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void AddVehicleToPackedList(byte VehicleType, int Num)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.AddVehicleToPackedList");
+			byte* params = (byte*)malloc(5);
+			*params = VehicleType;
+			*(int*)(params + 4) = Num;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class Texture2D* GetMarker()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.GetMarker");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Texture2D**)params;
+			free(params);
+			return returnVal;
+		}
+		bool ShouldPostRenderForCaH()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.ShouldPostRenderForCaH");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

@@ -36,15 +36,77 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bForceStaticDecals, 0x1)
 		ADD_OBJECT(MaterialInterface, ReplicatedMaterial)
 		ADD_OBJECT(StaticMesh, ReplicatedMesh)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'OnSetMesh'
-		// Here lies the not-yet-implemented method 'OnSetMaterial'
-		// Here lies the not-yet-implemented method 'SetStaticMesh'
-		// Here lies the not-yet-implemented method 'CanBasePawn'
-		// Here lies the not-yet-implemented method 'Attach'
-		// Here lies the not-yet-implemented method 'Detach'
-		// Here lies the not-yet-implemented method 'SetLightEnvironmentToNotBeDynamic'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicSMActor.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicSMActor.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnSetMesh(class SeqAct_SetMesh* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicSMActor.OnSetMesh");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_SetMesh**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnSetMaterial(class SeqAct_SetMaterial* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicSMActor.OnSetMaterial");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_SetMaterial**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetStaticMesh(class StaticMesh* NewMesh, Vector NewTranslation, Rotator NewRotation, Vector NewScale3D)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicSMActor.SetStaticMesh");
+			byte* params = (byte*)malloc(40);
+			*(class StaticMesh**)params = NewMesh;
+			*(Vector*)(params + 4) = NewTranslation;
+			*(Rotator*)(params + 16) = NewRotation;
+			*(Vector*)(params + 28) = NewScale3D;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool CanBasePawn(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicSMActor.CanBasePawn");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void Attach(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicSMActor.Attach");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Detach(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicSMActor.Detach");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetLightEnvironmentToNotBeDynamic()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicSMActor.SetLightEnvironmentToNotBeDynamic");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

@@ -13,8 +13,24 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, SearchResultsRow, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetSearchResultsProvider'
-		// Here lies the not-yet-implemented method 'GetElementCount'
+		class UIDataProvider_Settings* GetSearchResultsProvider()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataProvider_ServerDetails.GetSearchResultsProvider");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class UIDataProvider_Settings**)params;
+			free(params);
+			return returnVal;
+		}
+		int GetElementCount()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataProvider_ServerDetails.GetElementCount");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

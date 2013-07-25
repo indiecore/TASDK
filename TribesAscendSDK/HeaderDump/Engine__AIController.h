@@ -29,15 +29,84 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Skill, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bReverseScriptedRoute, 0x2)
 		ADD_VAR(::BoolProperty, bAdjustFromWalls, 0x1)
-		// Here lies the not-yet-implemented method 'PreBeginPlay'
-		// Here lies the not-yet-implemented method 'Reset'
-		// Here lies the not-yet-implemented method 'DisplayDebug'
-		// Here lies the not-yet-implemented method 'SetTeam'
-		// Here lies the not-yet-implemented method 'GetPlayerViewPoint'
-		// Here lies the not-yet-implemented method 'OnAIMoveToActor'
-		// Here lies the not-yet-implemented method 'NotifyWeaponFired'
-		// Here lies the not-yet-implemented method 'NotifyWeaponFinishedFiring'
-		// Here lies the not-yet-implemented method 'CanFireWeapon'
+		void PreBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.PreBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Reset()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.Reset");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.DisplayDebug");
+			byte* params = (byte*)malloc(12);
+			*(class HUD**)params = HUD;
+			*(float*)(params + 4) = out_YL;
+			*(float*)(params + 8) = out_YPos;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_YL = *(float*)(params + 4);
+			out_YPos = *(float*)(params + 8);
+			free(params);
+		}
+		void SetTeam(int inTeamIdx)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.SetTeam");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = inTeamIdx;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void GetPlayerViewPoint(Vector& out_Location, Rotator& out_Rotation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.GetPlayerViewPoint");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = out_Location;
+			*(Rotator*)(params + 12) = out_Rotation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_Location = *(Vector*)params;
+			out_Rotation = *(Rotator*)(params + 12);
+			free(params);
+		}
+		void OnAIMoveToActor(class SeqAct_AIMoveToActor* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.OnAIMoveToActor");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_AIMoveToActor**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyWeaponFired(class Weapon* W, byte FireMode)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.NotifyWeaponFired");
+			byte* params = (byte*)malloc(5);
+			*(class Weapon**)params = W;
+			*(params + 4) = FireMode;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyWeaponFinishedFiring(class Weapon* W, byte FireMode)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.NotifyWeaponFinishedFiring");
+			byte* params = (byte*)malloc(5);
+			*(class Weapon**)params = W;
+			*(params + 4) = FireMode;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool CanFireWeapon(class Weapon* Wpn, byte FireModeNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.CanFireWeapon");
+			byte* params = (byte*)malloc(9);
+			*(class Weapon**)params = Wpn;
+			*(params + 4) = FireModeNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

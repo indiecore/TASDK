@@ -42,21 +42,155 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.LocalPlayer.SynchronizedActorVisibilityHistory' for the property named 'ActorVisibilityHistory'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ViewState'!
 		ADD_OBJECT(PostProcessChain, PlayerPostProcess)
-		// Here lies the not-yet-implemented method 'SpawnPlayActor'
-		// Here lies the not-yet-implemented method 'SendSplitJoin'
-		// Here lies the not-yet-implemented method 'GetActorVisibility'
-		// Here lies the not-yet-implemented method 'OverridePostProcessSettings'
-		// Here lies the not-yet-implemented method 'ClearPostProcessSettingsOverride'
-		// Here lies the not-yet-implemented method 'SetControllerId'
-		// Here lies the not-yet-implemented method 'GetTranslationContext'
-		// Here lies the not-yet-implemented method 'InsertPostProcessingChain'
-		// Here lies the not-yet-implemented method 'RemovePostProcessingChain'
-		// Here lies the not-yet-implemented method 'RemoveAllPostProcessingChains'
-		// Here lies the not-yet-implemented method 'GetPostProcessChain'
-		// Here lies the not-yet-implemented method 'TouchPlayerPostProcessChain'
-		// Here lies the not-yet-implemented method 'DeProject'
-		// Here lies the not-yet-implemented method 'GetUniqueNetId'
-		// Here lies the not-yet-implemented method 'GetNickname'
+		bool SpawnPlayActor(ScriptArray<wchar_t> URL, ScriptArray<wchar_t>& OutError)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.SpawnPlayActor");
+			byte* params = (byte*)malloc(28);
+			*(ScriptArray<wchar_t>*)params = URL;
+			*(ScriptArray<wchar_t>*)(params + 12) = OutError;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutError = *(ScriptArray<wchar_t>*)(params + 12);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		void SendSplitJoin()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.SendSplitJoin");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool GetActorVisibility(class Actor* TestActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.GetActorVisibility");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = TestActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void OverridePostProcessSettings(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
+void* OverrideSettings, float BlendInTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.OverridePostProcessSettings");
+			byte* params = (byte*)malloc(224);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
+void**)params = OverrideSettings;
+			*(float*)(params + 220) = BlendInTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearPostProcessSettingsOverride(float BlendOutTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.ClearPostProcessSettingsOverride");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = BlendOutTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetControllerId(int NewControllerId)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.SetControllerId");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = NewControllerId;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class TranslationContext* GetTranslationContext()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.GetTranslationContext");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class TranslationContext**)params;
+			free(params);
+			return returnVal;
+		}
+		bool InsertPostProcessingChain(class PostProcessChain* InChain, int InIndex, bool bInClone)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.InsertPostProcessingChain");
+			byte* params = (byte*)malloc(16);
+			*(class PostProcessChain**)params = InChain;
+			*(int*)(params + 4) = InIndex;
+			*(bool*)(params + 8) = bInClone;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		bool RemovePostProcessingChain(int InIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.RemovePostProcessingChain");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = InIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool RemoveAllPostProcessingChains()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.RemoveAllPostProcessingChains");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		class PostProcessChain* GetPostProcessChain(int InIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.GetPostProcessChain");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = InIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class PostProcessChain**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void TouchPlayerPostProcessChain()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.TouchPlayerPostProcessChain");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DeProject(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void* RelativeScreenPos, Vector& WorldOrigin, Vector& WorldDirection)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.DeProject");
+			byte* params = (byte*)malloc(32);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void**)params = RelativeScreenPos;
+			*(Vector*)(params + 8) = WorldOrigin;
+			*(Vector*)(params + 20) = WorldDirection;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			WorldOrigin = *(Vector*)(params + 8);
+			WorldDirection = *(Vector*)(params + 20);
+			free(params);
+		}
+		
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void* GetUniqueNetId()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.GetUniqueNetId");
+			byte* params = (byte*)malloc(8);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void**)params;
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetNickname()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.GetNickname");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

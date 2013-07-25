@@ -20,8 +20,20 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::StrProperty, SpeakingCharacterName, 0xFFFFFFFF)
 		ADD_OBJECT(SoundNodeWave, VoiceToPlay)
-		// Here lies the not-yet-implemented method 'Activated'
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		void Activated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_ScriptedVoiceMessage.Activated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_ScriptedVoiceMessage.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

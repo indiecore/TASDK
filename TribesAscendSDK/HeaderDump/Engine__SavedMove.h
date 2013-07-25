@@ -56,18 +56,114 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bPressedJump, 0x4)
 		ADD_VAR(::BoolProperty, bDuck, 0x2)
 		ADD_VAR(::BoolProperty, bRun, 0x1)
-		// Here lies the not-yet-implemented method 'SetFlags'
-		// Here lies the not-yet-implemented method 'CompressedFlags'
-		// Here lies the not-yet-implemented method 'IsImportantMove'
-		// Here lies the not-yet-implemented method 'CanCombineWith'
-		// Here lies the not-yet-implemented method 'GetStartLocation'
-		// Here lies the not-yet-implemented method 'Clear'
-		// Here lies the not-yet-implemented method 'PostUpdate'
-		// Here lies the not-yet-implemented method 'SetInitialPosition'
-		// Here lies the not-yet-implemented method 'SetMoveFor'
-		// Here lies the not-yet-implemented method 'PrepMoveFor'
-		// Here lies the not-yet-implemented method 'ResetMoveFor'
-		// Here lies the not-yet-implemented method 'GetDebugString'
+		byte SetFlags(byte Flags, class PlayerController* PC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SavedMove.SetFlags");
+			byte* params = (byte*)malloc(6);
+			*params = Flags;
+			*(class PlayerController**)(params + 4) = PC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(params + 8);
+			free(params);
+			return returnVal;
+		}
+		byte CompressedFlags()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SavedMove.CompressedFlags");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
+		bool IsImportantMove(Vector CompareAccel)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SavedMove.IsImportantMove");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = CompareAccel;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		bool CanCombineWith(class SavedMove* NewMove, class Pawn* inPawn, float MaxDelta)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SavedMove.CanCombineWith");
+			byte* params = (byte*)malloc(16);
+			*(class SavedMove**)params = NewMove;
+			*(class Pawn**)(params + 4) = inPawn;
+			*(float*)(params + 8) = MaxDelta;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		Vector GetStartLocation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SavedMove.GetStartLocation");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)params;
+			free(params);
+			return returnVal;
+		}
+		void Clear()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SavedMove.Clear");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostUpdate(class PlayerController* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SavedMove.PostUpdate");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerController**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetInitialPosition(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SavedMove.SetInitialPosition");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetMoveFor(class PlayerController* P, float DeltaTime, Vector newAccel, byte InDoubleClick)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SavedMove.SetMoveFor");
+			byte* params = (byte*)malloc(21);
+			*(class PlayerController**)params = P;
+			*(float*)(params + 4) = DeltaTime;
+			*(Vector*)(params + 8) = newAccel;
+			*(params + 20) = InDoubleClick;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PrepMoveFor(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SavedMove.PrepMoveFor");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ResetMoveFor(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SavedMove.ResetMoveFor");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		ScriptArray<wchar_t> GetDebugString()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SavedMove.GetDebugString");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

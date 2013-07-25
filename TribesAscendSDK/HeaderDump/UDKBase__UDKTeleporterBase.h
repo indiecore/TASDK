@@ -30,9 +30,30 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, TextureResolutionY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, TextureResolutionX, 0xFFFFFFFF)
 		ADD_OBJECT(TextureRenderTarget2D, TextureTarget)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'InitializePortalEffect'
-		// Here lies the not-yet-implemented method 'Accept'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKTeleporterBase.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void InitializePortalEffect(class Actor* Dest)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKTeleporterBase.InitializePortalEffect");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Dest;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool Accept(class Actor* Incoming, class Actor* Source)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKTeleporterBase.Accept");
+			byte* params = (byte*)malloc(12);
+			*(class Actor**)params = Incoming;
+			*(class Actor**)(params + 4) = Source;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

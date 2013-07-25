@@ -25,7 +25,11 @@ namespace UnrealScript
 		ADD_OBJECT(TrHUDSettings, HUDSettings)
 		ADD_OBJECT(TrVideoSettings, VideoSettings)
 		ADD_OBJECT(GFxTrMenuMoviePlayer, MP)
-		// Here lies the not-yet-implemented method 'Initialize'
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSettingsManager.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

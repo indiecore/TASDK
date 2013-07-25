@@ -15,13 +15,63 @@ namespace UnrealScript
 	{
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_TrTripNotifier'!
-		// Here lies the not-yet-implemented method 'AddTripActor'
-		// Here lies the not-yet-implemented method 'RemoveTripActor'
-		// Here lies the not-yet-implemented method 'TripActivated'
-		// Here lies the not-yet-implemented method 'GetParticleSystemName'
-		// Here lies the not-yet-implemented method 'GetTripSocketPosition'
-		// Here lies the not-yet-implemented method 'OnTripAwake'
-		// Here lies the not-yet-implemented method 'OnTripSleep'
+		void AddTripActor(class TrTripActor* NewTrip)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_TripSensor.AddTripActor");
+			byte* params = (byte*)malloc(4);
+			*(class TrTripActor**)params = NewTrip;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RemoveTripActor(class TrTripActor* RemoveTrip)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_TripSensor.RemoveTripActor");
+			byte* params = (byte*)malloc(4);
+			*(class TrTripActor**)params = RemoveTrip;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TripActivated(class Pawn* Other, Vector ActivateLocation, class TrTripActor* TripActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_TripSensor.TripActivated");
+			byte* params = (byte*)malloc(20);
+			*(class Pawn**)params = Other;
+			*(Vector*)(params + 4) = ActivateLocation;
+			*(class TrTripActor**)(params + 16) = TripActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class ParticleSystem* GetParticleSystemName()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_TripSensor.GetParticleSystemName");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class ParticleSystem**)params;
+			free(params);
+			return returnVal;
+		}
+		bool GetTripSocketPosition(bool bIsLeft, Vector& SocketPosition)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_TripSensor.GetTripSocketPosition");
+			byte* params = (byte*)malloc(20);
+			*(bool*)params = bIsLeft;
+			*(Vector*)(params + 4) = SocketPosition;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			SocketPosition = *(Vector*)(params + 4);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void OnTripAwake()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_TripSensor.OnTripAwake");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnTripSleep()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_TripSensor.OnTripSleep");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_STRUCT

@@ -29,12 +29,63 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fInTakeHitFlashRemainingTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fOutTakeHitFlashTimeLength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fInTakeHitFlashTimeLength, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Touch'
-		// Here lies the not-yet-implemented method 'OnHealthChanged'
-		// Here lies the not-yet-implemented method 'PlayDamageHealthEffects'
-		// Here lies the not-yet-implemented method 'PlayHitOtherEffects'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'GetMarker'
+		void Touch(class Actor* Other, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* OtherComp, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_ForceField.Touch");
+			byte* params = (byte*)malloc(32);
+			*(class Actor**)params = Other;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = OtherComp;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnHealthChanged(bool wasDamage)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_ForceField.OnHealthChanged");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = wasDamage;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayDamageHealthEffects(int DamageAmount, int HitBoneIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_ForceField.PlayDamageHealthEffects");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = DamageAmount;
+			*(int*)(params + 4) = HitBoneIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayHitOtherEffects(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_ForceField.PlayHitOtherEffects");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_ForceField.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class Texture2D* GetMarker()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_ForceField.GetMarker");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Texture2D**)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

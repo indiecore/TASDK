@@ -25,15 +25,72 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, m_PendingState, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fStingerVolumeMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_CTFTeamScores, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'CreateNewTrack'
-		// Here lies the not-yet-implemented method 'StartMusic'
-		// Here lies the not-yet-implemented method 'SetStateBasedOnGameState'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'MusicEvent'
-		// Here lies the not-yet-implemented method 'SetPendingState'
-		// Here lies the not-yet-implemented method 'SetCurrentState'
-		// Here lies the not-yet-implemented method 'PlayerScoredFlag'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* CreateNewTrack(class SoundCue* MusicCue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.CreateNewTrack");
+			byte* params = (byte*)malloc(8);
+			*(class SoundCue**)params = MusicCue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void StartMusic()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.StartMusic");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetStateBasedOnGameState()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.SetStateBasedOnGameState");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void MusicEvent(int NewEventIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.MusicEvent");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = NewEventIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetPendingState(byte NewState)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.SetPendingState");
+			byte* params = (byte*)malloc(1);
+			*params = NewState;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetCurrentState(byte NewState)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.SetCurrentState");
+			byte* params = (byte*)malloc(1);
+			*params = NewState;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayerScoredFlag()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.PlayerScoredFlag");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

@@ -6,7 +6,21 @@ namespace UnrealScript
 	class UDKProfileSettings : public OnlineProfileSettings
 	{
 	public:
-		// Here lies the not-yet-implemented method 'ResetToDefault'
-		// Here lies the not-yet-implemented method 'ResetKeysToDefault'
+		void ResetToDefault(int ProfileId)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKProfileSettings.ResetToDefault");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = ProfileId;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ResetKeysToDefault(class LocalPlayer* InPlayerOwner)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKProfileSettings.ResetKeysToDefault");
+			byte* params = (byte*)malloc(4);
+			*(class LocalPlayer**)params = InPlayerOwner;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }

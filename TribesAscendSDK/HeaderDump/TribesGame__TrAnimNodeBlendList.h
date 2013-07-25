@@ -12,7 +12,17 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, m_fBlendTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetBlendTime'
+		float GetBlendTime(int ChildIndex, bool bGetDefault)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendList.GetBlendTime");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = ChildIndex;
+			*(bool*)(params + 4) = bGetDefault;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

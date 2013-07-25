@@ -22,8 +22,16 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumWholeSceneDynamicShadowCascades, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WholeSceneDynamicShadowRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TraceDistance, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'OnUpdatePropertyLightColor'
-		// Here lies the not-yet-implemented method 'OnUpdatePropertyBrightness'
+		void OnUpdatePropertyLightColor()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DirectionalLightComponent.OnUpdatePropertyLightColor");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnUpdatePropertyBrightness()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DirectionalLightComponent.OnUpdatePropertyBrightness");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

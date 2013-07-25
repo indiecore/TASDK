@@ -5,6 +5,10 @@ namespace UnrealScript
 	class TrProj_HeavyTwinfusor : public TrProjectile
 	{
 	public:
-		// Here lies the not-yet-implemented method 'SpawnFlightEffects'
+		void SpawnFlightEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_HeavyTwinfusor.SpawnFlightEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

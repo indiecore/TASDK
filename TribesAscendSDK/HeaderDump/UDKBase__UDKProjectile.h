@@ -41,8 +41,20 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bCheckProjectileLight, 0x4)
 		ADD_VAR(::BoolProperty, bShuttingDown, 0x2)
 		ADD_VAR(::BoolProperty, bWideCheck, 0x1)
-		// Here lies the not-yet-implemented method 'GetTerminalVelocity'
-		// Here lies the not-yet-implemented method 'CreateProjectileLight'
+		float GetTerminalVelocity()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKProjectile.GetTerminalVelocity");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		void CreateProjectileLight()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKProjectile.CreateProjectileLight");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

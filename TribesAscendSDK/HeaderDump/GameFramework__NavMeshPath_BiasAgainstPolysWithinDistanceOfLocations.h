@@ -21,8 +21,29 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DistanceToCheck, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, Rotation, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'BiasAgainstPolysWithinDistanceOfLocations'
-		// Here lies the not-yet-implemented method 'Recycle'
+		bool BiasAgainstPolysWithinDistanceOfLocations(class NavigationHandle* NavHandle, Vector InLocation, Rotator InRotation, float InDistanceToCheck, 
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void* InLocationsToCheck)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.NavMeshPath_BiasAgainstPolysWithinDistanceOfLocations.BiasAgainstPolysWithinDistanceOfLocations");
+			byte* params = (byte*)malloc(48);
+			*(class NavigationHandle**)params = NavHandle;
+			*(Vector*)(params + 4) = InLocation;
+			*(Rotator*)(params + 16) = InRotation;
+			*(float*)(params + 28) = InDistanceToCheck;
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 32) = InLocationsToCheck;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 44);
+			free(params);
+			return returnVal;
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.NavMeshPath_BiasAgainstPolysWithinDistanceOfLocations.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

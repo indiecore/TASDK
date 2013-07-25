@@ -39,19 +39,116 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDedicatedServerSpectator, 0x1)
 		ADD_OBJECT(UDKEmitCameraEffect, CameraEffect)
 		ADD_OBJECT(CameraAnimInst, CameraAnimPlayer)
-		// Here lies the not-yet-implemented method 'SetGamma'
-		// Here lies the not-yet-implemented method 'SetHardwarePhysicsEnabled'
-		// Here lies the not-yet-implemented method 'IsKeyboardAvailable'
-		// Here lies the not-yet-implemented method 'IsMouseAvailable'
-		// Here lies the not-yet-implemented method 'RemoveCameraEffect'
-		// Here lies the not-yet-implemented method 'ClientSpawnCameraEffect'
-		// Here lies the not-yet-implemented method 'ClearCameraEffect'
-		// Here lies the not-yet-implemented method 'GetTargetAdhesionFrictionTarget'
-		// Here lies the not-yet-implemented method 'IsControllerTiltActive'
-		// Here lies the not-yet-implemented method 'SetControllerTiltDesiredIfAvailable'
-		// Here lies the not-yet-implemented method 'SetControllerTiltActive'
-		// Here lies the not-yet-implemented method 'SetOnlyUseControllerTiltInput'
-		// Here lies the not-yet-implemented method 'SetUseTiltForwardAndBack'
+		void SetGamma(float GammaValue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.SetGamma");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = GammaValue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetHardwarePhysicsEnabled(bool bEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.SetHardwarePhysicsEnabled");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool IsKeyboardAvailable()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.IsKeyboardAvailable");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsMouseAvailable()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.IsMouseAvailable");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void RemoveCameraEffect(class UDKEmitCameraEffect* CamEmitter)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.RemoveCameraEffect");
+			byte* params = (byte*)malloc(4);
+			*(class UDKEmitCameraEffect**)params = CamEmitter;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClientSpawnCameraEffect(ScriptClass* CameraEffectClass)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.ClientSpawnCameraEffect");
+			byte* params = (byte*)malloc(4);
+			*(ScriptClass**)params = CameraEffectClass;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearCameraEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.ClearCameraEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class Pawn* GetTargetAdhesionFrictionTarget(float MaxDistance, Vector& CamLoc, Rotator& CamRot)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.GetTargetAdhesionFrictionTarget");
+			byte* params = (byte*)malloc(32);
+			*(float*)params = MaxDistance;
+			*(Vector*)(params + 4) = CamLoc;
+			*(Rotator*)(params + 16) = CamRot;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			CamLoc = *(Vector*)(params + 4);
+			CamRot = *(Rotator*)(params + 16);
+			auto returnVal = *(class Pawn**)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		bool IsControllerTiltActive()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.IsControllerTiltActive");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void SetControllerTiltDesiredIfAvailable(bool bActive)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.SetControllerTiltDesiredIfAvailable");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bActive;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetControllerTiltActive(bool bActive)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.SetControllerTiltActive");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bActive;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetOnlyUseControllerTiltInput(bool bActive)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.SetOnlyUseControllerTiltInput");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bActive;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetUseTiltForwardAndBack(bool bActive)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPlayerController.SetUseTiltForwardAndBack");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bActive;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

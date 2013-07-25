@@ -14,10 +14,43 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CurrentDeltaTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentDelta, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, CurrentEvent, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'ResetInput'
-		// Here lies the not-yet-implemented method 'GetBind'
-		// Here lies the not-yet-implemented method 'GetBindNameFromCommandScript'
-		// Here lies the not-yet-implemented method 'SetBind'
+		void ResetInput()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Input.ResetInput");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		ScriptArray<wchar_t> GetBind(ScriptName& Key)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Input.GetBind");
+			byte* params = (byte*)malloc(20);
+			*(ScriptName*)params = Key;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Key = *(ScriptName*)params;
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetBindNameFromCommandScript(ScriptArray<wchar_t>& KeyCommand)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Input.GetBindNameFromCommandScript");
+			byte* params = (byte*)malloc(24);
+			*(ScriptArray<wchar_t>*)params = KeyCommand;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			KeyCommand = *(ScriptArray<wchar_t>*)params;
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void SetBind(ScriptName& BindName, ScriptArray<wchar_t> Command)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Input.SetBind");
+			byte* params = (byte*)malloc(20);
+			*(ScriptName*)params = BindName;
+			*(ScriptArray<wchar_t>*)(params + 8) = Command;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			BindName = *(ScriptName*)params;
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

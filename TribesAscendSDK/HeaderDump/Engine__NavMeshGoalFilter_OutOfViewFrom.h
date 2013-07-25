@@ -14,7 +14,17 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(::VectorProperty, OutOfViewLocation, 0xFFFFFFFF
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'GoalPoly'!
-		// Here lies the not-yet-implemented method 'MustBeHiddenFromThisPoint'
+		bool MustBeHiddenFromThisPoint(class NavMeshGoal_GenericFilterContainer* FilterContainer, Vector InOutOfViewLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoalFilter_OutOfViewFrom.MustBeHiddenFromThisPoint");
+			byte* params = (byte*)malloc(20);
+			*(class NavMeshGoal_GenericFilterContainer**)params = FilterContainer;
+			*(Vector*)(params + 4) = InOutOfViewLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_STRUCT

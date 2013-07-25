@@ -25,24 +25,143 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, ListDataProvider)
 		ADD_VAR(::StrProperty, SelectedOptionSet, 0xFFFFFFFF)
 		ADD_OBJECT(GFxClikWidget, ListMC)
-		// Here lies the not-yet-implemented method 'OnViewLoaded'
-		// Here lies the not-yet-implemented method 'OnViewActivated'
-		// Here lies the not-yet-implemented method 'OnTopMostView'
-		// Here lies the not-yet-implemented method 'DisableSubComponents'
-		// Here lies the not-yet-implemented method 'SetSelectedOptionSet'
-		// Here lies the not-yet-implemented method 'LoadDataFromStore'
-		// Here lies the not-yet-implemented method 'Select_Back'
-		// Here lies the not-yet-implemented method 'SaveState'
-		// Here lies the not-yet-implemented method 'SetList'
-		// Here lies the not-yet-implemented method 'OnListChange'
-		// Here lies the not-yet-implemented method 'OnOptionChanged'
-		// Here lies the not-yet-implemented method 'UpdateDescription'
-		// Here lies the not-yet-implemented method 'UpdateListDataProvider'
-		// Here lies the not-yet-implemented method 'FindLocalizedSettingIndexByName'
-		// Here lies the not-yet-implemented method 'OnEscapeKeyPress'
-		// Here lies the not-yet-implemented method 'Select_BackImpl'
-		// Here lies the not-yet-implemented method 'FindPropertyIndexByName'
-		// Here lies the not-yet-implemented method 'WidgetInitialized'
+		void OnViewLoaded()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.OnViewLoaded");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnViewActivated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.OnViewActivated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnTopMostView(bool bPlayOpenAnimation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.OnTopMostView");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bPlayOpenAnimation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DisableSubComponents(bool bDisableComponents)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.DisableSubComponents");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bDisableComponents;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetSelectedOptionSet()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.SetSelectedOptionSet");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void LoadDataFromStore()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.LoadDataFromStore");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Select_Back(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.Select_Back");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SaveState()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.SaveState");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetList(class GFxObject* List)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.SetList");
+			byte* params = (byte*)malloc(4);
+			*(class GFxObject**)params = List;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnListChange(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.OnListChange");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnOptionChanged(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.OnOptionChanged");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateDescription()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.UpdateDescription");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateListDataProvider()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.UpdateListDataProvider");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int FindLocalizedSettingIndexByName(ScriptArray<wchar_t> InSettingName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.FindLocalizedSettingIndexByName");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = InSettingName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void OnEscapeKeyPress()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.OnEscapeKeyPress");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Select_BackImpl()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.Select_BackImpl");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int FindPropertyIndexByName(ScriptArray<wchar_t> InPropertyName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.FindPropertyIndexByName");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = InPropertyName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.WidgetInitialized");
+			byte* params = (byte*)malloc(24);
+			*(ScriptName*)params = WidgetName;
+			*(ScriptName*)(params + 8) = WidgetPath;
+			*(class GFxObject**)(params + 16) = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

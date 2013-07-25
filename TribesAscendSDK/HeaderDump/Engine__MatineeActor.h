@@ -31,9 +31,24 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bReversePlayback, 0x2)
 		ADD_VAR(::BoolProperty, bIsPlaying, 0x1)
 		ADD_OBJECT(SeqAct_Interp, InterpAction)
-		// Here lies the not-yet-implemented method 'AddAIGroupActor'
-		// Here lies the not-yet-implemented method 'Update'
-		// Here lies the not-yet-implemented method 'CheckPriorityRefresh'
+		void AddAIGroupActor(class InterpGroupInstAI* AIGroupInst)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MatineeActor.AddAIGroupActor");
+			byte* params = (byte*)malloc(4);
+			*(class InterpGroupInstAI**)params = AIGroupInst;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Update()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MatineeActor.Update");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CheckPriorityRefresh()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MatineeActor.CheckPriorityRefresh");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

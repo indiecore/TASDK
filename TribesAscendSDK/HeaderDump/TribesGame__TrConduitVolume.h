@@ -6,7 +6,21 @@ namespace UnrealScript
 	class TrConduitVolume : public TrPhysicsVolume
 	{
 	public:
-		// Here lies the not-yet-implemented method 'PawnEnteredVolume'
-		// Here lies the not-yet-implemented method 'PawnLeavingVolume'
+		void PawnEnteredVolume(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConduitVolume.PawnEnteredVolume");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PawnLeavingVolume(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConduitVolume.PawnLeavingVolume");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }

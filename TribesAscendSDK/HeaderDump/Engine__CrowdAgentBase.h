@@ -12,7 +12,11 @@ namespace UnrealScript
 	{
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_NavigationHandle'!
-		// Here lies the not-yet-implemented method 'NotifyPathChanged'
+		void NotifyPathChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CrowdAgentBase.NotifyPathChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_STRUCT

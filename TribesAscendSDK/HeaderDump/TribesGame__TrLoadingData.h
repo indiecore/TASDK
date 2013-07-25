@@ -23,9 +23,26 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, MapURL, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Rules, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Tip, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetRandomTip'
-		// Here lies the not-yet-implemented method 'Initialize'
-		// Here lies the not-yet-implemented method 'SetDataFields'
+		ScriptArray<wchar_t> GetRandomTip(int GameIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoadingData.GetRandomTip");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = GameIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void Initialize()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoadingData.Initialize");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetDataFields()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoadingData.SetDataFields");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

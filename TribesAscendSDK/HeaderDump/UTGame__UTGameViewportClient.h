@@ -25,12 +25,55 @@ namespace UnrealScript
 		ADD_OBJECT(Font, LoadingScreenGameTypeNameFont)
 		ADD_OBJECT(Font, LoadingScreenMapNameFont)
 		ADD_VAR(::StrProperty, UTFrontEndString, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostRender'
-		// Here lies the not-yet-implemented method 'DrawTransition'
-		// Here lies the not-yet-implemented method 'RenderHeader'
-		// Here lies the not-yet-implemented method 'UpdateActiveSplitscreenType'
-		// Here lies the not-yet-implemented method 'SetProgressMessage'
-		// Here lies the not-yet-implemented method 'NotifyConnectionError'
+		void PostRender(class Canvas* Canvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameViewportClient.PostRender");
+			byte* params = (byte*)malloc(4);
+			*(class Canvas**)params = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DrawTransition(class Canvas* Canvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameViewportClient.DrawTransition");
+			byte* params = (byte*)malloc(4);
+			*(class Canvas**)params = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RenderHeader(class Canvas* Canvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameViewportClient.RenderHeader");
+			byte* params = (byte*)malloc(4);
+			*(class Canvas**)params = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateActiveSplitscreenType()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameViewportClient.UpdateActiveSplitscreenType");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetProgressMessage(byte MessageType, ScriptArray<wchar_t> Message, ScriptArray<wchar_t> Title, bool bIgnoreFutureNetworkMessages)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameViewportClient.SetProgressMessage");
+			byte* params = (byte*)malloc(29);
+			*params = MessageType;
+			*(ScriptArray<wchar_t>*)(params + 4) = Message;
+			*(ScriptArray<wchar_t>*)(params + 16) = Title;
+			*(bool*)(params + 28) = bIgnoreFutureNetworkMessages;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyConnectionError(ScriptArray<wchar_t> Message, ScriptArray<wchar_t> Title)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameViewportClient.NotifyConnectionError");
+			byte* params = (byte*)malloc(24);
+			*(ScriptArray<wchar_t>*)params = Message;
+			*(ScriptArray<wchar_t>*)(params + 12) = Title;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

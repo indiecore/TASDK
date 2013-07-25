@@ -22,8 +22,20 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumThrownOutNodes, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumNodesProcessed, 0xFFFFFFFF)
 		ADD_OBJECT(NavMeshPathConstraint, NextConstraint)
-		// Here lies the not-yet-implemented method 'Recycle'
-		// Here lies the not-yet-implemented method 'GetDumpString'
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPathConstraint.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		ScriptArray<wchar_t> GetDumpString()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPathConstraint.GetDumpString");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

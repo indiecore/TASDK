@@ -54,8 +54,24 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MaxReverseVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxReverseForce, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxThrustForce, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'InitWheels'
-		// Here lies the not-yet-implemented method 'UpdateLeanConstraint'
+		void InitWheels(class UDKVehicle* Vehicle)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleSimHoverboard.InitWheels");
+			byte* params = (byte*)malloc(4);
+			*(class UDKVehicle**)params = Vehicle;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateLeanConstraint(class RB_ConstraintInstance* LeanUprightConstraintInstance, Vector LeanY, Vector LeanZ)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleSimHoverboard.UpdateLeanConstraint");
+			byte* params = (byte*)malloc(28);
+			*(class RB_ConstraintInstance**)params = LeanUprightConstraintInstance;
+			*(Vector*)(params + 4) = LeanY;
+			*(Vector*)(params + 16) = LeanZ;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

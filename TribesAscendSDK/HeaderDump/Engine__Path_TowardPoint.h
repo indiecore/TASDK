@@ -13,8 +13,22 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(::VectorProperty, GoalPoint, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'TowardPoint'
-		// Here lies the not-yet-implemented method 'Recycle'
+		bool TowardPoint(class Pawn* P, Vector Point)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_TowardPoint.TowardPoint");
+			byte* params = (byte*)malloc(20);
+			*(class Pawn**)params = P;
+			*(Vector*)(params + 4) = Point;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_TowardPoint.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_STRUCT

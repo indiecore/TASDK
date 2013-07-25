@@ -22,8 +22,20 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAlwaysCallEvaluateGoal, 0x1)
 		ADD_VAR(::IntProperty, MaxPathVisits, 0xFFFFFFFF)
 		ADD_OBJECT(NavMeshPathGoalEvaluator, NextEvaluator)
-		// Here lies the not-yet-implemented method 'Recycle'
-		// Here lies the not-yet-implemented method 'GetDumpString'
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPathGoalEvaluator.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		ScriptArray<wchar_t> GetDumpString()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPathGoalEvaluator.GetDumpString");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

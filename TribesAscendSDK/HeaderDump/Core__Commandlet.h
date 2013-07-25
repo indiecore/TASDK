@@ -19,7 +19,16 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, HelpWebLink, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, HelpUsage, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, HelpDescription, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Main'
+		int Main(ScriptArray<wchar_t> Params)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Commandlet.Main");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = Params;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 12);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

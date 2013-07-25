@@ -41,14 +41,88 @@ namespace UnrealScript
 		ADD_OBJECT(Texture2D, PhysMaterialMask)
 		ADD_OBJECT(MaterialInterface, Parent)
 		ADD_OBJECT(PhysicalMaterial, PhysMaterial)
-		// Here lies the not-yet-implemented method 'SetParent'
-		// Here lies the not-yet-implemented method 'SetVectorParameterValue'
-		// Here lies the not-yet-implemented method 'SetScalarParameterValue'
-		// Here lies the not-yet-implemented method 'SetScalarCurveParameterValue'
-		// Here lies the not-yet-implemented method 'SetTextureParameterValue'
-		// Here lies the not-yet-implemented method 'SetFontParameterValue'
-		// Here lies the not-yet-implemented method 'ClearParameterValues'
-		// Here lies the not-yet-implemented method 'IsInMapOrTransientPackage'
+		void SetParent(class MaterialInterface* NewParent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetParent");
+			byte* params = (byte*)malloc(4);
+			*(class MaterialInterface**)params = NewParent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetVectorParameterValue(ScriptName ParameterName, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void*& Value)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetVectorParameterValue");
+			byte* params = (byte*)malloc(24);
+			*(ScriptName*)params = ParameterName;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)(params + 8) = Value;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Value = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)(params + 8);
+			free(params);
+		}
+		void SetScalarParameterValue(ScriptName ParameterName, float Value)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetScalarParameterValue");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = ParameterName;
+			*(float*)(params + 8) = Value;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetScalarCurveParameterValue(ScriptName ParameterName, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
+void*& Value)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetScalarCurveParameterValue");
+			byte* params = (byte*)malloc(24);
+			*(ScriptName*)params = ParameterName;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
+void**)(params + 8) = Value;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Value = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
+void**)(params + 8);
+			free(params);
+		}
+		void SetTextureParameterValue(ScriptName ParameterName, class Texture* Value)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetTextureParameterValue");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = ParameterName;
+			*(class Texture**)(params + 8) = Value;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetFontParameterValue(ScriptName ParameterName, class Font* FontValue, int FontPage)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetFontParameterValue");
+			byte* params = (byte*)malloc(16);
+			*(ScriptName*)params = ParameterName;
+			*(class Font**)(params + 8) = FontValue;
+			*(int*)(params + 12) = FontPage;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearParameterValues()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.ClearParameterValues");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool IsInMapOrTransientPackage()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.IsInMapOrTransientPackage");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

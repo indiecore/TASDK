@@ -50,9 +50,41 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, SlideReFireDelay, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, SlideEffect)
 		ADD_OBJECT(SoundCue, SlideSound)
-		// Here lies the not-yet-implemented method 'FindPhysEffectInfo'
-		// Here lies the not-yet-implemented method 'FindFractureSounds'
-		// Here lies the not-yet-implemented method 'GetPhysicalMaterialProperty'
+		
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.PhysEffectInfo'!
+void* FindPhysEffectInfo(byte Type)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicalMaterial.FindPhysEffectInfo");
+			byte* params = (byte*)malloc(17);
+			*params = Type;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.PhysEffectInfo'!
+void**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void FindFractureSounds(class SoundCue*& OutSoundExplosion, class SoundCue*& OutSoundSingle)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicalMaterial.FindFractureSounds");
+			byte* params = (byte*)malloc(8);
+			*(class SoundCue**)params = OutSoundExplosion;
+			*(class SoundCue**)(params + 4) = OutSoundSingle;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutSoundExplosion = *(class SoundCue**)params;
+			OutSoundSingle = *(class SoundCue**)(params + 4);
+			free(params);
+		}
+		class PhysicalMaterialPropertyBase* GetPhysicalMaterialProperty(ScriptClass* DesiredClass)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicalMaterial.GetPhysicalMaterialProperty");
+			byte* params = (byte*)malloc(8);
+			*(ScriptClass**)params = DesiredClass;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class PhysicalMaterialPropertyBase**)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

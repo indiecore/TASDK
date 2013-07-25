@@ -44,31 +44,225 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'DefaultHudColor'!
 		ADD_OBJECT(UTCarriedObject, HasFlag)
-		// Here lies the not-yet-implemented method 'IncrementEventStat'
-		// Here lies the not-yet-implemented method 'GetFlag'
-		// Here lies the not-yet-implemented method 'IncrementPickupStat'
-		// Here lies the not-yet-implemented method 'IncrementVehicleKillStat'
-		// Here lies the not-yet-implemented method 'IncrementSuicideStat'
-		// Here lies the not-yet-implemented method 'IncrementKillStat'
-		// Here lies the not-yet-implemented method 'IncrementDeathStat'
-		// Here lies the not-yet-implemented method 'GetCallSign'
-		// Here lies the not-yet-implemented method 'IsLocalPlayerPRI'
-		// Here lies the not-yet-implemented method 'ShouldBroadCastWelcomeMessage'
-		// Here lies the not-yet-implemented method 'StartDrivingStat'
-		// Here lies the not-yet-implemented method 'StopDrivingStat'
-		// Here lies the not-yet-implemented method 'StartPowerupTimeStat'
-		// Here lies the not-yet-implemented method 'StopPowerupTimeStat'
-		// Here lies the not-yet-implemented method 'SetFlag'
-		// Here lies the not-yet-implemented method 'IncrementKills'
-		// Here lies the not-yet-implemented method 'Reset'
-		// Here lies the not-yet-implemented method 'OverrideWith'
-		// Here lies the not-yet-implemented method 'CopyProperties'
-		// Here lies the not-yet-implemented method 'SeamlessTravelTo'
-		// Here lies the not-yet-implemented method 'AllowClientToTeleport'
-		// Here lies the not-yet-implemented method 'ServerTeleportToActor'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'ShowMidGameMenu'
-		// Here lies the not-yet-implemented method 'AttemptMidGameMenu'
+		int IncrementEventStat(ScriptName NewStatName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.IncrementEventStat");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = NewStatName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		class UTCarriedObject* GetFlag()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.GetFlag");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class UTCarriedObject**)params;
+			free(params);
+			return returnVal;
+		}
+		int IncrementPickupStat(ScriptName NewStatName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.IncrementPickupStat");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = NewStatName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		int IncrementVehicleKillStat(ScriptName NewStatName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.IncrementVehicleKillStat");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = NewStatName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		int IncrementSuicideStat(ScriptName NewStatName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.IncrementSuicideStat");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = NewStatName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		int IncrementKillStat(ScriptName NewStatName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.IncrementKillStat");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = NewStatName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		int IncrementDeathStat(ScriptName NewStatName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.IncrementDeathStat");
+			byte* params = (byte*)malloc(12);
+			*(ScriptName*)params = NewStatName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetCallSign()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.GetCallSign");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsLocalPlayerPRI()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.IsLocalPlayerPRI");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool ShouldBroadCastWelcomeMessage(bool bExiting)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.ShouldBroadCastWelcomeMessage");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bExiting;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void StartDrivingStat(ScriptName NewStatName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.StartDrivingStat");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = NewStatName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopDrivingStat(ScriptName NewStatName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.StopDrivingStat");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = NewStatName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StartPowerupTimeStat(ScriptName NewStatName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.StartPowerupTimeStat");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = NewStatName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopPowerupTimeStat(ScriptName NewStatName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.StopPowerupTimeStat");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = NewStatName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetFlag(class UTCarriedObject* NewFlag)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.SetFlag");
+			byte* params = (byte*)malloc(4);
+			*(class UTCarriedObject**)params = NewFlag;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void IncrementKills(bool bEnemyKill)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.IncrementKills");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnemyKill;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Reset()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.Reset");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OverrideWith(class PlayerReplicationInfo* PRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.OverrideWith");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerReplicationInfo**)params = PRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CopyProperties(class PlayerReplicationInfo* PRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.CopyProperties");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerReplicationInfo**)params = PRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SeamlessTravelTo(class PlayerReplicationInfo* NewPRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.SeamlessTravelTo");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerReplicationInfo**)params = NewPRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool AllowClientToTeleport(class Actor* DestinationActor, class UTPawn*& OwnerPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.AllowClientToTeleport");
+			byte* params = (byte*)malloc(12);
+			*(class Actor**)params = DestinationActor;
+			*(class UTPawn**)(params + 4) = OwnerPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OwnerPawn = *(class UTPawn**)(params + 4);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void ServerTeleportToActor(class Actor* DestinationActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.ServerTeleportToActor");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = DestinationActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ShowMidGameMenu(bool bInitial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.ShowMidGameMenu");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bInitial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool AttemptMidGameMenu()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerReplicationInfo.AttemptMidGameMenu");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

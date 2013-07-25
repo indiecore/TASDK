@@ -45,10 +45,47 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'WireframeColor'!
 		ADD_OBJECT(StaticMesh, StaticMesh)
 		ADD_VAR(::IntProperty, PreviousLODLevel, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'CanBecomeDynamic'
-		// Here lies the not-yet-implemented method 'SetStaticMesh'
-		// Here lies the not-yet-implemented method 'DisableRBCollisionWithSMC'
-		// Here lies the not-yet-implemented method 'SetForceStaticDecals'
+		bool CanBecomeDynamic()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshComponent.CanBecomeDynamic");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool SetStaticMesh(class StaticMesh* NewMesh, bool bForce)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshComponent.SetStaticMesh");
+			byte* params = (byte*)malloc(12);
+			*(class StaticMesh**)params = NewMesh;
+			*(bool*)(params + 4) = bForce;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void DisableRBCollisionWithSMC(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* OtherSMC, bool bDisabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshComponent.DisableRBCollisionWithSMC");
+			byte* params = (byte*)malloc(8);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = OtherSMC;
+			*(bool*)(params + 4) = bDisabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetForceStaticDecals(bool bInForceStaticDecals)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshComponent.SetForceStaticDecals");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bInForceStaticDecals;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -76,9 +76,33 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightmassPrimitiveSettings' for the property named 'LightmassSettings'!
 		ADD_VAR(::IntProperty, LightMapResolution, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInterface, FluidMaterial)
-		// Here lies the not-yet-implemented method 'ApplyForce'
-		// Here lies the not-yet-implemented method 'SetDetailPosition'
-		// Here lies the not-yet-implemented method 'SetSimulationPosition'
+		void ApplyForce(Vector WorldPos, float Strength, float Radius, bool bImpulse)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FluidSurfaceComponent.ApplyForce");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = WorldPos;
+			*(float*)(params + 12) = Strength;
+			*(float*)(params + 16) = Radius;
+			*(bool*)(params + 20) = bImpulse;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetDetailPosition(Vector WorldPos)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FluidSurfaceComponent.SetDetailPosition");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = WorldPos;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetSimulationPosition(Vector WorldPos)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FluidSurfaceComponent.SetSimulationPosition");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = WorldPos;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

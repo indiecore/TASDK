@@ -24,8 +24,27 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bSoft, 0x1)
 		ADD_VAR(::FloatProperty, MinDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxDistance, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'StayWithinEnvelopeToLoc'
-		// Here lies the not-yet-implemented method 'Recycle'
+		bool StayWithinEnvelopeToLoc(class NavigationHandle* NavHandle, Vector InEnvelopeTestPoint, float InMaxDistance, float InMinDistance, bool bInSoft, float InSoftStartPenalty, bool bOnlyTossOutSpecsThatLeave)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_WithinDistanceEnvelope.StayWithinEnvelopeToLoc");
+			byte* params = (byte*)malloc(40);
+			*(class NavigationHandle**)params = NavHandle;
+			*(Vector*)(params + 4) = InEnvelopeTestPoint;
+			*(float*)(params + 16) = InMaxDistance;
+			*(float*)(params + 20) = InMinDistance;
+			*(bool*)(params + 24) = bInSoft;
+			*(float*)(params + 28) = InSoftStartPenalty;
+			*(bool*)(params + 32) = bOnlyTossOutSpecsThatLeave;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 36);
+			free(params);
+			return returnVal;
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_WithinDistanceEnvelope.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

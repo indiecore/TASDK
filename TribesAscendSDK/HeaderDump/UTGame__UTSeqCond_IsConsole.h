@@ -5,6 +5,10 @@ namespace UnrealScript
 	class UTSeqCond_IsConsole : public SequenceCondition
 	{
 	public:
-		// Here lies the not-yet-implemented method 'Activated'
+		void Activated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqCond_IsConsole.Activated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

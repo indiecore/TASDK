@@ -5,6 +5,10 @@ namespace UnrealScript
 	class TrEmitCameraEffect_Snow : public TrEmitCameraEffect_Speed
 	{
 	public:
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEmitCameraEffect_Snow.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

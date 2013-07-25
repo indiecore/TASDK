@@ -30,23 +30,122 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, PickupStatName, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, RespawnSound)
 		ADD_OBJECT(Controller, TeamOwner)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'SetResOut'
-		// Here lies the not-yet-implemented method 'DisablePickup'
-		// Here lies the not-yet-implemented method 'ShutDown'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'ShouldCamp'
-		// Here lies the not-yet-implemented method 'UpdateHUD'
-		// Here lies the not-yet-implemented method 'RespawnEffect'
-		// Here lies the not-yet-implemented method 'StopsProjectile'
-		// Here lies the not-yet-implemented method 'StartPulse'
-		// Here lies the not-yet-implemented method 'SetPickupMesh'
-		// Here lies the not-yet-implemented method 'GetPickupStatName'
-		// Here lies the not-yet-implemented method 'InitPickupMeshEffects'
-		// Here lies the not-yet-implemented method 'SetPickupVisible'
-		// Here lies the not-yet-implemented method 'SetPickupHidden'
-		// Here lies the not-yet-implemented method 'SetInitialState'
-		// Here lies the not-yet-implemented method 'PickedUpBy'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetResOut()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.SetResOut");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DisablePickup()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.DisablePickup");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShutDown()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.ShutDown");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool ShouldCamp(class UTBot* B, float MaxWait)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.ShouldCamp");
+			byte* params = (byte*)malloc(12);
+			*(class UTBot**)params = B;
+			*(float*)(params + 4) = MaxWait;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void UpdateHUD(class UTHUD* H)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.UpdateHUD");
+			byte* params = (byte*)malloc(4);
+			*(class UTHUD**)params = H;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RespawnEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.RespawnEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool StopsProjectile(class Projectile* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.StopsProjectile");
+			byte* params = (byte*)malloc(8);
+			*(class Projectile**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void StartPulse(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void* TargetEmissive)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.StartPulse");
+			byte* params = (byte*)malloc(16);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
+void**)params = TargetEmissive;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetPickupMesh()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.SetPickupMesh");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		ScriptName GetPickupStatName()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.GetPickupStatName");
+			byte* params = (byte*)malloc(8);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptName*)params;
+			free(params);
+			return returnVal;
+		}
+		void InitPickupMeshEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.InitPickupMeshEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetPickupVisible()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.SetPickupVisible");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetPickupHidden()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.SetPickupHidden");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetInitialState()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.SetInitialState");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PickedUpBy(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.PickedUpBy");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

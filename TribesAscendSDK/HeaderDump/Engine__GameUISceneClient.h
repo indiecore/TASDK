@@ -29,15 +29,82 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IntPoint' for the property named 'DoubleClickStartPosition'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'DoubleClickStartTime'!
 		ADD_VAR(::FloatProperty, LatestDeltaTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetCurrentNetMode'
-		// Here lies the not-yet-implemented method 'RequestInputProcessingUpdate'
-		// Here lies the not-yet-implemented method 'CanUnpauseInternalUI'
-		// Here lies the not-yet-implemented method 'PauseGame'
-		// Here lies the not-yet-implemented method 'NotifyClientTravel'
-		// Here lies the not-yet-implemented method 'NotifyGameSessionEnded'
-		// Here lies the not-yet-implemented method 'NotifyPlayerAdded'
-		// Here lies the not-yet-implemented method 'NotifyPlayerRemoved'
-		// Here lies the not-yet-implemented method 'FindLocalPlayerIndex'
+		byte GetCurrentNetMode()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.GetCurrentNetMode");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
+		void RequestInputProcessingUpdate()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.RequestInputProcessingUpdate");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool CanUnpauseInternalUI()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.CanUnpauseInternalUI");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void PauseGame(bool bDesiredPauseState, int PlayerIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.PauseGame");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bDesiredPauseState;
+			*(int*)(params + 4) = PlayerIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyClientTravel(class PlayerController* TravellingPlayer, ScriptArray<wchar_t> TravelURL, byte TravelType, bool bIsSeamlessTravel)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.NotifyClientTravel");
+			byte* params = (byte*)malloc(21);
+			*(class PlayerController**)params = TravellingPlayer;
+			*(ScriptArray<wchar_t>*)(params + 4) = TravelURL;
+			*(params + 16) = TravelType;
+			*(bool*)(params + 20) = bIsSeamlessTravel;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyGameSessionEnded()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.NotifyGameSessionEnded");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void NotifyPlayerAdded(int PlayerIndex, class LocalPlayer* AddedPlayer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.NotifyPlayerAdded");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = PlayerIndex;
+			*(class LocalPlayer**)(params + 4) = AddedPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void NotifyPlayerRemoved(int PlayerIndex, class LocalPlayer* RemovedPlayer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.NotifyPlayerRemoved");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = PlayerIndex;
+			*(class LocalPlayer**)(params + 4) = RemovedPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int FindLocalPlayerIndex(class Player* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.FindLocalPlayerIndex");
+			byte* params = (byte*)malloc(8);
+			*(class Player**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

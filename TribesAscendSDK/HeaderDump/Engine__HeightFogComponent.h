@@ -24,7 +24,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Density, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Height, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
-		// Here lies the not-yet-implemented method 'SetEnabled'
+		void SetEnabled(bool bSetEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HeightFogComponent.SetEnabled");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bSetEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

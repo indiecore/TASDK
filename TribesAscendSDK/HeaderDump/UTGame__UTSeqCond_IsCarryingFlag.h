@@ -15,7 +15,11 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(UTGameObjective, FlagBase)
 		ADD_OBJECT(Actor, Target)
-		// Here lies the not-yet-implemented method 'Activated'
+		void Activated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqCond_IsCarryingFlag.Activated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

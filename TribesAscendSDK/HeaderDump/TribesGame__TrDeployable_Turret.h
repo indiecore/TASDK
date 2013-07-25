@@ -31,23 +31,143 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, m_MuzzleFlashLightClass)
 		ADD_VAR(::BoolProperty, m_bCanTargetVehicles, 0x2)
 		ADD_VAR(::BoolProperty, m_bEnabled, 0x1)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'PostInitAnimTree'
-		// Here lies the not-yet-implemented method 'DeployComplete'
-		// Here lies the not-yet-implemented method 'AcquireTarget'
-		// Here lies the not-yet-implemented method 'GetAcquireDelayTime'
-		// Here lies the not-yet-implemented method 'CleanupIgnoreList'
-		// Here lies the not-yet-implemented method 'CanTargetPawn'
-		// Here lies the not-yet-implemented method 'GetTargetPawn'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'UpdateAim'
-		// Here lies the not-yet-implemented method 'PlayFireEffects'
-		// Here lies the not-yet-implemented method 'CauseMuzzleFlash'
-		// Here lies the not-yet-implemented method 'MuzzleFlashTimer'
-		// Here lies the not-yet-implemented method 'SetMuzzleFlashParams'
-		// Here lies the not-yet-implemented method 'GetWeaponStartTraceLocation'
-		// Here lies the not-yet-implemented method 'GetMarker'
-		// Here lies the not-yet-implemented method 'AwardKillAssists'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostInitAnimTree(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.PostInitAnimTree");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DeployComplete()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.DeployComplete");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AcquireTarget()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.AcquireTarget");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		float GetAcquireDelayTime()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.GetAcquireDelayTime");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		void CleanupIgnoreList()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.CleanupIgnoreList");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool CanTargetPawn(class Pawn* aPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.CanTargetPawn");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = aPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class Pawn* GetTargetPawn()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.GetTargetPawn");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Pawn**)params;
+			free(params);
+			return returnVal;
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateAim(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.UpdateAim");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayFireEffects(class Weapon* InWeapon, bool bViaReplication, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.PlayFireEffects");
+			byte* params = (byte*)malloc(20);
+			*(class Weapon**)params = InWeapon;
+			*(bool*)(params + 4) = bViaReplication;
+			*(Vector*)(params + 8) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CauseMuzzleFlash()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.CauseMuzzleFlash");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void MuzzleFlashTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.MuzzleFlashTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetMuzzleFlashParams(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* PSC, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void* MuzzleFlashColor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.SetMuzzleFlashParams");
+			byte* params = (byte*)malloc(8);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = PSC;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void**)(params + 4) = MuzzleFlashColor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		Vector GetWeaponStartTraceLocation(class Weapon* CurrentWeapon)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.GetWeaponStartTraceLocation");
+			byte* params = (byte*)malloc(16);
+			*(class Weapon**)params = CurrentWeapon;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class Texture2D* GetMarker()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.GetMarker");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Texture2D**)params;
+			free(params);
+			return returnVal;
+		}
+		void AwardKillAssists()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.AwardKillAssists");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

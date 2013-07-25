@@ -25,9 +25,30 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameStatsAggregator.GameEvents' for the property named 'AllGameEvents'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'AggregateEventsMapping'!
 		ADD_OBJECT(GameStateObject, GameState)
-		// Here lies the not-yet-implemented method 'PreProcessStream'
-		// Here lies the not-yet-implemented method 'PostProcessStream'
-		// Here lies the not-yet-implemented method 'GetAggregateMappingIDs'
+		void PreProcessStream()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameStatsAggregator.PreProcessStream");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostProcessStream()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameStatsAggregator.PostProcessStream");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool GetAggregateMappingIDs(int EventID, int& AggregateID, int& TargetAggregateID)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameStatsAggregator.GetAggregateMappingIDs");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = EventID;
+			*(int*)(params + 4) = AggregateID;
+			*(int*)(params + 8) = TargetAggregateID;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			AggregateID = *(int*)(params + 4);
+			TargetAggregateID = *(int*)(params + 8);
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_STRUCT

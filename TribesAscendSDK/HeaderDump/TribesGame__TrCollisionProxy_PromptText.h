@@ -23,11 +23,37 @@ namespace UnrealScript
 		ADD_OBJECT(Pawn, m_LocalPawn)
 		ADD_VAR(::StrProperty, m_LastUpgradeMsg, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nLastUpgradeLevel, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'OnPawnAdded'
-		// Here lies the not-yet-implemented method 'RequestPromptText'
-		// Here lies the not-yet-implemented method 'CheckForUpgradeLevel'
-		// Here lies the not-yet-implemented method 'TryTraceAgainTimer'
-		// Here lies the not-yet-implemented method 'OnPawnRemoved'
+		void OnPawnAdded(class Pawn* aPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_PromptText.OnPawnAdded");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = aPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RequestPromptText()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_PromptText.RequestPromptText");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CheckForUpgradeLevel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_PromptText.CheckForUpgradeLevel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TryTraceAgainTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_PromptText.TryTraceAgainTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnPawnRemoved(class Pawn* aPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_PromptText.OnPawnRemoved");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = aPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -21,7 +21,14 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, FamilyInfo)
 		ADD_VAR(::FloatProperty, GroundSpeed, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NextTeam, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PostCreateActor'
+		void PostCreateActor(class Actor* NewActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrActorFactoryPawn.PostCreateActor");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = NewActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

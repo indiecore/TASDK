@@ -267,129 +267,969 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, m_nLastPerk2Icon, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nLastPerk1Icon, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nWinningTeam, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'DrawMarkerText'
-		// Here lies the not-yet-implemented method 'DrawMICMarker'
-		// Here lies the not-yet-implemented method 'GetEdgeScreenCoordinates'
-		// Here lies the not-yet-implemented method 'DrawMarker'
-		// Here lies the not-yet-implemented method 'DrawRotatedMarker'
-		// Here lies the not-yet-implemented method 'ShowDebugInfo'
-		// Here lies the not-yet-implemented method 'CreateHUDMovie'
-		// Here lies the not-yet-implemented method 'ShowSpectatorControls'
-		// Here lies the not-yet-implemented method 'SetShowScores'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'InitializeGameHUD'
-		// Here lies the not-yet-implemented method 'FadeInTimer'
-		// Here lies the not-yet-implemented method 'Fade'
-		// Here lies the not-yet-implemented method 'PlayRoundOver'
-		// Here lies the not-yet-implemented method 'ShowRoundEnding'
-		// Here lies the not-yet-implemented method 'PlayMatchOver'
-		// Here lies the not-yet-implemented method 'ShowEnding'
-		// Here lies the not-yet-implemented method 'FadeInSummary'
-		// Here lies the not-yet-implemented method 'ScaleformJoystickInputEvent'
-		// Here lies the not-yet-implemented method 'ToggleSkiEffect'
-		// Here lies the not-yet-implemented method 'TogglePauseMenu'
-		// Here lies the not-yet-implemented method 'ToggleMovieHUD'
-		// Here lies the not-yet-implemented method 'ToggleVehicleMenu'
-		// Here lies the not-yet-implemented method 'ToggleTeamSelectionMenu'
-		// Here lies the not-yet-implemented method 'SetPowerOscillation'
-		// Here lies the not-yet-implemented method 'AddUpdateToCombatLog'
-		// Here lies the not-yet-implemented method 'AddToPromptPanel'
-		// Here lies the not-yet-implemented method 'AddToPromptPanelTime'
-		// Here lies the not-yet-implemented method 'ClearPromptPanel'
-		// Here lies the not-yet-implemented method 'AddToHeroStatus'
-		// Here lies the not-yet-implemented method 'ClearHeroStatus'
-		// Here lies the not-yet-implemented method 'ClearPromptPanelMessage'
-		// Here lies the not-yet-implemented method 'UpdateVGSMenu'
-		// Here lies the not-yet-implemented method 'HideVGSMenu'
-		// Here lies the not-yet-implemented method 'AddToHelpText'
-		// Here lies the not-yet-implemented method 'ClearHelpText'
-		// Here lies the not-yet-implemented method 'AddUpdateToKillMessage'
-		// Here lies the not-yet-implemented method 'AddFlyingIcon'
-		// Here lies the not-yet-implemented method 'OnSpectate'
-		// Here lies the not-yet-implemented method 'CreateSpectatorHUDCache'
-		// Here lies the not-yet-implemented method 'ClearSpectatorHUDCache'
-		// Here lies the not-yet-implemented method 'HideHUDElements'
-		// Here lies the not-yet-implemented method 'ShowHUDPlayerSpawning'
-		// Here lies the not-yet-implemented method 'ShowHUDPlayerAlive'
-		// Here lies the not-yet-implemented method 'ShowCenterHUDElements'
-		// Here lies the not-yet-implemented method 'UpdateRespawnText'
-		// Here lies the not-yet-implemented method 'UpdateRespawnTimer'
-		// Here lies the not-yet-implemented method 'UpdateHUDCredits'
-		// Here lies the not-yet-implemented method 'TeamScoreboardShow'
-		// Here lies the not-yet-implemented method 'RabbitScoreboardShow'
-		// Here lies the not-yet-implemented method 'TeamScoreboardUpdateSlot'
-		// Here lies the not-yet-implemented method 'RabbitScoreboardUpdateSlot'
-		// Here lies the not-yet-implemented method 'TeamScoreboardUpdateTeamScore'
-		// Here lies the not-yet-implemented method 'TeamScoreboardUpdateTime'
-		// Here lies the not-yet-implemented method 'RabbitScoreboardUpdateTime'
-		// Here lies the not-yet-implemented method 'TeamScoreboardActivePlayer'
-		// Here lies the not-yet-implemented method 'RabbitScoreboardActivePlayer'
-		// Here lies the not-yet-implemented method 'ResolutionChanged'
-		// Here lies the not-yet-implemented method 'RestoreHUDState'
-		// Here lies the not-yet-implemented method 'HideMenus'
-		// Here lies the not-yet-implemented method 'RemoveMovies'
-		// Here lies the not-yet-implemented method 'CompleteVehicleMenuClose'
-		// Here lies the not-yet-implemented method 'CompleteTeamSelectionMenuClose'
-		// Here lies the not-yet-implemented method 'ClearCrosshairOnFriendly'
-		// Here lies the not-yet-implemented method 'CheckCrosshairOnFriendly'
-		// Here lies the not-yet-implemented method 'DrawColoredMarkerText'
-		// Here lies the not-yet-implemented method 'DrawSmallText'
-		// Here lies the not-yet-implemented method 'DrawHealthBar'
-		// Here lies the not-yet-implemented method 'PostRender'
-		// Here lies the not-yet-implemented method 'GetRemainingFriendlyGeneratorRestoreTime'
-		// Here lies the not-yet-implemented method 'GetRemainingEnemyGeneratorRestoreTime'
-		// Here lies the not-yet-implemented method 'UpdateSkiEffect'
-		// Here lies the not-yet-implemented method 'UpdatePickupFlashEffect'
-		// Here lies the not-yet-implemented method 'PulsePickupFlashEffect'
-		// Here lies the not-yet-implemented method 'UpdateInvulnerableEfect'
-		// Here lies the not-yet-implemented method 'UpdateShieldEffect'
-		// Here lies the not-yet-implemented method 'PulseShieldEffect'
-		// Here lies the not-yet-implemented method 'UpdateJammerEffect'
-		// Here lies the not-yet-implemented method 'UpdateFadeEffect'
-		// Here lies the not-yet-implemented method 'FumbleFlag'
-		// Here lies the not-yet-implemented method 'UpdateFumbledFlagEffect'
-		// Here lies the not-yet-implemented method 'Whiteout'
-		// Here lies the not-yet-implemented method 'ClearWhiteout'
-		// Here lies the not-yet-implemented method 'UpdateWhiteoutEffect'
-		// Here lies the not-yet-implemented method 'LocalizedMessage'
-		// Here lies the not-yet-implemented method 'ChatMessageReceived'
-		// Here lies the not-yet-implemented method 'StripTag'
-		// Here lies the not-yet-implemented method 'SendLocalMessageToGlobalAlert'
-		// Here lies the not-yet-implemented method 'SendLocalMessageToChat'
-		// Here lies the not-yet-implemented method 'SetPlayerClassObjects'
-		// Here lies the not-yet-implemented method 'HideGlobalAlert'
-		// Here lies the not-yet-implemented method 'KickVoteMessage'
-		// Here lies the not-yet-implemented method 'EnableGameTypeHUD'
-		// Here lies the not-yet-implemented method 'ShowSpectatorPlayer'
-		// Here lies the not-yet-implemented method 'HideSpectatorPlayer'
-		// Here lies the not-yet-implemented method 'UpdateSpectatorPlayerPanel'
-		// Here lies the not-yet-implemented method 'ShowSpectatorVehicle'
-		// Here lies the not-yet-implemented method 'HideSpectatorVehicle'
-		// Here lies the not-yet-implemented method 'UpdateSpectatorVehiclePanel'
-		// Here lies the not-yet-implemented method 'ShowSpectatorBookmark'
-		// Here lies the not-yet-implemented method 'HideSpectatorBookmark'
-		// Here lies the not-yet-implemented method 'UpdateSpectatorBookmarkPanel'
-		// Here lies the not-yet-implemented method 'ShowSpectatorObjectivePanel'
-		// Here lies the not-yet-implemented method 'HideSpectatorObjectivePanel'
-		// Here lies the not-yet-implemented method 'UpdateSpectatorObjectivePanel'
-		// Here lies the not-yet-implemented method 'ShowSpectatorFloatCameraPanel'
-		// Here lies the not-yet-implemented method 'HideSpectatorFloatCameraPanel'
-		// Here lies the not-yet-implemented method 'UpdateSpectatorFloatCameraPanel'
-		// Here lies the not-yet-implemented method 'HideAllSpectatorPanels'
-		// Here lies the not-yet-implemented method 'OnViewTargetChange'
-		// Here lies the not-yet-implemented method 'TestNumber'
-		// Here lies the not-yet-implemented method 'AddOverheadNumber'
-		// Here lies the not-yet-implemented method 'UpdateOverheadNumbers'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'PostRenderFor'
-		// Here lies the not-yet-implemented method 'PlayAward'
-		// Here lies the not-yet-implemented method 'QueueAccolade'
-		// Here lies the not-yet-implemented method 'CheckQueuedAccolades'
-		// Here lies the not-yet-implemented method 'RunQueuedAccoladesTimer'
-		// Here lies the not-yet-implemented method 'ClearQueuedAccoladesTimer'
-		// Here lies the not-yet-implemented method 'DeployableReplicated'
-		// Here lies the not-yet-implemented method 'MineReplicated'
-		// Here lies the not-yet-implemented method 'UpdateOwnedItems'
+		Vector DrawMarkerText(ScriptArray<wchar_t> ShowText, bool bFriend, Vector Placement, class Canvas* DrawCanvas, bool bBuddy)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawMarkerText");
+			byte* params = (byte*)malloc(48);
+			*(ScriptArray<wchar_t>*)params = ShowText;
+			*(bool*)(params + 12) = bFriend;
+			*(Vector*)(params + 16) = Placement;
+			*(class Canvas**)(params + 28) = DrawCanvas;
+			*(bool*)(params + 32) = bBuddy;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 36);
+			free(params);
+			return returnVal;
+		}
+		Vector DrawMICMarker(class MaterialInstanceConstant* MarkerMIC, Vector Placement, class Canvas* DrawCanvas, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void* MarkerSize, ScriptArray<wchar_t> markText, bool bFriend, float distScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawMICMarker");
+			byte* params = (byte*)malloc(60);
+			*(class MaterialInstanceConstant**)params = MarkerMIC;
+			*(Vector*)(params + 4) = Placement;
+			*(class Canvas**)(params + 16) = DrawCanvas;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
+void**)(params + 20) = MarkerSize;
+			*(ScriptArray<wchar_t>*)(params + 28) = markText;
+			*(bool*)(params + 40) = bFriend;
+			*(float*)(params + 44) = distScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 48);
+			free(params);
+			return returnVal;
+		}
+		bool GetEdgeScreenCoordinates(class Canvas* inCanvas, Vector CameraPosition, Vector CameraDir, Vector ObjectLocation, Vector& ScreenLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.GetEdgeScreenCoordinates");
+			byte* params = (byte*)malloc(56);
+			*(class Canvas**)params = inCanvas;
+			*(Vector*)(params + 4) = CameraPosition;
+			*(Vector*)(params + 16) = CameraDir;
+			*(Vector*)(params + 28) = ObjectLocation;
+			*(Vector*)(params + 40) = ScreenLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			ScreenLocation = *(Vector*)(params + 40);
+			auto returnVal = *(bool*)(params + 52);
+			free(params);
+			return returnVal;
+		}
+		Vector DrawMarker(class Texture2D* Marker, Vector Placement, class Canvas* DrawCanvas, ScriptArray<wchar_t> markText, bool bFriend, float Alpha, float distScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawMarker");
+			byte* params = (byte*)malloc(56);
+			*(class Texture2D**)params = Marker;
+			*(Vector*)(params + 4) = Placement;
+			*(class Canvas**)(params + 16) = DrawCanvas;
+			*(ScriptArray<wchar_t>*)(params + 20) = markText;
+			*(bool*)(params + 32) = bFriend;
+			*(float*)(params + 36) = Alpha;
+			*(float*)(params + 40) = distScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 44);
+			free(params);
+			return returnVal;
+		}
+		Vector DrawRotatedMarker(class Texture2D* Marker, Vector Placement, Rotator Rot, class Canvas* DrawCanvas, ScriptArray<wchar_t> markText, bool bFriend, float Alpha, float distScale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawRotatedMarker");
+			byte* params = (byte*)malloc(68);
+			*(class Texture2D**)params = Marker;
+			*(Vector*)(params + 4) = Placement;
+			*(Rotator*)(params + 16) = Rot;
+			*(class Canvas**)(params + 28) = DrawCanvas;
+			*(ScriptArray<wchar_t>*)(params + 32) = markText;
+			*(bool*)(params + 44) = bFriend;
+			*(float*)(params + 48) = Alpha;
+			*(float*)(params + 52) = distScale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 56);
+			free(params);
+			return returnVal;
+		}
+		void ShowDebugInfo(float& out_YL, float& out_YPos)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowDebugInfo");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = out_YL;
+			*(float*)(params + 4) = out_YPos;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_YL = *(float*)params;
+			out_YPos = *(float*)(params + 4);
+			free(params);
+		}
+		void CreateHUDMovie()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.CreateHUDMovie");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShowSpectatorControls(bool bForceEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowSpectatorControls");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bForceEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetShowScores(bool bEnableShowScores)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.SetShowScores");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnableShowScores;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void InitializeGameHUD()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.InitializeGameHUD");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FadeInTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.FadeInTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Fade(float FadeTarget, float FadeSpeed, float bForceFadeInStartAlpha)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.Fade");
+			byte* params = (byte*)malloc(12);
+			*(float*)params = FadeTarget;
+			*(float*)(params + 4) = FadeSpeed;
+			*(float*)(params + 8) = bForceFadeInStartAlpha;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayRoundOver(int WinningTeam)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PlayRoundOver");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = WinningTeam;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ShowRoundEnding()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowRoundEnding");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayMatchOver(int Winner, ScriptArray<wchar_t> WinnerName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PlayMatchOver");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = Winner;
+			*(ScriptArray<wchar_t>*)(params + 4) = WinnerName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ShowEnding()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowEnding");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FadeInSummary()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.FadeInSummary");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ScaleformJoystickInputEvent(float leftAngle, float rightAngle)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ScaleformJoystickInputEvent");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = leftAngle;
+			*(float*)(params + 4) = rightAngle;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ToggleSkiEffect(bool bEnabled, float fSpeed)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ToggleSkiEffect");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bEnabled;
+			*(float*)(params + 4) = fSpeed;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TogglePauseMenu()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TogglePauseMenu");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ToggleMovieHUD()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ToggleMovieHUD");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ToggleVehicleMenu()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ToggleVehicleMenu");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ToggleTeamSelectionMenu()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ToggleTeamSelectionMenu");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetPowerOscillation(bool bEnable)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.SetPowerOscillation");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnable;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AddUpdateToCombatLog(int CombatType, ScriptArray<wchar_t> Aggressor, int WeaponIcon, ScriptArray<wchar_t> Victim)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddUpdateToCombatLog");
+			byte* params = (byte*)malloc(32);
+			*(int*)params = CombatType;
+			*(ScriptArray<wchar_t>*)(params + 4) = Aggressor;
+			*(int*)(params + 16) = WeaponIcon;
+			*(ScriptArray<wchar_t>*)(params + 20) = Victim;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AddToPromptPanel(ScriptArray<wchar_t> Message, byte Priority)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddToPromptPanel");
+			byte* params = (byte*)malloc(13);
+			*(ScriptArray<wchar_t>*)params = Message;
+			*(params + 12) = Priority;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AddToPromptPanelTime(ScriptArray<wchar_t> Message, float EndTime, byte Priority)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddToPromptPanelTime");
+			byte* params = (byte*)malloc(17);
+			*(ScriptArray<wchar_t>*)params = Message;
+			*(float*)(params + 12) = EndTime;
+			*(params + 16) = Priority;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearPromptPanel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearPromptPanel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AddToHeroStatus(ScriptArray<wchar_t> Message, float ShowTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddToHeroStatus");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = Message;
+			*(float*)(params + 12) = ShowTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearHeroStatus()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearHeroStatus");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClearPromptPanelMessage(ScriptArray<wchar_t> Message)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearPromptPanelMessage");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Message;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateVGSMenu()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateVGSMenu");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HideVGSMenu()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideVGSMenu");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AddToHelpText(ScriptArray<wchar_t> Title, ScriptArray<wchar_t> Body, float PictureIndex, ScriptArray<wchar_t> footer, ScriptArray<wchar_t> SuppressString)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddToHelpText");
+			byte* params = (byte*)malloc(52);
+			*(ScriptArray<wchar_t>*)params = Title;
+			*(ScriptArray<wchar_t>*)(params + 12) = Body;
+			*(float*)(params + 24) = PictureIndex;
+			*(ScriptArray<wchar_t>*)(params + 28) = footer;
+			*(ScriptArray<wchar_t>*)(params + 40) = SuppressString;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearHelpText()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearHelpText");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AddUpdateToKillMessage(int RankIcon, int PlayerIcon, ScriptArray<wchar_t> PlayerName, ScriptArray<wchar_t> Message)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddUpdateToKillMessage");
+			byte* params = (byte*)malloc(32);
+			*(int*)params = RankIcon;
+			*(int*)(params + 4) = PlayerIcon;
+			*(ScriptArray<wchar_t>*)(params + 8) = PlayerName;
+			*(ScriptArray<wchar_t>*)(params + 20) = Message;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AddFlyingIcon(int iconNumber, ScriptArray<wchar_t> Description, ScriptArray<wchar_t> Points, int bIsBadge)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddFlyingIcon");
+			byte* params = (byte*)malloc(32);
+			*(int*)params = iconNumber;
+			*(ScriptArray<wchar_t>*)(params + 4) = Description;
+			*(ScriptArray<wchar_t>*)(params + 16) = Points;
+			*(int*)(params + 28) = bIsBadge;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnSpectate(bool bUpdateTeamState)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.OnSpectate");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bUpdateTeamState;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CreateSpectatorHUDCache()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.CreateSpectatorHUDCache");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClearSpectatorHUDCache()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearSpectatorHUDCache");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HideHUDElements(bool bShowStats, bool bForceCredits)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideHUDElements");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bShowStats;
+			*(bool*)(params + 4) = bForceCredits;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ShowHUDPlayerSpawning()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowHUDPlayerSpawning");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShowHUDPlayerAlive()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowHUDPlayerAlive");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShowCenterHUDElements(bool bShow)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowCenterHUDElements");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bShow;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateRespawnText(ScriptArray<wchar_t> Text)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateRespawnText");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Text;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateRespawnTimer(int TimeRemaining)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateRespawnTimer");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = TimeRemaining;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateHUDCredits(int changeAmount, int newTotal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateHUDCredits");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = changeAmount;
+			*(int*)(params + 4) = newTotal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TeamScoreboardShow(bool bVisible)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TeamScoreboardShow");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bVisible;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RabbitScoreboardShow(bool bVisible)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RabbitScoreboardShow");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bVisible;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TeamScoreboardUpdateSlot(int Index, ScriptArray<wchar_t> PlayerName, ScriptArray<wchar_t> Score, ScriptArray<wchar_t> Kills, ScriptArray<wchar_t> Assists, ScriptArray<wchar_t> Ping, ScriptArray<wchar_t> ClassAbb, int Rank, int RankIcon)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TeamScoreboardUpdateSlot");
+			byte* params = (byte*)malloc(84);
+			*(int*)params = Index;
+			*(ScriptArray<wchar_t>*)(params + 4) = PlayerName;
+			*(ScriptArray<wchar_t>*)(params + 16) = Score;
+			*(ScriptArray<wchar_t>*)(params + 28) = Kills;
+			*(ScriptArray<wchar_t>*)(params + 40) = Assists;
+			*(ScriptArray<wchar_t>*)(params + 52) = Ping;
+			*(ScriptArray<wchar_t>*)(params + 64) = ClassAbb;
+			*(int*)(params + 76) = Rank;
+			*(int*)(params + 80) = RankIcon;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RabbitScoreboardUpdateSlot(int Index, ScriptArray<wchar_t> PlayerName, ScriptArray<wchar_t> Score, ScriptArray<wchar_t> Kills, ScriptArray<wchar_t> Assists, ScriptArray<wchar_t> Ping, ScriptArray<wchar_t> ClassAbb, int Rank, int RankIcon)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RabbitScoreboardUpdateSlot");
+			byte* params = (byte*)malloc(84);
+			*(int*)params = Index;
+			*(ScriptArray<wchar_t>*)(params + 4) = PlayerName;
+			*(ScriptArray<wchar_t>*)(params + 16) = Score;
+			*(ScriptArray<wchar_t>*)(params + 28) = Kills;
+			*(ScriptArray<wchar_t>*)(params + 40) = Assists;
+			*(ScriptArray<wchar_t>*)(params + 52) = Ping;
+			*(ScriptArray<wchar_t>*)(params + 64) = ClassAbb;
+			*(int*)(params + 76) = Rank;
+			*(int*)(params + 80) = RankIcon;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TeamScoreboardUpdateTeamScore(int Index, int Score)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TeamScoreboardUpdateTeamScore");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Index;
+			*(int*)(params + 4) = Score;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TeamScoreboardUpdateTime(ScriptArray<wchar_t> Time)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TeamScoreboardUpdateTime");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Time;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RabbitScoreboardUpdateTime(ScriptArray<wchar_t> Time)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RabbitScoreboardUpdateTime");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Time;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TeamScoreboardActivePlayer(int Index)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TeamScoreboardActivePlayer");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = Index;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RabbitScoreboardActivePlayer(int Index, bool bVisible)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RabbitScoreboardActivePlayer");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Index;
+			*(bool*)(params + 4) = bVisible;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ResolutionChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ResolutionChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RestoreHUDState()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RestoreHUDState");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HideMenus()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideMenus");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RemoveMovies()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RemoveMovies");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CompleteVehicleMenuClose()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.CompleteVehicleMenuClose");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CompleteTeamSelectionMenuClose()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.CompleteTeamSelectionMenuClose");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClearCrosshairOnFriendly()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearCrosshairOnFriendly");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool CheckCrosshairOnFriendly()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.CheckCrosshairOnFriendly");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		Vector DrawColoredMarkerText(ScriptArray<wchar_t> ShowText, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void* TextColor, Vector Placement, class Canvas* DrawCanvas, float ScaleX, float ScaleY)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawColoredMarkerText");
+			byte* params = (byte*)malloc(52);
+			*(ScriptArray<wchar_t>*)params = ShowText;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void**)(params + 12) = TextColor;
+			*(Vector*)(params + 16) = Placement;
+			*(class Canvas**)(params + 28) = DrawCanvas;
+			*(float*)(params + 32) = ScaleX;
+			*(float*)(params + 36) = ScaleY;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 40);
+			free(params);
+			return returnVal;
+		}
+		void DrawSmallText(ScriptArray<wchar_t> ShowText, bool bFriend, Vector Placement, class Canvas* DrawCanvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawSmallText");
+			byte* params = (byte*)malloc(32);
+			*(ScriptArray<wchar_t>*)params = ShowText;
+			*(bool*)(params + 12) = bFriend;
+			*(Vector*)(params + 16) = Placement;
+			*(class Canvas**)(params + 28) = DrawCanvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DrawHealthBar(class MaterialInstanceConstant* HealthBarMIC, bool bFriend, Vector Placement, class Canvas* DrawCanvas, float PlacementX, float PlacementY, float Width, float Height)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawHealthBar");
+			byte* params = (byte*)malloc(40);
+			*(class MaterialInstanceConstant**)params = HealthBarMIC;
+			*(bool*)(params + 4) = bFriend;
+			*(Vector*)(params + 8) = Placement;
+			*(class Canvas**)(params + 20) = DrawCanvas;
+			*(float*)(params + 24) = PlacementX;
+			*(float*)(params + 28) = PlacementY;
+			*(float*)(params + 32) = Width;
+			*(float*)(params + 36) = Height;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostRender()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PostRender");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		float GetRemainingFriendlyGeneratorRestoreTime()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.GetRemainingFriendlyGeneratorRestoreTime");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		float GetRemainingEnemyGeneratorRestoreTime()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.GetRemainingEnemyGeneratorRestoreTime");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		void UpdateSkiEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateSkiEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdatePickupFlashEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdatePickupFlashEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PulsePickupFlashEffect(float PulseAmount, float PulseSpeed)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PulsePickupFlashEffect");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = PulseAmount;
+			*(float*)(params + 4) = PulseSpeed;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateInvulnerableEfect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateInvulnerableEfect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateShieldEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateShieldEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PulseShieldEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PulseShieldEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateJammerEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateJammerEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateFadeEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateFadeEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FumbleFlag(float Speed)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.FumbleFlag");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = Speed;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateFumbledFlagEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateFumbledFlagEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Whiteout(float Speed, float Amount)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.Whiteout");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = Speed;
+			*(float*)(params + 4) = Amount;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearWhiteout()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearWhiteout");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateWhiteoutEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateWhiteoutEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void LocalizedMessage(ScriptClass* InMessageClass, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, ScriptArray<wchar_t> CriticalString, int Switch, float Position, float Lifetime, int FontSize, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void* DrawColor, class Object* OptionalObject)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.LocalizedMessage");
+			byte* params = (byte*)malloc(48);
+			*(ScriptClass**)params = InMessageClass;
+			*(class PlayerReplicationInfo**)(params + 4) = RelatedPRI;
+			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
+			*(ScriptArray<wchar_t>*)(params + 12) = CriticalString;
+			*(int*)(params + 24) = Switch;
+			*(float*)(params + 28) = Position;
+			*(float*)(params + 32) = Lifetime;
+			*(int*)(params + 36) = FontSize;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
+void**)(params + 40) = DrawColor;
+			*(class Object**)(params + 44) = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ChatMessageReceived(int Channel, ScriptArray<wchar_t> Sender, ScriptArray<wchar_t> Message)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ChatMessageReceived");
+			byte* params = (byte*)malloc(28);
+			*(int*)params = Channel;
+			*(ScriptArray<wchar_t>*)(params + 4) = Sender;
+			*(ScriptArray<wchar_t>*)(params + 16) = Message;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		ScriptArray<wchar_t> StripTag(ScriptArray<wchar_t> sValue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.StripTag");
+			byte* params = (byte*)malloc(24);
+			*(ScriptArray<wchar_t>*)params = sValue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void SendLocalMessageToGlobalAlert(ScriptArray<wchar_t> Message)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.SendLocalMessageToGlobalAlert");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Message;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SendLocalMessageToChat(ScriptArray<wchar_t> Message)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.SendLocalMessageToChat");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Message;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetPlayerClassObjects(ScriptArray<wchar_t> ClassName, int PerkIcon1, int PerkIcon2)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.SetPlayerClassObjects");
+			byte* params = (byte*)malloc(20);
+			*(ScriptArray<wchar_t>*)params = ClassName;
+			*(int*)(params + 12) = PerkIcon1;
+			*(int*)(params + 16) = PerkIcon2;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void HideGlobalAlert()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideGlobalAlert");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void KickVoteMessage(bool bComplete, ScriptArray<wchar_t> Message)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.KickVoteMessage");
+			byte* params = (byte*)malloc(16);
+			*(bool*)params = bComplete;
+			*(ScriptArray<wchar_t>*)(params + 4) = Message;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void EnableGameTypeHUD()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.EnableGameTypeHUD");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ShowSpectatorPlayer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowSpectatorPlayer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HideSpectatorPlayer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideSpectatorPlayer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateSpectatorPlayerPanel(class TrPawn* ViewTargetTrPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateSpectatorPlayerPanel");
+			byte* params = (byte*)malloc(4);
+			*(class TrPawn**)params = ViewTargetTrPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ShowSpectatorVehicle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowSpectatorVehicle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HideSpectatorVehicle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideSpectatorVehicle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateSpectatorVehiclePanel(class TrVehicle* ViewTargetVehicle)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateSpectatorVehiclePanel");
+			byte* params = (byte*)malloc(4);
+			*(class TrVehicle**)params = ViewTargetVehicle;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ShowSpectatorBookmark()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowSpectatorBookmark");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HideSpectatorBookmark()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideSpectatorBookmark");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateSpectatorBookmarkPanel(class TrCamera_SpectatorBookmark* BookMark)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateSpectatorBookmarkPanel");
+			byte* params = (byte*)malloc(4);
+			*(class TrCamera_SpectatorBookmark**)params = BookMark;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ShowSpectatorObjectivePanel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowSpectatorObjectivePanel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HideSpectatorObjectivePanel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideSpectatorObjectivePanel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateSpectatorObjectivePanel(class Actor* ObjectiveActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateSpectatorObjectivePanel");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = ObjectiveActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ShowSpectatorFloatCameraPanel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowSpectatorFloatCameraPanel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HideSpectatorFloatCameraPanel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideSpectatorFloatCameraPanel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateSpectatorFloatCameraPanel()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateSpectatorFloatCameraPanel");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HideAllSpectatorPanels()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideAllSpectatorPanels");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnViewTargetChange(class Actor* NewViewTarget)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.OnViewTargetChange");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = NewViewTarget;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TestNumber(int Value)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TestNumber");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = Value;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AddOverheadNumber(int Value, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector4'!
+void* WorldLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddOverheadNumber");
+			byte* params = (byte*)malloc(20);
+			*(int*)params = Value;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector4'!
+void**)(params + 16) = WorldLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateOverheadNumbers(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateOverheadNumbers");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostRenderFor(class PlayerController* PC, class Canvas* DrawCanvas, Vector CameraPosition, Vector CameraDir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PostRenderFor");
+			byte* params = (byte*)malloc(32);
+			*(class PlayerController**)params = PC;
+			*(class Canvas**)(params + 4) = DrawCanvas;
+			*(Vector*)(params + 8) = CameraPosition;
+			*(Vector*)(params + 20) = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayAward(class Canvas* DrawCanvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PlayAward");
+			byte* params = (byte*)malloc(4);
+			*(class Canvas**)params = DrawCanvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void QueueAccolade(int Icon, ScriptArray<wchar_t> Title, ScriptArray<wchar_t> Subtitle, bool bIsBadge)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.QueueAccolade");
+			byte* params = (byte*)malloc(32);
+			*(int*)params = Icon;
+			*(ScriptArray<wchar_t>*)(params + 4) = Title;
+			*(ScriptArray<wchar_t>*)(params + 16) = Subtitle;
+			*(bool*)(params + 28) = bIsBadge;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CheckQueuedAccolades()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.CheckQueuedAccolades");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void RunQueuedAccoladesTimer(bool bIsBadge)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RunQueuedAccoladesTimer");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bIsBadge;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ClearQueuedAccoladesTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearQueuedAccoladesTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DeployableReplicated(class TrDeployable* NewDep)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DeployableReplicated");
+			byte* params = (byte*)malloc(4);
+			*(class TrDeployable**)params = NewDep;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void MineReplicated(class TrProj_Mine* NewMine)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.MineReplicated");
+			byte* params = (byte*)malloc(4);
+			*(class TrProj_Mine**)params = NewMine;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateOwnedItems()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateOwnedItems");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

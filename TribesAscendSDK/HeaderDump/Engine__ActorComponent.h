@@ -31,10 +31,35 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAttached, 0x1)
 		ADD_OBJECT(Actor, Owner)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Scene'!
-		// Here lies the not-yet-implemented method 'SetTickGroup'
-		// Here lies the not-yet-implemented method 'SetComponentRBFixed'
-		// Here lies the not-yet-implemented method 'ForceUpdate'
-		// Here lies the not-yet-implemented method 'DetachFromAny'
+		void SetTickGroup(byte NewTickGroup)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorComponent.SetTickGroup");
+			byte* params = (byte*)malloc(1);
+			*params = NewTickGroup;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetComponentRBFixed(bool bFixed)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorComponent.SetComponentRBFixed");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bFixed;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ForceUpdate(bool bTransformOnly)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorComponent.ForceUpdate");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bTransformOnly;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DetachFromAny()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorComponent.DetachFromAny");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

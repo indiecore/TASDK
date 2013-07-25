@@ -24,12 +24,50 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, Path, 0xFFFFFFFF)
 		ADD_OBJECT(WebServer, WebServer)
 		ADD_OBJECT(WorldInfo, WorldInfo)
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'Cleanup'
-		// Here lies the not-yet-implemented method 'CleanupApp'
-		// Here lies the not-yet-implemented method 'PreQuery'
-		// Here lies the not-yet-implemented method 'Query'
-		// Here lies the not-yet-implemented method 'PostQuery'
+		void Init()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.Init");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Cleanup()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.Cleanup");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CleanupApp()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.CleanupApp");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool PreQuery(class WebRequest* Request, class WebResponse* Response)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.PreQuery");
+			byte* params = (byte*)malloc(12);
+			*(class WebRequest**)params = Request;
+			*(class WebResponse**)(params + 4) = Response;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void Query(class WebRequest* Request, class WebResponse* Response)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.Query");
+			byte* params = (byte*)malloc(8);
+			*(class WebRequest**)params = Request;
+			*(class WebResponse**)(params + 4) = Response;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostQuery(class WebRequest* Request, class WebResponse* Response)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.PostQuery");
+			byte* params = (byte*)malloc(8);
+			*(class WebRequest**)params = Request;
+			*(class WebResponse**)(params + 4) = Response;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -29,14 +29,69 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, OverlayMC)
 		ADD_OBJECT(GFxObject, PauseMC)
 		ADD_OBJECT(GFxObject, RootMC)
-		// Here lies the not-yet-implemented method 'Start'
-		// Here lies the not-yet-implemented method 'OnPressResumeButton'
-		// Here lies the not-yet-implemented method 'OnPressExitButton'
-		// Here lies the not-yet-implemented method 'PlayOpenAnimation'
-		// Here lies the not-yet-implemented method 'PlayCloseAnimation'
-		// Here lies the not-yet-implemented method 'OnPlayAnimationComplete'
-		// Here lies the not-yet-implemented method 'OnCloseAnimationComplete'
-		// Here lies the not-yet-implemented method 'UT_ConsoleCommand'
+		bool Start(bool StartPaused)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.Start");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = StartPaused;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void OnPressResumeButton(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.OnPressResumeButton");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnPressExitButton(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.OnPressExitButton");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayOpenAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.PlayOpenAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayCloseAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.PlayCloseAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnPlayAnimationComplete()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.OnPlayAnimationComplete");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnCloseAnimationComplete()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.OnCloseAnimationComplete");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UT_ConsoleCommand(ScriptArray<wchar_t> Cmd, bool bWriteToLog)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.UT_ConsoleCommand");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = Cmd;
+			*(bool*)(params + 12) = bWriteToLog;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

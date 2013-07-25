@@ -13,7 +13,16 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, DamageGivenForSelfDestruct, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'IncrementKills'
+		int IncrementKills(class UTPlayerReplicationInfo* KillerPRI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDmgType_ScorpionSelfDestruct.IncrementKills");
+			byte* params = (byte*)malloc(8);
+			*(class UTPlayerReplicationInfo**)params = KillerPRI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

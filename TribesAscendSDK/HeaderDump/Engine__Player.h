@@ -33,7 +33,14 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ConfiguredLanSpeed, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ConfiguredInternetSpeed, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FExec'!
-		// Here lies the not-yet-implemented method 'SwitchController'
+		void SwitchController(class PlayerController* PC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Player.SwitchController");
+			byte* params = (byte*)malloc(4);
+			*(class PlayerController**)params = PC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

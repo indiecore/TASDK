@@ -17,11 +17,44 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(NavigationPoint, LastAnchor)
 		ADD_OBJECT(UTVehicle, HoldVehicle)
-		// Here lies the not-yet-implemented method 'PreBeginPlay'
-		// Here lies the not-yet-implemented method 'GetMoveTarget'
-		// Here lies the not-yet-implemented method 'FreePoint'
-		// Here lies the not-yet-implemented method 'SpecifyEndAnchor'
-		// Here lies the not-yet-implemented method 'NotifyAnchorFindingResult'
+		void PreBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.PreBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class Actor* GetMoveTarget()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.GetMoveTarget");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Actor**)params;
+			free(params);
+			return returnVal;
+		}
+		void FreePoint()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.FreePoint");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class NavigationPoint* SpecifyEndAnchor(class Pawn* RouteFinder)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.SpecifyEndAnchor");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = RouteFinder;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class NavigationPoint**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void NotifyAnchorFindingResult(class NavigationPoint* EndAnchor, class Pawn* RouteFinder)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.NotifyAnchorFindingResult");
+			byte* params = (byte*)malloc(8);
+			*(class NavigationPoint**)params = EndAnchor;
+			*(class Pawn**)(params + 4) = RouteFinder;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_OBJECT

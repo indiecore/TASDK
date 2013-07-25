@@ -14,8 +14,23 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ClearStreamingTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bForceLoadTextures, 0x1)
 		ADD_VAR(::FloatProperty, FOV, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PreloadTextures'
-		// Here lies the not-yet-implemented method 'SetFOV'
+		void PreloadTextures(bool bForcePreload, float ClearTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkeletalMeshComponent.PreloadTextures");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bForcePreload;
+			*(float*)(params + 4) = ClearTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetFOV(float NewFOV)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkeletalMeshComponent.SetFOV");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = NewFOV;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

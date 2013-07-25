@@ -27,21 +27,142 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, AcceptClass)
 		// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr' for the property named 'RemoteAddr'!
 		ADD_VAR(::ByteProperty, LinkState, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'BindPort'
-		// Here lies the not-yet-implemented method 'Listen'
-		// Here lies the not-yet-implemented method 'Open'
-		// Here lies the not-yet-implemented method 'Close'
-		// Here lies the not-yet-implemented method 'IsConnected'
-		// Here lies the not-yet-implemented method 'SendText'
-		// Here lies the not-yet-implemented method 'SendBinary'
-		// Here lies the not-yet-implemented method 'ReadText'
-		// Here lies the not-yet-implemented method 'ReadBinary'
-		// Here lies the not-yet-implemented method 'Accepted'
-		// Here lies the not-yet-implemented method 'Opened'
-		// Here lies the not-yet-implemented method 'Closed'
-		// Here lies the not-yet-implemented method 'ReceivedText'
-		// Here lies the not-yet-implemented method 'ReceivedLine'
-		// Here lies the not-yet-implemented method 'ReceivedBinary'
+		int BindPort(int PortNum, bool bUseNextAvailable)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.BindPort");
+			byte* params = (byte*)malloc(12);
+			*(int*)params = PortNum;
+			*(bool*)(params + 4) = bUseNextAvailable;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		bool Listen()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Listen");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool Open(
+// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
+void* Addr)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Open");
+			byte* params = (byte*)malloc(12);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
+void**)params = Addr;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		bool Close()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Close");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsConnected()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.IsConnected");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		int SendText(ScriptArray<wchar_t> Str)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.SendText");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = Str;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		int SendBinary(int Count, byte B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.SendBinary");
+			byte* params = (byte*)malloc(9);
+			*(int*)params = Count;
+			*(params + 4) = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 260);
+			free(params);
+			return returnVal;
+		}
+		int ReadText(ScriptArray<wchar_t>& Str)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.ReadText");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = Str;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Str = *(ScriptArray<wchar_t>*)params;
+			auto returnVal = *(int*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		int ReadBinary(int Count, byte& B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.ReadBinary");
+			byte* params = (byte*)malloc(9);
+			*(int*)params = Count;
+			*(params + 4) = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			B = *(params + 4);
+			auto returnVal = *(int*)(params + 260);
+			free(params);
+			return returnVal;
+		}
+		void Accepted()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Accepted");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Opened()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Opened");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Closed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Closed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReceivedText(ScriptArray<wchar_t> Text)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.ReceivedText");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Text;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ReceivedLine(ScriptArray<wchar_t> Line)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.ReceivedLine");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Line;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ReceivedBinary(int Count, byte B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.ReceivedBinary");
+			byte* params = (byte*)malloc(5);
+			*(int*)params = Count;
+			*(params + 4) = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

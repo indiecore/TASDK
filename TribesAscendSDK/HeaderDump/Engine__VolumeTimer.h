@@ -13,8 +13,16 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(PhysicsVolume, V)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'Timer'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.VolumeTimer.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Timer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.VolumeTimer.Timer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

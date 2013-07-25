@@ -31,11 +31,38 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'm_PowerOnColor'!
 		ADD_VAR(::FloatProperty, m_fStationReleaseTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fStationAnimTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'PawnEnteredStation'
-		// Here lies the not-yet-implemented method 'OnPowerStatusChanged'
-		// Here lies the not-yet-implemented method 'PlayStationEnteredEffects'
-		// Here lies the not-yet-implemented method 'Timer'
-		// Here lies the not-yet-implemented method 'GetMarker'
+		void PawnEnteredStation(class TrPawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryStation.PawnEnteredStation");
+			byte* params = (byte*)malloc(4);
+			*(class TrPawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnPowerStatusChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryStation.OnPowerStatusChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayStationEnteredEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryStation.PlayStationEnteredEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Timer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryStation.Timer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class Texture2D* GetMarker()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryStation.GetMarker");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Texture2D**)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

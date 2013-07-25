@@ -65,29 +65,178 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bBringDownFromBright, 0x2)
 		ADD_VAR(::BoolProperty, bBringUpBright, 0x1)
 		ADD_OBJECT(ParticleSystem, RespawnEffect)
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'OnBaseChainChanged'
-		// Here lies the not-yet-implemented method 'ShouldMinimapRenderFor'
-		// Here lies the not-yet-implemented method 'ClientReturnedHome'
-		// Here lies the not-yet-implemented method 'SetHolder'
-		// Here lies the not-yet-implemented method 'ValidHolder'
-		// Here lies the not-yet-implemented method 'SameTeamTouch'
-		// Here lies the not-yet-implemented method 'CustomRespawnEffects'
-		// Here lies the not-yet-implemented method 'bringUpBrightOff'
-		// Here lies the not-yet-implemented method 'CustomFadeOutEffects'
-		// Here lies the not-yet-implemented method 'Landed'
-		// Here lies the not-yet-implemented method 'EncroachedBy'
-		// Here lies the not-yet-implemented method 'Drop'
-		// Here lies the not-yet-implemented method 'SetFlagPropertiesToStationaryFlagState'
-		// Here lies the not-yet-implemented method 'SetFlagDynamicLightToNotBeDynamic'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'PostRenderFor'
-		// Here lies the not-yet-implemented method 'DisplayDebug'
-		// Here lies the not-yet-implemented method 'GetSpectatorName'
-		// Here lies the not-yet-implemented method 'GetSpectatorDescription'
-		// Here lies the not-yet-implemented method 'OnCollisionProxyTouched'
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnBaseChainChanged()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.OnBaseChainChanged");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool ShouldMinimapRenderFor(class PlayerController* PC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.ShouldMinimapRenderFor");
+			byte* params = (byte*)malloc(8);
+			*(class PlayerController**)params = PC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void ClientReturnedHome()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.ClientReturnedHome");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetHolder(class Controller* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.SetHolder");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool ValidHolder(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.ValidHolder");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void SameTeamTouch(class Controller* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.SameTeamTouch");
+			byte* params = (byte*)malloc(4);
+			*(class Controller**)params = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CustomRespawnEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.CustomRespawnEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void bringUpBrightOff()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.bringUpBrightOff");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CustomFadeOutEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.CustomFadeOutEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Landed(Vector HitNormal, class Actor* FloorActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.Landed");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = HitNormal;
+			*(class Actor**)(params + 12) = FloorActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void EncroachedBy(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.EncroachedBy");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Drop(class Controller* Killer, bool bNoThrow)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.Drop");
+			byte* params = (byte*)malloc(8);
+			*(class Controller**)params = Killer;
+			*(bool*)(params + 4) = bNoThrow;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetFlagPropertiesToStationaryFlagState()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.SetFlagPropertiesToStationaryFlagState");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetFlagDynamicLightToNotBeDynamic()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.SetFlagDynamicLightToNotBeDynamic");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.PostRenderFor");
+			byte* params = (byte*)malloc(32);
+			*(class PlayerController**)params = PC;
+			*(class Canvas**)(params + 4) = Canvas;
+			*(Vector*)(params + 8) = CameraPosition;
+			*(Vector*)(params + 20) = CameraDir;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.DisplayDebug");
+			byte* params = (byte*)malloc(12);
+			*(class HUD**)params = HUD;
+			*(float*)(params + 4) = out_YL;
+			*(float*)(params + 8) = out_YPos;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_YL = *(float*)(params + 4);
+			out_YPos = *(float*)(params + 8);
+			free(params);
+		}
+		ScriptArray<wchar_t> GetSpectatorName()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.GetSpectatorName");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetSpectatorDescription()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.GetSpectatorDescription");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
+		void OnCollisionProxyTouched(class TrPawn* TRP)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagBase.OnCollisionProxyTouched");
+			byte* params = (byte*)malloc(4);
+			*(class TrPawn**)params = TRP;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

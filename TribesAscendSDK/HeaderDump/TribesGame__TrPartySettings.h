@@ -14,10 +14,32 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(OnlineSubsystem, OnlineSub)
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'Close'
-		// Here lies the not-yet-implemented method 'OnLoginChange'
-		// Here lies the not-yet-implemented method 'RefreshMembersList'
+		void Init(class LocalPlayer* InPlayer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartySettings.Init");
+			byte* params = (byte*)malloc(4);
+			*(class LocalPlayer**)params = InPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Close()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartySettings.Close");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnLoginChange(byte LocalUserNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartySettings.OnLoginChange");
+			byte* params = (byte*)malloc(1);
+			*params = LocalUserNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RefreshMembersList()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartySettings.RefreshMembersList");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_OBJECT

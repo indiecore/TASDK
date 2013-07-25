@@ -46,7 +46,22 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bLoopingSound, 0x2)
 		ADD_VAR(::BoolProperty, bForceRealTimeDecompression, 0x1)
 		ADD_VAR(::IntProperty, CompressionQuality, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GeneratePCMData'
+		void GeneratePCMData(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void*& Buffer, int SamplesNeeded)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SoundNodeWave.GeneratePCMData");
+			byte* params = (byte*)malloc(16);
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)params = Buffer;
+			*(int*)(params + 12) = SamplesNeeded;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Buffer = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)params;
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

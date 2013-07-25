@@ -15,8 +15,20 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bIsActive, 0x1)
 		ADD_VAR(::FloatProperty, AuthoredGlobalScale, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'RegisterEvent'
-		// Here lies the not-yet-implemented method 'Render'
+		void RegisterEvent()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_HudRender.RegisterEvent");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Render(class Canvas* TargetCanvas, class HUD* TargetHud)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_HudRender.Render");
+			byte* params = (byte*)malloc(8);
+			*(class Canvas**)params = TargetCanvas;
+			*(class HUD**)(params + 4) = TargetHud;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -255,29 +255,226 @@ namespace UnrealScript
 		ADD_OBJECT(Font, SmallFont)
 		ADD_VAR(::StrProperty, TinyFontName, 0xFFFFFFFF)
 		ADD_OBJECT(Font, TinyFont)
-		// Here lies the not-yet-implemented method 'IsGame'
-		// Here lies the not-yet-implemented method 'IsEditor'
-		// Here lies the not-yet-implemented method 'GetSmallFont'
-		// Here lies the not-yet-implemented method 'GetAudioDevice'
-		// Here lies the not-yet-implemented method 'IsSplitScreen'
-		// Here lies the not-yet-implemented method 'GetTinyFont'
-		// Here lies the not-yet-implemented method 'GetMediumFont'
-		// Here lies the not-yet-implemented method 'GetLargeFont'
-		// Here lies the not-yet-implemented method 'GetCurrentWorldInfo'
-		// Here lies the not-yet-implemented method 'GetBuildDate'
-		// Here lies the not-yet-implemented method 'GetSubtitleFont'
-		// Here lies the not-yet-implemented method 'GetAdditionalFont'
-		// Here lies the not-yet-implemented method 'GetLastMovieName'
-		// Here lies the not-yet-implemented method 'PlayLoadMapMovie'
-		// Here lies the not-yet-implemented method 'StopMovie'
-		// Here lies the not-yet-implemented method 'RemoveAllOverlays'
-		// Here lies the not-yet-implemented method 'AddOverlay'
-		// Here lies the not-yet-implemented method 'AddOverlayWrapped'
-		// Here lies the not-yet-implemented method 'GetEngine'
-		// Here lies the not-yet-implemented method 'GetWorldPostProcessChain'
-		// Here lies the not-yet-implemented method 'AddTextureStreamingSlaveLoc'
-		// Here lies the not-yet-implemented method 'BasicSaveObject'
-		// Here lies the not-yet-implemented method 'BasicLoadObject'
+		bool IsGame()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.IsGame");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsEditor()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.IsEditor");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		class Font* GetSmallFont()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetSmallFont");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Font**)params;
+			free(params);
+			return returnVal;
+		}
+		class AudioDevice* GetAudioDevice()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetAudioDevice");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class AudioDevice**)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsSplitScreen()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.IsSplitScreen");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		class Font* GetTinyFont()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetTinyFont");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Font**)params;
+			free(params);
+			return returnVal;
+		}
+		class Font* GetMediumFont()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetMediumFont");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Font**)params;
+			free(params);
+			return returnVal;
+		}
+		class Font* GetLargeFont()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetLargeFont");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Font**)params;
+			free(params);
+			return returnVal;
+		}
+		class WorldInfo* GetCurrentWorldInfo()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetCurrentWorldInfo");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class WorldInfo**)params;
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetBuildDate()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetBuildDate");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
+		class Font* GetSubtitleFont()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetSubtitleFont");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Font**)params;
+			free(params);
+			return returnVal;
+		}
+		class Font* GetAdditionalFont(int AdditionalFontIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetAdditionalFont");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = AdditionalFontIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Font**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		ScriptArray<wchar_t> GetLastMovieName()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetLastMovieName");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)params;
+			free(params);
+			return returnVal;
+		}
+		bool PlayLoadMapMovie()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.PlayLoadMapMovie");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void StopMovie(bool bDelayStopUntilGameHasRendered)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.StopMovie");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bDelayStopUntilGameHasRendered;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RemoveAllOverlays()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.RemoveAllOverlays");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void AddOverlay(class Font* Font, ScriptArray<wchar_t> Text, float X, float Y, float ScaleX, float ScaleY, bool bIsCentered)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.AddOverlay");
+			byte* params = (byte*)malloc(36);
+			*(class Font**)params = Font;
+			*(ScriptArray<wchar_t>*)(params + 4) = Text;
+			*(float*)(params + 16) = X;
+			*(float*)(params + 20) = Y;
+			*(float*)(params + 24) = ScaleX;
+			*(float*)(params + 28) = ScaleY;
+			*(bool*)(params + 32) = bIsCentered;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AddOverlayWrapped(class Font* Font, ScriptArray<wchar_t> Text, float X, float Y, float ScaleX, float ScaleY, float WrapWidth)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.AddOverlayWrapped");
+			byte* params = (byte*)malloc(36);
+			*(class Font**)params = Font;
+			*(ScriptArray<wchar_t>*)(params + 4) = Text;
+			*(float*)(params + 16) = X;
+			*(float*)(params + 20) = Y;
+			*(float*)(params + 24) = ScaleX;
+			*(float*)(params + 28) = ScaleY;
+			*(float*)(params + 32) = WrapWidth;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class Engine* GetEngine()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetEngine");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Engine**)params;
+			free(params);
+			return returnVal;
+		}
+		class PostProcessChain* GetWorldPostProcessChain()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetWorldPostProcessChain");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class PostProcessChain**)params;
+			free(params);
+			return returnVal;
+		}
+		void AddTextureStreamingSlaveLoc(Vector InLoc)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.AddTextureStreamingSlaveLoc");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = InLoc;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool BasicSaveObject(class Object* Obj, ScriptArray<wchar_t> PathName, bool bIsSaveGame, int Version)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.BasicSaveObject");
+			byte* params = (byte*)malloc(28);
+			*(class Object**)params = Obj;
+			*(ScriptArray<wchar_t>*)(params + 4) = PathName;
+			*(bool*)(params + 16) = bIsSaveGame;
+			*(int*)(params + 20) = Version;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		bool BasicLoadObject(class Object* Obj, ScriptArray<wchar_t> PathName, bool bIsSaveGame, int Version)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.BasicLoadObject");
+			byte* params = (byte*)malloc(28);
+			*(class Object**)params = Obj;
+			*(ScriptArray<wchar_t>*)(params + 4) = PathName;
+			*(bool*)(params + 16) = bIsSaveGame;
+			*(int*)(params + 20) = Version;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

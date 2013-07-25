@@ -12,7 +12,16 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::NameProperty, Tag, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Translate'
+		ScriptArray<wchar_t> Translate(ScriptArray<wchar_t> InArgument)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TranslatorTag.Translate");
+			byte* params = (byte*)malloc(24);
+			*(ScriptArray<wchar_t>*)params = InArgument;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

@@ -15,8 +15,24 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(UTDataStore_GameSearchFavorites, FavoritesGameSearchDataStore)
 		ADD_OBJECT(ScriptClass, FavoritesGameSearchDataStoreClass)
-		// Here lies the not-yet-implemented method 'HasOutstandingQueries'
-		// Here lies the not-yet-implemented method 'Registered'
+		bool HasOutstandingQueries(bool bRestrictCheckToSelf)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchHistory.HasOutstandingQueries");
+			byte* params = (byte*)malloc(8);
+			*(bool*)params = bRestrictCheckToSelf;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void Registered(class LocalPlayer* PlayerOwner)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchHistory.Registered");
+			byte* params = (byte*)malloc(4);
+			*(class LocalPlayer**)params = PlayerOwner;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_OBJECT

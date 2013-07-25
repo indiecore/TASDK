@@ -12,8 +12,25 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, FriendlyFireScale, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'MutatorIsAllowed'
-		// Here lies the not-yet-implemented method 'InitMutator'
+		bool MutatorIsAllowed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_FriendlyFire.MutatorIsAllowed");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void InitMutator(ScriptArray<wchar_t> Options, ScriptArray<wchar_t>& ErrorMessage)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_FriendlyFire.InitMutator");
+			byte* params = (byte*)malloc(24);
+			*(ScriptArray<wchar_t>*)params = Options;
+			*(ScriptArray<wchar_t>*)(params + 12) = ErrorMessage;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			ErrorMessage = *(ScriptArray<wchar_t>*)(params + 12);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

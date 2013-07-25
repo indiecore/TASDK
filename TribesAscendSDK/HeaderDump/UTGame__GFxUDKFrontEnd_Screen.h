@@ -30,9 +30,35 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, TitleMC)
 		ADD_OBJECT(GFxClikWidget, BackBtn)
 		ADD_VAR(::StrProperty, ViewTitle, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'FocusIn_BackButton'
-		// Here lies the not-yet-implemented method 'UpdateHelpButtonImages'
-		// Here lies the not-yet-implemented method 'WidgetInitialized'
+		void FocusIn_BackButton(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void* ev)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Screen.FocusIn_BackButton");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
+void**)params = ev;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateHelpButtonImages()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Screen.UpdateHelpButtonImages");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Screen.WidgetInitialized");
+			byte* params = (byte*)malloc(24);
+			*(ScriptName*)params = WidgetName;
+			*(ScriptName*)(params + 8) = WidgetPath;
+			*(class GFxObject**)(params + 16) = Widget;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 20);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

@@ -13,8 +13,23 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(PrefabInstance, OwnerPrefab)
-		// Here lies the not-yet-implemented method 'SetOwnerPrefab'
-		// Here lies the not-yet-implemented method 'GetOwnerPrefab'
+		void SetOwnerPrefab(class PrefabInstance* InOwner)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrefabSequence.SetOwnerPrefab");
+			byte* params = (byte*)malloc(4);
+			*(class PrefabInstance**)params = InOwner;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		class PrefabInstance* GetOwnerPrefab()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrefabSequence.GetOwnerPrefab");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class PrefabInstance**)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_OBJECT

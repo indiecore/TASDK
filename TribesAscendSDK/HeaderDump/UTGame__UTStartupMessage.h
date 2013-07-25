@@ -17,8 +17,32 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, SinglePlayer, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, NotReady, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Stage, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'ClientReceive'
-		// Here lies the not-yet-implemented method 'GetString'
+		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTStartupMessage.ClientReceive");
+			byte* params = (byte*)malloc(20);
+			*(class PlayerController**)params = P;
+			*(int*)(params + 4) = Switch;
+			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
+			*(class PlayerReplicationInfo**)(params + 12) = RelatedPRI;
+			*(class Object**)(params + 16) = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		ScriptArray<wchar_t> GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTStartupMessage.GetString");
+			byte* params = (byte*)malloc(32);
+			*(int*)params = Switch;
+			*(bool*)(params + 4) = bPRI1HUD;
+			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
+			*(class PlayerReplicationInfo**)(params + 12) = RelatedPRI;
+			*(class Object**)(params + 16) = OptionalObject;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 20);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

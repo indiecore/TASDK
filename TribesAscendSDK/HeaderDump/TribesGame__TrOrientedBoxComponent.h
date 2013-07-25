@@ -14,7 +14,17 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BoxLength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BoxWidth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BoxHeight, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetBoxSize'
+		void SetBoxSize(float NewHeight, float NewLength, float NewWidth, bool IsRadii)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrOrientedBoxComponent.SetBoxSize");
+			byte* params = (byte*)malloc(16);
+			*(float*)params = NewHeight;
+			*(float*)(params + 4) = NewLength;
+			*(float*)(params + 8) = NewWidth;
+			*(bool*)(params + 12) = IsRadii;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

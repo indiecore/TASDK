@@ -16,7 +16,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ImpulseRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ImpulseStrength, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ImpulseFalloff, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'FireImpulse'
+		void FireImpulse(Vector Origin)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_RadialImpulseComponent.FireImpulse");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = Origin;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

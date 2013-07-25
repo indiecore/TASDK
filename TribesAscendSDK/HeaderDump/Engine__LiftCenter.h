@@ -33,10 +33,41 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, LiftOffset, 0xFFFFFFFF
 		ADD_VAR(::FloatProperty, MaxDist2D, 0xFFFFFFFF)
 		ADD_OBJECT(InterpActor, MyLift)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'SpecialHandling'
-		// Here lies the not-yet-implemented method 'SuggestMovePreparation'
-		// Here lies the not-yet-implemented method 'ProceedWithMove'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftCenter.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class Actor* SpecialHandling(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftCenter.SpecialHandling");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Actor**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool SuggestMovePreparation(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftCenter.SuggestMovePreparation");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool ProceedWithMove(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftCenter.ProceedWithMove");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

@@ -13,8 +13,19 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(Material, NeutralMaterial)
-		// Here lies the not-yet-implemented method 'PreBeginPlay'
-		// Here lies the not-yet-implemented method 'SetTeamNum'
+		void PreBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamStaticMesh.PreBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetTeamNum(byte NewTeam)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamStaticMesh.SetTeamNum");
+			byte* params = (byte*)malloc(1);
+			*params = NewTeam;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_OBJECT

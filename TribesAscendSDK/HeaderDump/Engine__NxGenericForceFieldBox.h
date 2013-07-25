@@ -12,7 +12,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(::VectorProperty, BoxExtent, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'DoInitRBPhys'
+		void DoInitRBPhys()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxGenericForceFieldBox.DoInitRBPhys");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_STRUCT

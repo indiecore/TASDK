@@ -34,11 +34,45 @@ namespace UnrealScript
 		ADD_OBJECT(Ladder, LadderList)
 		ADD_STRUCT(::VectorProperty, LookDir, 0xFFFFFFFF
 		ADD_STRUCT(::RotatorProperty, WallDir, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'InUse'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'PawnEnteredVolume'
-		// Here lies the not-yet-implemented method 'PawnLeavingVolume'
-		// Here lies the not-yet-implemented method 'PhysicsChangedFor'
+		bool InUse(class Pawn* Ignored)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LadderVolume.InUse");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = Ignored;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LadderVolume.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PawnEnteredVolume(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LadderVolume.PawnEnteredVolume");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PawnLeavingVolume(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LadderVolume.PawnLeavingVolume");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PhysicsChangedFor(class Actor* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LadderVolume.PhysicsChangedFor");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

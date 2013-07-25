@@ -107,26 +107,152 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_SpotTargetReminderRecursiveTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_OffhandReminderInitialTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_SpotTargetReminderInitialTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'RequestHelpText'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'InitHelpTextManager'
-		// Here lies the not-yet-implemented method 'LevelLoadCompleted'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'CheckDestroy'
-		// Here lies the not-yet-implemented method 'IsSuppressed'
-		// Here lies the not-yet-implemented method 'RemoveHelpText'
-		// Here lies the not-yet-implemented method 'SuppressHelpText'
-		// Here lies the not-yet-implemented method 'UpdateHUD'
-		// Here lies the not-yet-implemented method 'FormatText'
-		// Here lies the not-yet-implemented method 'HelpTextQueueSort'
-		// Here lies the not-yet-implemented method 'UnsuppressedHelpTextsExist'
-		// Here lies the not-yet-implemented method 'OffhandReminderTimer'
-		// Here lies the not-yet-implemented method 'ClearOffhandReminderTimer'
-		// Here lies the not-yet-implemented method 'SpotTargetReminderTimer'
-		// Here lies the not-yet-implemented method 'ClearSpotTargetReminderTimer'
-		// Here lies the not-yet-implemented method 'UpdateTypesToRemoveOnTimers'
-		// Here lies the not-yet-implemented method 'ResetConfig'
-		// Here lies the not-yet-implemented method 'EnableHelpText'
+		bool RequestHelpText(byte RequestedType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.RequestHelpText");
+			byte* params = (byte*)malloc(5);
+			*params = RequestedType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void InitHelpTextManager()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.InitHelpTextManager");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void LevelLoadCompleted()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.LevelLoadCompleted");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		bool CheckDestroy()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.CheckDestroy");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsSuppressed(byte RequestedType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.IsSuppressed");
+			byte* params = (byte*)malloc(5);
+			*params = RequestedType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void RemoveHelpText(byte TypeToRemove, float Time, bool bDoNotSuppress)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.RemoveHelpText");
+			byte* params = (byte*)malloc(9);
+			*params = TypeToRemove;
+			*(float*)(params + 4) = Time;
+			*(bool*)(params + 8) = bDoNotSuppress;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SuppressHelpText(byte TypeToSuppress)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.SuppressHelpText");
+			byte* params = (byte*)malloc(1);
+			*params = TypeToSuppress;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateHUD()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.UpdateHUD");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		ScriptArray<wchar_t> FormatText(ScriptArray<wchar_t> InString)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.FormatText");
+			byte* params = (byte*)malloc(24);
+			*(ScriptArray<wchar_t>*)params = InString;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		int HelpTextQueueSort(byte A, byte B)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.HelpTextQueueSort");
+			byte* params = (byte*)malloc(6);
+			*params = A;
+			*(params + 1) = B;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool UnsuppressedHelpTextsExist()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.UnsuppressedHelpTextsExist");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void OffhandReminderTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.OffhandReminderTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClearOffhandReminderTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.ClearOffhandReminderTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SpotTargetReminderTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.SpotTargetReminderTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ClearSpotTargetReminderTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.ClearSpotTargetReminderTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void UpdateTypesToRemoveOnTimers(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.UpdateTypesToRemoveOnTimers");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ResetConfig()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.ResetConfig");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void EnableHelpText(bool bEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager.EnableHelpText");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

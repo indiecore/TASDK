@@ -30,10 +30,52 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, GunnerFlashCount, 0xFFFFFFFF)
 		ADD_STRUCT(::RotatorProperty, GunnerWeaponRotation, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, GunnerFlashLocation, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'PostInitAnimTree'
-		// Here lies the not-yet-implemented method 'VehicleWeaponFireEffects'
-		// Here lies the not-yet-implemented method 'ProcessViewRotationBasedOnSeat'
-		// Here lies the not-yet-implemented method 'LimitViewRotation'
+		void PostInitAnimTree(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Tank.PostInitAnimTree");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void VehicleWeaponFireEffects(Vector HitLocation, int SeatIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Tank.VehicleWeaponFireEffects");
+			byte* params = (byte*)malloc(16);
+			*(Vector*)params = HitLocation;
+			*(int*)(params + 12) = SeatIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProcessViewRotationBasedOnSeat(int SeatIndex, float DeltaTime, Rotator& out_ViewRotation, Rotator& out_DeltaRot)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Tank.ProcessViewRotationBasedOnSeat");
+			byte* params = (byte*)malloc(32);
+			*(int*)params = SeatIndex;
+			*(float*)(params + 4) = DeltaTime;
+			*(Rotator*)(params + 8) = out_ViewRotation;
+			*(Rotator*)(params + 20) = out_DeltaRot;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_ViewRotation = *(Rotator*)(params + 8);
+			out_DeltaRot = *(Rotator*)(params + 20);
+			free(params);
+		}
+		Rotator LimitViewRotation(Rotator LimitViewRotation, float LimitViewPitchMin, float LimitViewPitchMax)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Tank.LimitViewRotation");
+			byte* params = (byte*)malloc(32);
+			*(Rotator*)params = LimitViewRotation;
+			*(float*)(params + 12) = LimitViewPitchMin;
+			*(float*)(params + 16) = LimitViewPitchMax;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Rotator*)(params + 20);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

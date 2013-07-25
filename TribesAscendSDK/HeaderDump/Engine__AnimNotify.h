@@ -13,7 +13,25 @@ namespace UnrealScript
 	{
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'NotifyColor'!
-		// Here lies the not-yet-implemented method 'FindNextNotifyOfClass'
+		bool FindNextNotifyOfClass(class AnimNodeSequence* AnimSeqInstigator, ScriptClass* NotifyClass, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.AnimSequence.AnimNotifyEvent'!
+void*& OutEvent)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNotify.FindNextNotifyOfClass");
+			byte* params = (byte*)malloc(32);
+			*(class AnimNodeSequence**)params = AnimSeqInstigator;
+			*(ScriptClass**)(params + 4) = NotifyClass;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.AnimSequence.AnimNotifyEvent'!
+void**)(params + 8) = OutEvent;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutEvent = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.AnimSequence.AnimNotifyEvent'!
+void**)(params + 8);
+			auto returnVal = *(bool*)(params + 28);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_STRUCT

@@ -32,15 +32,80 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bPendingAction, 0x1)
 		ADD_VAR(::FloatProperty, LastActionEventTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StingerVolumeMultiplier, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'AlreadyInActionMusic'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'StartMusic'
-		// Here lies the not-yet-implemented method 'IntroFinished'
-		// Here lies the not-yet-implemented method 'CreateNewTrack'
-		// Here lies the not-yet-implemented method 'MusicEvent'
-		// Here lies the not-yet-implemented method 'ProcessMusicEvent'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'ChangeTrack'
+		bool AlreadyInActionMusic()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.AlreadyInActionMusic");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StartMusic()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.StartMusic");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void IntroFinished(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* AC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.IntroFinished");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = AC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* CreateNewTrack(class SoundCue* MusicCue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.CreateNewTrack");
+			byte* params = (byte*)malloc(8);
+			*(class SoundCue**)params = MusicCue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void MusicEvent(int NewEventIndex)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.MusicEvent");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = NewEventIndex;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProcessMusicEvent()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.ProcessMusicEvent");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ChangeTrack(byte NewState)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.ChangeTrack");
+			byte* params = (byte*)malloc(1);
+			*params = NewState;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

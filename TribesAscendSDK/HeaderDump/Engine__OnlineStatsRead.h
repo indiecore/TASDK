@@ -16,13 +16,104 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, TotalRowsInView, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SortColumnId, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ViewId, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'OnReadComplete'
-		// Here lies the not-yet-implemented method 'GetIntStatValueForPlayer'
-		// Here lies the not-yet-implemented method 'SetIntStatValueForPlayer'
-		// Here lies the not-yet-implemented method 'GetFloatStatValueForPlayer'
-		// Here lies the not-yet-implemented method 'SetFloatStatValueForPlayer'
-		// Here lies the not-yet-implemented method 'AddPlayer'
-		// Here lies the not-yet-implemented method 'GetRankForPlayer'
+		void OnReadComplete()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.OnReadComplete");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool GetIntStatValueForPlayer(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void* PlayerID, int StatColumnNo, int& StatValue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.GetIntStatValueForPlayer");
+			byte* params = (byte*)malloc(20);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void**)params = PlayerID;
+			*(int*)(params + 8) = StatColumnNo;
+			*(int*)(params + 12) = StatValue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			StatValue = *(int*)(params + 12);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		bool SetIntStatValueForPlayer(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void* PlayerID, int StatColumnNo, int StatValue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.SetIntStatValueForPlayer");
+			byte* params = (byte*)malloc(20);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void**)params = PlayerID;
+			*(int*)(params + 8) = StatColumnNo;
+			*(int*)(params + 12) = StatValue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		bool GetFloatStatValueForPlayer(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void* PlayerID, int StatColumnNo, float& StatValue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.GetFloatStatValueForPlayer");
+			byte* params = (byte*)malloc(20);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void**)params = PlayerID;
+			*(int*)(params + 8) = StatColumnNo;
+			*(float*)(params + 12) = StatValue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			StatValue = *(float*)(params + 12);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		bool SetFloatStatValueForPlayer(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void* PlayerID, int StatColumnNo, float StatValue)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.SetFloatStatValueForPlayer");
+			byte* params = (byte*)malloc(20);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void**)params = PlayerID;
+			*(int*)(params + 8) = StatColumnNo;
+			*(float*)(params + 12) = StatValue;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		void AddPlayer(ScriptArray<wchar_t> PlayerName, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void* PlayerID)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.AddPlayer");
+			byte* params = (byte*)malloc(20);
+			*(ScriptArray<wchar_t>*)params = PlayerName;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void**)(params + 12) = PlayerID;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int GetRankForPlayer(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void* PlayerID)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.GetRankForPlayer");
+			byte* params = (byte*)malloc(12);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void**)params = PlayerID;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 8);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

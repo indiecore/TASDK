@@ -32,9 +32,28 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bReplicateChildVehicle, 0x2)
 		ADD_VAR(::BoolProperty, bHasLockedVehicle, 0x1)
 		ADD_VAR(::StrProperty, VehicleClassPath, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SpawnVehicle'
-		// Here lies the not-yet-implemented method 'SetHUDLocation'
-		// Here lies the not-yet-implemented method 'GetTeamNum'
+		void SpawnVehicle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleFactory.SpawnVehicle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetHUDLocation(Vector NewHUDLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleFactory.SetHUDLocation");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = NewHUDLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		byte GetTeamNum()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleFactory.GetTeamNum");
+			byte* params = (byte*)malloc(1);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

@@ -12,7 +12,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, TeamIndex, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Activated'
+		void Activated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_ReturnCTFFlag.Activated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

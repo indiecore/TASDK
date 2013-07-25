@@ -33,7 +33,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LiftStrength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RotationalStrength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RadialStrength, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'OnToggle'
+		void OnToggle(class SeqAct_Toggle* inAction)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_CylindricalForceActor.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = inAction;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -41,13 +41,93 @@ namespace UnrealScript
 		ADD_OBJECT(UTMapInfo, MapInfo)
 		ADD_OBJECT(WorldInfo, ThisWorld)
 		ADD_OBJECT(GFxMinimapHud, HUD)
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'UpdateData'
-		// Here lies the not-yet-implemented method 'GenFriendIcons'
-		// Here lies the not-yet-implemented method 'GenEnemyIcons'
-		// Here lies the not-yet-implemented method 'GenFlagIcons'
-		// Here lies the not-yet-implemented method 'UpdateIcons'
-		// Here lies the not-yet-implemented method 'Update'
+		void Init(class GFxMinimapHud* H)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.Init");
+			byte* params = (byte*)malloc(4);
+			*(class GFxMinimapHud**)params = H;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateData()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.UpdateData");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void* GenFriendIcons(int N)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.GenFriendIcons");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = N;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void* GenEnemyIcons(int N)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.GenEnemyIcons");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = N;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void* GenFlagIcons(int N)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.GenFlagIcons");
+			byte* params = (byte*)malloc(16);
+			*(int*)params = N;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void UpdateIcons(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void*& Actors, 
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void*& ActorIcons, bool bIsRedIconType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.UpdateIcons");
+			byte* params = (byte*)malloc(28);
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)params = Actors;
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 12) = ActorIcons;
+			*(bool*)(params + 24) = bIsRedIconType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			Actors = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)params;
+			ActorIcons = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 12);
+			free(params);
+		}
+		void Update(float Scale)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.Update");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = Scale;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

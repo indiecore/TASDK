@@ -36,10 +36,30 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, HorizontalScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TimeSinceLastFrame, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TimeIntoMovie, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Play'
-		// Here lies the not-yet-implemented method 'Pause'
-		// Here lies the not-yet-implemented method 'Stop'
-		// Here lies the not-yet-implemented method 'SetCurrentFrame'
+		void Play()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureFlipBook.Play");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Pause()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureFlipBook.Pause");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Stop()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureFlipBook.Stop");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetCurrentFrame(int Row, int Col)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureFlipBook.SetCurrentFrame");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Row;
+			*(int*)(params + 4) = Col;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

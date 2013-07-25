@@ -56,20 +56,128 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CameraAnimBlendOutTime, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RootBoneOption, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RootRotationOption, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'SetAnim'
-		// Here lies the not-yet-implemented method 'PlayAnim'
-		// Here lies the not-yet-implemented method 'StopAnim'
-		// Here lies the not-yet-implemented method 'ReplayAnim'
-		// Here lies the not-yet-implemented method 'SetPosition'
-		// Here lies the not-yet-implemented method 'GetNormalizedPosition'
-		// Here lies the not-yet-implemented method 'FindGroupRelativePosition'
-		// Here lies the not-yet-implemented method 'FindGroupPosition'
-		// Here lies the not-yet-implemented method 'GetGroupRelativePosition'
-		// Here lies the not-yet-implemented method 'GetGlobalPlayRate'
-		// Here lies the not-yet-implemented method 'GetAnimPlaybackLength'
-		// Here lies the not-yet-implemented method 'GetTimeLeft'
-		// Here lies the not-yet-implemented method 'SetRootBoneAxisOption'
-		// Here lies the not-yet-implemented method 'SetRootBoneRotationOption'
+		void SetAnim(ScriptName Sequence)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.SetAnim");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = Sequence;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayAnim(bool bLoop, float InRate, float StartTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.PlayAnim");
+			byte* params = (byte*)malloc(12);
+			*(bool*)params = bLoop;
+			*(float*)(params + 4) = InRate;
+			*(float*)(params + 8) = StartTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.StopAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReplayAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.ReplayAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetPosition(float NewTime, bool bFireNotifies)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.SetPosition");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = NewTime;
+			*(bool*)(params + 4) = bFireNotifies;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		float GetNormalizedPosition()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetNormalizedPosition");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		float FindGroupRelativePosition(float GroupRelativePosition)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.FindGroupRelativePosition");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = GroupRelativePosition;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		float FindGroupPosition(float GroupRelativePosition)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.FindGroupPosition");
+			byte* params = (byte*)malloc(8);
+			*(float*)params = GroupRelativePosition;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		float GetGroupRelativePosition()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetGroupRelativePosition");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		float GetGlobalPlayRate()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetGlobalPlayRate");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		float GetAnimPlaybackLength()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetAnimPlaybackLength");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		float GetTimeLeft()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetTimeLeft");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		void SetRootBoneAxisOption(byte AxisX, byte AxisY, byte AxisZ)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.SetRootBoneAxisOption");
+			byte* params = (byte*)malloc(3);
+			*params = AxisX;
+			*(params + 1) = AxisY;
+			*(params + 2) = AxisZ;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetRootBoneRotationOption(byte AxisX, byte AxisY, byte AxisZ)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.SetRootBoneRotationOption");
+			byte* params = (byte*)malloc(3);
+			*params = AxisX;
+			*(params + 1) = AxisY;
+			*(params + 2) = AxisZ;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

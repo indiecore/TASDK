@@ -13,9 +13,24 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bRespondToExplosions, 0x2)
 		ADD_VAR(::BoolProperty, bLastHitWasHeadShot, 0x1)
-		// Here lies the not-yet-implemented method 'UpdateShadowSettings'
-		// Here lies the not-yet-implemented method 'ReattachMesh'
-		// Here lies the not-yet-implemented method 'ReattachMeshWithoutBeingSeen'
+		void UpdateShadowSettings(bool bInWantShadow)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePawn.UpdateShadowSettings");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bInWantShadow;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ReattachMesh()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePawn.ReattachMesh");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReattachMeshWithoutBeingSeen()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePawn.ReattachMeshWithoutBeingSeen");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

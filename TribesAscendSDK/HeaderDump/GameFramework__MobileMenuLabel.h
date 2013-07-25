@@ -32,7 +32,14 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'TextColor'!
 		ADD_OBJECT(Font, TextFont)
 		ADD_VAR(::StrProperty, Caption, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'RenderObject'
+		void RenderObject(class Canvas* Canvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuLabel.RenderObject");
+			byte* params = (byte*)malloc(4);
+			*(class Canvas**)params = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

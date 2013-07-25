@@ -32,12 +32,55 @@ namespace UnrealScript
 		ADD_OBJECT(RB_ConstraintSetup, ConstraintSetup)
 		ADD_OBJECT(Actor, ConstraintActor2)
 		ADD_OBJECT(Actor, ConstraintActor1)
-		// Here lies the not-yet-implemented method 'SetDisableCollision'
-		// Here lies the not-yet-implemented method 'InitConstraint'
-		// Here lies the not-yet-implemented method 'TermConstraint'
-		// Here lies the not-yet-implemented method 'OnDestroy'
-		// Here lies the not-yet-implemented method 'OnToggle'
-		// Here lies the not-yet-implemented method 'OnToggleConstraintDrive'
+		void SetDisableCollision(bool NewDisableCollision)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintActor.SetDisableCollision");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = NewDisableCollision;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void InitConstraint(class Actor* Actor1, class Actor* Actor2, ScriptName Actor1Bone, ScriptName Actor2Bone, float BreakThreshold)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintActor.InitConstraint");
+			byte* params = (byte*)malloc(28);
+			*(class Actor**)params = Actor1;
+			*(class Actor**)(params + 4) = Actor2;
+			*(ScriptName*)(params + 8) = Actor1Bone;
+			*(ScriptName*)(params + 16) = Actor2Bone;
+			*(float*)(params + 24) = BreakThreshold;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void TermConstraint()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintActor.TermConstraint");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnDestroy(class SeqAct_Destroy* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintActor.OnDestroy");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Destroy**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnToggle(class SeqAct_Toggle* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintActor.OnToggle");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_Toggle**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnToggleConstraintDrive(class SeqAct_ToggleConstraintDrive* Action)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintActor.OnToggleConstraintDrive");
+			byte* params = (byte*)malloc(4);
+			*(class SeqAct_ToggleConstraintDrive**)params = Action;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -27,7 +27,11 @@ namespace UnrealScript
 		ADD_OBJECT(UDKAnimBlendBase, FlyingMode)
 		ADD_OBJECT(UDKPawn, Pawn)
 		ADD_VAR(::ByteProperty, FlyingState, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'UpdateFlyingState'
+		void UpdateFlyingState()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendByFlying.UpdateFlyingState");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

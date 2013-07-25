@@ -13,9 +13,26 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::ByteProperty, BlendType, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bFixNumChildren, 0x1)
-		// Here lies the not-yet-implemented method 'PlayAnim'
-		// Here lies the not-yet-implemented method 'StopAnim'
-		// Here lies the not-yet-implemented method 'ReplayAnim'
+		void PlayAnim(bool bLoop, float Rate, float StartTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeBlendBase.PlayAnim");
+			byte* params = (byte*)malloc(12);
+			*(bool*)params = bLoop;
+			*(float*)(params + 4) = Rate;
+			*(float*)(params + 8) = StartTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeBlendBase.StopAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReplayAnim()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeBlendBase.ReplayAnim");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

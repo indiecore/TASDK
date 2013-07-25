@@ -22,7 +22,11 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAllowSubclass, 0x1)
 		ADD_OBJECT(ScriptClass, RequiredInventory)
 		ADD_OBJECT(Actor, Target)
-		// Here lies the not-yet-implemented method 'Activated'
+		void Activated()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqCond_HasInventory.Activated");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

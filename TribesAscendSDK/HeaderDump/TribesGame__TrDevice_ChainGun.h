@@ -24,17 +24,92 @@ namespace UnrealScript
 		ADD_OBJECT(TrSkelControl_SpinControl, m_BarrelSpinControl)
 		ADD_VAR(::FloatProperty, m_fCurrSpinTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fBuildupTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetBuildUpTime'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
-		// Here lies the not-yet-implemented method 'PostInitAnimTree'
-		// Here lies the not-yet-implemented method 'Tick'
-		// Here lies the not-yet-implemented method 'UpdateSoundModulation'
-		// Here lies the not-yet-implemented method 'PlayBuildupAnimation'
-		// Here lies the not-yet-implemented method 'OnSwitchToWeapon'
-		// Here lies the not-yet-implemented method 'PlayWeaponPutDown'
-		// Here lies the not-yet-implemented method 'BuffMaxCarriedAmmo'
-		// Here lies the not-yet-implemented method 'AddCarriedAmmo'
-		// Here lies the not-yet-implemented method 'GetBasePickupAmmoAmount'
+		float GetBuildUpTime(class PlayerReplicationInfo* PRI, bool bForInterpSpeed)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.GetBuildUpTime");
+			byte* params = (byte*)malloc(12);
+			*(class PlayerReplicationInfo**)params = PRI;
+			*(bool*)(params + 4) = bForInterpSpeed;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostInitAnimTree(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* SkelComp)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.PostInitAnimTree");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = SkelComp;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void Tick(float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.Tick");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateSoundModulation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.UpdateSoundModulation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayBuildupAnimation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.PlayBuildupAnimation");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnSwitchToWeapon()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.OnSwitchToWeapon");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PlayWeaponPutDown()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.PlayWeaponPutDown");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void BuffMaxCarriedAmmo(int Amount)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.BuffMaxCarriedAmmo");
+			byte* params = (byte*)malloc(4);
+			*(int*)params = Amount;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		int AddCarriedAmmo(int Amount)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.AddCarriedAmmo");
+			byte* params = (byte*)malloc(8);
+			*(int*)params = Amount;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		int GetBasePickupAmmoAmount()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.GetBasePickupAmmoAmount");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

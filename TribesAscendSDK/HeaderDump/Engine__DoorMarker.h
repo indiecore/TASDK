@@ -28,12 +28,51 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, DoorTrigger)
 		ADD_VAR(::ByteProperty, DoorType, 0xFFFFFFFF)
 		ADD_OBJECT(InterpActor, MyDoor)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'MoverOpened'
-		// Here lies the not-yet-implemented method 'MoverClosed'
-		// Here lies the not-yet-implemented method 'SpecialHandling'
-		// Here lies the not-yet-implemented method 'ProceedWithMove'
-		// Here lies the not-yet-implemented method 'SuggestMovePreparation'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DoorMarker.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void MoverOpened()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DoorMarker.MoverOpened");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void MoverClosed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DoorMarker.MoverClosed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		class Actor* SpecialHandling(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DoorMarker.SpecialHandling");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Actor**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool ProceedWithMove(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DoorMarker.ProceedWithMove");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool SuggestMovePreparation(class Pawn* Other)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DoorMarker.SuggestMovePreparation");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = Other;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

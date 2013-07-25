@@ -12,7 +12,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, m_nLastMessageCode, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Timer'
+		void Timer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDTeam.Timer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

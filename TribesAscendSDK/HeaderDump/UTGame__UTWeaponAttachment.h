@@ -52,30 +52,206 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, MuzzleFlashPSCTemplate)
 		ADD_VAR(::NameProperty, MuzzleFlashSocket, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, SplashEffect)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'CheckToForceRefPose'
-		// Here lies the not-yet-implemented method 'CreateOverlayMesh'
-		// Here lies the not-yet-implemented method 'SetSkin'
-		// Here lies the not-yet-implemented method 'SetMuzzleFlashParams'
-		// Here lies the not-yet-implemented method 'AttachTo'
-		// Here lies the not-yet-implemented method 'SetPuttingDownWeapon'
-		// Here lies the not-yet-implemented method 'DetachFrom'
-		// Here lies the not-yet-implemented method 'MuzzleFlashTimer'
-		// Here lies the not-yet-implemented method 'CauseMuzzleFlash'
-		// Here lies the not-yet-implemented method 'StopMuzzleFlash'
-		// Here lies the not-yet-implemented method 'FirstPersonFireEffects'
-		// Here lies the not-yet-implemented method 'StopFirstPersonFireEffects'
-		// Here lies the not-yet-implemented method 'ThirdPersonFireEffects'
-		// Here lies the not-yet-implemented method 'StopThirdPersonFireEffects'
-		// Here lies the not-yet-implemented method 'GetImpactEffect'
-		// Here lies the not-yet-implemented method 'AllowImpactEffects'
-		// Here lies the not-yet-implemented method 'SetImpactedActor'
-		// Here lies the not-yet-implemented method 'PlayImpactEffects'
-		// Here lies the not-yet-implemented method 'CheckBulletWhip'
-		// Here lies the not-yet-implemented method 'SetWeaponOverlayFlags'
-		// Here lies the not-yet-implemented method 'ChangeVisibility'
-		// Here lies the not-yet-implemented method 'FireModeUpdated'
-		// Here lies the not-yet-implemented method 'GetEffectLocation'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CheckToForceRefPose()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.CheckToForceRefPose");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CreateOverlayMesh()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.CreateOverlayMesh");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetSkin(class Material* NewMaterial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.SetSkin");
+			byte* params = (byte*)malloc(4);
+			*(class Material**)params = NewMaterial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetMuzzleFlashParams(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* PSC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.SetMuzzleFlashParams");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = PSC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void AttachTo(class UTPawn* OwnerPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.AttachTo");
+			byte* params = (byte*)malloc(4);
+			*(class UTPawn**)params = OwnerPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetPuttingDownWeapon(bool bNowPuttingDown)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.SetPuttingDownWeapon");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNowPuttingDown;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void DetachFrom(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* MeshCpnt)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.DetachFrom");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = MeshCpnt;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void MuzzleFlashTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.MuzzleFlashTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CauseMuzzleFlash()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.CauseMuzzleFlash");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void StopMuzzleFlash()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.StopMuzzleFlash");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void FirstPersonFireEffects(class Weapon* PawnWeapon, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.FirstPersonFireEffects");
+			byte* params = (byte*)malloc(16);
+			*(class Weapon**)params = PawnWeapon;
+			*(Vector*)(params + 4) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopFirstPersonFireEffects(class Weapon* PawnWeapon)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.StopFirstPersonFireEffects");
+			byte* params = (byte*)malloc(4);
+			*(class Weapon**)params = PawnWeapon;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ThirdPersonFireEffects(Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.ThirdPersonFireEffects");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopThirdPersonFireEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.StopThirdPersonFireEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		
+// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect'!
+void* GetImpactEffect(class PhysicalMaterial* HitMaterial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.GetImpactEffect");
+			byte* params = (byte*)malloc(52);
+			*(class PhysicalMaterial**)params = HitMaterial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect'!
+void**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool AllowImpactEffects(class Actor* HitActor, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.AllowImpactEffects");
+			byte* params = (byte*)malloc(32);
+			*(class Actor**)params = HitActor;
+			*(Vector*)(params + 4) = HitLocation;
+			*(Vector*)(params + 16) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		void SetImpactedActor(class Actor* HitActor, Vector HitLocation, Vector HitNormal, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void* HitInfo)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.SetImpactedActor");
+			byte* params = (byte*)malloc(56);
+			*(class Actor**)params = HitActor;
+			*(Vector*)(params + 4) = HitLocation;
+			*(Vector*)(params + 16) = HitNormal;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
+void**)(params + 28) = HitInfo;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayImpactEffects(Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.PlayImpactEffects");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CheckBulletWhip(Vector FireDir, Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.CheckBulletWhip");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = FireDir;
+			*(Vector*)(params + 12) = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetWeaponOverlayFlags(class UTPawn* OwnerPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.SetWeaponOverlayFlags");
+			byte* params = (byte*)malloc(4);
+			*(class UTPawn**)params = OwnerPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ChangeVisibility(bool bIsVisible)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.ChangeVisibility");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bIsVisible;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void FireModeUpdated(byte FiringMode, bool bViaReplication)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.FireModeUpdated");
+			byte* params = (byte*)malloc(5);
+			*params = FiringMode;
+			*(bool*)(params + 4) = bViaReplication;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		Vector GetEffectLocation()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.GetEffectLocation");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

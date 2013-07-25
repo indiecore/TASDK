@@ -5,6 +5,10 @@ namespace UnrealScript
 	class NxCylindricalForceFieldCapsule : public NxCylindricalForceField
 	{
 	public:
-		// Here lies the not-yet-implemented method 'DoInitRBPhys'
+		void DoInitRBPhys()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxCylindricalForceFieldCapsule.DoInitRBPhys");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

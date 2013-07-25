@@ -56,24 +56,180 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, PreviousVelocity, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, Velocity, 0xFFFFFFFF
 		ADD_VAR(::IntProperty, BodyIndex, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'IsFixed'
-		// Here lies the not-yet-implemented method 'SetFixed'
-		// Here lies the not-yet-implemented method 'GetBodyMass'
-		// Here lies the not-yet-implemented method 'IsValidBodyInstance'
-		// Here lies the not-yet-implemented method 'GetPhysicsAssetInstance'
-		// Here lies the not-yet-implemented method 'GetUnrealWorldTM'
-		// Here lies the not-yet-implemented method 'GetUnrealWorldVelocity'
-		// Here lies the not-yet-implemented method 'GetUnrealWorldAngularVelocity'
-		// Here lies the not-yet-implemented method 'GetUnrealWorldVelocityAtPoint'
-		// Here lies the not-yet-implemented method 'EnableBoneSpring'
-		// Here lies the not-yet-implemented method 'SetBoneSpringParams'
-		// Here lies the not-yet-implemented method 'SetBoneSpringTarget'
-		// Here lies the not-yet-implemented method 'SetBlockRigidBody'
-		// Here lies the not-yet-implemented method 'SetPhysMaterialOverride'
-		// Here lies the not-yet-implemented method 'EnableCollisionResponse'
-		// Here lies the not-yet-implemented method 'SetContactReportForceThreshold'
-		// Here lies the not-yet-implemented method 'UpdateMassProperties'
-		// Here lies the not-yet-implemented method 'UpdateDampingProperties'
+		bool IsFixed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.IsFixed");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		void SetFixed(bool bNewFixed)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetFixed");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNewFixed;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		float GetBodyMass()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetBodyMass");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsValidBodyInstance()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.IsValidBodyInstance");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		class PhysicsAssetInstance* GetPhysicsAssetInstance()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetPhysicsAssetInstance");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class PhysicsAssetInstance**)params;
+			free(params);
+			return returnVal;
+		}
+		
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
+void* GetUnrealWorldTM()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetUnrealWorldTM");
+			byte* params = (byte*)malloc(64);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
+void**)params;
+			free(params);
+			return returnVal;
+		}
+		Vector GetUnrealWorldVelocity()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetUnrealWorldVelocity");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)params;
+			free(params);
+			return returnVal;
+		}
+		Vector GetUnrealWorldAngularVelocity()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetUnrealWorldAngularVelocity");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)params;
+			free(params);
+			return returnVal;
+		}
+		Vector GetUnrealWorldVelocityAtPoint(Vector Point)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetUnrealWorldVelocityAtPoint");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = Point;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void EnableBoneSpring(bool bInEnableLinear, bool bInEnableAngular, 
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
+void*& InBoneTarget)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.EnableBoneSpring");
+			byte* params = (byte*)malloc(72);
+			*(bool*)params = bInEnableLinear;
+			*(bool*)(params + 4) = bInEnableAngular;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
+void**)(params + 16) = InBoneTarget;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			InBoneTarget = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
+void**)(params + 16);
+			free(params);
+		}
+		void SetBoneSpringParams(float InLinearSpring, float InLinearDamping, float InAngularSpring, float InAngularDamping)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetBoneSpringParams");
+			byte* params = (byte*)malloc(16);
+			*(float*)params = InLinearSpring;
+			*(float*)(params + 4) = InLinearDamping;
+			*(float*)(params + 8) = InAngularSpring;
+			*(float*)(params + 12) = InAngularDamping;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetBoneSpringTarget(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
+void*& InBoneTarget, bool bTeleport)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetBoneSpringTarget");
+			byte* params = (byte*)malloc(68);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
+void**)params = InBoneTarget;
+			*(bool*)(params + 64) = bTeleport;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			InBoneTarget = *(
+// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
+void**)params;
+			free(params);
+		}
+		void SetBlockRigidBody(bool bNewBlockRigidBody)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetBlockRigidBody");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bNewBlockRigidBody;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetPhysMaterialOverride(class PhysicalMaterial* NewPhysMaterial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetPhysMaterialOverride");
+			byte* params = (byte*)malloc(4);
+			*(class PhysicalMaterial**)params = NewPhysMaterial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void EnableCollisionResponse(bool bEnableResponse)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.EnableCollisionResponse");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bEnableResponse;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void SetContactReportForceThreshold(float Threshold)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetContactReportForceThreshold");
+			byte* params = (byte*)malloc(4);
+			*(float*)params = Threshold;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateMassProperties(class RB_BodySetup* Setup)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.UpdateMassProperties");
+			byte* params = (byte*)malloc(4);
+			*(class RB_BodySetup**)params = Setup;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateDampingProperties()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.UpdateDampingProperties");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

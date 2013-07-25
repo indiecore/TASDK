@@ -12,7 +12,17 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, HintLocFileName, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'LoadRandomLocalizedHintMessage'
+		ScriptArray<wchar_t> LoadRandomLocalizedHintMessage(ScriptArray<wchar_t> Category1Name, ScriptArray<wchar_t> Category2Name)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameViewportClient.LoadRandomLocalizedHintMessage");
+			byte* params = (byte*)malloc(36);
+			*(ScriptArray<wchar_t>*)params = Category1Name;
+			*(ScriptArray<wchar_t>*)(params + 12) = Category2Name;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(ScriptArray<wchar_t>*)(params + 24);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

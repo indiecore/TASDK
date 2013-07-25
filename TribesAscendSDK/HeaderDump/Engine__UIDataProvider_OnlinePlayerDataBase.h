@@ -13,8 +13,19 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, PlayerControllerId, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'OnRegister'
-		// Here lies the not-yet-implemented method 'OnUnregister'
+		void OnRegister(class LocalPlayer* InPlayer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerDataBase.OnRegister");
+			byte* params = (byte*)malloc(4);
+			*(class LocalPlayer**)params = InPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnUnregister()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerDataBase.OnUnregister");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

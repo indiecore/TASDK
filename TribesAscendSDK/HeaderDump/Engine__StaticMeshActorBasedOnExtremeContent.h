@@ -5,7 +5,15 @@ namespace UnrealScript
 	class StaticMeshActorBasedOnExtremeContent : public Actor
 	{
 	public:
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'SetMaterialBasedOnExtremeContent'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshActorBasedOnExtremeContent.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SetMaterialBasedOnExtremeContent()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshActorBasedOnExtremeContent.SetMaterialBasedOnExtremeContent");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

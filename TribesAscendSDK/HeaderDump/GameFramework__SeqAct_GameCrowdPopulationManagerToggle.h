@@ -28,8 +28,20 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, MaxAgents, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bKillAgentsInstantly, 0x1)
 		ADD_OBJECT(ScriptClass, PopulationManagerClass)
-		// Here lies the not-yet-implemented method 'FindPopMgrTarget'
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		void FindPopMgrTarget()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdPopulationManagerToggle.FindPopMgrTarget");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdPopulationManagerToggle.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

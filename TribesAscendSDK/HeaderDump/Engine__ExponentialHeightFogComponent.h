@@ -28,7 +28,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, FogDensity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FogHeight, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
-		// Here lies the not-yet-implemented method 'SetEnabled'
+		void SetEnabled(bool bSetEnabled)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ExponentialHeightFogComponent.SetEnabled");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bSetEnabled;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -24,10 +24,42 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bKeepPartial, 0x1)
 		ADD_VAR(::FloatProperty, GoalDist, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, Goal, 0xFFFFFFFF
-		// Here lies the not-yet-implemented method 'RecycleNative'
-		// Here lies the not-yet-implemented method 'AtActor'
-		// Here lies the not-yet-implemented method 'AtLocation'
-		// Here lies the not-yet-implemented method 'Recycle'
+		void RecycleNative()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_At.RecycleNative");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool AtActor(class NavigationHandle* NavHandle, class Actor* GoalActor, float Dist, bool bReturnPartial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_At.AtActor");
+			byte* params = (byte*)malloc(20);
+			*(class NavigationHandle**)params = NavHandle;
+			*(class Actor**)(params + 4) = GoalActor;
+			*(float*)(params + 8) = Dist;
+			*(bool*)(params + 12) = bReturnPartial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		bool AtLocation(class NavigationHandle* NavHandle, Vector GoalLocation, float Dist, bool bReturnPartial)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_At.AtLocation");
+			byte* params = (byte*)malloc(28);
+			*(class NavigationHandle**)params = NavHandle;
+			*(Vector*)(params + 4) = GoalLocation;
+			*(float*)(params + 16) = Dist;
+			*(bool*)(params + 20) = bReturnPartial;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		void Recycle()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_At.Recycle");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

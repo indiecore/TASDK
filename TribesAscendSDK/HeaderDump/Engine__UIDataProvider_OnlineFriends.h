@@ -33,11 +33,40 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, PresenceInfoCol, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, NickNameCol, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
-		// Here lies the not-yet-implemented method 'OnRegister'
-		// Here lies the not-yet-implemented method 'OnUnregister'
-		// Here lies the not-yet-implemented method 'OnFriendsReadComplete'
-		// Here lies the not-yet-implemented method 'OnLoginChange'
-		// Here lies the not-yet-implemented method 'RefreshFriendsList'
+		void OnRegister(class LocalPlayer* InPlayer)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriends.OnRegister");
+			byte* params = (byte*)malloc(4);
+			*(class LocalPlayer**)params = InPlayer;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnUnregister()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriends.OnUnregister");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnFriendsReadComplete(bool bWasSuccessful)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriends.OnFriendsReadComplete");
+			byte* params = (byte*)malloc(4);
+			*(bool*)params = bWasSuccessful;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnLoginChange(byte LocalUserNum)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriends.OnLoginChange");
+			byte* params = (byte*)malloc(1);
+			*params = LocalUserNum;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RefreshFriendsList()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriends.RefreshFriendsList");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

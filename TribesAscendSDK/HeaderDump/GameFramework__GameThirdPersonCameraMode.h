@@ -83,19 +83,158 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bLockedToViewTarget, 0x1)
 		ADD_VAR(::FloatProperty, BlendTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FOVAngle, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetDesiredFOV'
-		// Here lies the not-yet-implemented method 'SetFocusPoint'
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'OnBecomeActive'
-		// Here lies the not-yet-implemented method 'OnBecomeInActive'
-		// Here lies the not-yet-implemented method 'AdjustViewOffset'
-		// Here lies the not-yet-implemented method 'GetCameraWorstCaseLoc'
-		// Here lies the not-yet-implemented method 'ProcessViewRotation'
-		// Here lies the not-yet-implemented method 'GetDOFFocusLoc'
-		// Here lies the not-yet-implemented method 'DOFTrace'
-		// Here lies the not-yet-implemented method 'UpdatePostProcess'
-		// Here lies the not-yet-implemented method 'ModifyPostProcessSettings'
-		// Here lies the not-yet-implemented method 'SetViewOffset'
+		float GetDesiredFOV(class Pawn* ViewedPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.GetDesiredFOV");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = ViewedPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		bool SetFocusPoint(class Pawn* ViewedPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.SetFocusPoint");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = ViewedPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void Init()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.Init");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnBecomeActive(class Pawn* TargetPawn, class GameThirdPersonCameraMode* PrevMode)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.OnBecomeActive");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = TargetPawn;
+			*(class GameThirdPersonCameraMode**)(params + 4) = PrevMode;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void OnBecomeInActive(class Pawn* TargetPawn, class GameThirdPersonCameraMode* NewMode)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.OnBecomeInActive");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = TargetPawn;
+			*(class GameThirdPersonCameraMode**)(params + 4) = NewMode;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		Vector AdjustViewOffset(class Pawn* P, Vector Offset)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.AdjustViewOffset");
+			byte* params = (byte*)malloc(28);
+			*(class Pawn**)params = P;
+			*(Vector*)(params + 4) = Offset;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 16);
+			free(params);
+			return returnVal;
+		}
+		Vector GetCameraWorstCaseLoc(class Pawn* TargetPawn, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
+void* CurrentViewTarget)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.GetCameraWorstCaseLoc");
+			byte* params = (byte*)malloc(60);
+			*(class Pawn**)params = TargetPawn;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
+void**)(params + 4) = CurrentViewTarget;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 48);
+			free(params);
+			return returnVal;
+		}
+		void ProcessViewRotation(float DeltaTime, class Actor* ViewTarget, Rotator& out_ViewRotation, Rotator& out_DeltaRot)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.ProcessViewRotation");
+			byte* params = (byte*)malloc(32);
+			*(float*)params = DeltaTime;
+			*(class Actor**)(params + 4) = ViewTarget;
+			*(Rotator*)(params + 8) = out_ViewRotation;
+			*(Rotator*)(params + 20) = out_DeltaRot;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			out_ViewRotation = *(Rotator*)(params + 8);
+			out_DeltaRot = *(Rotator*)(params + 20);
+			free(params);
+		}
+		Vector GetDOFFocusLoc(class Actor* TraceOwner, Vector StartTrace, Vector EndTrace)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.GetDOFFocusLoc");
+			byte* params = (byte*)malloc(40);
+			*(class Actor**)params = TraceOwner;
+			*(Vector*)(params + 4) = StartTrace;
+			*(Vector*)(params + 16) = EndTrace;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		Vector DOFTrace(class Actor* TraceOwner, Vector StartTrace, Vector EndTrace)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.DOFTrace");
+			byte* params = (byte*)malloc(40);
+			*(class Actor**)params = TraceOwner;
+			*(Vector*)(params + 4) = StartTrace;
+			*(Vector*)(params + 16) = EndTrace;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)(params + 28);
+			free(params);
+			return returnVal;
+		}
+		void UpdatePostProcess(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
+void*& VT, float DeltaTime)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.UpdatePostProcess");
+			byte* params = (byte*)malloc(48);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
+void**)params = VT;
+			*(float*)(params + 44) = DeltaTime;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			VT = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
+void**)params;
+			free(params);
+		}
+		void ModifyPostProcessSettings(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
+void*& PP)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.ModifyPostProcessSettings");
+			byte* params = (byte*)malloc(220);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
+void**)params = PP;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			PP = *(
+// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
+void**)params;
+			free(params);
+		}
+		void SetViewOffset(
+// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameThirdPersonCameraMode.ViewOffsetData'!
+void*& NewViewOffset)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.SetViewOffset");
+			byte* params = (byte*)malloc(36);
+			*(
+// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameThirdPersonCameraMode.ViewOffsetData'!
+void**)params = NewViewOffset;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			NewViewOffset = *(
+// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameThirdPersonCameraMode.ViewOffsetData'!
+void**)params;
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

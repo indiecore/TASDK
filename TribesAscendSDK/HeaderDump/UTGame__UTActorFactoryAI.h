@@ -14,7 +14,14 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bUseCompartment, 0x2)
 		ADD_VAR(::BoolProperty, bForceDeathmatchAI, 0x1)
-		// Here lies the not-yet-implemented method 'PostCreateActor'
+		void PostCreateActor(class Actor* NewActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTActorFactoryAI.PostCreateActor");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = NewActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

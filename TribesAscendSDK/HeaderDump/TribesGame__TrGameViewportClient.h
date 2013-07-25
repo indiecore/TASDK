@@ -14,8 +14,25 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TrChatConsole, ChatConsole)
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'PostRender'
+		bool Init(ScriptArray<wchar_t>& OutError)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGameViewportClient.Init");
+			byte* params = (byte*)malloc(16);
+			*(ScriptArray<wchar_t>*)params = OutError;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			OutError = *(ScriptArray<wchar_t>*)params;
+			auto returnVal = *(bool*)(params + 12);
+			free(params);
+			return returnVal;
+		}
+		void PostRender(class Canvas* Canvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGameViewportClient.PostRender");
+			byte* params = (byte*)malloc(4);
+			*(class Canvas**)params = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_OBJECT

@@ -14,8 +14,40 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::StrProperty, URLToLoad, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumberOfClientsToWaitFor, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Login'
-		// Here lies the not-yet-implemented method 'GetSeamlessTravelActorList'
+		class PlayerController* Login(ScriptArray<wchar_t> Portal, ScriptArray<wchar_t> Options, 
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void* UniqueId, ScriptArray<wchar_t>& ErrorMessage)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.PlayerCollectorGame.Login");
+			byte* params = (byte*)malloc(48);
+			*(ScriptArray<wchar_t>*)params = Portal;
+			*(ScriptArray<wchar_t>*)(params + 12) = Options;
+			*(
+// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
+void**)(params + 24) = UniqueId;
+			*(ScriptArray<wchar_t>*)(params + 32) = ErrorMessage;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			ErrorMessage = *(ScriptArray<wchar_t>*)(params + 32);
+			auto returnVal = *(class PlayerController**)(params + 44);
+			free(params);
+			return returnVal;
+		}
+		void GetSeamlessTravelActorList(bool bToEntry, 
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void*& ActorList)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.PlayerCollectorGame.GetSeamlessTravelActorList");
+			byte* params = (byte*)malloc(16);
+			*(bool*)params = bToEntry;
+			*(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 4) = ActorList;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			ActorList = *(
+// ERROR: Unknown object class 'Class Core.ArrayProperty'!
+void**)(params + 4);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -20,7 +20,11 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, ServerLifeSpan, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, EmitterTemplate)
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTReplicatedEmitter.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

@@ -38,7 +38,15 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, RotFrequency, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, RotAmplitude, 0xFFFFFFFF
 		ADD_VAR(::FloatProperty, Duration, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'Notify'
+		void Notify(class Actor* Owner, class AnimNodeSequence* AnimSeqInstigator)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNotify_ViewShake.Notify");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = Owner;
+			*(class AnimNodeSequence**)(params + 4) = AnimSeqInstigator;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

@@ -21,8 +21,26 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(TrStormCore, m_AssociatedCarrierCore)
 		ADD_VAR(::BoolProperty, m_bAreShieldsUp, 0x1)
-		// Here lies the not-yet-implemented method 'OnShieldsDestroyed'
-		// Here lies the not-yet-implemented method 'Touch'
+		void OnShieldsDestroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormCarrierShield.OnShieldsDestroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Touch(class Actor* Other, 
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* OtherComp, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormCarrierShield.Touch");
+			byte* params = (byte*)malloc(32);
+			*(class Actor**)params = Other;
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)(params + 4) = OtherComp;
+			*(Vector*)(params + 8) = HitLocation;
+			*(Vector*)(params + 20) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

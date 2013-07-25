@@ -5,7 +5,15 @@ namespace UnrealScript
 	class TrEntryHUD : public HUD
 	{
 	public:
-		// Here lies the not-yet-implemented method 'CreateMainMenu'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		void CreateMainMenu()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryHUD.CreateMainMenu");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryHUD.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }

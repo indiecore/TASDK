@@ -32,9 +32,33 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'ImageColor'!
 		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobileMenuObject.UVCoords' for the property named 'ImagesUVs'!
 		ADD_OBJECT(Texture2D, Images)
-		// Here lies the not-yet-implemented method 'InitMenuObject'
-		// Here lies the not-yet-implemented method 'RenderObject'
-		// Here lies the not-yet-implemented method 'RenderCaption'
+		void InitMenuObject(class MobilePlayerInput* PlayerInput, class MobileMenuScene* Scene, int ScreenWidth, int ScreenHeight)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuButton.InitMenuObject");
+			byte* params = (byte*)malloc(16);
+			*(class MobilePlayerInput**)params = PlayerInput;
+			*(class MobileMenuScene**)(params + 4) = Scene;
+			*(int*)(params + 8) = ScreenWidth;
+			*(int*)(params + 12) = ScreenHeight;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RenderObject(class Canvas* Canvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuButton.RenderObject");
+			byte* params = (byte*)malloc(4);
+			*(class Canvas**)params = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RenderCaption(class Canvas* Canvas)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuButton.RenderCaption");
+			byte* params = (byte*)malloc(4);
+			*(class Canvas**)params = Canvas;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

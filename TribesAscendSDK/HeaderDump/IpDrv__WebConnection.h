@@ -31,19 +31,90 @@ namespace UnrealScript
 		ADD_OBJECT(WebRequest, Request)
 		ADD_VAR(::StrProperty, ReceivedData, 0xFFFFFFFF)
 		ADD_OBJECT(WebServer, WebServer)
-		// Here lies the not-yet-implemented method 'Accepted'
-		// Here lies the not-yet-implemented method 'Closed'
-		// Here lies the not-yet-implemented method 'Timer'
-		// Here lies the not-yet-implemented method 'ReceivedText'
-		// Here lies the not-yet-implemented method 'ReceivedLine'
-		// Here lies the not-yet-implemented method 'ProcessHead'
-		// Here lies the not-yet-implemented method 'ProcessGet'
-		// Here lies the not-yet-implemented method 'ProcessPost'
-		// Here lies the not-yet-implemented method 'CreateResponseObject'
-		// Here lies the not-yet-implemented method 'EndOfHeaders'
-		// Here lies the not-yet-implemented method 'CheckRawBytes'
-		// Here lies the not-yet-implemented method 'Cleanup'
-		// Here lies the not-yet-implemented method 'IsHanging'
+		void Accepted()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.Accepted");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Closed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.Closed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Timer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.Timer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ReceivedText(ScriptArray<wchar_t> Text)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.ReceivedText");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = Text;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ReceivedLine(ScriptArray<wchar_t> S)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.ReceivedLine");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = S;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProcessHead(ScriptArray<wchar_t> S)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.ProcessHead");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = S;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProcessGet(ScriptArray<wchar_t> S)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.ProcessGet");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = S;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ProcessPost(ScriptArray<wchar_t> S)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.ProcessPost");
+			byte* params = (byte*)malloc(12);
+			*(ScriptArray<wchar_t>*)params = S;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void CreateResponseObject()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.CreateResponseObject");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void EndOfHeaders()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.EndOfHeaders");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void CheckRawBytes()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.CheckRawBytes");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Cleanup()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.Cleanup");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		bool IsHanging()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebConnection.IsHanging");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

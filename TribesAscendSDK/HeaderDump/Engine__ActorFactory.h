@@ -25,7 +25,14 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, MenuPriority, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, MenuName, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, GameplayActorClass)
-		// Here lies the not-yet-implemented method 'PostCreateActor'
+		void PostCreateActor(class Actor* NewActor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorFactory.PostCreateActor");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = NewActor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

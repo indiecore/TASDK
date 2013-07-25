@@ -20,12 +20,51 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, m_Tangent, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, m_Location, 0xFFFFFFFF
 		ADD_VAR(::BoolProperty, m_bIsTracerActive, 0x1)
-		// Here lies the not-yet-implemented method 'KillRepairEffect'
-		// Here lies the not-yet-implemented method 'SpawnRepairEffect'
-		// Here lies the not-yet-implemented method 'UpdateRepairEffect'
-		// Here lies the not-yet-implemented method 'PlayImpactEffects'
-		// Here lies the not-yet-implemented method 'ThirdPersonFireEffects'
-		// Here lies the not-yet-implemented method 'StopThirdPersonFireEffects'
+		void KillRepairEffect()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.KillRepairEffect");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void SpawnRepairEffect(Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.SpawnRepairEffect");
+			byte* params = (byte*)malloc(24);
+			*(Vector*)params = HitLocation;
+			*(Vector*)(params + 12) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void UpdateRepairEffect(float DeltaTime, Vector HitLocation, Vector HitNormal)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.UpdateRepairEffect");
+			byte* params = (byte*)malloc(28);
+			*(float*)params = DeltaTime;
+			*(Vector*)(params + 4) = HitLocation;
+			*(Vector*)(params + 16) = HitNormal;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PlayImpactEffects(Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.PlayImpactEffects");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ThirdPersonFireEffects(Vector HitLocation)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.ThirdPersonFireEffects");
+			byte* params = (byte*)malloc(12);
+			*(Vector*)params = HitLocation;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void StopThirdPersonFireEffects()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.StopThirdPersonFireEffects");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

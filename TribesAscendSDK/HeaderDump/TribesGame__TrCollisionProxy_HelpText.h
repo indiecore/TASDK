@@ -21,11 +21,42 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, m_HelpTextType, 0xFFFFFFFF)
 		ADD_OBJECT(Pawn, m_LocalPawn)
 		ADD_VAR(::FloatProperty, m_fHelpTextRemovalTime, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'ShouldShowHelpText_Delegate'
-		// Here lies the not-yet-implemented method 'OnPawnAdded'
-		// Here lies the not-yet-implemented method 'RequestHelpText'
-		// Here lies the not-yet-implemented method 'TryTraceAgainTimer'
-		// Here lies the not-yet-implemented method 'OnPawnRemoved'
+		bool ShouldShowHelpText_Delegate(byte HelpTextType)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_HelpText.ShouldShowHelpText_Delegate");
+			byte* params = (byte*)malloc(5);
+			*params = HelpTextType;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		void OnPawnAdded(class Pawn* aPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_HelpText.OnPawnAdded");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = aPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void RequestHelpText()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_HelpText.RequestHelpText");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void TryTraceAgainTimer()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_HelpText.TryTraceAgainTimer");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void OnPawnRemoved(class Pawn* aPawn)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_HelpText.OnPawnRemoved");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = aPawn;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

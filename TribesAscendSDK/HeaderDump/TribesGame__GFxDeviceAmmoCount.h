@@ -14,7 +14,14 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(GFxObject, AmmoCountTF)
-		// Here lies the not-yet-implemented method 'Init'
+		void Init(class LocalPlayer* Player)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxDeviceAmmoCount.Init");
+			byte* params = (byte*)malloc(4);
+			*(class LocalPlayer**)params = Player;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_OBJECT

@@ -23,8 +23,25 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MovementSpeedModifier, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bPickClosest, 0x2)
 		ADD_VAR(::BoolProperty, bInterruptable, 0x1)
-		// Here lies the not-yet-implemented method 'PickDestination'
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		class Actor* PickDestination(class Actor* Requestor)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_AIMoveToActor.PickDestination");
+			byte* params = (byte*)malloc(8);
+			*(class Actor**)params = Requestor;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class Actor**)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_AIMoveToActor.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

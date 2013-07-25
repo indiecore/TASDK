@@ -16,8 +16,24 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, GroupNames, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bOfficialMutator, 0x2)
 		ADD_VAR(::BoolProperty, bStandaloneOnly, 0x1)
-		// Here lies the not-yet-implemented method 'ShouldBeFiltered'
-		// Here lies the not-yet-implemented method 'SupportsCurrentGameMode'
+		bool ShouldBeFiltered()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTUIDataProvider_Mutator.ShouldBeFiltered");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
+		bool SupportsCurrentGameMode()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTUIDataProvider_Mutator.SupportsCurrentGameMode");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

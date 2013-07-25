@@ -31,11 +31,44 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
 		ADD_VAR(::StrProperty, Applications, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ServerName, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'GetApplication'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'GainedChild'
-		// Here lies the not-yet-implemented method 'LostChild'
+		class WebApplication* GetApplication(ScriptArray<wchar_t> URI, ScriptArray<wchar_t>& SubURI)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.GetApplication");
+			byte* params = (byte*)malloc(28);
+			*(ScriptArray<wchar_t>*)params = URI;
+			*(ScriptArray<wchar_t>*)(params + 12) = SubURI;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			SubURI = *(ScriptArray<wchar_t>*)(params + 12);
+			auto returnVal = *(class WebApplication**)(params + 24);
+			free(params);
+			return returnVal;
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void GainedChild(class Actor* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.GainedChild");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void LostChild(class Actor* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.LostChild");
+			byte* params = (byte*)malloc(4);
+			*(class Actor**)params = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

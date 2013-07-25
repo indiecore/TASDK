@@ -39,13 +39,55 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, HitDecalWidth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HitDecalHeight, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceTimeVarying, PodHitDecal)
-		// Here lies the not-yet-implemented method 'GetTerminalVelocity'
-		// Here lies the not-yet-implemented method 'Init'
-		// Here lies the not-yet-implemented method 'BreakApart'
-		// Here lies the not-yet-implemented method 'HideMesh'
-		// Here lies the not-yet-implemented method 'ParticleSystemFinished'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'Destroyed'
+		float GetTerminalVelocity()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.GetTerminalVelocity");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)params;
+			free(params);
+			return returnVal;
+		}
+		void Init(class TrCallIn_CrashLandInfo* CrashInfo)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.Init");
+			byte* params = (byte*)malloc(4);
+			*(class TrCallIn_CrashLandInfo**)params = CrashInfo;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void BreakApart()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.BreakApart");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void HideMesh()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.HideMesh");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void ParticleSystemFinished(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* PSC)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.ParticleSystemFinished");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = PSC;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

@@ -27,7 +27,15 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'VectorValue'!
 		ADD_VAR(::NameProperty, ParamName, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, MatInst)
-		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		int GetObjClassVersion()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_SetMatInstVectorParam.GetObjClassVersion");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)params;
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

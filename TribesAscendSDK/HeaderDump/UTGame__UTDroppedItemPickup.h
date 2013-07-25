@@ -22,12 +22,55 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(SoundCue, PickupSound)
 		ADD_VAR(::FloatProperty, MaxDesireability, 0xFFFFFFFF)
-		// Here lies the not-yet-implemented method 'BotDesireability'
-		// Here lies the not-yet-implemented method 'SetPickupMesh'
-		// Here lies the not-yet-implemented method 'PostBeginPlay'
-		// Here lies the not-yet-implemented method 'Destroyed'
-		// Here lies the not-yet-implemented method 'DroppedFrom'
-		// Here lies the not-yet-implemented method 'PickedUpBy'
+		float BotDesireability(class Pawn* Bot, class Controller* C)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.BotDesireability");
+			byte* params = (byte*)malloc(12);
+			*(class Pawn**)params = Bot;
+			*(class Controller**)(params + 4) = C;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(float*)(params + 8);
+			free(params);
+			return returnVal;
+		}
+		void SetPickupMesh(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void* NewPickupMesh)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.SetPickupMesh");
+			byte* params = (byte*)malloc(4);
+			*(
+// ERROR: Unknown object class 'Class Core.ComponentProperty'!
+void**)params = NewPickupMesh;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PostBeginPlay()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.PostBeginPlay");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void Destroyed()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.Destroyed");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
+		void DroppedFrom(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.DroppedFrom");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void PickedUpBy(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.PickedUpBy");
+			byte* params = (byte*)malloc(4);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_VAR

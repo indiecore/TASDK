@@ -34,7 +34,11 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bForceActive, 0x1)
 		ADD_VAR(::IntProperty, ExcludeChannel, 0xFFFFFFFF)
 		ADD_OBJECT(ForceFieldShape, Shape)
-		// Here lies the not-yet-implemented method 'DoInitRBPhys'
+		void DoInitRBPhys()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxForceFieldComponent.DoInitRBPhys");
+			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
+		}
 	};
 }
 #undef ADD_VAR

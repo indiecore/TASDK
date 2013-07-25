@@ -43,10 +43,44 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF
 		ADD_VAR(::IntProperty, Distance, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'NavOctreeObject'!
-		// Here lies the not-yet-implemented method 'CostFor'
-		// Here lies the not-yet-implemented method 'GetEnd'
-		// Here lies the not-yet-implemented method 'GetDirection'
-		// Here lies the not-yet-implemented method 'IsBlockedFor'
+		int CostFor(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ReachSpec.CostFor");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(int*)(params + 4);
+			free(params);
+			return returnVal;
+		}
+		class NavigationPoint* GetEnd()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ReachSpec.GetEnd");
+			byte* params = (byte*)malloc(4);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(class NavigationPoint**)params;
+			free(params);
+			return returnVal;
+		}
+		Vector GetDirection()
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ReachSpec.GetDirection");
+			byte* params = (byte*)malloc(12);
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(Vector*)params;
+			free(params);
+			return returnVal;
+		}
+		bool IsBlockedFor(class Pawn* P)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ReachSpec.IsBlockedFor");
+			byte* params = (byte*)malloc(8);
+			*(class Pawn**)params = P;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			auto returnVal = *(bool*)(params + 4);
+			free(params);
+			return returnVal;
+		}
 	};
 }
 #undef ADD_VAR

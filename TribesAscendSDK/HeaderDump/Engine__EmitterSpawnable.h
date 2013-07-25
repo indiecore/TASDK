@@ -13,8 +13,23 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ParticleSystem, ParticleTemplate)
-		// Here lies the not-yet-implemented method 'SetTemplate'
-		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		void SetTemplate(class ParticleSystem* NewTemplate, bool bDestroyOnFinish)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterSpawnable.SetTemplate");
+			byte* params = (byte*)malloc(8);
+			*(class ParticleSystem**)params = NewTemplate;
+			*(bool*)(params + 4) = bDestroyOnFinish;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
+		void ReplicatedEvent(ScriptName VarName)
+		{
+			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterSpawnable.ReplicatedEvent");
+			byte* params = (byte*)malloc(8);
+			*(ScriptName*)params = VarName;
+			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
+			free(params);
+		}
 	};
 }
 #undef ADD_OBJECT
