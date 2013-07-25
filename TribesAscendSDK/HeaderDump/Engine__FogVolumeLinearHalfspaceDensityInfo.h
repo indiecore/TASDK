@@ -1,8 +1,0 @@
-#pragma once
-#include "Engine__FogVolumeDensityInfo.h"
-namespace UnrealScript
-{
-	class FogVolumeLinearHalfspaceDensityInfo : public FogVolumeDensityInfo
-	{
-	};
-}
