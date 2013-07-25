@@ -54,6 +54,7 @@ std::string GetHeaderName(ScriptObject* obj)
 struct ClassDependencyManager
 {
 	std::unordered_map<std::string, int> requiredHeaders;
+	ScriptObject* parentClass;
 
 	~ClassDependencyManager()
 	{
@@ -63,6 +64,8 @@ struct ClassDependencyManager
 
 	void RequireType(ScriptObject* objType)
 	{
+		if (objType == parentClass)
+			return;
 		static std::string headerName;
 		headerName = GetHeaderName(objType);
 		if (requiredHeaders.count(headerName) > 0)
@@ -104,7 +107,7 @@ struct PropertyDescription
 		return
 			   !strcmp(originalProperty->object_class()->GetName(), "ObjectProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "StringRefProperty")
-			|| !strcmp(originalProperty->object_class()->GetName(), "NameProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "ClassProperty")
 		;
 	}
 
@@ -211,6 +214,7 @@ struct ClassDescription
 		primitivePropertyCount = 0;
 		structPropertyCount = 0;
 		objectPropertyCount = 0;
+		dependencyManager.parentClass = originalClass;
 
 		for (int i = 0; i < originalClass->object_array()->count(); i++)
 		{
