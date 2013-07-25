@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__PrimitiveComponent.h"
+#include "Engine__MaterialInterface.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.RB_ConstraintDrawComponent." #y); \

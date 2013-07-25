@@ -1,5 +1,9 @@
 #pragma once
 #include "GameFramework__GameCrowdInteractionPoint.h"
+#include "GameFramework__GameCrowdPopulationManager.h"
+#include "GameFramework__GameCrowdAgent.h"
+#include "GameFramework__SeqAct_GameCrowdSpawner.h"
+#include "GameFramework__GameCrowdDestinationQueuePoint.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameCrowdDestination." #y); \
@@ -54,6 +58,16 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAllowAsPreviousDestination, 0x2)
 		ADD_VAR(::BoolProperty, bKillWhenReached, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IEditorLinkSelectionInterface'!
+		// Here lies the not-yet-implemented method 'ReachedByAgent'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'ReachedDestination'
+		// Here lies the not-yet-implemented method 'PickNewDestinationFor'
+		// Here lies the not-yet-implemented method 'AllowableDestinationFor'
+		// Here lies the not-yet-implemented method 'DecrementCustomerCount'
+		// Here lies the not-yet-implemented method 'IncrementCustomerCount'
+		// Here lies the not-yet-implemented method 'AtCapacity'
+		// Here lies the not-yet-implemented method 'GetSpawnPosition'
 	};
 }
 #undef ADD_VAR

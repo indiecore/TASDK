@@ -1,5 +1,11 @@
 #pragma once
+#include "Engine__PlayerController.h"
+#include "Engine__Canvas.h"
+#include "Engine__Texture2D.h"
 #include "UDKBase__UDKHUD.h"
+#include "UTGame__GFxUI_PauseMenu.h"
+#include "UTGame__UTPlayerController.h"
+#include "UTGame__UTGameReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTHUDBase." #y); \
@@ -44,7 +50,27 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bEnableActorOverlays, 0x2)
 		ADD_OBJECT(UTGameReplicationInfo, UTGRI)
 		ADD_OBJECT(UTPlayerController, UTPlayerOwner)
+		ADD_OBJECT(ScriptClass, MusicManagerClass)
 		ADD_OBJECT(GFxUI_PauseMenu, PauseMenuMovie)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Timer'
+		// Here lies the not-yet-implemented method 'ShowMenu'
+		// Here lies the not-yet-implemented method 'ResolutionChanged'
+		// Here lies the not-yet-implemented method 'DisplayHit'
+		// Here lies the not-yet-implemented method 'PostRender'
+		// Here lies the not-yet-implemented method 'RemoveMovies'
+		// Here lies the not-yet-implemented method 'SetVisible'
+		// Here lies the not-yet-implemented method 'CloseOtherMenus'
+		// Here lies the not-yet-implemented method 'TogglePauseMenu'
+		// Here lies the not-yet-implemented method 'CompletePauseMenuClose'
+		// Here lies the not-yet-implemented method 'ReleaseShowScores'
+		// Here lies the not-yet-implemented method 'GetLocalPlayerOwnerIndex'
+		// Here lies the not-yet-implemented method 'DrawToolTip'
+		// Here lies the not-yet-implemented method 'CheckCrosshairOnFriendly'
+		// Here lies the not-yet-implemented method 'ClearCrosshairOnFriendly'
+		// Here lies the not-yet-implemented method 'DrawShadowedTile'
+		// Here lies the not-yet-implemented method 'DrawShadowedStretchedTile'
+		// Here lies the not-yet-implemented method 'DrawShadowedRotatedTile'
 	};
 }
 #undef ADD_VAR

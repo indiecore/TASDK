@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__RB_BodySetup.h"
 #include "Core__Object.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

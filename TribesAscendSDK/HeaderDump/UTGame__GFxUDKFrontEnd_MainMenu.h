@@ -1,5 +1,7 @@
 #pragma once
+#include "GFxUI__GFxObject.h"
 #include "UTGame__GFxUDKFrontEnd_Screen.h"
+#include "GFxUI__GFxClikWidget.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_MainMenu." #y); \
@@ -22,6 +24,21 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, UserNameTxt)
 		ADD_OBJECT(GFxObject, UserLabelTxt)
 		ADD_OBJECT(GFxObject, ListDataProvider)
+		// Here lies the not-yet-implemented method 'OnViewLoaded'
+		// Here lies the not-yet-implemented method 'OnTopMostView'
+		// Here lies the not-yet-implemented method 'DisableSubComponents'
+		// Here lies the not-yet-implemented method 'Select_InstantAction'
+		// Here lies the not-yet-implemented method 'Select_Multiplayer'
+		// Here lies the not-yet-implemented method 'Select_ExitGame'
+		// Here lies the not-yet-implemented method 'ExitDialog_SelectOK'
+		// Here lies the not-yet-implemented method 'ExitDialog_SelectBack'
+		// Here lies the not-yet-implemented method 'OnListItemPress'
+		// Here lies the not-yet-implemented method 'OnListChange'
+		// Here lies the not-yet-implemented method 'UpdateDescription'
+		// Here lies the not-yet-implemented method 'UpdateListDataProvider'
+		// Here lies the not-yet-implemented method 'SetList'
+		// Here lies the not-yet-implemented method 'OnEscapeKeyPress'
+		// Here lies the not-yet-implemented method 'WidgetInitialized'
 	};
 }
 #undef ADD_VAR

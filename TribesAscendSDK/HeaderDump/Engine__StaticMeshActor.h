@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bDisableAutoBaseOnProcBuilding, 0x1)
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
 	};
 }
 #undef ADD_VAR

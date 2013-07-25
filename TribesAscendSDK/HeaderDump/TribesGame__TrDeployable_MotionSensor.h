@@ -1,5 +1,10 @@
 #pragma once
 #include "TribesGame__TrDeployable_Sensor.h"
+#include "Engine__Canvas.h"
+#include "Engine__PlayerController.h"
+#include "Engine__Texture2D.h"
+#include "Engine__Pawn.h"
+#include "TribesGame__TrPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDeployable_MotionSensor." #y); \
@@ -33,6 +38,17 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fLastAlarmTimestamp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fTimeBetweenAlarms, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMotionSenseExpireTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'DeployComplete'
+		// Here lies the not-yet-implemented method 'OnPawnDetectedByCollisionProxy'
+		// Here lies the not-yet-implemented method 'OnPawnExitedCollisionProxy'
+		// Here lies the not-yet-implemented method 'UpdateInRangeEnemyPawns'
+		// Here lies the not-yet-implemented method 'CanSetOffAlarm'
+		// Here lies the not-yet-implemented method 'ModifyDetectedPawn'
+		// Here lies the not-yet-implemented method 'PlayAlarm'
+		// Here lies the not-yet-implemented method 'TriggerHUDAlarm'
+		// Here lies the not-yet-implemented method 'HideHUDAlarm'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
+		// Here lies the not-yet-implemented method 'GetMarker'
 	};
 }
 #undef ADD_VAR

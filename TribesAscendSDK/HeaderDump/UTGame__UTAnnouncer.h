@@ -1,5 +1,10 @@
 #pragma once
+#include "Core__Object.h"
+#include "Engine__PlayerReplicationInfo.h"
+#include "Engine__SoundCue.h"
 #include "Engine__Info.h"
+#include "UTGame__UTPlayerController.h"
+#include "UTGame__UTQueuedAnnouncement.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTAnnouncer." #y); \
@@ -24,7 +29,14 @@ namespace UnrealScript
 		ADD_OBJECT(UTPlayerController, PlayerOwner)
 		ADD_OBJECT(UTQueuedAnnouncement, Queue)
 		ADD_VAR(::IntProperty, PlayingAnnouncementIndex, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, PlayingAnnouncementClass)
 		ADD_VAR(::ByteProperty, AnnouncerLevel, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'PlayNextAnnouncement'
+		// Here lies the not-yet-implemented method 'PlayAnnouncementNow'
+		// Here lies the not-yet-implemented method 'AnnouncementFinished'
+		// Here lies the not-yet-implemented method 'PlayAnnouncement'
 	};
 }
 #undef ADD_VAR

@@ -14,6 +14,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BlendTime, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, LoopingAnim, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bLooping, 0x1)
+		// Here lies the not-yet-implemented method 'AnimFire'
+		// Here lies the not-yet-implemented method 'AnimStopFire'
 	};
 }
 #undef ADD_VAR

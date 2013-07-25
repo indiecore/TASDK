@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame__TrVehicle.h"
+#include "Engine__CameraShake.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrVehicle_Tank." #y); \
@@ -29,6 +30,10 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, GunnerFlashCount, 0xFFFFFFFF)
 		ADD_STRUCT(::RotatorProperty, GunnerWeaponRotation, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, GunnerFlashLocation, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'PostInitAnimTree'
+		// Here lies the not-yet-implemented method 'VehicleWeaponFireEffects'
+		// Here lies the not-yet-implemented method 'ProcessViewRotationBasedOnSeat'
+		// Here lies the not-yet-implemented method 'LimitViewRotation'
 	};
 }
 #undef ADD_VAR

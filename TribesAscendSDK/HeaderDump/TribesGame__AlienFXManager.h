@@ -29,6 +29,19 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bShowFX, 0x1)
 		ADD_VAR(::IntProperty, nHealth, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, nTeam, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'Close'
+		// Here lies the not-yet-implemented method 'Queued'
+		// Here lies the not-yet-implemented method 'Objective'
+		// Here lies the not-yet-implemented method 'SwapWeapon'
+		// Here lies the not-yet-implemented method 'CheckHealth'
+		// Here lies the not-yet-implemented method 'menu'
+		// Here lies the not-yet-implemented method 'Damage'
+		// Here lies the not-yet-implemented method 'SetTeam'
+		// Here lies the not-yet-implemented method 'SetHealth'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'Overlay'
+		// Here lies the not-yet-implemented method 'DamageConvert'
 	};
 }
 #undef ADD_VAR

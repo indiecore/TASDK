@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SequenceAction.h"
+#include "UTGame__UTVehicle.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTSeqAct_UseHoverboard." #y); \
@@ -12,6 +13,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(UTVehicle, Hoverboard)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_OBJECT

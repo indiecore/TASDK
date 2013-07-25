@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__Pawn.h"
 #include "Engine__NavigationPoint.h"
+#include "Engine__LiftCenter.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LiftExit." #y); \
@@ -19,6 +21,9 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bExitOnly, 0x1)
 		ADD_OBJECT(LiftCenter, MyLiftCenter)
+		// Here lies the not-yet-implemented method 'CanBeReachedFromLiftBy'
+		// Here lies the not-yet-implemented method 'WaitForLift'
+		// Here lies the not-yet-implemented method 'SuggestMovePreparation'
 	};
 }
 #undef ADD_VAR

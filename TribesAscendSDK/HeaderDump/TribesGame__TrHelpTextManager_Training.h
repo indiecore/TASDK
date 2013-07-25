@@ -36,6 +36,13 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, m_TrainingHelpTextSkiAdv4MenuTitle, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, m_TrainingHelpTextSkiAdvMessage5, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, m_TrainingHelpTextSkiAdv5MenuTitle, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'InitHelpTextManager'
+		// Here lies the not-yet-implemented method 'UpdateTypesToRemoveOnTimers'
+		// Here lies the not-yet-implemented method 'CheckDestroy'
+		// Here lies the not-yet-implemented method 'RequestHelpText'
+		// Here lies the not-yet-implemented method 'RemoveHelpText'
+		// Here lies the not-yet-implemented method 'RequestHelpText_Training'
+		// Here lies the not-yet-implemented method 'UpdateHUD'
 	};
 }
 #undef ADD_VAR

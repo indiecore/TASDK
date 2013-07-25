@@ -15,6 +15,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BlendTimeToGo, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Child2WeightTarget, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Child2Weight, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetBlendTarget'
 	};
 }
 #undef ADD_VAR

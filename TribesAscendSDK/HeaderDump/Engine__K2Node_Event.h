@@ -1,4 +1,5 @@
 #pragma once
+#include "Core__Function.h"
 #include "Engine__K2Node_Code.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

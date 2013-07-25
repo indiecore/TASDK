@@ -1,5 +1,7 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__ForceFeedbackWaveform.h"
+#include "Engine__Vehicle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DamageType." #y); \
@@ -31,6 +33,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bExtraMomentumZ, 0x4)
 		ADD_VAR(::BoolProperty, bCausedByWorld, 0x2)
 		ADD_VAR(::BoolProperty, bArmorStops, 0x1)
+		// Here lies the not-yet-implemented method 'VehicleDamageScalingFor'
 	};
 }
 #undef ADD_VAR

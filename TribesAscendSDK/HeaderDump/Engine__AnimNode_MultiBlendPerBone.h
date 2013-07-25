@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__Pawn.h"
 #include "Engine__AnimNodeBlendBase.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -19,6 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Pawn, PawnOwner)
 		ADD_VAR(::ByteProperty, RotationBlendType, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetMaskWeight'
 	};
 }
 #undef ADD_VAR

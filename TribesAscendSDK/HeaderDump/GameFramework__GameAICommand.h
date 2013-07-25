@@ -1,5 +1,9 @@
 #pragma once
 #include "Engine__AICommandBase.h"
+#include "GameFramework__GameAIController.h"
+#include "Engine__Actor.h"
+#include "Engine__HUD.h"
+#include "Engine__PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameAICommand." #y); \
@@ -27,6 +31,28 @@ namespace UnrealScript
 		ADD_OBJECT(GameAIController, GameAIOwner)
 		ADD_VAR(::NameProperty, ChildStatus, 0xFFFFFFFF)
 		ADD_OBJECT(GameAICommand, ChildCommand)
+		// Here lies the not-yet-implemented method 'InitCommandUserActor'
+		// Here lies the not-yet-implemented method 'InitCommand'
+		// Here lies the not-yet-implemented method 'InternalPrePushed'
+		// Here lies the not-yet-implemented method 'InternalPushed'
+		// Here lies the not-yet-implemented method 'InternalPopped'
+		// Here lies the not-yet-implemented method 'InternalPaused'
+		// Here lies the not-yet-implemented method 'InternalResumed'
+		// Here lies the not-yet-implemented method 'InternalTick'
+		// Here lies the not-yet-implemented method 'ShouldIgnoreNotifies'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'AllowTransitionTo'
+		// Here lies the not-yet-implemented method 'AllowStateTransitionTo'
+		// Here lies the not-yet-implemented method 'PrePushed'
+		// Here lies the not-yet-implemented method 'PostPopped'
+		// Here lies the not-yet-implemented method 'Pushed'
+		// Here lies the not-yet-implemented method 'Popped'
+		// Here lies the not-yet-implemented method 'Paused'
+		// Here lies the not-yet-implemented method 'Resumed'
+		// Here lies the not-yet-implemented method 'GetDumpString'
+		// Here lies the not-yet-implemented method 'DrawDebug'
+		// Here lies the not-yet-implemented method 'GetDebugOverheadText'
+		// Here lies the not-yet-implemented method 'GetDebugVerboseText'
 	};
 }
 #undef ADD_VAR

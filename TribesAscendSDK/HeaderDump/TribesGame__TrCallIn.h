@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "Engine__MaterialInstanceConstant.h"
+#include "TribesGame__TrPlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrCallIn." #y); \
@@ -18,6 +20,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TrPlayerController, OwningController)
+		ADD_OBJECT(ScriptClass, ExtentTemplateClass)
 		ADD_VAR(::BoolProperty, IsInProgress, 0x4)
 		ADD_VAR(::BoolProperty, PendingDelete, 0x2)
 		ADD_VAR(::BoolProperty, CheckExtentsOnSpawn, 0x1)
@@ -33,6 +36,12 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BuildupTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DatabaseId, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, CallInId, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'GetCreditCost'
+		// Here lies the not-yet-implemented method 'VerifyCredits'
+		// Here lies the not-yet-implemented method 'VerifyPower'
+		// Here lies the not-yet-implemented method 'FireCompletedCallIn'
+		// Here lies the not-yet-implemented method 'Tick'
 	};
 }
 #undef ADD_VAR

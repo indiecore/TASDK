@@ -5,5 +5,6 @@ namespace UnrealScript
 	class DefaultPhysicsVolume : public PhysicsVolume
 	{
 	public:
+		// Here lies the not-yet-implemented method 'Destroyed'
 	};
 }

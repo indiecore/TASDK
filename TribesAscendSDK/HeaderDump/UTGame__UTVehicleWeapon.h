@@ -1,5 +1,13 @@
 #pragma once
+#include "UTGame__UTPlayerController.h"
+#include "Engine__Actor.h"
 #include "UTGame__UTWeapon.h"
+#include "Engine__HUD.h"
+#include "UTGame__UTVehicle.h"
+#include "Engine__SoundCue.h"
+#include "Engine__PhysicalMaterial.h"
+#include "Engine__Canvas.h"
+#include "Engine__Projectile.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTVehicleWeapon." #y); \
@@ -28,6 +36,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIgnoreSocketPitchRotation, 0x4)
 		ADD_VAR(::BoolProperty, bIgnoreDownwardPitch, 0x8)
 		ADD_OBJECT(SoundCue, BulletWhip)
+		ADD_OBJECT(ScriptClass, VehicleClass)
 		ADD_VAR(::BoolProperty, bDebugTurret, 0x10)
 		ADD_VAR(::BoolProperty, bCurrentlyZoomed, 0x2)
 		ADD_VAR(::BoolProperty, bPlaySoundFromSocket, 0x1)
@@ -37,6 +46,36 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastCorrectAimTime, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect' for the property named 'DefaultAltImpactEffect'!
 		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect' for the property named 'DefaultImpactEffect'!
+		// Here lies the not-yet-implemented method 'GetMaxFinalAimAdjustment'
+		// Here lies the not-yet-implemented method 'GetAdjustedAim'
+		// Here lies the not-yet-implemented method 'GetFireTriggerTag'
+		// Here lies the not-yet-implemented method 'GetImpactEffect'
+		// Here lies the not-yet-implemented method 'CanHitDesiredTarget'
+		// Here lies the not-yet-implemented method 'DrawKillIcon'
+		// Here lies the not-yet-implemented method 'GetCrosshairScaling'
+		// Here lies the not-yet-implemented method 'DrawWeaponCrosshair'
+		// Here lies the not-yet-implemented method 'GetDesiredAimPoint'
+		// Here lies the not-yet-implemented method 'GetFireStartLocationAndRotation'
+		// Here lies the not-yet-implemented method 'IsAimCorrect'
+		// Here lies the not-yet-implemented method 'GetFireInterval'
+		// Here lies the not-yet-implemented method 'AttachWeaponTo'
+		// Here lies the not-yet-implemented method 'DetachWeapon'
+		// Here lies the not-yet-implemented method 'Activate'
+		// Here lies the not-yet-implemented method 'PutDownWeapon'
+		// Here lies the not-yet-implemented method 'GetPhysicalFireStartLoc'
+		// Here lies the not-yet-implemented method 'BeginFire'
+		// Here lies the not-yet-implemented method 'EndFire'
+		// Here lies the not-yet-implemented method 'ProjectileFire'
+		// Here lies the not-yet-implemented method 'InstantFireStartTrace'
+		// Here lies the not-yet-implemented method 'InstantFireEndTrace'
+		// Here lies the not-yet-implemented method 'GetTraceOwner'
+		// Here lies the not-yet-implemented method 'NotifyVehicleDeployed'
+		// Here lies the not-yet-implemented method 'NotifyVehicleUndeployed'
+		// Here lies the not-yet-implemented method 'WeaponPlaySound'
+		// Here lies the not-yet-implemented method 'GetZoomedState'
+		// Here lies the not-yet-implemented method 'ServerSetZoom'
+		// Here lies the not-yet-implemented method 'StartZoom'
+		// Here lies the not-yet-implemented method 'EndZoom'
 	};
 }
 #undef ADD_VAR

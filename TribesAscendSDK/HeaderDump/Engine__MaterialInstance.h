@@ -1,5 +1,9 @@
 #pragma once
 #include "Engine__MaterialInterface.h"
+#include "Engine__PhysicalMaterial.h"
+#include "Engine__Font.h"
+#include "Engine__Texture.h"
+#include "Engine__Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialInstance." #y); \
@@ -37,6 +41,14 @@ namespace UnrealScript
 		ADD_OBJECT(Texture2D, PhysMaterialMask)
 		ADD_OBJECT(MaterialInterface, Parent)
 		ADD_OBJECT(PhysicalMaterial, PhysMaterial)
+		// Here lies the not-yet-implemented method 'SetParent'
+		// Here lies the not-yet-implemented method 'SetVectorParameterValue'
+		// Here lies the not-yet-implemented method 'SetScalarParameterValue'
+		// Here lies the not-yet-implemented method 'SetScalarCurveParameterValue'
+		// Here lies the not-yet-implemented method 'SetTextureParameterValue'
+		// Here lies the not-yet-implemented method 'SetFontParameterValue'
+		// Here lies the not-yet-implemented method 'ClearParameterValues'
+		// Here lies the not-yet-implemented method 'IsInMapOrTransientPackage'
 	};
 }
 #undef ADD_VAR

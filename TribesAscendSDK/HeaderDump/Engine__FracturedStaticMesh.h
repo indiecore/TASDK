@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__StaticMesh.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__MaterialInterface.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FracturedStaticMesh." #y); \

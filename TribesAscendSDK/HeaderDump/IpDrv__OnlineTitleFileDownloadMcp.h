@@ -14,6 +14,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TimeOut, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, BaseUrl, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DownloadCount, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'OnReadTitleFileComplete'
+		// Here lies the not-yet-implemented method 'ReadTitleFile'
+		// Here lies the not-yet-implemented method 'AddReadTitleFileCompleteDelegate'
+		// Here lies the not-yet-implemented method 'ClearReadTitleFileCompleteDelegate'
+		// Here lies the not-yet-implemented method 'GetTitleFileContents'
+		// Here lies the not-yet-implemented method 'GetTitleFileState'
+		// Here lies the not-yet-implemented method 'ClearDownloadedFiles'
+		// Here lies the not-yet-implemented method 'ClearDownloadedFile'
 	};
 }
 #undef ADD_VAR

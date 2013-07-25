@@ -14,6 +14,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LOD3DisplayFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LOD2DisplayFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LOD1DisplayFactor, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'FindFamilyInfo'
+		// Here lies the not-yet-implemented method 'GetRandomCharClassName'
 	};
 }
 #undef ADD_VAR

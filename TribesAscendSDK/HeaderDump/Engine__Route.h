@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Info.h"
+#include "Engine__Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Route." #y); \
@@ -21,6 +22,8 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IEditorLinkSelectionInterface'!
 		ADD_VAR(::FloatProperty, FudgeFactor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, RouteIndexOffset, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'ResolveRouteIndex'
+		// Here lies the not-yet-implemented method 'MoveOntoRoutePath'
 	};
 }
 #undef ADD_VAR

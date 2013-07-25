@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine__Teleporter.h"
+#include "Engine__SoundCue.h"
+#include "UTGame__UTPawn.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTTeleporterCustomMesh." #y); \
@@ -20,6 +23,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastTime, 0xFFFFFFFF)
 		ADD_OBJECT(UTPawn, LastPawn)
 		ADD_OBJECT(SoundCue, TeleportingSound)
+		// Here lies the not-yet-implemented method 'Accept'
+		// Here lies the not-yet-implemented method 'Touch'
 	};
 }
 #undef ADD_VAR

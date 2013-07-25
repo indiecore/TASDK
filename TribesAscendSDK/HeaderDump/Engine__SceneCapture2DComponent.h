@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SceneCaptureComponent.h"
+#include "Engine__TextureRenderTarget2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SceneCapture2DComponent." #y); \
@@ -30,6 +31,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, NearPlane, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FieldOfView, 0xFFFFFFFF)
 		ADD_OBJECT(TextureRenderTarget2D, TextureTarget)
+		// Here lies the not-yet-implemented method 'SetCaptureParameters'
+		// Here lies the not-yet-implemented method 'SetView'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,8 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__PBRuleNodeBase.h"
+#include "Engine__MaterialInterface.h"
+#include "Engine__Texture.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ProcBuildingRuleset." #y); \

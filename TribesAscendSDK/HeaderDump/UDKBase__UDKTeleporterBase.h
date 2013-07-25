@@ -1,5 +1,10 @@
 #pragma once
 #include "Engine__Teleporter.h"
+#include "Engine__TextureRenderTarget2D.h"
+#include "Engine__SoundCue.h"
+#include "Engine__MaterialInstanceConstant.h"
+#include "Engine__MaterialInterface.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKTeleporterBase." #y); \
@@ -25,6 +30,9 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, TextureResolutionY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, TextureResolutionX, 0xFFFFFFFF)
 		ADD_OBJECT(TextureRenderTarget2D, TextureTarget)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'InitializePortalEffect'
+		// Here lies the not-yet-implemented method 'Accept'
 	};
 }
 #undef ADD_VAR

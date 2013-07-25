@@ -1,5 +1,18 @@
 #pragma once
+#include "Engine__SoundCue.h"
 #include "UDKBase__UDKCarriedObject.h"
+#include "Engine__Canvas.h"
+#include "Engine__PlayerController.h"
+#include "Engine__Texture2D.h"
+#include "Engine__ForceFeedbackWaveform.h"
+#include "Engine__Controller.h"
+#include "Engine__Pawn.h"
+#include "UTGame__UTPlayerReplicationInfo.h"
+#include "UTGame__UTMapInfo.h"
+#include "UTGame__UTPlayerController.h"
+#include "UTGame__UTGameObjective.h"
+#include "Engine__Actor.h"
+#include "UDKBase__UDKGameObjective.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTCarriedObject." #y); \
@@ -56,6 +69,42 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUseTeamColorForIcon, 0x4)
 		ADD_VAR(::BoolProperty, bLeavingDroppedState, 0x2)
 		ADD_VAR(::BoolProperty, bLastSecondSave, 0x1)
+		// Here lies the not-yet-implemented method 'FlagUse'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'ShouldMinimapRenderFor'
+		// Here lies the not-yet-implemented method 'HighlightOnMinimap'
+		// Here lies the not-yet-implemented method 'GetIconTexture'
+		// Here lies the not-yet-implemented method 'DrawIcon'
+		// Here lies the not-yet-implemented method 'RenderMapIcon'
+		// Here lies the not-yet-implemented method 'RenderEnemyMapIcon'
+		// Here lies the not-yet-implemented method 'SetHolder'
+		// Here lies the not-yet-implemented method 'SendFlagMessage'
+		// Here lies the not-yet-implemented method 'Score'
+		// Here lies the not-yet-implemented method 'Drop'
+		// Here lies the not-yet-implemented method 'SendHome'
+		// Here lies the not-yet-implemented method 'KismetSendHome'
+		// Here lies the not-yet-implemented method 'BroadcastReturnedMessage'
+		// Here lies the not-yet-implemented method 'BroadcastDroppedMessage'
+		// Here lies the not-yet-implemented method 'BroadcastTakenFromBaseMessage'
+		// Here lies the not-yet-implemented method 'BroadcastTakenDroppedMessage'
+		// Here lies the not-yet-implemented method 'CalcSetHome'
+		// Here lies the not-yet-implemented method 'ClearHolder'
+		// Here lies the not-yet-implemented method 'Position'
+		// Here lies the not-yet-implemented method 'ValidHolder'
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'FellOutOfWorld'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'ClientReturnedHome'
+		// Here lies the not-yet-implemented method 'NotReachableBy'
+		// Here lies the not-yet-implemented method 'Landed'
+		// Here lies the not-yet-implemented method 'GetKismetEventObjective'
+		// Here lies the not-yet-implemented method 'LogTaken'
+		// Here lies the not-yet-implemented method 'LogReturned'
+		// Here lies the not-yet-implemented method 'LogDropped'
+		// Here lies the not-yet-implemented method 'CheckTouching'
+		// Here lies the not-yet-implemented method 'AutoSendHome'
+		// Here lies the not-yet-implemented method 'CheckFit'
+		// Here lies the not-yet-implemented method 'CheckPain'
 	};
 }
 #undef ADD_VAR

@@ -5,5 +5,7 @@ namespace UnrealScript
 	class OnlineMatchmakingStats : public Object
 	{
 	public:
+		// Here lies the not-yet-implemented method 'StartTimer'
+		// Here lies the not-yet-implemented method 'StopTimer'
 	};
 }

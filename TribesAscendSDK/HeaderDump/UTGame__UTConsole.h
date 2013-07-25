@@ -12,6 +12,9 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, TextCount, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'AnyBrowserOpen'
+		// Here lies the not-yet-implemented method 'InputKey'
+		// Here lies the not-yet-implemented method 'OutputTextLine'
 	};
 }
 #undef ADD_VAR

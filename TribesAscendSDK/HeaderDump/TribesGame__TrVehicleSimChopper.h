@@ -25,6 +25,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, m_nLastPitchInput, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ReverseSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HoverHeight, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetVehicleControls'
 	};
 }
 #undef ADD_VAR

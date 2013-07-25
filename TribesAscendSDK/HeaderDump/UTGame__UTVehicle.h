@@ -1,5 +1,40 @@
 #pragma once
+#include "UTGame__UTHUD.h"
+#include "Engine__Texture2D.h"
 #include "UDKBase__UDKVehicle.h"
+#include "Engine__Vehicle.h"
+#include "Engine__StaticMesh.h"
+#include "UTGame__UTWeapon.h"
+#include "Engine__ParticleSystem.h"
+#include "UTGame__UTGib.h"
+#include "Engine__MaterialInterface.h"
+#include "Engine__PlayerReplicationInfo.h"
+#include "Engine__SoundCue.h"
+#include "UTGame__UTVehicleDeathPiece.h"
+#include "Engine__Weapon.h"
+#include "Engine__CameraAnim.h"
+#include "Engine__Emitter.h"
+#include "UTGame__UTBot.h"
+#include "UTGame__UTVehicleFactory.h"
+#include "Engine__PhysicalMaterial.h"
+#include "Engine__Actor.h"
+#include "Engine__Pawn.h"
+#include "Engine__Canvas.h"
+#include "UTGame__UTCarriedObject.h"
+#include "UTGame__UTMapInfo.h"
+#include "UTGame__UTPlayerController.h"
+#include "Engine__Controller.h"
+#include "Engine__Projectile.h"
+#include "Engine__AnimNodeSequence.h"
+#include "Engine__PlayerController.h"
+#include "UDKBase__UDKProjectile.h"
+#include "UTGame__UTPlayerReplicationInfo.h"
+#include "UDKBase__UDKCarriedObject.h"
+#include "UTGame__UTSquadAI.h"
+#include "UTGame__UTProjectile.h"
+#include "UTGame__UTVehicleWeapon.h"
+#include "UTGame__UTPawn.h"
+#include "UTGame__UTSeqAct_ExitVehicle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTVehicle." #y); \
@@ -93,11 +128,15 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, ExplosionTemplate)
 		ADD_VAR(::FloatProperty, MaxFireEffectDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxImpactEffectDistance, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, ExplosionDamageType)
 		ADD_VAR(::FloatProperty, DamageSmokeThreshold, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, VehiclePieceClass)
 		ADD_VAR(::IntProperty, ClientHealth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TimeTilSecondaryVehicleExplosion, 0xFFFFFFFF)
 		ADD_OBJECT(Emitter, DeathExplosion)
 		ADD_VAR(::FloatProperty, MaxExplosionLightDistance, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, ExplosionLightClass)
+		ADD_OBJECT(ScriptClass, VehicleDrowningDamType)
 		ADD_VAR(::FloatProperty, HUDExtent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TeamBeaconPlayerInfoMaxDist, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo' for the property named 'NeedToPickUpAnnouncement'!
@@ -108,6 +147,7 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, StolenSound)
 		ADD_VAR(::IntProperty, StolenAnnouncementIndex, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, RanOverSound)
+		ADD_OBJECT(ScriptClass, RanOverDamageType)
 		ADD_OBJECT(SoundCue, LockedOnSound)
 		ADD_VAR(::FloatProperty, ConsoleSteerScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LookSteerDeadZone, 0xFFFFFFFF)
@@ -169,6 +209,195 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bKeyVehicle, 0x20)
 		ADD_VAR(::BoolProperty, bEnteringUnlocks, 0x8)
 		ADD_VAR(::BoolProperty, bValidLinkTarget, 0x4)
+		// Here lies the not-yet-implemented method 'TryToDrive'
+		// Here lies the not-yet-implemented method 'InCustomEntryRadius'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'UpdateShadowSettings'
+		// Here lies the not-yet-implemented method 'ReattachMesh'
+		// Here lies the not-yet-implemented method 'CreateDamageMaterialInstance'
+		// Here lies the not-yet-implemented method 'UpdateLookSteerStatus'
+		// Here lies the not-yet-implemented method 'SetInputs'
+		// Here lies the not-yet-implemented method 'FellOutOfWorld'
+		// Here lies the not-yet-implemented method 'GetChargePower'
+		// Here lies the not-yet-implemented method 'PlaySpawnEffect'
+		// Here lies the not-yet-implemented method 'StopSpawnEffect'
+		// Here lies the not-yet-implemented method 'EjectSeat'
+		// Here lies the not-yet-implemented method 'GetRanOverDamageType'
+		// Here lies the not-yet-implemented method 'DisplayWeaponBar'
+		// Here lies the not-yet-implemented method 'DrawKillIcon'
+		// Here lies the not-yet-implemented method 'RenderMapIcon'
+		// Here lies the not-yet-implemented method 'AdjustedStrength'
+		// Here lies the not-yet-implemented method 'ContinueOnFoot'
+		// Here lies the not-yet-implemented method 'IsDriverSeat'
+		// Here lies the not-yet-implemented method 'RecommendCharge'
+		// Here lies the not-yet-implemented method 'CriticalChargeAttack'
+		// Here lies the not-yet-implemented method 'CreateVehicleEffect'
+		// Here lies the not-yet-implemented method 'InitializeEffects'
+		// Here lies the not-yet-implemented method 'SetVehicleEffectParms'
+		// Here lies the not-yet-implemented method 'TriggerVehicleEffect'
+		// Here lies the not-yet-implemented method 'PlayVehicleSound'
+		// Here lies the not-yet-implemented method 'PlayVehicleAnimation'
+		// Here lies the not-yet-implemented method 'VehicleEvent'
+		// Here lies the not-yet-implemented method 'EntryAnnouncement'
+		// Here lies the not-yet-implemented method 'ExitRotation'
+		// Here lies the not-yet-implemented method 'FindAutoExit'
+		// Here lies the not-yet-implemented method 'RanInto'
+		// Here lies the not-yet-implemented method 'PancakeOther'
+		// Here lies the not-yet-implemented method 'TakeWaterDamage'
+		// Here lies the not-yet-implemented method 'DriverRadiusDamage'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'SetTexturesToBeResident'
+		// Here lies the not-yet-implemented method 'DisableVehicle'
+		// Here lies the not-yet-implemented method 'EnableVehicle'
+		// Here lies the not-yet-implemented method 'TakeFireDamage'
+		// Here lies the not-yet-implemented method 'GetSeatIndexFromPrefix'
+		// Here lies the not-yet-implemented method 'ServerSetConsoleTurning'
+		// Here lies the not-yet-implemented method 'ProcessViewRotation'
+		// Here lies the not-yet-implemented method 'GetClampedViewRotation'
+		// Here lies the not-yet-implemented method 'ShouldClamp'
+		// Here lies the not-yet-implemented method 'GetViewRotation'
+		// Here lies the not-yet-implemented method 'WeaponRotationChanged'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'SetKeyVehicle'
+		// Here lies the not-yet-implemented method 'DrivingStatusChanged'
+		// Here lies the not-yet-implemented method 'OnAnimEnd'
+		// Here lies the not-yet-implemented method 'SeatAvailable'
+		// Here lies the not-yet-implemented method 'AnySeatAvailable'
+		// Here lies the not-yet-implemented method 'GetSeatIndexForController'
+		// Here lies the not-yet-implemented method 'GetControllerForSeatIndex'
+		// Here lies the not-yet-implemented method 'ServerAdjacentSeat'
+		// Here lies the not-yet-implemented method 'ServerChangeSeat'
+		// Here lies the not-yet-implemented method 'HasPriority'
+		// Here lies the not-yet-implemented method 'ChangeSeat'
+		// Here lies the not-yet-implemented method 'TornOff'
+		// Here lies the not-yet-implemented method 'GetCollisionDamageInstigator'
+		// Here lies the not-yet-implemented method 'Died'
+		// Here lies the not-yet-implemented method 'BlowupVehicle'
+		// Here lies the not-yet-implemented method 'GetSeatPRI'
+		// Here lies the not-yet-implemented method 'CanEnterVehicle'
+		// Here lies the not-yet-implemented method 'KickOutBot'
+		// Here lies the not-yet-implemented method 'VehicleLocked'
+		// Here lies the not-yet-implemented method 'ShouldShowUseable'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
+		// Here lies the not-yet-implemented method 'GetDisplayedHealth'
+		// Here lies the not-yet-implemented method 'RenderPassengerBeacons'
+		// Here lies the not-yet-implemented method 'PostRenderPassengerBeacon'
+		// Here lies the not-yet-implemented method 'SetTeamNum'
+		// Here lies the not-yet-implemented method 'TeamChanged'
+		// Here lies the not-yet-implemented method 'TeamChanged_VehicleEffects'
+		// Here lies the not-yet-implemented method 'Dodge'
+		// Here lies the not-yet-implemented method 'IncomingMissile'
+		// Here lies the not-yet-implemented method 'ShootMissile'
+		// Here lies the not-yet-implemented method 'SendLockOnMessage'
+		// Here lies the not-yet-implemented method 'LockOnWarning'
+		// Here lies the not-yet-implemented method 'TooCloseToAttack'
+		// Here lies the not-yet-implemented method 'CheckTurretPitchLimit'
+		// Here lies the not-yet-implemented method 'PlayHorn'
+		// Here lies the not-yet-implemented method 'DriverLeave'
+		// Here lies the not-yet-implemented method 'UpdateControllerOnPossess'
+		// Here lies the not-yet-implemented method 'NumPassengers'
+		// Here lies the not-yet-implemented method 'GetMoveTargetFor'
+		// Here lies the not-yet-implemented method 'HandleEnteringFlag'
+		// Here lies the not-yet-implemented method 'DriverEnter'
+		// Here lies the not-yet-implemented method 'HoldGameObject'
+		// Here lies the not-yet-implemented method 'AttachFlag'
+		// Here lies the not-yet-implemented method 'DriverLeft'
+		// Here lies the not-yet-implemented method 'GetFirstAvailableSeat'
+		// Here lies the not-yet-implemented method 'PassengerEnter'
+		// Here lies the not-yet-implemented method 'PassengerLeave'
+		// Here lies the not-yet-implemented method 'CheckReset'
+		// Here lies the not-yet-implemented method 'Occupied'
+		// Here lies the not-yet-implemented method 'OpenPositionFor'
+		// Here lies the not-yet-implemented method 'BotDesireability'
+		// Here lies the not-yet-implemented method 'ReservationCostMultiplier'
+		// Here lies the not-yet-implemented method 'SpokenFor'
+		// Here lies the not-yet-implemented method 'StopsProjectile'
+		// Here lies the not-yet-implemented method 'SetReservation'
+		// Here lies the not-yet-implemented method 'TeamLink'
+		// Here lies the not-yet-implemented method 'AllowLinkThroughOwnedActor'
+		// Here lies the not-yet-implemented method 'HealDamage'
+		// Here lies the not-yet-implemented method 'IncrementLinkedToCount'
+		// Here lies the not-yet-implemented method 'DecrementLinkedToCount'
+		// Here lies the not-yet-implemented method 'StartLinkedEffect'
+		// Here lies the not-yet-implemented method 'StopLinkedEffect'
+		// Here lies the not-yet-implemented method 'PlayHit'
+		// Here lies the not-yet-implemented method 'PlayTakeHitEffects'
+		// Here lies the not-yet-implemented method 'NotifyTakeHit'
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'GetHomingTarget'
+		// Here lies the not-yet-implemented method 'ImportantVehicle'
+		// Here lies the not-yet-implemented method 'InitializeSeats'
+		// Here lies the not-yet-implemented method 'PreCacheSeatNames'
+		// Here lies the not-yet-implemented method 'InitializeTurrets'
+		// Here lies the not-yet-implemented method 'PossessedBy'
+		// Here lies the not-yet-implemented method 'SetFiringMode'
+		// Here lies the not-yet-implemented method 'ClearFlashCount'
+		// Here lies the not-yet-implemented method 'IncrementFlashCount'
+		// Here lies the not-yet-implemented method 'SetFlashLocation'
+		// Here lies the not-yet-implemented method 'ClearFlashLocation'
+		// Here lies the not-yet-implemented method 'GetBarrelLocationAndRotation'
+		// Here lies the not-yet-implemented method 'GetEffectLocation'
+		// Here lies the not-yet-implemented method 'GetPhysicalFireStartLoc'
+		// Here lies the not-yet-implemented method 'GetWeaponAim'
+		// Here lies the not-yet-implemented method 'OverrideBeginFire'
+		// Here lies the not-yet-implemented method 'OverrideEndFire'
+		// Here lies the not-yet-implemented method 'GetWeaponViewAxes'
+		// Here lies the not-yet-implemented method 'CauseMuzzleFlashLight'
+		// Here lies the not-yet-implemented method 'WeaponFired'
+		// Here lies the not-yet-implemented method 'VehicleWeaponFired'
+		// Here lies the not-yet-implemented method 'WeaponStoppedFiring'
+		// Here lies the not-yet-implemented method 'VehicleWeaponStoppedFiring'
+		// Here lies the not-yet-implemented method 'VehicleWeaponFireEffects'
+		// Here lies the not-yet-implemented method 'FindWeaponHitNormal'
+		// Here lies the not-yet-implemented method 'VehicleWeaponImpactEffects'
+		// Here lies the not-yet-implemented method 'SpawnImpactEmitter'
+		// Here lies the not-yet-implemented method 'VehicleAdjustFlashCount'
+		// Here lies the not-yet-implemented method 'VehicleAdjustFlashLocation'
+		// Here lies the not-yet-implemented method 'FindGoodEndView'
+		// Here lies the not-yet-implemented method 'CalcCamera'
+		// Here lies the not-yet-implemented method 'GetCameraFocus'
+		// Here lies the not-yet-implemented method 'GetCameraStart'
+		// Here lies the not-yet-implemented method 'LimitCameraZ'
+		// Here lies the not-yet-implemented method 'VehicleCalcCamera'
+		// Here lies the not-yet-implemented method 'AdjustCameraScale'
+		// Here lies the not-yet-implemented method 'StartBurnOut'
+		// Here lies the not-yet-implemented method 'TurnOffShadows'
+		// Here lies the not-yet-implemented method 'DisableDamageSmoke'
+		// Here lies the not-yet-implemented method 'DisableCollision'
+		// Here lies the not-yet-implemented method 'SetBurnOut'
+		// Here lies the not-yet-implemented method 'ShouldSpawnExplosionLight'
+		// Here lies the not-yet-implemented method 'RBPenetrationDestroy'
+		// Here lies the not-yet-implemented method 'RigidBodyCollision'
+		// Here lies the not-yet-implemented method 'TurretExplosion'
+		// Here lies the not-yet-implemented method 'StopVehicleSounds'
+		// Here lies the not-yet-implemented method 'CheckDamageSmoke'
+		// Here lies the not-yet-implemented method 'AttachDriver'
+		// Here lies the not-yet-implemented method 'SitDriver'
+		// Here lies the not-yet-implemented method 'OnDriverPhysicsAssetChanged'
+		// Here lies the not-yet-implemented method 'GetHumanReadableName'
+		// Here lies the not-yet-implemented method 'OnPropertyChange'
+		// Here lies the not-yet-implemented method 'GetHealth'
+		// Here lies the not-yet-implemented method 'GetCollisionDamageModifier'
+		// Here lies the not-yet-implemented method 'InitializeMorphs'
+		// Here lies the not-yet-implemented method 'ReceivedHealthChange'
+		// Here lies the not-yet-implemented method 'ApplyMorphHeal'
+		// Here lies the not-yet-implemented method 'ApplyRandomMorphDamage'
+		// Here lies the not-yet-implemented method 'SpawnGibVehicle'
+		// Here lies the not-yet-implemented method 'GetSVehicleDebug'
+		// Here lies the not-yet-implemented method 'OnExitVehicle'
+		// Here lies the not-yet-implemented method 'SetShieldActive'
+		// Here lies the not-yet-implemented method 'SetSeatStoragePawn'
+		// Here lies the not-yet-implemented method 'SetMovementEffect'
+		// Here lies the not-yet-implemented method 'DetachDriver'
+		// Here lies the not-yet-implemented method 'CanAttack'
+		// Here lies the not-yet-implemented method 'GetVehicleKillStatName'
+		// Here lies the not-yet-implemented method 'DisplayHud'
+		// Here lies the not-yet-implemented method 'DrawBarGraph'
+		// Here lies the not-yet-implemented method 'DisplayExtraHud'
+		// Here lies the not-yet-implemented method 'DisplaySeats'
+		// Here lies the not-yet-implemented method 'GetSeatColor'
+		// Here lies the not-yet-implemented method 'ApplyWeaponEffects'
+		// Here lies the not-yet-implemented method 'ShouldLeaveForCombat'
 	};
 }
 #undef ADD_VAR

@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo' for the property named 'Announcement'!
+		// Here lies the not-yet-implemented method 'Activated'
 	};
 }
 #undef ADD_STRUCT

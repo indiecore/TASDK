@@ -1,5 +1,17 @@
 #pragma once
+#include "Engine__SoundCue.h"
+#include "UDKBase__UDKCarriedObject.h"
 #include "GameFramework__GamePawn.h"
+#include "Engine__Material.h"
+#include "Engine__AnimNodeAimOffset.h"
+#include "Engine__SkelControlSingleBone.h"
+#include "Engine__SkelControlLimb.h"
+#include "Engine__SkelControlFootPlacement.h"
+#include "GameFramework__GameSkelCtrl_Recoil.h"
+#include "Engine__MaterialInterface.h"
+#include "Engine__Actor.h"
+#include "Engine__PlayerController.h"
+#include "Engine__Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKPawn." #y); \
@@ -110,6 +122,24 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bNoJumpAdjust, 0x8)
 		ADD_VAR(::BoolProperty, bCanDoubleJump, 0x4)
 		ADD_VAR(::BoolProperty, bRequiresDoubleJump, 0x2)
+		// Here lies the not-yet-implemented method 'GetBoundingCylinder'
+		// Here lies the not-yet-implemented method 'RestorePreRagdollCollisionComponent'
+		// Here lies the not-yet-implemented method 'EnsureOverlayComponentLast'
+		// Here lies the not-yet-implemented method 'GetTargetLocation'
+		// Here lies the not-yet-implemented method 'IsInvisible'
+		// Here lies the not-yet-implemented method 'HoldGameObject'
+		// Here lies the not-yet-implemented method 'StoppedFalling'
+		// Here lies the not-yet-implemented method 'EndCrouch'
+		// Here lies the not-yet-implemented method 'StartCrouch'
+		// Here lies the not-yet-implemented method 'SuggestJumpVelocity'
+		// Here lies the not-yet-implemented method 'SetHUDLocation'
+		// Here lies the not-yet-implemented method 'NativePostRenderFor'
+		// Here lies the not-yet-implemented method 'SetWeaponAttachmentVisibility'
+		// Here lies the not-yet-implemented method 'SetHandIKEnabled'
+		// Here lies the not-yet-implemented method 'StartFeignDeathRecoveryAnim'
+		// Here lies the not-yet-implemented method 'TakeHitBlendedOut'
+		// Here lies the not-yet-implemented method 'UpdateEyeHeight'
+		// Here lies the not-yet-implemented method 'StuckFalling'
 	};
 }
 #undef ADD_VAR

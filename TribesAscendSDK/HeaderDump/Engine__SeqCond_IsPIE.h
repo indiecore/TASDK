@@ -5,5 +5,6 @@ namespace UnrealScript
 	class SeqCond_IsPIE : public SequenceCondition
 	{
 	public:
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }

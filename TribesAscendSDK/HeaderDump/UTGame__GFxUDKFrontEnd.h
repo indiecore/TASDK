@@ -1,5 +1,24 @@
 #pragma once
+#include "UTGame__GFxUDKFrontEnd_GameMode.h"
 #include "GFxUI__GFxMoviePlayer.h"
+#include "UTGame__GFxUDKFrontEnd_PasswordDialog.h"
+#include "UTGame__GFxUDKFrontEnd_ErrorDialog.h"
+#include "UTGame__GFxUDKFrontEnd_FilterDialog.h"
+#include "UTGame__GFxUDKFrontEnd_MapSelect.h"
+#include "UTGame__GFxUDKFrontEnd_JoinDialog.h"
+#include "UTGame__GFxUDKFrontEnd_InfoDialog.h"
+#include "UTGame__GFxUDKFrontEnd_ServerSettings.h"
+#include "UTGame__GFxUDKFrontEnd_HostGame.h"
+#include "UTGame__GFxUDKFrontEnd_JoinGame.h"
+#include "UTGame__GFxUDKFrontEnd_Settings.h"
+#include "UTGame__GFxUDKFrontEnd_Mutators.h"
+#include "UTGame__GFxUDKFrontEnd_Multiplayer.h"
+#include "UTGame__GFxUDKFrontEnd_InstantAction.h"
+#include "UTGame__GFxUDKFrontEnd_MainMenu.h"
+#include "GFxUI__GFxObject.h"
+#include "UTGame__GFxUDKFrontEnd_Screen.h"
+#include "UTGame__GFxUDKFrontEnd_Dialog.h"
+#include "UTGame__GFxUDKFrontEnd_View.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd." #y); \
@@ -35,6 +54,33 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bInitialized, 0x1)
 		ADD_OBJECT(GFxObject, ManagerMC)
 		ADD_OBJECT(GFxObject, RootMC)
+		// Here lies the not-yet-implemented method 'EscapeDelegate'
+		// Here lies the not-yet-implemented method 'Start'
+		// Here lies the not-yet-implemented method 'ConfigFrontEnd'
+		// Here lies the not-yet-implemented method 'ASShowCursor'
+		// Here lies the not-yet-implemented method 'LoadViews'
+		// Here lies the not-yet-implemented method 'LoadView'
+		// Here lies the not-yet-implemented method 'LoadViewByName'
+		// Here lies the not-yet-implemented method 'IsViewLoaded'
+		// Here lies the not-yet-implemented method 'SetEscapeDelegate'
+		// Here lies the not-yet-implemented method 'PushViewByName'
+		// Here lies the not-yet-implemented method 'SpawnDialog'
+		// Here lies the not-yet-implemented method 'ConfigureTargetDialog'
+		// Here lies the not-yet-implemented method 'ConfigureTargetView'
+		// Here lies the not-yet-implemented method 'IsViewAllowed'
+		// Here lies the not-yet-implemented method 'PushView'
+		// Here lies the not-yet-implemented method 'PushDialogView'
+		// Here lies the not-yet-implemented method 'SetSelectionFocus'
+		// Here lies the not-yet-implemented method 'ASSetSelectionFocus'
+		// Here lies the not-yet-implemented method 'PopView'
+		// Here lies the not-yet-implemented method 'PopViewStub'
+		// Here lies the not-yet-implemented method 'UpdateViewLayout'
+		// Here lies the not-yet-implemented method 'ConfigureView'
+		// Here lies the not-yet-implemented method 'PostWidgetInit'
+		// Here lies the not-yet-implemented method 'CheckLinkConnectionAndError'
+		// Here lies the not-yet-implemented method 'WidgetInitialized'
+		// Here lies the not-yet-implemented method 'LoadDependantViews'
+		// Here lies the not-yet-implemented method 'DestroyDependantViews'
 	};
 }
 #undef ADD_VAR

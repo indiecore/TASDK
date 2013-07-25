@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__DataStoreClient.h"
 #include "Engine__UIRoot.h"
+#include "Engine__PostProcessChain.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UISceneClient." #y); \
@@ -31,6 +33,10 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IntPoint' for the property named 'MousePosition'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'RenderViewport'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FExec'!
+		// Here lies the not-yet-implemented method 'IsUIActive'
+		// Here lies the not-yet-implemented method 'GetCanvasToScreen'
+		// Here lies the not-yet-implemented method 'GetInverseCanvasToScreen'
+		// Here lies the not-yet-implemented method 'InitializeSceneClient'
 	};
 }
 #undef ADD_VAR

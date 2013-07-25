@@ -1,5 +1,10 @@
 #pragma once
 #include "Engine__SeqAct_Latent.h"
+#include "GameFramework__GameCrowdReplicationActor.h"
+#include "GameFramework__GameCrowdAgent.h"
+#include "GameFramework__GameCrowd_ListOfAgents.h"
+#include "Engine__Actor.h"
+#include "GameFramework__GameCrowdGroup.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqAct_GameCrowdSpawner." #y); \
@@ -45,6 +50,13 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bRespawnDeadAgents, 0x4)
 		ADD_VAR(::BoolProperty, bCycleSpawnLocs, 0x2)
 		ADD_VAR(::BoolProperty, bSpawningActive, 0x1)
+		// Here lies the not-yet-implemented method 'SpawnedAgent'
+		// Here lies the not-yet-implemented method 'CacheSpawnerVars'
+		// Here lies the not-yet-implemented method 'KillAgents'
+		// Here lies the not-yet-implemented method 'UpdateSpawning'
+		// Here lies the not-yet-implemented method 'SpawnAgent'
+		// Here lies the not-yet-implemented method 'CreateNewAgent'
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

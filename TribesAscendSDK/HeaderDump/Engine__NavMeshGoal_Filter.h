@@ -14,6 +14,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumNodesProcessed, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumNodesThrownOut, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bShowDebug, 0x1)
+		// Here lies the not-yet-implemented method 'GetDumpString'
 	};
 }
 #undef ADD_VAR

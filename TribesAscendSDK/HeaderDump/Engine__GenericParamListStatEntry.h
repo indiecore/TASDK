@@ -1,5 +1,6 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__GameplayEventsWriter.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.GenericParamListStatEntry." #y); \
@@ -19,6 +20,15 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(GameplayEventsWriter, Writer)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'StatEvent'!
+		// Here lies the not-yet-implemented method 'AddFloat'
+		// Here lies the not-yet-implemented method 'AddInt'
+		// Here lies the not-yet-implemented method 'AddVector'
+		// Here lies the not-yet-implemented method 'AddString'
+		// Here lies the not-yet-implemented method 'GetFloat'
+		// Here lies the not-yet-implemented method 'GetInt'
+		// Here lies the not-yet-implemented method 'GetVector'
+		// Here lies the not-yet-implemented method 'GetString'
+		// Here lies the not-yet-implemented method 'CommitToDisk'
 	};
 }
 #undef ADD_STRUCT

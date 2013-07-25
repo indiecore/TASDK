@@ -17,6 +17,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Yaw, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Pitch, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Roll, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

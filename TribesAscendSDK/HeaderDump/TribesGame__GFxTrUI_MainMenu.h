@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(GFxUI_PauseMenu, FamilyMenuMovie)
+		// Here lies the not-yet-implemented method 'Start'
 	};
 }
 #undef ADD_OBJECT

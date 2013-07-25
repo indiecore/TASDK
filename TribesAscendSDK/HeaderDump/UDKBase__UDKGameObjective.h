@@ -1,5 +1,11 @@
 #pragma once
+#include "Engine__Controller.h"
 #include "Engine__NavigationPoint.h"
+#include "Engine__Canvas.h"
+#include "Engine__Texture2D.h"
+#include "Engine__AIController.h"
+#include "Engine__Actor.h"
+#include "UDKBase__UDKPlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKGameObjective." #y); \
@@ -29,6 +35,13 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF
 		ADD_VAR(::BoolProperty, bUnderAttack, 0x2)
 		ADD_VAR(::BoolProperty, bAllowOnlyShootable, 0x1)
+		// Here lies the not-yet-implemented method 'ObjectiveChanged'
+		// Here lies the not-yet-implemented method 'GetBestViewTarget'
+		// Here lies the not-yet-implemented method 'BotNearObjective'
+		// Here lies the not-yet-implemented method 'TriggerFlagEvent'
+		// Here lies the not-yet-implemented method 'SetHUDLocation'
+		// Here lies the not-yet-implemented method 'DrawIcon'
+		// Here lies the not-yet-implemented method 'GetTeamNum'
 	};
 }
 #undef ADD_VAR

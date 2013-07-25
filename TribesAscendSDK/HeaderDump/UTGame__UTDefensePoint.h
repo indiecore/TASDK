@@ -1,5 +1,9 @@
 #pragma once
 #include "UDKBase__UDKScriptedNavigationPoint.h"
+#include "Engine__Actor.h"
+#include "UDKBase__UDKGameObjective.h"
+#include "Engine__Controller.h"
+#include "UTGame__UTBot.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTDefensePoint." #y); \
@@ -17,6 +21,7 @@ namespace UnrealScript
 	class UTDefensePoint : public UDKScriptedNavigationPoint
 	{
 	public:
+		ADD_OBJECT(ScriptClass, WeaponPreference)
 		ADD_VAR(::BoolProperty, bSniping, 0x2)
 		ADD_VAR(::BoolProperty, bFirstScript, 0x1)
 		ADD_OBJECT(UDKGameObjective, DefendedObjective)
@@ -26,6 +31,12 @@ namespace UnrealScript
 		ADD_OBJECT(Controller, CurrentUser)
 		ADD_VAR(::ByteProperty, DefensePriority, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bOnlySkilled, 0x8)
+		// Here lies the not-yet-implemented method 'GetMoveTarget'
+		// Here lies the not-yet-implemented method 'HigherPriorityThan'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'FreePoint'
+		// Here lies the not-yet-implemented method 'CheckForErrors'
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,8 @@
 #pragma once
+#include "Engine__Controller.h"
 #include "UDKBase__UDKWeaponShield.h"
+#include "Engine__SoundCue.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTVehicleShield." #y); \
@@ -21,6 +24,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ShieldActivatedTime, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, DeactivatedSound)
 		ADD_OBJECT(SoundCue, ActivatedSound)
+		// Here lies the not-yet-implemented method 'SetActive'
+		// Here lies the not-yet-implemented method 'ShieldFullyOnline'
+		// Here lies the not-yet-implemented method 'TakeDamage'
 	};
 }
 #undef ADD_VAR

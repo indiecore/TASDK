@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, YawRotationRate, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Tick'
 	};
 }
 #undef ADD_VAR

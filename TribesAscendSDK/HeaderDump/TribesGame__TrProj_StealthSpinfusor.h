@@ -5,5 +5,6 @@ namespace UnrealScript
 	class TrProj_StealthSpinfusor : public TrProjectile
 	{
 	public:
+		// Here lies the not-yet-implemented method 'SpawnFlightEffects'
 	};
 }

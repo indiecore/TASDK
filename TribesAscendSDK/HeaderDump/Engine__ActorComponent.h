@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__Actor.h"
 #include "Core__Component.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -30,6 +31,10 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAttached, 0x1)
 		ADD_OBJECT(Actor, Owner)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Scene'!
+		// Here lies the not-yet-implemented method 'SetTickGroup'
+		// Here lies the not-yet-implemented method 'SetComponentRBFixed'
+		// Here lies the not-yet-implemented method 'ForceUpdate'
+		// Here lies the not-yet-implemented method 'DetachFromAny'
 	};
 }
 #undef ADD_VAR

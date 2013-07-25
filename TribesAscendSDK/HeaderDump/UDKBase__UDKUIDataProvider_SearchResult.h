@@ -16,6 +16,7 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, ServerFlagsTag, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, GameModeFriendlyNameTag, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, PlayerRatioTag, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'IsPrivateServer'
 	};
 }
 #undef ADD_VAR

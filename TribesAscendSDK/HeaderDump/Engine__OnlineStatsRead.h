@@ -16,6 +16,13 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, TotalRowsInView, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SortColumnId, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ViewId, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'OnReadComplete'
+		// Here lies the not-yet-implemented method 'GetIntStatValueForPlayer'
+		// Here lies the not-yet-implemented method 'SetIntStatValueForPlayer'
+		// Here lies the not-yet-implemented method 'GetFloatStatValueForPlayer'
+		// Here lies the not-yet-implemented method 'SetFloatStatValueForPlayer'
+		// Here lies the not-yet-implemented method 'AddPlayer'
+		// Here lies the not-yet-implemented method 'GetRankForPlayer'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__AnimNodeBlendBase.h"
+#include "Engine__AnimNodeAimOffset.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKAnimNodeCopyBoneTranslation." #y); \

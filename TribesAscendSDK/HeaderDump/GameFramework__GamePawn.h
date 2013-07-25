@@ -13,6 +13,9 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bRespondToExplosions, 0x2)
 		ADD_VAR(::BoolProperty, bLastHitWasHeadShot, 0x1)
+		// Here lies the not-yet-implemented method 'UpdateShadowSettings'
+		// Here lies the not-yet-implemented method 'ReattachMesh'
+		// Here lies the not-yet-implemented method 'ReattachMeshWithoutBeingSeen'
 	};
 }
 #undef ADD_VAR

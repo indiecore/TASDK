@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame__TrProjectile.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_Tracer." #y); \
@@ -26,6 +27,20 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bScaledUp, 0x1)
 		ADD_VAR(::FloatProperty, m_fMeshScaleUpTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fAccelRate, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'CalcTracerAccel'
+		// Here lies the not-yet-implemented method 'InitTracer'
+		// Here lies the not-yet-implemented method 'KillProjectile'
+		// Here lies the not-yet-implemented method 'ScaleDownFinishedNotify'
+		// Here lies the not-yet-implemented method 'ScaleUpFinishedNotify'
+		// Here lies the not-yet-implemented method 'OutsideWorldBounds'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'Explode'
+		// Here lies the not-yet-implemented method 'Recycle'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'WakeProjectile'
+		// Here lies the not-yet-implemented method 'ProcessTouch'
 	};
 }
 #undef ADD_VAR

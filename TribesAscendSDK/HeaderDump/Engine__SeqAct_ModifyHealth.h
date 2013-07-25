@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SequenceAction.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_ModifyHealth." #y); \
@@ -20,10 +21,12 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, Instigator)
 		ADD_VAR(::BoolProperty, bHeal, 0x1)
 		ADD_VAR(::FloatProperty, Amount, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, DamageType)
 		ADD_VAR(::FloatProperty, Momentum, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bFalloff, 0x4)
 		ADD_VAR(::BoolProperty, bRadial, 0x2)
 		ADD_VAR(::FloatProperty, Radius, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

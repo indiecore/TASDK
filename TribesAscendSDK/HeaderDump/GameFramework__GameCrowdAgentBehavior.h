@@ -1,5 +1,9 @@
 #pragma once
+#include "GameFramework__GameCrowdDestination.h"
 #include "Core__Object.h"
+#include "Engine__Actor.h"
+#include "GameFramework__GameCrowdAgent.h"
+#include "Engine__AnimNodeSequence.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameCrowdAgentBehavior." #y); \
@@ -27,6 +31,21 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsViralBehavior, 0x4)
 		ADD_VAR(::BoolProperty, bFaceActionTargetFirst, 0x2)
 		ADD_VAR(::BoolProperty, bIdleBehavior, 0x1)
+		// Here lies the not-yet-implemented method 'AllowBehaviorAt'
+		// Here lies the not-yet-implemented method 'AllowThisDestination'
+		// Here lies the not-yet-implemented method 'CanBeUsedBy'
+		// Here lies the not-yet-implemented method 'GetDestinationActor'
+		// Here lies the not-yet-implemented method 'GetBehaviorString'
+		// Here lies the not-yet-implemented method 'ShouldEndIdle'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'FinishedTargetRotation'
+		// Here lies the not-yet-implemented method 'HandleMovement'
+		// Here lies the not-yet-implemented method 'InitBehavior'
+		// Here lies the not-yet-implemented method 'StopBehavior'
+		// Here lies the not-yet-implemented method 'OnAnimEnd'
+		// Here lies the not-yet-implemented method 'ChangingDestination'
+		// Here lies the not-yet-implemented method 'ActivatedBy'
+		// Here lies the not-yet-implemented method 'PropagateViralBehaviorTo'
 	};
 }
 #undef ADD_VAR

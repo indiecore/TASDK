@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SeqAct_ActorFactory.h"
+#include "Engine__ParticleSystem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_ProjectileFactory." #y); \
@@ -20,6 +21,7 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, BoneName, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, SocketName, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, PSTemplate)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

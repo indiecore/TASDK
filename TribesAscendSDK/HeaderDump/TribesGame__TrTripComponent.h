@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__PrimitiveComponent.h"
+#include "TribesGame__TrTripActor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrTripComponent." #y); \

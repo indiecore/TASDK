@@ -1,5 +1,8 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__Actor.h"
+#include "Engine__PlayerController.h"
+#include "Engine__Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SavedMove." #y); \
@@ -53,6 +56,18 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bPressedJump, 0x4)
 		ADD_VAR(::BoolProperty, bDuck, 0x2)
 		ADD_VAR(::BoolProperty, bRun, 0x1)
+		// Here lies the not-yet-implemented method 'SetFlags'
+		// Here lies the not-yet-implemented method 'CompressedFlags'
+		// Here lies the not-yet-implemented method 'IsImportantMove'
+		// Here lies the not-yet-implemented method 'CanCombineWith'
+		// Here lies the not-yet-implemented method 'GetStartLocation'
+		// Here lies the not-yet-implemented method 'Clear'
+		// Here lies the not-yet-implemented method 'PostUpdate'
+		// Here lies the not-yet-implemented method 'SetInitialPosition'
+		// Here lies the not-yet-implemented method 'SetMoveFor'
+		// Here lies the not-yet-implemented method 'PrepMoveFor'
+		// Here lies the not-yet-implemented method 'ResetMoveFor'
+		// Here lies the not-yet-implemented method 'GetDebugString'
 	};
 }
 #undef ADD_VAR

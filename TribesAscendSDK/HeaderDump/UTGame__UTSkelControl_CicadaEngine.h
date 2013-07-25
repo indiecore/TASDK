@@ -20,6 +20,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, PitchRate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BackPitch, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ForwardPitch, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'TickSkelControl'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,17 @@
 #pragma once
 #include "UDKBase__UDKVehicleBase.h"
+#include "Engine__Pawn.h"
+#include "Engine__Controller.h"
+#include "Engine__MaterialInstanceConstant.h"
+#include "Engine__SoundCue.h"
+#include "UDKBase__UDKProjectile.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__TeamInfo.h"
+#include "Engine__PlayerController.h"
+#include "UDKBase__UDKForcedDirectionVolume.h"
+#include "Engine__Actor.h"
+#include "Engine__Canvas.h"
+#include "UDKBase__UDKPlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKVehicle." #y); \
@@ -91,6 +103,40 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bFrontalCollisionWithFixed, 0x8)
 		ADD_VAR(::BoolProperty, bFrontalCollision, 0x4)
 		ADD_VAR(::BoolProperty, bHomingTarget, 0x2)
+		// Here lies the not-yet-implemented method 'OnTouchForcedDirVolume'
+		// Here lies the not-yet-implemented method 'GetRanOverDamageType'
+		// Here lies the not-yet-implemented method 'SeatWeaponRotation'
+		// Here lies the not-yet-implemented method 'SeatFlashLocation'
+		// Here lies the not-yet-implemented method 'SeatFlashCount'
+		// Here lies the not-yet-implemented method 'SeatFiringMode'
+		// Here lies the not-yet-implemented method 'ForceWeaponRotation'
+		// Here lies the not-yet-implemented method 'GetSeatPivotPoint'
+		// Here lies the not-yet-implemented method 'GetBarrelIndex'
+		// Here lies the not-yet-implemented method 'IsSeatControllerReplicationViewer'
+		// Here lies the not-yet-implemented method 'IsLocalOnVehicle'
+		// Here lies the not-yet-implemented method 'LockOnWarning'
+		// Here lies the not-yet-implemented method 'OnPropertyChange'
+		// Here lies the not-yet-implemented method 'GetGravityZ'
+		// Here lies the not-yet-implemented method 'PlayTakeHitEffects'
+		// Here lies the not-yet-implemented method 'ReceivedHealthChange'
+		// Here lies the not-yet-implemented method 'JumpOutCheck'
+		// Here lies the not-yet-implemented method 'GetMaxRiseForce'
+		// Here lies the not-yet-implemented method 'CheckAutoDestruct'
+		// Here lies the not-yet-implemented method 'SelfDestruct'
+		// Here lies the not-yet-implemented method 'GetTeamNum'
+		// Here lies the not-yet-implemented method 'NativePostRenderFor'
+		// Here lies the not-yet-implemented method 'InUseableRange'
+		// Here lies the not-yet-implemented method 'SetHUDLocation'
+		// Here lies the not-yet-implemented method 'InitDamageSkel'
+		// Here lies the not-yet-implemented method 'UpdateDamageMaterial'
+		// Here lies the not-yet-implemented method 'ApplyMorphDamage'
+		// Here lies the not-yet-implemented method 'MorphTargetDestroyed'
+		// Here lies the not-yet-implemented method 'RBPenetrationDestroy'
+		// Here lies the not-yet-implemented method 'TakeWaterDamage'
+		// Here lies the not-yet-implemented method 'CheckReset'
+		// Here lies the not-yet-implemented method 'TakeFireDamage'
+		// Here lies the not-yet-implemented method 'PostInitRigidBody'
+		// Here lies the not-yet-implemented method 'UpdateHoverboardDustEffect'
 	};
 }
 #undef ADD_VAR

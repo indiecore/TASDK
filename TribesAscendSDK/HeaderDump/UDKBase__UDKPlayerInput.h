@@ -5,5 +5,6 @@ namespace UnrealScript
 	class UDKPlayerInput : public MobilePlayerInput
 	{
 	public:
+		// Here lies the not-yet-implemented method 'GetUDKBindNameFromCommand'
 	};
 }

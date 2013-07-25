@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame__TrDevice.h"
+#include "Engine__SoundCue.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice_ConstantFire." #y); \
@@ -23,6 +24,13 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bIsCurrentlyFiring, 0x4)
 		ADD_VAR(::BoolProperty, m_bHasLoopingFireAnim, 0x2)
 		ADD_VAR(::BoolProperty, m_bSoundLinkedWithState, 0x1)
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'OnEndConstantFire'
+		// Here lies the not-yet-implemented method 'OnStartConstantFire'
+		// Here lies the not-yet-implemented method 'OnTickConstantFire'
+		// Here lies the not-yet-implemented method 'EndFire'
+		// Here lies the not-yet-implemented method 'StartFire'
+		// Here lies the not-yet-implemented method 'PlayFireAnimation'
 	};
 }
 #undef ADD_VAR

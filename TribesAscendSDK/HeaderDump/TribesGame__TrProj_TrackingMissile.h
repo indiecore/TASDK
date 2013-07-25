@@ -1,5 +1,10 @@
 #pragma once
 #include "TribesGame__TrProjectile.h"
+#include "Engine__Actor.h"
+#include "TribesGame__TrSeekingMissileManager.h"
+#include "Engine__Controller.h"
+#include "Engine__Canvas.h"
+#include "Engine__PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_TrackingMissile." #y); \
@@ -31,6 +36,21 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bLostTightHoming, 0x2)
 		ADD_VAR(::BoolProperty, m_bHasBentToTarget, 0x1)
 		ADD_VAR(::ByteProperty, m_MissileStage, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'ProcessTouch'
+		// Here lies the not-yet-implemented method 'EnableCollisionTimer'
+		// Here lies the not-yet-implemented method 'SetSeekTarget'
+		// Here lies the not-yet-implemented method 'NativeExplode'
+		// Here lies the not-yet-implemented method 'OnExploded'
+		// Here lies the not-yet-implemented method 'Explode'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'GetSeekingMissileManager'
+		// Here lies the not-yet-implemented method 'SpawnFlightEffects'
+		// Here lies the not-yet-implemented method 'SpawnFlightEffectsTimer'
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
 	};
 }
 #undef ADD_VAR

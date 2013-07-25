@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "Engine__MaterialInstanceConstant.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrStealthResidue." #y); \
@@ -12,6 +13,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(MaterialInstanceConstant, m_MeshMaterial)
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
 	};
 }
 #undef ADD_OBJECT

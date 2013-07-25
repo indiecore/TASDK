@@ -1,5 +1,11 @@
 #pragma once
+#include "Engine__Controller.h"
+#include "Engine__Pawn.h"
 #include "TribesGame__TrInventory.h"
+#include "Engine__SoundCue.h"
+#include "Engine__Canvas.h"
+#include "Engine__HUD.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrTimedPowerup." #y); \
@@ -33,6 +39,19 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, PowerupOverSound)
 		ADD_VAR(::IntProperty, HudIndex, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TimeRemaining, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'GivenTo'
+		// Here lies the not-yet-implemented method 'ClientGivenTo'
+		// Here lies the not-yet-implemented method 'AdjustPPEffects'
+		// Here lies the not-yet-implemented method 'ClientLostItem'
+		// Here lies the not-yet-implemented method 'ClientSetTimeRemaining'
+		// Here lies the not-yet-implemented method 'TimeRemaingUpdated'
+		// Here lies the not-yet-implemented method 'DisplayPowerup'
+		// Here lies the not-yet-implemented method 'DenyPickupQuery'
+		// Here lies the not-yet-implemented method 'TimeExpired'
+		// Here lies the not-yet-implemented method 'BotDesireability'
+		// Here lies the not-yet-implemented method 'DetourWeight'
+		// Here lies the not-yet-implemented method 'GetPowerupStatName'
 	};
 }
 #undef ADD_VAR

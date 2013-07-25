@@ -15,6 +15,10 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, r_bShield1Up, 0x2)
 		ADD_VAR(::BoolProperty, r_bShield2Up, 0x4)
 		ADD_VAR(::BoolProperty, r_bIsRotating, 0x8)
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'StartRotation'
+		// Here lies the not-yet-implemented method 'StopRotation'
 	};
 }
 #undef ADD_VAR

@@ -5,5 +5,8 @@ namespace UnrealScript
 	class TrInventoryHelper : public Object
 	{
 	public:
+		// Here lies the not-yet-implemented method 'GetEquipClass'
+		// Here lies the not-yet-implemented method 'GetFamilyClass'
+		// Here lies the not-yet-implemented method 'GetSkinClass'
 	};
 }

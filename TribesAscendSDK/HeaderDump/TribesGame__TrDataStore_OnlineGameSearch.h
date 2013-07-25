@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__UIDataStore_OnlineGameSearch.h"
+#include "UDKBase__UDKUIDataProvider_ServerDetails.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrDataStore_OnlineGameSearch." #y); \
@@ -12,6 +13,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(UDKUIDataProvider_ServerDetails, ServerDetailsProvider)
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'SubmitGameSearch'
+		// Here lies the not-yet-implemented method 'OnSearchComplete'
+		// Here lies the not-yet-implemented method 'HasOutstandingQueries'
+		// Here lies the not-yet-implemented method 'HasExistingSearchResults'
 	};
 }
 #undef ADD_OBJECT

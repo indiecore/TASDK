@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__SoundCue.h"
 #include "Engine__Info.h"
+#include "TribesGame__TrPlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrMusicManager." #y); \
@@ -23,6 +25,15 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, m_PendingState, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fStingerVolumeMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_CTFTeamScores, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'CreateNewTrack'
+		// Here lies the not-yet-implemented method 'StartMusic'
+		// Here lies the not-yet-implemented method 'SetStateBasedOnGameState'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'MusicEvent'
+		// Here lies the not-yet-implemented method 'SetPendingState'
+		// Here lies the not-yet-implemented method 'SetCurrentState'
+		// Here lies the not-yet-implemented method 'PlayerScoredFlag'
 	};
 }
 #undef ADD_VAR

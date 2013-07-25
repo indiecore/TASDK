@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, m_nLastMessageCode, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Timer'
 	};
 }
 #undef ADD_VAR

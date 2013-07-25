@@ -1,5 +1,9 @@
 #pragma once
+#include "Engine__SeqAct_Toggle.h"
 #include "Engine__Actor.h"
+#include "Engine__DroppedPickup.h"
+#include "Engine__Pawn.h"
+#include "Engine__ReachSpec.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NavigationPoint." #y); \
@@ -73,6 +77,25 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bHideEditorPaths, 0x4)
 		ADD_VAR(::BoolProperty, bTransientEndPoint, 0x2)
 		ADD_VAR(::BoolProperty, bEndPoint, 0x1)
+		// Here lies the not-yet-implemented method 'ProceedWithMove'
+		// Here lies the not-yet-implemented method 'GetBoundingCylinder'
+		// Here lies the not-yet-implemented method 'GetReachSpecTo'
+		// Here lies the not-yet-implemented method 'IsUsableAnchorFor'
+		// Here lies the not-yet-implemented method 'CanTeleport'
+		// Here lies the not-yet-implemented method 'SpecialCost'
+		// Here lies the not-yet-implemented method 'Accept'
+		// Here lies the not-yet-implemented method 'DetourWeight'
+		// Here lies the not-yet-implemented method 'SuggestMovePreparation'
+		// Here lies the not-yet-implemented method 'GetNearestNavToActor'
+		// Here lies the not-yet-implemented method 'GetNearestNavToPoint'
+		// Here lies the not-yet-implemented method 'GetAllNavInRadius'
+		// Here lies the not-yet-implemented method 'IsOnDifferentNetwork'
+		// Here lies the not-yet-implemented method 'OnToggle'
+		// Here lies the not-yet-implemented method 'ShutDown'
+		// Here lies the not-yet-implemented method 'ShouldSaveForCheckpoint'
+		// Here lies the not-yet-implemented method 'CreateCheckpointRecord'
+		// Here lies the not-yet-implemented method 'ApplyCheckpointRecord'
+		// Here lies the not-yet-implemented method 'GetDebugAbbrev'
 	};
 }
 #undef ADD_VAR

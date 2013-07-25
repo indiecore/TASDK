@@ -1,5 +1,10 @@
 #pragma once
 #include "GameFramework__GameCrowdAgent.h"
+#include "Engine__AnimTree.h"
+#include "Engine__AnimNodeSequence.h"
+#include "GameFramework__SeqAct_PlayAgentAnimation.h"
+#include "Engine__AnimNodeBlend.h"
+#include "Engine__AnimNodeSlot.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameCrowdAgentSkeletal." #y); \
@@ -35,6 +40,16 @@ namespace UnrealScript
 		ADD_OBJECT(AnimNodeSequence, ActionSeqNode)
 		ADD_OBJECT(AnimNodeSlot, FullBodySlot)
 		ADD_OBJECT(AnimNodeBlend, SpeedBlendNode)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'SetLighting'
+		// Here lies the not-yet-implemented method 'PlayDeath'
+		// Here lies the not-yet-implemented method 'SetRootMotion'
+		// Here lies the not-yet-implemented method 'OnPlayAgentAnimation'
+		// Here lies the not-yet-implemented method 'ClearLatentAnimation'
+		// Here lies the not-yet-implemented method 'PlayIdleAnimation'
+		// Here lies the not-yet-implemented method 'StopIdleAnimation'
+		// Here lies the not-yet-implemented method 'OnAnimEnd'
+		// Here lies the not-yet-implemented method 'CreateAttachments'
 	};
 }
 #undef ADD_VAR

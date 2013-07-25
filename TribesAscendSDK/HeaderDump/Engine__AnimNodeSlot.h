@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__AnimNodeBlendBase.h"
+#include "Engine__AnimNodeSynch.h"
+#include "Engine__AnimNodeSequence.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNodeSlot." #y); \
@@ -26,6 +28,16 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bSkipBlendWhenNotRendered, 0x4)
 		ADD_VAR(::BoolProperty, bEarlyAnimEndNotify, 0x2)
 		ADD_VAR(::BoolProperty, bIsPlayingCustomAnim, 0x1)
+		// Here lies the not-yet-implemented method 'PlayCustomAnim'
+		// Here lies the not-yet-implemented method 'PlayCustomAnimByDuration'
+		// Here lies the not-yet-implemented method 'GetPlayedAnimation'
+		// Here lies the not-yet-implemented method 'StopCustomAnim'
+		// Here lies the not-yet-implemented method 'SetCustomAnim'
+		// Here lies the not-yet-implemented method 'SetActorAnimEndNotification'
+		// Here lies the not-yet-implemented method 'GetCustomAnimNodeSeq'
+		// Here lies the not-yet-implemented method 'SetRootBoneAxisOption'
+		// Here lies the not-yet-implemented method 'SetRootBoneRotationOption'
+		// Here lies the not-yet-implemented method 'AddToSynchGroup'
 	};
 }
 #undef ADD_VAR

@@ -341,6 +341,8 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, ChatString_GlobalNo, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ChatString_GlobalYes, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrVGSCommandList.TrVGSCommand' for the property named 'm_CommandList'!
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'GetContextLocationString'
 	};
 }
 #undef ADD_VAR

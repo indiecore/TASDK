@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame__GFxTrPage_VendorTable.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrPage_ClanTagChange." #y); \
@@ -23,6 +24,14 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ConfirmNum, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, EntryNum, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PopupNum, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'FillData'
+		// Here lies the not-yet-implemented method 'FillOption'
+		// Here lies the not-yet-implemented method 'FillDescription'
+		// Here lies the not-yet-implemented method 'ModifyAction'
+		// Here lies the not-yet-implemented method 'CheckPricing'
+		// Here lies the not-yet-implemented method 'PopupData'
+		// Here lies the not-yet-implemented method 'PopupComplete'
+		// Here lies the not-yet-implemented method 'ShowModel'
 	};
 }
 #undef ADD_VAR

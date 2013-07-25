@@ -31,6 +31,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, SceneIndex, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BoneName2, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BoneName1, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetComponents'
+		// Here lies the not-yet-implemented method 'Clear'
 	};
 }
 #undef ADD_VAR

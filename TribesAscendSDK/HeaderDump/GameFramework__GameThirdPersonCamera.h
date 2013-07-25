@@ -1,5 +1,9 @@
 #pragma once
+#include "GameFramework__GamePlayerCamera.h"
 #include "GameFramework__GameCameraBase.h"
+#include "Engine__Actor.h"
+#include "GameFramework__GameThirdPersonCameraMode.h"
+#include "Engine__Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameThirdPersonCamera." #y); \
@@ -56,6 +60,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastPitchAdjustment, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastHeightAdjustment, 0xFFFFFFFF)
 		ADD_OBJECT(GameThirdPersonCameraMode, CurrentCamMode)
+		ADD_OBJECT(ScriptClass, ThirdPersonCamDefaultClass)
 		ADD_OBJECT(GameThirdPersonCameraMode, ThirdPersonCamDefault)
 		ADD_VAR(::FloatProperty, LastCamFOV, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, LastViewOffset, 0xFFFFFFFF
@@ -69,6 +74,28 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, WorstLocPenetrationExtentScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WorstLocBlockedPct, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, LastActualCameraOrigin, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'CreateCameraMode'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'GetDesiredFOV'
+		// Here lies the not-yet-implemented method 'UpdateCamera'
+		// Here lies the not-yet-implemented method 'UpdateCameraMode'
+		// Here lies the not-yet-implemented method 'PlayerUpdateCamera'
+		// Here lies the not-yet-implemented method 'BeginTurn'
+		// Here lies the not-yet-implemented method 'EndTurn'
+		// Here lies the not-yet-implemented method 'AdjustTurn'
+		// Here lies the not-yet-implemented method 'SetFocusOnLoc'
+		// Here lies the not-yet-implemented method 'SetFocusOnActor'
+		// Here lies the not-yet-implemented method 'GetFocusActor'
+		// Here lies the not-yet-implemented method 'ClearFocusPoint'
+		// Here lies the not-yet-implemented method 'UpdateFocusPoint'
+		// Here lies the not-yet-implemented method 'GetActualFocusLocation'
+		// Here lies the not-yet-implemented method 'AdjustFocusPointInterpolation'
+		// Here lies the not-yet-implemented method 'FindBestCameraMode'
+		// Here lies the not-yet-implemented method 'ProcessViewRotation'
+		// Here lies the not-yet-implemented method 'OnBecomeActive'
+		// Here lies the not-yet-implemented method 'ModifyPostProcessSettings'
+		// Here lies the not-yet-implemented method 'ResetInterpolation'
 	};
 }
 #undef ADD_VAR

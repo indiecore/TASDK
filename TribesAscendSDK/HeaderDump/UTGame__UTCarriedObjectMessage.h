@@ -1,5 +1,11 @@
 #pragma once
+#include "UTGame__UTQueuedAnnouncement.h"
+#include "Engine__PlayerController.h"
 #include "UTGame__UTLocalMessage.h"
+#include "UTGame__UTAnnouncer.h"
+#include "Engine__SoundNodeWave.h"
+#include "Core__Object.h"
+#include "Engine__PlayerReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTCarriedObjectMessage." #y); \
@@ -32,6 +38,14 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, ReturnedBlue, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ReturnRed, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ReturnBlue, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'ClientReceive'
+		// Here lies the not-yet-implemented method 'AnnouncementSound'
+		// Here lies the not-yet-implemented method 'AnnouncementLevel'
+		// Here lies the not-yet-implemented method 'GetString'
+		// Here lies the not-yet-implemented method 'ShouldBeRemoved'
+		// Here lies the not-yet-implemented method 'ShouldRemoveFlagAnnouncement'
+		// Here lies the not-yet-implemented method 'AddAnnouncement'
+		// Here lies the not-yet-implemented method 'PartiallyDuplicates'
 	};
 }
 #undef ADD_VAR

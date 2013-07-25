@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bStopImmediately, 0x1)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

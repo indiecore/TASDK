@@ -12,6 +12,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(::VectorProperty, r_TargetLocation, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'EffectIsRelevant'
 	};
 }
 #undef ADD_STRUCT

@@ -17,6 +17,10 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fBoostThrustBuildUp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fThrustInvDuration, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fThrustBuildUp, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'CreateParticleSystems'
+		// Here lies the not-yet-implemented method 'SetInputs'
+		// Here lies the not-yet-implemented method 'VehicleCalcCamera'
 	};
 }
 #undef ADD_VAR

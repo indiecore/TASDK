@@ -1,5 +1,16 @@
 #pragma once
+#include "Engine__RB_ConstraintInstance.h"
 #include "Engine__Vehicle.h"
+#include "Engine__SoundCue.h"
+#include "Engine__RB_StayUprightSetup.h"
+#include "Engine__Controller.h"
+#include "Engine__Actor.h"
+#include "Engine__PhysicsAsset.h"
+#include "Engine__SkeletalMesh.h"
+#include "Engine__PlayerController.h"
+#include "Engine__Teleporter.h"
+#include "Engine__Pawn.h"
+#include "Engine__HUD.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SVehicle." #y); \
@@ -75,6 +86,38 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bStayUpright, 0x1)
 		ADD_STRUCT(::VectorProperty, InertiaTensorMultiplier, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, COMOffset, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'AddForce'
+		// Here lies the not-yet-implemented method 'AddImpulse'
+		// Here lies the not-yet-implemented method 'AddTorque'
+		// Here lies the not-yet-implemented method 'IsSleeping'
+		// Here lies the not-yet-implemented method 'SetWheelCollision'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'PostInitAnimTree'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'TurnOff'
+		// Here lies the not-yet-implemented method 'StopVehicleSounds'
+		// Here lies the not-yet-implemented method 'TakeRadiusDamage'
+		// Here lies the not-yet-implemented method 'InitVehicleRagdoll'
+		// Here lies the not-yet-implemented method 'AddVelocity'
+		// Here lies the not-yet-implemented method 'Died'
+		// Here lies the not-yet-implemented method 'CalcCamera'
+		// Here lies the not-yet-implemented method 'GetDefaultCameraMode'
+		// Here lies the not-yet-implemented method 'TryToDrive'
+		// Here lies the not-yet-implemented method 'HasWheelsOnGround'
+		// Here lies the not-yet-implemented method 'StartEngineSound'
+		// Here lies the not-yet-implemented method 'StartEngineSoundTimed'
+		// Here lies the not-yet-implemented method 'StopEngineSound'
+		// Here lies the not-yet-implemented method 'StopEngineSoundTimed'
+		// Here lies the not-yet-implemented method 'VehiclePlayEnterSound'
+		// Here lies the not-yet-implemented method 'VehiclePlayExitSound'
+		// Here lies the not-yet-implemented method 'DrivingStatusChanged'
+		// Here lies the not-yet-implemented method 'RigidBodyCollision'
+		// Here lies the not-yet-implemented method 'SuspensionHeavyShift'
+		// Here lies the not-yet-implemented method 'PostTeleport'
+		// Here lies the not-yet-implemented method 'DisplayDebug'
+		// Here lies the not-yet-implemented method 'DisplayWheelsDebug'
+		// Here lies the not-yet-implemented method 'HermiteEval'
+		// Here lies the not-yet-implemented method 'GetSVehicleDebug'
 	};
 }
 #undef ADD_VAR

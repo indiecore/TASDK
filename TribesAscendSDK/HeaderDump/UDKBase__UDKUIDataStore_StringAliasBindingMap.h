@@ -19,6 +19,11 @@ namespace UnrealScript
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'CommandToBindNames'!
 		ADD_VAR(::IntProperty, FakePlatform, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetStringWithFieldName'
+		// Here lies the not-yet-implemented method 'GetBoundStringWithFieldName'
+		// Here lies the not-yet-implemented method 'FindMappingInBoundKeyCache'
+		// Here lies the not-yet-implemented method 'AddMappingToBoundKeyCache'
+		// Here lies the not-yet-implemented method 'ClearBoundKeyCache'
 	};
 }
 #undef ADD_VAR

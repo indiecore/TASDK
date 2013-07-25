@@ -1,5 +1,8 @@
 #pragma once
+#include "Engine__SoundCue.h"
 #include "Core__Object.h"
+#include "Engine__Material.h"
+#include "Engine__ParticleSystem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrEffectForm." #y); \
@@ -26,6 +29,10 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, m_eMatType, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fBodyMatFadeOutTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fBodyMatFadeInTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetOverwriteMat'
+		// Here lies the not-yet-implemented method 'GetMatApplyToPawn'
+		// Here lies the not-yet-implemented method 'GetMatApplyToWeapon'
+		// Here lies the not-yet-implemented method 'GetMatApplyToAttachment'
 	};
 }
 #undef ADD_VAR

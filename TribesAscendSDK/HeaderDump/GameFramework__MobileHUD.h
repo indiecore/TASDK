@@ -1,5 +1,10 @@
 #pragma once
 #include "Engine__HUD.h"
+#include "Engine__Font.h"
+#include "Engine__Texture2D.h"
+#include "GameFramework__MobilePlayerInput.h"
+#include "GameFramework__MobileInputZone.h"
+#include "GameFramework__SeqEvent_HudRender.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.MobileHUD." #y); \
@@ -48,6 +53,20 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bForceMobileHUD, 0x4)
 		ADD_VAR(::BoolProperty, bShowMobileHud, 0x2)
 		ADD_VAR(::BoolProperty, bShowGameHud, 0x1)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'PostRender'
+		// Here lies the not-yet-implemented method 'DrawMobileDebugString'
+		// Here lies the not-yet-implemented method 'ShowMobileHud'
+		// Here lies the not-yet-implemented method 'RenderMobileMenu'
+		// Here lies the not-yet-implemented method 'DrawInputZoneOverlays'
+		// Here lies the not-yet-implemented method 'DrawMobileZone_Button'
+		// Here lies the not-yet-implemented method 'DrawMobileZone_Joystick'
+		// Here lies the not-yet-implemented method 'DrawMobileZone_Trackball'
+		// Here lies the not-yet-implemented method 'DrawMobileTilt'
+		// Here lies the not-yet-implemented method 'DrawMobileZone_Slider'
+		// Here lies the not-yet-implemented method 'RefreshKismetLinks'
+		// Here lies the not-yet-implemented method 'AddKismetRenderEvent'
+		// Here lies the not-yet-implemented method 'RenderKismetHud'
 	};
 }
 #undef ADD_VAR

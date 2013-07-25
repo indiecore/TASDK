@@ -46,6 +46,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bLoopingSound, 0x2)
 		ADD_VAR(::BoolProperty, bForceRealTimeDecompression, 0x1)
 		ADD_VAR(::IntProperty, CompressionQuality, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GeneratePCMData'
 	};
 }
 #undef ADD_VAR

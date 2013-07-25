@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__Projectile.h"
+#include "Engine__Vehicle.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKProjectile." #y); \
@@ -39,6 +41,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bCheckProjectileLight, 0x4)
 		ADD_VAR(::BoolProperty, bShuttingDown, 0x2)
 		ADD_VAR(::BoolProperty, bWideCheck, 0x1)
+		// Here lies the not-yet-implemented method 'GetTerminalVelocity'
+		// Here lies the not-yet-implemented method 'CreateProjectileLight'
 	};
 }
 #undef ADD_VAR

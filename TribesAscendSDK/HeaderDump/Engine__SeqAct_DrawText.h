@@ -20,6 +20,7 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.KismetDrawTextInfo' for the property named 'DrawTextInfo'!
 		ADD_VAR(::FloatProperty, DisplayTimeSeconds, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDisplayOnObject, 0x1)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

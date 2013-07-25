@@ -1,5 +1,10 @@
 #pragma once
 #include "UTGame__UTDamageType.h"
+#include "Engine__SoundCue.h"
+#include "TribesGame__TrPlayerController.h"
+#include "Engine__Actor.h"
+#include "Engine__Controller.h"
+#include "Engine__Vehicle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDmgType_Base." #y); \
@@ -50,6 +55,13 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fMaxDamageRangePct, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DBWeaponTypeId, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DBWeaponBaseId, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'CalculateRangeDamageFalloff'
+		// Here lies the not-yet-implemented method 'GetActorCausingDamage'
+		// Here lies the not-yet-implemented method 'ModifyOverheadNumberLocation'
+		// Here lies the not-yet-implemented method 'GetDamageScale'
+		// Here lies the not-yet-implemented method 'GetRandomDeathAnimName'
+		// Here lies the not-yet-implemented method 'VehicleDamageScalingFor'
+		// Here lies the not-yet-implemented method 'GetCameraShake'
 	};
 }
 #undef ADD_VAR

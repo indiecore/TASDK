@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__WaterVolume.h"
+#include "Engine__Actor.h"
+#include "Engine__ParticleSystem.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTWaterVolume." #y); \
@@ -14,6 +16,8 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, ProjectileEntryEffect)
 		ADD_OBJECT(ParticleSystem, PS_EnterWaterEffect_Vehicle)
 		ADD_OBJECT(ParticleSystem, PS_EnterWaterEffect_Pawn)
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'PlayEntrySplash'
 	};
 }
 #undef ADD_OBJECT

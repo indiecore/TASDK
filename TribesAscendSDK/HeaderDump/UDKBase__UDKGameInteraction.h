@@ -12,6 +12,10 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, BlockUIInputSemaphore, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'ShouldProcessUIInput'
+		// Here lies the not-yet-implemented method 'ClearUIInputBlocks'
+		// Here lies the not-yet-implemented method 'BlockUIInput'
+		// Here lies the not-yet-implemented method 'NotifyGameSessionEnded'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Keypoint.h"
+#include "Engine__Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.TargetPoint." #y); \

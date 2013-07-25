@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine__SeqAct_Latent.h"
+#include "Engine__MatineeActor.h"
+#include "Engine__InterpData.h"
+#include "Engine__PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_Interp." #y); \
@@ -27,6 +30,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TerminationTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PreferredSplitScreenNum, 0xFFFFFFFF)
 		ADD_OBJECT(MatineeActor, ReplicatedActor)
+		ADD_OBJECT(ScriptClass, ReplicatedActorClass)
 		ADD_OBJECT(InterpData, InterpData)
 		ADD_VAR(::BoolProperty, bShouldShowGore, 0x4000)
 		ADD_VAR(::BoolProperty, bIsSkippable, 0x2000)
@@ -39,6 +43,11 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bLooping, 0x8)
 		ADD_VAR(::BoolProperty, bIsBeingEdited, 0x4)
 		ADD_VAR(::FloatProperty, ForceStartPosition, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'AddPlayerToDirectorTracks'
+		// Here lies the not-yet-implemented method 'SetPosition'
+		// Here lies the not-yet-implemented method 'Stop'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

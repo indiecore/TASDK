@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__Controller.h"
 #include "Engine__NavigationPoint.h"
+#include "Engine__SeqAct_Toggle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Pylon." #y); \
@@ -47,6 +49,12 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ObstacleMesh'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'NavMeshPtr'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IEditorLinkSelectionInterface'!
+		// Here lies the not-yet-implemented method 'OnPylonStatusChange'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'SetEnabled'
+		// Here lies the not-yet-implemented method 'IsEnabled'
+		// Here lies the not-yet-implemented method 'OnToggle'
+		// Here lies the not-yet-implemented method 'CanReachPylon'
 	};
 }
 #undef ADD_VAR

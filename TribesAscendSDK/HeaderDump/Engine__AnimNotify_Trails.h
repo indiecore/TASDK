@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__AnimNotify.h"
+#include "Engine__AnimNodeSequence.h"
+#include "Engine__ParticleSystem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNotify_Trails." #y); \
@@ -32,6 +34,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bPreview, 0x2)
 		ADD_VAR(::BoolProperty, bIsExtremeContent, 0x1)
 		ADD_OBJECT(ParticleSystem, PSTemplate)
+		// Here lies the not-yet-implemented method 'GetNumSteps'
 	};
 }
 #undef ADD_VAR

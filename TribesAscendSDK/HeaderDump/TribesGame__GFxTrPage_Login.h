@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame__GFxTrPage.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrPage_Login." #y); \
@@ -21,6 +22,10 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, AccountLabel, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, SubmitLabel, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, HelpLabel, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'TakeAction'
+		// Here lies the not-yet-implemented method 'FillData'
+		// Here lies the not-yet-implemented method 'FillOption'
+		// Here lies the not-yet-implemented method 'ShowModel'
 	};
 }
 #undef ADD_VAR

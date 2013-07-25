@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine__PrimitiveComponent.h"
+#include "Engine__Texture2D.h"
+#include "Engine__MaterialInterface.h"
+#include "Engine__SpeedTree.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SpeedTreeComponent." #y); \
@@ -48,6 +51,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUseLeafMeshes, 0x2)
 		ADD_VAR(::BoolProperty, bUseLeafCards, 0x1)
 		ADD_OBJECT(SpeedTree, SpeedTree)
+		// Here lies the not-yet-implemented method 'GetMaterial'
+		// Here lies the not-yet-implemented method 'SetMaterial'
 	};
 }
 #undef ADD_VAR

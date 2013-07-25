@@ -12,6 +12,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bMoving, 0x1)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'RebuildDynamicEdges'
+		// Here lies the not-yet-implemented method 'FlushDynamicEdges'
+		// Here lies the not-yet-implemented method 'StartedMoving'
+		// Here lies the not-yet-implemented method 'StoppedMoving'
 	};
 }
 #undef ADD_VAR

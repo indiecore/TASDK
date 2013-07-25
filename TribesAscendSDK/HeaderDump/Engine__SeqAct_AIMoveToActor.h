@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SeqAct_Latent.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_AIMoveToActor." #y); \
@@ -22,6 +23,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MovementSpeedModifier, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bPickClosest, 0x2)
 		ADD_VAR(::BoolProperty, bInterruptable, 0x1)
+		// Here lies the not-yet-implemented method 'PickDestination'
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

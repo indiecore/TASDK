@@ -1,4 +1,5 @@
 #pragma once
+#include "UTGame__UTVehicle.h"
 #include "Engine__SequenceEvent.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
@@ -12,6 +13,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(UTVehicle, SpawnedVehicle)
+		// Here lies the not-yet-implemented method 'Activated'
 	};
 }
 #undef ADD_OBJECT

@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__Actor.h"
 #include "Engine__SequenceOp.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -29,6 +30,10 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ActivationTime, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, Instigator)
 		ADD_OBJECT(Actor, Originator)
+		// Here lies the not-yet-implemented method 'CheckActivate'
+		// Here lies the not-yet-implemented method 'RegisterEvent'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'Toggled'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,8 @@
 #pragma once
 #include "TribesGame__TrDevice_ConstantFire.h"
+#include "Engine__Actor.h"
+#include "TribesGame__TrCallIn.h"
+#include "Engine__SoundCue.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice_LaserTargeter." #y); \
@@ -30,6 +33,30 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, m_CallInConfirmation)
 		ADD_VAR(::ByteProperty, m_PrevActiveCallin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCallInEndTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'CalcHUDAimChargePercent'
+		// Here lies the not-yet-implemented method 'IsValidCallIn'
+		// Here lies the not-yet-implemented method 'IsValidTargetLocation'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'UpdateCallins'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'CanFireCallIn'
+		// Here lies the not-yet-implemented method 'SetActiveCallIn'
+		// Here lies the not-yet-implemented method 'OnEndConstantFire'
+		// Here lies the not-yet-implemented method 'OnStartConstantFire'
+		// Here lies the not-yet-implemented method 'GetLaserStartAndEnd'
+		// Here lies the not-yet-implemented method 'KillLaserEffect'
+		// Here lies the not-yet-implemented method 'SpawnLaserEffect'
+		// Here lies the not-yet-implemented method 'UpdateLaserEffect'
+		// Here lies the not-yet-implemented method 'CallInConfirmed'
+		// Here lies the not-yet-implemented method 'ServerPerformCallIn'
+		// Here lies the not-yet-implemented method 'UpdateTarget'
+		// Here lies the not-yet-implemented method 'GetTraceOwner'
+		// Here lies the not-yet-implemented method 'GetAmmoCount'
+		// Here lies the not-yet-implemented method 'UpdateCreditMaterial'
+		// Here lies the not-yet-implemented method 'PlayWeaponEquip'
+		// Here lies the not-yet-implemented method 'UpdateCallInMaterial'
+		// Here lies the not-yet-implemented method 'UpdateWeaponMICs'
 	};
 }
 #undef ADD_VAR

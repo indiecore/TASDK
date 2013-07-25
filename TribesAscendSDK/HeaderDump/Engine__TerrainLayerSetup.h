@@ -5,5 +5,6 @@ namespace UnrealScript
 	class TerrainLayerSetup : public Object
 	{
 	public:
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
 	};
 }

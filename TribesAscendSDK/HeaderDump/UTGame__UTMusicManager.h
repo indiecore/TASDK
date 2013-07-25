@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__SoundCue.h"
 #include "Engine__Info.h"
+#include "UTGame__UTPlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTMusicManager." #y); \
@@ -30,6 +32,15 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bPendingAction, 0x1)
 		ADD_VAR(::FloatProperty, LastActionEventTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StingerVolumeMultiplier, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'AlreadyInActionMusic'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'StartMusic'
+		// Here lies the not-yet-implemented method 'IntroFinished'
+		// Here lies the not-yet-implemented method 'CreateNewTrack'
+		// Here lies the not-yet-implemented method 'MusicEvent'
+		// Here lies the not-yet-implemented method 'ProcessMusicEvent'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'ChangeTrack'
 	};
 }
 #undef ADD_VAR

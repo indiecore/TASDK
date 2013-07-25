@@ -14,6 +14,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DesiredStrength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BlendRate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxForwardVelocity, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'TickSkelControl'
 	};
 }
 #undef ADD_VAR

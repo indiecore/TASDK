@@ -18,6 +18,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bPlayActiveChild, 0x1)
 		ADD_VAR(::IntProperty, ActiveChildIndex, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BlendTimeToGo, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetActiveChild'
 	};
 }
 #undef ADD_VAR

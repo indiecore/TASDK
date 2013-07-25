@@ -1,5 +1,8 @@
 #pragma once
 #include "GFxUI__GFxObject.h"
+#include "UTGame__GFxMinimapHud.h"
+#include "Engine__WorldInfo.h"
+#include "UTGame__UTMapInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxMinimap." #y); \
@@ -38,6 +41,13 @@ namespace UnrealScript
 		ADD_OBJECT(UTMapInfo, MapInfo)
 		ADD_OBJECT(WorldInfo, ThisWorld)
 		ADD_OBJECT(GFxMinimapHud, HUD)
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'UpdateData'
+		// Here lies the not-yet-implemented method 'GenFriendIcons'
+		// Here lies the not-yet-implemented method 'GenEnemyIcons'
+		// Here lies the not-yet-implemented method 'GenFlagIcons'
+		// Here lies the not-yet-implemented method 'UpdateIcons'
+		// Here lies the not-yet-implemented method 'Update'
 	};
 }
 #undef ADD_VAR

@@ -31,6 +31,7 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'HorizontalRange'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'PreviousAim'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'Aim'!
+		// Here lies the not-yet-implemented method 'CheckAnimsUpToDate'
 	};
 }
 #undef ADD_VAR

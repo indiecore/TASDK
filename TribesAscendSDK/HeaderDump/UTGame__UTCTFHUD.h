@@ -1,5 +1,7 @@
 #pragma once
+#include "UTGame__UTCTFBase.h"
 #include "UTGame__UTTeamHUD.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTCTFHUD." #y); \
@@ -19,6 +21,10 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::ByteProperty, FlagStates, 0xFFFFFFFF)
 		ADD_OBJECT(UTCTFBase, FlagBases)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Timer'
+		// Here lies the not-yet-implemented method 'DisplayTeamLogos'
+		// Here lies the not-yet-implemented method 'GetDirectionalDest'
 	};
 }
 #undef ADD_VAR

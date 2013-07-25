@@ -16,6 +16,8 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, GroupNames, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bOfficialMutator, 0x2)
 		ADD_VAR(::BoolProperty, bStandaloneOnly, 0x1)
+		// Here lies the not-yet-implemented method 'ShouldBeFiltered'
+		// Here lies the not-yet-implemented method 'SupportsCurrentGameMode'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,34 @@
 #pragma once
+#include "UTGame__UTWeaponAttachment.h"
+#include "UDKBase__UDKCarriedObject.h"
 #include "UTGame__UTPawn.h"
+#include "TribesGame__TrVehicle.h"
+#include "TribesGame__TrStatsInterface.h"
+#include "TribesGame__TrAnimNodeBlendByRidingPassenger.h"
+#include "TribesGame__TrAnimNodeAimOffset.h"
+#include "TribesGame__TrProjectile.h"
+#include "Engine__Weapon.h"
+#include "Engine__SkeletalMesh.h"
+#include "Engine__MaterialInstanceConstant.h"
+#include "Engine__Material.h"
+#include "TribesGame__TrPlayerReplicationInfo.h"
+#include "TribesGame__TrPawnCollisionProxy.h"
+#include "Engine__PlayerController.h"
+#include "Engine__MorphNodeWeight.h"
+#include "TribesGame__TrAnimNodeBlendByVehicle.h"
+#include "Engine__Actor.h"
+#include "TribesGame__TrHUD.h"
+#include "TribesGame__TrValueModifier.h"
+#include "Engine__MaterialInterface.h"
+#include "Engine__Canvas.h"
+#include "Engine__Controller.h"
+#include "TribesGame__TrPlayerController.h"
+#include "Engine__HUD.h"
+#include "Engine__Vehicle.h"
+#include "Engine__SVehicle.h"
+#include "Engine__Pawn.h"
+#include "TribesGame__TrDeployable_DropJammer.h"
+#include "Engine__AnimNodeSequence.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrPawn." #y); \
@@ -39,6 +68,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, r_bIsJetting, 0x8000)
 		ADD_VAR(::FloatProperty, m_TerrainWalkableFloorZ, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fSwapSkinDistSq, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, c_Pending1PSkin)
+		ADD_OBJECT(ScriptClass, c_Pending3PSkin)
 		ADD_VAR(::IntProperty, m_nNetViewPitchCount, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_PitchInterpRate, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nTargetRemoteViewPitch, 0xFFFFFFFF)
@@ -190,6 +221,190 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bRefreshInventoryWasRespawn, 0x2)
 		ADD_VAR(::BoolProperty, m_bInitialized, 0x1)
 		ADD_VAR(::NameProperty, m_nmMakeVisible, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetCurrentPowerPool'
+		// Here lies the not-yet-implemented method 'GetMaxPowerPool'
+		// Here lies the not-yet-implemented method 'CalculatePawnSpeed'
+		// Here lies the not-yet-implemented method 'GetCurrCharClassInfo'
+		// Here lies the not-yet-implemented method 'IsFirstPerson'
+		// Here lies the not-yet-implemented method 'GetHandsMesh'
+		// Here lies the not-yet-implemented method 'GetTribesReplicationInfo'
+		// Here lies the not-yet-implemented method 'CheckHeadShot'
+		// Here lies the not-yet-implemented method 'GetPawnViewLocation'
+		// Here lies the not-yet-implemented method 'GetTrHud'
+		// Here lies the not-yet-implemented method 'IsPulseStealthed'
+		// Here lies the not-yet-implemented method 'IsJammedByFriendOrSelf'
+		// Here lies the not-yet-implemented method 'CheckGrabSpeed'
+		// Here lies the not-yet-implemented method 'NativeGetCollisionHeight'
+		// Here lies the not-yet-implemented method 'NativeGetCollisionRadius'
+		// Here lies the not-yet-implemented method 'SyncClientCurrentPowerPool'
+		// Here lies the not-yet-implemented method 'ConsumePowerPool'
+		// Here lies the not-yet-implemented method 'RegainPowerPool'
+		// Here lies the not-yet-implemented method 'GetPowerPoolPercent'
+		// Here lies the not-yet-implemented method 'GetCurrentDeviceAccuracyInfo'
+		// Here lies the not-yet-implemented method 'SetOverlayMaterial'
+		// Here lies the not-yet-implemented method 'ServerUpdateLockedTarget'
+		// Here lies the not-yet-implemented method 'NativePostRenderFor'
+		// Here lies the not-yet-implemented method 'GetTargetLocation'
+		// Here lies the not-yet-implemented method 'SetFlashNormal'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'PostInitAnimTree'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'GetCurrentCredits'
+		// Here lies the not-yet-implemented method 'ClientRestart'
+		// Here lies the not-yet-implemented method 'CurrentDeployedCount'
+		// Here lies the not-yet-implemented method 'ExitDeployMode'
+		// Here lies the not-yet-implemented method 'GetArmorType'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'ReplicateMultiFlashLocation'
+		// Here lies the not-yet-implemented method 'EquipBestPossibleDevice'
+		// Here lies the not-yet-implemented method 'InitDefaultAnims'
+		// Here lies the not-yet-implemented method 'SetCharacterClassFromInfo'
+		// Here lies the not-yet-implemented method 'ActivatePendingClass'
+		// Here lies the not-yet-implemented method 'RefreshInventoryTimer'
+		// Here lies the not-yet-implemented method 'SetValuesFromCurrentFamilyInfo'
+		// Here lies the not-yet-implemented method 'RefreshInventory'
+		// Here lies the not-yet-implemented method 'ActivateSelectedDeployable'
+		// Here lies the not-yet-implemented method 'RemoveEffectByClass'
+		// Here lies the not-yet-implemented method 'ProcessEffectForm'
+		// Here lies the not-yet-implemented method 'GetShieldStrength'
+		// Here lies the not-yet-implemented method 'AdjustAmmoPool'
+		// Here lies the not-yet-implemented method 'AdjustMaxPowerPool'
+		// Here lies the not-yet-implemented method 'SetMaxPowerPool'
+		// Here lies the not-yet-implemented method 'SetMaxHealthPool'
+		// Here lies the not-yet-implemented method 'ClientUpdateHUDHealth'
+		// Here lies the not-yet-implemented method 'ShouldRechargePowerPool'
+		// Here lies the not-yet-implemented method 'ForceHealthRegen'
+		// Here lies the not-yet-implemented method 'RechargeHealthPool'
+		// Here lies the not-yet-implemented method 'GetJetpackAirControl'
+		// Here lies the not-yet-implemented method 'UpdateSkiEffects'
+		// Here lies the not-yet-implemented method 'PlayJetpackEffects'
+		// Here lies the not-yet-implemented method 'UpdateJetpackEffects'
+		// Here lies the not-yet-implemented method 'StopJetpackEffects'
+		// Here lies the not-yet-implemented method 'PlayLandingSound'
+		// Here lies the not-yet-implemented method 'PlayJumpingSound'
+		// Here lies the not-yet-implemented method 'RememberLastDamager'
+		// Here lies the not-yet-implemented method 'GetHealthPct'
+		// Here lies the not-yet-implemented method 'CreateAssistRecord'
+		// Here lies the not-yet-implemented method 'GetLastDamager'
+		// Here lies the not-yet-implemented method 'ProcessKillAssists'
+		// Here lies the not-yet-implemented method 'GetUnshieldedDamage'
+		// Here lies the not-yet-implemented method 'GetPawnCausingDamage'
+		// Here lies the not-yet-implemented method 'GetDamageScale'
+		// Here lies the not-yet-implemented method 'DoRepairs'
+		// Here lies the not-yet-implemented method 'CheckTribesTurretInstigator'
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'PlayWhiteoutEffect'
+		// Here lies the not-yet-implemented method 'TakeRadiusDamage'
+		// Here lies the not-yet-implemented method 'RecentlyGrabbedFlag'
+		// Here lies the not-yet-implemented method 'GetShowDistanceThreshold'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
+		// Here lies the not-yet-implemented method 'DisplayDebug'
+		// Here lies the not-yet-implemented method 'Landed'
+		// Here lies the not-yet-implemented method 'TakeFallingDamage'
+		// Here lies the not-yet-implemented method 'PlayHardLandingEffect'
+		// Here lies the not-yet-implemented method 'PlaySonicPunchEffect'
+		// Here lies the not-yet-implemented method 'TakeFallDamage'
+		// Here lies the not-yet-implemented method 'ProcessCreditEvent'
+		// Here lies the not-yet-implemented method 'FlashLocationUpdated'
+		// Here lies the not-yet-implemented method 'WeaponFired'
+		// Here lies the not-yet-implemented method 'Dodge'
+		// Here lies the not-yet-implemented method 'PerformDodge'
+		// Here lies the not-yet-implemented method 'gibbedBy'
+		// Here lies the not-yet-implemented method 'EncroachedBy'
+		// Here lies the not-yet-implemented method 'ShouldGib'
+		// Here lies the not-yet-implemented method 'SetHandIKEnabled'
+		// Here lies the not-yet-implemented method 'PlayDamageCameraShake'
+		// Here lies the not-yet-implemented method 'IsLastHitFromNinjaSmoke'
+		// Here lies the not-yet-implemented method 'PlayTakeHitEffects'
+		// Here lies the not-yet-implemented method 'FellOutOfWorld'
+		// Here lies the not-yet-implemented method 'Died'
+		// Here lies the not-yet-implemented method 'StopLocalEffectsAndSounds'
+		// Here lies the not-yet-implemented method 'SetOverlayMeshHidden'
+		// Here lies the not-yet-implemented method 'PlayDying'
+		// Here lies the not-yet-implemented method 'NotifyTeamChanged'
+		// Here lies the not-yet-implemented method 'UpdateTeamBlockerMaterials'
+		// Here lies the not-yet-implemented method 'PossessedBy'
+		// Here lies the not-yet-implemented method 'ResetSkin'
+		// Here lies the not-yet-implemented method 'SetSkin'
+		// Here lies the not-yet-implemented method 'InitializeOverlayMaterials'
+		// Here lies the not-yet-implemented method 'ClientPlayHealthRegenEffect'
+		// Here lies the not-yet-implemented method 'SetShieldPackActive'
+		// Here lies the not-yet-implemented method 'PlayShieldPackEffect'
+		// Here lies the not-yet-implemented method 'SetStealthPackActive'
+		// Here lies the not-yet-implemented method 'PlayStealthPackEffect'
+		// Here lies the not-yet-implemented method 'PulseStealth'
+		// Here lies the not-yet-implemented method 'SetRagePerkActive'
+		// Here lies the not-yet-implemented method 'ClearRagePerk'
+		// Here lies the not-yet-implemented method 'PlayRageEffect'
+		// Here lies the not-yet-implemented method 'PlayInvulnerabilityEffect'
+		// Here lies the not-yet-implemented method 'StartRidingInVehicle'
+		// Here lies the not-yet-implemented method 'StopRidingInVehicle'
+		// Here lies the not-yet-implemented method 'StartDriving'
+		// Here lies the not-yet-implemented method 'StopDriving'
+		// Here lies the not-yet-implemented method 'OnRanOver'
+		// Here lies the not-yet-implemented method 'EnableJamming'
+		// Here lies the not-yet-implemented method 'DisableJamming'
+		// Here lies the not-yet-implemented method 'DisableJammingOtherPawns'
+		// Here lies the not-yet-implemented method 'EnteredFriendJammingRadius'
+		// Here lies the not-yet-implemented method 'ExitFriendJammingRadius'
+		// Here lies the not-yet-implemented method 'EnteredEnemyJammingRadius'
+		// Here lies the not-yet-implemented method 'ExitEnemyJammingRadius'
+		// Here lies the not-yet-implemented method 'IsJammedByEnemy'
+		// Here lies the not-yet-implemented method 'PlayJammerPackEffect'
+		// Here lies the not-yet-implemented method 'PlayJammingByFriendEffect'
+		// Here lies the not-yet-implemented method 'PlayEnemyJammerPackEffect'
+		// Here lies the not-yet-implemented method 'OnPawnDetectedByCollisionProxy'
+		// Here lies the not-yet-implemented method 'OnPawnExitedCollisionProxy'
+		// Here lies the not-yet-implemented method 'OnEnteredDropJammer'
+		// Here lies the not-yet-implemented method 'OnExitedDropJammer'
+		// Here lies the not-yet-implemented method 'UpdateEnemyDropJammer'
+		// Here lies the not-yet-implemented method 'UpdateFriendlyDropJammer'
+		// Here lies the not-yet-implemented method 'PlayJammingByEnemyDropJammerEffect'
+		// Here lies the not-yet-implemented method 'PlayJammingByFriendlyDropJammerEffect'
+		// Here lies the not-yet-implemented method 'OnChangeJammingTeam'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'SetMeshVisibility'
+		// Here lies the not-yet-implemented method 'SetFirstPersonBodyVisibility'
+		// Here lies the not-yet-implemented method 'WeaponAttachmentChanged'
+		// Here lies the not-yet-implemented method 'ForceCrouch'
+		// Here lies the not-yet-implemented method 'FindClosestStickyGrenadeSocketIndex'
+		// Here lies the not-yet-implemented method 'StickGrenadeToPawn'
+		// Here lies the not-yet-implemented method 'UpdateStickyGrenades'
+		// Here lies the not-yet-implemented method 'SetSkiing'
+		// Here lies the not-yet-implemented method 'PlaySkiEffects'
+		// Here lies the not-yet-implemented method 'StopSkiEffects'
+		// Here lies the not-yet-implemented method 'PlaySkiEffectsSound'
+		// Here lies the not-yet-implemented method 'StopSkiEffectsSound'
+		// Here lies the not-yet-implemented method 'FaceRotation'
+		// Here lies the not-yet-implemented method 'PlayDyingSound'
+		// Here lies the not-yet-implemented method 'HoldGameObject'
+		// Here lies the not-yet-implemented method 'AdjustDamage'
+		// Here lies the not-yet-implemented method 'GoInvulnerable'
+		// Here lies the not-yet-implemented method 'ClearInvulnerability'
+		// Here lies the not-yet-implemented method 'SetMovementPhysics'
+		// Here lies the not-yet-implemented method 'OnAnimEnd'
+		// Here lies the not-yet-implemented method 'PlayTeleportEffect'
+		// Here lies the not-yet-implemented method 'TurnOff'
+		// Here lies the not-yet-implemented method 'SetDetectedByEnemyScanner'
+		// Here lies the not-yet-implemented method 'GetDetectedByEnemyScanner'
+		// Here lies the not-yet-implemented method 'SetScannerDetect'
+		// Here lies the not-yet-implemented method 'GetFamilyInfo'
+		// Here lies the not-yet-implemented method 'LockedOutFromFlagPickupTimer'
+		// Here lies the not-yet-implemented method 'LockFromFlagPickup'
+		// Here lies the not-yet-implemented method 'Blink'
+		// Here lies the not-yet-implemented method 'PlayBlinkPackEffect'
+		// Here lies the not-yet-implemented method 'DoJump'
+		// Here lies the not-yet-implemented method 'CheckClotheslineDamage'
+		// Here lies the not-yet-implemented method 'GetSpectatorName'
+		// Here lies the not-yet-implemented method 'CrushedBy'
+		// Here lies the not-yet-implemented method 'StuckOnPawn'
+		// Here lies the not-yet-implemented method 'SetPending3PSkin'
+		// Here lies the not-yet-implemented method 'CheckApplyPending3PSkin'
+		// Here lies the not-yet-implemented method 'ThrowActiveWeapon'
+		// Here lies the not-yet-implemented method 'ThrowWeaponOnDeath'
+		// Here lies the not-yet-implemented method 'ClearSkiParticleEffects'
+		// Here lies the not-yet-implemented method 'ClearJetpackParticleEffects'
+		// Here lies the not-yet-implemented method 'AlienFXOverlay'
 	};
 }
 #undef ADD_VAR

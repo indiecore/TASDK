@@ -19,6 +19,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::NameProperty, ParentSocketName, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'MeshInfo'!
+		// Here lies the not-yet-implemented method 'PreloadTextures'
 	};
 }
 #undef ADD_VAR

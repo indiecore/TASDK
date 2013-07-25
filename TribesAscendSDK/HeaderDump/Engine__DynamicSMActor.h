@@ -1,5 +1,10 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "Engine__MaterialInterface.h"
+#include "Engine__SeqAct_SetMesh.h"
+#include "Engine__StaticMesh.h"
+#include "Engine__SeqAct_SetMaterial.h"
+#include "Engine__Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DynamicSMActor." #y); \
@@ -31,6 +36,15 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bForceStaticDecals, 0x1)
 		ADD_OBJECT(MaterialInterface, ReplicatedMaterial)
 		ADD_OBJECT(StaticMesh, ReplicatedMesh)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'OnSetMesh'
+		// Here lies the not-yet-implemented method 'OnSetMaterial'
+		// Here lies the not-yet-implemented method 'SetStaticMesh'
+		// Here lies the not-yet-implemented method 'CanBasePawn'
+		// Here lies the not-yet-implemented method 'Attach'
+		// Here lies the not-yet-implemented method 'Detach'
+		// Here lies the not-yet-implemented method 'SetLightEnvironmentToNotBeDynamic'
 	};
 }
 #undef ADD_VAR

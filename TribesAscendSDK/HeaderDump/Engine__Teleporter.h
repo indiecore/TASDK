@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__Pawn.h"
 #include "Engine__NavigationPoint.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Teleporter." #y); \
@@ -28,6 +30,12 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bChangesVelocity, 0x1)
 		ADD_VAR(::NameProperty, ProductRequired, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, URL, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'CanTeleport'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Accept'
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'PostTouch'
+		// Here lies the not-yet-implemented method 'SpecialHandling'
 	};
 }
 #undef ADD_VAR

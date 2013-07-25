@@ -1,5 +1,6 @@
 #pragma once
 #include "UTGame__UTEmitter.h"
+#include "Engine__ParticleSystem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTReplicatedEmitter." #y); \
@@ -19,6 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, ServerLifeSpan, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, EmitterTemplate)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
 	};
 }
 #undef ADD_VAR

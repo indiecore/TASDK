@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__Texture2D.h"
 #include "TribesGame__TrStation.h"
+#include "TribesGame__TrPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrInventoryStation." #y); \
@@ -29,6 +31,11 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'm_PowerOnColor'!
 		ADD_VAR(::FloatProperty, m_fStationReleaseTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fStationAnimTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PawnEnteredStation'
+		// Here lies the not-yet-implemented method 'OnPowerStatusChanged'
+		// Here lies the not-yet-implemented method 'PlayStationEnteredEffects'
+		// Here lies the not-yet-implemented method 'Timer'
+		// Here lies the not-yet-implemented method 'GetMarker'
 	};
 }
 #undef ADD_VAR

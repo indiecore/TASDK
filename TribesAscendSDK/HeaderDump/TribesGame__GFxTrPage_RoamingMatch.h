@@ -5,5 +5,7 @@ namespace UnrealScript
 	class GFxTrPage_RoamingMatch : public GFxTrPage
 	{
 	public:
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'ShowModel'
 	};
 }

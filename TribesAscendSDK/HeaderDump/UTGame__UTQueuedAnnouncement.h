@@ -1,4 +1,6 @@
 #pragma once
+#include "Core__Object.h"
+#include "Engine__PlayerReplicationInfo.h"
 #include "Engine__Info.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -18,6 +20,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(UTQueuedAnnouncement, nextAnnouncement)
+		ADD_OBJECT(ScriptClass, AnnouncementClass)
 		ADD_VAR(::IntProperty, MessageIndex, 0xFFFFFFFF)
 		ADD_OBJECT(PlayerReplicationInfo, PRI)
 		ADD_OBJECT(Object, OptionalObject)

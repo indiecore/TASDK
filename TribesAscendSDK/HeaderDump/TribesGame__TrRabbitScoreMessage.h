@@ -1,5 +1,9 @@
 #pragma once
+#include "Engine__PlayerController.h"
 #include "UTGame__UTLocalMessage.h"
+#include "Core__Object.h"
+#include "Engine__PlayerReplicationInfo.h"
+#include "Engine__SoundCue.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrRabbitScoreMessage." #y); \
@@ -29,6 +33,9 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, YouAreNewLeader, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, OtherScoreFlagTouch, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, YouScoreFlagTouch, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetString'
+		// Here lies the not-yet-implemented method 'ClientReceive'
+		// Here lies the not-yet-implemented method 'AnnouncementLevel'
 	};
 }
 #undef ADD_VAR

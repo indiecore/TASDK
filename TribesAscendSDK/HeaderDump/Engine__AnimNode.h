@@ -34,6 +34,13 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bTickDuringPausedAnims, 0x4)
 		ADD_VAR(::BoolProperty, bJustBecameRelevant, 0x2)
 		ADD_VAR(::BoolProperty, bRelevant, 0x1)
+		// Here lies the not-yet-implemented method 'OnInit'
+		// Here lies the not-yet-implemented method 'OnBecomeRelevant'
+		// Here lies the not-yet-implemented method 'OnCeaseRelevant'
+		// Here lies the not-yet-implemented method 'FindAnimNode'
+		// Here lies the not-yet-implemented method 'PlayAnim'
+		// Here lies the not-yet-implemented method 'StopAnim'
+		// Here lies the not-yet-implemented method 'ReplayAnim'
 	};
 }
 #undef ADD_VAR

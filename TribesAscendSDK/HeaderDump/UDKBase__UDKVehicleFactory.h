@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__NavigationPoint.h"
+#include "UDKBase__UDKVehicle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKVehicleFactory." #y); \
@@ -27,9 +28,13 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF
 		ADD_VAR(::FloatProperty, RespawnProgress, 0xFFFFFFFF)
 		ADD_OBJECT(UDKVehicle, ChildVehicle)
+		ADD_OBJECT(ScriptClass, VehicleClass)
 		ADD_VAR(::BoolProperty, bReplicateChildVehicle, 0x2)
 		ADD_VAR(::BoolProperty, bHasLockedVehicle, 0x1)
 		ADD_VAR(::StrProperty, VehicleClassPath, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SpawnVehicle'
+		// Here lies the not-yet-implemented method 'SetHUDLocation'
+		// Here lies the not-yet-implemented method 'GetTeamNum'
 	};
 }
 #undef ADD_VAR

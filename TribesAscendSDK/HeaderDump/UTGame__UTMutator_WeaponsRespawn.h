@@ -5,5 +5,6 @@ namespace UnrealScript
 	class UTMutator_WeaponsRespawn : public UTMutator
 	{
 	public:
+		// Here lies the not-yet-implemented method 'InitMutator'
 	};
 }

@@ -19,6 +19,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, MapPrefix, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, GameAcronym, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ClassName, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'IsProviderDisabled'
 	};
 }
 #undef ADD_VAR

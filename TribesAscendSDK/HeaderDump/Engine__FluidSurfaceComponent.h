@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__Actor.h"
 #include "Engine__PrimitiveComponent.h"
+#include "Engine__MaterialInterface.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FluidSurfaceComponent." #y); \
@@ -74,6 +76,9 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightmassPrimitiveSettings' for the property named 'LightmassSettings'!
 		ADD_VAR(::IntProperty, LightMapResolution, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInterface, FluidMaterial)
+		// Here lies the not-yet-implemented method 'ApplyForce'
+		// Here lies the not-yet-implemented method 'SetDetailPosition'
+		// Here lies the not-yet-implemented method 'SetSimulationPosition'
 	};
 }
 #undef ADD_VAR

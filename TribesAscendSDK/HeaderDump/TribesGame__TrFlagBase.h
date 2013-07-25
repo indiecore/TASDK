@@ -1,5 +1,14 @@
 #pragma once
 #include "UTGame__UTCarriedObject.h"
+#include "Engine__MaterialInstanceConstant.h"
+#include "Engine__Canvas.h"
+#include "Engine__PlayerController.h"
+#include "TribesGame__TrCollisionProxy.h"
+#include "Engine__Actor.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__Controller.h"
+#include "Engine__HUD.h"
+#include "TribesGame__TrPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrFlagBase." #y); \
@@ -56,6 +65,29 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bBringDownFromBright, 0x2)
 		ADD_VAR(::BoolProperty, bBringUpBright, 0x1)
 		ADD_OBJECT(ParticleSystem, RespawnEffect)
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'OnBaseChainChanged'
+		// Here lies the not-yet-implemented method 'ShouldMinimapRenderFor'
+		// Here lies the not-yet-implemented method 'ClientReturnedHome'
+		// Here lies the not-yet-implemented method 'SetHolder'
+		// Here lies the not-yet-implemented method 'ValidHolder'
+		// Here lies the not-yet-implemented method 'SameTeamTouch'
+		// Here lies the not-yet-implemented method 'CustomRespawnEffects'
+		// Here lies the not-yet-implemented method 'bringUpBrightOff'
+		// Here lies the not-yet-implemented method 'CustomFadeOutEffects'
+		// Here lies the not-yet-implemented method 'Landed'
+		// Here lies the not-yet-implemented method 'EncroachedBy'
+		// Here lies the not-yet-implemented method 'Drop'
+		// Here lies the not-yet-implemented method 'SetFlagPropertiesToStationaryFlagState'
+		// Here lies the not-yet-implemented method 'SetFlagDynamicLightToNotBeDynamic'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
+		// Here lies the not-yet-implemented method 'DisplayDebug'
+		// Here lies the not-yet-implemented method 'GetSpectatorName'
+		// Here lies the not-yet-implemented method 'GetSpectatorDescription'
+		// Here lies the not-yet-implemented method 'OnCollisionProxyTouched'
 	};
 }
 #undef ADD_VAR

@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, NodeWeight, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetNodeWeight'
 	};
 }
 #undef ADD_VAR

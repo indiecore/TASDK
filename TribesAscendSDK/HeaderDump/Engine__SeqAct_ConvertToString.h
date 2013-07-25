@@ -14,6 +14,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumberOfInputs, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, VarSeparator, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIncludeVarComment, 0x1)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

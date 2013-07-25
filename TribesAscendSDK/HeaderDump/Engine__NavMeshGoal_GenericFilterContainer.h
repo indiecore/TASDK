@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__NavMeshPathGoalEvaluator.h"
+#include "Engine__NavigationHandle.h"
+#include "Engine__NavMeshGoal_Filter.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NavMeshGoal_GenericFilterContainer." #y); \
@@ -19,6 +21,10 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(NavigationHandle, MyNavigationHandle)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SuccessfulGoal'!
+		// Here lies the not-yet-implemented method 'CreateAndAddFilterToNavHandle'
+		// Here lies the not-yet-implemented method 'GetFilterOfType'
+		// Here lies the not-yet-implemented method 'GetGoalPoint'
+		// Here lies the not-yet-implemented method 'Recycle'
 	};
 }
 #undef ADD_STRUCT

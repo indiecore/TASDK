@@ -5,5 +5,6 @@ namespace UnrealScript
 	class SeqAct_RandomSwitch : public SeqAct_Switch
 	{
 	public:
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }

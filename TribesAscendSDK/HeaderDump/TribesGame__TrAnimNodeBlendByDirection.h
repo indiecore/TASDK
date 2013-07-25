@@ -1,4 +1,5 @@
 #pragma once
+#include "TribesGame__TrPawn.h"
 #include "Engine__AnimNodeSequenceBlendBase.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

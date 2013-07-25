@@ -1,5 +1,8 @@
 #pragma once
+#include "GFxUI__GFxMoviePlayer.h"
 #include "Engine__SequenceAction.h"
+#include "GFxUI__SwfMovie.h"
+#include "Engine__TextureRenderTarget2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GFxUI.GFxAction_OpenMovie." #y); \
@@ -25,7 +28,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bCaptureInput, 0x2)
 		ADD_VAR(::BoolProperty, bTakeFocus, 0x1)
 		ADD_OBJECT(GFxMoviePlayer, MoviePlayer)
+		ADD_OBJECT(ScriptClass, MoviePlayerClass)
 		ADD_OBJECT(SwfMovie, Movie)
+		// Here lies the not-yet-implemented method 'IsValidLevelSequenceObject'
 	};
 }
 #undef ADD_VAR

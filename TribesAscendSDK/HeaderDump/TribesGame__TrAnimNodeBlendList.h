@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, m_fBlendTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetBlendTime'
 	};
 }
 #undef ADD_VAR

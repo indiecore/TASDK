@@ -13,6 +13,9 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::ByteProperty, BlendType, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bFixNumChildren, 0x1)
+		// Here lies the not-yet-implemented method 'PlayAnim'
+		// Here lies the not-yet-implemented method 'StopAnim'
+		// Here lies the not-yet-implemented method 'ReplayAnim'
 	};
 }
 #undef ADD_VAR

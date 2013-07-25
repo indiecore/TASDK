@@ -12,6 +12,10 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, EULA, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'LoadEULA'
+		// Here lies the not-yet-implemented method 'AcceptEULA'
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'EULAReponse'
 	};
 }
 #undef ADD_VAR

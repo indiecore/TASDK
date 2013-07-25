@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, HintLocFileName, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'LoadRandomLocalizedHintMessage'
 	};
 }
 #undef ADD_VAR

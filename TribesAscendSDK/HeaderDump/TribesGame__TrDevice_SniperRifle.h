@@ -16,6 +16,15 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, r_fAimChargeTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fAimChargeDeltaTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMaxAimedDamage, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'OnSwitchToWeapon'
+		// Here lies the not-yet-implemented method 'OnSwitchAwayFromWeapon'
+		// Here lies the not-yet-implemented method 'InstantFire'
+		// Here lies the not-yet-implemented method 'ModifyInstantHitDamage'
+		// Here lies the not-yet-implemented method 'StartFire'
+		// Here lies the not-yet-implemented method 'CalcHUDAimChargePercent'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'PlayScopeRechargeSound'
+		// Here lies the not-yet-implemented method 'StopScopeRechargeSound'
 	};
 }
 #undef ADD_VAR

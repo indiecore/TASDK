@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "Engine__Controller.h"
+#include "Engine__SoundCue.h"
+#include "Engine__FluidSurfaceActor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Projectile." #y); \
@@ -22,6 +25,7 @@ namespace UnrealScript
 		ADD_OBJECT(Controller, InstigatorController)
 		ADD_OBJECT(SoundCue, ImpactSound)
 		ADD_OBJECT(SoundCue, SpawnSound)
+		ADD_OBJECT(ScriptClass, MyDamageType)
 		ADD_VAR(::FloatProperty, MomentumTransfer, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DamageRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Damage, 0xFFFFFFFF)
@@ -32,6 +36,27 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bSwitchToZeroCollision, 0x1)
 		ADD_VAR(::FloatProperty, MaxSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Speed, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'EncroachingOn'
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'GetTeamNum'
+		// Here lies the not-yet-implemented method 'CanSplash'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'ProjectileHurtRadius'
+		// Here lies the not-yet-implemented method 'HurtRadius'
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'ProcessTouch'
+		// Here lies the not-yet-implemented method 'HitWall'
+		// Here lies the not-yet-implemented method 'EncroachedBy'
+		// Here lies the not-yet-implemented method 'Explode'
+		// Here lies the not-yet-implemented method 'RandSpin'
+		// Here lies the not-yet-implemented method 'IsStationary'
+		// Here lies the not-yet-implemented method 'FellOutOfWorld'
+		// Here lies the not-yet-implemented method 'GetTimeToLocation'
+		// Here lies the not-yet-implemented method 'StaticGetTimeToLocation'
+		// Here lies the not-yet-implemented method 'GetRange'
+		// Here lies the not-yet-implemented method 'ApplyFluidSurfaceImpact'
 	};
 }
 #undef ADD_VAR

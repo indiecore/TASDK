@@ -15,6 +15,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bBlockActors, 0x2)
 		ADD_VAR(::BoolProperty, bIgnoreEncroachers, 0x4)
 		ADD_VAR(::ByteProperty, CollisionType, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

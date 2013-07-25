@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SeqAct_Latent.h"
+#include "Engine__ActorFactory.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_ActorFactory." #y); \
@@ -27,6 +28,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bCheckSpawnCollision, 0x4)
 		ADD_VAR(::BoolProperty, bIsSpawning, 0x2)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

@@ -26,6 +26,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, FalloffExponent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Radius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ShadowRadiusMultiplier, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetTranslation'
+		// Here lies the not-yet-implemented method 'OnUpdatePropertyLightColor'
+		// Here lies the not-yet-implemented method 'OnUpdatePropertyBrightness'
 	};
 }
 #undef ADD_VAR

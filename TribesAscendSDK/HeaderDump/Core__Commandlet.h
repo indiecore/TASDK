@@ -19,6 +19,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, HelpWebLink, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, HelpUsage, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, HelpDescription, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Main'
 	};
 }
 #undef ADD_VAR

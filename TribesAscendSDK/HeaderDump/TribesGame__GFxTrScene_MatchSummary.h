@@ -1,5 +1,8 @@
 #pragma once
+#include "TribesGame__TrPlayerReplicationInfo.h"
 #include "TribesGame__GFxTrScene.h"
+#include "TribesGame__TrSummaryHelper.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrScene_MatchSummary." #y); \
@@ -43,6 +46,22 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, AwardDataCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MiscDataCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SCOREBOARD_SIZE, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'CreditsSort'
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'ClearSummary'
+		// Here lies the not-yet-implemented method 'SummaryReady'
+		// Here lies the not-yet-implemented method 'LoadTeamStatsData'
+		// Here lies the not-yet-implemented method 'LoadTeamAccoladeData'
+		// Here lies the not-yet-implemented method 'LoadTeamScoreboardData'
+		// Here lies the not-yet-implemented method 'LoadTeamMiscData'
+		// Here lies the not-yet-implemented method 'AddAward'
+		// Here lies the not-yet-implemented method 'AddAccolade'
+		// Here lies the not-yet-implemented method 'AddScoreSlot'
+		// Here lies the not-yet-implemented method 'AddMiscData'
+		// Here lies the not-yet-implemented method 'FormatResult'
+		// Here lies the not-yet-implemented method 'FormatTime'
+		// Here lies the not-yet-implemented method 'FindPlayerName'
+		// Here lies the not-yet-implemented method 'PopulateScoreboardDataFromGRI'
 	};
 }
 #undef ADD_VAR

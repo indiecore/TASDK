@@ -12,6 +12,9 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'CreateCheckpointRecord'
+		// Here lies the not-yet-implemented method 'ApplyCheckpointRecord'
 	};
 }
 #undef ADD_VAR

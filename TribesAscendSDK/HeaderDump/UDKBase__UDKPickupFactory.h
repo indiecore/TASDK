@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__PickupFactory.h"
+#include "Engine__MaterialInstanceConstant.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKPickupFactory." #y); \
@@ -50,6 +51,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsDisabled, 0x4)
 		ADD_VAR(::BoolProperty, bPulseBase, 0x2)
 		ADD_VAR(::BoolProperty, bIsRespawning, 0x1)
+		// Here lies the not-yet-implemented method 'SetPickupVisible'
+		// Here lies the not-yet-implemented method 'SetPickupHidden'
 	};
 }
 #undef ADD_VAR

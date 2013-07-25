@@ -1,5 +1,9 @@
 #pragma once
+#include "Engine__PlayerController.h"
 #include "UTGame__UTLocalMessage.h"
+#include "Core__Object.h"
+#include "Engine__PlayerReplicationInfo.h"
+#include "UTGame__UTAnnouncer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrCTFHUDMessage." #y); \
@@ -23,6 +27,10 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, BothFlagsString, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, EnemyHasFlagString, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, YouHaveFlagString, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'ClientReceive'
+		// Here lies the not-yet-implemented method 'GetColor'
+		// Here lies the not-yet-implemented method 'GetString'
+		// Here lies the not-yet-implemented method 'AddAnnouncement'
 	};
 }
 #undef ADD_VAR

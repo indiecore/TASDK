@@ -1,5 +1,8 @@
 #pragma once
+#include "Engine__Pawn.h"
 #include "Engine__NavigationPoint.h"
+#include "Engine__InterpActor.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DoorMarker." #y); \
@@ -25,6 +28,12 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, DoorTrigger)
 		ADD_VAR(::ByteProperty, DoorType, 0xFFFFFFFF)
 		ADD_OBJECT(InterpActor, MyDoor)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'MoverOpened'
+		// Here lies the not-yet-implemented method 'MoverClosed'
+		// Here lies the not-yet-implemented method 'SpecialHandling'
+		// Here lies the not-yet-implemented method 'ProceedWithMove'
+		// Here lies the not-yet-implemented method 'SuggestMovePreparation'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,19 @@
 #pragma once
 #include "UTGame__UTHUDBase.h"
+#include "Engine__Texture2D.h"
+#include "Engine__MaterialEffect.h"
+#include "Engine__Pawn.h"
+#include "UTGame__UTPlayerReplicationInfo.h"
+#include "UTGame__UTWeapon.h"
+#include "Engine__MaterialInstanceConstant.h"
+#include "Engine__Material.h"
+#include "Engine__Weapon.h"
+#include "UTGame__UTPawn.h"
+#include "Engine__PlayerReplicationInfo.h"
+#include "Engine__UIInteraction.h"
+#include "Engine__LocalPlayer.h"
+#include "Engine__Canvas.h"
+#include "Engine__Font.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTHUD." #y); \
@@ -202,6 +216,50 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'LC_White'!
 		ADD_OBJECT(Texture2D, UT3GHudTexture)
 		ADD_OBJECT(Texture2D, TalkingTexture)
+		ADD_OBJECT(ScriptClass, WeaponSwitchMessage)
+		// Here lies the not-yet-implemented method 'DrawTileCentered'
+		// Here lies the not-yet-implemented method 'SetDisplayedOrders'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Message'
+		// Here lies the not-yet-implemented method 'ResolveHUDPosition'
+		// Here lies the not-yet-implemented method 'GetScreenCoords'
+		// Here lies the not-yet-implemented method 'DrawMessageText'
+		// Here lies the not-yet-implemented method 'PostRender'
+		// Here lies the not-yet-implemented method 'DrawHUD'
+		// Here lies the not-yet-implemented method 'DrawGameHud'
+		// Here lies the not-yet-implemented method 'DrawMicIcon'
+		// Here lies the not-yet-implemented method 'DisplayLocalMessages'
+		// Here lies the not-yet-implemented method 'DrawLivingHud'
+		// Here lies the not-yet-implemented method 'DrawPostGameHud'
+		// Here lies the not-yet-implemented method 'DisplayWeaponBar'
+		// Here lies the not-yet-implemented method 'DisplayMap'
+		// Here lies the not-yet-implemented method 'DrawAIOverlays'
+		// Here lies the not-yet-implemented method 'GetUIController'
+		// Here lies the not-yet-implemented method 'StartMusic'
+		// Here lies the not-yet-implemented method 'GetTeamColor'
+		// Here lies the not-yet-implemented method 'DisplayHit'
+		// Here lies the not-yet-implemented method 'FlashDamage'
+		// Here lies the not-yet-implemented method 'UpdateDamage'
+		// Here lies the not-yet-implemented method 'DisplayDamage'
+		// Here lies the not-yet-implemented method 'DrawBackground'
+		// Here lies the not-yet-implemented method 'DrawBeaconBackground'
+		// Here lies the not-yet-implemented method 'DrawHealth'
+		// Here lies the not-yet-implemented method 'DrawBarGraph'
+		// Here lies the not-yet-implemented method 'FormatTime'
+		// Here lies the not-yet-implemented method 'GetFontSizeIndex'
+		// Here lies the not-yet-implemented method 'ShowPortrait'
+		// Here lies the not-yet-implemented method 'HidePortrait'
+		// Here lies the not-yet-implemented method 'DisplayPortrait'
+		// Here lies the not-yet-implemented method 'DisplayHUDMessage'
+		// Here lies the not-yet-implemented method 'DisplayClock'
+		// Here lies the not-yet-implemented method 'DisplayPawnDoll'
+		// Here lies the not-yet-implemented method 'DisplayAmmo'
+		// Here lies the not-yet-implemented method 'DisplayPowerups'
+		// Here lies the not-yet-implemented method 'DisplayScoring'
+		// Here lies the not-yet-implemented method 'DisplayFragCount'
+		// Here lies the not-yet-implemented method 'DrawNameplateBackground'
+		// Here lies the not-yet-implemented method 'DisplayLeaderBoard'
+		// Here lies the not-yet-implemented method 'DisplayConsoleMessages'
 	};
 }
 #undef ADD_VAR

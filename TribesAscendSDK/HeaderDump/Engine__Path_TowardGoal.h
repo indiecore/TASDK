@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__PathConstraint.h"
+#include "Engine__Actor.h"
+#include "Engine__Pawn.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.Path_TowardGoal." #y); \
@@ -12,6 +14,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(Actor, GoalActor)
+		// Here lies the not-yet-implemented method 'TowardGoal'
+		// Here lies the not-yet-implemented method 'Recycle'
 	};
 }
 #undef ADD_OBJECT

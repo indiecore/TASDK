@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__SeqAct_Toggle.h"
 #include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -24,6 +25,8 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'CollideWithChannels'!
 		ADD_VAR(::BoolProperty, bForceActive, 0x1)
 		ADD_VAR(::IntProperty, ExcludeChannel, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'DoInitRBPhys'
+		// Here lies the not-yet-implemented method 'OnToggle'
 	};
 }
 #undef ADD_VAR

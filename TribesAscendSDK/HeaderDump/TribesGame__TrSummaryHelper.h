@@ -12,6 +12,17 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, AWARD_TIER_SIZE, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SortPlayerAwards'
+		// Here lies the not-yet-implemented method 'SortMVPAwards'
+		// Here lies the not-yet-implemented method 'MVPSort'
+		// Here lies the not-yet-implemented method 'AwardSort'
+		// Here lies the not-yet-implemented method 'GetAwardFromId'
+		// Here lies the not-yet-implemented method 'GetTierTitle'
+		// Here lies the not-yet-implemented method 'GetAccoladeFromId'
+		// Here lies the not-yet-implemented method 'GetRankFromXP'
+		// Here lies the not-yet-implemented method 'GetNextRank'
+		// Here lies the not-yet-implemented method 'GetMinTierValue'
+		// Here lies the not-yet-implemented method 'GetTieredWeight'
 	};
 }
 #undef ADD_VAR

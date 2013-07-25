@@ -16,6 +16,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ImpulseRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ImpulseStrength, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ImpulseFalloff, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'FireImpulse'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,11 @@
 #pragma once
 #include "Engine__PlayerInput.h"
+#include "GameFramework__MobileMenuObject.h"
+#include "GameFramework__MobileInputZone.h"
+#include "GameFramework__MobileMenuScene.h"
+#include "Engine__Canvas.h"
+#include "GameFramework__SeqEvent_MobileBase.h"
+#include "GameFramework__SeqEvent_MobileRawInput.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.MobilePlayerInput." #y); \
@@ -52,6 +58,30 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bSupportsAccelerometer, 0x1)
 		ADD_VAR(::IntProperty, CurrentMobileGroup, 0xFFFFFFFF)
 		ADD_OBJECT(MobileMenuObject, InteractiveObject)
+		// Here lies the not-yet-implemented method 'HasZones'
+		// Here lies the not-yet-implemented method 'GetCurrentZones'
+		// Here lies the not-yet-implemented method 'OpenMenuScene'
+		// Here lies the not-yet-implemented method 'OnInputTouch'
+		// Here lies the not-yet-implemented method 'OnPreviewTouch'
+		// Here lies the not-yet-implemented method 'OnTouchNotHandledInMenu'
+		// Here lies the not-yet-implemented method 'OnMobileMotion'
+		// Here lies the not-yet-implemented method 'NativeInitializeInputSystem'
+		// Here lies the not-yet-implemented method 'NativeInitializeInputZones'
+		// Here lies the not-yet-implemented method 'SendInputKey'
+		// Here lies the not-yet-implemented method 'SendInputAxis'
+		// Here lies the not-yet-implemented method 'InitInputSystem'
+		// Here lies the not-yet-implemented method 'ClientInitInputSystem'
+		// Here lies the not-yet-implemented method 'InitTouchSystem'
+		// Here lies the not-yet-implemented method 'InitializeInputZones'
+		// Here lies the not-yet-implemented method 'RefreshKismetLinks'
+		// Here lies the not-yet-implemented method 'AddKismetEventHandler'
+		// Here lies the not-yet-implemented method 'AddKismetRawInputEventHandler'
+		// Here lies the not-yet-implemented method 'FindZone'
+		// Here lies the not-yet-implemented method 'FindorAddZone'
+		// Here lies the not-yet-implemented method 'CloseMenuScene'
+		// Here lies the not-yet-implemented method 'CloseAllMenus'
+		// Here lies the not-yet-implemented method 'RenderMenus'
+		// Here lies the not-yet-implemented method 'PreClientTravel'
 	};
 }
 #undef ADD_VAR

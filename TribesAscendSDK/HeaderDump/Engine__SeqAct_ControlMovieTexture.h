@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SequenceAction.h"
+#include "Engine__TextureMovie.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.SeqAct_ControlMovieTexture." #y); \
@@ -12,6 +13,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TextureMovie, MovieTexture)
+		// Here lies the not-yet-implemented method 'Activated'
 	};
 }
 #undef ADD_OBJECT

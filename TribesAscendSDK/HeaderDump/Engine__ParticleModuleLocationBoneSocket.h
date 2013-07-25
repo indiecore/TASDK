@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__SkeletalMesh.h"
 #include "Engine__ParticleModuleLocationBase.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

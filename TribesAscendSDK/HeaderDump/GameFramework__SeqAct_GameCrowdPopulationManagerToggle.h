@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SequenceAction.h"
+#include "GameFramework__GameCrowd_ListOfAgents.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqAct_GameCrowdPopulationManagerToggle." #y); \
@@ -26,6 +27,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, SpawnRate, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxAgents, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bKillAgentsInstantly, 0x1)
+		ADD_OBJECT(ScriptClass, PopulationManagerClass)
+		// Here lies the not-yet-implemented method 'FindPopMgrTarget'
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

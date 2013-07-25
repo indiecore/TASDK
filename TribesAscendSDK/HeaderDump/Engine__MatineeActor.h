@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "Engine__Pawn.h"
+#include "Engine__SeqAct_Interp.h"
+#include "Engine__InterpGroupInstAI.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MatineeActor." #y); \
@@ -28,6 +31,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bReversePlayback, 0x2)
 		ADD_VAR(::BoolProperty, bIsPlaying, 0x1)
 		ADD_OBJECT(SeqAct_Interp, InterpAction)
+		// Here lies the not-yet-implemented method 'AddAIGroupActor'
+		// Here lies the not-yet-implemented method 'Update'
+		// Here lies the not-yet-implemented method 'CheckPriorityRefresh'
 	};
 }
 #undef ADD_VAR

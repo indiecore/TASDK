@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame__TrVehicleWeapon.h"
+#include "Engine__SoundCue.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrVehicleWeapon_FullAuto." #y); \
@@ -19,6 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::NameProperty, m_PostFireState, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, m_FireTail)
+		// Here lies the not-yet-implemented method 'RefireCheckTimer'
 	};
 }
 #undef ADD_VAR

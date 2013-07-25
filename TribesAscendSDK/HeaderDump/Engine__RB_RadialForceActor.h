@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__RigidBodyBase.h"
+#include "Engine__SeqAct_Toggle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RB_RadialForceActor." #y); \
@@ -29,6 +30,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, SwirlStrength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ForceRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ForceStrength, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'OnToggle'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,9 @@
 #pragma once
+#include "IpDrv__WebServer.h"
 #include "IpDrv__TcpLink.h"
+#include "IpDrv__WebApplication.h"
+#include "IpDrv__WebResponse.h"
+#include "IpDrv__WebRequest.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.WebConnection." #y); \
@@ -27,6 +31,19 @@ namespace UnrealScript
 		ADD_OBJECT(WebRequest, Request)
 		ADD_VAR(::StrProperty, ReceivedData, 0xFFFFFFFF)
 		ADD_OBJECT(WebServer, WebServer)
+		// Here lies the not-yet-implemented method 'Accepted'
+		// Here lies the not-yet-implemented method 'Closed'
+		// Here lies the not-yet-implemented method 'Timer'
+		// Here lies the not-yet-implemented method 'ReceivedText'
+		// Here lies the not-yet-implemented method 'ReceivedLine'
+		// Here lies the not-yet-implemented method 'ProcessHead'
+		// Here lies the not-yet-implemented method 'ProcessGet'
+		// Here lies the not-yet-implemented method 'ProcessPost'
+		// Here lies the not-yet-implemented method 'CreateResponseObject'
+		// Here lies the not-yet-implemented method 'EndOfHeaders'
+		// Here lies the not-yet-implemented method 'CheckRawBytes'
+		// Here lies the not-yet-implemented method 'Cleanup'
+		// Here lies the not-yet-implemented method 'IsHanging'
 	};
 }
 #undef ADD_VAR

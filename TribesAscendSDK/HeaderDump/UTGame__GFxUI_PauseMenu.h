@@ -1,5 +1,7 @@
 #pragma once
 #include "UTGame__UTGFxTweenableMoviePlayer.h"
+#include "GFxUI__GFxClikWidget.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUI_PauseMenu." #y); \
@@ -27,6 +29,14 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, OverlayMC)
 		ADD_OBJECT(GFxObject, PauseMC)
 		ADD_OBJECT(GFxObject, RootMC)
+		// Here lies the not-yet-implemented method 'Start'
+		// Here lies the not-yet-implemented method 'OnPressResumeButton'
+		// Here lies the not-yet-implemented method 'OnPressExitButton'
+		// Here lies the not-yet-implemented method 'PlayOpenAnimation'
+		// Here lies the not-yet-implemented method 'PlayCloseAnimation'
+		// Here lies the not-yet-implemented method 'OnPlayAnimationComplete'
+		// Here lies the not-yet-implemented method 'OnCloseAnimationComplete'
+		// Here lies the not-yet-implemented method 'UT_ConsoleCommand'
 	};
 }
 #undef ADD_VAR

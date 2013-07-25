@@ -14,6 +14,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BoxLength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BoxWidth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BoxHeight, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetBoxSize'
 	};
 }
 #undef ADD_VAR

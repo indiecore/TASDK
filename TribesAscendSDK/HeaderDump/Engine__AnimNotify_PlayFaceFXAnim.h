@@ -1,5 +1,9 @@
 #pragma once
 #include "Engine__AnimNotify_Scripted.h"
+#include "Engine__SoundCue.h"
+#include "Engine__FaceFXAnimSet.h"
+#include "Engine__Actor.h"
+#include "Engine__AnimNodeSequence.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNotify_PlayFaceFXAnim." #y); \
@@ -23,6 +27,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, AnimName, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, GroupName, 0xFFFFFFFF)
 		ADD_OBJECT(FaceFXAnimSet, FaceFXAnimSetRef)
+		// Here lies the not-yet-implemented method 'Notify'
 	};
 }
 #undef ADD_VAR

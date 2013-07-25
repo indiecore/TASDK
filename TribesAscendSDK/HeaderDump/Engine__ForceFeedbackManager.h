@@ -1,5 +1,7 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__Actor.h"
+#include "Engine__ForceFeedbackWaveform.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ForceFeedbackManager." #y); \
@@ -24,6 +26,9 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, CurrentSample, 0xFFFFFFFF)
 		ADD_OBJECT(ForceFeedbackWaveform, FFWaveform)
 		ADD_VAR(::BoolProperty, bIsPaused, 0x2)
+		// Here lies the not-yet-implemented method 'PlayForceFeedbackWaveform'
+		// Here lies the not-yet-implemented method 'StopForceFeedbackWaveform'
+		// Here lies the not-yet-implemented method 'PauseWaveform'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,10 @@
 #pragma once
+#include "Engine__SoundCue.h"
 #include "Core__Object.h"
+#include "Engine__Canvas.h"
+#include "Engine__Font.h"
+#include "GameFramework__MobilePlayerInput.h"
+#include "GameFramework__MobileMenuObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.MobileMenuScene." #y); \
@@ -37,6 +42,19 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bSceneDoesNotRequireInput, 0x1)
 		ADD_OBJECT(MobilePlayerInput, InputOwner)
 		ADD_VAR(::StrProperty, MenuName, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetGlobalScaleX'
+		// Here lies the not-yet-implemented method 'GetGlobalScaleY'
+		// Here lies the not-yet-implemented method 'InitMenuScene'
+		// Here lies the not-yet-implemented method 'RenderScene'
+		// Here lies the not-yet-implemented method 'OnTouch'
+		// Here lies the not-yet-implemented method 'OnSceneTouch'
+		// Here lies the not-yet-implemented method 'Opened'
+		// Here lies the not-yet-implemented method 'MadeTopMenu'
+		// Here lies the not-yet-implemented method 'Closing'
+		// Here lies the not-yet-implemented method 'Closed'
+		// Here lies the not-yet-implemented method 'CleanUpScene'
+		// Here lies the not-yet-implemented method 'FindMenuObject'
+		// Here lies the not-yet-implemented method 'MobileMenuCommand'
 	};
 }
 #undef ADD_VAR

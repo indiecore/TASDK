@@ -1,5 +1,7 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__AnimationCompressionAlgorithm.h"
+#include "Engine__AnimNotify.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimSequence." #y); \
@@ -42,6 +44,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, EncodingPkgVersion, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, CompressCommandletVersion, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, UseScore, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetNotifyTimeByClass'
 	};
 }
 #undef ADD_VAR

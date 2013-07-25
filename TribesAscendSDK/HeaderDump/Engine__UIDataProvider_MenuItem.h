@@ -36,6 +36,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, DescriptionMarkup, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, DataStoreMarkup, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, OptionType, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'IsFiltered'
 	};
 }
 #undef ADD_VAR

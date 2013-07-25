@@ -12,6 +12,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, FriendlyFireScale, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'MutatorIsAllowed'
+		// Here lies the not-yet-implemented method 'InitMutator'
 	};
 }
 #undef ADD_VAR

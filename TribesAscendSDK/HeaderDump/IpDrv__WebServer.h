@@ -1,5 +1,7 @@
 #pragma once
 #include "IpDrv__TcpLink.h"
+#include "IpDrv__WebApplication.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.WebServer." #y); \
@@ -29,6 +31,11 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
 		ADD_VAR(::StrProperty, Applications, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ServerName, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetApplication'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'GainedChild'
+		// Here lies the not-yet-implemented method 'LostChild'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__MeshComponent.h"
+#include "Engine__ApexAsset.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ApexComponentBase." #y); \

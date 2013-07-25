@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__SoundCue.h"
 #include "Engine__AmbientSound.h"
+#include "Engine__SoundNodeAmbient.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.AmbientSoundSimple." #y); \

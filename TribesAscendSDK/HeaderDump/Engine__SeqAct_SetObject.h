@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SeqAct_SetSequenceVariable.h"
+#include "Core__Object.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.SeqAct_SetObject." #y); \
@@ -13,6 +14,7 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Object, Value)
 		ADD_OBJECT(Object, DefaultValue)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_OBJECT

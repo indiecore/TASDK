@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__InterpGroup.h"
+#include "Engine__Actor.h"
+#include "Engine__Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.InterpGroupAI." #y); \
@@ -22,6 +24,7 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, StageMarkActor)
 		ADD_OBJECT(Pawn, PreviewPawn)
 		ADD_VAR(::NameProperty, StageMarkGroup, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, PreviewPawnClass)
 	};
 }
 #undef ADD_VAR

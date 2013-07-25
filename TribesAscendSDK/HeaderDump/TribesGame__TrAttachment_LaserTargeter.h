@@ -12,6 +12,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, m_bIsTracerActive, 0x1)
+		// Here lies the not-yet-implemented method 'KillLaserEffect'
+		// Here lies the not-yet-implemented method 'SpawnLaserEffect'
+		// Here lies the not-yet-implemented method 'UpdateLaserEffect'
+		// Here lies the not-yet-implemented method 'ThirdPersonFireEffects'
+		// Here lies the not-yet-implemented method 'StopThirdPersonFireEffects'
 	};
 }
 #undef ADD_VAR

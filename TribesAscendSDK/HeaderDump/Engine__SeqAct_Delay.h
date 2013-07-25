@@ -17,6 +17,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DefaultDuration, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bStartWillRestart, 0x2)
 		ADD_VAR(::BoolProperty, bDelayActive, 0x1)
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'ResetDelayActive'
 	};
 }
 #undef ADD_VAR

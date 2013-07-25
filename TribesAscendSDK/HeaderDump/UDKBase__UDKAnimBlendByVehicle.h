@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__Vehicle.h"
 #include "UDKBase__UDKAnimBlendBase.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -19,6 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Vehicle, LastVehicle)
 		ADD_VAR(::BoolProperty, bLastPawnDriving, 0x1)
+		// Here lies the not-yet-implemented method 'UpdateVehicleState'
 	};
 }
 #undef ADD_VAR

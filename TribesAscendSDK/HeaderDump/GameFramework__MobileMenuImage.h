@@ -1,5 +1,7 @@
 #pragma once
 #include "GameFramework__MobileMenuObject.h"
+#include "Engine__Canvas.h"
+#include "Engine__Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.MobileMenuImage." #y); \
@@ -27,6 +29,7 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobileMenuObject.UVCoords' for the property named 'ImageUVs'!
 		ADD_VAR(::ByteProperty, ImageDrawStyle, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, Image)
+		// Here lies the not-yet-implemented method 'RenderObject'
 	};
 }
 #undef ADD_VAR

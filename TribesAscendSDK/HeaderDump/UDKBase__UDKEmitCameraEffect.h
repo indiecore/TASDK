@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Emitter.h"
+#include "UDKBase__UDKPlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKEmitCameraEffect." #y); \
@@ -19,6 +20,12 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(UDKPlayerController, Cam)
 		ADD_VAR(::FloatProperty, DistFromCamera, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'RegisterCamera'
+		// Here lies the not-yet-implemented method 'Activate'
+		// Here lies the not-yet-implemented method 'Deactivate'
+		// Here lies the not-yet-implemented method 'UpdateLocation'
 	};
 }
 #undef ADD_VAR

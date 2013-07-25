@@ -24,6 +24,21 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, URLStore, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, URLAlert, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, URLGold, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'OpenURL'
+		// Here lies the not-yet-implemented method 'OpenVideo'
+		// Here lies the not-yet-implemented method 'GetLanguageString'
+		// Here lies the not-yet-implemented method 'Alert'
+		// Here lies the not-yet-implemented method 'Gold'
+		// Here lies the not-yet-implemented method 'Store'
+		// Here lies the not-yet-implemented method 'Booster'
+		// Here lies the not-yet-implemented method 'Support'
+		// Here lies the not-yet-implemented method 'Profile'
+		// Here lies the not-yet-implemented method 'ActivateKey'
+		// Here lies the not-yet-implemented method 'RecoverPassword'
+		// Here lies the not-yet-implemented method 'RecoverUsername'
+		// Here lies the not-yet-implemented method 'ClassVideo'
+		// Here lies the not-yet-implemented method 'CreateAccount'
+		// Here lies the not-yet-implemented method 'GetLangParam'
 	};
 }
 #undef ADD_VAR

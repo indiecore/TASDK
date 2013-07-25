@@ -1,5 +1,7 @@
 #pragma once
 #include "GFxUI__GFxObject.h"
+#include "TribesGame__GFxTrMenuMoviePlayer.h"
+#include "Engine__OnlineSubsystem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrScene." #y); \
@@ -20,6 +22,7 @@ namespace UnrealScript
 		ADD_OBJECT(GFxTrMenuMoviePlayer, TrOuter)
 		ADD_OBJECT(OnlineSubsystem, OnlineSub)
 		ADD_VAR(::BoolProperty, bSceneCreated, 0x1)
+		// Here lies the not-yet-implemented method 'Initialize'
 	};
 }
 #undef ADD_VAR

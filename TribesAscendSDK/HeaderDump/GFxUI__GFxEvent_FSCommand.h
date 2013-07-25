@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__SequenceEvent.h"
+#include "GFxUI__SwfMovie.h"
+#include "GFxUI__GFxFSCmdHandler_Kismet.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GFxUI.GFxEvent_FSCommand." #y); \

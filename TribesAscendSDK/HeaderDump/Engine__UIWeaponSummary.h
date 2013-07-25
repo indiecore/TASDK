@@ -15,6 +15,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, WeaponDescription, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, FriendlyName, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ClassPathName, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'IsProviderDisabled'
 	};
 }
 #undef ADD_VAR

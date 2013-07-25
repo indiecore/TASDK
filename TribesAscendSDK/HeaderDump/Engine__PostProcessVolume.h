@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Volume.h"
+#include "Engine__SeqAct_Toggle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PostProcessVolume." #y); \
@@ -27,6 +28,7 @@ namespace UnrealScript
 		ADD_OBJECT(PostProcessVolume, NextLowerPriorityVolume)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'Settings'!
 		ADD_VAR(::FloatProperty, Priority, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'OnToggle'
 	};
 }
 #undef ADD_VAR

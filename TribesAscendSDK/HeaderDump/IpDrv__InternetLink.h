@@ -26,6 +26,15 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, OutLineMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, LinkMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, InLineMode, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'IsDataPending'
+		// Here lies the not-yet-implemented method 'ParseURL'
+		// Here lies the not-yet-implemented method 'Resolve'
+		// Here lies the not-yet-implemented method 'GetLastError'
+		// Here lies the not-yet-implemented method 'IpAddrToString'
+		// Here lies the not-yet-implemented method 'StringToIpAddr'
+		// Here lies the not-yet-implemented method 'GetLocalIP'
+		// Here lies the not-yet-implemented method 'Resolved'
+		// Here lies the not-yet-implemented method 'ResolveFailed'
 	};
 }
 #undef ADD_VAR

@@ -17,6 +17,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAllowDynamicShadowsOnTranslucency, 0x4)
 		ADD_VAR(::BoolProperty, bForceNonCompositeDynamicLights, 0x2)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
+		// Here lies the not-yet-implemented method 'SetEnabled'
+		// Here lies the not-yet-implemented method 'IsEnabled'
 	};
 }
 #undef ADD_VAR

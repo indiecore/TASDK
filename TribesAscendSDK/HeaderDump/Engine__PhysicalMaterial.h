@@ -1,5 +1,8 @@
 #pragma once
+#include "Engine__PhysicalMaterialPropertyBase.h"
+#include "Engine__SoundCue.h"
 #include "Core__Object.h"
+#include "Engine__ParticleSystem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PhysicalMaterial." #y); \
@@ -47,6 +50,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, SlideReFireDelay, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, SlideEffect)
 		ADD_OBJECT(SoundCue, SlideSound)
+		// Here lies the not-yet-implemented method 'FindPhysEffectInfo'
+		// Here lies the not-yet-implemented method 'FindFractureSounds'
+		// Here lies the not-yet-implemented method 'GetPhysicalMaterialProperty'
 	};
 }
 #undef ADD_VAR

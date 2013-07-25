@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__StaticMeshActor.h"
+#include "Engine__Controller.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.InteractiveFoliageActor." #y); \
@@ -30,6 +32,8 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, FoliageForce, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, FoliageVelocity, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, TouchingActorEntryPosition, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'Touch'
 	};
 }
 #undef ADD_VAR

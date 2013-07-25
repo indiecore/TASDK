@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__KMeshProps.h"
+#include "Engine__PhysicalMaterial.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RB_BodySetup." #y); \

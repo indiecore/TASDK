@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "Engine__MaterialInstanceTimeVarying.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrCallIn_OpenDeliveryPod." #y); \
@@ -20,6 +21,8 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceTimeVarying, PodFadeMaterial)
 		ADD_VAR(::FloatProperty, TimeToFade, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TimeToDelete, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'RemovePod'
 	};
 }
 #undef ADD_VAR

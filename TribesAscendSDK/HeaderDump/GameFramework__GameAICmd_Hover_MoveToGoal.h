@@ -1,5 +1,9 @@
 #pragma once
 #include "GameFramework__GameAICommand.h"
+#include "Engine__ReachSpec.h"
+#include "Engine__Actor.h"
+#include "GameFramework__GameAIController.h"
+#include "Engine__Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameAICmd_Hover_MoveToGoal." #y); \
@@ -34,6 +38,10 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, Goal)
 		ADD_OBJECT(Actor, Find)
 		ADD_OBJECT(Actor, Path)
+		// Here lies the not-yet-implemented method 'MoveToGoal'
+		// Here lies the not-yet-implemented method 'Pushed'
+		// Here lies the not-yet-implemented method 'HandlePathObstruction'
+		// Here lies the not-yet-implemented method 'IsEnemyBasedOnInterpActor'
 	};
 }
 #undef ADD_VAR

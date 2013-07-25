@@ -1,5 +1,7 @@
 #pragma once
 #include "TribesGame__GFxTrPage.h"
+#include "TribesGame__GFxTrAction.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrPage_JoinMatch." #y); \
@@ -13,6 +15,10 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, DollMesh, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, queueId, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'SpecialAction'
+		// Here lies the not-yet-implemented method 'FillData'
+		// Here lies the not-yet-implemented method 'TakeFocus'
 	};
 }
 #undef ADD_VAR

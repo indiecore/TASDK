@@ -1,5 +1,12 @@
 #pragma once
+#include "Engine__ParticleSystem.h"
 #include "Engine__Actor.h"
+#include "Engine__Controller.h"
+#include "Engine__PhysicalMaterial.h"
+#include "GameFramework__GameExplosion.h"
+#include "GameFramework__GamePawn.h"
+#include "Engine__PlayerController.h"
+#include "Engine__CameraShake.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameExplosionActor." #y); \
@@ -40,6 +47,25 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDrawDebug, 0x4)
 		ADD_VAR(::BoolProperty, bExplodeMoreThanOnce, 0x2)
 		ADD_VAR(::BoolProperty, bHasExploded, 0x1)
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		// Here lies the not-yet-implemented method 'GetPhysicalMaterial'
+		// Here lies the not-yet-implemented method 'DoFullDamageToActor'
+		// Here lies the not-yet-implemented method 'IsBehindExplosion'
+		// Here lies the not-yet-implemented method 'BoxDistanceToPoint'
+		// Here lies the not-yet-implemented method 'DoExplosionDamage'
+		// Here lies the not-yet-implemented method 'GetEffectCheckRadius'
+		// Here lies the not-yet-implemented method 'SpecialPawnEffectsFor'
+		// Here lies the not-yet-implemented method 'UpdateExplosionTemplateWithPerMaterialFX'
+		// Here lies the not-yet-implemented method 'SpawnExplosionParticleSystem'
+		// Here lies the not-yet-implemented method 'SpawnExplosionDecal'
+		// Here lies the not-yet-implemented method 'SpawnExplosionFogVolume'
+		// Here lies the not-yet-implemented method 'Explode'
+		// Here lies the not-yet-implemented method 'DelayedExplosionDamage'
+		// Here lies the not-yet-implemented method 'DrawDebug'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'DoExplosionCameraEffects'
+		// Here lies the not-yet-implemented method 'SpawnCameraLensEffects'
+		// Here lies the not-yet-implemented method 'ChooseCameraShake'
 	};
 }
 #undef ADD_VAR

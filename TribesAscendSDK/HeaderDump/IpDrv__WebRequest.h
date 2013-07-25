@@ -26,6 +26,20 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, ContentType, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'VariableMap'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'HeaderMap'!
+		// Here lies the not-yet-implemented method 'GetVariable'
+		// Here lies the not-yet-implemented method 'GetVariableCount'
+		// Here lies the not-yet-implemented method 'GetVariableNumber'
+		// Here lies the not-yet-implemented method 'DecodeBase64'
+		// Here lies the not-yet-implemented method 'EncodeBase64'
+		// Here lies the not-yet-implemented method 'AddHeader'
+		// Here lies the not-yet-implemented method 'GetHeader'
+		// Here lies the not-yet-implemented method 'GetHeaders'
+		// Here lies the not-yet-implemented method 'AddVariable'
+		// Here lies the not-yet-implemented method 'GetVariables'
+		// Here lies the not-yet-implemented method 'Dump'
+		// Here lies the not-yet-implemented method 'ProcessHeaderString'
+		// Here lies the not-yet-implemented method 'DecodeFormData'
+		// Here lies the not-yet-implemented method 'GetHexDigit'
 	};
 }
 #undef ADD_VAR

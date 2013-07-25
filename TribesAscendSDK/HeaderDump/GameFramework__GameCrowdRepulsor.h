@@ -1,5 +1,6 @@
 #pragma once
 #include "GameFramework__GameCrowdForcePoint.h"
+#include "GameFramework__GameCrowdAgent.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameCrowdRepulsor." #y); \
@@ -13,6 +14,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bAttractionFalloff, 0x1)
 		ADD_VAR(::FloatProperty, Repulsion, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'AppliedForce'
 	};
 }
 #undef ADD_VAR

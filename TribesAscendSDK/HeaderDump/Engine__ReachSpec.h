@@ -1,5 +1,8 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__Actor.h"
+#include "Engine__Pawn.h"
+#include "Engine__NavigationPoint.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ReachSpec." #y); \
@@ -40,6 +43,10 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF
 		ADD_VAR(::IntProperty, Distance, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'NavOctreeObject'!
+		// Here lies the not-yet-implemented method 'CostFor'
+		// Here lies the not-yet-implemented method 'GetEnd'
+		// Here lies the not-yet-implemented method 'GetDirection'
+		// Here lies the not-yet-implemented method 'IsBlockedFor'
 	};
 }
 #undef ADD_VAR

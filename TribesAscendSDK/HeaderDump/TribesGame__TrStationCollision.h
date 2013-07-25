@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "TribesGame__TrPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrStationCollision." #y); \
@@ -20,6 +21,10 @@ namespace UnrealScript
 		ADD_OBJECT(TrPawn, m_OccupiedPawn)
 		ADD_VAR(::BoolProperty, m_bCanBeUsedDuringWarmupRound, 0x2)
 		ADD_VAR(::BoolProperty, m_bOccupied, 0x1)
+		// Here lies the not-yet-implemented method 'GetPawnsInStation'
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'UnTouch'
+		// Here lies the not-yet-implemented method 'CheckCanPawnUseStationNow'
 	};
 }
 #undef ADD_VAR

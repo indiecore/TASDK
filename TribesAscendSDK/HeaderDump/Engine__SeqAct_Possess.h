@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__Pawn.h"
 #include "Engine__SequenceAction.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

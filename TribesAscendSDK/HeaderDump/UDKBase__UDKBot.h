@@ -1,5 +1,13 @@
 #pragma once
+#include "Engine__Actor.h"
 #include "Engine__AIController.h"
+#include "Engine__NavigationPoint.h"
+#include "Engine__Pawn.h"
+#include "Engine__Projectile.h"
+#include "Engine__Vehicle.h"
+#include "UDKBase__UDKSquadAI.h"
+#include "UDKBase__UDKVehicle.h"
+#include "Engine__PickupFactory.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKBot." #y); \
@@ -72,6 +80,26 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bExecutingWhatToDoNext, 0x1)
 		ADD_OBJECT(Actor, TemporaryFocus)
 		ADD_OBJECT(UDKSquadAI, Squad)
+		// Here lies the not-yet-implemented method 'FaceActor'
+		// Here lies the not-yet-implemented method 'ExecuteWhatToDoNext'
+		// Here lies the not-yet-implemented method 'ReceiveRunOverWarning'
+		// Here lies the not-yet-implemented method 'WaitToSeeEnemy'
+		// Here lies the not-yet-implemented method 'LatentWhatToDoNext'
+		// Here lies the not-yet-implemented method 'CanMakePathTo'
+		// Here lies the not-yet-implemented method 'FindBestInventoryPath'
+		// Here lies the not-yet-implemented method 'FindPathToSquadRoute'
+		// Here lies the not-yet-implemented method 'BuildSquadRoute'
+		// Here lies the not-yet-implemented method 'FindBestSuperPickup'
+		// Here lies the not-yet-implemented method 'WhatToDoNext'
+		// Here lies the not-yet-implemented method 'MonitoredPawnAlert'
+		// Here lies the not-yet-implemented method 'TimeDJReset'
+		// Here lies the not-yet-implemented method 'MayDodgeToMoveTarget'
+		// Here lies the not-yet-implemented method 'SpecialJumpCost'
+		// Here lies the not-yet-implemented method 'SuperDesireability'
+		// Here lies the not-yet-implemented method 'AdjustAimError'
+		// Here lies the not-yet-implemented method 'MissedDodge'
+		// Here lies the not-yet-implemented method 'DelayedWarning'
+		// Here lies the not-yet-implemented method 'DelayedLeaveVehicle'
 	};
 }
 #undef ADD_VAR

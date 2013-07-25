@@ -1,5 +1,10 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "Engine__FracturedStaticMeshPart.h"
+#include "Engine__MaterialInterface.h"
+#include "Engine__SoundCue.h"
+#include "Engine__Controller.h"
+#include "Engine__Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FracturedStaticMeshActor." #y); \
@@ -33,6 +38,23 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bBreakChunksOnActorTouch, 0x2)
 		ADD_VAR(::BoolProperty, bHasShownMissingSoundWarning, 0x1)
 		ADD_VAR(::IntProperty, MaxPartsToSpawnAtOnce, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'IsFracturedByDamageType'
+		// Here lies the not-yet-implemented method 'FractureEffectIsRelevant'
+		// Here lies the not-yet-implemented method 'SpawnPart'
+		// Here lies the not-yet-implemented method 'SpawnPartMulti'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'ResetHealth'
+		// Here lies the not-yet-implemented method 'BreakOffIsolatedIslands'
+		// Here lies the not-yet-implemented method 'SpawnDeferredParts'
+		// Here lies the not-yet-implemented method 'RemoveDecals'
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'Explode'
+		// Here lies the not-yet-implemented method 'BreakOffPartsInRadius'
+		// Here lies the not-yet-implemented method 'ResetVisibility'
+		// Here lies the not-yet-implemented method 'HideOneFragment'
+		// Here lies the not-yet-implemented method 'HideFragmentsToMaximizeMemoryUsage'
+		// Here lies the not-yet-implemented method 'SetLoseChunkReplacementMaterial'
+		// Here lies the not-yet-implemented method 'NotifyHitByExplosion'
 	};
 }
 #undef ADD_VAR

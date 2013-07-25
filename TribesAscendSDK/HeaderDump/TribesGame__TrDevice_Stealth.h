@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, m_fPulseSpeedThreshold, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
 	};
 }
 #undef ADD_VAR

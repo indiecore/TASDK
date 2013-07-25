@@ -33,6 +33,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bConstrainRoll, 0x4)
 		ADD_VAR(::BoolProperty, bConstrainYaw, 0x2)
 		ADD_VAR(::BoolProperty, bConstrainPitch, 0x1)
+		// Here lies the not-yet-implemented method 'OnTurretStatusChange'
+		// Here lies the not-yet-implemented method 'InitTurret'
+		// Here lies the not-yet-implemented method 'WouldConstrainPitch'
 	};
 }
 #undef ADD_VAR

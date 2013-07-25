@@ -1,5 +1,9 @@
 #pragma once
+#include "Engine__Pawn.h"
 #include "Engine__NavigationPoint.h"
+#include "Engine__SoundCue.h"
+#include "Engine__PathNode.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKJumpPad." #y); \
@@ -28,6 +32,9 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, JumpSound)
 		ADD_OBJECT(PathNode, JumpTarget)
 		ADD_STRUCT(::VectorProperty, JumpVelocity, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'PostTouch'
+		// Here lies the not-yet-implemented method 'SuggestMovePreparation'
 	};
 }
 #undef ADD_VAR

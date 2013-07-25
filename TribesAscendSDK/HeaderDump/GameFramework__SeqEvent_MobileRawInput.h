@@ -15,6 +15,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TouchLocationY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TouchLocationX, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, TouchIndex, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'RegisterEvent'
 	};
 }
 #undef ADD_VAR

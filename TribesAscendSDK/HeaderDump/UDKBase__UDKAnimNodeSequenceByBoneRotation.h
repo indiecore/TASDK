@@ -13,6 +13,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::ByteProperty, BoneAxis, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BoneName, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'OnBecomeRelevant'
 	};
 }
 #undef ADD_VAR

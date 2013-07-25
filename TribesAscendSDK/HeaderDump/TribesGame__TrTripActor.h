@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__ParticleSystem.h"
 #include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -25,6 +26,15 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, r_fSleepEndTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, r_bIsInitialized, 0x2)
 		ADD_VAR(::BoolProperty, r_bIsPowered, 0x1)
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'CreateTripComponent'
+		// Here lies the not-yet-implemented method 'ClientCreateVisualEffect'
+		// Here lies the not-yet-implemented method 'DestroyNotify'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'InitializeTripPhysics'
+		// Here lies the not-yet-implemented method 'GoToSleep'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'Touch'
 	};
 }
 #undef ADD_VAR

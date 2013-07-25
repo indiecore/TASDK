@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__PrimitiveComponent.h"
+#include "Engine__MaterialInterface.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DecalComponent." #y); \
@@ -68,6 +69,10 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Height, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Width, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInterface, DecalMaterial)
+		// Here lies the not-yet-implemented method 'ResetToDefaults'
+		// Here lies the not-yet-implemented method 'SetDecalMaterial'
+		// Here lies the not-yet-implemented method 'GetDecalMaterial'
+		// Here lies the not-yet-implemented method 'SetGameplayRequired'
 	};
 }
 #undef ADD_VAR

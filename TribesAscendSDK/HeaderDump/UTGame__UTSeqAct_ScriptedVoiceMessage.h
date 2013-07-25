@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SequenceAction.h"
+#include "Engine__SoundNodeWave.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTSeqAct_ScriptedVoiceMessage." #y); \
@@ -19,6 +20,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::StrProperty, SpeakingCharacterName, 0xFFFFFFFF)
 		ADD_OBJECT(SoundNodeWave, VoiceToPlay)
+		// Here lies the not-yet-implemented method 'Activated'
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

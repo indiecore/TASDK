@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__AnimNodeBlendBySpeed.h"
+#include "TribesGame__TrPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrAnimNodeBlendBySpeed." #y); \

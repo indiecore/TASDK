@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__ActorComponent.h"
+#include "Engine__PhysicalMaterial.h"
+#include "Engine__RB_BodyInstance.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PrimitiveComponent." #y); \
@@ -118,6 +120,50 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastSubmitTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastRenderTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ScriptRigidBodyCollisionThreshold, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetBlockRigidBody'
+		// Here lies the not-yet-implemented method 'SetRBLinearVelocity'
+		// Here lies the not-yet-implemented method 'AddImpulse'
+		// Here lies the not-yet-implemented method 'AddRadialImpulse'
+		// Here lies the not-yet-implemented method 'AddForce'
+		// Here lies the not-yet-implemented method 'AddRadialForce'
+		// Here lies the not-yet-implemented method 'AddTorque'
+		// Here lies the not-yet-implemented method 'SetRBAngularVelocity'
+		// Here lies the not-yet-implemented method 'RetardRBLinearVelocity'
+		// Here lies the not-yet-implemented method 'SetRBPosition'
+		// Here lies the not-yet-implemented method 'SetRBRotation'
+		// Here lies the not-yet-implemented method 'WakeRigidBody'
+		// Here lies the not-yet-implemented method 'PutRigidBodyToSleep'
+		// Here lies the not-yet-implemented method 'RigidBodyIsAwake'
+		// Here lies the not-yet-implemented method 'SetRBCollidesWithChannel'
+		// Here lies the not-yet-implemented method 'SetRBCollisionChannels'
+		// Here lies the not-yet-implemented method 'SetRBChannel'
+		// Here lies the not-yet-implemented method 'SetNotifyRigidBodyCollision'
+		// Here lies the not-yet-implemented method 'InitRBPhys'
+		// Here lies the not-yet-implemented method 'SetPhysMaterialOverride'
+		// Here lies the not-yet-implemented method 'GetRootBodyInstance'
+		// Here lies the not-yet-implemented method 'SetRBDominanceGroup'
+		// Here lies the not-yet-implemented method 'ShouldComponentAddToScene'
+		// Here lies the not-yet-implemented method 'SetHidden'
+		// Here lies the not-yet-implemented method 'SetOwnerNoSee'
+		// Here lies the not-yet-implemented method 'SetOnlyOwnerSee'
+		// Here lies the not-yet-implemented method 'SetIgnoreOwnerHidden'
+		// Here lies the not-yet-implemented method 'SetShadowParent'
+		// Here lies the not-yet-implemented method 'SetLightEnvironment'
+		// Here lies the not-yet-implemented method 'SetCullDistance'
+		// Here lies the not-yet-implemented method 'SetLightingChannels'
+		// Here lies the not-yet-implemented method 'SetDepthPriorityGroup'
+		// Here lies the not-yet-implemented method 'SetViewOwnerDepthPriorityGroup'
+		// Here lies the not-yet-implemented method 'SetTraceBlocking'
+		// Here lies the not-yet-implemented method 'SetActorCollision'
+		// Here lies the not-yet-implemented method 'SetTranslation'
+		// Here lies the not-yet-implemented method 'SetRotation'
+		// Here lies the not-yet-implemented method 'SetScale'
+		// Here lies the not-yet-implemented method 'SetScale3D'
+		// Here lies the not-yet-implemented method 'SetAbsolute'
+		// Here lies the not-yet-implemented method 'GetPosition'
+		// Here lies the not-yet-implemented method 'GetRotation'
+		// Here lies the not-yet-implemented method 'ClosestPointOnComponentToPoint'
+		// Here lies the not-yet-implemented method 'ClosestPointOnComponentToComponent'
 	};
 }
 #undef ADD_VAR

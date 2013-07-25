@@ -18,6 +18,10 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bOnlyUpgrades, 0x10)
 		ADD_VAR(::IntProperty, PreviousGold, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PreviousXP, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetClassRibbon'
+		// Here lies the not-yet-implemented method 'GetTypeRibbon'
+		// Here lies the not-yet-implemented method 'GetEquipRibbon'
+		// Here lies the not-yet-implemented method 'CalculateRibbons'
 	};
 }
 #undef ADD_VAR

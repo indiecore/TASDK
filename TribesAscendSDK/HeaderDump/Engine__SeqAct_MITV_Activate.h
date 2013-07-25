@@ -12,6 +12,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, DurationOfMITV, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		// Here lies the not-yet-implemented method 'Activated'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__PrimitiveComponent.h"
+#include "Engine__LensFlare.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LensFlareComponent." #y); \
@@ -38,6 +39,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsActive, 0x2)
 		ADD_VAR(::BoolProperty, bAutoActivate, 0x1)
 		ADD_OBJECT(LensFlare, Template)
+		// Here lies the not-yet-implemented method 'SetTemplate'
+		// Here lies the not-yet-implemented method 'SetSourceColor'
+		// Here lies the not-yet-implemented method 'SetIsActive'
 	};
 }
 #undef ADD_VAR

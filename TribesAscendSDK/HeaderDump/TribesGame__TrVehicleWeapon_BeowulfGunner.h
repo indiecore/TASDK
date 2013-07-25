@@ -1,4 +1,5 @@
 #pragma once
+#include "TribesGame__TrSkelControl_SpinControl.h"
 #include "TribesGame__TrVehicleWeapon_FullAuto.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
@@ -12,6 +13,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TrSkelControl_SpinControl, m_BarrelSpinControl)
+		// Here lies the not-yet-implemented method 'InitVehicleGun'
+		// Here lies the not-yet-implemented method 'Activate'
 	};
 }
 #undef ADD_OBJECT

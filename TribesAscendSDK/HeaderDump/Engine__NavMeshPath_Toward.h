@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__Actor.h"
 #include "Engine__NavMeshPathConstraint.h"
+#include "Engine__NavigationHandle.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NavMeshPath_Toward." #y); \
@@ -19,6 +21,9 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(::VectorProperty, GoalPoint, 0xFFFFFFFF
 		ADD_OBJECT(Actor, GoalActor)
+		// Here lies the not-yet-implemented method 'TowardGoal'
+		// Here lies the not-yet-implemented method 'TowardPoint'
+		// Here lies the not-yet-implemented method 'Recycle'
 	};
 }
 #undef ADD_STRUCT

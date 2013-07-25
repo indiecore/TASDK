@@ -1,5 +1,6 @@
 #pragma once
 #include "IpDrv__MeshBeacon.h"
+#include "IpDrv__ClientBeaconAddressResolver.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.MeshBeaconClient." #y); \
@@ -25,6 +26,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bUsingRegisteredAddr, 0x1)
 		ADD_OBJECT(ClientBeaconAddressResolver, Resolver)
+		ADD_OBJECT(ScriptClass, ResolverClass)
 		ADD_VAR(::StrProperty, ResolverClassName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConnectionRequestElapsedTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConnectionRequestTimeout, 0xFFFFFFFF)
@@ -33,6 +35,15 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeaconClient.ClientBandwidthTestData' for the property named 'CurrentBandwidthTest'!
 		// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeaconClient.ClientConnectionRequest' for the property named 'ClientPendingRequest'!
 		// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult' for the property named 'HostPendingRequest'!
+		// Here lies the not-yet-implemented method 'OnCreateNewSessionRequestReceived'
+		// Here lies the not-yet-implemented method 'OnTravelRequestReceived'
+		// Here lies the not-yet-implemented method 'OnReceivedBandwidthTestResults'
+		// Here lies the not-yet-implemented method 'OnReceivedBandwidthTestRequest'
+		// Here lies the not-yet-implemented method 'OnConnectionRequestResult'
+		// Here lies the not-yet-implemented method 'DestroyBeacon'
+		// Here lies the not-yet-implemented method 'RequestConnection'
+		// Here lies the not-yet-implemented method 'BeginBandwidthTest'
+		// Here lies the not-yet-implemented method 'SendHostNewGameSessionResponse'
 	};
 }
 #undef ADD_VAR

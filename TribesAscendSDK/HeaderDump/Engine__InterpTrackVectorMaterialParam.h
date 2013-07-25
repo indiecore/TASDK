@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__MaterialInterface.h"
 #include "Engine__InterpTrackVectorBase.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

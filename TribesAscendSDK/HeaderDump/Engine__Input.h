@@ -14,6 +14,10 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CurrentDeltaTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentDelta, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, CurrentEvent, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'ResetInput'
+		// Here lies the not-yet-implemented method 'GetBind'
+		// Here lies the not-yet-implemented method 'GetBindNameFromCommandScript'
+		// Here lies the not-yet-implemented method 'SetBind'
 	};
 }
 #undef ADD_VAR

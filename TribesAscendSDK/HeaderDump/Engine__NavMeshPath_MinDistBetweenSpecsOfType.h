@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__NavMeshPathConstraint.h"
+#include "Engine__NavigationHandle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NavMeshPath_MinDistBetweenSpecsOfType." #y); \
@@ -20,6 +21,8 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, EdgeType, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, InitLocation, 0xFFFFFFFF
 		ADD_VAR(::FloatProperty, MinDistBetweenEdgeTypes, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'EnforceMinDist'
+		// Here lies the not-yet-implemented method 'Recycle'
 	};
 }
 #undef ADD_VAR

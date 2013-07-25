@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__GameplayEventsHandler.h"
+#include "GameFramework__GameStateObject.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty GameFramework.GameStatsAggregator." #y); \
@@ -24,6 +25,9 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameStatsAggregator.GameEvents' for the property named 'AllGameEvents'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'AggregateEventsMapping'!
 		ADD_OBJECT(GameStateObject, GameState)
+		// Here lies the not-yet-implemented method 'PreProcessStream'
+		// Here lies the not-yet-implemented method 'PostProcessStream'
+		// Here lies the not-yet-implemented method 'GetAggregateMappingIDs'
 	};
 }
 #undef ADD_STRUCT

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__NavMeshPathConstraint.h"
+#include "Engine__NavigationHandle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.NavMeshPath_BiasAgainstPolysWithinDistanceOfLocations." #y); \
@@ -20,6 +21,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DistanceToCheck, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, Rotation, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'BiasAgainstPolysWithinDistanceOfLocations'
+		// Here lies the not-yet-implemented method 'Recycle'
 	};
 }
 #undef ADD_VAR

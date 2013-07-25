@@ -1,5 +1,9 @@
 #pragma once
 #include "Engine__Surface.h"
+#include "Engine__Font.h"
+#include "Engine__Texture.h"
+#include "Engine__PhysicalMaterial.h"
+#include "Engine__Material.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialInterface." #y); \
@@ -85,6 +89,16 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, PreviewMesh, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialInterface.LightmassMaterialInterfaceSettings' for the property named 'LightmassSettings'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.RenderCommandFence_Mirror' for the property named 'ParentRefFence'!
+		// Here lies the not-yet-implemented method 'GetMaterial'
+		// Here lies the not-yet-implemented method 'GetPhysicalMaterial'
+		// Here lies the not-yet-implemented method 'GetParameterDesc'
+		// Here lies the not-yet-implemented method 'GetFontParameterValue'
+		// Here lies the not-yet-implemented method 'GetScalarParameterValue'
+		// Here lies the not-yet-implemented method 'GetScalarCurveParameterValue'
+		// Here lies the not-yet-implemented method 'GetTextureParameterValue'
+		// Here lies the not-yet-implemented method 'GetVectorParameterValue'
+		// Here lies the not-yet-implemented method 'GetVectorCurveParameterValue'
+		// Here lies the not-yet-implemented method 'SetForceMipLevelsToBeResident'
 	};
 }
 #undef ADD_VAR

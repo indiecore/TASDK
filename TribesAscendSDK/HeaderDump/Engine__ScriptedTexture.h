@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__TextureRenderTarget2D.h"
+#include "Engine__Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ScriptedTexture." #y); \
@@ -13,6 +14,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bSkipNextClear, 0x2)
 		ADD_VAR(::BoolProperty, bNeedsUpdate, 0x1)
+		// Here lies the not-yet-implemented method 'Render'
 	};
 }
 #undef ADD_VAR

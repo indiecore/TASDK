@@ -54,6 +54,15 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ClassCounts, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxPlayers, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ScoreLimit, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetClassCount'
+		// Here lies the not-yet-implemented method 'IsCallinAllowed'
+		// Here lies the not-yet-implemented method 'IsClassAllowed'
+		// Here lies the not-yet-implemented method 'GetPropAsFloat'
+		// Here lies the not-yet-implemented method 'GetPropAsInt'
+		// Here lies the not-yet-implemented method 'GetPropAsString'
+		// Here lies the not-yet-implemented method 'ApplyServerSettings'
+		// Here lies the not-yet-implemented method 'LoadServerSettings'
+		// Here lies the not-yet-implemented method 'GetVehicleLimit'
 	};
 }
 #undef ADD_VAR

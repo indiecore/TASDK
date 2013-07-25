@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Weapon.h"
+#include "UDKBase__UDKPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKWeapon." #y); \
@@ -16,6 +17,11 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, AmmoCount, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bConsiderProjectileAcceleration, 0x2)
 		ADD_VAR(::BoolProperty, bLeadTarget, 0x1)
+		// Here lies the not-yet-implemented method 'IsAimCorrect'
+		// Here lies the not-yet-implemented method 'BestMode'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'EnsureWeaponOverlayComponentLast'
+		// Here lies the not-yet-implemented method 'SetPosition'
 	};
 }
 #undef ADD_VAR

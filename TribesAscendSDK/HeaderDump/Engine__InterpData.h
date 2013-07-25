@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__SequenceVariable.h"
+#include "Engine__InterpCurveEdSetup.h"
+#include "Engine__InterpFilter.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.InterpData." #y); \

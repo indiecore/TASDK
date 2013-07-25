@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__MeshComponent.h"
+#include "Engine__Texture.h"
+#include "Engine__StaticMesh.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.StaticMeshComponent." #y); \
@@ -43,6 +45,10 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'WireframeColor'!
 		ADD_OBJECT(StaticMesh, StaticMesh)
 		ADD_VAR(::IntProperty, PreviousLODLevel, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'CanBecomeDynamic'
+		// Here lies the not-yet-implemented method 'SetStaticMesh'
+		// Here lies the not-yet-implemented method 'DisableRBCollisionWithSMC'
+		// Here lies the not-yet-implemented method 'SetForceStaticDecals'
 	};
 }
 #undef ADD_VAR

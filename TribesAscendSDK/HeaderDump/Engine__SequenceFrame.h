@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__SequenceObject.h"
+#include "Engine__Material.h"
+#include "Engine__Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SequenceFrame." #y); \

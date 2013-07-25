@@ -1,5 +1,11 @@
 #pragma once
+#include "Engine__SeqAct_ToggleConstraintDrive.h"
+#include "Engine__RB_ConstraintSetup.h"
 #include "Engine__RigidBodyBase.h"
+#include "Engine__SeqAct_Toggle.h"
+#include "Engine__Actor.h"
+#include "Engine__RB_ConstraintInstance.h"
+#include "Engine__SeqAct_Destroy.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RB_ConstraintActor." #y); \
@@ -26,6 +32,12 @@ namespace UnrealScript
 		ADD_OBJECT(RB_ConstraintSetup, ConstraintSetup)
 		ADD_OBJECT(Actor, ConstraintActor2)
 		ADD_OBJECT(Actor, ConstraintActor1)
+		// Here lies the not-yet-implemented method 'SetDisableCollision'
+		// Here lies the not-yet-implemented method 'InitConstraint'
+		// Here lies the not-yet-implemented method 'TermConstraint'
+		// Here lies the not-yet-implemented method 'OnDestroy'
+		// Here lies the not-yet-implemented method 'OnToggle'
+		// Here lies the not-yet-implemented method 'OnToggleConstraintDrive'
 	};
 }
 #undef ADD_VAR

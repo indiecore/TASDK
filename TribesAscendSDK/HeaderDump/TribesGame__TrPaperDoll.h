@@ -1,5 +1,10 @@
 #pragma once
 #include "Engine__SkeletalMeshActorMAT.h"
+#include "Engine__AnimNodeSequence.h"
+#include "Engine__MaterialInstanceConstant.h"
+#include "TribesGame__TrPlayerController.h"
+#include "Engine__AnimNodePlayCustomAnim.h"
+#include "Engine__SkeletalMesh.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrPaperDoll." #y); \
@@ -23,7 +28,11 @@ namespace UnrealScript
 	class TrPaperDoll : public SkeletalMeshActorMAT
 	{
 	public:
+		ADD_OBJECT(ScriptClass, m_LastFamilyClassRequest)
+		ADD_OBJECT(ScriptClass, m_LastDeviceOnlyRequest)
 		ADD_OBJECT(TrPlayerController, m_TrPlayerController)
+		ADD_OBJECT(ScriptClass, m_LastDeviceClassRequest)
+		ADD_OBJECT(ScriptClass, m_DeviceContentDataClass)
 		ADD_VAR(::FloatProperty, m_fLastStreamingCheckTimestamp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCheckStreamingFrequency, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'm_PendingPaperDollInfoSkin'!
@@ -44,9 +53,31 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fBackdropScale4x3, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, m_DiamondSwordBackdropMaterial)
 		ADD_OBJECT(MaterialInstanceConstant, m_BloodEagleBackdropMaterial)
+		ADD_OBJECT(ScriptClass, m_TrDeviceClass)
+		ADD_OBJECT(ScriptClass, m_FamilyInfoClass)
 		ADD_STRUCT(::VectorProperty, m_vViewOffset16x10, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, m_vViewOffset16x9, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, m_vViewOffset4x3, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'IsFullyStreamed'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'PostInitAnimTree'
+		// Here lies the not-yet-implemented method 'GetCharacterSkeletalMesh'
+		// Here lies the not-yet-implemented method 'OnCharacterMeshContentDataClassLoaded'
+		// Here lies the not-yet-implemented method 'OnSkeletalMeshFinishedStreaming'
+		// Here lies the not-yet-implemented method 'TryUpdatingPaperDoll'
+		// Here lies the not-yet-implemented method 'SetFamilyInfo'
+		// Here lies the not-yet-implemented method 'PlayCustomAnimation'
+		// Here lies the not-yet-implemented method 'StopCustomAnimation'
+		// Here lies the not-yet-implemented method 'ResetCustomAnimTimer'
+		// Here lies the not-yet-implemented method 'OnAnimEnd'
+		// Here lies the not-yet-implemented method 'OnDeviceContentDataClassLoaded'
+		// Here lies the not-yet-implemented method 'PlayLoadingGraphic'
+		// Here lies the not-yet-implemented method 'StopLoadingGraphic'
+		// Here lies the not-yet-implemented method 'OnWeaponFinishedStreaming'
+		// Here lies the not-yet-implemented method 'SetWeaponOnlyMesh'
+		// Here lies the not-yet-implemented method 'GetDevicePaperDollInfo'
+		// Here lies the not-yet-implemented method 'SetMainMesh'
+		// Here lies the not-yet-implemented method 'Destroyed'
 	};
 }
 #undef ADD_VAR

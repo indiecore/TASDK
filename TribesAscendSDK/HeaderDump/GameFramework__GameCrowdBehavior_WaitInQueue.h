@@ -1,5 +1,8 @@
 #pragma once
+#include "Engine__Actor.h"
 #include "GameFramework__GameCrowdAgentBehavior.h"
+#include "GameFramework__GameCrowdDestinationQueuePoint.h"
+#include "GameFramework__GameCrowdDestination.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameCrowdBehavior_WaitInQueue." #y); \
@@ -19,6 +22,12 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(GameCrowdDestinationQueuePoint, QueuePosition)
 		ADD_VAR(::BoolProperty, bStoppingBehavior, 0x1)
+		// Here lies the not-yet-implemented method 'HandleMovement'
+		// Here lies the not-yet-implemented method 'ChangingDestination'
+		// Here lies the not-yet-implemented method 'GetDestinationActor'
+		// Here lies the not-yet-implemented method 'GetBehaviorString'
+		// Here lies the not-yet-implemented method 'ShouldEndIdle'
+		// Here lies the not-yet-implemented method 'StopBehavior'
 	};
 }
 #undef ADD_VAR

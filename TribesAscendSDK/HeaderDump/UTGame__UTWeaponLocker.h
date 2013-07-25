@@ -1,5 +1,10 @@
 #pragma once
+#include "UTGame__UTBot.h"
 #include "UTGame__UTPickupFactory.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__Controller.h"
+#include "Engine__Pawn.h"
+#include "Engine__PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTWeaponLocker." #y); \
@@ -35,6 +40,24 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsActive, 0x1)
 		ADD_VAR(::StrProperty, LockerString, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct UTGame.UTWeaponLocker.ReplacementWeaponEntry' for the property named 'ReplacementWeapons'!
+		// Here lies the not-yet-implemented method 'BotDesireability'
+		// Here lies the not-yet-implemented method 'SetInitialState'
+		// Here lies the not-yet-implemented method 'ShouldCamp'
+		// Here lies the not-yet-implemented method 'AddCustomer'
+		// Here lies the not-yet-implemented method 'HasCustomer'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'InitializeWeapons'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'ReplaceWeapon'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'GetHumanReadableName'
+		// Here lies the not-yet-implemented method 'DetourWeight'
+		// Here lies the not-yet-implemented method 'InitializePickup'
+		// Here lies the not-yet-implemented method 'ShowActive'
+		// Here lies the not-yet-implemented method 'NotifyLocalPlayerDead'
+		// Here lies the not-yet-implemented method 'SetPlayerNearby'
+		// Here lies the not-yet-implemented method 'DestroyWeapons'
+		// Here lies the not-yet-implemented method 'ShowHidden'
 	};
 }
 #undef ADD_VAR

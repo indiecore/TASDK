@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Info.h"
+#include "Engine__PhysicsVolume.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.VolumeTimer." #y); \
@@ -12,6 +13,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(PhysicsVolume, V)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Timer'
 	};
 }
 #undef ADD_OBJECT

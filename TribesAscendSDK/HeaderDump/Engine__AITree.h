@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__K2GraphBase.h"
+#include "Engine__AIController.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.AITree." #y); \
@@ -12,6 +13,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(K2GraphBase, GatherList)
+		// Here lies the not-yet-implemented method 'SetActiveRoot'
+		// Here lies the not-yet-implemented method 'EvaluateTree'
 	};
 }
 #undef ADD_OBJECT

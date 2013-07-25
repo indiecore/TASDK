@@ -13,6 +13,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bRequiresOnlineAccess, 0x1)
 		ADD_VAR(::StrProperty, Description, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'ShouldBeFiltered'
 	};
 }
 #undef ADD_VAR

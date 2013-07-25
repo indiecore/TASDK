@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Info.h"
+#include "Engine__PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AutoTestManager." #y); \
@@ -43,6 +44,29 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUsingAutomatedTestingMapList, 0x4)
 		ADD_VAR(::BoolProperty, bAutoContinueToNextRound, 0x2)
 		ADD_VAR(::BoolProperty, bAutomatedPerfTesting, 0x1)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Timer'
+		// Here lies the not-yet-implemented method 'InitializeOptions'
+		// Here lies the not-yet-implemented method 'BeginSentinelRun'
+		// Here lies the not-yet-implemented method 'AddSentinelPerTimePeriodStats'
+		// Here lies the not-yet-implemented method 'EndSentinelRun'
+		// Here lies the not-yet-implemented method 'DoTravelTheWorld'
+		// Here lies the not-yet-implemented method 'DoSentinelActionPerLoadedMap'
+		// Here lies the not-yet-implemented method 'HandlePerLoadedMapAudioStats'
+		// Here lies the not-yet-implemented method 'GetTravelLocations'
+		// Here lies the not-yet-implemented method 'DoSentinel_MemoryAtSpecificLocation'
+		// Here lies the not-yet-implemented method 'DoSentinel_PerfAtSpecificLocation'
+		// Here lies the not-yet-implemented method 'DoSentinel_ViewDependentMemoryAtSpecificLocation'
+		// Here lies the not-yet-implemented method 'DoTimeBasedSentinelStatGathering'
+		// Here lies the not-yet-implemented method 'DoMemoryTracking'
+		// Here lies the not-yet-implemented method 'StartAutomatedMapTestTimer'
+		// Here lies the not-yet-implemented method 'StartAutomatedMapTestTimerWorker'
+		// Here lies the not-yet-implemented method 'CloseAutomatedMapTestTimer'
+		// Here lies the not-yet-implemented method 'IncrementAutomatedTestingMapIndex'
+		// Here lies the not-yet-implemented method 'IncrementNumberOfMatchesPlayed'
+		// Here lies the not-yet-implemented method 'GetNextAutomatedTestingMap'
+		// Here lies the not-yet-implemented method 'StartMatch'
+		// Here lies the not-yet-implemented method 'CheckForSentinelRun'
 	};
 }
 #undef ADD_VAR

@@ -20,6 +20,7 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, SavedScale3D, 0xFFFFFFFF
 		ADD_VAR(::BoolProperty, bHasSavedScale3D, 0x1)
 		ADD_VAR(::FloatProperty, FOV, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetFOV'
 	};
 }
 #undef ADD_VAR

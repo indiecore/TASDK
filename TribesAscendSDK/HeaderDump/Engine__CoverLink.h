@@ -1,5 +1,9 @@
 #pragma once
+#include "Engine__Pawn.h"
 #include "Engine__NavigationPoint.h"
+#include "Engine__SeqAct_ModifyCover.h"
+#include "Engine__SeqAct_Toggle.h"
+#include "Engine__Scout.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CoverLink." #y); \
@@ -54,6 +58,47 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DangerScale, 0xFFFFFFFF)
 		ADD_OBJECT(CoverLink, NextCoverLink)
 		ADD_VAR(::ByteProperty, LocationDescription, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetFireLinkTargetCoverInfo'
+		// Here lies the not-yet-implemented method 'PackFireLinkInteractionInfo'
+		// Here lies the not-yet-implemented method 'UnPackFireLinkInteractionInfo'
+		// Here lies the not-yet-implemented method 'GetSlotLocation'
+		// Here lies the not-yet-implemented method 'GetSlotRotation'
+		// Here lies the not-yet-implemented method 'GetSlotViewPoint'
+		// Here lies the not-yet-implemented method 'IsExposedTo'
+		// Here lies the not-yet-implemented method 'SetInvalidUntil'
+		// Here lies the not-yet-implemented method 'Claim'
+		// Here lies the not-yet-implemented method 'UnClaim'
+		// Here lies the not-yet-implemented method 'IsValidClaim'
+		// Here lies the not-yet-implemented method 'IsValidClaimBetween'
+		// Here lies the not-yet-implemented method 'IsStationarySlot'
+		// Here lies the not-yet-implemented method 'IsEdgeSlot'
+		// Here lies the not-yet-implemented method 'FindSlots'
+		// Here lies the not-yet-implemented method 'IsLeftEdgeSlot'
+		// Here lies the not-yet-implemented method 'IsRightEdgeSlot'
+		// Here lies the not-yet-implemented method 'GetSlotIdxToLeft'
+		// Here lies the not-yet-implemented method 'GetSlotIdxToRight'
+		// Here lies the not-yet-implemented method 'AllowRightTransition'
+		// Here lies the not-yet-implemented method 'AllowLeftTransition'
+		// Here lies the not-yet-implemented method 'GetFireLinkTo'
+		// Here lies the not-yet-implemented method 'HasFireLinkTo'
+		// Here lies the not-yet-implemented method 'GetSlotActions'
+		// Here lies the not-yet-implemented method 'SetDisabled'
+		// Here lies the not-yet-implemented method 'SetSlotEnabled'
+		// Here lies the not-yet-implemented method 'NotifySlotOwnerCoverDisabled'
+		// Here lies the not-yet-implemented method 'SetSlotPlayerOnly'
+		// Here lies the not-yet-implemented method 'OnModifyCover'
+		// Here lies the not-yet-implemented method 'AutoAdjustSlot'
+		// Here lies the not-yet-implemented method 'IsEnabled'
+		// Here lies the not-yet-implemented method 'OnToggle'
+		// Here lies the not-yet-implemented method 'CreateCheckpointRecord'
+		// Here lies the not-yet-implemented method 'ApplyCheckpointRecord'
+		// Here lies the not-yet-implemented method 'ShutDown'
+		// Here lies the not-yet-implemented method 'GetSwatTurnTarget'
+		// Here lies the not-yet-implemented method 'BreakFracturedMeshes'
+		// Here lies the not-yet-implemented method 'AddCoverSlot'
+		// Here lies the not-yet-implemented method 'GetDebugString'
+		// Here lies the not-yet-implemented method 'GetLocationDescription'
+		// Here lies the not-yet-implemented method 'GetDebugAbbrev'
 	};
 }
 #undef ADD_VAR

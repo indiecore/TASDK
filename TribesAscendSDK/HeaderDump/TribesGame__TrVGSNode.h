@@ -1,5 +1,6 @@
 #pragma once
 #include "Core__Object.h"
+#include "TribesGame__TrPlayerInput.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrVGSNode." #y); \
@@ -18,6 +19,11 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bIgnoreArena, 0x4)
 		ADD_VAR(::BoolProperty, m_bIgnoreTeamRabbit, 0x2)
 		ADD_VAR(::BoolProperty, m_bIgnoreCTF, 0x1)
+		// Here lies the not-yet-implemented method 'ProcessKeyInput'
+		// Here lies the not-yet-implemented method 'VerifyVGSCommandEntry'
+		// Here lies the not-yet-implemented method 'VerifyVGSChild'
+		// Here lies the not-yet-implemented method 'GetGametypeSpecificCommands'
+		// Here lies the not-yet-implemented method 'GetGametypeSpecificChildrenNodes'
 	};
 }
 #undef ADD_VAR

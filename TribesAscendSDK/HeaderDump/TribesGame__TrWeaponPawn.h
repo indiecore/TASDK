@@ -1,5 +1,6 @@
 #pragma once
 #include "UTGame__UTWeaponPawn.h"
+#include "Engine__SoundCue.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrWeaponPawn." #y); \
@@ -21,6 +22,11 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, r_nFlashReload, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, r_scFiringLoop)
 		ADD_VAR(::BoolProperty, r_bFiringLoopSound, 0x1)
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'PlayReload'
+		// Here lies the not-yet-implemented method 'ProcessViewRotation'
+		// Here lies the not-yet-implemented method 'ClientPlayLoopSound'
+		// Here lies the not-yet-implemented method 'PlayLoopingSound'
 	};
 }
 #undef ADD_VAR

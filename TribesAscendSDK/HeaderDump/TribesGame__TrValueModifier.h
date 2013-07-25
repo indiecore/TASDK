@@ -106,6 +106,11 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, IconId, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Description, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, FriendlyName, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'Merge'
+		// Here lies the not-yet-implemented method 'MergeClass'
+		// Here lies the not-yet-implemented method 'MergeModification'
+		// Here lies the not-yet-implemented method 'LogModifiedValues'
 	};
 }
 #undef ADD_VAR

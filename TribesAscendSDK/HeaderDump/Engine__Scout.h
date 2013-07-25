@@ -6,6 +6,12 @@
 	return (##x(this, script_property->offset, z)); \
 } \
 __declspec(property(get=get_##y)) x y;
+#define ADD_OBJECT(x, y) (class x*) get_##y() \
+{ \
+	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.Scout." #y); \
+	return *(x**)(this + script_property->offset); \
+} \
+__declspec(property(get=get_##y)) class x* y;
 namespace UnrealScript
 {
 	class Scout : public Pawn
@@ -34,12 +40,15 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, NavMeshGen_StartingHeightOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NavMeshGen_EntityHalfHeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NavMeshGen_StepSize, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, DefaultReachSpecClass)
 		ADD_VAR(::IntProperty, MinNumPlayerStarts, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxLandingVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TestFallSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TestMaxFallSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TestGroundSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TestJumpZ, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
 	};
 }
 #undef ADD_VAR
+#undef ADD_OBJECT

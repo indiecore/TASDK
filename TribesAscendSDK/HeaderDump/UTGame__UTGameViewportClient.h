@@ -1,5 +1,7 @@
 #pragma once
 #include "UDKBase__UDKGameViewportClient.h"
+#include "Engine__Canvas.h"
+#include "Engine__Font.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTGameViewportClient." #y); \
@@ -23,6 +25,12 @@ namespace UnrealScript
 		ADD_OBJECT(Font, LoadingScreenGameTypeNameFont)
 		ADD_OBJECT(Font, LoadingScreenMapNameFont)
 		ADD_VAR(::StrProperty, UTFrontEndString, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostRender'
+		// Here lies the not-yet-implemented method 'DrawTransition'
+		// Here lies the not-yet-implemented method 'RenderHeader'
+		// Here lies the not-yet-implemented method 'UpdateActiveSplitscreenType'
+		// Here lies the not-yet-implemented method 'SetProgressMessage'
+		// Here lies the not-yet-implemented method 'NotifyConnectionError'
 	};
 }
 #undef ADD_VAR

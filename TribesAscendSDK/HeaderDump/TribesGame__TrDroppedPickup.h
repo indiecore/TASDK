@@ -1,5 +1,12 @@
 #pragma once
 #include "UTGame__UTDroppedPickup.h"
+#include "Engine__Canvas.h"
+#include "Engine__PlayerController.h"
+#include "TribesGame__TrCollisionProxy.h"
+#include "Engine__SoundCue.h"
+#include "Engine__Pawn.h"
+#include "Engine__Actor.h"
+#include "TribesGame__TrPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDroppedPickup." #y); \
@@ -33,6 +40,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fMarkerZOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_PctAmmoToRefill, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, m_AmmoPickupSound)
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'GiveTo'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'DoBounce'
+		// Here lies the not-yet-implemented method 'HitWall'
+		// Here lies the not-yet-implemented method 'OnCollisionProxyTouched'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
 	};
 }
 #undef ADD_VAR

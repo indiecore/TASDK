@@ -1,5 +1,9 @@
 #pragma once
+#include "Engine__SoundCue.h"
 #include "Core__Object.h"
+#include "Engine__FogVolumeSphericalDensityInfo.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__CameraShake.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameExplosionContent." #y); \
@@ -23,6 +27,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ExploRadialBlurFadeOutTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ExploLightFadeOutTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CameraLensEffectRadius, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, CameraLensEffect)
 		ADD_VAR(::FloatProperty, CamShakeFalloff, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CamShakeOuterRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CamShakeInnerRadius, 0xFFFFFFFF)

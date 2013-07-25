@@ -1,5 +1,13 @@
 #pragma once
+#include "Engine__TextureRenderTarget2D.h"
+#include "GFxUI__SwfMovie.h"
 #include "Core__Object.h"
+#include "GFxUI__GFxDataStoreSubscriber.h"
+#include "Engine__Texture.h"
+#include "Engine__PlayerController.h"
+#include "Engine__LocalPlayer.h"
+#include "Engine__GameViewportClient.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GFxUI.GFxMoviePlayer." #y); \
@@ -50,6 +58,74 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, RenderTextureMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, Priority, 0xFFFFFFFF)
 		ADD_OBJECT(GFxDataStoreSubscriber, DataStoreSubscriber)
+		// Here lies the not-yet-implemented method 'OnFocusLost'
+		// Here lies the not-yet-implemented method 'OnFocusGained'
+		// Here lies the not-yet-implemented method 'ConsoleCommand'
+		// Here lies the not-yet-implemented method 'GetPC'
+		// Here lies the not-yet-implemented method 'GetLP'
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'SetWidgetPathBinding'
+		// Here lies the not-yet-implemented method 'Advance'
+		// Here lies the not-yet-implemented method 'PostWidgetInit'
+		// Here lies the not-yet-implemented method 'WidgetUnloaded'
+		// Here lies the not-yet-implemented method 'WidgetInitialized'
+		// Here lies the not-yet-implemented method 'ActionScriptObject'
+		// Here lies the not-yet-implemented method 'ActionScriptString'
+		// Here lies the not-yet-implemented method 'ActionScriptFloat'
+		// Here lies the not-yet-implemented method 'ActionScriptInt'
+		// Here lies the not-yet-implemented method 'ActionScriptVoid'
+		// Here lies the not-yet-implemented method 'Invoke'
+		// Here lies the not-yet-implemented method 'ActionScriptSetFunction'
+		// Here lies the not-yet-implemented method 'CreateArray'
+		// Here lies the not-yet-implemented method 'CreateObject'
+		// Here lies the not-yet-implemented method 'SetVariableStringArray'
+		// Here lies the not-yet-implemented method 'SetVariableFloatArray'
+		// Here lies the not-yet-implemented method 'SetVariableIntArray'
+		// Here lies the not-yet-implemented method 'SetVariableArray'
+		// Here lies the not-yet-implemented method 'GetVariableStringArray'
+		// Here lies the not-yet-implemented method 'GetVariableFloatArray'
+		// Here lies the not-yet-implemented method 'GetVariableIntArray'
+		// Here lies the not-yet-implemented method 'GetVariableArray'
+		// Here lies the not-yet-implemented method 'SetVariableObject'
+		// Here lies the not-yet-implemented method 'SetVariableString'
+		// Here lies the not-yet-implemented method 'SetVariableNumber'
+		// Here lies the not-yet-implemented method 'SetVariableBool'
+		// Here lies the not-yet-implemented method 'SetVariable'
+		// Here lies the not-yet-implemented method 'GetVariableObject'
+		// Here lies the not-yet-implemented method 'GetVariableString'
+		// Here lies the not-yet-implemented method 'GetVariableNumber'
+		// Here lies the not-yet-implemented method 'GetVariableBool'
+		// Here lies the not-yet-implemented method 'GetVariable'
+		// Here lies the not-yet-implemented method 'FilterButtonInput'
+		// Here lies the not-yet-implemented method 'FlushPlayerInput'
+		// Here lies the not-yet-implemented method 'ClearFocusIgnoreKeys'
+		// Here lies the not-yet-implemented method 'AddFocusIgnoreKey'
+		// Here lies the not-yet-implemented method 'ClearCaptureKeys'
+		// Here lies the not-yet-implemented method 'AddCaptureKey'
+		// Here lies the not-yet-implemented method 'SetMovieCanReceiveInput'
+		// Here lies the not-yet-implemented method 'SetMovieCanReceiveFocus'
+		// Here lies the not-yet-implemented method 'SetPerspective3D'
+		// Here lies the not-yet-implemented method 'SetView3D'
+		// Here lies the not-yet-implemented method 'GetVisibleFrameRect'
+		// Here lies the not-yet-implemented method 'SetAlignment'
+		// Here lies the not-yet-implemented method 'SetViewScaleMode'
+		// Here lies the not-yet-implemented method 'SetViewport'
+		// Here lies the not-yet-implemented method 'GetGameViewportClient'
+		// Here lies the not-yet-implemented method 'SetPriority'
+		// Here lies the not-yet-implemented method 'PublishDataStoreValues'
+		// Here lies the not-yet-implemented method 'RefreshDataStoreBindings'
+		// Here lies the not-yet-implemented method 'SetExternalTexture'
+		// Here lies the not-yet-implemented method 'SetExternalInterface'
+		// Here lies the not-yet-implemented method 'SetForceSmoothAnimation'
+		// Here lies the not-yet-implemented method 'SetTimingMode'
+		// Here lies the not-yet-implemented method 'SetMovieInfo'
+		// Here lies the not-yet-implemented method 'ConditionalClearPause'
+		// Here lies the not-yet-implemented method 'OnClose'
+		// Here lies the not-yet-implemented method 'Close'
+		// Here lies the not-yet-implemented method 'SetPause'
+		// Here lies the not-yet-implemented method 'OnPostAdvance'
+		// Here lies the not-yet-implemented method 'PostAdvance'
+		// Here lies the not-yet-implemented method 'Start'
 	};
 }
 #undef ADD_VAR

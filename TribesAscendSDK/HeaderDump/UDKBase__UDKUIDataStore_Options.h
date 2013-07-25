@@ -12,6 +12,9 @@ namespace UnrealScript
 	{
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.MultiMap_Mirror' for the property named 'OptionProviders'!
+		// Here lies the not-yet-implemented method 'ClearSet'
+		// Here lies the not-yet-implemented method 'AppendToSet'
+		// Here lies the not-yet-implemented method 'GetSet'
 	};
 }
 #undef ADD_STRUCT

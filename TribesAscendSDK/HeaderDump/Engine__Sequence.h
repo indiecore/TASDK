@@ -22,6 +22,10 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, DefaultViewX, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'LogFile'!
+		// Here lies the not-yet-implemented method 'FindSeqObjectsByClass'
+		// Here lies the not-yet-implemented method 'FindSeqObjectsByName'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'SetEnabled'
 	};
 }
 #undef ADD_VAR

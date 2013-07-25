@@ -1,5 +1,7 @@
 #pragma once
 #include "TribesGame__TrDevice.h"
+#include "Engine__AnimNodePlayCustomAnim.h"
+#include "Engine__AnimNodeSequence.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice_Shotgun." #y); \
@@ -24,6 +26,16 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fConsumeAmmoTimeStamp, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nImpactCounter, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nMinShotCount, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostInitAnimTree'
+		// Here lies the not-yet-implemented method 'SetFlashLocation'
+		// Here lies the not-yet-implemented method 'PerformInactiveReload'
+		// Here lies the not-yet-implemented method 'CustomFire'
+		// Here lies the not-yet-implemented method 'FireAmmunition'
+		// Here lies the not-yet-implemented method 'StartFire'
+		// Here lies the not-yet-implemented method 'ConsumeAmmo'
+		// Here lies the not-yet-implemented method 'ConsumeAmmo_Internal'
+		// Here lies the not-yet-implemented method 'ProcessInstantHit_Internal'
+		// Here lies the not-yet-implemented method 'OnAnimEnd'
 	};
 }
 #undef ADD_VAR

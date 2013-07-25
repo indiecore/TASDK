@@ -1,5 +1,7 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__InterpCurveEdSetup.h"
+#include "Engine__Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleSystem." #y); \
@@ -60,6 +62,11 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, MacroUVPosition, 0xFFFFFFFF
 		ADD_VAR(::FloatProperty, MacroUVRadius, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box' for the property named 'CustomOcclusionBounds'!
+		// Here lies the not-yet-implemented method 'GetCurrentLODMethod'
+		// Here lies the not-yet-implemented method 'GetLODLevelCount'
+		// Here lies the not-yet-implemented method 'GetLODDistance'
+		// Here lies the not-yet-implemented method 'SetCurrentLODMethod'
+		// Here lies the not-yet-implemented method 'SetLODDistance'
 	};
 }
 #undef ADD_VAR

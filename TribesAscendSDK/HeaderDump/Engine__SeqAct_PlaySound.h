@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SeqAct_Latent.h"
+#include "Engine__SoundCue.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_PlaySound." #y); \
@@ -26,6 +27,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, SoundDuration, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ExtraDelay, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, PlaySound)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

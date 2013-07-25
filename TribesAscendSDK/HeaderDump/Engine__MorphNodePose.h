@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__MorphNodeBase.h"
+#include "Engine__MorphTarget.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MorphNodePose." #y); \
@@ -20,6 +21,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Weight, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, MorphName, 0xFFFFFFFF)
 		ADD_OBJECT(MorphTarget, Target)
+		// Here lies the not-yet-implemented method 'SetMorphTarget'
 	};
 }
 #undef ADD_VAR

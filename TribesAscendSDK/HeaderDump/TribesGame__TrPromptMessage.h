@@ -1,5 +1,9 @@
 #pragma once
 #include "UTGame__UTLocalMessage.h"
+#include "Core__Object.h"
+#include "Engine__PlayerReplicationInfo.h"
+#include "Engine__SoundCue.h"
+#include "TribesGame__TrPlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrPromptMessage." #y); \
@@ -25,6 +29,8 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, UpgradeObjective, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, EquipRepairGun, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, UpgradeDeniedSound)
+		// Here lies the not-yet-implemented method 'GetString'
+		// Here lies the not-yet-implemented method 'FormatText'
 	};
 }
 #undef ADD_VAR

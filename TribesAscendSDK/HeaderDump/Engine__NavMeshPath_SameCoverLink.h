@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__CoverLink.h"
 #include "Engine__NavMeshPathConstraint.h"
+#include "Engine__NavigationHandle.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.NavMeshPath_SameCoverLink." #y); \
@@ -12,6 +14,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(CoverLink, TestLink)
+		// Here lies the not-yet-implemented method 'SameCoverLink'
+		// Here lies the not-yet-implemented method 'Recycle'
 	};
 }
 #undef ADD_OBJECT

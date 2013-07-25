@@ -1,5 +1,9 @@
 #pragma once
 #include "Engine__ReplicationInfo.h"
+#include "Engine__Texture2D.h"
+#include "Engine__TeamInfo.h"
+#include "Engine__Controller.h"
+#include "Engine__HUD.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PlayerReplicationInfo." #y); \
@@ -56,6 +60,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, StatPingMin, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, StatPingTotals, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, StatConnectionCounts, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, GameMessageClass)
 		ADD_VAR(::StrProperty, StringUnknown, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, StringSpectating, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bHasBeenWelcomed, 0x80)
@@ -63,6 +68,29 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumLives, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, TTSSpeaker, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Deaths, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Duplicate'
+		// Here lies the not-yet-implemented method 'UpdatePing'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'ClientInitialize'
+		// Here lies the not-yet-implemented method 'SetPlayerTeam'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'ShouldBroadCastWelcomeMessage'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'GetHumanReadableName'
+		// Here lies the not-yet-implemented method 'DisplayDebug'
+		// Here lies the not-yet-implemented method 'SetPlayerName'
+		// Here lies the not-yet-implemented method 'SetWaitingPlayer'
+		// Here lies the not-yet-implemented method 'OverrideWith'
+		// Here lies the not-yet-implemented method 'CopyProperties'
+		// Here lies the not-yet-implemented method 'IncrementDeaths'
+		// Here lies the not-yet-implemented method 'SeamlessTravelTo'
+		// Here lies the not-yet-implemented method 'SetUniqueId'
+		// Here lies the not-yet-implemented method 'GetTeamNum'
+		// Here lies the not-yet-implemented method 'IsInvalidName'
+		// Here lies the not-yet-implemented method 'RegisterPlayerWithSession'
+		// Here lies the not-yet-implemented method 'UnregisterPlayerFromSession'
+		// Here lies the not-yet-implemented method 'GetSpectatorName'
 	};
 }
 #undef ADD_VAR

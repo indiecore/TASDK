@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SequenceAction.h"
+#include "Core__Object.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_Trace." #y); \
@@ -31,6 +32,7 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, TraceExtent, 0xFFFFFFFF
 		ADD_VAR(::BoolProperty, bTraceWorld, 0x2)
 		ADD_VAR(::BoolProperty, bTraceActors, 0x1)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

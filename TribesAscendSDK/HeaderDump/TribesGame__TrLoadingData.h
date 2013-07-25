@@ -23,6 +23,9 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, MapURL, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Rules, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Tip, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetRandomTip'
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'SetDataFields'
 	};
 }
 #undef ADD_VAR

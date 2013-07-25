@@ -1,5 +1,6 @@
 #pragma once
 #include "UTGame__UTGFxTweenableMoviePlayer.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxProjectedUI." #y); \
@@ -26,6 +27,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, CancelString, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, AcceptString, 0xFFFFFFFF)
 		ADD_STRUCT(::RotatorProperty, StartRotation, 0xFFFFFFFF
+		ADD_OBJECT(ScriptClass, WeaponClass)
 		ADD_VAR(::FloatProperty, leftThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, rightThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, rotval, 0xFFFFFFFF)
@@ -67,6 +69,37 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, MainMC)
 		ADD_OBJECT(GFxObject, Window)
 		ADD_OBJECT(GFxObject, Root)
+		// Here lies the not-yet-implemented method 'Start'
+		// Here lies the not-yet-implemented method 'ConfigureInventory'
+		// Here lies the not-yet-implemented method 'AddCaptureKeys'
+		// Here lies the not-yet-implemented method 'StartCloseAnimation'
+		// Here lies the not-yet-implemented method 'OnCloseAnimComplete'
+		// Here lies the not-yet-implemented method 'SetupBG'
+		// Here lies the not-yet-implemented method 'SetupBorder'
+		// Here lies the not-yet-implemented method 'SetupArsenal'
+		// Here lies the not-yet-implemented method 'SetupBackpack'
+		// Here lies the not-yet-implemented method 'SetupInfo'
+		// Here lies the not-yet-implemented method 'PopulateBackpackFake'
+		// Here lies the not-yet-implemented method 'SetupArsenalButtons'
+		// Here lies the not-yet-implemented method 'SetupBackpackButtons'
+		// Here lies the not-yet-implemented method 'SwitchWeapon'
+		// Here lies the not-yet-implemented method 'OnFocusInSelection'
+		// Here lies the not-yet-implemented method 'OnFocusOutSelection'
+		// Here lies the not-yet-implemented method 'OnClickWeaponButton'
+		// Here lies the not-yet-implemented method 'OnFocusUpdateInfo'
+		// Here lies the not-yet-implemented method 'OnFocusArsenalTab'
+		// Here lies the not-yet-implemented method 'OnFocusBackpackTab'
+		// Here lies the not-yet-implemented method 'OnClickFakeItem'
+		// Here lies the not-yet-implemented method 'SetInfo'
+		// Here lies the not-yet-implemented method 'PopulateArsenal'
+		// Here lies the not-yet-implemented method 'FakeUpdateEquippedWeapon'
+		// Here lies the not-yet-implemented method 'UpdateEquippedWeapon'
+		// Here lies the not-yet-implemented method 'ProcessTweenCallback'
+		// Here lies the not-yet-implemented method 'TweenTurbines'
+		// Here lies the not-yet-implemented method 'FloatSelectionUp'
+		// Here lies the not-yet-implemented method 'FloatSelectionDown'
+		// Here lies the not-yet-implemented method 'UpdatePos'
+		// Here lies the not-yet-implemented method 'CreateItemData'
 	};
 }
 #undef ADD_VAR

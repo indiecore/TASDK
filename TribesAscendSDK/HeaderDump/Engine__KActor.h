@@ -1,5 +1,10 @@
 #pragma once
 #include "Engine__DynamicSMActor.h"
+#include "Engine__PhysicalMaterial.h"
+#include "Engine__Controller.h"
+#include "Engine__SeqAct_Toggle.h"
+#include "Engine__Actor.h"
+#include "Engine__SeqAct_Teleport.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.KActor." #y); \
@@ -37,6 +42,20 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bCurrentSlide, 0x4)
 		ADD_VAR(::BoolProperty, bWakeOnLevelStart, 0x2)
 		ADD_VAR(::BoolProperty, bDamageAppliesImpulse, 0x1)
+		// Here lies the not-yet-implemented method 'GetKActorPhysMaterial'
+		// Here lies the not-yet-implemented method 'ResolveRBState'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'FellOutOfWorld'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'SetPhysicalCollisionProperties'
+		// Here lies the not-yet-implemented method 'SpawnedByKismet'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'ApplyImpulse'
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'TakeRadiusDamage'
+		// Here lies the not-yet-implemented method 'OnToggle'
+		// Here lies the not-yet-implemented method 'OnTeleport'
+		// Here lies the not-yet-implemented method 'Reset'
 	};
 }
 #undef ADD_VAR

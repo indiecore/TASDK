@@ -1,5 +1,20 @@
 #pragma once
+#include "Engine__PhysicalMaterial.h"
+#include "Engine__Material.h"
+#include "Engine__GameViewportClient.h"
 #include "Core__Subsystem.h"
+#include "Engine__TranslationContext.h"
+#include "Engine__PostProcessChain.h"
+#include "Engine__Client.h"
+#include "Engine__SoundNodeWave.h"
+#include "Engine__Texture.h"
+#include "Engine__Texture2D.h"
+#include "Engine__ApexDestructibleDamageParameters.h"
+#include "Engine__StaticMesh.h"
+#include "Engine__Font.h"
+#include "Core__Object.h"
+#include "Engine__AudioDevice.h"
+#include "Engine__WorldInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Engine." #y); \
@@ -109,6 +124,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, DefaultPostProcessName, 0xFFFFFFFF)
 		ADD_OBJECT(PostProcessChain, DefaultPostProcess)
 		ADD_VAR(::StrProperty, DefaultOnlineSubsystemName, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, OnlineSubsystemClass)
 		ADD_VAR(::FloatProperty, TerrainTessellationCheckDistance, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, TerrainTessellationCheckCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, TerrainMaterialMaxTextureCount, 0xFFFFFFFF)
@@ -222,9 +238,13 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, DefaultMaterialName, 0xFFFFFFFF)
 		ADD_OBJECT(Material, DefaultMaterial)
 		ADD_VAR(::StrProperty, LocalPlayerClassName, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, LocalPlayerClass)
 		ADD_VAR(::StrProperty, DataStoreClientClassName, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, DataStoreClientClass)
 		ADD_VAR(::StrProperty, GameViewportClientClassName, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, GameViewportClientClass)
 		ADD_VAR(::StrProperty, ConsoleClassName, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, ConsoleClass)
 		ADD_VAR(::StrProperty, SubtitleFontName, 0xFFFFFFFF)
 		ADD_OBJECT(Font, SubtitleFont)
 		ADD_VAR(::StrProperty, LargeFontName, 0xFFFFFFFF)
@@ -235,6 +255,29 @@ namespace UnrealScript
 		ADD_OBJECT(Font, SmallFont)
 		ADD_VAR(::StrProperty, TinyFontName, 0xFFFFFFFF)
 		ADD_OBJECT(Font, TinyFont)
+		// Here lies the not-yet-implemented method 'IsGame'
+		// Here lies the not-yet-implemented method 'IsEditor'
+		// Here lies the not-yet-implemented method 'GetSmallFont'
+		// Here lies the not-yet-implemented method 'GetAudioDevice'
+		// Here lies the not-yet-implemented method 'IsSplitScreen'
+		// Here lies the not-yet-implemented method 'GetTinyFont'
+		// Here lies the not-yet-implemented method 'GetMediumFont'
+		// Here lies the not-yet-implemented method 'GetLargeFont'
+		// Here lies the not-yet-implemented method 'GetCurrentWorldInfo'
+		// Here lies the not-yet-implemented method 'GetBuildDate'
+		// Here lies the not-yet-implemented method 'GetSubtitleFont'
+		// Here lies the not-yet-implemented method 'GetAdditionalFont'
+		// Here lies the not-yet-implemented method 'GetLastMovieName'
+		// Here lies the not-yet-implemented method 'PlayLoadMapMovie'
+		// Here lies the not-yet-implemented method 'StopMovie'
+		// Here lies the not-yet-implemented method 'RemoveAllOverlays'
+		// Here lies the not-yet-implemented method 'AddOverlay'
+		// Here lies the not-yet-implemented method 'AddOverlayWrapped'
+		// Here lies the not-yet-implemented method 'GetEngine'
+		// Here lies the not-yet-implemented method 'GetWorldPostProcessChain'
+		// Here lies the not-yet-implemented method 'AddTextureStreamingSlaveLoc'
+		// Here lies the not-yet-implemented method 'BasicSaveObject'
+		// Here lies the not-yet-implemented method 'BasicLoadObject'
 	};
 }
 #undef ADD_VAR

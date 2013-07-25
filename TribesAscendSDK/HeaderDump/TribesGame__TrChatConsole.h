@@ -1,5 +1,7 @@
 #pragma once
 #include "UTGame__UTConsole.h"
+#include "TribesGame__TrPlayerController.h"
+#include "Engine__Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrChatConsole." #y); \
@@ -25,6 +27,16 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, SlashHelp, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LastFriendCount, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ChannelStr, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Initialized'
+		// Here lies the not-yet-implemented method 'GetPlayerController'
+		// Here lies the not-yet-implemented method 'ConsoleCommand'
+		// Here lies the not-yet-implemented method 'StartTypingChat'
+		// Here lies the not-yet-implemented method 'StartTyping'
+		// Here lies the not-yet-implemented method 'IsSlashCommand'
+		// Here lies the not-yet-implemented method 'IsPlayerTell'
+		// Here lies the not-yet-implemented method 'PostRender_Console'
+		// Here lies the not-yet-implemented method 'InputKey'
+		// Here lies the not-yet-implemented method 'AddOnlineFriendHelp'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,12 @@
 #pragma once
 #include "TribesGame__TrGameObjective.h"
+#include "TribesGame__TrPawn.h"
+#include "Engine__MaterialInstanceConstant.h"
+#include "TribesGame__TrPlayerController.h"
+#include "Engine__SkelControlSingleBone.h"
+#include "Engine__Actor.h"
+#include "Engine__Canvas.h"
+#include "Engine__PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrCaHCapturePoint." #y); \
@@ -52,6 +59,21 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceConstant, m_DiamondSwordHologramMIC)
 		ADD_OBJECT(MaterialInstanceConstant, m_BloodEagleHologramMIC)
 		ADD_VAR(::StrProperty, m_sCapturePointName, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'PostInitAnimTree'
+		// Here lies the not-yet-implemented method 'PulseMarker'
+		// Here lies the not-yet-implemented method 'PointPulseMarker'
+		// Here lies the not-yet-implemented method 'UpdateHologramVisibility'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'OnPawnTouched'
+		// Here lies the not-yet-implemented method 'PostCapturePointTimer'
+		// Here lies the not-yet-implemented method 'AwardPointTimer'
+		// Here lies the not-yet-implemented method 'ShouldPostRenderForCaH'
+		// Here lies the not-yet-implemented method 'GetScreenName'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
+		// Here lies the not-yet-implemented method 'CheckNearbyPlayersTimer'
+		// Here lies the not-yet-implemented method 'IsPawnConsideredNearby'
 	};
 }
 #undef ADD_VAR

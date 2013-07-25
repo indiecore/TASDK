@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__UIDataProvider_OnlinePlayerDataBase.h"
+#include "Engine__LocalPlayer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataProvider_OnlineFriends." #y); \
@@ -32,6 +33,11 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, PresenceInfoCol, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, NickNameCol, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
+		// Here lies the not-yet-implemented method 'OnRegister'
+		// Here lies the not-yet-implemented method 'OnUnregister'
+		// Here lies the not-yet-implemented method 'OnFriendsReadComplete'
+		// Here lies the not-yet-implemented method 'OnLoginChange'
+		// Here lies the not-yet-implemented method 'RefreshFriendsList'
 	};
 }
 #undef ADD_VAR

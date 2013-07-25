@@ -1,5 +1,13 @@
 #pragma once
+#include "Engine__VolumeTimer.h"
+#include "Engine__Pawn.h"
+#include "Engine__Controller.h"
 #include "Engine__Volume.h"
+#include "Engine__Info.h"
+#include "Engine__SeqAct_SetDamageInstigator.h"
+#include "Engine__Actor.h"
+#include "Engine__SeqAct_Toggle.h"
+#include "Engine__PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PhysicsVolume." #y); \
@@ -34,6 +42,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, PainInterval, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FluidFriction, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Priority, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, DamageType)
 		ADD_VAR(::FloatProperty, TerminalVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, GroundFriction, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bPhysicsOnContact, 0x800)
@@ -48,6 +57,26 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAIShouldIgnorePain, 0x4)
 		ADD_VAR(::BoolProperty, bVelocityAffectsWalking, 0x1)
 		ADD_STRUCT(::VectorProperty, ZoneVelocity, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'GetGravityZ'
+		// Here lies the not-yet-implemented method 'GetZoneVelocityForActor'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'PhysicsChangedFor'
+		// Here lies the not-yet-implemented method 'ActorEnteredVolume'
+		// Here lies the not-yet-implemented method 'ActorLeavingVolume'
+		// Here lies the not-yet-implemented method 'PawnEnteredVolume'
+		// Here lies the not-yet-implemented method 'PawnLeavingVolume'
+		// Here lies the not-yet-implemented method 'OnToggle'
+		// Here lies the not-yet-implemented method 'CollisionChanged'
+		// Here lies the not-yet-implemented method 'TimerPop'
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'CausePainTo'
+		// Here lies the not-yet-implemented method 'ModifyPlayer'
+		// Here lies the not-yet-implemented method 'NotifyPawnBecameViewTarget'
+		// Here lies the not-yet-implemented method 'OnSetDamageInstigator'
+		// Here lies the not-yet-implemented method 'ShouldSaveForCheckpoint'
+		// Here lies the not-yet-implemented method 'CreateCheckpointRecord'
+		// Here lies the not-yet-implemented method 'ApplyCheckpointRecord'
 	};
 }
 #undef ADD_VAR

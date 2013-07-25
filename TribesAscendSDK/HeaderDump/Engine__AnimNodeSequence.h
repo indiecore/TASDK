@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine__AnimNode.h"
+#include "Engine__AnimSequence.h"
+#include "Engine__CameraAnim.h"
+#include "Engine__CameraAnimInst.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNodeSequence." #y); \
@@ -53,6 +56,20 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CameraAnimBlendOutTime, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RootBoneOption, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RootRotationOption, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetAnim'
+		// Here lies the not-yet-implemented method 'PlayAnim'
+		// Here lies the not-yet-implemented method 'StopAnim'
+		// Here lies the not-yet-implemented method 'ReplayAnim'
+		// Here lies the not-yet-implemented method 'SetPosition'
+		// Here lies the not-yet-implemented method 'GetNormalizedPosition'
+		// Here lies the not-yet-implemented method 'FindGroupRelativePosition'
+		// Here lies the not-yet-implemented method 'FindGroupPosition'
+		// Here lies the not-yet-implemented method 'GetGroupRelativePosition'
+		// Here lies the not-yet-implemented method 'GetGlobalPlayRate'
+		// Here lies the not-yet-implemented method 'GetAnimPlaybackLength'
+		// Here lies the not-yet-implemented method 'GetTimeLeft'
+		// Here lies the not-yet-implemented method 'SetRootBoneAxisOption'
+		// Here lies the not-yet-implemented method 'SetRootBoneRotationOption'
 	};
 }
 #undef ADD_VAR

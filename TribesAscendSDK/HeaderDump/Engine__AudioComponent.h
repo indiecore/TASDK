@@ -1,5 +1,10 @@
 #pragma once
 #include "Engine__ActorComponent.h"
+#include "Engine__SoundCue.h"
+#include "Engine__SoundNodeWave.h"
+#include "Engine__SoundNode.h"
+#include "Engine__Actor.h"
+#include "Engine__PortalVolume.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AudioComponent." #y); \
@@ -90,6 +95,18 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bStopWhenOwnerDestroyed, 0x8)
 		ADD_VAR(::BoolProperty, bAutoPlay, 0x2)
 		ADD_OBJECT(SoundNode, CueFirstNode)
+		// Here lies the not-yet-implemented method 'ResetToDefaults'
+		// Here lies the not-yet-implemented method 'Play'
+		// Here lies the not-yet-implemented method 'FadeIn'
+		// Here lies the not-yet-implemented method 'FadeOut'
+		// Here lies the not-yet-implemented method 'OnQueueSubtitles'
+		// Here lies the not-yet-implemented method 'OnAudioFinished'
+		// Here lies the not-yet-implemented method 'Stop'
+		// Here lies the not-yet-implemented method 'IsPlaying'
+		// Here lies the not-yet-implemented method 'AdjustVolume'
+		// Here lies the not-yet-implemented method 'SetFloatParameter'
+		// Here lies the not-yet-implemented method 'SetWaveParameter'
+		// Here lies the not-yet-implemented method 'OcclusionChanged'
 	};
 }
 #undef ADD_VAR

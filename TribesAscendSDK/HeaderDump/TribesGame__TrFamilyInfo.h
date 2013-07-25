@@ -1,5 +1,11 @@
 #pragma once
 #include "UTGame__UTFamilyInfo.h"
+#include "Engine__PhysicsAsset.h"
+#include "Engine__SkeletalMesh.h"
+#include "Engine__AnimTree.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__AnimSet.h"
+#include "Engine__MorphTargetSet.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrFamilyInfo." #y); \
@@ -79,6 +85,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fLowHealthThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fJetpackInitTotalTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, InfoBit, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, DefaultSkinClass)
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'm_MainMenuPaperDollInfo'!
 		ADD_OBJECT(PhysicsAsset, m_PaperDollSidekickPhysics)
 		ADD_OBJECT(AnimTree, m_PaperDollSidekickAnimTree)
@@ -103,6 +110,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fJetpackPowerPoolTickRate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fJetpackPowerPoolCost, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fJetpackInitAccelMultiplier, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetDeviceClassByEquipPoint'
+		// Here lies the not-yet-implemented method 'GetContentDeviceClassStringByEquipPoint'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__SequenceAction.h"
+#include "Engine__Actor.h"
+#include "Engine__CameraShake.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_CameraShake." #y); \
@@ -27,6 +29,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bOrientTowardRadialEpicenter, 0x4)
 		ADD_VAR(::FloatProperty, ShakeScale, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, PlaySpace, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

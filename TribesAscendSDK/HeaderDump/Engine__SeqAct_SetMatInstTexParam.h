@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__SequenceAction.h"
+#include "Engine__Texture.h"
+#include "Engine__MaterialInstanceConstant.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_SetMatInstTexParam." #y); \

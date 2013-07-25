@@ -1,5 +1,8 @@
 #pragma once
+#include "Engine__ParticleSystem.h"
 #include "TribesGame__TrProj_Grenade.h"
+#include "Engine__SoundCue.h"
+#include "Engine__SkelControlSingleBone.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_SpikeGrenade." #y); \
@@ -40,6 +43,17 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fFractalTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRemainingFractalTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bStartedFractal, 0x1)
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'PostInitAnimTree'
+		// Here lies the not-yet-implemented method 'InitProjectile'
+		// Here lies the not-yet-implemented method 'Explode'
+		// Here lies the not-yet-implemented method 'ClientReceivedExplosionLocation'
+		// Here lies the not-yet-implemented method 'IsFractalActive'
+		// Here lies the not-yet-implemented method 'StartFractalShots'
+		// Here lies the not-yet-implemented method 'ShootFractalShot'
+		// Here lies the not-yet-implemented method 'SpawnFractalExplosionEffects'
+		// Here lies the not-yet-implemented method 'EndFractal'
+		// Here lies the not-yet-implemented method 'SpawnExplosionEffects'
 	};
 }
 #undef ADD_VAR

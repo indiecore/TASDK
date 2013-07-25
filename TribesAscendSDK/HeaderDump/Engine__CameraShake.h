@@ -1,5 +1,6 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__CameraAnim.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CameraShake." #y); \
@@ -37,6 +38,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, AnimBlendInTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AnimBlendOutTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RandomAnimSegmentDuration, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetLocOscillationMagnitude'
+		// Here lies the not-yet-implemented method 'GetRotOscillationMagnitude'
 	};
 }
 #undef ADD_VAR

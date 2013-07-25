@@ -1,5 +1,9 @@
 #pragma once
+#include "GFxUI__GFxObject.h"
 #include "UTGame__GFxUDKFrontEnd_Screen.h"
+#include "GFxUI__GFxClikWidget.h"
+#include "Engine__UIDataStore_OnlineGameSettings.h"
+#include "UTGame__UTUIDataStore_StringList.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_GameMode." #y); \
@@ -25,6 +29,18 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, GameMode, 0xFFFFFFFF)
 		ADD_OBJECT(UTUIDataStore_StringList, StringListDataStore)
 		ADD_OBJECT(UIDataStore_OnlineGameSettings, SettingsDataStore)
+		// Here lies the not-yet-implemented method 'OnViewLoaded'
+		// Here lies the not-yet-implemented method 'OnTopMostView'
+		// Here lies the not-yet-implemented method 'DisableSubComponents'
+		// Here lies the not-yet-implemented method 'OnGameModeSelected'
+		// Here lies the not-yet-implemented method 'OnGameModeChange'
+		// Here lies the not-yet-implemented method 'OnListItemPress'
+		// Here lies the not-yet-implemented method 'OnListChange'
+		// Here lies the not-yet-implemented method 'UpdateDescription'
+		// Here lies the not-yet-implemented method 'UpdateListDataProvider'
+		// Here lies the not-yet-implemented method 'SetImgScroller'
+		// Here lies the not-yet-implemented method 'ASSetList'
+		// Here lies the not-yet-implemented method 'WidgetInitialized'
 	};
 }
 #undef ADD_VAR

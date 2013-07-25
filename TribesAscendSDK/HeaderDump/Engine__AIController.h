@@ -1,5 +1,10 @@
 #pragma once
 #include "Engine__Controller.h"
+#include "Engine__Actor.h"
+#include "Engine__HUD.h"
+#include "Engine__Route.h"
+#include "Engine__Weapon.h"
+#include "Engine__SeqAct_AIMoveToActor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AIController." #y); \
@@ -24,6 +29,15 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Skill, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bReverseScriptedRoute, 0x2)
 		ADD_VAR(::BoolProperty, bAdjustFromWalls, 0x1)
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'DisplayDebug'
+		// Here lies the not-yet-implemented method 'SetTeam'
+		// Here lies the not-yet-implemented method 'GetPlayerViewPoint'
+		// Here lies the not-yet-implemented method 'OnAIMoveToActor'
+		// Here lies the not-yet-implemented method 'NotifyWeaponFired'
+		// Here lies the not-yet-implemented method 'NotifyWeaponFinishedFiring'
+		// Here lies the not-yet-implemented method 'CanFireWeapon'
 	};
 }
 #undef ADD_VAR

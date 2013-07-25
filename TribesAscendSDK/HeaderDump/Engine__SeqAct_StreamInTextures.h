@@ -23,6 +23,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Seconds, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bStreamingActive, 0x2)
 		ADD_VAR(::BoolProperty, bLocationBased, 0x1)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

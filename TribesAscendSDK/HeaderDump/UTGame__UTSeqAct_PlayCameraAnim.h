@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SequenceAction.h"
+#include "Engine__CameraAnim.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTSeqAct_PlayCameraAnim." #y); \
@@ -22,6 +23,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Rate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BlendInTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BlendOutTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

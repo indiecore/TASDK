@@ -13,6 +13,9 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bTickAnimInScript, 0x1)
 		ADD_VAR(::FloatProperty, BlendTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetBlendTime'
+		// Here lies the not-yet-implemented method 'GetAnimDuration'
+		// Here lies the not-yet-implemented method 'TickAnim'
 	};
 }
 #undef ADD_VAR

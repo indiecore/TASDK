@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine__Camera.h"
+#include "TribesGame__TrPawn.h"
+#include "TribesGame__TrFlagBase.h"
+#include "Engine__PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrCamera_Spectator." #y); \
@@ -34,6 +37,11 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fPawnZOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCameraDistanceInterpSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fInterpedCameraDistance, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'InitializeFor'
+		// Here lies the not-yet-implemented method 'UpdateCamera'
+		// Here lies the not-yet-implemented method 'UpdateViewTarget'
+		// Here lies the not-yet-implemented method 'ShowHiddenPawn'
+		// Here lies the not-yet-implemented method 'SetFOV'
 	};
 }
 #undef ADD_VAR

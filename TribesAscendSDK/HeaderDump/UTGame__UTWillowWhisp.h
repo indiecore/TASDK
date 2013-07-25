@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__ParticleSystem.h"
 #include "UTGame__UTReplicatedEmitter.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -20,6 +21,11 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, Position, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumPoints, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, WayPoints, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'SetInitialState'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'SetTemplate'
+		// Here lies the not-yet-implemented method 'StartNextPath'
 	};
 }
 #undef ADD_VAR

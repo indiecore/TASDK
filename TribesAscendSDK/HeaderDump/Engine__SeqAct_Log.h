@@ -22,6 +22,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TargetDuration, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIncludeObjComment, 0x2)
 		ADD_VAR(::BoolProperty, bOutputToScreen, 0x1)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

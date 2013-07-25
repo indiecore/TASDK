@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__UIDynamicDataProvider.h"
+#include "Engine__Settings.h"
+#include "Engine__UIDataProvider.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataProvider_Settings." #y); \
@@ -19,6 +21,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bIsAListRow, 0x1)
 		ADD_OBJECT(Settings, Settings)
+		// Here lies the not-yet-implemented method 'ArrayProviderPropertyChanged'
+		// Here lies the not-yet-implemented method 'OnSettingValueUpdated'
 	};
 }
 #undef ADD_VAR

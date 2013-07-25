@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__Texture2D.h"
 #include "Engine__Texture.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

@@ -23,6 +23,7 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, Velocity, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, InitialWorldSpaceGoalOffset, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, WorldSpaceGoal, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'EntireBeamVelocity'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,10 @@
 #pragma once
+#include "TribesGame__TrPlayerController.h"
+#include "TribesGame__TrAnimNodeBlendBy3pDevice.h"
 #include "TribesGame__TrPawn.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__Actor.h"
+#include "Engine__SoundCue.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrPlayerPawn." #y); \
@@ -67,6 +72,34 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, m_DefaultSkiJetParticle)
 		ADD_VAR(::FloatProperty, m_fJetpackSoundFadeOutTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRemainingJetpackSoundFadeOutTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetCharacterClassFromInfo'
+		// Here lies the not-yet-implemented method 'UpdateEyeHeight'
+		// Here lies the not-yet-implemented method 'GetMaterialBelowFeetByLoc'
+		// Here lies the not-yet-implemented method 'GetMaterialBelowFeet'
+		// Here lies the not-yet-implemented method 'ActuallyPlayFootstepSound'
+		// Here lies the not-yet-implemented method 'WeaponBob'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'PostInitAnimTree'
+		// Here lies the not-yet-implemented method 'PlayHardLandingEffect'
+		// Here lies the not-yet-implemented method 'PlaySonicPunchEffect'
+		// Here lies the not-yet-implemented method 'CreateSkiParticleEffects'
+		// Here lies the not-yet-implemented method 'ClearSkiParticleEffects'
+		// Here lies the not-yet-implemented method 'PlaySkiEffects'
+		// Here lies the not-yet-implemented method 'StopSkiEffects'
+		// Here lies the not-yet-implemented method 'CreateJetpackParticleEffects'
+		// Here lies the not-yet-implemented method 'ClearJetpackParticleEffects'
+		// Here lies the not-yet-implemented method 'PlayJetpackEffects'
+		// Here lies the not-yet-implemented method 'UpdateJetpackEffects'
+		// Here lies the not-yet-implemented method 'StopJetpackEffects'
+		// Here lies the not-yet-implemented method 'PlayReload'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'CalcCamera'
+		// Here lies the not-yet-implemented method 'SetThirdPersonCamera'
+		// Here lies the not-yet-implemented method 'CalcThirdPersonCam'
+		// Here lies the not-yet-implemented method 'CalcOtherWatchingCam'
+		// Here lies the not-yet-implemented method 'ClearMeshAnimSeqNodes'
+		// Here lies the not-yet-implemented method 'CacheMeshAnimSeqNodes'
+		// Here lies the not-yet-implemented method 'SuppressAnimNotifies'
 	};
 }
 #undef ADD_VAR

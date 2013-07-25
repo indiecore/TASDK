@@ -1,5 +1,9 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__ParticleModuleSpawn.h"
+#include "Engine__ParticleModuleEventGenerator.h"
+#include "Engine__ParticleModule.h"
+#include "Engine__ParticleModuleRequired.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleLODLevel." #y); \

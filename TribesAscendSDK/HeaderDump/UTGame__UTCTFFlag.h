@@ -1,5 +1,9 @@
 #pragma once
 #include "UTGame__UTCarriedObject.h"
+#include "Engine__Actor.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__PlayerController.h"
+#include "Engine__Controller.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTCTFFlag." #y); \
@@ -32,6 +36,21 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bBringDownFromBright, 0x2)
 		ADD_VAR(::BoolProperty, bBringUpBright, 0x1)
 		ADD_OBJECT(ParticleSystem, RespawnEffect)
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'OnBaseChainChanged'
+		// Here lies the not-yet-implemented method 'ShouldMinimapRenderFor'
+		// Here lies the not-yet-implemented method 'ClientReturnedHome'
+		// Here lies the not-yet-implemented method 'SetHolder'
+		// Here lies the not-yet-implemented method 'ValidHolder'
+		// Here lies the not-yet-implemented method 'SameTeamTouch'
+		// Here lies the not-yet-implemented method 'CustomRespawnEffects'
+		// Here lies the not-yet-implemented method 'bringUpBrightOff'
+		// Here lies the not-yet-implemented method 'CustomFadeOutEffects'
+		// Here lies the not-yet-implemented method 'Drop'
+		// Here lies the not-yet-implemented method 'SetFlagPropertiesToStationaryFlagState'
+		// Here lies the not-yet-implemented method 'SetFlagDynamicLightToNotBeDynamic'
 	};
 }
 #undef ADD_VAR

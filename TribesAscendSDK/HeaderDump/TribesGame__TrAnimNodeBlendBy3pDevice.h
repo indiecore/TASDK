@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame__TrAnimNodeBlendList.h"
+#include "TribesGame__TrPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrAnimNodeBlendBy3pDevice." #y); \
@@ -28,6 +29,13 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bFirePreview, 0x2)
 		ADD_VAR(::BoolProperty, m_bScaleFireByRefireTime, 0x1)
 		ADD_OBJECT(TrPawn, m_TrPawn)
+		// Here lies the not-yet-implemented method 'PlayIdle'
+		// Here lies the not-yet-implemented method 'PlayBuildup'
+		// Here lies the not-yet-implemented method 'PlayFire'
+		// Here lies the not-yet-implemented method 'PlayPutaway'
+		// Here lies the not-yet-implemented method 'PlayRetrieve'
+		// Here lies the not-yet-implemented method 'PlayReload'
+		// Here lies the not-yet-implemented method 'PlayOffhand'
 	};
 }
 #undef ADD_VAR

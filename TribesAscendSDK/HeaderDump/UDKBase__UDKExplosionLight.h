@@ -16,6 +16,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, HighDetailFrameTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bInitialized, 0x2)
 		ADD_VAR(::BoolProperty, bCheckFrameRate, 0x1)
+		// Here lies the not-yet-implemented method 'OnLightFinished'
+		// Here lies the not-yet-implemented method 'ResetLight'
 	};
 }
 #undef ADD_VAR

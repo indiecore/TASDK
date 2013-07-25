@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__Emitter.h"
+#include "Engine__Camera.h"
+#include "Engine__ParticleSystem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.EmitterCameraLensEffectBase." #y); \
@@ -23,6 +25,12 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BaseFOV, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, PS_CameraEffectNonExtremeContent)
 		ADD_OBJECT(ParticleSystem, PS_CameraEffect)
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'RegisterCamera'
+		// Here lies the not-yet-implemented method 'NotifyRetriggered'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'ActivateLensEffect'
+		// Here lies the not-yet-implemented method 'UpdateLocation'
 	};
 }
 #undef ADD_VAR

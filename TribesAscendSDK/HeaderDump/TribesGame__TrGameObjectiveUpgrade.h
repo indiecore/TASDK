@@ -1,5 +1,6 @@
 #pragma once
 #include "Core__Object.h"
+#include "TribesGame__TrGameObjective.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrGameObjectiveUpgrade." #y); \
@@ -27,6 +28,7 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, m_nmClassPropertyName, 0xFFFFFFFF)
 		ADD_OBJECT(TrGameObjective, m_Owner)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'm_ClassPropertyPointer'!
+		// Here lies the not-yet-implemented method 'InitUpgrade'
 	};
 }
 #undef ADD_VAR

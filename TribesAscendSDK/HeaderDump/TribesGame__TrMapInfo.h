@@ -1,5 +1,6 @@
 #pragma once
 #include "UDKBase__UDKMapInfo.h"
+#include "TribesGame__TrMapMusicInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrMapInfo." #y); \
@@ -18,6 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::NameProperty, m_DefaultPhysicalMaterialName, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, m_WeatherEffect)
 		ADD_OBJECT(TrMapMusicInfo, m_MapMusicInfo)
 	};
 }

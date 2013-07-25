@@ -24,6 +24,11 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'SplineColor'!
 		ADD_VAR(::FloatProperty, SplineCurviness, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector' for the property named 'SplineInfo'!
+		// Here lies the not-yet-implemented method 'UpdateSplineCurviness'
+		// Here lies the not-yet-implemented method 'UpdateSplineReparamTable'
+		// Here lies the not-yet-implemented method 'GetSplineLength'
+		// Here lies the not-yet-implemented method 'GetLocationAtDistanceAlongSpline'
+		// Here lies the not-yet-implemented method 'GetTangentAtDistanceAlongSpline'
 	};
 }
 #undef ADD_VAR

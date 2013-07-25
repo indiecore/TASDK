@@ -21,6 +21,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDataBindingPropertiesOnly, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementProvider'!
+		// Here lies the not-yet-implemented method 'InitializeProvider'
 	};
 }
 #undef ADD_VAR

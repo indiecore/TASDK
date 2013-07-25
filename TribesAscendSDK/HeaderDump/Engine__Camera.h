@@ -1,5 +1,14 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "Engine__CameraModifier_CameraShake.h"
+#include "Engine__HUD.h"
+#include "Engine__CameraAnimInst.h"
+#include "Engine__DynamicCameraActor.h"
+#include "Engine__CameraShake.h"
+#include "Engine__CameraModifier.h"
+#include "Engine__EmitterCameraLensEffectBase.h"
+#include "Engine__PlayerController.h"
+#include "Engine__CameraAnim.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Camera." #y); \
@@ -24,6 +33,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(CameraModifier_CameraShake, CameraShakeCamMod)
+		ADD_OBJECT(ScriptClass, CameraShakeCamModClass)
 		ADD_OBJECT(CameraAnimInst, AnimInstPool)
 		ADD_OBJECT(DynamicCameraActor, AnimCameraActor)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TCameraCache' for the property named 'CameraCache'!
@@ -59,6 +69,37 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, OffAxisYawAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DefaultAspectRatio, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, CameraStyle, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'CreateCameraModifier'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'ApplyCameraModifiers'
+		// Here lies the not-yet-implemented method 'InitializeFor'
+		// Here lies the not-yet-implemented method 'SetViewTarget'
+		// Here lies the not-yet-implemented method 'GetFOVAngle'
+		// Here lies the not-yet-implemented method 'SetFOV'
+		// Here lies the not-yet-implemented method 'GetCameraViewPoint'
+		// Here lies the not-yet-implemented method 'GetCameraRotation'
+		// Here lies the not-yet-implemented method 'SetDesiredColorScale'
+		// Here lies the not-yet-implemented method 'UpdateCamera'
+		// Here lies the not-yet-implemented method 'BlendViewTargets'
+		// Here lies the not-yet-implemented method 'FillCameraCache'
+		// Here lies the not-yet-implemented method 'CheckViewTarget'
+		// Here lies the not-yet-implemented method 'UpdateViewTarget'
+		// Here lies the not-yet-implemented method 'ProcessViewRotation'
+		// Here lies the not-yet-implemented method 'DisplayDebug'
+		// Here lies the not-yet-implemented method 'FindCameraLensEffect'
+		// Here lies the not-yet-implemented method 'AddCameraLensEffect'
+		// Here lies the not-yet-implemented method 'RemoveCameraLensEffect'
+		// Here lies the not-yet-implemented method 'ClearCameraLensEffects'
+		// Here lies the not-yet-implemented method 'PlayCameraShake'
+		// Here lies the not-yet-implemented method 'StopCameraShake'
+		// Here lies the not-yet-implemented method 'CalcRadialShakeScale'
+		// Here lies the not-yet-implemented method 'PlayWorldCameraShake'
+		// Here lies the not-yet-implemented method 'ClearAllCameraShakes'
+		// Here lies the not-yet-implemented method 'PlayCameraAnim'
+		// Here lies the not-yet-implemented method 'StopAllCameraAnims'
+		// Here lies the not-yet-implemented method 'StopAllCameraAnimsByType'
+		// Here lies the not-yet-implemented method 'StopCameraAnim'
 	};
 }
 #undef ADD_VAR

@@ -12,6 +12,9 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bOpen, 0x1)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'SetEnabled'
+		// Here lies the not-yet-implemented method 'IsEnabled'
 	};
 }
 #undef ADD_VAR

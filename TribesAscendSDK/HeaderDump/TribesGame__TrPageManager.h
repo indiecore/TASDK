@@ -1,5 +1,109 @@
 #pragma once
+#include "TribesGame__GFxTrPage_KeybindCommunication.h"
 #include "Core__Object.h"
+#include "TribesGame__GFxTrPage_ClassSelect.h"
+#include "TribesGame__GFxTrPage_Equip.h"
+#include "TribesGame__GFxTrPage_Classes.h"
+#include "TribesGame__GFxTrPage_Main.h"
+#include "TribesGame__GFxTrPage_ServerEditCallin.h"
+#include "TribesGame__GFxTrPage_GameMapSetup.h"
+#include "TribesGame__GFxTrPage_Store.h"
+#include "TribesGame__GFxTrPage_RankedMatch.h"
+#include "TribesGame__GFxTrPage_WatchNow.h"
+#include "TribesGame__GFxTrPage_RegionSettings.h"
+#include "TribesGame__GFxTrPage_Party.h"
+#include "TribesGame__GFxTrPage_ServerFF.h"
+#include "TribesGame__GFxTrPage_Class.h"
+#include "TribesGame__GFxTrPage_Loadouts.h"
+#include "TribesGame__GFxTrPage_PartyMember.h"
+#include "TribesGame__GFxTrPage_Bundles.h"
+#include "TribesGame__GFxTrPage_KeybindVehicle.h"
+#include "TribesGame__GFxTrPage_NameChange.h"
+#include "TribesGame__GFxTrPage_Login.h"
+#include "TribesGame__GFxTrPage_ClanTagChange.h"
+#include "TribesGame__GFxTrPage_ManageServers.h"
+#include "TribesGame__GFxTrPage_ServerActions.h"
+#include "TribesGame__GFxTrPage_ServerAddTime.h"
+#include "TribesGame__GFxTrPage_KeybindSpecInterface.h"
+#include "TribesGame__GFxTrPage_WhisperSettings.h"
+#include "TribesGame__GFxTrPage_Game.h"
+#include "TribesGame__GFxTrPage_Vehicle.h"
+#include "TribesGame__GFxTrPage_VideoTexture.h"
+#include "TribesGame__GFxTrPage_BuyGoldSteam.h"
+#include "TribesGame__GFxTrPage_Friends.h"
+#include "TribesGame__GFxTrPage_Followers.h"
+#include "TribesGame__GFxTrPage_ChangeMap.h"
+#include "TribesGame__GFxTrPage_KeybindMovement.h"
+#include "TribesGame__GFxTrPage_ServerCallin.h"
+#include "TribesGame__GFxTrPage_BlockedPlayers.h"
+#include "TribesGame__GFxTrPage_FriendJoin.h"
+#include "TribesGame__GFxTrPage_RoamRabbit.h"
+#include "TribesGame__GFxTrPage_MapRotation.h"
+#include "TribesGame__GFxTrPage_BuyGoldPortal.h"
+#include "TribesGame__GFxTrPage_GameTypeFilter.h"
+#include "TribesGame__GFxTrPage_KeybindInterface.h"
+#include "TribesGame__GFxTrPage_FollowerActions.h"
+#include "TribesGame__GFxTrPage_Social.h"
+#include "TribesGame__GFxTrPage_FriendActions.h"
+#include "TribesGame__GFxTrPage_KeybindSpecMovement.h"
+#include "TribesGame__GFxTrPage_PartyInvite.h"
+#include "TribesGame__GFxTrPage_Settings.h"
+#include "TribesGame__GFxTrPage_GameType.h"
+#include "TribesGame__GFxTrPage_GameRules.h"
+#include "TribesGame__GFxTrPage_RotationType.h"
+#include "TribesGame__GFxTrPage_ServerTime.h"
+#include "TribesGame__GFxTrPage_ServerTeam.h"
+#include "TribesGame__GFxTrPage_ServerScoring.h"
+#include "TribesGame__GFxTrPage_ServerPlayer.h"
+#include "TribesGame__GFxTrPage_ServerBase.h"
+#include "TribesGame__GFxTrPage_KeybindGameplay.h"
+#include "TribesGame__GFxTrPage_ServerVehicle.h"
+#include "TribesGame__GFxTrPage_KeybindWeapon.h"
+#include "TribesGame__GFxTrPage_KeybindHotkeys.h"
+#include "TribesGame__GFxTrPage_KeybindSpectator.h"
+#include "TribesGame__GFxTrPage_KeybindSpecTargeting.h"
+#include "TribesGame__GFxTrPage_PlayNow.h"
+#include "TribesGame__GFxTrPage_TrainingMatch.h"
+#include "TribesGame__GFxTrPage_ServerSettings.h"
+#include "TribesGame__GFxTrPage_ManageServer.h"
+#include "TribesGame__GFxTrPage_PartyAction.h"
+#include "TribesGame__GFxTrPage_CustomMatch.h"
+#include "TribesGame__GFxTrPage_Badges.h"
+#include "TribesGame__GFxTrPage_Accolades.h"
+#include "TribesGame__GFxTrPage_JoinMatch.h"
+#include "TribesGame__GFxTrPage_RoamTDM.h"
+#include "TribesGame__GFxTrPage_HiRezVideo.h"
+#include "TribesGame__GFxTrPage_RoamCTF.h"
+#include "TribesGame__GFxTrPage_RoamArena.h"
+#include "TribesGame__GFxTrPage_RoamCAH.h"
+#include "TribesGame__GFxTrPage_ServerClasses.h"
+#include "TribesGame__GFxTrPage_ServerSpawn.h"
+#include "TribesGame__GFxTrPage_ServerTeamJoin.h"
+#include "TribesGame__GFxTrPage_AudioSettings.h"
+#include "TribesGame__GFxTrPage_VideoSettings.h"
+#include "TribesGame__GFxTrPage_ControlSettings.h"
+#include "TribesGame__GFxTrPage_HUDSettings.h"
+#include "TribesGame__GFxTrPage_KeybindSettings.h"
+#include "TribesGame__GFxTrPage_NotificationSettings.h"
+#include "TribesGame__GFxTrPage_Profile.h"
+#include "TribesGame__GFxTrPage_BuyBoost.h"
+#include "TribesGame__GFxTrPage_BuyGold.h"
+#include "TribesGame__GFxTrPage_TrainVideo.h"
+#include "TribesGame__GFxTrPage_RoamingMatch.h"
+#include "TribesGame__GFxTrPage_VideoResolution.h"
+#include "TribesGame__GFxTrPage_VideoGraphics.h"
+#include "TribesGame__GFxTrPage_VideoWindow.h"
+#include "TribesGame__GFxTrPage_VideoResolutionTypes.h"
+#include "TribesGame__GFxTrPage_LiveStream.h"
+#include "TribesGame__GFxTrPage_CmntyVideo.h"
+#include "TribesGame__GFxTrPage_ManageProfile.h"
+#include "TribesGame__GFxTrPage_ManageProfiles.h"
+#include "TribesGame__GFxTrPage_RentServer.h"
+#include "TribesGame__GFxTrPage_QuickMatch.h"
+#include "TribesGame__GFxTrPage_Extras.h"
+#include "TribesGame__GFxTrPage_Queued.h"
+#include "TribesGame__GFxTrPage.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrPageManager." #y); \
@@ -125,6 +229,40 @@ namespace UnrealScript
 		ADD_OBJECT(GFxTrPage_RoamRabbit, RoamRabbitPage)
 		ADD_OBJECT(GFxTrPage_Extras, ExtrasPage)
 		ADD_OBJECT(GFxTrPage_Queued, QueuedPage)
+		// Here lies the not-yet-implemented method 'GetActivePage'
+		// Here lies the not-yet-implemented method 'PopPage'
+		// Here lies the not-yet-implemented method 'NavigateGold'
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'PopupData'
+		// Here lies the not-yet-implemented method 'PopupComplete'
+		// Here lies the not-yet-implemented method 'TakeFocus'
+		// Here lies the not-yet-implemented method 'TakeAction'
+		// Here lies the not-yet-implemented method 'ActionUp'
+		// Here lies the not-yet-implemented method 'ActionDown'
+		// Here lies the not-yet-implemented method 'ModifyAction'
+		// Here lies the not-yet-implemented method 'ModifyFocus'
+		// Here lies the not-yet-implemented method 'HelpButton'
+		// Here lies the not-yet-implemented method 'ProfileUp'
+		// Here lies the not-yet-implemented method 'ProfileDown'
+		// Here lies the not-yet-implemented method 'PushPage'
+		// Here lies the not-yet-implemented method 'PushOpen'
+		// Here lies the not-yet-implemented method 'PopBack'
+		// Here lies the not-yet-implemented method 'ClearStack'
+		// Here lies the not-yet-implemented method 'PushOpenMain'
+		// Here lies the not-yet-implemented method 'PushOpenParty'
+		// Here lies the not-yet-implemented method 'PushOpenClassSelect'
+		// Here lies the not-yet-implemented method 'PushOpenLogin'
+		// Here lies the not-yet-implemented method 'TravelToMain'
+		// Here lies the not-yet-implemented method 'TravelToClasses'
+		// Here lies the not-yet-implemented method 'TravelToFriends'
+		// Here lies the not-yet-implemented method 'TravelToSettings'
+		// Here lies the not-yet-implemented method 'TravelToBundles'
+		// Here lies the not-yet-implemented method 'TravelToStore'
+		// Here lies the not-yet-implemented method 'ShowInGameModel'
+		// Here lies the not-yet-implemented method 'PromoAction'
+		// Here lies the not-yet-implemented method 'SelectedFeature'
+		// Here lies the not-yet-implemented method 'ShowReticule'
+		// Here lies the not-yet-implemented method 'SaveReticule'
 	};
 }
 #undef ADD_VAR

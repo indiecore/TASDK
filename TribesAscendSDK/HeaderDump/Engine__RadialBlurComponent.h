@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__MaterialInterface.h"
 #include "Engine__ActorComponent.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -33,6 +34,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BlurScale, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, DepthPriorityGroup, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInterface, Material)
+		// Here lies the not-yet-implemented method 'SetMaterial'
+		// Here lies the not-yet-implemented method 'SetBlurScale'
+		// Here lies the not-yet-implemented method 'SetBlurFalloffExponent'
+		// Here lies the not-yet-implemented method 'SetBlurOpacity'
+		// Here lies the not-yet-implemented method 'SetEnabled'
+		// Here lies the not-yet-implemented method 'OnUpdatePropertyBlurScale'
+		// Here lies the not-yet-implemented method 'OnUpdatePropertyBlurFalloffExponent'
+		// Here lies the not-yet-implemented method 'OnUpdatePropertyBlurOpacity'
 	};
 }
 #undef ADD_VAR

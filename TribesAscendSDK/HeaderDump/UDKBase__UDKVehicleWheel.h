@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__SVehicleWheel.h"
+#include "UDKBase__UDKVehicle.h"
+#include "Engine__ParticleSystem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKVehicleWheel." #y); \
@@ -14,6 +16,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, EffectDesiredSpinDir, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDisableWheelOnDeath, 0x2)
 		ADD_VAR(::BoolProperty, bUseMaterialSpecificEffects, 0x1)
+		// Here lies the not-yet-implemented method 'SetParticleEffect'
+		// Here lies the not-yet-implemented method 'OldEffectFinished'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Volume.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ColorScaleVolume." #y); \
@@ -19,6 +20,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, InterpTime, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, ColorScale, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'UnTouch'
 	};
 }
 #undef ADD_VAR

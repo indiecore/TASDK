@@ -1,5 +1,32 @@
 #pragma once
+#include "Engine__UberPostProcessEffect.h"
 #include "UTGame__UTGFxHudWrapper.h"
+#include "TribesGame__TrSpectatorHUDCache.h"
+#include "Engine__MaterialInstanceConstant.h"
+#include "TribesGame__TrHUDTeamCTFStats.h"
+#include "TribesGame__TrPlayerController.h"
+#include "TribesGame__GFxTrUI_TeamSelectionMenu.h"
+#include "Engine__Texture2D.h"
+#include "TribesGame__TrDeployable.h"
+#include "TribesGame__GfxTrHud.h"
+#include "Engine__MaterialEffect.h"
+#include "TribesGame__TrDaDStats.h"
+#include "TribesGame__TrCaHStats.h"
+#include "TribesGame__TrArenaStats.h"
+#include "TribesGame__TrTeamRabbitStats.h"
+#include "TribesGame__TrRabbitLeaderboard.h"
+#include "TribesGame__TrScoreboard.h"
+#include "TribesGame__GFxTrUI_VehicleMenu.h"
+#include "Engine__Material.h"
+#include "Engine__Canvas.h"
+#include "Engine__PlayerReplicationInfo.h"
+#include "Core__Object.h"
+#include "TribesGame__TrPawn.h"
+#include "TribesGame__TrVehicle.h"
+#include "TribesGame__TrCamera_SpectatorBookmark.h"
+#include "Engine__Actor.h"
+#include "Engine__PlayerController.h"
+#include "TribesGame__TrProj_Mine.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrHUD." #y); \
@@ -176,6 +203,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fControllerSkiSpeed, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, m_SkiEffectMaterialInstance)
 		ADD_OBJECT(MaterialEffect, m_SkiEffect)
+		ADD_OBJECT(ScriptClass, m_GameClass)
+		ADD_OBJECT(ScriptClass, m_MusicManagerClass)
 		ADD_VAR(::FloatProperty, m_fEnemyGeneratorRestoreTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fFriendlyGeneratorRestoreTime, 0xFFFFFFFF)
 		ADD_OBJECT(TrCaHStats, CaHStats)
@@ -238,6 +267,129 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, m_nLastPerk2Icon, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nLastPerk1Icon, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nWinningTeam, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'DrawMarkerText'
+		// Here lies the not-yet-implemented method 'DrawMICMarker'
+		// Here lies the not-yet-implemented method 'GetEdgeScreenCoordinates'
+		// Here lies the not-yet-implemented method 'DrawMarker'
+		// Here lies the not-yet-implemented method 'DrawRotatedMarker'
+		// Here lies the not-yet-implemented method 'ShowDebugInfo'
+		// Here lies the not-yet-implemented method 'CreateHUDMovie'
+		// Here lies the not-yet-implemented method 'ShowSpectatorControls'
+		// Here lies the not-yet-implemented method 'SetShowScores'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'InitializeGameHUD'
+		// Here lies the not-yet-implemented method 'FadeInTimer'
+		// Here lies the not-yet-implemented method 'Fade'
+		// Here lies the not-yet-implemented method 'PlayRoundOver'
+		// Here lies the not-yet-implemented method 'ShowRoundEnding'
+		// Here lies the not-yet-implemented method 'PlayMatchOver'
+		// Here lies the not-yet-implemented method 'ShowEnding'
+		// Here lies the not-yet-implemented method 'FadeInSummary'
+		// Here lies the not-yet-implemented method 'ScaleformJoystickInputEvent'
+		// Here lies the not-yet-implemented method 'ToggleSkiEffect'
+		// Here lies the not-yet-implemented method 'TogglePauseMenu'
+		// Here lies the not-yet-implemented method 'ToggleMovieHUD'
+		// Here lies the not-yet-implemented method 'ToggleVehicleMenu'
+		// Here lies the not-yet-implemented method 'ToggleTeamSelectionMenu'
+		// Here lies the not-yet-implemented method 'SetPowerOscillation'
+		// Here lies the not-yet-implemented method 'AddUpdateToCombatLog'
+		// Here lies the not-yet-implemented method 'AddToPromptPanel'
+		// Here lies the not-yet-implemented method 'AddToPromptPanelTime'
+		// Here lies the not-yet-implemented method 'ClearPromptPanel'
+		// Here lies the not-yet-implemented method 'AddToHeroStatus'
+		// Here lies the not-yet-implemented method 'ClearHeroStatus'
+		// Here lies the not-yet-implemented method 'ClearPromptPanelMessage'
+		// Here lies the not-yet-implemented method 'UpdateVGSMenu'
+		// Here lies the not-yet-implemented method 'HideVGSMenu'
+		// Here lies the not-yet-implemented method 'AddToHelpText'
+		// Here lies the not-yet-implemented method 'ClearHelpText'
+		// Here lies the not-yet-implemented method 'AddUpdateToKillMessage'
+		// Here lies the not-yet-implemented method 'AddFlyingIcon'
+		// Here lies the not-yet-implemented method 'OnSpectate'
+		// Here lies the not-yet-implemented method 'CreateSpectatorHUDCache'
+		// Here lies the not-yet-implemented method 'ClearSpectatorHUDCache'
+		// Here lies the not-yet-implemented method 'HideHUDElements'
+		// Here lies the not-yet-implemented method 'ShowHUDPlayerSpawning'
+		// Here lies the not-yet-implemented method 'ShowHUDPlayerAlive'
+		// Here lies the not-yet-implemented method 'ShowCenterHUDElements'
+		// Here lies the not-yet-implemented method 'UpdateRespawnText'
+		// Here lies the not-yet-implemented method 'UpdateRespawnTimer'
+		// Here lies the not-yet-implemented method 'UpdateHUDCredits'
+		// Here lies the not-yet-implemented method 'TeamScoreboardShow'
+		// Here lies the not-yet-implemented method 'RabbitScoreboardShow'
+		// Here lies the not-yet-implemented method 'TeamScoreboardUpdateSlot'
+		// Here lies the not-yet-implemented method 'RabbitScoreboardUpdateSlot'
+		// Here lies the not-yet-implemented method 'TeamScoreboardUpdateTeamScore'
+		// Here lies the not-yet-implemented method 'TeamScoreboardUpdateTime'
+		// Here lies the not-yet-implemented method 'RabbitScoreboardUpdateTime'
+		// Here lies the not-yet-implemented method 'TeamScoreboardActivePlayer'
+		// Here lies the not-yet-implemented method 'RabbitScoreboardActivePlayer'
+		// Here lies the not-yet-implemented method 'ResolutionChanged'
+		// Here lies the not-yet-implemented method 'RestoreHUDState'
+		// Here lies the not-yet-implemented method 'HideMenus'
+		// Here lies the not-yet-implemented method 'RemoveMovies'
+		// Here lies the not-yet-implemented method 'CompleteVehicleMenuClose'
+		// Here lies the not-yet-implemented method 'CompleteTeamSelectionMenuClose'
+		// Here lies the not-yet-implemented method 'ClearCrosshairOnFriendly'
+		// Here lies the not-yet-implemented method 'CheckCrosshairOnFriendly'
+		// Here lies the not-yet-implemented method 'DrawColoredMarkerText'
+		// Here lies the not-yet-implemented method 'DrawSmallText'
+		// Here lies the not-yet-implemented method 'DrawHealthBar'
+		// Here lies the not-yet-implemented method 'PostRender'
+		// Here lies the not-yet-implemented method 'GetRemainingFriendlyGeneratorRestoreTime'
+		// Here lies the not-yet-implemented method 'GetRemainingEnemyGeneratorRestoreTime'
+		// Here lies the not-yet-implemented method 'UpdateSkiEffect'
+		// Here lies the not-yet-implemented method 'UpdatePickupFlashEffect'
+		// Here lies the not-yet-implemented method 'PulsePickupFlashEffect'
+		// Here lies the not-yet-implemented method 'UpdateInvulnerableEfect'
+		// Here lies the not-yet-implemented method 'UpdateShieldEffect'
+		// Here lies the not-yet-implemented method 'PulseShieldEffect'
+		// Here lies the not-yet-implemented method 'UpdateJammerEffect'
+		// Here lies the not-yet-implemented method 'UpdateFadeEffect'
+		// Here lies the not-yet-implemented method 'FumbleFlag'
+		// Here lies the not-yet-implemented method 'UpdateFumbledFlagEffect'
+		// Here lies the not-yet-implemented method 'Whiteout'
+		// Here lies the not-yet-implemented method 'ClearWhiteout'
+		// Here lies the not-yet-implemented method 'UpdateWhiteoutEffect'
+		// Here lies the not-yet-implemented method 'LocalizedMessage'
+		// Here lies the not-yet-implemented method 'ChatMessageReceived'
+		// Here lies the not-yet-implemented method 'StripTag'
+		// Here lies the not-yet-implemented method 'SendLocalMessageToGlobalAlert'
+		// Here lies the not-yet-implemented method 'SendLocalMessageToChat'
+		// Here lies the not-yet-implemented method 'SetPlayerClassObjects'
+		// Here lies the not-yet-implemented method 'HideGlobalAlert'
+		// Here lies the not-yet-implemented method 'KickVoteMessage'
+		// Here lies the not-yet-implemented method 'EnableGameTypeHUD'
+		// Here lies the not-yet-implemented method 'ShowSpectatorPlayer'
+		// Here lies the not-yet-implemented method 'HideSpectatorPlayer'
+		// Here lies the not-yet-implemented method 'UpdateSpectatorPlayerPanel'
+		// Here lies the not-yet-implemented method 'ShowSpectatorVehicle'
+		// Here lies the not-yet-implemented method 'HideSpectatorVehicle'
+		// Here lies the not-yet-implemented method 'UpdateSpectatorVehiclePanel'
+		// Here lies the not-yet-implemented method 'ShowSpectatorBookmark'
+		// Here lies the not-yet-implemented method 'HideSpectatorBookmark'
+		// Here lies the not-yet-implemented method 'UpdateSpectatorBookmarkPanel'
+		// Here lies the not-yet-implemented method 'ShowSpectatorObjectivePanel'
+		// Here lies the not-yet-implemented method 'HideSpectatorObjectivePanel'
+		// Here lies the not-yet-implemented method 'UpdateSpectatorObjectivePanel'
+		// Here lies the not-yet-implemented method 'ShowSpectatorFloatCameraPanel'
+		// Here lies the not-yet-implemented method 'HideSpectatorFloatCameraPanel'
+		// Here lies the not-yet-implemented method 'UpdateSpectatorFloatCameraPanel'
+		// Here lies the not-yet-implemented method 'HideAllSpectatorPanels'
+		// Here lies the not-yet-implemented method 'OnViewTargetChange'
+		// Here lies the not-yet-implemented method 'TestNumber'
+		// Here lies the not-yet-implemented method 'AddOverheadNumber'
+		// Here lies the not-yet-implemented method 'UpdateOverheadNumbers'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
+		// Here lies the not-yet-implemented method 'PlayAward'
+		// Here lies the not-yet-implemented method 'QueueAccolade'
+		// Here lies the not-yet-implemented method 'CheckQueuedAccolades'
+		// Here lies the not-yet-implemented method 'RunQueuedAccoladesTimer'
+		// Here lies the not-yet-implemented method 'ClearQueuedAccoladesTimer'
+		// Here lies the not-yet-implemented method 'DeployableReplicated'
+		// Here lies the not-yet-implemented method 'MineReplicated'
+		// Here lies the not-yet-implemented method 'UpdateOwnedItems'
 	};
 }
 #undef ADD_VAR

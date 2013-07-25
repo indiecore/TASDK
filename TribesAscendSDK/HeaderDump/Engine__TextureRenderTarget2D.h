@@ -24,6 +24,7 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, Format, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeX, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Create'
 	};
 }
 #undef ADD_VAR

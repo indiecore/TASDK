@@ -1,5 +1,7 @@
 #pragma once
 #include "UTGame__UTLocalMessage.h"
+#include "Core__Object.h"
+#include "Engine__PlayerReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrVehicleMessage." #y); \
@@ -13,6 +15,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::StrProperty, VehicleLocked, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ArmorClassRestricted, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetString'
 	};
 }
 #undef ADD_VAR

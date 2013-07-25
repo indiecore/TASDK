@@ -5,5 +5,6 @@ namespace UnrealScript
 	class GFxTrPage_KeybindHotkeys : public GFxTrPage_KeybindAction
 	{
 	public:
+		// Here lies the not-yet-implemented method 'Initialize'
 	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Texture.h"
+#include "Engine__CodecMovie.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.TextureMovie." #y); \
@@ -30,12 +31,16 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, Stopped, 0x2)
 		ADD_VAR(::BoolProperty, Paused, 0x1)
 		ADD_OBJECT(CodecMovie, Decoder)
+		ADD_OBJECT(ScriptClass, DecoderClass)
 		ADD_VAR(::ByteProperty, MovieStreamSource, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeX, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, AddressY, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, AddressX, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, Format, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeY, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Play'
+		// Here lies the not-yet-implemented method 'Pause'
+		// Here lies the not-yet-implemented method 'Stop'
 	};
 }
 #undef ADD_VAR

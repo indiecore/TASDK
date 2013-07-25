@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "Engine__MaterialInstanceTimeVarying.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.MaterialInstanceTimeVaryingActor." #y); \

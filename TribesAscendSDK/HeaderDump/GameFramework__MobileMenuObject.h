@@ -1,5 +1,8 @@
 #pragma once
 #include "Core__Object.h"
+#include "GameFramework__MobilePlayerInput.h"
+#include "GameFramework__MobileMenuScene.h"
+#include "Engine__Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.MobileMenuObject." #y); \
@@ -48,6 +51,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bRelativeTop, 0x4)
 		ADD_VAR(::BoolProperty, bRelativeLeft, 0x2)
 		ADD_VAR(::BoolProperty, bHasBeenInitialized, 0x1)
+		// Here lies the not-yet-implemented method 'InitMenuObject'
+		// Here lies the not-yet-implemented method 'RenderObject'
 	};
 }
 #undef ADD_VAR

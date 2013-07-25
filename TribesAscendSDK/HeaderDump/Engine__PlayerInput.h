@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Input.h"
+#include "Engine__HUD.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PlayerInput." #y); \
@@ -66,6 +67,25 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bInvertAirVehicles, 0x8)
 		ADD_VAR(::BoolProperty, bInvertTurn, 0x4)
 		ADD_VAR(::BoolProperty, bInvertMouse, 0x2)
+		// Here lies the not-yet-implemented method 'CheckForDoubleClickMove'
+		// Here lies the not-yet-implemented method 'InvertMouse'
+		// Here lies the not-yet-implemented method 'InvertTurn'
+		// Here lies the not-yet-implemented method 'SetSensitivity'
+		// Here lies the not-yet-implemented method 'DrawHUD'
+		// Here lies the not-yet-implemented method 'PreProcessInput'
+		// Here lies the not-yet-implemented method 'PostProcessInput'
+		// Here lies the not-yet-implemented method 'AdjustMouseSensitivity'
+		// Here lies the not-yet-implemented method 'IsMouseSmoothEnabled'
+		// Here lies the not-yet-implemented method 'PlayerInput'
+		// Here lies the not-yet-implemented method 'ProcessInputMatching'
+		// Here lies the not-yet-implemented method 'CatchDoubleClickInput'
+		// Here lies the not-yet-implemented method 'Jump'
+		// Here lies the not-yet-implemented method 'SmartJump'
+		// Here lies the not-yet-implemented method 'ClearSmoothing'
+		// Here lies the not-yet-implemented method 'SmoothMouse'
+		// Here lies the not-yet-implemented method 'InitInputSystem'
+		// Here lies the not-yet-implemented method 'ClientInitInputSystem'
+		// Here lies the not-yet-implemented method 'PreClientTravel'
 	};
 }
 #undef ADD_VAR

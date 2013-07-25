@@ -1,5 +1,15 @@
 #pragma once
 #include "GFxUI__GFxMoviePlayer.h"
+#include "UTGame__UTWeapon.h"
+#include "UTGame__UTPlayerReplicationInfo.h"
+#include "UTGame__UTGameReplicationInfo.h"
+#include "UTGame__GFxMinimap.h"
+#include "UTGame__UTVehicle.h"
+#include "GFxUI__GFxObject.h"
+#include "Engine__WorldInfo.h"
+#include "Engine__Weapon.h"
+#include "Engine__LocalPlayer.h"
+#include "Engine__PlayerReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxMinimapHud." #y); \
@@ -57,6 +67,28 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MaxZoomf, 0xFFFFFFFF)
 		ADD_OBJECT(GFxMinimap, Minimap)
 		ADD_OBJECT(WorldInfo, ThisWorld)
+		// Here lies the not-yet-implemented method 'registerMiniMapView'
+		// Here lies the not-yet-implemented method 'SetAmmoCountTF'
+		// Here lies the not-yet-implemented method 'CreateMessageRow'
+		// Here lies the not-yet-implemented method 'InitMessageRow'
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'LoadHeEn'
+		// Here lies the not-yet-implemented method 'UpdateHealth'
+		// Here lies the not-yet-implemented method 'UpdateEnergy'
+		// Here lies the not-yet-implemented method 'FormatTime'
+		// Here lies the not-yet-implemented method 'ClearStats'
+		// Here lies the not-yet-implemented method 'RemoveMessage'
+		// Here lies the not-yet-implemented method 'AddMessage'
+		// Here lies the not-yet-implemented method 'UpdateGameHUD'
+		// Here lies the not-yet-implemented method 'TickHud'
+		// Here lies the not-yet-implemented method 'ToggleCrosshair'
+		// Here lies the not-yet-implemented method 'MinimapZoomOut'
+		// Here lies the not-yet-implemented method 'MinimapZoomIn'
+		// Here lies the not-yet-implemented method 'DisplayHit'
+		// Here lies the not-yet-implemented method 'ShowMultiKill'
+		// Here lies the not-yet-implemented method 'SetCenterText'
+		// Here lies the not-yet-implemented method 'GetRank'
+		// Here lies the not-yet-implemented method 'AddDeathMessage'
 	};
 }
 #undef ADD_VAR

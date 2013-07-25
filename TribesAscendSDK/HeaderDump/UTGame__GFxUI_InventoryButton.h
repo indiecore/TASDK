@@ -1,5 +1,6 @@
 #pragma once
 #include "GFxUI__GFxClikWidget.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUI_InventoryButton." #y); \
@@ -19,6 +20,8 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(GFxObject, IconMC)
 		ADD_VAR(::StrProperty, Content, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetContent'
+		// Here lies the not-yet-implemented method 'SetIconMC'
 	};
 }
 #undef ADD_VAR

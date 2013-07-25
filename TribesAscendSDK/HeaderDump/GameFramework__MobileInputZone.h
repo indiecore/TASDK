@@ -1,5 +1,9 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__Canvas.h"
+#include "Engine__Texture2D.h"
+#include "GameFramework__SeqEvent_MobileZoneBase.h"
+#include "GameFramework__MobilePlayerInput.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.MobileInputZone." #y); \
@@ -91,6 +95,15 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, TapInputKey, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, HorizontalInputKey, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, InputKey, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'OnPreDrawZone'
+		// Here lies the not-yet-implemented method 'OnPostDrawZone'
+		// Here lies the not-yet-implemented method 'OnProcessSlide'
+		// Here lies the not-yet-implemented method 'OnDoubleTapDelegate'
+		// Here lies the not-yet-implemented method 'OnTapDelegate'
+		// Here lies the not-yet-implemented method 'OnProcessInputDelegate'
+		// Here lies the not-yet-implemented method 'ActivateZone'
+		// Here lies the not-yet-implemented method 'DeactivateZone'
+		// Here lies the not-yet-implemented method 'AddKismetEventHandler'
 	};
 }
 #undef ADD_VAR

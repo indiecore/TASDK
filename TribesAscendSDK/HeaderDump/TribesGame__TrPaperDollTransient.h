@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__MaterialInstanceConstant.h"
 #include "TribesGame__TrPaperDoll.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -20,6 +21,10 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fBackdropFadeRemainingTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fBackdropFadeTime, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, m_BackdropMIC)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'FadeInBackdrop'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'SetPosition'
 	};
 }
 #undef ADD_VAR

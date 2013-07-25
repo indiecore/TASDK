@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__UIDataProvider.h"
+#include "Engine__LocalPlayer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataProvider_OnlinePlayerDataBase." #y); \
@@ -12,6 +13,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, PlayerControllerId, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'OnRegister'
+		// Here lies the not-yet-implemented method 'OnUnregister'
 	};
 }
 #undef ADD_VAR

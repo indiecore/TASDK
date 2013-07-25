@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__SoundNodeWave.h"
 #include "Engine__SoundNode.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

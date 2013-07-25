@@ -40,6 +40,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BlendInTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ControlStrength, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, ControlName, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetSkelControlActive'
+		// Here lies the not-yet-implemented method 'SetSkelControlStrength'
+		// Here lies the not-yet-implemented method 'TickSkelControl'
 	};
 }
 #undef ADD_VAR

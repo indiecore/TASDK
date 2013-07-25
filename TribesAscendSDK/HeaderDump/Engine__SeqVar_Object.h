@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SequenceVariable.h"
+#include "Core__Object.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SeqVar_Object." #y); \
@@ -19,6 +20,8 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(::VectorProperty, ActorLocation, 0xFFFFFFFF
 		ADD_OBJECT(Object, ObjValue)
+		// Here lies the not-yet-implemented method 'GetObjectValue'
+		// Here lies the not-yet-implemented method 'SetObjectValue'
 	};
 }
 #undef ADD_STRUCT

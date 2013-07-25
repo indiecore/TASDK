@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__MaterialInstanceConstant.h"
 #include "TribesGame__TrDeviceContentData.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \

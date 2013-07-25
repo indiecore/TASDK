@@ -1,4 +1,5 @@
 #pragma once
+#include "GFxUI__GFxMoviePlayer.h"
 #include "Engine__SequenceAction.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -19,6 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::StrProperty, Variable, 0xFFFFFFFF)
 		ADD_OBJECT(GFxMoviePlayer, Movie)
+		// Here lies the not-yet-implemented method 'IsValidLevelSequenceObject'
 	};
 }
 #undef ADD_VAR

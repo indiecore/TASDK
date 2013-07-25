@@ -20,6 +20,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bSplitNavMesh, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_NavMeshPathObject'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_NavMeshPathObstacle'!
+		// Here lies the not-yet-implemented method 'SetSplitNavMesh'
 	};
 }
 #undef ADD_VAR

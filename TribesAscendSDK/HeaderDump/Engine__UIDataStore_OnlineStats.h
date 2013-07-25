@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__UIDataStore_Remote.h"
+#include "Engine__OnlineStatsRead.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataStore_OnlineStats." #y); \
@@ -31,6 +32,12 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, StatsReadName, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementProvider'!
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'SetStatsReadInfo'
+		// Here lies the not-yet-implemented method 'RefreshStats'
+		// Here lies the not-yet-implemented method 'ShowGamercard'
+		// Here lies the not-yet-implemented method 'OnReadComplete'
+		// Here lies the not-yet-implemented method 'SortResultsByRank'
 	};
 }
 #undef ADD_VAR

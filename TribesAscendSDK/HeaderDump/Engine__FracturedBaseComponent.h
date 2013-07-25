@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__StaticMeshComponent.h"
+#include "Engine__StaticMesh.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FracturedBaseComponent." #y); \
@@ -26,6 +27,11 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bVisibilityHasChanged, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.RenderCommandFence_Mirror' for the property named 'ReleaseResourcesFence'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ComponentBaseResources'!
+		// Here lies the not-yet-implemented method 'SetStaticMesh'
+		// Here lies the not-yet-implemented method 'GetVisibleFragments'
+		// Here lies the not-yet-implemented method 'IsFragmentVisible'
+		// Here lies the not-yet-implemented method 'GetNumFragments'
+		// Here lies the not-yet-implemented method 'GetNumVisibleFragments'
 	};
 }
 #undef ADD_VAR

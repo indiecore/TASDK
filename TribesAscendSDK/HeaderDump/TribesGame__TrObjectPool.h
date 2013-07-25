@@ -1,4 +1,5 @@
 #pragma once
+#include "TribesGame__TrProj_Tracer.h"
 #include "Engine__Actor.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -12,6 +13,14 @@ namespace UnrealScript
 	{
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObjectPool.TracerCacheInfo' for the property named 'm_TracerCache'!
+		// Here lies the not-yet-implemented method 'GetTracer'
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		// Here lies the not-yet-implemented method 'CreatePools'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'CleanUpPools'
+		// Here lies the not-yet-implemented method 'CreateTracers'
+		// Here lies the not-yet-implemented method 'CleanupTracers'
+		// Here lies the not-yet-implemented method 'CreateTracer'
 	};
 }
 #undef ADD_STRUCT

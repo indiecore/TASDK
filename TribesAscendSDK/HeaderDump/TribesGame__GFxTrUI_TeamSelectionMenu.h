@@ -1,5 +1,8 @@
 #pragma once
 #include "GFxUI__GFxMoviePlayer.h"
+#include "GFxUI__GFxObject.h"
+#include "TribesGame__TrPlayerController.h"
+#include "Engine__GameReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrUI_TeamSelectionMenu." #y); \
@@ -32,6 +35,20 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, PrevBloodEagleCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, AllowedTeamDiscrepancyOnTeam, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, AllowedTeamDiscrepancyNoTeam, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'Start'
+		// Here lies the not-yet-implemented method 'SetFontIndex'
+		// Here lies the not-yet-implemented method 'Show'
+		// Here lies the not-yet-implemented method 'SetLabels'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'EnableBloodEagle'
+		// Here lies the not-yet-implemented method 'AsTeamChooseEnableButton'
+		// Here lies the not-yet-implemented method 'EnableDiamondSword'
+		// Here lies the not-yet-implemented method 'EnableSpectate'
+		// Here lies the not-yet-implemented method 'choseTeamBE'
+		// Here lies the not-yet-implemented method 'choseTeamDS'
+		// Here lies the not-yet-implemented method 'choseTeamSpectate'
+		// Here lies the not-yet-implemented method 'CompleteMovie'
 	};
 }
 #undef ADD_VAR

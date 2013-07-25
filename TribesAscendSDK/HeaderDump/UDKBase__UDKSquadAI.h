@@ -1,5 +1,8 @@
 #pragma once
 #include "UDKBase__UDKTeamOwnedInfo.h"
+#include "UDKBase__UDKBot.h"
+#include "Engine__NavigationPoint.h"
+#include "UDKBase__UDKGameObjective.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKSquadAI." #y); \

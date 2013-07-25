@@ -24,6 +24,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, EventEmitterTime, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, EventPosition, 0xFFFFFFFF
 		ADD_VAR(::ByteProperty, EventType, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

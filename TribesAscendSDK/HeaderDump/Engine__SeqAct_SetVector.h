@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(::VectorProperty, DefaultValue, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'Activated'
 	};
 }
 #undef ADD_STRUCT

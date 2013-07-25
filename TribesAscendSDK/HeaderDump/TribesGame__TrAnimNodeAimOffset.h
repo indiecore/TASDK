@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__AnimNodeAimOffset.h"
+#include "TribesGame__TrDevice.h"
+#include "TribesGame__TrPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrAnimNodeAimOffset." #y); \

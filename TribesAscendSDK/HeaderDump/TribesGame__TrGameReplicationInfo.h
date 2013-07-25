@@ -1,5 +1,13 @@
 #pragma once
+#include "Engine__Actor.h"
+#include "TribesGame__TrDaDCore.h"
 #include "UTGame__UTGameReplicationInfo.h"
+#include "TribesGame__TrServerSettingsInfo.h"
+#include "TribesGame__TrPlayerReplicationInfo.h"
+#include "TribesGame__TrObjectPool.h"
+#include "TribesGame__TrFlagBase.h"
+#include "Engine__PlayerReplicationInfo.h"
+#include "TribesGame__TrDaDCapacitor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrGameReplicationInfo." #y); \
@@ -50,6 +58,28 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bGivePrivateXP, 0x4)
 		ADD_VAR(::BoolProperty, r_bCanPlaceDeployables, 0x1)
 		ADD_VAR(::IntProperty, GeneratorDowntime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'IsClassAllowed'
+		// Here lies the not-yet-implemented method 'GetTeamSize'
+		// Here lies the not-yet-implemented method 'CanJoinTeam'
+		// Here lies the not-yet-implemented method 'GetGlobalSpeedCapMultiplier'
+		// Here lies the not-yet-implemented method 'GetGlobalAccelerationMultiplier'
+		// Here lies the not-yet-implemented method 'GetGlobalAirSpeedMultiplier'
+		// Here lies the not-yet-implemented method 'GetGlobalMaxJetpackThrustSpeedMultiplier'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'ApplyServerSettings'
+		// Here lies the not-yet-implemented method 'CanPlaceDeployables'
+		// Here lies the not-yet-implemented method 'OnPhase0SiegeEnded'
+		// Here lies the not-yet-implemented method 'OnResetGame'
+		// Here lies the not-yet-implemented method 'Timer'
+		// Here lies the not-yet-implemented method 'OnSameTeam'
+		// Here lies the not-yet-implemented method 'Blip'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'ChangePhysicsType'
+		// Here lies the not-yet-implemented method 'IsValidTeamPlayer'
+		// Here lies the not-yet-implemented method 'SetWarmingUp'
+		// Here lies the not-yet-implemented method 'AddPRI'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,15 @@
 #pragma once
 #include "TribesGame__TrProjectile.h"
+#include "Engine__PlayerReplicationInfo.h"
+#include "Engine__SoundCue.h"
+#include "Engine__MaterialInstanceConstant.h"
+#include "TribesGame__TrMineCollisionProxy.h"
+#include "Engine__Actor.h"
+#include "Engine__Pawn.h"
+#include "Engine__Controller.h"
+#include "Engine__Texture2D.h"
+#include "Engine__PlayerController.h"
+#include "Engine__Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_Mine." #y); \
@@ -37,6 +47,24 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bUsesDetonationProxy, 0x2)
 		ADD_VAR(::BoolProperty, m_bArmed, 0x1)
 		ADD_OBJECT(SoundCue, WallImpactSound)
+		// Here lies the not-yet-implemented method 'IsAliveAndWell'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'OnPRIReplicated'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'ArmedTimer'
+		// Here lies the not-yet-implemented method 'HitWall'
+		// Here lies the not-yet-implemented method 'TakeRadiusDamage'
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'InitProjectile'
+		// Here lies the not-yet-implemented method 'PawnEnteredDetonationArea'
+		// Here lies the not-yet-implemented method 'MeetsDetonationRequirements'
+		// Here lies the not-yet-implemented method 'PawnLeftDetonationArea'
+		// Here lies the not-yet-implemented method 'NativeExplode'
+		// Here lies the not-yet-implemented method 'ProcessTouch'
+		// Here lies the not-yet-implemented method 'Bounce'
+		// Here lies the not-yet-implemented method 'ShutDown'
+		// Here lies the not-yet-implemented method 'GetMarker'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
 	};
 }
 #undef ADD_VAR

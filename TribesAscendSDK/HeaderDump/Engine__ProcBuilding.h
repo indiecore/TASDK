@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine__Volume.h"
+#include "Engine__ProcBuildingRuleset.h"
+#include "Engine__StaticMeshActor.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ProcBuilding." #y); \
@@ -40,6 +43,12 @@ namespace UnrealScript
 		ADD_OBJECT(StaticMeshActor, LowLODPersistentActor)
 		ADD_OBJECT(Actor, CurrentSimpleMeshActor)
 		ADD_VAR(::IntProperty, BuildingInstanceVersion, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'FindEdgeForTopLevelScope'
+		// Here lies the not-yet-implemented method 'BreakFractureComponent'
+		// Here lies the not-yet-implemented method 'GetAllGroupedProcBuildings'
+		// Here lies the not-yet-implemented method 'GetBaseMostBuilding'
+		// Here lies the not-yet-implemented method 'FindComponentsForTopLevelScope'
+		// Here lies the not-yet-implemented method 'ClearBuildingMeshes'
 	};
 }
 #undef ADD_VAR

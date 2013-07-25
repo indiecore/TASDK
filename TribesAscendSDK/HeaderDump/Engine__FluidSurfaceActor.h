@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__ParticleSystem.h"
 #include "Engine__Actor.h"
+#include "Engine__Controller.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.FluidSurfaceActor." #y); \
@@ -12,6 +14,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ParticleSystem, ProjectileEntryEffect)
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'Touch'
 	};
 }
 #undef ADD_OBJECT

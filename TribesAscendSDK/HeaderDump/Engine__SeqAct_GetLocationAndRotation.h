@@ -21,6 +21,7 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, Rotation, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, RotationVector, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

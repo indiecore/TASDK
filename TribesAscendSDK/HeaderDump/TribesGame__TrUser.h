@@ -1,4 +1,5 @@
 #pragma once
+#include "TribesGame__GFxTrMenuMoviePlayer.h"
 #include "Core__Object.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -31,6 +32,30 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_SeenNewGametype, 0x10)
 		ADD_VAR(::BoolProperty, m_SeenClanTags, 0x8)
 		ADD_VAR(::IntProperty, CurrencyCode, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'NeedsToSeeNewItemsClass'
+		// Here lies the not-yet-implemented method 'NeedsToSeeNewItemsType'
+		// Here lies the not-yet-implemented method 'NeedToSeeNewBundle'
+		// Here lies the not-yet-implemented method 'NeedsToSeeClanTags'
+		// Here lies the not-yet-implemented method 'NeedToSeeAnyNewItem'
+		// Here lies the not-yet-implemented method 'IsFavoriteServer'
+		// Here lies the not-yet-implemented method 'NeedsToSeeNewItem'
+		// Here lies the not-yet-implemented method 'DecryptPassword'
+		// Here lies the not-yet-implemented method 'EncryptPassword'
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'SaveCredentials'
+		// Here lies the not-yet-implemented method 'SaveClassId'
+		// Here lies the not-yet-implemented method 'SaveGameType'
+		// Here lies the not-yet-implemented method 'SaveDidLogin'
+		// Here lies the not-yet-implemented method 'SaveChoseRegion'
+		// Here lies the not-yet-implemented method 'SeenNewGametype'
+		// Here lies the not-yet-implemented method 'SeenNewItemsMain'
+		// Here lies the not-yet-implemented method 'SeenNewBundlesMain'
+		// Here lies the not-yet-implemented method 'SeenClanTags'
+		// Here lies the not-yet-implemented method 'SeenNewBundle'
+		// Here lies the not-yet-implemented method 'SeenNewItemsClass'
+		// Here lies the not-yet-implemented method 'SeenNewItemsType'
+		// Here lies the not-yet-implemented method 'NeedsToSeeNewBundle'
+		// Here lies the not-yet-implemented method 'SetFavoriteServer'
 	};
 }
 #undef ADD_VAR

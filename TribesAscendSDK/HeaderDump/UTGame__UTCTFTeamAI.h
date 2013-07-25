@@ -1,5 +1,9 @@
 #pragma once
 #include "UTGame__UTTeamAI.h"
+#include "UTGame__UTCTFFlag.h"
+#include "UTGame__UTSquadAI.h"
+#include "Engine__Controller.h"
+#include "UTGame__UTGameObjective.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTCTFTeamAI." #y); \
@@ -20,6 +24,8 @@ namespace UnrealScript
 		ADD_OBJECT(UTCTFFlag, FriendlyFlag)
 		ADD_OBJECT(UTCTFFlag, EnemyFlag)
 		ADD_VAR(::FloatProperty, LastGotFlag, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'AddSquadWithLeader'
+		// Here lies the not-yet-implemented method 'GetPriorityFreelanceObjectiveFor'
 	};
 }
 #undef ADD_VAR

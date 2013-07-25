@@ -1,4 +1,5 @@
 #pragma once
+#include "GFxUI__GFxMoviePlayer.h"
 #include "Engine__SequenceAction.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \

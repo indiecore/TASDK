@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__AnimNodeAdditiveBlending.h"
 #include "TribesGame__TrAnimNodeBlendList.h"
+#include "TribesGame__TrFlagBase.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrAnimNodeBlendByFlagDirection." #y); \

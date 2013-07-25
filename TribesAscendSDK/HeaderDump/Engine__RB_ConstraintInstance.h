@@ -1,5 +1,8 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__Actor.h"
+#include "Engine__RB_ConstraintSetup.h"
+#include "Engine__PhysicsAssetInstance.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RB_ConstraintInstance." #y); \
@@ -51,6 +54,23 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bInHardware, 0x1)
 		ADD_VAR(::IntProperty, SceneIndex, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, Owner)
+		// Here lies the not-yet-implemented method 'TermConstraint'
+		// Here lies the not-yet-implemented method 'InitConstraint'
+		// Here lies the not-yet-implemented method 'GetPhysicsAssetInstance'
+		// Here lies the not-yet-implemented method 'GetConstraintLocation'
+		// Here lies the not-yet-implemented method 'SetLinearPositionDrive'
+		// Here lies the not-yet-implemented method 'SetLinearVelocityDrive'
+		// Here lies the not-yet-implemented method 'SetAngularPositionDrive'
+		// Here lies the not-yet-implemented method 'SetAngularVelocityDrive'
+		// Here lies the not-yet-implemented method 'SetLinearPositionTarget'
+		// Here lies the not-yet-implemented method 'SetLinearVelocityTarget'
+		// Here lies the not-yet-implemented method 'SetLinearDriveParams'
+		// Here lies the not-yet-implemented method 'SetAngularPositionTarget'
+		// Here lies the not-yet-implemented method 'SetAngularVelocityTarget'
+		// Here lies the not-yet-implemented method 'SetAngularDriveParams'
+		// Here lies the not-yet-implemented method 'SetAngularDOFLimitScale'
+		// Here lies the not-yet-implemented method 'SetLinearLimitSize'
+		// Here lies the not-yet-implemented method 'MoveKinActorTransform'
 	};
 }
 #undef ADD_VAR

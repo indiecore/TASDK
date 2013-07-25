@@ -1,5 +1,7 @@
 #pragma once
 #include "TribesGame__TrDeployable.h"
+#include "Engine__Actor.h"
+#include "Engine__Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDeployable_ForceField." #y); \
@@ -27,6 +29,12 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fInTakeHitFlashRemainingTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fOutTakeHitFlashTimeLength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fInTakeHitFlashTimeLength, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'OnHealthChanged'
+		// Here lies the not-yet-implemented method 'PlayDamageHealthEffects'
+		// Here lies the not-yet-implemented method 'PlayHitOtherEffects'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'GetMarker'
 	};
 }
 #undef ADD_VAR

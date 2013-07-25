@@ -1,5 +1,7 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__SkeletalMesh.h"
+#include "Engine__FaceFXAnimSet.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FaceFXAsset." #y); \
@@ -26,6 +28,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumLoadErrors, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'FaceFXActor'!
 		ADD_OBJECT(SkeletalMesh, DefaultSkelMesh)
+		// Here lies the not-yet-implemented method 'MountFaceFXAnimSet'
+		// Here lies the not-yet-implemented method 'UnmountFaceFXAnimSet'
 	};
 }
 #undef ADD_VAR

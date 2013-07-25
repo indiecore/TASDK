@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame__TrAnimNodeBlendList.h"
+#include "TribesGame__TrVehicle.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrAnimNodeBlendByFlyingVehicleThrottle." #y); \

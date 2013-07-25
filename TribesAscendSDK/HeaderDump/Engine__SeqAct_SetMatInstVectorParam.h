@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SequenceAction.h"
+#include "Engine__MaterialInstanceConstant.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_SetMatInstVectorParam." #y); \
@@ -26,6 +27,7 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'VectorValue'!
 		ADD_VAR(::NameProperty, ParamName, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, MatInst)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

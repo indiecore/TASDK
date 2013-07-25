@@ -1,4 +1,5 @@
 #pragma once
+#include "IpDrv__ClientBeaconAddressResolver.h"
 #include "IpDrv__PartyBeacon.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -24,6 +25,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ClientBeaconAddressResolver, Resolver)
+		ADD_OBJECT(ScriptClass, ResolverClass)
 		ADD_VAR(::StrProperty, ResolverClassName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ReservationRequestElapsedTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ReservationRequestTimeout, 0xFFFFFFFF)
@@ -31,6 +33,15 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, ClientBeaconState, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult' for the property named 'HostPendingRequest'!
 		// WARNING: Unknown structure type 'ScriptStruct IpDrv.PartyBeacon.PartyReservation' for the property named 'PendingRequest'!
+		// Here lies the not-yet-implemented method 'OnHostHasCancelled'
+		// Here lies the not-yet-implemented method 'OnHostIsReady'
+		// Here lies the not-yet-implemented method 'OnTravelRequestReceived'
+		// Here lies the not-yet-implemented method 'OnReservationCountUpdated'
+		// Here lies the not-yet-implemented method 'OnReservationRequestComplete'
+		// Here lies the not-yet-implemented method 'RequestReservation'
+		// Here lies the not-yet-implemented method 'RequestReservationUpdate'
+		// Here lies the not-yet-implemented method 'CancelReservation'
+		// Here lies the not-yet-implemented method 'DestroyBeacon'
 	};
 }
 #undef ADD_VAR

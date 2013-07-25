@@ -1,5 +1,7 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__SkeletalMesh.h"
+#include "Engine__MorphTarget.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.MorphTargetSet." #y); \
@@ -19,6 +21,7 @@ namespace UnrealScript
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Array_Mirror' for the property named 'RawWedgePointIndices'!
 		ADD_OBJECT(SkeletalMesh, BaseSkelMesh)
+		// Here lies the not-yet-implemented method 'FindMorphTarget'
 	};
 }
 #undef ADD_STRUCT

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Info.h"
+#include "Engine__PhysicalMaterial.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Terrain." #y); \
@@ -61,6 +62,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumSectionsY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumSectionsX, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NormalMapLayer, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'CalcLayerBounds'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
 	};
 }
 #undef ADD_VAR

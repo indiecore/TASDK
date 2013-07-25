@@ -36,6 +36,10 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, HorizontalScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TimeSinceLastFrame, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TimeIntoMovie, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Play'
+		// Here lies the not-yet-implemented method 'Pause'
+		// Here lies the not-yet-implemented method 'Stop'
+		// Here lies the not-yet-implemented method 'SetCurrentFrame'
 	};
 }
 #undef ADD_VAR

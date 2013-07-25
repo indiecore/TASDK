@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__ActorFactoryAI.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTActorFactoryAI." #y); \
@@ -13,6 +14,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bUseCompartment, 0x2)
 		ADD_VAR(::BoolProperty, bForceDeathmatchAI, 0x1)
+		// Here lies the not-yet-implemented method 'PostCreateActor'
 	};
 }
 #undef ADD_VAR

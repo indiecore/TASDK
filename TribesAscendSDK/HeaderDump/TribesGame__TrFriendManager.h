@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame__TrObject.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrFriendManager." #y); \
@@ -24,6 +25,19 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, PrevBlockedCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PrevFollowerCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PrevFriendCount, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'RequestFriendsList'
+		// Here lies the not-yet-implemented method 'AddFriend'
+		// Here lies the not-yet-implemented method 'JoinFriend'
+		// Here lies the not-yet-implemented method 'IgnoreFriend'
+		// Here lies the not-yet-implemented method 'RemoveFriend'
+		// Here lies the not-yet-implemented method 'Update'
+		// Here lies the not-yet-implemented method 'RemoveFromList'
+		// Here lies the not-yet-implemented method 'GetOnlineFriendCount'
+		// Here lies the not-yet-implemented method 'GetInGameFriendCount'
+		// Here lies the not-yet-implemented method 'GetOnlineFollowerCount'
+		// Here lies the not-yet-implemented method 'IsFriend'
+		// Here lies the not-yet-implemented method 'GetFriendListIndex'
+		// Here lies the not-yet-implemented method 'AddFriendScoreboard'
 	};
 }
 #undef ADD_VAR

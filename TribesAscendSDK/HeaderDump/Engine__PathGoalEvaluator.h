@@ -1,5 +1,6 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__NavigationPoint.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PathGoalEvaluator." #y); \
@@ -21,6 +22,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, MaxPathVisits, 0xFFFFFFFF)
 		ADD_OBJECT(NavigationPoint, GeneratedGoal)
 		ADD_OBJECT(PathGoalEvaluator, NextEvaluator)
+		// Here lies the not-yet-implemented method 'Recycle'
+		// Here lies the not-yet-implemented method 'GetDumpString'
 	};
 }
 #undef ADD_VAR

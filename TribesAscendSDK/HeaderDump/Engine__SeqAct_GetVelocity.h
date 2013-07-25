@@ -19,6 +19,7 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(::VectorProperty, VelocityVect, 0xFFFFFFFF
 		ADD_VAR(::FloatProperty, VelocityMag, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

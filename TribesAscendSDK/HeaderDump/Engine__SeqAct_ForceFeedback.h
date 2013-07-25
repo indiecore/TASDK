@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SequenceAction.h"
+#include "Engine__ForceFeedbackWaveform.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.SeqAct_ForceFeedback." #y); \
@@ -12,6 +13,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ForceFeedbackWaveform, FFWaveform)
+		ADD_OBJECT(ScriptClass, PredefinedWaveForm)
 	};
 }
 #undef ADD_OBJECT

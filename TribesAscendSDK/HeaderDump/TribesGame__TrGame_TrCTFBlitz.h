@@ -1,5 +1,10 @@
 #pragma once
+#include "TribesGame__TrCTFBase_BloodEagle.h"
 #include "TribesGame__TrGame_TRCTF.h"
+#include "Engine__Controller.h"
+#include "TribesGame__TrCTFBase_DiamondSword.h"
+#include "TribesGame__TrCTFBase.h"
+#include "TribesGame__TrFlagBase.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrGame_TrCTFBlitz." #y); \
@@ -20,6 +25,10 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bRotateBothFlagsOnCapture, 0x1)
 		ADD_OBJECT(TrCTFBase_DiamondSword, DiamondSwordFlagStands)
 		ADD_OBJECT(TrCTFBase_BloodEagle, BloodEagleFlagStands)
+		// Here lies the not-yet-implemented method 'ApplyServerSettings'
+		// Here lies the not-yet-implemented method 'RegisterFlagBase'
+		// Here lies the not-yet-implemented method 'ScoreFlag'
+		// Here lies the not-yet-implemented method 'RotateFlag'
 	};
 }
 #undef ADD_VAR

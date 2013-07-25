@@ -1,5 +1,8 @@
 #pragma once
+#include "GFxUI__GFxClikWidget.h"
 #include "UTGame__GFxUDKFrontEnd_Dialog.h"
+#include "Engine__OnlineGameSettings.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.GFxUDKFrontEnd_JoinDialog." #y); \
@@ -15,6 +18,12 @@ namespace UnrealScript
 		ADD_OBJECT(GFxClikWidget, JoinBtn)
 		ADD_OBJECT(GFxClikWidget, MutatorListMC)
 		ADD_OBJECT(GFxClikWidget, ServerInfoListMC)
+		// Here lies the not-yet-implemented method 'OnTopMostView'
+		// Here lies the not-yet-implemented method 'DisableSubComponents'
+		// Here lies the not-yet-implemented method 'PopulateServerInfo'
+		// Here lies the not-yet-implemented method 'SetJoinButtonPress'
+		// Here lies the not-yet-implemented method 'SetSpectateButtonPress'
+		// Here lies the not-yet-implemented method 'WidgetInitialized'
 	};
 }
 #undef ADD_OBJECT

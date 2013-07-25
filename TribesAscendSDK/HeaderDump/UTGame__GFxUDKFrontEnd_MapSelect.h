@@ -1,5 +1,7 @@
 #pragma once
+#include "GFxUI__GFxObject.h"
 #include "UTGame__GFxUDKFrontEnd_Screen.h"
+#include "GFxUI__GFxClikWidget.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_MapSelect." #y); \
@@ -22,6 +24,20 @@ namespace UnrealScript
 		ADD_OBJECT(GFxClikWidget, ImgScrollerMC)
 		ADD_OBJECT(GFxObject, ListDataProvider)
 		ADD_OBJECT(GFxClikWidget, ListMC)
+		// Here lies the not-yet-implemented method 'GetImageMarkupByMapName'
+		// Here lies the not-yet-implemented method 'OnViewLoaded'
+		// Here lies the not-yet-implemented method 'OnTopMostView'
+		// Here lies the not-yet-implemented method 'DisableSubComponents'
+		// Here lies the not-yet-implemented method 'OnMapList_ValueChanged'
+		// Here lies the not-yet-implemented method 'SetList'
+		// Here lies the not-yet-implemented method 'OnListItemPress'
+		// Here lies the not-yet-implemented method 'UpdateListDataProvider'
+		// Here lies the not-yet-implemented method 'GetMapFriendlyName'
+		// Here lies the not-yet-implemented method 'SetImgScroller'
+		// Here lies the not-yet-implemented method 'GetCurrentGameMode'
+		// Here lies the not-yet-implemented method 'SetupMapCycle'
+		// Here lies the not-yet-implemented method 'GetSelectedMap'
+		// Here lies the not-yet-implemented method 'WidgetInitialized'
 	};
 }
 #undef ADD_VAR

@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__InterpTrackVectorMaterialParam.h"
 #include "Engine__InterpTrackInst.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \

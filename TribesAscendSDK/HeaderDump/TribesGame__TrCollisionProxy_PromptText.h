@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame__TrCollisionProxy.h"
+#include "Engine__Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrCollisionProxy_PromptText." #y); \
@@ -22,6 +23,11 @@ namespace UnrealScript
 		ADD_OBJECT(Pawn, m_LocalPawn)
 		ADD_VAR(::StrProperty, m_LastUpgradeMsg, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nLastUpgradeLevel, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'OnPawnAdded'
+		// Here lies the not-yet-implemented method 'RequestPromptText'
+		// Here lies the not-yet-implemented method 'CheckForUpgradeLevel'
+		// Here lies the not-yet-implemented method 'TryTraceAgainTimer'
+		// Here lies the not-yet-implemented method 'OnPawnRemoved'
 	};
 }
 #undef ADD_VAR

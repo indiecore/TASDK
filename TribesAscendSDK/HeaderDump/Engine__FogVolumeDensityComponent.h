@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__MaterialInterface.h"
 #include "Engine__ActorComponent.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -31,6 +32,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
 		ADD_OBJECT(MaterialInterface, DefaultFogVolumeMaterial)
 		ADD_OBJECT(MaterialInterface, FogMaterial)
+		// Here lies the not-yet-implemented method 'SetEnabled'
 	};
 }
 #undef ADD_VAR

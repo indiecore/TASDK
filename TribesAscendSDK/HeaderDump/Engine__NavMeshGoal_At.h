@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__NavMeshPathGoalEvaluator.h"
+#include "Engine__NavigationHandle.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NavMeshGoal_At." #y); \
@@ -22,6 +24,10 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bKeepPartial, 0x1)
 		ADD_VAR(::FloatProperty, GoalDist, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, Goal, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'RecycleNative'
+		// Here lies the not-yet-implemented method 'AtActor'
+		// Here lies the not-yet-implemented method 'AtLocation'
+		// Here lies the not-yet-implemented method 'Recycle'
 	};
 }
 #undef ADD_VAR

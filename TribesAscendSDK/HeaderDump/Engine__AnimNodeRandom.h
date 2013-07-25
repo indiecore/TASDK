@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__AnimNodeSequence.h"
 #include "Engine__AnimNodeBlendList.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

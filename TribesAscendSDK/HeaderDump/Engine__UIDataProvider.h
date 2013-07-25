@@ -12,6 +12,21 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::ByteProperty, WriteAccessType, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'OnDataProviderPropertyChange'
+		// Here lies the not-yet-implemented method 'GetProviderFieldType'
+		// Here lies the not-yet-implemented method 'ParseArrayDelimiter'
+		// Here lies the not-yet-implemented method 'GetSupportedScriptFields'
+		// Here lies the not-yet-implemented method 'AllowPublishingToField'
+		// Here lies the not-yet-implemented method 'GetFieldValue'
+		// Here lies the not-yet-implemented method 'SetFieldValue'
+		// Here lies the not-yet-implemented method 'GenerateScriptMarkupString'
+		// Here lies the not-yet-implemented method 'GenerateFillerData'
+		// Here lies the not-yet-implemented method 'IsProviderDisabled'
+		// Here lies the not-yet-implemented method 'IsCollectionDataType'
+		// Here lies the not-yet-implemented method 'NotifyPropertyChanged'
+		// Here lies the not-yet-implemented method 'AddPropertyNotificationChangeRequest'
+		// Here lies the not-yet-implemented method 'RemovePropertyNotificationChangeRequest'
+		// Here lies the not-yet-implemented method 'ParseTagArrayDelimiter'
 	};
 }
 #undef ADD_VAR

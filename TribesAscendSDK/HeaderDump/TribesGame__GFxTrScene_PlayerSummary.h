@@ -1,5 +1,7 @@
 #pragma once
 #include "TribesGame__GFxTrScene.h"
+#include "TribesGame__TrSummaryHelper.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrScene_PlayerSummary." #y); \
@@ -45,6 +47,20 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, MiscDataCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SkillClassId, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, AWARD_TIER_SIZE, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'ClearSummary'
+		// Here lies the not-yet-implemented method 'ClearEarnedBadgeValue'
+		// Here lies the not-yet-implemented method 'SummaryReady'
+		// Here lies the not-yet-implemented method 'LoadXPData'
+		// Here lies the not-yet-implemented method 'LoadPlayerStatsData'
+		// Here lies the not-yet-implemented method 'LoadPlayerAccoladeData'
+		// Here lies the not-yet-implemented method 'LoadPlayerMiscData'
+		// Here lies the not-yet-implemented method 'AddAward'
+		// Here lies the not-yet-implemented method 'AddBadge'
+		// Here lies the not-yet-implemented method 'AddAccolade'
+		// Here lies the not-yet-implemented method 'AddMiscData'
+		// Here lies the not-yet-implemented method 'GetFlagGrabCount'
+		// Here lies the not-yet-implemented method 'GetFlagReturnCount'
 	};
 }
 #undef ADD_VAR

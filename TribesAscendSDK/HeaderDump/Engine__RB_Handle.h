@@ -33,6 +33,13 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bInHardware, 0x1)
 		ADD_VAR(::IntProperty, SceneIndex, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, GrabbedBoneName, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GrabComponent'
+		// Here lies the not-yet-implemented method 'ReleaseComponent'
+		// Here lies the not-yet-implemented method 'SetLocation'
+		// Here lies the not-yet-implemented method 'SetSmoothLocation'
+		// Here lies the not-yet-implemented method 'UpdateSmoothLocation'
+		// Here lies the not-yet-implemented method 'SetOrientation'
+		// Here lies the not-yet-implemented method 'GetOrientation'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "Engine__MaterialInterface.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DecalManager." #y); \
@@ -21,6 +22,12 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DecalDepthBias, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DecalLifeSpan, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxActiveDecals, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'AreDynamicDecalsEnabled'
+		// Here lies the not-yet-implemented method 'DecalFinished'
+		// Here lies the not-yet-implemented method 'CanSpawnDecals'
+		// Here lies the not-yet-implemented method 'SetDecalParameters'
+		// Here lies the not-yet-implemented method 'GetPooledComponent'
+		// Here lies the not-yet-implemented method 'SpawnDecal'
 	};
 }
 #undef ADD_VAR

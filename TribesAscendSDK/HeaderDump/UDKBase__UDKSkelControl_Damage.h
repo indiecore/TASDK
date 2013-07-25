@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine__SkelControlSingleBone.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__StaticMesh.h"
+#include "UDKBase__UDKVehicle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKSkelControl_Damage." #y); \
@@ -54,6 +57,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bControlStrFollowsHealth, 0x4)
 		ADD_VAR(::BoolProperty, bOnDamageActive, 0x2)
 		ADD_VAR(::BoolProperty, bInitialized, 0x1)
+		// Here lies the not-yet-implemented method 'BreakApart'
+		// Here lies the not-yet-implemented method 'BreakApartOnDeath'
+		// Here lies the not-yet-implemented method 'RestorePart'
 	};
 }
 #undef ADD_VAR

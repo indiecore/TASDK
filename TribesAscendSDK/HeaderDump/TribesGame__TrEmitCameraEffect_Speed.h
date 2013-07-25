@@ -1,5 +1,6 @@
 #pragma once
 #include "UDKBase__UDKEmitCameraEffect.h"
+#include "Engine__SoundCue.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrEmitCameraEffect_Speed." #y); \
@@ -22,6 +23,9 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, m_WeatherSound)
 		ADD_VAR(::BoolProperty, m_bUpdateLocationBasedOnVelocity, 0x2)
 		ADD_VAR(::BoolProperty, m_bUpdateRotation, 0x1)
+		// Here lies the not-yet-implemented method 'UpdateLocation'
+		// Here lies the not-yet-implemented method 'Activate'
+		// Here lies the not-yet-implemented method 'Deactivate'
 	};
 }
 #undef ADD_VAR

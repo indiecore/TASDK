@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
+		// Here lies the not-yet-implemented method 'GetElementCount'
 	};
 }
 #undef ADD_STRUCT

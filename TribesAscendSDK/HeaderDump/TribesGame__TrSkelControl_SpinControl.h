@@ -29,6 +29,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_PreviewStartStop, 0x1)
 		ADD_STRUCT(::VectorProperty, m_vAxis, 0xFFFFFFFF
 		ADD_VAR(::FloatProperty, m_fDegreesPerSecond, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Spin'
+		// Here lies the not-yet-implemented method 'SpinToTargetRotation'
 	};
 }
 #undef ADD_VAR

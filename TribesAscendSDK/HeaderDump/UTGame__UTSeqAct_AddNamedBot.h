@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__NavigationPoint.h"
 #include "Engine__SequenceAction.h"
+#include "UTGame__UTBot.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTSeqAct_AddNamedBot." #y); \
@@ -22,6 +24,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, TeamIndex, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bForceTeam, 0x1)
 		ADD_VAR(::StrProperty, BotName, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Activated'
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

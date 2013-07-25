@@ -12,6 +12,9 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, MaxTextureSize, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SourceTexturesFullyStreamedIn'
+		// Here lies the not-yet-implemented method 'UpdateCompositeTexture'
+		// Here lies the not-yet-implemented method 'ResetSourceRegions'
 	};
 }
 #undef ADD_VAR

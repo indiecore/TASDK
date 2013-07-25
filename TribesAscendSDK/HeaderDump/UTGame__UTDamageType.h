@@ -1,5 +1,13 @@
 #pragma once
+#include "UTGame__UTGib.h"
+#include "Engine__Pawn.h"
 #include "Engine__DamageType.h"
+#include "Engine__CameraAnim.h"
+#include "UTGame__UTPlayerReplicationInfo.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__PlayerReplicationInfo.h"
+#include "UTGame__UTPawn.h"
+#include "Engine__Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTDamageType." #y); \
@@ -25,6 +33,7 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(CameraAnim, DamageCameraAnim)
 		ADD_VAR(::BoolProperty, bLocationalHit, 0x2)
+		ADD_OBJECT(ScriptClass, DamageWeaponClass)
 		ADD_VAR(::BoolProperty, bDirectDamage, 0x10)
 		ADD_VAR(::BoolProperty, bHeadGibCamera, 0x40000)
 		ADD_VAR(::FloatProperty, GibPerterbation, 0xFFFFFFFF)
@@ -51,11 +60,14 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, CustomTauntIndex, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, RewardEvent, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, RewardAnnouncementSwitch, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, RewardAnnouncementClass)
 		ADD_VAR(::IntProperty, RewardCount, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, SuicideStatsName, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, DeathStatsName, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, KillStatsName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NodeDamageScaling, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, DeathCameraEffectInstigator)
+		ADD_OBJECT(ScriptClass, DeathCameraEffectVictim)
 		ADD_OBJECT(ParticleSystem, GibTrail)
 		ADD_VAR(::IntProperty, DamageWeaponFireMode, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, AlwaysGibDamageThreshold, 0xFFFFFFFF)
@@ -72,6 +84,27 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bNeverGibs, 0x8)
 		ADD_VAR(::BoolProperty, bAlwaysGibs, 0x4)
 		ADD_VAR(::FloatProperty, DeathOverlayTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetDeathCameraEffectInstigator'
+		// Here lies the not-yet-implemented method 'GetHitEffectDuration'
+		// Here lies the not-yet-implemented method 'ShouldGib'
+		// Here lies the not-yet-implemented method 'GetDeathCameraEffectVictim'
+		// Here lies the not-yet-implemented method 'DeathMessage'
+		// Here lies the not-yet-implemented method 'SuicideMessage'
+		// Here lies the not-yet-implemented method 'SpawnHitEffect'
+		// Here lies the not-yet-implemented method 'IncrementKills'
+		// Here lies the not-yet-implemented method 'IncrementDeaths'
+		// Here lies the not-yet-implemented method 'IncrementSuicides'
+		// Here lies the not-yet-implemented method 'GetStatsName'
+		// Here lies the not-yet-implemented method 'ScoreKill'
+		// Here lies the not-yet-implemented method 'PawnTornOff'
+		// Here lies the not-yet-implemented method 'SpawnGibEffects'
+		// Here lies the not-yet-implemented method 'DoCustomDamageEffects'
+		// Here lies the not-yet-implemented method 'CreateDeathSkeleton'
+		// Here lies the not-yet-implemented method 'BoneBreaker'
+		// Here lies the not-yet-implemented method 'CreateDeathGoreChunks'
+		// Here lies the not-yet-implemented method 'SpawnExtraGibEffects'
+		// Here lies the not-yet-implemented method 'DrawKillIcon'
+		// Here lies the not-yet-implemented method 'CalcDeathCamera'
 	};
 }
 #undef ADD_VAR

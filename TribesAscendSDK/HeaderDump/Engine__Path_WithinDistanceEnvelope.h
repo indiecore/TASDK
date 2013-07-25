@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__PathConstraint.h"
+#include "Engine__Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Path_WithinDistanceEnvelope." #y); \
@@ -23,6 +24,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bSoft, 0x1)
 		ADD_VAR(::FloatProperty, MinDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxDistance, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'StayWithinEnvelopeToLoc'
+		// Here lies the not-yet-implemented method 'Recycle'
 	};
 }
 #undef ADD_VAR

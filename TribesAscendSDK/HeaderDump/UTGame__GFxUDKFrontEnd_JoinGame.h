@@ -1,5 +1,14 @@
 #pragma once
+#include "GFxUI__GFxObject.h"
 #include "UTGame__GFxUDKFrontEnd_Screen.h"
+#include "UTGame__GFxUDKFrontEnd_JoinDialog.h"
+#include "UDKBase__UDKDataStore_GameSearchBase.h"
+#include "UTGame__UTUIDataStore_StringList.h"
+#include "GFxUI__GFxClikWidget.h"
+#include "UTGame__GFxUDKFrontEnd_PasswordDialog.h"
+#include "UTGame__UTUIDataStore_MenuItems.h"
+#include "Engine__OnlineSubsystem.h"
+#include "UTGame__UTDataStore_GameSearchDM.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_JoinGame." #y); \
@@ -50,6 +59,50 @@ namespace UnrealScript
 		ADD_OBJECT(GFxClikWidget, FilterBtn)
 		ADD_OBJECT(UTDataStore_GameSearchDM, SearchDMDataStore)
 		ADD_VAR(::IntProperty, LastServerAdded, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'OnViewLoaded'
+		// Here lies the not-yet-implemented method 'OnViewActivated'
+		// Here lies the not-yet-implemented method 'ForceLANOption'
+		// Here lies the not-yet-implemented method 'UpdateFilterButton'
+		// Here lies the not-yet-implemented method 'OnTopMostView'
+		// Here lies the not-yet-implemented method 'OnViewClosed'
+		// Here lies the not-yet-implemented method 'DisableSubComponents'
+		// Here lies the not-yet-implemented method 'ValidateServerType'
+		// Here lies the not-yet-implemented method 'Cleanup'
+		// Here lies the not-yet-implemented method 'GetGameTypeSearchProviderIndex'
+		// Here lies the not-yet-implemented method 'OnGameTypeChanged'
+		// Here lies the not-yet-implemented method 'ConditionalRefreshServerList'
+		// Here lies the not-yet-implemented method 'UseLANMode'
+		// Here lies the not-yet-implemented method 'UpdateButtonStates'
+		// Here lies the not-yet-implemented method 'PromptForServerPassword'
+		// Here lies the not-yet-implemented method 'StripInvalidPasswordCharacters'
+		// Here lies the not-yet-implemented method 'OnPasswordDialog_OK'
+		// Here lies the not-yet-implemented method 'ProcessJoin'
+		// Here lies the not-yet-implemented method 'UpdateServerCount'
+		// Here lies the not-yet-implemented method 'BuildJoinURL'
+		// Here lies the not-yet-implemented method 'RefreshServerList'
+		// Here lies the not-yet-implemented method 'SubmitServerListQuery'
+		// Here lies the not-yet-implemented method 'OnFindOnlineGamesCompleteDelegate'
+		// Here lies the not-yet-implemented method 'OnFindOnlineGamesComplete'
+		// Here lies the not-yet-implemented method 'GetDesiredMatchType'
+		// Here lies the not-yet-implemented method 'OnRefreshButtonPress'
+		// Here lies the not-yet-implemented method 'OnFilterButtonPress'
+		// Here lies the not-yet-implemented method 'ServerFilterChangedGameType'
+		// Here lies the not-yet-implemented method 'UpdateListDataProvider'
+		// Here lies the not-yet-implemented method 'OnServerHeaderPress'
+		// Here lies the not-yet-implemented method 'OnMapHeaderPress'
+		// Here lies the not-yet-implemented method 'OnPlayersHeaderPress'
+		// Here lies the not-yet-implemented method 'OnPingHeaderPress'
+		// Here lies the not-yet-implemented method 'OnServerListItemPress'
+		// Here lies the not-yet-implemented method 'SpectateServer'
+		// Here lies the not-yet-implemented method 'JoinServerClikListener'
+		// Here lies the not-yet-implemented method 'JoinServer'
+		// Here lies the not-yet-implemented method 'OnJoinGameComplete'
+		// Here lies the not-yet-implemented method 'AllowJoinServer'
+		// Here lies the not-yet-implemented method 'CancelQuery'
+		// Here lies the not-yet-implemented method 'SetRefreshing'
+		// Here lies the not-yet-implemented method 'OnCancelSearchComplete'
+		// Here lies the not-yet-implemented method 'NotifyGameTypeChanged'
+		// Here lies the not-yet-implemented method 'WidgetInitialized'
 	};
 }
 #undef ADD_VAR

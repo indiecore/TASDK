@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__FracturedBaseComponent.h"
+#include "Engine__MaterialInterface.h"
+#include "Engine__PhysicalMaterial.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FracturedStaticMeshComponent." #y); \
@@ -32,6 +34,17 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUseVisibleVertsForBounds, 0x2)
 		ADD_VAR(::BoolProperty, bUseSkinnedRendering, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box' for the property named 'VisibleBox'!
+		// Here lies the not-yet-implemented method 'SetVisibleFragments'
+		// Here lies the not-yet-implemented method 'IsFragmentDestroyable'
+		// Here lies the not-yet-implemented method 'IsRootFragment'
+		// Here lies the not-yet-implemented method 'IsNoPhysFragment'
+		// Here lies the not-yet-implemented method 'GetFragmentBox'
+		// Here lies the not-yet-implemented method 'GetFragmentAverageExteriorNormal'
+		// Here lies the not-yet-implemented method 'GetCoreFragmentIndex'
+		// Here lies the not-yet-implemented method 'GetFragmentGroups'
+		// Here lies the not-yet-implemented method 'GetBoundaryHiddenFragments'
+		// Here lies the not-yet-implemented method 'RecreatePhysState'
+		// Here lies the not-yet-implemented method 'GetFracturedMeshPhysMaterial'
 	};
 }
 #undef ADD_VAR

@@ -19,6 +19,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, SettingsCount, 0xFFFFFFFF)
 		ADD_OBJECT(GFxObject, SettingsList)
+		// Here lies the not-yet-implemented method 'GetCurrentValue'
+		// Here lies the not-yet-implemented method 'SaveSetting'
 	};
 }
 #undef ADD_VAR

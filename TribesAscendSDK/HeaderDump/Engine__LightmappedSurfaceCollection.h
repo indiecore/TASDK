@@ -1,5 +1,6 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__Model.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.LightmappedSurfaceCollection." #y); \

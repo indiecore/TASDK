@@ -1,5 +1,9 @@
 #pragma once
+#include "TribesGame__GfxTrHud.h"
 #include "Core__Object.h"
+#include "TribesGame__TrGameReplicationInfo.h"
+#include "TribesGame__TrPlayerController.h"
+#include "TribesGame__TrPlayerReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrScoreboard." #y); \
@@ -41,6 +45,22 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, DSSlots, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, BESlots, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MAX_PLAYER_INDEX, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'CreditsSort'
+		// Here lies the not-yet-implemented method 'AssistsSort'
+		// Here lies the not-yet-implemented method 'KillsSort'
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'Show'
+		// Here lies the not-yet-implemented method 'Hide'
+		// Here lies the not-yet-implemented method 'ConfigScoreboard'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'UpdatePRILists'
+		// Here lies the not-yet-implemented method 'GetBestSortArray'
+		// Here lies the not-yet-implemented method 'GetRank'
+		// Here lies the not-yet-implemented method 'ClearSlot'
+		// Here lies the not-yet-implemented method 'UpdateSlot'
+		// Here lies the not-yet-implemented method 'FormatTime'
+		// Here lies the not-yet-implemented method 'UpdateHeaders'
+		// Here lies the not-yet-implemented method 'IsValidScoreboardPlayer'
 	};
 }
 #undef ADD_VAR

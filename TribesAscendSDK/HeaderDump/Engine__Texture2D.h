@@ -43,6 +43,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, SizeX, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IndirectArray_Mirror' for the property named 'CachedPVRTCMips'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IndirectArray_Mirror' for the property named 'Mips'!
+		// Here lies the not-yet-implemented method 'SetForceMipLevelsToBeResident'
+		// Here lies the not-yet-implemented method 'Create'
 	};
 }
 #undef ADD_VAR

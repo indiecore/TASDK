@@ -1,5 +1,7 @@
 #pragma once
 #include "TribesGame__TrPlayerInput.h"
+#include "Engine__Pawn.h"
+#include "UTGame__UTWeapon.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrConsolePlayerInput." #y); \
@@ -76,6 +78,15 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAutoCenterPitch, 0x1)
 		ADD_VAR(::FloatProperty, TurningAccelerationMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SensitivityMultiplier, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'PreProcessInput'
+		// Here lies the not-yet-implemented method 'ApplyViewAutoPitchCentering'
+		// Here lies the not-yet-implemented method 'ApplyViewAutoVehiclePitchCentering'
+		// Here lies the not-yet-implemented method 'ApplyViewAcceleration'
+		// Here lies the not-yet-implemented method 'ApplyTargetAdhesion'
+		// Here lies the not-yet-implemented method 'AdjustMouseSensitivity'
+		// Here lies the not-yet-implemented method 'ApplyTargetFriction'
+		// Here lies the not-yet-implemented method 'CheckForDoubleClickMove'
 	};
 }
 #undef ADD_VAR

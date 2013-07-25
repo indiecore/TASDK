@@ -1,5 +1,6 @@
 #pragma once
 #include "GameFramework__SeqEvent_MobileBase.h"
+#include "GameFramework__MobilePlayerInput.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqEvent_MobileZoneBase." #y); \
@@ -12,6 +13,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, TargetZoneName, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'AddToMobileInput'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,8 @@
 #pragma once
 #include "GameFramework__GamePlayerController.h"
+#include "UDKBase__UDKEmitCameraEffect.h"
+#include "Engine__CameraAnimInst.h"
+#include "Engine__Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKPlayerController." #y); \
@@ -36,6 +39,19 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDedicatedServerSpectator, 0x1)
 		ADD_OBJECT(UDKEmitCameraEffect, CameraEffect)
 		ADD_OBJECT(CameraAnimInst, CameraAnimPlayer)
+		// Here lies the not-yet-implemented method 'SetGamma'
+		// Here lies the not-yet-implemented method 'SetHardwarePhysicsEnabled'
+		// Here lies the not-yet-implemented method 'IsKeyboardAvailable'
+		// Here lies the not-yet-implemented method 'IsMouseAvailable'
+		// Here lies the not-yet-implemented method 'RemoveCameraEffect'
+		// Here lies the not-yet-implemented method 'ClientSpawnCameraEffect'
+		// Here lies the not-yet-implemented method 'ClearCameraEffect'
+		// Here lies the not-yet-implemented method 'GetTargetAdhesionFrictionTarget'
+		// Here lies the not-yet-implemented method 'IsControllerTiltActive'
+		// Here lies the not-yet-implemented method 'SetControllerTiltDesiredIfAvailable'
+		// Here lies the not-yet-implemented method 'SetControllerTiltActive'
+		// Here lies the not-yet-implemented method 'SetOnlyUseControllerTiltInput'
+		// Here lies the not-yet-implemented method 'SetUseTiltForwardAndBack'
 	};
 }
 #undef ADD_VAR

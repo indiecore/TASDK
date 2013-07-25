@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, GravityZ, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'InitMutator'
 	};
 }
 #undef ADD_VAR

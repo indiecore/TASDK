@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SeqVar_Object.h"
+#include "Core__Object.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqVar_Player." #y); \
@@ -13,6 +14,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, PlayerIdx, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bAllPlayers, 0x1)
+		// Here lies the not-yet-implemented method 'UpdatePlayersList'
+		// Here lies the not-yet-implemented method 'GetObjectValue'
 	};
 }
 #undef ADD_VAR

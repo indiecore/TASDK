@@ -22,6 +22,10 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, FileType, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bFlushEachWrite, 0x1)
 		ADD_VAR(::BoolProperty, bWantsAsyncWrites, 0x2)
+		// Here lies the not-yet-implemented method 'OpenFile'
+		// Here lies the not-yet-implemented method 'CloseFile'
+		// Here lies the not-yet-implemented method 'Logf'
+		// Here lies the not-yet-implemented method 'Destroyed'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,9 @@
 #pragma once
+#include "UDKBase__UDKGameObjective.h"
 #include "Engine__Actor.h"
+#include "Engine__Pawn.h"
+#include "Engine__NavigationPoint.h"
+#include "Engine__TeamInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKCarriedObject." #y); \
@@ -32,6 +36,10 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastValidAnchorTime, 0xFFFFFFFF)
 		ADD_OBJECT(NavigationPoint, LastAnchor)
 		ADD_OBJECT(TeamInfo, Team)
+		// Here lies the not-yet-implemented method 'SetHUDLocation'
+		// Here lies the not-yet-implemented method 'NotReachableBy'
+		// Here lies the not-yet-implemented method 'OnBaseChainChanged'
+		// Here lies the not-yet-implemented method 'GetTeamNum'
 	};
 }
 #undef ADD_VAR

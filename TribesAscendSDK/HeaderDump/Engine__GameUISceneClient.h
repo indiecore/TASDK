@@ -1,5 +1,8 @@
 #pragma once
+#include "Engine__PlayerController.h"
 #include "Engine__UISceneClient.h"
+#include "Engine__LocalPlayer.h"
+#include "Engine__Player.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.GameUISceneClient." #y); \
@@ -26,6 +29,15 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IntPoint' for the property named 'DoubleClickStartPosition'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'DoubleClickStartTime'!
 		ADD_VAR(::FloatProperty, LatestDeltaTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetCurrentNetMode'
+		// Here lies the not-yet-implemented method 'RequestInputProcessingUpdate'
+		// Here lies the not-yet-implemented method 'CanUnpauseInternalUI'
+		// Here lies the not-yet-implemented method 'PauseGame'
+		// Here lies the not-yet-implemented method 'NotifyClientTravel'
+		// Here lies the not-yet-implemented method 'NotifyGameSessionEnded'
+		// Here lies the not-yet-implemented method 'NotifyPlayerAdded'
+		// Here lies the not-yet-implemented method 'NotifyPlayerRemoved'
+		// Here lies the not-yet-implemented method 'FindLocalPlayerIndex'
 	};
 }
 #undef ADD_VAR

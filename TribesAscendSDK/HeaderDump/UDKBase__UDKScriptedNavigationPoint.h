@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__Pawn.h"
 #include "Engine__NavigationPoint.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -14,6 +15,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAnchorMustBeReachable, 0x4)
 		ADD_VAR(::BoolProperty, bScriptNotifyAnchorFindingResult, 0x2)
 		ADD_VAR(::BoolProperty, bScriptSpecifyEndAnchor, 0x1)
+		// Here lies the not-yet-implemented method 'SpecifyEndAnchor'
+		// Here lies the not-yet-implemented method 'NotifyAnchorFindingResult'
 	};
 }
 #undef ADD_VAR

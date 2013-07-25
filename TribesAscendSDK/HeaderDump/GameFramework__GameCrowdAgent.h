@@ -1,5 +1,17 @@
 #pragma once
+#include "Engine__Canvas.h"
+#include "GameFramework__GameCrowdGroup.h"
 #include "Engine__CrowdAgentBase.h"
+#include "Engine__Texture2D.h"
+#include "Engine__Actor.h"
+#include "GameFramework__GameCrowdAgentBehavior.h"
+#include "GameFramework__GameCrowdDestination.h"
+#include "Engine__SoundCue.h"
+#include "Engine__NavigationHandle.h"
+#include "Engine__HUD.h"
+#include "GameFramework__SeqAct_PlayAgentAnimation.h"
+#include "Engine__PlayerController.h"
+#include "Engine__Controller.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameCrowdAgent." #y); \
@@ -50,6 +62,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, WalkableFloorZ, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ObstacleCheckCount, 0xFFFFFFFF)
 		ADD_OBJECT(NavigationHandle, NavigationHandle)
+		ADD_OBJECT(ScriptClass, NavigationHandleClass)
 		ADD_STRUCT(::VectorProperty, SearchExtent, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, IntermediatePoint, 0xFFFFFFFF
 		ADD_VAR(::FloatProperty, GroundOffset, 0xFFFFFFFF)
@@ -103,6 +116,45 @@ namespace UnrealScript
 		ADD_OBJECT(GameCrowdDestination, CurrentDestination)
 		ADD_VAR(::FloatProperty, AvoidanceShare, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, PreferredVelocity, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'PickBehaviorFrom'
+		// Here lies the not-yet-implemented method 'FellOutOfWorld'
+		// Here lies the not-yet-implemented method 'IsPanicked'
+		// Here lies the not-yet-implemented method 'SetPanic'
+		// Here lies the not-yet-implemented method 'WaitForGroupMembers'
+		// Here lies the not-yet-implemented method 'SetCurrentDestination'
+		// Here lies the not-yet-implemented method 'SetMaxSpeed'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'KillAgent'
+		// Here lies the not-yet-implemented method 'ResetPooledAgent'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'DisplayDebug'
+		// Here lies the not-yet-implemented method 'SetLighting'
+		// Here lies the not-yet-implemented method 'InitializeAgent'
+		// Here lies the not-yet-implemented method 'OnPlayAgentAnimation'
+		// Here lies the not-yet-implemented method 'PlayIdleAnimation'
+		// Here lies the not-yet-implemented method 'StopIdleAnimation'
+		// Here lies the not-yet-implemented method 'HandlePotentialAgentEncounter'
+		// Here lies the not-yet-implemented method 'PlaySpawnBehavior'
+		// Here lies the not-yet-implemented method 'NotifySeePlayer'
+		// Here lies the not-yet-implemented method 'TryRandomBehavior'
+		// Here lies the not-yet-implemented method 'ResetSeePlayer'
+		// Here lies the not-yet-implemented method 'ActivateBehavior'
+		// Here lies the not-yet-implemented method 'SetCurrentBehavior'
+		// Here lies the not-yet-implemented method 'ActivateInstancedBehavior'
+		// Here lies the not-yet-implemented method 'StopBehavior'
+		// Here lies the not-yet-implemented method 'IsIdle'
+		// Here lies the not-yet-implemented method 'CalcCamera'
+		// Here lies the not-yet-implemented method 'UpdateIntermediatePoint'
+		// Here lies the not-yet-implemented method 'PlayDeath'
+		// Here lies the not-yet-implemented method 'FireDeathEvent'
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'OverlappedActorEvent'
+		// Here lies the not-yet-implemented method 'InitNavigationHandle'
+		// Here lies the not-yet-implemented method 'GeneratePathToActor'
+		// Here lies the not-yet-implemented method 'NativePostRenderFor'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
+		// Here lies the not-yet-implemented method 'GetDestString'
+		// Here lies the not-yet-implemented method 'GetBehaviorString'
 	};
 }
 #undef ADD_VAR

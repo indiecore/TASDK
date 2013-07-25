@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__AnimNodeBlendList.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNodeBlendByBase." #y); \
@@ -19,6 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Actor, CachedBase)
 		ADD_VAR(::FloatProperty, BlendTime, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, ActorClass)
 		ADD_VAR(::NameProperty, ActorTag, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, Type, 0xFFFFFFFF)
 	};

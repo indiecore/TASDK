@@ -5,5 +5,7 @@ namespace UnrealScript
 	class Surface : public Object
 	{
 	public:
+		// Here lies the not-yet-implemented method 'GetSurfaceWidth'
+		// Here lies the not-yet-implemented method 'GetSurfaceHeight'
 	};
 }

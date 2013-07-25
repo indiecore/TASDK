@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__K2Connector.h"
+#include "Engine__K2Output.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.K2Input." #y); \

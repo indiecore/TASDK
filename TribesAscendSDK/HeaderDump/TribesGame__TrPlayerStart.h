@@ -1,4 +1,5 @@
 #pragma once
+#include "TribesGame__TrCaHCapturePoint.h"
 #include "UDKBase__UDKTeamPlayerStart.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \

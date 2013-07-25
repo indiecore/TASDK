@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__AnimNotify.h"
+#include "Engine__ForceFeedbackWaveform.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNotify_Rumble." #y); \
@@ -17,6 +18,7 @@ namespace UnrealScript
 	class AnimNotify_Rumble : public AnimNotify
 	{
 	public:
+		ADD_OBJECT(ScriptClass, PredefinedWaveForm)
 		ADD_OBJECT(ForceFeedbackWaveform, WaveForm)
 		ADD_VAR(::FloatProperty, EffectRadius, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bCheckForBasedPlayer, 0x1)

@@ -1,5 +1,9 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__Texture.h"
+#include "Engine__Texture2D.h"
+#include "Engine__Font.h"
+#include "Engine__MaterialInterface.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Canvas." #y); \
@@ -41,6 +45,37 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ClipX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OrgY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OrgX, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetPos'
+		// Here lies the not-yet-implemented method 'SetDrawColor'
+		// Here lies the not-yet-implemented method 'DrawText'
+		// Here lies the not-yet-implemented method 'Project'
+		// Here lies the not-yet-implemented method 'StrLen'
+		// Here lies the not-yet-implemented method 'DrawTile'
+		// Here lies the not-yet-implemented method 'PreOptimizeDrawTiles'
+		// Here lies the not-yet-implemented method 'DrawMaterialTile'
+		// Here lies the not-yet-implemented method 'DrawRotatedTile'
+		// Here lies the not-yet-implemented method 'DrawRotatedMaterialTile'
+		// Here lies the not-yet-implemented method 'DrawTileStretched'
+		// Here lies the not-yet-implemented method 'DrawTris'
+		// Here lies the not-yet-implemented method 'CreateFontRenderInfo'
+		// Here lies the not-yet-implemented method 'TextSize'
+		// Here lies the not-yet-implemented method 'DeProject'
+		// Here lies the not-yet-implemented method 'PushTranslationMatrix'
+		// Here lies the not-yet-implemented method 'PopTransform'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'SetOrigin'
+		// Here lies the not-yet-implemented method 'SetClip'
+		// Here lies the not-yet-implemented method 'DrawTexture'
+		// Here lies the not-yet-implemented method 'DrawTextureBlended'
+		// Here lies the not-yet-implemented method 'MakeIcon'
+		// Here lies the not-yet-implemented method 'DrawIcon'
+		// Here lies the not-yet-implemented method 'DrawRect'
+		// Here lies the not-yet-implemented method 'DrawBox'
+		// Here lies the not-yet-implemented method 'SetDrawColorStruct'
+		// Here lies the not-yet-implemented method 'Draw2DLine'
+		// Here lies the not-yet-implemented method 'DrawTextureLine'
+		// Here lies the not-yet-implemented method 'DrawTextureDoubleLine'
+		// Here lies the not-yet-implemented method 'DrawDebugGraph'
 	};
 }
 #undef ADD_VAR

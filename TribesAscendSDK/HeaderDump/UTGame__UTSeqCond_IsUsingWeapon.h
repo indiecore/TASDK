@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SequenceCondition.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTSeqCond_IsUsingWeapon." #y); \
@@ -19,7 +20,9 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bMustBeImpactHammer, 0x2)
 		ADD_VAR(::BoolProperty, bAllowSubclass, 0x1)
+		ADD_OBJECT(ScriptClass, RequiredWeapon)
 		ADD_OBJECT(Actor, Target)
+		// Here lies the not-yet-implemented method 'Activated'
 	};
 }
 #undef ADD_VAR

@@ -13,6 +13,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, m_MaxEnergyConsumed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_DamagePerEnergy, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'InstantFire'
+		// Here lies the not-yet-implemented method 'ModifyInstantHitDamage'
 	};
 }
 #undef ADD_VAR

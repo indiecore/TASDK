@@ -1,5 +1,10 @@
 #pragma once
+#include "Engine__PlayerController.h"
 #include "UTGame__UTLocalMessage.h"
+#include "Engine__SoundNodeWave.h"
+#include "Core__Object.h"
+#include "Engine__PlayerReplicationInfo.h"
+#include "Engine__HUD.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTTeamGameMessage." #y); \
@@ -30,6 +35,12 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, YouAreOnRedMessage, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, RequestTeamSwapPostfix, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, RequestTeamSwapPrefix, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'ClientReceive'
+		// Here lies the not-yet-implemented method 'GetString'
+		// Here lies the not-yet-implemented method 'AnnouncementSound'
+		// Here lies the not-yet-implemented method 'GetFontSize'
+		// Here lies the not-yet-implemented method 'GetPos'
+		// Here lies the not-yet-implemented method 'GetColor'
 	};
 }
 #undef ADD_VAR

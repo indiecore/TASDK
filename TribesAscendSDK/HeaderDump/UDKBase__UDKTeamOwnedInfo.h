@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__ReplicationInfo.h"
+#include "Engine__TeamInfo.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UDKBase.UDKTeamOwnedInfo." #y); \
@@ -12,6 +13,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TeamInfo, Team)
+		// Here lies the not-yet-implemented method 'GetTeamNum'
 	};
 }
 #undef ADD_OBJECT

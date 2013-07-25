@@ -1,5 +1,8 @@
 #pragma once
 #include "GameFramework__SeqEvent_HudRender.h"
+#include "Engine__Canvas.h"
+#include "Engine__Font.h"
+#include "Engine__HUD.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqEvent_HudRenderText." #y); \
@@ -28,6 +31,8 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, DisplayLocation, 0xFFFFFFFF
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'DisplayColor'!
 		ADD_OBJECT(Font, DisplayFont)
+		// Here lies the not-yet-implemented method 'Render'
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

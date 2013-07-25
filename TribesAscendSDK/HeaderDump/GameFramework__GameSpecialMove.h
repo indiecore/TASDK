@@ -1,5 +1,8 @@
 #pragma once
+#include "GameFramework__GamePawn.h"
 #include "Core__Object.h"
+#include "Engine__Actor.h"
+#include "Engine__Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameSpecialMove." #y); \
@@ -37,6 +40,27 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastCanDoSpecialMoveTime, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, Handle, 0xFFFFFFFF)
 		ADD_OBJECT(GamePawn, PawnOwner)
+		// Here lies the not-yet-implemented method 'InitSpecialMove'
+		// Here lies the not-yet-implemented method 'InitSpecialMoveFlags'
+		// Here lies the not-yet-implemented method 'ExtractSpecialMoveFlags'
+		// Here lies the not-yet-implemented method 'CanChainMove'
+		// Here lies the not-yet-implemented method 'CanOverrideMoveWith'
+		// Here lies the not-yet-implemented method 'CanOverrideSpecialMove'
+		// Here lies the not-yet-implemented method 'CanDoSpecialMove'
+		// Here lies the not-yet-implemented method 'InternalCanDoSpecialMove'
+		// Here lies the not-yet-implemented method 'SpecialMoveStarted'
+		// Here lies the not-yet-implemented method 'SpecialMoveEnded'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'SpecialMoveFlagsUpdated'
+		// Here lies the not-yet-implemented method 'ShouldReplicate'
+		// Here lies the not-yet-implemented method 'SetReachPreciseDestination'
+		// Here lies the not-yet-implemented method 'SetFacePreciseRotation'
+		// Here lies the not-yet-implemented method 'ReachedPrecisePosition'
+		// Here lies the not-yet-implemented method 'ResetFacePreciseRotation'
+		// Here lies the not-yet-implemented method 'MessageEvent'
+		// Here lies the not-yet-implemented method 'ForcePawnRotation'
+		// Here lies the not-yet-implemented method 'WorldToRelativeOffset'
+		// Here lies the not-yet-implemented method 'RelativeToWorldOffset'
 	};
 }
 #undef ADD_VAR

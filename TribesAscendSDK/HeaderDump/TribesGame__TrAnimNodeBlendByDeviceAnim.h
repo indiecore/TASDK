@@ -1,5 +1,8 @@
 #pragma once
 #include "TribesGame__TrAnimNodeBlendList.h"
+#include "TribesGame__TrSkelControl_SpinControl.h"
+#include "TribesGame__TrDevice.h"
+#include "TribesGame__TrPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrAnimNodeBlendByDeviceAnim." #y); \
@@ -33,6 +36,19 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, m_nmBuildupFireSpinControlName, 0xFFFFFFFF)
 		ADD_OBJECT(TrDevice, m_Device)
 		ADD_OBJECT(TrPawn, m_TrPawn)
+		// Here lies the not-yet-implemented method 'StopAnim'
+		// Here lies the not-yet-implemented method 'SetActiveChild'
+		// Here lies the not-yet-implemented method 'PlayIdle'
+		// Here lies the not-yet-implemented method 'PlayAltIdle'
+		// Here lies the not-yet-implemented method 'PlayBuildup'
+		// Here lies the not-yet-implemented method 'PlayFire'
+		// Here lies the not-yet-implemented method 'PlayPutaway'
+		// Here lies the not-yet-implemented method 'PlayRetrieve'
+		// Here lies the not-yet-implemented method 'PlayReload'
+		// Here lies the not-yet-implemented method 'PlayOffhand'
+		// Here lies the not-yet-implemented method 'OnStopFire'
+		// Here lies the not-yet-implemented method 'PlayDryFire'
+		// Here lies the not-yet-implemented method 'PlayQuickRetrieve'
 	};
 }
 #undef ADD_VAR

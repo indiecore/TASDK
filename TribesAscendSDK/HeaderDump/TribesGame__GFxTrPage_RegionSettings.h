@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame__GFxTrPage.h"
+#include "GFxUI__GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrPage_RegionSettings." #y); \
@@ -17,6 +18,10 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, CurrFilterIndex, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, CurrFilterSite, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, CurrRegion, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'FillData'
+		// Here lies the not-yet-implemented method 'TakeAction'
+		// Here lies the not-yet-implemented method 'FillOption'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SceneCaptureComponent.h"
+#include "Engine__TextureRenderTarget2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SceneCapture2DHitMaskComponent." #y); \
@@ -25,6 +26,9 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ForceLOD, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaterialIndex, 0xFFFFFFFF)
 		ADD_OBJECT(TextureRenderTarget2D, TextureTarget)
+		// Here lies the not-yet-implemented method 'SetCaptureTargetTexture'
+		// Here lies the not-yet-implemented method 'SetCaptureParameters'
+		// Here lies the not-yet-implemented method 'SetFadingStartTimeSinceHit'
 	};
 }
 #undef ADD_VAR

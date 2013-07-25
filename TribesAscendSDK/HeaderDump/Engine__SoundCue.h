@@ -1,5 +1,7 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__FaceFXAnimSet.h"
+#include "Engine__SoundNode.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SoundCue." #y); \
@@ -30,6 +32,7 @@ namespace UnrealScript
 		ADD_OBJECT(SoundNode, FirstNode)
 		ADD_VAR(::ByteProperty, SoundClassName, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, SoundClass, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetCueDuration'
 	};
 }
 #undef ADD_VAR

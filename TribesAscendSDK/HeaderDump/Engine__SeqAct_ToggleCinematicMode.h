@@ -18,6 +18,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDisableInput, 0x8)
 		ADD_VAR(::BoolProperty, bDroppedPickups, 0x40)
 		ADD_VAR(::BoolProperty, bDeadBodies, 0x20)
+		// Here lies the not-yet-implemented method 'Activated'
 	};
 }
 #undef ADD_VAR

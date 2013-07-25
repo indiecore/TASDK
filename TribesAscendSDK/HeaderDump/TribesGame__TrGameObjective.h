@@ -1,5 +1,19 @@
 #pragma once
+#include "Engine__MaterialInstanceConstant.h"
 #include "UTGame__UTGameObjective.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__Controller.h"
+#include "Engine__SoundCue.h"
+#include "Engine__CameraAnim.h"
+#include "Engine__PhysicsAsset.h"
+#include "Engine__Texture2D.h"
+#include "Engine__Material.h"
+#include "TribesGame__TrStatsInterface.h"
+#include "Engine__Actor.h"
+#include "Engine__Pawn.h"
+#include "Engine__PlayerController.h"
+#include "TribesGame__TrPlayerController.h"
+#include "Engine__Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrGameObjective." #y); \
@@ -23,6 +37,7 @@ namespace UnrealScript
 	class TrGameObjective : public UTGameObjective
 	{
 	public:
+		ADD_OBJECT(ScriptClass, m_AssistAccolade)
 		ADD_VAR(::FloatProperty, fUpgradeAssistTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMarker2DDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DESTROY_ASSIST_PERCENTAGE, 0xFFFFFFFF)
@@ -67,6 +82,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bAutoPlayOnlineSound, 0x1)
 		ADD_OBJECT(PhysicsAsset, m_OfflinePhysicsAsset)
 		ADD_OBJECT(PhysicsAsset, m_OnlinePhysicsAsset)
+		ADD_OBJECT(ScriptClass, m_ExplosionLightClass)
 		ADD_VAR(::StrProperty, m_sScreenName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fOuterExplosionShakeRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fInnerExplosionShakeRadius, 0xFFFFFFFF)
@@ -92,6 +108,57 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, CallInPosition, 0xFFFFFFFF
 		ADD_STRUCT(::RotatorProperty, CallInRotation, 0xFFFFFFFF
 		ADD_OBJECT(TrStatsInterface, Stats)
+		// Here lies the not-yet-implemented method 'IsEnemy'
+		// Here lies the not-yet-implemented method 'IsInLOS_Basic'
+		// Here lies the not-yet-implemented method 'ApplyServerSettings'
+		// Here lies the not-yet-implemented method 'GetScreenName'
+		// Here lies the not-yet-implemented method 'GetSpectatorName'
+		// Here lies the not-yet-implemented method 'GetHealthAmount'
+		// Here lies the not-yet-implemented method 'GetUpgradeCost'
+		// Here lies the not-yet-implemented method 'ShouldShowPromptText'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'Shootable'
+		// Here lies the not-yet-implemented method 'RegenerateHealth'
+		// Here lies the not-yet-implemented method 'DoRepairs'
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'ClientRecievedHitInfo'
+		// Here lies the not-yet-implemented method 'ClientPlayUpgradeEffect'
+		// Here lies the not-yet-implemented method 'PlayDestroyedEffects'
+		// Here lies the not-yet-implemented method 'OnHealthChanged'
+		// Here lies the not-yet-implemented method 'PlayDamageHealthEffects'
+		// Here lies the not-yet-implemented method 'PlayDamageShieldEffects'
+		// Here lies the not-yet-implemented method 'PlayExplosion'
+		// Here lies the not-yet-implemented method 'SetPowered'
+		// Here lies the not-yet-implemented method 'OnPowerStatusChanged'
+		// Here lies the not-yet-implemented method 'HideMesh'
+		// Here lies the not-yet-implemented method 'ShouldPostRenderForCaH'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
+		// Here lies the not-yet-implemented method 'GetMarker'
+		// Here lies the not-yet-implemented method 'GetPossessiveInstigatorName'
+		// Here lies the not-yet-implemented method 'BlocksLineChecksFromSourceActor'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'SpawnHelpTextCollisionProxy'
+		// Here lies the not-yet-implemented method 'ShouldShowHelpText'
+		// Here lies the not-yet-implemented method 'ReceivesPowerFromGenerator'
+		// Here lies the not-yet-implemented method 'PerformUpgrade'
+		// Here lies the not-yet-implemented method 'AddUpgrader'
+		// Here lies the not-yet-implemented method 'AddDamageAssistance'
+		// Here lies the not-yet-implemented method 'CheckRepairAssists'
+		// Here lies the not-yet-implemented method 'CheckDestroyAssists'
+		// Here lies the not-yet-implemented method 'ClearDamageAssistance'
+		// Here lies the not-yet-implemented method 'GiveDestroyAccolade'
+		// Here lies the not-yet-implemented method 'GetSpectatorHealthInfo'
+		// Here lies the not-yet-implemented method 'GetSpectatorDescription'
+		// Here lies the not-yet-implemented method 'IsAliveAndWell'
+		// Here lies the not-yet-implemented method 'InstantlyRegenerateHealth'
+		// Here lies the not-yet-implemented method 'HideBasePlatform'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'RequiresLOSForRepairDeployable'
+		// Here lies the not-yet-implemented method 'AwardKillAssists'
+		// Here lies the not-yet-implemented method 'AwardUpgradeAssists'
+		// Here lies the not-yet-implemented method 'OnUpgradePerformed'
 	};
 }
 #undef ADD_VAR

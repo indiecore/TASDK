@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine__AIController.h"
+#include "Engine__FileLog.h"
+#include "GameFramework__GameAICommand.h"
+#include "Engine__AITree.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameAIController." #y); \
@@ -38,6 +41,23 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUseAITree, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.AITree.AITreeHandle' for the property named 'AITreeHandle'!
 		ADD_OBJECT(AITree, AITree)
+		// Here lies the not-yet-implemented method 'AllCommands'
+		// Here lies the not-yet-implemented method 'PushCommand'
+		// Here lies the not-yet-implemented method 'PopCommand'
+		// Here lies the not-yet-implemented method 'AbortCommand'
+		// Here lies the not-yet-implemented method 'GetActiveCommand'
+		// Here lies the not-yet-implemented method 'CheckCommandCount'
+		// Here lies the not-yet-implemented method 'DumpCommandStack'
+		// Here lies the not-yet-implemented method 'FindCommandOfClass'
+		// Here lies the not-yet-implemented method 'GetAICommandInStack'
+		// Here lies the not-yet-implemented method 'GetDestinationOffset'
+		// Here lies the not-yet-implemented method 'ReachedMoveGoal'
+		// Here lies the not-yet-implemented method 'ReachedIntermediateMoveGoal'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'RecordDemoAILog'
+		// Here lies the not-yet-implemented method 'AILog_Internal'
+		// Here lies the not-yet-implemented method 'SetDesiredRotation'
+		// Here lies the not-yet-implemented method 'GetActionString'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,8 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__Pawn.h"
+#include "GameFramework__GameThirdPersonCamera.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameThirdPersonCameraMode." #y); \
@@ -80,6 +83,19 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bLockedToViewTarget, 0x1)
 		ADD_VAR(::FloatProperty, BlendTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FOVAngle, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetDesiredFOV'
+		// Here lies the not-yet-implemented method 'SetFocusPoint'
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'OnBecomeActive'
+		// Here lies the not-yet-implemented method 'OnBecomeInActive'
+		// Here lies the not-yet-implemented method 'AdjustViewOffset'
+		// Here lies the not-yet-implemented method 'GetCameraWorstCaseLoc'
+		// Here lies the not-yet-implemented method 'ProcessViewRotation'
+		// Here lies the not-yet-implemented method 'GetDOFFocusLoc'
+		// Here lies the not-yet-implemented method 'DOFTrace'
+		// Here lies the not-yet-implemented method 'UpdatePostProcess'
+		// Here lies the not-yet-implemented method 'ModifyPostProcessSettings'
+		// Here lies the not-yet-implemented method 'SetViewOffset'
 	};
 }
 #undef ADD_VAR

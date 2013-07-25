@@ -5,5 +5,6 @@ namespace UnrealScript
 	class TrEmitCameraEffect_Snow : public TrEmitCameraEffect_Speed
 	{
 	public:
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
 	};
 }

@@ -49,6 +49,10 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, LookAtAxis, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, TargetLocationSpace, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, TargetLocation, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'SetTargetLocation'
+		// Here lies the not-yet-implemented method 'InterpolateTargetLocation'
+		// Here lies the not-yet-implemented method 'SetLookAtAlpha'
+		// Here lies the not-yet-implemented method 'CanLookAtPoint'
 	};
 }
 #undef ADD_VAR

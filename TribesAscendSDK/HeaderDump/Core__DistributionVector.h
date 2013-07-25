@@ -20,6 +20,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsDirty, 0x2)
 		ADD_VAR(::BoolProperty, bCanBeBaked, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FCurveEdInterface'!
+		// Here lies the not-yet-implemented method 'GetVectorValue'
 	};
 }
 #undef ADD_VAR

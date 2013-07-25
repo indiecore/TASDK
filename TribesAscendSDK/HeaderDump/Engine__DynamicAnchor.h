@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__Controller.h"
 #include "Engine__NavigationPoint.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \

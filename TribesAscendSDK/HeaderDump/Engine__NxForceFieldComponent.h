@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__PrimitiveComponent.h"
+#include "Engine__ForceFieldShape.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NxForceFieldComponent." #y); \
@@ -33,6 +34,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bForceActive, 0x1)
 		ADD_VAR(::IntProperty, ExcludeChannel, 0xFFFFFFFF)
 		ADD_OBJECT(ForceFieldShape, Shape)
+		// Here lies the not-yet-implemented method 'DoInitRBPhys'
 	};
 }
 #undef ADD_VAR

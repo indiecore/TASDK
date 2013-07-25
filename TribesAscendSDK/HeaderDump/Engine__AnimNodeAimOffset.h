@@ -33,6 +33,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bForceAimDir, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'AngleOffset'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'Aim'!
+		// Here lies the not-yet-implemented method 'SetActiveProfileByName'
+		// Here lies the not-yet-implemented method 'SetActiveProfileByIndex'
 	};
 }
 #undef ADD_VAR

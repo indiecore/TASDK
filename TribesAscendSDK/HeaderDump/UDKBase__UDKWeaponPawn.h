@@ -1,5 +1,8 @@
 #pragma once
 #include "UDKBase__UDKVehicleBase.h"
+#include "UDKBase__UDKWeapon.h"
+#include "UDKBase__UDKVehicle.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKWeaponPawn." #y); \
@@ -20,6 +23,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, MySeatIndex, 0xFFFFFFFF)
 		ADD_OBJECT(UDKWeapon, MyVehicleWeapon)
 		ADD_OBJECT(UDKVehicle, MyVehicle)
+		// Here lies the not-yet-implemented method 'GetTargetLocation'
 	};
 }
 #undef ADD_VAR

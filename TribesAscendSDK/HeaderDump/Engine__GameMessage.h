@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__LocalMessage.h"
+#include "Core__Object.h"
+#include "Engine__PlayerReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.GameMessage." #y); \
@@ -34,6 +36,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, FailedTeamMessage, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, LeftMessage, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, SwitchLevelMessage, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetString'
 	};
 }
 #undef ADD_VAR

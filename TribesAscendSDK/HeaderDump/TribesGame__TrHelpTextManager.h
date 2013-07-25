@@ -107,6 +107,26 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_SpotTargetReminderRecursiveTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_OffhandReminderInitialTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_SpotTargetReminderInitialTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'RequestHelpText'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'InitHelpTextManager'
+		// Here lies the not-yet-implemented method 'LevelLoadCompleted'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'CheckDestroy'
+		// Here lies the not-yet-implemented method 'IsSuppressed'
+		// Here lies the not-yet-implemented method 'RemoveHelpText'
+		// Here lies the not-yet-implemented method 'SuppressHelpText'
+		// Here lies the not-yet-implemented method 'UpdateHUD'
+		// Here lies the not-yet-implemented method 'FormatText'
+		// Here lies the not-yet-implemented method 'HelpTextQueueSort'
+		// Here lies the not-yet-implemented method 'UnsuppressedHelpTextsExist'
+		// Here lies the not-yet-implemented method 'OffhandReminderTimer'
+		// Here lies the not-yet-implemented method 'ClearOffhandReminderTimer'
+		// Here lies the not-yet-implemented method 'SpotTargetReminderTimer'
+		// Here lies the not-yet-implemented method 'ClearSpotTargetReminderTimer'
+		// Here lies the not-yet-implemented method 'UpdateTypesToRemoveOnTimers'
+		// Here lies the not-yet-implemented method 'ResetConfig'
+		// Here lies the not-yet-implemented method 'EnableHelpText'
 	};
 }
 #undef ADD_VAR

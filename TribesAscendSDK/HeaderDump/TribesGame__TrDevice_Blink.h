@@ -25,6 +25,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fLastActivationTimestamp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCooldownTime, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, m_vBlinkImpulse, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'GetBlinkImpulse'
+		// Here lies the not-yet-implemented method 'ToggleActivate'
+		// Here lies the not-yet-implemented method 'OnBlink'
 	};
 }
 #undef ADD_VAR

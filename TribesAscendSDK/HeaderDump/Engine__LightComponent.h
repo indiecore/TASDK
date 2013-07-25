@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__LightFunction.h"
 #include "Engine__ActorComponent.h"
+#include "Engine__Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LightComponent." #y); \
@@ -73,6 +75,17 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, OcclusionMaskDarkness, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, ReflectionTexture)
 		ADD_VAR(::FloatProperty, ReflectionScale, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetEnabled'
+		// Here lies the not-yet-implemented method 'SetLightProperties'
+		// Here lies the not-yet-implemented method 'GetOrigin'
+		// Here lies the not-yet-implemented method 'GetDirection'
+		// Here lies the not-yet-implemented method 'UpdateColorAndBrightness'
+		// Here lies the not-yet-implemented method 'UpdateLightShaftParameters'
+		// Here lies the not-yet-implemented method 'OnUpdatePropertyBloomScale'
+		// Here lies the not-yet-implemented method 'OnUpdatePropertyBloomTint'
+		// Here lies the not-yet-implemented method 'OnUpdatePropertyOcclusionMaskDarkness'
+		// Here lies the not-yet-implemented method 'OnUpdatePropertyBrightness'
+		// Here lies the not-yet-implemented method 'OnUpdatePropertyLightColor'
 	};
 }
 #undef ADD_VAR

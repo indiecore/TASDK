@@ -22,6 +22,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumThrownOutNodes, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumNodesProcessed, 0xFFFFFFFF)
 		ADD_OBJECT(NavMeshPathConstraint, NextConstraint)
+		// Here lies the not-yet-implemented method 'Recycle'
+		// Here lies the not-yet-implemented method 'GetDumpString'
 	};
 }
 #undef ADD_VAR

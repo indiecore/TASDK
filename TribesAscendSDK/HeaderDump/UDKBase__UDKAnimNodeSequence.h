@@ -13,6 +13,9 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bLoopLastSequence, 0x2)
 		ADD_VAR(::BoolProperty, bAutoStart, 0x1)
+		// Here lies the not-yet-implemented method 'PlayAnimation'
+		// Here lies the not-yet-implemented method 'PlayAnimationSet'
+		// Here lies the not-yet-implemented method 'OnInit'
 	};
 }
 #undef ADD_VAR

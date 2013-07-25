@@ -12,6 +12,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, Command, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'VersionUpdated'
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

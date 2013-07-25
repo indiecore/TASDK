@@ -1,5 +1,8 @@
 #pragma once
+#include "Engine__Actor.h"
+#include "Engine__ParticleSystem.h"
 #include "Engine__KActor.h"
+#include "Engine__Controller.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKKActorBreakable." #y); \
@@ -20,6 +23,7 @@ namespace UnrealScript
 		ADD_OBJECT(Controller, InstigatorController)
 		ADD_OBJECT(ParticleSystem, BrokenTemplate)
 		ADD_VAR(::IntProperty, DOEResetThreshold, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, DmgTypeClass)
 		ADD_VAR(::IntProperty, EncroachDamage_Self, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, EncroachDamage_Other, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Health, 0xFFFFFFFF)
@@ -29,6 +33,12 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bResetDOEWhenAsleep, 0x4)
 		ADD_VAR(::BoolProperty, bDamageOnEncroachment, 0x2)
 		ADD_VAR(::BoolProperty, bHasHealth, 0x1)
+		// Here lies the not-yet-implemented method 'OnEncroach'
+		// Here lies the not-yet-implemented method 'OnBreakApart'
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'EncroachingOn'
+		// Here lies the not-yet-implemented method 'BreakApart'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
 	};
 }
 #undef ADD_VAR

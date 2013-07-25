@@ -25,6 +25,11 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Ascent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EmScale, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, IsRemapped, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetResolutionPageIndex'
+		// Here lies the not-yet-implemented method 'GetScalingFactor'
+		// Here lies the not-yet-implemented method 'GetAuthoredViewportHeight'
+		// Here lies the not-yet-implemented method 'GetMaxCharHeight'
+		// Here lies the not-yet-implemented method 'GetStringHeightAndWidth'
 	};
 }
 #undef ADD_VAR

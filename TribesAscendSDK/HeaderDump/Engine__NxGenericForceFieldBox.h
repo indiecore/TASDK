@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(::VectorProperty, BoxExtent, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'DoInitRBPhys'
 	};
 }
 #undef ADD_STRUCT

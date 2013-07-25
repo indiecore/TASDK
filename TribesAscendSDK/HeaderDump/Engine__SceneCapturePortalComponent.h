@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__SceneCaptureComponent.h"
+#include "Engine__Actor.h"
+#include "Engine__TextureRenderTarget2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SceneCapturePortalComponent." #y); \
@@ -20,6 +22,7 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, ViewDestination)
 		ADD_VAR(::FloatProperty, ScaleFOV, 0xFFFFFFFF)
 		ADD_OBJECT(TextureRenderTarget2D, TextureTarget)
+		// Here lies the not-yet-implemented method 'SetCaptureParameters'
 	};
 }
 #undef ADD_VAR

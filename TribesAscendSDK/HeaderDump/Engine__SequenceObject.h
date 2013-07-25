@@ -1,5 +1,7 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__Sequence.h"
+#include "Engine__WorldInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SequenceObject." #y); \
@@ -38,6 +40,11 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ObjPosY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ObjPosX, 0xFFFFFFFF)
 		ADD_OBJECT(Sequence, ParentSequence)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		// Here lies the not-yet-implemented method 'ScriptLog'
+		// Here lies the not-yet-implemented method 'GetWorldInfo'
+		// Here lies the not-yet-implemented method 'IsValidLevelSequenceObject'
+		// Here lies the not-yet-implemented method 'IsPastingIntoLevelSequenceAllowed'
 	};
 }
 #undef ADD_VAR

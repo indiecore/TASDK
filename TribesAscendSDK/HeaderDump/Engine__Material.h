@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__MaterialInterface.h"
+#include "Engine__PhysicalMaterial.h"
+#include "Engine__Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Material." #y); \
@@ -102,6 +104,7 @@ namespace UnrealScript
 		ADD_OBJECT(PhysicalMaterial, BlackPhysicalMaterial)
 		ADD_VAR(::IntProperty, PhysMaterialMaskUVChannel, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, PhysMaterialMask)
+		ADD_OBJECT(ScriptClass, PhysicalMaterial)
 		ADD_OBJECT(PhysicalMaterial, PhysMaterial)
 	};
 }

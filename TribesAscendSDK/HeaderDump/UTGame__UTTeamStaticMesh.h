@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__StaticMeshActor.h"
+#include "Engine__Material.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTTeamStaticMesh." #y); \
@@ -12,6 +13,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(Material, NeutralMaterial)
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		// Here lies the not-yet-implemented method 'SetTeamNum'
 	};
 }
 #undef ADD_OBJECT

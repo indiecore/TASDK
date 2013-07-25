@@ -1,5 +1,9 @@
 #pragma once
+#include "Engine__ParticleSystem.h"
 #include "Engine__Actor.h"
+#include "Engine__SoundCue.h"
+#include "Engine__MaterialInstanceTimeVarying.h"
+#include "TribesGame__TrCallIn_CrashLandInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrCallIn_DeliveryPod." #y); \
@@ -35,6 +39,13 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, HitDecalWidth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HitDecalHeight, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceTimeVarying, PodHitDecal)
+		// Here lies the not-yet-implemented method 'GetTerminalVelocity'
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'BreakApart'
+		// Here lies the not-yet-implemented method 'HideMesh'
+		// Here lies the not-yet-implemented method 'ParticleSystemFinished'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Destroyed'
 	};
 }
 #undef ADD_VAR

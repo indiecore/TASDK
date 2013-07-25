@@ -1,5 +1,6 @@
 #pragma once
 #include "Core__Object.h"
+#include "Engine__PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Player." #y); \
@@ -32,6 +33,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ConfiguredLanSpeed, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ConfiguredInternetSpeed, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FExec'!
+		// Here lies the not-yet-implemented method 'SwitchController'
 	};
 }
 #undef ADD_VAR

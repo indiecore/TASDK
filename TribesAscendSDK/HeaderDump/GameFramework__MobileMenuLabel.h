@@ -1,5 +1,7 @@
 #pragma once
 #include "GameFramework__MobileMenuObject.h"
+#include "Engine__Canvas.h"
+#include "Engine__Font.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.MobileMenuLabel." #y); \
@@ -30,6 +32,7 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'TextColor'!
 		ADD_OBJECT(Font, TextFont)
 		ADD_VAR(::StrProperty, Caption, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'RenderObject'
 	};
 }
 #undef ADD_VAR

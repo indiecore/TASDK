@@ -1,5 +1,8 @@
 #pragma once
+#include "Engine__PlayerController.h"
 #include "UTGame__UTLocalMessage.h"
+#include "Core__Object.h"
+#include "Engine__PlayerReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTStartupMessage." #y); \
@@ -14,6 +17,8 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, SinglePlayer, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, NotReady, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Stage, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'ClientReceive'
+		// Here lies the not-yet-implemented method 'GetString'
 	};
 }
 #undef ADD_VAR

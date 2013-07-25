@@ -1,5 +1,7 @@
 #pragma once
 #include "TribesGame__TrProj_Mine.h"
+#include "Engine__SoundCue.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_RepairDeployable." #y); \
@@ -25,6 +27,13 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fRepairBuff, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRepairRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCheckNearbyActorsFrequency, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'InitProjectile'
+		// Here lies the not-yet-implemented method 'ArmedTimer'
+		// Here lies the not-yet-implemented method 'HitWall'
+		// Here lies the not-yet-implemented method 'CheckRepair'
+		// Here lies the not-yet-implemented method 'Explode'
+		// Here lies the not-yet-implemented method 'DetonateObsolete'
 	};
 }
 #undef ADD_VAR

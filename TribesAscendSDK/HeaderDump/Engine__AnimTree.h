@@ -1,5 +1,10 @@
 #pragma once
 #include "Engine__AnimNodeBlendBase.h"
+#include "Engine__StaticMesh.h"
+#include "Engine__SkeletalMesh.h"
+#include "Engine__SkelControlBase.h"
+#include "Engine__MorphNodeBase.h"
+#include "Engine__AnimNodeSequence.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimTree." #y); \
@@ -41,6 +46,17 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bParentNodeArrayBuilt, 0x4)
 		ADD_VAR(::BoolProperty, bBeingEdited, 0x2)
 		ADD_VAR(::BoolProperty, bUseSavedPose, 0x1)
+		// Here lies the not-yet-implemented method 'FindSkelControl'
+		// Here lies the not-yet-implemented method 'FindMorphNode'
+		// Here lies the not-yet-implemented method 'SetUseSavedPose'
+		// Here lies the not-yet-implemented method 'SetAnimGroupForNode'
+		// Here lies the not-yet-implemented method 'GetGroupSynchMaster'
+		// Here lies the not-yet-implemented method 'GetGroupNotifyMaster'
+		// Here lies the not-yet-implemented method 'ForceGroupRelativePosition'
+		// Here lies the not-yet-implemented method 'GetGroupRelativePosition'
+		// Here lies the not-yet-implemented method 'SetGroupRateScale'
+		// Here lies the not-yet-implemented method 'GetGroupRateScale'
+		// Here lies the not-yet-implemented method 'GetGroupIndex'
 	};
 }
 #undef ADD_VAR

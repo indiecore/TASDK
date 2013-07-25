@@ -26,6 +26,8 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Socket'!
 		ADD_VAR(::IntProperty, PartyBeaconPort, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FTickableObject'!
+		// Here lies the not-yet-implemented method 'OnDestroyComplete'
+		// Here lies the not-yet-implemented method 'DestroyBeacon'
 	};
 }
 #undef ADD_VAR

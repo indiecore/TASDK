@@ -1,5 +1,9 @@
 #pragma once
+#include "Engine__PlayerController.h"
 #include "UTGame__UTLocalMessage.h"
+#include "Engine__SoundNodeWave.h"
+#include "Core__Object.h"
+#include "Engine__PlayerReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTVehicleCantCarryFlagMessage." #y); \
@@ -19,6 +23,10 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(SoundNodeWave, FlagAnnouncement)
 		ADD_VAR(::StrProperty, FlagMessage, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'ClientReceive'
+		// Here lies the not-yet-implemented method 'AnnouncementSound'
+		// Here lies the not-yet-implemented method 'AnnouncementLevel'
+		// Here lies the not-yet-implemented method 'GetString'
 	};
 }
 #undef ADD_VAR

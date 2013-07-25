@@ -5,5 +5,6 @@ namespace UnrealScript
 	class TrDaDCore_BE : public TrDaDCore
 	{
 	public:
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
 	};
 }

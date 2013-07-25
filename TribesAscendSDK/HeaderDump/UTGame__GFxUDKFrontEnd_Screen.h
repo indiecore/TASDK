@@ -1,5 +1,7 @@
 #pragma once
 #include "UTGame__GFxUDKFrontEnd_View.h"
+#include "GFxUI__GFxObject.h"
+#include "GFxUI__GFxClikWidget.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_Screen." #y); \
@@ -28,6 +30,9 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, TitleMC)
 		ADD_OBJECT(GFxClikWidget, BackBtn)
 		ADD_VAR(::StrProperty, ViewTitle, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'FocusIn_BackButton'
+		// Here lies the not-yet-implemented method 'UpdateHelpButtonImages'
+		// Here lies the not-yet-implemented method 'WidgetInitialized'
 	};
 }
 #undef ADD_VAR

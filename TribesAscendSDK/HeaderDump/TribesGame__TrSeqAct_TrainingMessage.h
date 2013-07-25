@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::ByteProperty, m_MessageType, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Activated'
 	};
 }
 #undef ADD_VAR

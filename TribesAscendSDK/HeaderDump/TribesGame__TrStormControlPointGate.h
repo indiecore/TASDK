@@ -1,5 +1,9 @@
 #pragma once
+#include "TribesGame__TrStormControlPoint.h"
 #include "TribesGame__TrGameObjective.h"
+#include "Engine__Actor.h"
+#include "Engine__Canvas.h"
+#include "Engine__PlayerController.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty TribesGame.TrStormControlPointGate." #y); \
@@ -12,6 +16,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TrStormControlPoint, m_ControlPoint)
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
 	};
 }
 #undef ADD_OBJECT

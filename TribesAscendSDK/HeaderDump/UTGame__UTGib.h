@@ -1,5 +1,13 @@
 #pragma once
+#include "Engine__ParticleSystem.h"
 #include "Engine__Actor.h"
+#include "Engine__StaticMesh.h"
+#include "Engine__MaterialInstanceTimeVarying.h"
+#include "Engine__HUD.h"
+#include "Engine__MaterialInstance.h"
+#include "Engine__MaterialInstanceConstant.h"
+#include "Engine__SoundCue.h"
+#include "Engine__PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTGib." #y); \
@@ -38,6 +46,20 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstance, MI_Decal)
 		ADD_OBJECT(MaterialInstanceConstant, MIC_Gib)
 		ADD_OBJECT(SoundCue, HitSound)
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		// Here lies the not-yet-implemented method 'SetTexturesToBeResident'
+		// Here lies the not-yet-implemented method 'DisplayDebug'
+		// Here lies the not-yet-implemented method 'SetGibStaticMesh'
+		// Here lies the not-yet-implemented method 'ChooseGib'
+		// Here lies the not-yet-implemented method 'DoCustomGibEffects'
+		// Here lies the not-yet-implemented method 'Timer'
+		// Here lies the not-yet-implemented method 'BecomeViewTarget'
+		// Here lies the not-yet-implemented method 'CalcCamera'
+		// Here lies the not-yet-implemented method 'RigidBodyCollision'
+		// Here lies the not-yet-implemented method 'LeaveADecal'
+		// Here lies the not-yet-implemented method 'TurnOnCollision'
+		// Here lies the not-yet-implemented method 'Landed'
+		// Here lies the not-yet-implemented method 'HitWall'
 	};
 }
 #undef ADD_VAR

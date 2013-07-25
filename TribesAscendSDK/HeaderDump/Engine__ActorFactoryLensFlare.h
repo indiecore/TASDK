@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__LensFlare.h"
 #include "Engine__ActorFactory.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \

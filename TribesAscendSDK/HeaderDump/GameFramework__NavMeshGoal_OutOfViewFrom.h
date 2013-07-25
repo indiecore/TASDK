@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__NavMeshPathGoalEvaluator.h"
+#include "Engine__NavigationHandle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.NavMeshGoal_OutOfViewFrom." #y); \
@@ -20,6 +21,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bShowDebug, 0x1)
 		ADD_STRUCT(::VectorProperty, OutOfViewLocation, 0xFFFFFFFF
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'GoalPoly'!
+		// Here lies the not-yet-implemented method 'RecycleNative'
+		// Here lies the not-yet-implemented method 'MustBeHiddenFromThisPoint'
+		// Here lies the not-yet-implemented method 'Recycle'
 	};
 }
 #undef ADD_VAR

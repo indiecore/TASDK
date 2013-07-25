@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__FracturedStaticMeshActor.h"
+#include "Engine__Controller.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FracturedStaticMeshPart." #y); \
@@ -35,6 +37,13 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bHasBeenRecycled, 0x1)
 		ADD_OBJECT(FracturedStaticMeshActor, BaseFracturedMeshActor)
 		ADD_VAR(::FloatProperty, DestroyPartRadiusFactor, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'RecyclePart'
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'TryToCleanUp'
+		// Here lies the not-yet-implemented method 'FellOutOfWorld'
+		// Here lies the not-yet-implemented method 'Explode'
+		// Here lies the not-yet-implemented method 'BreakOffPartsInRadius'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__ParticleSystem.h"
 #include "TribesGame__TrCallIn.h"
+#include "Engine__SoundCue.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrCallIn_Projectile." #y); \
@@ -32,6 +34,9 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumberOfProjectiles, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FireTimeLength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CallRadius, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, ProjectileFireClass)
+		// Here lies the not-yet-implemented method 'FireCompletedCallIn'
+		// Here lies the not-yet-implemented method 'FireProjectile'
 	};
 }
 #undef ADD_VAR

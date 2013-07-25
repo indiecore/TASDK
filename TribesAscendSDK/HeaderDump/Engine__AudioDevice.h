@@ -1,5 +1,8 @@
 #pragma once
 #include "Core__Subsystem.h"
+#include "Engine__SoundNodeWave.h"
+#include "Engine__SoundMode.h"
+#include "Engine__SoundClass.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AudioDevice." #y); \
@@ -59,6 +62,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LowPassFilterResonance, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, CommonAudioPoolSize, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxChannels, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetSoundMode'
+		// Here lies the not-yet-implemented method 'FindSoundClass'
 	};
 }
 #undef ADD_VAR

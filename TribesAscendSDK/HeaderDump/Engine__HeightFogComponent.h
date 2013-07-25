@@ -24,6 +24,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Density, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Height, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
+		// Here lies the not-yet-implemented method 'SetEnabled'
 	};
 }
 #undef ADD_VAR

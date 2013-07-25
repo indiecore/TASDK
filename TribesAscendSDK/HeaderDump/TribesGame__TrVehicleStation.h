@@ -1,5 +1,10 @@
 #pragma once
+#include "Engine__Texture2D.h"
+#include "TribesGame__TrAnimNodeBlendList.h"
 #include "TribesGame__TrStation.h"
+#include "TribesGame__TrPawn.h"
+#include "TribesGame__TrVehicle.h"
+#include "TribesGame__TrVehiclePad.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrVehicleStation." #y); \
@@ -37,6 +42,25 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, r_nSpawnedVehicles, 0xFFFFFFFF)
 		ADD_OBJECT(TrVehiclePad, m_VehiclePad)
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrVehicleStation.VehicleSpawnInfo' for the property named 'm_SpawnList'!
+		// Here lies the not-yet-implemented method 'RequestSpawnVehicle'
+		// Here lies the not-yet-implemented method 'GetNumVehiclesSpawnedByType'
+		// Here lies the not-yet-implemented method 'GetMaxVehicleCountAllowed'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'PostInitAnimTree'
+		// Here lies the not-yet-implemented method 'PawnEnteredStation'
+		// Here lies the not-yet-implemented method 'PawnLeftStation'
+		// Here lies the not-yet-implemented method 'PlayStationEnteredEffects'
+		// Here lies the not-yet-implemented method 'PlayStationLeftEffects'
+		// Here lies the not-yet-implemented method 'PlayRetractAnim'
+		// Here lies the not-yet-implemented method 'PlayVehiclePadDeployAnim'
+		// Here lies the not-yet-implemented method 'PlayVehiclePadCollapseAnim'
+		// Here lies the not-yet-implemented method 'SpawnVehicle'
+		// Here lies the not-yet-implemented method 'TeleportDriverToVehicle'
+		// Here lies the not-yet-implemented method 'Unlock'
+		// Here lies the not-yet-implemented method 'AbleToSpawnVehicleType'
+		// Here lies the not-yet-implemented method 'AddVehicleToPackedList'
+		// Here lies the not-yet-implemented method 'GetMarker'
+		// Here lies the not-yet-implemented method 'ShouldPostRenderForCaH'
 	};
 }
 #undef ADD_VAR

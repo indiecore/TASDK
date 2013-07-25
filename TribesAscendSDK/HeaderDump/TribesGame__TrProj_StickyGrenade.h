@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__Actor.h"
 #include "TribesGame__TrProj_Grenade.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -19,6 +20,11 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Actor, m_OldBase)
 		ADD_VAR(::BoolProperty, m_bHasStuckToTarget, 0x1)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'HitWall'
+		// Here lies the not-yet-implemented method 'ProcessTouch'
+		// Here lies the not-yet-implemented method 'StickToTarget'
+		// Here lies the not-yet-implemented method 'OnBaseChanged'
 	};
 }
 #undef ADD_VAR

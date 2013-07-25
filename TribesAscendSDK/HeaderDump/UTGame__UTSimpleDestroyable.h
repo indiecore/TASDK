@@ -1,5 +1,10 @@
 #pragma once
 #include "Engine__DynamicSMActor.h"
+#include "Engine__StaticMesh.h"
+#include "Engine__Actor.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__SoundCue.h"
+#include "Engine__Controller.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTSimpleDestroyable." #y); \
@@ -37,6 +42,12 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDestroyOnVehicleTouch, 0x4)
 		ADD_VAR(::BoolProperty, bDestroyOnPlayerTouch, 0x2)
 		ADD_VAR(::BoolProperty, bDestroyOnDamage, 0x1)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'GoBoom'
+		// Here lies the not-yet-implemented method 'RespawnDestructible'
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'CheckRespawn'
 	};
 }
 #undef ADD_VAR

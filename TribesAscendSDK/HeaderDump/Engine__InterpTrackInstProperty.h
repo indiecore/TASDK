@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__InterpTrackInst.h"
+#include "Core__Object.h"
+#include "Core__Function.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.InterpTrackInstProperty." #y); \

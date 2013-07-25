@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__PrimitiveComponent.h"
+#include "Engine__Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SpriteComponent." #y); \
@@ -24,6 +25,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ScreenSize, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsScreenSizeScaled, 0x1)
 		ADD_OBJECT(Texture2D, Sprite)
+		// Here lies the not-yet-implemented method 'SetSprite'
+		// Here lies the not-yet-implemented method 'SetUV'
+		// Here lies the not-yet-implemented method 'SetSpriteAndUV'
 	};
 }
 #undef ADD_VAR

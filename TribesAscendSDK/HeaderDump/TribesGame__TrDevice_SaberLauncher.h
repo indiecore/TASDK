@@ -1,5 +1,9 @@
 #pragma once
 #include "TribesGame__TrDevice.h"
+#include "Engine__Projectile.h"
+#include "TribesGame__TrPlayerController.h"
+#include "Engine__Actor.h"
+#include "TribesGame__TrSeekingMissileManager.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice_SaberLauncher." #y); \
@@ -36,6 +40,29 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, m_Target)
 		ADD_VAR(::FloatProperty, m_fPreLockTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fTargetSightTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'ResumeTargeting'
+		// Here lies the not-yet-implemented method 'SuspendTargeting'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'TargetInsideReticle'
+		// Here lies the not-yet-implemented method 'IsActorInLOS'
+		// Here lies the not-yet-implemented method 'ValidateTrackingTarget'
+		// Here lies the not-yet-implemented method 'SetTargetActorMissileLockState'
+		// Here lies the not-yet-implemented method 'SetNewTrackingTarget'
+		// Here lies the not-yet-implemented method 'TargetLockAcquired'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'FireAmmunition'
+		// Here lies the not-yet-implemented method 'PerformTargeting'
+		// Here lies the not-yet-implemented method 'OnSwitchAwayFromWeapon'
+		// Here lies the not-yet-implemented method 'OnSwitchToWeapon'
+		// Here lies the not-yet-implemented method 'HolderEnteredVehicle'
+		// Here lies the not-yet-implemented method 'HolderExitedVehicle'
+		// Here lies the not-yet-implemented method 'ProjectileFire'
+		// Here lies the not-yet-implemented method 'ServerTryNewPossibleTarget'
+		// Here lies the not-yet-implemented method 'BeginFire'
+		// Here lies the not-yet-implemented method 'StartFire'
+		// Here lies the not-yet-implemented method 'GetSeekingMissileManager'
 	};
 }
 #undef ADD_VAR

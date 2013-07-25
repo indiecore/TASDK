@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__SeqAct_Latent.h"
+#include "UTGame__UTDummyPawn.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTSeqAct_DummyWeaponFire." #y); \
@@ -29,8 +31,12 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, Origin)
 		ADD_VAR(::IntProperty, ShotsFired, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, FireMode, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, WeaponClass)
 		ADD_VAR(::IntProperty, ShotsToFire, 0xFFFFFFFF)
 		ADD_OBJECT(UTDummyPawn, DummyPawn)
+		// Here lies the not-yet-implemented method 'Activated'
+		// Here lies the not-yet-implemented method 'NotifyDummyFire'
+		// Here lies the not-yet-implemented method 'Update'
 	};
 }
 #undef ADD_VAR

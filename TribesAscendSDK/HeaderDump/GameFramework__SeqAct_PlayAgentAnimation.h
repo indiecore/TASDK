@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__SeqAct_Latent.h"
+#include "Engine__Actor.h"
+#include "GameFramework__GameCrowdAgentSkeletal.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqAct_PlayAgentAnimation." #y); \
@@ -26,6 +28,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUseRootMotion, 0x1)
 		ADD_VAR(::FloatProperty, BlendOutTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BlendInTime, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
+		// Here lies the not-yet-implemented method 'SetCurrentAnimationActionFor'
 	};
 }
 #undef ADD_VAR

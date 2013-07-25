@@ -1,5 +1,8 @@
 #pragma once
+#include "UDKBase__UDKVehicle.h"
 #include "Engine__SVehicleSimBase.h"
+#include "Engine__SoundCue.h"
+#include "Engine__RB_ConstraintInstance.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKVehicleSimHoverboard." #y); \
@@ -51,6 +54,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MaxReverseVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxReverseForce, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxThrustForce, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'InitWheels'
+		// Here lies the not-yet-implemented method 'UpdateLeanConstraint'
 	};
 }
 #undef ADD_VAR

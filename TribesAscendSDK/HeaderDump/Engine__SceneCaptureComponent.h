@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__PostProcessChain.h"
 #include "Engine__ActorComponent.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -40,6 +41,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUseMainScenePostProcessSettings, 0x8)
 		ADD_VAR(::BoolProperty, bEnableFog, 0x4)
 		ADD_VAR(::BoolProperty, bEnablePostProcess, 0x2)
+		// Here lies the not-yet-implemented method 'SetEnabled'
+		// Here lies the not-yet-implemented method 'SetFrameRate'
 	};
 }
 #undef ADD_VAR

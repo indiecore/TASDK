@@ -14,6 +14,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fClearStreamingTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bForceLoadTextures, 0x1)
 		ADD_VAR(::FloatProperty, m_fFOV, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PreloadTextures'
+		// Here lies the not-yet-implemented method 'SetFOV'
 	};
 }
 #undef ADD_VAR

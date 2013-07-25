@@ -1,5 +1,7 @@
 #pragma once
 #include "TribesGame__TrPlayerController.h"
+#include "Engine__PlayerReplicationInfo.h"
+#include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDemoRecSpectator." #y); \
@@ -22,6 +24,19 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAutoSwitchPlayers, 0x4)
 		ADD_VAR(::BoolProperty, bLockRotationToViewTarget, 0x2)
 		ADD_VAR(::BoolProperty, bFindPlayer, 0x1)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'ReceivedPlayer'
+		// Here lies the not-yet-implemented method 'InitPlayerReplicationInfo'
+		// Here lies the not-yet-implemented method 'Slomo'
+		// Here lies the not-yet-implemented method 'ViewClass'
+		// Here lies the not-yet-implemented method 'DemoViewNextPlayer'
+		// Here lies the not-yet-implemented method 'SetViewTarget'
+		// Here lies the not-yet-implemented method 'ServerViewSelf'
+		// Here lies the not-yet-implemented method 'ClientSetRealViewTarget'
+		// Here lies the not-yet-implemented method 'SetPause'
+		// Here lies the not-yet-implemented method 'Pause'
+		// Here lies the not-yet-implemented method 'GetPlayerViewPoint'
+		// Here lies the not-yet-implemented method 'UpdateRotation'
 	};
 }
 #undef ADD_VAR

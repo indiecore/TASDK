@@ -36,6 +36,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bMultiplyByZVelocity, 0x1)
 		ADD_VAR(::FloatProperty, MaxLeanChangeSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, JumpLeanStrength, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetLeanWeight'
 	};
 }
 #undef ADD_VAR

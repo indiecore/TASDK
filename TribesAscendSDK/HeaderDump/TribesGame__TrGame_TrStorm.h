@@ -1,5 +1,9 @@
 #pragma once
 #include "TribesGame__TrGame.h"
+#include "TribesGame__TrStormCore.h"
+#include "TribesGame__TrStormCarrierShield.h"
+#include "TribesGame__TrStormControlPoint.h"
+#include "Engine__PlayerReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrGame_TrStorm." #y); \
@@ -30,6 +34,16 @@ namespace UnrealScript
 		ADD_OBJECT(TrStormCarrierShield, m_CarrierShields)
 		ADD_VAR(::FloatProperty, m_fMissileDamageAmount, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrGame_TrStorm.Carrier' for the property named 'm_Carriers'!
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'MissileFired'
+		// Here lies the not-yet-implemented method 'Tick'
+		// Here lies the not-yet-implemented method 'ExplodeMissile'
+		// Here lies the not-yet-implemented method 'TakeHealthDamage'
+		// Here lies the not-yet-implemented method 'CarrierDestroyed'
+		// Here lies the not-yet-implemented method 'TakeDamageFromCore'
+		// Here lies the not-yet-implemented method 'CheckEndGame'
+		// Here lies the not-yet-implemented method 'EndGame'
+		// Here lies the not-yet-implemented method 'DetermineWinningTeam'
 	};
 }
 #undef ADD_VAR

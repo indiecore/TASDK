@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, FakePlatform, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetStringWithFieldName'
 	};
 }
 #undef ADD_VAR

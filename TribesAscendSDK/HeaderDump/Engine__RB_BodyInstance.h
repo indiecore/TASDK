@@ -1,5 +1,8 @@
 #pragma once
+#include "Engine__RB_BodySetup.h"
 #include "Core__Object.h"
+#include "Engine__PhysicalMaterial.h"
+#include "Engine__PhysicsAssetInstance.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RB_BodyInstance." #y); \
@@ -53,6 +56,24 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, PreviousVelocity, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, Velocity, 0xFFFFFFFF
 		ADD_VAR(::IntProperty, BodyIndex, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'IsFixed'
+		// Here lies the not-yet-implemented method 'SetFixed'
+		// Here lies the not-yet-implemented method 'GetBodyMass'
+		// Here lies the not-yet-implemented method 'IsValidBodyInstance'
+		// Here lies the not-yet-implemented method 'GetPhysicsAssetInstance'
+		// Here lies the not-yet-implemented method 'GetUnrealWorldTM'
+		// Here lies the not-yet-implemented method 'GetUnrealWorldVelocity'
+		// Here lies the not-yet-implemented method 'GetUnrealWorldAngularVelocity'
+		// Here lies the not-yet-implemented method 'GetUnrealWorldVelocityAtPoint'
+		// Here lies the not-yet-implemented method 'EnableBoneSpring'
+		// Here lies the not-yet-implemented method 'SetBoneSpringParams'
+		// Here lies the not-yet-implemented method 'SetBoneSpringTarget'
+		// Here lies the not-yet-implemented method 'SetBlockRigidBody'
+		// Here lies the not-yet-implemented method 'SetPhysMaterialOverride'
+		// Here lies the not-yet-implemented method 'EnableCollisionResponse'
+		// Here lies the not-yet-implemented method 'SetContactReportForceThreshold'
+		// Here lies the not-yet-implemented method 'UpdateMassProperties'
+		// Here lies the not-yet-implemented method 'UpdateDampingProperties'
 	};
 }
 #undef ADD_VAR

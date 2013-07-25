@@ -1,5 +1,10 @@
 #pragma once
+#include "GFxUI__GFxObject.h"
 #include "UTGame__GFxUDKFrontEnd_Screen.h"
+#include "UTGame__UTUIDataStore_MenuItems.h"
+#include "GFxUI__GFxClikWidget.h"
+#include "Engine__UIDataStore_OnlineGameSettings.h"
+#include "UTGame__UTUIDataStore_StringList.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_LaunchGame." #y); \
@@ -45,6 +50,21 @@ namespace UnrealScript
 		ADD_OBJECT(UTUIDataStore_MenuItems, MenuDataStore)
 		ADD_OBJECT(UTUIDataStore_StringList, StringListDataStore)
 		ADD_OBJECT(UIDataStore_OnlineGameSettings, SettingsDataStore)
+		// Here lies the not-yet-implemented method 'GetGameModeFriendlyString'
+		// Here lies the not-yet-implemented method 'OnViewLoaded'
+		// Here lies the not-yet-implemented method 'OnViewActivated'
+		// Here lies the not-yet-implemented method 'DisableSubComponents'
+		// Here lies the not-yet-implemented method 'OnTopMostView'
+		// Here lies the not-yet-implemented method 'UpdateGameSettingsPanel'
+		// Here lies the not-yet-implemented method 'PlayOpenAnimation'
+		// Here lies the not-yet-implemented method 'PlayCloseAnimation'
+		// Here lies the not-yet-implemented method 'OnStartGame_Confirm'
+		// Here lies the not-yet-implemented method 'OnListItemPress'
+		// Here lies the not-yet-implemented method 'OnListChange'
+		// Here lies the not-yet-implemented method 'UpdateDescription'
+		// Here lies the not-yet-implemented method 'UpdateListDataProvider'
+		// Here lies the not-yet-implemented method 'WidgetInitialized'
+		// Here lies the not-yet-implemented method 'GetStringFromMarkup'
 	};
 }
 #undef ADD_VAR

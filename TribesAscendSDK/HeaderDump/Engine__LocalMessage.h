@@ -1,5 +1,8 @@
 #pragma once
+#include "Engine__PlayerReplicationInfo.h"
 #include "Core__Object.h"
+#include "Engine__PlayerController.h"
+#include "Engine__HUD.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LocalMessage." #y); \
@@ -27,6 +30,15 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, PosY, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'DrawColor'!
 		ADD_VAR(::BoolProperty, bIsConsoleMessage, 0x8)
+		// Here lies the not-yet-implemented method 'GetConsoleColor'
+		// Here lies the not-yet-implemented method 'PartiallyDuplicates'
+		// Here lies the not-yet-implemented method 'ClientReceive'
+		// Here lies the not-yet-implemented method 'GetString'
+		// Here lies the not-yet-implemented method 'GetColor'
+		// Here lies the not-yet-implemented method 'GetPos'
+		// Here lies the not-yet-implemented method 'GetFontSize'
+		// Here lies the not-yet-implemented method 'GetLifeTime'
+		// Here lies the not-yet-implemented method 'IsConsoleMessage'
 	};
 }
 #undef ADD_VAR

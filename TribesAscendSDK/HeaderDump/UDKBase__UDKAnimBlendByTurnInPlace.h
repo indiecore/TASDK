@@ -1,5 +1,6 @@
 #pragma once
 #include "UDKBase__UDKAnimBlendBase.h"
+#include "UDKBase__UDKPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKAnimBlendByTurnInPlace." #y); \

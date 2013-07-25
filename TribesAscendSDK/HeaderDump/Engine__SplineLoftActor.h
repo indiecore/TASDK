@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SplineActor.h"
+#include "Engine__StaticMesh.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SplineLoftActor." #y); \
@@ -32,6 +33,8 @@ namespace UnrealScript
 		ADD_OBJECT(StaticMesh, DeformMesh)
 		ADD_VAR(::FloatProperty, ScaleY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ScaleX, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'ClearLoftMesh'
+		// Here lies the not-yet-implemented method 'UpdateSplineParams'
 	};
 }
 #undef ADD_VAR

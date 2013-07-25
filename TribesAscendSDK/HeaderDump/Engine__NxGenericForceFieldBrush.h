@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Volume.h"
+#include "Engine__Projectile.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NxGenericForceFieldBrush." #y); \
@@ -36,6 +37,8 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, RBChannel, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'CollideWithChannels'!
 		ADD_VAR(::IntProperty, ExcludeChannel, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'StopsProjectile'
 	};
 }
 #undef ADD_VAR

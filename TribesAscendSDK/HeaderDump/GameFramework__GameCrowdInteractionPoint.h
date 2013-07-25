@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__SeqAct_Toggle.h"
 #include "Engine__Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -12,6 +13,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bIsEnabled, 0x1)
+		// Here lies the not-yet-implemented method 'OnToggle'
 	};
 }
 #undef ADD_VAR

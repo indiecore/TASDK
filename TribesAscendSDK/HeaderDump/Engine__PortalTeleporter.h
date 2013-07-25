@@ -1,5 +1,9 @@
 #pragma once
+#include "Engine__Actor.h"
 #include "Engine__SceneCapturePortalActor.h"
+#include "Engine__Projectile.h"
+#include "Engine__PortalMarker.h"
+#include "Engine__TextureRenderTarget2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PortalTeleporter." #y); \
@@ -24,6 +28,11 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, TextureResolutionY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, TextureResolutionX, 0xFFFFFFFF)
 		ADD_OBJECT(PortalTeleporter, SisterPortal)
+		// Here lies the not-yet-implemented method 'TransformActor'
+		// Here lies the not-yet-implemented method 'TransformVectorDir'
+		// Here lies the not-yet-implemented method 'TransformHitLocation'
+		// Here lies the not-yet-implemented method 'CreatePortalTexture'
+		// Here lies the not-yet-implemented method 'StopsProjectile'
 	};
 }
 #undef ADD_VAR

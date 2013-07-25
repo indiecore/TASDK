@@ -1,5 +1,7 @@
 #pragma once
 #include "TribesGame__TrProj_StickyGrenade.h"
+#include "Engine__Actor.h"
+#include "Engine__ParticleSystem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_SpikeLauncher." #y); \
@@ -19,6 +21,13 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(ParticleSystem, ProjExplosionTemplateAir)
 		ADD_VAR(::BoolProperty, m_bInAirHit, 0x1)
+		ADD_OBJECT(ScriptClass, m_ThirdProjectile)
+		ADD_OBJECT(ScriptClass, m_SecondProjectile)
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		// Here lies the not-yet-implemented method 'StickToTarget'
+		// Here lies the not-yet-implemented method 'ProcessTouch'
+		// Here lies the not-yet-implemented method 'Explode'
+		// Here lies the not-yet-implemented method 'SpawnSecondaryProjectile'
 	};
 }
 #undef ADD_VAR

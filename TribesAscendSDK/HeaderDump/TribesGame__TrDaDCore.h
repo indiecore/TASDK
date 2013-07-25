@@ -1,5 +1,13 @@
 #pragma once
+#include "TribesGame__TrDaDCapacitor.h"
 #include "TribesGame__TrGameObjective.h"
+#include "TribesGame__TrDaDShell.h"
+#include "TribesGame__TrDaDCoreShield.h"
+#include "Engine__MaterialInstanceConstant.h"
+#include "Engine__Controller.h"
+#include "Engine__Actor.h"
+#include "Engine__Canvas.h"
+#include "Engine__PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDaDCore." #y); \
@@ -22,6 +30,14 @@ namespace UnrealScript
 		ADD_OBJECT(TrDaDCapacitor, m_Capacitors)
 		ADD_VAR(::FloatProperty, m_fShieldBarPlacementY, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, m_ShieldBarMIC)
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'SpawnShield'
+		// Here lies the not-yet-implemented method 'OnCapacitorBlownUp'
+		// Here lies the not-yet-implemented method 'OnCapacitorRestored'
+		// Here lies the not-yet-implemented method 'TakeDamage'
+		// Here lies the not-yet-implemented method 'OnCoreDestroyed'
+		// Here lies the not-yet-implemented method 'PostRenderFor'
+		// Here lies the not-yet-implemented method 'GetCeilPctScore'
 	};
 }
 #undef ADD_VAR

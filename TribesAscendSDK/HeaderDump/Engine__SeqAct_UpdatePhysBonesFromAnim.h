@@ -5,5 +5,6 @@ namespace UnrealScript
 	class SeqAct_UpdatePhysBonesFromAnim : public SequenceAction
 	{
 	public:
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "GameFramework__MobileHUD.h"
+#include "Engine__Font.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKHUD." #y); \
@@ -30,6 +31,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, PulseSplit, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PulseDuration, 0xFFFFFFFF)
 		ADD_OBJECT(Font, GlowFonts)
+		// Here lies the not-yet-implemented method 'DrawGlowText'
+		// Here lies the not-yet-implemented method 'TranslateBindToFont'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine__AnimNodeAimOffset.h"
 #include "UDKBase__UDKAnimBlendBase.h"
+#include "UDKBase__UDKPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKAnimBlendByFlying." #y); \
@@ -25,6 +27,7 @@ namespace UnrealScript
 		ADD_OBJECT(UDKAnimBlendBase, FlyingMode)
 		ADD_OBJECT(UDKPawn, Pawn)
 		ADD_VAR(::ByteProperty, FlyingState, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'UpdateFlyingState'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame__TrDeviceAttachment.h"
+#include "TribesGame__TrSkelControl_SpinControl.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrAttachment_ChainGun_MKD." #y); \
@@ -22,6 +23,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fCurrSpinTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bSpinningUp, 0x2)
 		ADD_VAR(::BoolProperty, m_bIsFiring, 0x1)
+		// Here lies the not-yet-implemented method 'PostInitAnimTree'
+		// Here lies the not-yet-implemented method 'ThirdPersonFireEffects'
 	};
 }
 #undef ADD_VAR

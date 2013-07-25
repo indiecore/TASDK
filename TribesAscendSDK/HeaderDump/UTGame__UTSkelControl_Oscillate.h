@@ -21,6 +21,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CurrentTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Period, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, MaxDelta, 0xFFFFFFFF
+		// Here lies the not-yet-implemented method 'TickSkelControl'
 	};
 }
 #undef ADD_VAR

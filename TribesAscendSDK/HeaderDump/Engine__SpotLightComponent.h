@@ -21,6 +21,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LightShaftConeAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OuterConeAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InnerConeAngle, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'SetRotation'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,35 @@
 #pragma once
+#include "Engine__PlayerReplicationInfo.h"
+#include "Engine__EmitterPool.h"
+#include "Engine__GameInfo.h"
+#include "Engine__GameReplicationInfo.h"
 #include "Engine__ZoneInfo.h"
+#include "Engine__FractureManager.h"
+#include "Engine__DecalManager.h"
+#include "Engine__ParticleEventManager.h"
+#include "Engine__EnvironmentVolume.h"
+#include "Engine__PostProcessChain.h"
+#include "Engine__PostProcessVolume.h"
+#include "Engine__ReverbVolume.h"
+#include "Engine__BookMark.h"
+#include "Engine__KismetBookMark.h"
+#include "Engine__Sequence.h"
+#include "Engine__Texture2D.h"
+#include "Engine__NavigationPoint.h"
+#include "Engine__Controller.h"
+#include "Engine__Pawn.h"
+#include "Engine__NavMeshPathConstraint.h"
+#include "Engine__CoverLink.h"
+#include "Engine__Pylon.h"
+#include "Engine__ObjectReferencer.h"
+#include "Engine__NavMeshPathGoalEvaluator.h"
+#include "Engine__MapInfo.h"
+#include "Engine__ProcBuildingRuleset.h"
+#include "Engine__PhysicsLODVerticalEmitter.h"
+#include "Engine__LightmassLevelSettings.h"
+#include "Engine__CrowdPopulationManagerBase.h"
+#include "Engine__NavigationHandle.h"
+#include "Engine__DefaultPhysicsVolume.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.WorldInfo." #y); \
@@ -123,6 +153,7 @@ namespace UnrealScript
 		ADD_OBJECT(CoverLink, CoverList)
 		ADD_OBJECT(Pylon, PylonList)
 		ADD_VAR(::IntProperty, PackedLightAndShadowMapTextureSize, 0xFFFFFFFF)
+		ADD_OBJECT(ScriptClass, GameTypeForPIE)
 		ADD_VAR(::NameProperty, CommittedPersistentLevelName, 0xFFFFFFFF)
 		ADD_OBJECT(ObjectReferencer, PersistentMapForcedObjects)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.MusicTrackDataStructures.MusicTrackStruct' for the property named 'CurrentMusicTrack'!
@@ -161,6 +192,60 @@ namespace UnrealScript
 		ADD_OBJECT(CrowdPopulationManagerBase, PopulationManager)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.WorldInfo.HostMigrationState' for the property named 'PeerHostMigration'!
 		ADD_VAR(::FloatProperty, HostMigrationTimeout, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetGameSequence'
+		// Here lies the not-yet-implemented method 'AllControllers'
+		// Here lies the not-yet-implemented method 'IsConsoleBuild'
+		// Here lies the not-yet-implemented method 'GetWorldInfo'
+		// Here lies the not-yet-implemented method 'GetMapName'
+		// Here lies the not-yet-implemented method 'GetGameClass'
+		// Here lies the not-yet-implemented method 'AllNavigationPoints'
+		// Here lies the not-yet-implemented method 'ForceGarbageCollection'
+		// Here lies the not-yet-implemented method 'IsPreparingMapChange'
+		// Here lies the not-yet-implemented method 'PrepareMapChange'
+		// Here lies the not-yet-implemented method 'CommitMapChange'
+		// Here lies the not-yet-implemented method 'CancelPendingMapChange'
+		// Here lies the not-yet-implemented method 'ReleaseCachedConstraintsAndEvaluators'
+		// Here lies the not-yet-implemented method 'GetNavMeshPathConstraintFromCache'
+		// Here lies the not-yet-implemented method 'GetNavMeshPathGoalEvaluatorFromCache'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'UpdateMusicTrack'
+		// Here lies the not-yet-implemented method 'AddOnScreenDebugMessage'
+		// Here lies the not-yet-implemented method 'IsMenuLevel'
+		// Here lies the not-yet-implemented method 'GetGravityZ'
+		// Here lies the not-yet-implemented method 'GetAllRootSequences'
+		// Here lies the not-yet-implemented method 'SetLevelRBGravity'
+		// Here lies the not-yet-implemented method 'GetLocalURL'
+		// Here lies the not-yet-implemented method 'IsDemoBuild'
+		// Here lies the not-yet-implemented method 'IsPlayInEditor'
+		// Here lies the not-yet-implemented method 'IsPlayInPreview'
+		// Here lies the not-yet-implemented method 'VerifyNavList'
+		// Here lies the not-yet-implemented method 'GetAddressURL'
+		// Here lies the not-yet-implemented method 'ServerTravel'
+		// Here lies the not-yet-implemented method 'IsInSeamlessTravel'
+		// Here lies the not-yet-implemented method 'ThisIsNeverExecuted'
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'Reset'
+		// Here lies the not-yet-implemented method 'RadiusNavigationPoints'
+		// Here lies the not-yet-implemented method 'NavigationPointCheck'
+		// Here lies the not-yet-implemented method 'AllPawns'
+		// Here lies the not-yet-implemented method 'NotifyMatchStarted'
+		// Here lies the not-yet-implemented method 'IsMapChangeReady'
+		// Here lies the not-yet-implemented method 'SeamlessTravel'
+		// Here lies the not-yet-implemented method 'SetSeamlessTravelMidpointPause'
+		// Here lies the not-yet-implemented method 'GetMapInfo'
+		// Here lies the not-yet-implemented method 'SetMapInfo'
+		// Here lies the not-yet-implemented method 'GetDetailMode'
+		// Here lies the not-yet-implemented method 'IsRecordingDemo'
+		// Here lies the not-yet-implemented method 'IsPlayingDemo'
+		// Here lies the not-yet-implemented method 'GetDemoFrameInfo'
+		// Here lies the not-yet-implemented method 'GetDemoRewindPoints'
+		// Here lies the not-yet-implemented method 'DoMemoryTracking'
+		// Here lies the not-yet-implemented method 'GetWorldFractureSettings'
+		// Here lies the not-yet-implemented method 'FindEnvironmentVolume'
+		// Here lies the not-yet-implemented method 'BeginHostMigration'
+		// Here lies the not-yet-implemented method 'ToggleHostMigration'
+		// Here lies the not-yet-implemented method 'ClearPhysicsPools'
 	};
 }
 #undef ADD_VAR

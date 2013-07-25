@@ -12,6 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, NumNeededLoggedIn, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'CheckLogins'
 	};
 }
 #undef ADD_VAR

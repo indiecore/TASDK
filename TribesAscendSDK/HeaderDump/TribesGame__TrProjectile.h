@@ -1,5 +1,10 @@
 #pragma once
 #include "UTGame__UTProjectile.h"
+#include "Engine__Controller.h"
+#include "TribesGame__TrDevice.h"
+#include "Engine__Actor.h"
+#include "Engine__SoundCue.h"
+#include "Engine__PhysicalMaterial.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProjectile." #y); \
@@ -56,6 +61,33 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bFastProjectile, 0x4)
 		ADD_VAR(::BoolProperty, m_bDebugProjectileRadius, 0x2)
 		ADD_VAR(::BoolProperty, m_bLimitXYDamageCheck, 0x1)
+		ADD_OBJECT(ScriptClass, m_SpawnedDeployableClass)
+		// Here lies the not-yet-implemented method 'IsBlockedByBlocker'
+		// Here lies the not-yet-implemented method 'OrientToSlope'
+		// Here lies the not-yet-implemented method 'CalculateHitLocation'
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		// Here lies the not-yet-implemented method 'ExplodeFromTimeLimit'
+		// Here lies the not-yet-implemented method 'PostBeginPlay'
+		// Here lies the not-yet-implemented method 'ClientReceivedProjectileToTether'
+		// Here lies the not-yet-implemented method 'CreateProjectileLight'
+		// Here lies the not-yet-implemented method 'DetonateObsolete'
+		// Here lies the not-yet-implemented method 'DestroyOldestOverLimit'
+		// Here lies the not-yet-implemented method 'GetMaxDeployedLimit'
+		// Here lies the not-yet-implemented method 'Init'
+		// Here lies the not-yet-implemented method 'InitProjectile'
+		// Here lies the not-yet-implemented method 'ApplyInheritance'
+		// Here lies the not-yet-implemented method 'ClientCheckFastSpawnExplode'
+		// Here lies the not-yet-implemented method 'SpawnExplosionEffects'
+		// Here lies the not-yet-implemented method 'GetExplosionSound'
+		// Here lies the not-yet-implemented method 'Explode'
+		// Here lies the not-yet-implemented method 'ShutDown'
+		// Here lies the not-yet-implemented method 'Bounce'
+		// Here lies the not-yet-implemented method 'ProjectileHurtRadius'
+		// Here lies the not-yet-implemented method 'HurtRadius_Internal'
+		// Here lies the not-yet-implemented method 'HitWall'
+		// Here lies the not-yet-implemented method 'Touch'
+		// Here lies the not-yet-implemented method 'ProcessTouch'
 	};
 }
 #undef ADD_VAR

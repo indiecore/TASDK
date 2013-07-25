@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__OnlineSubsystem.h"
+#include "IpDrv__OnlineGameInterfaceImpl.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.OnlineSubsystemCommonImpl." #y); \
@@ -28,6 +29,10 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, MaxRemoteTalkers, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxLocalTalkers, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VoiceEngine'!
+		// Here lies the not-yet-implemented method 'GetPlayerNicknameFromIndex'
+		// Here lies the not-yet-implemented method 'GetPlayerUniqueNetIdFromIndex'
+		// Here lies the not-yet-implemented method 'IsPlayerInSession'
+		// Here lies the not-yet-implemented method 'GetRegisteredPlayers'
 	};
 }
 #undef ADD_VAR

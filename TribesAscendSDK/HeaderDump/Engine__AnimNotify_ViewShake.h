@@ -1,5 +1,8 @@
 #pragma once
+#include "Engine__CameraShake.h"
 #include "Engine__AnimNotify_Scripted.h"
+#include "Engine__Actor.h"
+#include "Engine__AnimNodeSequence.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNotify_ViewShake." #y); \
@@ -35,6 +38,7 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, RotFrequency, 0xFFFFFFFF
 		ADD_STRUCT(::VectorProperty, RotAmplitude, 0xFFFFFFFF
 		ADD_VAR(::FloatProperty, Duration, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'Notify'
 	};
 }
 #undef ADD_VAR

@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine__PhysicalMaterial.h"
 #include "Engine__ApexAsset.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

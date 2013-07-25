@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "GameFramework__SeqAct_GameCrowdSpawner.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameCrowdReplicationActor." #y); \
@@ -20,6 +21,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, DestroyAllCount, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSpawningActive, 0x1)
 		ADD_OBJECT(SeqAct_GameCrowdSpawner, Spawner)
+		// Here lies the not-yet-implemented method 'ReplicatedEvent'
 	};
 }
 #undef ADD_VAR

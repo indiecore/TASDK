@@ -36,6 +36,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAdjustCamera, 0x4)
 		ADD_VAR(::BoolProperty, bAlwaysFocus, 0x2)
 		ADD_VAR(::BoolProperty, bAffectCamera, 0x1)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

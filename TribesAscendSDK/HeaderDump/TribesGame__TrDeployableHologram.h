@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__SkeletalMeshActorSpawnable.h"
+#include "Engine__MaterialInstanceConstant.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDeployableHologram." #y); \
@@ -20,6 +21,11 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, m_nOldInvalidDeployReason, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, m_RuntimeMIC)
 		ADD_OBJECT(MaterialInstanceConstant, m_HologramMaterial)
+		// Here lies the not-yet-implemented method 'SetValidDeployableLocation'
+		// Here lies the not-yet-implemented method 'ClearAllMessages'
+		// Here lies the not-yet-implemented method 'Destroyed'
+		// Here lies the not-yet-implemented method 'PreBeginPlay'
+		// Here lies the not-yet-implemented method 'Init'
 	};
 }
 #undef ADD_VAR

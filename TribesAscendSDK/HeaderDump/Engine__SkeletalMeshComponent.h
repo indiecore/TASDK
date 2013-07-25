@@ -1,5 +1,21 @@
 #pragma once
 #include "Engine__MeshComponent.h"
+#include "Engine__AnimNode.h"
+#include "Engine__PhysicsAssetInstance.h"
+#include "Engine__PhysicsAsset.h"
+#include "Engine__SkeletalMeshSocket.h"
+#include "Engine__AnimTree.h"
+#include "Engine__SkeletalMesh.h"
+#include "Engine__Material.h"
+#include "Engine__RB_BodyInstance.h"
+#include "Engine__AnimSequence.h"
+#include "Engine__SkelControlBase.h"
+#include "Engine__MorphTarget.h"
+#include "Engine__MorphNodeBase.h"
+#include "Engine__FaceFXAnimSet.h"
+#include "Engine__SoundCue.h"
+#include "Engine__AnimNotify_ForceField.h"
+#include "Engine__AnimNotify_PlayParticleEffect.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SkeletalMeshComponent." #y); \
@@ -168,6 +184,123 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoneAtom' for the property named 'LocalToWorldBoneAtom'!
 		ADD_VAR(::FloatProperty, ProgressiveDrawingFraction, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, CustomSortAlternateIndexMode, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'AttachComponent'
+		// Here lies the not-yet-implemented method 'DetachComponent'
+		// Here lies the not-yet-implemented method 'AttachComponentToSocket'
+		// Here lies the not-yet-implemented method 'GetSocketWorldLocationAndRotation'
+		// Here lies the not-yet-implemented method 'GetSocketByName'
+		// Here lies the not-yet-implemented method 'GetSocketBoneName'
+		// Here lies the not-yet-implemented method 'FindComponentAttachedToBone'
+		// Here lies the not-yet-implemented method 'IsComponentAttached'
+		// Here lies the not-yet-implemented method 'AttachedComponents'
+		// Here lies the not-yet-implemented method 'GetTransformMatrix'
+		// Here lies the not-yet-implemented method 'SetSkeletalMesh'
+		// Here lies the not-yet-implemented method 'SetPhysicsAsset'
+		// Here lies the not-yet-implemented method 'SetForceRefPose'
+		// Here lies the not-yet-implemented method 'SetEnableClothSimulation'
+		// Here lies the not-yet-implemented method 'SetClothFrozen'
+		// Here lies the not-yet-implemented method 'SetEnableClothingSimulation'
+		// Here lies the not-yet-implemented method 'UpdateClothParams'
+		// Here lies the not-yet-implemented method 'SetClothExternalForce'
+		// Here lies the not-yet-implemented method 'SetAttachClothVertsToBaseBody'
+		// Here lies the not-yet-implemented method 'ResetClothVertsToRefPose'
+		// Here lies the not-yet-implemented method 'GetClothAttachmentResponseCoefficient'
+		// Here lies the not-yet-implemented method 'GetClothAttachmentTearFactor'
+		// Here lies the not-yet-implemented method 'GetClothBendingStiffness'
+		// Here lies the not-yet-implemented method 'GetClothCollisionResponseCoefficient'
+		// Here lies the not-yet-implemented method 'GetClothDampingCoefficient'
+		// Here lies the not-yet-implemented method 'GetClothFlags'
+		// Here lies the not-yet-implemented method 'GetClothFriction'
+		// Here lies the not-yet-implemented method 'GetClothPressure'
+		// Here lies the not-yet-implemented method 'GetClothSleepLinearVelocity'
+		// Here lies the not-yet-implemented method 'GetClothSolverIterations'
+		// Here lies the not-yet-implemented method 'GetClothStretchingStiffness'
+		// Here lies the not-yet-implemented method 'GetClothTearFactor'
+		// Here lies the not-yet-implemented method 'GetClothThickness'
+		// Here lies the not-yet-implemented method 'SetClothAttachmentResponseCoefficient'
+		// Here lies the not-yet-implemented method 'SetClothAttachmentTearFactor'
+		// Here lies the not-yet-implemented method 'SetClothBendingStiffness'
+		// Here lies the not-yet-implemented method 'SetClothCollisionResponseCoefficient'
+		// Here lies the not-yet-implemented method 'SetClothDampingCoefficient'
+		// Here lies the not-yet-implemented method 'SetClothFlags'
+		// Here lies the not-yet-implemented method 'SetClothFriction'
+		// Here lies the not-yet-implemented method 'SetClothPressure'
+		// Here lies the not-yet-implemented method 'SetClothSleepLinearVelocity'
+		// Here lies the not-yet-implemented method 'SetClothSolverIterations'
+		// Here lies the not-yet-implemented method 'SetClothStretchingStiffness'
+		// Here lies the not-yet-implemented method 'SetClothTearFactor'
+		// Here lies the not-yet-implemented method 'SetClothThickness'
+		// Here lies the not-yet-implemented method 'SetClothSleep'
+		// Here lies the not-yet-implemented method 'SetClothPosition'
+		// Here lies the not-yet-implemented method 'SetClothVelocity'
+		// Here lies the not-yet-implemented method 'AttachClothToCollidingShapes'
+		// Here lies the not-yet-implemented method 'EnableClothValidBounds'
+		// Here lies the not-yet-implemented method 'SetClothValidBounds'
+		// Here lies the not-yet-implemented method 'UpdateSoftBodyParams'
+		// Here lies the not-yet-implemented method 'SetSoftBodyFrozen'
+		// Here lies the not-yet-implemented method 'WakeSoftBody'
+		// Here lies the not-yet-implemented method 'FindAnimSequence'
+		// Here lies the not-yet-implemented method 'SaveAnimSets'
+		// Here lies the not-yet-implemented method 'RestoreSavedAnimSets'
+		// Here lies the not-yet-implemented method 'GetAnimRateByDuration'
+		// Here lies the not-yet-implemented method 'GetAnimLength'
+		// Here lies the not-yet-implemented method 'FindMorphTarget'
+		// Here lies the not-yet-implemented method 'FindAnimNode'
+		// Here lies the not-yet-implemented method 'AllAnimNodes'
+		// Here lies the not-yet-implemented method 'FindSkelControl'
+		// Here lies the not-yet-implemented method 'FindMorphNode'
+		// Here lies the not-yet-implemented method 'GetBoneQuaternion'
+		// Here lies the not-yet-implemented method 'GetBoneLocation'
+		// Here lies the not-yet-implemented method 'MatchRefBone'
+		// Here lies the not-yet-implemented method 'GetBoneName'
+		// Here lies the not-yet-implemented method 'GetBoneMatrix'
+		// Here lies the not-yet-implemented method 'GetParentBone'
+		// Here lies the not-yet-implemented method 'GetBoneNames'
+		// Here lies the not-yet-implemented method 'BoneIsChildOf'
+		// Here lies the not-yet-implemented method 'GetRefPosePosition'
+		// Here lies the not-yet-implemented method 'GetBoneAxis'
+		// Here lies the not-yet-implemented method 'TransformToBoneSpace'
+		// Here lies the not-yet-implemented method 'TransformFromBoneSpace'
+		// Here lies the not-yet-implemented method 'FindClosestBone'
+		// Here lies the not-yet-implemented method 'GetClosestCollidingBoneLocation'
+		// Here lies the not-yet-implemented method 'SetAnimTreeTemplate'
+		// Here lies the not-yet-implemented method 'SetParentAnimComponent'
+		// Here lies the not-yet-implemented method 'UpdateParentBoneMap'
+		// Here lies the not-yet-implemented method 'InitSkelControls'
+		// Here lies the not-yet-implemented method 'InitMorphTargets'
+		// Here lies the not-yet-implemented method 'FindConstraintIndex'
+		// Here lies the not-yet-implemented method 'FindConstraintBoneName'
+		// Here lies the not-yet-implemented method 'FindBodyInstanceNamed'
+		// Here lies the not-yet-implemented method 'SetHasPhysicsAssetInstance'
+		// Here lies the not-yet-implemented method 'UpdateRBBonesFromSpaceBases'
+		// Here lies the not-yet-implemented method 'ForceSkelUpdate'
+		// Here lies the not-yet-implemented method 'UpdateAnimations'
+		// Here lies the not-yet-implemented method 'GetBonesWithinRadius'
+		// Here lies the not-yet-implemented method 'AddInstanceVertexWeightBoneParented'
+		// Here lies the not-yet-implemented method 'RemoveInstanceVertexWeightBoneParented'
+		// Here lies the not-yet-implemented method 'FindInstanceVertexweightBonePair'
+		// Here lies the not-yet-implemented method 'UpdateInstanceVertexWeightBones'
+		// Here lies the not-yet-implemented method 'ToggleInstanceVertexWeights'
+		// Here lies the not-yet-implemented method 'PlayFaceFXAnim'
+		// Here lies the not-yet-implemented method 'StopFaceFXAnim'
+		// Here lies the not-yet-implemented method 'IsPlayingFaceFXAnim'
+		// Here lies the not-yet-implemented method 'DeclareFaceFXRegister'
+		// Here lies the not-yet-implemented method 'GetFaceFXRegister'
+		// Here lies the not-yet-implemented method 'SetFaceFXRegister'
+		// Here lies the not-yet-implemented method 'SetFaceFXRegisterEx'
+		// Here lies the not-yet-implemented method 'HideBone'
+		// Here lies the not-yet-implemented method 'UnHideBone'
+		// Here lies the not-yet-implemented method 'IsBoneHidden'
+		// Here lies the not-yet-implemented method 'HideBoneByName'
+		// Here lies the not-yet-implemented method 'UnHideBoneByName'
+		// Here lies the not-yet-implemented method 'UpdateMeshForBrokenConstraints'
+		// Here lies the not-yet-implemented method 'ShowMaterialSection'
+		// Here lies the not-yet-implemented method 'PlayAnim'
+		// Here lies the not-yet-implemented method 'StopAnim'
+		// Here lies the not-yet-implemented method 'CreateForceField'
+		// Here lies the not-yet-implemented method 'PlayParticleEffect'
+		// Here lies the not-yet-implemented method 'SkelMeshCompOnParticleSystemFinished'
+		// Here lies the not-yet-implemented method 'BreakConstraint'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__Actor.h"
+#include "Engine__HUD.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CameraActor." #y); \
@@ -23,6 +24,8 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'CamOverridePostProcess'!
 		ADD_VAR(::FloatProperty, FOVAngle, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bCamOverridePostProcess, 0x2)
+		// Here lies the not-yet-implemented method 'GetCameraView'
+		// Here lies the not-yet-implemented method 'DisplayDebug'
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine__NxForceField.h"
+#include "Engine__ForceFieldShape.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NxForceFieldRadial." #y); \
@@ -29,6 +30,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ForceRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ForceStrength, 0xFFFFFFFF)
 		ADD_OBJECT(ForceFieldShape, Shape)
+		// Here lies the not-yet-implemented method 'DoInitRBPhys'
 	};
 }
 #undef ADD_VAR

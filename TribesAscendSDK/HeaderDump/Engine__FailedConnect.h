@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine__LocalMessage.h"
+#include "Core__Object.h"
+#include "Engine__PlayerReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FailedConnect." #y); \
@@ -12,6 +14,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, FailMessage, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetFailSwitch'
+		// Here lies the not-yet-implemented method 'GetString'
 	};
 }
 #undef ADD_VAR

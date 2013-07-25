@@ -21,6 +21,28 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, TokName, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NewsIndex, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bUpdateReady, 0x1)
+		// Here lies the not-yet-implemented method 'GetTitleAtIndex'
+		// Here lies the not-yet-implemented method 'IsLiveAtIndex'
+		// Here lies the not-yet-implemented method 'GetViewersAtIndex'
+		// Here lies the not-yet-implemented method 'GetDescriptionAtIndex'
+		// Here lies the not-yet-implemented method 'HaveFeature'
+		// Here lies the not-yet-implemented method 'GetFeatureName'
+		// Here lies the not-yet-implemented method 'IsStream'
+		// Here lies the not-yet-implemented method 'GetTypeCountWatching'
+		// Here lies the not-yet-implemented method 'GetTypeCount'
+		// Here lies the not-yet-implemented method 'GetFeatureDescription'
+		// Here lies the not-yet-implemented method 'ViewerSort'
+		// Here lies the not-yet-implemented method 'LoadStreams'
+		// Here lies the not-yet-implemented method 'GetStreamData'
+		// Here lies the not-yet-implemented method 'OpenStream'
+		// Here lies the not-yet-implemented method 'Initialize'
+		// Here lies the not-yet-implemented method 'ViewStreamIndex'
+		// Here lies the not-yet-implemented method 'ViewVideoIndex'
+		// Here lies the not-yet-implemented method 'StartTVTimer'
+		// Here lies the not-yet-implemented method 'UpdateStreams'
+		// Here lies the not-yet-implemented method 'CheckForUpdate'
+		// Here lies the not-yet-implemented method 'GetLatestNews'
+		// Here lies the not-yet-implemented method 'CompleteUpdate'
 	};
 }
 #undef ADD_VAR

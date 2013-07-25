@@ -1,5 +1,8 @@
 #pragma once
 #include "TribesGame__TrProj_Mine.h"
+#include "Engine__ParticleSystem.h"
+#include "Engine__Pawn.h"
+#include "TribesGame__TrTripActor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_PrismMine." #y); \
@@ -30,6 +33,18 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fTripDistance, 0xFFFFFFFF)
 		ADD_OBJECT(TrTripActor, m_TripActor)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_TrTripNotifier'!
+		// Here lies the not-yet-implemented method 'PawnEnteredDetonationArea'
+		// Here lies the not-yet-implemented method 'InitProjectile'
+		// Here lies the not-yet-implemented method 'ArmedTimer'
+		// Here lies the not-yet-implemented method 'ShutDown'
+		// Here lies the not-yet-implemented method 'CreateTripActor'
+		// Here lies the not-yet-implemented method 'TripActivated'
+		// Here lies the not-yet-implemented method 'GetParticleSystemName'
+		// Here lies the not-yet-implemented method 'GetTripSocketPosition'
+		// Here lies the not-yet-implemented method 'OnTripAwake'
+		// Here lies the not-yet-implemented method 'OnTripSleep'
+		// Here lies the not-yet-implemented method 'AddTripActor'
+		// Here lies the not-yet-implemented method 'RemoveTripActor'
 	};
 }
 #undef ADD_VAR

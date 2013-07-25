@@ -14,6 +14,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bCheckForObstructions, 0x1)
 		ADD_VAR(::FloatProperty, TriggerDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ScreenCenterDistance, 0xFFFFFFFF)
+		// Here lies the not-yet-implemented method 'GetObjClassVersion'
 	};
 }
 #undef ADD_VAR

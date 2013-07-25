@@ -1,5 +1,11 @@
 #pragma once
+#include "Engine__InterpTrackMove.h"
+#include "Engine__InterpTrackInstMove.h"
 #include "Core__Object.h"
+#include "Engine__AnimNodeSequence.h"
+#include "Engine__Actor.h"
+#include "Engine__InterpGroupInst.h"
+#include "Engine__CameraAnim.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CameraAnimInst." #y); \
@@ -48,6 +54,12 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CurTime, 0xFFFFFFFF)
 		ADD_OBJECT(InterpGroupInst, InterpGroupInst)
 		ADD_OBJECT(CameraAnim, CamAnim)
+		// Here lies the not-yet-implemented method 'SetPlaySpace'
+		// Here lies the not-yet-implemented method 'Play'
+		// Here lies the not-yet-implemented method 'Update'
+		// Here lies the not-yet-implemented method 'AdvanceAnim'
+		// Here lies the not-yet-implemented method 'Stop'
+		// Here lies the not-yet-implemented method 'ApplyTransientScaling'
 	};
 }
 #undef ADD_VAR
