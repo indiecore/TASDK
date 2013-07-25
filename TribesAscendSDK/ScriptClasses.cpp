@@ -237,20 +237,42 @@ struct FunctionArgumentDescription
 
 	void WriteLoadToBuffer(IndentedStreamWriter* wtr, const char* bufName)
 	{
-		if (offset > 0)
-			wtr->WriteLine("*(%s*)(%s + %i) = %s;", GetTypeNameForProperty(originalProperty).c_str(), bufName, offset, name.c_str());
+		auto tnfp = GetTypeNameForProperty(originalProperty).c_str();
+		if (offset != 0)
+		{
+			if (!strcmp(tnfp, "byte"))
+				wtr->WriteLine("*(%s + %i) = %s;", bufName, offset, name.c_str());
+			else
+				wtr->WriteLine("*(%s*)(%s + %i) = %s;", tnfp, bufName, offset, name.c_str());
+		}
 		else
-			wtr->WriteLine("*(%s*)%s = %s;", GetTypeNameForProperty(originalProperty).c_str(), bufName, name.c_str());
+		{
+			if (!strcmp(tnfp, "byte"))
+				wtr->WriteLine("*%s = %s;", bufName, name.c_str());
+			else
+				wtr->WriteLine("*(%s*)%s = %s;", tnfp, bufName, name.c_str());
+		}
 	}
 
 	void WriteLoadFromBuffer(IndentedStreamWriter* wtr, const char* bufName)
 	{
+		auto tnfp = GetTypeNameForProperty(originalProperty).c_str();
 		if (out_param)
 		{
-			if (offset > 0)
-				wtr->WriteLine("%s = *(%s*)(%s + %i);", name.c_str(), GetTypeNameForProperty(originalProperty).c_str(), bufName, offset);
+			if (offset != 0)
+			{
+				if (!strcmp(tnfp, "byte"))
+					wtr->WriteLine("%s = *(%s + %i);", name.c_str(), bufName, offset);
+				else
+					wtr->WriteLine("%s = *(%s*)(%s + %i);", name.c_str(), tnfp, bufName, offset);
+			}
 			else
-				wtr->WriteLine("%s = *(%s*)%s;", name.c_str(), GetTypeNameForProperty(originalProperty).c_str(), bufName);
+			{
+				if (!strcmp(tnfp, "byte"))
+					wtr->WriteLine("%s = *%s;", name.c_str(), bufName);
+				else
+					wtr->WriteLine("%s = *(%s*)%s;", name.c_str(), tnfp, bufName);
+			}
 		}
 	}
 };
@@ -328,7 +350,23 @@ struct FunctionDescription
 			arguments[i].WriteLoadFromBuffer(wtr, "params");
 
 		if (returnProperty)
-			wtr->WriteLine("return *(%s*)(params + %i);", GetTypeNameForProperty(returnProperty).c_str(), originalFunction->return_val_offset());
+		{
+			auto tnfp = GetTypeNameForProperty(returnProperty).c_str();
+			if (originalFunction->return_val_offset() != 0)
+			{
+				if (!strcmp(tnfp, "byte"))
+					wtr->WriteLine("return *(params + %i);", originalFunction->return_val_offset());
+				else
+					wtr->WriteLine("return *(%s*)(params + %i);", tnfp, originalFunction->return_val_offset());
+			}
+			else
+			{
+				if (!strcmp(tnfp, "byte"))
+					wtr->WriteLine("return *params;");
+				else
+					wtr->WriteLine("return *(%s*)params;", tnfp);
+			}
+		}
 
 		wtr->Indent--;
 		wtr->WriteLine("}");
