@@ -37,10 +37,10 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::NameProperty, GameObjBone3P, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, GameObjRot3P, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, GameObjOffset3P, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, GameObjRot1P, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, GameObjOffset1P, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, GameObjRot3P, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, GameObjOffset3P, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, GameObjRot1P, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, GameObjOffset1P, 0xFFFFFFFF)
 		ADD_OBJECT(ForceFeedbackWaveform, PickUpWaveForm)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'GoldColor'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'BlueColor'!

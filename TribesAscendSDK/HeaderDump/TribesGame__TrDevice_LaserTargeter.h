@@ -28,8 +28,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::ByteProperty, r_ActiveCallin, 0xFFFFFFFF)
 		ADD_OBJECT(TrCallIn, r_CallIns)
-		ADD_STRUCT(::VectorProperty, m_LastTargetPos, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, m_LastOwnerRot, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_LastTargetPos, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, m_LastOwnerRot, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, m_CallInConfirmation)
 		ADD_VAR(::ByteProperty, m_PrevActiveCallin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCallInEndTime, 0xFFFFFFFF)

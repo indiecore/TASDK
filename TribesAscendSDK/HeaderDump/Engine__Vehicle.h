@@ -42,11 +42,11 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, CrushedDamageType)
 		ADD_VAR(::FloatProperty, MomentumMult, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DriverDamageMult, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, TargetLocationAdjustment, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, TargetLocationAdjustment, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Rise, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Throttle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Steering, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ExitOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ExitOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ExitRadius, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDoExtraNetRelevancyTraces, 0x1000)
 		ADD_VAR(::BoolProperty, bIgnoreStallZ, 0x800)

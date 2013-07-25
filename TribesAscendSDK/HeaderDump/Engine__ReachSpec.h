@@ -40,7 +40,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, CollisionRadius, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ActorReference' for the property named 'End'!
 		ADD_OBJECT(NavigationPoint, Start)
-		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Distance, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'NavOctreeObject'!
 		int CostFor(class Pawn* P)

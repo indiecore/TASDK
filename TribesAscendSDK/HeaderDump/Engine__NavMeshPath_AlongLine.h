@@ -12,7 +12,7 @@ namespace UnrealScript
 	class NavMeshPath_AlongLine : public NavMeshPathConstraint
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF)
 		bool AlongLine(class NavigationHandle* NavHandle, Vector Dir)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_AlongLine.AlongLine");

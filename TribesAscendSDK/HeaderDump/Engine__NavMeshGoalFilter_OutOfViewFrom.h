@@ -12,7 +12,7 @@ namespace UnrealScript
 	class NavMeshGoalFilter_OutOfViewFrom : public NavMeshGoal_Filter
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, OutOfViewLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, OutOfViewLocation, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'GoalPoly'!
 		bool MustBeHiddenFromThisPoint(class NavMeshGoal_GenericFilterContainer* FilterContainer, Vector InOutOfViewLocation)
 		{

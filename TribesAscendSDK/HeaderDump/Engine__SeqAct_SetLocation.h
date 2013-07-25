@@ -25,8 +25,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(Object, Target)
-		ADD_STRUCT(::RotatorProperty, RotationValue, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LocationValue, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, RotationValue, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LocationValue, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSetRotation, 0x2)
 		ADD_VAR(::BoolProperty, bSetLocation, 0x1)
 		int GetObjClassVersion()

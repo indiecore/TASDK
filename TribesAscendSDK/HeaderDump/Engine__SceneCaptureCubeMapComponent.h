@@ -24,7 +24,7 @@ namespace UnrealScript
 	class SceneCaptureCubeMapComponent : public SceneCaptureComponent
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, WorldLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, WorldLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FarPlane, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NearPlane, 0xFFFFFFFF)
 		ADD_OBJECT(TextureRenderTargetCube, TextureTarget)

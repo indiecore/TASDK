@@ -29,7 +29,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bUseOwnerLocation, 0x1)
-		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bAllowSpatialization, 0x100)
 		ADD_VAR(::FloatProperty, VolumeMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PitchMultiplier, 0xFFFFFFFF)
@@ -42,7 +42,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, HighFrequencyGainMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LastReverbVolumeIndex, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.ReverbVolume.InteriorSettings' for the property named 'LastInteriorSettings'!
-		ADD_STRUCT(::VectorProperty, LastLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentInteriorLPF, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentInteriorVolume, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SourceInteriorLPF, 0xFFFFFFFF)
@@ -59,7 +59,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CurrentHighFrequencyGain, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentPitch, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentVolume, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, CurrentLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, CurrentLocation, 0xFFFFFFFF)
 		ADD_OBJECT(SoundNode, CurrentNotifyBufferFinishedHook)
 		ADD_VAR(::FloatProperty, CurrAdjustVolumeTargetVolume, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AdjustVolumeTargetVolume, 0xFFFFFFFF)
@@ -72,7 +72,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, FadeInStopTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FadeInStartTime, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, LastOwner)
-		ADD_STRUCT(::VectorProperty, ComponentLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ComponentLocation, 0xFFFFFFFF)
 		ADD_OBJECT(PortalVolume, PortalVolume)
 		ADD_VAR(::FloatProperty, PlaybackTime, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Listener'!

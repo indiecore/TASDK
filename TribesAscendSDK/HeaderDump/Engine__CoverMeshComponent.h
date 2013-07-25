@@ -28,7 +28,7 @@ namespace UnrealScript
 		ADD_OBJECT(StaticMesh, Disabled)
 		ADD_OBJECT(StaticMesh, AutoAdjustOff)
 		ADD_OBJECT(StaticMesh, AutoAdjustOn)
-		ADD_STRUCT(::VectorProperty, LocationOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LocationOffset, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

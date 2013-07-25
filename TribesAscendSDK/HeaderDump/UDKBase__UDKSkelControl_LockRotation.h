@@ -19,8 +19,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::NameProperty, RotationSpaceBoneName, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, LockRotationSpace, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, MaxDelta, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, LockRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, MaxDelta, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, LockRotation, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bLockRoll, 0x4)
 		ADD_VAR(::BoolProperty, bLockYaw, 0x2)
 		ADD_VAR(::BoolProperty, bLockPitch, 0x1)

@@ -24,10 +24,10 @@ namespace UnrealScript
 	class DecalComponent : public PrimitiveComponent
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, OriginalParentRelativeOrientationVec, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, OriginalParentRelativeLocation, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, ParentRelativeOrientation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, ParentRelativeLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, OriginalParentRelativeOrientationVec, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, OriginalParentRelativeLocation, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, ParentRelativeOrientation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, ParentRelativeLocation, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, FilterMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, DecalTransform, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'BlendRange'!
@@ -52,12 +52,12 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bGameplayRequired, 0x4)
 		ADD_VAR(::BoolProperty, bStaticDecal, 0x2)
 		ADD_VAR(::BoolProperty, bNoClip, 0x1)
-		ADD_STRUCT(::VectorProperty, HitBinormal, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, HitTangent, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, HitNormal, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, HitLocation, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, Orientation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HitBinormal, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, HitTangent, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, HitNormal, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, HitLocation, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, Orientation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FarPlane, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NearPlane, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FieldOfView, 0xFFFFFFFF)

@@ -30,11 +30,11 @@ namespace UnrealScript
 	class GameExplosionActor : public Actor
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, ExplosionDirection, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ExplosionDirection, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DirectionalExplosionMinDot, 0xFFFFFFFF)
 		ADD_OBJECT(Controller, AttacheeController)
 		ADD_OBJECT(Actor, Attachee)
-		ADD_STRUCT(::VectorProperty, HitLocationFromPhysMaterialTrace, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HitLocationFromPhysMaterialTrace, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, HitActorFromPhysMaterialTrace)
 		ADD_OBJECT(Controller, InstigatorController)
 		ADD_OBJECT(GameExplosion, ExplosionTemplate)

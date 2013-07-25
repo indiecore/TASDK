@@ -30,7 +30,7 @@ namespace UnrealScript
 		ADD_OBJECT(Trigger, LiftTrigger)
 		ADD_VAR(::FloatProperty, CollisionHeight, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bJumpLift, 0x1)
-		ADD_STRUCT(::VectorProperty, LiftOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LiftOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxDist2D, 0xFFFFFFFF)
 		ADD_OBJECT(InterpActor, MyLift)
 		void PostBeginPlay()

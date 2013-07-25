@@ -27,7 +27,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDrawOnlyIfSelected, 0x4)
 		ADD_VAR(::BoolProperty, bDrawLitBox, 0x2)
 		ADD_VAR(::BoolProperty, bDrawWireBox, 0x1)
-		ADD_STRUCT(::VectorProperty, BoxExtent, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, BoxExtent, 0xFFFFFFFF)
 		ADD_OBJECT(Material, BoxMaterial)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BoxColor'!
 	};

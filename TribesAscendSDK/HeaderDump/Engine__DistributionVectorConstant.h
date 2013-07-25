@@ -19,7 +19,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::ByteProperty, LockedAxes, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bLockAxes, 0x1)
-		ADD_STRUCT(::VectorProperty, Constant, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Constant, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

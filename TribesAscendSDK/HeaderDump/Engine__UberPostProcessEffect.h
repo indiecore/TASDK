@@ -32,11 +32,11 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TonemapperToeFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TonemapperRange, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, TonemapperType, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, SceneShadows, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, SceneColorize, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, SceneShadows, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, SceneColorize, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SceneDesaturation, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, SceneMidTones, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, SceneHighLights, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, SceneMidTones, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, SceneHighLights, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

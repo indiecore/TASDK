@@ -44,10 +44,10 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fMinCustomAnimTime, 0xFFFFFFFF)
 		ADD_OBJECT(AnimNodePlayCustomAnim, m_SidekickCustomAnimNode)
 		ADD_OBJECT(AnimNodePlayCustomAnim, m_CharacterCustomAnimNode)
-		ADD_STRUCT(::VectorProperty, m_vOffsetHeavy, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_vOffsetMedium, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_vOffsetLight, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_vBackdropOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vOffsetHeavy, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_vOffsetMedium, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_vOffsetLight, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_vBackdropOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fBackdropScale16x10, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fBackdropScale16x9, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fBackdropScale4x3, 0xFFFFFFFF)
@@ -55,9 +55,9 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceConstant, m_BloodEagleBackdropMaterial)
 		ADD_OBJECT(ScriptClass, m_TrDeviceClass)
 		ADD_OBJECT(ScriptClass, m_FamilyInfoClass)
-		ADD_STRUCT(::VectorProperty, m_vViewOffset16x10, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_vViewOffset16x9, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_vViewOffset4x3, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vViewOffset16x10, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_vViewOffset16x9, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_vViewOffset4x3, 0xFFFFFFFF)
 		bool IsFullyStreamed(
 // WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
 void* PaperDoll)

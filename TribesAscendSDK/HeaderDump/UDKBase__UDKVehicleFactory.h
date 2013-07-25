@@ -25,7 +25,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, TeamNum, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RespawnProgress, 0xFFFFFFFF)
 		ADD_OBJECT(UDKVehicle, ChildVehicle)
 		ADD_OBJECT(ScriptClass, VehicleClass)

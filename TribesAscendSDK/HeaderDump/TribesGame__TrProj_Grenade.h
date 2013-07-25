@@ -36,7 +36,7 @@ namespace UnrealScript
 		ADD_OBJECT(TrCollisionProxy, m_CollisionProxy)
 		ADD_VAR(::FloatProperty, m_fStuckMomentumMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fStuckDamageMultiplier, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_OverloadHitNormal, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_OverloadHitNormal, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, m_StuckOnPawnLoopingSound)
 		ADD_OBJECT(ParticleSystem, m_StuckOnTargetTemplate)
 		ADD_VAR(::FloatProperty, m_fExplosionTime, 0xFFFFFFFF)

@@ -28,7 +28,7 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Texture2D, ThumbnailImage)
 		ADD_VAR(::FloatProperty, ThumbnailDistance, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, ThumbnailAngle, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, ThumbnailAngle, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ReflectionCount, 0xFFFFFFFF)
 		ADD_OBJECT(InterpCurveEdSetup, CurveEdSetup)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box' for the property named 'FixedRelativeBoundingBox'!

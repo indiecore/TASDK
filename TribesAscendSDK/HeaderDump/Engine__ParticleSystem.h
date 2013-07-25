@@ -31,7 +31,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, UpdateTime_FPS, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, UpdateTime_Delta, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WarmupTime, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, ThumbnailAngle, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, ThumbnailAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ThumbnailDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ThumbnailWarmup, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bLit, 0x1)
@@ -51,15 +51,15 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box' for the property named 'FixedRelativeBoundingBox'!
 		ADD_VAR(::FloatProperty, SecondsBeforeInactive, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, FloorMesh, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, FloorPosition, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, FloorRotation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FloorPosition, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, FloorRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FloorScale, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, FloorScale3D, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FloorScale3D, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BackgroundColor'!
 		ADD_OBJECT(Texture2D, ThumbnailImage)
 		ADD_VAR(::FloatProperty, Delay, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DelayLow, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, MacroUVPosition, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, MacroUVPosition, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MacroUVRadius, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box' for the property named 'CustomOcclusionBounds'!
 		byte GetCurrentLODMethod()

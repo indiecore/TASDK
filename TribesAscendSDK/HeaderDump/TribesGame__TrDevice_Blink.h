@@ -24,7 +24,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fSpeedCapThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fLastActivationTimestamp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCooldownTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_vBlinkImpulse, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vBlinkImpulse, 0xFFFFFFFF)
 		Vector GetBlinkImpulse()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Blink.GetBlinkImpulse");

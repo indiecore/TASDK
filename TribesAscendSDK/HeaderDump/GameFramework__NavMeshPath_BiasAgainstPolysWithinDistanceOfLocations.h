@@ -19,8 +19,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, DistanceToCheck, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Rotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Rotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF)
 		bool BiasAgainstPolysWithinDistanceOfLocations(class NavigationHandle* NavHandle, Vector InLocation, Rotator InRotation, float InDistanceToCheck, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void* InLocationsToCheck)

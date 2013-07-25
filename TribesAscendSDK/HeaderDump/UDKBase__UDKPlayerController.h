@@ -30,8 +30,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, VehicleCheckRadiusScaling, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'PostProcessModifier'!
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'CamOverridePostProcess'!
-		ADD_STRUCT(::RotatorProperty, ShakeRot, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, ShakeOffset, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, ShakeRot, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, ShakeOffset, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bUsePhysicsRotation, 0x10)
 		ADD_VAR(::BoolProperty, bPulseTeamColor, 0x8)
 		ADD_VAR(::BoolProperty, bConsolePlayer, 0x4)

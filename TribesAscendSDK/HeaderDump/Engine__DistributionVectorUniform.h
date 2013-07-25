@@ -21,8 +21,8 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, LockedAxes, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bUseExtremes, 0x2)
 		ADD_VAR(::BoolProperty, bLockAxes, 0x1)
-		ADD_STRUCT(::VectorProperty, Min, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Max, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Min, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Max, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

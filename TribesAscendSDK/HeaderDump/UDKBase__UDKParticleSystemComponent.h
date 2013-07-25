@@ -17,7 +17,7 @@ namespace UnrealScript
 	class UDKParticleSystemComponent : public ParticleSystemComponent
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, SavedScale3D, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, SavedScale3D, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bHasSavedScale3D, 0x1)
 		ADD_VAR(::FloatProperty, FOV, 0xFFFFFFFF)
 		void SetFOV(float NewFOV)

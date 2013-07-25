@@ -18,7 +18,7 @@ namespace UnrealScript
 	class NavMeshPath_WithinDistanceEnvelope : public NavMeshPathConstraint
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, EnvelopeTestPoint, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, EnvelopeTestPoint, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SoftStartPenalty, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bOnlyThrowOutNodesThatLeaveEnvelope, 0x2)
 		ADD_VAR(::BoolProperty, bSoft, 0x1)

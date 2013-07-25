@@ -31,8 +31,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TimeToRespawn, 0xFFFFFFFF)
 		ADD_OBJECT(StaticMesh, RespawnStaticMesh)
 		ADD_VAR(::FloatProperty, RespawnTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, SpawnPhysMeshAngularVel, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, SpawnPhysMeshLinearVel, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, SpawnPhysMeshAngularVel, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, SpawnPhysMeshLinearVel, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SpawnPhysMeshLifeSpan, 0xFFFFFFFF)
 		ADD_OBJECT(StaticMesh, SpawnPhysMesh)
 		ADD_OBJECT(ParticleSystem, ParticlesOnDestroy)

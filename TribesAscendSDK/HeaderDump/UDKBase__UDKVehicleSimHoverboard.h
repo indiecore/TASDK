@@ -36,7 +36,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, SpinHeadingOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TrickJumpWarmup, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TakeoffYaw, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, GroundNormal, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, GroundNormal, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, OverWaterSound)
 		ADD_VAR(::FloatProperty, WaterCheckLevel, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StopThreshold, 0xFFFFFFFF)

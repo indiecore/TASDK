@@ -20,7 +20,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, LastFired, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, TargetVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, TargetVelocity, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bCanTeleportVehicles, 0x40)
 		ADD_VAR(::BoolProperty, bEnabled, 0x20)
 		ADD_VAR(::BoolProperty, bReversesZ, 0x10)

@@ -30,7 +30,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bBlockRigidBody, 0x4)
 		ADD_VAR(::BoolProperty, bNotifyRigidBodyCollision, 0x2)
 		ADD_VAR(::BoolProperty, bNoEncroachCheck, 0x1)
-		ADD_STRUCT(::VectorProperty, DrawScale3D, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DrawScale3D, 0xFFFFFFFF)
 		ADD_OBJECT(StaticMesh, StaticMesh)
 	};
 }

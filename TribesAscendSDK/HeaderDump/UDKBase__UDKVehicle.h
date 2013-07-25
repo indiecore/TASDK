@@ -37,7 +37,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bAllowedExit, 0x8000)
 		ADD_VAR(::BoolProperty, bEjectKilledBodies, 0x1)
-		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ShowLockedMaxDist, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastPostRenderTraceTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TeamBeaconMaxDist, 0xFFFFFFFF)
@@ -65,7 +65,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DestroyOnPenetrationThreshold, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, DrivingAnim, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SeatMask, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, WeaponRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, WeaponRotation, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, WaterGroundEffect)
 		ADD_VAR(::NameProperty, GroundEffectDistParameterName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxGroundEffectDist, 0xFFFFFFFF)

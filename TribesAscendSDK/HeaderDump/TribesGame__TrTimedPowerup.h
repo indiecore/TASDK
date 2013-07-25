@@ -30,7 +30,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, PP_Scene_Desaturation, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PP_Scene_HighLights, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PP_Scene_HighLights, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WarningTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TransitionDuration, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TransitionTime, 0xFFFFFFFF)

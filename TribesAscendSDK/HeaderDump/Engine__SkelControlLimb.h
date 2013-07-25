@@ -26,13 +26,13 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bInvertJointAxis, 0x2)
 		ADD_VAR(::BoolProperty, bInvertBoneAxis, 0x1)
 		ADD_VAR(::NameProperty, JointTargetSpaceBoneName, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, JointTargetLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, JointTargetLocation, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, EffectorSpaceBoneName, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, JointAxis, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, BoneAxis, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, JointTargetLocationSpace, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, EffectorLocationSpace, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, EffectorLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, EffectorLocation, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

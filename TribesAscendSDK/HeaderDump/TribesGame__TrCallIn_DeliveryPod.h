@@ -28,8 +28,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, Speed, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, TargetImpactPoint, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, TargetHitNormal, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, TargetImpactPoint, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, TargetHitNormal, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LifeAfterImpact, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, ImpactSound)
 		ADD_OBJECT(SoundCue, FallingSound)

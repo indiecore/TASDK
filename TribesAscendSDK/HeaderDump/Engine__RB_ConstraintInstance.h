@@ -32,13 +32,13 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, AngularDriveForceLimit, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AngularDriveDamping, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AngularDriveSpring, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, AngularVelocityTarget, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, AngularVelocityTarget, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat' for the property named 'AngularPositionTarget'!
 		ADD_VAR(::FloatProperty, LinearDriveForceLimit, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearDriveDamping, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearDriveSpring, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LinearVelocityTarget, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LinearPositionTarget, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LinearVelocityTarget, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LinearPositionTarget, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ConstraintData'!
 		ADD_VAR(::BoolProperty, bAngularSlerpDrive, 0x800)
 		ADD_VAR(::BoolProperty, bTwistVelocityDrive, 0x400)

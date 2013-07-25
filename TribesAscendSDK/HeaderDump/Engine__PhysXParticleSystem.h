@@ -25,7 +25,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, KernelRadiusMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RestDensity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RestParticleDistance, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ExternalAcceleration, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ExternalAcceleration, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Damping, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxMotionDistance, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsInGame, 0x40)

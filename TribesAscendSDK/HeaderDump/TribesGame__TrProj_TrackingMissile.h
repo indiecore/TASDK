@@ -23,9 +23,9 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, m_fLoseTightTrackingDistance, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, m_MissileCaratRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_MissileCaratRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fStage1MinGroundDist, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_vLastKnownTargetLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vLastKnownTargetLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fInitialLocationZ, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMinHeightGainForGoodLOS, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fIdealHeightAboveTargetForGoodLOS, 0xFFFFFFFF)

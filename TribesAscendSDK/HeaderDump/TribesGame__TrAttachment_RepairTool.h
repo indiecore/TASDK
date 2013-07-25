@@ -17,8 +17,8 @@ namespace UnrealScript
 	class TrAttachment_RepairTool : public TrDeviceAttachment
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, m_Tangent, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_Location, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_Tangent, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_Location, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bIsTracerActive, 0x1)
 		void KillRepairEffect()
 		{

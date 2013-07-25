@@ -29,9 +29,9 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, PreviewFloorYaw, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PreviewFloorPos, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, PreviewCamRot, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, PreviewCamPos, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PreviewFloorPos, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, PreviewCamRot, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, PreviewCamPos, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PreviewAnimSetIndex, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PreviewAnimSetListIndex, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PreviewSocketIndex, 0xFFFFFFFF)

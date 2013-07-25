@@ -17,7 +17,7 @@ namespace UnrealScript
 	class SeqAct_SetDOFParams : public SeqAct_Latent
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, OldFocusPosition, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, OldFocusPosition, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OldFocusDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OldFocusInnerRadius, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'OldModulateBlurColor'!
@@ -28,7 +28,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, OldFalloffExponent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InterpolateElapsed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InterpolateSeconds, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, FocusPosition, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FocusPosition, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FocusDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FocusInnerRadius, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'ModulateBlurColor'!

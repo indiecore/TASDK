@@ -18,7 +18,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bUseAcceleration, 0x1)
-		ADD_STRUCT(::RotatorProperty, RotationOffset, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, RotationOffset, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SingleAnimAtOrAboveLOD, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DirAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DirDegreesPerSecond, 0xFFFFFFFF)

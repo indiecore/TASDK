@@ -20,7 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, Position, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumPoints, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, WayPoints, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, WayPoints, 0xFFFFFFFF)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWillowWhisp.PostBeginPlay");

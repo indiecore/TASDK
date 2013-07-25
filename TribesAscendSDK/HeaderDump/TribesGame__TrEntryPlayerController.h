@@ -30,11 +30,11 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bMenuNotified, 0x1)
 		ADD_VAR(::FloatProperty, m_fCameraRotationInterpTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCameraRotationCurrTime, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, m_rTargetCameraRotation, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, m_rInitialCameraRotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_CameraLocation4x3, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_CameraLocation16x10, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_CameraLocation16x9, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_rTargetCameraRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, m_rInitialCameraRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_CameraLocation4x3, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_CameraLocation16x10, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_CameraLocation16x9, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_PreloadTextureTime, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, m_ContentDataType, 0xFFFFFFFF)
 		ADD_OBJECT(TrPaperDollMainMenu, m_MainMenuPaperDoll)

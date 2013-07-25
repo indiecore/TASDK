@@ -20,14 +20,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fSpinDownTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fSpinUpTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_TimeToInterpToTargetRotation, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, m_TargetRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_TargetRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCurrentDegreesPerSecond, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bRotateToTargetRotation, 0x10)
 		ADD_VAR(::BoolProperty, m_bSpinningDown, 0x8)
 		ADD_VAR(::BoolProperty, m_bSpinningUp, 0x4)
 		ADD_VAR(::BoolProperty, m_bIsSpinning, 0x2)
 		ADD_VAR(::BoolProperty, m_PreviewStartStop, 0x1)
-		ADD_STRUCT(::VectorProperty, m_vAxis, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vAxis, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fDegreesPerSecond, 0xFFFFFFFF)
 		void Spin(bool bEnabled)
 		{

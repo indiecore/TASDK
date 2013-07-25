@@ -51,7 +51,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LightDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LightDesaturation, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'AmbientGlow'!
-		ADD_STRUCT(::VectorProperty, AmbientShadowSourceDirection, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, AmbientShadowSourceDirection, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'AmbientShadowColor'!
 		ADD_VAR(::FloatProperty, LightingBoundsScale, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumVolumeVisibilitySamples, 0xFFFFFFFF)

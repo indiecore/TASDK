@@ -24,8 +24,8 @@ namespace UnrealScript
 	class ParticleModuleRequired : public ParticleModule
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, NormalsCylinderDirection, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, NormalsSphereCenter, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, NormalsCylinderDirection, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, NormalsSphereCenter, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DownsampleThresholdScreenFraction, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxDrawCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, RandomImageChanges, 0xFFFFFFFF)

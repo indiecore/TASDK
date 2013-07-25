@@ -17,7 +17,7 @@ namespace UnrealScript
 	class SpotLightComponent : public PointLightComponent
 	{
 	public:
-		ADD_STRUCT(::RotatorProperty, Rotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, Rotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LightShaftConeAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OuterConeAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InnerConeAngle, 0xFFFFFFFF)

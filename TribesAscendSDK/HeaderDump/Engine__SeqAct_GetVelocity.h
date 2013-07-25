@@ -17,7 +17,7 @@ namespace UnrealScript
 	class SeqAct_GetVelocity : public SequenceAction
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, VelocityVect, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, VelocityVect, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, VelocityMag, 0xFFFFFFFF)
 		int GetObjClassVersion()
 		{

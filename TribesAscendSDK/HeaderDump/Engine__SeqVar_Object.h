@@ -18,7 +18,7 @@ namespace UnrealScript
 	class SeqVar_Object : public SequenceVariable
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, ActorLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ActorLocation, 0xFFFFFFFF)
 		ADD_OBJECT(Object, ObjValue)
 		class Object* GetObjectValue()
 		{

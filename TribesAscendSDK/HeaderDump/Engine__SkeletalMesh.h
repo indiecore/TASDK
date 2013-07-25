@@ -27,8 +27,8 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(FaceFXAsset, FaceFXAsset)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoxSphereBounds' for the property named 'Bounds'!
-		ADD_STRUCT(::VectorProperty, Origin, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, RotOrigin, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Origin, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, RotOrigin, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SkeletalDepth, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IndirectArray_Mirror' for the property named 'LODModels'!
 		ADD_VAR(::ByteProperty, SkelMirrorAxis, 0xFFFFFFFF)
@@ -84,8 +84,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ClothTearFactor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ClothTearReserve, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnableValidBounds, 0x1)
-		ADD_STRUCT(::VectorProperty, ValidBoundsMin, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, ValidBoundsMax, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ValidBoundsMin, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, ValidBoundsMax, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'ClothTornTriMap'!
 		ADD_VAR(::FloatProperty, SoftBodyVolumeStiffness, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SoftBodyStretchingStiffness, 0xFFFFFFFF)

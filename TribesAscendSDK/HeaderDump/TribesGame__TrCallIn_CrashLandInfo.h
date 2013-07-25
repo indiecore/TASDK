@@ -29,8 +29,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Damage, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DamageRadius, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, DamageTypeClass)
-		ADD_STRUCT(::VectorProperty, r_CrashLandNormal, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, r_CrashLandPoint, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, r_CrashLandNormal, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, r_CrashLandPoint, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, r_fCrashLandTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, r_bPodLanded, 0x1)
 		ADD_OBJECT(Controller, m_Owner)

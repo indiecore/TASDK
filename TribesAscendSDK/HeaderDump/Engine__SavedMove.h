@@ -28,25 +28,25 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, TimeStamp, 0xFFFFFFFF)
 		ADD_OBJECT(SavedMove, NextMove)
-		ADD_STRUCT(::VectorProperty, Acceleration, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Acceleration, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, EndBase)
-		ADD_STRUCT(::VectorProperty, SavedRelativeLocation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, SavedLocation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, SavedVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, SavedRelativeLocation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, SavedLocation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, SavedVelocity, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bForceRMVelocity, 0x20)
 		ADD_VAR(::FloatProperty, Delta, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, DoubleClickMove, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, StartVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, StartVelocity, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, StartBase)
-		ADD_STRUCT(::VectorProperty, StartFloor, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, Rotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RootMotionInterpCurveLastValue, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, StartFloor, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, Rotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RootMotionInterpCurveLastValue, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RootMotionInterpCurrentTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AccelDotThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CustomTimeDilation, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, RMVelocity, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, StartRelativeLocation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, StartLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, RMVelocity, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, StartRelativeLocation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, StartLocation, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RootMotionMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, SavedPhysics, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bRootMotionFromInterpCurve, 0x80)

@@ -27,9 +27,9 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(StaticMesh, PreviewStaticMesh)
 		ADD_OBJECT(SkeletalMesh, PreviewSkelMesh)
-		ADD_STRUCT(::VectorProperty, RelativeScale, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, RelativeRotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RelativeLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, RelativeScale, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, RelativeRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RelativeLocation, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BoneName, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, SocketName, 0xFFFFFFFF)
 	};

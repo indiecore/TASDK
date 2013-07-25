@@ -64,7 +64,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BaseEyeHeight, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Health, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bForceRMVelocity, 0x100000)
-		ADD_STRUCT(::VectorProperty, Floor, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Floor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bRootMotionFromInterpCurve, 0x8000000)
 		ADD_VAR(::FloatProperty, CrouchHeight, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsCrouched, 0x10)
@@ -84,7 +84,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, OutofWaterZ, 0xFFFFFFFF)
 		ADD_OBJECT(NavigationPoint, Anchor)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.Pawn.LastHitInfoStruct' for the property named 'LastHitInfo'!
-		ADD_STRUCT(::VectorProperty, RootMotionInterpCurveLastValue, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, RootMotionInterpCurveLastValue, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RootMotionInterpCurrentTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RootMotionInterpRate, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.RootMotionCurve' for the property named 'RootMotionInterpCurve'!
@@ -93,10 +93,10 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, FailedLandingCount, 0xFFFFFFFF)
 		ADD_OBJECT(RB_BodyInstance, PhysicsPushBody)
 		ADD_VAR(::IntProperty, ShotCount, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LastFiringFlashLocation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, FlashLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastFiringFlashLocation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, FlashLocation, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, InventoryManagerClass)
-		ADD_STRUCT(::RotatorProperty, DesiredRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, DesiredRotation, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, AllowedYawError, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ViewPitchMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ViewPitchMin, 0xFFFFFFFF)
@@ -105,9 +105,9 @@ namespace UnrealScript
 		ADD_OBJECT(Vehicle, DrivenVehicle)
 		ADD_VAR(::FloatProperty, RBPushStrength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RBPushRadius, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, TearOffMomentum, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, TearOffMomentum, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, HitDamageType)
-		ADD_STRUCT(::VectorProperty, TakeHitLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, TakeHitLocation, 0xFFFFFFFF)
 		ADD_OBJECT(PlayerStart, LastStartSpot)
 		ADD_OBJECT(PlayerReplicationInfo, PlayerReplicationInfo)
 		ADD_OBJECT(ScriptClass, ControllerClass)
@@ -117,12 +117,12 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, noise2loudness, 0xFFFFFFFF)
 		ADD_OBJECT(Pawn, noise2other)
 		ADD_VAR(::FloatProperty, noise2time, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, noise2spot, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, noise2spot, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, noise1loudness, 0xFFFFFFFF)
 		ADD_OBJECT(Pawn, noise1other)
 		ADD_VAR(::FloatProperty, noise1time, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, noise1spot, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RMVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, noise1spot, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RMVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, KismetDeathDelayTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastPainTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, HealthMax, 0xFFFFFFFF)
@@ -142,7 +142,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, SpawnTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SerpentineTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SerpentineDist, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, SerpentineDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, SerpentineDir, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NextPathRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DestinationOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastValidAnchorTime, 0xFFFFFFFF)
@@ -229,7 +229,7 @@ namespace UnrealScript
 		ADD_OBJECT(PlayerController, LastRealViewer)
 		ADD_VAR(::FloatProperty, NetRelevancyTime, 0xFFFFFFFF)
 		ADD_OBJECT(Pawn, NextPawn)
-		ADD_STRUCT(::VectorProperty, PartialLedgeMoveDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PartialLedgeMoveDir, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LedgeCheckThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WalkableFloorZ, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxJumpHeight, 0xFFFFFFFF)

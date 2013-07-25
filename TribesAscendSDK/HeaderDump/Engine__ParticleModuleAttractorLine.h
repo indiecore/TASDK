@@ -13,8 +13,8 @@ namespace UnrealScript
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Strength'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Range'!
-		ADD_STRUCT(::VectorProperty, EndPoint1, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, EndPoint0, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, EndPoint1, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, EndPoint0, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

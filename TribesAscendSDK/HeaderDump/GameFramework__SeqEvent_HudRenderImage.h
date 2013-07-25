@@ -33,7 +33,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, YL, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, XL, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, DisplayTexture)
-		ADD_STRUCT(::VectorProperty, DisplayLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DisplayLocation, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'DisplayColor'!
 		void Render(class Canvas* TargetCanvas, class HUD* TargetHud)
 		{

@@ -112,10 +112,10 @@ namespace UnrealScript
 		ADD_OBJECT(PhysicalMaterial, PhysMaterialOverride)
 		ADD_OBJECT(RB_BodyInstance, BodyInstance)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'CachedParentToWorld'!
-		ADD_STRUCT(::VectorProperty, Translation, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, Rotation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Translation, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, Rotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Scale, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Scale3D, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Scale3D, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BoundsScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastSubmitTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastRenderTime, 0xFFFFFFFF)

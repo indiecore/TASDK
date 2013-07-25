@@ -105,11 +105,11 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, m_bAllowSimulatedProjectiles, 0x400000)
 		ADD_VAR(::BoolProperty, c_bPressingZoomButton, 0x200)
 		ADD_OBJECT(TrHelpTextManager, m_HelpTextManager)
-		ADD_STRUCT(::RotatorProperty, m_rCurrentKickbackDirection, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_rCurrentKickbackDirection, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialEffect, m_ZoomedEffect)
 		ADD_OBJECT(TrStatsInterface, Stats)
 		ADD_OBJECT(TrAccoladeManager, m_AccoladeManager)
-		ADD_STRUCT(::VectorProperty, m_vDeathCamOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vDeathCamOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fDeathCameraCurrentScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fDeathCameraInnerScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fDeathCameraInterpSpeed, 0xFFFFFFFF)
@@ -134,8 +134,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, VGSClassId, 0xFFFFFFFF)
 		ADD_OBJECT(TrContentLoader, c_ContentLoader)
 		ADD_VAR(::IntProperty, m_WhisperFilter, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, r_rViewTargetViewRotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, r_vViewTargetViewLocation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, r_rViewTargetViewRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, r_vViewTargetViewLocation, 0xFFFFFFFF)
 		ADD_OBJECT(PlayerReplicationInfo, r_ViewTargetVehiclePassengerPRI)
 		ADD_OBJECT(PlayerReplicationInfo, r_ViewTargetVehicleDriverPRI)
 		ADD_VAR(::FloatProperty, r_fViewTargetVehicleMaxPowerPool, 0xFFFFFFFF)
@@ -229,7 +229,7 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, m_MissileLockingCue)
 		ADD_VAR(::IntProperty, m_OverwatchTeam, 0xFFFFFFFF)
 		ADD_OBJECT(CameraActor, m_OverwatchCam)
-		ADD_STRUCT(::RotatorProperty, m_rKickbackAim, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_rKickbackAim, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fLastKickbackViewTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fKickbackViewBlendInTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fKickbackViewBlendOutTime, 0xFFFFFFFF)

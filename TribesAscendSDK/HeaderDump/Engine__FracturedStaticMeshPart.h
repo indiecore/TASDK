@@ -27,7 +27,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, LastImpactSoundTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentVibrationLevel, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, OldVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, OldVelocity, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, AsleepRBChannel, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FracPartGravScale, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PartPoolIndex, 0xFFFFFFFF)

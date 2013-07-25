@@ -18,9 +18,9 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::NameProperty, SocketOrBoneName, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Rotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RotationVector, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Rotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RotationVector, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF)
 		int GetObjClassVersion()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_GetLocationAndRotation.GetObjClassVersion");

@@ -23,7 +23,7 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'GoalPoly'!
 		ADD_VAR(::BoolProperty, bKeepPartial, 0x1)
 		ADD_VAR(::FloatProperty, GoalDist, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Goal, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Goal, 0xFFFFFFFF)
 		void RecycleNative()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_At.RecycleNative");

@@ -45,14 +45,14 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bLinearBreakable, 0x4)
 		ADD_VAR(::BoolProperty, bLinearLimitSoft, 0x2)
 		ADD_VAR(::BoolProperty, bEnableProjection, 0x1)
-		ADD_STRUCT(::VectorProperty, PulleyPivot2, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, PulleyPivot1, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, SecAxis2, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, PriAxis2, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Pos2, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, SecAxis1, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, PriAxis1, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Pos1, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PulleyPivot2, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, PulleyPivot1, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, SecAxis2, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, PriAxis2, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Pos2, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, SecAxis1, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, PriAxis1, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Pos1, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

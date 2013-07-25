@@ -25,8 +25,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(Object, FinalTouchObject)
-		ADD_STRUCT(::VectorProperty, FinalTouchNormal, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, FinalTouchLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FinalTouchNormal, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, FinalTouchLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TraceDistance, 0xFFFFFFFF)
 	};
 }

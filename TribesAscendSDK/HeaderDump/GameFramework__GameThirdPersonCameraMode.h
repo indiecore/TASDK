@@ -33,7 +33,7 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'DOF_RadiusDistRange'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'DOF_RadiusRange'!
 		ADD_VAR(::FloatProperty, DOF_RadiusFalloff, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, DOFTraceExtent, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DOFTraceExtent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DOFDistanceInterpSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastDOFDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastDOFRadius, 0xFFFFFFFF)
@@ -44,22 +44,22 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DOF_FalloffExponent, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameThirdPersonCameraMode.ViewOffsetData' for the property named 'ViewOffset_ViewportAdjustments'!
 		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameThirdPersonCameraMode.ViewOffsetData' for the property named 'ViewOffset'!
-		ADD_STRUCT(::VectorProperty, TargetRelativeCameraOriginOffset, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, WorstLocOffset, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastRunOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, TargetRelativeCameraOriginOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, WorstLocOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastRunOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RunOffsetInterpSpeedOut, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RunOffsetInterpSpeedIn, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RunOffsetScalingThreshold, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, RunBackAdjustment, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RunFwdAdjustment, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastStrafeOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, RunBackAdjustment, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RunFwdAdjustment, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastStrafeOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StrafeOffsetInterpSpeedOut, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StrafeOffsetInterpSpeedIn, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StrafeOffsetScalingThreshold, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, StrafeRightAdjustment, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, StrafeLeftAdjustment, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, StrafeRightAdjustment, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, StrafeLeftAdjustment, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OriginRotInterpSpeed, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PerAxisOriginLocInterpSpeed, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PerAxisOriginLocInterpSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OriginLocInterpSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FollowingCameraVelThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FollowingInterpSpeed_Roll, 0xFFFFFFFF)

@@ -18,7 +18,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, LoopCount, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LocationOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LocationOffset, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector2D' for the property named 'AnimatedPosition'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveLinearColor' for the property named 'AnimatedColor'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat' for the property named 'AnimatedScale'!

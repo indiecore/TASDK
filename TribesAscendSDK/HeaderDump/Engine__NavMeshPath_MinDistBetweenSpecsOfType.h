@@ -19,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::ByteProperty, EdgeType, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, InitLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, InitLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinDistBetweenEdgeTypes, 0xFFFFFFFF)
 		bool EnforceMinDist(class NavigationHandle* NavHandle, float InMinDist, byte InEdgeType, Vector LastLocation)
 		{

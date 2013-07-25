@@ -53,8 +53,8 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'BoneSpring'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'BodyData'!
 		ADD_VAR(::IntProperty, SceneIndex, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PreviousVelocity, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Velocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PreviousVelocity, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Velocity, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, BodyIndex, 0xFFFFFFFF)
 		bool IsFixed()
 		{

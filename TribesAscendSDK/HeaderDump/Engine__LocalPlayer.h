@@ -38,7 +38,7 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, AspectRatioAxisConstraint, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.LocalPlayer.CurrentPostProcessVolumeInfo' for the property named 'LevelPPInfo'!
 		// WARNING: Unknown structure type 'ScriptStruct Engine.LocalPlayer.CurrentPostProcessVolumeInfo' for the property named 'CurrentPPInfo'!
-		ADD_STRUCT(::VectorProperty, LastViewLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastViewLocation, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.LocalPlayer.SynchronizedActorVisibilityHistory' for the property named 'ActorVisibilityHistory'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ViewState'!
 		ADD_OBJECT(PostProcessChain, PlayerPostProcess)

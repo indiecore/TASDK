@@ -17,7 +17,7 @@ namespace UnrealScript
 	class SeqEvent_MobileLook : public SeqEvent_MobileZoneBase
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, RotationVector, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, RotationVector, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StickStrength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Yaw, 0xFFFFFFFF)
 	};

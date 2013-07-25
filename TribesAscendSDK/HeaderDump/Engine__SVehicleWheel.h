@@ -27,17 +27,17 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(SkelControlWheel, WheelControl)
 		ADD_VAR(::NameProperty, SkelControlName, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, WheelPosition, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, WheelPosition, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ContactForce, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LongSlipRatio, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LatSlipAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MotorTorque, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SpinVel, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LongImpulse, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LongDirection, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LongDirection, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WheelRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LatImpulse, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LatDirection, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LatDirection, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, SlipParticleParamName, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, WheelPSCClass)
 		ADD_VAR(::IntProperty, WheelMaterialIndex, 0xFFFFFFFF)
@@ -45,7 +45,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CurrentRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SuspensionPosition, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DesiredSuspensionPosition, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ContactNormal, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ContactNormal, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ParkedSlipFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HandbrakeLatSlipFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HandbrakeLongSlipFactor, 0xFFFFFFFF)
@@ -55,7 +55,7 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, WheelParticleSystem)
 		ADD_VAR(::FloatProperty, SuspensionSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SuspensionTravel, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, BoneOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, BoneOffset, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BoneName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SteerFactor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bWheelOnGround, 0x20)

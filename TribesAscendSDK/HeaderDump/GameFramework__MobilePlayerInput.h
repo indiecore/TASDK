@@ -29,13 +29,13 @@ namespace UnrealScript
 	class MobilePlayerInput : public PlayerInput
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, DeviceAccelerometerRawData, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DeviceAccelerometerRawData, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDeviceHasGyroscope, 0x10)
-		ADD_STRUCT(::VectorProperty, DeviceGyroRawData, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, DeviceMotionAttitude, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, DeviceMotionRotationRate, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, DeviceMotionGravity, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, DeviceMotionAcceleration, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DeviceGyroRawData, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, DeviceMotionAttitude, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, DeviceMotionRotationRate, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, DeviceMotionGravity, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, DeviceMotionAcceleration, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobilePlayerInput.TouchData' for the property named 'Touches'!
 		ADD_VAR(::FloatProperty, MobileYaw, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MobileYawCenter, 0xFFFFFFFF)

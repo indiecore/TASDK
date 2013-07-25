@@ -26,8 +26,8 @@ namespace UnrealScript
 	class TrProj_PrismMine : public TrProj_Mine
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, r_vRightHit, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, r_vLeftHit, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, r_vRightHit, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, r_vLeftHit, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, m_nSocketTraceName, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, m_LaserTemplate)
 		ADD_VAR(::FloatProperty, m_fTripDistance, 0xFFFFFFFF)

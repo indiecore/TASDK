@@ -26,18 +26,18 @@ namespace UnrealScript
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'LinearKernel'!
 		ADD_VAR(::FloatProperty, TorusRadius, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, FalloffQuadratic, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, FalloffLinear, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Noise, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, VelocityTarget, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, VelocityMultiplierZ, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, VelocityMultiplierY, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, VelocityMultiplierX, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, PositionTarget, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, PositionMultiplierZ, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, PositionMultiplierY, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, PositionMultiplierX, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Constant, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FalloffQuadratic, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, FalloffLinear, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Noise, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, VelocityTarget, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, VelocityMultiplierZ, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, VelocityMultiplierY, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, VelocityMultiplierX, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, PositionTarget, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, PositionMultiplierZ, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, PositionMultiplierY, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, PositionMultiplierX, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Constant, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, Coordinates, 0xFFFFFFFF)
 		ADD_OBJECT(ForceFieldShape, Shape)
 		ADD_VAR(::FloatProperty, RoughExtentZ, 0xFFFFFFFF)

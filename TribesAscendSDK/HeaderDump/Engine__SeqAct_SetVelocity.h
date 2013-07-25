@@ -18,7 +18,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, VelocityMag, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, VelocityDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, VelocityDir, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bVelocityRelativeToActorRotation, 0x1)
 		int GetObjClassVersion()
 		{

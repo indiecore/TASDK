@@ -26,11 +26,11 @@ namespace UnrealScript
 	class GameSpecialMove : public Object
 	{
 	public:
-		ADD_STRUCT(::RotatorProperty, PreciseRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, PreciseRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PreciseRotationInterpolationTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PreciseDestRelOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PreciseDestRelOffset, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, PreciseDestBase)
-		ADD_STRUCT(::VectorProperty, PreciseDestination, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PreciseDestination, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bForcePrecisePosition, 0x20)
 		ADD_VAR(::BoolProperty, bReachedPreciseRotation, 0x10)
 		ADD_VAR(::BoolProperty, bReachPreciseRotation, 0x8)

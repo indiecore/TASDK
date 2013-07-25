@@ -19,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::ByteProperty, m_OldContentDataType, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, m_rZeroedRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_rZeroedRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fFullCharacterLightingContrastFactor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bWasLastMeshSwapRequestMainMenuContentScene, 0x2)
 		ADD_VAR(::BoolProperty, m_bEditorMode, 0x1)

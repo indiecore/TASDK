@@ -57,7 +57,7 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceConstant, BioDeathMICParent)
 		ADD_OBJECT(MaterialInstanceConstant, BaseMICParent)
 		ADD_OBJECT(ScriptClass, VoiceClass)
-		ADD_STRUCT(::VectorProperty, PortraitExtraOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PortraitExtraOffset, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, NeckStumpName, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInterface, BlueArmMaterial)
 		ADD_OBJECT(MaterialInterface, RedArmMaterial)

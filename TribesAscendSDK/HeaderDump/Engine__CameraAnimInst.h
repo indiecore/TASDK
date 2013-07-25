@@ -29,7 +29,7 @@ namespace UnrealScript
 	class CameraAnimInst : public Object
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, LastCameraLoc, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastCameraLoc, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastPPSettingsAlpha, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'LastPPSettings'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'UserPlaySpaceMatrix'!

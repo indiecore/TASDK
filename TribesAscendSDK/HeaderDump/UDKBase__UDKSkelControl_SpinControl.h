@@ -17,7 +17,7 @@ namespace UnrealScript
 	class UDKSkelControl_SpinControl : public SkelControlSingleBone
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, Axis, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Axis, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DegreesPerSecond, 0xFFFFFFFF)
 	};
 }

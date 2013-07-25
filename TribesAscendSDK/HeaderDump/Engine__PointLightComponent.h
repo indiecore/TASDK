@@ -19,7 +19,7 @@ namespace UnrealScript
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightmassPointLightSettings' for the property named 'LightmassSettings'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Plane' for the property named 'ShadowPlane'!
-		ADD_STRUCT(::VectorProperty, Translation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Translation, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'CachedParentToWorld'!
 		ADD_VAR(::FloatProperty, MinShadowFalloffRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ShadowFalloffExponent, 0xFFFFFFFF)

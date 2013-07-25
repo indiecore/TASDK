@@ -28,19 +28,19 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(ParticleSystem, PS_DeathTrail)
 		ADD_OBJECT(ParticleSystem, PS_DeathOnBreak)
-		ADD_STRUCT(::VectorProperty, DeathScale, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, DeathImpulseDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DeathScale, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, DeathImpulseDir, 0xFFFFFFFF)
 		ADD_OBJECT(StaticMesh, DeathStaticMesh)
 		ADD_VAR(::FloatProperty, DeathBoneScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DeathPercentToActuallySpawn, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, BreakSpeed, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, BreakSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OwnerVehicleMaxHealth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BreakTimer, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BrokenBone, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, PS_DamageTrail)
 		ADD_OBJECT(ParticleSystem, PS_DamageOnBreak)
-		ADD_STRUCT(::VectorProperty, DamageScale, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, DefaultBreakDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DamageScale, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, DefaultBreakDir, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BreakTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BreakThreshold, 0xFFFFFFFF)
 		ADD_OBJECT(StaticMesh, BreakMesh)

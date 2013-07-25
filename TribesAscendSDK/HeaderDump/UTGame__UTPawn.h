@@ -62,14 +62,14 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, CurrentCameraScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CameraScale, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, WalkBob, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, WalkBob, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, VestArmor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ShieldBeltArmor, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, HoverboardClass)
 		ADD_VAR(::BoolProperty, bIsInvulnerable, 0x40)
 		ADD_VAR(::BoolProperty, bFixedView, 0x1)
-		ADD_STRUCT(::VectorProperty, FixedViewLoc, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, FixedViewRot, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FixedViewLoc, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, FixedViewRot, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LandBob, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bJustLanded, 0x400)
 		ADD_VAR(::BoolProperty, bLandRecovery, 0x800)
@@ -128,7 +128,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bWinnerCam, 0x4000)
 		ADD_VAR(::IntProperty, HeroCameraPitch, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HeroCameraScale, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, CamOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, CamOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DodgeSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DodgeSpeedZ, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDodging, 0x10)
@@ -159,7 +159,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CameraScaleMin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CameraScaleMax, 0xFFFFFFFF)
 		ADD_OBJECT(ForceFeedbackWaveform, FallingDamageWaveForm)
-		ADD_STRUCT(::VectorProperty, OldCameraPosition, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, OldCameraPosition, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bKilledByBio, 0x800000)
 		ADD_VAR(::FloatProperty, BioBurnAwayTime, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BioEffectName, 0xFFFFFFFF)

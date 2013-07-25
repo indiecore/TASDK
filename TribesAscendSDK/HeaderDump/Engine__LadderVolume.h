@@ -26,14 +26,14 @@ namespace UnrealScript
 	class LadderVolume : public PhysicsVolume
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, ClimbDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ClimbDir, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bAllowLadderStrafing, 0x4)
 		ADD_OBJECT(Pawn, PendingClimber)
 		ADD_VAR(::BoolProperty, bAutoPath, 0x2)
 		ADD_VAR(::BoolProperty, bNoPhysicalLadder, 0x1)
 		ADD_OBJECT(Ladder, LadderList)
-		ADD_STRUCT(::VectorProperty, LookDir, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, WallDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LookDir, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, WallDir, 0xFFFFFFFF)
 		bool InUse(class Pawn* Ignored)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LadderVolume.InUse");

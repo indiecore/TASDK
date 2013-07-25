@@ -18,10 +18,10 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::ByteProperty, ParamModes, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, MaxOutput, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, MinOutput, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, MaxInput, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, MinInput, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, MaxOutput, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, MinOutput, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, MaxInput, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, MinInput, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, ParameterName, 0xFFFFFFFF)
 	};
 }

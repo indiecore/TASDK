@@ -33,13 +33,13 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, m_SpawnedEquipPoint, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, r_nTetherId, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bIsBullet, 0x100)
-		ADD_STRUCT(::VectorProperty, r_vSpawnLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, r_vSpawnLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fInstigatorExtraZMomentum, 0xFFFFFFFF)
 		ADD_OBJECT(TrDevice, SpawnedFromDevice)
 		ADD_VAR(::FloatProperty, m_fAlwaysRelevantDistanceSquared, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMinLifespan, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMaxLifespan, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_vAccelDirection, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vAccelDirection, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fClientSimulatedSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fTweenSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCurrentTetherTweenAmount, 0xFFFFFFFF)

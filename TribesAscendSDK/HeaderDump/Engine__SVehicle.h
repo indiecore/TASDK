@@ -40,7 +40,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, DriverViewYaw, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DriverViewPitch, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CamDist, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, BaseOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, BaseOffset, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumPoweredWheels, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ForwardVel, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OutputRise, 0xFFFFFFFF)
@@ -84,8 +84,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUpdateWheelShapes, 0x4)
 		ADD_VAR(::BoolProperty, bUseSuspensionAxis, 0x2)
 		ADD_VAR(::BoolProperty, bStayUpright, 0x1)
-		ADD_STRUCT(::VectorProperty, InertiaTensorMultiplier, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, COMOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, InertiaTensorMultiplier, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, COMOffset, 0xFFFFFFFF)
 		void AddForce(Vector Force)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.AddForce");

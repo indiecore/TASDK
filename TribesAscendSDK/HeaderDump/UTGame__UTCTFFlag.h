@@ -28,8 +28,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, LastLocationPingTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, HoverboardingClothVelClamp, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RunningClothVelClamp, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HoverboardingClothVelClamp, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RunningClothVelClamp, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bWasClothEnabled, 0x10)
 		ADD_VAR(::BoolProperty, bRespawning, 0x8)
 		ADD_VAR(::BoolProperty, bFadingOut, 0x4)

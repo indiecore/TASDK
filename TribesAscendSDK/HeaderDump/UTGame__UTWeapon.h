@@ -86,17 +86,17 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, AttachmentClass)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'MuzzleFlashColor'!
 		ADD_VAR(::BoolProperty, bForceHidden, 0x200000)
-		ADD_STRUCT(::VectorProperty, HiddenWeaponsOffset, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, PlayerViewOffset, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, SmallWeaponsOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HiddenWeaponsOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, PlayerViewOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, SmallWeaponsOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WideScreenOffsetScaling, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BobDamping, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, JumpDamping, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, LastRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, LastRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxYawLag, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxPitchLag, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastRotUpdate, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, WidescreenRotationOffset, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, WidescreenRotationOffset, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, OldRotDiff, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OldLeadMag, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OldMaxDiff, 0xFFFFFFFF)
@@ -133,10 +133,10 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, IconHeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DroppedPickupOffsetZ, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ZoomFadeTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PivotTranslation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PivotTranslation, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'WeaponColor'!
-		ADD_STRUCT(::RotatorProperty, LockerRotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LockerOffset, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, LockerRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LockerOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, aimerror, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo' for the property named 'NeedToPickUpAnnouncement'!
 		ADD_VAR(::FloatProperty, ZoomedTurnSpeedScalePct, 0xFFFFFFFF)
@@ -147,7 +147,7 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'TargetFrictionMultiplierRange'!
 		ADD_VAR(::FloatProperty, TargetFrictionPeakRadiusScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetFrictionPeakHeightScale, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, TargetFrictionOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, TargetFrictionOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetFrictionZoomedBoostValue, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetAdhesionTimeMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetAdhesionDistanceMax, 0xFFFFFFFF)

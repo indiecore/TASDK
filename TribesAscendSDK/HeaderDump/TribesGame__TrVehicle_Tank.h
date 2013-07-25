@@ -28,8 +28,8 @@ namespace UnrealScript
 		ADD_OBJECT(CameraShake, m_FireCameraShake)
 		ADD_VAR(::ByteProperty, GunnerFiringMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, GunnerFlashCount, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, GunnerWeaponRotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, GunnerFlashLocation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, GunnerWeaponRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, GunnerFlashLocation, 0xFFFFFFFF)
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)

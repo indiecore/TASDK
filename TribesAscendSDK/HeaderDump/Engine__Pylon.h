@@ -26,7 +26,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, DebugEdgeCount, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ExpansionSphereCenter, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ExpansionSphereCenter, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bForceObstacleMeshCollision, 0x400)
 		ADD_VAR(::BoolProperty, bDisabled, 0x200)
 		ADD_VAR(::BoolProperty, bBuildThisPylon, 0x100)

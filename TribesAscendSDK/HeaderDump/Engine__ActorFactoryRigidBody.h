@@ -20,7 +20,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, StayUprightMaxTorque, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StayUprightTorqueFactor, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RBChannel, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, InitialVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, InitialVelocity, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnableStayUprightSpring, 0x8)
 		ADD_VAR(::BoolProperty, bLocalSpaceInitialVelocity, 0x4)
 		ADD_VAR(::BoolProperty, bDamageAppliesImpulse, 0x2)

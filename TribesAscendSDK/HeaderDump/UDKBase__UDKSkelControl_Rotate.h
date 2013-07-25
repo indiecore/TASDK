@@ -11,8 +11,8 @@ namespace UnrealScript
 	class UDKSkelControl_Rotate : public SkelControlSingleBone
 	{
 	public:
-		ADD_STRUCT(::RotatorProperty, DesiredBoneRotationRate, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, DesiredBoneRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, DesiredBoneRotationRate, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, DesiredBoneRotation, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

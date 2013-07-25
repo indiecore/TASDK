@@ -18,8 +18,8 @@ namespace UnrealScript
 	class TrDevice_RepairTool : public TrDevice_ConstantFire
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, m_Location, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_Tangent, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_Location, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_Tangent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fTargetHealth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fDisplayOn, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bIsBehindView, 0x1)

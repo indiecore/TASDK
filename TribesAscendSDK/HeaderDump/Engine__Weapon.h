@@ -42,7 +42,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bWasOptionalSet, 0x4)
 		ADD_VAR(::BoolProperty, bCanThrow, 0x2)
 		ADD_VAR(::BoolProperty, bWeaponPutDown, 0x1)
-		ADD_STRUCT(::VectorProperty, FireOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FireOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PutDownTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EquipTime, 0xFFFFFFFF)
 		float GetTraceRange()

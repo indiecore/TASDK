@@ -26,7 +26,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::StrProperty, CancelString, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, AcceptString, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, StartRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, StartRotation, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, WeaponClass)
 		ADD_VAR(::FloatProperty, leftThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, rightThreshold, 0xFFFFFFFF)

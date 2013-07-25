@@ -28,7 +28,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ReachSpec, CurrentSpec)
-		ADD_STRUCT(::VectorProperty, MoveVectDest, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, MoveVectDest, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, GoalDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SubGoalReachDist, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentHoverHeight, 0xFFFFFFFF)

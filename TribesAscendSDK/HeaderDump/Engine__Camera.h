@@ -42,9 +42,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bLockedFOV, 0x1)
 		ADD_VAR(::FloatProperty, LockedFOV, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnableColorScaling, 0x8)
-		ADD_STRUCT(::VectorProperty, ColorScale, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, OriginalColorScale, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, DesiredColorScale, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ColorScale, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, OriginalColorScale, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, DesiredColorScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ColorScaleInterpStartTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ColorScaleInterpDuration, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnableColorScaleInterp, 0x10)
@@ -61,7 +61,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, FadeAmount, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'FadeAlpha'!
 		// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TCameraCache' for the property named 'LastFrameCameraCache'!
-		ADD_STRUCT(::VectorProperty, FreeCamOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FreeCamOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FreeCamDistance, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'CamPostProcessSettings'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'FadeColor'!

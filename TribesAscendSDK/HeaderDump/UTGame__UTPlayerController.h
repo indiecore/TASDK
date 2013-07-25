@@ -74,14 +74,14 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bFreeCamera, 0x200)
 		ADD_VAR(::FloatProperty, LastCameraTimeStamp, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDebugFreeCam, 0x40000)
-		ADD_STRUCT(::RotatorProperty, DebugFreeCamRot, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, DebugFreeCamRot, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, MatineeCameraClass)
-		ADD_STRUCT(::VectorProperty, CalcViewActorLocation, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, CalcViewActorRotation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, CalcViewActorLocation, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, CalcViewActorRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CalcEyeHeight, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, CalcWalkBob, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, CalcViewLocation, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, CalcViewRotation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, CalcWalkBob, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, CalcViewLocation, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, CalcViewRotation, 0xFFFFFFFF)
 		ADD_OBJECT(CameraAnim, DamageCameraAnim)
 		ADD_VAR(::BoolProperty, bCurrentCamAnimIsDamageShake, 0x1000)
 		ADD_VAR(::BoolProperty, bCurrentCamAnimAffectsFOV, 0x2000)
@@ -104,7 +104,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bNoCrosshair, 0x100000)
 		ADD_VAR(::BoolProperty, bSimpleCrosshair, 0x200000)
 		ADD_VAR(::BoolProperty, bHideObjectivePaths, 0x1000000)
-		ADD_STRUCT(::VectorProperty, DesiredLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DesiredLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ZoomRotationModifier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OldMessageTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastFriendlyFireTime, 0xFFFFFFFF)

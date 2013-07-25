@@ -28,10 +28,10 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, FoliageStiffness, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FoliageTouchImpulseScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FoliageDamageImpulseScale, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, FoliagePosition, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, FoliageForce, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, FoliageVelocity, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, TouchingActorEntryPosition, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FoliagePosition, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, FoliageForce, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, FoliageVelocity, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, TouchingActorEntryPosition, 0xFFFFFFFF)
 		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, 
 // WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
 void* HitInfo, class Actor* DamageCauser)

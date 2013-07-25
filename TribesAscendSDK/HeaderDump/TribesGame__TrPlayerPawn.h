@@ -63,7 +63,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_Cam3pZoomInSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_Cam3pZoomOutSpeed, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, m_DeathCamFocus)
-		ADD_STRUCT(::RotatorProperty, m_CamRotOffset, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_CamRotOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRibbonZVelocity, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, m_SonicPunchEffect3p)
 		ADD_OBJECT(ParticleSystem, m_SonicPunchEffect1p)

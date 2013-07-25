@@ -19,8 +19,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, Epsilon, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Rotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Rotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF)
 		bool OutsideOfDotProductWedge(class NavMeshGoal_GenericFilterContainer* FilterContainer, Vector InLocation, Rotator InRotation, float InEpsilon)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoalFilter_OutSideOfDotProductWedge.OutsideOfDotProductWedge");

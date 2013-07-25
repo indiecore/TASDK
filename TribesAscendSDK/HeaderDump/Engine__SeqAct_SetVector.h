@@ -11,7 +11,7 @@ namespace UnrealScript
 	class SeqAct_SetVector : public SeqAct_SetSequenceVariable
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, DefaultValue, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DefaultValue, 0xFFFFFFFF)
 		void Activated()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_SetVector.Activated");

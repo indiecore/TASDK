@@ -56,7 +56,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, m_nPromptMessageSwitch, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fPromptMessageTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRemainingSeekingTargetHUDZoomTime, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, m_rPotentialSeekingTargetHUDRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_rPotentialSeekingTargetHUDRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRemainingPotentialSeekingTargetHUDZoomTime, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, m_MissileLockStatus, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, r_bReset, 0xFFFFFFFF)
@@ -99,14 +99,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fShieldHealthPercentage, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, r_nRepairHealthThreshold, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nCriticalHealthThreshold, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, r_vReplicatedHitInfo, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, r_vReplicatedHitInfo, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nHealthRegenRate, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nLastHealth, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, r_MaxHealth, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, r_Health, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, m_ObjectiveMIC)
-		ADD_STRUCT(::VectorProperty, CallInPosition, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, CallInRotation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, CallInPosition, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, CallInRotation, 0xFFFFFFFF)
 		ADD_OBJECT(TrStatsInterface, Stats)
 		bool IsEnemy(class Actor* Target)
 		{

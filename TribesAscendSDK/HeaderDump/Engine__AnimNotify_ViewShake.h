@@ -33,10 +33,10 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDoControllerVibration, 0x1)
 		ADD_VAR(::FloatProperty, FOVFrequency, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FOVAmplitude, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LocFrequency, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LocAmplitude, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RotFrequency, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RotAmplitude, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LocFrequency, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LocAmplitude, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RotFrequency, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RotAmplitude, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Duration, 0xFFFFFFFF)
 		void Notify(class Actor* Owner, class AnimNodeSequence* AnimSeqInstigator)
 		{

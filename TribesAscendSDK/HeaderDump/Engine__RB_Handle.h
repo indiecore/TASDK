@@ -17,13 +17,13 @@ namespace UnrealScript
 	class RB_Handle : public ActorComponent
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, StepSize, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Destination, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, StepSize, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Destination, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AngularStiffness, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AngularDamping, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LinearDampingScale3D, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LinearStiffnessScale3D, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LinearDampingScale3D, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LinearStiffnessScale3D, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearStiffness, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearDamping, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'KinActorData'!

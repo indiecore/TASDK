@@ -19,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, InterpTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ColorScale, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ColorScale, 0xFFFFFFFF)
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* OtherComp, Vector HitLocation, Vector HitNormal)

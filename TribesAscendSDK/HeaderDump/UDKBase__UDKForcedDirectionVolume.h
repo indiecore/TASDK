@@ -25,7 +25,7 @@ namespace UnrealScript
 	class UDKForcedDirectionVolume : public PhysicsVolume
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, ArrowDirection, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ArrowDirection, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bBlockSpectators, 0x8)
 		ADD_VAR(::BoolProperty, bBlockPawns, 0x4)
 		ADD_VAR(::BoolProperty, bDenyExit, 0x2)

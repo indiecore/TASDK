@@ -20,7 +20,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Z, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Y, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, X, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, InVector, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, InVector, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

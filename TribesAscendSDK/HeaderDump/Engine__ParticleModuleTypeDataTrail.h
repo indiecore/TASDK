@@ -17,7 +17,7 @@ namespace UnrealScript
 	class ParticleModuleTypeDataTrail : public ParticleModuleTypeDataBase
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, SpawnDistance, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, SpawnDistance, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Tension'!
 		ADD_VAR(::IntProperty, TessellationFactor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, SpawnByDistance, 0x10)

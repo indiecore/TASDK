@@ -18,7 +18,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bSmoothInterpRollScale, 0x1)
-		ADD_STRUCT(::VectorProperty, SplineXDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, SplineXDir, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.SplineMeshComponent.SplineMeshParams' for the property named 'SplineParams'!
 	};
 }

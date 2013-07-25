@@ -37,7 +37,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bNotifyStopFalling, 0x40)
 		ADD_VAR(::BoolProperty, bReadyToDoubleJump, 0x1)
-		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'CurrentSkelAim'!
 		ADD_VAR(::IntProperty, MaxYawAim, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RootYawSpeed, 0xFFFFFFFF)
@@ -72,7 +72,7 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, FallImpactSound)
 		ADD_VAR(::NameProperty, TorsoBoneName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StartFallImpactTime, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, CompressedBodyMatColor, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, CompressedBodyMatColor, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'BodyMatColor'!
 		ADD_VAR(::FloatProperty, ClientBodyMatDuration, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RemainingBodyMatDuration, 0xFFFFFFFF)
@@ -89,7 +89,7 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.DrivenWeaponPawnInfo' for the property named 'DrivenWeaponPawn'!
 		ADD_OBJECT(SoundCue, PawnAmbientSoundCue)
 		ADD_VAR(::FloatProperty, OldZ, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, MeshTranslationOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, MeshTranslationOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SmoothNetUpdateTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NoSmoothNetUpdateDist, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxSmoothNetUpdateDist, 0xFFFFFFFF)

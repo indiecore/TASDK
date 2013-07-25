@@ -41,7 +41,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastKillTime, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, OrdersIndex, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, OrdersString, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'DefaultHudColor'!
 		ADD_OBJECT(UTCarriedObject, HasFlag)
 		int IncrementEventStat(ScriptName NewStatName)

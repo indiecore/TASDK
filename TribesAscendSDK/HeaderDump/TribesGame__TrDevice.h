@@ -52,13 +52,13 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, DBWeaponId, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nReticuleIndex, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bAllowFireWhileZoomed, 0x100000)
-		ADD_STRUCT(::VectorProperty, m_vClientSideFireOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vClientSideFireOffset, 0xFFFFFFFF)
 		ADD_OBJECT(TrDeviceContentData, m_ContentData)
 		ADD_VAR(::StrProperty, m_sContentDataClassName, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrDevice.DeviceUpgrade' for the property named 'BaseMod'!
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'm_InGamePaperDollInfo'!
 		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'm_MainMenuPaperDollInfo'!
-		ADD_STRUCT(::VectorProperty, m_TinyWeaponsOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_TinyWeaponsOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fTimeBeforeInactiveReload, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fLastActiveTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nTetherCounter, 0xFFFFFFFF)
@@ -67,11 +67,11 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fClientSideHitLeeway, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, m_ZoomOverlayMaterial)
 		ADD_VAR(::NameProperty, m_nmZoomMaterialEffectName, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_vZoomMeshOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vZoomMeshOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fZoomRate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fDesiredZoomFOV, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_ShotsFired, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_vPositionPivotOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vPositionPivotOffset, 0xFFFFFFFF)
 		ADD_OBJECT(CameraShake, m_FireCameraShake)
 		ADD_OBJECT(Material, r_ReplicatedMaterial)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_v2WeaponLagSmoothingFactor'!

@@ -28,9 +28,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ForceImpact, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'FluidSimulation'!
 		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightMapRef' for the property named 'LightMap'!
-		ADD_STRUCT(::VectorProperty, EditorViewPosition, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, DetailPosition, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, SimulationPosition, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, EditorViewPosition, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, DetailPosition, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, SimulationPosition, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ViewDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DeactivationTimer, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TestRippleAngle, 0xFFFFFFFF)

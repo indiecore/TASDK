@@ -27,10 +27,10 @@ namespace UnrealScript
 	class GameThirdPersonCamera : public GameCameraBase
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, LastOffsetAdjustment, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, LastPreModifierCameraRot, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastPreModifierCameraLoc, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastWorstLocationLocal, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastOffsetAdjustment, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, LastPreModifierCameraRot, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastPreModifierCameraLoc, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastWorstLocationLocal, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WorstLocInterpSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DirectLookInterpSpeed, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DirectLookYaw, 0xFFFFFFFF)
@@ -48,8 +48,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bFocusPointSuccessful, 0x2)
 		ADD_VAR(::BoolProperty, bFocusPointSet, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameThirdPersonCamera.CamFocusPointParams' for the property named 'FocusPoint'!
-		ADD_STRUCT(::VectorProperty, LastFocusPointLoc, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, ActualFocusPointWorldLoc, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastFocusPointLoc, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, ActualFocusPointWorldLoc, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastFocusChangeTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Focus_FastAdjustKickInTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Focus_MaxTries, 0xFFFFFFFF)
@@ -63,17 +63,17 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, ThirdPersonCamDefaultClass)
 		ADD_OBJECT(GameThirdPersonCameraMode, ThirdPersonCamDefault)
 		ADD_VAR(::FloatProperty, LastCamFOV, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LastViewOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastViewOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OriginOffsetInterpSpeed, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, LastActualCameraOriginRot, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastActualOriginOffset, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, LastActualCameraOriginRot, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastActualOriginOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PenetrationExtentScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PenetrationBlockedPct, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PenetrationBlendInTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PenetrationBlendOutTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WorstLocPenetrationExtentScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WorstLocBlockedPct, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LastActualCameraOrigin, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastActualCameraOrigin, 0xFFFFFFFF)
 		class GameThirdPersonCameraMode* CreateCameraMode(ScriptClass* ModeClass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCamera.CreateCameraMode");

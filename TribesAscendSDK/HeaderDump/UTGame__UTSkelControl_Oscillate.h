@@ -20,7 +20,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bReverseDirection, 0x1)
 		ADD_VAR(::FloatProperty, CurrentTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Period, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, MaxDelta, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, MaxDelta, 0xFFFFFFFF)
 		void TickSkelControl(float DeltaTime, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)

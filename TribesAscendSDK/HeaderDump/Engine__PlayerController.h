@@ -109,7 +109,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ClientCap, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastPingUpdate, 0xFFFFFFFF)
 		ADD_OBJECT(SavedMove, FreeMoves)
-		ADD_STRUCT(::VectorProperty, LastAckedAccel, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastAckedAccel, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bUpdatePosition, 0x8)
 		ADD_VAR(::ByteProperty, bRun, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, bDuck, 0xFFFFFFFF)
@@ -150,12 +150,12 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bCheckRelevancyThroughPortals, 0x10000000)
 		ADD_VAR(::BoolProperty, bDebugClientAdjustPosition, 0x20000000)
 		ADD_OBJECT(InterpTrackInstDirector, ControllingDirTrackInst)
-		ADD_STRUCT(::RotatorProperty, TargetViewRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, TargetViewRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetEyeHeight, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, BlendedTargetViewRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, BlendedTargetViewRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DynamicPingThreshold, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, CheatClass)
-		ADD_STRUCT(::VectorProperty, FailedPathStart, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FailedPathStart, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, DelayedJoinSessionName, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxConcurrentHearSounds, 0xFFFFFFFF)
 		float GetFOVAngle()

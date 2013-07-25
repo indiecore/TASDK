@@ -44,15 +44,15 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LeanTraceDist, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InvalidateDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxFireLinkDist, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, CircularOrigin, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, CircularOrigin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CircularRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AlignDist, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AutoCoverSlotInterval, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StandHeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MidHeight, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, StandingLeanOffset, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, CrouchLeanOffset, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, PopupOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, StandingLeanOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, CrouchLeanOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, PopupOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SlipDist, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TurnDist, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DangerScale, 0xFFFFFFFF)

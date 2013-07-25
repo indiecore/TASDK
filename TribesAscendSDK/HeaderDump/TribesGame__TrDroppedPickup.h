@@ -34,7 +34,7 @@ namespace UnrealScript
 		ADD_OBJECT(TrCollisionProxy, m_CollisionProxy)
 		ADD_VAR(::FloatProperty, m_fMarkerOpacity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCurrentMarkerTime, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, m_rMarkerRot, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_rMarkerRot, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMarkerBlinkSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMarkerScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMarkerZOffset, 0xFFFFFFFF)

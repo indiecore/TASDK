@@ -31,7 +31,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TerminalVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LockWarningInterval, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastLockWarningTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, InitialDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, InitialDir, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HomingTrackingStrength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BaseTrackingStrength, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, SeekTarget)

@@ -47,15 +47,15 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fForwardThrowVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fInheritVelocityPct, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_TimeAwaySeconds, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LastCameraPos, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastCameraDir, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastScreenLoc, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastCameraPos, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastCameraDir, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastScreenLoc, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_FlagIconAlpha, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fFriction, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMass, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastLocationPingTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, HoverboardingClothVelClamp, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RunningClothVelClamp, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HoverboardingClothVelClamp, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RunningClothVelClamp, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bPassToTeammatesEnabled, 0x80)
 		ADD_VAR(::BoolProperty, m_bBounceSlideEnabled, 0x40)
 		ADD_VAR(::BoolProperty, bWasFlagReturned, 0x20)

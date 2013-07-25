@@ -74,8 +74,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bHurtEntry, 0x8000)
 		ADD_VAR(::BoolProperty, bWorldGeometry, 0x80)
 		ADD_VAR(::BoolProperty, bCanBeDamaged, 0x80000)
-		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, Rotation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Location, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, Rotation, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDeleteMe, 0x8)
 		ADD_VAR(::ByteProperty, Role, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RemoteRole, 0xFFFFFFFF)
@@ -84,11 +84,11 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, Base)
 		ADD_VAR(::BoolProperty, bBounce, 0x200)
 		ADD_VAR(::BoolProperty, bHardAttach, 0x400)
-		ADD_STRUCT(::VectorProperty, RelativeLocation, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, RelativeRotation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, RelativeLocation, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, RelativeRotation, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BaseBoneName, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Velocity, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Acceleration, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Velocity, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Acceleration, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bCollideActors, 0x8000000)
 		ADD_VAR(::BoolProperty, bCollideWorld, 0x10000000)
 		ADD_OBJECT(Actor, Owner)
@@ -111,8 +111,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bReplicateInstigator, 0x400000)
 		ADD_VAR(::BoolProperty, bNetOwner, 0x1000)
 		ADD_VAR(::FloatProperty, DrawScale, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, DrawScale3D, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, PrePivot, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DrawScale3D, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, PrePivot, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'EditorIconColor'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.RenderCommandFence' for the property named 'DetachFence'!
 		ADD_VAR(::FloatProperty, CustomTimeDilation, 0xFFFFFFFF)
@@ -200,9 +200,9 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.QWord' for the property named 'HiddenEditorViews'!
 		ADD_VAR(::FloatProperty, LatentFloat, 0xFFFFFFFF)
 		ADD_OBJECT(AnimNodeSequence, LatentSeqNode)
-		ADD_STRUCT(::VectorProperty, AngularVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, AngularVelocity, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, OverlapTag, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, RotationRate, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, RotationRate, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, PendingTouch)
 		ADD_OBJECT(ScriptClass, MessageClass)
 		void ForceUpdateComponents(bool bCollisionUpdate, bool bTransformOnly)

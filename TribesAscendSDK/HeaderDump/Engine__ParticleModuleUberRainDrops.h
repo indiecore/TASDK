@@ -17,12 +17,12 @@ namespace UnrealScript
 	class ParticleModuleUberRainDrops : public ParticleModuleUberBase
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, StartLocationMax, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, StartLocationMin, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, StartLocationMax, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, StartLocationMin, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, PC_HeightAxis, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PC_StartHeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PC_StartRadius, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PC_StartLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PC_StartLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PC_VelocityScale, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bRadialVelocity, 0x200)
 		ADD_VAR(::BoolProperty, bVelocity, 0x100)
@@ -35,13 +35,13 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bPositive_X, 0x2)
 		ADD_VAR(::BoolProperty, bIsUsingCylinder, 0x1)
 		ADD_VAR(::FloatProperty, AlphaOverLife, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ColorOverLife, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ColorOverLife, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StartVelocityRadialMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StartVelocityRadialMin, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, StartVelocityMax, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, StartVelocityMin, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, StartSizeMax, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, StartSizeMin, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, StartVelocityMax, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, StartVelocityMin, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, StartSizeMax, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, StartSizeMin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LifetimeMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LifetimeMin, 0xFFFFFFFF)
 	};

@@ -27,10 +27,10 @@ namespace UnrealScript
 	class UDKCarriedObject : public Actor
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, OldBaseBase)
 		ADD_OBJECT(Actor, OldBase)
-		ADD_STRUCT(::VectorProperty, HomeBaseOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HomeBaseOffset, 0xFFFFFFFF)
 		ADD_OBJECT(UDKGameObjective, HomeBase)
 		ADD_VAR(::BoolProperty, bHome, 0x1)
 		ADD_VAR(::FloatProperty, LastValidAnchorTime, 0xFFFFFFFF)

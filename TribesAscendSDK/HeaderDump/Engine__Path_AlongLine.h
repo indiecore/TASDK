@@ -12,7 +12,7 @@ namespace UnrealScript
 	class Path_AlongLine : public PathConstraint
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF)
 		bool AlongLine(class Pawn* P, Vector Dir)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AlongLine.AlongLine");

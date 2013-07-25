@@ -28,7 +28,7 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceConstant, MIC_VisibilitySecondMaterial)
 		ADD_OBJECT(MaterialInstanceConstant, MIC_Visibility)
 		ADD_VAR(::NameProperty, VisibilityParamName, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PivotTranslation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PivotTranslation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, YawRotationRate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BobBaseOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BobSpeed, 0xFFFFFFFF)

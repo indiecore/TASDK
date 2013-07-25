@@ -24,8 +24,8 @@ namespace UnrealScript
 	class SeqAct_Deproject : public SequenceAction
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, HitNormal, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, HitLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HitNormal, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, HitLocation, 0xFFFFFFFF)
 		ADD_OBJECT(Object, HitObject)
 		ADD_VAR(::FloatProperty, TraceDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ScreenY, 0xFFFFFFFF)

@@ -34,7 +34,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(Texture, MapTexture)
-		ADD_STRUCT(::VectorProperty, MapCenter, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, MapCenter, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MapExtent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MapScale, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, RecommendedPlayersMax, 0xFFFFFFFF)
@@ -43,16 +43,16 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'PlayerIconCoords'!
 		ADD_OBJECT(MaterialInstanceConstant, GreenIconMaterialInstance)
 		ADD_VAR(::FloatProperty, ColorPercent, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, CenterPos, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, CenterPos, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RadarRange, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RadarWidth, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ActualMapCenter, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ActualMapCenter, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, UseableRadius, 0xFFFFFFFF)
 		ADD_OBJECT(Material, MapMaterialReference)
 		ADD_OBJECT(MaterialInstanceConstant, MapMaterialInstance)
 		ADD_VAR(::IntProperty, CurrentMapRotYaw, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, MapRotY, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, MapRotX, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, MapRotY, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, MapRotX, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, HUDIconsT)
 		ADD_OBJECT(Material, HudIcons)
 		ADD_OBJECT(Actor, WatchedActor)

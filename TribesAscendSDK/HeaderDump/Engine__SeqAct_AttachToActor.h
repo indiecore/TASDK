@@ -21,8 +21,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bHardAttach, 0x2)
 		ADD_VAR(::BoolProperty, bUseRelativeOffset, 0x4)
 		ADD_VAR(::BoolProperty, bUseRelativeRotation, 0x8)
-		ADD_STRUCT(::RotatorProperty, RelativeRotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RelativeOffset, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, RelativeRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RelativeOffset, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BoneName, 0xFFFFFFFF)
 		int GetObjClassVersion()
 		{

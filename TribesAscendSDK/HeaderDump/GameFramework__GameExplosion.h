@@ -42,8 +42,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ExploRadialBlurFadeOutTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ExploLightFadeOutTime, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, ExplosionSound)
-		ADD_STRUCT(::VectorProperty, HitNormal, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, HitLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HitNormal, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, HitLocation, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, HitActor)
 		ADD_VAR(::FloatProperty, ExplosionEmitterScale, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, ParticleEmitterTemplate)

@@ -32,7 +32,7 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, DefenderTeamIndex, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'IconCoords'!
 		ADD_OBJECT(Texture2D, IconHudTexture)
-		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bUnderAttack, 0x2)
 		ADD_VAR(::BoolProperty, bAllowOnlyShootable, 0x1)
 		void ObjectiveChanged()

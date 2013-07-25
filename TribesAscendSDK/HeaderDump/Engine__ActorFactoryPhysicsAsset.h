@@ -25,8 +25,8 @@ namespace UnrealScript
 	class ActorFactoryPhysicsAsset : public ActorFactory
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, DrawScale3D, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, InitialVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DrawScale3D, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, InitialVelocity, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bCastDynamicShadow, 0x10)
 		ADD_VAR(::BoolProperty, bUseCompartment, 0x8)
 		ADD_VAR(::BoolProperty, bNotifyRigidBodyCollision, 0x4)

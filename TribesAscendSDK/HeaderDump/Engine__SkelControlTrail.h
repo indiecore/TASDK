@@ -19,7 +19,7 @@ namespace UnrealScript
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'OldLocalToWorld'!
 		ADD_VAR(::FloatProperty, ThisTimstep, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, FakeVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FakeVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StretchLimit, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TrailRelaxation, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bHadValidStrength, 0x8)

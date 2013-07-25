@@ -18,7 +18,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, m_bResetVelocity, 0x1)
-		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Magnitude, 0xFFFFFFFF)
 	};
 }

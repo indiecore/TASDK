@@ -18,7 +18,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, MaxDistance, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Origin, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Origin, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

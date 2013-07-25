@@ -12,7 +12,7 @@ namespace UnrealScript
 	class Path_TowardPoint : public PathConstraint
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, GoalPoint, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, GoalPoint, 0xFFFFFFFF)
 		bool TowardPoint(class Pawn* P, Vector Point)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_TowardPoint.TowardPoint");

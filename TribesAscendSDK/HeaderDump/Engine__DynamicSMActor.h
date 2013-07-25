@@ -28,9 +28,9 @@ namespace UnrealScript
 	class DynamicSMActor : public Actor
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, ReplicatedMeshScale3D, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, ReplicatedMeshRotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, ReplicatedMeshTranslation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ReplicatedMeshScale3D, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, ReplicatedMeshRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, ReplicatedMeshTranslation, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSafeBaseIfAsleep, 0x4)
 		ADD_VAR(::BoolProperty, bPawnCanBaseOn, 0x2)
 		ADD_VAR(::BoolProperty, bForceStaticDecals, 0x1)

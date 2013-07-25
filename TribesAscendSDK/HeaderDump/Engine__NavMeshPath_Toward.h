@@ -19,7 +19,7 @@ namespace UnrealScript
 	class NavMeshPath_Toward : public NavMeshPathConstraint
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, GoalPoint, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, GoalPoint, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, GoalActor)
 		bool TowardGoal(class NavigationHandle* NavHandle, class Actor* Goal)
 		{

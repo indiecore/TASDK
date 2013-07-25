@@ -25,7 +25,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, DisabledBrightness, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, Scale, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Scale, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInterface, SourceMaterial)
 	};
 }

@@ -25,8 +25,8 @@ namespace UnrealScript
 	class TrCallIn_Projectile : public TrCallIn
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, m_SavedTargetNormal, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_SavedTargetLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_SavedTargetNormal, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_SavedTargetLocation, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_FiredProjectiles, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, TargetParticleSystem)
 		ADD_OBJECT(SoundCue, TargetParticleSound)

@@ -43,21 +43,21 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastIterativeCheck, 0xFFFFFFFF)
 		ADD_OBJECT(Pawn, BlockedAimTarget)
 		ADD_OBJECT(NavigationPoint, SquadRouteGoal)
-		ADD_STRUCT(::VectorProperty, TrackedVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, TrackedVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BaseTrackingReactionTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TrackingReactionTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastSeenTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LastSeeingPos, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastSeenPos, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastSeeingPos, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastSeenPos, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MonitorMaxDistSq, 0xFFFFFFFF)
 		ADD_OBJECT(Pawn, MonitoredPawn)
-		ADD_STRUCT(::VectorProperty, MonitorStartLoc, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, MonitorStartLoc, 0xFFFFFFFF)
 		ADD_OBJECT(Projectile, WarningProjectile)
 		ADD_VAR(::FloatProperty, WarningDelay, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RespawnPredictionTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HearingThreshold, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, AcquisitionYawRate, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ImpactVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ImpactVelocity, 0xFFFFFFFF)
 		ADD_OBJECT(Pawn, CurrentlyTrackedEnemy)
 		ADD_OBJECT(Vehicle, LastBlockingVehicle)
 		ADD_OBJECT(Pawn, VisibleEnemy)

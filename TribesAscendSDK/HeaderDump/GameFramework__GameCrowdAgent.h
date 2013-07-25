@@ -36,7 +36,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, InitialLastRenderTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, SpawnOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, SpawnOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxLOSLifeDistanceSq, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DesiredGroupRadiusSq, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DesiredGroupRadius, 0xFFFFFFFF)
@@ -49,7 +49,7 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, AmbientSoundCue)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'BeaconColor'!
 		ADD_OBJECT(Texture2D, BeaconTexture)
-		ADD_STRUCT(::VectorProperty, BeaconOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, BeaconOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BeaconMaxDist, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxRunningSpeed, 0xFFFFFFFF)
@@ -63,15 +63,15 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ObstacleCheckCount, 0xFFFFFFFF)
 		ADD_OBJECT(NavigationHandle, NavigationHandle)
 		ADD_OBJECT(ScriptClass, NavigationHandleClass)
-		ADD_STRUCT(::VectorProperty, SearchExtent, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, IntermediatePoint, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, SearchExtent, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, IntermediatePoint, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, GroundOffset, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LastKnownGoodPosition, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastKnownGoodPosition, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, VisibleProximityLODDist, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ProximityLODDist, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EyeZOffset, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, MeshMaxScale3D, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, MeshMinScale3D, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, MeshMaxScale3D, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, MeshMinScale3D, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxYawRate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RotateToTargetSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, VelocityDamping, 0xFFFFFFFF)
@@ -110,12 +110,12 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DeadBodyDuration, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Health, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InterpZTranslation, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ExternalForce, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ExternalForce, 0xFFFFFFFF)
 		ADD_OBJECT(GameCrowdDestination, PreviousDestination)
 		ADD_OBJECT(GameCrowdDestination, BehaviorDestination)
 		ADD_OBJECT(GameCrowdDestination, CurrentDestination)
 		ADD_VAR(::FloatProperty, AvoidanceShare, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, PreferredVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PreferredVelocity, 0xFFFFFFFF)
 		bool PickBehaviorFrom(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void* BehaviorList, Vector BestCameraLoc)

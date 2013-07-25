@@ -25,7 +25,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ScriptClass, ReachSpecClass)
-		ADD_STRUCT(::VectorProperty, InitLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, InitLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinDistBetweenSpecTypes, 0xFFFFFFFF)
 		bool EnforceMinDist(class Pawn* P, float InMinDist, ScriptClass* InSpecClass, Vector LastLocation)
 		{

@@ -21,7 +21,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TiltYScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TiltDeadZone, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TiltScale, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, UpVector, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, UpVector, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

@@ -24,7 +24,7 @@ namespace UnrealScript
 	class TrAnimNodeTurnInPlace : public AnimNodeBlend
 	{
 	public:
-		ADD_STRUCT(::RotatorProperty, m_InterpRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_InterpRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fTurnInterpTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fIgnoredTransitionTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_RemainingInterpolationTime, 0xFFFFFFFF)

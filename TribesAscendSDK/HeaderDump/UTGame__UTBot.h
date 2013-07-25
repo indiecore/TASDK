@@ -45,7 +45,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(Actor, NoVehicleGoal)
-		ADD_STRUCT(::VectorProperty, DirectionHint, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DirectionHint, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, KilledVehicleClass)
 		ADD_VAR(::BoolProperty, bHuntPlayer, 0x1)
 		ADD_OBJECT(ScriptClass, FavoriteWeapon)
@@ -58,8 +58,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastTryHoverboardTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastActionMusicUpdate, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, ScriptedTarget)
-		ADD_STRUCT(::VectorProperty, LastKillerPosition, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastKnownPosition, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastKillerPosition, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastKnownPosition, 0xFFFFFFFF)
 		ADD_OBJECT(Controller, OldOrderGiver)
 		ADD_VAR(::NameProperty, OldOrders, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, OrderNames, 0xFFFFFFFF)
@@ -97,7 +97,7 @@ namespace UnrealScript
 		ADD_OBJECT(NavigationPoint, BlockedPath)
 		ADD_VAR(::FloatProperty, LastAttractCheck, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Aggressiveness, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, HidingSpot, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HidingSpot, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LastTauntIndex, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, OldMessageID, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, OldMessageType, 0xFFFFFFFF)

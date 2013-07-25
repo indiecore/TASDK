@@ -70,11 +70,11 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, DisabledTemplate)
 		ADD_VAR(::FloatProperty, TimeLastDisabled, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DisabledTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, OldCameraPosition, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, OldCameraPosition, 0xFFFFFFFF)
 		ADD_OBJECT(UTGib, DeathCameraGib)
 		ADD_VAR(::FloatProperty, MinCameraDistSq, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LookForwardDist, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, CameraOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, CameraOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CameraLag, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CameraSmoothingFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OldCamPosZ, 0xFFFFFFFF)
@@ -87,9 +87,9 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, SpawnMaterialParameterName, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'HudCoords'!
 		ADD_OBJECT(Texture2D, HudIcons)
-		ADD_STRUCT(::VectorProperty, PassengerTeamBeaconOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, PassengerTeamBeaconOffset, 0xFFFFFFFF)
 		ADD_OBJECT(PlayerReplicationInfo, PassengerPRI)
-		ADD_STRUCT(::VectorProperty, TeamBeaconOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, TeamBeaconOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HealthPulseTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LastHealth, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'DropOrbIconCoords'!
@@ -99,8 +99,8 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'IconCoords'!
 		ADD_VAR(::FloatProperty, MapSize, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, FlagBone, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, FlagRotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, FlagOffset, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, FlagRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, FlagOffset, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, BoostPadSound)
 		ADD_OBJECT(SoundCue, SpawnOutSound)
 		ADD_OBJECT(SoundCue, SpawnInSound)
@@ -110,7 +110,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TurretExplosiveForce, 0xFFFFFFFF)
 		ADD_OBJECT(StaticMesh, DestroyedTurretTemplate)
 		ADD_OBJECT(UTVehicleDeathPiece, DestroyedTurret)
-		ADD_STRUCT(::VectorProperty, TurretOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, TurretOffset, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, TurretSocketName, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, TurretScaleControlName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OuterExplosionShakeRadius, 0xFFFFFFFF)

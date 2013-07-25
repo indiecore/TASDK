@@ -48,8 +48,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bRecacheViewRelevance, 0x20000)
 		ADD_VAR(::BoolProperty, bLODUpdatePending, 0x40000)
 		ADD_VAR(::BoolProperty, bSkipSpawnCountCheck, 0x80000)
-		ADD_STRUCT(::VectorProperty, OldPosition, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, PartSysVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, OldPosition, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, PartSysVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WarmupTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LODLevel, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SecondsBeforeInactive, 0xFFFFFFFF)

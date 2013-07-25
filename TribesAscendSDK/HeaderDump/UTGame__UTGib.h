@@ -34,8 +34,8 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, DecalDissolveParamName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DecalWaitTimeBeforeDissolve, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bUseUnrealPhysics, 0x1)
-		ADD_STRUCT(::RotatorProperty, OldCamRot, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, OldCamLoc, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, OldCamRot, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, OldCamLoc, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bStopMovingCamera, 0x2)
 		ADD_OBJECT(ParticleSystem, PS_CustomEffect)
 		ADD_VAR(::FloatProperty, GibMeshWaitTimeBeforeDissolve, 0xFFFFFFFF)

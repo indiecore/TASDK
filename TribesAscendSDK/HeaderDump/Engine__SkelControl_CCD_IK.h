@@ -24,10 +24,10 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, IterationsCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxPerBoneIterations, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumBones, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, EffectorTranslationFromBone, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, EffectorTranslationFromBone, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, EffectorSpaceBoneName, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, EffectorLocationSpace, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, EffectorLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, EffectorLocation, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

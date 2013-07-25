@@ -13,8 +13,8 @@ namespace UnrealScript
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat' for the property named 'InitialQuat'!
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'InitialTM'!
-		ADD_STRUCT(::RotatorProperty, ResetRotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, ResetLocation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, ResetRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, ResetLocation, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

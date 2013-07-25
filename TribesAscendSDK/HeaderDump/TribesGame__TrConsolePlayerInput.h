@@ -38,8 +38,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MagicScaleForSensitivityMiddle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RightThumbStickDeadZoneThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LeftThumbStickDeadZoneThreshold, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, LastDeltaRot, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastCamLoc, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, LastDeltaRot, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastCamLoc, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastAdjustZ, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastAdjustY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastDistFromAimZa, 0xFFFFFFFF)

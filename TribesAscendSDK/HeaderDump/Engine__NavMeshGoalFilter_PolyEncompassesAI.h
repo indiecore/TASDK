@@ -12,7 +12,7 @@ namespace UnrealScript
 	class NavMeshGoalFilter_PolyEncompassesAI : public NavMeshGoal_Filter
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, OverrideExtentToCheck, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, OverrideExtentToCheck, 0xFFFFFFFF)
 		bool MakeSureAIFits(class NavMeshGoal_GenericFilterContainer* FilterContainer, Vector InOverrideExtentToCheck)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoalFilter_PolyEncompassesAI.MakeSureAIFits");

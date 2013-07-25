@@ -18,11 +18,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, UseRelfectedImpactVector, 0x1)
-		ADD_STRUCT(::VectorProperty, EventNormal, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, EventNormal, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EventParticleTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, EventVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, EventVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EventEmitterTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, EventPosition, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, EventPosition, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, EventType, 0xFFFFFFFF)
 		int GetObjClassVersion()
 		{

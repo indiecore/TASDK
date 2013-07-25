@@ -27,7 +27,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bSuppressSounds, 0x1)
 		ADD_OBJECT(Actor, Target)
-		ADD_STRUCT(::RotatorProperty, MaxSpread, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, MaxSpread, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, Origin)
 		ADD_VAR(::IntProperty, ShotsFired, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, FireMode, 0xFFFFFFFF)

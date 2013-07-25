@@ -18,7 +18,7 @@ namespace UnrealScript
 	class Path_WithinDistanceEnvelope : public PathConstraint
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, EnvelopeTestPoint, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, EnvelopeTestPoint, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SoftStartPenalty, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bOnlyThrowOutNodesThatLeaveEnvelope, 0x2)
 		ADD_VAR(::BoolProperty, bSoft, 0x1)

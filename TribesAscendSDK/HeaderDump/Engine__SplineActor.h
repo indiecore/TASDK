@@ -34,7 +34,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAlreadyVisited, 0x2)
 		ADD_VAR(::BoolProperty, bDisableDestination, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'SplineColor'!
-		ADD_STRUCT(::VectorProperty, SplineActorTangent, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, SplineActorTangent, 0xFFFFFFFF)
 		Vector GetWorldSpaceTangent()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineActor.GetWorldSpaceTangent");

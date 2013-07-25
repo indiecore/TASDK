@@ -18,9 +18,9 @@ namespace UnrealScript
 	class TrProj_Tracer : public TrProjectile
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, m_vTracerDrawScale3D, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_vInitialFrameOfRefVelocity, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_vDestinationLoc, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vTracerDrawScale3D, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_vInitialFrameOfRefVelocity, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_vDestinationLoc, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMeshScaleDownTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCurScale, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bScalingDown, 0x2)

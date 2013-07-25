@@ -43,8 +43,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bShouldBeVisibleInEditor, 0x8)
 		ADD_VAR(::BoolProperty, bHasUnloadRequestPending, 0x4)
 		ADD_VAR(::BoolProperty, bIsVisible, 0x1)
-		ADD_STRUCT(::VectorProperty, OldOffset, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, Offset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, OldOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, Offset, 0xFFFFFFFF)
 		ADD_OBJECT(Level, LoadedLevel)
 	};
 }

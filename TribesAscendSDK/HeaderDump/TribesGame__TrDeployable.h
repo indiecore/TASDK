@@ -41,7 +41,7 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Controller, m_Controller)
 		ADD_VAR(::IntProperty, m_nIconStackId, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_vDeathCamStartOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vDeathCamStartOffset, 0xFFFFFFFF)
 		ADD_OBJECT(PlayerReplicationInfo, r_OwnerPRI)
 		ADD_VAR(::FloatProperty, m_fAnimInterpSpeed, 0xFFFFFFFF)
 		ADD_OBJECT(AnimNodeScalePlayRate, m_AnimNodeScale)
@@ -62,7 +62,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fOverriddenTargetComponentHeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_TargetCollisionTraceDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fFiringArcCheckValue, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_PlacementOrientationVector, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_PlacementOrientationVector, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nFiringArcDegrees, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bBlocksFriendlies, 0x80)
 		ADD_VAR(::BoolProperty, m_bCanBeSpottedByVGS, 0x40)

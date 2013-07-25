@@ -22,9 +22,9 @@ namespace UnrealScript
 	class KActor : public DynamicSMActor
 	{
 	public:
-		ADD_STRUCT(::RotatorProperty, InitialRotation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, InitialLocation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, ReplicatedDrawScale3D, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, InitialRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, InitialLocation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, ReplicatedDrawScale3D, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AngErrorAccumulator, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.RigidBodyState' for the property named 'RBState'!
 		ADD_VAR(::FloatProperty, MaxPhysicsVelocity, 0xFFFFFFFF)

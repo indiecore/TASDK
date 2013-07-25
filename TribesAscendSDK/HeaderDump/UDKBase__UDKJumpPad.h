@@ -31,7 +31,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, JumpTime, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, JumpSound)
 		ADD_OBJECT(PathNode, JumpTarget)
-		ADD_STRUCT(::VectorProperty, JumpVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, JumpVelocity, 0xFFFFFFFF)
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* OtherComp, Vector HitLocation, Vector HitNormal)

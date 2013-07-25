@@ -57,7 +57,7 @@ namespace UnrealScript
 		ADD_OBJECT(GameInfo, Game)
 		ADD_VAR(::FloatProperty, TimeSeconds, 0xFFFFFFFF)
 		ADD_OBJECT(GameReplicationInfo, GRI)
-		ADD_STRUCT(::VectorProperty, DefaultColorScale, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DefaultColorScale, 0xFFFFFFFF)
 		ADD_OBJECT(EmitterPool, MyEmitterPool)
 		ADD_VAR(::FloatProperty, TimeDilation, 0xFFFFFFFF)
 		ADD_OBJECT(PlayerReplicationInfo, Pauser)

@@ -24,10 +24,10 @@ namespace UnrealScript
 	class SeqAct_ParticleEventGenerator : public SequenceAction
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, EventNormal, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, EventVelocity, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, EventDirection, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, EventLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, EventNormal, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, EventVelocity, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, EventDirection, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, EventLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EventTime, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, Instigator)
 		ADD_VAR(::BoolProperty, bUseEmitterLocation, 0x2)

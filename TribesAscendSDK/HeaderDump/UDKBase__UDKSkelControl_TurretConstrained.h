@@ -17,9 +17,9 @@ namespace UnrealScript
 	class UDKSkelControl_TurretConstrained : public SkelControlSingleBone
 	{
 	public:
-		ADD_STRUCT(::RotatorProperty, ConstrainedBoneRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, ConstrainedBoneRotation, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, AssociatedSeatIndex, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, DesiredBoneRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, DesiredBoneRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PitchSpeedScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LagDegreesPerSecond, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKSkelControl_TurretConstrained.TurretConstraintData' for the property named 'MinAngle'!

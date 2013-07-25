@@ -56,7 +56,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bEntryPain, 0x8)
 		ADD_VAR(::BoolProperty, bAIShouldIgnorePain, 0x4)
 		ADD_VAR(::BoolProperty, bVelocityAffectsWalking, 0x1)
-		ADD_STRUCT(::VectorProperty, ZoneVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ZoneVelocity, 0xFFFFFFFF)
 		float GetGravityZ()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.GetGravityZ");

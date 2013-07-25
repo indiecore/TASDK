@@ -18,7 +18,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, LogMessage, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, TargetOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, TargetOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetDuration, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIncludeObjComment, 0x2)
 		ADD_VAR(::BoolProperty, bOutputToScreen, 0x1)

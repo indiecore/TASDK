@@ -28,7 +28,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::ByteProperty, TextDrawMethod, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, DisplayText, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, DisplayLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, DisplayLocation, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'DisplayColor'!
 		ADD_OBJECT(Font, DisplayFont)
 		void Render(class Canvas* TargetCanvas, class HUD* TargetHud)

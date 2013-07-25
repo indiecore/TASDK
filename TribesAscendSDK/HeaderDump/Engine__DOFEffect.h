@@ -26,7 +26,7 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, FocusType, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FocusInnerRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FocusDistance, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, FocusPosition, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FocusPosition, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

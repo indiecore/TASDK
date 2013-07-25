@@ -19,12 +19,12 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, HardLimitAirSpeedScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StoppedBrakeTorque, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, OldVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, OldVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentStabilizationMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StabilizationForceMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AccumulatedTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, RandTorque, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RandForce, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, RandTorque, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RandForce, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PitchViewCorrelation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetPitch, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetHeading, 0xFFFFFFFF)

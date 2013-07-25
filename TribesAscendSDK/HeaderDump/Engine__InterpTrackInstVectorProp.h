@@ -11,7 +11,7 @@ namespace UnrealScript
 	class InterpTrackInstVectorProp : public InterpTrackInstProperty
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, ResetVector, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ResetVector, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VectorProp'!
 	};
 }

@@ -19,9 +19,9 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, ControlBoneIndex, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastCalcTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, BaseBonePos, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, BaseLookDir, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LimitLookDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, BaseBonePos, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, BaseLookDir, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LimitLookDir, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LookAtAlphaBlendTimeToGo, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LookAtAlphaTarget, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LookAtAlpha, 0xFFFFFFFF)
@@ -29,8 +29,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DeadZoneAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OuterMaxAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxAngle, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ActorSpaceLookAtTarget, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, DesiredTargetLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ActorSpaceLookAtTarget, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, DesiredTargetLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetLocationInterpSpeed, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bAllowRotationZ, 0x400)
 		ADD_VAR(::BoolProperty, bAllowRotationY, 0x200)
@@ -48,7 +48,7 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, UpAxis, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, LookAtAxis, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, TargetLocationSpace, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, TargetLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, TargetLocation, 0xFFFFFFFF)
 		void SetTargetLocation(Vector NewTargetLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.SetTargetLocation");

@@ -29,9 +29,9 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, MaxMoveFails, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MoveFailCounter, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, InitialFinalDestination, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastMoveVectDest, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, MoveVectDest, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, InitialFinalDestination, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastMoveVectDest, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, MoveVectDest, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, GoalDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SubGoalReachDist, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentHoverHeight, 0xFFFFFFFF)
@@ -40,7 +40,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Radius, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, Goal)
 		ADD_OBJECT(Actor, Find)
-		ADD_STRUCT(::VectorProperty, Transient_FinalDest, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, Transient_FinalDest, 0xFFFFFFFF)
 		bool HoverToGoal(class GameAIController* AI, class Actor* InGoal, float InGoalDistance, float InHoverHeight)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICmd_Hover_MoveToGoal_Mesh.HoverToGoal");

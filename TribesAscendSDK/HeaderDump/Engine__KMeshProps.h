@@ -12,7 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Engine.KMeshProps.KAggregateGeom' for the property named 'AggGeom'!
-		ADD_STRUCT(::VectorProperty, COMNudge, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, COMNudge, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

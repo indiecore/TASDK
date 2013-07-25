@@ -35,7 +35,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Restitution, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bForceConeFriction, 0x1)
 		ADD_VAR(::BoolProperty, bEnableAnisotropicFriction, 0x2)
-		ADD_STRUCT(::VectorProperty, AnisoFrictionDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, AnisoFrictionDir, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FrictionV, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Density, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AngularDamping, 0xFFFFFFFF)

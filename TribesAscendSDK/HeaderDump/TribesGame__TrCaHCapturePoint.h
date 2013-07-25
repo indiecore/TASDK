@@ -43,16 +43,16 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, r_nFlashPointPulse, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, m_CapturePointLabel, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, r_bIsHeld, 0x1)
-		ADD_STRUCT(::VectorProperty, LastCameraPos, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastCameraDir, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastScreenLoc, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastCameraPos, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastCameraDir, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastScreenLoc, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fInfluenceRadiusSize, 0xFFFFFFFF)
 		ADD_OBJECT(SkelControlSingleBone, m_SkyHologramSkelControl)
 		ADD_VAR(::FloatProperty, m_fSkyHologramScaleDS, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fSkyHologramScaleBE, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fSkyHologramScaleOffset, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, m_vSkyHologramOffsetDS, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_vSkyHologramOffsetBE, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vSkyHologramOffsetDS, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_vSkyHologramOffsetBE, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fSkyHologramOffsetZ, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fSkyHologramOffsetY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fSkyHologramOffsetX, 0xFFFFFFFF)

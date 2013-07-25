@@ -59,7 +59,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, m_nServerTickCount, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fClientPhysDeltaTime, 0xFFFFFFFF)
 		ADD_OBJECT(TrStatsInterface, Stats)
-		ADD_STRUCT(::VectorProperty, m_vDeathCamStartOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_vDeathCamStartOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fVehicleHealthBarHeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fVehicleHealthBarWidth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fVehicleHealthBarPlacementY, 0xFFFFFFFF)
@@ -72,7 +72,7 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceConstant, m_DriverHealthBarMIC)
 		ADD_OBJECT(MaterialInstanceConstant, m_HealthBarMIC)
 		ADD_VAR(::FloatProperty, m_fRemainingSeekingTargetHUDZoomTime, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, m_rPotentialSeekingTargetHUDRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_rPotentialSeekingTargetHUDRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRemainingPotentialSeekingTargetHUDZoomTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fContrailSpeed, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect' for the property named 'm_DefaultDustEffect'!

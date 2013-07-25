@@ -29,9 +29,9 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(Texture2D, m_AlarmIcon)
-		ADD_STRUCT(::VectorProperty, LastCameraPos, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastCameraDir, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, LastScreenLoc, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastCameraPos, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastCameraDir, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, LastScreenLoc, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_IconAlpha, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fHUDAlarmTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bDrawHUDAlarm, 0x1)

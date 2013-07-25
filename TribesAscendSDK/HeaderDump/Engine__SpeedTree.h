@@ -25,7 +25,7 @@ namespace UnrealScript
 	{
 	public:
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'LightingGuid'!
-		ADD_STRUCT(::VectorProperty, WindDirection, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, WindDirection, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WindStrength, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInterface, BillboardMaterial)
 		ADD_OBJECT(MaterialInterface, LeafMeshMaterial)

@@ -23,7 +23,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bOnlyEnableForUpAdjustment, 0x4)
 		ADD_VAR(::BoolProperty, bOrientFootToGround, 0x2)
 		ADD_VAR(::BoolProperty, bInvertFootUpAxis, 0x1)
-		ADD_STRUCT(::RotatorProperty, FootRotOffset, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, FootRotOffset, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, FootUpAxis, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FootOffset, 0xFFFFFFFF)
 	};

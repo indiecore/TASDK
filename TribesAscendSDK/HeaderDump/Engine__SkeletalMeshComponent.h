@@ -103,7 +103,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bChartDistanceFactor, 0x8000000)
 		ADD_VAR(::BoolProperty, bEnableLineCheckWithBounds, 0x10000000)
 		ADD_VAR(::BoolProperty, bCanHighlightSelectedSections, 0x20000000)
-		ADD_STRUCT(::VectorProperty, LineCheckBoundsScale, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LineCheckBoundsScale, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnableClothSimulation, 0x1)
 		ADD_VAR(::BoolProperty, bDisableClothCollision, 0x2)
 		ADD_VAR(::BoolProperty, bClothFrozen, 0x4)
@@ -122,19 +122,19 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAlwaysUseInstanceWeights, 0x8000)
 		ADD_VAR(::BoolProperty, bUpdateComposeSkeletonPasses, 0x10000)
 		ADD_VAR(::BoolProperty, bValidTemporarySavedAnimSets, 0x20000)
-		ADD_STRUCT(::VectorProperty, FrozenLocalToWorldPos, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, FrozenLocalToWorldRot, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, ClothExternalForce, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, ClothWind, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, ClothBaseVelClampRange, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FrozenLocalToWorldPos, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, FrozenLocalToWorldRot, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, ClothExternalForce, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, ClothWind, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, ClothBaseVelClampRange, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ClothBlendWeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ClothDynamicBlendWeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ClothBlendMinDistanceFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ClothBlendMaxDistanceFactor, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, MinPosDampRange, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, MaxPosDampRange, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, MinPosDampScale, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, MaxPosDampScale, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, MinPosDampRange, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, MaxPosDampRange, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, MinPosDampScale, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, MaxPosDampScale, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ClothSim'!
 		ADD_VAR(::IntProperty, SceneIndex, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumClothMeshVerts, 0xFFFFFFFF)
@@ -148,11 +148,11 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ClothAttachmentTearFactor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bClothUseCompartment, 0x1)
 		ADD_VAR(::FloatProperty, MinDistanceForClothReset, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LastClothLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastClothLocation, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ApexClothingRBChannel, 0xFFFFFFFF)
 		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'ApexClothingRBCollideWithChannels'!
 		ADD_VAR(::BoolProperty, bAutoFreezeApexClothingWhenNotRendered, 0x1)
-		ADD_STRUCT(::VectorProperty, WindVelocity, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, WindVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WindVelocityBlendTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSkipInitClothing, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SoftBodySim'!
@@ -170,9 +170,9 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SoftBodyASVPlane'!
 		ADD_OBJECT(Material, LimitMaterial)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoneAtom' for the property named 'RootMotionDelta'!
-		ADD_STRUCT(::VectorProperty, RootMotionVelocity, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RootBoneTranslation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, RootMotionAccelScale, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, RootMotionVelocity, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RootBoneTranslation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, RootMotionAccelScale, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RootMotionMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, PreviousRMM, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, PendingRMM, 0xFFFFFFFF)

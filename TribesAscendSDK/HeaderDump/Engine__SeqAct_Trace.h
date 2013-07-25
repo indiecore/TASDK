@@ -24,12 +24,12 @@ namespace UnrealScript
 	class SeqAct_Trace : public SequenceAction
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, HitLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, HitLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Distance, 0xFFFFFFFF)
 		ADD_OBJECT(Object, HitObject)
-		ADD_STRUCT(::VectorProperty, EndOffset, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, StartOffset, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, TraceExtent, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, EndOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, StartOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, TraceExtent, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bTraceWorld, 0x2)
 		ADD_VAR(::BoolProperty, bTraceActors, 0x1)
 		int GetObjClassVersion()

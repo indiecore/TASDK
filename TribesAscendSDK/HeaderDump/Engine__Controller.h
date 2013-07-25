@@ -51,8 +51,8 @@ namespace UnrealScript
 		ADD_OBJECT(Pawn, Pawn)
 		ADD_OBJECT(PlayerReplicationInfo, PlayerReplicationInfo)
 		ADD_VAR(::BoolProperty, bGodMode, 0x2)
-		ADD_STRUCT(::VectorProperty, NavMeshPath_SearchExtent_Modifier, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, OldBasedRotation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, NavMeshPath_SearchExtent_Modifier, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, OldBasedRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LaneOffset, 0xFFFFFFFF)
 		ADD_OBJECT(Pawn, Enemy)
 		ADD_VAR(::FloatProperty, MaxMoveTowardPawnTargetTime, 0xFFFFFFFF)
@@ -60,13 +60,13 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, InUseNodeCostMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SightCounterInterval, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SightCounter, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, FailedReachLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, FailedReachLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FailedReachTime, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, LastFailedReach)
 		ADD_OBJECT(Pawn, ShotTarget)
-		ADD_STRUCT(::VectorProperty, ViewZ, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, ViewY, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, ViewX, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ViewZ, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, ViewY, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, ViewX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, GroundPitchTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MoveFailureCount, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, FailedMoveTarget)
@@ -74,7 +74,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastRouteFind, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RouteDist, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, RouteGoal)
-		ADD_STRUCT(::VectorProperty, CurrentPathDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, CurrentPathDir, 0xFFFFFFFF)
 		ADD_OBJECT(ReachSpec, NextRoutePath)
 		ADD_OBJECT(ReachSpec, CurrentPath)
 		ADD_OBJECT(NavigationPoint, StartSpot)
@@ -85,7 +85,7 @@ namespace UnrealScript
 		// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition' for the property named 'DestinationPosition'!
 		ADD_OBJECT(Actor, MoveTarget)
 		ADD_VAR(::FloatProperty, MoveTimer, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, OverrideSearchStart, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, OverrideSearchStart, 0xFFFFFFFF)
 		ADD_OBJECT(NavigationHandle, NavigationHandle)
 		ADD_OBJECT(ScriptClass, NavigationHandleClass)
 		ADD_VAR(::FloatProperty, MinHitWall, 0xFFFFFFFF)

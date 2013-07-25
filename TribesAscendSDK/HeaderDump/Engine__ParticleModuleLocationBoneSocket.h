@@ -28,7 +28,7 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, SkelMeshActorParamName, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bOrientMeshEmitters, 0x2)
 		ADD_VAR(::BoolProperty, bUpdatePositionEachFrame, 0x1)
-		ADD_STRUCT(::VectorProperty, UniversalOffset, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, UniversalOffset, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, SelectionMethod, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, SourceType, 0xFFFFFFFF)
 	};

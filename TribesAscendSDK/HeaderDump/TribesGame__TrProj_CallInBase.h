@@ -11,7 +11,7 @@ namespace UnrealScript
 	class TrProj_CallInBase : public TrProjectile
 	{
 	public:
-		ADD_STRUCT(::VectorProperty, r_TargetLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, r_TargetLocation, 0xFFFFFFFF)
 		void ReplicatedEvent(ScriptName VarName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_CallInBase.ReplicatedEvent");

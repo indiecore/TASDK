@@ -60,7 +60,7 @@ namespace UnrealScript
 		ADD_OBJECT(TrAnimNodeBlendByRidingPassenger, m_RidingPassengerBlendNode)
 		ADD_OBJECT(TrAnimNodeAimOffset, m_AimOffsetNode)
 		ADD_OBJECT(TrAnimNodeAimOffset, m_1pBodyAimOffsetNode)
-		ADD_STRUCT(::VectorProperty, r_FlashNormal, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, r_FlashNormal, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fShowObjectThreshold, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, r_bIsStealthed, 0x4)
 		ADD_VAR(::BoolProperty, r_bIsInvulnerable, 0x100000)
@@ -77,8 +77,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, m_nSmoothedRemoteViewPitch, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nNetRotationCount, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_RotationInterpRate, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, m_TargetNetReceiveRotation, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, m_PreviousNetReceiveRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_TargetNetReceiveRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, m_PreviousNetReceiveRotation, 0xFFFFFFFF)
 		ADD_OBJECT(SkeletalMesh, m_GibMesh)
 		ADD_OBJECT(TrStatsInterface, Stats)
 		ADD_VAR(::FloatProperty, m_fInventoryStationLockoutTime, 0xFFFFFFFF)
@@ -101,7 +101,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fSplatDamageFromLandMin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_bJustLandedSpeedSq, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRemainingSeekingTargetHUDZoomTime, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, m_rPotentialSeekingTargetHUDRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, m_rPotentialSeekingTargetHUDRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRemainingPotentialSeekingTargetHUDZoomTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fGroundSkiEffectDist, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, m_InvulnerableOverlayMIC)
@@ -130,7 +130,7 @@ namespace UnrealScript
 		ADD_OBJECT(TrPawnCollisionProxy, m_JammingCollisionProxy)
 		ADD_OBJECT(Material, r_ReplicatedWeaponAttachmentMat)
 		ADD_VAR(::FloatProperty, m_OldSpeed, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, r_avMultiShotLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, r_avMultiShotLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fEnemyShowDistanceThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fFriendlyShowDistanceThreshold, 0xFFFFFFFF)
 		ADD_OBJECT(MorphNodeWeight, m_OverlayMorphNode)

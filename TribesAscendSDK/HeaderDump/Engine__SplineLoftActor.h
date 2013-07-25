@@ -28,7 +28,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAcceptsLights, 0x2)
 		ADD_VAR(::BoolProperty, bSmoothInterpRollAndScale, 0x1)
 		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'Offset'!
-		ADD_STRUCT(::VectorProperty, WorldXDir, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, WorldXDir, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Roll, 0xFFFFFFFF)
 		ADD_OBJECT(StaticMesh, DeformMesh)
 		ADD_VAR(::FloatProperty, ScaleY, 0xFFFFFFFF)

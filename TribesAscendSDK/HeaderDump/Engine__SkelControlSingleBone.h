@@ -18,11 +18,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::NameProperty, RotationSpaceBoneName, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, BoneRotation, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, BoneRotation, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, TranslationSpaceBoneName, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, BoneRotationSpace, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, BoneTranslationSpace, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, BoneTranslation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, BoneTranslation, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bRemoveMeshRotation, 0x10)
 		ADD_VAR(::BoolProperty, bAddRotation, 0x8)
 		ADD_VAR(::BoolProperty, bAddTranslation, 0x4)

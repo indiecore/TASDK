@@ -18,9 +18,9 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, ConeMaxAngle, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ConeAxis, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ConeAxis, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConeRadius, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, ConeVertex, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, ConeVertex, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxDensity, 0xFFFFFFFF)
 	};
 }

@@ -19,14 +19,14 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, MomentumPortion, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastHitTime, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, LastHitMomentum, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, LastHitMomentum, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RandomPortion, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, CurrentAngle, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, CurrentAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AVModifier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SpringStiffness, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Falloff, 0xFFFFFFFF)
-		ADD_STRUCT(::RotatorProperty, MinAngle, 0xFFFFFFFF
-		ADD_STRUCT(::RotatorProperty, MaxAngle, 0xFFFFFFFF
+		ADD_STRUCT(::RotatorProperty, MinAngle, 0xFFFFFFFF)
+		ADD_STRUCT(::RotatorProperty, MaxAngle, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

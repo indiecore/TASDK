@@ -31,12 +31,12 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, m_FractalExplosionTemplate)
 		ADD_VAR(::FloatProperty, m_fFractalDamageRadius, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nFractalDamage, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, r_vFlashExplosionLocation, 0xFFFFFFFF
-		ADD_STRUCT(::VectorProperty, m_vAscentLocation, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, r_vFlashExplosionLocation, 0xFFFFFFFF)
+		ADD_STRUCT(::VectorProperty, m_vAscentLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fZFractalShotDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fFractalShotDistance, 0xFFFFFFFF)
 		ADD_OBJECT(SkelControlSingleBone, m_AscendControl)
-		ADD_STRUCT(::VectorProperty, m_CachedHitNormal, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, m_CachedHitNormal, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fAscentHeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fAscentTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fFractalInterval, 0xFFFFFFFF)

@@ -18,7 +18,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, SphereRadius, 0xFFFFFFFF)
-		ADD_STRUCT(::VectorProperty, SphereCenter, 0xFFFFFFFF
+		ADD_STRUCT(::VectorProperty, SphereCenter, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxDensity, 0xFFFFFFFF)
 	};
 }
