@@ -53,6 +53,8 @@ std::string GetTypeNameForProperty(ScriptProperty* prop)
 			return "Vector";
 		else if (!strcmp(objProp->property_class->GetName(), "Rotator"))
 			return "Rotator";
+		else if (!strcmp(objProp->property_class->GetFullName(), "ScriptStruct Core.Object.QWord"))
+			return "QWord";
 		else
 		{
 			std::string tp = "\n// WARNING: Unknown structure type '";
@@ -93,7 +95,7 @@ std::string GetHeaderName(ScriptObject* obj)
 
 	for(ScriptObject* outer = obj->outer(); outer; outer = outer->outer())
 	{
-		file_name.insert(0, "__");
+		file_name.insert(0, ".");
 		file_name.insert(0, outer->GetName());
 	}
 
@@ -204,6 +206,8 @@ struct PropertyDescription
 				writer->WriteLine("ADD_STRUCT(::VectorProperty, %s, 0xFFFFFFFF)", originalProperty->GetName());
 			else if (!strcmp(objectProperty->property_class->GetName(), "Rotator"))
 				writer->WriteLine("ADD_STRUCT(::RotatorProperty, %s, 0xFFFFFFFF)", originalProperty->GetName());
+			else if (!strcmp(objectProperty->property_class->GetFullName(), "ScriptStruct Core.Object.QWord"))
+				writer->WriteLine("ADD_STRUCT(::QWordProperty, %s, 0xFFFFFFFF)", originalProperty->GetName());
 			else
 				writer->WriteLine("// WARNING: Unknown structure type '%s' for the property named '%s'!", objectProperty->property_class->GetFullName(), originalProperty->GetName());
 		}
@@ -533,11 +537,7 @@ void ScriptObject::GenerateHeaders()
 	{
 		ScriptObject* class_object = (*object_array())(i);
 
-		if(class_object && class_object->object_class() == core_class
-			&& strcmp(class_object->outer()->GetName(), "UnrealEd")
-			&& strcmp(class_object->GetName(), "GenericBrowserType_GFxMovie")
-			&& strcmp(class_object->GetName(), "TrRank")
-		)
+		if(class_object && class_object->object_class() == core_class)
 		{
 			class_object->GenerateHeader();
 		}

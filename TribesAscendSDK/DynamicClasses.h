@@ -120,6 +120,7 @@ public:
 typedef ArithmeticProperty< byte > ByteProperty;
 typedef ArithmeticProperty< int > IntProperty;
 typedef ArithmeticProperty< float > FloatProperty;
+typedef ArithmeticProperty< QWord > QWordProperty;
 
 class RotatorProperty
 {
