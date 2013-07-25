@@ -51,6 +51,33 @@ std::string GetHeaderName(ScriptObject* obj)
 	return file_name;
 }
 
+struct ClassDependencyManager
+{
+	std::unordered_map<std::string, int> requiredHeaders;
+
+	~ClassDependencyManager()
+	{
+		for each (auto h in requiredHeaders)
+			h.first.~basic_string();
+	}
+
+	void RequireType(ScriptObject* objType)
+	{
+		static std::string headerName;
+		headerName = GetHeaderName(objType);
+		if (requiredHeaders.count(headerName) > 0)
+			headerName.~basic_string();
+		else
+			requiredHeaders[headerName] = 1;
+	}
+
+	void WriteToStream(IndentedStreamWriter* wtr)
+	{
+		for each (auto h in requiredHeaders)
+			wtr->WriteLine("#include \"%s\"", h.first.c_str());
+	}
+};
+
 struct PropertyDescription
 {
 	ScriptProperty* originalProperty;
@@ -84,6 +111,12 @@ struct PropertyDescription
 	bool IsStructProperty()
 	{
 		return !strcmp(originalProperty->object_class()->GetName(), "StructProperty");
+	}
+
+	void RequireTypes(ClassDependencyManager* classDepMgr)
+	{
+		if (IsObjectProperty() || IsStructProperty())
+			classDepMgr->RequireType(((ScriptObjectProperty*)originalProperty)->property_class);
 	}
 
 	void WriteToStream(IndentedStreamWriter* writer)
@@ -170,7 +203,7 @@ struct ClassDescription
 	int objectPropertyCount;
 	std::vector<PropertyDescription> properties;
 	std::vector<FunctionDescription> functions;
-	std::unordered_map<const char*, int> requiredHeaders;
+	ClassDependencyManager dependencyManager;
 
 	ClassDescription(ScriptClass* originalClass_)
 	{
@@ -210,14 +243,12 @@ struct ClassDescription
 		}
 
 		if (originalClass->super())
-			RequireType(originalClass->super());
-	}
+			dependencyManager.RequireType(originalClass->super());
 
-	void RequireType(ScriptObject* objType)
-	{
-		static std::string headerName;
-		headerName = GetHeaderName(objType);
-		requiredHeaders[headerName.c_str()] = 1;
+		for (unsigned int i = 0; i < properties.size(); i++)
+			properties[i].RequireTypes(&dependencyManager);
+		//for (unsigned int i = 0; i < functions.size(); i++)
+		//	functions[i].RequireTypes(this);
 	}
 
 	void Write()
@@ -228,8 +259,7 @@ struct ClassDescription
 
 		wtr->WriteLine("#pragma once");
 		
-		for each (auto h in requiredHeaders)
-			wtr->WriteLine("#include \"%s\"", h.first);
+		dependencyManager.WriteToStream(wtr);
 
 		if (primitivePropertyCount > 0)
 		{
