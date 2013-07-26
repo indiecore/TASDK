@@ -455,6 +455,11 @@ struct ScriptBoolProperty : public ScriptProperty
 	DWORD bit_mask;
 };
 
+struct ScriptByteProperty : public ScriptProperty
+{
+	ScriptEnum* enum_type;
+};
+
 struct Vector
 {
 	float x, y, z;

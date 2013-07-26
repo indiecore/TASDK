@@ -70,7 +70,13 @@ std::string GetTypeNameForProperty(ScriptObject* prop)
 		return tp;
 	}
 	else if (!strcmp(prop->object_class()->GetName(), "ByteProperty"))
-		return "byte";
+	{
+		auto bProp = (ScriptByteProperty*)prop;
+		if (bProp->enum_type)
+			return GetTypeNameForProperty(bProp->enum_type);
+		else
+			return "byte";
+	}
 	else if (!strcmp(prop->object_class()->GetName(), "IntProperty"))
 		return "int";
 	else if (!strcmp(prop->object_class()->GetName(), "FloatProperty"))
@@ -260,16 +266,16 @@ struct FunctionArgumentDescription
 		if (offset != 0)
 		{
 			if (!strcmp(tnfp.c_str(), "byte"))
-				wtr->WriteLine("*(%s + %i) = %s;", bufName, offset, name.c_str());
+				wtr->WriteLine("%s[%i] = %s;", bufName, offset, name.c_str());
 			else
-				wtr->WriteLine("*(%s*)(%s + %i) = %s;", tnfp.c_str(), bufName, offset, name.c_str());
+				wtr->WriteLine("*(%s*)&%s[%i] = %s;", tnfp.c_str(), bufName, offset, name.c_str());
 		}
 		else
 		{
 			if (!strcmp(tnfp.c_str(), "byte"))
-				wtr->WriteLine("*%s = %s;", bufName, name.c_str());
+				wtr->WriteLine("%s[0] = %s;", bufName, name.c_str());
 			else
-				wtr->WriteLine("*(%s*)%s = %s;", tnfp.c_str(), bufName, name.c_str());
+				wtr->WriteLine("*(%s*)&%s[0] = %s;", tnfp.c_str(), bufName, name.c_str());
 		}
 	}
 
@@ -281,16 +287,16 @@ struct FunctionArgumentDescription
 			if (offset != 0)
 			{
 				if (!strcmp(tnfp.c_str(), "byte"))
-					wtr->WriteLine("%s = *(%s + %i);", name.c_str(), bufName, offset);
+					wtr->WriteLine("%s = %s[%i];", name.c_str(), bufName, offset);
 				else
-					wtr->WriteLine("%s = *(%s*)(%s + %i);", name.c_str(), tnfp.c_str(), bufName, offset);
+					wtr->WriteLine("%s = *(%s*)&%s[%i];", name.c_str(), tnfp.c_str(), bufName, offset);
 			}
 			else
 			{
 				if (!strcmp(tnfp.c_str(), "byte"))
-					wtr->WriteLine("%s = *%s;", name.c_str(), bufName);
+					wtr->WriteLine("%s = %s[0];", name.c_str(), bufName);
 				else
-					wtr->WriteLine("%s = *(%s*)%s;", name.c_str(), tnfp.c_str(), bufName);
+					wtr->WriteLine("%s = *(%s*)&%s[0];", name.c_str(), tnfp.c_str(), bufName);
 			}
 		}
 	}
@@ -356,7 +362,7 @@ struct FunctionDescription
 			wtr->WriteLine("byte params[%i] = { NULL };", paramSize);
 
 		for (unsigned int i = 0; i < arguments.size(); i++)
-			arguments[i].WriteLoadToBuffer(wtr, "&params");
+			arguments[i].WriteLoadToBuffer(wtr, "params");
 
 		wtr->Write("((ScriptObject*)this)->ProcessEvent(function, ");
 		if (paramSize > 0)
@@ -366,7 +372,7 @@ struct FunctionDescription
 		wtr->WriteLine(", NULL);");
 
 		for (unsigned int i = 0; i < arguments.size(); i++)
-			arguments[i].WriteLoadFromBuffer(wtr, "&params");
+			arguments[i].WriteLoadFromBuffer(wtr, "params");
 
 		if (returnProperty)
 		{
@@ -383,7 +389,7 @@ struct FunctionDescription
 				if (!strcmp(tnfp.c_str(), "byte"))
 					wtr->WriteLine("return params[0];");
 				else
-					wtr->WriteLine("return *(%s*)&params;", tnfp.c_str());
+					wtr->WriteLine("return *(%s*)&params[0];", tnfp.c_str());
 			}
 		}
 
