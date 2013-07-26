@@ -1,5 +1,7 @@
 #pragma once
+#include "Core.Object.Vector2D.h"
 #include "Engine.SplineActor.h"
+#include "Core.Object.Vector.h"
 #include "Engine.StaticMesh.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -27,7 +29,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MeshMaxDrawDistance, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bAcceptsLights, 0x2)
 		ADD_VAR(::BoolProperty, bSmoothInterpRollAndScale, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'Offset'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, Offset, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, WorldXDir, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Roll, 0xFFFFFFFF)
 		ADD_OBJECT(StaticMesh, DeformMesh)

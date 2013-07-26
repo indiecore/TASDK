@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "UDKBase.UDKVehicleBase.h"
 #include "UDKBase.UDKWeapon.h"
 #include "UDKBase.UDKVehicle.h"

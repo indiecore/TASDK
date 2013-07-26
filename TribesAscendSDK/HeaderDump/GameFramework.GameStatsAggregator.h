@@ -1,5 +1,11 @@
 #pragma once
+#include "GameFramework.GameStatsAggregator.GameEvents.h"
+#include "GameFramework.GameStatsAggregator.PawnEvents.h"
 #include "Engine.GameplayEventsHandler.h"
+#include "GameFramework.GameStatsAggregator.DamageEvents.h"
+#include "GameFramework.GameStatsAggregator.ProjectileEvents.h"
+#include "GameFramework.GameStatsAggregator.WeaponEvents.h"
+#include "Core.Object.Map_Mirror.h"
 #include "GameFramework.GameStateObject.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -18,12 +24,12 @@ namespace UnrealScript
 	class GameStatsAggregator : public GameplayEventsHandler
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameStatsAggregator.DamageEvents' for the property named 'AllDamageEvents'!
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameStatsAggregator.PawnEvents' for the property named 'AllPawnEvents'!
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameStatsAggregator.ProjectileEvents' for the property named 'AllProjectileEvents'!
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameStatsAggregator.WeaponEvents' for the property named 'AllWeaponEvents'!
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameStatsAggregator.GameEvents' for the property named 'AllGameEvents'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'AggregateEventsMapping'!
+		ADD_STRUCT(::NonArithmeticProperty<DamageEvents>, AllDamageEvents, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<PawnEvents>, AllPawnEvents, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ProjectileEvents>, AllProjectileEvents, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<WeaponEvents>, AllWeaponEvents, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<GameEvents>, AllGameEvents, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, AggregateEventsMapping, 0xFFFFFFFF)
 		ADD_OBJECT(GameStateObject, GameState)
 		void PreProcessStream()
 		{

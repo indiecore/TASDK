@@ -1,11 +1,14 @@
 #pragma once
+#include "Engine.PlayerInput.h"
 #include "GameFramework.SeqEvent_MobileRawInput.h"
 #include "GameFramework.SeqEvent_MobileBase.h"
-#include "Engine.PlayerInput.h"
+#include "Core.Object.Vector.h"
+#include "GameFramework.MobilePlayerInput.TouchData.h"
 #include "GameFramework.MobileMenuObject.h"
-#include "Engine.Canvas.h"
 #include "GameFramework.MobileMenuScene.h"
+#include "Core.Object.Vector2D.h"
 #include "GameFramework.MobileInputZone.h"
+#include "Engine.Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.MobilePlayerInput." #y); \
@@ -36,7 +39,7 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, DeviceMotionRotationRate, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, DeviceMotionGravity, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, DeviceMotionAcceleration, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobilePlayerInput.TouchData' for the property named 'Touches'!
+		ADD_STRUCT(::NonArithmeticProperty<TouchData>, Touches, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MobileYaw, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MobileYawCenter, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MobileYawMultiplier, 0xFFFFFFFF)
@@ -91,17 +94,13 @@ void**)params;
 			free(params);
 			return returnVal;
 		}
-		void OnInputTouch(int Handle, byte Type, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* TouchLocation, float DeviceTimestamp)
+		void OnInputTouch(int Handle, byte Type, Vector2D TouchLocation, float DeviceTimestamp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.OnInputTouch");
 			byte* params = (byte*)malloc(17);
 			*(int*)params = Handle;
 			*(params + 4) = Type;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8) = TouchLocation;
+			*(Vector2D*)(params + 8) = TouchLocation;
 			*(float*)(params + 16) = DeviceTimestamp;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

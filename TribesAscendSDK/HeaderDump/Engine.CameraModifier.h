@@ -1,7 +1,9 @@
 #pragma once
 #include "Engine.Actor.h"
 #include "Core.Object.h"
+#include "Core.Object.TPOV.h"
 #include "Engine.Camera.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CameraModifier." #y); \
@@ -59,21 +61,15 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier.Init");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool ModifyCamera(class Camera* Camera, float DeltaTime, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void*& OutPOV)
+		bool ModifyCamera(class Camera* Camera, float DeltaTime, TPOV& OutPOV)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier.ModifyCamera");
 			byte* params = (byte*)malloc(40);
 			*(class Camera**)params = Camera;
 			*(float*)(params + 4) = DeltaTime;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void**)(params + 8) = OutPOV;
+			*(TPOV*)(params + 8) = OutPOV;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutPOV = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void**)(params + 8);
+			OutPOV = *(TPOV*)(params + 8);
 			auto returnVal = *(bool*)(params + 36);
 			free(params);
 			return returnVal;

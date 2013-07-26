@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.SkeletalMesh.h"
 #include "Engine.FaceFXAnimSet.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -26,7 +27,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, NumLoadErrors, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'FaceFXActor'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, FaceFXActor, 0xFFFFFFFF)
 		ADD_OBJECT(SkeletalMesh, DefaultSkelMesh)
 		void MountFaceFXAnimSet(class FaceFXAnimSet* AnimSet)
 		{

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.AnimObject.h"
+#include "Core.Object.BoneAtom.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNode." #y); \
@@ -19,7 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, SearchTag, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, bCachedHasRootMotion, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoneAtom' for the property named 'CachedRootMotionDelta'!
+		ADD_STRUCT(::NonArithmeticProperty<BoneAtom>, CachedRootMotionDelta, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, CachedNumDesiredBones, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, NodeName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NodeTotalWeight, 0xFFFFFFFF)

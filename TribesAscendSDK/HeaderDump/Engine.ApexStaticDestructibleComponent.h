@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ApexStaticComponent.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ApexStaticDestructibleComponent." #y); \
@@ -18,8 +19,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bIsThumbnailComponent, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ApexDestructiblePreview'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ApexDestructibleActor'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ApexDestructiblePreview, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ApexDestructibleActor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SleepDamping, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SleepEnergyThreshold, 0xFFFFFFFF)
 	};

@@ -1,5 +1,7 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.ParticleModuleBeamBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleBeamNoise." #y); \
@@ -17,16 +19,16 @@ namespace UnrealScript
 	class ParticleModuleBeamNoise : public ParticleModuleBeamBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'NoiseScale'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, NoiseScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FrequencyDistance, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NoiseTessellation, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'NoiseTangentStrength'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, NoiseTangentStrength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NoiseTension, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NoiseLockTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NoiseLockRadius, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'NoiseSpeed'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'NoiseRangeScale'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'NoiseRange'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, NoiseSpeed, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, NoiseRangeScale, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, NoiseRange, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Frequency_LowRange, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Frequency, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bApplyNoiseScale, 0x80)

@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.SoundNode.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -17,8 +18,8 @@ namespace UnrealScript
 	class SoundNodeModulator : public SoundNode
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'VolumeModulation'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'PitchModulation'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, VolumeModulation, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, PitchModulation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, VolumeMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, VolumeMin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PitchMax, 0xFFFFFFFF)

@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Color.h"
 #include "UTGame.UTLocalMessage.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Core.Object.h"
@@ -17,17 +18,13 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bNoConsoleDeathMessages, 0x1)
 		ADD_VAR(::StrProperty, SomeoneString, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, KilledString, 0xFFFFFFFF)
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* GetConsoleColor(class PlayerReplicationInfo* RelatedPRI)
+		Color GetConsoleColor(class PlayerReplicationInfo* RelatedPRI)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeathMessage.GetConsoleColor");
 			byte* params = (byte*)malloc(8);
 			*(class PlayerReplicationInfo**)params = RelatedPRI;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 4);
+			auto returnVal = *(Color*)(params + 4);
 			free(params);
 			return returnVal;
 		}

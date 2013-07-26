@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.SeqAct_Latent.h"
+#include "Engine.Texture.TextureGroupContainer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_StreamInTextures." #y); \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, SelectedCinematicTextureGroups, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Texture.TextureGroupContainer' for the property named 'CinematicTextureGroups'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureGroupContainer>, CinematicTextureGroups, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StopTimestamp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Seconds, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bStreamingActive, 0x2)

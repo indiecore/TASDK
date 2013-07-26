@@ -1,6 +1,8 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "TribesGame.TrDevice.h"
 #include "Engine.AnimNodePlayCustomAnim.h"
+#include "Engine.Actor.ImpactInfo.h"
 #include "Engine.AnimNodeSequence.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -85,16 +87,12 @@ void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ProcessInstantHit_Internal(byte FiringMode, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* Impact, bool bHeadShot)
+		void ProcessInstantHit_Internal(byte FiringMode, ImpactInfo Impact, bool bHeadShot)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.ProcessInstantHit_Internal");
 			byte* params = (byte*)malloc(85);
 			*params = FiringMode;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 4) = Impact;
+			*(ImpactInfo*)(params + 4) = Impact;
 			*(bool*)(params + 84) = bHeadShot;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.SoundNode.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -17,10 +18,10 @@ namespace UnrealScript
 	class SoundNodeAttenuation : public SoundNode
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'LPFMaxRadius'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'LPFMinRadius'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'MaxRadius'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'MinRadius'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, LPFMaxRadius, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, LPFMinRadius, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, MaxRadius, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, MinRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LPFRadiusMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LPFRadiusMin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RadiusMax, 0xFFFFFFFF)

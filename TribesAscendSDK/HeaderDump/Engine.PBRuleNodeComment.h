@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.PBRuleNodeBase.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PBRuleNodeComment." #y); \
@@ -17,9 +18,9 @@ namespace UnrealScript
 	class PBRuleNodeComment : public PBRuleNodeBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'FillColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, FillColor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bFilled, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BorderColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, BorderColor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, BorderWidth, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeX, 0xFFFFFFFF)

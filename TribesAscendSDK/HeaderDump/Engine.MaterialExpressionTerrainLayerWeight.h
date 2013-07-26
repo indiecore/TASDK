@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine.MaterialExpression.h"
+#include "Core.Object.Guid.h"
+#include "Engine.MaterialExpression.ExpressionInput.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialExpressionTerrainLayerWeight." #y); \
@@ -17,12 +20,12 @@ namespace UnrealScript
 	class MaterialExpressionTerrainLayerWeight : public MaterialExpression
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'ExpressionGUID'!
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, ExpressionGUID, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PreviewWeight, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, ParameterName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'Layer'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'Base'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'InstanceOverride'!
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, Layer, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, Base, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, InstanceOverride, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

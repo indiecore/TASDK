@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.Volume.h"
+#include "Core.Object.Pointer.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.TestSplittingVolume." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class TestSplittingVolume : public Volume
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_NavMeshPathObject'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IInterface_NavMeshPathObject, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

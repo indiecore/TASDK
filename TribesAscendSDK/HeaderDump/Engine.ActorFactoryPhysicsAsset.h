@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Engine.ActorFactory.h"
 #include "Engine.SkeletalMesh.h"
 #include "Engine.PhysicsAsset.h"

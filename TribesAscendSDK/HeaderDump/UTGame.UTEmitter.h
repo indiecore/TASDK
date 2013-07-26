@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.Emitter.h"
 #include "Engine.ParticleSystem.h"
+#include "Core.Object.Vector.h"
 #include "Engine.WorldInfo.h"
 namespace UnrealScript
 {

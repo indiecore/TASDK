@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleVelocity.h"
+#include "Engine.ParticleModule.ParticleRandomSeedInfo.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleVelocity_Seeded." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class ParticleModuleVelocity_Seeded : public ParticleModuleVelocity
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ParticleModule.ParticleRandomSeedInfo' for the property named 'RandomSeedInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<ParticleRandomSeedInfo>, RandomSeedInfo, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

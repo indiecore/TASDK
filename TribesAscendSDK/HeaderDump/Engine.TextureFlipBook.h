@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Pointer.h"
 #include "Engine.Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class TextureFlipBook : public Texture2D
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ReleaseResourcesFence'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ReleaseResourcesFence, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RenderOffsetV, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RenderOffsetU, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, CurrentColumn, 0xFFFFFFFF)
@@ -25,7 +26,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, FrameTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FrameRate, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, FBMethod, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FTickableObject'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FTickableObject, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, VerticalImages, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, HorizontalImages, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bAutoPlay, 0x8)

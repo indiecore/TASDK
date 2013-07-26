@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "TribesGame.TrDevice.h"
 #include "Engine.SoundCue.h"
 #include "Engine.SkelControlSingleBone.h"

@@ -1,9 +1,11 @@
 #pragma once
 #include "GameFramework.SeqEvent_HudRender.h"
 #include "Engine.HUD.h"
+#include "GameFramework.MobileInputZone.TextureUVs.h"
 #include "GameFramework.MobileInputZone.h"
 #include "Engine.Font.h"
 #include "Engine.Texture2D.h"
+#include "Core.Object.Color.h"
 #include "GameFramework.MobilePlayerInput.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -31,19 +33,19 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MobileTiltSize, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MobileTiltY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MobileTiltX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobileInputZone.TextureUVs' for the property named 'SliderUVs'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, SliderUVs, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, SliderImages)
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobileInputZone.TextureUVs' for the property named 'TrackballTouchIndicatorUVs'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, TrackballTouchIndicatorUVs, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, TrackballTouchIndicator)
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobileInputZone.TextureUVs' for the property named 'TrackballBackgroundUVs'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, TrackballBackgroundUVs, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, TrackballBackground)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'ButtonCaptionColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, ButtonCaptionColor, 0xFFFFFFFF)
 		ADD_OBJECT(Font, ButtonFont)
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobileInputZone.TextureUVs' for the property named 'ButtonUVs'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, ButtonUVs, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, ButtonImages)
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobileInputZone.TextureUVs' for the property named 'JoystickHatUVs'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, JoystickHatUVs, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, JoystickHat)
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobileInputZone.TextureUVs' for the property named 'JoystickBackgroundUVs'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, JoystickBackgroundUVs, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, JoystickBackground)
 		ADD_VAR(::BoolProperty, bShowMotionDebug, 0x80)
 		ADD_VAR(::BoolProperty, bDebugZonePresses, 0x40)

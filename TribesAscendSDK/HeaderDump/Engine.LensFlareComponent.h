@@ -1,5 +1,7 @@
 #pragma once
+#include "Core.Object.Pointer.h"
 #include "Engine.PrimitiveComponent.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.LensFlare.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -25,8 +27,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, NextTraceTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ReleaseResourcesFence'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'SourceColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ReleaseResourcesFence, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, SourceColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Radius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConeFudgeFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InnerCone, 0xFFFFFFFF)
@@ -48,15 +50,11 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetSourceColor(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* InSourceColor)
+		void SetSourceColor(LinearColor InSourceColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LensFlareComponent.SetSourceColor");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)params = InSourceColor;
+			*(LinearColor*)params = InSourceColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

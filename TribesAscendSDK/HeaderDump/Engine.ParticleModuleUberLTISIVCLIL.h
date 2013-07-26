@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.ParticleModuleUberBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleUberLTISIVCLIL." #y); \
@@ -11,13 +13,13 @@ namespace UnrealScript
 	class ParticleModuleUberLTISIVCLIL : public ParticleModuleUberBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'StartLocation'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'AlphaOverLife'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'ColorOverLife'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'StartVelocityRadial'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'StartVelocity'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'StartSize'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Lifetime'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, StartLocation, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, AlphaOverLife, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, ColorOverLife, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, StartVelocityRadial, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, StartVelocity, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, StartSize, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Lifetime, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

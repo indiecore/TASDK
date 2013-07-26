@@ -15,12 +15,14 @@
 #include "TribesGame.TrPartyManager.h"
 #include "TribesGame.TrLoadingData.h"
 #include "TribesGame.TrSettingsManager.h"
+#include "Core.Object.Pointer.h"
 #include "TribesGame.TrRibbonManager.h"
 #include "TribesGame.TrFriendManager.h"
 #include "TribesGame.GFxTrScene_EULA.h"
 #include "TribesGame.GFxTrScene_MatchSummary.h"
 #include "TribesGame.GFxTrScene_PlayerSummary.h"
 #include "TribesGame.GFxTrMenuSounds.h"
+#include "TribesGame.GFxTrMenuMoviePlayer.VendorItemData.h"
 #include "TribesGame.TrHUD.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -123,7 +125,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bShowGenericFailure, 0x2000000)
 		ADD_VAR(::BoolProperty, bWaitingForPlayerNameInput, 0x8000000)
 		ADD_VAR(::StrProperty, NameRulesMessage, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.GFxTrMenuMoviePlayer.VendorItemData' for the property named 'PortalPurchase'!
+		ADD_STRUCT(::NonArithmeticProperty<VendorItemData>, PortalPurchase, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bInQueue, 0x20)
 		ADD_VAR(::BoolProperty, bQueueListDirty, 0x40)
 		ADD_VAR(::BoolProperty, bWebVendorLoaded, 0x10000)
@@ -225,15 +227,11 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DelegateOnMarshalEvent(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer'!
-void* pMarEvent)
+		void DelegateOnMarshalEvent(Pointer pMarEvent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateOnMarshalEvent");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer'!
-void**)params = pMarEvent;
+			*(Pointer*)params = pMarEvent;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -420,15 +418,11 @@ void**)params = pMarEvent;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnMarshalEvent(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer'!
-void* pMarEvent)
+		void OnMarshalEvent(Pointer pMarEvent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.OnMarshalEvent");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer'!
-void**)params = pMarEvent;
+			*(Pointer*)params = pMarEvent;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -442,15 +436,11 @@ void**)params = pMarEvent;
 			free(params);
 			return returnVal;
 		}
-		void UserLoginChanged(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer'!
-void* pMarEvent)
+		void UserLoginChanged(Pointer pMarEvent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UserLoginChanged");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer'!
-void**)params = pMarEvent;
+			*(Pointer*)params = pMarEvent;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

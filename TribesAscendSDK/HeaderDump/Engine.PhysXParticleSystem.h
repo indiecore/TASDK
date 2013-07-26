@@ -1,5 +1,8 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.Vector.h"
+#include "Engine.PrimitiveComponent.RBCollisionChannelContainer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PhysXParticleSystem." #y); \
@@ -17,8 +20,8 @@ namespace UnrealScript
 	class PhysXParticleSystem : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'PSys'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'CascadeScene'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, PSys, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, CascadeScene, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CollisionResponseCoefficient, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Viscosity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Stiffness, 0xFFFFFFFF)
@@ -42,7 +45,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, RestitutionWithDynamicShapes, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RestitutionWithStaticShapes, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CollisionDistance, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'RBCollideWithChannels'!
+		ADD_STRUCT(::NonArithmeticProperty<RBCollisionChannelContainer>, RBCollideWithChannels, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, PacketSizeMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, SimulationMethod, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RBChannel, 0xFFFFFFFF)

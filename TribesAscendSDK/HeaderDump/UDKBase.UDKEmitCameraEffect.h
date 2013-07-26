@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.Emitter.h"
+#include "Core.Object.Rotator.h"
 #include "UDKBase.UDKPlayerController.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKEmitCameraEffect." #y); \

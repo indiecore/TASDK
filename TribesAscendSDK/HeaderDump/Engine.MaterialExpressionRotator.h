@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.MaterialExpression.h"
+#include "Engine.MaterialExpression.ExpressionInput.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialExpressionRotator." #y); \
@@ -20,8 +21,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Speed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CenterY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CenterX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'Time'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'Coordinate'!
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, Time, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, Coordinate, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

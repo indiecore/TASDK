@@ -2,6 +2,7 @@
 #include "Engine.PhysicsVolume.h"
 #include "Engine.SoundCue.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.WaterVolume." #y); \

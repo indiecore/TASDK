@@ -5,6 +5,7 @@
 #include "TribesGame.TrSeqAct_AIStopJetting.h"
 #include "TribesGame.TrSeqAct_AIStartSkiing.h"
 #include "Engine.SeqAct_AIMoveToActor.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Pawn.h"
 namespace UnrealScript
 {

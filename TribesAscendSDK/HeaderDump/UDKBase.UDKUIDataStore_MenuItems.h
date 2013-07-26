@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.UIDataStore_GameResource.h"
+#include "Core.Object.Pointer.h"
 #include "UDKBase.UDKUIResourceDataProvider.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -26,7 +27,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, GameModeFilter, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, MapInfoDataProviderClass)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
 		int GetProviderCount(ScriptName FieldName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.GetProviderCount");

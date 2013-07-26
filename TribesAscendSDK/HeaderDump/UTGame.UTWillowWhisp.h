@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "UTGame.UTReplicatedEmitter.h"
 #include "Engine.ParticleSystem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \

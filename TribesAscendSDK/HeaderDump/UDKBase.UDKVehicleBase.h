@@ -2,6 +2,7 @@
 #include "Engine.SVehicle.h"
 #include "UDKBase.UDKCarriedObject.h"
 #include "Engine.Controller.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

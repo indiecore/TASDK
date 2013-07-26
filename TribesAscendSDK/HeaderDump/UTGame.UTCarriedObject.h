@@ -1,13 +1,17 @@
 #pragma once
-#include "Engine.Canvas.h"
-#include "UTGame.UTPlayerReplicationInfo.h"
+#include "Engine.UIRoot.TextureCoordinates.h"
 #include "UDKBase.UDKCarriedObject.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.Vector.h"
 #include "Engine.ForceFeedbackWaveform.h"
-#include "Engine.PlayerController.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.Texture2D.h"
 #include "Engine.Pawn.h"
 #include "Engine.SoundCue.h"
 #include "Engine.Controller.h"
+#include "UTGame.UTPlayerReplicationInfo.h"
+#include "Engine.PlayerController.h"
+#include "Engine.Canvas.h"
 #include "UTGame.UTMapInfo.h"
 #include "UTGame.UTPlayerController.h"
 #include "UTGame.UTGameObjective.h"
@@ -42,9 +46,9 @@ namespace UnrealScript
 		ADD_STRUCT(::RotatorProperty, GameObjRot1P, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, GameObjOffset1P, 0xFFFFFFFF)
 		ADD_OBJECT(ForceFeedbackWaveform, PickUpWaveForm)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'GoldColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'BlueColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'RedColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, GoldColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BlueColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, RedColor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LastSeeMessageIndex, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastFlagSeeTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastHighlightUpdate, 0xFFFFFFFF)
@@ -58,7 +62,7 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, DroppedSound)
 		ADD_OBJECT(SoundCue, PickupSound)
 		ADD_OBJECT(Texture2D, IconTexture)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'IconCoords'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, IconCoords, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MapSize, 0xFFFFFFFF)
 		ADD_OBJECT(Controller, FirstTouch)
 		ADD_VAR(::FloatProperty, MaxDropTime, 0xFFFFFFFF)

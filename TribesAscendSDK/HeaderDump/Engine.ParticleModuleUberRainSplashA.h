@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.ParticleModuleUberBase.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleUberRainSplashA." #y); \
@@ -17,16 +19,16 @@ namespace UnrealScript
 	class ParticleModuleUberRainSplashA : public ParticleModuleUberBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'AlphaOverLife'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'ColorOverLife'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'LifeMultiplier'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, AlphaOverLife, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, ColorOverLife, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, LifeMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, MultiplyZ, 0x8)
 		ADD_VAR(::BoolProperty, MultiplyY, 0x4)
 		ADD_VAR(::BoolProperty, MultiplyX, 0x2)
 		ADD_VAR(::BoolProperty, bInheritParent, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'StartRotation'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'StartSize'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Lifetime'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, StartRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, StartSize, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Lifetime, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

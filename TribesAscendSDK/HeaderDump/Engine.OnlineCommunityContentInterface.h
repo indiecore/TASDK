@@ -1,5 +1,8 @@
 #pragma once
 #include "Core.Interface.h"
+#include "Engine.OnlineSubsystem.CommunityContentFile.h"
+#include "Engine.OnlineSubsystem.OnlineFriend.h"
+#include "Engine.OnlineSubsystem.CommunityContentMetadata.h"
 namespace UnrealScript
 {
 	class OnlineCommunityContentInterface : public Interface
@@ -39,18 +42,14 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnGetContentPayloadComplete(bool bWasSuccessful, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void* FileDownloaded, 
+		void OnGetContentPayloadComplete(bool bWasSuccessful, CommunityContentFile FileDownloaded, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& Payload)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineCommunityContentInterface.OnGetContentPayloadComplete");
 			byte* params = (byte*)malloc(68);
 			*(bool*)params = bWasSuccessful;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void**)(params + 4) = FileDownloaded;
+			*(CommunityContentFile*)(params + 4) = FileDownloaded;
 			*(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 56) = Payload;
@@ -60,29 +59,21 @@ void**)(params + 56) = Payload;
 void**)(params + 56);
 			free(params);
 		}
-		void OnDownloadContentComplete(bool bWasSuccessful, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void* FileDownloaded)
+		void OnDownloadContentComplete(bool bWasSuccessful, CommunityContentFile FileDownloaded)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineCommunityContentInterface.OnDownloadContentComplete");
 			byte* params = (byte*)malloc(56);
 			*(bool*)params = bWasSuccessful;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void**)(params + 4) = FileDownloaded;
+			*(CommunityContentFile*)(params + 4) = FileDownloaded;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnUploadContentComplete(bool bWasSuccessful, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void* UploadedFile)
+		void OnUploadContentComplete(bool bWasSuccessful, CommunityContentFile UploadedFile)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineCommunityContentInterface.OnUploadContentComplete");
 			byte* params = (byte*)malloc(56);
 			*(bool*)params = bWasSuccessful;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void**)(params + 4) = UploadedFile;
+			*(CommunityContentFile*)(params + 4) = UploadedFile;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -180,25 +171,19 @@ void**)params = ReadFriendsContentListCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool GetFriendsContentList(byte PlayerNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineFriend'!
-void*& Friend, 
+		bool GetFriendsContentList(byte PlayerNum, OnlineFriend& Friend, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& ContentFiles)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineCommunityContentInterface.GetFriendsContentList");
 			byte* params = (byte*)malloc(65);
 			*params = PlayerNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineFriend'!
-void**)(params + 4) = Friend;
+			*(OnlineFriend*)(params + 4) = Friend;
 			*(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 52) = ContentFiles;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Friend = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineFriend'!
-void**)(params + 4);
+			Friend = *(OnlineFriend*)(params + 4);
 			ContentFiles = *(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 52);
@@ -208,9 +193,7 @@ void**)(params + 52);
 		}
 		bool UploadContent(byte PlayerNum, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& Payload, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentMetadata'!
-void*& MetaData)
+void*& Payload, CommunityContentMetadata& MetaData)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineCommunityContentInterface.UploadContent");
 			byte* params = (byte*)malloc(33);
@@ -218,16 +201,12 @@ void*& MetaData)
 			*(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 4) = Payload;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentMetadata'!
-void**)(params + 16) = MetaData;
+			*(CommunityContentMetadata*)(params + 16) = MetaData;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			Payload = *(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 4);
-			MetaData = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentMetadata'!
-void**)(params + 16);
+			MetaData = *(CommunityContentMetadata*)(params + 16);
 			auto returnVal = *(bool*)(params + 32);
 			free(params);
 			return returnVal;
@@ -256,20 +235,14 @@ void**)params = UploadContentCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool DownloadContent(byte PlayerNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void*& FileToDownload)
+		bool DownloadContent(byte PlayerNum, CommunityContentFile& FileToDownload)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineCommunityContentInterface.DownloadContent");
 			byte* params = (byte*)malloc(57);
 			*params = PlayerNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void**)(params + 4) = FileToDownload;
+			*(CommunityContentFile*)(params + 4) = FileToDownload;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			FileToDownload = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void**)(params + 4);
+			FileToDownload = *(CommunityContentFile*)(params + 4);
 			auto returnVal = *(bool*)(params + 56);
 			free(params);
 			return returnVal;
@@ -298,20 +271,14 @@ void**)params = DownloadContentCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool GetContentPayload(byte PlayerNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void*& FileDownloaded)
+		bool GetContentPayload(byte PlayerNum, CommunityContentFile& FileDownloaded)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineCommunityContentInterface.GetContentPayload");
 			byte* params = (byte*)malloc(57);
 			*params = PlayerNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void**)(params + 4) = FileDownloaded;
+			*(CommunityContentFile*)(params + 4) = FileDownloaded;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			FileDownloaded = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void**)(params + 4);
+			FileDownloaded = *(CommunityContentFile*)(params + 4);
 			auto returnVal = *(bool*)(params + 56);
 			free(params);
 			return returnVal;
@@ -340,21 +307,15 @@ void**)params = GetContentPayloadCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void RateContent(byte PlayerNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void*& FileToRate, int NewRating)
+		void RateContent(byte PlayerNum, CommunityContentFile& FileToRate, int NewRating)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineCommunityContentInterface.RateContent");
 			byte* params = (byte*)malloc(57);
 			*params = PlayerNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void**)(params + 4) = FileToRate;
+			*(CommunityContentFile*)(params + 4) = FileToRate;
 			*(int*)(params + 56) = NewRating;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			FileToRate = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.CommunityContentFile'!
-void**)(params + 4);
+			FileToRate = *(CommunityContentFile*)(params + 4);
 			free(params);
 		}
 	};

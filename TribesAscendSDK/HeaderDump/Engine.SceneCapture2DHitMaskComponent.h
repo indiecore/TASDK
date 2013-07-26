@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.SceneCaptureComponent.h"
 #include "Engine.TextureRenderTarget2D.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SceneCapture2DHitMaskComponent." #y); \

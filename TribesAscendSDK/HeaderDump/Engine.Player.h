@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -32,7 +33,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, PP_DesaturationMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ConfiguredLanSpeed, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ConfiguredInternetSpeed, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FExec'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FExec, 0xFFFFFFFF)
 		void SwitchController(class PlayerController* PC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Player.SwitchController");

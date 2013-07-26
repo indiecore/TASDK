@@ -1,5 +1,6 @@
 #pragma once
 #include "GameFramework.SeqEvent_MobileRawInput.h"
+#include "Core.Object.Vector2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.SeqEvent_MobileSwipe." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class SeqEvent_MobileSwipe : public SeqEvent_MobileRawInput
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'InitialTouch'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, InitialTouch, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Tolerance, 0xFFFFFFFF)
 	};

@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.ParticleModuleTypeDataBase.h"
+#include "Core.Object.Vector.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleTypeDataTrail." #y); \
@@ -18,7 +20,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(::VectorProperty, SpawnDistance, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Tension'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Tension, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, TessellationFactor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, SpawnByDistance, 0x10)
 		ADD_VAR(::BoolProperty, Tapered, 0x8)

@@ -1,5 +1,6 @@
 #pragma once
 #include "UTGame.GFxUDKFrontEnd_Screen.h"
+#include "GFxUI.GFxClikWidget.EventData.h"
 #include "GFxUI.GFxObject.h"
 #include "GFxUI.GFxClikWidget.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
@@ -47,27 +48,19 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.Select_HostGame");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnListItemPress(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* ev)
+		void OnListItemPress(EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.OnListItemPress");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = ev;
+			*(EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnListChange(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* ev)
+		void OnListChange(EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.OnListChange");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = ev;
+			*(EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

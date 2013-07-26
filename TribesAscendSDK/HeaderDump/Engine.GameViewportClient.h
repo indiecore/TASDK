@@ -1,10 +1,14 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.QWord.h"
 #include "Engine.Console.h"
-#include "Engine.Canvas.h"
 #include "Engine.UIInteraction.h"
+#include "Engine.GameViewportClient.TitleSafeZoneArea.h"
 #include "Engine.LocalPlayer.h"
 #include "Engine.Interaction.h"
+#include "Core.Object.Vector2D.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.GameViewportClient." #y); \
@@ -36,7 +40,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDebugNoGFxUI, 0x80)
 		ADD_VAR(::ByteProperty, Default2PSplitType, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, Default3PSplitType, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.GameViewportClient.TitleSafeZoneArea' for the property named 'TitleSafeZone'!
+		ADD_STRUCT(::NonArithmeticProperty<TitleSafeZoneArea>, TitleSafeZone, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bShowTitleSafeZone, 0x1)
 		ADD_VAR(::FloatProperty, ProgressTimeOut, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ProgressFadeTime, 0xFFFFFFFF)
@@ -46,10 +50,10 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, ConnectingMessage, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, PrecachingMessage, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, PausedMessage, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FViewportClient'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FExec'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Viewport'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ViewportFrame'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FViewportClient, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FExec, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Viewport, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ViewportFrame, 0xFFFFFFFF)
 		ADD_STRUCT(::QWordProperty, ShowFlags, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDisplayingUIMouseCursor, 0x2)
 		ADD_VAR(::BoolProperty, bUIMouseCaptureOverride, 0x4)
@@ -58,7 +62,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bShowSystemMouseCursor, 0x20)
 		ADD_VAR(::BoolProperty, bDisableWorldRendering, 0x40)
 		ADD_VAR(::BoolProperty, bUseHardwareCursorWhenWindowed, 0x100)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ScaleformInteraction'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ScaleformInteraction, 0xFFFFFFFF)
 		ScriptArray<wchar_t> ConsoleCommand(ScriptArray<wchar_t> Command)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.ConsoleCommand");
@@ -108,19 +112,13 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void GetViewportSize(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void*& out_ViewportSize)
+		void GetViewportSize(Vector2D& out_ViewportSize)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.GetViewportSize");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = out_ViewportSize;
+			*(Vector2D*)params = out_ViewportSize;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_ViewportSize = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params;
+			out_ViewportSize = *(Vector2D*)params;
 			free(params);
 		}
 		bool IsFullScreenViewport()
@@ -316,27 +314,15 @@ void**)params;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.LayoutPlayers");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void GetSubtitleRegion(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void*& MinPos, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void*& MaxPos)
+		void GetSubtitleRegion(Vector2D& MinPos, Vector2D& MaxPos)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.GetSubtitleRegion");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = MinPos;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8) = MaxPos;
+			*(Vector2D*)params = MinPos;
+			*(Vector2D*)(params + 8) = MaxPos;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			MinPos = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params;
-			MaxPos = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8);
+			MinPos = *(Vector2D*)params;
+			MaxPos = *(Vector2D*)(params + 8);
 			free(params);
 		}
 		int ConvertLocalPlayerToGamePlayerIndex(class LocalPlayer* LPlayer)

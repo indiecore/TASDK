@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "TribesGame.TrStreamManager.GameStream.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrStreamManager." #y); \
@@ -120,20 +121,12 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		int ViewerSort(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrStreamManager.GameStream'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrStreamManager.GameStream'!
-void* B)
+		int ViewerSort(GameStream A, GameStream B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.ViewerSort");
 			byte* params = (byte*)malloc(140);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrStreamManager.GameStream'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrStreamManager.GameStream'!
-void**)(params + 68) = B;
+			*(GameStream*)params = A;
+			*(GameStream*)(params + 68) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 136);
 			free(params);

@@ -1,8 +1,11 @@
 #pragma once
 #include "Core.Object.h"
 #include "Engine.PhysicalMaterial.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.Vector.h"
 #include "Engine.RB_BodySetup.h"
 #include "Engine.PhysicsAssetInstance.h"
+#include "Core.Object.Matrix.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RB_BodyInstance." #y); \
@@ -49,9 +52,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDisableOnOverextension, 0x4)
 		ADD_VAR(::BoolProperty, bEnableBoneSpringAngular, 0x2)
 		ADD_VAR(::BoolProperty, bEnableBoneSpringLinear, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'BoneSpringKinActor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'BoneSpring'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'BodyData'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, BoneSpringKinActor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, BoneSpring, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, BodyData, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SceneIndex, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, PreviousVelocity, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, Velocity, 0xFFFFFFFF)
@@ -100,16 +103,12 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* GetUnrealWorldTM()
+		Matrix GetUnrealWorldTM()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetUnrealWorldTM");
 			byte* params = (byte*)malloc(64);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params;
+			auto returnVal = *(Matrix*)params;
 			free(params);
 			return returnVal;
 		}
@@ -141,21 +140,15 @@ void**)params;
 			free(params);
 			return returnVal;
 		}
-		void EnableBoneSpring(bool bInEnableLinear, bool bInEnableAngular, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void*& InBoneTarget)
+		void EnableBoneSpring(bool bInEnableLinear, bool bInEnableAngular, Matrix& InBoneTarget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.EnableBoneSpring");
 			byte* params = (byte*)malloc(72);
 			*(bool*)params = bInEnableLinear;
 			*(bool*)(params + 4) = bInEnableAngular;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)(params + 16) = InBoneTarget;
+			*(Matrix*)(params + 16) = InBoneTarget;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			InBoneTarget = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)(params + 16);
+			InBoneTarget = *(Matrix*)(params + 16);
 			free(params);
 		}
 		void SetBoneSpringParams(float InLinearSpring, float InLinearDamping, float InAngularSpring, float InAngularDamping)
@@ -169,20 +162,14 @@ void**)(params + 16);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetBoneSpringTarget(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void*& InBoneTarget, bool bTeleport)
+		void SetBoneSpringTarget(Matrix& InBoneTarget, bool bTeleport)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetBoneSpringTarget");
 			byte* params = (byte*)malloc(68);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = InBoneTarget;
+			*(Matrix*)params = InBoneTarget;
 			*(bool*)(params + 64) = bTeleport;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			InBoneTarget = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params;
+			InBoneTarget = *(Matrix*)params;
 			free(params);
 		}
 		void SetBlockRigidBody(bool bNewBlockRigidBody)

@@ -1,7 +1,9 @@
 #pragma once
 #include "Engine.Emitter.h"
 #include "Engine.Camera.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.ParticleSystem.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.EmitterCameraLensEffectBase." #y); \

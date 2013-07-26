@@ -1,6 +1,7 @@
 #pragma once
 #include "IpDrv.PartyBeacon.h"
 #include "Engine.OnlineGameSearch.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.PartyBeaconHost." #y); \
@@ -22,15 +23,11 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumReservations, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumPlayersPerTeam, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumTeams, 0xFFFFFFFF)
-		void OnClientCancellationReceived(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PartyLeader)
+		void OnClientCancellationReceived(UniqueNetId PartyLeader)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconHost.OnClientCancellationReceived");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PartyLeader;
+			*(UniqueNetId*)params = PartyLeader;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -66,17 +63,13 @@ void**)params = PartyLeader;
 			free(params);
 			return returnVal;
 		}
-		byte AddPartyReservationEntry(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PartyLeader, 
+		byte AddPartyReservationEntry(UniqueNetId PartyLeader, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& PlayerMembers, int TeamNum, bool bIsHost)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconHost.AddPartyReservationEntry");
 			byte* params = (byte*)malloc(29);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PartyLeader;
+			*(UniqueNetId*)params = PartyLeader;
 			*(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 8) = PlayerMembers;
@@ -90,17 +83,13 @@ void**)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		byte UpdatePartyReservationEntry(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PartyLeader, 
+		byte UpdatePartyReservationEntry(UniqueNetId PartyLeader, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& PlayerMembers)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconHost.UpdatePartyReservationEntry");
 			byte* params = (byte*)malloc(21);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PartyLeader;
+			*(UniqueNetId*)params = PartyLeader;
 			*(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 8) = PlayerMembers;
@@ -112,32 +101,22 @@ void**)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		int GetExistingReservation(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void*& PartyLeader)
+		int GetExistingReservation(UniqueNetId& PartyLeader)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconHost.GetExistingReservation");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PartyLeader;
+			*(UniqueNetId*)params = PartyLeader;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			PartyLeader = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params;
+			PartyLeader = *(UniqueNetId*)params;
 			auto returnVal = *(int*)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		void HandlePlayerLogout(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID, bool bMaintainParty)
+		void HandlePlayerLogout(UniqueNetId PlayerID, bool bMaintainParty)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconHost.HandlePlayerLogout");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerID;
+			*(UniqueNetId*)params = PlayerID;
 			*(bool*)(params + 8) = bMaintainParty;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -186,15 +165,11 @@ void**)params = PlayerID;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconHost.UnregisterPartyMembers");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void UnregisterParty(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PartyLeader)
+		void UnregisterParty(UniqueNetId PartyLeader)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconHost.UnregisterParty");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PartyLeader;
+			*(UniqueNetId*)params = PartyLeader;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

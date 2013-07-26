@@ -1,8 +1,10 @@
 #pragma once
+#include "Core.Object.Rotator.h"
 #include "UTGame.UTPawn.h"
 #include "Engine.SoundCue.h"
 #include "UTGame.UTSeqAct_DummyWeaponFire.h"
 #include "Engine.Weapon.h"
+#include "Core.Object.Vector.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty UTGame.UTDummyPawn." #y); \

@@ -1,10 +1,12 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Engine.SkeletalMeshActorMAT.h"
 #include "Engine.AnimNodePlayCustomAnim.h"
 #include "TribesGame.TrPlayerController.h"
+#include "Engine.SkeletalMesh.h"
+#include "TribesGame.TrObject.PaperDollInfo.h"
 #include "Engine.AnimNodeSequence.h"
 #include "Engine.MaterialInstanceConstant.h"
-#include "Engine.SkeletalMesh.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrPaperDoll." #y); \
@@ -35,11 +37,11 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, m_DeviceContentDataClass)
 		ADD_VAR(::FloatProperty, m_fLastStreamingCheckTimestamp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCheckStreamingFrequency, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'm_PendingPaperDollInfoSkin'!
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'm_PendingPaperDollInfoDevice'!
+		ADD_STRUCT(::NonArithmeticProperty<PaperDollInfo>, m_PendingPaperDollInfoSkin, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<PaperDollInfo>, m_PendingPaperDollInfoDevice, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_LastSkinIdRequest, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bWasLastMeshSwapRequestNonWeapon, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'm_CurrentPaperDollInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<PaperDollInfo>, m_CurrentPaperDollInfo, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMaxCustomAnimTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMinCustomAnimTime, 0xFFFFFFFF)
 		ADD_OBJECT(AnimNodePlayCustomAnim, m_SidekickCustomAnimNode)
@@ -58,15 +60,11 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, m_vViewOffset16x10, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, m_vViewOffset16x9, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, m_vViewOffset4x3, 0xFFFFFFFF)
-		bool IsFullyStreamed(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
-void* PaperDoll)
+		bool IsFullyStreamed(PaperDollInfo PaperDoll)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDoll.IsFullyStreamed");
 			byte* params = (byte*)malloc(60);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
-void**)params = PaperDoll;
+			*(PaperDollInfo*)params = PaperDoll;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 56);
 			free(params);
@@ -178,15 +176,11 @@ void**)params = SkelComp;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDoll.StopLoadingGraphic");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnWeaponFinishedStreaming(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
-void* NewPaperDollInfo)
+		void OnWeaponFinishedStreaming(PaperDollInfo NewPaperDollInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDoll.OnWeaponFinishedStreaming");
 			byte* params = (byte*)malloc(56);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
-void**)params = NewPaperDollInfo;
+			*(PaperDollInfo*)params = NewPaperDollInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -198,29 +192,21 @@ void**)params = NewPaperDollInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
-void* GetDevicePaperDollInfo(ScriptClass* WeaponClass)
+		PaperDollInfo GetDevicePaperDollInfo(ScriptClass* WeaponClass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDoll.GetDevicePaperDollInfo");
 			byte* params = (byte*)malloc(60);
 			*(ScriptClass**)params = WeaponClass;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
-void**)(params + 4);
+			auto returnVal = *(PaperDollInfo*)(params + 4);
 			free(params);
 			return returnVal;
 		}
-		void SetMainMesh(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
-void* NewInfo)
+		void SetMainMesh(PaperDollInfo NewInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDoll.SetMainMesh");
 			byte* params = (byte*)malloc(56);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
-void**)params = NewInfo;
+			*(PaperDollInfo*)params = NewInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

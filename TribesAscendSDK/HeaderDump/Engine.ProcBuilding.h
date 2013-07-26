@@ -3,6 +3,7 @@
 #include "Engine.ProcBuildingRuleset.h"
 #include "Engine.StaticMeshActor.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ProcBuilding." #y); \

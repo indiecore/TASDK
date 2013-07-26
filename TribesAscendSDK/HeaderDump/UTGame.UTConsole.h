@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.Console.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTConsole." #y); \
@@ -35,16 +36,12 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void OutputTextLine(ScriptArray<wchar_t> Text, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* OverrideColor)
+		void OutputTextLine(ScriptArray<wchar_t> Text, Color OverrideColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsole.OutputTextLine");
 			byte* params = (byte*)malloc(16);
 			*(ScriptArray<wchar_t>*)params = Text;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 12) = OverrideColor;
+			*(Color*)(params + 12) = OverrideColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

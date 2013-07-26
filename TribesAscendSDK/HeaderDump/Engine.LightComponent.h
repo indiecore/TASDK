@@ -1,7 +1,14 @@
 #pragma once
+#include "Core.Object.LinearColor.h"
 #include "Engine.ActorComponent.h"
+#include "Core.Object.Color.h"
 #include "Engine.LightFunction.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.Texture2D.h"
+#include "Core.Object.Guid.h"
+#include "Engine.LightComponent.LightingChannelContainer.h"
+#include "Core.Object.Matrix.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LightComponent." #y); \
@@ -26,15 +33,15 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, Brightness, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'LightColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, LightColor, 0xFFFFFFFF)
 		ADD_OBJECT(LightFunction, Function)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SceneInfo'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'WorldToLight'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'LightToWorld'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'LightGuid'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'LightmapGuid'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SceneInfo, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, WorldToLight, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, LightToWorld, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, LightGuid, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, LightmapGuid, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LightEnv_BouncedLightBrightness, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'LightEnv_BouncedModulationColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, LightEnv_BouncedModulationColor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
 		ADD_VAR(::BoolProperty, CastShadows, 0x2)
 		ADD_VAR(::BoolProperty, CastStaticShadows, 0x4)
@@ -54,10 +61,10 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUseImageReflectionSpecular, 0x10000)
 		ADD_VAR(::BoolProperty, bPrecomputedLightingIsValid, 0x20000)
 		ADD_VAR(::BoolProperty, bExplicitlyAssignedLight, 0x40000)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer' for the property named 'LightingChannels'!
+		ADD_STRUCT(::NonArithmeticProperty<LightingChannelContainer>, LightingChannels, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, LightAffectsClassification, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, LightShadowMode, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'ModShadowColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, ModShadowColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ModShadowFadeoutTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ModShadowFadeoutExponent, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LightListIndex, 0xFFFFFFFF)
@@ -70,7 +77,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BloomScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BloomThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BloomScreenBlendThreshold, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BloomTint'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, BloomTint, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RadialBlurPercent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OcclusionMaskDarkness, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, ReflectionTexture)
@@ -83,16 +90,12 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetLightProperties(float NewBrightness, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* NewLightColor, class LightFunction* NewLightFunction)
+		void SetLightProperties(float NewBrightness, Color NewLightColor, class LightFunction* NewLightFunction)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.SetLightProperties");
 			byte* params = (byte*)malloc(12);
 			*(float*)params = NewBrightness;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 4) = NewLightColor;
+			*(Color*)(params + 4) = NewLightColor;
 			*(class LightFunction**)(params + 8) = NewLightFunction;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

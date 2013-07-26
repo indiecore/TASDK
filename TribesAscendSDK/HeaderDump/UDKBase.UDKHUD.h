@@ -1,6 +1,7 @@
 #pragma once
 #include "GameFramework.MobileHUD.h"
 #include "Engine.Font.h"
+#include "Engine.Canvas.FontRenderInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKHUD." #y); \
@@ -26,7 +27,7 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Font, BindTextFont)
 		ADD_OBJECT(Font, ConsoleIconFont)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Canvas.FontRenderInfo' for the property named 'TextRenderInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<FontRenderInfo>, TextRenderInfo, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PulseMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PulseSplit, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PulseDuration, 0xFFFFFFFF)

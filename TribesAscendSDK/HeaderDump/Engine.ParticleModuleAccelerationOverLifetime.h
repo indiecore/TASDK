@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleAccelerationBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleAccelerationOverLifetime." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class ParticleModuleAccelerationOverLifetime : public ParticleModuleAccelerationBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'AccelOverLife'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, AccelOverLife, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

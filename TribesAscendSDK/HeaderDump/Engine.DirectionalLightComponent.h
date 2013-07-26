@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.LightComponent.h"
+#include "Engine.EngineTypes.LightmassDirectionalLightSettings.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DirectionalLightComponent." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class DirectionalLightComponent : public LightComponent
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightmassDirectionalLightSettings' for the property named 'LightmassSettings'!
+		ADD_STRUCT(::NonArithmeticProperty<LightmassDirectionalLightSettings>, LightmassSettings, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CascadeDistributionExponent, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumWholeSceneDynamicShadowCascades, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WholeSceneDynamicShadowRadius, 0xFFFFFFFF)

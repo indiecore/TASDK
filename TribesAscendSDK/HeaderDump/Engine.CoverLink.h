@@ -1,9 +1,13 @@
 #pragma once
 #include "Engine.NavigationPoint.h"
-#include "Engine.Pawn.h"
+#include "Engine.NavigationPoint.CheckpointRecord.h"
 #include "Engine.SeqAct_ModifyCover.h"
-#include "Engine.SeqAct_Toggle.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Scout.h"
+#include "Engine.CoverLink.CoverInfo.h"
+#include "Engine.SeqAct_Toggle.h"
+#include "Core.Object.Rotator.h"
+#include "Engine.Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CoverLink." #y); \
@@ -58,22 +62,16 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DangerScale, 0xFFFFFFFF)
 		ADD_OBJECT(CoverLink, NextCoverLink)
 		ADD_VAR(::ByteProperty, LocationDescription, 0xFFFFFFFF)
-		bool GetFireLinkTargetCoverInfo(int SlotIdx, int FireLinkIdx, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverLink.CoverInfo'!
-void*& out_Info, byte ArrayID)
+		bool GetFireLinkTargetCoverInfo(int SlotIdx, int FireLinkIdx, CoverInfo& out_Info, byte ArrayID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetFireLinkTargetCoverInfo");
 			byte* params = (byte*)malloc(21);
 			*(int*)params = SlotIdx;
 			*(int*)(params + 4) = FireLinkIdx;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverLink.CoverInfo'!
-void**)(params + 8) = out_Info;
+			*(CoverInfo*)(params + 8) = out_Info;
 			*(params + 16) = ArrayID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_Info = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverLink.CoverInfo'!
-void**)(params + 8);
+			out_Info = *(CoverInfo*)(params + 8);
 			auto returnVal = *(bool*)(params + 20);
 			free(params);
 			return returnVal;
@@ -141,16 +139,12 @@ void**)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		bool IsExposedTo(int SlotIdx, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverLink.CoverInfo'!
-void* ChkSlot, float& out_ExposedScale)
+		bool IsExposedTo(int SlotIdx, CoverInfo ChkSlot, float& out_ExposedScale)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.IsExposedTo");
 			byte* params = (byte*)malloc(20);
 			*(int*)params = SlotIdx;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverLink.CoverInfo'!
-void**)(params + 4) = ChkSlot;
+			*(CoverInfo*)(params + 4) = ChkSlot;
 			*(float*)(params + 12) = out_ExposedScale;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			out_ExposedScale = *(float*)(params + 12);
@@ -317,18 +311,14 @@ void**)(params + 4) = ChkSlot;
 			free(params);
 			return returnVal;
 		}
-		bool GetFireLinkTo(int SlotIdx, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverLink.CoverInfo'!
-void* ChkCover, byte ChkAction, byte ChkType, int& out_FireLinkIdx, 
+		bool GetFireLinkTo(int SlotIdx, CoverInfo ChkCover, byte ChkAction, byte ChkType, int& out_FireLinkIdx, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& out_Items)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetFireLinkTo");
 			byte* params = (byte*)malloc(34);
 			*(int*)params = SlotIdx;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverLink.CoverInfo'!
-void**)(params + 4) = ChkCover;
+			*(CoverInfo*)(params + 4) = ChkCover;
 			*(params + 12) = ChkAction;
 			*(params + 13) = ChkType;
 			*(int*)(params + 16) = out_FireLinkIdx;
@@ -344,16 +334,12 @@ void**)(params + 20);
 			free(params);
 			return returnVal;
 		}
-		bool HasFireLinkTo(int SlotIdx, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverLink.CoverInfo'!
-void* ChkCover, bool bAllowFallbackLinks)
+		bool HasFireLinkTo(int SlotIdx, CoverInfo ChkCover, bool bAllowFallbackLinks)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.HasFireLinkTo");
 			byte* params = (byte*)malloc(20);
 			*(int*)params = SlotIdx;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverLink.CoverInfo'!
-void**)(params + 4) = ChkCover;
+			*(CoverInfo*)(params + 4) = ChkCover;
 			*(bool*)(params + 12) = bAllowFallbackLinks;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 16);
@@ -447,34 +433,22 @@ void**)(params + 4);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void CreateCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.CheckpointRecord'!
-void*& Record)
+		void CreateCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.CreateCheckpointRecord");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
-		void ApplyCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.CheckpointRecord'!
-void*& Record)
+		void ApplyCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.ApplyCheckpointRecord");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
 		void ShutDown()
@@ -482,21 +456,15 @@ void**)params;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.ShutDown");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool GetSwatTurnTarget(int SlotIdx, int Direction, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverLink.CoverInfo'!
-void*& out_Info)
+		bool GetSwatTurnTarget(int SlotIdx, int Direction, CoverInfo& out_Info)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetSwatTurnTarget");
 			byte* params = (byte*)malloc(20);
 			*(int*)params = SlotIdx;
 			*(int*)(params + 4) = Direction;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverLink.CoverInfo'!
-void**)(params + 8) = out_Info;
+			*(CoverInfo*)(params + 8) = out_Info;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_Info = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverLink.CoverInfo'!
-void**)(params + 8);
+			out_Info = *(CoverInfo*)(params + 8);
 			auto returnVal = *(bool*)(params + 16);
 			free(params);
 			return returnVal;

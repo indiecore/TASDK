@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine.Surface.h"
+#include "Core.Object.Guid.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.UntypedBulkData_Mirror.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Texture." #y); \
@@ -24,8 +27,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, AdjustVibrance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AdjustBrightnessCurve, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AdjustBrightness, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'LightingGuid'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Resource'!
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, LightingGuid, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Resource, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, SourceFileTimestamp, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, SourceFilePath, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumCinematicMipLevels, 0xFFFFFFFF)
@@ -35,7 +38,7 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, LODGroup, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, Filter, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, CompressionSettings, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.UntypedBulkData_Mirror' for the property named 'SourceArt'!
+		ADD_STRUCT(::NonArithmeticProperty<UntypedBulkData_Mirror>, SourceArt, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, UnpackMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, UnpackMin, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bUseCinematicMipLevels, 0x20000)

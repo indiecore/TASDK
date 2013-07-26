@@ -1,6 +1,7 @@
 #pragma once
 #include "UTGame.UTTeamHUD.h"
 #include "UTGame.UTCTFBase.h"
+#include "Core.Object.Vector2D.h"
 #include "Engine.Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -31,16 +32,12 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFHUD.Timer");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DisplayTeamLogos(byte TeamIndex, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* pos, float DestScale)
+		void DisplayTeamLogos(byte TeamIndex, Vector2D pos, float DestScale)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFHUD.DisplayTeamLogos");
 			byte* params = (byte*)malloc(13);
 			*params = TeamIndex;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 4) = pos;
+			*(Vector2D*)(params + 4) = pos;
 			*(float*)(params + 12) = DestScale;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

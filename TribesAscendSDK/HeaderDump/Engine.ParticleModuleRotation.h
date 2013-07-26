@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.ParticleModuleRotationBase.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class ParticleModuleRotation : public ParticleModuleRotationBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'StartRotation'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, StartRotation, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

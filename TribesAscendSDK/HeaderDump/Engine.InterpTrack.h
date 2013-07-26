@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.InterpTrack." #y); \
@@ -35,8 +36,8 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, TrackTitle, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ActiveCondition, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, TrackInstClass)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'CurveEdVTable'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FInterpEdInputInterface'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, CurveEdVTable, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FInterpEdInputInterface, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

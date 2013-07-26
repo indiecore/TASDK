@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame.TrProjectile.h"
+#include "Core.Object.Vector.h"
 #include "Engine.PhysicalMaterial.h"
 #include "Engine.SoundCue.h"
 #include "Engine.Actor.h"

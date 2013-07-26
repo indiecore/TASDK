@@ -1,8 +1,10 @@
 #pragma once
+#include "Core.Object.Color.h"
 #include "UTGame.UTCarriedObject.h"
 #include "Engine.TeamInfo.h"
 #include "UTGame.UTTeamAI.h"
 #include "UTGame.UTGameObjective.h"
+#include "UTGame.UTCharInfo.CharacterInfo.h"
 #include "Engine.Controller.h"
 #include "UTGame.UTBot.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -33,19 +35,15 @@ namespace UnrealScript
 		ADD_OBJECT(UTTeamAI, AI)
 		ADD_OBJECT(UTGameObjective, HomeBase)
 		ADD_VAR(::StrProperty, TeamColorNames, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BaseTeamColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, BaseTeamColor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DesiredTeamSize, 0xFFFFFFFF)
-		
-// WARNING: Unknown structure type 'ScriptStruct UTGame.UTCharInfo.CharacterInfo'!
-void* GetBotInfo(ScriptArray<wchar_t> BotName)
+		CharacterInfo GetBotInfo(ScriptArray<wchar_t> BotName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.GetBotInfo");
 			byte* params = (byte*)malloc(124);
 			*(ScriptArray<wchar_t>*)params = BotName;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.UTCharInfo.CharacterInfo'!
-void**)(params + 12);
+			auto returnVal = *(CharacterInfo*)(params + 12);
 			free(params);
 			return returnVal;
 		}
@@ -58,16 +56,12 @@ void**)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* GetHUDColor()
+		Color GetHUDColor()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.GetHUDColor");
 			byte* params = (byte*)malloc(4);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)params;
+			auto returnVal = *(Color*)params;
 			free(params);
 			return returnVal;
 		}

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.SVehicleSimCar.h"
+#include "Core.Object.InterpCurveFloat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKVehicleSimCar." #y); \
@@ -42,8 +43,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MinRPM, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ThrottleSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LSDFactor, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat' for the property named 'EngineRPMCurve'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat' for the property named 'TorqueVSpeedCurve'!
+		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, EngineRPMCurve, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, TorqueVSpeedCurve, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

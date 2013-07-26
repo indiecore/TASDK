@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.ReplicationInfo.h"
 #include "Engine.PlayerController.h"
+#include "Engine.CoverReplicator.ManualCoverTypeInfo.h"
 #include "Engine.CoverLink.h"
 namespace UnrealScript
 {
@@ -33,9 +34,7 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ClientReceiveInitialCoverReplicationInfo(int Index, class CoverLink* Link, bool bLinkDisabled, byte NumSlotsEnabled, byte SlotsEnabled, byte NumSlotsDisabled, byte SlotsDisabled, byte NumSlotsAdjusted, byte SlotsAdjusted, byte NumCoverTypesChanged, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverReplicator.ManualCoverTypeInfo'!
-void* SlotsCoverTypeChanged, bool bDone)
+		void ClientReceiveInitialCoverReplicationInfo(int Index, class CoverLink* Link, bool bLinkDisabled, byte NumSlotsEnabled, byte SlotsEnabled, byte NumSlotsDisabled, byte SlotsDisabled, byte NumSlotsAdjusted, byte SlotsAdjusted, byte NumCoverTypesChanged, ManualCoverTypeInfo SlotsCoverTypeChanged, bool bDone)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ClientReceiveInitialCoverReplicationInfo");
 			byte* params = (byte*)malloc(27);
@@ -49,9 +48,7 @@ void* SlotsCoverTypeChanged, bool bDone)
 			*(params + 30) = NumSlotsAdjusted;
 			*(params + 31) = SlotsAdjusted;
 			*(params + 39) = NumCoverTypesChanged;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverReplicator.ManualCoverTypeInfo'!
-void**)(params + 40) = SlotsCoverTypeChanged;
+			*(ManualCoverTypeInfo*)(params + 40) = SlotsCoverTypeChanged;
 			*(bool*)(params + 72) = bDone;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -189,18 +186,14 @@ void**)(params + 4);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ClientReceiveManualCoverTypeSlots(int Index, class CoverLink* Link, byte NumCoverTypesChanged, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverReplicator.ManualCoverTypeInfo'!
-void* SlotsCoverTypeChanged, bool bDone)
+		void ClientReceiveManualCoverTypeSlots(int Index, class CoverLink* Link, byte NumCoverTypesChanged, ManualCoverTypeInfo SlotsCoverTypeChanged, bool bDone)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ClientReceiveManualCoverTypeSlots");
 			byte* params = (byte*)malloc(17);
 			*(int*)params = Index;
 			*(class CoverLink**)(params + 4) = Link;
 			*(params + 8) = NumCoverTypesChanged;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CoverReplicator.ManualCoverTypeInfo'!
-void**)(params + 12) = SlotsCoverTypeChanged;
+			*(ManualCoverTypeInfo*)(params + 12) = SlotsCoverTypeChanged;
 			*(bool*)(params + 44) = bDone;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

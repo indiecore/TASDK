@@ -1,19 +1,16 @@
 #pragma once
+#include "GFxUI.GFxClikWidget.EventData.h"
 #include "GFxUI.GFxObject.h"
 namespace UnrealScript
 {
 	class GFxClikWidget : public GFxObject
 	{
 	public:
-		void EventListener(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* Data)
+		void EventListener(EventData Data)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxClikWidget.EventListener");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = Data;
+			*(EventData*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

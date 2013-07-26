@@ -1,5 +1,7 @@
 #pragma once
+#include "Core.Object.UntypedBulkData_Mirror.h"
 #include "Engine.Texture.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.CodecMovie.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -24,8 +26,8 @@ namespace UnrealScript
 	class TextureMovie : public Texture
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ReleaseCodecFence'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.UntypedBulkData_Mirror' for the property named 'Data'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ReleaseCodecFence, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<UntypedBulkData_Mirror>, Data, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, AutoPlay, 0x8)
 		ADD_VAR(::BoolProperty, Looping, 0x4)
 		ADD_VAR(::BoolProperty, Stopped, 0x2)

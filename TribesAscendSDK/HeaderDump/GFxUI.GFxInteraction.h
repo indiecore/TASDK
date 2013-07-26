@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.LocalPlayer.h"
 #include "Engine.Interaction.h"
+#include "Core.Object.Pointer.h"
 #include "GFxUI.GFxMoviePlayer.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -13,7 +14,7 @@ namespace UnrealScript
 	class GFxInteraction : public Interaction
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FCallbackEventDevice'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FCallbackEventDevice, 0xFFFFFFFF)
 		class GFxMoviePlayer* GetFocusMovie(int ControllerId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxInteraction.GetFocusMovie");

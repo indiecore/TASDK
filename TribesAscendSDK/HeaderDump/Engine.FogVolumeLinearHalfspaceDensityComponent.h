@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.FogVolumeDensityComponent.h"
+#include "Core.Object.Plane.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FogVolumeLinearHalfspaceDensityComponent." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class FogVolumeLinearHalfspaceDensityComponent : public FogVolumeDensityComponent
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Plane' for the property named 'HalfspacePlane'!
+		ADD_STRUCT(::NonArithmeticProperty<Plane>, HalfspacePlane, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PlaneDistanceFactor, 0xFFFFFFFF)
 	};
 }

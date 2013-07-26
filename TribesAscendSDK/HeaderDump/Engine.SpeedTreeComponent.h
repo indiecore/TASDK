@@ -3,6 +3,9 @@
 #include "Engine.PrimitiveComponent.h"
 #include "Engine.SpeedTree.h"
 #include "Engine.MaterialInterface.h"
+#include "Core.Object.Matrix.h"
+#include "Engine.EngineTypes.LightmassPrimitiveSettings.h"
+#include "Engine.EngineTypes.LightMapRef.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SpeedTreeComponent." #y); \
@@ -26,13 +29,13 @@ namespace UnrealScript
 	class SpeedTreeComponent : public PrimitiveComponent
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightmassPrimitiveSettings' for the property named 'LightmassSettings'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'RotationOnlyMatrix'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightMapRef' for the property named 'BillboardLightMap'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightMapRef' for the property named 'LeafCardLightMap'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightMapRef' for the property named 'LeafMeshLightMap'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightMapRef' for the property named 'FrondLightMap'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightMapRef' for the property named 'BranchLightMap'!
+		ADD_STRUCT(::NonArithmeticProperty<LightmassPrimitiveSettings>, LightmassSettings, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, RotationOnlyMatrix, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LightMapRef>, BillboardLightMap, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LightMapRef>, LeafCardLightMap, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LightMapRef>, LeafMeshLightMap, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LightMapRef>, FrondLightMap, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LightMapRef>, BranchLightMap, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, SpeedTreeIcon)
 		ADD_OBJECT(MaterialInterface, BillboardMaterial)
 		ADD_OBJECT(MaterialInterface, LeafMeshMaterial)

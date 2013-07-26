@@ -1,6 +1,9 @@
 #pragma once
 #include "Engine.NavigationPoint.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.SeqAct_Toggle.h"
+#include "Core.Object.OctreeElementId.h"
 #include "Engine.Controller.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -41,14 +44,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MaxExpansionRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ExpansionRadius, 0xFFFFFFFF)
 		ADD_OBJECT(Pylon, NextPylon)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'OctreeIWasAddedTo'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.OctreeElementId' for the property named 'OctreeId'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'PathObjectsThatAffectThisPylon'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'WorkingSetPtr'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'DynamicObstacleMesh'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ObstacleMesh'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'NavMeshPtr'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IEditorLinkSelectionInterface'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, OctreeIWasAddedTo, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<OctreeElementId>, OctreeId, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, PathObjectsThatAffectThisPylon, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, WorkingSetPtr, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, DynamicObstacleMesh, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ObstacleMesh, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, NavMeshPtr, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IEditorLinkSelectionInterface, 0xFFFFFFFF)
 		void OnPylonStatusChange()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.OnPylonStatusChange");

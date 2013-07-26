@@ -1,13 +1,15 @@
 #pragma once
 #include "Engine.Volume.h"
-#include "Engine.SeqAct_SetDamageInstigator.h"
 #include "Engine.Actor.h"
 #include "Engine.Controller.h"
 #include "Engine.PlayerController.h"
 #include "Engine.Pawn.h"
 #include "Engine.Info.h"
+#include "Core.Object.Vector.h"
 #include "Engine.VolumeTimer.h"
 #include "Engine.SeqAct_Toggle.h"
+#include "Engine.SeqAct_SetDamageInstigator.h"
+#include "Engine.PhysicsVolume.CheckpointRecord.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PhysicsVolume." #y); \
@@ -204,34 +206,22 @@ void**)(params + 4) = OtherComp;
 			free(params);
 			return returnVal;
 		}
-		void CreateCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PhysicsVolume.CheckpointRecord'!
-void*& Record)
+		void CreateCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.CreateCheckpointRecord");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PhysicsVolume.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PhysicsVolume.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
-		void ApplyCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PhysicsVolume.CheckpointRecord'!
-void*& Record)
+		void ApplyCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsVolume.ApplyCheckpointRecord");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PhysicsVolume.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PhysicsVolume.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
 	};

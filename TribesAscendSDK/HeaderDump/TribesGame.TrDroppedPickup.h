@@ -3,10 +3,12 @@
 #include "TribesGame.TrPawn.h"
 #include "Engine.Pawn.h"
 #include "UTGame.UTDroppedPickup.h"
-#include "Engine.Canvas.h"
 #include "TribesGame.TrCollisionProxy.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.SoundCue.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
+#include "Engine.Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDroppedPickup." #y); \

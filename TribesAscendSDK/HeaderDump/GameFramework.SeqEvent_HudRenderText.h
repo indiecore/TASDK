@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.HUD.h"
+#include "Core.Object.Vector.h"
 #include "GameFramework.SeqEvent_HudRender.h"
+#include "Core.Object.Color.h"
 #include "Engine.Font.h"
 #include "Engine.Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -29,7 +31,7 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, TextDrawMethod, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, DisplayText, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, DisplayLocation, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'DisplayColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, DisplayColor, 0xFFFFFFFF)
 		ADD_OBJECT(Font, DisplayFont)
 		void Render(class Canvas* TargetCanvas, class HUD* TargetHud)
 		{

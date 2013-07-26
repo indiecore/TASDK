@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Component.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Core.DistributionFloat." #y); \
@@ -19,7 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bIsDirty, 0x2)
 		ADD_VAR(::BoolProperty, bCanBeBaked, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FCurveEdInterface'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FCurveEdInterface, 0xFFFFFFFF)
 		float GetFloatValue(float F)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.DistributionFloat.GetFloatValue");

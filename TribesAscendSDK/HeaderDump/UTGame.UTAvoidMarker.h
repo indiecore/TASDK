@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 namespace UnrealScript
 {
 	class UTAvoidMarker : public Actor

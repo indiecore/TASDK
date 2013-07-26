@@ -1,7 +1,9 @@
 #pragma once
 #include "Engine.LocalPlayer.h"
 #include "Engine.Interaction.h"
+#include "Engine.Console.AutoCompleteNode.h"
 #include "Engine.Texture2D.h"
+#include "Core.Object.Color.h"
 #include "Engine.Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -26,7 +28,7 @@ namespace UnrealScript
 	class Console : public Interaction
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Console.AutoCompleteNode' for the property named 'AutoCompleteTree'!
+		ADD_STRUCT(::NonArithmeticProperty<AutoCompleteNode>, AutoCompleteTree, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, AutoCompleteIndex, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, TypedStrPos, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, TypedStr, 0xFFFFFFFF)
@@ -91,29 +93,21 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.ClearOutput");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OutputTextLine(ScriptArray<wchar_t> Text, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* OverrideColor)
+		void OutputTextLine(ScriptArray<wchar_t> Text, Color OverrideColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.OutputTextLine");
 			byte* params = (byte*)malloc(16);
 			*(ScriptArray<wchar_t>*)params = Text;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 12) = OverrideColor;
+			*(Color*)(params + 12) = OverrideColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OutputText(ScriptArray<wchar_t> Text, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* OverrideColor)
+		void OutputText(ScriptArray<wchar_t> Text, Color OverrideColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.OutputText");
 			byte* params = (byte*)malloc(16);
 			*(ScriptArray<wchar_t>*)params = Text;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 12) = OverrideColor;
+			*(Color*)(params + 12) = OverrideColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

@@ -1,4 +1,7 @@
 #pragma once
+#include "Engine.CameraShake.FOscillator.h"
+#include "Engine.CameraShake.ROscillator.h"
+#include "Engine.CameraShake.VOscillator.h"
 #include "Core.Object.h"
 #include "Engine.CameraAnim.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -24,14 +27,14 @@ namespace UnrealScript
 	class CameraShake : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.CameraShake.VOscillator' for the property named 'LocOscillation'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.CameraShake.ROscillator' for the property named 'RotOscillation'!
+		ADD_STRUCT(::NonArithmeticProperty<VOscillator>, LocOscillation, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ROscillator>, RotOscillation, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSingleInstance, 0x1)
 		ADD_VAR(::BoolProperty, bRandomAnimSegment, 0x2)
 		ADD_VAR(::FloatProperty, OscillationDuration, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OscillationBlendInTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OscillationBlendOutTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.CameraShake.FOscillator' for the property named 'FOVOscillation'!
+		ADD_STRUCT(::NonArithmeticProperty<FOscillator>, FOVOscillation, 0xFFFFFFFF)
 		ADD_OBJECT(CameraAnim, Anim)
 		ADD_VAR(::FloatProperty, AnimPlayRate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AnimScale, 0xFFFFFFFF)

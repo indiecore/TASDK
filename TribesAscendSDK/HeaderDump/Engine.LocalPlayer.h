@@ -1,9 +1,16 @@
 #pragma once
 #include "Engine.GameViewportClient.h"
 #include "Engine.Player.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.LocalPlayer.CurrentPostProcessVolumeInfo.h"
+#include "Core.Object.Vector2D.h"
 #include "Engine.TranslationContext.h"
-#include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
+#include "Engine.LocalPlayer.SynchronizedActorVisibilityHistory.h"
 #include "Engine.PostProcessChain.h"
+#include "Engine.Actor.h"
+#include "Engine.PostProcessVolume.PostProcessSettings.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LocalPlayer." #y); \
@@ -29,18 +36,18 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, ControllerId, 0xFFFFFFFF)
 		ADD_OBJECT(GameViewportClient, ViewportClient)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'Size'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'Origin'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, Size, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, Origin, 0xFFFFFFFF)
 		ADD_OBJECT(TranslationContext, TagContext)
 		ADD_VAR(::BoolProperty, bSentSplitJoin, 0x2)
 		ADD_VAR(::BoolProperty, bWantToResetToMapDefaultPP, 0x1)
 		ADD_VAR(::StrProperty, LastMap, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, AspectRatioAxisConstraint, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.LocalPlayer.CurrentPostProcessVolumeInfo' for the property named 'LevelPPInfo'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.LocalPlayer.CurrentPostProcessVolumeInfo' for the property named 'CurrentPPInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<CurrentPostProcessVolumeInfo>, LevelPPInfo, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<CurrentPostProcessVolumeInfo>, CurrentPPInfo, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, LastViewLocation, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.LocalPlayer.SynchronizedActorVisibilityHistory' for the property named 'ActorVisibilityHistory'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ViewState'!
+		ADD_STRUCT(::NonArithmeticProperty<SynchronizedActorVisibilityHistory>, ActorVisibilityHistory, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ViewState, 0xFFFFFFFF)
 		ADD_OBJECT(PostProcessChain, PlayerPostProcess)
 		bool SpawnPlayActor(ScriptArray<wchar_t> URL, ScriptArray<wchar_t>& OutError)
 		{
@@ -69,15 +76,11 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void OverridePostProcessSettings(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
-void* OverrideSettings, float BlendInTime)
+		void OverridePostProcessSettings(PostProcessSettings OverrideSettings, float BlendInTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.OverridePostProcessSettings");
 			byte* params = (byte*)malloc(224);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
-void**)params = OverrideSettings;
+			*(PostProcessSettings*)params = OverrideSettings;
 			*(float*)(params + 220) = BlendInTime;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -153,15 +156,11 @@ void**)params = OverrideSettings;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.TouchPlayerPostProcessChain");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DeProject(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* RelativeScreenPos, Vector& WorldOrigin, Vector& WorldDirection)
+		void DeProject(Vector2D RelativeScreenPos, Vector& WorldOrigin, Vector& WorldDirection)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.DeProject");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = RelativeScreenPos;
+			*(Vector2D*)params = RelativeScreenPos;
 			*(Vector*)(params + 8) = WorldOrigin;
 			*(Vector*)(params + 20) = WorldDirection;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
@@ -169,16 +168,12 @@ void**)params = RelativeScreenPos;
 			WorldDirection = *(Vector*)(params + 20);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* GetUniqueNetId()
+		UniqueNetId GetUniqueNetId()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.GetUniqueNetId");
 			byte* params = (byte*)malloc(8);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params;
+			auto returnVal = *(UniqueNetId*)params;
 			free(params);
 			return returnVal;
 		}

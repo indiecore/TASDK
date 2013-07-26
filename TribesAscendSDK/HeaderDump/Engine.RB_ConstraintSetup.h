@@ -1,5 +1,7 @@
 #pragma once
 #include "Core.Object.h"
+#include "Engine.RB_ConstraintSetup.LinearDOFSetup.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RB_ConstraintSetup." #y); \
@@ -32,9 +34,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LinearBreakThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearLimitDamping, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearLimitStiffness, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.RB_ConstraintSetup.LinearDOFSetup' for the property named 'LinearZSetup'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.RB_ConstraintSetup.LinearDOFSetup' for the property named 'LinearYSetup'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.RB_ConstraintSetup.LinearDOFSetup' for the property named 'LinearXSetup'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearDOFSetup>, LinearZSetup, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearDOFSetup>, LinearYSetup, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearDOFSetup>, LinearXSetup, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bMaintainMinDistance, 0x200)
 		ADD_VAR(::BoolProperty, bIsPulley, 0x100)
 		ADD_VAR(::BoolProperty, bAngularBreakable, 0x80)

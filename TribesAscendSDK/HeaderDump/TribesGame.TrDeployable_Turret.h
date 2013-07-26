@@ -1,9 +1,11 @@
 #pragma once
+#include "Core.Object.Color.h"
 #include "TribesGame.TrDeployable.h"
 #include "Engine.SoundCue.h"
 #include "Engine.Texture2D.h"
 #include "Engine.Weapon.h"
 #include "Engine.Pawn.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDeployable_Turret." #y); \
@@ -129,18 +131,14 @@ void**)params = SkelComp;
 		}
 		void SetMuzzleFlashParams(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* PSC, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* MuzzleFlashColor)
+void* PSC, Color MuzzleFlashColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.SetMuzzleFlashParams");
 			byte* params = (byte*)malloc(8);
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)params = PSC;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 4) = MuzzleFlashColor;
+			*(Color*)(params + 4) = MuzzleFlashColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

@@ -1,5 +1,7 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.ParticleModuleCollisionBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleCollision." #y); \
@@ -17,18 +19,18 @@ namespace UnrealScript
 	class ParticleModuleCollision : public ParticleModuleCollisionBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'DelayAmount'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, DelayAmount, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, VerticalFudgeFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DirScalar, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'ParticleMass'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, ParticleMass, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDropDetail, 0x8)
 		ADD_VAR(::BoolProperty, bOnlyVerticalNormalsDecrementCount, 0x4)
 		ADD_VAR(::BoolProperty, bPawnsDoNotDecrementCount, 0x2)
 		ADD_VAR(::BoolProperty, bApplyPhysics, 0x1)
 		ADD_VAR(::ByteProperty, CollisionCompletionOption, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'MaxCollisions'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'DampingFactorRotation'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'DampingFactor'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, MaxCollisions, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, DampingFactorRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, DampingFactor, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

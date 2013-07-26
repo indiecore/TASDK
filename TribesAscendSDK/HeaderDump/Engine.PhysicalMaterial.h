@@ -1,7 +1,9 @@
 #pragma once
+#include "Engine.Actor.PhysEffectInfo.h"
 #include "Core.Object.h"
 #include "Engine.PhysicalMaterialPropertyBase.h"
 #include "Engine.SoundCue.h"
+#include "Core.Object.Vector.h"
 #include "Engine.ParticleSystem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -50,17 +52,13 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, SlideReFireDelay, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, SlideEffect)
 		ADD_OBJECT(SoundCue, SlideSound)
-		
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.PhysEffectInfo'!
-void* FindPhysEffectInfo(byte Type)
+		PhysEffectInfo FindPhysEffectInfo(byte Type)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicalMaterial.FindPhysEffectInfo");
 			byte* params = (byte*)malloc(17);
 			*params = Type;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.PhysEffectInfo'!
-void**)(params + 4);
+			auto returnVal = *(PhysEffectInfo*)(params + 4);
 			free(params);
 			return returnVal;
 		}

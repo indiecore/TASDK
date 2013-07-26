@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame.TrPawn.h"
+#include "Core.Object.Vector2D.h"
 #include "Engine.AnimNodeAimOffset.h"
 #include "TribesGame.TrDevice.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -25,18 +26,18 @@ namespace UnrealScript
 	class TrAnimNodeAimOffset : public AnimNodeAimOffset
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_TargetRandomAimLocation'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_TargetRandomAimLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fCurrentRandomAimPointsInterval, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRandomAimPointsIntervalMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRandomAimPointsIntervalMin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fRandomAimPointsInterpRate, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_RandomAimPointsRangeY'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_RandomAimPointsRangeX'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_RandomAimPointsRangeY, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_RandomAimPointsRangeX, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bRandomAimPointsEnabled, 0x1)
 		ADD_VAR(::FloatProperty, m_fTurnAroundBlendTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fTurnAroundTimeToGo, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_v2dLastPostProcessedAimOffset'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_v2dLastAimOffset'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_v2dLastPostProcessedAimOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_v2dLastAimOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fTurnInPlaceOffset, 0xFFFFFFFF)
 		ADD_OBJECT(TrDevice, m_TrDevice)
 		ADD_OBJECT(TrPawn, m_TrPawn)

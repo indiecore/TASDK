@@ -4,6 +4,7 @@
 #include "TribesGame.TrPawn.h"
 #include "Engine.Pawn.h"
 #include "Engine.Texture2D.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

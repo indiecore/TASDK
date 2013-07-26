@@ -1,13 +1,22 @@
 #pragma once
 #include "Engine.Actor.h"
-#include "Engine.CameraShake.h"
-#include "Engine.EmitterCameraLensEffectBase.h"
-#include "Engine.CameraModifier_CameraShake.h"
+#include "Core.Object.Vector.h"
 #include "Engine.HUD.h"
+#include "Engine.CameraModifier_CameraShake.h"
 #include "Engine.CameraAnimInst.h"
-#include "Engine.DynamicCameraActor.h"
+#include "Engine.Camera.ViewTargetTransitionParams.h"
+#include "Engine.Camera.TViewTarget.h"
 #include "Engine.CameraModifier.h"
+#include "Engine.DynamicCameraActor.h"
+#include "Engine.PostProcessVolume.PostProcessSettings.h"
 #include "Engine.PlayerController.h"
+#include "Core.Object.TPOV.h"
+#include "Engine.Camera.TCameraCache.h"
+#include "Core.Object.Vector2D.h"
+#include "Core.Object.Color.h"
+#include "Core.Object.Rotator.h"
+#include "Engine.EmitterCameraLensEffectBase.h"
+#include "Engine.CameraShake.h"
 #include "Engine.CameraAnim.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -36,7 +45,7 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, CameraShakeCamModClass)
 		ADD_OBJECT(CameraAnimInst, AnimInstPool)
 		ADD_OBJECT(DynamicCameraActor, AnimCameraActor)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TCameraCache' for the property named 'CameraCache'!
+		ADD_STRUCT(::NonArithmeticProperty<TCameraCache>, CameraCache, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DefaultFOV, 0xFFFFFFFF)
 		ADD_OBJECT(PlayerController, PCOwner)
 		ADD_VAR(::BoolProperty, bLockedFOV, 0x1)
@@ -50,21 +59,21 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bEnableColorScaleInterp, 0x10)
 		ADD_VAR(::BoolProperty, bConstrainAspectRatio, 0x2)
 		ADD_VAR(::FloatProperty, CamOverridePostProcessAlpha, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget' for the property named 'PendingViewTarget'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams' for the property named 'BlendParams'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget' for the property named 'ViewTarget'!
+		ADD_STRUCT(::NonArithmeticProperty<TViewTarget>, PendingViewTarget, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ViewTargetTransitionParams>, BlendParams, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TViewTarget>, ViewTarget, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConstrainedAspectRatio, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BlendTimeToGo, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnableFading, 0x4)
 		ADD_VAR(::FloatProperty, FadeTimeRemaining, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FadeTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FadeAmount, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'FadeAlpha'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TCameraCache' for the property named 'LastFrameCameraCache'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, FadeAlpha, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TCameraCache>, LastFrameCameraCache, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, FreeCamOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FreeCamDistance, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'CamPostProcessSettings'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'FadeColor'!
+		ADD_STRUCT(::NonArithmeticProperty<PostProcessSettings>, CamPostProcessSettings, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, FadeColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OffAxisPitchAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OffAxisYawAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DefaultAspectRatio, 0xFFFFFFFF)
@@ -89,20 +98,14 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.Destroyed");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ApplyCameraModifiers(float DeltaTime, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void*& OutPOV)
+		void ApplyCameraModifiers(float DeltaTime, TPOV& OutPOV)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.ApplyCameraModifiers");
 			byte* params = (byte*)malloc(32);
 			*(float*)params = DeltaTime;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void**)(params + 4) = OutPOV;
+			*(TPOV*)(params + 4) = OutPOV;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutPOV = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void**)(params + 4);
+			OutPOV = *(TPOV*)(params + 4);
 			free(params);
 		}
 		void InitializeFor(class PlayerController* PC)
@@ -113,16 +116,12 @@ void**)(params + 4);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetViewTarget(class Actor* NewViewTarget, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void* TransitionParams)
+		void SetViewTarget(class Actor* NewViewTarget, ViewTargetTransitionParams TransitionParams)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.SetViewTarget");
 			byte* params = (byte*)malloc(20);
 			*(class Actor**)params = NewViewTarget;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void**)(params + 4) = TransitionParams;
+			*(ViewTargetTransitionParams*)(params + 4) = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -180,80 +179,46 @@ void**)(params + 4) = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void* BlendViewTargets(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void*& A, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void*& B, float Alpha)
+		TPOV BlendViewTargets(TViewTarget& A, TViewTarget& B, float Alpha)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.BlendViewTargets");
 			byte* params = (byte*)malloc(120);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)(params + 44) = B;
+			*(TViewTarget*)params = A;
+			*(TViewTarget*)(params + 44) = B;
 			*(float*)(params + 88) = Alpha;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			A = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params;
-			B = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)(params + 44);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void**)(params + 92);
+			A = *(TViewTarget*)params;
+			B = *(TViewTarget*)(params + 44);
+			auto returnVal = *(TPOV*)(params + 92);
 			free(params);
 			return returnVal;
 		}
-		void FillCameraCache(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void*& NewPOV)
+		void FillCameraCache(TPOV& NewPOV)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.FillCameraCache");
 			byte* params = (byte*)malloc(28);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void**)params = NewPOV;
+			*(TPOV*)params = NewPOV;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			NewPOV = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void**)params;
+			NewPOV = *(TPOV*)params;
 			free(params);
 		}
-		void CheckViewTarget(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void*& VT)
+		void CheckViewTarget(TViewTarget& VT)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.CheckViewTarget");
 			byte* params = (byte*)malloc(44);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params = VT;
+			*(TViewTarget*)params = VT;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			VT = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params;
+			VT = *(TViewTarget*)params;
 			free(params);
 		}
-		void UpdateViewTarget(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void*& OutVT, float DeltaTime)
+		void UpdateViewTarget(TViewTarget& OutVT, float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.UpdateViewTarget");
 			byte* params = (byte*)malloc(48);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params = OutVT;
+			*(TViewTarget*)params = OutVT;
 			*(float*)(params + 44) = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutVT = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params;
+			OutVT = *(TViewTarget*)params;
 			free(params);
 		}
 		void ProcessViewRotation(float DeltaTime, Rotator& OutViewRotation, Rotator& OutDeltaRot)

@@ -1,7 +1,10 @@
 #pragma once
 #include "UTGame.UTPlayerController.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Engine.Actor.h"
+#include "Engine.Camera.ViewTargetTransitionParams.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.DemoRecSpectator." #y); \
@@ -62,28 +65,20 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.DemoRecSpectator.DemoViewNextPlayer");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SetViewTarget(class Actor* NewViewTarget, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void* TransitionParams)
+		void SetViewTarget(class Actor* NewViewTarget, ViewTargetTransitionParams TransitionParams)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.DemoRecSpectator.SetViewTarget");
 			byte* params = (byte*)malloc(20);
 			*(class Actor**)params = NewViewTarget;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void**)(params + 4) = TransitionParams;
+			*(ViewTargetTransitionParams*)(params + 4) = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ServerViewSelf(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void* TransitionParams)
+		void ServerViewSelf(ViewTargetTransitionParams TransitionParams)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.DemoRecSpectator.ServerViewSelf");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void**)params = TransitionParams;
+			*(ViewTargetTransitionParams*)params = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

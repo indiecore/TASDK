@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.MaterialExpression.h"
+#include "Engine.MaterialExpression.ExpressionInput.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialExpressionTransform." #y); \
@@ -19,7 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::ByteProperty, TransformType, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, TransformSourceType, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'Input'!
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, Input, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

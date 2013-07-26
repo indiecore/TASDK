@@ -1,6 +1,8 @@
 #pragma once
+#include "Core.Object.Color.h"
 #include "TribesGame.TrDeployable.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -20,7 +22,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, m_LightFlashBrightness, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'm_LightFlashColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, m_LightFlashColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fOutHitOtherFlashRemainingTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fInHitOtherFlashRemainingTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fOutHitOtherFlashTimeLength, 0xFFFFFFFF)

@@ -1,9 +1,11 @@
 #pragma once
 #include "Engine.SoundCue.h"
 #include "TribesGame.TrInventory.h"
-#include "Engine.Pawn.h"
-#include "Engine.Canvas.h"
 #include "Engine.HUD.h"
+#include "Core.Object.Vector.h"
+#include "Engine.Canvas.h"
+#include "Engine.UIRoot.TextureCoordinates.h"
+#include "Engine.Pawn.h"
 #include "Engine.Controller.h"
 #include "Engine.Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -34,7 +36,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, WarningTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TransitionDuration, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TransitionTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'IconCoords'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, IconCoords, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, PowerupStatName, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, PowerupOverSound)
 		ADD_VAR(::IntProperty, HudIndex, 0xFFFFFFFF)

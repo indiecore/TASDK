@@ -1,7 +1,14 @@
 #pragma once
+#include "Engine.PrimitiveComponent.RBCollisionChannelContainer.h"
 #include "Engine.ActorComponent.h"
+#include "Engine.LightComponent.LightingChannelContainer.h"
+#include "Core.Object.Matrix.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.BoxSphereBounds.h"
 #include "Engine.PhysicalMaterial.h"
 #include "Engine.RB_BodyInstance.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PrimitiveComponent." #y); \
@@ -26,10 +33,10 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, Tag, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'LocalToWorld'!
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, LocalToWorld, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ThreadTag, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoxSphereBounds' for the property named 'Bounds'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SceneInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<BoxSphereBounds>, Bounds, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SceneInfo, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DetachFence, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LocalToWorldDeterminant, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MotionBlurInfoIndex, 0xFFFFFFFF)
@@ -107,11 +114,11 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bWasSNFiltered, 0x4000000)
 		ADD_VAR(::IntProperty, TranslucencySortPriority, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, VisibilityId, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer' for the property named 'LightingChannels'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'RBCollideWithChannels'!
+		ADD_STRUCT(::NonArithmeticProperty<LightingChannelContainer>, LightingChannels, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RBCollisionChannelContainer>, RBCollideWithChannels, 0xFFFFFFFF)
 		ADD_OBJECT(PhysicalMaterial, PhysMaterialOverride)
 		ADD_OBJECT(RB_BodyInstance, BodyInstance)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'CachedParentToWorld'!
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, CachedParentToWorld, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, Translation, 0xFFFFFFFF)
 		ADD_STRUCT(::RotatorProperty, Rotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Scale, 0xFFFFFFFF)
@@ -261,15 +268,11 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetRBCollisionChannels(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer'!
-void* Channels)
+		void SetRBCollisionChannels(RBCollisionChannelContainer Channels)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBCollisionChannels");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer'!
-void**)params = Channels;
+			*(RBCollisionChannelContainer*)params = Channels;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -392,15 +395,11 @@ void**)params = NewLightEnvironment;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetLightingChannels(
-// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer'!
-void* NewLightingChannels)
+		void SetLightingChannels(LightingChannelContainer NewLightingChannels)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetLightingChannels");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer'!
-void**)params = NewLightingChannels;
+			*(LightingChannelContainer*)params = NewLightingChannels;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

@@ -1,13 +1,17 @@
 #pragma once
 #include "UDKBase.UDKWeaponPawn.h"
+#include "Core.Object.Vector.h"
 #include "Engine.HUD.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.Weapon.h"
 #include "Engine.Pawn.h"
-#include "Engine.Actor.h"
 #include "Engine.Controller.h"
-#include "Engine.Canvas.h"
-#include "UTGame.UTHUD.h"
+#include "Engine.Actor.TraceHitInfo.h"
 #include "UDKBase.UDKCarriedObject.h"
+#include "Engine.Actor.h"
+#include "UTGame.UTHUD.h"
+#include "Engine.Canvas.h"
+#include "Core.Object.Vector2D.h"
 namespace UnrealScript
 {
 	class UTWeaponPawn : public UDKWeaponPawn
@@ -168,18 +172,14 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPawn.DropToGround");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void AddVelocity(Vector NewVelocity, Vector HitLocation, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo)
+		void AddVelocity(Vector NewVelocity, Vector HitLocation, ScriptClass* DamageType, TraceHitInfo HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPawn.AddVelocity");
 			byte* params = (byte*)malloc(56);
 			*(Vector*)params = NewVelocity;
 			*(Vector*)(params + 12) = HitLocation;
 			*(ScriptClass**)(params + 24) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 28) = HitInfo;
+			*(TraceHitInfo*)(params + 28) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -279,17 +279,13 @@ void**)(params + 28) = HitInfo;
 			free(params);
 			return returnVal;
 		}
-		void DisplayHud(class UTHUD* HUD, class Canvas* Canvas, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* HudPOS, int SIndex)
+		void DisplayHud(class UTHUD* HUD, class Canvas* Canvas, Vector2D HudPOS, int SIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPawn.DisplayHud");
 			byte* params = (byte*)malloc(20);
 			*(class UTHUD**)params = HUD;
 			*(class Canvas**)(params + 4) = Canvas;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8) = HudPOS;
+			*(Vector2D*)(params + 8) = HudPOS;
 			*(int*)(params + 16) = SIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

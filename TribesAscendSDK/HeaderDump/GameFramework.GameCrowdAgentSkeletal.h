@@ -3,7 +3,9 @@
 #include "Engine.AnimTree.h"
 #include "Engine.AnimNodeSequence.h"
 #include "Engine.AnimNodeSlot.h"
+#include "Engine.LightComponent.LightingChannelContainer.h"
 #include "Engine.AnimNodeBlend.h"
+#include "Core.Object.Vector.h"
 #include "GameFramework.SeqAct_PlayAgentAnimation.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -45,16 +47,12 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgentSkeletal.PostBeginPlay");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SetLighting(bool bEnableLightEnvironment, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer'!
-void* AgentLightingChannel, bool bCastShadows)
+		void SetLighting(bool bEnableLightEnvironment, LightingChannelContainer AgentLightingChannel, bool bCastShadows)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgentSkeletal.SetLighting");
 			byte* params = (byte*)malloc(12);
 			*(bool*)params = bEnableLightEnvironment;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer'!
-void**)(params + 4) = AgentLightingChannel;
+			*(LightingChannelContainer*)(params + 4) = AgentLightingChannel;
 			*(bool*)(params + 8) = bCastShadows;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

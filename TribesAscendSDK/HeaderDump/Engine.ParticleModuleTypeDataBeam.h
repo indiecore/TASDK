@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.ParticleModuleTypeDataBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleTypeDataBeam." #y); \
@@ -22,12 +24,12 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, RenderDirectLine, 0x2)
 		ADD_VAR(::BoolProperty, RenderGeometry, 0x1)
 		ADD_VAR(::IntProperty, TextureTile, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'EndPointDirection'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'TargetStrength'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'EmitterStrength'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, EndPointDirection, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, TargetStrength, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, EmitterStrength, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, TessellationFactor, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'EndPoint'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Distance'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, EndPoint, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Distance, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, EndPointMethod, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, BeamMethod, 0xFFFFFFFF)
 	};

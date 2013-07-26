@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.PhysicsVolume.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Actor.h"
 #include "Engine.Projectile.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \

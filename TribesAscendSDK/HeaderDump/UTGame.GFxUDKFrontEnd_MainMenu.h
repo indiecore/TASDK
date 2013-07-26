@@ -1,6 +1,7 @@
 #pragma once
 #include "UTGame.GFxUDKFrontEnd_Screen.h"
 #include "GFxUI.GFxClikWidget.h"
+#include "GFxUI.GFxClikWidget.EventData.h"
 #include "GFxUI.GFxObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -60,51 +61,35 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.Select_ExitGame");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ExitDialog_SelectOK(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* ev)
+		void ExitDialog_SelectOK(EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.ExitDialog_SelectOK");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = ev;
+			*(EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ExitDialog_SelectBack(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* ev)
+		void ExitDialog_SelectBack(EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.ExitDialog_SelectBack");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = ev;
+			*(EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnListItemPress(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* ev)
+		void OnListItemPress(EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.OnListItemPress");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = ev;
+			*(EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnListChange(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* ev)
+		void OnListChange(EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_MainMenu.OnListChange");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = ev;
+			*(EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

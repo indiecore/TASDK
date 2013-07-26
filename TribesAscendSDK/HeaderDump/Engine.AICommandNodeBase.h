@@ -2,6 +2,7 @@
 #include "Engine.K2NodeBase.h"
 #include "Engine.DMC_Prototype.h"
 #include "Engine.AIController.h"
+#include "Engine.AITree.AITreeHandle.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("ObjectProperty Engine.AICommandNodeBase." #y); \
@@ -15,20 +16,14 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(DMC_Prototype, UtilityDMC)
 		ADD_OBJECT(ScriptClass, CommandClass)
-		class AICommandNodeBase* SelectBestChild(class AIController* InAI, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.AITree.AITreeHandle'!
-void*& Handle)
+		class AICommandNodeBase* SelectBestChild(class AIController* InAI, AITreeHandle& Handle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AICommandNodeBase.SelectBestChild");
 			byte* params = (byte*)malloc(56);
 			*(class AIController**)params = InAI;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.AITree.AITreeHandle'!
-void**)(params + 4) = Handle;
+			*(AITreeHandle*)(params + 4) = Handle;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Handle = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.AITree.AITreeHandle'!
-void**)(params + 4);
+			Handle = *(AITreeHandle*)(params + 4);
 			auto returnVal = *(class AICommandNodeBase**)(params + 52);
 			free(params);
 			return returnVal;

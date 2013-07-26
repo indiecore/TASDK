@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.SequenceAction.h"
+#include "Core.Object.Vector2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_CameraLookAt." #y); \
@@ -22,8 +23,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TotalTime, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, TextDisplay, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, FocusBoneName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'InFocusFOV'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'InterpSpeedRange'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, InFocusFOV, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, InterpSpeedRange, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bCheckLineOfSight, 0x800)
 		ADD_VAR(::BoolProperty, bUsedTimer, 0x400)
 		ADD_VAR(::BoolProperty, bDisableInput, 0x200)

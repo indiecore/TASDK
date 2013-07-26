@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.Actor.h"
 #include "Engine.DynamicSMActor.h"
+#include "Engine.InterpActor.CheckpointRecord.h"
 #include "Engine.SoundCue.h"
 #include "Engine.NavigationPoint.h"
 #include "Engine.SeqAct_Interp.h"
@@ -140,34 +141,22 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void CreateCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.InterpActor.CheckpointRecord'!
-void*& Record)
+		void CreateCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.CreateCheckpointRecord");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.InterpActor.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.InterpActor.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
-		void ApplyCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.InterpActor.CheckpointRecord'!
-void*& Record)
+		void ApplyCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.ApplyCheckpointRecord");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.InterpActor.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.InterpActor.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
 	};

@@ -1,6 +1,7 @@
 #pragma once
 #include "UTGame.GFxUDKFrontEnd_SettingsBase.h"
 #include "GFxUI.GFxObject.h"
+#include "GFxUI.GFxClikWidget.EventData.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_ServerSettings." #y); \
@@ -18,15 +19,11 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ServerSettings.SetSelectedOptionSet");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnOptionChanged(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* ev)
+		void OnOptionChanged(EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ServerSettings.OnOptionChanged");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = ev;
+			*(EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

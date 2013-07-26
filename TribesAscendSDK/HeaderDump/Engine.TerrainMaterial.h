@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.Object.h"
 #include "Engine.Texture2D.h"
+#include "Core.Object.Matrix.h"
 #include "Engine.MaterialInterface.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -33,7 +34,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MappingRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MappingScale, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, MappingType, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'LocalToMapping'!
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, LocalToMapping, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

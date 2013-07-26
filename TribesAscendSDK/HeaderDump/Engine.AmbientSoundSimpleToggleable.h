@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.AmbientSoundSimple.h"
 #include "Engine.SeqAct_Toggle.h"
+#include "Engine.AmbientSoundSimpleToggleable.CheckpointRecord.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AmbientSoundSimpleToggleable." #y); \
@@ -50,34 +51,22 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void CreateCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.AmbientSoundSimpleToggleable.CheckpointRecord'!
-void*& Record)
+		void CreateCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.CreateCheckpointRecord");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.AmbientSoundSimpleToggleable.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.AmbientSoundSimpleToggleable.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
-		void ApplyCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.AmbientSoundSimpleToggleable.CheckpointRecord'!
-void*& Record)
+		void ApplyCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.ApplyCheckpointRecord");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.AmbientSoundSimpleToggleable.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.AmbientSoundSimpleToggleable.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
 	};

@@ -1,7 +1,9 @@
 #pragma once
 #include "Engine.UIDataStore.h"
-#include "Engine.UIResourceDataProvider.h"
 #include "Engine.OnlinePlaylistProvider.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.UIRoot.UIProviderScriptFieldValue.h"
+#include "Engine.UIResourceDataProvider.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataStore_OnlinePlaylists." #y); \
@@ -27,7 +29,7 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(ScriptClass, ProviderClass)
 		ADD_VAR(::StrProperty, ProviderClassName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementProvider, 0xFFFFFFFF)
 		int GetProviderCount(ScriptName ProviderTag)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetProviderCount");
@@ -74,41 +76,29 @@ void**)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		bool GetProviderFieldValue(ScriptName ProviderTag, ScriptName SearchField, int ProviderIndex, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void*& out_FieldValue)
+		bool GetProviderFieldValue(ScriptName ProviderTag, ScriptName SearchField, int ProviderIndex, UIProviderScriptFieldValue& out_FieldValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetProviderFieldValue");
 			byte* params = (byte*)malloc(108);
 			*(ScriptName*)params = ProviderTag;
 			*(ScriptName*)(params + 8) = SearchField;
 			*(int*)(params + 16) = ProviderIndex;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)(params + 20) = out_FieldValue;
+			*(UIProviderScriptFieldValue*)(params + 20) = out_FieldValue;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_FieldValue = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)(params + 20);
+			out_FieldValue = *(UIProviderScriptFieldValue*)(params + 20);
 			auto returnVal = *(bool*)(params + 104);
 			free(params);
 			return returnVal;
 		}
-		int FindProviderIndexByFieldValue(ScriptName ProviderTag, ScriptName SearchField, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void*& ValueToSearchFor)
+		int FindProviderIndexByFieldValue(ScriptName ProviderTag, ScriptName SearchField, UIProviderScriptFieldValue& ValueToSearchFor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.FindProviderIndexByFieldValue");
 			byte* params = (byte*)malloc(104);
 			*(ScriptName*)params = ProviderTag;
 			*(ScriptName*)(params + 8) = SearchField;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)(params + 16) = ValueToSearchFor;
+			*(UIProviderScriptFieldValue*)(params + 16) = ValueToSearchFor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ValueToSearchFor = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)(params + 16);
+			ValueToSearchFor = *(UIProviderScriptFieldValue*)(params + 16);
 			auto returnVal = *(int*)(params + 100);
 			free(params);
 			return returnVal;

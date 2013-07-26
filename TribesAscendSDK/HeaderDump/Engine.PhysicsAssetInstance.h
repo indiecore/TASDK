@@ -2,6 +2,7 @@
 #include "Engine.RB_ConstraintInstance.h"
 #include "Engine.Actor.h"
 #include "Core.Object.h"
+#include "Core.Object.Map_Mirror.h"
 #include "Engine.RB_BodyInstance.h"
 #include "Engine.PhysicsAsset.h"
 #include "Engine.SkeletalMesh.h"
@@ -35,7 +36,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LinearForceLimitScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearDampingScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearSpringScale, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'CollisionDisableTable'!
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, CollisionDisableTable, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, RootBodyIndex, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, Owner)
 		void SetLinearDriveScale(float InLinearSpringScale, float InLinearDampingScale, float InLinearForceLimitScale)

@@ -2,6 +2,7 @@
 #include "Engine.Texture2D.h"
 #include "Engine.SequenceObject.h"
 #include "Engine.Material.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SequenceFrame." #y); \
@@ -27,8 +28,8 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Material, FillMaterial)
 		ADD_OBJECT(Texture2D, FillTexture)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'FillColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BorderColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, FillColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, BorderColor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bTileFill, 0x4)
 		ADD_VAR(::BoolProperty, bFilled, 0x2)
 		ADD_VAR(::BoolProperty, bDrawBox, 0x1)

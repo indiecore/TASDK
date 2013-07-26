@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine.Camera.ViewTargetTransitionParams.h"
 #include "Engine.SequenceAction.h"
 #include "Engine.Actor.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
@@ -19,7 +20,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(Actor, CameraTarget)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams' for the property named 'TransitionParams'!
+		ADD_STRUCT(::NonArithmeticProperty<ViewTargetTransitionParams>, TransitionParams, 0xFFFFFFFF)
 		int GetObjClassVersion()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_SetCameraTarget.GetObjClassVersion");

@@ -1,11 +1,15 @@
 #pragma once
+#include "Core.Object.Color.h"
 #include "UDKBase.UDKHUD.h"
-#include "Engine.PlayerController.h"
 #include "Engine.Texture2D.h"
+#include "Engine.Canvas.h"
+#include "Engine.UIRoot.TextureCoordinates.h"
 #include "UTGame.UTGameReplicationInfo.h"
 #include "UTGame.UTPlayerController.h"
 #include "UTGame.GFxUI_PauseMenu.h"
-#include "Engine.Canvas.h"
+#include "Core.Object.Vector.h"
+#include "Engine.PlayerController.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTHUDBase." #y); \
@@ -30,23 +34,23 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bCrosshairShow, 0x4)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BlackColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, BlackColor, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, IconHudTexture)
 		ADD_VAR(::BoolProperty, bCrosshairOnFriendly, 0x8)
 		ADD_VAR(::FloatProperty, ResolutionScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastPickupTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConfiguredCrosshairScaling, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bGreenCrosshair, 0x10)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'LightGreenColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, LightGreenColor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsSplitScreen, 0x1)
 		ADD_VAR(::IntProperty, ViewY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ViewX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ResolutionScaleX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'LightGoldColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'GoldColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, LightGoldColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, GoldColor, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ConsoleIconFontClassName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastTimeTooltipDrawn, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'ToolTipSepCoords'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, ToolTipSepCoords, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnableActorOverlays, 0x2)
 		ADD_OBJECT(UTGameReplicationInfo, UTGRI)
 		ADD_OBJECT(UTPlayerController, UTPlayerOwner)
@@ -162,9 +166,7 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.ClearCrosshairOnFriendly");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DrawShadowedTile(class Texture2D* Tex, float X, float Y, float XL, float YL, float U, float V, float UL, float VL, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* TileColor, bool bScaleToRes)
+		void DrawShadowedTile(class Texture2D* Tex, float X, float Y, float XL, float YL, float U, float V, float UL, float VL, Color TileColor, bool bScaleToRes)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.DrawShadowedTile");
 			byte* params = (byte*)malloc(44);
@@ -177,16 +179,12 @@ void* TileColor, bool bScaleToRes)
 			*(float*)(params + 24) = V;
 			*(float*)(params + 28) = UL;
 			*(float*)(params + 32) = VL;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 36) = TileColor;
+			*(Color*)(params + 36) = TileColor;
 			*(bool*)(params + 40) = bScaleToRes;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawShadowedStretchedTile(class Texture2D* Tex, float X, float Y, float XL, float YL, float U, float V, float UL, float VL, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* TileColor, bool bScaleToRes)
+		void DrawShadowedStretchedTile(class Texture2D* Tex, float X, float Y, float XL, float YL, float U, float V, float UL, float VL, Color TileColor, bool bScaleToRes)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.DrawShadowedStretchedTile");
 			byte* params = (byte*)malloc(44);
@@ -199,16 +197,12 @@ void* TileColor, bool bScaleToRes)
 			*(float*)(params + 24) = V;
 			*(float*)(params + 28) = UL;
 			*(float*)(params + 32) = VL;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 36) = TileColor;
+			*(Color*)(params + 36) = TileColor;
 			*(bool*)(params + 40) = bScaleToRes;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawShadowedRotatedTile(class Texture2D* Tex, Rotator Rot, float X, float Y, float XL, float YL, float U, float V, float UL, float VL, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* TileColor, bool bScaleToRes)
+		void DrawShadowedRotatedTile(class Texture2D* Tex, Rotator Rot, float X, float Y, float XL, float YL, float U, float V, float UL, float VL, Color TileColor, bool bScaleToRes)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.DrawShadowedRotatedTile");
 			byte* params = (byte*)malloc(56);
@@ -222,9 +216,7 @@ void* TileColor, bool bScaleToRes)
 			*(float*)(params + 36) = V;
 			*(float*)(params + 40) = UL;
 			*(float*)(params + 44) = VL;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 48) = TileColor;
+			*(Color*)(params + 48) = TileColor;
 			*(bool*)(params + 52) = bScaleToRes;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

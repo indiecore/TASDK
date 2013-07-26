@@ -1,6 +1,8 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "UDKBase.UDKEmitCameraEffect.h"
 #include "Engine.SoundCue.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrEmitCameraEffect_Speed." #y); \

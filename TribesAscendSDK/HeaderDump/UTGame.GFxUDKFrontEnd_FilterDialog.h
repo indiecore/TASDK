@@ -1,5 +1,6 @@
 #pragma once
 #include "UTGame.GFxUDKFrontEnd_Dialog.h"
+#include "GFxUI.GFxClikWidget.EventData.h"
 #include "UTGame.UTUIDataStore_MenuItems.h"
 #include "GFxUI.GFxObject.h"
 #include "GFxUI.GFxClikWidget.h"
@@ -95,15 +96,11 @@ void**)params = DelegateListener;
 			free(params);
 			return returnVal;
 		}
-		void OnFilterList_OptionChanged(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* ev)
+		void OnFilterList_OptionChanged(EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.OnFilterList_OptionChanged");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = ev;
+			*(EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

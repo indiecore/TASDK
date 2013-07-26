@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.Volume.h"
 #include "Engine.SeqAct_Toggle.h"
+#include "Engine.LevelStreamingVolume.CheckpointRecord.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LevelStreamingVolume." #y); \
@@ -26,34 +27,22 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void CreateCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.LevelStreamingVolume.CheckpointRecord'!
-void*& Record)
+		void CreateCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LevelStreamingVolume.CreateCheckpointRecord");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.LevelStreamingVolume.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.LevelStreamingVolume.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
-		void ApplyCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.LevelStreamingVolume.CheckpointRecord'!
-void*& Record)
+		void ApplyCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LevelStreamingVolume.ApplyCheckpointRecord");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.LevelStreamingVolume.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.LevelStreamingVolume.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
 	};

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.UIDataStore_GameResource.h"
+#include "Core.Object.MultiMap_Mirror.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKUIDataStore_Options." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class UDKUIDataStore_Options : public UIDataStore_GameResource
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.MultiMap_Mirror' for the property named 'OptionProviders'!
+		ADD_STRUCT(::NonArithmeticProperty<MultiMap_Mirror>, OptionProviders, 0xFFFFFFFF)
 		void ClearSet(ScriptName SetName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_Options.ClearSet");

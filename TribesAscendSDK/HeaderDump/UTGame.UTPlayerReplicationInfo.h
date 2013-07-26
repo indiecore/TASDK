@@ -4,7 +4,9 @@
 #include "Engine.Texture.h"
 #include "Engine.Actor.h"
 #include "UTGame.UTSquadAI.h"
+#include "Core.Object.Vector.h"
 #include "UTGame.UTCarriedObject.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTPlayerReplicationInfo." #y); \
@@ -42,7 +44,7 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, OrdersIndex, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, OrdersString, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'DefaultHudColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, DefaultHudColor, 0xFFFFFFFF)
 		ADD_OBJECT(UTCarriedObject, HasFlag)
 		int IncrementEventStat(ScriptName NewStatName)
 		{

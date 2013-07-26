@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.UIResourceDataProvider.h"
+#include "Engine.UIRoot.UIRangeData.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataProvider_MenuItem." #y); \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, IniName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIRangeData' for the property named 'RangeData'!
+		ADD_STRUCT(::NonArithmeticProperty<UIRangeData>, RangeData, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, EditBoxMaxLength, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bRemoveOnPS3, 0x100)
 		ADD_VAR(::BoolProperty, bRemoveOnPC, 0x80)

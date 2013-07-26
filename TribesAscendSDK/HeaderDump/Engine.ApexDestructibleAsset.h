@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.ApexAsset.h"
+#include "Engine.ApexDestructibleAsset.NxDestructibleParameters.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.PhysicalMaterial.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -24,14 +26,14 @@ namespace UnrealScript
 	class ApexDestructibleAsset : public ApexAsset
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ApexDestructibleAsset.NxDestructibleParameters' for the property named 'DestructibleParameters'!
+		ADD_STRUCT(::NonArithmeticProperty<NxDestructibleParameters>, DestructibleParameters, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, DustEmitterName, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, CrumbleEmitterName, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDynamic, 0x2)
 		ADD_VAR(::BoolProperty, bHasUniqueAssetMaterialNames, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'MDestructibleThumbnailComponent'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, MDestructibleThumbnailComponent, 0xFFFFFFFF)
 		ADD_OBJECT(PhysicalMaterial, DefaultPhysMaterial)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'MApexAsset'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, MApexAsset, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Pointer.h"
 #include "Engine.PrimitiveComponent.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -18,8 +19,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, DefaultLifeTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'FPrimitiveDrawInterfaceView'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'FPrimitiveDrawInterfaceVfTable'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, FPrimitiveDrawInterfaceView, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, FPrimitiveDrawInterfaceVfTable, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine.UIRoot.UIProviderScriptFieldValue.h"
 #include "Engine.UIDataProvider.h"
+#include "Core.Object.Map_Mirror.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.UIDynamicFieldProvider." #y); \
@@ -11,8 +13,8 @@ namespace UnrealScript
 	class UIDynamicFieldProvider : public UIDataProvider
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'RuntimeCollectionData'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'PersistentCollectionData'!
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, RuntimeCollectionData, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, PersistentCollectionData, 0xFFFFFFFF)
 		void InitializeRuntimeFields()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDynamicFieldProvider.InitializeRuntimeFields");
@@ -63,39 +65,27 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		bool GetField(ScriptName FieldName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void*& out_Field)
+		bool GetField(ScriptName FieldName, UIProviderScriptFieldValue& out_Field)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDynamicFieldProvider.GetField");
 			byte* params = (byte*)malloc(96);
 			*(ScriptName*)params = FieldName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)(params + 8) = out_Field;
+			*(UIProviderScriptFieldValue*)(params + 8) = out_Field;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_Field = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)(params + 8);
+			out_Field = *(UIProviderScriptFieldValue*)(params + 8);
 			auto returnVal = *(bool*)(params + 92);
 			free(params);
 			return returnVal;
 		}
-		bool SetField(ScriptName FieldName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void*& FieldValue, bool bChangeExistingOnly)
+		bool SetField(ScriptName FieldName, UIProviderScriptFieldValue& FieldValue, bool bChangeExistingOnly)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDynamicFieldProvider.SetField");
 			byte* params = (byte*)malloc(100);
 			*(ScriptName*)params = FieldName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)(params + 8) = FieldValue;
+			*(UIProviderScriptFieldValue*)(params + 8) = FieldValue;
 			*(bool*)(params + 92) = bChangeExistingOnly;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			FieldValue = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)(params + 8);
+			FieldValue = *(UIProviderScriptFieldValue*)(params + 8);
 			auto returnVal = *(bool*)(params + 96);
 			free(params);
 			return returnVal;

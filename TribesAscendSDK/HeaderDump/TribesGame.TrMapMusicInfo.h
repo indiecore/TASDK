@@ -1,5 +1,7 @@
 #pragma once
 #include "UDKBase.UDKMapMusicInfo.h"
+#include "TribesGame.TrMapMusicInfo.TrMapStingers.h"
+#include "TribesGame.TrMapMusicInfo.TrMapMusic.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrMapMusicInfo." #y); \
@@ -11,8 +13,8 @@ namespace UnrealScript
 	class TrMapMusicInfo : public UDKMapMusicInfo
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrMapMusicInfo.TrMapStingers' for the property named 'm_MapStingers'!
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrMapMusicInfo.TrMapMusic' for the property named 'm_MapMusic'!
+		ADD_STRUCT(::NonArithmeticProperty<TrMapStingers>, m_MapStingers, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TrMapMusic>, m_MapMusic, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

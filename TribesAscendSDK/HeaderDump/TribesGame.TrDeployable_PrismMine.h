@@ -4,6 +4,8 @@
 #include "TribesGame.TrTripActor.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.Pawn.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDeployable_PrismMine." #y); \
@@ -36,7 +38,7 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, m_DamageType)
 		ADD_VAR(::NameProperty, m_nSocketTraceName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fPrismRadius, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_TrTripNotifier'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IInterface_TrTripNotifier, 0xFFFFFFFF)
 		void CreateTripActor(class TrDeployable_PrismMine* Right, Vector LeftLocation, Vector RightLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.CreateTripActor");

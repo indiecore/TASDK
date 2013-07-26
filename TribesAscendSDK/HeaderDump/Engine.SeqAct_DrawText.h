@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine.HUD.KismetDrawTextInfo.h"
 #include "Engine.SequenceAction.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class SeqAct_DrawText : public SequenceAction
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.KismetDrawTextInfo' for the property named 'DrawTextInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<KismetDrawTextInfo>, DrawTextInfo, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DisplayTimeSeconds, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDisplayOnObject, 0x1)
 		int GetObjClassVersion()

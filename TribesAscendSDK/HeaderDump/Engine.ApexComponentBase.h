@@ -1,6 +1,9 @@
 #pragma once
 #include "Engine.MeshComponent.h"
+#include "Core.Object.Color.h"
 #include "Engine.ApexAsset.h"
+#include "Core.Object.RenderCommandFence_Mirror.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ApexComponentBase." #y); \
@@ -25,10 +28,10 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bAssetChanged, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'WireframeColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, WireframeColor, 0xFFFFFFFF)
 		ADD_OBJECT(ApexAsset, Asset)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.RenderCommandFence_Mirror' for the property named 'ReleaseResourcesFence'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ComponentBaseResources'!
+		ADD_STRUCT(::NonArithmeticProperty<RenderCommandFence_Mirror>, ReleaseResourcesFence, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ComponentBaseResources, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

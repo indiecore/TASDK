@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.PrimitiveComponent.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DrawConeComponent." #y); \
@@ -20,7 +21,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ConeSides, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConeAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConeRadius, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'ConeColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, ConeColor, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

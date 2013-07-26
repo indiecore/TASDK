@@ -1,6 +1,7 @@
 #pragma once
 #include "TribesGame.TrSpottedTarget.h"
 #include "Engine.Texture2D.h"
+#include "Core.Object.LinearColor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrSpottedTarget_MotionMine." #y); \
@@ -31,16 +32,12 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* GetMarkerColor()
+		LinearColor GetMarkerColor()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSpottedTarget_MotionMine.GetMarkerColor");
 			byte* params = (byte*)malloc(16);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)params;
+			auto returnVal = *(LinearColor*)params;
 			free(params);
 			return returnVal;
 		}

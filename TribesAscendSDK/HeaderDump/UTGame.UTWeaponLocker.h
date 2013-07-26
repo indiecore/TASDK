@@ -3,6 +3,7 @@
 #include "Engine.Controller.h"
 #include "UTGame.UTPickupFactory.h"
 #include "Engine.ParticleSystem.h"
+#include "UTGame.UTWeaponLocker.ReplacementWeaponEntry.h"
 #include "Engine.PlayerController.h"
 #include "Engine.Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -39,7 +40,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bPlayerNearby, 0x2)
 		ADD_VAR(::BoolProperty, bIsActive, 0x1)
 		ADD_VAR(::StrProperty, LockerString, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct UTGame.UTWeaponLocker.ReplacementWeaponEntry' for the property named 'ReplacementWeapons'!
+		ADD_STRUCT(::NonArithmeticProperty<ReplacementWeaponEntry>, ReplacementWeapons, 0xFFFFFFFF)
 		float BotDesireability(class Pawn* Bot, class Controller* C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.BotDesireability");

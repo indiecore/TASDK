@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.UIDataProvider_OnlinePlayerDataBase.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.LocalPlayer.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataProvider_OnlineFriendMessages." #y); \
@@ -24,7 +26,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, bWasAcceptedCol, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, bIsFriendInviteCol, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, SendingPlayerNameCol, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
 		void OnRegister(class LocalPlayer* InPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnRegister");
@@ -43,31 +45,23 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.ReadMessages");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnFriendInviteReceived(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* RequestingPlayer, ScriptArray<wchar_t> RequestingNick, ScriptArray<wchar_t> Message)
+		void OnFriendInviteReceived(byte LocalUserNum, UniqueNetId RequestingPlayer, ScriptArray<wchar_t> RequestingNick, ScriptArray<wchar_t> Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnFriendInviteReceived");
 			byte* params = (byte*)malloc(33);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = RequestingPlayer;
+			*(UniqueNetId*)(params + 4) = RequestingPlayer;
 			*(ScriptArray<wchar_t>*)(params + 12) = RequestingNick;
 			*(ScriptArray<wchar_t>*)(params + 24) = Message;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnFriendMessageReceived(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* SendingPlayer, ScriptArray<wchar_t> SendingNick, ScriptArray<wchar_t> Message)
+		void OnFriendMessageReceived(byte LocalUserNum, UniqueNetId SendingPlayer, ScriptArray<wchar_t> SendingNick, ScriptArray<wchar_t> Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnFriendMessageReceived");
 			byte* params = (byte*)malloc(33);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = SendingPlayer;
+			*(UniqueNetId*)(params + 4) = SendingPlayer;
 			*(ScriptArray<wchar_t>*)(params + 12) = SendingNick;
 			*(ScriptArray<wchar_t>*)(params + 24) = Message;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);

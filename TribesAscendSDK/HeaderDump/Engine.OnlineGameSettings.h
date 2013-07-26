@@ -1,4 +1,6 @@
 #pragma once
+#include "Core.Object.QWord.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "Engine.Settings.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -21,7 +23,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumOpenPrivateConnections, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumOpenPublicConnections, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, GameState, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId' for the property named 'OwningPlayerId'!
+		ADD_STRUCT(::NonArithmeticProperty<UniqueNetId>, OwningPlayerId, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsLanMatch, 0x2)
 		ADD_VAR(::BoolProperty, bUsesStats, 0x4)
 		ADD_VAR(::IntProperty, NumPublicConnections, 0xFFFFFFFF)

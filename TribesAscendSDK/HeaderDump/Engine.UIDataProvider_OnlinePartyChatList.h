@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.UIDataProvider_OnlinePlayerDataBase.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.LocalPlayer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -25,7 +26,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, IsLocalCol, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, NatTypeCol, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, NickNameCol, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
 		void OnRegister(class LocalPlayer* InPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePartyChatList.OnRegister");

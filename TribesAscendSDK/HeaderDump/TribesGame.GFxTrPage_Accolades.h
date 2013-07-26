@@ -2,6 +2,7 @@
 #include "TribesGame.GFxTrPage.h"
 #include "TribesGame.GFxTrAction.h"
 #include "GFxUI.GFxObject.h"
+#include "PlatformCommon.TgPlayerProfile.AccoladeStruct.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrPage_Accolades." #y); \
@@ -71,15 +72,11 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		class GFxObject* FillAccolade(
-// WARNING: Unknown structure type 'ScriptStruct PlatformCommon.TgPlayerProfile.AccoladeStruct'!
-void* Accolade)
+		class GFxObject* FillAccolade(AccoladeStruct Accolade)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Accolades.FillAccolade");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct PlatformCommon.TgPlayerProfile.AccoladeStruct'!
-void**)params = Accolade;
+			*(AccoladeStruct*)params = Accolade;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(class GFxObject**)(params + 16);
 			free(params);

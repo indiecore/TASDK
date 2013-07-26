@@ -1,7 +1,9 @@
 #pragma once
+#include "Core.Object.Color.h"
 #include "UTGame.UTHUDBase.h"
 #include "UTGame.GFxMinimapHud.h"
 #include "UTGame.GFxProjectedUI.h"
+#include "Core.Object.Vector.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Core.Object.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
@@ -85,9 +87,7 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.DrawHUD");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void LocalizedMessage(ScriptClass* InMessageClass, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, ScriptArray<wchar_t> CriticalString, int Switch, float Position, float Lifetime, int FontSize, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* DrawColor, class Object* OptionalObject)
+		void LocalizedMessage(ScriptClass* InMessageClass, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, ScriptArray<wchar_t> CriticalString, int Switch, float Position, float Lifetime, int FontSize, Color DrawColor, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.LocalizedMessage");
 			byte* params = (byte*)malloc(48);
@@ -99,9 +99,7 @@ void* DrawColor, class Object* OptionalObject)
 			*(float*)(params + 28) = Position;
 			*(float*)(params + 32) = Lifetime;
 			*(int*)(params + 36) = FontSize;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 40) = DrawColor;
+			*(Color*)(params + 40) = DrawColor;
 			*(class Object**)(params + 44) = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

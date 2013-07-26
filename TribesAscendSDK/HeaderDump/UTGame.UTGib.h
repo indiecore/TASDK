@@ -1,13 +1,16 @@
 #pragma once
 #include "Engine.Actor.h"
 #include "Engine.ParticleSystem.h"
-#include "Engine.SoundCue.h"
-#include "Engine.MaterialInstanceTimeVarying.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.HUD.h"
 #include "Engine.MaterialInstance.h"
+#include "Core.Object.Vector.h"
+#include "Engine.SoundCue.h"
+#include "Engine.MaterialInstanceTimeVarying.h"
 #include "Engine.MaterialInstanceConstant.h"
 #include "Engine.StaticMesh.h"
 #include "Engine.PlayerController.h"
+#include "Engine.Actor.CollisionImpactData.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTGib." #y); \
@@ -122,9 +125,7 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* HitComponent, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComponent, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
-void*& RigidCollisionData, int ContactIndex)
+void* OtherComponent, CollisionImpactData& RigidCollisionData, int ContactIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.RigidBodyCollision");
 			byte* params = (byte*)malloc(48);
@@ -134,14 +135,10 @@ void**)params = HitComponent;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)(params + 4) = OtherComponent;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
-void**)(params + 8) = RigidCollisionData;
+			*(CollisionImpactData*)(params + 8) = RigidCollisionData;
 			*(int*)(params + 44) = ContactIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			RigidCollisionData = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
-void**)(params + 8);
+			RigidCollisionData = *(CollisionImpactData*)(params + 8);
 			free(params);
 		}
 		void LeaveADecal(Vector HitLoc, Vector HitNorm)

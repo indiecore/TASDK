@@ -1,8 +1,13 @@
 #pragma once
 #include "Engine.Actor.h"
 #include "Engine.Controller.h"
+#include "Engine.Actor.PhysEffectInfo.h"
 #include "Engine.DynamicSMActor.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.Vector.h"
+#include "Engine.Actor.TraceHitInfo.h"
 #include "Engine.PhysicalMaterial.h"
+#include "Engine.Actor.RigidBodyState.h"
 #include "Engine.SeqAct_Toggle.h"
 #include "Engine.SeqAct_Teleport.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -26,13 +31,13 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, InitialLocation, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, ReplicatedDrawScale3D, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AngErrorAccumulator, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.RigidBodyState' for the property named 'RBState'!
+		ADD_STRUCT(::NonArithmeticProperty<RigidBodyState>, RBState, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxPhysicsVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StayUprightMaxTorque, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StayUprightTorqueFactor, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.PhysEffectInfo' for the property named 'SlideEffectInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<PhysEffectInfo>, SlideEffectInfo, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastSlideTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.PhysEffectInfo' for the property named 'ImpactEffectInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<PhysEffectInfo>, ImpactEffectInfo, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastImpactTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDisableClientSidePawnInteractions, 0x80)
 		ADD_VAR(::BoolProperty, bNeedsRBStateReplication, 0x40)
@@ -92,25 +97,19 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ApplyImpulse(Vector ImpulseDir, float ImpulseMag, Vector HitLocation, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo, ScriptClass* DamageType)
+		void ApplyImpulse(Vector ImpulseDir, float ImpulseMag, Vector HitLocation, TraceHitInfo HitInfo, ScriptClass* DamageType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.ApplyImpulse");
 			byte* params = (byte*)malloc(60);
 			*(Vector*)params = ImpulseDir;
 			*(float*)(params + 12) = ImpulseMag;
 			*(Vector*)(params + 16) = HitLocation;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 28) = HitInfo;
+			*(TraceHitInfo*)(params + 28) = HitInfo;
 			*(ScriptClass**)(params + 56) = DamageType;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.TakeDamage");
 			byte* params = (byte*)malloc(68);
@@ -119,9 +118,7 @@ void* HitInfo, class Actor* DamageCauser)
 			*(Vector*)(params + 8) = HitLocation;
 			*(Vector*)(params + 20) = Momentum;
 			*(ScriptClass**)(params + 32) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 36) = HitInfo;
+			*(TraceHitInfo*)(params + 36) = HitInfo;
 			*(class Actor**)(params + 64) = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

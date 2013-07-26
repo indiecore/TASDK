@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleTypeDataBase.h"
+#include "Engine.ParticleModuleTypeDataPhysX.PhysXEmitterVerticalLodProperties.h"
 #include "Engine.PhysXParticleSystem.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	class ParticleModuleTypeDataPhysX : public ParticleModuleTypeDataBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ParticleModuleTypeDataPhysX.PhysXEmitterVerticalLodProperties' for the property named 'VerticalLod'!
+		ADD_STRUCT(::NonArithmeticProperty<PhysXEmitterVerticalLodProperties>, VerticalLod, 0xFFFFFFFF)
 		ADD_OBJECT(PhysXParticleSystem, PhysXParSys)
 	};
 }

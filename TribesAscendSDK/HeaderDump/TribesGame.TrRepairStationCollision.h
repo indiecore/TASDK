@@ -2,6 +2,7 @@
 #include "TribesGame.TrStationCollision.h"
 #include "TribesGame.TrPawn.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 namespace UnrealScript
 {
 	class TrRepairStationCollision : public TrStationCollision

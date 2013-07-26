@@ -1,6 +1,9 @@
 #pragma once
+#include "IpDrv.PartyBeacon.PartyReservation.h"
 #include "IpDrv.PartyBeacon.h"
 #include "IpDrv.ClientBeaconAddressResolver.h"
+#include "Engine.OnlineGameSearch.OnlineGameSearchResult.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.PartyBeaconClient." #y); \
@@ -31,8 +34,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ReservationRequestTimeout, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ClientBeaconRequestType, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ClientBeaconState, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult' for the property named 'HostPendingRequest'!
-		// WARNING: Unknown structure type 'ScriptStruct IpDrv.PartyBeacon.PartyReservation' for the property named 'PendingRequest'!
+		ADD_STRUCT(::NonArithmeticProperty<OnlineGameSearchResult>, HostPendingRequest, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<PartyReservation>, PendingRequest, 0xFFFFFFFF)
 		void OnHostHasCancelled()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.OnHostHasCancelled");
@@ -69,29 +72,19 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool RequestReservation(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void*& DesiredHost, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* RequestingPartyLeader, 
+		bool RequestReservation(OnlineGameSearchResult& DesiredHost, UniqueNetId RequestingPartyLeader, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& Players)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.RequestReservation");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params = DesiredHost;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 8) = RequestingPartyLeader;
+			*(OnlineGameSearchResult*)params = DesiredHost;
+			*(UniqueNetId*)(params + 8) = RequestingPartyLeader;
 			*(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 16) = Players;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DesiredHost = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params;
+			DesiredHost = *(OnlineGameSearchResult*)params;
 			Players = *(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 16);
@@ -99,29 +92,19 @@ void**)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		bool RequestReservationUpdate(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void*& DesiredHost, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* RequestingPartyLeader, 
+		bool RequestReservationUpdate(OnlineGameSearchResult& DesiredHost, UniqueNetId RequestingPartyLeader, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& PlayersToAdd)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.RequestReservationUpdate");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params = DesiredHost;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 8) = RequestingPartyLeader;
+			*(OnlineGameSearchResult*)params = DesiredHost;
+			*(UniqueNetId*)(params + 8) = RequestingPartyLeader;
 			*(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 16) = PlayersToAdd;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DesiredHost = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params;
+			DesiredHost = *(OnlineGameSearchResult*)params;
 			PlayersToAdd = *(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 16);
@@ -129,15 +112,11 @@ void**)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		bool CancelReservation(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* CancellingPartyLeader)
+		bool CancelReservation(UniqueNetId CancellingPartyLeader)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.CancelReservation");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = CancellingPartyLeader;
+			*(UniqueNetId*)params = CancellingPartyLeader;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 8);
 			free(params);

@@ -1,6 +1,7 @@
 #pragma once
 #include "TribesGame.TrPawn.h"
 #include "Engine.Info.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Controller.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

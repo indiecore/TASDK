@@ -6,9 +6,11 @@
 #include "UTGame.UTWeapon.h"
 #include "UTGame.UTPlayerReplicationInfo.h"
 #include "UTGame.UTVehicle.h"
-#include "Engine.Weapon.h"
+#include "UTGame.GFxMinimapHud.HeEnDisplay.h"
 #include "UTGame.GFxMinimap.h"
+#include "Engine.Weapon.h"
 #include "Engine.LocalPlayer.h"
+#include "Core.Object.Vector.h"
 #include "Engine.PlayerReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -61,8 +63,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumMessages, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MessageHeight, 0xFFFFFFFF)
 		ADD_OBJECT(GFxObject, LogMC)
-		// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay' for the property named 'VehicleHE'!
-		// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay' for the property named 'PlayerHE'!
+		ADD_STRUCT(::NonArithmeticProperty<HeEnDisplay>, VehicleHE, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<HeEnDisplay>, PlayerHE, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinZoomf, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxZoomf, 0xFFFFFFFF)
 		ADD_OBJECT(GFxMinimap, Minimap)
@@ -111,54 +113,36 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void LoadHeEn(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void*& Info, ScriptArray<wchar_t> Base)
+		void LoadHeEn(HeEnDisplay& Info, ScriptArray<wchar_t> Base)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.LoadHeEn");
 			byte* params = (byte*)malloc(48);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void**)params = Info;
+			*(HeEnDisplay*)params = Info;
 			*(ScriptArray<wchar_t>*)(params + 36) = Base;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Info = *(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void**)params;
+			Info = *(HeEnDisplay*)params;
 			free(params);
 		}
-		void UpdateHealth(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void*& Info, float NewHealth, float HealthMax)
+		void UpdateHealth(HeEnDisplay& Info, float NewHealth, float HealthMax)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.UpdateHealth");
 			byte* params = (byte*)malloc(44);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void**)params = Info;
+			*(HeEnDisplay*)params = Info;
 			*(float*)(params + 36) = NewHealth;
 			*(float*)(params + 40) = HealthMax;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Info = *(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void**)params;
+			Info = *(HeEnDisplay*)params;
 			free(params);
 		}
-		void UpdateEnergy(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void*& Info, float NewEnergy, float EnergyMax)
+		void UpdateEnergy(HeEnDisplay& Info, float NewEnergy, float EnergyMax)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.UpdateEnergy");
 			byte* params = (byte*)malloc(44);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void**)params = Info;
+			*(HeEnDisplay*)params = Info;
 			*(float*)(params + 36) = NewEnergy;
 			*(float*)(params + 40) = EnergyMax;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Info = *(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void**)params;
+			Info = *(HeEnDisplay*)params;
 			free(params);
 		}
 		ScriptArray<wchar_t> FormatTime(int Seconds)

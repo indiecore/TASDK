@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "GameFramework.SeqEvent_MobileRawInput.h"
 #include "Core.Object.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \

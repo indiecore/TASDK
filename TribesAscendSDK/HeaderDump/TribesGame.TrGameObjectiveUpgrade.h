@@ -1,6 +1,7 @@
 #pragma once
 #include "TribesGame.TrGameObjective.h"
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrGameObjectiveUpgrade." #y); \
@@ -27,7 +28,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fNewValue, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, m_nmClassPropertyName, 0xFFFFFFFF)
 		ADD_OBJECT(TrGameObjective, m_Owner)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'm_ClassPropertyPointer'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, m_ClassPropertyPointer, 0xFFFFFFFF)
 		void InitUpgrade(class TrGameObjective* OwnerObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGameObjectiveUpgrade.InitUpgrade");

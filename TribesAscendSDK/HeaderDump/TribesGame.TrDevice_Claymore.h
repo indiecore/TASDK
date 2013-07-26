@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame.TrDevice_AutoFire.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Projectile.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

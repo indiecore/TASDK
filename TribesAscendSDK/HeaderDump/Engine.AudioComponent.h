@@ -1,10 +1,15 @@
 #pragma once
-#include "Engine.SoundNodeWave.h"
 #include "Engine.ActorComponent.h"
+#include "Engine.PortalVolume.h"
+#include "Core.Object.Double.h"
+#include "Core.Object.Vector.h"
 #include "Engine.SoundCue.h"
+#include "Engine.ReverbVolume.InteriorSettings.h"
 #include "Engine.SoundNode.h"
 #include "Engine.Actor.h"
-#include "Engine.PortalVolume.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.MultiMap_Mirror.h"
+#include "Engine.SoundNodeWave.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AudioComponent." #y); \
@@ -41,13 +46,13 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, OcclusionCheckInterval, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HighFrequencyGainMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LastReverbVolumeIndex, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ReverbVolume.InteriorSettings' for the property named 'LastInteriorSettings'!
+		ADD_STRUCT(::NonArithmeticProperty<InteriorSettings>, LastInteriorSettings, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, LastLocation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentInteriorLPF, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentInteriorVolume, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SourceInteriorLPF, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SourceInteriorVolume, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'LastUpdateTime'!
+		ADD_STRUCT(::NonArithmeticProperty<Double>, LastUpdateTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentRadioFilterVolumeThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentRadioFilterVolume, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentVoiceCenterChannelVolume, 0xFFFFFFFF)
@@ -75,8 +80,8 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, ComponentLocation, 0xFFFFFFFF)
 		ADD_OBJECT(PortalVolume, PortalVolume)
 		ADD_VAR(::FloatProperty, PlaybackTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Listener'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.MultiMap_Mirror' for the property named 'SoundNodeResetWaveMap'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Listener, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<MultiMap_Mirror>, SoundNodeResetWaveMap, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bBassBoost, 0x40)
 		ADD_VAR(::BoolProperty, bCenterChannelOnly, 0x20)
 		ADD_VAR(::BoolProperty, bReverb, 0x10)

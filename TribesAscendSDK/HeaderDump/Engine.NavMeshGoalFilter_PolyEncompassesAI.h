@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.NavMeshGoal_GenericFilterContainer.h"
 #include "Engine.NavMeshGoal_Filter.h"
+#include "Core.Object.Vector.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NavMeshGoalFilter_PolyEncompassesAI." #y); \

@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Color.h"
 #include "UTGame.UTLocalMessage.h"
 #include "Engine.PlayerReplicationInfo.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
@@ -12,19 +13,15 @@ namespace UnrealScript
 	class UTSayMsg : public UTLocalMessage
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BlueTeamColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'RedTeamColor'!
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* GetConsoleColor(class PlayerReplicationInfo* RelatedPRI)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, BlueTeamColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, RedTeamColor, 0xFFFFFFFF)
+		Color GetConsoleColor(class PlayerReplicationInfo* RelatedPRI)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSayMsg.GetConsoleColor");
 			byte* params = (byte*)malloc(8);
 			*(class PlayerReplicationInfo**)params = RelatedPRI;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 4);
+			auto returnVal = *(Color*)(params + 4);
 			free(params);
 			return returnVal;
 		}

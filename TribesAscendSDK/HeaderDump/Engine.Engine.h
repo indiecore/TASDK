@@ -1,12 +1,16 @@
 #pragma once
 #include "Engine.GameViewportClient.h"
 #include "Core.Subsystem.h"
-#include "Engine.Client.h"
+#include "Core.Object.Color.h"
 #include "Engine.Material.h"
+#include "Engine.Client.h"
+#include "Core.Object.Vector.h"
 #include "Engine.TranslationContext.h"
-#include "Engine.SoundNodeWave.h"
 #include "Engine.Font.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.Texture2D.h"
+#include "Core.Object.LinearColor.h"
+#include "Engine.SoundNodeWave.h"
 #include "Engine.Texture.h"
 #include "Engine.PostProcessChain.h"
 #include "Engine.ApexDestructibleDamageParameters.h"
@@ -39,12 +43,12 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(TranslationContext, GlobalTranslationContext)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ScreenSaverInhibitor'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ScreenSaverInhibitor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ScreenSaverInhibitorSemaphore, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'UnselectedMaterialColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'SelectedMaterialColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'DefaultHoveredMaterialColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'DefaultSelectedMaterialColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, UnselectedMaterialColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, SelectedMaterialColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, DefaultHoveredMaterialColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, DefaultSelectedMaterialColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TrackedOcclusionStepSize, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxTrackedOcclusionIncrement, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NetClientTicksPerSecond, 0xFFFFFFFF)
@@ -68,21 +72,21 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, TransitionType, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ScoutClassName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StreamingDistanceFactor, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_BrushShape'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_Volume'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_OrthoBackground'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_BSPCollision'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_VolumeCollision'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_ScaleBoxHi'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_WireBackground'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_NonSolidWire'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_SemiSolidWire'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_SubtractWire'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_AddWire'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_BrushWire'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'C_WorldBox'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'MobileMaterialEmulator'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'RemoteControlExec'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_BrushShape, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_Volume, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_OrthoBackground, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_BSPCollision, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_VolumeCollision, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_ScaleBoxHi, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_WireBackground, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_NonSolidWire, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_SemiSolidWire, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_SubtractWire, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_AddWire, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_BrushWire, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, C_WorldBox, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, MobileMaterialEmulator, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, RemoteControlExec, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinSmoothedFrameRate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxSmoothedFrameRate, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ClientCycles, 0xFFFFFFFF)
@@ -136,8 +140,8 @@ namespace UnrealScript
 		ADD_OBJECT(PhysicalMaterial, DefaultPhysMaterial)
 		ADD_VAR(::StrProperty, EditorBrushMaterialName, 0xFFFFFFFF)
 		ADD_OBJECT(Material, EditorBrushMaterial)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'LightMapDensitySelectedColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'LightMapDensityVertexMappedColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, LightMapDensitySelectedColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, LightMapDensityVertexMappedColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RenderLightMapDensityColorScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RenderLightMapDensityGrayscaleScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxLightMapDensity, 0xFFFFFFFF)
@@ -147,7 +151,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, IdealTextureDensity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinTextureDensity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxPixelShaderAdditiveComplexityCount, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'LightingOnlyBrightness'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, LightingOnlyBrightness, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ImageReflectionTextureSize, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxRMSDForCombiningMappings, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDisableAILogging, 0x40000000)

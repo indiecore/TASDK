@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "TribesGame.TrProj_Mine.h"
 #include "Engine.Texture2D.h"
 #include "Engine.Pawn.h"

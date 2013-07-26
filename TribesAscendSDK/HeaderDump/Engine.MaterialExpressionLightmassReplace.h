@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.MaterialExpression.h"
+#include "Engine.MaterialExpression.ExpressionInput.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.MaterialExpressionLightmassReplace." #y); \
@@ -11,8 +12,8 @@ namespace UnrealScript
 	class MaterialExpressionLightmassReplace : public MaterialExpression
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'Lightmass'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'Realtime'!
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, Lightmass, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, Realtime, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

@@ -1,5 +1,7 @@
 #pragma once
+#include "Core.Object.Pointer.h"
 #include "Engine.Info.h"
+#include "Engine.EngineTypes.LightmassPrimitiveSettings.h"
 #include "Engine.Material.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -27,10 +29,10 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumSubsections, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SubsectionSizeQuads, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ComponentSizeQuads, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'DataInterface'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, DataInterface, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StreamingDistanceMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, StaticLightingResolution, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightmassPrimitiveSettings' for the property named 'LightmassSettings'!
+		ADD_STRUCT(::NonArithmeticProperty<LightmassPrimitiveSettings>, LightmassSettings, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxLODLevel, 0xFFFFFFFF)
 		ADD_OBJECT(Material, LandscapeMaterial)
 	};

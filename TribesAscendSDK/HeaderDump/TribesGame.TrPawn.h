@@ -1,26 +1,33 @@
 #pragma once
-#include "UTGame.UTWeaponAttachment.h"
 #include "Engine.SkeletalMesh.h"
+#include "Core.Object.Rotator.h"
 #include "UTGame.UTPawn.h"
 #include "UDKBase.UDKCarriedObject.h"
+#include "TribesGame.TrPawn.AssistInfo.h"
 #include "Engine.Canvas.h"
 #include "TribesGame.TrVehicle.h"
 #include "TribesGame.TrAnimNodeBlendByRidingPassenger.h"
 #include "TribesGame.TrStatsInterface.h"
 #include "TribesGame.TrAnimNodeAimOffset.h"
+#include "Core.Object.Vector.h"
 #include "Engine.MaterialInstanceConstant.h"
+#include "UTGame.UTWeaponAttachment.h"
 #include "TribesGame.TrValueModifier.h"
 #include "Engine.Material.h"
 #include "TribesGame.TrPlayerReplicationInfo.h"
 #include "TribesGame.TrPawnCollisionProxy.h"
 #include "Engine.MorphNodeWeight.h"
 #include "TribesGame.TrAnimNodeBlendByVehicle.h"
+#include "TribesGame.TrObject.TrTakeEffectInfo.h"
+#include "TribesGame.TrObject.TR_HUD_INFO.h"
 #include "Engine.Actor.h"
+#include "Engine.Controller.h"
+#include "Engine.Actor.ImpactInfo.h"
 #include "TribesGame.TrHUD.h"
 #include "Engine.MaterialInterface.h"
 #include "Engine.PlayerController.h"
-#include "Engine.Controller.h"
 #include "TribesGame.TrPlayerController.h"
+#include "Engine.Actor.TraceHitInfo.h"
 #include "Engine.HUD.h"
 #include "Engine.Pawn.h"
 #include "Engine.Weapon.h"
@@ -149,9 +156,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fMaxSkiControlPct, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fSkiControlSigmaSquare, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fPeakSkiControlSpeed, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.TrTakeEffectInfo' for the property named 'r_LastTakeEffectInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<TrTakeEffectInfo>, r_LastTakeEffectInfo, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ShowHeaderUntil, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.TR_HUD_INFO' for the property named 'm_HudInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<TR_HUD_INFO>, m_HudInfo, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, r_nSensorAlertLevel, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fDecelerationRateWithFlag, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMaxSpeedWithFlag, 0xFFFFFFFF)
@@ -285,19 +292,13 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		bool CheckHeadShot(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void*& Impact)
+		bool CheckHeadShot(ImpactInfo& Impact)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.CheckHeadShot");
 			byte* params = (byte*)malloc(84);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)params = Impact;
+			*(ImpactInfo*)params = Impact;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Impact = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)params;
+			Impact = *(ImpactInfo*)params;
 			auto returnVal = *(bool*)(params + 80);
 			free(params);
 			return returnVal;
@@ -737,18 +738,14 @@ void**)params = SkelComp;
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrPawn.AssistInfo'!
-void* CreateAssistRecord(class Controller* Damager, int DamageAmount)
+		AssistInfo CreateAssistRecord(class Controller* Damager, int DamageAmount)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.CreateAssistRecord");
 			byte* params = (byte*)malloc(20);
 			*(class Controller**)params = Damager;
 			*(int*)(params + 4) = DamageAmount;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrPawn.AssistInfo'!
-void**)(params + 8);
+			auto returnVal = *(AssistInfo*)(params + 8);
 			free(params);
 			return returnVal;
 		}
@@ -828,9 +825,7 @@ void**)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.TakeDamage");
 			byte* params = (byte*)malloc(68);
@@ -839,9 +834,7 @@ void* HitInfo, class Actor* DamageCauser)
 			*(Vector*)(params + 8) = HitLocation;
 			*(Vector*)(params + 20) = Momentum;
 			*(ScriptClass**)(params + 32) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 36) = HitInfo;
+			*(TraceHitInfo*)(params + 36) = HitInfo;
 			*(class Actor**)(params + 64) = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -1467,9 +1460,7 @@ void**)(params + 4) = RunOverComponent;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void AdjustDamage(int& InDamage, Vector& Momentum, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo, class Actor* DamageCauser)
+		void AdjustDamage(int& InDamage, Vector& Momentum, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawn.AdjustDamage");
 			byte* params = (byte*)malloc(68);
@@ -1478,9 +1469,7 @@ void* HitInfo, class Actor* DamageCauser)
 			*(class Controller**)(params + 16) = InstigatedBy;
 			*(Vector*)(params + 20) = HitLocation;
 			*(ScriptClass**)(params + 32) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 36) = HitInfo;
+			*(TraceHitInfo*)(params + 36) = HitInfo;
 			*(class Actor**)(params + 64) = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			InDamage = *(int*)params;

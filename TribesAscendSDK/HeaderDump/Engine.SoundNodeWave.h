@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.SoundNode.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.UntypedBulkData_Mirror.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SoundNodeWave." #y); \
@@ -20,16 +22,16 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, SourceFileTimestamp, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, SourceFilePath, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Comment, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ResourceData'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ResourceData, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ResourceSize, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ResourceID, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.UntypedBulkData_Mirror' for the property named 'CompressedPS3Data'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.UntypedBulkData_Mirror' for the property named 'CompressedXbox360Data'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.UntypedBulkData_Mirror' for the property named 'CompressedPCData'!
+		ADD_STRUCT(::NonArithmeticProperty<UntypedBulkData_Mirror>, CompressedPS3Data, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<UntypedBulkData_Mirror>, CompressedXbox360Data, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<UntypedBulkData_Mirror>, CompressedPCData, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, RawPCMDataSize, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'RawPCMData'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VorbisDecompressor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.UntypedBulkData_Mirror' for the property named 'RawData'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, RawPCMData, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VorbisDecompressor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<UntypedBulkData_Mirror>, RawData, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SampleRate, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumChannels, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Duration, 0xFFFFFFFF)

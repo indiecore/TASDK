@@ -1,14 +1,19 @@
 #pragma once
 #include "Engine.Vehicle.h"
+#include "Engine.SVehicle.VehicleState.h"
 #include "Engine.SoundCue.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Actor.h"
 #include "Engine.Controller.h"
 #include "Engine.RB_ConstraintInstance.h"
-#include "Engine.PlayerController.h"
 #include "Engine.Pawn.h"
 #include "Engine.RB_StayUprightSetup.h"
 #include "Engine.SkeletalMesh.h"
 #include "Engine.PhysicsAsset.h"
+#include "Engine.Actor.TraceHitInfo.h"
+#include "Core.Object.Rotator.h"
+#include "Engine.PlayerController.h"
+#include "Engine.Actor.CollisionImpactData.h"
 #include "Engine.Teleporter.h"
 #include "Engine.HUD.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -36,7 +41,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, RadialImpulseScaling, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AngErrorAccumulator, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.SVehicle.VehicleState' for the property named 'VState'!
+		ADD_STRUCT(::NonArithmeticProperty<VehicleState>, VState, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DriverViewYaw, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DriverViewPitch, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CamDist, 0xFFFFFFFF)
@@ -187,18 +192,14 @@ void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void AddVelocity(Vector NewVelocity, Vector HitLocation, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo)
+		void AddVelocity(Vector NewVelocity, Vector HitLocation, ScriptClass* DamageType, TraceHitInfo HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.AddVelocity");
 			byte* params = (byte*)malloc(56);
 			*(Vector*)params = NewVelocity;
 			*(Vector*)(params + 12) = HitLocation;
 			*(ScriptClass**)(params + 24) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 28) = HitInfo;
+			*(TraceHitInfo*)(params + 28) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -298,9 +299,7 @@ void**)(params + 28) = HitInfo;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* HitComponent, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComponent, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
-void*& RigidCollisionData, int ContactIndex)
+void* OtherComponent, CollisionImpactData& RigidCollisionData, int ContactIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.RigidBodyCollision");
 			byte* params = (byte*)malloc(48);
@@ -310,14 +309,10 @@ void**)params = HitComponent;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)(params + 4) = OtherComponent;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
-void**)(params + 8) = RigidCollisionData;
+			*(CollisionImpactData*)(params + 8) = RigidCollisionData;
 			*(int*)(params + 44) = ContactIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			RigidCollisionData = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
-void**)(params + 8);
+			RigidCollisionData = *(CollisionImpactData*)(params + 8);
 			free(params);
 		}
 		void SuspensionHeavyShift(float Delta)

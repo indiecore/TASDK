@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Color.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Engine.PlayerController.h"
 #include "Engine.HUD.h"
@@ -28,19 +29,15 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsPartiallyUnique, 0x4)
 		ADD_VAR(::IntProperty, FontSize, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PosY, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'DrawColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, DrawColor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsConsoleMessage, 0x8)
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* GetConsoleColor(class PlayerReplicationInfo* RelatedPRI)
+		Color GetConsoleColor(class PlayerReplicationInfo* RelatedPRI)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalMessage.GetConsoleColor");
 			byte* params = (byte*)malloc(8);
 			*(class PlayerReplicationInfo**)params = RelatedPRI;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 4);
+			auto returnVal = *(Color*)(params + 4);
 			free(params);
 			return returnVal;
 		}
@@ -83,9 +80,7 @@ void**)(params + 4);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		Color GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalMessage.GetColor");
 			byte* params = (byte*)malloc(20);
@@ -94,9 +89,7 @@ void* GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI, class Player
 			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
 			*(class Object**)(params + 12) = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 16);
+			auto returnVal = *(Color*)(params + 16);
 			free(params);
 			return returnVal;
 		}

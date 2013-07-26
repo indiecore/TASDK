@@ -1,9 +1,15 @@
 #pragma once
+#include "Core.Object.Vector2D.h"
 #include "Engine.Pawn.h"
+#include "Engine.PostProcessVolume.PostProcessSettings.h"
 #include "GameFramework.GameCameraBase.h"
-#include "Engine.Actor.h"
-#include "GameFramework.GameThirdPersonCameraMode.h"
+#include "Core.Object.Vector.h"
 #include "GameFramework.GamePlayerCamera.h"
+#include "Core.Object.Rotator.h"
+#include "GameFramework.GameThirdPersonCamera.CamFocusPointParams.h"
+#include "GameFramework.GameThirdPersonCameraMode.h"
+#include "Engine.Camera.TViewTarget.h"
+#include "Engine.Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameThirdPersonCamera." #y); \
@@ -47,7 +53,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDoingACameraTurn, 0x4)
 		ADD_VAR(::BoolProperty, bFocusPointSuccessful, 0x2)
 		ADD_VAR(::BoolProperty, bFocusPointSet, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameThirdPersonCamera.CamFocusPointParams' for the property named 'FocusPoint'!
+		ADD_STRUCT(::NonArithmeticProperty<CamFocusPointParams>, FocusPoint, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, LastFocusPointLoc, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, ActualFocusPointWorldLoc, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastFocusChangeTime, 0xFFFFFFFF)
@@ -104,22 +110,16 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void UpdateCamera(class Pawn* P, class GamePlayerCamera* CameraActor, float DeltaTime, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void*& OutVT)
+		void UpdateCamera(class Pawn* P, class GamePlayerCamera* CameraActor, float DeltaTime, TViewTarget& OutVT)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCamera.UpdateCamera");
 			byte* params = (byte*)malloc(56);
 			*(class Pawn**)params = P;
 			*(class GamePlayerCamera**)(params + 4) = CameraActor;
 			*(float*)(params + 8) = DeltaTime;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)(params + 12) = OutVT;
+			*(TViewTarget*)(params + 12) = OutVT;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutVT = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)(params + 12);
+			OutVT = *(TViewTarget*)(params + 12);
 			free(params);
 		}
 		void UpdateCameraMode(class Pawn* P)
@@ -130,22 +130,16 @@ void**)(params + 12);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void PlayerUpdateCamera(class Pawn* P, class GamePlayerCamera* CameraActor, float DeltaTime, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void*& OutVT)
+		void PlayerUpdateCamera(class Pawn* P, class GamePlayerCamera* CameraActor, float DeltaTime, TViewTarget& OutVT)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCamera.PlayerUpdateCamera");
 			byte* params = (byte*)malloc(56);
 			*(class Pawn**)params = P;
 			*(class GamePlayerCamera**)(params + 4) = CameraActor;
 			*(float*)(params + 8) = DeltaTime;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)(params + 12) = OutVT;
+			*(TViewTarget*)(params + 12) = OutVT;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutVT = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)(params + 12);
+			OutVT = *(TViewTarget*)(params + 12);
 			free(params);
 		}
 		void BeginTurn(int StartAngle, int EndAngle, float TimeSec, float DelaySec, bool bAlignTargetWhenFinished)
@@ -173,21 +167,13 @@ void**)(params + 12);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetFocusOnLoc(Vector FocusWorldLoc, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* InterpSpeedRange, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* InFocusFOV, float CameraFOV, bool bAlwaysFocus, bool bAdjustCamera, bool bIgnoreTrace, float FocusPitchOffsetDeg)
+		void SetFocusOnLoc(Vector FocusWorldLoc, Vector2D InterpSpeedRange, Vector2D InFocusFOV, float CameraFOV, bool bAlwaysFocus, bool bAdjustCamera, bool bIgnoreTrace, float FocusPitchOffsetDeg)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCamera.SetFocusOnLoc");
 			byte* params = (byte*)malloc(48);
 			*(Vector*)params = FocusWorldLoc;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 12) = InterpSpeedRange;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 20) = InFocusFOV;
+			*(Vector2D*)(params + 12) = InterpSpeedRange;
+			*(Vector2D*)(params + 20) = InFocusFOV;
 			*(float*)(params + 28) = CameraFOV;
 			*(bool*)(params + 32) = bAlwaysFocus;
 			*(bool*)(params + 36) = bAdjustCamera;
@@ -196,22 +182,14 @@ void**)(params + 20) = InFocusFOV;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetFocusOnActor(class Actor* FocusActor, ScriptName FocusBoneName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* InterpSpeedRange, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* InFocusFOV, float CameraFOV, bool bAlwaysFocus, bool bAdjustCamera, bool bIgnoreTrace, float FocusPitchOffsetDeg)
+		void SetFocusOnActor(class Actor* FocusActor, ScriptName FocusBoneName, Vector2D InterpSpeedRange, Vector2D InFocusFOV, float CameraFOV, bool bAlwaysFocus, bool bAdjustCamera, bool bIgnoreTrace, float FocusPitchOffsetDeg)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCamera.SetFocusOnActor");
 			byte* params = (byte*)malloc(48);
 			*(class Actor**)params = FocusActor;
 			*(ScriptName*)(params + 4) = FocusBoneName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 12) = InterpSpeedRange;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 20) = InFocusFOV;
+			*(Vector2D*)(params + 12) = InterpSpeedRange;
+			*(Vector2D*)(params + 20) = InFocusFOV;
 			*(float*)(params + 28) = CameraFOV;
 			*(bool*)(params + 32) = bAlwaysFocus;
 			*(bool*)(params + 36) = bAdjustCamera;
@@ -293,19 +271,13 @@ void**)(params + 20) = InFocusFOV;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ModifyPostProcessSettings(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
-void*& PP)
+		void ModifyPostProcessSettings(PostProcessSettings& PP)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCamera.ModifyPostProcessSettings");
 			byte* params = (byte*)malloc(220);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
-void**)params = PP;
+			*(PostProcessSettings*)params = PP;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			PP = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
-void**)params;
+			PP = *(PostProcessSettings*)params;
 			free(params);
 		}
 		void ResetInterpolation()

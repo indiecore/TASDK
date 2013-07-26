@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleVelocityBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleVelocityInheritParent." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class ParticleModuleVelocityInheritParent : public ParticleModuleVelocityBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'Scale'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, Scale, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

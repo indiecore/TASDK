@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.SkelControl_CCD_IK.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrSkelControlFootPlacement_CCD." #y); \

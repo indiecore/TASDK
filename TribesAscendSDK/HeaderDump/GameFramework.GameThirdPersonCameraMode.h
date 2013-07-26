@@ -1,8 +1,14 @@
 #pragma once
 #include "Engine.Actor.h"
 #include "Core.Object.h"
+#include "GameFramework.GameThirdPersonCameraMode.ViewOffsetData.h"
+#include "Engine.Camera.TViewTarget.h"
 #include "GameFramework.GameThirdPersonCamera.h"
 #include "Engine.Pawn.h"
+#include "Core.Object.Vector2D.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
+#include "Engine.PostProcessVolume.PostProcessSettings.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameThirdPersonCameraMode." #y); \
@@ -30,8 +36,8 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, CurrentViewportType, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OffsetAdjustmentInterpSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ViewOffsetInterp, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'DOF_RadiusDistRange'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'DOF_RadiusRange'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, DOF_RadiusDistRange, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, DOF_RadiusRange, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DOF_RadiusFalloff, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, DOFTraceExtent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DOFDistanceInterpSpeed, 0xFFFFFFFF)
@@ -42,8 +48,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DOF_FocusInnerRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DOF_BlurKernelSize, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DOF_FalloffExponent, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameThirdPersonCameraMode.ViewOffsetData' for the property named 'ViewOffset_ViewportAdjustments'!
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameThirdPersonCameraMode.ViewOffsetData' for the property named 'ViewOffset'!
+		ADD_STRUCT(::NonArithmeticProperty<ViewOffsetData>, ViewOffset_ViewportAdjustments, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ViewOffsetData>, ViewOffset, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, TargetRelativeCameraOriginOffset, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, WorstLocOffset, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, LastRunOffset, 0xFFFFFFFF)
@@ -137,16 +143,12 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		Vector GetCameraWorstCaseLoc(class Pawn* TargetPawn, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void* CurrentViewTarget)
+		Vector GetCameraWorstCaseLoc(class Pawn* TargetPawn, TViewTarget CurrentViewTarget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.GetCameraWorstCaseLoc");
 			byte* params = (byte*)malloc(60);
 			*(class Pawn**)params = TargetPawn;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)(params + 4) = CurrentViewTarget;
+			*(TViewTarget*)(params + 4) = CurrentViewTarget;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Vector*)(params + 48);
 			free(params);
@@ -189,50 +191,32 @@ void**)(params + 4) = CurrentViewTarget;
 			free(params);
 			return returnVal;
 		}
-		void UpdatePostProcess(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void*& VT, float DeltaTime)
+		void UpdatePostProcess(TViewTarget& VT, float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.UpdatePostProcess");
 			byte* params = (byte*)malloc(48);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params = VT;
+			*(TViewTarget*)params = VT;
 			*(float*)(params + 44) = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			VT = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params;
+			VT = *(TViewTarget*)params;
 			free(params);
 		}
-		void ModifyPostProcessSettings(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
-void*& PP)
+		void ModifyPostProcessSettings(PostProcessSettings& PP)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.ModifyPostProcessSettings");
 			byte* params = (byte*)malloc(220);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
-void**)params = PP;
+			*(PostProcessSettings*)params = PP;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			PP = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings'!
-void**)params;
+			PP = *(PostProcessSettings*)params;
 			free(params);
 		}
-		void SetViewOffset(
-// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameThirdPersonCameraMode.ViewOffsetData'!
-void*& NewViewOffset)
+		void SetViewOffset(ViewOffsetData& NewViewOffset)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameThirdPersonCameraMode.SetViewOffset");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameThirdPersonCameraMode.ViewOffsetData'!
-void**)params = NewViewOffset;
+			*(ViewOffsetData*)params = NewViewOffset;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			NewViewOffset = *(
-// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameThirdPersonCameraMode.ViewOffsetData'!
-void**)params;
+			NewViewOffset = *(ViewOffsetData*)params;
 			free(params);
 		}
 	};

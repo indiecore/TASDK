@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.Object.h"
 #include "IpDrv.WebConnection.h"
+#include "Core.Object.Map_Mirror.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.WebResponse." #y); \
@@ -29,7 +30,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bSentText, 0x1)
 		ADD_VAR(::StrProperty, CharSet, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, IncludePath, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'ReplacementMap'!
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, ReplacementMap, 0xFFFFFFFF)
 		void Subst(ScriptArray<wchar_t> Variable, ScriptArray<wchar_t> Value, bool bClear)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.Subst");

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.UIDataStore_GameResource.h"
+#include "Core.Object.MultiMap_Mirror.h"
 #include "Engine.LocalPlayer.h"
 #include "Engine.UIDataProvider.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -19,7 +20,7 @@ namespace UnrealScript
 	class UIDataStore_MenuItems : public UIDataStore_GameResource
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.MultiMap_Mirror' for the property named 'OptionProviders'!
+		ADD_STRUCT(::NonArithmeticProperty<MultiMap_Mirror>, OptionProviders, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, CurrentGameSettingsTag, 0xFFFFFFFF)
 		void ClearSet(ScriptName SetName)
 		{

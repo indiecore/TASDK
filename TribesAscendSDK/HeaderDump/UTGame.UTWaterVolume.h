@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Engine.WaterVolume.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.Actor.h"

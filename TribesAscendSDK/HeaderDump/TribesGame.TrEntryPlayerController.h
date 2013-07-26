@@ -2,8 +2,11 @@
 #include "TribesGame.TrPlayerController.h"
 #include "Engine.LocalPlayer.h"
 #include "TribesGame.TrPaperDollMainMenu.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.Vector.h"
 #include "TribesGame.TrMainMenuContentData.h"
 #include "Engine.PostProcessChain.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrEntryPlayerController." #y); \
@@ -201,31 +204,23 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnFriendInviteReceived(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* RequestingPlayer, ScriptArray<wchar_t> RequestingNick, ScriptArray<wchar_t> Message)
+		void OnFriendInviteReceived(byte LocalUserNum, UniqueNetId RequestingPlayer, ScriptArray<wchar_t> RequestingNick, ScriptArray<wchar_t> Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.OnFriendInviteReceived");
 			byte* params = (byte*)malloc(33);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = RequestingPlayer;
+			*(UniqueNetId*)(params + 4) = RequestingPlayer;
 			*(ScriptArray<wchar_t>*)(params + 12) = RequestingNick;
 			*(ScriptArray<wchar_t>*)(params + 24) = Message;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnFriendMessageReceived(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* SendingPlayer, ScriptArray<wchar_t> SendingNick, ScriptArray<wchar_t> Message)
+		void OnFriendMessageReceived(byte LocalUserNum, UniqueNetId SendingPlayer, ScriptArray<wchar_t> SendingNick, ScriptArray<wchar_t> Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryPlayerController.OnFriendMessageReceived");
 			byte* params = (byte*)malloc(33);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = SendingPlayer;
+			*(UniqueNetId*)(params + 4) = SendingPlayer;
 			*(ScriptArray<wchar_t>*)(params + 12) = SendingNick;
 			*(ScriptArray<wchar_t>*)(params + 24) = Message;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);

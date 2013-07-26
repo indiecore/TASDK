@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.GameInfo.h"
 #include "Engine.PlayerController.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.PlayerCollectorGame." #y); \
@@ -14,17 +15,13 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::StrProperty, URLToLoad, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumberOfClientsToWaitFor, 0xFFFFFFFF)
-		class PlayerController* Login(ScriptArray<wchar_t> Portal, ScriptArray<wchar_t> Options, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* UniqueId, ScriptArray<wchar_t>& ErrorMessage)
+		class PlayerController* Login(ScriptArray<wchar_t> Portal, ScriptArray<wchar_t> Options, UniqueNetId UniqueId, ScriptArray<wchar_t>& ErrorMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.PlayerCollectorGame.Login");
 			byte* params = (byte*)malloc(48);
 			*(ScriptArray<wchar_t>*)params = Portal;
 			*(ScriptArray<wchar_t>*)(params + 12) = Options;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 24) = UniqueId;
+			*(UniqueNetId*)(params + 24) = UniqueId;
 			*(ScriptArray<wchar_t>*)(params + 32) = ErrorMessage;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			ErrorMessage = *(ScriptArray<wchar_t>*)(params + 32);

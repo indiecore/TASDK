@@ -1,7 +1,8 @@
 #pragma once
 #include "GFxUI.GFxObject.h"
-#include "UTGame.UTMapInfo.h"
 #include "Engine.WorldInfo.h"
+#include "Core.Object.Matrix.h"
+#include "UTGame.UTMapInfo.h"
 #include "UTGame.GFxMinimapHud.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -32,7 +33,7 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, IconsFlagMC)
 		ADD_OBJECT(GFxObject, IconsBlueMC)
 		ADD_OBJECT(GFxObject, IconsRedMC)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'IconMatrix'!
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, IconMatrix, 0xFFFFFFFF)
 		ADD_OBJECT(GFxObject, MapMC)
 		ADD_OBJECT(GFxObject, CompassIcon)
 		ADD_OBJECT(GFxObject, PlayerIcon)

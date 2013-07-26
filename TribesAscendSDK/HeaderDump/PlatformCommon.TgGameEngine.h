@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.GameEngine.h"
 #include "Engine.PlayerController.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty PlatformCommon.TgGameEngine." #y); \
@@ -12,17 +14,13 @@ namespace UnrealScript
 	class TgGameEngine : public GameEngine
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'pEventMarshal'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'pOutgoingMarshal'!
-		void OnMarshalEvent(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer'!
-void* pMarEvent)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, pEventMarshal, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, pOutgoingMarshal, 0xFFFFFFFF)
+		void OnMarshalEvent(Pointer pMarEvent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.OnMarshalEvent");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer'!
-void**)params = pMarEvent;
+			*(Pointer*)params = pMarEvent;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -74,15 +72,11 @@ void**)params = pMarEvent;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.ClearMarshal");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SendMarshal(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* qwPlayerId, bool bLowPriority)
+		void SendMarshal(UniqueNetId qwPlayerId, bool bLowPriority)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgGameEngine.SendMarshal");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = qwPlayerId;
+			*(UniqueNetId*)params = qwPlayerId;
 			*(bool*)(params + 8) = bLowPriority;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

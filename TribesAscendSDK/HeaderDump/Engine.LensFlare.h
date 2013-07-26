@@ -1,7 +1,11 @@
 #pragma once
+#include "Engine.LensFlare.LensFlareElement.h"
 #include "Core.Object.h"
 #include "Engine.Texture2D.h"
 #include "Engine.InterpCurveEdSetup.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.Box.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.StaticMesh.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -31,11 +35,11 @@ namespace UnrealScript
 		ADD_STRUCT(::RotatorProperty, ThumbnailAngle, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ReflectionCount, 0xFFFFFFFF)
 		ADD_OBJECT(InterpCurveEdSetup, CurveEdSetup)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box' for the property named 'FixedRelativeBoundingBox'!
+		ADD_STRUCT(::NonArithmeticProperty<Box>, FixedRelativeBoundingBox, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, ThumbnailImageOutOfDate, 0x4)
 		ADD_VAR(::BoolProperty, bRenderDebugLines, 0x2)
 		ADD_VAR(::BoolProperty, bUseFixedRelativeBoundingBox, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'ScreenPercentageMap'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, ScreenPercentageMap, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Radius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConeFudgeFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InnerCone, 0xFFFFFFFF)
@@ -43,7 +47,7 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, ReflectionsDPG, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, SourceDPG, 0xFFFFFFFF)
 		ADD_OBJECT(StaticMesh, SourceMesh)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.LensFlare.LensFlareElement' for the property named 'SourceElement'!
+		ADD_STRUCT(::NonArithmeticProperty<LensFlareElement>, SourceElement, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

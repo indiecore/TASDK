@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.Object.h"
 #include "Engine.SkeletalMesh.h"
+#include "Core.Object.Array_Mirror.h"
 #include "Engine.MorphTarget.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -19,7 +20,7 @@ namespace UnrealScript
 	class MorphTargetSet : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Array_Mirror' for the property named 'RawWedgePointIndices'!
+		ADD_STRUCT(::NonArithmeticProperty<Array_Mirror>, RawWedgePointIndices, 0xFFFFFFFF)
 		ADD_OBJECT(SkeletalMesh, BaseSkelMesh)
 		class MorphTarget* FindMorphTarget(ScriptName MorphTargetName)
 		{

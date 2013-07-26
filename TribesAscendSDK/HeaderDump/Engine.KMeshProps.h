@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine.KMeshProps.KAggregateGeom.h"
 #include "Core.Object.h"
+#include "Core.Object.Vector.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.KMeshProps." #y); \
@@ -11,7 +13,7 @@ namespace UnrealScript
 	class KMeshProps : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.KMeshProps.KAggregateGeom' for the property named 'AggGeom'!
+		ADD_STRUCT(::NonArithmeticProperty<KAggregateGeom>, AggGeom, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, COMNudge, 0xFFFFFFFF)
 	};
 }

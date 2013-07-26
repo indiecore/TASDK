@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleSizeBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleSizeMultiplyLife." #y); \
@@ -20,7 +21,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, MultiplyZ, 0x4)
 		ADD_VAR(::BoolProperty, MultiplyY, 0x2)
 		ADD_VAR(::BoolProperty, MultiplyX, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'LifeMultiplier'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, LifeMultiplier, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

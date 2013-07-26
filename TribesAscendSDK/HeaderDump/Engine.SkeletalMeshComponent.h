@@ -1,19 +1,28 @@
 #pragma once
-#include "Engine.SkeletalMeshSocket.h"
 #include "Engine.SoundCue.h"
 #include "Engine.MeshComponent.h"
+#include "Core.Object.Color.h"
 #include "Engine.PhysicsAsset.h"
 #include "Engine.AnimNode.h"
 #include "Engine.PhysicsAssetInstance.h"
 #include "Engine.SkeletalMesh.h"
-#include "Engine.AnimSequence.h"
 #include "Engine.AnimTree.h"
-#include "Engine.Material.h"
-#include "Engine.MorphTarget.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.FaceFXAnimSet.h"
 #include "Engine.SkelControlBase.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
+#include "Engine.PrimitiveComponent.RBCollisionChannelContainer.h"
+#include "Engine.Material.h"
+#include "Core.Object.BoneAtom.h"
+#include "Engine.SkeletalMeshSocket.h"
+#include "Core.Object.Matrix.h"
+#include "Engine.AnimSequence.h"
+#include "Engine.MorphTarget.h"
 #include "Engine.MorphNodeBase.h"
+#include "Core.Object.Quat.h"
 #include "Engine.RB_BodyInstance.h"
+#include "Engine.SkeletalMeshComponent.BonePair.h"
 #include "Engine.AnimNotify_ForceField.h"
 #include "Engine.AnimNotify_PlayParticleEffect.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -44,11 +53,11 @@ namespace UnrealScript
 		ADD_OBJECT(PhysicsAsset, PhysicsAsset)
 		ADD_OBJECT(SkeletalMesh, SkeletalMesh)
 		ADD_OBJECT(AnimTree, AnimTreeTemplate)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ApexClothing'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ApexClothing, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PhysicsWeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, GlobalAnimRateScale, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'MeshObject'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'WireframeColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, MeshObject, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, WireframeColor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LowUpdateFrameRate, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bShouldIgnoreParentAnimComponent, 0x1)
 		ADD_VAR(::IntProperty, ForcedLodModel, 0xFFFFFFFF)
@@ -135,14 +144,14 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, MaxPosDampRange, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, MinPosDampScale, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, MaxPosDampScale, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ClothSim'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ClothSim, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SceneIndex, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumClothMeshVerts, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumClothMeshIndices, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumClothMeshParentIndices, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ClothDirtyBufferFlag, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ClothRBChannel, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'ClothRBCollideWithChannels'!
+		ADD_STRUCT(::NonArithmeticProperty<RBCollisionChannelContainer>, ClothRBCollideWithChannels, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ClothForceScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ClothImpulseScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ClothAttachmentTearFactor, 0xFFFFFFFF)
@@ -150,12 +159,12 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MinDistanceForClothReset, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, LastClothLocation, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ApexClothingRBChannel, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'ApexClothingRBCollideWithChannels'!
+		ADD_STRUCT(::NonArithmeticProperty<RBCollisionChannelContainer>, ApexClothingRBCollideWithChannels, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bAutoFreezeApexClothingWhenNotRendered, 0x1)
 		ADD_STRUCT(::VectorProperty, WindVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WindVelocityBlendTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSkipInitClothing, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SoftBodySim'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SoftBodySim, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SoftBodySceneIndex, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnableSoftBodySimulation, 0x1)
 		ADD_VAR(::IntProperty, NumSoftBodyTetraVerts, 0xFFFFFFFF)
@@ -166,10 +175,10 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bSoftBodyAwakeOnStartup, 0x4)
 		ADD_VAR(::BoolProperty, bSoftBodyUseCompartment, 0x8)
 		ADD_VAR(::ByteProperty, SoftBodyRBChannel, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'SoftBodyRBCollideWithChannels'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SoftBodyASVPlane'!
+		ADD_STRUCT(::NonArithmeticProperty<RBCollisionChannelContainer>, SoftBodyRBCollideWithChannels, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SoftBodyASVPlane, 0xFFFFFFFF)
 		ADD_OBJECT(Material, LimitMaterial)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoneAtom' for the property named 'RootMotionDelta'!
+		ADD_STRUCT(::NonArithmeticProperty<BoneAtom>, RootMotionDelta, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, RootMotionVelocity, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, RootBoneTranslation, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, RootMotionAccelScale, 0xFFFFFFFF)
@@ -180,8 +189,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, bRMMOneFrameDelay, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RootMotionRotationMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, FaceFXBlendMode, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'FaceFXActorInstance'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoneAtom' for the property named 'LocalToWorldBoneAtom'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, FaceFXActorInstance, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<BoneAtom>, LocalToWorldBoneAtom, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ProgressiveDrawingFraction, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, CustomSortAlternateIndexMode, 0xFFFFFFFF)
 		void AttachComponent(
@@ -305,16 +314,12 @@ void**)(params + 4) = OutComponent;
 void**)(params + 4);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* GetTransformMatrix()
+		Matrix GetTransformMatrix()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetTransformMatrix");
 			byte* params = (byte*)malloc(64);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params;
+			auto returnVal = *(Matrix*)params;
 			free(params);
 			return returnVal;
 		}
@@ -774,18 +779,14 @@ void**)params;
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* GetBoneQuaternion(ScriptName BoneName, int Space)
+		Quat GetBoneQuaternion(ScriptName BoneName, int Space)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetBoneQuaternion");
 			byte* params = (byte*)malloc(28);
 			*(ScriptName*)params = BoneName;
 			*(int*)(params + 8) = Space;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 16);
+			auto returnVal = *(Quat*)(params + 16);
 			free(params);
 			return returnVal;
 		}
@@ -820,17 +821,13 @@ void**)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* GetBoneMatrix(int BoneIndex)
+		Matrix GetBoneMatrix(int BoneIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetBoneMatrix");
 			byte* params = (byte*)malloc(68);
 			*(int*)params = BoneIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)(params + 16);
+			auto returnVal = *(Matrix*)(params + 16);
 			free(params);
 			return returnVal;
 		}
@@ -1073,15 +1070,11 @@ void**)(params + 20);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		int FindInstanceVertexweightBonePair(
-// WARNING: Unknown structure type 'ScriptStruct Engine.SkeletalMeshComponent.BonePair'!
-void* Bones)
+		int FindInstanceVertexweightBonePair(BonePair Bones)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.FindInstanceVertexweightBonePair");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.SkeletalMeshComponent.BonePair'!
-void**)params = Bones;
+			*(BonePair*)params = Bones;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 16);
 			free(params);

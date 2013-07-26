@@ -1,6 +1,10 @@
 #pragma once
 #include "Core.Object.h"
 #include "Engine.InterpCurveEdSetup.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.Box.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Color.h"
 #include "Engine.Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -48,20 +52,20 @@ namespace UnrealScript
 		ADD_OBJECT(InterpCurveEdSetup, CurveEdSetup)
 		ADD_VAR(::FloatProperty, LODDistanceCheckTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, EditorLODSetting, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box' for the property named 'FixedRelativeBoundingBox'!
+		ADD_STRUCT(::NonArithmeticProperty<Box>, FixedRelativeBoundingBox, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SecondsBeforeInactive, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, FloorMesh, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, FloorPosition, 0xFFFFFFFF)
 		ADD_STRUCT(::RotatorProperty, FloorRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FloorScale, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, FloorScale3D, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BackgroundColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, BackgroundColor, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, ThumbnailImage)
 		ADD_VAR(::FloatProperty, Delay, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DelayLow, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, MacroUVPosition, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MacroUVRadius, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box' for the property named 'CustomOcclusionBounds'!
+		ADD_STRUCT(::NonArithmeticProperty<Box>, CustomOcclusionBounds, 0xFFFFFFFF)
 		byte GetCurrentLODMethod()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystem.GetCurrentLODMethod");

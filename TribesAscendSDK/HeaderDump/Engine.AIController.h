@@ -3,7 +3,9 @@
 #include "Engine.Controller.h"
 #include "Engine.SeqAct_AIMoveToActor.h"
 #include "Engine.Route.h"
+#include "Core.Object.Vector.h"
 #include "Engine.HUD.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.Weapon.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

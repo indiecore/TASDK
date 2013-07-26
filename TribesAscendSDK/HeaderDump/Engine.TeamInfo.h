@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ReplicationInfo.h"
+#include "Core.Object.Color.h"
 #include "Engine.Controller.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -20,7 +21,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, TeamIndex, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Score, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'TeamColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, TeamColor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Size, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, TeamName, 0xFFFFFFFF)
 		ScriptArray<wchar_t> GetHumanReadableName()

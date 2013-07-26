@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Core.Interface.h"
 #include "Engine.ParticleSystem.h"
 #include "TribesGame.TrTripActor.h"

@@ -1,5 +1,7 @@
 #pragma once
 #include "Core.Interface.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
+#include "Engine.OnlineSubsystem.OnlinePartyMember.h"
 namespace UnrealScript
 {
 	class OnlinePartyChatInterface : public Interface
@@ -23,16 +25,12 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnPartyMembersInfoChanged(ScriptArray<wchar_t> PlayerName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID, int CustomData1, int CustomData2, int CustomData3, int CustomData4)
+		void OnPartyMembersInfoChanged(ScriptArray<wchar_t> PlayerName, UniqueNetId PlayerID, int CustomData1, int CustomData2, int CustomData3, int CustomData4)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.OnPartyMembersInfoChanged");
 			byte* params = (byte*)malloc(36);
 			*(ScriptArray<wchar_t>*)params = PlayerName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 12) = PlayerID;
+			*(UniqueNetId*)(params + 12) = PlayerID;
 			*(int*)(params + 20) = CustomData1;
 			*(int*)(params + 24) = CustomData2;
 			*(int*)(params + 28) = CustomData3;
@@ -40,17 +38,13 @@ void**)(params + 12) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnPartyMemberListChanged(bool bJoinedOrLeft, ScriptArray<wchar_t> PlayerName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID)
+		void OnPartyMemberListChanged(bool bJoinedOrLeft, ScriptArray<wchar_t> PlayerName, UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.OnPartyMemberListChanged");
 			byte* params = (byte*)malloc(24);
 			*(bool*)params = bJoinedOrLeft;
 			*(ScriptArray<wchar_t>*)(params + 4) = PlayerName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 16) = PlayerID;
+			*(UniqueNetId*)(params + 16) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -97,24 +91,14 @@ void**)params;
 			free(params);
 			return returnVal;
 		}
-		bool GetPartyMemberInformation(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* MemberId, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlinePartyMember'!
-void*& PartyMember)
+		bool GetPartyMemberInformation(UniqueNetId MemberId, OnlinePartyMember& PartyMember)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.GetPartyMemberInformation");
 			byte* params = (byte*)malloc(68);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = MemberId;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlinePartyMember'!
-void**)(params + 8) = PartyMember;
+			*(UniqueNetId*)params = MemberId;
+			*(OnlinePartyMember*)(params + 8) = PartyMember;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			PartyMember = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlinePartyMember'!
-void**)(params + 8);
+			PartyMember = *(OnlinePartyMember*)(params + 8);
 			auto returnVal = *(bool*)(params + 64);
 			free(params);
 			return returnVal;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.ApexGenericAsset.h"
 #include "Engine.ApexAsset.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ApexClothingAsset." #y); \
@@ -37,7 +38,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bFallbackSkinning, 0x2)
 		ADD_VAR(::BoolProperty, bUseHardwareCloth, 0x1)
 		ADD_OBJECT(ApexGenericAsset, ApexClothingLibrary)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'MApexAsset'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, MApexAsset, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

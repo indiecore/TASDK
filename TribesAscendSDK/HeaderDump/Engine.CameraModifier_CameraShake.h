@@ -1,7 +1,11 @@
 #pragma once
 #include "Engine.CameraModifier.h"
+#include "Engine.CameraShake.FOscillator.h"
+#include "Engine.CameraModifier_CameraShake.CameraShakeInstance.h"
 #include "Engine.CameraShake.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.Camera.h"
+#include "Core.Object.TPOV.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CameraModifier_CameraShake." #y); \
@@ -14,19 +18,13 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, SplitScreenShakeScale, 0xFFFFFFFF)
-		float InitializeOffset(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CameraShake.FOscillator'!
-void*& Param)
+		float InitializeOffset(FOscillator& Param)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier_CameraShake.InitializeOffset");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CameraShake.FOscillator'!
-void**)params = Param;
+			*(FOscillator*)params = Param;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Param = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CameraShake.FOscillator'!
-void**)params;
+			Param = *(FOscillator*)params;
 			auto returnVal = *(float*)(params + 12);
 			free(params);
 			return returnVal;
@@ -40,9 +38,7 @@ void**)params;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Engine.CameraModifier_CameraShake.CameraShakeInstance'!
-void* InitializeShake(class CameraShake* NewShake, float Scale, byte PlaySpace, Rotator UserPlaySpaceRot)
+		CameraShakeInstance InitializeShake(class CameraShake* NewShake, float Scale, byte PlaySpace, Rotator UserPlaySpaceRot)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier_CameraShake.InitializeShake");
 			byte* params = (byte*)malloc(165);
@@ -51,9 +47,7 @@ void* InitializeShake(class CameraShake* NewShake, float Scale, byte PlaySpace, 
 			*(params + 8) = PlaySpace;
 			*(Rotator*)(params + 12) = UserPlaySpaceRot;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CameraModifier_CameraShake.CameraShakeInstance'!
-void**)(params + 32);
+			auto returnVal = *(CameraShakeInstance*)(params + 32);
 			free(params);
 			return returnVal;
 		}
@@ -81,45 +75,27 @@ void**)(params + 32);
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier_CameraShake.RemoveAllCameraShakes");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void UpdateCameraShake(float DeltaTime, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.CameraModifier_CameraShake.CameraShakeInstance'!
-void*& Shake, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void*& OutPOV)
+		void UpdateCameraShake(float DeltaTime, CameraShakeInstance& Shake, TPOV& OutPOV)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier_CameraShake.UpdateCameraShake");
 			byte* params = (byte*)malloc(176);
 			*(float*)params = DeltaTime;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CameraModifier_CameraShake.CameraShakeInstance'!
-void**)(params + 16) = Shake;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void**)(params + 160) = OutPOV;
+			*(CameraShakeInstance*)(params + 16) = Shake;
+			*(TPOV*)(params + 160) = OutPOV;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Shake = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.CameraModifier_CameraShake.CameraShakeInstance'!
-void**)(params + 16);
-			OutPOV = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void**)(params + 160);
+			Shake = *(CameraShakeInstance*)(params + 16);
+			OutPOV = *(TPOV*)(params + 160);
 			free(params);
 		}
-		bool ModifyCamera(class Camera* Camera, float DeltaTime, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void*& OutPOV)
+		bool ModifyCamera(class Camera* Camera, float DeltaTime, TPOV& OutPOV)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier_CameraShake.ModifyCamera");
 			byte* params = (byte*)malloc(40);
 			*(class Camera**)params = Camera;
 			*(float*)(params + 4) = DeltaTime;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void**)(params + 8) = OutPOV;
+			*(TPOV*)(params + 8) = OutPOV;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutPOV = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.TPOV'!
-void**)(params + 8);
+			OutPOV = *(TPOV*)(params + 8);
 			auto returnVal = *(bool*)(params + 36);
 			free(params);
 			return returnVal;

@@ -1,13 +1,16 @@
 #pragma once
 #include "GFxUI.GFxObject.h"
 #include "Core.Object.h"
+#include "GFxUI.GFxMoviePlayer.ASValue.h"
 #include "GFxUI.SwfMovie.h"
-#include "Engine.Texture.h"
+#include "Engine.PlayerController.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.TextureRenderTarget2D.h"
 #include "GFxUI.GFxDataStoreSubscriber.h"
-#include "Engine.PlayerController.h"
 #include "Engine.LocalPlayer.h"
+#include "Core.Object.Matrix.h"
 #include "Engine.GameViewportClient.h"
+#include "Engine.Texture.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GFxUI.GFxMoviePlayer." #y); \
@@ -36,9 +39,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAutoPlay, 0x80)
 		ADD_OBJECT(Object, ExternalInterface)
 		ADD_VAR(::BoolProperty, bPauseGameWhileActive, 0x100)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'pMovie'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'pCaptureKeys'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'pFocusIgnoreKeys'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, pMovie, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, pCaptureKeys, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, pFocusIgnoreKeys, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NextASUObject, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bMovieIsOpen, 0x1)
 		ADD_VAR(::BoolProperty, bDisplayWithHudOff, 0x2)
@@ -202,9 +205,7 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void* Invoke(ScriptArray<wchar_t> method, 
+		ASValue Invoke(ScriptArray<wchar_t> method, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void* args)
 		{
@@ -215,9 +216,7 @@ void* args)
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 12) = args;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void**)(params + 24);
+			auto returnVal = *(ASValue*)(params + 24);
 			free(params);
 			return returnVal;
 		}
@@ -426,16 +425,12 @@ void**)(params + 16);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetVariable(ScriptArray<wchar_t> Path, 
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void* Arg)
+		void SetVariable(ScriptArray<wchar_t> Path, ASValue Arg)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetVariable");
 			byte* params = (byte*)malloc(36);
 			*(ScriptArray<wchar_t>*)params = Path;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void**)(params + 12) = Arg;
+			*(ASValue*)(params + 12) = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -480,17 +475,13 @@ void**)(params + 12) = Arg;
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void* GetVariable(ScriptArray<wchar_t> Path)
+		ASValue GetVariable(ScriptArray<wchar_t> Path)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetVariable");
 			byte* params = (byte*)malloc(36);
 			*(ScriptArray<wchar_t>*)params = Path;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void**)(params + 12);
+			auto returnVal = *(ASValue*)(params + 12);
 			free(params);
 			return returnVal;
 		}
@@ -556,34 +547,22 @@ void**)(params + 12);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetPerspective3D(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void*& matPersp)
+		void SetPerspective3D(Matrix& matPersp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetPerspective3D");
 			byte* params = (byte*)malloc(64);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = matPersp;
+			*(Matrix*)params = matPersp;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			matPersp = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params;
+			matPersp = *(Matrix*)params;
 			free(params);
 		}
-		void SetView3D(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void*& matView)
+		void SetView3D(Matrix& matView)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetView3D");
 			byte* params = (byte*)malloc(64);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = matView;
+			*(Matrix*)params = matView;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			matView = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params;
+			matView = *(Matrix*)params;
 			free(params);
 		}
 		void GetVisibleFrameRect(float& x0, float& y0, float& X1, float& Y1)

@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine.UIRoot.UIProviderScriptFieldValue.h"
 #include "Core.Property.h"
 #include "Engine.UIDataProvider.h"
 namespace UnrealScript
@@ -16,20 +17,14 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		bool GetCustomPropertyValue(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void*& PropertyValue, int ArrayIndex)
+		bool GetCustomPropertyValue(UIProviderScriptFieldValue& PropertyValue, int ArrayIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIPropertyDataProvider.GetCustomPropertyValue");
 			byte* params = (byte*)malloc(92);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)params = PropertyValue;
+			*(UIProviderScriptFieldValue*)params = PropertyValue;
 			*(int*)(params + 84) = ArrayIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			PropertyValue = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)params;
+			PropertyValue = *(UIProviderScriptFieldValue*)params;
 			auto returnVal = *(bool*)(params + 88);
 			free(params);
 			return returnVal;

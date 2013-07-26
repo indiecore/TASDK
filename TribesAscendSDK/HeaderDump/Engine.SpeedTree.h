@@ -1,6 +1,9 @@
 #pragma once
 #include "Core.Object.h"
 #include "Engine.MaterialInterface.h"
+#include "Core.Object.Guid.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SpeedTree." #y); \
@@ -24,7 +27,7 @@ namespace UnrealScript
 	class SpeedTree : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'LightingGuid'!
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, LightingGuid, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, WindDirection, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WindStrength, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInterface, BillboardMaterial)
@@ -34,7 +37,7 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInterface, Branch2Material)
 		ADD_OBJECT(MaterialInterface, Branch1Material)
 		ADD_VAR(::FloatProperty, LeafStaticShadowOpacity, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SRH'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SRH, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bLegacySpeedTree, 0x1)
 	};
 }

@@ -1,8 +1,11 @@
 #pragma once
+#include "Engine.Emitter.CheckpointRecord.h"
 #include "Engine.Actor.h"
 #include "Engine.SeqAct_Toggle.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.SeqAct_ParticleEventGenerator.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Color.h"
 #include "Engine.SeqAct_SetParticleSysParam.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -91,16 +94,12 @@ void**)params = FinishedComponent;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetColorParameter(ScriptName ParameterName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* Param)
+		void SetColorParameter(ScriptName ParameterName, Color Param)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.SetColorParameter");
 			byte* params = (byte*)malloc(12);
 			*(ScriptName*)params = ParameterName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 8) = Param;
+			*(Color*)(params + 8) = Param;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -142,34 +141,22 @@ void**)(params + 8) = Param;
 			free(params);
 			return returnVal;
 		}
-		void CreateCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Emitter.CheckpointRecord'!
-void*& Record)
+		void CreateCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.CreateCheckpointRecord");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Emitter.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Emitter.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
-		void ApplyCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Emitter.CheckpointRecord'!
-void*& Record)
+		void ApplyCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Emitter.ApplyCheckpointRecord");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Emitter.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Emitter.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
 		void HideSelf()

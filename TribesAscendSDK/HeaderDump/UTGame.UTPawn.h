@@ -1,24 +1,33 @@
 #pragma once
 #include "Engine.ForceFeedbackWaveform.h"
 #include "UDKBase.UDKPawn.h"
+#include "Engine.SeqAct_ModifyHealth.h"
+#include "Core.Object.Vector.h"
 #include "UTGame.UTAnimBlendByDriving.h"
 #include "UTGame.UTSeqAct_ExitVehicle.h"
 #include "UTGame.UTSeqAct_PlayAnim.h"
 #include "UTGame.UTWeaponAttachment.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.Vehicle.h"
 #include "Engine.AnimNodeBlend.h"
-#include "Engine.Texture.h"
-#include "Engine.SoundCue.h"
+#include "UTGame.UTWeapon.h"
+#include "Engine.UIRoot.TextureCoordinates.h"
 #include "UTGame.UTAnimBlendByVehicle.h"
+#include "Engine.Actor.TraceHitInfo.h"
 #include "Engine.AnimNodeSlot.h"
 #include "Engine.Actor.h"
 #include "UTGame.UTAnimBlendByHoverboarding.h"
+#include "Core.Object.LinearColor.h"
+#include "Engine.Texture.h"
+#include "Engine.SoundCue.h"
 #include "UTGame.UTPlayerController.h"
 #include "Engine.CameraAnim.h"
 #include "Engine.Teleporter.h"
 #include "Engine.Material.h"
 #include "UTGame.UTClientSideWeaponPawn.h"
+#include "UDKBase.UDKPawn.EmoteInfo.h"
 #include "Engine.MaterialInterface.h"
+#include "UDKBase.UDKPawn.DrivenWeaponPawnInfo.h"
 #include "UTGame.UTProjectile.h"
 #include "UTGame.UTPlayerReplicationInfo.h"
 #include "Engine.PhysicsVolume.h"
@@ -28,13 +37,13 @@
 #include "UTGame.UTSeqAct_UseHoverboard.h"
 #include "Engine.Weapon.h"
 #include "Engine.Pawn.h"
+#include "Engine.Actor.ImpactInfo.h"
 #include "Engine.Controller.h"
-#include "Engine.SeqAct_ModifyHealth.h"
 #include "Engine.PlayerController.h"
 #include "UDKBase.UDKCarriedObject.h"
 #include "UTGame.UTGib.h"
 #include "Engine.HUD.h"
-#include "UTGame.UTWeapon.h"
+#include "Engine.Actor.CollisionImpactData.h"
 #include "Engine.SVehicle.h"
 #include "UTGame.UTSeqAct_InfiniteAmmo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -78,7 +87,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bStopDeathCamera, 0x2000)
 		ADD_VAR(::FloatProperty, LastPainSound, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MapSize, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'IconCoords'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, IconCoords, 0xFFFFFFFF)
 		ADD_OBJECT(UTWeaponAttachment, CurrentWeaponAttachment)
 		ADD_OBJECT(ScriptClass, CurrCharClassInfo)
 		ADD_OBJECT(ScriptClass, SoundGroupClass)
@@ -99,9 +108,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bWeaponAttachmentVisible, 0x40000)
 		ADD_VAR(::BoolProperty, bSpawnDone, 0x2)
 		ADD_VAR(::BoolProperty, bSpawnIn, 0x4)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'SpawnProtectionColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, SpawnProtectionColor, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, SpawnSound)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'TranslocateColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, TranslocateColor, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, TeleportSound)
 		ADD_OBJECT(CameraAnim, TransCameraAnim)
 		ADD_OBJECT(ScriptClass, TransInEffects)
@@ -146,7 +155,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, FeignDeathRecoveryStartTime, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, HeadBone, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bKillsAffectHead, 0x400000)
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.DrivenWeaponPawnInfo' for the property named 'LastDrivenWeaponPawn'!
+		ADD_STRUCT(::NonArithmeticProperty<DrivenWeaponPawnInfo>, LastDrivenWeaponPawn, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, m_ClientSideWeaponPawnClass)
 		ADD_OBJECT(UTProjectile, AttachedProj)
 		ADD_VAR(::FloatProperty, AccumulationTime, 0xFFFFFFFF)
@@ -272,18 +281,14 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void RenderMapIcon(class UTMapInfo* MP, class Canvas* Canvas, class UTPlayerController* PlayerOwner, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* FinalColor)
+		void RenderMapIcon(class UTMapInfo* MP, class Canvas* Canvas, class UTPlayerController* PlayerOwner, LinearColor FinalColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.RenderMapIcon");
 			byte* params = (byte*)malloc(28);
 			*(class UTMapInfo**)params = MP;
 			*(class Canvas**)(params + 4) = Canvas;
 			*(class UTPlayerController**)(params + 8) = PlayerOwner;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 12) = FinalColor;
+			*(LinearColor*)(params + 12) = FinalColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -300,15 +305,11 @@ void**)(params + 12) = FinalColor;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.ClearBodyMatColor");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SetBodyMatColor(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* NewBodyMatColor, float NewOverlayDuration)
+		void SetBodyMatColor(LinearColor NewBodyMatColor, float NewOverlayDuration)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.SetBodyMatColor");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)params = NewBodyMatColor;
+			*(LinearColor*)params = NewBodyMatColor;
 			*(float*)(params + 16) = NewOverlayDuration;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -460,15 +461,11 @@ void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void PerformEmoteCommand(
-// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.EmoteInfo'!
-void* EInfo, int PlayerID)
+		void PerformEmoteCommand(EmoteInfo EInfo, int PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PerformEmoteCommand");
 			byte* params = (byte*)malloc(56);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.EmoteInfo'!
-void**)params = EInfo;
+			*(EmoteInfo*)params = EInfo;
 			*(int*)(params + 52) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -562,18 +559,14 @@ void**)params = EInfo;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.Falling");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void AddVelocity(Vector NewVelocity, Vector HitLocation, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo)
+		void AddVelocity(Vector NewVelocity, Vector HitLocation, ScriptClass* DamageType, TraceHitInfo HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.AddVelocity");
 			byte* params = (byte*)malloc(56);
 			*(Vector*)params = NewVelocity;
 			*(Vector*)(params + 12) = HitLocation;
 			*(ScriptClass**)(params + 24) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 28) = HitInfo;
+			*(TraceHitInfo*)(params + 28) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -815,9 +808,7 @@ void**)(params + 28) = HitInfo;
 			free(params);
 			return returnVal;
 		}
-		void AdjustDamage(int& InDamage, Vector& Momentum, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo, class Actor* DamageCauser)
+		void AdjustDamage(int& InDamage, Vector& Momentum, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.AdjustDamage");
 			byte* params = (byte*)malloc(68);
@@ -826,9 +817,7 @@ void* HitInfo, class Actor* DamageCauser)
 			*(class Controller**)(params + 16) = InstigatedBy;
 			*(Vector*)(params + 20) = HitLocation;
 			*(ScriptClass**)(params + 32) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 36) = HitInfo;
+			*(TraceHitInfo*)(params + 36) = HitInfo;
 			*(class Actor**)(params + 64) = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			InDamage = *(int*)params;
@@ -1361,9 +1350,7 @@ void**)(params + 36) = HitInfo;
 			free(params);
 			return returnVal;
 		}
-		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.TakeDamage");
 			byte* params = (byte*)malloc(68);
@@ -1372,9 +1359,7 @@ void* HitInfo, class Actor* DamageCauser)
 			*(Vector*)(params + 8) = HitLocation;
 			*(Vector*)(params + 20) = Momentum;
 			*(ScriptClass**)(params + 32) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 36) = HitInfo;
+			*(TraceHitInfo*)(params + 36) = HitInfo;
 			*(class Actor**)(params + 64) = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -1411,9 +1396,7 @@ void**)(params + 36) = HitInfo;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.WeaponAttachmentChanged");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void PlayHit(float Damage, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, Vector Momentum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo)
+		void PlayHit(float Damage, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, Vector Momentum, TraceHitInfo HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.PlayHit");
 			byte* params = (byte*)malloc(64);
@@ -1422,9 +1405,7 @@ void* HitInfo)
 			*(Vector*)(params + 8) = HitLocation;
 			*(ScriptClass**)(params + 20) = DamageType;
 			*(Vector*)(params + 24) = Momentum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 36) = HitInfo;
+			*(TraceHitInfo*)(params + 36) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -1464,20 +1445,14 @@ void**)(params + 36) = HitInfo;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.TakeDrowningDamage");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool IsLocationOnHead(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void*& Impact, float AdditionalScale)
+		bool IsLocationOnHead(ImpactInfo& Impact, float AdditionalScale)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.IsLocationOnHead");
 			byte* params = (byte*)malloc(88);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)params = Impact;
+			*(ImpactInfo*)params = Impact;
 			*(float*)(params + 80) = AdditionalScale;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Impact = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)params;
+			Impact = *(ImpactInfo*)params;
 			auto returnVal = *(bool*)(params + 84);
 			free(params);
 			return returnVal;
@@ -1530,9 +1505,7 @@ void**)params;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* HitComponent, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComponent, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
-void*& RigidCollisionData, int ContactIndex)
+void* OtherComponent, CollisionImpactData& RigidCollisionData, int ContactIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPawn.RigidBodyCollision");
 			byte* params = (byte*)malloc(48);
@@ -1542,14 +1515,10 @@ void**)params = HitComponent;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)(params + 4) = OtherComponent;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
-void**)(params + 8) = RigidCollisionData;
+			*(CollisionImpactData*)(params + 8) = RigidCollisionData;
 			*(int*)(params + 44) = ContactIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			RigidCollisionData = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
-void**)(params + 8);
+			RigidCollisionData = *(CollisionImpactData*)(params + 8);
 			free(params);
 		}
 		void OnRanOver(class SVehicle* Vehicle, 

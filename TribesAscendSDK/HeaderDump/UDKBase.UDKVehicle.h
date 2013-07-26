@@ -1,14 +1,17 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "UDKBase.UDKVehicleBase.h"
 #include "Engine.Controller.h"
-#include "Engine.TeamInfo.h"
 #include "Engine.MaterialInstanceConstant.h"
+#include "UDKBase.UDKPawn.UTTakeHitInfo.h"
 #include "Engine.SoundCue.h"
 #include "UDKBase.UDKPlayerController.h"
 #include "UDKBase.UDKForcedDirectionVolume.h"
 #include "Engine.ParticleSystem.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.Pawn.h"
 #include "UDKBase.UDKProjectile.h"
+#include "Engine.TeamInfo.h"
 #include "Engine.Actor.h"
 #include "Engine.PlayerController.h"
 #include "Engine.Canvas.h"
@@ -53,7 +56,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastJumpOutCheck, 0xFFFFFFFF)
 		ADD_OBJECT(Controller, KillerController)
 		ADD_VAR(::FloatProperty, LastTakeHitTimeout, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.UTTakeHitInfo' for the property named 'LastTakeHitInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<UTTakeHitInfo>, LastTakeHitInfo, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, DamageMaterialInstance)
 		ADD_VAR(::FloatProperty, CustomGravityScaling, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, SmallChunkImpactSound)

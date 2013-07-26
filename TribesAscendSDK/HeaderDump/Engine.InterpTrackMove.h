@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.InterpTrack.h"
+#include "Engine.InterpTrackMove.InterpLookupTrack.h"
+#include "Core.Object.InterpCurveVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.InterpTrackMove." #y); \
@@ -28,9 +30,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, AngCurveTension, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinCurveTension, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, LookAtGroupName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.InterpTrackMove.InterpLookupTrack' for the property named 'LookupTrack'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector' for the property named 'EulerTrack'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector' for the property named 'PosTrack'!
+		ADD_STRUCT(::NonArithmeticProperty<InterpLookupTrack>, LookupTrack, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<InterpCurveVector>, EulerTrack, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<InterpCurveVector>, PosTrack, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

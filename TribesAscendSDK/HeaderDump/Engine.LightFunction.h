@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Vector.h"
 #include "Engine.MaterialInterface.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

@@ -1,35 +1,28 @@
 #pragma once
 #include "Core.Interface.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 namespace UnrealScript
 {
 	class OnlinePlayerInterfaceEx : public Interface
 	{
 	public:
-		bool ShowFeedbackUI(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID)
+		bool ShowFeedbackUI(byte LocalUserNum, UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerInterfaceEx.ShowFeedbackUI");
 			byte* params = (byte*)malloc(13);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = PlayerID;
+			*(UniqueNetId*)(params + 4) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		bool ShowGamerCardUI(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID)
+		bool ShowGamerCardUI(byte LocalUserNum, UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerInterfaceEx.ShowGamerCardUI");
 			byte* params = (byte*)malloc(13);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = PlayerID;
+			*(UniqueNetId*)(params + 4) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);
@@ -199,16 +192,12 @@ void**)(params + 4) = ProfileDataChangedDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool ShowFriendsInviteUI(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID)
+		bool ShowFriendsInviteUI(byte LocalUserNum, UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerInterfaceEx.ShowFriendsInviteUI");
 			byte* params = (byte*)malloc(13);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = PlayerID;
+			*(UniqueNetId*)(params + 4) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);

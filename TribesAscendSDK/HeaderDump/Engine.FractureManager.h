@@ -1,6 +1,9 @@
 #pragma once
 #include "Engine.Actor.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.ParticleSystem.h"
+#include "Core.Object.Box.h"
+#include "Core.Object.Vector.h"
 #include "Engine.FracturedStaticMeshPart.h"
 #include "Engine.FracturedStaticMeshActor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -38,16 +41,12 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void SpawnChunkDestroyEffect(class ParticleSystem* Effect, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box'!
-void* ChunkBox, Vector ChunkDir, float Scale)
+		void SpawnChunkDestroyEffect(class ParticleSystem* Effect, Box ChunkBox, Vector ChunkDir, float Scale)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.SpawnChunkDestroyEffect");
 			byte* params = (byte*)malloc(48);
 			*(class ParticleSystem**)params = Effect;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box'!
-void**)(params + 4) = ChunkBox;
+			*(Box*)(params + 4) = ChunkBox;
 			*(Vector*)(params + 32) = ChunkDir;
 			*(float*)(params + 44) = Scale;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);

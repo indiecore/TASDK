@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.Component.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ActorComponent." #y); \
@@ -30,7 +31,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bTickInEditor, 0x2)
 		ADD_VAR(::BoolProperty, bAttached, 0x1)
 		ADD_OBJECT(Actor, Owner)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Scene'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Scene, 0xFFFFFFFF)
 		void SetTickGroup(byte NewTickGroup)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorComponent.SetTickGroup");

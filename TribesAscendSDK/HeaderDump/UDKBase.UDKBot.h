@@ -1,6 +1,6 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Engine.AIController.h"
-#include "Engine.PickupFactory.h"
 #include "Engine.Actor.h"
 #include "Engine.Pawn.h"
 #include "UDKBase.UDKSquadAI.h"
@@ -8,6 +8,7 @@
 #include "Engine.Projectile.h"
 #include "Engine.Vehicle.h"
 #include "UDKBase.UDKVehicle.h"
+#include "Engine.PickupFactory.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKBot." #y); \

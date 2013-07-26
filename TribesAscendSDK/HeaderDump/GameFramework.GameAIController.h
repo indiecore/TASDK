@@ -2,7 +2,9 @@
 #include "GameFramework.GameAICommand.h"
 #include "Engine.FileLog.h"
 #include "Engine.AIController.h"
+#include "Engine.AITree.AITreeHandle.h"
 #include "Engine.AITree.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameAIController." #y); \
@@ -39,7 +41,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAILogging, 0x4)
 		ADD_VAR(::BoolProperty, bHasRunawayCommandList, 0x2)
 		ADD_VAR(::BoolProperty, bUseAITree, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.AITree.AITreeHandle' for the property named 'AITreeHandle'!
+		ADD_STRUCT(::NonArithmeticProperty<AITreeHandle>, AITreeHandle, 0xFFFFFFFF)
 		ADD_OBJECT(AITree, AITree)
 		void AllCommands(ScriptClass* BaseClass, class GameAICommand*& Cmd)
 		{

@@ -1,5 +1,6 @@
 #pragma once
 #include "IpDrv.InternetLink.h"
+#include "IpDrv.InternetLink.IpAddr.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.TcpLink." #y); \
@@ -25,7 +26,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::StrProperty, RecvBuf, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, AcceptClass)
-		// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr' for the property named 'RemoteAddr'!
+		ADD_STRUCT(::NonArithmeticProperty<IpAddr>, RemoteAddr, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, LinkState, 0xFFFFFFFF)
 		int BindPort(int PortNum, bool bUseNextAvailable)
 		{
@@ -47,15 +48,11 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		bool Open(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
-void* Addr)
+		bool Open(IpAddr Addr)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Open");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
-void**)params = Addr;
+			*(IpAddr*)params = Addr;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 8);
 			free(params);

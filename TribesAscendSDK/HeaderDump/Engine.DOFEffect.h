@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.PostProcessEffect.h"
+#include "Core.Object.Color.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DOFEffect." #y); \
@@ -22,7 +24,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MaxNearBlurAmount, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinBlurAmount, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxFarBlurAmount, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'ModulateBlurColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, ModulateBlurColor, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, FocusType, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FocusInnerRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FocusDistance, 0xFFFFFFFF)

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.MaterialExpression.h"
+#include "Engine.MaterialExpression.ExpressionInput.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialExpressionSphereMask." #y); \
@@ -19,8 +20,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, HardnessPercent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AttenuationRadius, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'B'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'A'!
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, B, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, A, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

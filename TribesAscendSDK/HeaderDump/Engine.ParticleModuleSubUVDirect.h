@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.DistributionVector.RawDistributionVector.h"
 #include "Engine.ParticleModuleSubUVBase.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -11,8 +12,8 @@ namespace UnrealScript
 	class ParticleModuleSubUVDirect : public ParticleModuleSubUVBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'SubUVSize'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'SubUVPosition'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, SubUVSize, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, SubUVPosition, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

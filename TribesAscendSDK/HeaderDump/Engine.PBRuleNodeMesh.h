@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine.PBRuleNodeMesh.BuildingMeshInfo.h"
 #include "Engine.PBRuleNodeBase.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -19,7 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bBlockAll, 0x2)
 		ADD_VAR(::BoolProperty, bDoOcclusionTest, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PBRuleNodeMesh.BuildingMeshInfo' for the property named 'PartialOccludedBuildingMesh'!
+		ADD_STRUCT(::NonArithmeticProperty<BuildingMeshInfo>, PartialOccludedBuildingMesh, 0xFFFFFFFF)
 		int PickRandomBuildingMesh()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PBRuleNodeMesh.PickRandomBuildingMesh");

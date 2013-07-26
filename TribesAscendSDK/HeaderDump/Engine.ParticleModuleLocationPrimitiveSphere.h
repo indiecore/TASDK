@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleLocationPrimitiveBase.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleLocationPrimitiveSphere." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class ParticleModuleLocationPrimitiveSphere : public ParticleModuleLocationPrimitiveBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'StartRadius'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, StartRadius, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.Actor.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.PrimitiveComponent.RBCollisionChannelContainer.h"
 #include "Engine.SeqAct_Toggle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -19,10 +21,10 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, SceneIndex, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'U2NRotation'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ForceField'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, U2NRotation, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ForceField, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RBChannel, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'CollideWithChannels'!
+		ADD_STRUCT(::NonArithmeticProperty<RBCollisionChannelContainer>, CollideWithChannels, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bForceActive, 0x1)
 		ADD_VAR(::IntProperty, ExcludeChannel, 0xFFFFFFFF)
 		void DoInitRBPhys()

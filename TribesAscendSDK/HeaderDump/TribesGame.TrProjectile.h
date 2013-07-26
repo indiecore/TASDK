@@ -1,6 +1,7 @@
 #pragma once
 #include "UTGame.UTProjectile.h"
 #include "TribesGame.TrDevice.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Controller.h"
 #include "Engine.Actor.h"
 #include "Engine.PhysicalMaterial.h"

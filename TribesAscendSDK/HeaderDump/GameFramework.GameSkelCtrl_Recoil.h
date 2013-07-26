@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.SkelControlBase.h"
+#include "Core.Object.Vector2D.h"
+#include "GameFramework.GameSkelCtrl_Recoil.RecoilDef.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameSkelCtrl_Recoil." #y); \
@@ -17,8 +19,8 @@ namespace UnrealScript
 	class GameSkelCtrl_Recoil : public SkelControlBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'Aim'!
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.GameSkelCtrl_Recoil.RecoilDef' for the property named 'Recoil'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, Aim, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RecoilDef>, Recoil, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bApplyControl, 0x8)
 		ADD_VAR(::BoolProperty, bOldPlayRecoil, 0x4)
 		ADD_VAR(::BoolProperty, bPlayRecoil, 0x2)

@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Engine.Teleporter.h"
 #include "UTGame.UTPawn.h"
 #include "Engine.SoundCue.h"

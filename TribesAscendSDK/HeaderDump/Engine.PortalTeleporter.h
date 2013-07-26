@@ -2,6 +2,7 @@
 #include "Engine.PortalMarker.h"
 #include "Engine.SceneCapturePortalActor.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 #include "Engine.TextureRenderTarget2D.h"
 #include "Engine.Projectile.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \

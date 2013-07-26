@@ -1,6 +1,9 @@
 #pragma once
 #include "Core.Object.h"
 #include "Engine.SpeechRecognition.h"
+#include "OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.LocalTalkerMcts.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty OnlineSubsystemMcts.OnlineVoiceInterfaceMcts." #y); \
@@ -12,23 +15,19 @@ namespace UnrealScript
 	class OnlineVoiceInterfaceMcts : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.LocalTalkerMcts' for the property named 'CurrentLocalTalker'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VoiceEnginePtr'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'MctsSubsystem'!
+		ADD_STRUCT(::NonArithmeticProperty<LocalTalkerMcts>, CurrentLocalTalker, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VoiceEnginePtr, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, MctsSubsystem, 0xFFFFFFFF)
 		void OnRecognitionComplete()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.OnRecognitionComplete");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnPlayerTalkingStateChange(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* Player, bool bIsTalking)
+		void OnPlayerTalkingStateChange(UniqueNetId Player, bool bIsTalking)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.OnPlayerTalkingStateChange");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = Player;
+			*(UniqueNetId*)params = Player;
 			*(bool*)(params + 8) = bIsTalking;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -53,29 +52,21 @@ void**)params = Player;
 			free(params);
 			return returnVal;
 		}
-		bool RegisterRemoteTalker(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID)
+		bool RegisterRemoteTalker(UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.RegisterRemoteTalker");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerID;
+			*(UniqueNetId*)params = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		bool UnregisterRemoteTalker(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID)
+		bool UnregisterRemoteTalker(UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.UnregisterRemoteTalker");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerID;
+			*(UniqueNetId*)params = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 8);
 			free(params);
@@ -91,15 +82,11 @@ void**)params = PlayerID;
 			free(params);
 			return returnVal;
 		}
-		bool IsRemotePlayerTalking(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID)
+		bool IsRemotePlayerTalking(UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.IsRemotePlayerTalking");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerID;
+			*(UniqueNetId*)params = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 8);
 			free(params);
@@ -115,48 +102,36 @@ void**)params = PlayerID;
 			free(params);
 			return returnVal;
 		}
-		bool SetRemoteTalkerPriority(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID, int Priority)
+		bool SetRemoteTalkerPriority(byte LocalUserNum, UniqueNetId PlayerID, int Priority)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.SetRemoteTalkerPriority");
 			byte* params = (byte*)malloc(17);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = PlayerID;
+			*(UniqueNetId*)(params + 4) = PlayerID;
 			*(int*)(params + 12) = Priority;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		bool MuteRemoteTalker(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID, bool bIsSystemWide)
+		bool MuteRemoteTalker(byte LocalUserNum, UniqueNetId PlayerID, bool bIsSystemWide)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.MuteRemoteTalker");
 			byte* params = (byte*)malloc(17);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = PlayerID;
+			*(UniqueNetId*)(params + 4) = PlayerID;
 			*(bool*)(params + 12) = bIsSystemWide;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		bool UnmuteRemoteTalker(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID, bool bIsSystemWide)
+		bool UnmuteRemoteTalker(byte LocalUserNum, UniqueNetId PlayerID, bool bIsSystemWide)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.UnmuteRemoteTalker");
 			byte* params = (byte*)malloc(17);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = PlayerID;
+			*(UniqueNetId*)(params + 4) = PlayerID;
 			*(bool*)(params + 12) = bIsSystemWide;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 16);

@@ -2,16 +2,21 @@
 #include "GameFramework.GameCrowdDestination.h"
 #include "GameFramework.GameCrowdGroup.h"
 #include "Engine.CrowdAgentBase.h"
+#include "Engine.NavigationHandle.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Canvas.h"
 #include "GameFramework.GameCrowdAgentBehavior.h"
 #include "Engine.SoundCue.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.Texture2D.h"
-#include "Engine.HUD.h"
-#include "Engine.NavigationHandle.h"
 #include "Engine.Actor.h"
+#include "Engine.HUD.h"
+#include "Engine.LightComponent.LightingChannelContainer.h"
 #include "GameFramework.SeqAct_PlayAgentAnimation.h"
 #include "Engine.PlayerController.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.Controller.h"
+#include "Engine.Actor.TraceHitInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameCrowdAgent." #y); \
@@ -47,7 +52,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, MaxSeePlayerDistSq, 0xFFFFFFFF)
 		ADD_OBJECT(GameCrowdAgentBehavior, CurrentBehavior)
 		ADD_OBJECT(SoundCue, AmbientSoundCue)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'BeaconColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BeaconColor, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, BeaconTexture)
 		ADD_STRUCT(::VectorProperty, BeaconOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BeaconMaxDist, 0xFFFFFFFF)
@@ -207,16 +212,12 @@ void**)params = BehaviorList;
 			out_YPos = *(float*)(params + 8);
 			free(params);
 		}
-		void SetLighting(bool bEnableLightEnvironment, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer'!
-void* AgentLightingChannel, bool bCastShadows)
+		void SetLighting(bool bEnableLightEnvironment, LightingChannelContainer AgentLightingChannel, bool bCastShadows)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.SetLighting");
 			byte* params = (byte*)malloc(12);
 			*(bool*)params = bEnableLightEnvironment;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer'!
-void**)(params + 4) = AgentLightingChannel;
+			*(LightingChannelContainer*)(params + 4) = AgentLightingChannel;
 			*(bool*)(params + 8) = bCastShadows;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -356,9 +357,7 @@ void**)(params + 4) = AgentLightingChannel;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.FireDeathEvent");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgent.TakeDamage");
 			byte* params = (byte*)malloc(68);
@@ -367,9 +366,7 @@ void* HitInfo, class Actor* DamageCauser)
 			*(Vector*)(params + 8) = HitLocation;
 			*(Vector*)(params + 20) = Momentum;
 			*(ScriptClass**)(params + 32) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 36) = HitInfo;
+			*(TraceHitInfo*)(params + 36) = HitInfo;
 			*(class Actor**)(params + 64) = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

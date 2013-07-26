@@ -1,14 +1,22 @@
 #pragma once
 #include "Engine.SoundCue.h"
 #include "UDKBase.UDKWeapon.h"
+#include "Engine.UIRoot.TextureCoordinates.h"
 #include "Engine.Texture2D.h"
+#include "UDKBase.UDKPawn.h"
+#include "Core.Object.Color.h"
+#include "Engine.ForceFeedbackWaveform.h"
+#include "UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.AnimSet.h"
-#include "UDKBase.UDKPawn.h"
-#include "Engine.ForceFeedbackWaveform.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.InterpCurveFloat.h"
+#include "Core.Object.Vector2D.h"
 #include "Engine.Canvas.h"
-#include "Engine.HUD.h"
 #include "Engine.Material.h"
+#include "Engine.HUD.h"
+#include "Engine.Actor.ImpactInfo.h"
 #include "Engine.Controller.h"
 #include "Engine.Weapon.h"
 #include "Engine.Pawn.h"
@@ -47,22 +55,22 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAllowFiringWithoutController, 0x40000)
 		ADD_VAR(::BoolProperty, bSmallWeapons, 0x8)
 		ADD_VAR(::BoolProperty, bUseCustomCoordinates, 0x4)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'SimpleCrossHairCoordinates'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'CustomCrosshairCoordinates'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, SimpleCrossHairCoordinates, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, CustomCrosshairCoordinates, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastHitEnemyTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InventoryWeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, GroupWeight, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'CrossHairCoordinates'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, CrossHairCoordinates, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CrosshairScaling, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, CrosshairImage)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'CrosshairColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, CrosshairColor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bWasLocked, 0x2)
 		ADD_VAR(::FloatProperty, LockedStartTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentLockedScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StartLockedScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LockedScaleTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FinalLockedScale, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'LockedCrossHairCoordinates'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, LockedCrossHairCoordinates, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ZoomedRate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ZoomedTargetFOV, 0xFFFFFFFF)
 		ADD_OBJECT(AnimSet, ArmsAnimSet)
@@ -84,7 +92,7 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, WeaponEquipSnd)
 		ADD_VAR(::BoolProperty, bPendingShow, 0x100)
 		ADD_OBJECT(ScriptClass, AttachmentClass)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'MuzzleFlashColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, MuzzleFlashColor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bForceHidden, 0x200000)
 		ADD_STRUCT(::VectorProperty, HiddenWeaponsOffset, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, PlayerViewOffset, 0xFFFFFFFF)
@@ -115,7 +123,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ProjectileSpawnOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WeaponCanvasXPct, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WeaponCanvasYPct, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'IconCoordinates'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, IconCoordinates, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSuperWeapon, 0x10)
 		ADD_VAR(::BoolProperty, bNeverForwardPendingFire, 0x20)
 		ADD_VAR(::BoolProperty, bUsesOffhand, 0x80)
@@ -134,17 +142,17 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DroppedPickupOffsetZ, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ZoomFadeTime, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, PivotTranslation, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'WeaponColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, WeaponColor, 0xFFFFFFFF)
 		ADD_STRUCT(::RotatorProperty, LockerRotation, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, LockerOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, aimerror, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo' for the property named 'NeedToPickUpAnnouncement'!
+		ADD_STRUCT(::NonArithmeticProperty<ObjectiveAnnouncementInfo>, NeedToPickUpAnnouncement, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ZoomedTurnSpeedScalePct, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetFrictionDistanceMin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetFrictionDistancePeak, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetFrictionDistanceMax, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat' for the property named 'TargetFrictionDistanceCurve'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'TargetFrictionMultiplierRange'!
+		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, TargetFrictionDistanceCurve, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, TargetFrictionMultiplierRange, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetFrictionPeakRadiusScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetFrictionPeakHeightScale, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, TargetFrictionOffset, 0xFFFFFFFF)
@@ -153,7 +161,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, TargetAdhesionDistanceMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetAdhesionAimDistY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetAdhesionAimDistZ, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'TargetAdhesionScaleRange'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, TargetAdhesionScaleRange, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetAdhesionScaleAmountMin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetAdhesionTargetVelocityMin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TargetAdhesionPlayerVelocityMin, 0xFFFFFFFF)
@@ -857,23 +865,15 @@ void**)params = PSC;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeapon.InstantFire");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* InstantAimHelp(Vector StartTrace, Vector EndTrace, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* RealImpact)
+		ImpactInfo InstantAimHelp(Vector StartTrace, Vector EndTrace, ImpactInfo RealImpact)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeapon.InstantAimHelp");
 			byte* params = (byte*)malloc(184);
 			*(Vector*)params = StartTrace;
 			*(Vector*)(params + 12) = EndTrace;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 24) = RealImpact;
+			*(ImpactInfo*)(params + 24) = RealImpact;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 104);
+			auto returnVal = *(ImpactInfo*)(params + 104);
 			free(params);
 			return returnVal;
 		}
@@ -886,16 +886,12 @@ void**)(params + 104);
 			free(params);
 			return returnVal;
 		}
-		void ProcessInstantHit(byte FiringMode, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* Impact, int NumHits)
+		void ProcessInstantHit(byte FiringMode, ImpactInfo Impact, int NumHits)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeapon.ProcessInstantHit");
 			byte* params = (byte*)malloc(85);
 			*params = FiringMode;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 4) = Impact;
+			*(ImpactInfo*)(params + 4) = Impact;
 			*(int*)(params + 84) = NumHits;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

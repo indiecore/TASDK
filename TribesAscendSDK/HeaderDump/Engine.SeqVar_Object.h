@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.SequenceVariable.h"
+#include "Core.Object.Vector.h"
 #include "Core.Object.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \

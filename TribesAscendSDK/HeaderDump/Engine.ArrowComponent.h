@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.PrimitiveComponent.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ArrowComponent." #y); \
@@ -19,7 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bTreatAsASprite, 0x1)
 		ADD_VAR(::FloatProperty, ArrowSize, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'ArrowColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, ArrowColor, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

@@ -13,7 +13,12 @@
 #include "Engine.Controller.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Engine.Pawn.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
+#include "Engine.GameInfo.GameTypePrefix.h"
 #include "Engine.NavigationPoint.h"
+#include "Core.Object.Guid.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.PlayerStart.h"
 #include "Engine.PickupFactory.h"
 #include "Core.Object.h"
@@ -258,22 +263,16 @@ void**)(params + 4) = CanUnpauseDelegate;
 			free(params);
 			return returnVal;
 		}
-		bool GetSupportedGameTypes(ScriptArray<wchar_t>& InFilename, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.GameInfo.GameTypePrefix'!
-void*& OutGameType, bool bCheckExt)
+		bool GetSupportedGameTypes(ScriptArray<wchar_t>& InFilename, GameTypePrefix& OutGameType, bool bCheckExt)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameInfo.GetSupportedGameTypes");
 			byte* params = (byte*)malloc(72);
 			*(ScriptArray<wchar_t>*)params = InFilename;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.GameInfo.GameTypePrefix'!
-void**)(params + 12) = OutGameType;
+			*(GameTypePrefix*)(params + 12) = OutGameType;
 			*(bool*)(params + 64) = bCheckExt;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			InFilename = *(ScriptArray<wchar_t>*)params;
-			OutGameType = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.GameInfo.GameTypePrefix'!
-void**)(params + 12);
+			OutGameType = *(GameTypePrefix*)(params + 12);
 			auto returnVal = *(bool*)(params + 68);
 			free(params);
 			return returnVal;
@@ -536,16 +535,12 @@ void**)(params + 12);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		class PlayerController* ProcessClientTravel(ScriptArray<wchar_t>& URL, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid'!
-void* NextMapGuid, bool bSeamless, bool bAbsolute)
+		class PlayerController* ProcessClientTravel(ScriptArray<wchar_t>& URL, Guid NextMapGuid, bool bSeamless, bool bAbsolute)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameInfo.ProcessClientTravel");
 			byte* params = (byte*)malloc(40);
 			*(ScriptArray<wchar_t>*)params = URL;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid'!
-void**)(params + 12) = NextMapGuid;
+			*(Guid*)(params + 12) = NextMapGuid;
 			*(bool*)(params + 28) = bSeamless;
 			*(bool*)(params + 32) = bAbsolute;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
@@ -594,17 +589,13 @@ void**)(params + 12) = NextMapGuid;
 			free(params);
 			return returnVal;
 		}
-		class PlayerController* Login(ScriptArray<wchar_t> Portal, ScriptArray<wchar_t> Options, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* UniqueId, ScriptArray<wchar_t>& ErrorMessage)
+		class PlayerController* Login(ScriptArray<wchar_t> Portal, ScriptArray<wchar_t> Options, UniqueNetId UniqueId, ScriptArray<wchar_t>& ErrorMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameInfo.Login");
 			byte* params = (byte*)malloc(48);
 			*(ScriptArray<wchar_t>*)params = Portal;
 			*(ScriptArray<wchar_t>*)(params + 12) = Options;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 24) = UniqueId;
+			*(UniqueNetId*)(params + 24) = UniqueId;
 			*(ScriptArray<wchar_t>*)(params + 32) = ErrorMessage;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			ErrorMessage = *(ScriptArray<wchar_t>*)(params + 32);

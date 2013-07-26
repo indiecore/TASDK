@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.AnimNodeSequenceBlendBase.h"
+#include "Core.Object.Vector2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNodeSequenceBlendByAim." #y); \
@@ -26,11 +27,11 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, AnimName_LD, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, AnimName_LC, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, AnimName_LU, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'AngleOffset'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'VerticalRange'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'HorizontalRange'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'PreviousAim'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'Aim'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, AngleOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, VerticalRange, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, HorizontalRange, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, PreviousAim, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, Aim, 0xFFFFFFFF)
 		void CheckAnimsUpToDate()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequenceBlendByAim.CheckAnimsUpToDate");

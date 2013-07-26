@@ -18,25 +18,35 @@
 #include "Engine.PlayerInput.h"
 #include "Engine.ForceFeedbackManager.h"
 #include "Engine.UIDataStore_OnlinePlayerData.h"
+#include "Engine.PlayerController.ClientAdjustment.h"
+#include "Engine.OnlineGameSettings.h"
+#include "Engine.FaceFXAnimSet.h"
+#include "Core.Object.Vector.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Engine.NetConnection.h"
 #include "Engine.CheatManager.h"
 #include "Engine.InterpTrackInstDirector.h"
+#include "Engine.OnlineGameSearch.OnlineGameSearchResult.h"
+#include "Engine.SeqAct_ToggleInput.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.Guid.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "Engine.Canvas.h"
 #include "Engine.Inventory.h"
 #include "Core.Object.h"
 #include "Engine.SeqAct_DrawText.h"
+#include "Engine.Camera.ViewTargetTransitionParams.h"
 #include "Engine.SoundCue.h"
-#include "Engine.OnlineGameSettings.h"
-#include "Engine.FaceFXAnimSet.h"
 #include "Engine.SeqAct_ConsoleCommand.h"
 #include "Engine.UIInteraction.h"
-#include "Engine.SeqAct_ToggleInput.h"
+#include "Engine.ForceFeedbackWaveform.h"
+#include "Core.Object.Color.h"
+#include "Core.Object.Vector2D.h"
+#include "Engine.HUD.KismetDrawTextInfo.h"
 #include "Engine.MaterialInterface.h"
 #include "Engine.SeqAct_SetCameraTarget.h"
 #include "Engine.SeqAct_ToggleHUD.h"
 #include "Engine.SeqAct_ForceFeedback.h"
-#include "Engine.ForceFeedbackWaveform.h"
 #include "Engine.AnimNotify_Rumble.h"
 #include "Engine.SeqAct_ToggleCinematicMode.h"
 #include "Engine.LevelStreaming.h"
@@ -102,7 +112,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CurrentTimeStamp, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bWasSpeedHack, 0x400)
 		ADD_VAR(::FloatProperty, LastSpeedHackLog, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PlayerController.ClientAdjustment' for the property named 'PendingAdjustment'!
+		ADD_STRUCT(::NonArithmeticProperty<ClientAdjustment>, PendingAdjustment, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ServerTimeStamp, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, SavedMoveClass)
 		ADD_VAR(::BoolProperty, bDoubleJump, 0x4)
@@ -222,18 +232,14 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void ClientTravel(ScriptArray<wchar_t> URL, byte TravelType, bool bSeamless, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid'!
-void* MapPackageGuid)
+		void ClientTravel(ScriptArray<wchar_t> URL, byte TravelType, bool bSeamless, Guid MapPackageGuid)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientTravel");
 			byte* params = (byte*)malloc(33);
 			*(ScriptArray<wchar_t>*)params = URL;
 			*(params + 12) = TravelType;
 			*(bool*)(params + 16) = bSeamless;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid'!
-void**)(params + 20) = MapPackageGuid;
+			*(Guid*)(params + 20) = MapPackageGuid;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -406,104 +412,72 @@ void**)(params + 20) = MapPackageGuid;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.RegisterPlayerDataStores");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		int FindConnectedPeerIndex(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PeerNetId)
+		int FindConnectedPeerIndex(UniqueNetId PeerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.FindConnectedPeerIndex");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PeerNetId;
+			*(UniqueNetId*)params = PeerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		void AddPeer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PeerNetId, byte NatType)
+		void AddPeer(UniqueNetId PeerNetId, byte NatType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.AddPeer");
 			byte* params = (byte*)malloc(9);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PeerNetId;
+			*(UniqueNetId*)params = PeerNetId;
 			*(params + 8) = NatType;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void RemovePeer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PeerNetId)
+		void RemovePeer(UniqueNetId PeerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.RemovePeer");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PeerNetId;
+			*(UniqueNetId*)params = PeerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ServerAddPeer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PeerNetId, byte NatType)
+		void ServerAddPeer(UniqueNetId PeerNetId, byte NatType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ServerAddPeer");
 			byte* params = (byte*)malloc(9);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PeerNetId;
+			*(UniqueNetId*)params = PeerNetId;
 			*(params + 8) = NatType;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ServerRemovePeer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PeerNetId)
+		void ServerRemovePeer(UniqueNetId PeerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ServerRemovePeer");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PeerNetId;
+			*(UniqueNetId*)params = PeerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ClientUpdateBestNextHosts(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* SortedNextHosts, byte NumEntries)
+		void ClientUpdateBestNextHosts(UniqueNetId SortedNextHosts, byte NumEntries)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientUpdateBestNextHosts");
 			byte* params = (byte*)malloc(9);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = SortedNextHosts;
+			*(UniqueNetId*)params = SortedNextHosts;
 			*(params + 80) = NumEntries;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void NotifyPeerDisconnectHost(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PeerNetId)
+		void NotifyPeerDisconnectHost(UniqueNetId PeerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.NotifyPeerDisconnectHost");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PeerNetId;
+			*(UniqueNetId*)params = PeerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool IsBestHostPeer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PeerNetId)
+		bool IsBestHostPeer(UniqueNetId PeerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.IsBestHostPeer");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PeerNetId;
+			*(UniqueNetId*)params = PeerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 8);
 			free(params);
@@ -551,16 +525,12 @@ void**)(params + 8);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnUnregisterPlayerCompleteForMigrate(ScriptName SessionName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID, bool bWasSuccessful)
+		void OnUnregisterPlayerCompleteForMigrate(ScriptName SessionName, UniqueNetId PlayerID, bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.OnUnregisterPlayerCompleteForMigrate");
 			byte* params = (byte*)malloc(20);
 			*(ScriptName*)params = SessionName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 8) = PlayerID;
+			*(UniqueNetId*)(params + 8) = PlayerID;
 			*(bool*)(params + 16) = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -600,27 +570,19 @@ void**)(params + 8) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void TellPeerToTravel(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* ToPeerNetId)
+		void TellPeerToTravel(UniqueNetId ToPeerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.TellPeerToTravel");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = ToPeerNetId;
+			*(UniqueNetId*)params = ToPeerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void TellPeerToTravelToSession(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* ToPeerNetId, ScriptName SessionName, ScriptClass* SearchClass, byte PlatformSpecificInfo, int PlatformSpecificInfoSize)
+		void TellPeerToTravelToSession(UniqueNetId ToPeerNetId, ScriptName SessionName, ScriptClass* SearchClass, byte PlatformSpecificInfo, int PlatformSpecificInfoSize)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.TellPeerToTravelToSession");
 			byte* params = (byte*)malloc(25);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = ToPeerNetId;
+			*(UniqueNetId*)params = ToPeerNetId;
 			*(ScriptName*)(params + 8) = SessionName;
 			*(ScriptClass**)(params + 16) = SearchClass;
 			*(params + 20) = PlatformSpecificInfo;
@@ -628,15 +590,11 @@ void**)params = ToPeerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void PeerReceivedMigratedSession(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* FromPeerNetId, ScriptName SessionName, ScriptClass* SearchClass, byte PlatformSpecificInfo)
+		void PeerReceivedMigratedSession(UniqueNetId FromPeerNetId, ScriptName SessionName, ScriptClass* SearchClass, byte PlatformSpecificInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.PeerReceivedMigratedSession");
 			byte* params = (byte*)malloc(21);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = FromPeerNetId;
+			*(UniqueNetId*)params = FromPeerNetId;
 			*(ScriptName*)(params + 8) = SessionName;
 			*(ScriptClass**)(params + 16) = SearchClass;
 			*(params + 20) = PlatformSpecificInfo;
@@ -1112,30 +1070,22 @@ void**)(params + 28);
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.RegisterOnlineDelegates");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnPartyMemberListChanged(bool bJoinedOrLeft, ScriptArray<wchar_t> PlayerName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID)
+		void OnPartyMemberListChanged(bool bJoinedOrLeft, ScriptArray<wchar_t> PlayerName, UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.OnPartyMemberListChanged");
 			byte* params = (byte*)malloc(24);
 			*(bool*)params = bJoinedOrLeft;
 			*(ScriptArray<wchar_t>*)(params + 4) = PlayerName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 16) = PlayerID;
+			*(UniqueNetId*)(params + 16) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnPartyMembersInfoChanged(ScriptArray<wchar_t> PlayerName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID, int CustomData1, int CustomData2, int CustomData3, int CustomData4)
+		void OnPartyMembersInfoChanged(ScriptArray<wchar_t> PlayerName, UniqueNetId PlayerID, int CustomData1, int CustomData2, int CustomData3, int CustomData4)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.OnPartyMembersInfoChanged");
 			byte* params = (byte*)malloc(36);
 			*(ScriptArray<wchar_t>*)params = PlayerName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 12) = PlayerID;
+			*(UniqueNetId*)(params + 12) = PlayerID;
 			*(int*)(params + 20) = CustomData1;
 			*(int*)(params + 24) = CustomData2;
 			*(int*)(params + 28) = CustomData3;
@@ -1290,21 +1240,13 @@ void**)(params + 12) = PlayerID;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ResetCameraMode");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ClientSetCameraFade(bool bEnableFading, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* FadeColor, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* FadeAlpha, float FadeTime)
+		void ClientSetCameraFade(bool bEnableFading, Color FadeColor, Vector2D FadeAlpha, float FadeTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientSetCameraFade");
 			byte* params = (byte*)malloc(20);
 			*(bool*)params = bEnableFading;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 4) = FadeColor;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8) = FadeAlpha;
+			*(Color*)(params + 4) = FadeColor;
+			*(Vector2D*)(params + 8) = FadeAlpha;
 			*(float*)(params + 16) = FadeTime;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -2003,16 +1945,12 @@ void**)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		void SetViewTarget(class Actor* NewViewTarget, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void* TransitionParams)
+		void SetViewTarget(class Actor* NewViewTarget, ViewTargetTransitionParams TransitionParams)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.SetViewTarget");
 			byte* params = (byte*)malloc(20);
 			*(class Actor**)params = NewViewTarget;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void**)(params + 4) = TransitionParams;
+			*(ViewTargetTransitionParams*)(params + 4) = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -2028,16 +1966,12 @@ void**)(params + 4) = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ClientSetViewTarget(class Actor* A, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void* TransitionParams)
+		void ClientSetViewTarget(class Actor* A, ViewTargetTransitionParams TransitionParams)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientSetViewTarget");
 			byte* params = (byte*)malloc(20);
 			*(class Actor**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void**)(params + 4) = TransitionParams;
+			*(ViewTargetTransitionParams*)(params + 4) = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -2141,15 +2075,11 @@ void**)(params + 4) = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ServerViewSelf(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void* TransitionParams)
+		void ServerViewSelf(ViewTargetTransitionParams TransitionParams)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ServerViewSelf");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void**)params = TransitionParams;
+			*(ViewTargetTransitionParams*)params = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -2223,28 +2153,20 @@ void**)params = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ClientDrawKismetText(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.KismetDrawTextInfo'!
-void* DrawTextInfo, float DisplayTime)
+		void ClientDrawKismetText(KismetDrawTextInfo DrawTextInfo, float DisplayTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientDrawKismetText");
 			byte* params = (byte*)malloc(56);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.KismetDrawTextInfo'!
-void**)params = DrawTextInfo;
+			*(KismetDrawTextInfo*)params = DrawTextInfo;
 			*(float*)(params + 52) = DisplayTime;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ClientClearKismetText(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* MessageOffset)
+		void ClientClearKismetText(Vector2D MessageOffset)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientClearKismetText");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = MessageOffset;
+			*(Vector2D*)params = MessageOffset;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -2468,19 +2390,13 @@ void**)params = MessageOffset;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientSetBlockOnAsyncLoading");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool IsPlayerMuted(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void*& Sender)
+		bool IsPlayerMuted(UniqueNetId& Sender)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.IsPlayerMuted");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = Sender;
+			*(UniqueNetId*)params = Sender;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Sender = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params;
+			Sender = *(UniqueNetId*)params;
 			auto returnVal = *(bool*)(params + 8);
 			free(params);
 			return returnVal;
@@ -2522,15 +2438,11 @@ void**)(params + 4);
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientSetOnlineStatus");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		class PlayerController* GetPlayerControllerFromNetId(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerNetId)
+		class PlayerController* GetPlayerControllerFromNetId(UniqueNetId PlayerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.GetPlayerControllerFromNetId");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerNetId;
+			*(UniqueNetId*)params = PlayerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(class PlayerController**)(params + 8);
 			free(params);
@@ -2541,75 +2453,51 @@ void**)params = PlayerNetId;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientVoiceHandshakeComplete");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ClientMutePlayer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerNetId)
+		void ClientMutePlayer(UniqueNetId PlayerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientMutePlayer");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerNetId;
+			*(UniqueNetId*)params = PlayerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ClientUnmutePlayer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerNetId)
+		void ClientUnmutePlayer(UniqueNetId PlayerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientUnmutePlayer");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerNetId;
+			*(UniqueNetId*)params = PlayerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void GameplayMutePlayer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerNetId)
+		void GameplayMutePlayer(UniqueNetId PlayerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.GameplayMutePlayer");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerNetId;
+			*(UniqueNetId*)params = PlayerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void GameplayUnmutePlayer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerNetId)
+		void GameplayUnmutePlayer(UniqueNetId PlayerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.GameplayUnmutePlayer");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerNetId;
+			*(UniqueNetId*)params = PlayerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ServerMutePlayer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerNetId)
+		void ServerMutePlayer(UniqueNetId PlayerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ServerMutePlayer");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerNetId;
+			*(UniqueNetId*)params = PlayerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ServerUnmutePlayer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerNetId)
+		void ServerUnmutePlayer(UniqueNetId PlayerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ServerUnmutePlayer");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerNetId;
+			*(UniqueNetId*)params = PlayerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -2665,19 +2553,13 @@ void**)params = PlayerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnGameInviteAccepted(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void*& InviteResult)
+		void OnGameInviteAccepted(OnlineGameSearchResult& InviteResult)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.OnGameInviteAccepted");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params = InviteResult;
+			*(OnlineGameSearchResult*)params = InviteResult;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			InviteResult = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params;
+			InviteResult = *(OnlineGameSearchResult*)params;
 			free(params);
 		}
 		bool InviteHasEnoughSpace(class OnlineGameSettings* InviteSettings)
@@ -2777,15 +2659,11 @@ void**)params;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ClientSetHostUniqueId(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* InHostId)
+		void ClientSetHostUniqueId(UniqueNetId InHostId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientSetHostUniqueId");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = InHostId;
+			*(UniqueNetId*)params = InHostId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -2816,9 +2694,7 @@ void**)params = InHostId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void AddDebugText(ScriptArray<wchar_t> DebugText, class Actor* SrcActor, float Duration, Vector Offset, Vector DesiredOffset, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* TextColor, bool bSkipOverwriteCheck, bool bAbsoluteLocation, bool bKeepAttachedToActor, class Font* InFont)
+		void AddDebugText(ScriptArray<wchar_t> DebugText, class Actor* SrcActor, float Duration, Vector Offset, Vector DesiredOffset, Color TextColor, bool bSkipOverwriteCheck, bool bAbsoluteLocation, bool bKeepAttachedToActor, class Font* InFont)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.AddDebugText");
 			byte* params = (byte*)malloc(64);
@@ -2827,9 +2703,7 @@ void* TextColor, bool bSkipOverwriteCheck, bool bAbsoluteLocation, bool bKeepAtt
 			*(float*)(params + 16) = Duration;
 			*(Vector*)(params + 20) = Offset;
 			*(Vector*)(params + 32) = DesiredOffset;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 44) = TextColor;
+			*(Color*)(params + 44) = TextColor;
 			*(bool*)(params + 48) = bSkipOverwriteCheck;
 			*(bool*)(params + 52) = bAbsoluteLocation;
 			*(bool*)(params + 56) = bKeepAttachedToActor;
@@ -2925,15 +2799,11 @@ void**)(params + 44) = TextColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ClientReturnToParty(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* RequestingPlayerId)
+		void ClientReturnToParty(UniqueNetId RequestingPlayerId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.ClientReturnToParty");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = RequestingPlayerId;
+			*(UniqueNetId*)params = RequestingPlayerId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -3143,19 +3013,13 @@ void**)params = RequestingPlayerId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool HasPeerConnection(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void*& PeerNetId)
+		bool HasPeerConnection(UniqueNetId& PeerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerController.HasPeerConnection");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PeerNetId;
+			*(UniqueNetId*)params = PeerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			PeerNetId = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params;
+			PeerNetId = *(UniqueNetId*)params;
 			auto returnVal = *(bool*)(params + 8);
 			free(params);
 			return returnVal;

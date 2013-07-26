@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.ParticleModuleColorBase.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleColorOverLife." #y); \
@@ -18,8 +20,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bClampAlpha, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'AlphaOverLife'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'ColorOverLife'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, AlphaOverLife, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, ColorOverLife, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

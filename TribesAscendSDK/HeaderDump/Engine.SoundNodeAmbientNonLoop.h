@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.SoundNodeAmbient.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SoundNodeAmbientNonLoop." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class SoundNodeAmbientNonLoop : public SoundNodeAmbient
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'DelayTime'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, DelayTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DelayMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DelayMin, 0xFFFFFFFF)
 	};

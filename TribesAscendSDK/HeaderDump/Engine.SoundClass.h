@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Engine.SoundClass.SoundClassProperties.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SoundClass." #y); \
@@ -19,7 +20,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, MenuID, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsChild, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.SoundClass.SoundClassProperties' for the property named 'Properties'!
+		ADD_STRUCT(::NonArithmeticProperty<SoundClassProperties>, Properties, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

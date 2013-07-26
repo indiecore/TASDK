@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Engine.ActorFactory.h"
 #include "Engine.FracturedStaticMesh.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \

@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.ParticleModuleCameraBase.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::ByteProperty, UpdateMethod, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'CameraOffset'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, CameraOffset, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSpawnTimeOnly, 0x1)
 	};
 }

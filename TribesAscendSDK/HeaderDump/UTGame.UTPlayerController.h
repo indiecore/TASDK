@@ -1,15 +1,20 @@
 #pragma once
+#include "Core.Object.Rotator.h"
 #include "UDKBase.UDKPlayerController.h"
 #include "UTGame.UTAnnouncer.h"
+#include "Core.Object.Vector.h"
 #include "UTGame.UTUIDataStore_StringAliasBindingsMap.h"
 #include "UTGame.UTPlayerReplicationInfo.h"
 #include "UTGame.UTMusicManager.h"
 #include "Engine.Actor.h"
 #include "Engine.CameraAnim.h"
 #include "Engine.ForceFeedbackWaveform.h"
-#include "Engine.SoundCue.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "UTGame.UTSeqAct_PlayCameraAnim.h"
 #include "Engine.SpeechRecognition.h"
+#include "Engine.OnlineSubsystem.SpeechRecognizedWord.h"
+#include "Engine.Camera.ViewTargetTransitionParams.h"
+#include "Engine.SoundCue.h"
 #include "Engine.SavedMove.h"
 #include "Engine.Pawn.h"
 #include "Engine.Weapon.h"
@@ -200,31 +205,23 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnFriendInviteReceived(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* RequestingPlayer, ScriptArray<wchar_t> RequestingNick, ScriptArray<wchar_t> Message)
+		void OnFriendInviteReceived(byte LocalUserNum, UniqueNetId RequestingPlayer, ScriptArray<wchar_t> RequestingNick, ScriptArray<wchar_t> Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerController.OnFriendInviteReceived");
 			byte* params = (byte*)malloc(33);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = RequestingPlayer;
+			*(UniqueNetId*)(params + 4) = RequestingPlayer;
 			*(ScriptArray<wchar_t>*)(params + 12) = RequestingNick;
 			*(ScriptArray<wchar_t>*)(params + 24) = Message;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnFriendMessageReceived(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* SendingPlayer, ScriptArray<wchar_t> SendingNick, ScriptArray<wchar_t> Message)
+		void OnFriendMessageReceived(byte LocalUserNum, UniqueNetId SendingPlayer, ScriptArray<wchar_t> SendingNick, ScriptArray<wchar_t> Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerController.OnFriendMessageReceived");
 			byte* params = (byte*)malloc(33);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = SendingPlayer;
+			*(UniqueNetId*)(params + 4) = SendingPlayer;
 			*(ScriptArray<wchar_t>*)(params + 12) = SendingNick;
 			*(ScriptArray<wchar_t>*)(params + 24) = Message;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
@@ -310,15 +307,11 @@ void**)(params + 4) = SendingPlayer;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerController.SpeechRecognitionComplete");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ServerProcessSpeechRecognition(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.SpeechRecognizedWord'!
-void* ReplicatedWords)
+		void ServerProcessSpeechRecognition(SpeechRecognizedWord ReplicatedWords)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerController.ServerProcessSpeechRecognition");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.SpeechRecognizedWord'!
-void**)params = ReplicatedWords;
+			*(SpeechRecognizedWord*)params = ReplicatedWords;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -555,16 +548,12 @@ void**)params = ReplicatedWords;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetViewTarget(class Actor* NewViewTarget, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void* TransitionParams)
+		void SetViewTarget(class Actor* NewViewTarget, ViewTargetTransitionParams TransitionParams)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerController.SetViewTarget");
 			byte* params = (byte*)malloc(20);
 			*(class Actor**)params = NewViewTarget;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void**)(params + 4) = TransitionParams;
+			*(ViewTargetTransitionParams*)(params + 4) = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -1029,15 +1018,11 @@ void**)(params + 4) = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ServerViewSelf(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void* TransitionParams)
+		void ServerViewSelf(ViewTargetTransitionParams TransitionParams)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPlayerController.ServerViewSelf");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void**)params = TransitionParams;
+			*(ViewTargetTransitionParams*)params = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

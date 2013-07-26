@@ -2,6 +2,7 @@
 #include "Engine.Brush.h"
 #include "Engine.Actor.h"
 #include "Engine.HUD.h"
+#include "Core.Object.Vector.h"
 #include "Engine.SeqAct_Toggle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

@@ -1,5 +1,6 @@
 #pragma once
 #include "UTGame.UTCarriedObject.h"
+#include "Core.Object.Vector.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.PlayerController.h"
 #include "Engine.Actor.h"

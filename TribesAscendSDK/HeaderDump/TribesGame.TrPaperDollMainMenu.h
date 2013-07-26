@@ -1,6 +1,8 @@
 #pragma once
 #include "TribesGame.TrMainMenuMeshInfo.h"
 #include "TribesGame.TrPaperDoll.h"
+#include "TribesGame.TrObject.PaperDollInfo.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrPaperDollMainMenu." #y); \
@@ -36,29 +38,21 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
-void* GetDevicePaperDollInfo(ScriptClass* WeaponClass)
+		PaperDollInfo GetDevicePaperDollInfo(ScriptClass* WeaponClass)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.GetDevicePaperDollInfo");
 			byte* params = (byte*)malloc(60);
 			*(ScriptClass**)params = WeaponClass;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
-void**)(params + 4);
+			auto returnVal = *(PaperDollInfo*)(params + 4);
 			free(params);
 			return returnVal;
 		}
-		void SetMainMesh(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
-void* NewInfo)
+		void SetMainMesh(PaperDollInfo NewInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.SetMainMesh");
 			byte* params = (byte*)malloc(56);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo'!
-void**)params = NewInfo;
+			*(PaperDollInfo*)params = NewInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

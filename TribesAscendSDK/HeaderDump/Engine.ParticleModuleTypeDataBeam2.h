@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleTypeDataBase.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleTypeDataBeam2." #y); \
@@ -17,9 +18,9 @@ namespace UnrealScript
 	class ParticleModuleTypeDataBeam2 : public ParticleModuleTypeDataBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'TaperScale'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'TaperFactor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Distance'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, TaperScale, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, TaperFactor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Distance, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BranchParentName, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, UpVectorStepSize, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, RenderTessellation, 0x10)

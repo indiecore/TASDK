@@ -2,6 +2,7 @@
 #include "TribesGame.TrStation.h"
 #include "Engine.Texture2D.h"
 #include "TribesGame.TrPawn.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrInventoryStation." #y); \
@@ -27,8 +28,8 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(TrPawn, m_PawnToRefresh)
 		ADD_VAR(::BoolProperty, m_bForceHealthRegen, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'm_PowerOffColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'm_PowerOnColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, m_PowerOffColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, m_PowerOnColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fStationReleaseTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fStationAnimTime, 0xFFFFFFFF)
 		void PawnEnteredStation(class TrPawn* P)

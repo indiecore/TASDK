@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine.ActorComponent.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.Quat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RB_Handle." #y); \
@@ -26,8 +29,8 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, LinearStiffnessScale3D, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearStiffness, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearDamping, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'KinActorData'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'HandleData'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, KinActorData, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, HandleData, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bInterpolating, 0x4)
 		ADD_VAR(::BoolProperty, bRotationConstrained, 0x2)
 		ADD_VAR(::BoolProperty, bInHardware, 0x1)
@@ -79,31 +82,21 @@ void**)params = Component;
 			NewLocation = *(Vector*)params;
 			free(params);
 		}
-		void SetOrientation(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void*& NewOrientation)
+		void SetOrientation(Quat& NewOrientation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Handle.SetOrientation");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params = NewOrientation;
+			*(Quat*)params = NewOrientation;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			NewOrientation = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params;
+			NewOrientation = *(Quat*)params;
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* GetOrientation()
+		Quat GetOrientation()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Handle.GetOrientation");
 			byte* params = (byte*)malloc(16);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params;
+			auto returnVal = *(Quat*)params;
 			free(params);
 			return returnVal;
 		}

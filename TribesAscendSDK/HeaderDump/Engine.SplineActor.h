@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine.Actor.h"
+#include "Core.Object.InterpCurveFloat.h"
+#include "Core.Object.Color.h"
+#include "Core.Object.Vector.h"
 #include "Engine.SeqAct_Toggle.h"
 #include "Engine.SeqAct_ToggleHidden.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -25,7 +28,7 @@ namespace UnrealScript
 	class SplineActor : public Actor
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat' for the property named 'SplineVelocityOverTime'!
+		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, SplineVelocityOverTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, visitedWeight, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, bestPathWeight, 0xFFFFFFFF)
 		ADD_OBJECT(SplineActor, previousPath)
@@ -33,7 +36,7 @@ namespace UnrealScript
 		ADD_OBJECT(SplineActor, nextOrdered)
 		ADD_VAR(::BoolProperty, bAlreadyVisited, 0x2)
 		ADD_VAR(::BoolProperty, bDisableDestination, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'SplineColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, SplineColor, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, SplineActorTangent, 0xFFFFFFFF)
 		Vector GetWorldSpaceTangent()
 		{

@@ -1,22 +1,29 @@
 #pragma once
 #include "UTGame.UTWeapon.h"
-#include "Engine.Actor.h"
-#include "TribesGame.TrDeviceContentData.h"
-#include "Engine.PlayerReplicationInfo.h"
-#include "Engine.ParticleSystem.h"
-#include "Engine.AnimSet.h"
-#include "Engine.MaterialInstanceConstant.h"
-#include "TribesGame.TrAnimNodeBlendByDeviceAnim.h"
 #include "Engine.Material.h"
 #include "Engine.CameraShake.h"
+#include "Core.Object.Vector.h"
+#include "TribesGame.TrDeviceContentData.h"
+#include "TribesGame.TrDevice.DeviceUpgrade.h"
+#include "Engine.AnimSet.h"
+#include "TribesGame.TrObject.PaperDollInfo.h"
+#include "TribesGame.TrAnimNodeBlendByDeviceAnim.h"
+#include "Engine.MaterialInstanceConstant.h"
+#include "TribesGame.TrPawn.h"
+#include "Core.Object.Vector2D.h"
+#include "Engine.PlayerReplicationInfo.h"
+#include "Engine.ParticleSystem.h"
+#include "Engine.Actor.h"
+#include "UTGame.UTPlayerController.h"
+#include "TribesGame.TrDevice.ReplicatedAmmoCount.h"
 #include "Engine.SoundCue.h"
 #include "TribesGame.TrDeployable.h"
+#include "Engine.Actor.ImpactInfo.h"
 #include "TribesGame.TrProj_Tracer.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.Weapon.h"
 #include "Engine.Projectile.h"
 #include "UDKBase.UDKPawn.h"
-#include "TribesGame.TrPawn.h"
-#include "UTGame.UTPlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice." #y); \
@@ -55,9 +62,9 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, m_vClientSideFireOffset, 0xFFFFFFFF)
 		ADD_OBJECT(TrDeviceContentData, m_ContentData)
 		ADD_VAR(::StrProperty, m_sContentDataClassName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrDevice.DeviceUpgrade' for the property named 'BaseMod'!
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'm_InGamePaperDollInfo'!
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'm_MainMenuPaperDollInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<DeviceUpgrade>, BaseMod, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<PaperDollInfo>, m_InGamePaperDollInfo, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<PaperDollInfo>, m_MainMenuPaperDollInfo, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, m_TinyWeaponsOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fTimeBeforeInactiveReload, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fLastActiveTime, 0xFFFFFFFF)
@@ -74,18 +81,18 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, m_vPositionPivotOffset, 0xFFFFFFFF)
 		ADD_OBJECT(CameraShake, m_FireCameraShake)
 		ADD_OBJECT(Material, r_ReplicatedMaterial)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_v2WeaponLagSmoothingFactor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_v2WeaponLagInterpSpeed'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_v2WeaponLagSmoothingFactor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_v2WeaponLagInterpSpeed, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nMaxWeaponLagPitch, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nMaxWeaponLagYaw, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_v2WeaponLagAimOffset'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_v2WeaponLagAimOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMaxKickbackDistanceY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMaxKickbackDistanceX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fKickbackBlendOutTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fLastKickbackTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_v2KickbackAmount'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_v2MinMaxKickbackY'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_v2MinMaxKickbackX'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_v2KickbackAmount, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_v2MinMaxKickbackY, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_v2MinMaxKickbackX, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nCreditCost, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, m_TracerBeamTemplate)
 		ADD_VAR(::FloatProperty, m_fShowTracerDistance, 0xFFFFFFFF)
@@ -94,7 +101,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fLockTargetTime, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, c_LockedActor)
 		ADD_VAR(::FloatProperty, c_fLockTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrDevice.ReplicatedAmmoCount' for the property named 'r_AmmoCount'!
+		ADD_STRUCT(::NonArithmeticProperty<ReplicatedAmmoCount>, r_AmmoCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, s_iCheatCountAmmo, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, m_ZoomOutSoundCue)
 		ADD_OBJECT(SoundCue, m_ZoomInSoundCue)
@@ -304,16 +311,12 @@ void**)(params + 4) = ImpactList;
 			free(params);
 			return returnVal;
 		}
-		int ValidateClientReportedHit(byte FiringMode, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* Impact, bool bHeadShot, bool bDeviceIsFiring)
+		int ValidateClientReportedHit(byte FiringMode, ImpactInfo Impact, bool bHeadShot, bool bDeviceIsFiring)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice.ValidateClientReportedHit");
 			byte* params = (byte*)malloc(93);
 			*params = FiringMode;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 4) = Impact;
+			*(ImpactInfo*)(params + 4) = Impact;
 			*(bool*)(params + 84) = bHeadShot;
 			*(bool*)(params + 88) = bDeviceIsFiring;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
@@ -321,16 +324,12 @@ void**)(params + 4) = Impact;
 			free(params);
 			return returnVal;
 		}
-		int ValidateClientReportedHitInternal(byte FiringMode, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* Impact, bool bHeadShot, bool bDeviceIsFiring)
+		int ValidateClientReportedHitInternal(byte FiringMode, ImpactInfo Impact, bool bHeadShot, bool bDeviceIsFiring)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice.ValidateClientReportedHitInternal");
 			byte* params = (byte*)malloc(93);
 			*params = FiringMode;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 4) = Impact;
+			*(ImpactInfo*)(params + 4) = Impact;
 			*(bool*)(params + 84) = bHeadShot;
 			*(bool*)(params + 88) = bDeviceIsFiring;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
@@ -636,58 +635,42 @@ void**)params = SkelComp;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice.InstantFire");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ProcessInstantHit(byte FiringMode, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* Impact, int NumHits)
+		void ProcessInstantHit(byte FiringMode, ImpactInfo Impact, int NumHits)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice.ProcessInstantHit");
 			byte* params = (byte*)malloc(85);
 			*params = FiringMode;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 4) = Impact;
+			*(ImpactInfo*)(params + 4) = Impact;
 			*(int*)(params + 84) = NumHits;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ServerNotifyHit(byte FiringMode, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* Impact, bool bHeadShot)
+		void ServerNotifyHit(byte FiringMode, ImpactInfo Impact, bool bHeadShot)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice.ServerNotifyHit");
 			byte* params = (byte*)malloc(85);
 			*params = FiringMode;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 4) = Impact;
+			*(ImpactInfo*)(params + 4) = Impact;
 			*(bool*)(params + 84) = bHeadShot;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ProcessInstantHit_Internal(byte FiringMode, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* Impact, bool bHeadShot)
+		void ProcessInstantHit_Internal(byte FiringMode, ImpactInfo Impact, bool bHeadShot)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice.ProcessInstantHit_Internal");
 			byte* params = (byte*)malloc(85);
 			*params = FiringMode;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 4) = Impact;
+			*(ImpactInfo*)(params + 4) = Impact;
 			*(bool*)(params + 84) = bHeadShot;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		float ModifyInstantHitDamage(byte FiringMode, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* Impact, float Damage)
+		float ModifyInstantHitDamage(byte FiringMode, ImpactInfo Impact, float Damage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice.ModifyInstantHitDamage");
 			byte* params = (byte*)malloc(89);
 			*params = FiringMode;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 4) = Impact;
+			*(ImpactInfo*)(params + 4) = Impact;
 			*(float*)(params + 84) = Damage;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(float*)(params + 88);
@@ -775,16 +758,12 @@ void**)(params + 4) = Impact;
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* GetCurrentKickbackAmount()
+		Vector2D GetCurrentKickbackAmount()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice.GetCurrentKickbackAmount");
 			byte* params = (byte*)malloc(8);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params;
+			auto returnVal = *(Vector2D*)params;
 			free(params);
 			return returnVal;
 		}
@@ -1248,9 +1227,7 @@ void**)params;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice.ResetAltReticule");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* CalcWeaponFire(Vector StartTrace, Vector EndTrace, 
+		ImpactInfo CalcWeaponFire(Vector StartTrace, Vector EndTrace, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& ImpactList, Vector Extent)
 		{
@@ -1266,9 +1243,7 @@ void**)(params + 24) = ImpactList;
 			ImpactList = *(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 24);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 48);
+			auto returnVal = *(ImpactInfo*)(params + 48);
 			free(params);
 			return returnVal;
 		}

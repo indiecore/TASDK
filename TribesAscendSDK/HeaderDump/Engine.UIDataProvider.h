@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.UIRoot.h"
+#include "Engine.UIRoot.UIProviderScriptFieldValue.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataProvider." #y); \
@@ -70,40 +71,28 @@ void**)params;
 			free(params);
 			return returnVal;
 		}
-		bool GetFieldValue(ScriptArray<wchar_t> FieldName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void*& FieldValue, int ArrayIndex)
+		bool GetFieldValue(ScriptArray<wchar_t> FieldName, UIProviderScriptFieldValue& FieldValue, int ArrayIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.GetFieldValue");
 			byte* params = (byte*)malloc(104);
 			*(ScriptArray<wchar_t>*)params = FieldName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)(params + 12) = FieldValue;
+			*(UIProviderScriptFieldValue*)(params + 12) = FieldValue;
 			*(int*)(params + 96) = ArrayIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			FieldValue = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)(params + 12);
+			FieldValue = *(UIProviderScriptFieldValue*)(params + 12);
 			auto returnVal = *(bool*)(params + 100);
 			free(params);
 			return returnVal;
 		}
-		bool SetFieldValue(ScriptArray<wchar_t> FieldName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void*& FieldValue, int ArrayIndex)
+		bool SetFieldValue(ScriptArray<wchar_t> FieldName, UIProviderScriptFieldValue& FieldValue, int ArrayIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.SetFieldValue");
 			byte* params = (byte*)malloc(104);
 			*(ScriptArray<wchar_t>*)params = FieldName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)(params + 12) = FieldValue;
+			*(UIProviderScriptFieldValue*)(params + 12) = FieldValue;
 			*(int*)(params + 96) = ArrayIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			FieldValue = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderScriptFieldValue'!
-void**)(params + 12);
+			FieldValue = *(UIProviderScriptFieldValue*)(params + 12);
 			auto returnVal = *(bool*)(params + 100);
 			free(params);
 			return returnVal;

@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine.Settings.h"
+#include "Engine.OnlineGameSearch.OverrideSkill.h"
+#include "Engine.Settings.LocalizedStringSetting.h"
+#include "Engine.OnlineGameSearch.OnlineGameSearchQuery.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.OnlineGameSearch." #y); \
@@ -23,14 +26,14 @@ namespace UnrealScript
 	class OnlineGameSearch : public Settings
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OverrideSkill' for the property named 'ManualSkillOverride'!
+		ADD_STRUCT(::NonArithmeticProperty<OverrideSkill>, ManualSkillOverride, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxSearchResults, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.LocalizedStringSetting' for the property named 'Query'!
+		ADD_STRUCT(::NonArithmeticProperty<LocalizedStringSetting>, Query, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsLanQuery, 0x1)
 		ADD_VAR(::BoolProperty, bUsesArbitration, 0x2)
 		ADD_VAR(::BoolProperty, bIsSearchInProgress, 0x4)
 		ADD_OBJECT(ScriptClass, GameSettingsClass)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchQuery' for the property named 'FilterQuery'!
+		ADD_STRUCT(::NonArithmeticProperty<OnlineGameSearchQuery>, FilterQuery, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, AdditionalSearchCriteria, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PingBucketSize, 0xFFFFFFFF)
 		void SortSearchResults()

@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "UDKBase.UDKBot.h"
 #include "Engine.Controller.h"
 #include "Engine.Actor.h"
@@ -9,11 +10,13 @@
 #include "Engine.Inventory.h"
 #include "UTGame.UTAvoidMarker.h"
 #include "Engine.InterpActor.h"
+#include "Core.Object.Rotator.h"
 #include "UTGame.UTSeqAct_AIStartFireAt.h"
 #include "UTGame.UTSeqAct_AIStopFire.h"
 #include "Engine.HUD.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Engine.PhysicsVolume.h"
+#include "UTGame.UTCharInfo.CharacterInfo.h"
 #include "Engine.Vehicle.h"
 #include "Engine.Projectile.h"
 #include "UDKBase.UDKVehicle.h"
@@ -685,20 +688,14 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void Initialize(float InSkill, 
-// WARNING: Unknown structure type 'ScriptStruct UTGame.UTCharInfo.CharacterInfo'!
-void*& BotInfo)
+		void Initialize(float InSkill, CharacterInfo& BotInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBot.Initialize");
 			byte* params = (byte*)malloc(116);
 			*(float*)params = InSkill;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.UTCharInfo.CharacterInfo'!
-void**)(params + 4) = BotInfo;
+			*(CharacterInfo*)(params + 4) = BotInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			BotInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.UTCharInfo.CharacterInfo'!
-void**)(params + 4);
+			BotInfo = *(CharacterInfo*)(params + 4);
 			free(params);
 		}
 		void ResetSkill()

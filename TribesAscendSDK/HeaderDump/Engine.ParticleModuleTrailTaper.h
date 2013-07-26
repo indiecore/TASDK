@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleTrailBase.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleTrailTaper." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class ParticleModuleTrailTaper : public ParticleModuleTrailBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'TaperFactor'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, TaperFactor, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, TaperMethod, 0xFFFFFFFF)
 	};
 }

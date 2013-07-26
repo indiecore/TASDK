@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.AnimationCompressionAlgorithm_RemoveLinearKeys.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimationCompressionAlgorithm_PerTrackCompression." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class AnimationCompressionAlgorithm_PerTrackCompression : public AnimationCompressionAlgorithm_RemoveLinearKeys
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'PerReductionCachedData'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, PerReductionCachedData, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PerturbationProbeSize, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxErrorPerTrackRatio, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TranslationErrorSourceRatio, 0xFFFFFFFF)

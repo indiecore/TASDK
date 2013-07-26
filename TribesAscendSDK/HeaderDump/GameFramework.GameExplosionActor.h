@@ -3,9 +3,11 @@
 #include "GameFramework.GameExplosion.h"
 #include "Engine.Controller.h"
 #include "Engine.Actor.h"
-#include "Engine.PhysicalMaterial.h"
-#include "Engine.ParticleSystem.h"
 #include "Engine.CameraShake.h"
+#include "Core.Object.Vector.h"
+#include "Engine.PhysicalMaterial.h"
+#include "Core.Object.Box.h"
+#include "Engine.ParticleSystem.h"
 #include "Engine.PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -81,16 +83,12 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		float BoxDistanceToPoint(Vector Start, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box'!
-void* BBox)
+		float BoxDistanceToPoint(Vector Start, Box BBox)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.BoxDistanceToPoint");
 			byte* params = (byte*)malloc(44);
 			*(Vector*)params = Start;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box'!
-void**)(params + 12) = BBox;
+			*(Box*)(params + 12) = BBox;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(float*)(params + 40);
 			free(params);

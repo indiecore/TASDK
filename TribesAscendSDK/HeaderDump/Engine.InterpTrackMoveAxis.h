@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.InterpTrackFloatBase.h"
+#include "Engine.InterpTrackMove.InterpLookupTrack.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.InterpTrackMoveAxis." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class InterpTrackMoveAxis : public InterpTrackFloatBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.InterpTrackMove.InterpLookupTrack' for the property named 'LookupTrack'!
+		ADD_STRUCT(::NonArithmeticProperty<InterpLookupTrack>, LookupTrack, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, MoveAxis, 0xFFFFFFFF)
 	};
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.Texture.h"
 #include "Engine.MeshComponent.h"
+#include "Engine.EngineTypes.LightmassPrimitiveSettings.h"
+#include "Core.Object.Color.h"
 #include "Engine.StaticMesh.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -25,7 +27,7 @@ namespace UnrealScript
 	class StaticMeshComponent : public MeshComponent
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightmassPrimitiveSettings' for the property named 'LightmassSettings'!
+		ADD_STRUCT(::NonArithmeticProperty<LightmassPrimitiveSettings>, LightmassSettings, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, VertexPositionVersionNumber, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bNeverBecomeDynamic, 0x1)
 		ADD_VAR(::ByteProperty, SimpleLightmapModificationFunction, 0xFFFFFFFF)
@@ -42,7 +44,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bOverrideLightMapRes, 0x4)
 		ADD_VAR(::BoolProperty, bOverrideLightMapResolution, 0x2)
 		ADD_VAR(::BoolProperty, bIgnoreInstanceForTextureStreaming, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'WireframeColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, WireframeColor, 0xFFFFFFFF)
 		ADD_OBJECT(StaticMesh, StaticMesh)
 		ADD_VAR(::IntProperty, PreviousLODLevel, 0xFFFFFFFF)
 		bool CanBecomeDynamic()

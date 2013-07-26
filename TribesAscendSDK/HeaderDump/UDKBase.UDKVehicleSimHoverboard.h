@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.SVehicleSimBase.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.InterpCurveFloat.h"
 #include "Engine.SoundCue.h"
 #include "UDKBase.UDKVehicle.h"
 #include "Engine.RB_ConstraintInstance.h"
@@ -43,7 +45,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bLeftGround, 0x4)
 		ADD_VAR(::BoolProperty, bInAJump, 0x2)
 		ADD_VAR(::BoolProperty, bIsOverDeepWater, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat' for the property named 'TurnDampingSpeedFunc'!
+		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, TurnDampingSpeedFunc, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxTurnTorque, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SpinTurnTorqueScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TurnTorqueFactor, 0xFFFFFFFF)

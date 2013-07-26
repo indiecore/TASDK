@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Engine.CheatManager.h"
 #include "Engine.SpeechRecognition.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \

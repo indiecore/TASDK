@@ -1,6 +1,10 @@
 #pragma once
+#include "IpDrv.MeshBeaconClient.ClientBandwidthTestData.h"
 #include "IpDrv.MeshBeacon.h"
+#include "IpDrv.MeshBeacon.ConnectionBandwidthStats.h"
 #include "IpDrv.ClientBeaconAddressResolver.h"
+#include "IpDrv.MeshBeaconClient.ClientConnectionRequest.h"
+#include "Engine.OnlineGameSearch.OnlineGameSearchResult.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.MeshBeaconClient." #y); \
@@ -32,9 +36,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ConnectionRequestTimeout, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ClientBeaconRequestType, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ClientBeaconState, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeaconClient.ClientBandwidthTestData' for the property named 'CurrentBandwidthTest'!
-		// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeaconClient.ClientConnectionRequest' for the property named 'ClientPendingRequest'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult' for the property named 'HostPendingRequest'!
+		ADD_STRUCT(::NonArithmeticProperty<ClientBandwidthTestData>, CurrentBandwidthTest, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ClientConnectionRequest>, ClientPendingRequest, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<OnlineGameSearchResult>, HostPendingRequest, 0xFFFFFFFF)
 		void OnCreateNewSessionRequestReceived(ScriptName SessionName, ScriptClass* SearchClass, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& Players)
@@ -63,21 +67,15 @@ void**)(params + 12);
 			PlatformSpecificInfo = *(params + 12);
 			free(params);
 		}
-		void OnReceivedBandwidthTestResults(byte TestType, byte TestResult, 
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeacon.ConnectionBandwidthStats'!
-void*& BandwidthStats)
+		void OnReceivedBandwidthTestResults(byte TestType, byte TestResult, ConnectionBandwidthStats& BandwidthStats)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.OnReceivedBandwidthTestResults");
 			byte* params = (byte*)malloc(14);
 			*params = TestType;
 			*(params + 1) = TestResult;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeacon.ConnectionBandwidthStats'!
-void**)(params + 4) = BandwidthStats;
+			*(ConnectionBandwidthStats*)(params + 4) = BandwidthStats;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			BandwidthStats = *(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeacon.ConnectionBandwidthStats'!
-void**)(params + 4);
+			BandwidthStats = *(ConnectionBandwidthStats*)(params + 4);
 			free(params);
 		}
 		void OnReceivedBandwidthTestRequest(byte TestType)
@@ -101,28 +99,16 @@ void**)(params + 4);
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.DestroyBeacon");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool RequestConnection(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void*& DesiredHost, 
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeaconClient.ClientConnectionRequest'!
-void*& ClientRequest, bool bRegisterSecureAddress)
+		bool RequestConnection(OnlineGameSearchResult& DesiredHost, ClientConnectionRequest& ClientRequest, bool bRegisterSecureAddress)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.RequestConnection");
 			byte* params = (byte*)malloc(52);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params = DesiredHost;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeaconClient.ClientConnectionRequest'!
-void**)(params + 8) = ClientRequest;
+			*(OnlineGameSearchResult*)params = DesiredHost;
+			*(ClientConnectionRequest*)(params + 8) = ClientRequest;
 			*(bool*)(params + 44) = bRegisterSecureAddress;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DesiredHost = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params;
-			ClientRequest = *(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeaconClient.ClientConnectionRequest'!
-void**)(params + 8);
+			DesiredHost = *(OnlineGameSearchResult*)params;
+			ClientRequest = *(ClientConnectionRequest*)(params + 8);
 			auto returnVal = *(bool*)(params + 48);
 			free(params);
 			return returnVal;

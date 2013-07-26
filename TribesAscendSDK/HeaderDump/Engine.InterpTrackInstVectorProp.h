@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.InterpTrackInstProperty.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Pointer.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.InterpTrackInstVectorProp." #y); \
@@ -12,7 +14,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(::VectorProperty, ResetVector, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VectorProp'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VectorProp, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

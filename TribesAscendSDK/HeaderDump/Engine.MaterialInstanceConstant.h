@@ -2,6 +2,7 @@
 #include "Engine.MaterialInstance.h"
 #include "Engine.MaterialInterface.h"
 #include "Engine.Texture.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.Font.h"
 namespace UnrealScript
 {
@@ -34,20 +35,14 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetVectorParameterValue(ScriptName ParameterName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void*& Value)
+		void SetVectorParameterValue(ScriptName ParameterName, LinearColor& Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceConstant.SetVectorParameterValue");
 			byte* params = (byte*)malloc(24);
 			*(ScriptName*)params = ParameterName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 8) = Value;
+			*(LinearColor*)(params + 8) = Value;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Value = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 8);
+			Value = *(LinearColor*)(params + 8);
 			free(params);
 		}
 		void SetFontParameterValue(ScriptName ParameterName, class Font* FontValue, int FontPage)

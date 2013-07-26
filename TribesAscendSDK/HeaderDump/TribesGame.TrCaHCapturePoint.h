@@ -1,7 +1,8 @@
 #pragma once
-#include "Engine.Actor.h"
 #include "TribesGame.TrGameObjective.h"
+#include "Engine.Actor.h"
 #include "TribesGame.TrPlayerController.h"
+#include "Core.Object.Vector.h"
 #include "Engine.SkelControlSingleBone.h"
 #include "Engine.MaterialInstanceConstant.h"
 #include "Engine.PlayerController.h"

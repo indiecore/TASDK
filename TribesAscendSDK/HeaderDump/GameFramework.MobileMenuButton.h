@@ -1,7 +1,9 @@
 #pragma once
 #include "GameFramework.MobileMenuObject.h"
-#include "Engine.Texture2D.h"
 #include "GameFramework.MobilePlayerInput.h"
+#include "Core.Object.LinearColor.h"
+#include "Engine.Texture2D.h"
+#include "GameFramework.MobileMenuObject.UVCoords.h"
 #include "Engine.Canvas.h"
 #include "GameFramework.MobileMenuScene.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -27,10 +29,10 @@ namespace UnrealScript
 	class MobileMenuButton : public MobileMenuObject
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'CaptionColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, CaptionColor, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Caption, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'ImageColor'!
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobileMenuObject.UVCoords' for the property named 'ImagesUVs'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, ImageColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<UVCoords>, ImagesUVs, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, Images)
 		void InitMenuObject(class MobilePlayerInput* PlayerInput, class MobileMenuScene* Scene, int ScreenWidth, int ScreenHeight)
 		{

@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.Object.h"
 #include "Engine.PhysicsAssetInstance.h"
+#include "Core.Object.Map_Mirror.h"
 #include "Engine.SkeletalMesh.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -20,7 +21,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(PhysicsAssetInstance, DefaultInstance)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'BodySetupIndexMap'!
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, BodySetupIndexMap, 0xFFFFFFFF)
 		ADD_OBJECT(SkeletalMesh, DefaultSkelMesh)
 		int FindBodyIndex(ScriptName BodyName)
 		{

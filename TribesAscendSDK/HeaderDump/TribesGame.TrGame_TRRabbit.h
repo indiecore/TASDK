@@ -5,6 +5,7 @@
 #include "Engine.PlayerStart.h"
 #include "Engine.Controller.h"
 #include "UTGame.UTTeamInfo.h"
+#include "TribesGame.TrGame_TRRabbit.ScoreStruct.h"
 #include "TribesGame.TrPlayerController.h"
 #include "Engine.Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -91,18 +92,14 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.ChangePreviousRabbitTeam");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrGame_TRRabbit.ScoreStruct'!
-void* MakeScoreStruct(class TrPlayerController* C, float Score)
+		ScoreStruct MakeScoreStruct(class TrPlayerController* C, float Score)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRRabbit.MakeScoreStruct");
 			byte* params = (byte*)malloc(16);
 			*(class TrPlayerController**)params = C;
 			*(float*)(params + 4) = Score;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrGame_TRRabbit.ScoreStruct'!
-void**)(params + 8);
+			auto returnVal = *(ScoreStruct*)(params + 8);
 			free(params);
 			return returnVal;
 		}

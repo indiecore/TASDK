@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleEmitter." #y); \
@@ -23,7 +24,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsSoloing, 0x4)
 		ADD_VAR(::BoolProperty, bCollapsed, 0x2)
 		ADD_VAR(::BoolProperty, ConvertedModules, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'EmitterEditorColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, EmitterEditorColor, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, EmitterRenderMode, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SubUVDataOffset, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, EmitterName, 0xFFFFFFFF)

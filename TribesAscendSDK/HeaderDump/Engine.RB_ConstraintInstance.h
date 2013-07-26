@@ -1,8 +1,12 @@
 #pragma once
 #include "Engine.RB_ConstraintSetup.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Quat.h"
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.Vector.h"
 #include "Engine.PhysicsAssetInstance.h"
+#include "Core.Object.Matrix.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RB_ConstraintInstance." #y); \
@@ -28,18 +32,18 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bTerminated, 0x1000)
 		ADD_VAR(::IntProperty, ConstraintIndex, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'DummyKinActor'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, DummyKinActor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AngularDriveForceLimit, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AngularDriveDamping, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AngularDriveSpring, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, AngularVelocityTarget, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat' for the property named 'AngularPositionTarget'!
+		ADD_STRUCT(::NonArithmeticProperty<Quat>, AngularPositionTarget, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearDriveForceLimit, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearDriveDamping, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LinearDriveSpring, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, LinearVelocityTarget, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, LinearPositionTarget, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ConstraintData'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ConstraintData, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bAngularSlerpDrive, 0x800)
 		ADD_VAR(::BoolProperty, bTwistVelocityDrive, 0x400)
 		ADD_VAR(::BoolProperty, bTwistPositionDrive, 0x200)
@@ -167,19 +171,13 @@ void**)(params + 20) = InPrimComp;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetAngularPositionTarget(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void*& InPosTarget)
+		void SetAngularPositionTarget(Quat& InPosTarget)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.SetAngularPositionTarget");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params = InPosTarget;
+			*(Quat*)params = InPosTarget;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			InPosTarget = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params;
+			InPosTarget = *(Quat*)params;
 			free(params);
 		}
 		void SetAngularVelocityTarget(Vector InVelTarget)
@@ -219,19 +217,13 @@ void**)params;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void MoveKinActorTransform(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void*& NewTM)
+		void MoveKinActorTransform(Matrix& NewTM)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_ConstraintInstance.MoveKinActorTransform");
 			byte* params = (byte*)malloc(64);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = NewTM;
+			*(Matrix*)params = NewTM;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			NewTM = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params;
+			NewTM = *(Matrix*)params;
 			free(params);
 		}
 	};

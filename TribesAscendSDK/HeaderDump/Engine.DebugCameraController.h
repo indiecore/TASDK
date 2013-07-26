@@ -2,6 +2,8 @@
 #include "Engine.PlayerController.h"
 #include "Engine.Player.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
+#include "Engine.Actor.TraceHitInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DebugCameraController." #y); \
@@ -27,31 +29,23 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, UnselectKey, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, SecondaryKey, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, PrimaryKey, 0xFFFFFFFF)
-		void PrimarySelect(Vector HitLoc, Vector HitNormal, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo)
+		void PrimarySelect(Vector HitLoc, Vector HitNormal, TraceHitInfo HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraController.PrimarySelect");
 			byte* params = (byte*)malloc(52);
 			*(Vector*)params = HitLoc;
 			*(Vector*)(params + 12) = HitNormal;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 24) = HitInfo;
+			*(TraceHitInfo*)(params + 24) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SecondarySelect(Vector HitLoc, Vector HitNormal, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo)
+		void SecondarySelect(Vector HitLoc, Vector HitNormal, TraceHitInfo HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraController.SecondarySelect");
 			byte* params = (byte*)malloc(52);
 			*(Vector*)params = HitLoc;
 			*(Vector*)(params + 12) = HitNormal;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 24) = HitInfo;
+			*(TraceHitInfo*)(params + 24) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

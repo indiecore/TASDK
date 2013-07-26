@@ -2,16 +2,19 @@
 #include "Engine.Pawn.h"
 #include "Engine.PlayerController.h"
 #include "UTGame.UTTeamGame.h"
-#include "Engine.Actor.h"
 #include "Engine.Controller.h"
 #include "TribesGame.TrStatsInterface.h"
+#include "Core.Object.Vector.h"
 #include "TribesGame.TrSeekingMissileManager.h"
 #include "TribesGame.TrPlayerController.h"
 #include "Engine.PlayerReplicationInfo.h"
+#include "Engine.Actor.h"
 #include "UTGame.UTBot.h"
 #include "UTGame.UTTeamInfo.h"
-#include "Engine.NavigationPoint.h"
 #include "UTGame.UTPlayerReplicationInfo.h"
+#include "UTGame.UTCharInfo.CharacterInfo.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
+#include "Engine.NavigationPoint.h"
 #include "TribesGame.TrPowerGenerator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -225,21 +228,15 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void InitializeBot(class UTBot* NewBot, class UTTeamInfo* BotTeam, 
-// WARNING: Unknown structure type 'ScriptStruct UTGame.UTCharInfo.CharacterInfo'!
-void*& BotInfo)
+		void InitializeBot(class UTBot* NewBot, class UTTeamInfo* BotTeam, CharacterInfo& BotInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame.InitializeBot");
 			byte* params = (byte*)malloc(120);
 			*(class UTBot**)params = NewBot;
 			*(class UTTeamInfo**)(params + 4) = BotTeam;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.UTCharInfo.CharacterInfo'!
-void**)(params + 8) = BotInfo;
+			*(CharacterInfo*)(params + 8) = BotInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			BotInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.UTCharInfo.CharacterInfo'!
-void**)(params + 8);
+			BotInfo = *(CharacterInfo*)(params + 8);
 			free(params);
 		}
 		void StartBots()
@@ -255,17 +252,13 @@ void**)(params + 8);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		class PlayerController* Login(ScriptArray<wchar_t> Portal, ScriptArray<wchar_t> Options, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* UniqueId, ScriptArray<wchar_t>& ErrorMessage)
+		class PlayerController* Login(ScriptArray<wchar_t> Portal, ScriptArray<wchar_t> Options, UniqueNetId UniqueId, ScriptArray<wchar_t>& ErrorMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame.Login");
 			byte* params = (byte*)malloc(48);
 			*(ScriptArray<wchar_t>*)params = Portal;
 			*(ScriptArray<wchar_t>*)(params + 12) = Options;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 24) = UniqueId;
+			*(UniqueNetId*)(params + 24) = UniqueId;
 			*(ScriptArray<wchar_t>*)(params + 32) = ErrorMessage;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			ErrorMessage = *(ScriptArray<wchar_t>*)(params + 32);

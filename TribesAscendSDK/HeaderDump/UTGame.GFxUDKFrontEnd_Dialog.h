@@ -1,6 +1,7 @@
 #pragma once
 #include "UTGame.GFxUDKFrontEnd_View.h"
 #include "GFxUI.GFxClikWidget.h"
+#include "GFxUI.GFxClikWidget.EventData.h"
 #include "GFxUI.GFxObject.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
@@ -18,15 +19,11 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, InfoTxt)
 		ADD_OBJECT(GFxObject, TitleTxt)
 		ADD_OBJECT(GFxObject, DialogMC)
-		void AcceptDelegate(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* ev)
+		void AcceptDelegate(EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Dialog.AcceptDelegate");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = ev;
+			*(EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -81,15 +78,11 @@ void**)params = EventListener;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void Select_Back(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* ev)
+		void Select_Back(EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Dialog.Select_Back");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = ev;
+			*(EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

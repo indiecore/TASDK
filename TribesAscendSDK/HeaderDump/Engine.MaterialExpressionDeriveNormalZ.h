@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.MaterialExpression.h"
+#include "Engine.MaterialExpression.ExpressionInput.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.MaterialExpressionDeriveNormalZ." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class MaterialExpressionDeriveNormalZ : public MaterialExpression
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'InXY'!
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, InXY, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

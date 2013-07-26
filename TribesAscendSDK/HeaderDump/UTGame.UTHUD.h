@@ -1,19 +1,25 @@
 #pragma once
 #include "Engine.MaterialInstanceConstant.h"
+#include "Core.Object.Color.h"
 #include "UTGame.UTHUDBase.h"
-#include "Engine.Pawn.h"
+#include "Core.Object.Vector2D.h"
 #include "Engine.Weapon.h"
+#include "Engine.Pawn.h"
 #include "Engine.Font.h"
 #include "Engine.Texture2D.h"
-#include "UTGame.UTPlayerReplicationInfo.h"
+#include "Core.Object.LinearColor.h"
+#include "Engine.UIRoot.TextureCoordinates.h"
 #include "UTGame.UTWeapon.h"
 #include "Engine.MaterialEffect.h"
 #include "Engine.Material.h"
+#include "UTGame.UTPlayerReplicationInfo.h"
 #include "UTGame.UTPawn.h"
 #include "Engine.PlayerReplicationInfo.h"
+#include "Engine.Canvas.h"
+#include "Engine.HUD.HudLocalizedMessage.h"
 #include "Engine.UIInteraction.h"
 #include "Engine.LocalPlayer.h"
-#include "Engine.Canvas.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTHUD." #y); \
@@ -38,25 +44,25 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(Texture2D, AltHudTexture)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'WhiteLinearColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'TeamHUDColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, WhiteLinearColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, TeamHUDColor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bShowVehicleArmorCount, 0x40000)
 		ADD_VAR(::FloatProperty, TX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TY, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'GoldLinearColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, GoldLinearColor, 0xFFFFFFFF)
 		ADD_OBJECT(Pawn, PawnOwner)
 		ADD_VAR(::FloatProperty, LastAmmoPickupTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastArmorPickupTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MessageOffset, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsFirstPlayer, 0x80000)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BkgTexColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'BkgTexCoords'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, BkgTexColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, BkgTexCoords, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, BkgTexture)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'SilverLinearColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'DMLinearColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'BlueLinearColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'RedLinearColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'AmmoBarColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, SilverLinearColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, DMLinearColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BlueLinearColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, RedLinearColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, AmmoBarColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, THeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BootHeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BootWidth, 0xFFFFFFFF)
@@ -78,7 +84,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DollWidth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DollOffsetY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DollOffsetX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'PawnDollBGCoords'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, PawnDollBGCoords, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, PlaceMarks, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, YouHaveLost, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, YouHaveWon, 0xFFFFFFFF)
@@ -88,30 +94,30 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, PressFireToBegin, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, WaitingForMatch, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, WarmupString, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'BlackBackgroundColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'NameplateRight'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'NameplateBubble'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'NameplateCenter'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'NameplateLeft'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BlackBackgroundColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, NameplateRight, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, NameplateBubble, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, NameplateCenter, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, NameplateLeft, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NameplateBubbleWidth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NameplateWidth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DamageIndicatorSize, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'VehiclePosition'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, VehiclePosition, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LastFragCount, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FragPulseTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'ScoringPosition'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, ScoringPosition, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PowerupTransitionTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PowerupYPos, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'PowerupDims'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'MapPosition'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, PowerupDims, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, MapPosition, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AmmoPulseTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LastAmmoCount, 0xFFFFFFFF)
 		ADD_OBJECT(UTWeapon, LastWeapon)
 		ADD_VAR(::FloatProperty, AmmoTextOffsetY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AmmoTextOffsetX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'AmmoBGCoords'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, AmmoBGCoords, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AmmoBarOffsetY, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'AmmoPosition'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, AmmoPosition, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ArmorPulseTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LastArmorAmount, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ArmorTextY, 0xFFFFFFFF)
@@ -120,7 +126,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ArmorIconX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ArmorBGOffsetY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ArmorBGOffsetX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'ArmorBGCoords'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, ArmorBGCoords, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HealthPulseTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LastHealth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HealthTextY, 0xFFFFFFFF)
@@ -130,15 +136,15 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, HealthBGOffsetY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HealthBGOffsetX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HealthOffsetX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'HealthBGCoords'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, HealthBGCoords, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DollVisibility, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastDollUpdate, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'DollPosition'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'ClockPosition'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, DollPosition, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, ClockPosition, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, HitEffectMaterialInstance)
 		ADD_OBJECT(MaterialEffect, HitEffect)
 		ADD_VAR(::FloatProperty, HitEffectFadeTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'MaxHitEffectColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MaxHitEffectColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HitEffectIntensity, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, FadeParamName, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, PositionalParamName, 0xFFFFFFFF)
@@ -175,7 +181,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CurrentWeaponScale, 0xFFFFFFFF)
 		ADD_OBJECT(UTWeapon, WeaponList)
 		ADD_VAR(::FloatProperty, WeaponBarY, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'TeamTextColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, TeamTextColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HUDScaleY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HUDScaleX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WeaponBoxHeight, 0xFFFFFFFF)
@@ -183,7 +189,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, WeaponBarScale, 0xFFFFFFFF)
 		ADD_OBJECT(UTPlayerReplicationInfo, CharPendingPRI)
 		ADD_OBJECT(UTPlayerReplicationInfo, CharPRI)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'CharPortraitSize'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, CharPortraitSize, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CharPortraitSlideTransitionTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CharPortraitSlideTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CharPortraitTime, 0xFFFFFFFF)
@@ -212,14 +218,12 @@ namespace UnrealScript
 		ADD_OBJECT(UTPlayerReplicationInfo, UTOwnerPRI)
 		ADD_OBJECT(UTPawn, UTPawnOwner)
 		ADD_VAR(::FloatProperty, LastHealthPickupTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'GrayColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'LC_White'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, GrayColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, LC_White, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, UT3GHudTexture)
 		ADD_OBJECT(Texture2D, TalkingTexture)
 		ADD_OBJECT(ScriptClass, WeaponSwitchMessage)
-		void DrawTileCentered(class Texture2D* Tex, float XL, float YL, float U, float V, float UL, float VL, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* C)
+		void DrawTileCentered(class Texture2D* Tex, float XL, float YL, float U, float V, float UL, float VL, LinearColor C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawTileCentered");
 			byte* params = (byte*)malloc(44);
@@ -230,9 +234,7 @@ void* C)
 			*(float*)(params + 16) = V;
 			*(float*)(params + 20) = UL;
 			*(float*)(params + 24) = VL;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 28) = C;
+			*(LinearColor*)(params + 28) = C;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -260,55 +262,37 @@ void**)(params + 28) = C;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* ResolveHUDPosition(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* Position, float Width, float Height)
+		Vector2D ResolveHUDPosition(Vector2D Position, float Width, float Height)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.ResolveHUDPosition");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = Position;
+			*(Vector2D*)params = Position;
 			*(float*)(params + 8) = Width;
 			*(float*)(params + 12) = Height;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 16);
+			auto returnVal = *(Vector2D*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		void GetScreenCoords(float PosY, float& ScreenX, float& ScreenY, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void*& InMessage)
+		void GetScreenCoords(float PosY, float& ScreenX, float& ScreenY, HudLocalizedMessage& InMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetScreenCoords");
 			byte* params = (byte*)malloc(76);
 			*(float*)params = PosY;
 			*(float*)(params + 4) = ScreenX;
 			*(float*)(params + 8) = ScreenY;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void**)(params + 12) = InMessage;
+			*(HudLocalizedMessage*)(params + 12) = InMessage;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			ScreenX = *(float*)(params + 4);
 			ScreenY = *(float*)(params + 8);
-			InMessage = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void**)(params + 12);
+			InMessage = *(HudLocalizedMessage*)(params + 12);
 			free(params);
 		}
-		void DrawMessageText(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void* LocalMessage, float ScreenX, float ScreenY)
+		void DrawMessageText(HudLocalizedMessage LocalMessage, float ScreenX, float ScreenY)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawMessageText");
 			byte* params = (byte*)malloc(72);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void**)params = LocalMessage;
+			*(HudLocalizedMessage*)params = LocalMessage;
 			*(float*)(params + 64) = ScreenX;
 			*(float*)(params + 68) = ScreenY;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
@@ -380,28 +364,16 @@ void**)params = LocalMessage;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.StartMusic");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void GetTeamColor(int TeamIndex, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void*& ImageColor, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void*& TextColor)
+		void GetTeamColor(int TeamIndex, LinearColor& ImageColor, Color& TextColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetTeamColor");
 			byte* params = (byte*)malloc(24);
 			*(int*)params = TeamIndex;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 4) = ImageColor;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 20) = TextColor;
+			*(LinearColor*)(params + 4) = ImageColor;
+			*(Color*)(params + 20) = TextColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ImageColor = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 4);
-			TextColor = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 20);
+			ImageColor = *(LinearColor*)(params + 4);
+			TextColor = *(Color*)(params + 20);
 			free(params);
 		}
 		void DisplayHit(Vector HitDir, int Damage, ScriptClass* DamageType)
@@ -432,9 +404,7 @@ void**)(params + 20);
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayDamage");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DrawBackground(float X, float Y, float Width, float Height, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* DrawColor, class Canvas* DrawCanvas)
+		void DrawBackground(float X, float Y, float Width, float Height, LinearColor DrawColor, class Canvas* DrawCanvas)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawBackground");
 			byte* params = (byte*)malloc(36);
@@ -442,16 +412,12 @@ void* DrawColor, class Canvas* DrawCanvas)
 			*(float*)(params + 4) = Y;
 			*(float*)(params + 8) = Width;
 			*(float*)(params + 12) = Height;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 16) = DrawColor;
+			*(LinearColor*)(params + 16) = DrawColor;
 			*(class Canvas**)(params + 32) = DrawCanvas;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawBeaconBackground(float X, float Y, float Width, float Height, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* DrawColor, class Canvas* DrawCanvas)
+		void DrawBeaconBackground(float X, float Y, float Width, float Height, LinearColor DrawColor, class Canvas* DrawCanvas)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawBeaconBackground");
 			byte* params = (byte*)malloc(36);
@@ -459,9 +425,7 @@ void* DrawColor, class Canvas* DrawCanvas)
 			*(float*)(params + 4) = Y;
 			*(float*)(params + 8) = Width;
 			*(float*)(params + 12) = Height;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 16) = DrawColor;
+			*(LinearColor*)(params + 16) = DrawColor;
 			*(class Canvas**)(params + 32) = DrawCanvas;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -480,11 +444,7 @@ void**)(params + 16) = DrawColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawBarGraph(float X, float Y, float Width, float MaxWidth, float Height, class Canvas* DrawCanvas, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* BarColor, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* BackColor)
+		void DrawBarGraph(float X, float Y, float Width, float MaxWidth, float Height, class Canvas* DrawCanvas, Color BarColor, Color BackColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawBarGraph");
 			byte* params = (byte*)malloc(32);
@@ -494,12 +454,8 @@ void* BackColor)
 			*(float*)(params + 12) = MaxWidth;
 			*(float*)(params + 16) = Height;
 			*(class Canvas**)(params + 20) = DrawCanvas;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 24) = BarColor;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 28) = BackColor;
+			*(Color*)(params + 24) = BarColor;
+			*(Color*)(params + 28) = BackColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -584,46 +540,30 @@ void**)(params + 28) = BackColor;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayScoring");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DisplayFragCount(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* pos)
+		void DisplayFragCount(Vector2D pos)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayFragCount");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = pos;
+			*(Vector2D*)params = pos;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawNameplateBackground(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* pos, float WordWidth, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* NameplateColor, float WordHeight)
+		void DrawNameplateBackground(Vector2D pos, float WordWidth, LinearColor NameplateColor, float WordHeight)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawNameplateBackground");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = pos;
+			*(Vector2D*)params = pos;
 			*(float*)(params + 8) = WordWidth;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 12) = NameplateColor;
+			*(LinearColor*)(params + 12) = NameplateColor;
 			*(float*)(params + 28) = WordHeight;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DisplayLeaderBoard(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* pos)
+		void DisplayLeaderBoard(Vector2D pos)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayLeaderBoard");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = pos;
+			*(Vector2D*)params = pos;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

@@ -2,8 +2,10 @@
 #include "UTGame.UTDamageType.h"
 #include "TribesGame.TrPlayerController.h"
 #include "Engine.SoundCue.h"
+#include "Core.Object.Vector2D.h"
 #include "Engine.Controller.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Vehicle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -40,9 +42,9 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, m_GibFalloff, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bEnableMotors, 0x2)
 		ADD_VAR(::FloatProperty, m_fDamageMultiplierAgainstGenerators, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_v2DDamageNumbersMinMaxZ'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_v2DDamageNumbersMinMaxY'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_v2DDamageNumbersMinMaxX'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_v2DDamageNumbersMinMaxZ, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_v2DDamageNumbersMinMaxY, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_v2DDamageNumbersMinMaxX, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_nKillIconIndex, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, m_nmCameraShake, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bOffhandType, 0x10)

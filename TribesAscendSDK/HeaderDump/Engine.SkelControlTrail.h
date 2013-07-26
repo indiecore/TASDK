@@ -1,5 +1,7 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Engine.SkelControlBase.h"
+#include "Core.Object.Matrix.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SkelControlTrail." #y); \
@@ -17,7 +19,7 @@ namespace UnrealScript
 	class SkelControlTrail : public SkelControlBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'OldLocalToWorld'!
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, OldLocalToWorld, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ThisTimstep, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, FakeVelocity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StretchLimit, 0xFFFFFFFF)

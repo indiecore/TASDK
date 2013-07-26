@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.Actor.h"
+#include "Core.Object.Pointer.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.CrowdAgentBase." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class CrowdAgentBase : public Actor
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_NavigationHandle'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IInterface_NavigationHandle, 0xFFFFFFFF)
 		void NotifyPathChanged()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CrowdAgentBase.NotifyPathChanged");

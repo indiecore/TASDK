@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "GameFramework.GameAICommand.h"
 #include "Engine.ReachSpec.h"
 #include "Engine.Actor.h"

@@ -3,8 +3,10 @@
 #include "UTGame.UTMapInfo.h"
 #include "UTGame.UTGameObjective.h"
 #include "Engine.Canvas.h"
+#include "Core.Object.LinearColor.h"
 #include "UTGame.UTPlayerController.h"
 #include "UTGame.UTVehicle.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.SeqAct_Toggle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -45,18 +47,14 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.SetInitialState");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void RenderMapIcon(class UTMapInfo* MP, class Canvas* Canvas, class UTPlayerController* PlayerOwner, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* FinalColor)
+		void RenderMapIcon(class UTMapInfo* MP, class Canvas* Canvas, class UTPlayerController* PlayerOwner, LinearColor FinalColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.RenderMapIcon");
 			byte* params = (byte*)malloc(28);
 			*(class UTMapInfo**)params = MP;
 			*(class Canvas**)(params + 4) = Canvas;
 			*(class UTPlayerController**)(params + 8) = PlayerOwner;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 12) = FinalColor;
+			*(LinearColor*)(params + 12) = FinalColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

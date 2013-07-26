@@ -1,5 +1,7 @@
 #pragma once
 #include "Core.Object.h"
+#include "Engine.OnlineRecentPlayersList.RecentParty.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.OnlineRecentPlayersList." #y); \
@@ -21,16 +23,12 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, RecentPlayersAddIndex, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxRecentParties, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxRecentPlayers, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineRecentPlayersList.RecentParty' for the property named 'LastParty'!
-		void AddPlayerToRecentPlayers(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* NewPlayer)
+		ADD_STRUCT(::NonArithmeticProperty<RecentParty>, LastParty, 0xFFFFFFFF)
+		void AddPlayerToRecentPlayers(UniqueNetId NewPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineRecentPlayersList.AddPlayerToRecentPlayers");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = NewPlayer;
+			*(UniqueNetId*)params = NewPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -39,17 +37,13 @@ void**)params = NewPlayer;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineRecentPlayersList.ClearRecentPlayers");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void AddPartyToRecentParties(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PartyLeader, 
+		void AddPartyToRecentParties(UniqueNetId PartyLeader, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& PartyMembers)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineRecentPlayersList.AddPartyToRecentParties");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PartyLeader;
+			*(UniqueNetId*)params = PartyLeader;
 			*(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 8) = PartyMembers;
@@ -94,45 +88,33 @@ void**)params = Players;
 void**)params;
 			free(params);
 		}
-		int GetSkillForCurrentPlayer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* Player)
+		int GetSkillForCurrentPlayer(UniqueNetId Player)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineRecentPlayersList.GetSkillForCurrentPlayer");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = Player;
+			*(UniqueNetId*)params = Player;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		int GetTeamForCurrentPlayer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* Player)
+		int GetTeamForCurrentPlayer(UniqueNetId Player)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineRecentPlayersList.GetTeamForCurrentPlayer");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = Player;
+			*(UniqueNetId*)params = Player;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		void SetLastParty(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PartyLeader, 
+		void SetLastParty(UniqueNetId PartyLeader, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& PartyMembers)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineRecentPlayersList.SetLastParty");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PartyLeader;
+			*(UniqueNetId*)params = PartyLeader;
 			*(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 8) = PartyMembers;

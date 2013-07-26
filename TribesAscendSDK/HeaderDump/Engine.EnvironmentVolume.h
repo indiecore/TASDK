@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.Volume.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.EnvironmentVolume." #y); \
@@ -18,8 +19,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bSplitNavMesh, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_NavMeshPathObject'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_NavMeshPathObstacle'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IInterface_NavMeshPathObject, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IInterface_NavMeshPathObstacle, 0xFFFFFFFF)
 		void SetSplitNavMesh(bool bNewValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EnvironmentVolume.SetSplitNavMesh");

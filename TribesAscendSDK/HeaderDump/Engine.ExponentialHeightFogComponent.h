@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ActorComponent.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ExponentialHeightFogComponent." #y); \
@@ -17,9 +18,9 @@ namespace UnrealScript
 	class ExponentialHeightFogComponent : public ActorComponent
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'LightInscatteringColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, LightInscatteringColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LightInscatteringBrightness, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'OppositeLightColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, OppositeLightColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OppositeLightBrightness, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LightTerminatorAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StartDistance, 0xFFFFFFFF)

@@ -1,9 +1,12 @@
 #pragma once
 #include "Engine.Actor.h"
-#include "Engine.MaterialInstanceConstant.h"
 #include "Engine.Texture2D.h"
 #include "Engine.PlayerController.h"
+#include "Core.Object.Vector2D.h"
+#include "Engine.MaterialInstanceConstant.h"
 #include "Engine.Canvas.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.LinearColor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrSpottedTarget." #y); \
@@ -30,7 +33,7 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, m_SpottedActor)
 		ADD_VAR(::FloatProperty, m_fLastSpottedTimestamp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fSpottedActorDuration, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_MarkerSize'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_MarkerSize, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, m_MarkerMIC)
 		ADD_VAR(::FloatProperty, m_fMarkerOpacity, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMarkerZOffset, 0xFFFFFFFF)
@@ -77,16 +80,12 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* GetMarkerColor()
+		LinearColor GetMarkerColor()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSpottedTarget.GetMarkerColor");
 			byte* params = (byte*)malloc(16);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)params;
+			auto returnVal = *(LinearColor*)params;
 			free(params);
 			return returnVal;
 		}

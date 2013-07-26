@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.PathConstraint.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Pawn.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \

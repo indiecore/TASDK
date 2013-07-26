@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.Volume.h"
+#include "Engine.ReverbVolume.InteriorSettings.h"
+#include "Engine.ReverbVolume.ReverbSettings.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ReverbVolume." #y); \
@@ -24,8 +26,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ReverbVolume, NextLowerPriorityVolume)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ReverbVolume.InteriorSettings' for the property named 'AmbientZoneSettings'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ReverbVolume.ReverbSettings' for the property named 'Settings'!
+		ADD_STRUCT(::NonArithmeticProperty<InteriorSettings>, AmbientZoneSettings, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ReverbSettings>, Settings, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
 		ADD_VAR(::FloatProperty, Priority, 0xFFFFFFFF)
 	};

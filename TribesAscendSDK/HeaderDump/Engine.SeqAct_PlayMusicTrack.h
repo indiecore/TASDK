@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.SequenceAction.h"
+#include "Engine.MusicTrackDataStructures.MusicTrackStruct.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.SeqAct_PlayMusicTrack." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class SeqAct_PlayMusicTrack : public SequenceAction
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MusicTrackDataStructures.MusicTrackStruct' for the property named 'MusicTrack'!
+		ADD_STRUCT(::NonArithmeticProperty<MusicTrackStruct>, MusicTrack, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

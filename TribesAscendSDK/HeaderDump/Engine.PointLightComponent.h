@@ -1,5 +1,9 @@
 #pragma once
 #include "Engine.LightComponent.h"
+#include "Engine.EngineTypes.LightmassPointLightSettings.h"
+#include "Core.Object.Plane.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Matrix.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.PointLightComponent." #y); \
@@ -17,10 +21,10 @@ namespace UnrealScript
 	class PointLightComponent : public LightComponent
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightmassPointLightSettings' for the property named 'LightmassSettings'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Plane' for the property named 'ShadowPlane'!
+		ADD_STRUCT(::NonArithmeticProperty<LightmassPointLightSettings>, LightmassSettings, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Plane>, ShadowPlane, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, Translation, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'CachedParentToWorld'!
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, CachedParentToWorld, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinShadowFalloffRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ShadowFalloffExponent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FalloffExponent, 0xFFFFFFFF)

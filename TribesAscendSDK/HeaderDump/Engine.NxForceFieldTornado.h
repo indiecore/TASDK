@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.NxForceField.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.ForceFieldShape.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -24,7 +25,7 @@ namespace UnrealScript
 	class NxForceFieldTornado : public NxForceField
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Kernel'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Kernel, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SelfRotationStrength, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, BSpecialRadialForceMode, 0x1)
 		ADD_VAR(::FloatProperty, HeightOffset, 0xFFFFFFFF)

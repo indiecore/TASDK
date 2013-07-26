@@ -1,8 +1,10 @@
 #pragma once
 #include "TribesGame.TrDeployable_Sensor.h"
+#include "Engine.Pawn.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.ParticleSystem.h"
 #include "TribesGame.TrTripActor.h"
-#include "Engine.Pawn.h"
+#include "Core.Object.Vector.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrDeployable_TripSensor." #y); \
@@ -14,7 +16,7 @@ namespace UnrealScript
 	class TrDeployable_TripSensor : public TrDeployable_Sensor
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_TrTripNotifier'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IInterface_TrTripNotifier, 0xFFFFFFFF)
 		void AddTripActor(class TrTripActor* NewTrip)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_TripSensor.AddTripActor");

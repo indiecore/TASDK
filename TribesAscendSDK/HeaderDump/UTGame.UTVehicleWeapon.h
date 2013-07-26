@@ -1,11 +1,14 @@
 #pragma once
 #include "Engine.Canvas.h"
 #include "UTGame.UTWeapon.h"
-#include "Engine.HUD.h"
+#include "Core.Object.Vector.h"
+#include "UDKBase.UDKPawn.MaterialImpactEffect.h"
 #include "UTGame.UTVehicle.h"
 #include "Engine.PhysicalMaterial.h"
 #include "Engine.SoundCue.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.Actor.h"
+#include "Engine.HUD.h"
 #include "Engine.Projectile.h"
 #include "UTGame.UTPlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -44,8 +47,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CurrentCrosshairScaling, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastInCorrectAimTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastCorrectAimTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect' for the property named 'DefaultAltImpactEffect'!
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect' for the property named 'DefaultImpactEffect'!
+		ADD_STRUCT(::NonArithmeticProperty<MaterialImpactEffect>, DefaultAltImpactEffect, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<MaterialImpactEffect>, DefaultImpactEffect, 0xFFFFFFFF)
 		float GetMaxFinalAimAdjustment()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleWeapon.GetMaxFinalAimAdjustment");
@@ -76,9 +79,7 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect'!
-void* GetImpactEffect(class Actor* HitActor, class PhysicalMaterial* HitMaterial, byte FireModeNum)
+		MaterialImpactEffect GetImpactEffect(class Actor* HitActor, class PhysicalMaterial* HitMaterial, byte FireModeNum)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleWeapon.GetImpactEffect");
 			byte* params = (byte*)malloc(57);
@@ -86,9 +87,7 @@ void* GetImpactEffect(class Actor* HitActor, class PhysicalMaterial* HitMaterial
 			*(class PhysicalMaterial**)(params + 4) = HitMaterial;
 			*(params + 8) = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect'!
-void**)(params + 12);
+			auto returnVal = *(MaterialImpactEffect*)(params + 12);
 			free(params);
 			return returnVal;
 		}

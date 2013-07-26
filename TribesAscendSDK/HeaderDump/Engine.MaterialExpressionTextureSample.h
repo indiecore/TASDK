@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.MaterialExpression.h"
+#include "Engine.MaterialExpression.ExpressionInput.h"
 #include "Engine.Texture.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	class MaterialExpressionTextureSample : public MaterialExpression
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'Coordinates'!
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, Coordinates, 0xFFFFFFFF)
 		ADD_OBJECT(Texture, Texture)
 	};
 }

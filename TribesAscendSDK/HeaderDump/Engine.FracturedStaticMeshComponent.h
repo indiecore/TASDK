@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.FracturedBaseComponent.h"
+#include "Core.Object.Box.h"
 #include "Engine.MaterialInterface.h"
+#include "Core.Object.Vector.h"
 #include "Engine.PhysicalMaterial.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -33,7 +35,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bTopFragmentsRootNonDestroyable, 0x4)
 		ADD_VAR(::BoolProperty, bUseVisibleVertsForBounds, 0x2)
 		ADD_VAR(::BoolProperty, bUseSkinnedRendering, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box' for the property named 'VisibleBox'!
+		ADD_STRUCT(::NonArithmeticProperty<Box>, VisibleBox, 0xFFFFFFFF)
 		void SetVisibleFragments(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void* VisibilityFactors)
@@ -76,17 +78,13 @@ void**)params = VisibilityFactors;
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box'!
-void* GetFragmentBox(int FragmentIndex)
+		Box GetFragmentBox(int FragmentIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshComponent.GetFragmentBox");
 			byte* params = (byte*)malloc(32);
 			*(int*)params = FragmentIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box'!
-void**)(params + 4);
+			auto returnVal = *(Box*)(params + 4);
 			free(params);
 			return returnVal;
 		}

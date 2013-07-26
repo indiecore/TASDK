@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.DistributionVector.h"
+#include "Core.Object.InterpCurveTwoVectors.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DistributionVectorUniformCurve." #y); \
@@ -22,7 +23,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUseExtremes, 0x4)
 		ADD_VAR(::BoolProperty, bLockAxes2, 0x2)
 		ADD_VAR(::BoolProperty, bLockAxes1, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveTwoVectors' for the property named 'ConstantCurve'!
+		ADD_STRUCT(::NonArithmeticProperty<InterpCurveTwoVectors>, ConstantCurve, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

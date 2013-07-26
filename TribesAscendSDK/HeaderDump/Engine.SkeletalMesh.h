@@ -1,6 +1,12 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.QWord.h"
 #include "Engine.FaceFXAsset.h"
+#include "Core.Object.BoxSphereBounds.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Map_Mirror.h"
+#include "Core.Object.IndirectArray_Mirror.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.PhysicsAsset.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -26,11 +32,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(FaceFXAsset, FaceFXAsset)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoxSphereBounds' for the property named 'Bounds'!
+		ADD_STRUCT(::NonArithmeticProperty<BoxSphereBounds>, Bounds, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, Origin, 0xFFFFFFFF)
 		ADD_STRUCT(::RotatorProperty, RotOrigin, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SkeletalDepth, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IndirectArray_Mirror' for the property named 'LODModels'!
+		ADD_STRUCT(::NonArithmeticProperty<IndirectArray_Mirror>, LODModels, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, SkelMirrorAxis, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, SkelMirrorFlipAxis, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bPerPolyUseSoftWeighting, 0x1)
@@ -86,7 +92,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bEnableValidBounds, 0x1)
 		ADD_STRUCT(::VectorProperty, ValidBoundsMin, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, ValidBoundsMax, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'ClothTornTriMap'!
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, ClothTornTriMap, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SoftBodyVolumeStiffness, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SoftBodyStretchingStiffness, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SoftBodyDensity, 0xFFFFFFFF)

@@ -1,7 +1,11 @@
 #pragma once
 #include "Core.Subsystem.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.Double.h"
+#include "Engine.ReverbVolume.InteriorSettings.h"
 #include "Engine.SoundMode.h"
 #include "Engine.SoundNodeWave.h"
+#include "Core.Object.QWord.h"
 #include "Engine.SoundClass.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -29,28 +33,28 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastUpdateTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TransientMasterVolume, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, DebugState, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'TextToSpeech'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, TextToSpeech, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ExteriorLPFInterp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ExteriorVolumeInterp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InteriorLPFInterp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InteriorVolumeInterp, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'ExteriorLPFEndTime'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'InteriorLPFEndTime'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'ExteriorEndTime'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'InteriorEndTime'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'InteriorStartTime'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ReverbVolume.InteriorSettings' for the property named 'ListenerInteriorSettings'!
+		ADD_STRUCT(::NonArithmeticProperty<Double>, ExteriorLPFEndTime, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Double>, InteriorLPFEndTime, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Double>, ExteriorEndTime, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Double>, InteriorEndTime, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Double>, InteriorStartTime, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<InteriorSettings>, ListenerInteriorSettings, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ListenerVolumeIndex, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'SoundModeEndTime'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'SoundModeFadeInEndTime'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'SoundModeFadeInStartTime'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'SoundModeStartTime'!
+		ADD_STRUCT(::NonArithmeticProperty<Double>, SoundModeEndTime, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Double>, SoundModeFadeInEndTime, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Double>, SoundModeFadeInStartTime, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Double>, SoundModeStartTime, 0xFFFFFFFF)
 		ADD_OBJECT(SoundMode, CurrentMode)
 		ADD_VAR(::NameProperty, BaseSoundModeName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Effects'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Effects, 0xFFFFFFFF)
 		ADD_STRUCT(::QWordProperty, CurrentTick, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, CommonAudioPoolFreeBytes, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'CommonAudioPool'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, CommonAudioPool, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bGameWasTicking, 0x2)
 		ADD_VAR(::BoolProperty, m_bEnableBassBoost, 0x1)
 		ADD_OBJECT(SoundNodeWave, ChirpOutSoundNodeWave)

@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.Projectile.h"
 #include "Engine.Vehicle.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

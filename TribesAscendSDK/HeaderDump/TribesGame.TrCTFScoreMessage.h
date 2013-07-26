@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Color.h"
 #include "UTGame.UTLocalMessage.h"
 #include "Engine.SoundNodeWave.h"
 #include "Engine.PlayerController.h"
@@ -84,9 +85,7 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		Color GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFScoreMessage.GetColor");
 			byte* params = (byte*)malloc(20);
@@ -95,9 +94,7 @@ void* GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI, class Player
 			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
 			*(class Object**)(params + 12) = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 16);
+			auto returnVal = *(Color*)(params + 16);
 			free(params);
 			return returnVal;
 		}

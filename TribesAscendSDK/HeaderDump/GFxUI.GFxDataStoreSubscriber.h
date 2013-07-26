@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.Object.h"
 #include "GFxUI.GFxMoviePlayer.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.UIDataStore.h"
 #include "Engine.UIDataProvider.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
@@ -21,7 +22,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(GFxMoviePlayer, Movie)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIDataStorePublisher'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIDataStorePublisher, 0xFFFFFFFF)
 		void PublishValues()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxDataStoreSubscriber.PublishValues");

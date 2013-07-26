@@ -3,6 +3,7 @@
 #include "Engine.SkelControlSingleBone.h"
 #include "UDKBase.UDKVehicle.h"
 #include "Engine.ParticleSystem.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKSkelControl_Damage." #y); \

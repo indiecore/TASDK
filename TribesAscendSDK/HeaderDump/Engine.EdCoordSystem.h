@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Matrix.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.EdCoordSystem." #y); \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::StrProperty, Desc, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'M'!
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, M, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

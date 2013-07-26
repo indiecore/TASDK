@@ -1,6 +1,8 @@
 #pragma once
 #include "TribesGame.TrDeployableHologram.h"
+#include "Core.Object.Vector.h"
 #include "TribesGame.TrDevice.h"
+#include "Core.Object.Rotator.h"
 #include "TribesGame.TrDeployable.h"
 #include "UTGame.UTPlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \

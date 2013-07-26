@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.NavMeshPathGoalEvaluator.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.MultiMap_Mirror.h"
 #include "Engine.NavigationHandle.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -12,8 +14,8 @@ namespace UnrealScript
 	class NavMeshGoal_ClosestActorInList : public NavMeshPathGoalEvaluator
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'CachedAnchorPoly'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.MultiMap_Mirror' for the property named 'PolyToGoalActorMap'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, CachedAnchorPoly, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<MultiMap_Mirror>, PolyToGoalActorMap, 0xFFFFFFFF)
 		class NavMeshGoal_ClosestActorInList* ClosestActorInList(class NavigationHandle* NavHandle, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& InGoalList)

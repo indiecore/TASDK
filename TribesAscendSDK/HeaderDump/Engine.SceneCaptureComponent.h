@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.ActorComponent.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.PostProcessChain.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SceneCaptureComponent." #y); \
@@ -25,8 +27,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ViewState'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'CaptureInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ViewState, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, CaptureInfo, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxStreamingUpdateDist, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxViewDistanceOverride, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxUpdateDist, 0xFFFFFFFF)
@@ -34,7 +36,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, FrameRate, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SceneLOD, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ViewMode, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'ClearColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, ClearColor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSkipRenderingDepthPrepass, 0x40)
 		ADD_VAR(::BoolProperty, bSkipUpdateIfOwnerOccluded, 0x20)
 		ADD_VAR(::BoolProperty, bSkipUpdateIfTextureUsersOccluded, 0x10)

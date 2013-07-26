@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleTrailBase.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleTrailSource." #y); \
@@ -20,7 +21,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, SourceOffsetCount, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bInheritRotation, 0x2)
 		ADD_VAR(::BoolProperty, bLockSourceStength, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'SourceStrength'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, SourceStrength, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, SourceName, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, SelectionMethod, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, SourceMethod, 0xFFFFFFFF)

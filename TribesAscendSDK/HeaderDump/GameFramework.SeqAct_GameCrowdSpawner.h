@@ -3,6 +3,7 @@
 #include "Engine.SeqAct_Latent.h"
 #include "GameFramework.GameCrowd_ListOfAgents.h"
 #include "GameFramework.GameCrowdReplicationActor.h"
+#include "Engine.LightComponent.LightingChannelContainer.h"
 #include "GameFramework.GameCrowdAgent.h"
 #include "GameFramework.GameCrowdGroup.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -30,7 +31,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, AgentWarmupTime, 0xFFFFFFFF)
 		ADD_OBJECT(GameCrowdReplicationActor, RepActor)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer' for the property named 'AgentLightingChannel'!
+		ADD_STRUCT(::NonArithmeticProperty<LightingChannelContainer>, AgentLightingChannel, 0xFFFFFFFF)
 		ADD_OBJECT(GameCrowd_ListOfAgents, CrowdAgentList)
 		ADD_VAR(::FloatProperty, AgentFrequencySum, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Remainder, 0xFFFFFFFF)

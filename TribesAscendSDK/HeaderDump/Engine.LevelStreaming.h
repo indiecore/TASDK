@@ -2,6 +2,8 @@
 #include "Engine.Level.h"
 #include "Engine.LevelGridVolume.h"
 #include "Core.Object.h"
+#include "Core.Object.Color.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LevelStreaming." #y); \
@@ -34,7 +36,7 @@ namespace UnrealScript
 		ADD_OBJECT(LevelGridVolume, EditorGridVolume)
 		ADD_VAR(::FloatProperty, LastVolumeUnloadRequestTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinTimeBetweenVolumeUnloadRequests, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'DrawColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, DrawColor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsRequestingUnloadAndRemoval, 0x800)
 		ADD_VAR(::BoolProperty, bDrawOnLevelStatusMap, 0x400)
 		ADD_VAR(::BoolProperty, bIsFullyStatic, 0x40)

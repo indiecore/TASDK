@@ -1,6 +1,7 @@
 #pragma once
 #include "TribesGame.TrGame.h"
 #include "TribesGame.TrFlagTeamRabbit.h"
+#include "Core.Object.Vector.h"
 #include "Engine.PlayerStart.h"
 #include "Engine.Controller.h"
 #include "Engine.Pawn.h"

@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Engine.ActorFactory.h"
 #include "Engine.StaticMesh.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.HUD.h"
+#include "Core.Object.Vector.h"
 #include "GameFramework.GameAICommand.h"
 #include "Engine.Actor.h"
 #include "GameFramework.GameAIController.h"

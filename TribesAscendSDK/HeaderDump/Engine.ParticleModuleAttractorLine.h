@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.ParticleModuleAttractorBase.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
+#include "Core.Object.Vector.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleAttractorLine." #y); \
@@ -11,8 +13,8 @@ namespace UnrealScript
 	class ParticleModuleAttractorLine : public ParticleModuleAttractorBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Strength'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Range'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Strength, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Range, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, EndPoint1, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, EndPoint0, 0xFFFFFFFF)
 	};

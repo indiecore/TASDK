@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.UIDataProvider_OnlinePlayerDataBase.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.OnlineSubsystem.AchievementDetails.h"
 #include "Engine.LocalPlayer.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -12,7 +14,7 @@ namespace UnrealScript
 	class UIDataProvider_PlayerAchievements : public UIDataProvider_OnlinePlayerDataBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
 		int GetTotalGamerScore()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.GetTotalGamerScore");
@@ -47,20 +49,14 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void GetAchievementDetails(int AchievementId, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.AchievementDetails'!
-void*& OutAchievementDetails)
+		void GetAchievementDetails(int AchievementId, AchievementDetails& OutAchievementDetails)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.GetAchievementDetails");
 			byte* params = (byte*)malloc(56);
 			*(int*)params = AchievementId;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.AchievementDetails'!
-void**)(params + 4) = OutAchievementDetails;
+			*(AchievementDetails*)(params + 4) = OutAchievementDetails;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutAchievementDetails = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.AchievementDetails'!
-void**)(params + 4);
+			OutAchievementDetails = *(AchievementDetails*)(params + 4);
 			free(params);
 		}
 		void OnPlayerAchievementsChanged(int TitleId)

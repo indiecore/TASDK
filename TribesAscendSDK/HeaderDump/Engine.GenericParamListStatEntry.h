@@ -1,6 +1,8 @@
 #pragma once
 #include "Core.Object.h"
 #include "Engine.GameplayEventsWriter.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.Vector.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.GenericParamListStatEntry." #y); \
@@ -19,7 +21,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(GameplayEventsWriter, Writer)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'StatEvent'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, StatEvent, 0xFFFFFFFF)
 		void AddFloat(ScriptName ParamName, float Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GenericParamListStatEntry.AddFloat");

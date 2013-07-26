@@ -1,18 +1,23 @@
 #pragma once
+#include "Engine.UIRoot.TextureCoordinates.h"
 #include "UDKBase.UDKGameObjective.h"
+#include "Engine.SoundNodeWave.h"
+#include "Core.Object.LinearColor.h"
+#include "UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo.h"
 #include "Engine.Material.h"
-#include "Engine.Volume.h"
 #include "UTGame.UTCarriedObject.h"
+#include "Engine.Volume.h"
 #include "UTGame.UTDefensePoint.h"
-#include "Engine.Actor.h"
 #include "UTGame.UTSquadAI.h"
 #include "Engine.Pawn.h"
+#include "Engine.Actor.h"
 #include "UTGame.UTPlayerController.h"
+#include "Core.Object.Vector.h"
 #include "Engine.PlayerController.h"
 #include "Engine.Canvas.h"
 #include "UTGame.UTBot.h"
-#include "Engine.SoundNodeWave.h"
 #include "UTGame.UTTeamStaticMesh.h"
+#include "Core.Object.Rotator.h"
 #include "UTGame.UTMapInfo.h"
 #include "Engine.AIController.h"
 #include "UTGame.UTPlayerReplicationInfo.h"
@@ -42,7 +47,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bAllowRemoteUse, 0x2)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'AttackLinearColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, AttackLinearColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxBeaconDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastPostRenderTraceTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastHighlightUpdate, 0xFFFFFFFF)
@@ -50,8 +55,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, HighlightSpeed, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxHighlightScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HighlightScale, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo' for the property named 'DefendAnnouncement'!
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo' for the property named 'AttackAnnouncement'!
+		ADD_STRUCT(::NonArithmeticProperty<ObjectiveAnnouncementInfo>, DefendAnnouncement, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ObjectiveAnnouncementInfo>, AttackAnnouncement, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CameraViewDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxSensorRange, 0xFFFFFFFF)
 		ADD_OBJECT(Material, HudMaterial)
@@ -59,8 +64,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, IconExtentX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, IconPosY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, IconPosX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'AttackCoords'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'ControlColor'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, AttackCoords, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, ControlColor, 0xFFFFFFFF)
 		ADD_OBJECT(UTGameObjective, NextObjective)
 		ADD_VAR(::IntProperty, Score, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BaseRadius, 0xFFFFFFFF)

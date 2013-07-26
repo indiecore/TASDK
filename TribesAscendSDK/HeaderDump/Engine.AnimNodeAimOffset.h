@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.AnimNodeBlendBase.h"
+#include "Core.Object.Vector2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNodeAimOffset." #y); \
@@ -31,8 +32,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bPassThroughWhenNotRendered, 0x4)
 		ADD_VAR(::BoolProperty, bBakeFromAnimations, 0x2)
 		ADD_VAR(::BoolProperty, bForceAimDir, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'AngleOffset'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'Aim'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, AngleOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, Aim, 0xFFFFFFFF)
 		void SetActiveProfileByName(ScriptName ProfileName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeAimOffset.SetActiveProfileByName");

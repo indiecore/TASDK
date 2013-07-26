@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Color.h"
 #include "Engine.LightComponent.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class SkyLightComponent : public LightComponent
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'LowerColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, LowerColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LowerBrightness, 0xFFFFFFFF)
 	};
 }

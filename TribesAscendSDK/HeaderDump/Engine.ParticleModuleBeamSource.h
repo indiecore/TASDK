@@ -1,5 +1,7 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.ParticleModuleBeamBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleBeamSource." #y); \
@@ -17,9 +19,9 @@ namespace UnrealScript
 	class ParticleModuleBeamSource : public ParticleModuleBeamBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'SourceStrength'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'SourceTangent'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'Source'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, SourceStrength, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, SourceTangent, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, Source, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bLockSourceStength, 0x8)
 		ADD_VAR(::BoolProperty, bLockSourceTangent, 0x4)
 		ADD_VAR(::BoolProperty, bLockSource, 0x2)

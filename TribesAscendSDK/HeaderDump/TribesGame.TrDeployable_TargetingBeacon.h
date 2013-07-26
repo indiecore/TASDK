@@ -3,6 +3,7 @@
 #include "Engine.Texture2D.h"
 #include "Engine.PlayerController.h"
 #include "Engine.Canvas.h"
+#include "Core.Object.Vector.h"
 namespace UnrealScript
 {
 	class TrDeployable_TargetingBeacon : public TrDeployable_RadarSensor

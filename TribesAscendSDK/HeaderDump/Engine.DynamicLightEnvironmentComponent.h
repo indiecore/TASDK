@@ -1,5 +1,10 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Engine.LightEnvironmentComponent.h"
+#include "Engine.LightComponent.LightingChannelContainer.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.BoxSphereBounds.h"
+#include "Core.Object.LinearColor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DynamicLightEnvironmentComponent." #y); \
@@ -17,12 +22,12 @@ namespace UnrealScript
 	class DynamicLightEnvironmentComponent : public LightEnvironmentComponent
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer' for the property named 'OverriddenLightingChannels'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoxSphereBounds' for the property named 'OverriddenBounds'!
+		ADD_STRUCT(::NonArithmeticProperty<LightingChannelContainer>, OverriddenLightingChannels, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<BoxSphereBounds>, OverriddenBounds, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinShadowAngle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BouncedLightingFactor, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, BoundsMethod, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'State'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, State, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, LightShadowMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ShadowFilterQuality, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ShadowFadeResolution, 0xFFFFFFFF)
@@ -30,7 +35,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, MinShadowResolution, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DominantShadowTransitionEndDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DominantShadowTransitionStartDistance, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'MaxModulatedShadowColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MaxModulatedShadowColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ModShadowFadeoutExponent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ModShadowFadeoutTime, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bOverrideOwnerLightingChannels, 0x2000)
@@ -50,9 +55,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ShadowDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LightDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LightDesaturation, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'AmbientGlow'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, AmbientGlow, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, AmbientShadowSourceDirection, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'AmbientShadowColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, AmbientShadowColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LightingBoundsScale, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumVolumeVisibilitySamples, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ShadowInterpolationSpeed, 0xFFFFFFFF)

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.AnimNotify_Scripted.h"
+#include "Core.Object.Vector.h"
 #include "Engine.CameraShake.h"
 #include "Engine.Actor.h"
 #include "Engine.AnimNodeSequence.h"

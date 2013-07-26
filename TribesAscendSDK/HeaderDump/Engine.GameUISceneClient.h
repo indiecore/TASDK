@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine.UISceneClient.h"
+#include "Core.Object.Double.h"
+#include "Core.Object.Map_Mirror.h"
+#include "Core.Object.IntPoint.h"
 #include "Engine.PlayerController.h"
 #include "Engine.LocalPlayer.h"
 #include "Engine.Player.h"
@@ -25,9 +28,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bEnableDebugInput, 0x4)
 		ADD_VAR(::BoolProperty, bUpdateSceneViewportSizes, 0x2)
 		ADD_VAR(::BoolProperty, bUpdateInputProcessingStatus, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'InitialPressedKeys'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IntPoint' for the property named 'DoubleClickStartPosition'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'DoubleClickStartTime'!
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, InitialPressedKeys, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<IntPoint>, DoubleClickStartPosition, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Double>, DoubleClickStartTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LatestDeltaTime, 0xFFFFFFFF)
 		byte GetCurrentNetMode()
 		{

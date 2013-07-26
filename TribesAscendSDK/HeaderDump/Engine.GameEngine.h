@@ -3,8 +3,9 @@
 #include "Engine.Engine.h"
 #include "Engine.OnlineSubsystem.h"
 #include "Engine.PendingLevel.h"
-#include "Engine.DownloadableContentManager.h"
 #include "Engine.InGameAdManager.h"
+#include "Engine.GameEngine.URL.h"
+#include "Engine.DownloadableContentManager.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.GameEngine." #y); \
@@ -30,8 +31,8 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(PendingLevel, GPendingLevel)
 		ADD_VAR(::StrProperty, PendingLevelPlayerControllerClassName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.GameEngine.URL' for the property named 'LastURL'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.GameEngine.URL' for the property named 'LastRemoteURL'!
+		ADD_STRUCT(::NonArithmeticProperty<URL>, LastURL, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<URL>, LastRemoteURL, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, TravelURL, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, TravelType, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bWorldWasLoadedThisTick, 0x1)

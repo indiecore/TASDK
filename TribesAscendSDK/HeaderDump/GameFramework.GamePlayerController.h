@@ -2,6 +2,7 @@
 #include "Engine.PlayerController.h"
 #include "GameFramework.GameCrowdAgent.h"
 #include "Engine.CameraShake.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GamePlayerController." #y); \
@@ -139,15 +140,11 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerController.CallMemLeakCheck");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ClientColorFade(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* FadeColor, byte FromAlpha, byte ToAlpha, float FadeTime)
+		void ClientColorFade(Color FadeColor, byte FromAlpha, byte ToAlpha, float FadeTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerController.ClientColorFade");
 			byte* params = (byte*)malloc(10);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)params = FadeColor;
+			*(Color*)params = FadeColor;
 			*(params + 4) = FromAlpha;
 			*(params + 5) = ToAlpha;
 			*(float*)(params + 8) = FadeTime;

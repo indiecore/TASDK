@@ -1,13 +1,20 @@
 #pragma once
 #include "GameFramework.GamePawn.h"
+#include "Core.Object.Vector.h"
 #include "Engine.AnimNodeAimOffset.h"
-#include "Engine.SkelControlSingleBone.h"
-#include "GameFramework.GameSkelCtrl_Recoil.h"
+#include "Core.Object.Vector2D.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.SkelControlLimb.h"
 #include "Engine.SkelControlFootPlacement.h"
 #include "Engine.SoundCue.h"
+#include "Core.Object.Rotator.h"
+#include "GameFramework.GameSkelCtrl_Recoil.h"
+#include "Engine.SkelControlSingleBone.h"
 #include "Engine.MaterialInterface.h"
 #include "Engine.Material.h"
+#include "UDKBase.UDKPawn.DrivenWeaponPawnInfo.h"
+#include "UDKBase.UDKPawn.UTTakeHitInfo.h"
+#include "UDKBase.UDKPawn.PlayEmoteInfo.h"
 #include "Engine.Actor.h"
 #include "UDKBase.UDKCarriedObject.h"
 #include "Engine.PlayerController.h"
@@ -38,7 +45,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bNotifyStopFalling, 0x40)
 		ADD_VAR(::BoolProperty, bReadyToDoubleJump, 0x1)
 		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'CurrentSkelAim'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, CurrentSkelAim, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxYawAim, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RootYawSpeed, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, RootYaw, 0xFFFFFFFF)
@@ -73,10 +80,10 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, TorsoBoneName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, StartFallImpactTime, 0xFFFFFFFF)
 		ADD_STRUCT(::RotatorProperty, CompressedBodyMatColor, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'BodyMatColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BodyMatColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ClientBodyMatDuration, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RemainingBodyMatDuration, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'CurrentBodyMatColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, CurrentBodyMatColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BodyMatFadeDuration, 0xFFFFFFFF)
 		ADD_OBJECT(GameSkelCtrl_Recoil, RightRecoilNode)
 		ADD_OBJECT(GameSkelCtrl_Recoil, LeftRecoilNode)
@@ -86,7 +93,7 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInterface, OverlayMaterialInstance)
 		ADD_OBJECT(Material, ReplicatedBodyMaterial)
 		ADD_OBJECT(SoundCue, WeaponAmbientSoundCue)
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.DrivenWeaponPawnInfo' for the property named 'DrivenWeaponPawn'!
+		ADD_STRUCT(::NonArithmeticProperty<DrivenWeaponPawnInfo>, DrivenWeaponPawn, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, PawnAmbientSoundCue)
 		ADD_VAR(::FloatProperty, OldZ, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, MeshTranslationOffset, 0xFFFFFFFF)
@@ -96,12 +103,12 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, HeadScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FireRateMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastTakeHitTimeout, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.UTTakeHitInfo' for the property named 'LastTakeHitInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<UTTakeHitInfo>, LastTakeHitInfo, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, WeaponOverlayFlags, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, BigTeleportCount, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MinTimeBetweenEmotes, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastEmoteTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.PlayEmoteInfo' for the property named 'EmoteRepInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<PlayEmoteInfo>, EmoteRepInfo, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CustomGravityScaling, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MultiJumpBoost, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxMultiJump, 0xFFFFFFFF)

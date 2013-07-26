@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.MaterialExpressionFontSample.h"
+#include "Core.Object.Guid.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialExpressionFontSampleParameter." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class MaterialExpressionFontSampleParameter : public MaterialExpressionFontSample
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'ExpressionGUID'!
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, ExpressionGUID, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, ParameterName, 0xFFFFFFFF)
 	};
 }

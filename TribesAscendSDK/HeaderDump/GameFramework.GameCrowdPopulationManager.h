@@ -1,11 +1,14 @@
 #pragma once
 #include "Engine.CrowdPopulationManagerBase.h"
 #include "GameFramework.GameCrowdAgent.h"
+#include "Core.Object.Vector.h"
 #include "Engine.HUD.h"
 #include "Engine.NavigationHandle.h"
-#include "GameFramework.GameCrowdGroup.h"
+#include "Engine.LightComponent.LightingChannelContainer.h"
+#include "Core.Object.Pointer.h"
 #include "GameFramework.GameCrowdDestination.h"
 #include "GameFramework.SeqAct_GameCrowdPopulationManagerToggle.h"
+#include "GameFramework.GameCrowdGroup.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameCrowdPopulationManager." #y); \
@@ -45,7 +48,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, PrioritizationIndex, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SpawnPrioritizationInterval, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AgentWarmupTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer' for the property named 'AgentLightingChannel'!
+		ADD_STRUCT(::NonArithmeticProperty<LightingChannelContainer>, AgentLightingChannel, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, AgentCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxAgentPoolSize, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AgentFrequencySum, 0xFFFFFFFF)
@@ -60,7 +63,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bCastShadows, 0x4)
 		ADD_VAR(::BoolProperty, bEnableCrowdLightEnvironment, 0x2)
 		ADD_VAR(::BoolProperty, bSpawningActive, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_NavigationHandle'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IInterface_NavigationHandle, 0xFFFFFFFF)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.PostBeginPlay");

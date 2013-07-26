@@ -1,10 +1,16 @@
 #pragma once
-#include "Engine.Controller.h"
-#include "Engine.Actor.h"
 #include "Engine.NavMeshPathConstraint.h"
 #include "Core.Object.h"
-#include "Engine.NavMeshPathGoalEvaluator.h"
 #include "Engine.Pylon.h"
+#include "Engine.NavigationHandle.NavMeshPathParams.h"
+#include "Engine.NavMeshPathGoalEvaluator.h"
+#include "Core.Object.Vector.h"
+#include "Engine.Actor.BasedPosition.h"
+#include "Engine.NavigationHandle.PathStore.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.Actor.h"
+#include "Engine.Controller.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NavigationHandle." #y); \
@@ -30,19 +36,19 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, LastPathFailTime, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, LastPathError, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationHandle.NavMeshPathParams' for the property named 'CachedPathParams'!
+		ADD_STRUCT(::NonArithmeticProperty<NavMeshPathParams>, CachedPathParams, 0xFFFFFFFF)
 		ADD_OBJECT(NavMeshPathGoalEvaluator, PathGoalList)
 		ADD_OBJECT(NavMeshPathConstraint, PathConstraintList)
 		ADD_VAR(::BoolProperty, bUltraVerbosePathDebugging, 0x8)
 		ADD_VAR(::BoolProperty, bDebugConstraintsAndGoalEvals, 0x4)
 		ADD_VAR(::BoolProperty, bUseORforEvaluateGoal, 0x2)
 		ADD_VAR(::BoolProperty, bSkipRouteCacheUpdates, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition' for the property named 'FinalDestination'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SubGoal_DestPoly'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'CurrentEdge'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'BestUnfinishedPathPoint'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationHandle.PathStore' for the property named 'PathCache'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'AnchorPoly'!
+		ADD_STRUCT(::NonArithmeticProperty<BasedPosition>, FinalDestination, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SubGoal_DestPoly, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, CurrentEdge, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, BestUnfinishedPathPoint, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<PathStore>, PathCache, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, AnchorPoly, 0xFFFFFFFF)
 		ADD_OBJECT(Pylon, AnchorPylon)
 		void ClearConstraints()
 		{
@@ -279,17 +285,13 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void DrawPathCache(Vector DrawOffset, bool bPersistent, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* DrawColor)
+		void DrawPathCache(Vector DrawOffset, bool bPersistent, Color DrawColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.DrawPathCache");
 			byte* params = (byte*)malloc(20);
 			*(Vector*)params = DrawOffset;
 			*(bool*)(params + 12) = bPersistent;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 16) = DrawColor;
+			*(Color*)(params + 16) = DrawColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

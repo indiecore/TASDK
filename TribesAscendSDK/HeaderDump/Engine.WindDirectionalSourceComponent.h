@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ActorComponent.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.WindDirectionalSourceComponent." #y); \
@@ -21,7 +22,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Frequency, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Phase, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Strength, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SceneProxy'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SceneProxy, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

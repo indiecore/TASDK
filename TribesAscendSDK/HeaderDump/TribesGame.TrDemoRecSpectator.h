@@ -1,7 +1,10 @@
 #pragma once
+#include "Engine.Camera.ViewTargetTransitionParams.h"
 #include "TribesGame.TrPlayerController.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDemoRecSpectator." #y); \
@@ -62,28 +65,20 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.DemoViewNextPlayer");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SetViewTarget(class Actor* NewViewTarget, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void* TransitionParams)
+		void SetViewTarget(class Actor* NewViewTarget, ViewTargetTransitionParams TransitionParams)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.SetViewTarget");
 			byte* params = (byte*)malloc(20);
 			*(class Actor**)params = NewViewTarget;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void**)(params + 4) = TransitionParams;
+			*(ViewTargetTransitionParams*)(params + 4) = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ServerViewSelf(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void* TransitionParams)
+		void ServerViewSelf(ViewTargetTransitionParams TransitionParams)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.ServerViewSelf");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.ViewTargetTransitionParams'!
-void**)params = TransitionParams;
+			*(ViewTargetTransitionParams*)params = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

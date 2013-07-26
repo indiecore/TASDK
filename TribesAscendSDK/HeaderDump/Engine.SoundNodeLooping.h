@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.SoundNode.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class SoundNodeLooping : public SoundNode
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'LoopCount'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, LoopCount, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LoopCountMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LoopCountMin, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bLoopIndefinitely, 0x1)

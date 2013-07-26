@@ -1,7 +1,9 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Engine.KActor.h"
 #include "Engine.Controller.h"
 #include "Engine.Actor.h"
+#include "Engine.Actor.TraceHitInfo.h"
 #include "Engine.Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -61,18 +63,14 @@ void**)params = MovableMesh;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.MakeStatic");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ApplyImpulse(Vector ImpulseDir, float ImpulseMag, Vector HitLocation, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo, ScriptClass* DamageType)
+		void ApplyImpulse(Vector ImpulseDir, float ImpulseMag, Vector HitLocation, TraceHitInfo HitInfo, ScriptClass* DamageType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.ApplyImpulse");
 			byte* params = (byte*)malloc(60);
 			*(Vector*)params = ImpulseDir;
 			*(float*)(params + 12) = ImpulseMag;
 			*(Vector*)(params + 16) = HitLocation;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 28) = HitInfo;
+			*(TraceHitInfo*)(params + 28) = HitInfo;
 			*(ScriptClass**)(params + 56) = DamageType;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

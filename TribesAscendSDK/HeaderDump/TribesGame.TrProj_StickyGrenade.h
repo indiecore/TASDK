@@ -1,6 +1,7 @@
 #pragma once
 #include "TribesGame.TrProj_Grenade.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_StickyGrenade." #y); \

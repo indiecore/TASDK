@@ -1,9 +1,11 @@
 #pragma once
 #include "Engine.Actor.h"
 #include "Core.Object.h"
+#include "Core.Object.Vector.h"
 #include "Engine.CameraShake.h"
 #include "Engine.SoundCue.h"
 #include "Engine.ParticleSystem.h"
+#include "Core.Object.Vector2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameExplosion." #y); \
@@ -48,7 +50,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, ExplosionEmitterScale, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, ParticleEmitterTemplate)
 		ADD_VAR(::FloatProperty, MomentumTransferScale, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'CringeDuration'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, CringeDuration, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CringeRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, KnockDownStrength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, KnockDownRadius, 0xFFFFFFFF)

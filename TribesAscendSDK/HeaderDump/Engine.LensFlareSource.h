@@ -2,6 +2,8 @@
 #include "Engine.LensFlare.h"
 #include "Engine.Actor.h"
 #include "Engine.SeqAct_Toggle.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.LinearColor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LensFlareSource." #y); \
@@ -61,16 +63,12 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetColorParameter(ScriptName ParameterName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* Param)
+		void SetColorParameter(ScriptName ParameterName, LinearColor Param)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LensFlareSource.SetColorParameter");
 			byte* params = (byte*)malloc(24);
 			*(ScriptName*)params = ParameterName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 8) = Param;
+			*(LinearColor*)(params + 8) = Param;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

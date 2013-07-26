@@ -1,11 +1,14 @@
 #pragma once
 #include "Engine.NavigationPoint.h"
+#include "Engine.Canvas.h"
+#include "Engine.UIRoot.TextureCoordinates.h"
 #include "Engine.Texture2D.h"
+#include "Engine.AIController.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Controller.h"
 #include "Engine.Actor.h"
-#include "Engine.AIController.h"
-#include "Engine.Canvas.h"
 #include "UDKBase.UDKPlayerController.h"
+#include "Core.Object.LinearColor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKGameObjective." #y); \
@@ -30,7 +33,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::ByteProperty, DefenderTeamIndex, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'IconCoords'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, IconCoords, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, IconHudTexture)
 		ADD_STRUCT(::VectorProperty, HUDLocation, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bUnderAttack, 0x2)
@@ -76,9 +79,7 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawIcon(class Canvas* Canvas, Vector IconLocation, float IconWidth, float IconAlpha, class UDKPlayerController* PlayerOwner, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* DrawColor)
+		void DrawIcon(class Canvas* Canvas, Vector IconLocation, float IconWidth, float IconAlpha, class UDKPlayerController* PlayerOwner, LinearColor DrawColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameObjective.DrawIcon");
 			byte* params = (byte*)malloc(44);
@@ -87,9 +88,7 @@ void* DrawColor)
 			*(float*)(params + 16) = IconWidth;
 			*(float*)(params + 20) = IconAlpha;
 			*(class UDKPlayerController**)(params + 24) = PlayerOwner;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 28) = DrawColor;
+			*(LinearColor*)(params + 28) = DrawColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

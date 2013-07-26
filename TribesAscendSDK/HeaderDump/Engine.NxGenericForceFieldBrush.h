@@ -1,6 +1,9 @@
 #pragma once
 #include "Engine.Projectile.h"
 #include "Engine.Volume.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.Vector.h"
+#include "Engine.PrimitiveComponent.RBCollisionChannelContainer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NxGenericForceFieldBrush." #y); \
@@ -18,8 +21,8 @@ namespace UnrealScript
 	class NxGenericForceFieldBrush : public Volume
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'LinearKernel'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ForceField'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, LinearKernel, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ForceField, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TorusRadius, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, FalloffQuadratic, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, FalloffLinear, 0xFFFFFFFF)
@@ -35,7 +38,7 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, Constant, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, Coordinates, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RBChannel, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'CollideWithChannels'!
+		ADD_STRUCT(::NonArithmeticProperty<RBCollisionChannelContainer>, CollideWithChannels, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ExcludeChannel, 0xFFFFFFFF)
 		void PostBeginPlay()
 		{

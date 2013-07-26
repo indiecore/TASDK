@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine.ParticleModule.ParticleRandomSeedInfo.h"
 #include "Engine.ParticleModuleRotation.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class ParticleModuleRotation_Seeded : public ParticleModuleRotation
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ParticleModule.ParticleRandomSeedInfo' for the property named 'RandomSeedInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<ParticleRandomSeedInfo>, RandomSeedInfo, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

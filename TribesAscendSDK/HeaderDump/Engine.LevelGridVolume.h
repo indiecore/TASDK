@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.Volume.h"
+#include "Engine.KMeshProps.KConvexElem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LevelGridVolume." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class LevelGridVolume : public Volume
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.KMeshProps.KConvexElem' for the property named 'CellConvexElem'!
+		ADD_STRUCT(::NonArithmeticProperty<KConvexElem>, CellConvexElem, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, KeepLoadedRange, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LoadingDistance, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Subdivisions, 0xFFFFFFFF)

@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.NavMeshPathGoalEvaluator.h"
+#include "Core.Object.Vector.h"
 #include "Engine.NavigationHandle.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.NavMeshGoal_Filter.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -20,7 +22,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(NavigationHandle, MyNavigationHandle)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SuccessfulGoal'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SuccessfulGoal, 0xFFFFFFFF)
 		class NavMeshGoal_GenericFilterContainer* CreateAndAddFilterToNavHandle(class NavigationHandle* NavHandle, int InMaxPathVisits)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_GenericFilterContainer.CreateAndAddFilterToNavHandle");

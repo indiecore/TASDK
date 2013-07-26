@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.LightmassLevelSettings." #y); \
@@ -28,7 +29,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DiffuseBoost, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EmissiveBoost, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EnvironmentIntensity, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'EnvironmentColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, EnvironmentColor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumIndirectLightingBounces, 0xFFFFFFFF)
 	};
 }

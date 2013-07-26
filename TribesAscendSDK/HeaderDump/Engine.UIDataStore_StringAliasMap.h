@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.UIDataStore_StringBase.h"
+#include "Core.Object.Map_Mirror.h"
 #include "Engine.LocalPlayer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -19,7 +20,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, PlayerIndex, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'MenuInputSets'!
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, MenuInputSets, 0xFFFFFFFF)
 		class LocalPlayer* GetPlayerOwner()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_StringAliasMap.GetPlayerOwner");

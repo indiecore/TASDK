@@ -3,9 +3,12 @@
 #include "Engine.SkeletalMesh.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.MaterialInstanceConstant.h"
+#include "UTGame.UTPawn.GibInfo.h"
 #include "Engine.PhysicsAsset.h"
 #include "Engine.MaterialInstance.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.StaticMesh.h"
+#include "Core.Object.Vector.h"
 #include "Engine.MaterialInterface.h"
 #include "Engine.Texture.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -42,7 +45,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BaseTranslationOffset, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstance, BloodSplatterDecalMaterial)
 		ADD_VAR(::FloatProperty, DrivingDrawScale, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct UTGame.UTPawn.GibInfo' for the property named 'HeadGib'!
+		ADD_STRUCT(::NonArithmeticProperty<GibInfo>, HeadGib, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, HeadShotEffect)
 		ADD_OBJECT(ParticleSystem, GibExplosionTemplate)
 		ADD_VAR(::NameProperty, HeadShotGoreSocketName, 0xFFFFFFFF)
@@ -52,8 +55,8 @@ namespace UnrealScript
 		ADD_OBJECT(SkeletalMesh, DeathMeshSkelMesh)
 		ADD_OBJECT(PhysicsAsset, DeathMeshPhysAsset)
 		ADD_VAR(::IntProperty, DeathMeshNumMaterialsToSetResident, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'NonTeamTintColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'NonTeamEmissiveColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, NonTeamTintColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, NonTeamEmissiveColor, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, BioDeathMICParent)
 		ADD_OBJECT(MaterialInstanceConstant, BaseMICParent)
 		ADD_OBJECT(ScriptClass, VoiceClass)

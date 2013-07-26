@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.PhysXParticleSystem.h"
 #include "Engine.ParticleModuleTypeDataMesh.h"
+#include "Engine.ParticleModuleTypeDataPhysX.PhysXEmitterVerticalLodProperties.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleTypeDataMeshPhysX." #y); \
@@ -24,8 +26,8 @@ namespace UnrealScript
 	class ParticleModuleTypeDataMeshPhysX : public ParticleModuleTypeDataMesh
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ParticleModuleTypeDataPhysX.PhysXEmitterVerticalLodProperties' for the property named 'VerticalLod'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'RenderInstance'!
+		ADD_STRUCT(::NonArithmeticProperty<PhysXEmitterVerticalLodProperties>, VerticalLod, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, RenderInstance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FluidRotationCoefficient, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, PhysXRotationMethod, 0xFFFFFFFF)
 		ADD_OBJECT(PhysXParticleSystem, PhysXParSys)

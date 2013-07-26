@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.Actor.h"
 #include "Core.Object.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.Pawn.h"
 #include "Engine.PlayerController.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \

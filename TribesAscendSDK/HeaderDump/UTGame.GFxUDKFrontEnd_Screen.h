@@ -1,5 +1,6 @@
 #pragma once
 #include "UTGame.GFxUDKFrontEnd_View.h"
+#include "GFxUI.GFxClikWidget.EventData.h"
 #include "GFxUI.GFxObject.h"
 #include "GFxUI.GFxClikWidget.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -30,15 +31,11 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, TitleMC)
 		ADD_OBJECT(GFxClikWidget, BackBtn)
 		ADD_VAR(::StrProperty, ViewTitle, 0xFFFFFFFF)
-		void FocusIn_BackButton(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* ev)
+		void FocusIn_BackButton(EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Screen.FocusIn_BackButton");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = ev;
+			*(EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

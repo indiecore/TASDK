@@ -1,8 +1,11 @@
 #pragma once
 #include "Engine.Actor.h"
 #include "Core.Object.h"
+#include "Core.Object.Vector.h"
+#include "Engine.Actor.ActorReference.h"
 #include "Engine.NavigationPoint.h"
 #include "Engine.Pawn.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ReachSpec." #y); \
@@ -38,11 +41,11 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, reachFlags, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, CollisionHeight, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, CollisionRadius, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ActorReference' for the property named 'End'!
+		ADD_STRUCT(::NonArithmeticProperty<ActorReference>, End, 0xFFFFFFFF)
 		ADD_OBJECT(NavigationPoint, Start)
 		ADD_STRUCT(::VectorProperty, Direction, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Distance, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'NavOctreeObject'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, NavOctreeObject, 0xFFFFFFFF)
 		int CostFor(class Pawn* P)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ReachSpec.CostFor");

@@ -1,15 +1,19 @@
 #pragma once
 #include "Engine.Texture2D.h"
 #include "UDKBase.UDKMapInfo.h"
-#include "UTGame.UTMapMusicInfo.h"
 #include "Engine.Texture.h"
-#include "UDKBase.UDKVehicle.h"
-#include "Engine.MaterialInstanceConstant.h"
 #include "Engine.Material.h"
+#include "Core.Object.Vector.h"
+#include "UDKBase.UDKVehicle.h"
+#include "Engine.UIRoot.TextureCoordinates.h"
+#include "Engine.MaterialInstanceConstant.h"
 #include "Engine.Actor.h"
+#include "UTGame.UTMapMusicInfo.h"
 #include "Engine.Canvas.h"
 #include "UTGame.UTPlayerController.h"
 #include "UTGame.UTVehicle.h"
+#include "Core.Object.LinearColor.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTMapInfo." #y); \
@@ -40,7 +44,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, RecommendedPlayersMax, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, RecommendedPlayersMin, 0xFFFFFFFF)
 		ADD_OBJECT(UDKVehicle, KeyVehicles)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates' for the property named 'PlayerIconCoords'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureCoordinates>, PlayerIconCoords, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, GreenIconMaterialInstance)
 		ADD_VAR(::FloatProperty, ColorPercent, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, CenterPos, 0xFFFFFFFF)
@@ -122,11 +126,7 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawRotatedTile(class Canvas* Canvas, class Texture2D* T, Vector MapLocation, int InYaw, float IconScale, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates'!
-void* TexCoords, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* DrawColor)
+		void DrawRotatedTile(class Canvas* Canvas, class Texture2D* T, Vector MapLocation, int InYaw, float IconScale, TextureCoordinates TexCoords, LinearColor DrawColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMapInfo.DrawRotatedTile");
 			byte* params = (byte*)malloc(60);
@@ -135,12 +135,8 @@ void* DrawColor)
 			*(Vector*)(params + 8) = MapLocation;
 			*(int*)(params + 20) = InYaw;
 			*(float*)(params + 24) = IconScale;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.TextureCoordinates'!
-void**)(params + 28) = TexCoords;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 44) = DrawColor;
+			*(TextureCoordinates*)(params + 28) = TexCoords;
+			*(LinearColor*)(params + 44) = DrawColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

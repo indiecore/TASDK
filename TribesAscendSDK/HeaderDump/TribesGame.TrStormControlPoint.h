@@ -3,6 +3,7 @@
 #include "Engine.PlayerController.h"
 #include "TribesGame.TrPawn.h"
 #include "Engine.Canvas.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrStormControlPoint." #y); \

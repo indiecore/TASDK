@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Engine.SoundMode.AudioEQEffect.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SoundMode." #y); \
@@ -21,7 +22,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, Duration, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FadeInTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InitialDelay, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.SoundMode.AudioEQEffect' for the property named 'EQSettings'!
+		ADD_STRUCT(::NonArithmeticProperty<AudioEQEffect>, EQSettings, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bApplyEQ, 0x1)
 	};
 }

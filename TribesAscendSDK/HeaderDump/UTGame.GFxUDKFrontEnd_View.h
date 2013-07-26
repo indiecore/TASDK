@@ -2,6 +2,7 @@
 #include "UTGame.GFxUDKFrontEnd.h"
 #include "UTGame.GFxUIView.h"
 #include "GFxUI.GFxObject.h"
+#include "GFxUI.GFxClikWidget.EventData.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.GFxUDKFrontEnd_View." #y); \
@@ -62,15 +63,11 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.PlayCloseAnimation");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Select_Back(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void* ev)
+		void Select_Back(EventData ev)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.Select_Back");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxClikWidget.EventData'!
-void**)params = ev;
+			*(EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

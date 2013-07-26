@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.SoundNode.h"
 #include "Engine.SoundNodeWave.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -24,12 +25,12 @@ namespace UnrealScript
 	class SoundNodeAmbient : public SoundNode
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'VolumeModulation'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'PitchModulation'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'LPFMaxRadius'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'LPFMinRadius'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'MaxRadius'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'MinRadius'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, VolumeModulation, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, PitchModulation, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, LPFMaxRadius, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, LPFMinRadius, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, MaxRadius, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, MinRadius, 0xFFFFFFFF)
 		ADD_OBJECT(SoundNodeWave, Wave)
 		ADD_VAR(::FloatProperty, VolumeMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, VolumeMin, 0xFFFFFFFF)

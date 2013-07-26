@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.Actor.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.SeqAct_Toggle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -20,7 +21,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bPreserveInternalGeo, 0x2)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_NavMeshPathObstacle'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IInterface_NavMeshPathObstacle, 0xFFFFFFFF)
 		bool GetObstacleBoudingShape(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& Shape)

@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame.TrCallIn.h"
+#include "Core.Object.Vector.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.SoundCue.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \

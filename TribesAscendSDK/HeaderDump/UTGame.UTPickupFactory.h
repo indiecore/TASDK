@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.LinearColor.h"
 #include "UDKBase.UDKPickupFactory.h"
 #include "Engine.Projectile.h"
 #include "Engine.ForceFeedbackWaveform.h"
@@ -92,15 +93,11 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void StartPulse(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* TargetEmissive)
+		void StartPulse(LinearColor TargetEmissive)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupFactory.StartPulse");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)params = TargetEmissive;
+			*(LinearColor*)params = TargetEmissive;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

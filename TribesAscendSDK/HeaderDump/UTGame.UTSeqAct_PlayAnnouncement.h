@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.SequenceAction.h"
+#include "UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UTGame.UTSeqAct_PlayAnnouncement." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class UTSeqAct_PlayAnnouncement : public SequenceAction
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo' for the property named 'Announcement'!
+		ADD_STRUCT(::NonArithmeticProperty<ObjectiveAnnouncementInfo>, Announcement, 0xFFFFFFFF)
 		void Activated()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_PlayAnnouncement.Activated");

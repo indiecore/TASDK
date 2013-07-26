@@ -1,5 +1,10 @@
 #pragma once
 #include "Engine.Texture.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.Texture2D.TextureLinkedListMirror.h"
+#include "Core.Object.Guid.h"
+#include "Core.Object.ThreadSafeCounter.h"
+#include "Core.Object.IndirectArray_Mirror.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Texture2D." #y); \
@@ -19,14 +24,14 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, Timer, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, FirstResourceMemMip, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ResourceMem'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ResourceMem, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MipTailBaseIdx, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, StreamingIndex, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Texture2D.TextureLinkedListMirror' for the property named 'StreamableTexturesLink'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.ThreadSafeCounter' for the property named 'PendingMipChangeRequestStatus'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureLinkedListMirror>, StreamableTexturesLink, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ThreadSafeCounter>, PendingMipChangeRequestStatus, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ResidentMips, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, RequestedMips, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'TextureFileCacheGuid'!
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, TextureFileCacheGuid, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, TextureFileCacheName, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ForceMipLevelsToBeResidentTimestamp, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bGlobalForceMipLevelsToBeResident, 0x10)
@@ -41,8 +46,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, OriginalSizeX, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IndirectArray_Mirror' for the property named 'CachedPVRTCMips'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IndirectArray_Mirror' for the property named 'Mips'!
+		ADD_STRUCT(::NonArithmeticProperty<IndirectArray_Mirror>, CachedPVRTCMips, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<IndirectArray_Mirror>, Mips, 0xFFFFFFFF)
 		void SetForceMipLevelsToBeResident(float Seconds, int CinematicTextureGroups)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2D.SetForceMipLevelsToBeResident");

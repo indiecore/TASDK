@@ -1,5 +1,9 @@
 #pragma once
+#include "Core.Object.Pointer.h"
+#include "Core.Object.Vector2D.h"
 #include "Engine.PrimitiveComponent.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.MaterialInterface.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -30,12 +34,12 @@ namespace UnrealScript
 		ADD_STRUCT(::VectorProperty, ParentRelativeLocation, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, FilterMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, DecalTransform, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'BlendRange'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, BlendRange, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BackfaceAngle, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SortOrder, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SlopeScaleDepthBias, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DepthBias, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ReleaseResourcesFence'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ReleaseResourcesFence, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, FracturedStaticMeshComponentIndex, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, HitLevelIndex, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, HitNodeIndex, 0xFFFFFFFF)

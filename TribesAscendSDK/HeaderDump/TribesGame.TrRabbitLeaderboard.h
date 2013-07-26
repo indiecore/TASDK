@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.Object.h"
 #include "TribesGame.GfxTrHud.h"
+#include "TribesGame.TrRabbitLeaderboard.LeaderboardSlot.h"
 #include "TribesGame.TrPlayerController.h"
 #include "TribesGame.TrGameReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -28,7 +29,7 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(GfxTrHud, m_MoviePlayer)
 		ADD_VAR(::BoolProperty, bIsActive, 0x4)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrRabbitLeaderboard.LeaderboardSlot' for the property named 'LeaderboardSlots'!
+		ADD_STRUCT(::NonArithmeticProperty<LeaderboardSlot>, LeaderboardSlots, 0xFFFFFFFF)
 		ADD_OBJECT(TrPlayerController, TrPC)
 		ADD_VAR(::BoolProperty, bInitialized, 0x2)
 		ADD_VAR(::BoolProperty, bUpdated, 0x1)

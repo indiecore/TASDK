@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.AnimationCompressionAlgorithm.h"
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.AnimNotify.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -38,8 +39,8 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, TranslationCompressionFormat, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RotationCompressionFormat, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, KeyEncodingFormat, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'TranslationCodec'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'RotationCodec'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, TranslationCodec, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, RotationCodec, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, AdditiveRefName, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, EncodingPkgVersion, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, CompressCommandletVersion, 0xFFFFFFFF)

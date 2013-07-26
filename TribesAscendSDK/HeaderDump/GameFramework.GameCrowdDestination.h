@@ -1,8 +1,11 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "GameFramework.GameCrowdDestinationQueuePoint.h"
 #include "GameFramework.GameCrowdPopulationManager.h"
 #include "GameFramework.GameCrowdInteractionPoint.h"
 #include "GameFramework.GameCrowdAgent.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.Rotator.h"
 #include "GameFramework.SeqAct_GameCrowdSpawner.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -57,7 +60,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bLastAllowableResult, 0x4)
 		ADD_VAR(::BoolProperty, bAllowAsPreviousDestination, 0x2)
 		ADD_VAR(::BoolProperty, bKillWhenReached, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IEditorLinkSelectionInterface'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IEditorLinkSelectionInterface, 0xFFFFFFFF)
 		bool ReachedByAgent(class GameCrowdAgent* Agent, Vector TestPosition, bool bTestExactly)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestination.ReachedByAgent");

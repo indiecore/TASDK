@@ -1,7 +1,11 @@
 #pragma once
+#include "Core.Object.Pointer.h"
 #include "Engine.PrimitiveComponent.h"
+#include "Engine.EngineTypes.LightMapRef.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Actor.h"
 #include "Engine.MaterialInterface.h"
+#include "Engine.EngineTypes.LightmassPrimitiveSettings.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.FluidSurfaceComponent." #y); \
@@ -26,8 +30,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, ForceImpact, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'FluidSimulation'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightMapRef' for the property named 'LightMap'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, FluidSimulation, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LightMapRef>, LightMap, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, EditorViewPosition, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, DetailPosition, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, SimulationPosition, 0xFFFFFFFF)
@@ -73,7 +77,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bPause, 0x4)
 		ADD_VAR(::BoolProperty, EnableDetail, 0x2)
 		ADD_VAR(::BoolProperty, EnableSimulation, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightmassPrimitiveSettings' for the property named 'LightmassSettings'!
+		ADD_STRUCT(::NonArithmeticProperty<LightmassPrimitiveSettings>, LightmassSettings, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LightMapResolution, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInterface, FluidMaterial)
 		void ApplyForce(Vector WorldPos, float Strength, float Radius, bool bImpulse)

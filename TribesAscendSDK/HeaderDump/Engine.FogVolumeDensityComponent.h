@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.LinearColor.h"
 #include "Engine.ActorComponent.h"
 #include "Engine.MaterialInterface.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -25,8 +26,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, StartDistance, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'ApproxFogLightColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'SimpleLightColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, ApproxFogLightColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, SimpleLightColor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bOnlyAffectsTranslucency, 0x4)
 		ADD_VAR(::BoolProperty, bAffectsTranslucency, 0x2)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)

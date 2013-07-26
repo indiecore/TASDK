@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.SoundNode.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class SoundNodeDelay : public SoundNode
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'DelayDuration'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, DelayDuration, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DelayMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DelayMin, 0xFFFFFFFF)
 	};

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.Pawn.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.Info.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -19,7 +20,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::ByteProperty, RouteType, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IEditorLinkSelectionInterface'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IEditorLinkSelectionInterface, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FudgeFactor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, RouteIndexOffset, 0xFFFFFFFF)
 		int ResolveRouteIndex(int Idx, byte RouteDirection, byte& out_bComplete, byte& out_bReverse)

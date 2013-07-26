@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.MaterialExpression.h"
+#include "Engine.MaterialExpression.ExpressionInput.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialExpressionFresnel." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class MaterialExpressionFresnel : public MaterialExpression
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'Normal'!
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, Normal, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Exponent, 0xFFFFFFFF)
 	};
 }

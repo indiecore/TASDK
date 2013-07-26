@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.K2GraphBase.h"
+#include "Engine.AITree.AITreeHandle.h"
 #include "Engine.AIController.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
@@ -13,40 +14,28 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(K2GraphBase, GatherList)
-		bool SetActiveRoot(ScriptName InName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.AITree.AITreeHandle'!
-void*& Handle)
+		bool SetActiveRoot(ScriptName InName, AITreeHandle& Handle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree.SetActiveRoot");
 			byte* params = (byte*)malloc(60);
 			*(ScriptName*)params = InName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.AITree.AITreeHandle'!
-void**)(params + 8) = Handle;
+			*(AITreeHandle*)(params + 8) = Handle;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Handle = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.AITree.AITreeHandle'!
-void**)(params + 8);
+			Handle = *(AITreeHandle*)(params + 8);
 			auto returnVal = *(bool*)(params + 56);
 			free(params);
 			return returnVal;
 		}
 		
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void* EvaluateTree(class AIController* InAI, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.AITree.AITreeHandle'!
-void*& Handle)
+void* EvaluateTree(class AIController* InAI, AITreeHandle& Handle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree.EvaluateTree");
 			byte* params = (byte*)malloc(64);
 			*(class AIController**)params = InAI;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.AITree.AITreeHandle'!
-void**)(params + 4) = Handle;
+			*(AITreeHandle*)(params + 4) = Handle;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Handle = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.AITree.AITreeHandle'!
-void**)(params + 4);
+			Handle = *(AITreeHandle*)(params + 4);
 			auto returnVal = *(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 52);

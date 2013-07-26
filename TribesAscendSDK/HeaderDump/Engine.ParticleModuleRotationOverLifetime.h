@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.ParticleModuleRotationBase.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, Scale, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'RotationOverLife'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, RotationOverLife, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

@@ -1,7 +1,9 @@
 #pragma once
 #include "Engine.PhysicsVolume.h"
-#include "Engine.Pawn.h"
 #include "Engine.Ladder.h"
+#include "Core.Object.Vector.h"
+#include "Engine.Pawn.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

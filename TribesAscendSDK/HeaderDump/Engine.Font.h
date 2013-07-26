@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Engine.FontImportOptions.FontImportOptionsData.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Font." #y); \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, NumCharacters, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.FontImportOptions.FontImportOptionsData' for the property named 'ImportOptions'!
+		ADD_STRUCT(::NonArithmeticProperty<FontImportOptionsData>, ImportOptions, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Kerning, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Leading, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Descent, 0xFFFFFFFF)

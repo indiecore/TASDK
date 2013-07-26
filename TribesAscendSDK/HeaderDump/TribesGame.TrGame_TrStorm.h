@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame.TrGame.h"
+#include "TribesGame.TrGame_TrStorm.Carrier.h"
 #include "TribesGame.TrStormCarrierShield.h"
 #include "TribesGame.TrStormCore.h"
 #include "Engine.PlayerReplicationInfo.h"
@@ -33,7 +34,7 @@ namespace UnrealScript
 		ADD_OBJECT(TrStormCore, m_CarrierCore)
 		ADD_OBJECT(TrStormCarrierShield, m_CarrierShields)
 		ADD_VAR(::FloatProperty, m_fMissileDamageAmount, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrGame_TrStorm.Carrier' for the property named 'm_Carriers'!
+		ADD_STRUCT(::NonArithmeticProperty<Carrier>, m_Carriers, 0xFFFFFFFF)
 		void PostBeginPlay()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrStorm.PostBeginPlay");

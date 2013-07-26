@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame.TrDevice_Pack.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice_Blink." #y); \

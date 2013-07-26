@@ -7,6 +7,7 @@
 #include "Engine.Pawn.h"
 #include "UTGame.UTPlayerReplicationInfo.h"
 #include "UTGame.UTVehicle.h"
+#include "Core.Object.Rotator.h"
 #include "UTGame.UTTeamInfo.h"
 #include "UTGame.UTGameObjective.h"
 #include "Engine.PlayerController.h"

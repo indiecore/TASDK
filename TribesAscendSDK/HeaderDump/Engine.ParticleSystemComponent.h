@@ -1,6 +1,9 @@
 #pragma once
+#include "Core.Object.Pointer.h"
 #include "Engine.PrimitiveComponent.h"
 #include "Engine.ParticleSystem.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Color.h"
 #include "Engine.Actor.h"
 #include "Engine.MaterialInterface.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -62,7 +65,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, ReplayClipIDNumber, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ReplayFrameIndex, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AccumLODDistanceCheckTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ReleaseResourcesFence'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ReleaseResourcesFence, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CustomTimeDilation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EmitterDelay, 0xFFFFFFFF)
 		void SetTemplate(class ParticleSystem* NewTemplate)
@@ -349,16 +352,12 @@ void**)params = PSystem;
 			ParamLow = *(Vector*)(params + 20);
 			free(params);
 		}
-		void SetColorParameter(ScriptName ParameterName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* Param)
+		void SetColorParameter(ScriptName ParameterName, Color Param)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystemComponent.SetColorParameter");
 			byte* params = (byte*)malloc(12);
 			*(ScriptName*)params = ParameterName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 8) = Param;
+			*(Color*)(params + 8) = Param;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -404,20 +403,14 @@ void**)(params + 8) = Param;
 			free(params);
 			return returnVal;
 		}
-		bool GetColorParameter(ScriptName InName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void*& OutColor)
+		bool GetColorParameter(ScriptName InName, Color& OutColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystemComponent.GetColorParameter");
 			byte* params = (byte*)malloc(16);
 			*(ScriptName*)params = InName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 8) = OutColor;
+			*(Color*)(params + 8) = OutColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutColor = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 8);
+			OutColor = *(Color*)(params + 8);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);
 			return returnVal;

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleRotationRateBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleMeshRotationRateMultiplyLife." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class ParticleModuleMeshRotationRateMultiplyLife : public ParticleModuleRotationRateBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'LifeMultiplier'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, LifeMultiplier, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

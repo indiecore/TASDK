@@ -1,4 +1,5 @@
 #pragma once
+#include "UDKBase.UDKVehicleSimChopper.AnglePID.h"
 #include "UDKBase.UDKVehicleSimChopper.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -17,8 +18,8 @@ namespace UnrealScript
 	class TrVehicleSimChopper : public UDKVehicleSimChopper
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKVehicleSimChopper.AnglePID' for the property named 'RollGain'!
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKVehicleSimChopper.AnglePID' for the property named 'PitchGain'!
+		ADD_STRUCT(::NonArithmeticProperty<AnglePID>, RollGain, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<AnglePID>, PitchGain, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bShouldStabilizeRotation, 0x2)
 		ADD_VAR(::BoolProperty, m_bInvertFlight, 0x1)
 		ADD_VAR(::IntProperty, m_nLastYawInput, 0xFFFFFFFF)

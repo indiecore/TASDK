@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.OnlineGameSettings.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -31,7 +32,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, VersionNumber, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SuccessfulCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DownloadCount, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FTickableObject'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FTickableObject, 0xFFFFFFFF)
 		void OnPlaylistPopulationDataUpdated()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.OnPlaylistPopulationDataUpdated");

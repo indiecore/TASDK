@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.SeqAct_SetSequenceVariable.h"
 #include "Core.Object.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_SetLocation." #y); \

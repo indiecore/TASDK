@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.MaterialExpressionParameter.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.MaterialExpression.ExpressionInput.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialExpressionStaticSwitchParameter." #y); \
@@ -17,9 +19,9 @@ namespace UnrealScript
 	class MaterialExpressionStaticSwitchParameter : public MaterialExpressionParameter
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'InstanceOverride'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'B'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialExpression.ExpressionInput' for the property named 'A'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, InstanceOverride, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, B, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ExpressionInput>, A, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, ExtendedCaptionDisplay, 0x2)
 		ADD_VAR(::BoolProperty, DefaultValue, 0x1)
 	};

@@ -1,6 +1,7 @@
 #pragma once
 #include "TribesGame.TrCollisionProxy.h"
 #include "TribesGame.TrProjectile.h"
+#include "Core.Object.Vector.h"
 #include "Engine.SoundCue.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.Actor.h"

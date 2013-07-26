@@ -1,17 +1,16 @@
 #pragma once
 #include "UTGame.UTObjectiveSpecificMessage.h"
+#include "Engine.PlayerReplicationInfo.h"
+#include "UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo.h"
 #include "Core.Object.h"
 #include "Engine.PlayerController.h"
 #include "UTGame.UTQueuedAnnouncement.h"
-#include "Engine.PlayerReplicationInfo.h"
 namespace UnrealScript
 {
 	class UTObjectiveAnnouncement : public UTObjectiveSpecificMessage
 	{
 	public:
-		
-// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo'!
-void* GetObjectiveAnnouncement(byte MessageIndex, class Object* Objective, class PlayerController* PC)
+		ObjectiveAnnouncementInfo GetObjectiveAnnouncement(byte MessageIndex, class Object* Objective, class PlayerController* PC)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTObjectiveAnnouncement.GetObjectiveAnnouncement");
 			byte* params = (byte*)malloc(25);
@@ -19,9 +18,7 @@ void* GetObjectiveAnnouncement(byte MessageIndex, class Object* Objective, class
 			*(class Object**)(params + 4) = Objective;
 			*(class PlayerController**)(params + 8) = PC;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPlayerController.ObjectiveAnnouncementInfo'!
-void**)(params + 12);
+			auto returnVal = *(ObjectiveAnnouncementInfo*)(params + 12);
 			free(params);
 			return returnVal;
 		}

@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.StaticMeshComponent.h"
 #include "Engine.StaticMesh.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CoverMeshComponent." #y); \

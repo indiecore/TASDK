@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 #include "UDKBase.UDKGameObjective.h"
 #include "Engine.NavigationPoint.h"
 #include "Engine.TeamInfo.h"

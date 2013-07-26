@@ -1,6 +1,7 @@
 #pragma once
 #include "TribesGame.TrVehicle.h"
 #include "TribesGame.TrStation.h"
+#include "TribesGame.TrVehicleStation.VehicleSpawnInfo.h"
 #include "TribesGame.TrAnimNodeBlendList.h"
 #include "Engine.Texture2D.h"
 #include "TribesGame.TrVehiclePad.h"
@@ -41,7 +42,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, r_bIsLocked, 0x1)
 		ADD_VAR(::IntProperty, r_nSpawnedVehicles, 0xFFFFFFFF)
 		ADD_OBJECT(TrVehiclePad, m_VehiclePad)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrVehicleStation.VehicleSpawnInfo' for the property named 'm_SpawnList'!
+		ADD_STRUCT(::NonArithmeticProperty<VehicleSpawnInfo>, m_SpawnList, 0xFFFFFFFF)
 		bool RequestSpawnVehicle(byte VehicleType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.RequestSpawnVehicle");

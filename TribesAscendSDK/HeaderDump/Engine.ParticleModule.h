@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModule." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class ParticleModule : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'ModuleEditorColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, ModuleEditorColor, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, LODValidity, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bRequiresLoopingNotification, 0x400)
 		ADD_VAR(::BoolProperty, bSupportsRandomSeed, 0x200)

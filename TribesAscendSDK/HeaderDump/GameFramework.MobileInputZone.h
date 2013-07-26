@@ -1,6 +1,9 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Color.h"
+#include "Core.Object.Vector2D.h"
 #include "Engine.Texture2D.h"
+#include "GameFramework.MobileInputZone.TextureUVs.h"
 #include "GameFramework.MobilePlayerInput.h"
 #include "GameFramework.SeqEvent_MobileZoneBase.h"
 #include "Engine.Canvas.h"
@@ -28,7 +31,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bIsInvisible, 0x200)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'RenderColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, RenderColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AnimatingFadeOpacity, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, State, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InactiveAlpha, 0xFFFFFFFF)
@@ -41,30 +44,30 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, SizeX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SizeY, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, OverrideTexture1)
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobileInputZone.TextureUVs' for the property named 'OverrideUVs1'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, OverrideUVs1, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, OverrideTexture2)
-		// WARNING: Unknown structure type 'ScriptStruct GameFramework.MobileInputZone.TextureUVs' for the property named 'OverrideUVs2'!
+		ADD_STRUCT(::NonArithmeticProperty<TextureUVs>, OverrideUVs2, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ActiveSizeX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ActiveSizeY, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Caption, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CaptionXAdjustment, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CaptionYAdjustment, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'CurrentCenter'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'CurrentLocation'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, CurrentCenter, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, CurrentLocation, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bRenderGuides, 0x8000)
 		ADD_VAR(::ByteProperty, SlideType, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastWentActiveTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TotalActiveTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'LastAxisValues'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'EscapeVelocity'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, LastAxisValues, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, EscapeVelocity, 0xFFFFFFFF)
 		ADD_OBJECT(MobilePlayerInput, InputOwner)
 		ADD_VAR(::FloatProperty, TimeSinceLastTapRepeat, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastTouchTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PreviousLocationCount, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PreviousMoveDeltaTimes, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'PreviousLocations'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'InitialCenter'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'InitialLocation'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, PreviousLocations, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, InitialCenter, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, InitialLocation, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, OverrideTexture2Name, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, OverrideTexture1Name, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TapDistanceConstraint, 0xFFFFFFFF)
@@ -115,58 +118,44 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool OnProcessSlide(class MobileInputZone* Zone, byte EventType, int SlideValue, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* ViewportSize)
+		bool OnProcessSlide(class MobileInputZone* Zone, byte EventType, int SlideValue, Vector2D ViewportSize)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnProcessSlide");
 			byte* params = (byte*)malloc(21);
 			*(class MobileInputZone**)params = Zone;
 			*(params + 4) = EventType;
 			*(int*)(params + 8) = SlideValue;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 12) = ViewportSize;
+			*(Vector2D*)(params + 12) = ViewportSize;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 20);
 			free(params);
 			return returnVal;
 		}
-		bool OnDoubleTapDelegate(class MobileInputZone* Zone, byte EventType, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* TouchLocation)
+		bool OnDoubleTapDelegate(class MobileInputZone* Zone, byte EventType, Vector2D TouchLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnDoubleTapDelegate");
 			byte* params = (byte*)malloc(17);
 			*(class MobileInputZone**)params = Zone;
 			*(params + 4) = EventType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8) = TouchLocation;
+			*(Vector2D*)(params + 8) = TouchLocation;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		bool OnTapDelegate(class MobileInputZone* Zone, byte EventType, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* TouchLocation)
+		bool OnTapDelegate(class MobileInputZone* Zone, byte EventType, Vector2D TouchLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnTapDelegate");
 			byte* params = (byte*)malloc(17);
 			*(class MobileInputZone**)params = Zone;
 			*(params + 4) = EventType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8) = TouchLocation;
+			*(Vector2D*)(params + 8) = TouchLocation;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		bool OnProcessInputDelegate(class MobileInputZone* Zone, float DeltaTime, int Handle, byte EventType, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* TouchLocation)
+		bool OnProcessInputDelegate(class MobileInputZone* Zone, float DeltaTime, int Handle, byte EventType, Vector2D TouchLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnProcessInputDelegate");
 			byte* params = (byte*)malloc(25);
@@ -174,9 +163,7 @@ void* TouchLocation)
 			*(float*)(params + 4) = DeltaTime;
 			*(int*)(params + 8) = Handle;
 			*(params + 12) = EventType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 16) = TouchLocation;
+			*(Vector2D*)(params + 16) = TouchLocation;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 24);
 			free(params);

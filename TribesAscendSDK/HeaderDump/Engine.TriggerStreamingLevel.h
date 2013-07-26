@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.Trigger.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 namespace UnrealScript
 {
 	class TriggerStreamingLevel : public Trigger

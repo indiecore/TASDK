@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.StaticMeshComponent.h"
+#include "Engine.SplineMeshComponent.SplineMeshParams.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SplineMeshComponent." #y); \
@@ -19,7 +21,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bSmoothInterpRollScale, 0x1)
 		ADD_STRUCT(::VectorProperty, SplineXDir, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.SplineMeshComponent.SplineMeshParams' for the property named 'SplineParams'!
+		ADD_STRUCT(::NonArithmeticProperty<SplineMeshParams>, SplineParams, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

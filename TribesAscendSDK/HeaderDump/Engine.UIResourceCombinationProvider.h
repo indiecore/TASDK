@@ -1,7 +1,9 @@
 #pragma once
 #include "Engine.UIDataProvider.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.UIDataProvider_OnlineProfileSettings.h"
 #include "Engine.UIResourceDataProvider.h"
+#include "Engine.UIRoot.UIProviderFieldValue.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.UIResourceCombinationProvider." #y); \
@@ -21,8 +23,8 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(UIDataProvider_OnlineProfileSettings, ProfileProvider)
 		ADD_OBJECT(UIResourceDataProvider, StaticDataProvider)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementProvider, 0xFFFFFFFF)
 		void InitializeProvider(bool bIsEditor, class UIResourceDataProvider* InStaticResourceProvider, class UIDataProvider_OnlineProfileSettings* InProfileProvider)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIResourceCombinationProvider.InitializeProvider");
@@ -159,23 +161,17 @@ void**)(params + 20);
 			free(params);
 			return returnVal;
 		}
-		bool GetCellFieldValue(ScriptName FieldName, ScriptName CellTag, int ListIndex, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderFieldValue'!
-void*& out_FieldValue, int ArrayIndex)
+		bool GetCellFieldValue(ScriptName FieldName, ScriptName CellTag, int ListIndex, UIProviderFieldValue& out_FieldValue, int ArrayIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIResourceCombinationProvider.GetCellFieldValue");
 			byte* params = (byte*)malloc(116);
 			*(ScriptName*)params = FieldName;
 			*(ScriptName*)(params + 8) = CellTag;
 			*(int*)(params + 16) = ListIndex;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderFieldValue'!
-void**)(params + 20) = out_FieldValue;
+			*(UIProviderFieldValue*)(params + 20) = out_FieldValue;
 			*(int*)(params + 108) = ArrayIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_FieldValue = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderFieldValue'!
-void**)(params + 20);
+			out_FieldValue = *(UIProviderFieldValue*)(params + 20);
 			auto returnVal = *(bool*)(params + 112);
 			free(params);
 			return returnVal;

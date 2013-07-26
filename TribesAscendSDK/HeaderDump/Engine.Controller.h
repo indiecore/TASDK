@@ -1,15 +1,21 @@
 #pragma once
 #include "Engine.Actor.h"
-#include "Engine.InterpGroup.h"
 #include "Engine.Weapon.h"
 #include "Engine.Pawn.h"
+#include "Engine.CoverLink.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.PlayerReplicationInfo.h"
+#include "Engine.SeqAct_Interp.h"
+#include "Engine.Actor.BasedPosition.h"
+#include "Engine.SeqAct_ModifyHealth.h"
+#include "Engine.FaceFXAnimSet.h"
+#include "Core.Object.Vector.h"
 #include "Engine.InterpActor.h"
 #include "Engine.ReachSpec.h"
 #include "Engine.NavigationPoint.h"
-#include "Engine.SeqAct_ModifyHealth.h"
-#include "Engine.FaceFXAnimSet.h"
 #include "Engine.NavigationHandle.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.InterpGroup.h"
 #include "Engine.SeqAct_SetPhysics.h"
 #include "Engine.SoundCue.h"
 #include "Engine.SeqAct_Possess.h"
@@ -21,9 +27,7 @@
 #include "Engine.SeqAct_Teleport.h"
 #include "Engine.SeqAct_ToggleGodMode.h"
 #include "Engine.SeqAct_SetVelocity.h"
-#include "Engine.CoverLink.h"
 #include "Engine.SeqAct_ToggleHidden.h"
-#include "Engine.SeqAct_Interp.h"
 #include "Engine.InterpGroupInst.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -78,11 +82,11 @@ namespace UnrealScript
 		ADD_OBJECT(ReachSpec, NextRoutePath)
 		ADD_OBJECT(ReachSpec, CurrentPath)
 		ADD_OBJECT(NavigationPoint, StartSpot)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition' for the property named 'AdjustPosition'!
+		ADD_STRUCT(::NonArithmeticProperty<BasedPosition>, AdjustPosition, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, GoalList)
 		ADD_OBJECT(Actor, Focus)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition' for the property named 'FocalPosition'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition' for the property named 'DestinationPosition'!
+		ADD_STRUCT(::NonArithmeticProperty<BasedPosition>, FocalPosition, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<BasedPosition>, DestinationPosition, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, MoveTarget)
 		ADD_VAR(::FloatProperty, MoveTimer, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, OverrideSearchStart, 0xFFFFFFFF)
@@ -110,7 +114,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsPlayer, 0x1)
 		ADD_OBJECT(Controller, NextController)
 		ADD_VAR(::IntProperty, PlayerNum, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_NavigationHandle'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IInterface_NavigationHandle, 0xFFFFFFFF)
 		bool IsLocalPlayerController()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Controller.IsLocalPlayerController");

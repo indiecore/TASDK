@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.SequenceAction.h"
+#include "Core.Object.Vector2D.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SeqAct_CameraFade." #y); \
@@ -21,8 +23,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bPersistFade, 0x1)
 		ADD_VAR(::FloatProperty, FadeTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FadeOpacity, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'FadeAlpha'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'FadeColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, FadeAlpha, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, FadeColor, 0xFFFFFFFF)
 		int GetObjClassVersion()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_CameraFade.GetObjClassVersion");

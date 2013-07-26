@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ActorFactorySkeletalMesh.h"
+#include "Engine.PrimitiveComponent.RBCollisionChannelContainer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ActorFactoryApexClothing." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class ActorFactoryApexClothing : public ActorFactorySkeletalMesh
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'ClothingRBCollideWithChannels'!
+		ADD_STRUCT(::NonArithmeticProperty<RBCollisionChannelContainer>, ClothingRBCollideWithChannels, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ClothingRBChannel, 0xFFFFFFFF)
 	};
 }

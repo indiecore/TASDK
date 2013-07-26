@@ -1,9 +1,15 @@
 #pragma once
+#include "Core.Object.RenderCommandFence_Mirror.h"
+#include "Engine.MaterialInterface.LightmassMaterialInterfaceSettings.h"
 #include "Engine.Surface.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.PhysicalMaterial.h"
 #include "Engine.Texture.h"
+#include "Core.Object.Guid.h"
 #include "Engine.Material.h"
 #include "Engine.Font.h"
+#include "Core.Object.InterpCurveFloat.h"
+#include "Core.Object.InterpCurveVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialInterface." #y); \
@@ -42,23 +48,23 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, PannerSpeedX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TransformCenterY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TransformCenterX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'DefaultUniformColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, DefaultUniformColor, 0xFFFFFFFF)
 		ADD_OBJECT(Texture, MobileDetailTexture)
 		ADD_OBJECT(Texture, MobileMaskTexture)
 		ADD_VAR(::FloatProperty, MobileBumpOffsetHeightRatio, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MobileBumpOffsetReferencePlane, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'MobileRimLightingColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MobileRimLightingColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MobileRimLightingExponent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MobileRimLightingStrength, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MobileEnvironmentFresnelExponent, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MobileEnvironmentFresnelAmount, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'MobileEnvironmentColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MobileEnvironmentColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MobileEnvironmentAmount, 0xFFFFFFFF)
 		ADD_OBJECT(Texture, MobileEnvironmentTexture)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'MobileEmissiveColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MobileEmissiveColor, 0xFFFFFFFF)
 		ADD_OBJECT(Texture, MobileEmissiveTexture)
 		ADD_VAR(::FloatProperty, MobileSpecularPower, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'MobileSpecularColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MobileSpecularColor, 0xFFFFFFFF)
 		ADD_OBJECT(Texture, MobileNormalTexture)
 		ADD_VAR(::ByteProperty, MobileTextureTransformTarget, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, MobileTextureBlendFactorSource, 0xFFFFFFFF)
@@ -85,10 +91,10 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUseMobileSpecular, 0x4)
 		ADD_VAR(::BoolProperty, bMobileAllowFog, 0x2)
 		ADD_VAR(::BoolProperty, bAutoFlattenMobile, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'LightingGuid'!
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, LightingGuid, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, PreviewMesh, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MaterialInterface.LightmassMaterialInterfaceSettings' for the property named 'LightmassSettings'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.RenderCommandFence_Mirror' for the property named 'ParentRefFence'!
+		ADD_STRUCT(::NonArithmeticProperty<LightmassMaterialInterfaceSettings>, LightmassSettings, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RenderCommandFence_Mirror>, ParentRefFence, 0xFFFFFFFF)
 		class Material* GetMaterial()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetMaterial");
@@ -145,20 +151,14 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		bool GetScalarCurveParameterValue(ScriptName ParameterName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
-void*& OutValue)
+		bool GetScalarCurveParameterValue(ScriptName ParameterName, InterpCurveFloat& OutValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetScalarCurveParameterValue");
 			byte* params = (byte*)malloc(28);
 			*(ScriptName*)params = ParameterName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
-void**)(params + 8) = OutValue;
+			*(InterpCurveFloat*)(params + 8) = OutValue;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutValue = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
-void**)(params + 8);
+			OutValue = *(InterpCurveFloat*)(params + 8);
 			auto returnVal = *(bool*)(params + 24);
 			free(params);
 			return returnVal;
@@ -175,38 +175,26 @@ void**)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		bool GetVectorParameterValue(ScriptName ParameterName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void*& OutValue)
+		bool GetVectorParameterValue(ScriptName ParameterName, LinearColor& OutValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetVectorParameterValue");
 			byte* params = (byte*)malloc(28);
 			*(ScriptName*)params = ParameterName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 8) = OutValue;
+			*(LinearColor*)(params + 8) = OutValue;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutValue = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 8);
+			OutValue = *(LinearColor*)(params + 8);
 			auto returnVal = *(bool*)(params + 24);
 			free(params);
 			return returnVal;
 		}
-		bool GetVectorCurveParameterValue(ScriptName ParameterName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector'!
-void*& OutValue)
+		bool GetVectorCurveParameterValue(ScriptName ParameterName, InterpCurveVector& OutValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetVectorCurveParameterValue");
 			byte* params = (byte*)malloc(28);
 			*(ScriptName*)params = ParameterName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector'!
-void**)(params + 8) = OutValue;
+			*(InterpCurveVector*)(params + 8) = OutValue;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutValue = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector'!
-void**)(params + 8);
+			OutValue = *(InterpCurveVector*)(params + 8);
 			auto returnVal = *(bool*)(params + 24);
 			free(params);
 			return returnVal;

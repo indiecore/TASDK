@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.UIDataStore_StringBase.h"
+#include "Engine.UIRoot.RawInputKeyEventData.h"
 namespace UnrealScript
 {
 	class UIDataStore_InputAlias : public UIDataStore_StringBase
@@ -49,40 +50,28 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		bool GetAliasInputKeyData(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.RawInputKeyEventData'!
-void*& out_InputKeyData, ScriptName DesiredAlias, byte OverridePlatform)
+		bool GetAliasInputKeyData(RawInputKeyEventData& out_InputKeyData, ScriptName DesiredAlias, byte OverridePlatform)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_InputAlias.GetAliasInputKeyData");
 			byte* params = (byte*)malloc(25);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.RawInputKeyEventData'!
-void**)params = out_InputKeyData;
+			*(RawInputKeyEventData*)params = out_InputKeyData;
 			*(ScriptName*)(params + 12) = DesiredAlias;
 			*(params + 20) = OverridePlatform;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_InputKeyData = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.RawInputKeyEventData'!
-void**)params;
+			out_InputKeyData = *(RawInputKeyEventData*)params;
 			auto returnVal = *(bool*)(params + 24);
 			free(params);
 			return returnVal;
 		}
-		bool GetAliasInputKeyDataByIndex(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.RawInputKeyEventData'!
-void*& out_InputKeyData, int AliasIndex, byte OverridePlatform)
+		bool GetAliasInputKeyDataByIndex(RawInputKeyEventData& out_InputKeyData, int AliasIndex, byte OverridePlatform)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_InputAlias.GetAliasInputKeyDataByIndex");
 			byte* params = (byte*)malloc(21);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.RawInputKeyEventData'!
-void**)params = out_InputKeyData;
+			*(RawInputKeyEventData*)params = out_InputKeyData;
 			*(int*)(params + 12) = AliasIndex;
 			*(params + 16) = OverridePlatform;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_InputKeyData = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.RawInputKeyEventData'!
-void**)params;
+			out_InputKeyData = *(RawInputKeyEventData*)params;
 			auto returnVal = *(bool*)(params + 20);
 			free(params);
 			return returnVal;

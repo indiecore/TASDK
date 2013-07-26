@@ -1,5 +1,6 @@
 #pragma once
 #include "GameFramework.MobileMenuObject.h"
+#include "Core.Object.Color.h"
 #include "Engine.Font.h"
 #include "Engine.Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -28,8 +29,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAutoSize, 0x1)
 		ADD_VAR(::FloatProperty, TextYScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TextXScale, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'TouchedColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'TextColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, TouchedColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, TextColor, 0xFFFFFFFF)
 		ADD_OBJECT(Font, TextFont)
 		ADD_VAR(::StrProperty, Caption, 0xFFFFFFFF)
 		void RenderObject(class Canvas* Canvas)

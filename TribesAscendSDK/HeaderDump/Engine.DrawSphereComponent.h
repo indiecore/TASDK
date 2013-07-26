@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.PrimitiveComponent.h"
 #include "Engine.Material.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DrawSphereComponent." #y); \
@@ -30,7 +31,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, SphereSides, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SphereRadius, 0xFFFFFFFF)
 		ADD_OBJECT(Material, SphereMaterial)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'SphereColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, SphereColor, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

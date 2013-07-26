@@ -1,6 +1,9 @@
 #pragma once
+#include "Core.Object.Pointer.h"
 #include "Engine.PrimitiveComponent.h"
 #include "Engine.Model.h"
+#include "Engine.BrushComponent.KCachedConvexData_Mirror.h"
+#include "Engine.KMeshProps.KAggregateGeom.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.BrushComponent." #y); \
@@ -26,9 +29,9 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bBlockComplexCollisionTrace, 0x1)
 		ADD_VAR(::IntProperty, CachedPhysBrushDataVersion, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.BrushComponent.KCachedConvexData_Mirror' for the property named 'CachedPhysBrushData'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'BrushPhysDesc'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.KMeshProps.KAggregateGeom' for the property named 'BrushAggGeom'!
+		ADD_STRUCT(::NonArithmeticProperty<KCachedConvexData_Mirror>, CachedPhysBrushData, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, BrushPhysDesc, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<KAggregateGeom>, BrushAggGeom, 0xFFFFFFFF)
 		ADD_OBJECT(Model, Brush)
 	};
 }

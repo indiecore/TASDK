@@ -1,6 +1,8 @@
 #pragma once
 #include "TribesGame.TrDevice_AutoFire.h"
 #include "Engine.AnimNodeSequence.h"
+#include "Core.Object.Vector.h"
+#include "Engine.Actor.ImpactInfo.h"
 #include "TribesGame.TrPawn.h"
 #define ADD_OBJECT(x, y) (class x*) get_##y() \
 { \
@@ -64,16 +66,12 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Melee.FireAmmunition");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		float ModifyInstantHitDamage(byte FiringMode, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* Impact, float Damage)
+		float ModifyInstantHitDamage(byte FiringMode, ImpactInfo Impact, float Damage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Melee.ModifyInstantHitDamage");
 			byte* params = (byte*)malloc(89);
 			*params = FiringMode;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 4) = Impact;
+			*(ImpactInfo*)(params + 4) = Impact;
 			*(float*)(params + 84) = Damage;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(float*)(params + 88);

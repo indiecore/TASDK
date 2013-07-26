@@ -1,5 +1,8 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.GameplayEvents.GameSessionInformation.h"
+#include "Engine.GameplayEvents.GameplayEventsHeader.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.GameplayEvents." #y); \
@@ -17,10 +20,10 @@ namespace UnrealScript
 	class GameplayEvents : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.GameplayEvents.GameSessionInformation' for the property named 'CurrentSessionInfo'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.GameplayEvents.GameplayEventsHeader' for the property named 'Header'!
+		ADD_STRUCT(::NonArithmeticProperty<GameSessionInformation>, CurrentSessionInfo, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<GameplayEventsHeader>, Header, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, StatsFileName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Archive'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Archive, 0xFFFFFFFF)
 		bool OpenStatsFile(ScriptArray<wchar_t> Filename)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEvents.OpenStatsFile");

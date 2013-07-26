@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.GameEngine.h"
 #include "Core.Object.h"
+#include "Core.Object.Map_Mirror.h"
+#include "Engine.OnlineSubsystem.OnlineContent.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.DownloadableContentManager." #y); \
@@ -19,20 +21,14 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(GameEngine, GameEngine)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'TextureCachePathMap'!
-		bool InstallDLC(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
-void*& DLCBundle)
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, TextureCachePathMap, 0xFFFFFFFF)
+		bool InstallDLC(OnlineContent& DLCBundle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallDLC");
 			byte* params = (byte*)malloc(72);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
-void**)params = DLCBundle;
+			*(OnlineContent*)params = DLCBundle;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DLCBundle = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
-void**)params;
+			DLCBundle = *(OnlineContent*)params;
 			auto returnVal = *(bool*)(params + 68);
 			free(params);
 			return returnVal;
@@ -90,34 +86,22 @@ void**)params;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.UpdateObjectLists");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void InstallPackages(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
-void*& DLCBundle)
+		void InstallPackages(OnlineContent& DLCBundle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallPackages");
 			byte* params = (byte*)malloc(68);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
-void**)params = DLCBundle;
+			*(OnlineContent*)params = DLCBundle;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DLCBundle = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
-void**)params;
+			DLCBundle = *(OnlineContent*)params;
 			free(params);
 		}
-		void InstallNonPackageFiles(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
-void*& DLCBundle)
+		void InstallNonPackageFiles(OnlineContent& DLCBundle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallNonPackageFiles");
 			byte* params = (byte*)malloc(68);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
-void**)params = DLCBundle;
+			*(OnlineContent*)params = DLCBundle;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DLCBundle = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.OnlineContent'!
-void**)params;
+			DLCBundle = *(OnlineContent*)params;
 			free(params);
 		}
 		void Init()

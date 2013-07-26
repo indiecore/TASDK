@@ -1,6 +1,7 @@
 #pragma once
 #include "TribesGame.TrPaperDoll.h"
 #include "UTGame.UTPlayerController.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.CameraActor.h"
 #include "TribesGame.AlienFXManager.h"
 #include "TribesGame.TrSeqAct_PlayVGSCommand.h"
@@ -8,12 +9,15 @@
 #include "TribesGame.TrEquipInterface.h"
 #include "Engine.MaterialEffect.h"
 #include "TribesGame.TrStrings.h"
+#include "Core.Object.Color.h"
 #include "Engine.ForceFeedbackWaveform.h"
 #include "TribesGame.TrInventoryHelper.h"
 #include "TribesGame.TrHelpTextManager.h"
 #include "Core.Object.h"
 #include "TribesGame.TrStatsInterface.h"
+#include "Engine.PostProcessVolume.PostProcessSettings.h"
 #include "TribesGame.TrAccoladeManager.h"
+#include "Core.Object.Vector.h"
 #include "TribesGame.TrSeqAct_GiveCredits.h"
 #include "Engine.Actor.h"
 #include "TribesGame.TrPawn.h"
@@ -34,6 +38,7 @@
 #include "TribesGame.TrVehicleStation.h"
 #include "TribesGame.TrDevice.h"
 #include "TribesGame.TrWeatherVolume.h"
+#include "Engine.Actor.RigidBodyState.h"
 #include "Engine.PlayerInput.h"
 #include "TribesGame.TrPlayerInput_Spectator.h"
 #include "TribesGame.TrFlagCTF.h"
@@ -192,8 +197,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_RoundEndedPPTarget, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_RoundEndedPPAlpha, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_RoundEndedPPInterpSpeed, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'm_RoundEndedPPSettings'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'm_DefaultPPSettings'!
+		ADD_STRUCT(::NonArithmeticProperty<PostProcessSettings>, m_RoundEndedPPSettings, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<PostProcessSettings>, m_DefaultPPSettings, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fSpeedCameraSpeedSqared, 0xFFFFFFFF)
 		ADD_OBJECT(UDKEmitCameraEffect, m_WeatherCameraEffect)
 		ADD_OBJECT(UDKEmitCameraEffect, m_SpeedCameraEffect)
@@ -1531,9 +1536,7 @@ void**)params = AC;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ServerVerifyVehiclePhys(float TimeStamp, float InForward, float InStrafe, float InUp, int View, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.RigidBodyState'!
-void* InRBState)
+		void ServerVerifyVehiclePhys(float TimeStamp, float InForward, float InStrafe, float InUp, int View, RigidBodyState InRBState)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerController.ServerVerifyVehiclePhys");
 			byte* params = (byte*)malloc(84);
@@ -1542,9 +1545,7 @@ void* InRBState)
 			*(float*)(params + 8) = InStrafe;
 			*(float*)(params + 12) = InUp;
 			*(int*)(params + 16) = View;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.RigidBodyState'!
-void**)(params + 32) = InRBState;
+			*(RigidBodyState*)(params + 32) = InRBState;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -2057,9 +2058,7 @@ void**)(params + 32) = InRBState;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* GetChatColor(byte Channel, bool bSameTeam, int& ChatColorIdx)
+		Color GetChatColor(byte Channel, bool bSameTeam, int& ChatColorIdx)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerController.GetChatColor");
 			byte* params = (byte*)malloc(13);
@@ -2068,9 +2067,7 @@ void* GetChatColor(byte Channel, bool bSameTeam, int& ChatColorIdx)
 			*(int*)(params + 8) = ChatColorIdx;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			ChatColorIdx = *(int*)(params + 8);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 12);
+			auto returnVal = *(Color*)(params + 12);
 			free(params);
 			return returnVal;
 		}

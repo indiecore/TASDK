@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.ReplicationInfo.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "Engine.TeamInfo.h"
+#include "Engine.PlayerReplicationInfo.AutomatedTestingDatum.h"
 #include "Engine.Texture2D.h"
 #include "Engine.Controller.h"
 #include "Engine.HUD.h"
@@ -30,7 +32,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAdmin, 0x1)
 		ADD_VAR(::StrProperty, PlayerName, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PlayerID, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId' for the property named 'UniqueId'!
+		ADD_STRUCT(::NonArithmeticProperty<UniqueNetId>, UniqueId, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bOnlySpectator, 0x4)
 		ADD_OBJECT(TeamInfo, Team)
 		ADD_VAR(::NameProperty, SessionName, 0xFFFFFFFF)
@@ -40,7 +42,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bReadyToPlay, 0x10)
 		ADD_VAR(::BoolProperty, bOutOfLives, 0x20)
 		ADD_VAR(::FloatProperty, Score, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PlayerReplicationInfo.AutomatedTestingDatum' for the property named 'AutomatedTestingData'!
+		ADD_STRUCT(::NonArithmeticProperty<AutomatedTestingDatum>, AutomatedTestingData, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, StartTime, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, SavedNetworkAddress, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bWaitingPlayer, 0x8)
@@ -203,15 +205,11 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetUniqueId(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerUniqueId)
+		void SetUniqueId(UniqueNetId PlayerUniqueId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.SetUniqueId");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerUniqueId;
+			*(UniqueNetId*)params = PlayerUniqueId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

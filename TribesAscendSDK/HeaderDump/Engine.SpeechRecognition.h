@@ -1,5 +1,7 @@
 #pragma once
+#include "Engine.SpeechRecognition.RecogUserData.h"
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SpeechRecognition." #y); \
@@ -17,10 +19,10 @@ namespace UnrealScript
 	class SpeechRecognition : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'FnxVoiceData'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, FnxVoiceData, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bInitialised, 0x2)
 		ADD_VAR(::BoolProperty, bDirty, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.SpeechRecognition.RecogUserData' for the property named 'InstanceData'!
+		ADD_STRUCT(::NonArithmeticProperty<RecogUserData>, InstanceData, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConfidenceThreshhold, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Language, 0xFFFFFFFF)
 	};

@@ -2,6 +2,7 @@
 #include "TribesGame.GFxTrScene.h"
 #include "TribesGame.TrSummaryHelper.h"
 #include "GFxUI.GFxObject.h"
+#include "PlatformCommon.TgPlayerProfile.BadgeStruct.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.GFxTrScene_PlayerSummary." #y); \
@@ -108,15 +109,11 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void AddBadge(
-// WARNING: Unknown structure type 'ScriptStruct PlatformCommon.TgPlayerProfile.BadgeStruct'!
-void* Badge)
+		void AddBadge(BadgeStruct Badge)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.AddBadge");
 			byte* params = (byte*)malloc(52);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct PlatformCommon.TgPlayerProfile.BadgeStruct'!
-void**)params = Badge;
+			*(BadgeStruct*)params = Badge;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.NavMeshPathGoalEvaluator.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.NavigationHandle.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
@@ -12,7 +13,7 @@ namespace UnrealScript
 	class NavMeshGoal_Null : public NavMeshPathGoalEvaluator
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'PartialGoal'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, PartialGoal, 0xFFFFFFFF)
 		bool GoUntilBust(class NavigationHandle* NavHandle, int InMaxPathVisits)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_Null.GoUntilBust");

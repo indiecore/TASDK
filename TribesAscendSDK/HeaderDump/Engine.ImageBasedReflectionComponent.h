@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.StaticMeshComponent.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.Texture2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -24,7 +25,7 @@ namespace UnrealScript
 	class ImageBasedReflectionComponent : public StaticMeshComponent
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'ReflectionColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, ReflectionColor, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, ReflectionTexture)
 		ADD_VAR(::BoolProperty, bTwoSided, 0x2)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)

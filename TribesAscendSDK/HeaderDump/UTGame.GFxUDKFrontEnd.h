@@ -17,6 +17,7 @@
 #include "UTGame.GFxUDKFrontEnd_Multiplayer.h"
 #include "UTGame.GFxUDKFrontEnd_InstantAction.h"
 #include "UTGame.GFxUDKFrontEnd_MainMenu.h"
+#include "UTGame.GFxUDKFrontEnd.ViewInfo.h"
 #include "UTGame.GFxUDKFrontEnd_Screen.h"
 #include "UTGame.GFxUDKFrontEnd_Dialog.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -87,15 +88,11 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.LoadViews");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void LoadView(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxUDKFrontEnd.ViewInfo'!
-void* InViewInfo)
+		void LoadView(ViewInfo InViewInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.LoadView");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxUDKFrontEnd.ViewInfo'!
-void**)params = InViewInfo;
+			*(ViewInfo*)params = InViewInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

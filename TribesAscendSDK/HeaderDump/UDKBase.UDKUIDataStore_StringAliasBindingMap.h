@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Map_Mirror.h"
 #include "Engine.UIDataStore_StringAliasMap.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class UDKUIDataStore_StringAliasBindingMap : public UIDataStore_StringAliasMap
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'CommandToBindNames'!
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, CommandToBindNames, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, FakePlatform, 0xFFFFFFFF)
 		int GetStringWithFieldName(ScriptArray<wchar_t> FieldName, ScriptArray<wchar_t>& MappedString)
 		{

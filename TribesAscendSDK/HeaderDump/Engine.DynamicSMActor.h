@@ -1,8 +1,10 @@
 #pragma once
 #include "Engine.Actor.h"
+#include "Engine.SeqAct_SetMesh.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.MaterialInterface.h"
 #include "Engine.StaticMesh.h"
-#include "Engine.SeqAct_SetMesh.h"
 #include "Engine.Pawn.h"
 #include "Engine.SeqAct_SetMaterial.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \

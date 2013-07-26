@@ -1,5 +1,8 @@
 #pragma once
+#include "Core.Object.Pointer.h"
 #include "Engine.PrimitiveComponent.h"
+#include "Engine.TerrainComponent.TerrainBVTree.h"
+#include "Engine.EngineTypes.LightMapRef.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.TerrainComponent." #y); \
@@ -18,17 +21,17 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bDisplayCollisionLevel, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'RBHeightfield'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.TerrainComponent.TerrainBVTree' for the property named 'BVTree'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, RBHeightfield, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TerrainBVTree>, BVTree, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, FullBatch, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightMapRef' for the property named 'LightMap'!
+		ADD_STRUCT(::NonArithmeticProperty<LightMapRef>, LightMap, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, TrueSectionSizeY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, TrueSectionSizeX, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SectionSizeY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SectionSizeX, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SectionBaseY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SectionBaseX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'TerrainObject'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, TerrainObject, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

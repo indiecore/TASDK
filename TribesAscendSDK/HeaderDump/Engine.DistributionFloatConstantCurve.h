@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.DistributionFloat.h"
+#include "Core.Object.InterpCurveFloat.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.DistributionFloatConstantCurve." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class DistributionFloatConstantCurve : public DistributionFloat
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat' for the property named 'ConstantCurve'!
+		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, ConstantCurve, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

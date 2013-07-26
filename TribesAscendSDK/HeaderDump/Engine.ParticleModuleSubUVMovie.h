@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleSubUV.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleSubUVMovie." #y); \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, StartingFrame, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'FrameRate'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, FrameRate, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bUseEmitterTime, 0x1)
 	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleAttractorBase.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleAttractorParticle." #y); \
@@ -20,12 +21,12 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, LastSelIndex, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, SelectionMethod, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, EmitterName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Strength'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Strength, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bInheritSourceVel, 0x8)
 		ADD_VAR(::BoolProperty, bRenewSource, 0x4)
 		ADD_VAR(::BoolProperty, bAffectBaseVelocity, 0x2)
 		ADD_VAR(::BoolProperty, bStrengthByDistance, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Range'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Range, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

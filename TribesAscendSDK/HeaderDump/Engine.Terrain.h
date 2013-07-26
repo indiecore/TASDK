@@ -1,6 +1,12 @@
 #pragma once
+#include "Core.Object.Pointer.h"
 #include "Engine.Info.h"
+#include "Engine.LightComponent.LightingChannelContainer.h"
+#include "Engine.EngineTypes.LightmassPrimitiveSettings.h"
+#include "Core.Object.Guid.h"
+#include "Core.Object.Color.h"
 #include "Engine.PhysicalMaterial.h"
+#include "Engine.Terrain.CachedTerrainMaterialArray.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Terrain." #y); \
@@ -24,12 +30,12 @@ namespace UnrealScript
 	class Terrain : public Info
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'LightingGuid'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'WireframeColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, LightingGuid, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, WireframeColor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, EditorTessellationLevel, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ReleaseResourcesFence'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightmassPrimitiveSettings' for the property named 'LightmassSettings'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.LightComponent.LightingChannelContainer' for the property named 'LightingChannels'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ReleaseResourcesFence, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LightmassPrimitiveSettings>, LightmassSettings, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LightingChannelContainer>, LightingChannels, 0xFFFFFFFF)
 		ADD_OBJECT(PhysicalMaterial, TerrainPhysMaterialOverride)
 		ADD_VAR(::BoolProperty, bShowWireframe, 0x8000)
 		ADD_VAR(::BoolProperty, bUseWorldOriginTextureUVs, 0x4000)
@@ -53,7 +59,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, NumPatchesX, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumVerticesY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NumVerticesX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Terrain.CachedTerrainMaterialArray' for the property named 'CachedTerrainMaterials'!
+		ADD_STRUCT(::NonArithmeticProperty<CachedTerrainMaterialArray>, CachedTerrainMaterials, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, CollisionTesselationLevel, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TessellationCheckDistance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, TesselationDistanceScale, 0xFFFFFFFF)

@@ -1,7 +1,9 @@
 #pragma once
 #include "Engine.UIDataStore_Remote.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.OnlineSubsystem.h"
 #include "Engine.OnlineGameSearch.h"
+#include "Engine.OnlineGameSearch.OnlineGameSearchResult.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataStore_OnlineGameSearch." #y); \
@@ -29,8 +31,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, SelectedIndex, 0xFFFFFFFF)
 		ADD_OBJECT(OnlineSubsystem, OnlineSub)
 		ADD_VAR(::NameProperty, SearchResultsName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementProvider, 0xFFFFFFFF)
 		void Init()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.Init");
@@ -75,20 +77,14 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool GetSearchResultFromIndex(int ListIndex, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void*& Result)
+		bool GetSearchResultFromIndex(int ListIndex, OnlineGameSearchResult& Result)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.GetSearchResultFromIndex");
 			byte* params = (byte*)malloc(16);
 			*(int*)params = ListIndex;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)(params + 4) = Result;
+			*(OnlineGameSearchResult*)(params + 4) = Result;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Result = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)(params + 4);
+			Result = *(OnlineGameSearchResult*)(params + 4);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);
 			return returnVal;

@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrEquipInterface." #y); \
@@ -517,15 +518,11 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void DelegateOnMarshalEvent(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer'!
-void* pMarEvent)
+		void DelegateOnMarshalEvent(Pointer pMarEvent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEquipInterface.DelegateOnMarshalEvent");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer'!
-void**)params = pMarEvent;
+			*(Pointer*)params = pMarEvent;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -552,15 +549,11 @@ void**)params = pMarEvent;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnMarshalEvent(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer'!
-void* pMarEvent)
+		void OnMarshalEvent(Pointer pMarEvent)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEquipInterface.OnMarshalEvent");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer'!
-void**)params = pMarEvent;
+			*(Pointer*)params = pMarEvent;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

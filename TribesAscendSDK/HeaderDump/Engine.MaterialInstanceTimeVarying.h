@@ -1,7 +1,10 @@
 #pragma once
 #include "Engine.MaterialInstance.h"
+#include "Core.Object.InterpCurveVector.h"
 #include "Engine.MaterialInterface.h"
 #include "Engine.Texture.h"
+#include "Core.Object.InterpCurveFloat.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.Font.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -33,20 +36,14 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetScalarCurveParameterValue(ScriptName ParameterName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
-void*& Value)
+		void SetScalarCurveParameterValue(ScriptName ParameterName, InterpCurveFloat& Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetScalarCurveParameterValue");
 			byte* params = (byte*)malloc(24);
 			*(ScriptName*)params = ParameterName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
-void**)(params + 8) = Value;
+			*(InterpCurveFloat*)(params + 8) = Value;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Value = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
-void**)(params + 8);
+			Value = *(InterpCurveFloat*)(params + 8);
 			free(params);
 		}
 		void SetScalarStartTime(ScriptName ParameterName, float Value)
@@ -75,36 +72,24 @@ void**)(params + 8);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetVectorParameterValue(ScriptName ParameterName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void*& Value)
+		void SetVectorParameterValue(ScriptName ParameterName, LinearColor& Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetVectorParameterValue");
 			byte* params = (byte*)malloc(24);
 			*(ScriptName*)params = ParameterName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 8) = Value;
+			*(LinearColor*)(params + 8) = Value;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Value = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 8);
+			Value = *(LinearColor*)(params + 8);
 			free(params);
 		}
-		void SetVectorCurveParameterValue(ScriptName ParameterName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector'!
-void*& Value)
+		void SetVectorCurveParameterValue(ScriptName ParameterName, InterpCurveVector& Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetVectorCurveParameterValue");
 			byte* params = (byte*)malloc(24);
 			*(ScriptName*)params = ParameterName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector'!
-void**)(params + 8) = Value;
+			*(InterpCurveVector*)(params + 8) = Value;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Value = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector'!
-void**)(params + 8);
+			Value = *(InterpCurveVector*)(params + 8);
 			free(params);
 		}
 		void SetVectorStartTime(ScriptName ParameterName, float Value)

@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.PrimitiveComponent.h"
 #include "Engine.Material.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DrawCapsuleComponent." #y); \
@@ -30,7 +31,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CapsuleRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CapsuleHeight, 0xFFFFFFFF)
 		ADD_OBJECT(Material, CapsuleMaterial)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'CapsuleColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, CapsuleColor, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

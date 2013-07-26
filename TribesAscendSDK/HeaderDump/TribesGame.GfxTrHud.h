@@ -1,17 +1,20 @@
 #pragma once
 #include "TribesGame.GFxTrReticules.h"
 #include "UTGame.GFxMinimapHud.h"
+#include "TribesGame.GfxTrHud.TrTempMessage.h"
+#include "Engine.MaterialEffect.h"
 #include "TribesGame.GFxDeviceAmmoCount.h"
 #include "GFxUI.GFxObject.h"
 #include "Engine.TeamInfo.h"
 #include "Engine.MaterialInstanceConstant.h"
-#include "TribesGame.TrPlayerController.h"
-#include "Engine.MaterialEffect.h"
 #include "TribesGame.TrDevice.h"
+#include "TribesGame.TrPlayerController.h"
 #include "TribesGame.TrHUD.h"
 #include "Engine.LocalPlayer.h"
 #include "Engine.Weapon.h"
 #include "TribesGame.TrVehicle.h"
+#include "Core.Object.Vector.h"
+#include "UTGame.GFxMinimapHud.HeEnDisplay.h"
 #include "TribesGame.TrPlayerReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -36,8 +39,8 @@ namespace UnrealScript
 	class GfxTrHud : public GFxMinimapHud
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.GfxTrHud.TrTempMessage' for the property named 'm_HeroStatusTempMessage'!
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.GfxTrHud.TrTempMessage' for the property named 'm_PromptPanelTempMessage'!
+		ADD_STRUCT(::NonArithmeticProperty<TrTempMessage>, m_HeroStatusTempMessage, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TrTempMessage>, m_PromptPanelTempMessage, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, m_sRound, 0xFFFFFFFF)
 		ADD_OBJECT(GFxObject, VGSMenuList)
 		ADD_OBJECT(GFxObject, _global)
@@ -722,21 +725,15 @@ void**)params = InDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void UpdateHealth(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void*& Info, float NewHealth, float HealthMax)
+		void UpdateHealth(HeEnDisplay& Info, float NewHealth, float HealthMax)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GfxTrHud.UpdateHealth");
 			byte* params = (byte*)malloc(44);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void**)params = Info;
+			*(HeEnDisplay*)params = Info;
 			*(float*)(params + 36) = NewHealth;
 			*(float*)(params + 40) = HealthMax;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Info = *(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void**)params;
+			Info = *(HeEnDisplay*)params;
 			free(params);
 		}
 		void TickGhostHealth(float DeltaTime)
@@ -747,21 +744,15 @@ void**)params;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void UpdateEnergy(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void*& Info, float NewEnergy, float EnergyMax)
+		void UpdateEnergy(HeEnDisplay& Info, float NewEnergy, float EnergyMax)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GfxTrHud.UpdateEnergy");
 			byte* params = (byte*)malloc(44);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void**)params = Info;
+			*(HeEnDisplay*)params = Info;
 			*(float*)(params + 36) = NewEnergy;
 			*(float*)(params + 40) = EnergyMax;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Info = *(
-// WARNING: Unknown structure type 'ScriptStruct UTGame.GFxMinimapHud.HeEnDisplay'!
-void**)params;
+			Info = *(HeEnDisplay*)params;
 			free(params);
 		}
 		void SetOwnership()

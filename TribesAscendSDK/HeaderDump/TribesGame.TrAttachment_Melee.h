@@ -2,6 +2,7 @@
 #include "Engine.SoundCue.h"
 #include "TribesGame.TrDeviceAttachment.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 namespace UnrealScript
 {
 	class TrAttachment_Melee : public TrDeviceAttachment

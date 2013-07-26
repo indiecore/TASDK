@@ -1,5 +1,6 @@
 #pragma once
 #include "UDKBase.UDKVehicleSimHover.h"
+#include "UDKBase.UDKVehicleSimChopper.AnglePID.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrSVehicleSimHover." #y); \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bShouldStabilizeRotation, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKVehicleSimChopper.AnglePID' for the property named 'RollGain'!
+		ADD_STRUCT(::NonArithmeticProperty<AnglePID>, RollGain, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

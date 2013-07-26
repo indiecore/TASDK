@@ -2,6 +2,8 @@
 #include "Core.Object.h"
 #include "TribesGame.GFxTrMenuMoviePlayer.h"
 #include "OnlineSubsystemMcts.OnlineGameInterfaceMcts.h"
+#include "TribesGame.TrQueueManager.ServerInfo.h"
+#include "TribesGame.TrQueueManager.ProfileConfig.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrQueueManager." #y); \
@@ -387,343 +389,199 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		int FavoriteSortB(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int FavoriteSortB(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.FavoriteSortB");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int PasswordSortB(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int PasswordSortB(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.PasswordSortB");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int SlotsSortB(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int SlotsSortB(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.SlotsSortB");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int RangeSortB(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int RangeSortB(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.RangeSortB");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int RulesSortB(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int RulesSortB(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.RulesSortB");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int TypeSortB(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int TypeSortB(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.TypeSortB");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int PingSortB(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int PingSortB(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.PingSortB");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int NameSortB(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int NameSortB(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.NameSortB");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int MapSortB(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int MapSortB(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.MapSortB");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int FavoriteSortA(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int FavoriteSortA(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.FavoriteSortA");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int PasswordSortA(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int PasswordSortA(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.PasswordSortA");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int SlotsSortA(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int SlotsSortA(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.SlotsSortA");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int RangeSortA(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int RangeSortA(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.RangeSortA");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int RulesSortA(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int RulesSortA(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.RulesSortA");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int TypeSortA(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int TypeSortA(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.TypeSortA");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int PingSortA(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int PingSortA(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.PingSortA");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int NameSortA(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int NameSortA(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.NameSortA");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
 			return returnVal;
 		}
-		int MapSortA(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void* B)
+		int MapSortA(ServerInfo A, ServerInfo B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.MapSortA");
 			byte* params = (byte*)malloc(164);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ServerInfo'!
-void**)(params + 80) = B;
+			*(ServerInfo*)params = A;
+			*(ServerInfo*)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 160);
 			free(params);
@@ -928,16 +786,12 @@ void**)(params + 80) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void AddProfileConfig(int Index, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ProfileConfig'!
-void* Data)
+		void AddProfileConfig(int Index, ProfileConfig Data)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrQueueManager.AddProfileConfig");
 			byte* params = (byte*)malloc(64);
 			*(int*)params = Index;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrQueueManager.ProfileConfig'!
-void**)(params + 4) = Data;
+			*(ProfileConfig*)(params + 4) = Data;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

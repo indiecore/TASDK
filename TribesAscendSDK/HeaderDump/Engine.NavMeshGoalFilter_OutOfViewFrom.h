@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.NavMeshGoal_GenericFilterContainer.h"
 #include "Engine.NavMeshGoal_Filter.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Pointer.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NavMeshGoalFilter_OutOfViewFrom." #y); \
@@ -13,7 +15,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(::VectorProperty, OutOfViewLocation, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'GoalPoly'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, GoalPoly, 0xFFFFFFFF)
 		bool MustBeHiddenFromThisPoint(class NavMeshGoal_GenericFilterContainer* FilterContainer, Vector InOutOfViewLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoalFilter_OutOfViewFrom.MustBeHiddenFromThisPoint");

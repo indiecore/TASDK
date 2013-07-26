@@ -1,6 +1,8 @@
 #pragma once
+#include "Engine.Actor.ImpactInfo.h"
 #include "Engine.Actor.h"
 #include "TribesGame.TrDevice_ConstantFire.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDevice_RepairTool." #y); \
@@ -70,16 +72,12 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.InstantFire");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ProcessInstantHit_Internal(byte FiringMode, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* Impact, bool bHeadShot)
+		void ProcessInstantHit_Internal(byte FiringMode, ImpactInfo Impact, bool bHeadShot)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.ProcessInstantHit_Internal");
 			byte* params = (byte*)malloc(85);
 			*params = FiringMode;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 4) = Impact;
+			*(ImpactInfo*)(params + 4) = Impact;
 			*(bool*)(params + 84) = bHeadShot;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -131,16 +129,12 @@ void**)(params + 4) = Impact;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.UpdateDamageMaterial");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		float ModifyInstantHitDamage(byte FiringMode, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* Impact, float Damage)
+		float ModifyInstantHitDamage(byte FiringMode, ImpactInfo Impact, float Damage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.ModifyInstantHitDamage");
 			byte* params = (byte*)malloc(89);
 			*params = FiringMode;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 4) = Impact;
+			*(ImpactInfo*)(params + 4) = Impact;
 			*(float*)(params + 84) = Damage;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(float*)(params + 88);

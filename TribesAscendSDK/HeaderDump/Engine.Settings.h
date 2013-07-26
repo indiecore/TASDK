@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine.Settings.SettingsData.h"
 #include "Core.Object.h"
 #include "Engine.GameInfo.h"
 namespace UnrealScript
@@ -496,223 +497,145 @@ void**)(params + 4);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void GetSettingsDataDateTime(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data, int& OutInt1, int& OutInt2)
+		void GetSettingsDataDateTime(SettingsData& Data, int& OutInt1, int& OutInt2)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetSettingsDataDateTime");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params = Data;
+			*(SettingsData*)params = Data;
 			*(int*)(params + 12) = OutInt1;
 			*(int*)(params + 16) = OutInt2;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Data = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params;
+			Data = *(SettingsData*)params;
 			OutInt1 = *(int*)(params + 12);
 			OutInt2 = *(int*)(params + 16);
 			free(params);
 		}
-		void GetSettingsDataBlob(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data, 
+		void GetSettingsDataBlob(SettingsData& Data, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& OutBlob)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetSettingsDataBlob");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params = Data;
+			*(SettingsData*)params = Data;
 			*(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 12) = OutBlob;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Data = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params;
+			Data = *(SettingsData*)params;
 			OutBlob = *(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 12);
 			free(params);
 		}
-		int GetSettingsDataInt(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data)
+		int GetSettingsDataInt(SettingsData& Data)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetSettingsDataInt");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params = Data;
+			*(SettingsData*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Data = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params;
+			Data = *(SettingsData*)params;
 			auto returnVal = *(int*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		float GetSettingsDataFloat(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data)
+		float GetSettingsDataFloat(SettingsData& Data)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetSettingsDataFloat");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params = Data;
+			*(SettingsData*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Data = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params;
+			Data = *(SettingsData*)params;
 			auto returnVal = *(float*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		ScriptArray<wchar_t> GetSettingsDataString(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data)
+		ScriptArray<wchar_t> GetSettingsDataString(SettingsData& Data)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetSettingsDataString");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params = Data;
+			*(SettingsData*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Data = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params;
+			Data = *(SettingsData*)params;
 			auto returnVal = *(ScriptArray<wchar_t>*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		void EmptySettingsData(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data)
+		void EmptySettingsData(SettingsData& Data)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.EmptySettingsData");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params = Data;
+			*(SettingsData*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Data = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params;
+			Data = *(SettingsData*)params;
 			free(params);
 		}
-		void SetSettingsData(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data2Copy)
+		void SetSettingsData(SettingsData& Data, SettingsData& Data2Copy)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetSettingsData");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params = Data;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)(params + 12) = Data2Copy;
+			*(SettingsData*)params = Data;
+			*(SettingsData*)(params + 12) = Data2Copy;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Data = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params;
-			Data2Copy = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)(params + 12);
+			Data = *(SettingsData*)params;
+			Data2Copy = *(SettingsData*)(params + 12);
 			free(params);
 		}
-		void SetSettingsDataBlob(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data, 
+		void SetSettingsDataBlob(SettingsData& Data, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& InBlob)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetSettingsDataBlob");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params = Data;
+			*(SettingsData*)params = Data;
 			*(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 12) = InBlob;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Data = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params;
+			Data = *(SettingsData*)params;
 			InBlob = *(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 12);
 			free(params);
 		}
-		void SetSettingsDataDateTime(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data, int InInt1, int InInt2)
+		void SetSettingsDataDateTime(SettingsData& Data, int InInt1, int InInt2)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetSettingsDataDateTime");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params = Data;
+			*(SettingsData*)params = Data;
 			*(int*)(params + 12) = InInt1;
 			*(int*)(params + 16) = InInt2;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Data = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params;
+			Data = *(SettingsData*)params;
 			free(params);
 		}
-		void SetSettingsDataInt(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data, int InInt)
+		void SetSettingsDataInt(SettingsData& Data, int InInt)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetSettingsDataInt");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params = Data;
+			*(SettingsData*)params = Data;
 			*(int*)(params + 12) = InInt;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Data = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params;
+			Data = *(SettingsData*)params;
 			free(params);
 		}
-		void SetSettingsDataFloat(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data, float InFloat)
+		void SetSettingsDataFloat(SettingsData& Data, float InFloat)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetSettingsDataFloat");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params = Data;
+			*(SettingsData*)params = Data;
 			*(float*)(params + 12) = InFloat;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Data = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params;
+			Data = *(SettingsData*)params;
 			free(params);
 		}
-		void SetSettingsDataString(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void*& Data, ScriptArray<wchar_t> InString)
+		void SetSettingsDataString(SettingsData& Data, ScriptArray<wchar_t> InString)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetSettingsDataString");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params = Data;
+			*(SettingsData*)params = Data;
 			*(ScriptArray<wchar_t>*)(params + 12) = InString;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Data = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Settings.SettingsData'!
-void**)params;
+			Data = *(SettingsData*)params;
 			free(params);
 		}
 	};

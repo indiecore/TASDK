@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Guid.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.OnlineGameplayEvents." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class OnlineGameplayEvents : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'GameplaySessionID'!
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, GameplaySessionID, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bGameplaySessionInProgress, 0x1)
 		ADD_VAR(::StrProperty, GameplaySessionStartTime, 0xFFFFFFFF)
 	};

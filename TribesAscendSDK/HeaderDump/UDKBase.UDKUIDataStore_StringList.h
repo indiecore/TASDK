@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Pointer.h"
 #include "Engine.UIDataStore_StringBase.h"
 #include "Engine.LocalPlayer.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
@@ -12,8 +13,8 @@ namespace UnrealScript
 	class UDKUIDataStore_StringList : public UIDataStore_StringBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementProvider, 0xFFFFFFFF)
 		void Registered(class LocalPlayer* PlayerOwner)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.Registered");

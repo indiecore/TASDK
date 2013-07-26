@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.NxForceField.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NxRadialForceField." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class NxRadialForceField : public NxForceField
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'LinearKernel'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, LinearKernel, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ForceFalloff, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ForceRadius, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ForceStrength, 0xFFFFFFFF)

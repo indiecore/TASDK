@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "TribesGame.TrObject.PaperDollInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrMainMenuMeshInfo." #y); \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::NameProperty, ParentSocketName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'MeshInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<PaperDollInfo>, MeshInfo, 0xFFFFFFFF)
 		void PreloadTextures(float ForceDuration)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMainMenuMeshInfo.PreloadTextures");

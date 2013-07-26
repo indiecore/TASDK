@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.Volume.h"
+#include "Engine.PostProcessVolume.PostProcessSettings.h"
 #include "Engine.SeqAct_Toggle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -26,7 +27,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
 		ADD_OBJECT(PostProcessVolume, NextLowerPriorityVolume)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'Settings'!
+		ADD_STRUCT(::NonArithmeticProperty<PostProcessSettings>, Settings, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Priority, 0xFFFFFFFF)
 		void OnToggle(class SeqAct_Toggle* Action)
 		{

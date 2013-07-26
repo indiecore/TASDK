@@ -4,6 +4,7 @@
 #include "Engine.Info.h"
 #include "Engine.Actor.h"
 #include "Engine.Controller.h"
+#include "Core.Object.Vector.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Engine.NavigationPoint.h"
 #include "Engine.Vehicle.h"

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.UIDataProvider.h"
+#include "Core.Object.Pointer.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKUIDataProvider_SimpleElementProvider." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class UDKUIDataProvider_SimpleElementProvider : public UIDataProvider
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
 		int GetElementCount()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataProvider_SimpleElementProvider.GetElementCount");

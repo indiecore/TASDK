@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.IntPoint.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.BookMark2D." #y); \
@@ -17,7 +18,7 @@ namespace UnrealScript
 	class BookMark2D : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.IntPoint' for the property named 'Location'!
+		ADD_STRUCT(::NonArithmeticProperty<IntPoint>, Location, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, Zoom2D, 0xFFFFFFFF)
 	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.MaterialExpressionTextureSampleParameter.h"
+#include "Core.Object.Pointer.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.MaterialExpressionTextureSampleParameterNormal." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class MaterialExpressionTextureSampleParameterNormal : public MaterialExpressionTextureSampleParameter
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'InstanceOverride'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, InstanceOverride, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

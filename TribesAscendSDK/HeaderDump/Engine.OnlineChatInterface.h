@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Interface.h"
+#include "Core.Object.QWord.h"
 namespace UnrealScript
 {
 	class OnlineChatInterface : public Interface

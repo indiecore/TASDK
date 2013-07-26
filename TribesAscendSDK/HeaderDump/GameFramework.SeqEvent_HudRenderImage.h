@@ -1,7 +1,9 @@
 #pragma once
 #include "Engine.HUD.h"
+#include "Core.Object.Vector.h"
 #include "GameFramework.SeqEvent_HudRender.h"
 #include "Engine.Texture2D.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.Canvas.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -34,7 +36,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, XL, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, DisplayTexture)
 		ADD_STRUCT(::VectorProperty, DisplayLocation, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'DisplayColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, DisplayColor, 0xFFFFFFFF)
 		void Render(class Canvas* TargetCanvas, class HUD* TargetHud)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_HudRenderImage.Render");

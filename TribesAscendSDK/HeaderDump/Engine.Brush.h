@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.Actor.h"
 #include "Engine.Model.h"
+#include "Core.Object.Color.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Brush." #y); \
@@ -29,7 +30,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bSolidWhenSelected, 0x2)
 		ADD_VAR(::BoolProperty, bColored, 0x1)
 		ADD_VAR(::IntProperty, PolyFlags, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BrushColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, BrushColor, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, CsgOper, 0xFFFFFFFF)
 	};
 }

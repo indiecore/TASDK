@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.ParticleModuleOrbitBase.h"
+#include "Engine.ParticleModuleOrbit.OrbitOptions.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleOrbit." #y); \
@@ -17,12 +19,12 @@ namespace UnrealScript
 	class ParticleModuleOrbit : public ParticleModuleOrbitBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ParticleModuleOrbit.OrbitOptions' for the property named 'RotationRateOptions'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'RotationRateAmount'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ParticleModuleOrbit.OrbitOptions' for the property named 'RotationOptions'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'RotationAmount'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ParticleModuleOrbit.OrbitOptions' for the property named 'OffsetOptions'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'OffsetAmount'!
+		ADD_STRUCT(::NonArithmeticProperty<OrbitOptions>, RotationRateOptions, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, RotationRateAmount, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<OrbitOptions>, RotationOptions, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, RotationAmount, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<OrbitOptions>, OffsetOptions, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, OffsetAmount, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ChainMode, 0xFFFFFFFF)
 	};
 }

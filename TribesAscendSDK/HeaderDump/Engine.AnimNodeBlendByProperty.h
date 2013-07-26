@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.AnimNodeBlendList.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNodeBlendByProperty." #y); \
@@ -30,9 +31,9 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, FloatPropMin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BlendTime, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, CachedOwner)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'CachedByteProperty'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'CachedBoolProperty'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'CachedFloatProperty'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, CachedByteProperty, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, CachedBoolProperty, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, CachedFloatProperty, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, CachedPropertyName, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSynchronizeNodesInEditor, 0x8)
 		ADD_VAR(::BoolProperty, bUseSpecificBlendTimes, 0x4)

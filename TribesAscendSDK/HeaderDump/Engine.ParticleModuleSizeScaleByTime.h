@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleSizeBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleSizeScaleByTime." #y); \
@@ -20,7 +21,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bEnableZ, 0x4)
 		ADD_VAR(::BoolProperty, bEnableY, 0x2)
 		ADD_VAR(::BoolProperty, bEnableX, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'SizeScaleByTime'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, SizeScaleByTime, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

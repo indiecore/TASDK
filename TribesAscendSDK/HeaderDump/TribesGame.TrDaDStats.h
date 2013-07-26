@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "TribesGame.TrDaDStats.DaDScoreInfo.h"
 #include "TribesGame.TrPlayerController.h"
 #include "TribesGame.GfxTrHud.h"
 #include "TribesGame.TrGameReplicationInfo.h"
@@ -26,8 +27,8 @@ namespace UnrealScript
 	class TrDaDStats : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrDaDStats.DaDScoreInfo' for the property named 'EnemyDaDScore'!
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrDaDStats.DaDScoreInfo' for the property named 'FriendlyDaDScore'!
+		ADD_STRUCT(::NonArithmeticProperty<DaDScoreInfo>, EnemyDaDScore, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<DaDScoreInfo>, FriendlyDaDScore, 0xFFFFFFFF)
 		ADD_OBJECT(TrPlayerController, TrPC)
 		ADD_OBJECT(GfxTrHud, m_MoviePlayer)
 		ADD_VAR(::IntProperty, RoundNum, 0xFFFFFFFF)

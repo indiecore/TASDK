@@ -1,4 +1,16 @@
 #pragma once
+#include "Core.Object.Vector2D.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.LinearColor.h"
+#include "Core.Object.QWord.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.Color.h"
+#include "Core.Object.InterpCurveVector2D.h"
+#include "Core.Object.InterpCurveVector.h"
+#include "Core.Object.InterpCurveFloat.h"
+#include "Core.Object.Quat.h"
+#include "Core.Object.Matrix.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Core.Object." #y); \
@@ -24,14 +36,14 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Object, Outer)
 		ADD_VAR(::NameProperty, Name, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTableObject'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTableObject, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ObjectInternalInteger, 0xFFFFFFFF)
 		ADD_STRUCT(::QWordProperty, ObjectFlags, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'HashNext'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'HashOuterNext'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'StateFrame'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, HashNext, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, HashOuterNext, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, StateFrame, 0xFFFFFFFF)
 		ADD_OBJECT(Object, Linker)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'LinkerIndex'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, LinkerIndex, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, NetIndex, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, Class)
 		ADD_OBJECT(Object, ObjectArchetype)
@@ -168,19 +180,13 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void GetAngularDegreesFromRadians(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void*& OutFOV)
+		void GetAngularDegreesFromRadians(Vector2D& OutFOV)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetAngularDegreesFromRadians");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = OutFOV;
+			*(Vector2D*)params = OutFOV;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutFOV = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params;
+			OutFOV = *(Vector2D*)params;
 			free(params);
 		}
 		float Acos(float A)
@@ -193,64 +199,42 @@ void**)params;
 			free(params);
 			return returnVal;
 		}
-		void GetAngularFromDotDist(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void*& OutAngDist, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* DotDist)
+		void GetAngularFromDotDist(Vector2D& OutAngDist, Vector2D DotDist)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetAngularFromDotDist");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = OutAngDist;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8) = DotDist;
+			*(Vector2D*)params = OutAngDist;
+			*(Vector2D*)(params + 8) = DotDist;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutAngDist = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params;
+			OutAngDist = *(Vector2D*)params;
 			free(params);
 		}
-		bool GetAngularDistance(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void*& OutAngularDist, Vector Direction, Vector AxisX, Vector AxisY, Vector AxisZ)
+		bool GetAngularDistance(Vector2D& OutAngularDist, Vector Direction, Vector AxisX, Vector AxisY, Vector AxisZ)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetAngularDistance");
 			byte* params = (byte*)malloc(60);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = OutAngularDist;
+			*(Vector2D*)params = OutAngularDist;
 			*(Vector*)(params + 8) = Direction;
 			*(Vector*)(params + 20) = AxisX;
 			*(Vector*)(params + 32) = AxisY;
 			*(Vector*)(params + 44) = AxisZ;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutAngularDist = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params;
+			OutAngularDist = *(Vector2D*)params;
 			auto returnVal = *(bool*)(params + 56);
 			free(params);
 			return returnVal;
 		}
-		bool GetDotDistance(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void*& OutDotDist, Vector Direction, Vector AxisX, Vector AxisY, Vector AxisZ)
+		bool GetDotDistance(Vector2D& OutDotDist, Vector Direction, Vector AxisX, Vector AxisY, Vector AxisZ)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetDotDistance");
 			byte* params = (byte*)malloc(60);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = OutDotDist;
+			*(Vector2D*)params = OutDotDist;
 			*(Vector*)(params + 8) = Direction;
 			*(Vector*)(params + 20) = AxisX;
 			*(Vector*)(params + 32) = AxisY;
 			*(Vector*)(params + 44) = AxisZ;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutDotDist = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params;
+			OutDotDist = *(Vector2D*)params;
 			auto returnVal = *(bool*)(params + 56);
 			free(params);
 			return returnVal;
@@ -596,69 +580,39 @@ void**)(params + 12);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* Subtract_LinearColorLinearColor(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* B)
+		LinearColor Subtract_LinearColorLinearColor(LinearColor A, LinearColor B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_LinearColorLinearColor");
 			byte* params = (byte*)malloc(48);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 16) = B;
+			*(LinearColor*)params = A;
+			*(LinearColor*)(params + 16) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 32);
+			auto returnVal = *(LinearColor*)(params + 32);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* Multiply_LinearColorFloat(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* LC, float Mult)
+		LinearColor Multiply_LinearColorFloat(LinearColor LC, float Mult)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_LinearColorFloat");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)params = LC;
+			*(LinearColor*)params = LC;
 			*(float*)(params + 16) = Mult;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 20);
+			auto returnVal = *(LinearColor*)(params + 20);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* ColorToLinearColor(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* OldColor)
+		LinearColor ColorToLinearColor(Color OldColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ColorToLinearColor");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)params = OldColor;
+			*(Color*)params = OldColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 4);
+			auto returnVal = *(LinearColor*)(params + 4);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* MakeLinearColor(float R, float G, float B, float A)
+		LinearColor MakeLinearColor(float R, float G, float B, float A)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MakeLinearColor");
 			byte* params = (byte*)malloc(32);
@@ -667,39 +621,23 @@ void* MakeLinearColor(float R, float G, float B, float A)
 			*(float*)(params + 8) = B;
 			*(float*)(params + 12) = A;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 16);
+			auto returnVal = *(LinearColor*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* LerpColor(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* B, float Alpha)
+		Color LerpColor(Color A, Color B, float Alpha)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.LerpColor");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 4) = B;
+			*(Color*)params = A;
+			*(Color*)(params + 4) = B;
 			*(float*)(params + 8) = Alpha;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 12);
+			auto returnVal = *(Color*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* MakeColor(byte R, byte G, byte B, byte A)
+		Color MakeColor(byte R, byte G, byte B, byte A)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MakeColor");
 			byte* params = (byte*)malloc(8);
@@ -708,746 +646,448 @@ void* MakeColor(byte R, byte G, byte B, byte A)
 			*(params + 2) = B;
 			*(params + 3) = A;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 4);
+			auto returnVal = *(Color*)(params + 4);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* Add_ColorColor(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* B)
+		Color Add_ColorColor(Color A, Color B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Add_ColorColor");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 4) = B;
+			*(Color*)params = A;
+			*(Color*)(params + 4) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 8);
+			auto returnVal = *(Color*)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* Multiply_ColorFloat(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* A, float B)
+		Color Multiply_ColorFloat(Color A, float B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_ColorFloat");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)params = A;
+			*(Color*)params = A;
 			*(float*)(params + 4) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 8);
+			auto returnVal = *(Color*)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* Multiply_FloatColor(float A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* B)
+		Color Multiply_FloatColor(float A, Color B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_FloatColor");
 			byte* params = (byte*)malloc(12);
 			*(float*)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 4) = B;
+			*(Color*)(params + 4) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 8);
+			auto returnVal = *(Color*)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* Subtract_ColorColor(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* B)
+		Color Subtract_ColorColor(Color A, Color B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_ColorColor");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 4) = B;
+			*(Color*)params = A;
+			*(Color*)(params + 4) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 8);
+			auto returnVal = *(Color*)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* EvalInterpCurveVector2D(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector2D'!
-void* Vector2DCurve, float InVal)
+		Vector2D EvalInterpCurveVector2D(InterpCurveVector2D Vector2DCurve, float InVal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EvalInterpCurveVector2D");
 			byte* params = (byte*)malloc(28);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector2D'!
-void**)params = Vector2DCurve;
+			*(InterpCurveVector2D*)params = Vector2DCurve;
 			*(float*)(params + 16) = InVal;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 20);
+			auto returnVal = *(Vector2D*)(params + 20);
 			free(params);
 			return returnVal;
 		}
-		Vector EvalInterpCurveVector(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector'!
-void* VectorCurve, float InVal)
+		Vector EvalInterpCurveVector(InterpCurveVector VectorCurve, float InVal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EvalInterpCurveVector");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector'!
-void**)params = VectorCurve;
+			*(InterpCurveVector*)params = VectorCurve;
 			*(float*)(params + 16) = InVal;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Vector*)(params + 20);
 			free(params);
 			return returnVal;
 		}
-		float EvalInterpCurveFloat(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
-void* FloatCurve, float InVal)
+		float EvalInterpCurveFloat(InterpCurveFloat FloatCurve, float InVal)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EvalInterpCurveFloat");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
-void**)params = FloatCurve;
+			*(InterpCurveFloat*)params = FloatCurve;
 			*(float*)(params + 16) = InVal;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(float*)(params + 20);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* vect2d(float InX, float InY)
+		Vector2D vect2d(float InX, float InY)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.vect2d");
 			byte* params = (byte*)malloc(16);
 			*(float*)params = InX;
 			*(float*)(params + 4) = InY;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8);
+			auto returnVal = *(Vector2D*)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		float GetMappedRangeValue(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* InputRange, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* OutputRange, float Value)
+		float GetMappedRangeValue(Vector2D InputRange, Vector2D OutputRange, float Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetMappedRangeValue");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = InputRange;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8) = OutputRange;
+			*(Vector2D*)params = InputRange;
+			*(Vector2D*)(params + 8) = OutputRange;
 			*(float*)(params + 16) = Value;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(float*)(params + 20);
 			free(params);
 			return returnVal;
 		}
-		float GetRangePctByValue(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* Range, float Value)
+		float GetRangePctByValue(Vector2D Range, float Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetRangePctByValue");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = Range;
+			*(Vector2D*)params = Range;
 			*(float*)(params + 8) = Value;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(float*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		float GetRangeValueByPct(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* Range, float Pct)
+		float GetRangeValueByPct(Vector2D Range, float Pct)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetRangeValueByPct");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = Range;
+			*(Vector2D*)params = Range;
 			*(float*)(params + 8) = Pct;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(float*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* SubtractEqual_Vector2DVector2D(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void*& A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* B)
+		Vector2D SubtractEqual_Vector2DVector2D(Vector2D& A, Vector2D B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SubtractEqual_Vector2DVector2D");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8) = B;
+			*(Vector2D*)params = A;
+			*(Vector2D*)(params + 8) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			A = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params;
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 16);
+			A = *(Vector2D*)params;
+			auto returnVal = *(Vector2D*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* AddEqual_Vector2DVector2D(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void*& A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* B)
+		Vector2D AddEqual_Vector2DVector2D(Vector2D& A, Vector2D B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AddEqual_Vector2DVector2D");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8) = B;
+			*(Vector2D*)params = A;
+			*(Vector2D*)(params + 8) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			A = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params;
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 16);
+			A = *(Vector2D*)params;
+			auto returnVal = *(Vector2D*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* DivideEqual_Vector2DFloat(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void*& A, float B)
+		Vector2D DivideEqual_Vector2DFloat(Vector2D& A, float B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.DivideEqual_Vector2DFloat");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = A;
+			*(Vector2D*)params = A;
 			*(float*)(params + 8) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			A = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params;
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 12);
+			A = *(Vector2D*)params;
+			auto returnVal = *(Vector2D*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* MultiplyEqual_Vector2DFloat(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void*& A, float B)
+		Vector2D MultiplyEqual_Vector2DFloat(Vector2D& A, float B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MultiplyEqual_Vector2DFloat");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = A;
+			*(Vector2D*)params = A;
 			*(float*)(params + 8) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			A = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params;
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 12);
+			A = *(Vector2D*)params;
+			auto returnVal = *(Vector2D*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* Divide_Vector2DFloat(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* A, float B)
+		Vector2D Divide_Vector2DFloat(Vector2D A, float B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Divide_Vector2DFloat");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = A;
+			*(Vector2D*)params = A;
 			*(float*)(params + 8) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 12);
+			auto returnVal = *(Vector2D*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* Multiply_Vector2DFloat(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* A, float B)
+		Vector2D Multiply_Vector2DFloat(Vector2D A, float B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_Vector2DFloat");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = A;
+			*(Vector2D*)params = A;
 			*(float*)(params + 8) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 12);
+			auto returnVal = *(Vector2D*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* Subtract_Vector2DVector2D(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* B)
+		Vector2D Subtract_Vector2DVector2D(Vector2D A, Vector2D B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_Vector2DVector2D");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8) = B;
+			*(Vector2D*)params = A;
+			*(Vector2D*)(params + 8) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 16);
+			auto returnVal = *(Vector2D*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* Add_Vector2DVector2D(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* B)
+		Vector2D Add_Vector2DVector2D(Vector2D A, Vector2D B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Add_Vector2DVector2D");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 8) = B;
+			*(Vector2D*)params = A;
+			*(Vector2D*)(params + 8) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 16);
+			auto returnVal = *(Vector2D*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* Subtract_QuatQuat(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* B)
+		Quat Subtract_QuatQuat(Quat A, Quat B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_QuatQuat");
 			byte* params = (byte*)malloc(48);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 16) = B;
+			*(Quat*)params = A;
+			*(Quat*)(params + 16) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 32);
+			auto returnVal = *(Quat*)(params + 32);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* Add_QuatQuat(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* B)
+		Quat Add_QuatQuat(Quat A, Quat B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Add_QuatQuat");
 			byte* params = (byte*)malloc(48);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 16) = B;
+			*(Quat*)params = A;
+			*(Quat*)(params + 16) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 32);
+			auto returnVal = *(Quat*)(params + 32);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* QuatSlerp(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* B, float Alpha, bool bShortestPath)
+		Quat QuatSlerp(Quat A, Quat B, float Alpha, bool bShortestPath)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatSlerp");
 			byte* params = (byte*)malloc(56);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 16) = B;
+			*(Quat*)params = A;
+			*(Quat*)(params + 16) = B;
 			*(float*)(params + 32) = Alpha;
 			*(bool*)(params + 36) = bShortestPath;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 48);
+			auto returnVal = *(Quat*)(params + 48);
 			free(params);
 			return returnVal;
 		}
-		Rotator QuatToRotator(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* A)
+		Rotator QuatToRotator(Quat A)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatToRotator");
 			byte* params = (byte*)malloc(28);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params = A;
+			*(Quat*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Rotator*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* QuatFromRotator(Rotator A)
+		Quat QuatFromRotator(Rotator A)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatFromRotator");
 			byte* params = (byte*)malloc(28);
 			*(Rotator*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 16);
+			auto returnVal = *(Quat*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* QuatFromAxisAndAngle(Vector Axis, float Angle)
+		Quat QuatFromAxisAndAngle(Vector Axis, float Angle)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatFromAxisAndAngle");
 			byte* params = (byte*)malloc(32);
 			*(Vector*)params = Axis;
 			*(float*)(params + 12) = Angle;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 16);
+			auto returnVal = *(Quat*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* QuatFindBetween(Vector A, Vector B)
+		Quat QuatFindBetween(Vector A, Vector B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatFindBetween");
 			byte* params = (byte*)malloc(40);
 			*(Vector*)params = A;
 			*(Vector*)(params + 12) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 32);
+			auto returnVal = *(Quat*)(params + 32);
 			free(params);
 			return returnVal;
 		}
-		Vector QuatRotateVector(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* A, Vector B)
+		Vector QuatRotateVector(Quat A, Vector B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatRotateVector");
 			byte* params = (byte*)malloc(40);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params = A;
+			*(Quat*)params = A;
 			*(Vector*)(params + 16) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Vector*)(params + 28);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* QuatInvert(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* A)
+		Quat QuatInvert(Quat A)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatInvert");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params = A;
+			*(Quat*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 16);
+			auto returnVal = *(Quat*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		float QuatDot(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* B)
+		float QuatDot(Quat A, Quat B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatDot");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 16) = B;
+			*(Quat*)params = A;
+			*(Quat*)(params + 16) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(float*)(params + 32);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* QuatProduct(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void* B)
+		Quat QuatProduct(Quat A, Quat B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatProduct");
 			byte* params = (byte*)malloc(48);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 16) = B;
+			*(Quat*)params = A;
+			*(Quat*)(params + 16) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Quat'!
-void**)(params + 32);
+			auto returnVal = *(Quat*)(params + 32);
 			free(params);
 			return returnVal;
 		}
-		Vector MatrixGetAxis(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* TM, byte Axis)
+		Vector MatrixGetAxis(Matrix TM, byte Axis)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MatrixGetAxis");
 			byte* params = (byte*)malloc(77);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = TM;
+			*(Matrix*)params = TM;
 			*(params + 64) = Axis;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Vector*)(params + 68);
 			free(params);
 			return returnVal;
 		}
-		Vector MatrixGetOrigin(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* TM)
+		Vector MatrixGetOrigin(Matrix TM)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MatrixGetOrigin");
 			byte* params = (byte*)malloc(76);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = TM;
+			*(Matrix*)params = TM;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Vector*)(params + 64);
 			free(params);
 			return returnVal;
 		}
-		Rotator MatrixGetRotator(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* TM)
+		Rotator MatrixGetRotator(Matrix TM)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MatrixGetRotator");
 			byte* params = (byte*)malloc(76);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = TM;
+			*(Matrix*)params = TM;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Rotator*)(params + 64);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* MakeRotationMatrix(Rotator Rotation)
+		Matrix MakeRotationMatrix(Rotator Rotation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MakeRotationMatrix");
 			byte* params = (byte*)malloc(76);
 			*(Rotator*)params = Rotation;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)(params + 16);
+			auto returnVal = *(Matrix*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* MakeRotationTranslationMatrix(Vector Translation, Rotator Rotation)
+		Matrix MakeRotationTranslationMatrix(Vector Translation, Rotator Rotation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MakeRotationTranslationMatrix");
 			byte* params = (byte*)malloc(88);
 			*(Vector*)params = Translation;
 			*(Rotator*)(params + 12) = Rotation;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)(params + 32);
+			auto returnVal = *(Matrix*)(params + 32);
 			free(params);
 			return returnVal;
 		}
-		Vector InverseTransformNormal(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* TM, Vector A)
+		Vector InverseTransformNormal(Matrix TM, Vector A)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.InverseTransformNormal");
 			byte* params = (byte*)malloc(88);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = TM;
+			*(Matrix*)params = TM;
 			*(Vector*)(params + 64) = A;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Vector*)(params + 76);
 			free(params);
 			return returnVal;
 		}
-		Vector TransformNormal(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* TM, Vector A)
+		Vector TransformNormal(Matrix TM, Vector A)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.TransformNormal");
 			byte* params = (byte*)malloc(88);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = TM;
+			*(Matrix*)params = TM;
 			*(Vector*)(params + 64) = A;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Vector*)(params + 76);
 			free(params);
 			return returnVal;
 		}
-		Vector InverseTransformVector(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* TM, Vector A)
+		Vector InverseTransformVector(Matrix TM, Vector A)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.InverseTransformVector");
 			byte* params = (byte*)malloc(88);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = TM;
+			*(Matrix*)params = TM;
 			*(Vector*)(params + 64) = A;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Vector*)(params + 76);
 			free(params);
 			return returnVal;
 		}
-		Vector TransformVector(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* TM, Vector A)
+		Vector TransformVector(Matrix TM, Vector A)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.TransformVector");
 			byte* params = (byte*)malloc(88);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = TM;
+			*(Matrix*)params = TM;
 			*(Vector*)(params + 64) = A;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Vector*)(params + 76);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* Multiply_MatrixMatrix(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* B)
+		Matrix Multiply_MatrixMatrix(Matrix A, Matrix B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_MatrixMatrix");
 			byte* params = (byte*)malloc(192);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)(params + 64) = B;
+			*(Matrix*)params = A;
+			*(Matrix*)(params + 64) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)(params + 128);
+			auto returnVal = *(Matrix*)(params + 128);
 			free(params);
 			return returnVal;
 		}

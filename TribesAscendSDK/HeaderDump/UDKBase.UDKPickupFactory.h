@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.PickupFactory.h"
 #include "Engine.MaterialInstanceConstant.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.LinearColor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKPickupFactory." #y); \
@@ -35,13 +37,13 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BobOffset, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BobTimer, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, BaseMaterialParamName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'BaseEmissive'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'BaseTargetEmissive'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BaseEmissive, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BaseTargetEmissive, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PulseThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BasePulseTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BasePulseRate, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'BaseDimEmissive'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'BaseBrightEmissive'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BaseDimEmissive, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, BaseBrightEmissive, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, BaseMaterialInstance)
 		ADD_VAR(::BoolProperty, bDoVisibilityFadeIn, 0x80)
 		ADD_VAR(::BoolProperty, bUpdatingPickup, 0x40)

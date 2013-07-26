@@ -1,7 +1,9 @@
 #pragma once
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "Engine.GameplayEvents.h"
 #include "Engine.GameInfo.h"
 #include "Engine.Controller.h"
+#include "Core.Object.Vector.h"
 #include "Engine.TeamInfo.h"
 #include "Engine.CoverLink.h"
 #include "Engine.GenericParamListStatEntry.h"
@@ -213,18 +215,14 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void LogPlayerLoginChange(int EventID, class Controller* Player, ScriptArray<wchar_t> PlayerName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID, bool bSplitScreen)
+		void LogPlayerLoginChange(int EventID, class Controller* Player, ScriptArray<wchar_t> PlayerName, UniqueNetId PlayerID, bool bSplitScreen)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogPlayerLoginChange");
 			byte* params = (byte*)malloc(32);
 			*(int*)params = EventID;
 			*(class Controller**)(params + 4) = Player;
 			*(ScriptArray<wchar_t>*)(params + 8) = PlayerName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 20) = PlayerID;
+			*(UniqueNetId*)(params + 20) = PlayerID;
 			*(bool*)(params + 28) = bSplitScreen;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

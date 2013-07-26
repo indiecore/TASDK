@@ -1,5 +1,6 @@
 #pragma once
 #include "IpDrv.MCPBase.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "Engine.OnlineMatchmakingStats.h"
 #include "Engine.OnlinePlayerStorage.h"
 #include "Engine.OnlineProfileSettings.h"
@@ -15,15 +16,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bBinaryStats, 0x1)
-		bool UploadPlayerData(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* UniqueId, ScriptArray<wchar_t> PlayerNick, class OnlineProfileSettings* ProfileSettings, class OnlinePlayerStorage* PlayerStorage)
+		bool UploadPlayerData(UniqueNetId UniqueId, ScriptArray<wchar_t> PlayerNick, class OnlineProfileSettings* ProfileSettings, class OnlinePlayerStorage* PlayerStorage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineEventsInterfaceMcp.UploadPlayerData");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = UniqueId;
+			*(UniqueNetId*)params = UniqueId;
 			*(ScriptArray<wchar_t>*)(params + 8) = PlayerNick;
 			*(class OnlineProfileSettings**)(params + 20) = ProfileSettings;
 			*(class OnlinePlayerStorage**)(params + 24) = PlayerStorage;
@@ -32,17 +29,13 @@ void**)params = UniqueId;
 			free(params);
 			return returnVal;
 		}
-		bool UploadGameplayEventsData(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* UniqueId, 
+		bool UploadGameplayEventsData(UniqueNetId UniqueId, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& Payload)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineEventsInterfaceMcp.UploadGameplayEventsData");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = UniqueId;
+			*(UniqueNetId*)params = UniqueId;
 			*(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 8) = Payload;
@@ -65,15 +58,11 @@ void**)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		bool UploadMatchmakingStats(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* UniqueId, class OnlineMatchmakingStats* MMStats)
+		bool UploadMatchmakingStats(UniqueNetId UniqueId, class OnlineMatchmakingStats* MMStats)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineEventsInterfaceMcp.UploadMatchmakingStats");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = UniqueId;
+			*(UniqueNetId*)params = UniqueId;
 			*(class OnlineMatchmakingStats**)(params + 8) = MMStats;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 12);

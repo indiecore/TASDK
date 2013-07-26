@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.MaterialExpressionParameter.h"
+#include "Core.Object.LinearColor.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.MaterialExpressionVectorParameter." #y); \
@@ -11,7 +12,7 @@ namespace UnrealScript
 	class MaterialExpressionVectorParameter : public MaterialExpressionParameter
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'DefaultValue'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, DefaultValue, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

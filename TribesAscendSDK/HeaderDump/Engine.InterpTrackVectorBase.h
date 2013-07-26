@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.InterpTrack.h"
+#include "Core.Object.InterpCurveVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.InterpTrackVectorBase." #y); \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::FloatProperty, CurveTension, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveVector' for the property named 'VectorTrack'!
+		ADD_STRUCT(::NonArithmeticProperty<InterpCurveVector>, VectorTrack, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

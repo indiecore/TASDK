@@ -1,9 +1,11 @@
 #pragma once
 #include "UDKBase.UDKProjectile.h"
 #include "Engine.MaterialInterface.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.PhysicalMaterial.h"
 #include "Engine.SoundCue.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Controller.h"
 #include "Engine.Actor.h"
 #include "Engine.Pawn.h"

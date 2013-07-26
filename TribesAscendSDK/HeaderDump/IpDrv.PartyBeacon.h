@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.PartyBeacon." #y); \
@@ -23,9 +24,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bShouldTick, 0x4)
 		ADD_VAR(::BoolProperty, bWantsDeferredDestroy, 0x2)
 		ADD_VAR(::BoolProperty, bIsInTick, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Socket'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Socket, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PartyBeaconPort, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FTickableObject'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FTickableObject, 0xFFFFFFFF)
 		void OnDestroyComplete()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeacon.OnDestroyComplete");

@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector2D.h"
 #include "Engine.AnimNodeAimOffset.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -26,7 +27,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BlendTimeToGo, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LeanWeightTarget, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LeanWeight, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'PreBlendAim'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, PreBlendAim, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, OldAimProfileName, 0xFFFFFFFF)
 		ADD_OBJECT(AnimNodeAimOffset, CachedAimNode)
 		ADD_VAR(::BoolProperty, bOldDoubleJumping, 0x10)

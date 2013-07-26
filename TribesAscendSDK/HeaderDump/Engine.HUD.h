@@ -1,11 +1,16 @@
 #pragma once
-#include "Core.Object.h"
 #include "Engine.Actor.h"
 #include "Engine.Canvas.h"
-#include "Engine.Font.h"
+#include "Engine.HUD.HudLocalizedMessage.h"
+#include "Core.Object.Color.h"
 #include "Engine.Pawn.h"
 #include "Engine.PlayerController.h"
+#include "Core.Object.Vector.h"
 #include "Engine.PlayerReplicationInfo.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.h"
+#include "Core.Object.Vector2D.h"
+#include "Engine.Font.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.HUD." #y); \
@@ -40,12 +45,12 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastHUDRenderTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConsoleMessagePosY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConsoleMessagePosX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage' for the property named 'LocalMessages'!
+		ADD_STRUCT(::NonArithmeticProperty<HudLocalizedMessage>, LocalMessages, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxHUDAreaMessageCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MessageFontOffset, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ConsoleFontSize, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ConsoleMessageCount, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'ConsoleColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, ConsoleColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HudCanvasScale, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bShowOverlays, 0x40)
 		ADD_VAR(::BoolProperty, bMessageBeep, 0x20)
@@ -55,9 +60,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bShowHUD, 0x2)
 		ADD_VAR(::BoolProperty, bLostFocusPaused, 0x1)
 		ADD_OBJECT(PlayerController, PlayerOwner)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'RedColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'GreenColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'WhiteColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, RedColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, GreenColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, WhiteColor, 0xFFFFFFFF)
 		bool ShouldDisplayDebug(ScriptName DebugType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.ShouldDisplayDebug");
@@ -68,23 +73,17 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void Draw3DLine(Vector Start, Vector End, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* LineColor)
+		void Draw3DLine(Vector Start, Vector End, Color LineColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.Draw3DLine");
 			byte* params = (byte*)malloc(28);
 			*(Vector*)params = Start;
 			*(Vector*)(params + 12) = End;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 24) = LineColor;
+			*(Color*)(params + 24) = LineColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void Draw2DLine(int X1, int Y1, int X2, int Y2, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* LineColor)
+		void Draw2DLine(int X1, int Y1, int X2, int Y2, Color LineColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.Draw2DLine");
 			byte* params = (byte*)malloc(20);
@@ -92,9 +91,7 @@ void* LineColor)
 			*(int*)(params + 4) = Y1;
 			*(int*)(params + 8) = X2;
 			*(int*)(params + 12) = Y2;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 16) = LineColor;
+			*(Color*)(params + 16) = LineColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -198,19 +195,13 @@ void**)(params + 16) = LineColor;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DisplayBadConnectionAlert");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ClearMessage(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void*& M)
+		void ClearMessage(HudLocalizedMessage& M)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.ClearMessage");
 			byte* params = (byte*)malloc(64);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void**)params = M;
+			*(HudLocalizedMessage*)params = M;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			M = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void**)params;
+			M = *(HudLocalizedMessage*)params;
 			free(params);
 		}
 		void Message(class PlayerReplicationInfo* PRI, ScriptArray<wchar_t> msg, ScriptName MsgType, float Lifetime)
@@ -240,9 +231,7 @@ void**)params;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void LocalizedMessage(ScriptClass* InMessageClass, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, ScriptArray<wchar_t> CriticalString, int Switch, float Position, float Lifetime, int FontSize, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* DrawColor, class Object* OptionalObject)
+		void LocalizedMessage(ScriptClass* InMessageClass, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, ScriptArray<wchar_t> CriticalString, int Switch, float Position, float Lifetime, int FontSize, Color DrawColor, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.LocalizedMessage");
 			byte* params = (byte*)malloc(48);
@@ -254,16 +243,12 @@ void* DrawColor, class Object* OptionalObject)
 			*(float*)(params + 28) = Position;
 			*(float*)(params + 32) = Lifetime;
 			*(int*)(params + 36) = FontSize;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 40) = DrawColor;
+			*(Color*)(params + 40) = DrawColor;
 			*(class Object**)(params + 44) = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void AddLocalizedMessage(int Index, ScriptClass* InMessageClass, ScriptArray<wchar_t> CriticalString, int Switch, float Position, float Lifetime, int FontSize, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* DrawColor, int MessageCount, class Object* OptionalObject)
+		void AddLocalizedMessage(int Index, ScriptClass* InMessageClass, ScriptArray<wchar_t> CriticalString, int Switch, float Position, float Lifetime, int FontSize, Color DrawColor, int MessageCount, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.AddLocalizedMessage");
 			byte* params = (byte*)malloc(48);
@@ -274,32 +259,24 @@ void* DrawColor, int MessageCount, class Object* OptionalObject)
 			*(float*)(params + 24) = Position;
 			*(float*)(params + 28) = Lifetime;
 			*(int*)(params + 32) = FontSize;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 36) = DrawColor;
+			*(Color*)(params + 36) = DrawColor;
 			*(int*)(params + 40) = MessageCount;
 			*(class Object**)(params + 44) = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void GetScreenCoords(float PosY, float& ScreenX, float& ScreenY, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void*& InMessage)
+		void GetScreenCoords(float PosY, float& ScreenX, float& ScreenY, HudLocalizedMessage& InMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.GetScreenCoords");
 			byte* params = (byte*)malloc(76);
 			*(float*)params = PosY;
 			*(float*)(params + 4) = ScreenX;
 			*(float*)(params + 8) = ScreenY;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void**)(params + 12) = InMessage;
+			*(HudLocalizedMessage*)(params + 12) = InMessage;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			ScreenX = *(float*)(params + 4);
 			ScreenY = *(float*)(params + 8);
-			InMessage = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void**)(params + 12);
+			InMessage = *(HudLocalizedMessage*)(params + 12);
 			free(params);
 		}
 		void DrawMessage(int I, float PosY, float& DX, float& DY)
@@ -315,15 +292,11 @@ void**)(params + 12);
 			DY = *(float*)(params + 12);
 			free(params);
 		}
-		void DrawMessageText(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void* LocalMessage, float ScreenX, float ScreenY)
+		void DrawMessageText(HudLocalizedMessage LocalMessage, float ScreenX, float ScreenY)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DrawMessageText");
 			byte* params = (byte*)malloc(72);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.HUD.HudLocalizedMessage'!
-void**)params = LocalMessage;
+			*(HudLocalizedMessage*)params = LocalMessage;
 			*(float*)(params + 64) = ScreenX;
 			*(float*)(params + 68) = ScreenY;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
@@ -339,27 +312,15 @@ void**)params = LocalMessage;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DisplayKismetMessages");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DrawText(ScriptArray<wchar_t> Text, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* Position, class Font* TextFont, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* FontScale, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* TextColor)
+		void DrawText(ScriptArray<wchar_t> Text, Vector2D Position, class Font* TextFont, Vector2D FontScale, Color TextColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DrawText");
 			byte* params = (byte*)malloc(36);
 			*(ScriptArray<wchar_t>*)params = Text;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 12) = Position;
+			*(Vector2D*)(params + 12) = Position;
 			*(class Font**)(params + 20) = TextFont;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 24) = FontScale;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 32) = TextColor;
+			*(Vector2D*)(params + 24) = FontScale;
+			*(Color*)(params + 32) = TextColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

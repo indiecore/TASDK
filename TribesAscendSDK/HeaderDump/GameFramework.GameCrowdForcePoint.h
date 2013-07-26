@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "GameFramework.GameCrowdInteractionPoint.h"
 #include "Engine.Actor.h"
 #include "GameFramework.GameCrowdAgent.h"

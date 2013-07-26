@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.Pawn.h"
 #include "UTGame.UTPlayerInput.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.Vector.h"
 #include "UTGame.UTWeapon.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

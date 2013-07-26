@@ -1,7 +1,9 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.IniLocPatcher.h"
 #include "Engine.OnlineGameSettings.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.OnlineSubsystem." #y); \
@@ -25,7 +27,7 @@ namespace UnrealScript
 	class OnlineSubsystem : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FTickableObject'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FTickableObject, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, IniLocPatcherClassName, 0xFFFFFFFF)
 		ADD_OBJECT(IniLocPatcher, Patcher)
 		ADD_VAR(::BoolProperty, bUseBuildIdOverride, 0x1)
@@ -75,37 +77,25 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		bool StringToUniqueNetId(ScriptArray<wchar_t> UniqueNetIdString, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void*& out_UniqueId)
+		bool StringToUniqueNetId(ScriptArray<wchar_t> UniqueNetIdString, UniqueNetId& out_UniqueId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.StringToUniqueNetId");
 			byte* params = (byte*)malloc(24);
 			*(ScriptArray<wchar_t>*)params = UniqueNetIdString;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 12) = out_UniqueId;
+			*(UniqueNetId*)(params + 12) = out_UniqueId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_UniqueId = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 12);
+			out_UniqueId = *(UniqueNetId*)(params + 12);
 			auto returnVal = *(bool*)(params + 20);
 			free(params);
 			return returnVal;
 		}
-		ScriptArray<wchar_t> UniqueNetIdToString(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void*& IdToConvert)
+		ScriptArray<wchar_t> UniqueNetIdToString(UniqueNetId& IdToConvert)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.UniqueNetIdToString");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = IdToConvert;
+			*(UniqueNetId*)params = IdToConvert;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			IdToConvert = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params;
+			IdToConvert = *(UniqueNetId*)params;
 			auto returnVal = *(ScriptArray<wchar_t>*)(params + 8);
 			free(params);
 			return returnVal;

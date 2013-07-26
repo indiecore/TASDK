@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Map_Mirror.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.WebRequest." #y); \
@@ -24,8 +25,8 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, RemoteAddr, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ContentLength, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ContentType, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'VariableMap'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'HeaderMap'!
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, VariableMap, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, HeaderMap, 0xFFFFFFFF)
 		ScriptArray<wchar_t> GetVariable(ScriptArray<wchar_t> VariableName, ScriptArray<wchar_t> DefaultValue)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebRequest.GetVariable");

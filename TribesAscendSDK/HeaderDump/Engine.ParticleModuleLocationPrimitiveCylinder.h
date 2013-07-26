@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleLocationPrimitiveBase.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleLocationPrimitiveCylinder." #y); \
@@ -19,8 +20,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::ByteProperty, HeightAxis, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, RadialVelocity, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'StartHeight'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'StartRadius'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, StartHeight, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, StartRadius, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

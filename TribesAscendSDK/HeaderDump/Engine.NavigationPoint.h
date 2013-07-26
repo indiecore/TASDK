@@ -1,9 +1,14 @@
 #pragma once
 #include "Engine.DroppedPickup.h"
 #include "Engine.Actor.h"
+#include "Engine.NavigationPoint.NavigationOctreeObject.h"
 #include "Engine.Pawn.h"
 #include "Engine.ReachSpec.h"
+#include "Core.Object.Guid.h"
+#include "Core.Object.Cylinder.h"
 #include "Engine.SeqAct_Toggle.h"
+#include "Core.Object.Vector.h"
+#include "Engine.NavigationPoint.CheckpointRecord.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.NavigationPoint." #y); \
@@ -30,8 +35,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, LastAnchoredPawnTime, 0xFFFFFFFF)
 		ADD_OBJECT(Pawn, AnchoredPawn)
 		ADD_VAR(::IntProperty, NetworkID, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'NavGuid'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Cylinder' for the property named 'MaxPathSize'!
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, NavGuid, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Cylinder>, MaxPathSize, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastDetourWeight, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, InventoryDist, 0xFFFFFFFF)
 		ADD_OBJECT(DroppedPickup, InventoryCache)
@@ -45,7 +50,7 @@ namespace UnrealScript
 		ADD_OBJECT(NavigationPoint, nextNavigationPoint)
 		ADD_VAR(::IntProperty, bestPathWeight, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, visitedWeight, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.NavigationOctreeObject' for the property named 'NavOctreeObject'!
+		ADD_STRUCT(::NonArithmeticProperty<NavigationOctreeObject>, NavOctreeObject, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bShouldSaveForCheckpoint, 0x40000000)
 		ADD_VAR(::BoolProperty, bHasCrossLevelPaths, 0x20000000)
 		ADD_VAR(::BoolProperty, bPreferredVehiclePath, 0x10000000)
@@ -208,9 +213,7 @@ void**)(params + 20) = ExcludeList;
 		}
 		bool GetAllNavInRadius(class Actor* ChkActor, Vector ChkPoint, float Radius, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
-void*& out_NavList, bool bSkipBlocked, int inNetworkID, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Cylinder'!
-void* MinSize)
+void*& out_NavList, bool bSkipBlocked, int inNetworkID, Cylinder MinSize)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.GetAllNavInRadius");
 			byte* params = (byte*)malloc(52);
@@ -222,9 +225,7 @@ void* MinSize)
 void**)(params + 20) = out_NavList;
 			*(bool*)(params + 32) = bSkipBlocked;
 			*(int*)(params + 36) = inNetworkID;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Cylinder'!
-void**)(params + 40) = MinSize;
+			*(Cylinder*)(params + 40) = MinSize;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			out_NavList = *(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
@@ -265,34 +266,22 @@ void**)(params + 20);
 			free(params);
 			return returnVal;
 		}
-		void CreateCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.CheckpointRecord'!
-void*& Record)
+		void CreateCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.CreateCheckpointRecord");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
-		void ApplyCheckpointRecord(
-// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.CheckpointRecord'!
-void*& Record)
+		void ApplyCheckpointRecord(CheckpointRecord& Record)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.ApplyCheckpointRecord");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.CheckpointRecord'!
-void**)params = Record;
+			*(CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Record = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.NavigationPoint.CheckpointRecord'!
-void**)params;
+			Record = *(CheckpointRecord*)params;
 			free(params);
 		}
 		ScriptArray<wchar_t> GetDebugAbbrev()

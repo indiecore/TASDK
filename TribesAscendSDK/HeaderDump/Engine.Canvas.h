@@ -1,9 +1,18 @@
 #pragma once
 #include "Core.Object.h"
-#include "Engine.Texture2D.h"
+#include "Core.Object.Color.h"
 #include "Engine.Font.h"
+#include "Engine.Texture2D.h"
+#include "Core.Object.Pointer.h"
+#include "Core.Object.Plane.h"
+#include "Engine.Canvas.FontRenderInfo.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Texture.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.MaterialInterface.h"
+#include "Engine.Canvas.CanvasIcon.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.Vector2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Canvas." #y); \
@@ -27,12 +36,12 @@ namespace UnrealScript
 	class Canvas : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'DrawColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, DrawColor, 0xFFFFFFFF)
 		ADD_OBJECT(Font, Font)
 		ADD_OBJECT(Texture2D, DefaultTexture)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Plane' for the property named 'ColorModulate'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SceneView'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Canvas'!
+		ADD_STRUCT(::NonArithmeticProperty<Plane>, ColorModulate, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SceneView, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Canvas, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SizeX, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bNoSmooth, 0x2)
@@ -66,9 +75,7 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawText(ScriptArray<wchar_t> Text, bool CR, float XScale, float YScale, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Canvas.FontRenderInfo'!
-void*& RenderInfo)
+		void DrawText(ScriptArray<wchar_t> Text, bool CR, float XScale, float YScale, FontRenderInfo& RenderInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawText");
 			byte* params = (byte*)malloc(64);
@@ -76,13 +83,9 @@ void*& RenderInfo)
 			*(bool*)(params + 12) = CR;
 			*(float*)(params + 16) = XScale;
 			*(float*)(params + 20) = YScale;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Canvas.FontRenderInfo'!
-void**)(params + 24) = RenderInfo;
+			*(FontRenderInfo*)(params + 24) = RenderInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			RenderInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Canvas.FontRenderInfo'!
-void**)(params + 24);
+			RenderInfo = *(FontRenderInfo*)(params + 24);
 			free(params);
 		}
 		Vector Project(Vector Location)
@@ -107,9 +110,7 @@ void**)(params + 24);
 			YL = *(float*)(params + 16);
 			free(params);
 		}
-		void DrawTile(class Texture* Tex, float XL, float YL, float U, float V, float UL, float VL, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* LColor, bool ClipTile, byte Blend)
+		void DrawTile(class Texture* Tex, float XL, float YL, float U, float V, float UL, float VL, LinearColor LColor, bool ClipTile, byte Blend)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawTile");
 			byte* params = (byte*)malloc(49);
@@ -120,9 +121,7 @@ void* LColor, bool ClipTile, byte Blend)
 			*(float*)(params + 16) = V;
 			*(float*)(params + 20) = UL;
 			*(float*)(params + 24) = VL;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 28) = LColor;
+			*(LinearColor*)(params + 28) = LColor;
 			*(bool*)(params + 44) = ClipTile;
 			*(params + 48) = Blend;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
@@ -187,9 +186,7 @@ void**)(params + 28) = LColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawTileStretched(class Texture* Tex, float XL, float YL, float U, float V, float UL, float VL, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* LColor, bool bStretchHorizontally, bool bStretchVertically, float ScalingFactor)
+		void DrawTileStretched(class Texture* Tex, float XL, float YL, float U, float V, float UL, float VL, LinearColor LColor, bool bStretchHorizontally, bool bStretchVertically, float ScalingFactor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawTileStretched");
 			byte* params = (byte*)malloc(56);
@@ -200,9 +197,7 @@ void* LColor, bool bStretchHorizontally, bool bStretchVertically, float ScalingF
 			*(float*)(params + 16) = V;
 			*(float*)(params + 20) = UL;
 			*(float*)(params + 24) = VL;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 28) = LColor;
+			*(LinearColor*)(params + 28) = LColor;
 			*(bool*)(params + 44) = bStretchHorizontally;
 			*(bool*)(params + 48) = bStretchVertically;
 			*(float*)(params + 52) = ScalingFactor;
@@ -222,33 +217,17 @@ void**)(params + 4) = Triangles;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Engine.Canvas.FontRenderInfo'!
-void* CreateFontRenderInfo(bool bClipText, bool bEnableShadow, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* GlowColor, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* GlowOuterRadius, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* GlowInnerRadius)
+		FontRenderInfo CreateFontRenderInfo(bool bClipText, bool bEnableShadow, LinearColor GlowColor, Vector2D GlowOuterRadius, Vector2D GlowInnerRadius)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.CreateFontRenderInfo");
 			byte* params = (byte*)malloc(80);
 			*(bool*)params = bClipText;
 			*(bool*)(params + 4) = bEnableShadow;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 8) = GlowColor;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 24) = GlowOuterRadius;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 32) = GlowInnerRadius;
+			*(LinearColor*)(params + 8) = GlowColor;
+			*(Vector2D*)(params + 24) = GlowOuterRadius;
+			*(Vector2D*)(params + 32) = GlowInnerRadius;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Canvas.FontRenderInfo'!
-void**)(params + 40);
+			auto returnVal = *(FontRenderInfo*)(params + 40);
 			free(params);
 			return returnVal;
 		}
@@ -264,15 +243,11 @@ void**)(params + 40);
 			YL = *(float*)(params + 16);
 			free(params);
 		}
-		void DeProject(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* ScreenPos, Vector& WorldOrigin, Vector& WorldDirection)
+		void DeProject(Vector2D ScreenPos, Vector& WorldOrigin, Vector& WorldDirection)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DeProject");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)params = ScreenPos;
+			*(Vector2D*)params = ScreenPos;
 			*(Vector*)(params + 8) = WorldOrigin;
 			*(Vector*)(params + 20) = WorldDirection;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
@@ -338,9 +313,7 @@ void**)params = ScreenPos;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Engine.Canvas.CanvasIcon'!
-void* MakeIcon(class Texture* Texture, float U, float V, float UL, float VL)
+		CanvasIcon MakeIcon(class Texture* Texture, float U, float V, float UL, float VL)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.MakeIcon");
 			byte* params = (byte*)malloc(40);
@@ -350,21 +323,15 @@ void* MakeIcon(class Texture* Texture, float U, float V, float UL, float VL)
 			*(float*)(params + 12) = UL;
 			*(float*)(params + 16) = VL;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Canvas.CanvasIcon'!
-void**)(params + 20);
+			auto returnVal = *(CanvasIcon*)(params + 20);
 			free(params);
 			return returnVal;
 		}
-		void DrawIcon(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Canvas.CanvasIcon'!
-void* Icon, float X, float Y, float Scale)
+		void DrawIcon(CanvasIcon Icon, float X, float Y, float Scale)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawIcon");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Canvas.CanvasIcon'!
-void**)params = Icon;
+			*(CanvasIcon*)params = Icon;
 			*(float*)(params + 20) = X;
 			*(float*)(params + 24) = Y;
 			*(float*)(params + 28) = Scale;
@@ -390,21 +357,15 @@ void**)params = Icon;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetDrawColorStruct(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* C)
+		void SetDrawColorStruct(Color C)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.SetDrawColorStruct");
 			byte* params = (byte*)malloc(4);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)params = C;
+			*(Color*)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void Draw2DLine(float X1, float Y1, float X2, float Y2, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* LineColor)
+		void Draw2DLine(float X1, float Y1, float X2, float Y2, Color LineColor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.Draw2DLine");
 			byte* params = (byte*)malloc(20);
@@ -412,15 +373,11 @@ void* LineColor)
 			*(float*)(params + 4) = Y1;
 			*(float*)(params + 8) = X2;
 			*(float*)(params + 12) = Y2;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 16) = LineColor;
+			*(Color*)(params + 16) = LineColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawTextureLine(Vector StartPoint, Vector EndPoint, float Perc, float Width, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* LineColor, class Texture* LineTexture, float U, float V, float UL, float VL)
+		void DrawTextureLine(Vector StartPoint, Vector EndPoint, float Perc, float Width, Color LineColor, class Texture* LineTexture, float U, float V, float UL, float VL)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawTextureLine");
 			byte* params = (byte*)malloc(56);
@@ -428,9 +385,7 @@ void* LineColor, class Texture* LineTexture, float U, float V, float UL, float V
 			*(Vector*)(params + 12) = EndPoint;
 			*(float*)(params + 24) = Perc;
 			*(float*)(params + 28) = Width;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 32) = LineColor;
+			*(Color*)(params + 32) = LineColor;
 			*(class Texture**)(params + 36) = LineTexture;
 			*(float*)(params + 40) = U;
 			*(float*)(params + 44) = V;
@@ -439,11 +394,7 @@ void**)(params + 32) = LineColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawTextureDoubleLine(Vector StartPoint, Vector EndPoint, float Perc, float Spacing, float Width, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* LineColor, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* AltLineColor, class Texture* Tex, float U, float V, float UL, float VL)
+		void DrawTextureDoubleLine(Vector StartPoint, Vector EndPoint, float Perc, float Spacing, float Width, Color LineColor, Color AltLineColor, class Texture* Tex, float U, float V, float UL, float VL)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawTextureDoubleLine");
 			byte* params = (byte*)malloc(64);
@@ -452,12 +403,8 @@ void* AltLineColor, class Texture* Tex, float U, float V, float UL, float VL)
 			*(float*)(params + 24) = Perc;
 			*(float*)(params + 28) = Spacing;
 			*(float*)(params + 32) = Width;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 36) = LineColor;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 40) = AltLineColor;
+			*(Color*)(params + 36) = LineColor;
+			*(Color*)(params + 40) = AltLineColor;
 			*(class Texture**)(params + 44) = Tex;
 			*(float*)(params + 48) = U;
 			*(float*)(params + 52) = V;
@@ -466,11 +413,7 @@ void**)(params + 40) = AltLineColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawDebugGraph(ScriptArray<wchar_t> Title, float ValueX, float ValueY, float UL_X, float UL_Y, float W, float H, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* RangeX, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* RangeY)
+		void DrawDebugGraph(ScriptArray<wchar_t> Title, float ValueX, float ValueY, float UL_X, float UL_Y, float W, float H, Vector2D RangeX, Vector2D RangeY)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawDebugGraph");
 			byte* params = (byte*)malloc(52);
@@ -481,12 +424,8 @@ void* RangeY)
 			*(float*)(params + 24) = UL_Y;
 			*(float*)(params + 28) = W;
 			*(float*)(params + 32) = H;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 36) = RangeX;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 44) = RangeY;
+			*(Vector2D*)(params + 36) = RangeX;
+			*(Vector2D*)(params + 44) = RangeY;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

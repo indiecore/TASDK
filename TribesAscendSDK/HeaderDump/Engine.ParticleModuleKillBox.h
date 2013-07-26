@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleKillBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleKillBox." #y); \
@@ -19,8 +20,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bKillInside, 0x2)
 		ADD_VAR(::BoolProperty, bAbsolute, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'UpperRightCorner'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'LowerLeftCorner'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, UpperRightCorner, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, LowerLeftCorner, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

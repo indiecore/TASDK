@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.SkelControlSingleBone.h"
+#include "Core.Object.Rotator.h"
+#include "UDKBase.UDKSkelControl_TurretConstrained.TurretConstraintData.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UDKBase.UDKSkelControl_TurretConstrained." #y); \
@@ -22,8 +24,8 @@ namespace UnrealScript
 		ADD_STRUCT(::RotatorProperty, DesiredBoneRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, PitchSpeedScale, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LagDegreesPerSecond, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKSkelControl_TurretConstrained.TurretConstraintData' for the property named 'MinAngle'!
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKSkelControl_TurretConstrained.TurretConstraintData' for the property named 'MaxAngle'!
+		ADD_STRUCT(::NonArithmeticProperty<TurretConstraintData>, MinAngle, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TurretConstraintData>, MaxAngle, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsInMotion, 0x100)
 		ADD_VAR(::BoolProperty, bResetWhenUnattended, 0x80)
 		ADD_VAR(::BoolProperty, bFixedWhenFiring, 0x40)

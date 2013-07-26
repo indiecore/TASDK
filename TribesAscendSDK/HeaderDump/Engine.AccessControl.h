@@ -2,6 +2,7 @@
 #include "Engine.PlayerController.h"
 #include "Engine.Info.h"
 #include "Engine.Controller.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AccessControl." #y); \
@@ -197,19 +198,13 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		bool IsIDBanned(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void*& NetId)
+		bool IsIDBanned(UniqueNetId& NetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.IsIDBanned");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = NetId;
+			*(UniqueNetId*)params = NetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			NetId = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params;
+			NetId = *(UniqueNetId*)params;
 			auto returnVal = *(bool*)(params + 8);
 			free(params);
 			return returnVal;

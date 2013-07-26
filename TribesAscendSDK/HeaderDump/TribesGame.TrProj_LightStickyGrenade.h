@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame.TrProj_Grenade.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Actor.h"
 namespace UnrealScript
 {

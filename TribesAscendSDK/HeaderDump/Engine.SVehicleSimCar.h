@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.SVehicleSimBase.h"
+#include "Core.Object.InterpCurveFloat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SVehicleSimCar." #y); \
@@ -25,7 +26,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, EngineBrakeFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ReverseThrottle, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SteerSpeed, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat' for the property named 'MaxSteerAngleCurve'!
+		ADD_STRUCT(::NonArithmeticProperty<InterpCurveFloat>, MaxSteerAngleCurve, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ChassisTorqueScale, 0xFFFFFFFF)
 	};
 }

@@ -2,6 +2,7 @@
 #include "TribesGame.TrProj_Grenade.h"
 #include "Engine.SoundCue.h"
 #include "Engine.ParticleSystem.h"
+#include "Core.Object.Vector.h"
 #include "Engine.SkelControlSingleBone.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

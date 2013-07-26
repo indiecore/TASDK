@@ -3,26 +3,33 @@
 #include "Engine.Actor.h"
 #include "Engine.Weapon.h"
 #include "Engine.InventoryManager.h"
-#include "Engine.PhysicsVolume.h"
 #include "Engine.SeqAct_AttachToActor.h"
 #include "Engine.LadderVolume.h"
+#include "Engine.FaceFXAnimSet.h"
+#include "Core.Object.Vector.h"
+#include "Engine.PhysicsVolume.h"
 #include "Engine.NavigationPoint.h"
-#include "Engine.RB_BodyInstance.h"
+#include "Engine.Pawn.LastHitInfoStruct.h"
+#include "Engine.EngineTypes.RootMotionCurve.h"
 #include "Engine.SeqAct_AssignController.h"
 #include "Engine.Inventory.h"
 #include "Engine.MaterialInstanceConstant.h"
+#include "Engine.RB_BodyInstance.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.InterpGroupInst.h"
 #include "Engine.PathGoalEvaluator.h"
 #include "Engine.Vehicle.h"
 #include "Engine.PlayerStart.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Engine.PathConstraint.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.SeqAct_SetMaterial.h"
 #include "Engine.InterpGroup.h"
 #include "Engine.PlayerController.h"
-#include "Engine.FaceFXAnimSet.h"
 #include "Engine.SoundCue.h"
+#include "Engine.Pawn.ScalarParameterInterpStruct.h"
 #include "Engine.SeqAct_Interp.h"
+#include "Engine.Actor.TraceHitInfo.h"
 #include "Engine.SeqAct_PlayFaceFXAnim.h"
 #include "Engine.FaceFXAsset.h"
 #include "Engine.HUD.h"
@@ -83,11 +90,11 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bUpAndOut, 0x2)
 		ADD_VAR(::FloatProperty, OutofWaterZ, 0xFFFFFFFF)
 		ADD_OBJECT(NavigationPoint, Anchor)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Pawn.LastHitInfoStruct' for the property named 'LastHitInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<LastHitInfoStruct>, LastHitInfo, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, RootMotionInterpCurveLastValue, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RootMotionInterpCurrentTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, RootMotionInterpRate, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.RootMotionCurve' for the property named 'RootMotionInterpCurve'!
+		ADD_STRUCT(::NonArithmeticProperty<RootMotionCurve>, RootMotionInterpCurve, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, MIC_PawnHair)
 		ADD_OBJECT(MaterialInstanceConstant, MIC_PawnMat)
 		ADD_VAR(::IntProperty, FailedLandingCount, 0xFFFFFFFF)
@@ -169,7 +176,7 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, FlashCount, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RemoteViewPitch, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, PathSearchType, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IInterface_Speaker'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IInterface_Speaker, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bDebugShowCameraLocation, 0x10000000)
 		ADD_VAR(::BoolProperty, bNeedsBaseTickedFirst, 0x4000000)
 		ADD_VAR(::BoolProperty, bUnlockWhenReached, 0x2000000)
@@ -407,19 +414,13 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void SetScalarParameterInterp(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Pawn.ScalarParameterInterpStruct'!
-void*& ScalarParameterInterp)
+		void SetScalarParameterInterp(ScalarParameterInterpStruct& ScalarParameterInterp)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pawn.SetScalarParameterInterp");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Pawn.ScalarParameterInterpStruct'!
-void**)params = ScalarParameterInterp;
+			*(ScalarParameterInterpStruct*)params = ScalarParameterInterp;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ScalarParameterInterp = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Pawn.ScalarParameterInterpStruct'!
-void**)params;
+			ScalarParameterInterp = *(ScalarParameterInterpStruct*)params;
 			free(params);
 		}
 		bool CheatFly()
@@ -1489,33 +1490,25 @@ void**)params = AC;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void HandleMomentum(Vector Momentum, Vector HitLocation, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo)
+		void HandleMomentum(Vector Momentum, Vector HitLocation, ScriptClass* DamageType, TraceHitInfo HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pawn.HandleMomentum");
 			byte* params = (byte*)malloc(56);
 			*(Vector*)params = Momentum;
 			*(Vector*)(params + 12) = HitLocation;
 			*(ScriptClass**)(params + 24) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 28) = HitInfo;
+			*(TraceHitInfo*)(params + 28) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void AddVelocity(Vector NewVelocity, Vector HitLocation, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo)
+		void AddVelocity(Vector NewVelocity, Vector HitLocation, ScriptClass* DamageType, TraceHitInfo HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pawn.AddVelocity");
 			byte* params = (byte*)malloc(56);
 			*(Vector*)params = NewVelocity;
 			*(Vector*)(params + 12) = HitLocation;
 			*(ScriptClass**)(params + 24) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 28) = HitInfo;
+			*(TraceHitInfo*)(params + 28) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -1691,9 +1684,7 @@ void**)(params + 28) = HitInfo;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pawn.SetMovementPhysics");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void AdjustDamage(int& InDamage, Vector& Momentum, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo, class Actor* DamageCauser)
+		void AdjustDamage(int& InDamage, Vector& Momentum, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pawn.AdjustDamage");
 			byte* params = (byte*)malloc(68);
@@ -1702,9 +1693,7 @@ void* HitInfo, class Actor* DamageCauser)
 			*(class Controller**)(params + 16) = InstigatedBy;
 			*(Vector*)(params + 20) = HitLocation;
 			*(ScriptClass**)(params + 32) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 36) = HitInfo;
+			*(TraceHitInfo*)(params + 36) = HitInfo;
 			*(class Actor**)(params + 64) = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			InDamage = *(int*)params;
@@ -1783,9 +1772,7 @@ void**)(params + 40) = Bones;
 			free(params);
 			return returnVal;
 		}
-		void TakeDamage(int Damage, class Controller* InstigatedBy, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* InstigatedBy, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pawn.TakeDamage");
 			byte* params = (byte*)malloc(68);
@@ -1794,9 +1781,7 @@ void* HitInfo, class Actor* DamageCauser)
 			*(Vector*)(params + 8) = HitLocation;
 			*(Vector*)(params + 20) = Momentum;
 			*(ScriptClass**)(params + 32) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 36) = HitInfo;
+			*(TraceHitInfo*)(params + 36) = HitInfo;
 			*(class Actor**)(params + 64) = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -1884,9 +1869,7 @@ void**)(params + 36) = HitInfo;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pawn.PlayDyingSound");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void PlayHit(float Damage, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, Vector Momentum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo)
+		void PlayHit(float Damage, class Controller* InstigatedBy, Vector HitLocation, ScriptClass* DamageType, Vector Momentum, TraceHitInfo HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pawn.PlayHit");
 			byte* params = (byte*)malloc(64);
@@ -1895,9 +1878,7 @@ void* HitInfo)
 			*(Vector*)(params + 8) = HitLocation;
 			*(ScriptClass**)(params + 20) = DamageType;
 			*(Vector*)(params + 24) = Momentum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 36) = HitInfo;
+			*(TraceHitInfo*)(params + 36) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

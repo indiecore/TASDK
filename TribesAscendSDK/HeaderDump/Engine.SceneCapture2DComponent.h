@@ -1,6 +1,9 @@
 #pragma once
 #include "Engine.SceneCaptureComponent.h"
+#include "Core.Object.Matrix.h"
 #include "Engine.TextureRenderTarget2D.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SceneCapture2DComponent." #y); \
@@ -24,8 +27,8 @@ namespace UnrealScript
 	class SceneCapture2DComponent : public SceneCaptureComponent
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'ProjMatrix'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'ViewMatrix'!
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, ProjMatrix, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, ViewMatrix, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bUpdateMatrices, 0x1)
 		ADD_VAR(::FloatProperty, FarPlane, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NearPlane, 0xFFFFFFFF)

@@ -1,6 +1,8 @@
 #pragma once
 #include "UTGame.UTVehicleWeapon.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.ParticleSystem.h"
+#include "Core.Object.Vector.h"
 #include "Engine.CameraShake.h"
 #include "Engine.Projectile.h"
 #include "Engine.MaterialInstanceConstant.h"

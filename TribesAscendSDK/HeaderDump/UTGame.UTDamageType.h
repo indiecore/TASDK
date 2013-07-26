@@ -1,13 +1,17 @@
 #pragma once
 #include "Engine.DamageType.h"
-#include "UTGame.UTGib.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.CameraAnim.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "UTGame.UTPawn.h"
 #include "Engine.Pawn.h"
-#include "Engine.Canvas.h"
+#include "Core.Object.Vector.h"
 #include "UTGame.UTPlayerReplicationInfo.h"
+#include "UTGame.UTGib.h"
+#include "Engine.Actor.TraceHitInfo.h"
+#include "Engine.Canvas.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTDamageType." #y); \
@@ -46,14 +50,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, StopAnimAfterDamageInterval, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DamageOverlayTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, XRayEffectTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'DamageBodyMatColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, DamageBodyMatColor, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bCausesBloodSplatterDecals, 0x80000)
 		ADD_VAR(::BoolProperty, bCausesBlood, 0x1)
 		ADD_VAR(::FloatProperty, PhysicsTakeHitMomentumThreshold, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bSpecialDeathCamera, 0x4000)
 		ADD_VAR(::BoolProperty, bThrowRagdoll, 0x100)
 		ADD_VAR(::BoolProperty, bOverrideHitEffectColor, 0x20000)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'HitEffectColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, HitEffectColor, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, MaleSuicide, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, FemaleSuicide, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, DeathString, 0xFFFFFFFF)
@@ -220,40 +224,28 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DoCustomDamageEffects(class UTPawn* ThePawn, ScriptClass* TheDamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void*& HitInfo, Vector HitLocation)
+		void DoCustomDamageEffects(class UTPawn* ThePawn, ScriptClass* TheDamageType, TraceHitInfo& HitInfo, Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.DoCustomDamageEffects");
 			byte* params = (byte*)malloc(48);
 			*(class UTPawn**)params = ThePawn;
 			*(ScriptClass**)(params + 4) = TheDamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 8) = HitInfo;
+			*(TraceHitInfo*)(params + 8) = HitInfo;
 			*(Vector*)(params + 36) = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			HitInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 8);
+			HitInfo = *(TraceHitInfo*)(params + 8);
 			free(params);
 		}
-		void CreateDeathSkeleton(class UTPawn* ThePawn, ScriptClass* TheDamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void*& HitInfo, Vector HitLocation)
+		void CreateDeathSkeleton(class UTPawn* ThePawn, ScriptClass* TheDamageType, TraceHitInfo& HitInfo, Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.CreateDeathSkeleton");
 			byte* params = (byte*)malloc(48);
 			*(class UTPawn**)params = ThePawn;
 			*(ScriptClass**)(params + 4) = TheDamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 8) = HitInfo;
+			*(TraceHitInfo*)(params + 8) = HitInfo;
 			*(Vector*)(params + 36) = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			HitInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 8);
+			HitInfo = *(TraceHitInfo*)(params + 8);
 			free(params);
 		}
 		void BoneBreaker(class UTPawn* ThePawn, 
@@ -272,22 +264,16 @@ void**)(params + 4) = TheMesh;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void CreateDeathGoreChunks(class UTPawn* ThePawn, ScriptClass* TheDamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void*& HitInfo, Vector HitLocation)
+		void CreateDeathGoreChunks(class UTPawn* ThePawn, ScriptClass* TheDamageType, TraceHitInfo& HitInfo, Vector HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.CreateDeathGoreChunks");
 			byte* params = (byte*)malloc(48);
 			*(class UTPawn**)params = ThePawn;
 			*(ScriptClass**)(params + 4) = TheDamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 8) = HitInfo;
+			*(TraceHitInfo*)(params + 8) = HitInfo;
 			*(Vector*)(params + 36) = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			HitInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 8);
+			HitInfo = *(TraceHitInfo*)(params + 8);
 			free(params);
 		}
 		void SpawnExtraGibEffects(class UTGib* TheGib)

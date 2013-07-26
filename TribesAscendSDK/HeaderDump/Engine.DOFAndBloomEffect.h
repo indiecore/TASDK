@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Color.h"
 #include "Engine.DOFEffect.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -23,7 +24,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, BlurBloomKernelSize, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SceneMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BloomScreenBlendThreshold, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'BloomTint'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, BloomTint, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BloomThreshold, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BloomScale, 0xFFFFFFFF)
 	};

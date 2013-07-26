@@ -1,7 +1,12 @@
 #pragma once
 #include "Engine.MaterialInterface.h"
-#include "Engine.PhysicalMaterial.h"
 #include "Engine.Texture2D.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.Material.ColorMaterialInput.h"
+#include "Engine.Material.ScalarMaterialInput.h"
+#include "Engine.Material.Vector2MaterialInput.h"
+#include "Engine.Material.VectorMaterialInput.h"
+#include "Engine.PhysicalMaterial.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Material." #y); \
@@ -29,8 +34,8 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, EditorPitch, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, EditorY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, EditorX, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'DefaultMaterialInstances'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'MaterialResources'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, DefaultMaterialInstances, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, MaterialResources, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsPreviewMaterial, 0x1000)
 		ADD_VAR(::BoolProperty, bIsMasked, 0x800)
 		ADD_VAR(::BoolProperty, bUsesDistortion, 0x400)
@@ -76,30 +81,30 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, TwoSidedSeparatePass, 0x4)
 		ADD_VAR(::BoolProperty, TwoSided, 0x2)
 		ADD_VAR(::BoolProperty, EnableSubsurfaceScattering, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ScalarMaterialInput' for the property named 'SubsurfaceScatteringRadius'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ColorMaterialInput' for the property named 'SubsurfaceAbsorptionColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ColorMaterialInput' for the property named 'SubsurfaceInscatteringColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.Vector2MaterialInput' for the property named 'TessellationFactors'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.VectorMaterialInput' for the property named 'WorldDisplacement'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.VectorMaterialInput' for the property named 'WorldPositionOffset'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ColorMaterialInput' for the property named 'TwoSidedLightingColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ScalarMaterialInput' for the property named 'TwoSidedLightingMask'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.VectorMaterialInput' for the property named 'AnisotropicDirection'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ColorMaterialInput' for the property named 'CustomSkylightDiffuse'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ColorMaterialInput' for the property named 'CustomLighting'!
+		ADD_STRUCT(::NonArithmeticProperty<ScalarMaterialInput>, SubsurfaceScatteringRadius, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ColorMaterialInput>, SubsurfaceAbsorptionColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ColorMaterialInput>, SubsurfaceInscatteringColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2MaterialInput>, TessellationFactors, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<VectorMaterialInput>, WorldDisplacement, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<VectorMaterialInput>, WorldPositionOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ColorMaterialInput>, TwoSidedLightingColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ScalarMaterialInput>, TwoSidedLightingMask, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<VectorMaterialInput>, AnisotropicDirection, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ColorMaterialInput>, CustomSkylightDiffuse, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ColorMaterialInput>, CustomLighting, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, D3D11TessellationMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, LightingModel, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, BlendMode, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.Vector2MaterialInput' for the property named 'Distortion'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2MaterialInput>, Distortion, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OpacityMaskClipValue, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ScalarMaterialInput' for the property named 'OpacityMask'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ScalarMaterialInput' for the property named 'Opacity'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ColorMaterialInput' for the property named 'EmissiveColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.VectorMaterialInput' for the property named 'Normal'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ScalarMaterialInput' for the property named 'SpecularPower'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ColorMaterialInput' for the property named 'SpecularColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ScalarMaterialInput' for the property named 'DiffusePower'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Material.ColorMaterialInput' for the property named 'DiffuseColor'!
+		ADD_STRUCT(::NonArithmeticProperty<ScalarMaterialInput>, OpacityMask, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ScalarMaterialInput>, Opacity, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ColorMaterialInput>, EmissiveColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<VectorMaterialInput>, Normal, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ScalarMaterialInput>, SpecularPower, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ColorMaterialInput>, SpecularColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ScalarMaterialInput>, DiffusePower, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<ColorMaterialInput>, DiffuseColor, 0xFFFFFFFF)
 		ADD_OBJECT(PhysicalMaterial, WhitePhysicalMaterial)
 		ADD_OBJECT(PhysicalMaterial, BlackPhysicalMaterial)
 		ADD_VAR(::IntProperty, PhysMaterialMaskUVChannel, 0xFFFFFFFF)

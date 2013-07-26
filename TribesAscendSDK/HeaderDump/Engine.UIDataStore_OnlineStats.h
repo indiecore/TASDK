@@ -1,6 +1,9 @@
 #pragma once
 #include "Engine.UIDataStore_Remote.h"
 #include "Engine.OnlineStatsRead.h"
+#include "Engine.UIDataStore_OnlineStats.RankMetaData.h"
+#include "Engine.UIDataStore_OnlineStats.PlayerNickMetaData.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIDataStore_OnlineStats." #y); \
@@ -27,11 +30,11 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, CurrentReadType, 0xFFFFFFFF)
 		ADD_OBJECT(OnlineStatsRead, StatsRead)
 		ADD_VAR(::NameProperty, TotalRowsName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIDataStore_OnlineStats.RankMetaData' for the property named 'RankNameMetaData'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIDataStore_OnlineStats.PlayerNickMetaData' for the property named 'PlayerNickData'!
+		ADD_STRUCT(::NonArithmeticProperty<RankMetaData>, RankNameMetaData, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<PlayerNickMetaData>, PlayerNickData, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, StatsReadName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementProvider, 0xFFFFFFFF)
 		void Init()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.Init");

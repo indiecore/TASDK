@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "TribesGame.TrSubDevice.h"
 namespace UnrealScript
 {

@@ -1,6 +1,8 @@
 #pragma once
 #include "Core.Object.h"
 #include "Engine.InterpGroup.h"
+#include "Engine.PostProcessVolume.PostProcessSettings.h"
+#include "Core.Object.Box.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CameraAnim." #y); \
@@ -26,8 +28,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, BaseFOV, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BasePPSettingsAlpha, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'BasePPSettings'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box' for the property named 'BoundingBox'!
+		ADD_STRUCT(::NonArithmeticProperty<PostProcessSettings>, BasePPSettings, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Box>, BoundingBox, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, AnimLength, 0xFFFFFFFF)
 		ADD_OBJECT(InterpGroup, CameraInterpGroup)
 	};

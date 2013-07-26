@@ -2,6 +2,7 @@
 #include "Engine.Actor.h"
 #include "Engine.NavMeshPathConstraint.h"
 #include "Engine.NavigationHandle.h"
+#include "Core.Object.Vector.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.NavMeshPath_Toward." #y); \

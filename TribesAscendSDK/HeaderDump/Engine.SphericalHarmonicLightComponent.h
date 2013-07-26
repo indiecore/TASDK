@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.SHVectorRGB.h"
 #include "Engine.LightComponent.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bRenderBeforeModShadows, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.SHVectorRGB' for the property named 'WorldSpaceIncidentLighting'!
+		ADD_STRUCT(::NonArithmeticProperty<SHVectorRGB>, WorldSpaceIncidentLighting, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

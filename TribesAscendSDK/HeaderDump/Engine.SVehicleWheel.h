@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.SkelControlWheel.h"
 #include "Core.Component.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.ParticleSystem.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -41,7 +43,7 @@ namespace UnrealScript
 		ADD_VAR(::NameProperty, SlipParticleParamName, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, WheelPSCClass)
 		ADD_VAR(::IntProperty, WheelMaterialIndex, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'WheelShape'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, WheelShape, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CurrentRotation, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, SuspensionPosition, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DesiredSuspensionPosition, 0xFFFFFFFF)

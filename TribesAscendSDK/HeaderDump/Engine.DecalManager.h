@@ -1,6 +1,9 @@
 #pragma once
 #include "Engine.Actor.h"
+#include "Core.Object.Vector2D.h"
 #include "Engine.MaterialInterface.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.DecalManager." #y); \
@@ -18,7 +21,7 @@ namespace UnrealScript
 	class DecalManager : public Actor
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'DecalBlendRange'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, DecalBlendRange, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DecalDepthBias, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DecalLifeSpan, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxActiveDecals, 0xFFFFFFFF)
@@ -56,9 +59,7 @@ void**)params = Decal;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* TheDecal, class MaterialInterface* DecalMaterial, Vector DecalLocation, Rotator DecalOrientation, float Width, float Height, float Thickness, bool bNoClip, float DecalRotation, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* HitComponent, bool bProjectOnTerrain, bool bProjectOnSkeletalMeshes, ScriptName HitBone, int HitNodeIndex, int HitLevelIndex, int InFracturedStaticMeshComponentIndex, float DepthBias, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* BlendRange)
+void* HitComponent, bool bProjectOnTerrain, bool bProjectOnSkeletalMeshes, ScriptName HitBone, int HitNodeIndex, int HitLevelIndex, int InFracturedStaticMeshComponentIndex, float DepthBias, Vector2D BlendRange)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DecalManager.SetDecalParameters");
 			byte* params = (byte*)malloc(96);
@@ -83,9 +84,7 @@ void**)(params + 52) = HitComponent;
 			*(int*)(params + 76) = HitLevelIndex;
 			*(int*)(params + 80) = InFracturedStaticMeshComponentIndex;
 			*(float*)(params + 84) = DepthBias;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 88) = BlendRange;
+			*(Vector2D*)(params + 88) = BlendRange;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -106,9 +105,7 @@ void**)params;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SpawnDecal(class MaterialInterface* DecalMaterial, Vector DecalLocation, Rotator DecalOrientation, float Width, float Height, float Thickness, bool bNoClip, float DecalRotation, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* HitComponent, bool bProjectOnTerrain, bool bProjectOnSkeletalMeshes, ScriptName HitBone, int HitNodeIndex, int HitLevelIndex, float InDecalLifeSpan, int InFracturedStaticMeshComponentIndex, float InDepthBias, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* InBlendRange)
+void* HitComponent, bool bProjectOnTerrain, bool bProjectOnSkeletalMeshes, ScriptName HitBone, int HitNodeIndex, int HitLevelIndex, float InDecalLifeSpan, int InFracturedStaticMeshComponentIndex, float InDepthBias, Vector2D InBlendRange)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DecalManager.SpawnDecal");
 			byte* params = (byte*)malloc(100);
@@ -131,9 +128,7 @@ void**)(params + 48) = HitComponent;
 			*(float*)(params + 76) = InDecalLifeSpan;
 			*(int*)(params + 80) = InFracturedStaticMeshComponentIndex;
 			*(float*)(params + 84) = InDepthBias;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 88) = InBlendRange;
+			*(Vector2D*)(params + 88) = InBlendRange;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!

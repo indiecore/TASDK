@@ -2,6 +2,7 @@
 #include "TribesGame.TrProj_StickyGrenade.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrProj_SpikeLauncher." #y); \

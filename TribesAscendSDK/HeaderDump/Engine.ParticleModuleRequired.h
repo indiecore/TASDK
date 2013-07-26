@@ -1,5 +1,7 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.ParticleModule.h"
+#include "Core.Object.Vector.h"
 #include "Engine.MaterialInterface.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -34,7 +36,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, SubImages_Horizontal, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EmitterDelayLow, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EmitterDelay, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'SpawnRate'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, SpawnRate, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, EmitterLoops, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EmitterDurationLow, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, EmitterDuration, 0xFFFFFFFF)

@@ -1,6 +1,9 @@
 #pragma once
+#include "TribesGame.TrObjectPool.TracerCacheInfo.h"
 #include "Engine.Actor.h"
 #include "TribesGame.TrProj_Tracer.h"
+#include "Core.Object.Vector.h"
+#include "Core.Object.Rotator.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty TribesGame.TrObjectPool." #y); \
@@ -12,7 +15,7 @@ namespace UnrealScript
 	class TrObjectPool : public Actor
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObjectPool.TracerCacheInfo' for the property named 'm_TracerCache'!
+		ADD_STRUCT(::NonArithmeticProperty<TracerCacheInfo>, m_TracerCache, 0xFFFFFFFF)
 		class TrProj_Tracer* GetTracer(byte TracerType, byte ActiveReloadTier, Vector SpawnLocation, Rotator SpawnRotation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrObjectPool.GetTracer");

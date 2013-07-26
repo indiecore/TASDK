@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.UIPropertyDataProvider.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.UIResourceDataProvider." #y); \
@@ -19,8 +20,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bSkipDuringEnumeration, 0x2)
 		ADD_VAR(::BoolProperty, bDataBindingPropertiesOnly, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementProvider, 0xFFFFFFFF)
 		void InitializeProvider(bool bIsEditor)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIResourceDataProvider.InitializeProvider");

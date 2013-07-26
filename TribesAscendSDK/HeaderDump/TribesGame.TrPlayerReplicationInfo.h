@@ -3,12 +3,13 @@
 #include "TribesGame.TrStatsInterface.h"
 #include "Engine.Actor.h"
 #include "TribesGame.TrValueModifier.h"
-#include "UTGame.UTCarriedObject.h"
-#include "Engine.TeamInfo.h"
-#include "TribesGame.TrInventoryHelper.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Engine.SkeletalMesh.h"
 #include "Engine.ParticleSystem.h"
+#include "TribesGame.TrPlayerReplicationInfo.EquipLevel.h"
+#include "Engine.TeamInfo.h"
+#include "TribesGame.TrInventoryHelper.h"
+#include "UTGame.UTCarriedObject.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrPlayerReplicationInfo." #y); \
@@ -50,7 +51,7 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, c_Cached1PSkin)
 		ADD_OBJECT(ScriptClass, c_Cached3PSkin)
 		ADD_OBJECT(TrValueModifier, m_ValueModifier)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrPlayerReplicationInfo.EquipLevel' for the property named 'r_EquipLevels'!
+		ADD_STRUCT(::NonArithmeticProperty<EquipLevel>, r_EquipLevels, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, c_fRedFlagTimeStamp, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, c_fRedFlagPingTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, c_fRedFlagPingThreshold, 0xFFFFFFFF)

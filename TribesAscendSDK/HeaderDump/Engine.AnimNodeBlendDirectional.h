@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.AnimNodeBlendBase.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.AnimNodeBlendDirectional." #y); \

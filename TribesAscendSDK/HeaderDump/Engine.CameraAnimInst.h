@@ -1,11 +1,15 @@
 #pragma once
-#include "Engine.Actor.h"
 #include "Core.Object.h"
+#include "Core.Object.Vector.h"
+#include "Engine.PostProcessVolume.PostProcessSettings.h"
+#include "Engine.InterpGroupInst.h"
+#include "Core.Object.Matrix.h"
 #include "Engine.AnimNodeSequence.h"
 #include "Engine.CameraAnim.h"
 #include "Engine.InterpTrackInstMove.h"
 #include "Engine.InterpTrackMove.h"
-#include "Engine.InterpGroupInst.h"
+#include "Core.Object.Rotator.h"
+#include "Engine.Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.CameraAnimInst." #y); \
@@ -31,8 +35,8 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(::VectorProperty, LastCameraLoc, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LastPPSettingsAlpha, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'LastPPSettings'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'UserPlaySpaceMatrix'!
+		ADD_STRUCT(::NonArithmeticProperty<PostProcessSettings>, LastPPSettings, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, UserPlaySpaceMatrix, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, PlaySpace, 0xFFFFFFFF)
 		ADD_OBJECT(AnimNodeSequence, SourceAnimNode)
 		ADD_OBJECT(InterpTrackInstMove, MoveInst)

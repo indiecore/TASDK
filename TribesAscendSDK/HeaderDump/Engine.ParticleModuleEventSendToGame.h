@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Vector.h"
 namespace UnrealScript
 {
 	class ParticleModuleEventSendToGame : public Object

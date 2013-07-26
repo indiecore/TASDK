@@ -4,6 +4,7 @@
 #include "GameFramework.GameCrowdAgent.h"
 #include "Engine.AnimNodeSequence.h"
 #include "GameFramework.GameCrowdDestination.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameCrowdAgentBehavior." #y); \

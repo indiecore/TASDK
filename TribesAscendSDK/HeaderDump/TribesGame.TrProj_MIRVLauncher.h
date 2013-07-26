@@ -1,5 +1,7 @@
 #pragma once
 #include "TribesGame.TrProj_Grenade.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

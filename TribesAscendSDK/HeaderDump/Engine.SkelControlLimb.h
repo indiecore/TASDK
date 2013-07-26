@@ -1,5 +1,7 @@
 #pragma once
+#include "Core.Object.Vector.h"
 #include "Engine.SkelControlBase.h"
+#include "Core.Object.Vector2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.SkelControlLimb." #y); \
@@ -18,7 +20,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::NameProperty, StretchRollBoneName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'StretchLimits'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, StretchLimits, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bAllowStretching, 0x20)
 		ADD_VAR(::BoolProperty, bTakeRotationFromEffectorSpace, 0x10)
 		ADD_VAR(::BoolProperty, bMaintainEffectorRelRot, 0x8)

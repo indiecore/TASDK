@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Color.h"
 #include "Engine.Sequence.h"
 #include "Engine.WorldInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -34,7 +35,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bDrawFirst, 0x2)
 		ADD_VAR(::BoolProperty, bDeletable, 0x1)
 		ADD_VAR(::StrProperty, ObjComment, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'ObjColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, ObjColor, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ObjCategory, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ObjName, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, ObjPosY, 0xFFFFFFFF)

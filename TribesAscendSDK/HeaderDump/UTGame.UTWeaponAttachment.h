@@ -1,11 +1,15 @@
 #pragma once
 #include "Engine.Actor.h"
-#include "Engine.PhysicalMaterial.h"
 #include "Engine.SoundCue.h"
+#include "Core.Object.Vector.h"
+#include "Engine.Material.h"
+#include "UDKBase.UDKPawn.MaterialImpactEffect.h"
+#include "Core.Object.Color.h"
 #include "UTGame.UTPawn.h"
 #include "Engine.ParticleSystem.h"
-#include "Engine.Material.h"
 #include "Engine.Weapon.h"
+#include "Engine.PhysicalMaterial.h"
+#include "Engine.Actor.TraceHitInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTWeaponAttachment." #y); \
@@ -38,8 +42,8 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, WeaponClass)
 		ADD_VAR(::FloatProperty, MaxImpactEffectDistance, 0xFFFFFFFF)
 		ADD_OBJECT(SoundCue, BulletWhip)
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect' for the property named 'DefaultAltImpactEffect'!
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect' for the property named 'DefaultImpactEffect'!
+		ADD_STRUCT(::NonArithmeticProperty<MaterialImpactEffect>, DefaultAltImpactEffect, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<MaterialImpactEffect>, DefaultImpactEffect, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, AttachmentSocket, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MuzzleFlashDuration, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, MuzzleFlashLightClass)
@@ -47,7 +51,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bSuppressSounds, 0x4)
 		ADD_VAR(::BoolProperty, bAlignToSurfaceNormal, 0x2)
 		ADD_VAR(::BoolProperty, bMuzzleFlashPSCLoops, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'MuzzleFlashColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, MuzzleFlashColor, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, MuzzleFlashAltPSCTemplate)
 		ADD_OBJECT(ParticleSystem, MuzzleFlashPSCTemplate)
 		ADD_VAR(::NameProperty, MuzzleFlashSocket, 0xFFFFFFFF)
@@ -160,17 +164,13 @@ void**)params = MeshCpnt;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.StopThirdPersonFireEffects");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect'!
-void* GetImpactEffect(class PhysicalMaterial* HitMaterial)
+		MaterialImpactEffect GetImpactEffect(class PhysicalMaterial* HitMaterial)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.GetImpactEffect");
 			byte* params = (byte*)malloc(52);
 			*(class PhysicalMaterial**)params = HitMaterial;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect'!
-void**)(params + 4);
+			auto returnVal = *(MaterialImpactEffect*)(params + 4);
 			free(params);
 			return returnVal;
 		}
@@ -186,18 +186,14 @@ void**)(params + 4);
 			free(params);
 			return returnVal;
 		}
-		void SetImpactedActor(class Actor* HitActor, Vector HitLocation, Vector HitNormal, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo)
+		void SetImpactedActor(class Actor* HitActor, Vector HitLocation, Vector HitNormal, TraceHitInfo HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponAttachment.SetImpactedActor");
 			byte* params = (byte*)malloc(56);
 			*(class Actor**)params = HitActor;
 			*(Vector*)(params + 4) = HitLocation;
 			*(Vector*)(params + 16) = HitNormal;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 28) = HitInfo;
+			*(TraceHitInfo*)(params + 28) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

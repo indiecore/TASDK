@@ -1,6 +1,8 @@
 #pragma once
+#include "Core.Object.Pointer.h"
 #include "Engine.OnlineSubsystem.h"
 #include "IpDrv.OnlineGameInterfaceImpl.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.OnlineSubsystemCommonImpl." #y); \
@@ -28,7 +30,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsUsingSpeechRecognition, 0x1)
 		ADD_VAR(::IntProperty, MaxRemoteTalkers, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxLocalTalkers, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VoiceEngine'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VoiceEngine, 0xFFFFFFFF)
 		ScriptArray<wchar_t> GetPlayerNicknameFromIndex(int UserIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineSubsystemCommonImpl.GetPlayerNicknameFromIndex");
@@ -39,30 +41,22 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* GetPlayerUniqueNetIdFromIndex(int UserIndex)
+		UniqueNetId GetPlayerUniqueNetIdFromIndex(int UserIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineSubsystemCommonImpl.GetPlayerUniqueNetIdFromIndex");
 			byte* params = (byte*)malloc(12);
 			*(int*)params = UserIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4);
+			auto returnVal = *(UniqueNetId*)(params + 4);
 			free(params);
 			return returnVal;
 		}
-		bool IsPlayerInSession(ScriptName SessionName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID)
+		bool IsPlayerInSession(ScriptName SessionName, UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineSubsystemCommonImpl.IsPlayerInSession");
 			byte* params = (byte*)malloc(20);
 			*(ScriptName*)params = SessionName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 8) = PlayerID;
+			*(UniqueNetId*)(params + 8) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 16);
 			free(params);

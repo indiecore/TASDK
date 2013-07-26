@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.SkelControlSingleBone.h"
+#include "Core.Object.Rotator.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty UDKBase.UDKSkelControl_Rotate." #y); \

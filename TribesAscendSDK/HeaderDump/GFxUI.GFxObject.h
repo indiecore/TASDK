@@ -1,6 +1,10 @@
 #pragma once
+#include "GFxUI.GFxObject.ASColorTransform.h"
 #include "Core.Object.h"
 #include "Engine.TranslationContext.h"
+#include "GFxUI.GFxMoviePlayer.ASValue.h"
+#include "GFxUI.GFxObject.ASDisplayInfo.h"
+#include "Core.Object.Matrix.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GFxUI.GFxObject." #y); \
@@ -13,17 +17,13 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, Value, 0xFFFFFFFF)
-		
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void* Get(ScriptArray<wchar_t> Member)
+		ASValue Get(ScriptArray<wchar_t> Member)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.Get");
 			byte* params = (byte*)malloc(36);
 			*(ScriptArray<wchar_t>*)params = Member;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void**)(params + 12);
+			auto returnVal = *(ASValue*)(params + 12);
 			free(params);
 			return returnVal;
 		}
@@ -68,16 +68,12 @@ void**)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		void Set(ScriptArray<wchar_t> Member, 
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void* Arg)
+		void Set(ScriptArray<wchar_t> Member, ASValue Arg)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.Set");
 			byte* params = (byte*)malloc(36);
 			*(ScriptArray<wchar_t>*)params = Member;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void**)(params + 12) = Arg;
+			*(ASValue*)(params + 12) = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -139,16 +135,12 @@ void**)(params + 12) = Arg;
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASDisplayInfo'!
-void* GetDisplayInfo()
+		ASDisplayInfo GetDisplayInfo()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetDisplayInfo");
 			byte* params = (byte*)malloc(44);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASDisplayInfo'!
-void**)params;
+			auto returnVal = *(ASDisplayInfo*)params;
 			free(params);
 			return returnVal;
 		}
@@ -165,41 +157,29 @@ void**)params;
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASColorTransform'!
-void* GetColorTransform()
+		ASColorTransform GetColorTransform()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetColorTransform");
 			byte* params = (byte*)malloc(32);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASColorTransform'!
-void**)params;
+			auto returnVal = *(ASColorTransform*)params;
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* GetDisplayMatrix()
+		Matrix GetDisplayMatrix()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetDisplayMatrix");
 			byte* params = (byte*)malloc(64);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params;
+			auto returnVal = *(Matrix*)params;
 			free(params);
 			return returnVal;
 		}
-		void SetDisplayInfo(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASDisplayInfo'!
-void* D)
+		void SetDisplayInfo(ASDisplayInfo D)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetDisplayInfo");
 			byte* params = (byte*)malloc(44);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASDisplayInfo'!
-void**)params = D;
+			*(ASDisplayInfo*)params = D;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -212,39 +192,27 @@ void**)params = D;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetColorTransform(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASColorTransform'!
-void* cxform)
+		void SetColorTransform(ASColorTransform cxform)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetColorTransform");
 			byte* params = (byte*)malloc(32);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASColorTransform'!
-void**)params = cxform;
+			*(ASColorTransform*)params = cxform;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetDisplayMatrix(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* M)
+		void SetDisplayMatrix(Matrix M)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetDisplayMatrix");
 			byte* params = (byte*)malloc(64);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = M;
+			*(Matrix*)params = M;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetDisplayMatrix3D(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* M)
+		void SetDisplayMatrix3D(Matrix M)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetDisplayMatrix3D");
 			byte* params = (byte*)malloc(64);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = M;
+			*(Matrix*)params = M;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -274,17 +242,13 @@ void**)params = M;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void* GetElement(int Index)
+		ASValue GetElement(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElement");
 			byte* params = (byte*)malloc(28);
 			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void**)(params + 4);
+			auto returnVal = *(ASValue*)(params + 4);
 			free(params);
 			return returnVal;
 		}
@@ -329,16 +293,12 @@ void**)(params + 4);
 			free(params);
 			return returnVal;
 		}
-		void SetElement(int Index, 
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void* Arg)
+		void SetElement(int Index, ASValue Arg)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElement");
 			byte* params = (byte*)malloc(28);
 			*(int*)params = Index;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void**)(params + 4) = Arg;
+			*(ASValue*)(params + 4) = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -378,57 +338,41 @@ void**)(params + 4) = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASDisplayInfo'!
-void* GetElementDisplayInfo(int Index)
+		ASDisplayInfo GetElementDisplayInfo(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementDisplayInfo");
 			byte* params = (byte*)malloc(48);
 			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASDisplayInfo'!
-void**)(params + 4);
+			auto returnVal = *(ASDisplayInfo*)(params + 4);
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* GetElementDisplayMatrix(int Index)
+		Matrix GetElementDisplayMatrix(int Index)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementDisplayMatrix");
 			byte* params = (byte*)malloc(68);
 			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)(params + 16);
+			auto returnVal = *(Matrix*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		void SetElementDisplayInfo(int Index, 
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASDisplayInfo'!
-void* D)
+		void SetElementDisplayInfo(int Index, ASDisplayInfo D)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementDisplayInfo");
 			byte* params = (byte*)malloc(48);
 			*(int*)params = Index;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASDisplayInfo'!
-void**)(params + 4) = D;
+			*(ASDisplayInfo*)(params + 4) = D;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetElementDisplayMatrix(int Index, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void* M)
+		void SetElementDisplayMatrix(int Index, Matrix M)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementDisplayMatrix");
 			byte* params = (byte*)malloc(68);
 			*(int*)params = Index;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)(params + 16) = M;
+			*(Matrix*)(params + 16) = M;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -451,31 +395,23 @@ void**)(params + 16) = M;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetElementColorTransform(int Index, 
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASColorTransform'!
-void* cxform)
+		void SetElementColorTransform(int Index, ASColorTransform cxform)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementColorTransform");
 			byte* params = (byte*)malloc(36);
 			*(int*)params = Index;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxObject.ASColorTransform'!
-void**)(params + 4) = cxform;
+			*(ASColorTransform*)(params + 4) = cxform;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void* GetElementMember(int Index, ScriptArray<wchar_t> Member)
+		ASValue GetElementMember(int Index, ScriptArray<wchar_t> Member)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.GetElementMember");
 			byte* params = (byte*)malloc(40);
 			*(int*)params = Index;
 			*(ScriptArray<wchar_t>*)(params + 4) = Member;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void**)(params + 16);
+			auto returnVal = *(ASValue*)(params + 16);
 			free(params);
 			return returnVal;
 		}
@@ -524,17 +460,13 @@ void**)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		void SetElementMember(int Index, ScriptArray<wchar_t> Member, 
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void* Arg)
+		void SetElementMember(int Index, ScriptArray<wchar_t> Member, ASValue Arg)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxObject.SetElementMember");
 			byte* params = (byte*)malloc(40);
 			*(int*)params = Index;
 			*(ScriptArray<wchar_t>*)(params + 4) = Member;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void**)(params + 16) = Arg;
+			*(ASValue*)(params + 16) = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -595,9 +527,7 @@ void**)(params + 16) = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void* Invoke(ScriptArray<wchar_t> Member, 
+		ASValue Invoke(ScriptArray<wchar_t> Member, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void* args)
 		{
@@ -608,9 +538,7 @@ void* args)
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 12) = args;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct GFxUI.GFxMoviePlayer.ASValue'!
-void**)(params + 24);
+			auto returnVal = *(ASValue*)(params + 24);
 			free(params);
 			return returnVal;
 		}

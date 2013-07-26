@@ -1,8 +1,10 @@
 #pragma once
 #include "Engine.AnimNodeBlendBase.h"
-#include "Engine.StaticMesh.h"
-#include "Engine.SkeletalMesh.h"
 #include "Engine.SkelControlBase.h"
+#include "Core.Object.Vector.h"
+#include "Engine.SkeletalMesh.h"
+#include "Core.Object.Rotator.h"
+#include "Engine.StaticMesh.h"
 #include "Engine.MorphNodeBase.h"
 #include "Engine.AnimNodeSequence.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \

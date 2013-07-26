@@ -1,6 +1,7 @@
 #pragma once
 #include "UDKBase.UDKDataStore_GameSearchBase.h"
 #include "UTGame.UTDataStore_GameSearchDM.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "Engine.OnlineGameSearch.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -52,20 +53,14 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		bool GetPlayerNetId(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void*& out_PlayerId, int ControllerId)
+		bool GetPlayerNetId(UniqueNetId& out_PlayerId, int ControllerId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.GetPlayerNetId");
 			byte* params = (byte*)malloc(16);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = out_PlayerId;
+			*(UniqueNetId*)params = out_PlayerId;
 			*(int*)(params + 8) = ControllerId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			out_PlayerId = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params;
+			out_PlayerId = *(UniqueNetId*)params;
 			auto returnVal = *(bool*)(params + 12);
 			free(params);
 			return returnVal;
@@ -81,49 +76,35 @@ void**)params;
 			free(params);
 			return returnVal;
 		}
-		int FindServerIndexById(int ControllerId, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void*& IdToFind)
+		int FindServerIndexById(int ControllerId, UniqueNetId& IdToFind)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.FindServerIndexById");
 			byte* params = (byte*)malloc(16);
 			*(int*)params = ControllerId;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = IdToFind;
+			*(UniqueNetId*)(params + 4) = IdToFind;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			IdToFind = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4);
+			IdToFind = *(UniqueNetId*)(params + 4);
 			auto returnVal = *(int*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		bool AddServer(int ControllerId, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* IdToAdd)
+		bool AddServer(int ControllerId, UniqueNetId IdToAdd)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.AddServer");
 			byte* params = (byte*)malloc(16);
 			*(int*)params = ControllerId;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = IdToAdd;
+			*(UniqueNetId*)(params + 4) = IdToAdd;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		bool RemoveServer(int ControllerId, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* IdToRemove)
+		bool RemoveServer(int ControllerId, UniqueNetId IdToRemove)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.RemoveServer");
 			byte* params = (byte*)malloc(16);
 			*(int*)params = ControllerId;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = IdToRemove;
+			*(UniqueNetId*)(params + 4) = IdToRemove;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);

@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Interface.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "Engine.OnlineStatsRead.h"
 #include "Engine.OnlineStatsWrite.h"
 namespace UnrealScript
@@ -46,15 +47,11 @@ void**)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		bool RegisterStatGuid(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID, ScriptArray<wchar_t>& ClientStatGuid)
+		bool RegisterStatGuid(UniqueNetId PlayerID, ScriptArray<wchar_t>& ClientStatGuid)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsInterface.RegisterStatGuid");
 			byte* params = (byte*)malloc(24);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerID;
+			*(UniqueNetId*)params = PlayerID;
 			*(ScriptArray<wchar_t>*)(params + 8) = ClientStatGuid;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			ClientStatGuid = *(ScriptArray<wchar_t>*)(params + 8);
@@ -181,16 +178,12 @@ void**)params = ReadOnlineStatsCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool WriteOnlineStats(ScriptName SessionName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* Player, class OnlineStatsWrite* StatsWrite)
+		bool WriteOnlineStats(ScriptName SessionName, UniqueNetId Player, class OnlineStatsWrite* StatsWrite)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsInterface.WriteOnlineStats");
 			byte* params = (byte*)malloc(24);
 			*(ScriptName*)params = SessionName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 8) = Player;
+			*(UniqueNetId*)(params + 8) = Player;
 			*(class OnlineStatsWrite**)(params + 16) = StatsWrite;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 20);

@@ -1,5 +1,8 @@
 #pragma once
 #include "IpDrv.MeshBeacon.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
+#include "IpDrv.MeshBeacon.ConnectionBandwidthStats.h"
+#include "IpDrv.MeshBeaconHost.ClientMeshBeaconConnection.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.MeshBeaconHost." #y); \
@@ -19,7 +22,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, ConnectionBacklog, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bAllowBandwidthTesting, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId' for the property named 'OwningPlayerId'!
+		ADD_STRUCT(::NonArithmeticProperty<UniqueNetId>, OwningPlayerId, 0xFFFFFFFF)
 		void OnReceivedClientCreateNewSessionResult(bool bSucceeded, ScriptName SessionName, ScriptClass* SearchClass, byte& PlatformSpecificInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconHost.OnReceivedClientCreateNewSessionResult");
@@ -37,65 +40,41 @@ namespace UnrealScript
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconHost.OnAllPendingPlayersConnected");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnFinishedBandwidthTest(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerNetId, byte TestType, byte TestResult, 
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeacon.ConnectionBandwidthStats'!
-void*& BandwidthStats)
+		void OnFinishedBandwidthTest(UniqueNetId PlayerNetId, byte TestType, byte TestResult, ConnectionBandwidthStats& BandwidthStats)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconHost.OnFinishedBandwidthTest");
 			byte* params = (byte*)malloc(22);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerNetId;
+			*(UniqueNetId*)params = PlayerNetId;
 			*(params + 8) = TestType;
 			*(params + 9) = TestResult;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeacon.ConnectionBandwidthStats'!
-void**)(params + 12) = BandwidthStats;
+			*(ConnectionBandwidthStats*)(params + 12) = BandwidthStats;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			BandwidthStats = *(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeacon.ConnectionBandwidthStats'!
-void**)(params + 12);
+			BandwidthStats = *(ConnectionBandwidthStats*)(params + 12);
 			free(params);
 		}
-		void OnStartedBandwidthTest(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerNetId, byte TestType)
+		void OnStartedBandwidthTest(UniqueNetId PlayerNetId, byte TestType)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconHost.OnStartedBandwidthTest");
 			byte* params = (byte*)malloc(9);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerNetId;
+			*(UniqueNetId*)params = PlayerNetId;
 			*(params + 8) = TestType;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnReceivedClientConnectionRequest(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeaconHost.ClientMeshBeaconConnection'!
-void*& NewClientConnection)
+		void OnReceivedClientConnectionRequest(ClientMeshBeaconConnection& NewClientConnection)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconHost.OnReceivedClientConnectionRequest");
 			byte* params = (byte*)malloc(88);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeaconHost.ClientMeshBeaconConnection'!
-void**)params = NewClientConnection;
+			*(ClientMeshBeaconConnection*)params = NewClientConnection;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			NewClientConnection = *(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.MeshBeaconHost.ClientMeshBeaconConnection'!
-void**)params;
+			NewClientConnection = *(ClientMeshBeaconConnection*)params;
 			free(params);
 		}
-		bool InitHostBeacon(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* InOwningPlayerId)
+		bool InitHostBeacon(UniqueNetId InOwningPlayerId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconHost.InitHostBeacon");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = InOwningPlayerId;
+			*(UniqueNetId*)params = InOwningPlayerId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 8);
 			free(params);
@@ -106,15 +85,11 @@ void**)params = InOwningPlayerId;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconHost.DestroyBeacon");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool RequestClientBandwidthTest(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerNetId, byte TestType, int TestBufferSize)
+		bool RequestClientBandwidthTest(UniqueNetId PlayerNetId, byte TestType, int TestBufferSize)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconHost.RequestClientBandwidthTest");
 			byte* params = (byte*)malloc(17);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerNetId;
+			*(UniqueNetId*)params = PlayerNetId;
 			*(params + 8) = TestType;
 			*(int*)(params + 12) = TestBufferSize;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
@@ -173,15 +148,11 @@ void**)params = Players;
 void**)params;
 			free(params);
 		}
-		int GetConnectionIndexForPlayer(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerNetId)
+		int GetConnectionIndexForPlayer(UniqueNetId PlayerNetId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconHost.GetConnectionIndexForPlayer");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerNetId;
+			*(UniqueNetId*)params = PlayerNetId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 8);
 			free(params);
@@ -215,17 +186,13 @@ void**)params;
 			PlatformSpecificInfo = *(params + 12);
 			free(params);
 		}
-		bool RequestClientCreateNewSession(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerNetId, ScriptName SessionName, ScriptClass* SearchClass, 
+		bool RequestClientCreateNewSession(UniqueNetId PlayerNetId, ScriptName SessionName, ScriptClass* SearchClass, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& Players)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconHost.RequestClientCreateNewSession");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = PlayerNetId;
+			*(UniqueNetId*)params = PlayerNetId;
 			*(ScriptName*)(params + 8) = SessionName;
 			*(ScriptClass**)(params + 16) = SearchClass;
 			*(

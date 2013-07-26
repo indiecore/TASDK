@@ -6,12 +6,15 @@
 #include "TribesGame.TrVehicle.h"
 #include "Engine.Canvas.h"
 #include "TribesGame.GFxTrUI_TeamSelectionMenu.h"
-#include "Engine.MaterialEffect.h"
 #include "TribesGame.TrPlayerController.h"
+#include "Core.Object.Color.h"
 #include "Engine.MaterialInstanceConstant.h"
-#include "Engine.Texture2D.h"
 #include "TribesGame.GfxTrHud.h"
+#include "Core.Object.LinearColor.h"
+#include "Engine.Texture2D.h"
 #include "Engine.UberPostProcessEffect.h"
+#include "Engine.Canvas.FontRenderInfo.h"
+#include "Engine.MaterialEffect.h"
 #include "TribesGame.TrProj_Mine.h"
 #include "TribesGame.TrCaHStats.h"
 #include "TribesGame.TrDaDStats.h"
@@ -23,8 +26,12 @@
 #include "TribesGame.TrScoreboard.h"
 #include "TribesGame.GFxTrUI_VehicleMenu.h"
 #include "Engine.Material.h"
+#include "Core.Object.Vector.h"
 #include "TribesGame.TrPawn.h"
+#include "Core.Object.Vector2D.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Vector4.h"
 #include "Engine.PlayerController.h"
 #include "TribesGame.TrDeployable.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -57,8 +64,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsMainMenuOpen, 0x1000)
 		ADD_OBJECT(MaterialInstanceConstant, MarkerBaseMIC)
 		ADD_VAR(::BoolProperty, bShowObjectives, 0x4)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'MarkerColorFriendly'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'MarkerColorEnemy'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MarkerColorFriendly, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MarkerColorEnemy, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, BaseDeployableLevel1)
 		ADD_OBJECT(Texture2D, BaseDeployableLevel2)
 		ADD_OBJECT(Texture2D, BaseDeployableLevel3)
@@ -104,21 +111,21 @@ namespace UnrealScript
 		ADD_OBJECT(Texture2D, FlagHeldLight)
 		ADD_OBJECT(Texture2D, FlagHeldMedium)
 		ADD_OBJECT(Texture2D, FlagHeldHeavy)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'MarkerColorEnemy_IsFriend'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MarkerColorEnemy_IsFriend, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fNamePlacementX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fNamePlacementY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fHealthBarPlacementX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fHealthBarPlacementY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fHealthBarWidth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fHealthBarHeight, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'MarkerColorFriendly_IsFriend'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MarkerColorFriendly_IsFriend, 0xFFFFFFFF)
 		ADD_OBJECT(GfxTrHud, m_GFxHud)
 		ADD_VAR(::IntProperty, FriendlyChatColorIdx, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'FriendlyChatColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, FriendlyChatColor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, EnemyChatColorIdx, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'EnemyChatColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, EnemyChatColor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, WhisperChatColorIdx, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'WhisperChatColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, WhisperChatColor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, InfoChatColorIdx, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bVotePending, 0x800)
 		ADD_OBJECT(Texture2D, FlagEmptyBase)
@@ -138,8 +145,8 @@ namespace UnrealScript
 		ADD_OBJECT(Texture2D, BaseSensorLevel5_Down)
 		ADD_OBJECT(Texture2D, HUDMarkerLaserTargetAimPoint)
 		ADD_OBJECT(Texture2D, HUDMarkerLaserTarget)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'LaserTargetTracePossible'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'LaserTargetTraceImprobable'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, LaserTargetTracePossible, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, LaserTargetTraceImprobable, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, AmmoDropPickup)
 		ADD_OBJECT(Texture2D, FlagAtBase)
 		ADD_OBJECT(Texture2D, FlagDropped)
@@ -149,11 +156,11 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fOverheadNumberScaleTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fOverheadNumberFadeTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fOverheadNumberTotalTime, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'm_OverheadNumberColorMax'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'm_OverheadNumberColorMin'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, m_OverheadNumberColorMax, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, m_OverheadNumberColorMin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fOverheadNumberZSpeed, 0xFFFFFFFF)
 		ADD_OBJECT(UberPostProcessEffect, m_UperPPEffect)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.Canvas.FontRenderInfo' for the property named 'm_nNameFontRenderInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<FontRenderInfo>, m_nNameFontRenderInfo, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMineDeployerNamePlacementY, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMineDeployerNamePlacementX, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fMineNamePlacementY, 0xFFFFFFFF)
@@ -217,7 +224,7 @@ namespace UnrealScript
 		ADD_OBJECT(GFxTrUI_VehicleMenu, VehicleMenuMovie)
 		ADD_OBJECT(Material, MapMaterialReference)
 		ADD_OBJECT(MaterialInstanceConstant, LowAmmoMic)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'TeamChatColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, TeamChatColor, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, SelfChatColorIdx, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, SpottedTarget_MotionMine)
 		ADD_OBJECT(Texture2D, SpottedTarget)
@@ -241,11 +248,11 @@ namespace UnrealScript
 		ADD_OBJECT(Texture2D, VehicleMarkerMedium)
 		ADD_OBJECT(Texture2D, VehicleMarkerLight)
 		ADD_OBJECT(Texture2D, VehicleMarker)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'MarkerColorNone'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, MarkerColorNone, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_LastDeployableCount, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, m_LastMineCount, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'ColorEnemy'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'ColorFriend'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, ColorEnemy, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, ColorFriend, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ObjectiveInfoMaxDist, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, m_sLastClassName, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, m_sWinningPlayer, 0xFFFFFFFF)
@@ -281,18 +288,14 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		Vector DrawMICMarker(class MaterialInstanceConstant* MarkerMIC, Vector Placement, class Canvas* DrawCanvas, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void* MarkerSize, ScriptArray<wchar_t> markText, bool bFriend, float distScale)
+		Vector DrawMICMarker(class MaterialInstanceConstant* MarkerMIC, Vector Placement, class Canvas* DrawCanvas, Vector2D MarkerSize, ScriptArray<wchar_t> markText, bool bFriend, float distScale)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawMICMarker");
 			byte* params = (byte*)malloc(60);
 			*(class MaterialInstanceConstant**)params = MarkerMIC;
 			*(Vector*)(params + 4) = Placement;
 			*(class Canvas**)(params + 16) = DrawCanvas;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D'!
-void**)(params + 20) = MarkerSize;
+			*(Vector2D*)(params + 20) = MarkerSize;
 			*(ScriptArray<wchar_t>*)(params + 28) = markText;
 			*(bool*)(params + 40) = bFriend;
 			*(float*)(params + 44) = distScale;
@@ -794,16 +797,12 @@ void**)(params + 20) = MarkerSize;
 			free(params);
 			return returnVal;
 		}
-		Vector DrawColoredMarkerText(ScriptArray<wchar_t> ShowText, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* TextColor, Vector Placement, class Canvas* DrawCanvas, float ScaleX, float ScaleY)
+		Vector DrawColoredMarkerText(ScriptArray<wchar_t> ShowText, Color TextColor, Vector Placement, class Canvas* DrawCanvas, float ScaleX, float ScaleY)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawColoredMarkerText");
 			byte* params = (byte*)malloc(52);
 			*(ScriptArray<wchar_t>*)params = ShowText;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 12) = TextColor;
+			*(Color*)(params + 12) = TextColor;
 			*(Vector*)(params + 16) = Placement;
 			*(class Canvas**)(params + 28) = DrawCanvas;
 			*(float*)(params + 32) = ScaleX;
@@ -938,9 +937,7 @@ void**)(params + 12) = TextColor;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateWhiteoutEffect");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void LocalizedMessage(ScriptClass* InMessageClass, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, ScriptArray<wchar_t> CriticalString, int Switch, float Position, float Lifetime, int FontSize, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* DrawColor, class Object* OptionalObject)
+		void LocalizedMessage(ScriptClass* InMessageClass, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, ScriptArray<wchar_t> CriticalString, int Switch, float Position, float Lifetime, int FontSize, Color DrawColor, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.LocalizedMessage");
 			byte* params = (byte*)malloc(48);
@@ -952,9 +949,7 @@ void* DrawColor, class Object* OptionalObject)
 			*(float*)(params + 28) = Position;
 			*(float*)(params + 32) = Lifetime;
 			*(int*)(params + 36) = FontSize;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 40) = DrawColor;
+			*(Color*)(params + 40) = DrawColor;
 			*(class Object**)(params + 44) = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -1132,16 +1127,12 @@ void**)(params + 40) = DrawColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void AddOverheadNumber(int Value, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector4'!
-void* WorldLocation)
+		void AddOverheadNumber(int Value, Vector4 WorldLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddOverheadNumber");
 			byte* params = (byte*)malloc(20);
 			*(int*)params = Value;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector4'!
-void**)(params + 16) = WorldLocation;
+			*(Vector4*)(params + 16) = WorldLocation;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

@@ -1,13 +1,14 @@
 #pragma once
 #include "Engine.UIDataProvider_OnlineFriends.h"
 #include "Engine.UIDataStore_Remote.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.UIDataProvider_OnlineProfileSettings.h"
 #include "Engine.UIDataProvider_PlayerAchievements.h"
 #include "Engine.UIDataProvider_OnlinePartyChatList.h"
 #include "Engine.UIDataProvider_OnlineFriendMessages.h"
 #include "Engine.UIDataProvider_OnlinePlayerStorage.h"
-#include "Engine.LocalPlayer.h"
 #include "Engine.UIDataProvider.h"
+#include "Engine.LocalPlayer.h"
 #include "Engine.OnlinePlayerStorage.h"
 #include "Engine.OnlineProfileSettings.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -53,7 +54,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, PlayerNick, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, PlayerControllerId, 0xFFFFFFFF)
 		ADD_OBJECT(UIDataProvider_OnlineFriends, FriendsProvider)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementProvider, 0xFFFFFFFF)
 		void OnSettingProviderChanged(class UIDataProvider* SourceProvider, ScriptName SettingsName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnSettingProviderChanged");

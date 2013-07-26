@@ -3,6 +3,7 @@
 #include "UTGame.UTCarriedObject.h"
 #include "Engine.Canvas.h"
 #include "TribesGame.TrCollisionProxy.h"
+#include "Core.Object.Vector.h"
 #include "Engine.ParticleSystem.h"
 #include "Engine.PlayerController.h"
 #include "Engine.Actor.h"

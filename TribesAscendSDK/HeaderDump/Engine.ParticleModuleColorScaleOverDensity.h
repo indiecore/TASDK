@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.ParticleModuleColorBase.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleColorScaleOverDensity." #y); \
@@ -11,8 +13,8 @@ namespace UnrealScript
 	class ParticleModuleColorScaleOverDensity : public ParticleModuleColorBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'AlphaScaleOverDensity'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'ColorScaleOverDensity'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, AlphaScaleOverDensity, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, ColorScaleOverDensity, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

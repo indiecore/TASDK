@@ -1,7 +1,10 @@
 #pragma once
 #include "Engine.Pawn.h"
+#include "Engine.PostProcessVolume.PostProcessSettings.h"
 #include "GameFramework.GamePlayerController.h"
+#include "Core.Object.Rotator.h"
 #include "UDKBase.UDKEmitCameraEffect.h"
+#include "Core.Object.Vector.h"
 #include "Engine.CameraAnimInst.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -28,8 +31,8 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, PulseTimer, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, VehicleCheckRadiusScaling, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'PostProcessModifier'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'CamOverridePostProcess'!
+		ADD_STRUCT(::NonArithmeticProperty<PostProcessSettings>, PostProcessModifier, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<PostProcessSettings>, CamOverridePostProcess, 0xFFFFFFFF)
 		ADD_STRUCT(::RotatorProperty, ShakeRot, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, ShakeOffset, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bUsePhysicsRotation, 0x10)

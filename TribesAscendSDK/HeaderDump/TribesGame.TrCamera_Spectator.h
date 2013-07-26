@@ -3,6 +3,7 @@
 #include "TribesGame.TrPawn.h"
 #include "Engine.Camera.h"
 #include "TribesGame.TrFlagBase.h"
+#include "Engine.Camera.TViewTarget.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrCamera_Spectator." #y); \
@@ -53,20 +54,14 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void UpdateViewTarget(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void*& OutVT, float DeltaTime)
+		void UpdateViewTarget(TViewTarget& OutVT, float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCamera_Spectator.UpdateViewTarget");
 			byte* params = (byte*)malloc(48);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params = OutVT;
+			*(TViewTarget*)params = OutVT;
 			*(float*)(params + 44) = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutVT = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params;
+			OutVT = *(TViewTarget*)params;
 			free(params);
 		}
 		void ShowHiddenPawn()

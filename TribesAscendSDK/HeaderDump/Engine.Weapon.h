@@ -1,11 +1,14 @@
 #pragma once
-#include "Engine.Projectile.h"
 #include "Engine.AnimNodeSequence.h"
 #include "Engine.Inventory.h"
 #include "Engine.HUD.h"
+#include "Core.Object.Vector.h"
 #include "Engine.AIController.h"
+#include "Engine.Actor.ImpactInfo.h"
 #include "Engine.Actor.h"
+#include "Core.Object.Rotator.h"
 #include "Engine.Pawn.h"
+#include "Engine.Projectile.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Weapon." #y); \
@@ -568,9 +571,7 @@ void**)params = MeshCpnt;
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* CalcWeaponFire(Vector StartTrace, Vector EndTrace, 
+		ImpactInfo CalcWeaponFire(Vector StartTrace, Vector EndTrace, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& ImpactList, Vector Extent)
 		{
@@ -586,9 +587,7 @@ void**)(params + 24) = ImpactList;
 			ImpactList = *(
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void**)(params + 24);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 48);
+			auto returnVal = *(ImpactInfo*)(params + 48);
 			free(params);
 			return returnVal;
 		}
@@ -607,16 +606,12 @@ void**)(params + 48);
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.InstantFire");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ProcessInstantHit(byte FiringMode, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void* Impact, int NumHits)
+		void ProcessInstantHit(byte FiringMode, ImpactInfo Impact, int NumHits)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ProcessInstantHit");
 			byte* params = (byte*)malloc(85);
 			*params = FiringMode;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 4) = Impact;
+			*(ImpactInfo*)(params + 4) = Impact;
 			*(int*)(params + 84) = NumHits;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);

@@ -1,6 +1,7 @@
 #pragma once
 #include "TribesGame.GFxTrScene.h"
 #include "TribesGame.TrSummaryHelper.h"
+#include "TribesGame.GFxTrScene_MatchSummary.ScoreSlot.h"
 #include "GFxUI.GFxObject.h"
 #include "TribesGame.TrPlayerReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -28,7 +29,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::BoolProperty, bUseSNS, 0x1)
 		ADD_OBJECT(TrSummaryHelper, SummaryHelper)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.GFxTrScene_MatchSummary.ScoreSlot' for the property named 'Scoreboard'!
+		ADD_STRUCT(::NonArithmeticProperty<ScoreSlot>, Scoreboard, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Team2Score, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Team1Score, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MatchDate, 0xFFFFFFFF)

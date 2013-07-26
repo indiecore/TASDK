@@ -2,6 +2,8 @@
 #include "GameFramework.GamePawn.h"
 #include "Engine.Actor.h"
 #include "Core.Object.h"
+#include "Core.Object.Rotator.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Pawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

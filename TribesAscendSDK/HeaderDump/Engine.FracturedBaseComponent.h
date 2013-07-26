@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.StaticMeshComponent.h"
+#include "Core.Object.RenderCommandFence_Mirror.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.StaticMesh.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -25,8 +27,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bInitialVisibilityValue, 0x4)
 		ADD_VAR(::BoolProperty, bVisibilityReset, 0x2)
 		ADD_VAR(::BoolProperty, bVisibilityHasChanged, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.RenderCommandFence_Mirror' for the property named 'ReleaseResourcesFence'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'ComponentBaseResources'!
+		ADD_STRUCT(::NonArithmeticProperty<RenderCommandFence_Mirror>, ReleaseResourcesFence, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, ComponentBaseResources, 0xFFFFFFFF)
 		bool SetStaticMesh(class StaticMesh* NewMesh, bool bForce)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedBaseComponent.SetStaticMesh");

@@ -1,41 +1,54 @@
 #pragma once
-#include "Engine.Controller.h"
 #include "Engine.RB_ConstraintSetup.h"
 #include "Core.Object.h"
 #include "Engine.Canvas.h"
 #include "Engine.WorldInfo.h"
 #include "Engine.Pawn.h"
-#include "Engine.PhysicsVolume.h"
-#include "Engine.AnimNodeSequence.h"
+#include "Engine.FaceFXAnimSet.h"
+#include "Engine.SeqAct_ModifyHealth.h"
+#include "Core.Object.Vector.h"
 #include "Core.Property.h"
+#include "Core.Object.Rotator.h"
+#include "Engine.AnimNotify_ForceField.h"
+#include "Engine.SeqAct_Destroy.h"
+#include "Core.Object.QWord.h"
+#include "Engine.PhysicsVolume.h"
+#include "Core.Object.Color.h"
+#include "Engine.Actor.CollisionImpactData.h"
+#include "Core.Object.RenderCommandFence.h"
+#include "Engine.AnimNodeSequence.h"
+#include "Engine.SeqAct_Interp.h"
+#include "Engine.Actor.BasedPosition.h"
+#include "Core.Object.LinearColor.h"
+#include "Core.Object.Matrix.h"
+#include "Engine.FluidSurfaceActor.h"
+#include "Engine.Actor.TraceHitInfo.h"
+#include "Engine.InterpGroupInst.h"
+#include "Core.Object.Box.h"
 #include "Engine.SeqAct_ChangeCollision.h"
 #include "Engine.SeqAct_SetPhysics.h"
 #include "Engine.SoundCue.h"
+#include "Engine.Controller.h"
 #include "Engine.Teleporter.h"
 #include "Engine.InterpGroup.h"
 #include "Engine.PlayerController.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Engine.RB_ConstraintInstance.h"
+#include "Core.Object.BoneAtom.h"
 #include "Engine.SeqAct_SetBlockRigidBody.h"
 #include "Engine.Projectile.h"
 #include "Engine.SkelControlLookAt.h"
 #include "Engine.HUD.h"
-#include "Engine.FluidSurfaceActor.h"
 #include "Engine.SequenceEvent.h"
 #include "Engine.SeqAct_Latent.h"
-#include "Engine.AnimNotify_ForceField.h"
-#include "Engine.SeqAct_Destroy.h"
-#include "Engine.FaceFXAnimSet.h"
-#include "Engine.SeqAct_ModifyHealth.h"
 #include "Engine.SeqAct_Teleport.h"
 #include "Engine.SeqAct_SetVelocity.h"
 #include "Engine.AnimNotify_PlayParticleEffect.h"
 #include "Engine.SeqAct_ToggleHidden.h"
 #include "Engine.SeqAct_AttachToActor.h"
 #include "Engine.FaceFXAsset.h"
-#include "Engine.SeqAct_Interp.h"
-#include "Engine.InterpGroupInst.h"
 #include "Engine.SVehicle.h"
+#include "Core.Object.Guid.h"
 #include "Engine.RB_BodyInstance.h"
 #include "Engine.AnimNotify_Trails.h"
 #include "Engine.SequenceOp.h"
@@ -113,8 +126,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, DrawScale, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, DrawScale3D, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, PrePivot, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'EditorIconColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.RenderCommandFence' for the property named 'DetachFence'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, EditorIconColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RenderCommandFence>, DetachFence, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CustomTimeDilation, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, CollisionType, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ReplicatedCollisionType, 0xFFFFFFFF)
@@ -484,63 +497,43 @@ void**)(params + 16) = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void Vect2BP(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition'!
-void*& BP, Vector pos, class Actor* ForcedBase)
+		void Vect2BP(BasedPosition& BP, Vector pos, class Actor* ForcedBase)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.Vect2BP");
 			byte* params = (byte*)malloc(68);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition'!
-void**)params = BP;
+			*(BasedPosition*)params = BP;
 			*(Vector*)(params + 52) = pos;
 			*(class Actor**)(params + 64) = ForcedBase;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			BP = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition'!
-void**)params;
+			BP = *(BasedPosition*)params;
 			free(params);
 		}
-		Vector BP2Vect(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition'!
-void* BP)
+		Vector BP2Vect(BasedPosition BP)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.BP2Vect");
 			byte* params = (byte*)malloc(64);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition'!
-void**)params = BP;
+			*(BasedPosition*)params = BP;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Vector*)(params + 52);
 			free(params);
 			return returnVal;
 		}
-		void SetBasedPosition(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition'!
-void*& BP, Vector pos, class Actor* ForcedBase)
+		void SetBasedPosition(BasedPosition& BP, Vector pos, class Actor* ForcedBase)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.SetBasedPosition");
 			byte* params = (byte*)malloc(68);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition'!
-void**)params = BP;
+			*(BasedPosition*)params = BP;
 			*(Vector*)(params + 52) = pos;
 			*(class Actor**)(params + 64) = ForcedBase;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			BP = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition'!
-void**)params;
+			BP = *(BasedPosition*)params;
 			free(params);
 		}
-		Vector GetBasedPosition(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition'!
-void* BP)
+		Vector GetBasedPosition(BasedPosition BP)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.GetBasedPosition");
 			byte* params = (byte*)malloc(64);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.BasedPosition'!
-void**)params = BP;
+			*(BasedPosition*)params = BP;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(Vector*)(params + 52);
 			free(params);
@@ -564,17 +557,13 @@ void**)params = BP;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawDebugPoint(Vector Position, float Size, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void* PointColor, bool bPersistentLines)
+		void DrawDebugPoint(Vector Position, float Size, LinearColor PointColor, bool bPersistentLines)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.DrawDebugPoint");
 			byte* params = (byte*)malloc(36);
 			*(Vector*)params = Position;
 			*(float*)(params + 12) = Size;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 16) = PointColor;
+			*(LinearColor*)(params + 16) = PointColor;
 			*(bool*)(params + 32) = bPersistentLines;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -645,9 +634,7 @@ void**)(params + 16) = PointColor;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawDebugCone(Vector Origin, Vector Direction, float Length, float AngleWidth, float AngleHeight, int NumSides, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* DrawColor, bool bPersistentLines)
+		void DrawDebugCone(Vector Origin, Vector Direction, float Length, float AngleWidth, float AngleHeight, int NumSides, Color DrawColor, bool bPersistentLines)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.DrawDebugCone");
 			byte* params = (byte*)malloc(48);
@@ -657,46 +644,34 @@ void* DrawColor, bool bPersistentLines)
 			*(float*)(params + 28) = AngleWidth;
 			*(float*)(params + 32) = AngleHeight;
 			*(int*)(params + 36) = NumSides;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 40) = DrawColor;
+			*(Color*)(params + 40) = DrawColor;
 			*(bool*)(params + 44) = bPersistentLines;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawDebugString(Vector TextLocation, ScriptArray<wchar_t> Text, class Actor* TestBaseActor, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* TextColor, float Duration)
+		void DrawDebugString(Vector TextLocation, ScriptArray<wchar_t> Text, class Actor* TestBaseActor, Color TextColor, float Duration)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.DrawDebugString");
 			byte* params = (byte*)malloc(36);
 			*(Vector*)params = TextLocation;
 			*(ScriptArray<wchar_t>*)(params + 12) = Text;
 			*(class Actor**)(params + 24) = TestBaseActor;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 28) = TextColor;
+			*(Color*)(params + 28) = TextColor;
 			*(float*)(params + 32) = Duration;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void DrawDebugFrustrum(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void*& FrustumToWorld, byte R, byte G, byte B, bool bPersistentLines)
+		void DrawDebugFrustrum(Matrix& FrustumToWorld, byte R, byte G, byte B, bool bPersistentLines)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.DrawDebugFrustrum");
 			byte* params = (byte*)malloc(71);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params = FrustumToWorld;
+			*(Matrix*)params = FrustumToWorld;
 			*(params + 64) = R;
 			*(params + 65) = G;
 			*(params + 66) = B;
 			*(bool*)(params + 68) = bPersistentLines;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			FrustumToWorld = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix'!
-void**)params;
+			FrustumToWorld = *(Matrix*)params;
 			free(params);
 		}
 		void FlushDebugStrings()
@@ -1052,9 +1027,7 @@ void**)(params + 4) = OtherComp;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		class Actor* Trace(Vector& HitLocation, Vector& HitNormal, Vector TraceEnd, Vector TraceStart, bool bTraceActors, Vector Extent, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void*& HitInfo, int ExtraTraceFlags)
+		class Actor* Trace(Vector& HitLocation, Vector& HitNormal, Vector TraceEnd, Vector TraceStart, bool bTraceActors, Vector Extent, TraceHitInfo& HitInfo, int ExtraTraceFlags)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.Trace");
 			byte* params = (byte*)malloc(100);
@@ -1064,25 +1037,19 @@ void*& HitInfo, int ExtraTraceFlags)
 			*(Vector*)(params + 36) = TraceStart;
 			*(bool*)(params + 48) = bTraceActors;
 			*(Vector*)(params + 52) = Extent;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 64) = HitInfo;
+			*(TraceHitInfo*)(params + 64) = HitInfo;
 			*(int*)(params + 92) = ExtraTraceFlags;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			HitLocation = *(Vector*)params;
 			HitNormal = *(Vector*)(params + 12);
-			HitInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 64);
+			HitInfo = *(TraceHitInfo*)(params + 64);
 			auto returnVal = *(class Actor**)(params + 96);
 			free(params);
 			return returnVal;
 		}
 		bool TraceComponent(Vector& HitLocation, Vector& HitNormal, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* InComponent, Vector TraceEnd, Vector TraceStart, Vector Extent, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void*& HitInfo, bool bComplexCollision)
+void* InComponent, Vector TraceEnd, Vector TraceStart, Vector Extent, TraceHitInfo& HitInfo, bool bComplexCollision)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.TraceComponent");
 			byte* params = (byte*)malloc(100);
@@ -1094,16 +1061,12 @@ void**)(params + 24) = InComponent;
 			*(Vector*)(params + 28) = TraceEnd;
 			*(Vector*)(params + 40) = TraceStart;
 			*(Vector*)(params + 52) = Extent;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 64) = HitInfo;
+			*(TraceHitInfo*)(params + 64) = HitInfo;
 			*(bool*)(params + 92) = bComplexCollision;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			HitLocation = *(Vector*)params;
 			HitNormal = *(Vector*)(params + 12);
-			HitInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 64);
+			HitInfo = *(TraceHitInfo*)(params + 64);
 			auto returnVal = *(bool*)(params + 96);
 			free(params);
 			return returnVal;
@@ -1194,19 +1157,13 @@ void**)(params + 28);
 			free(params);
 			return returnVal;
 		}
-		void GetComponentsBoundingBox(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box'!
-void*& ActorBox)
+		void GetComponentsBoundingBox(Box& ActorBox)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.GetComponentsBoundingBox");
 			byte* params = (byte*)malloc(28);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box'!
-void**)params = ActorBox;
+			*(Box*)params = ActorBox;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ActorBox = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Box'!
-void**)params;
+			ActorBox = *(Box*)params;
 			free(params);
 		}
 		void GetBoundingCylinder(float& CollisionRadius, float& CollisionHeight)
@@ -1540,9 +1497,7 @@ void**)(params + 32);
 			Actor = *(class Actor**)(params + 4);
 			free(params);
 		}
-		void TraceActors(ScriptClass* BaseClass, class Actor*& Actor, Vector& HitLoc, Vector& HitNorm, Vector End, Vector Start, Vector Extent, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void*& HitInfo, int ExtraTraceFlags)
+		void TraceActors(ScriptClass* BaseClass, class Actor*& Actor, Vector& HitLoc, Vector& HitNorm, Vector End, Vector Start, Vector Extent, TraceHitInfo& HitInfo, int ExtraTraceFlags)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.TraceActors");
 			byte* params = (byte*)malloc(100);
@@ -1553,17 +1508,13 @@ void*& HitInfo, int ExtraTraceFlags)
 			*(Vector*)(params + 32) = End;
 			*(Vector*)(params + 44) = Start;
 			*(Vector*)(params + 56) = Extent;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 68) = HitInfo;
+			*(TraceHitInfo*)(params + 68) = HitInfo;
 			*(int*)(params + 96) = ExtraTraceFlags;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			Actor = *(class Actor**)(params + 4);
 			HitLoc = *(Vector*)(params + 8);
 			HitNorm = *(Vector*)(params + 20);
-			HitInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 68);
+			HitInfo = *(TraceHitInfo*)(params + 68);
 			free(params);
 		}
 		void VisibleActors(ScriptClass* BaseClass, class Actor*& Actor, float Radius, Vector Loc)
@@ -1578,9 +1529,7 @@ void**)(params + 68);
 			Actor = *(class Actor**)(params + 4);
 			free(params);
 		}
-		void VisibleCollidingActors(ScriptClass* BaseClass, class Actor*& Actor, float Radius, Vector Loc, bool bIgnoreHidden, Vector Extent, bool bTraceActors, ScriptClass* InterfaceClass, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void*& HitInfo)
+		void VisibleCollidingActors(ScriptClass* BaseClass, class Actor*& Actor, float Radius, Vector Loc, bool bIgnoreHidden, Vector Extent, bool bTraceActors, ScriptClass* InterfaceClass, TraceHitInfo& HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.VisibleCollidingActors");
 			byte* params = (byte*)malloc(76);
@@ -1592,19 +1541,13 @@ void*& HitInfo)
 			*(Vector*)(params + 28) = Extent;
 			*(bool*)(params + 40) = bTraceActors;
 			*(ScriptClass**)(params + 44) = InterfaceClass;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 48) = HitInfo;
+			*(TraceHitInfo*)(params + 48) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			Actor = *(class Actor**)(params + 4);
-			HitInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 48);
+			HitInfo = *(TraceHitInfo*)(params + 48);
 			free(params);
 		}
-		void CollidingActors(ScriptClass* BaseClass, class Actor*& Actor, float Radius, Vector Loc, bool bUseOverlapCheck, ScriptClass* InterfaceClass, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void*& HitInfo)
+		void CollidingActors(ScriptClass* BaseClass, class Actor*& Actor, float Radius, Vector Loc, bool bUseOverlapCheck, ScriptClass* InterfaceClass, TraceHitInfo& HitInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.CollidingActors");
 			byte* params = (byte*)malloc(60);
@@ -1614,19 +1557,13 @@ void*& HitInfo)
 			*(Vector*)(params + 12) = Loc;
 			*(bool*)(params + 24) = bUseOverlapCheck;
 			*(ScriptClass**)(params + 28) = InterfaceClass;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 32) = HitInfo;
+			*(TraceHitInfo*)(params + 32) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			Actor = *(class Actor**)(params + 4);
-			HitInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 32);
+			HitInfo = *(TraceHitInfo*)(params + 32);
 			free(params);
 		}
-		void VisibleCollidingExtentActors(ScriptClass* BaseClass, class Actor*& Actor, float Radius, Vector Loc, Vector AltLoc, bool bIgnoreHidden, Vector Extent, bool bTraceActors, ScriptClass* InterfaceClass, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void*& HitInfo, float XYCheckRadius)
+		void VisibleCollidingExtentActors(ScriptClass* BaseClass, class Actor*& Actor, float Radius, Vector Loc, Vector AltLoc, bool bIgnoreHidden, Vector Extent, bool bTraceActors, ScriptClass* InterfaceClass, TraceHitInfo& HitInfo, float XYCheckRadius)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.VisibleCollidingExtentActors");
 			byte* params = (byte*)malloc(92);
@@ -1639,15 +1576,11 @@ void*& HitInfo, float XYCheckRadius)
 			*(Vector*)(params + 40) = Extent;
 			*(bool*)(params + 52) = bTraceActors;
 			*(ScriptClass**)(params + 56) = InterfaceClass;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 60) = HitInfo;
+			*(TraceHitInfo*)(params + 60) = HitInfo;
 			*(float*)(params + 88) = XYCheckRadius;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			Actor = *(class Actor**)(params + 4);
-			HitInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 60);
+			HitInfo = *(TraceHitInfo*)(params + 60);
 			free(params);
 		}
 		void OverlappingActors(ScriptClass* BaseClass, class Actor*& out_Actor, float Radius, Vector Loc, bool bIgnoreHidden)
@@ -1807,9 +1740,7 @@ void**)(params + 4);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void* HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.TakeDamage");
 			byte* params = (byte*)malloc(68);
@@ -1818,9 +1749,7 @@ void* HitInfo, class Actor* DamageCauser)
 			*(Vector*)(params + 8) = HitLocation;
 			*(Vector*)(params + 20) = Momentum;
 			*(ScriptClass**)(params + 32) = DamageType;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)(params + 36) = HitInfo;
+			*(TraceHitInfo*)(params + 36) = HitInfo;
 			*(class Actor**)(params + 64) = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -1853,26 +1782,20 @@ void**)(params + 36) = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void CheckHitInfo(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void*& HitInfo, 
+		void CheckHitInfo(TraceHitInfo& HitInfo, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* FallBackComponent, Vector Dir, Vector& out_HitLocation)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.CheckHitInfo");
 			byte* params = (byte*)malloc(56);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)params = HitInfo;
+			*(TraceHitInfo*)params = HitInfo;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)(params + 28) = FallBackComponent;
 			*(Vector*)(params + 32) = Dir;
 			*(Vector*)(params + 44) = out_HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			HitInfo = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.TraceHitInfo'!
-void**)params;
+			HitInfo = *(TraceHitInfo*)params;
 			out_HitLocation = *(Vector*)(params + 44);
 			free(params);
 		}
@@ -2536,9 +2459,7 @@ void**)(params + 4);
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* HitComponent, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComponent, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
-void*& RigidCollisionData, int ContactIndex)
+void* OtherComponent, CollisionImpactData& RigidCollisionData, int ContactIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.RigidBodyCollision");
 			byte* params = (byte*)malloc(48);
@@ -2548,14 +2469,10 @@ void**)params = HitComponent;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)(params + 4) = OtherComponent;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
-void**)(params + 8) = RigidCollisionData;
+			*(CollisionImpactData*)(params + 8) = RigidCollisionData;
 			*(int*)(params + 44) = ContactIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			RigidCollisionData = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.CollisionImpactData'!
-void**)(params + 8);
+			RigidCollisionData = *(CollisionImpactData*)(params + 8);
 			free(params);
 		}
 		void OnRanOver(class SVehicle* Vehicle, 
@@ -2616,22 +2533,16 @@ void**)params = SkelComp;
 		}
 		void RootMotionExtracted(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* SkelComp, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoneAtom'!
-void*& ExtractedRootMotionDelta)
+void* SkelComp, BoneAtom& ExtractedRootMotionDelta)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.RootMotionExtracted");
 			byte* params = (byte*)malloc(36);
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)params = SkelComp;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoneAtom'!
-void**)(params + 16) = ExtractedRootMotionDelta;
+			*(BoneAtom*)(params + 16) = ExtractedRootMotionDelta;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			ExtractedRootMotionDelta = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoneAtom'!
-void**)(params + 16);
+			ExtractedRootMotionDelta = *(BoneAtom*)(params + 16);
 			free(params);
 		}
 		void PostInitAnimTree(
@@ -2646,17 +2557,13 @@ void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid'!
-void* GetPackageGuid(ScriptName PackageName)
+		Guid GetPackageGuid(ScriptName PackageName)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Actor.GetPackageGuid");
 			byte* params = (byte*)malloc(24);
 			*(ScriptName*)params = PackageName;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid'!
-void**)(params + 8);
+			auto returnVal = *(Guid*)(params + 8);
 			free(params);
 			return returnVal;
 		}

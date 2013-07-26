@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.ActorComponent.h"
 #include "Engine.MaterialInterface.h"
+#include "Core.Object.Matrix.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.RadialBlurComponent." #y); \
@@ -24,7 +25,7 @@ namespace UnrealScript
 	class RadialBlurComponent : public ActorComponent
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'LocalToWorld'!
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, LocalToWorld, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnabled, 0x2)
 		ADD_VAR(::BoolProperty, bRenderAsVelocity, 0x1)
 		ADD_VAR(::FloatProperty, DistanceFalloffExponent, 0xFFFFFFFF)

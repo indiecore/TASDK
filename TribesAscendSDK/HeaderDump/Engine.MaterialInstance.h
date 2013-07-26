@@ -1,9 +1,13 @@
 #pragma once
+#include "Core.Object.Guid.h"
 #include "Engine.MaterialInterface.h"
-#include "Engine.Texture.h"
-#include "Engine.PhysicalMaterial.h"
-#include "Engine.Font.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.Texture2D.h"
+#include "Engine.Font.h"
+#include "Engine.Texture.h"
+#include "Core.Object.InterpCurveFloat.h"
+#include "Engine.PhysicalMaterial.h"
+#include "Core.Object.LinearColor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.MaterialInstance." #y); \
@@ -27,10 +31,10 @@ namespace UnrealScript
 	class MaterialInstance : public MaterialInterface
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'ParentLightingGuid'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Resources'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'StaticPermutationResources'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'StaticParameters'!
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, ParentLightingGuid, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Resources, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, StaticPermutationResources, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, StaticParameters, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bNeedsMaterialFlattening, 0x8)
 		ADD_VAR(::BoolProperty, ReentrantFlag, 0x4)
 		ADD_VAR(::BoolProperty, bStaticPermutationDirty, 0x2)
@@ -49,20 +53,14 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetVectorParameterValue(ScriptName ParameterName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void*& Value)
+		void SetVectorParameterValue(ScriptName ParameterName, LinearColor& Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetVectorParameterValue");
 			byte* params = (byte*)malloc(24);
 			*(ScriptName*)params = ParameterName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 8) = Value;
+			*(LinearColor*)(params + 8) = Value;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Value = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor'!
-void**)(params + 8);
+			Value = *(LinearColor*)(params + 8);
 			free(params);
 		}
 		void SetScalarParameterValue(ScriptName ParameterName, float Value)
@@ -74,20 +72,14 @@ void**)(params + 8);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void SetScalarCurveParameterValue(ScriptName ParameterName, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
-void*& Value)
+		void SetScalarCurveParameterValue(ScriptName ParameterName, InterpCurveFloat& Value)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetScalarCurveParameterValue");
 			byte* params = (byte*)malloc(24);
 			*(ScriptName*)params = ParameterName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
-void**)(params + 8) = Value;
+			*(InterpCurveFloat*)(params + 8) = Value;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Value = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.InterpCurveFloat'!
-void**)(params + 8);
+			Value = *(InterpCurveFloat*)(params + 8);
 			free(params);
 		}
 		void SetTextureParameterValue(ScriptName ParameterName, class Texture* Value)

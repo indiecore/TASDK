@@ -3,16 +3,26 @@
 #include "Engine.GameInfo.h"
 #include "Engine.EmitterPool.h"
 #include "Engine.DecalManager.h"
+#include "Core.Object.Color.h"
 #include "Engine.GameReplicationInfo.h"
-#include "Engine.CoverLink.h"
-#include "Engine.ParticleEventManager.h"
+#include "Core.Object.Map_Mirror.h"
+#include "Core.Object.Vector.h"
+#include "Engine.ReverbVolume.InteriorSettings.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Engine.FractureManager.h"
+#include "Engine.MusicTrackDataStructures.MusicTrackStruct.h"
+#include "Engine.CoverLink.h"
+#include "Engine.ParticleEventManager.h"
+#include "Engine.PostProcessVolume.PostProcessSettings.h"
 #include "Engine.NavMeshPathConstraint.h"
 #include "Engine.PostProcessChain.h"
 #include "Engine.PostProcessVolume.h"
+#include "Engine.ReverbVolume.ReverbSettings.h"
 #include "Engine.EnvironmentVolume.h"
 #include "Engine.ReverbVolume.h"
+#include "Engine.WorldInfo.WorldFractureSettings.h"
+#include "Engine.Sequence.h"
+#include "Core.Object.Double.h"
 #include "Engine.BookMark.h"
 #include "Engine.KismetBookMark.h"
 #include "Engine.Texture2D.h"
@@ -20,16 +30,22 @@
 #include "Engine.NavigationPoint.h"
 #include "Engine.DefaultPhysicsVolume.h"
 #include "Engine.Controller.h"
+#include "Engine.WorldInfo.HostMigrationState.h"
 #include "Engine.Pawn.h"
 #include "Engine.Pylon.h"
 #include "Engine.ObjectReferencer.h"
 #include "Engine.MapInfo.h"
 #include "Engine.ProcBuildingRuleset.h"
+#include "Engine.WorldInfo.PhysXSceneProperties.h"
+#include "Engine.WorldInfo.ApexModuleDestructibleSettings.h"
 #include "Engine.PhysicsLODVerticalEmitter.h"
+#include "Engine.WorldInfo.PhysXVerticalProperties.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.LightmassLevelSettings.h"
-#include "Engine.Sequence.h"
+#include "Engine.WorldInfo.LightmassWorldInfoSettings.h"
 #include "Engine.NavigationHandle.h"
 #include "Engine.NavMeshPathGoalEvaluator.h"
+#include "Core.Object.Guid.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.WorldInfo." #y); \
@@ -69,7 +85,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, WorldGravityZ, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bPlayersOnlyPending, 0x400)
 		ADD_VAR(::FloatProperty, DemoPlayTimeDilation, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MusicTrackDataStructures.MusicTrackStruct' for the property named 'ReplicatedMusicTrack'!
+		ADD_STRUCT(::NonArithmeticProperty<MusicTrackStruct>, ReplicatedMusicTrack, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, NextTravelType, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, NextURL, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, NextSwitchCountdown, 0xFFFFFFFF)
@@ -81,7 +97,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, ParticleEventManagerClassPath, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleEventManager, MyParticleEventManager)
 		ADD_VAR(::BoolProperty, bUseConsoleInput, 0x20000)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PostProcessVolume.PostProcessSettings' for the property named 'DefaultPostProcessSettings'!
+		ADD_STRUCT(::NonArithmeticProperty<PostProcessSettings>, DefaultPostProcessSettings, 0xFFFFFFFF)
 		ADD_OBJECT(PostProcessChain, WorldPostProcessChain)
 		ADD_VAR(::BoolProperty, bPersistPostProcessToNextLevel, 0x1)
 		ADD_VAR(::BoolProperty, bFogEnabled, 0x2)
@@ -118,14 +134,14 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bAllowHostMigration, 0x10)
 		ADD_VAR(::FloatProperty, SquintModeKernelSize, 0xFFFFFFFF)
 		ADD_OBJECT(PostProcessVolume, HighestPriorityPostProcessVolume)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ReverbVolume.ReverbSettings' for the property named 'DefaultReverbSettings'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.ReverbVolume.InteriorSettings' for the property named 'DefaultAmbientZoneSettings'!
+		ADD_STRUCT(::NonArithmeticProperty<ReverbSettings>, DefaultReverbSettings, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<InteriorSettings>, DefaultAmbientZoneSettings, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FogStart, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, FogEnd, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'FogColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, FogColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, BumpEnd, 0xFFFFFFFF)
 		ADD_OBJECT(ReverbVolume, HighestPriorityReverbVolume)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Double' for the property named 'LastTimeUnbuiltLightingWasEncountered'!
+		ADD_STRUCT(::NonArithmeticProperty<Double>, LastTimeUnbuiltLightingWasEncountered, 0xFFFFFFFF)
 		ADD_OBJECT(BookMark, BookMarks)
 		ADD_OBJECT(KismetBookMark, KismetBookMarks)
 		ADD_VAR(::FloatProperty, RealTimeSeconds, 0xFFFFFFFF)
@@ -156,19 +172,19 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, GameTypeForPIE)
 		ADD_VAR(::NameProperty, CommittedPersistentLevelName, 0xFFFFFFFF)
 		ADD_OBJECT(ObjectReferencer, PersistentMapForcedObjects)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.MusicTrackDataStructures.MusicTrackStruct' for the property named 'CurrentMusicTrack'!
+		ADD_STRUCT(::NonArithmeticProperty<MusicTrackStruct>, CurrentMusicTrack, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Title, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, Author, 0xFFFFFFFF)
 		ADD_OBJECT(MapInfo, MyMapInfo)
 		ADD_OBJECT(ProcBuildingRuleset, ProcBuildingRulesetOverride)
 		ADD_VAR(::FloatProperty, MaxPhysicsDeltaTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxPhysicsSubsteps, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.WorldInfo.PhysXSceneProperties' for the property named 'PhysicsProperties'!
+		ADD_STRUCT(::NonArithmeticProperty<PhysXSceneProperties>, PhysicsProperties, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DefaultSkinWidth, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ApexLODResourceBudget, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.WorldInfo.ApexModuleDestructibleSettings' for the property named 'DestructibleSettings'!
+		ADD_STRUCT(::NonArithmeticProperty<ApexModuleDestructibleSettings>, DestructibleSettings, 0xFFFFFFFF)
 		ADD_OBJECT(PhysicsLODVerticalEmitter, EmitterVertical)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.WorldInfo.PhysXVerticalProperties' for the property named 'VerticalProperties'!
+		ADD_STRUCT(::NonArithmeticProperty<PhysXVerticalProperties>, VerticalProperties, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ChanceOfPhysicsChunkOverride, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxExplosionChunkSize, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MaxDamageChunkSize, 0xFFFFFFFF)
@@ -183,14 +199,14 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, CharacterShadowedIndirectContrastFactor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CharacterLightingContrastFactor, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, ImageReflectionEnvironmentTexture)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'ImageReflectionEnvironmentColor'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, ImageReflectionEnvironmentColor, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ImageReflectionEnvironmentRotation, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Map_Mirror' for the property named 'ScreenMessages'!
+		ADD_STRUCT(::NonArithmeticProperty<Map_Mirror>, ScreenMessages, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, MaxTrianglesPerLeaf, 0xFFFFFFFF)
 		ADD_OBJECT(LightmassLevelSettings, LMLevelSettings)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.WorldInfo.LightmassWorldInfoSettings' for the property named 'LightmassSettings'!
+		ADD_STRUCT(::NonArithmeticProperty<LightmassWorldInfoSettings>, LightmassSettings, 0xFFFFFFFF)
 		ADD_OBJECT(CrowdPopulationManagerBase, PopulationManager)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.WorldInfo.HostMigrationState' for the property named 'PeerHostMigration'!
+		ADD_STRUCT(::NonArithmeticProperty<HostMigrationState>, PeerHostMigration, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HostMigrationTimeout, 0xFFFFFFFF)
 		class Sequence* GetGameSequence()
 		{
@@ -336,29 +352,21 @@ void**)params;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void UpdateMusicTrack(
-// WARNING: Unknown structure type 'ScriptStruct Engine.MusicTrackDataStructures.MusicTrackStruct'!
-void* NewMusicTrack)
+		void UpdateMusicTrack(MusicTrackStruct NewMusicTrack)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.UpdateMusicTrack");
 			byte* params = (byte*)malloc(36);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.MusicTrackDataStructures.MusicTrackStruct'!
-void**)params = NewMusicTrack;
+			*(MusicTrackStruct*)params = NewMusicTrack;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void AddOnScreenDebugMessage(int Key, float TimeToDisplay, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* DisplayColor, ScriptArray<wchar_t> DebugMessage)
+		void AddOnScreenDebugMessage(int Key, float TimeToDisplay, Color DisplayColor, ScriptArray<wchar_t> DebugMessage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.AddOnScreenDebugMessage");
 			byte* params = (byte*)malloc(24);
 			*(int*)params = Key;
 			*(float*)(params + 4) = TimeToDisplay;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 8) = DisplayColor;
+			*(Color*)(params + 8) = DisplayColor;
 			*(ScriptArray<wchar_t>*)(params + 12) = DebugMessage;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -563,17 +571,13 @@ void**)(params + 36);
 			free(params);
 			return returnVal;
 		}
-		void SeamlessTravel(ScriptArray<wchar_t> URL, bool bAbsolute, 
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid'!
-void* MapPackageGuid)
+		void SeamlessTravel(ScriptArray<wchar_t> URL, bool bAbsolute, Guid MapPackageGuid)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.SeamlessTravel");
 			byte* params = (byte*)malloc(32);
 			*(ScriptArray<wchar_t>*)params = URL;
 			*(bool*)(params + 12) = bAbsolute;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid'!
-void**)(params + 16) = MapPackageGuid;
+			*(Guid*)(params + 16) = MapPackageGuid;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -662,16 +666,12 @@ void**)params;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.DoMemoryTracking");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Engine.WorldInfo.WorldFractureSettings'!
-void* GetWorldFractureSettings()
+		WorldFractureSettings GetWorldFractureSettings()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetWorldFractureSettings");
 			byte* params = (byte*)malloc(28);
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.WorldInfo.WorldFractureSettings'!
-void**)params;
+			auto returnVal = *(WorldFractureSettings*)params;
 			free(params);
 			return returnVal;
 		}

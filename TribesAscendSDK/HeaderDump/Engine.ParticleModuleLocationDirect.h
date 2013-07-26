@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleLocationBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleLocationDirect." #y); \
@@ -11,10 +12,10 @@ namespace UnrealScript
 	class ParticleModuleLocationDirect : public ParticleModuleLocationBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'Direction'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'ScaleFactor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'LocationOffset'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'Location'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, Direction, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, ScaleFactor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, LocationOffset, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, Location, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

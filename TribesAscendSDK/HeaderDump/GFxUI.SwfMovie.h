@@ -1,5 +1,6 @@
 #pragma once
 #include "GFxUI.GFxRawData.h"
+#include "Core.Object.QWord.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GFxUI.SwfMovie." #y); \

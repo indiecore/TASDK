@@ -2,8 +2,10 @@
 #include "UTGame.UTWeapon.h"
 #include "Engine.ForceFeedbackWaveform.h"
 #include "Engine.ParticleSystem.h"
-#include "Engine.Actor.h"
 #include "Engine.HUD.h"
+#include "Core.Object.Vector.h"
+#include "Engine.Actor.ImpactInfo.h"
+#include "Engine.Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " UTGame.UTBeamWeapon." #y); \
@@ -56,22 +58,16 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ProcessBeamHit(Vector StartTrace, Vector AimDir, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void*& TestImpact, float DeltaTime)
+		void ProcessBeamHit(Vector StartTrace, Vector AimDir, ImpactInfo& TestImpact, float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeapon.ProcessBeamHit");
 			byte* params = (byte*)malloc(108);
 			*(Vector*)params = StartTrace;
 			*(Vector*)(params + 12) = AimDir;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 24) = TestImpact;
+			*(ImpactInfo*)(params + 24) = TestImpact;
 			*(float*)(params + 104) = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			TestImpact = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Actor.ImpactInfo'!
-void**)(params + 24);
+			TestImpact = *(ImpactInfo*)(params + 24);
 			free(params);
 		}
 		void UpdateBeam(float DeltaTime)

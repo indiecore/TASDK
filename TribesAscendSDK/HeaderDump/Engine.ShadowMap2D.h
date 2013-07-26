@@ -1,6 +1,8 @@
 #pragma once
 #include "Core.Object.h"
 #include "Engine.ShadowMapTexture2D.h"
+#include "Core.Object.Guid.h"
+#include "Core.Object.Vector2D.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ShadowMap2D." #y); \
@@ -26,9 +28,9 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::IntProperty, InstanceIndex, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bIsShadowFactorTexture, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'LightGuid'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'CoordinateBias'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'CoordinateScale'!
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, LightGuid, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, CoordinateBias, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, CoordinateScale, 0xFFFFFFFF)
 		ADD_OBJECT(ShadowMapTexture2D, Texture)
 	};
 }

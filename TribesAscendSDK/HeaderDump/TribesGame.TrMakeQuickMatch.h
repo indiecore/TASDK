@@ -4,6 +4,7 @@
 #include "TribesGame.TrGameSettingsCommon.h"
 #include "Engine.PlayerController.h"
 #include "Engine.OnlineSubsystem.h"
+#include "Engine.OnlineGameSearch.OnlineGameSearchResult.h"
 #include "Engine.LocalPlayer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -96,15 +97,11 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		bool RequestJoin(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void* GameToJoin)
+		bool RequestJoin(OnlineGameSearchResult GameToJoin)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMakeQuickMatch.RequestJoin");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params = GameToJoin;
+			*(OnlineGameSearchResult*)params = GameToJoin;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 8);
 			free(params);

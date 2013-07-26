@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.RigidBodyBase.h"
+#include "Engine.PrimitiveComponent.RBCollisionChannelContainer.h"
 #include "Engine.SeqAct_Toggle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -19,7 +20,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, bForceActive, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'CollideWithChannels'!
+		ADD_STRUCT(::NonArithmeticProperty<RBCollisionChannelContainer>, CollideWithChannels, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bForceApplyToProjectiles, 0x10)
 		ADD_VAR(::BoolProperty, bForceApplyToRigidBodies, 0x8)
 		ADD_VAR(::BoolProperty, bForceApplyToFluid, 0x4)

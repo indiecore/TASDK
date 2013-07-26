@@ -1,5 +1,6 @@
 #pragma once
 #include "TribesGame.TrVehicle_BaseFlying.h"
+#include "Core.Object.Rotator.h"
 #include "UTGame.UTVehicleWeapon.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

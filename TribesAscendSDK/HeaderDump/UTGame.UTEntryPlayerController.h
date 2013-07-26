@@ -1,4 +1,5 @@
 #pragma once
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "UTGame.UTPlayerController.h"
 #include "Engine.LocalPlayer.h"
 #include "Engine.PostProcessChain.h"
@@ -48,31 +49,23 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnFriendInviteReceived(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* RequestingPlayer, ScriptArray<wchar_t> RequestingNick, ScriptArray<wchar_t> Message)
+		void OnFriendInviteReceived(byte LocalUserNum, UniqueNetId RequestingPlayer, ScriptArray<wchar_t> RequestingNick, ScriptArray<wchar_t> Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.OnFriendInviteReceived");
 			byte* params = (byte*)malloc(33);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = RequestingPlayer;
+			*(UniqueNetId*)(params + 4) = RequestingPlayer;
 			*(ScriptArray<wchar_t>*)(params + 12) = RequestingNick;
 			*(ScriptArray<wchar_t>*)(params + 24) = Message;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnFriendMessageReceived(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* SendingPlayer, ScriptArray<wchar_t> SendingNick, ScriptArray<wchar_t> Message)
+		void OnFriendMessageReceived(byte LocalUserNum, UniqueNetId SendingPlayer, ScriptArray<wchar_t> SendingNick, ScriptArray<wchar_t> Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.OnFriendMessageReceived");
 			byte* params = (byte*)malloc(33);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = SendingPlayer;
+			*(UniqueNetId*)(params + 4) = SendingPlayer;
 			*(ScriptArray<wchar_t>*)(params + 12) = SendingNick;
 			*(ScriptArray<wchar_t>*)(params + 24) = Message;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);

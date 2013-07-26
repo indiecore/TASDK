@@ -1,10 +1,12 @@
 #pragma once
+#include "Core.Object.Vector2D.h"
 #include "UTGame.UTFamilyInfo.h"
 #include "Engine.AnimTree.h"
 #include "Engine.MorphTargetSet.h"
 #include "Engine.AnimSet.h"
-#include "Engine.ParticleSystem.h"
+#include "TribesGame.TrObject.PaperDollInfo.h"
 #include "Engine.SkeletalMesh.h"
+#include "Engine.ParticleSystem.h"
 #include "Engine.PhysicsAsset.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -70,8 +72,8 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fPowerPoolRechargeRate, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fSecondsBeforeAutoHeal, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fHealthPoolRechargeRate, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_vAirControlReductionRange'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'm_vAirControlMultiplier'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_vAirControlReductionRange, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, m_vAirControlMultiplier, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, m_fFlightAcceleration, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, m_bMomentumDampingEnabled, 0x1)
 		ADD_VAR(::FloatProperty, m_fMomentumDampingSpeed, 0xFFFFFFFF)
@@ -86,7 +88,7 @@ namespace UnrealScript
 		ADD_VAR(::FloatProperty, m_fJetpackInitTotalTime, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, InfoBit, 0xFFFFFFFF)
 		ADD_OBJECT(ScriptClass, DefaultSkinClass)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrObject.PaperDollInfo' for the property named 'm_MainMenuPaperDollInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<PaperDollInfo>, m_MainMenuPaperDollInfo, 0xFFFFFFFF)
 		ADD_OBJECT(PhysicsAsset, m_PaperDollSidekickPhysics)
 		ADD_OBJECT(AnimTree, m_PaperDollSidekickAnimTree)
 		ADD_OBJECT(AnimSet, m_PaperDollSidekickAnimset)

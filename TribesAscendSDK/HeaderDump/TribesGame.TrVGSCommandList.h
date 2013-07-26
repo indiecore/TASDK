@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.Object.h"
+#include "TribesGame.TrVGSCommandList.TrVGSCommand.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrVGSCommandList." #y); \
@@ -340,7 +341,7 @@ namespace UnrealScript
 		ADD_VAR(::StrProperty, ChatString_GlobalHi, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ChatString_GlobalNo, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, ChatString_GlobalYes, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrVGSCommandList.TrVGSCommand' for the property named 'm_CommandList'!
+		ADD_STRUCT(::NonArithmeticProperty<TrVGSCommand>, m_CommandList, 0xFFFFFFFF)
 		void Init()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVGSCommandList.Init");

@@ -1,8 +1,11 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "Engine.OnlineGameSearch.h"
 #include "Engine.OnlineGameSettings.h"
 #include "IpDrv.OnlineSubsystemCommonImpl.h"
+#include "Engine.OnlineGameSearch.OnlineGameSearchResult.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.OnlineGameInterfaceImpl." #y); \
@@ -26,8 +29,8 @@ namespace UnrealScript
 	class OnlineGameInterfaceImpl : public Object
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'SessionInfo'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'LanBeacon'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, SessionInfo, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, LanBeacon, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LanQueryTimeout, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, LanQueryTimeLeft, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LanPacketPlatformMask, 0xFFFFFFFF)
@@ -145,19 +148,13 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnGameInviteAccepted(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void*& InviteResult)
+		void OnGameInviteAccepted(OnlineGameSearchResult& InviteResult)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnGameInviteAccepted");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params = InviteResult;
+			*(OnlineGameSearchResult*)params = InviteResult;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			InviteResult = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params;
+			InviteResult = *(OnlineGameSearchResult*)params;
 			free(params);
 		}
 		void OnArbitrationRegistrationComplete(ScriptName SessionName, bool bWasSuccessful)
@@ -169,30 +166,22 @@ void**)params;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnUnregisterPlayerComplete(ScriptName SessionName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID, bool bWasSuccessful)
+		void OnUnregisterPlayerComplete(ScriptName SessionName, UniqueNetId PlayerID, bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnUnregisterPlayerComplete");
 			byte* params = (byte*)malloc(20);
 			*(ScriptName*)params = SessionName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 8) = PlayerID;
+			*(UniqueNetId*)(params + 8) = PlayerID;
 			*(bool*)(params + 16) = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnRegisterPlayerComplete(ScriptName SessionName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID, bool bWasSuccessful)
+		void OnRegisterPlayerComplete(ScriptName SessionName, UniqueNetId PlayerID, bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnRegisterPlayerComplete");
 			byte* params = (byte*)malloc(20);
 			*(ScriptName*)params = SessionName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 8) = PlayerID;
+			*(UniqueNetId*)(params + 8) = PlayerID;
 			*(bool*)(params + 16) = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -400,21 +389,15 @@ void**)params = CancelFindOnlineGamesCompleteDelegate;
 			free(params);
 			return returnVal;
 		}
-		bool JoinOnlineGame(byte PlayerNum, ScriptName SessionName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void*& DesiredGame)
+		bool JoinOnlineGame(byte PlayerNum, ScriptName SessionName, OnlineGameSearchResult& DesiredGame)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.JoinOnlineGame");
 			byte* params = (byte*)malloc(21);
 			*params = PlayerNum;
 			*(ScriptName*)(params + 4) = SessionName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)(params + 12) = DesiredGame;
+			*(OnlineGameSearchResult*)(params + 12) = DesiredGame;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DesiredGame = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)(params + 12);
+			DesiredGame = *(OnlineGameSearchResult*)(params + 12);
 			auto returnVal = *(bool*)(params + 20);
 			free(params);
 			return returnVal;
@@ -455,16 +438,12 @@ void**)params = JoinOnlineGameCompleteDelegate;
 			free(params);
 			return returnVal;
 		}
-		bool RegisterPlayer(ScriptName SessionName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID, bool bWasInvited)
+		bool RegisterPlayer(ScriptName SessionName, UniqueNetId PlayerID, bool bWasInvited)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.RegisterPlayer");
 			byte* params = (byte*)malloc(24);
 			*(ScriptName*)params = SessionName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 8) = PlayerID;
+			*(UniqueNetId*)(params + 8) = PlayerID;
 			*(bool*)(params + 16) = bWasInvited;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 20);
@@ -495,16 +474,12 @@ void**)params = RegisterPlayerCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool UnregisterPlayer(ScriptName SessionName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID)
+		bool UnregisterPlayer(ScriptName SessionName, UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.UnregisterPlayer");
 			byte* params = (byte*)malloc(20);
 			*(ScriptName*)params = SessionName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 8) = PlayerID;
+			*(UniqueNetId*)(params + 8) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 16);
 			free(params);
@@ -764,21 +739,15 @@ void**)params = MigrateOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool JoinMigratedOnlineGame(byte PlayerNum, ScriptName SessionName, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void*& DesiredGame)
+		bool JoinMigratedOnlineGame(byte PlayerNum, ScriptName SessionName, OnlineGameSearchResult& DesiredGame)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.JoinMigratedOnlineGame");
 			byte* params = (byte*)malloc(21);
 			*params = PlayerNum;
 			*(ScriptName*)(params + 4) = SessionName;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)(params + 12) = DesiredGame;
+			*(OnlineGameSearchResult*)(params + 12) = DesiredGame;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DesiredGame = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)(params + 12);
+			DesiredGame = *(OnlineGameSearchResult*)(params + 12);
 			auto returnVal = *(bool*)(params + 20);
 			free(params);
 			return returnVal;
@@ -818,20 +787,14 @@ void**)params = JoinMigratedOnlineGameCompleteDelegate;
 			free(params);
 			return returnVal;
 		}
-		bool ReadPlatformSpecificSessionInfo(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void*& DesiredGame, byte& PlatformSpecificInfo)
+		bool ReadPlatformSpecificSessionInfo(OnlineGameSearchResult& DesiredGame, byte& PlatformSpecificInfo)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ReadPlatformSpecificSessionInfo");
 			byte* params = (byte*)malloc(13);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params = DesiredGame;
+			*(OnlineGameSearchResult*)params = DesiredGame;
 			*(params + 8) = PlatformSpecificInfo;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			DesiredGame = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineGameSearch.OnlineGameSearchResult'!
-void**)params;
+			DesiredGame = *(OnlineGameSearchResult*)params;
 			PlatformSpecificInfo = *(params + 8);
 			auto returnVal = *(bool*)(params + 88);
 			free(params);

@@ -1,5 +1,7 @@
 #pragma once
+#include "Core.Object.Pointer.h"
 #include "Engine.Info.h"
+#include "IpDrv.InternetLink.IpAddr.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " IpDrv.InternetLink." #y); \
@@ -18,10 +20,10 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, DataPending, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'PrivateResolveInfo'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'RemoteSocket'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, PrivateResolveInfo, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, RemoteSocket, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, Port, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'Socket'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, Socket, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, ReceiveMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, OutLineMode, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, LinkMode, 0xFFFFFFFF)
@@ -70,62 +72,42 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		ScriptArray<wchar_t> IpAddrToString(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
-void* Arg)
+		ScriptArray<wchar_t> IpAddrToString(IpAddr Arg)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.IpAddrToString");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
-void**)params = Arg;
+			*(IpAddr*)params = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(ScriptArray<wchar_t>*)(params + 8);
 			free(params);
 			return returnVal;
 		}
-		bool StringToIpAddr(ScriptArray<wchar_t> Str, 
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
-void*& Addr)
+		bool StringToIpAddr(ScriptArray<wchar_t> Str, IpAddr& Addr)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.StringToIpAddr");
 			byte* params = (byte*)malloc(24);
 			*(ScriptArray<wchar_t>*)params = Str;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
-void**)(params + 12) = Addr;
+			*(IpAddr*)(params + 12) = Addr;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Addr = *(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
-void**)(params + 12);
+			Addr = *(IpAddr*)(params + 12);
 			auto returnVal = *(bool*)(params + 20);
 			free(params);
 			return returnVal;
 		}
-		void GetLocalIP(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
-void*& Arg)
+		void GetLocalIP(IpAddr& Arg)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.GetLocalIP");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
-void**)params = Arg;
+			*(IpAddr*)params = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			Arg = *(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
-void**)params;
+			Arg = *(IpAddr*)params;
 			free(params);
 		}
-		void Resolved(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
-void* Addr)
+		void Resolved(IpAddr Addr)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.Resolved");
 			byte* params = (byte*)malloc(8);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct IpDrv.InternetLink.IpAddr'!
-void**)params = Addr;
+			*(IpAddr*)params = Addr;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleSpawnBase.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleSpawn." #y); \
@@ -18,8 +19,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::ByteProperty, ParticleBurstMethod, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'RateScale'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Rate'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, RateScale, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Rate, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.NavigationPoint.h"
+#include "Core.Object.Vector.h"
 #include "UDKBase.UDKVehicle.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \

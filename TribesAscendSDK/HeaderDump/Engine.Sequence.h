@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.SequenceOp.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.Sequence." #y); \
@@ -21,7 +22,7 @@ namespace UnrealScript
 		ADD_VAR(::IntProperty, DefaultViewY, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DefaultViewX, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bEnabled, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'LogFile'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, LogFile, 0xFFFFFFFF)
 		void FindSeqObjectsByClass(ScriptClass* DesiredClass, bool bRecursive, 
 // ERROR: Unknown object class 'Class Core.ArrayProperty'!
 void*& OutputObjects)

@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine.NavMeshPathGoalEvaluator.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.NavigationHandle.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -19,8 +21,8 @@ namespace UnrealScript
 	class NavMeshGoal_At : public NavMeshPathGoalEvaluator
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'PartialGoal'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'GoalPoly'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, PartialGoal, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, GoalPoly, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bKeepPartial, 0x1)
 		ADD_VAR(::FloatProperty, GoalDist, 0xFFFFFFFF)
 		ADD_STRUCT(::VectorProperty, Goal, 0xFFFFFFFF)

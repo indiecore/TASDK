@@ -1,13 +1,16 @@
 #pragma once
+#include "Core.Object.Rotator.h"
 #include "UTGame.UTPawn.h"
 #include "Engine.ParticleSystem.h"
 #include "UTGame.UTWeaponAttachment.h"
 #include "Engine.Weapon.h"
 #include "TribesGame.TrPawn.h"
+#include "Core.Object.Vector.h"
 #include "TribesGame.TrProj_Tracer.h"
 #include "Engine.Actor.h"
-#include "Engine.PhysicalMaterial.h"
 #include "Engine.SoundCue.h"
+#include "UDKBase.UDKPawn.MaterialImpactEffect.h"
+#include "Engine.PhysicalMaterial.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrDeviceAttachment." #y); \
@@ -165,17 +168,13 @@ void**)params = MeshCpnt;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect'!
-void* GetImpactEffect(class PhysicalMaterial* HitMaterial)
+		MaterialImpactEffect GetImpactEffect(class PhysicalMaterial* HitMaterial)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeviceAttachment.GetImpactEffect");
 			byte* params = (byte*)malloc(52);
 			*(class PhysicalMaterial**)params = HitMaterial;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialImpactEffect'!
-void**)(params + 4);
+			auto returnVal = *(MaterialImpactEffect*)(params + 4);
 			free(params);
 			return returnVal;
 		}

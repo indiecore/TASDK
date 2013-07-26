@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.ActorFactory.h"
 #include "Engine.ApexDestructibleAsset.h"
+#include "Engine.PrimitiveComponent.RBCollisionChannelContainer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ActorFactoryApexDestructible." #y); \
@@ -25,7 +26,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ApexDestructibleAsset, DestructibleAsset)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.PrimitiveComponent.RBCollisionChannelContainer' for the property named 'CollideWithChannels'!
+		ADD_STRUCT(::NonArithmeticProperty<RBCollisionChannelContainer>, CollideWithChannels, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, RBChannel, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bStartAwake, 0x1)
 	};

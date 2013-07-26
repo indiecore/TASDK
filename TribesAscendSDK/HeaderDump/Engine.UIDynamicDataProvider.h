@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.UIPropertyDataProvider.h"
 #include "Core.Object.h"
+#include "Core.Object.Pointer.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.UIDynamicDataProvider." #y); \
@@ -20,7 +21,7 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(Object, DataSource)
 		ADD_OBJECT(ScriptClass, DataClass)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_IUIListElementCellProvider'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_IUIListElementCellProvider, 0xFFFFFFFF)
 		bool BindProviderInstance(class Object* DataSourceInstance)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDynamicDataProvider.BindProviderInstance");

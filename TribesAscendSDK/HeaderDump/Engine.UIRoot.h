@@ -4,6 +4,7 @@
 #include "Engine.UIDataStore.h"
 #include "Engine.UIInteraction.h"
 #include "Engine.GameUISceneClient.h"
+#include "Engine.UIRoot.UIProviderFieldValue.h"
 namespace UnrealScript
 {
 	class UIRoot : public Object
@@ -73,40 +74,28 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		bool SetDataStoreFieldValue(ScriptArray<wchar_t> InDataStoreMarkup, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderFieldValue'!
-void*& InFieldValue, class LocalPlayer* OwnerPlayer)
+		bool SetDataStoreFieldValue(ScriptArray<wchar_t> InDataStoreMarkup, UIProviderFieldValue& InFieldValue, class LocalPlayer* OwnerPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.SetDataStoreFieldValue");
 			byte* params = (byte*)malloc(108);
 			*(ScriptArray<wchar_t>*)params = InDataStoreMarkup;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderFieldValue'!
-void**)(params + 12) = InFieldValue;
+			*(UIProviderFieldValue*)(params + 12) = InFieldValue;
 			*(class LocalPlayer**)(params + 100) = OwnerPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			InFieldValue = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderFieldValue'!
-void**)(params + 12);
+			InFieldValue = *(UIProviderFieldValue*)(params + 12);
 			auto returnVal = *(bool*)(params + 104);
 			free(params);
 			return returnVal;
 		}
-		bool GetDataStoreFieldValue(ScriptArray<wchar_t> InDataStoreMarkup, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderFieldValue'!
-void*& OutFieldValue, class LocalPlayer* OwnerPlayer)
+		bool GetDataStoreFieldValue(ScriptArray<wchar_t> InDataStoreMarkup, UIProviderFieldValue& OutFieldValue, class LocalPlayer* OwnerPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.GetDataStoreFieldValue");
 			byte* params = (byte*)malloc(108);
 			*(ScriptArray<wchar_t>*)params = InDataStoreMarkup;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderFieldValue'!
-void**)(params + 12) = OutFieldValue;
+			*(UIProviderFieldValue*)(params + 12) = OutFieldValue;
 			*(class LocalPlayer**)(params + 100) = OwnerPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutFieldValue = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.UIRoot.UIProviderFieldValue'!
-void**)(params + 12);
+			OutFieldValue = *(UIProviderFieldValue*)(params + 12);
 			auto returnVal = *(bool*)(params + 104);
 			free(params);
 			return returnVal;

@@ -2,6 +2,7 @@
 #include "Engine.Actor.h"
 #include "Engine.DynamicSMActor.h"
 #include "TribesGame.TrStormCore.h"
+#include "Core.Object.Vector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrStormCarrierShield." #y); \

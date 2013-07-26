@@ -1,5 +1,7 @@
 #pragma once
 #include "Engine.ParticleModuleVelocityBase.h"
+#include "Core.DistributionFloat.RawDistributionFloat.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_STRUCT(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>("StructProperty Engine.ParticleModuleVelocity." #y); \
@@ -11,8 +13,8 @@ namespace UnrealScript
 	class ParticleModuleVelocity : public ParticleModuleVelocityBase
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'StartVelocityRadial'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'StartVelocity'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, StartVelocityRadial, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, StartVelocity, 0xFFFFFFFF)
 	};
 }
 #undef ADD_STRUCT

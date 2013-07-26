@@ -1,7 +1,9 @@
 #pragma once
 #include "Core.Object.h"
 #include "TribesGame.TrPlayerReplicationInfo.h"
+#include "TribesGame.TrScoreboard.TrScoreSlot.h"
 #include "TribesGame.GfxTrHud.h"
+#include "TribesGame.TrScoreboard.TrScoreboardState.h"
 #include "TribesGame.TrPlayerController.h"
 #include "TribesGame.TrGameReplicationInfo.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
@@ -30,8 +32,8 @@ namespace UnrealScript
 		ADD_OBJECT(GfxTrHud, m_MoviePlayer)
 		ADD_VAR(::BoolProperty, bIsActive, 0x8)
 		ADD_OBJECT(TrPlayerController, TrPC)
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrScoreboard.TrScoreboardState' for the property named 'PreviousState'!
-		// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrScoreboard.TrScoreSlot' for the property named 'ScoreboardSlots'!
+		ADD_STRUCT(::NonArithmeticProperty<TrScoreboardState>, PreviousState, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<TrScoreSlot>, ScoreboardSlots, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bCheckPing, 0x10)
 		ADD_VAR(::BoolProperty, bInitialized, 0x4)
 		ADD_VAR(::BoolProperty, bUpdated, 0x2)

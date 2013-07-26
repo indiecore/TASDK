@@ -1,5 +1,7 @@
 #pragma once
 #include "Core.Object.h"
+#include "Core.Object.Color.h"
+#include "Core.Object.Pointer.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.InterpGroup." #y); \
@@ -22,9 +24,9 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsFolder, 0x4)
 		ADD_VAR(::BoolProperty, bVisible, 0x2)
 		ADD_VAR(::BoolProperty, bCollapsed, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'GroupColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, GroupColor, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, GroupName, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FInterpEdInputInterface'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FInterpEdInputInterface, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

@@ -1,8 +1,11 @@
 #pragma once
 #include "Engine.LocalPlayer.h"
 #include "Engine.Interaction.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.GameUISceneClient.h"
 #include "Engine.DataStoreClient.h"
+#include "Engine.UIInteraction.UIAxisEmulationData.h"
+#include "Engine.UIInteraction.UIKeyRepeatData.h"
 #include "Engine.UIManager.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -28,8 +31,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(GameUISceneClient, SceneClient)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIInteraction.UIAxisEmulationData' for the property named 'AxisInputEmulation'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.UIInteraction.UIKeyRepeatData' for the property named 'MouseButtonRepeatInfo'!
+		ADD_STRUCT(::NonArithmeticProperty<UIAxisEmulationData>, AxisInputEmulation, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<UIKeyRepeatData>, MouseButtonRepeatInfo, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, DoubleClickPixelTolerance, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, DoubleClickTriggerSeconds, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, MouseButtonRepeatDelay, 0xFFFFFFFF)
@@ -41,9 +44,9 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, SceneClientClass)
 		ADD_OBJECT(ScriptClass, UIManagerClass)
 		ADD_OBJECT(UIManager, UIManager)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FCallbackEventDevice'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FGlobalDataStoreClientManager'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'VfTable_FExec'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FCallbackEventDevice, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FGlobalDataStoreClientManager, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, VfTable_FExec, 0xFFFFFFFF)
 		class DataStoreClient* GetDataStoreClient()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetDataStoreClient");

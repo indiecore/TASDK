@@ -1,6 +1,12 @@
 #pragma once
+#include "Core.Object.Vector2D.h"
+#include "Core.Object.Pointer.h"
 #include "Engine.Texture2D.h"
+#include "Core.Object.BoxSphereBounds.h"
 #include "Engine.PrimitiveComponent.h"
+#include "Engine.EngineTypes.LightMapRef.h"
+#include "Core.Object.Guid.h"
+#include "Core.Object.Vector4.h"
 #include "Engine.MaterialInstanceConstant.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -26,17 +32,17 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::IntProperty, CollisionMipLevel, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Pointer' for the property named 'EditToolRenderData'!
-		// WARNING: Unknown structure type 'ScriptStruct Engine.EngineTypes.LightMapRef' for the property named 'LightMap'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Guid' for the property named 'LightingGuid'!
+		ADD_STRUCT(::NonArithmeticProperty<Pointer>, EditToolRenderData, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<LightMapRef>, LightMap, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Guid>, LightingGuid, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, StaticLightingResolution, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.BoxSphereBounds' for the property named 'CachedBoxSphereBounds'!
+		ADD_STRUCT(::NonArithmeticProperty<BoxSphereBounds>, CachedBoxSphereBounds, 0xFFFFFFFF)
 		ADD_OBJECT(Texture2D, HeightmapTexture)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector2D' for the property named 'LayerUVPan'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector2D>, LayerUVPan, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, HeightmapSubsectionOffset, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector4' for the property named 'HeightmapScaleBias'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector4>, HeightmapScaleBias, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, WeightmapSubsectionOffset, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Vector4' for the property named 'WeightmapScaleBias'!
+		ADD_STRUCT(::NonArithmeticProperty<Vector4>, WeightmapScaleBias, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, EditingAlphaLayerName, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, MaterialInstance)
 		ADD_VAR(::IntProperty, NumSubsections, 0xFFFFFFFF)

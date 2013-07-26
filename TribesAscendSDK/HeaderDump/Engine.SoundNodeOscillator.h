@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.DistributionFloat.RawDistributionFloat.h"
 #include "Engine.SoundNode.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -17,10 +18,10 @@ namespace UnrealScript
 	class SoundNodeOscillator : public SoundNode
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Center'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Offset'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Frequency'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionFloat.RawDistributionFloat' for the property named 'Amplitude'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Center, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Offset, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Frequency, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionFloat>, Amplitude, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CenterMax, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, CenterMin, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, OffsetMax, 0xFFFFFFFF)

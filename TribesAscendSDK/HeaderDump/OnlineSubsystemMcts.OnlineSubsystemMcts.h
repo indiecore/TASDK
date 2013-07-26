@@ -1,9 +1,12 @@
 #pragma once
 #include "OnlineSubsystemMcts.OnlineGameInterfaceMcts.h"
 #include "IpDrv.OnlineSubsystemCommonImpl.h"
+#include "OnlineSubsystemMcts.OnlineSubsystemMcts.ControllerConnectionState.h"
+#include "Core.Object.QWord.h"
 #include "OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.h"
-#include "Engine.OnlinePlayerStorage.h"
+#include "Engine.OnlineSubsystem.UniqueNetId.h"
 #include "Engine.OnlineProfileSettings.h"
+#include "Engine.OnlinePlayerStorage.h"
 #include "PlatformCommon.TgPlayerProfile.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -30,7 +33,7 @@ namespace UnrealScript
 	public:
 		ADD_VAR(::FloatProperty, ConnectionPresenceElapsedTime, 0xFFFFFFFF)
 		ADD_VAR(::FloatProperty, ConnectionPresenceTimeInterval, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct OnlineSubsystemMcts.OnlineSubsystemMcts.ControllerConnectionState' for the property named 'ControllerStates'!
+		ADD_STRUCT(::NonArithmeticProperty<ControllerConnectionState>, ControllerStates, 0xFFFFFFFF)
 		ADD_VAR(::BoolProperty, bShouldUseMcp, 0x4)
 		ADD_VAR(::BoolProperty, bLastHasConnection, 0x2)
 		ADD_VAR(::BoolProperty, bNeedsKeyboardTicking, 0x1)
@@ -41,7 +44,7 @@ namespace UnrealScript
 		ADD_VAR(::ByteProperty, bWasKeyboardInputCanceled, 0xFFFFFFFF)
 		ADD_VAR(::ByteProperty, LoggedInStatus, 0xFFFFFFFF)
 		ADD_VAR(::IntProperty, LoggedInPlayerNum, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId' for the property named 'LoggedInPlayerId'!
+		ADD_STRUCT(::NonArithmeticProperty<UniqueNetId>, LoggedInPlayerId, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, LoggedInPlayerName, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, LocalProfileName, 0xFFFFFFFF)
 		ADD_OBJECT(OnlineVoiceInterfaceMcts, MctsVoiceInt)
@@ -121,16 +124,12 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnFriendMessageReceived(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* SendingPlayer, ScriptArray<wchar_t> SendingNick, ScriptArray<wchar_t> Message)
+		void OnFriendMessageReceived(byte LocalUserNum, UniqueNetId SendingPlayer, ScriptArray<wchar_t> SendingNick, ScriptArray<wchar_t> Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnFriendMessageReceived");
 			byte* params = (byte*)malloc(33);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = SendingPlayer;
+			*(UniqueNetId*)(params + 4) = SendingPlayer;
 			*(ScriptArray<wchar_t>*)(params + 12) = SendingNick;
 			*(ScriptArray<wchar_t>*)(params + 24) = Message;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
@@ -153,16 +152,12 @@ void**)(params + 4) = SendingPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnFriendInviteReceived(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* RequestingPlayer, ScriptArray<wchar_t> RequestingNick, ScriptArray<wchar_t> Message)
+		void OnFriendInviteReceived(byte LocalUserNum, UniqueNetId RequestingPlayer, ScriptArray<wchar_t> RequestingNick, ScriptArray<wchar_t> Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnFriendInviteReceived");
 			byte* params = (byte*)malloc(33);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = RequestingPlayer;
+			*(UniqueNetId*)(params + 4) = RequestingPlayer;
 			*(ScriptArray<wchar_t>*)(params + 12) = RequestingNick;
 			*(ScriptArray<wchar_t>*)(params + 24) = Message;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
@@ -198,15 +193,11 @@ void**)(params + 4) = RequestingPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void OnReadPlayerStorageForNetIdComplete(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* NetId, bool bWasSuccessful)
+		void OnReadPlayerStorageForNetIdComplete(UniqueNetId NetId, bool bWasSuccessful)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReadPlayerStorageForNetIdComplete");
 			byte* params = (byte*)malloc(12);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = NetId;
+			*(UniqueNetId*)params = NetId;
 			*(bool*)(params + 8) = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
@@ -248,16 +239,12 @@ void**)params = NetId;
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLoginCancelled");
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnLoginStatusChange(byte NewStatus, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* NewId)
+		void OnLoginStatusChange(byte NewStatus, UniqueNetId NewId)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLoginStatusChange");
 			byte* params = (byte*)malloc(9);
 			*params = NewStatus;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = NewId;
+			*(UniqueNetId*)(params + 4) = NewId;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
@@ -419,20 +406,14 @@ void**)(params + 4) = LogoutDelegate;
 			free(params);
 			return returnVal;
 		}
-		bool GetUniquePlayerId(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void*& PlayerID)
+		bool GetUniquePlayerId(byte LocalUserNum, UniqueNetId& PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetUniquePlayerId");
 			byte* params = (byte*)malloc(13);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = PlayerID;
+			*(UniqueNetId*)(params + 4) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			PlayerID = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4);
+			PlayerID = *(UniqueNetId*)(params + 4);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);
 			return returnVal;
@@ -497,16 +478,12 @@ void**)(params + 4);
 			free(params);
 			return returnVal;
 		}
-		bool IsFriend(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID)
+		bool IsFriend(byte LocalUserNum, UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.IsFriend");
 			byte* params = (byte*)malloc(13);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = PlayerID;
+			*(UniqueNetId*)(params + 4) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);
@@ -582,17 +559,13 @@ void**)params = LoginDelegate;
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* GetPlayerUniqueNetIdFromIndex(int UserIndex)
+		UniqueNetId GetPlayerUniqueNetIdFromIndex(int UserIndex)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetPlayerUniqueNetIdFromIndex");
 			byte* params = (byte*)malloc(12);
 			*(int*)params = UserIndex;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4);
+			auto returnVal = *(UniqueNetId*)(params + 4);
 			free(params);
 			return returnVal;
 		}
@@ -869,16 +842,12 @@ void**)params;
 			free(params);
 			return returnVal;
 		}
-		bool IsMuted(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* PlayerID)
+		bool IsMuted(byte LocalUserNum, UniqueNetId PlayerID)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.IsMuted");
 			byte* params = (byte*)malloc(13);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = PlayerID;
+			*(UniqueNetId*)(params + 4) = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);
@@ -1090,50 +1059,38 @@ void**)(params + 4) = ReadPlayerStorageCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool ReadPlayerStorageForNetId(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* NetId, class OnlinePlayerStorage* PlayerStorage)
+		bool ReadPlayerStorageForNetId(byte LocalUserNum, UniqueNetId NetId, class OnlinePlayerStorage* PlayerStorage)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadPlayerStorageForNetId");
 			byte* params = (byte*)malloc(17);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = NetId;
+			*(UniqueNetId*)(params + 4) = NetId;
 			*(class OnlinePlayerStorage**)(params + 12) = PlayerStorage;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 16);
 			free(params);
 			return returnVal;
 		}
-		void AddReadPlayerStorageForNetIdCompleteDelegate(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* NetId, 
+		void AddReadPlayerStorageForNetIdCompleteDelegate(UniqueNetId NetId, 
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadPlayerStorageForNetIdCompleteDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReadPlayerStorageForNetIdCompleteDelegate");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = NetId;
+			*(UniqueNetId*)params = NetId;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)(params + 8) = ReadPlayerStorageForNetIdCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		void ClearReadPlayerStorageForNetIdCompleteDelegate(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* NetId, 
+		void ClearReadPlayerStorageForNetIdCompleteDelegate(UniqueNetId NetId, 
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadPlayerStorageForNetIdCompleteDelegate)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReadPlayerStorageForNetIdCompleteDelegate");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)params = NetId;
+			*(UniqueNetId*)params = NetId;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)(params + 8) = ReadPlayerStorageForNetIdCompleteDelegate;
@@ -1348,16 +1305,12 @@ void**)params = InputDelegate;
 			free(params);
 			return returnVal;
 		}
-		bool AddFriend(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* NewFriend, ScriptArray<wchar_t> Message)
+		bool AddFriend(byte LocalUserNum, UniqueNetId NewFriend, ScriptArray<wchar_t> Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddFriend");
 			byte* params = (byte*)malloc(25);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = NewFriend;
+			*(UniqueNetId*)(params + 4) = NewFriend;
 			*(ScriptArray<wchar_t>*)(params + 12) = Message;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 24);
@@ -1402,46 +1355,34 @@ void**)(params + 4) = FriendDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool AcceptFriendInvite(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* RequestingPlayer)
+		bool AcceptFriendInvite(byte LocalUserNum, UniqueNetId RequestingPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AcceptFriendInvite");
 			byte* params = (byte*)malloc(13);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = RequestingPlayer;
+			*(UniqueNetId*)(params + 4) = RequestingPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		bool DenyFriendInvite(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* RequestingPlayer)
+		bool DenyFriendInvite(byte LocalUserNum, UniqueNetId RequestingPlayer)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.DenyFriendInvite");
 			byte* params = (byte*)malloc(13);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = RequestingPlayer;
+			*(UniqueNetId*)(params + 4) = RequestingPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);
 			return returnVal;
 		}
-		bool RemoveFriend(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* FormerFriend)
+		bool RemoveFriend(byte LocalUserNum, UniqueNetId FormerFriend)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.RemoveFriend");
 			byte* params = (byte*)malloc(13);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = FormerFriend;
+			*(UniqueNetId*)(params + 4) = FormerFriend;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);
@@ -1473,32 +1414,24 @@ void**)(params + 4) = InviteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool SendMessageToFriend(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* Friend, ScriptArray<wchar_t> Message)
+		bool SendMessageToFriend(byte LocalUserNum, UniqueNetId Friend, ScriptArray<wchar_t> Message)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.SendMessageToFriend");
 			byte* params = (byte*)malloc(25);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = Friend;
+			*(UniqueNetId*)(params + 4) = Friend;
 			*(ScriptArray<wchar_t>*)(params + 12) = Message;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 24);
 			free(params);
 			return returnVal;
 		}
-		bool SendGameInviteToFriend(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* Friend, ScriptArray<wchar_t> Text)
+		bool SendGameInviteToFriend(byte LocalUserNum, UniqueNetId Friend, ScriptArray<wchar_t> Text)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.SendGameInviteToFriend");
 			byte* params = (byte*)malloc(25);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = Friend;
+			*(UniqueNetId*)(params + 4) = Friend;
 			*(ScriptArray<wchar_t>*)(params + 12) = Text;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 24);
@@ -1547,16 +1480,12 @@ void**)(params + 4) = ReceivedGameInviteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			free(params);
 		}
-		bool JoinFriendGame(byte LocalUserNum, 
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void* Friend)
+		bool JoinFriendGame(byte LocalUserNum, UniqueNetId Friend)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.JoinFriendGame");
 			byte* params = (byte*)malloc(13);
 			*params = LocalUserNum;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.OnlineSubsystem.UniqueNetId'!
-void**)(params + 4) = Friend;
+			*(UniqueNetId*)(params + 4) = Friend;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(bool*)(params + 12);
 			free(params);

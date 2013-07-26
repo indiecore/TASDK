@@ -1,8 +1,10 @@
 #pragma once
 #include "TribesGame.TrProjectile.h"
 #include "Engine.CameraAnim.h"
+#include "UDKBase.UDKPawn.MaterialSoundEffect.h"
 #include "Engine.SoundCue.h"
 #include "Engine.ParticleSystem.h"
+#include "Core.Object.Vector.h"
 #include "Engine.Actor.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -31,7 +33,7 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bShrinking, 0x2)
 		ADD_VAR(::BoolProperty, bCheckShortRangeKill, 0x1)
 		ADD_OBJECT(SoundCue, HitPawnSound)
-		// WARNING: Unknown structure type 'ScriptStruct UDKBase.UDKPawn.MaterialSoundEffect' for the property named 'DefaultHitSound'!
+		ADD_STRUCT(::NonArithmeticProperty<MaterialSoundEffect>, DefaultHitSound, 0xFFFFFFFF)
 		ADD_OBJECT(ParticleSystem, RockSmokeTemplate)
 		ADD_OBJECT(ParticleSystem, BounceTemplate)
 		ADD_VAR(::FloatProperty, ShrinkTimer, 0xFFFFFFFF)

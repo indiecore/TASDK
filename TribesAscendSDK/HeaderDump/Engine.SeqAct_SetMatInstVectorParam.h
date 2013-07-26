@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.SequenceAction.h"
+#include "Core.Object.LinearColor.h"
 #include "Engine.MaterialInstanceConstant.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
@@ -24,7 +25,7 @@ namespace UnrealScript
 	class SeqAct_SetMatInstVectorParam : public SequenceAction
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.LinearColor' for the property named 'VectorValue'!
+		ADD_STRUCT(::NonArithmeticProperty<LinearColor>, VectorValue, 0xFFFFFFFF)
 		ADD_VAR(::NameProperty, ParamName, 0xFFFFFFFF)
 		ADD_OBJECT(MaterialInstanceConstant, MatInst)
 		int GetObjClassVersion()

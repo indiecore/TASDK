@@ -47,22 +47,7 @@ std::string GetTypeNameForProperty(ScriptProperty* prop)
 		return tp;
 	}
 	else if (!strcmp(prop->object_class()->GetName(), "StructProperty"))
-	{
-		auto objProp = (ScriptObjectProperty*)prop;
-		if (!strcmp(objProp->property_class->GetName(), "Vector"))
-			return "Vector";
-		else if (!strcmp(objProp->property_class->GetName(), "Rotator"))
-			return "Rotator";
-		else if (!strcmp(objProp->property_class->GetFullName(), "ScriptStruct Core.Object.QWord"))
-			return "QWord";
-		else
-		{
-			std::string tp = "\n// WARNING: Unknown structure type '";
-			tp += objProp->property_class->GetFullName();
-			tp += "'!\nvoid*";
-			return tp;
-		}
-	}
+		return ((ScriptObjectProperty*)prop)->property_class->GetName();
 	else if (!strcmp(prop->object_class()->GetName(), "ByteProperty"))
 		return "byte";
 	else if (!strcmp(prop->object_class()->GetName(), "IntProperty"))
@@ -116,7 +101,7 @@ struct ClassDependencyManager
 	void ProcessProperty(ScriptProperty* prop)
 	{
 		// TODO: Once child structs are dumped, add those headers as dependencies as well.
-		if (!strcmp(prop->object_class()->GetName(), "ObjectProperty"))
+		if (!strcmp(prop->object_class()->GetName(), "ObjectProperty") || !strcmp(prop->object_class()->GetName(), "StructProperty"))
 			RequireType(((ScriptObjectProperty*)prop)->property_class);
 	}
 
@@ -209,7 +194,8 @@ struct PropertyDescription
 			else if (!strcmp(objectProperty->property_class->GetFullName(), "ScriptStruct Core.Object.QWord"))
 				writer->WriteLine("ADD_STRUCT(::QWordProperty, %s, 0xFFFFFFFF)", originalProperty->GetName());
 			else
-				writer->WriteLine("// WARNING: Unknown structure type '%s' for the property named '%s'!", objectProperty->property_class->GetFullName(), originalProperty->GetName());
+				writer->WriteLine("ADD_STRUCT(::NonArithmeticProperty<%s>, %s, 0xFFFFFFFF)", GetTypeNameForProperty(objectProperty).c_str(), originalProperty->GetName());
+			//	writer->WriteLine("// WARNING: Unknown structure type '%s' for the property named '%s'!", objectProperty->property_class->GetFullName(), originalProperty->GetName());
 		}
 		else
 			writer->WriteLine("// ERROR: Unknown object class '%s' for the property named '%s'!", originalProperty->object_class()->GetName(), originalProperty->GetName());
@@ -533,11 +519,12 @@ void ScriptObject::GenerateHeader()
 void ScriptObject::GenerateHeaders()
 {
 	static ScriptClass* core_class = ScriptObject::Find<ScriptClass>("Class Core.Class");
+	static ScriptClass* core_scriptStruct = ScriptObject::Find<ScriptClass>("Class Core.ScriptStruct");
 	for (int i = 0; i < object_array()->count(); i++)
 	{
 		ScriptObject* class_object = (*object_array())(i);
 
-		if(class_object && class_object->object_class() == core_class)
+		if(class_object && (class_object->object_class() == core_class || class_object->object_class() == core_scriptStruct))
 		{
 			class_object->GenerateHeader();
 		}

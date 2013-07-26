@@ -2,8 +2,12 @@
 #include "Engine.Pawn.h"
 #include "GameFramework.GameCameraBase.h"
 #include "Engine.Camera.h"
+#include "Core.Object.Matrix.h"
 #include "Engine.Actor.h"
+#include "Engine.Camera.TViewTarget.h"
+#include "Core.Object.Vector.h"
 #include "Engine.HUD.h"
+#include "Core.Object.Rotator.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GamePlayerCamera." #y); \
@@ -27,7 +31,7 @@ namespace UnrealScript
 	class GamePlayerCamera : public Camera
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Matrix' for the property named 'LastTargetBaseTM'!
+		ADD_STRUCT(::NonArithmeticProperty<Matrix>, LastTargetBaseTM, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, LastTargetBase)
 		ADD_VAR(::FloatProperty, SplitScreenShakeScale, 0xFFFFFFFF)
 		ADD_OBJECT(Actor, LastViewTarget)
@@ -87,20 +91,14 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		void UpdateViewTarget(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void*& OutVT, float DeltaTime)
+		void UpdateViewTarget(TViewTarget& OutVT, float DeltaTime)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.UpdateViewTarget");
 			byte* params = (byte*)malloc(48);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params = OutVT;
+			*(TViewTarget*)params = OutVT;
 			*(float*)(params + 44) = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutVT = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params;
+			OutVT = *(TViewTarget*)params;
 			free(params);
 		}
 		float AdjustFOVForViewport(float inHorizFOV, class Pawn* CameraTargetPawn)
@@ -114,19 +112,13 @@ void**)params;
 			free(params);
 			return returnVal;
 		}
-		void UpdateCameraLensEffects(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void*& OutVT)
+		void UpdateCameraLensEffects(TViewTarget& OutVT)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.UpdateCameraLensEffects");
 			byte* params = (byte*)malloc(44);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params = OutVT;
+			*(TViewTarget*)params = OutVT;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			OutVT = *(
-// WARNING: Unknown structure type 'ScriptStruct Engine.Camera.TViewTarget'!
-void**)params;
+			OutVT = *(TViewTarget*)params;
 			free(params);
 		}
 		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)

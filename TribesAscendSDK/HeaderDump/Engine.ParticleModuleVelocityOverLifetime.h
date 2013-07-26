@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.ParticleModuleVelocityBase.h"
+#include "Core.DistributionVector.RawDistributionVector.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " Engine.ParticleModuleVelocityOverLifetime." #y); \
@@ -18,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_VAR(::BoolProperty, Absolute, 0x1)
-		// WARNING: Unknown structure type 'ScriptStruct Core.DistributionVector.RawDistributionVector' for the property named 'VelOverLife'!
+		ADD_STRUCT(::NonArithmeticProperty<RawDistributionVector>, VelOverLife, 0xFFFFFFFF)
 	};
 }
 #undef ADD_VAR

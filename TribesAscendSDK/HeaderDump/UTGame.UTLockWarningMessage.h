@@ -1,4 +1,5 @@
 #pragma once
+#include "Core.Object.Color.h"
 #include "UTGame.UTLocalMessage.h"
 #include "Engine.PlayerReplicationInfo.h"
 #include "Core.Object.h"
@@ -19,8 +20,8 @@ namespace UnrealScript
 	class UTLockWarningMessage : public UTLocalMessage
 	{
 	public:
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'YellowColor'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color' for the property named 'RedColor'!
+		ADD_STRUCT(::NonArithmeticProperty<Color>, YellowColor, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Color>, RedColor, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, RadarLockString, 0xFFFFFFFF)
 		ADD_VAR(::StrProperty, MissileLockOnString, 0xFFFFFFFF)
 		byte AnnouncementLevel(byte MessageIndex)
@@ -47,9 +48,7 @@ namespace UnrealScript
 			free(params);
 			return returnVal;
 		}
-		
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void* GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
+		Color GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI, class PlayerReplicationInfo* RelatedPRI, class Object* OptionalObject)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTLockWarningMessage.GetColor");
 			byte* params = (byte*)malloc(20);
@@ -58,9 +57,7 @@ void* GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI, class Player
 			*(class PlayerReplicationInfo**)(params + 8) = RelatedPRI;
 			*(class Object**)(params + 12) = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
-			auto returnVal = *(
-// WARNING: Unknown structure type 'ScriptStruct Core.Object.Color'!
-void**)(params + 16);
+			auto returnVal = *(Color*)(params + 16);
 			free(params);
 			return returnVal;
 		}

@@ -1,5 +1,7 @@
 #pragma once
+#include "PlatformCommon.TgPlayerProfile.PropertyPair.h"
 #include "Core.Object.h"
+#include "TribesGame.TrSummaryHelper.MVPAward.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " TribesGame.TrSummaryHelper." #y); \
@@ -42,39 +44,23 @@ void**)params = AwardArray;
 void**)params;
 			free(params);
 		}
-		int MVPSort(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrSummaryHelper.MVPAward'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrSummaryHelper.MVPAward'!
-void* B)
+		int MVPSort(MVPAward A, MVPAward B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.MVPSort");
 			byte* params = (byte*)malloc(28);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrSummaryHelper.MVPAward'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct TribesGame.TrSummaryHelper.MVPAward'!
-void**)(params + 12) = B;
+			*(MVPAward*)params = A;
+			*(MVPAward*)(params + 12) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 24);
 			free(params);
 			return returnVal;
 		}
-		int AwardSort(
-// WARNING: Unknown structure type 'ScriptStruct PlatformCommon.TgPlayerProfile.PropertyPair'!
-void* A, 
-// WARNING: Unknown structure type 'ScriptStruct PlatformCommon.TgPlayerProfile.PropertyPair'!
-void* B)
+		int AwardSort(PropertyPair A, PropertyPair B)
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.AwardSort");
 			byte* params = (byte*)malloc(20);
-			*(
-// WARNING: Unknown structure type 'ScriptStruct PlatformCommon.TgPlayerProfile.PropertyPair'!
-void**)params = A;
-			*(
-// WARNING: Unknown structure type 'ScriptStruct PlatformCommon.TgPlayerProfile.PropertyPair'!
-void**)(params + 8) = B;
+			*(PropertyPair*)params = A;
+			*(PropertyPair*)(params + 8) = B;
 			((ScriptObject*)this)->ProcessEvent(function, params, NULL);
 			auto returnVal = *(int*)(params + 16);
 			free(params);

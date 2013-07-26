@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.GameplayEventsHandler.h"
+#include "Core.Object.Array_Mirror.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
 	static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x " GameFramework.GameStateObject." #y); \
@@ -22,8 +23,8 @@ namespace UnrealScript
 		ADD_VAR(::BoolProperty, bIsRoundStarted, 0x2)
 		ADD_VAR(::BoolProperty, bIsMatchStarted, 0x1)
 		ADD_VAR(::ByteProperty, SessionType, 0xFFFFFFFF)
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Array_Mirror' for the property named 'PlayerStates'!
-		// WARNING: Unknown structure type 'ScriptStruct Core.Object.Array_Mirror' for the property named 'TeamStates'!
+		ADD_STRUCT(::NonArithmeticProperty<Array_Mirror>, PlayerStates, 0xFFFFFFFF)
+		ADD_STRUCT(::NonArithmeticProperty<Array_Mirror>, TeamStates, 0xFFFFFFFF)
 		void PreProcessStream()
 		{
 			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameStateObject.PreProcessStream");

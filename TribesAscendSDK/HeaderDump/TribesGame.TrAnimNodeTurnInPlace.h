@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.AnimNodeBlend.h"
+#include "Core.Object.Rotator.h"
 #include "TribesGame.TrPawn.h"
 #define ADD_VAR(x, y, z) (x) get_##y() \
 { \
