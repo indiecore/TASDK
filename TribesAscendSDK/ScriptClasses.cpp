@@ -353,20 +353,20 @@ struct FunctionDescription
 
 		wtr->WriteLine("static ScriptFunction* function = ScriptObject::Find<ScriptFunction>(\"%s\");", originalFunction->GetFullName());
 		if (paramSize > 0)
-			wtr->WriteLine("byte* params = (byte*)malloc(%i);", paramSize);
+			wtr->WriteLine("byte params[%i] = { NULL };", paramSize);
 
 		for (unsigned int i = 0; i < arguments.size(); i++)
-			arguments[i].WriteLoadToBuffer(wtr, "params");
+			arguments[i].WriteLoadToBuffer(wtr, "&params");
 
 		wtr->Write("((ScriptObject*)this)->ProcessEvent(function, ");
 		if (paramSize > 0)
-			wtr->Write("params");
+			wtr->Write("&params");
 		else
 			wtr->Write("NULL");
 		wtr->WriteLine(", NULL);");
 
 		for (unsigned int i = 0; i < arguments.size(); i++)
-			arguments[i].WriteLoadFromBuffer(wtr, "params");
+			arguments[i].WriteLoadFromBuffer(wtr, "&params");
 
 		if (returnProperty)
 		{
@@ -374,24 +374,18 @@ struct FunctionDescription
 			if (originalFunction->return_val_offset() != 0)
 			{
 				if (!strcmp(tnfp.c_str(), "byte"))
-					wtr->WriteLine("auto returnVal = *(params + %i);", originalFunction->return_val_offset());
+					wtr->WriteLine("return params[%i];", originalFunction->return_val_offset());
 				else
-					wtr->WriteLine("auto returnVal = *(%s*)(params + %i);", tnfp.c_str(), originalFunction->return_val_offset());
+					wtr->WriteLine("return *(%s*)&params[%i];", tnfp.c_str(), originalFunction->return_val_offset());
 			}
 			else
 			{
 				if (!strcmp(tnfp.c_str(), "byte"))
-					wtr->WriteLine("auto returnVal = *params;");
+					wtr->WriteLine("return params[0];");
 				else
-					wtr->WriteLine("auto returnVal = *(%s*)params;", tnfp.c_str());
+					wtr->WriteLine("return *(%s*)&params;", tnfp.c_str());
 			}
 		}
-		
-		if (paramSize > 0)
-			wtr->WriteLine("free(params);");
-
-		if (returnProperty)
-			wtr->WriteLine("return returnVal;");
 
 		wtr->Indent--;
 		wtr->WriteLine("}");
