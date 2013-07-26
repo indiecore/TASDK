@@ -528,8 +528,7 @@ struct ClassDescription
 			}
 		}
 		
-		if (!strcmp(originalClass->object_class()->GetName(), "Class"))
-			this->RequireTypes(&dependencyManager);
+		this->RequireTypes(&dependencyManager);
 	}
 
 	void RequireTypes(ClassDependencyManager* classDepMgr)
@@ -572,19 +571,33 @@ struct ClassDescription
 				wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
 				wtr->Indent--;
 				wtr->WriteLine("} \\");
-				wtr->WriteLine("__declspec(property(get=get_##y)) x y;");
+				wtr->WriteLine("void set_##y(x val) \\");
+				wtr->WriteLine("{ \\");
+				wtr->Indent++;
+				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"StructProperty \" OBJECT_CONTEXT \".\" #y); \\");
+				wtr->WriteLine("*(x*)(this + script_property->offset) = val; \\");
+				wtr->Indent--;
+				wtr->WriteLine("} \\");
+				wtr->WriteLine("__declspec(property(get=get_##y, put=set_##y)) x y;");
 			}
 
 			if (objectPropertyCount > 0)
 			{
-				wtr->WriteLine("#define ADD_OBJECT(x, y) (class x*) get_##y() \\");
+				wtr->WriteLine("#define ADD_OBJECT(x, y) x* get_##y() \\");
 				wtr->WriteLine("{ \\");
 				wtr->Indent++;
 				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"ObjectProperty \" OBJECT_CONTEXT \".\" #y); \\");
 				wtr->WriteLine("return *(x**)(this + script_property->offset); \\");
 				wtr->Indent--;
 				wtr->WriteLine("} \\");
-				wtr->WriteLine("__declspec(property(get=get_##y)) class x* y;");
+				wtr->WriteLine("void set_##y(x val) \\");
+				wtr->WriteLine("{ \\");
+				wtr->Indent++;
+				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"ObjectProperty \" OBJECT_CONTEXT \".\" #y); \\");
+				wtr->WriteLine("*(x**)(this + script_property->offset) = val; \\");
+				wtr->Indent--;
+				wtr->WriteLine("} \\");
+				wtr->WriteLine("__declspec(property(get=get_##y, put=set_##y)) x* y;");
 			}
 
 			wtr->WriteLine("namespace UnrealScript");
