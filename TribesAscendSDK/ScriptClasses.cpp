@@ -39,15 +39,22 @@ bool ScriptObject::IsA( ScriptClass *script_class )
 
 std::string GetTypeNameForProperty(ScriptProperty* prop)
 {
-	if (!strcmp(prop->object_class()->GetName(), "ObjectProperty"))
+	if (!strcmp(prop->object_class()->GetName(), "ObjectProperty") || !strcmp(prop->object_class()->GetName(), "StructProperty"))
 	{
-		std::string tp = "class ";
-		tp += ((ScriptObjectProperty*)prop)->property_class->GetName();
-		tp += "*";
+		std::string tp = ((ScriptObjectProperty*)prop)->property_class->GetName();
+		for (auto outer = prop->outer(); outer; outer = outer->outer())
+		{
+			tp.insert(0, "::");
+			tp.insert(0, outer->GetName());
+		}
+		tp.insert(0, "UnrealScript::");
+		if (!strcmp(prop->object_class()->GetName(), "ObjectProperty"))
+		{
+			tp.insert(0, "class ");
+			tp += "*";
+		}
 		return tp;
 	}
-	else if (!strcmp(prop->object_class()->GetName(), "StructProperty"))
-		return ((ScriptObjectProperty*)prop)->property_class->GetName();
 	else if (!strcmp(prop->object_class()->GetName(), "ByteProperty"))
 		return "byte";
 	else if (!strcmp(prop->object_class()->GetName(), "IntProperty"))
@@ -373,7 +380,7 @@ struct FunctionDescription
 
 struct ClassDescription
 {
-	ScriptClass* originalClass;
+	ScriptStruct* originalClass;
 	std::vector<ClassDescription> nestedStructs;
 	int primitivePropertyCount;
 	int structPropertyCount;
@@ -382,7 +389,7 @@ struct ClassDescription
 	std::vector<FunctionDescription> functions;
 	ClassDependencyManager dependencyManager;
 
-	ClassDescription(ScriptClass* originalClass_)
+	ClassDescription(ScriptStruct* originalClass_)
 	{
 		originalClass = originalClass_; 
 		primitivePropertyCount = 0;
@@ -477,7 +484,13 @@ struct ClassDescription
 			wtr->WriteLine("__declspec(property(get=get_##y)) class x* y;");
 		}
 
-		wtr->WriteLine("namespace UnrealScript");
+		std::string nmspc = "";
+		for (auto outer = originalClass->outer(); outer; outer = outer->outer())
+		{
+			nmspc.insert(0, "::");
+			nmspc.insert(0, outer->GetName());
+		}
+		wtr->WriteLine("namespace UnrealScript::%s", nmspc.c_str());
 		wtr->WriteLine("{");
 		wtr->Indent++;
 
