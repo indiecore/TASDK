@@ -127,9 +127,14 @@ struct ClassDependencyManager
 
 	void ProcessProperty(ScriptProperty* prop)
 	{
-		// TODO: Once child structs are dumped, add those headers as dependencies as well.
-		if (!strcmp(prop->object_class()->GetName(), "ObjectProperty") || !strcmp(prop->object_class()->GetName(), "StructProperty"))
+		if (
+			   !strcmp(prop->object_class()->GetName(), "ObjectProperty")
+			|| !strcmp(prop->object_class()->GetName(), "StructProperty")
+			|| (!strcmp(prop->object_class()->GetName(), "ByteProperty") && ((ScriptByteProperty*)prop)->enum_type)
+		)
+		{
 			RequireType(((ScriptObjectProperty*)prop)->property_class);
+		}
 	}
 
 	void RequireType(ScriptObject* objType)
