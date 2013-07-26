@@ -42,12 +42,12 @@ std::string GetTypeNameForProperty(ScriptProperty* prop)
 	if (!strcmp(prop->object_class()->GetName(), "ObjectProperty") || !strcmp(prop->object_class()->GetName(), "StructProperty"))
 	{
 		std::string tp = ((ScriptObjectProperty*)prop)->property_class->GetName();
-		for (auto outer = ((ScriptObjectProperty*)prop)->property_class->outer(); outer; outer = outer->outer())
-		{
-			tp.insert(0, "::");
-			tp.insert(0, outer->GetName());
-		}
-		tp.insert(0, "UnrealScript::");
+		//for (auto outer = ((ScriptObjectProperty*)prop)->property_class->outer(); outer; outer = outer->outer())
+		//{
+		//	tp.insert(0, "::");
+		//	tp.insert(0, outer->GetName());
+		//}
+		//tp.insert(0, "UnrealScript::");
 		if (!strcmp(prop->object_class()->GetName(), "ObjectProperty"))
 		{
 			tp.insert(0, "class ");
@@ -428,32 +428,61 @@ struct ClassDescription
 				}
 			}
 		}
-
-		if (originalClass->super())
-			dependencyManager.RequireType(originalClass->super());
-
-		for (unsigned int i = 0; i < properties.size(); i++)
-			properties[i].RequireTypes(&dependencyManager);
-		for (unsigned int i = 0; i < functions.size(); i++)
-			functions[i].RequireTypes(&dependencyManager);
+		
+		if (!strcmp(originalClass->object_class()->GetName(), "Class"))
+			this->RequireTypes(&dependencyManager);
 	}
 
-	void Write()
+	void RequireTypes(ClassDependencyManager* classDepMgr)
 	{
-		auto headerName = GetHeaderName(originalClass);
-		headerName.insert(0, REPO_ROOT "TribesAscendSDK\\HeaderDump\\");
-		auto wtr = new IndentedStreamWriter(headerName.c_str());
+		if (originalClass->super())
+			classDepMgr->RequireType(originalClass->super());
 
-		wtr->WriteLine("#pragma once");
+		for (unsigned int i = 0; i < properties.size(); i++)
+			properties[i].RequireTypes(classDepMgr);
+		for (unsigned int i = 0; i < functions.size(); i++)
+			functions[i].RequireTypes(classDepMgr);
+	}
+
+	void Write(IndentedStreamWriter* wtr)
+	{
+		if (!strcmp(originalClass->object_class()->GetName(), "Class"))
+		{
+			wtr->WriteLine("#pragma once");
 		
-		dependencyManager.WriteToStream(wtr);
+			dependencyManager.WriteToStream(wtr);
 
+			wtr->WriteLine("namespace UnrealScript");
+			wtr->WriteLine("{");
+			wtr->Indent++;
+		}
+
+		if (originalClass->super())
+			wtr->WriteLine("class %s : public %s", originalClass->GetName(), originalClass->super()->GetName());
+		else
+			wtr->WriteLine("class %s", originalClass->GetName());
+		wtr->WriteLine("{");
+		if (properties.size() > 0 || functions.size() > 0 || nestedStructs.size() > 0)
+			wtr->WriteLine("public:");
+		wtr->Indent++;
+
+		
+		for (unsigned int i = 0; i < nestedStructs.size(); i++)
+			nestedStructs[i].Write(wtr);
+		//wtr->WriteLine("// Here would be the struct '%s'", nestedStructs[i].originalClass->GetName());
+
+		std::string propertyPrefix = originalClass->GetName();
+		for (auto outer = originalClass->outer(); outer; outer = outer->outer())
+		{
+			propertyPrefix.insert(0, ".");
+			propertyPrefix.insert(0, outer->GetName());
+		}
 		if (primitivePropertyCount > 0)
 		{
 			wtr->WriteLine("#define ADD_VAR(x, y, z) (x) get_##y() \\");
 			wtr->WriteLine("{ \\");
 			wtr->Indent++;
-			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x \" %s.%s.\" #y); \\", originalClass->outer()->GetName(), originalClass->GetName());
+			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x \" %s.\" #y); \\", propertyPrefix.c_str());
 			wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
 			wtr->Indent--;
 			wtr->WriteLine("} \\");
@@ -465,7 +494,7 @@ struct ClassDescription
 			wtr->WriteLine("#define ADD_STRUCT(x, y, z) (x) get_##y() \\");
 			wtr->WriteLine("{ \\");
 			wtr->Indent++;
-			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"StructProperty %s.%s.\" #y); \\", originalClass->outer()->GetName(), originalClass->GetName());
+			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"StructProperty %s.\" #y); \\", propertyPrefix.c_str());
 			wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
 			wtr->Indent--;
 			wtr->WriteLine("} \\");
@@ -477,46 +506,17 @@ struct ClassDescription
 			wtr->WriteLine("#define ADD_OBJECT(x, y) (class x*) get_##y() \\");
 			wtr->WriteLine("{ \\");
 			wtr->Indent++;
-			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"ObjectProperty %s.%s.\" #y); \\", originalClass->outer()->GetName(), originalClass->GetName());
+			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"ObjectProperty %s.\" #y); \\", propertyPrefix.c_str());
 			wtr->WriteLine("return *(x**)(this + script_property->offset); \\");
 			wtr->Indent--;
 			wtr->WriteLine("} \\");
 			wtr->WriteLine("__declspec(property(get=get_##y)) class x* y;");
 		}
 
-		std::string nmspc = originalClass->outer()->GetName();
-		for (auto outer = originalClass->outer()->outer(); outer; outer = outer->outer())
-		{
-			nmspc.insert(0, "::");
-			nmspc.insert(0, outer->GetName());
-		}
-		wtr->WriteLine("namespace UnrealScript::%s", nmspc.c_str());
-		wtr->WriteLine("{");
-		wtr->Indent++;
-
-		if (originalClass->super())
-			wtr->WriteLine("class %s : public %s", originalClass->GetName(), originalClass->super()->GetName());
-		else
-			wtr->WriteLine("class %s", originalClass->GetName());
-		wtr->WriteLine("{");
-
-		if (properties.size() > 0 || functions.size() > 0 || nestedStructs.size() > 0)
-			wtr->WriteLine("public:");
-
-		wtr->Indent++;
-
-		for (unsigned int i = 0; i < nestedStructs.size(); i++)
-			wtr->WriteLine("// Here would be the struct '%s'", nestedStructs[i].originalClass->GetName());
 		for (unsigned int i = 0; i < properties.size(); i++)
 			properties[i].WriteToStream(wtr);
 		for (unsigned int i = 0; i < functions.size(); i++)
 			functions[i].WriteToStream(wtr);
-
-		wtr->Indent--;
-		wtr->WriteLine("};");
-
-		wtr->Indent--;
-		wtr->WriteLine("}");
 
 		if (primitivePropertyCount > 0)
 			wtr->WriteLine("#undef ADD_VAR");
@@ -525,29 +525,36 @@ struct ClassDescription
 		if (objectPropertyCount > 0)
 			wtr->WriteLine("#undef ADD_OBJECT");
 
-		delete wtr;
+		wtr->Indent--;
+		wtr->WriteLine("};");
+		
+		if (!strcmp(originalClass->object_class()->GetName(), "Class"))
+		{
+			wtr->Indent--;
+			wtr->WriteLine("}");
+		}
 	}
 };
 
 void ScriptObject::GenerateHeader()
 {
 	auto cd = new ClassDescription((ScriptClass*)this);
-	cd->Write();
+	auto headerName = GetHeaderName(cd->originalClass);
+	headerName.insert(0, REPO_ROOT "TribesAscendSDK\\HeaderDump\\");
+	auto wtr = new IndentedStreamWriter(headerName.c_str());
+	cd->Write(wtr);
+	delete wtr;
 	delete cd;
 }
 
 void ScriptObject::GenerateHeaders()
 {
 	static ScriptClass* core_class = ScriptObject::Find<ScriptClass>("Class Core.Class");
-	static ScriptClass* core_scriptStruct = ScriptObject::Find<ScriptClass>("Class Core.ScriptStruct");
 	for (int i = 0; i < object_array()->count(); i++)
 	{
 		ScriptObject* class_object = (*object_array())(i);
-
-		if(class_object && (class_object->object_class() == core_class || class_object->object_class() == core_scriptStruct))
-		{
+		if(class_object && class_object->object_class() == core_class)
 			class_object->GenerateHeader();
-		}
 	}
 
 	OutputLog("Finished.\n");
