@@ -389,21 +389,20 @@ struct FunctionDescription
 struct ConstDescription
 {
 	ScriptConst* originalConst;
-	const char* valueString;
+	std::string valueString;
 	const char* typeString;
 	bool nonIntegral;
 
 	ConstDescription(ScriptConst* originalConst_)
 	{
 		originalConst = originalConst_;
-		valueString = originalConst->value().c_str();
+		valueString = std::string(originalConst->value().c_str());
 		nonIntegral = true;
-		auto str = std::string(valueString);
-		if (str.find('.'))
+		if (valueString.find('.'))
 			typeString = "float";
-		else if (str.find('"'))
+		else if (valueString.find('"'))
 			typeString = "const char*";
-		else if (str.find('t') || str.find('s')) // [t]rue/fal[s]e
+		else if (valueString.find('t') || valueString.find('s')) // [t]rue/fal[s]e
 			typeString = "bool";
 		else
 		{
@@ -412,23 +411,18 @@ struct ConstDescription
 		}
 	}
 
-	~ConstDescription()
-	{
-		delete valueString;
-	}
-
 	void WriteDeclaration(IndentedStreamWriter* wtr)
 	{
 		if (nonIntegral)
 			wtr->WriteLine("static const %s %s;", typeString, originalConst->GetName());
 		else
-			wtr->WriteLine("static const %s %s = %s;", typeString, originalConst->GetName(), valueString);
+			wtr->WriteLine("static const %s %s = %s;", typeString, originalConst->GetName(), valueString.c_str());
 	}
 
 	void WriteImplementation(IndentedStreamWriter* wtr)
 	{
 		if (nonIntegral)
-			wtr->WriteLine("const %s %s::%s = %s;", typeString, GetTypeNameForProperty(originalConst->outer()).c_str(), originalConst->GetName(), valueString);
+			wtr->WriteLine("const %s %s::%s = %s;", typeString, GetTypeNameForProperty(originalConst->outer()).c_str(), originalConst->GetName(), valueString.c_str());
 	}
 };
 
