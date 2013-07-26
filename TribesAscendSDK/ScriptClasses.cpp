@@ -552,7 +552,7 @@ struct ClassDescription
 
 			if (primitivePropertyCount > 0)
 			{
-				wtr->WriteLine("#define ADD_VAR(x, y, z) (x) get_##y() \\");
+				wtr->WriteLine("#define ADD_VAR(x, y, z) x get_##y() \\");
 				wtr->WriteLine("{ \\");
 				wtr->Indent++;
 				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x \" \" OBJECT_CONTEXT \".\" #y); \\");
@@ -564,7 +564,7 @@ struct ClassDescription
 
 			if (structPropertyCount > 0)
 			{
-				wtr->WriteLine("#define ADD_STRUCT(x, y, z) (x) get_##y() \\");
+				wtr->WriteLine("#define ADD_STRUCT(x, y, z) x get_##y() \\");
 				wtr->WriteLine("{ \\");
 				wtr->Indent++;
 				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"StructProperty \" OBJECT_CONTEXT \".\" #y); \\");
@@ -590,7 +590,7 @@ struct ClassDescription
 				wtr->WriteLine("return *(x**)(this + script_property->offset); \\");
 				wtr->Indent--;
 				wtr->WriteLine("} \\");
-				wtr->WriteLine("void set_##y(x val) \\");
+				wtr->WriteLine("void set_##y(x* val) \\");
 				wtr->WriteLine("{ \\");
 				wtr->Indent++;
 				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"ObjectProperty \" OBJECT_CONTEXT \".\" #y); \\");
