@@ -454,7 +454,7 @@ struct EnumDescription
 
 	void WriteToStream(IndentedStreamWriter* wtr)
 	{
-		wtr->WriteLine("enum %s", originalEnum->GetName());
+		wtr->WriteLine("enum %s : byte", originalEnum->GetName());
 		wtr->WriteLine("{");
 		wtr->Indent++;
 
