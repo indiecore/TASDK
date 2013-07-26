@@ -422,7 +422,12 @@ struct ConstDescription
 	void WriteImplementation(IndentedStreamWriter* wtr)
 	{
 		if (nonIntegral)
-			wtr->WriteLine("const %s %s::%s = %s;", typeString, GetTypeNameForProperty(originalConst->outer()).c_str(), originalConst->GetName(), valueString.c_str());
+		{
+			if (!strcmp(typeString, "float"))
+				wtr->WriteLine("const %s %s::%s = %sf;", typeString, GetTypeNameForProperty(originalConst->outer()).c_str(), originalConst->GetName(), valueString.c_str());
+			else
+				wtr->WriteLine("const %s %s::%s = %s;", typeString, GetTypeNameForProperty(originalConst->outer()).c_str(), originalConst->GetName(), valueString.c_str());
+		}
 	}
 };
 
