@@ -392,7 +392,7 @@ struct EnumDescription
 		wtr->Indent++;
 
 		for (int i = 0; i < originalEnum->value_names().count(); i++)
-			wtr->WriteLine("%s,", originalEnum->value_names().data()[i].GetName());
+			wtr->WriteLine("%s = %i,", originalEnum->value_names().data()[i].GetName(), i);
 		
 		wtr->Indent--;
 		wtr->WriteLine("};");
@@ -428,7 +428,7 @@ struct ClassDescription
 				if (!strcmp(object->object_class()->GetName(), "Function"))
 					functions.push_back(FunctionDescription((ScriptFunction*)object));
 				else if (!strcmp(object->object_class()->GetName(), "ScriptStruct"))
-					nestedStructs.push_back(ClassDescription((ScriptClass*)object));
+					nestedStructs.push_back(ClassDescription((ScriptStruct*)object));
 				else if (!strcmp(object->object_class()->GetName(), "Enum"))
 					nestedEnums.push_back(EnumDescription((ScriptEnum*)object));
 				else
