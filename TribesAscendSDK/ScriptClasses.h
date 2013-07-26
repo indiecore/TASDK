@@ -60,6 +60,14 @@ public:
 		wcscpy_s( string.data_, wcslen( string_ ) + 1, string_ );
 	}
 
+	char* c_str()
+	{
+		char* buf = (char*)calloc(1, string.count());
+		size_t convLen = 0;
+		wcstombs_s(&convLen, buf, string.count(), string.data(), string.count());
+		return buf;
+	}
+
 	operator ScriptArray< wchar_t >()
 	{
 		return string;
@@ -284,6 +292,18 @@ public:
 	inline ScriptArray<ScriptName> value_names()
 	{
 		return value_names_;
+	}
+};
+
+class ScriptConst : public ScriptField
+{
+private:
+	ScriptString value_;
+
+public:
+	inline ScriptString value()
+	{
+		return value_;
 	}
 };
 

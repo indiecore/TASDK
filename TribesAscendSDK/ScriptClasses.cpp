@@ -376,6 +376,23 @@ struct FunctionDescription
 	}
 };
 
+struct ConstDescription
+{
+	ScriptConst* originalConst;
+
+	ConstDescription(ScriptConst* originalConst_)
+	{
+		originalConst = originalConst_;
+	}
+
+	void WriteToStream(IndentedStreamWriter* wtr)
+	{
+		auto val = originalConst->value().c_str();
+		wtr->WriteLine("static const auto %s = %s;", originalConst->GetName(), val);
+		delete val;
+	}
+};
+
 struct EnumDescription
 {
 	ScriptEnum* originalEnum;
@@ -402,8 +419,9 @@ struct EnumDescription
 struct ClassDescription
 {
 	ScriptStruct* originalClass;
-	std::vector<ClassDescription> nestedStructs;
+	std::vector<ConstDescription> nestedConstants;
 	std::vector<EnumDescription> nestedEnums;
+	std::vector<ClassDescription> nestedStructs;
 	int primitivePropertyCount;
 	int structPropertyCount;
 	int objectPropertyCount;
@@ -431,6 +449,8 @@ struct ClassDescription
 					nestedStructs.push_back(ClassDescription((ScriptStruct*)object));
 				else if (!strcmp(object->object_class()->GetName(), "Enum"))
 					nestedEnums.push_back(EnumDescription((ScriptEnum*)object));
+				else if (!strcmp(object->object_class()->GetName(), "Const"))
+					nestedConstants.push_back(ConstDescription((ScriptConst*)object));
 				else
 				{
 					auto prop = PropertyDescription((ScriptProperty*)object);
@@ -490,6 +510,8 @@ struct ClassDescription
 			wtr->WriteLine("public:");
 		wtr->Indent++;
 
+		for (unsigned int i = 0; i < nestedConstants.size(); i++)
+			nestedConstants[i].WriteToStream(wtr);
 		for (unsigned int i = 0; i < nestedEnums.size(); i++)
 			nestedEnums[i].WriteToStream(wtr);
 		for (unsigned int i = 0; i < nestedStructs.size(); i++)
