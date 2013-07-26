@@ -42,12 +42,11 @@ std::string GetTypeNameForProperty(ScriptProperty* prop)
 	if (!strcmp(prop->object_class()->GetName(), "ObjectProperty") || !strcmp(prop->object_class()->GetName(), "StructProperty"))
 	{
 		std::string tp = ((ScriptObjectProperty*)prop)->property_class->GetName();
-		//for (auto outer = ((ScriptObjectProperty*)prop)->property_class->outer(); outer; outer = outer->outer())
-		//{
-		//	tp.insert(0, "::");
-		//	tp.insert(0, outer->GetName());
-		//}
-		//tp.insert(0, "UnrealScript::");
+		for (auto outer = ((ScriptObjectProperty*)prop)->property_class->outer(); outer->outer(); outer = outer->outer())
+		{
+			tp.insert(0, "::");
+			tp.insert(0, outer->GetName());
+		}
 		if (!strcmp(prop->object_class()->GetName(), "ObjectProperty"))
 		{
 			tp.insert(0, "class ");
@@ -204,7 +203,6 @@ struct PropertyDescription
 				writer->WriteLine("ADD_STRUCT(::QWordProperty, %s, 0xFFFFFFFF)", originalProperty->GetName());
 			else
 				writer->WriteLine("ADD_STRUCT(::NonArithmeticProperty<%s>, %s, 0xFFFFFFFF)", GetTypeNameForProperty(objectProperty).c_str(), originalProperty->GetName());
-			//	writer->WriteLine("// WARNING: Unknown structure type '%s' for the property named '%s'!", objectProperty->property_class->GetFullName(), originalProperty->GetName());
 		}
 		else
 			writer->WriteLine("// ERROR: Unknown object class '%s' for the property named '%s'!", originalProperty->object_class()->GetName(), originalProperty->GetName());
