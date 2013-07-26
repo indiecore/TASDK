@@ -398,11 +398,11 @@ struct ConstDescription
 		originalConst = originalConst_;
 		valueString = std::string(originalConst->value().c_str());
 		nonIntegral = true;
-		if (valueString.find('.'))
+		if (valueString.find('.') != std::string::npos)
 			typeString = "float";
-		else if (valueString.find('"'))
+		else if (valueString.find('"') != std::string::npos)
 			typeString = "const char*";
-		else if (valueString.find('t') || valueString.find('s')) // [t]rue/fal[s]e
+		else if (valueString.find('t') != std::string::npos || valueString.find('s') != std::string::npos) // [t]rue/fal[s]e
 			typeString = "bool";
 		else
 		{
