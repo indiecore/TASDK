@@ -42,7 +42,7 @@ std::string GetTypeNameForProperty(ScriptProperty* prop)
 	if (!strcmp(prop->object_class()->GetName(), "ObjectProperty") || !strcmp(prop->object_class()->GetName(), "StructProperty"))
 	{
 		std::string tp = ((ScriptObjectProperty*)prop)->property_class->GetName();
-		for (auto outer = prop->outer(); outer; outer = outer->outer())
+		for (auto outer = ((ScriptObjectProperty*)prop)->property_class->outer(); outer; outer = outer->outer())
 		{
 			tp.insert(0, "::");
 			tp.insert(0, outer->GetName());
@@ -484,8 +484,8 @@ struct ClassDescription
 			wtr->WriteLine("__declspec(property(get=get_##y)) class x* y;");
 		}
 
-		std::string nmspc = "";
-		for (auto outer = originalClass->outer(); outer; outer = outer->outer())
+		std::string nmspc = originalClass->outer()->GetName();
+		for (auto outer = originalClass->outer()->outer(); outer; outer = outer->outer())
 		{
 			nmspc.insert(0, "::");
 			nmspc.insert(0, outer->GetName());
