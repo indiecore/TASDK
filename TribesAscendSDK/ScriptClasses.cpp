@@ -466,8 +466,9 @@ struct ClassDescription
 
 		
 		for (unsigned int i = 0; i < nestedStructs.size(); i++)
+			wtr->WriteLine("class %s;", nestedStructs[i].originalClass->GetName());
+		for (unsigned int i = 0; i < nestedStructs.size(); i++)
 			nestedStructs[i].Write(wtr);
-		//wtr->WriteLine("// Here would be the struct '%s'", nestedStructs[i].originalClass->GetName());
 
 		std::string propertyPrefix = originalClass->GetName();
 		for (auto outer = originalClass->outer(); outer; outer = outer->outer())
