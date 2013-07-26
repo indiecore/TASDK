@@ -37,7 +37,7 @@ bool ScriptObject::IsA( ScriptClass *script_class )
 }
 
 
-std::string GetTypeNameForProperty(ScriptProperty* prop)
+std::string GetTypeNameForProperty(ScriptObject* prop)
 {
 	if (!strcmp(prop->object_class()->GetName(), "ObjectProperty") || !strcmp(prop->object_class()->GetName(), "StructProperty"))
 	{
@@ -51,6 +51,16 @@ std::string GetTypeNameForProperty(ScriptProperty* prop)
 		{
 			tp.insert(0, "class ");
 			tp += "*";
+		}
+		return tp;
+	}
+	else if (!strcmp(prop->object_class()->GetName(), "Class"))
+	{
+		std::string tp = prop->GetName();
+		for (auto outer = prop->outer(); outer->outer(); outer = outer->outer())
+		{
+			tp.insert(0, "::");
+			tp.insert(0, outer->GetName());
 		}
 		return tp;
 	}
@@ -379,17 +389,46 @@ struct FunctionDescription
 struct ConstDescription
 {
 	ScriptConst* originalConst;
+	const char* valueString;
+	const char* typeString;
+	bool nonIntegral;
 
 	ConstDescription(ScriptConst* originalConst_)
 	{
 		originalConst = originalConst_;
+		valueString = originalConst->value().c_str();
+		nonIntegral = true;
+		auto str = std::string(valueString);
+		if (str.find('.'))
+			typeString = "float";
+		else if (str.find('"'))
+			typeString = "const char*";
+		else if (str.find('t') || str.find('s')) // [t]rue/fal[s]e
+			typeString = "bool";
+		else
+		{
+			typeString = "auto";
+			nonIntegral = false;
+		}
 	}
 
-	void WriteToStream(IndentedStreamWriter* wtr)
+	~ConstDescription()
 	{
-		auto val = originalConst->value().c_str();
-		wtr->WriteLine("static const auto %s = %s;", originalConst->GetName(), val);
-		delete val;
+		delete valueString;
+	}
+
+	void WriteDeclaration(IndentedStreamWriter* wtr)
+	{
+		if (nonIntegral)
+			wtr->WriteLine("static const %s %s;", typeString, originalConst->GetName());
+		else
+			wtr->WriteLine("static const %s %s = %s;", typeString, originalConst->GetName(), valueString);
+	}
+
+	void WriteImplementation(IndentedStreamWriter* wtr)
+	{
+		if (nonIntegral)
+			wtr->WriteLine("const %s %s::%s = %s;", typeString, GetTypeNameForProperty(originalConst->outer()).c_str(), originalConst->GetName(), valueString);
 	}
 };
 
@@ -511,7 +550,7 @@ struct ClassDescription
 		wtr->Indent++;
 
 		for (unsigned int i = 0; i < nestedConstants.size(); i++)
-			nestedConstants[i].WriteToStream(wtr);
+			nestedConstants[i].WriteDeclaration(wtr);
 		for (unsigned int i = 0; i < nestedEnums.size(); i++)
 			nestedEnums[i].WriteToStream(wtr);
 		for (unsigned int i = 0; i < nestedStructs.size(); i++)
@@ -573,6 +612,9 @@ struct ClassDescription
 
 		wtr->Indent--;
 		wtr->WriteLine("};");
+
+		for (unsigned int i = 0; i < nestedConstants.size(); i++)
+			nestedConstants[i].WriteImplementation(wtr);
 		
 		if (!strcmp(originalClass->object_class()->GetName(), "Class"))
 		{
