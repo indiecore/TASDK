@@ -210,7 +210,7 @@ struct PropertyDescription
 			|| !strcmp(originalProperty->object_class()->GetName(), "NameProperty")
 		)
 		{
-			writer->WriteLine("ADD_VAR(::%s, %s, 0xFFFFFFFF)", originalProperty->object_class()->GetName(), originalProperty->GetName());
+			writer->WriteLine("ADD_VAR(::%s, %s, 0)", originalProperty->object_class()->GetName(), originalProperty->GetName());
 		}
 		else if (!strcmp(originalProperty->object_class()->GetName(), "BoolProperty"))
 			writer->WriteLine("ADD_VAR(::%s, %s, 0x%X)", originalProperty->object_class()->GetName(), originalProperty->GetName(), ((ScriptBoolProperty*)originalProperty)->bit_mask);
@@ -224,13 +224,13 @@ struct PropertyDescription
 		{
 			auto objectProperty = (ScriptObjectProperty*)originalProperty;
 			if (!strcmp(objectProperty->property_class->GetName(), "Vector"))
-				writer->WriteLine("ADD_STRUCT(::VectorProperty, %s, 0xFFFFFFFF)", originalProperty->GetName());
+				writer->WriteLine("ADD_STRUCT(::VectorProperty, %s, 0)", originalProperty->GetName());
 			else if (!strcmp(objectProperty->property_class->GetName(), "Rotator"))
-				writer->WriteLine("ADD_STRUCT(::RotatorProperty, %s, 0xFFFFFFFF)", originalProperty->GetName());
+				writer->WriteLine("ADD_STRUCT(::RotatorProperty, %s, 0)", originalProperty->GetName());
 			else if (!strcmp(objectProperty->property_class->GetFullName(), "ScriptStruct Core.Object.QWord"))
-				writer->WriteLine("ADD_STRUCT(::QWordProperty, %s, 0xFFFFFFFF)", originalProperty->GetName());
+				writer->WriteLine("ADD_STRUCT(::QWordProperty, %s, 0)", originalProperty->GetName());
 			else
-				writer->WriteLine("ADD_STRUCT(::NonArithmeticProperty<%s>, %s, 0xFFFFFFFF)", GetTypeNameForProperty(objectProperty).c_str(), originalProperty->GetName());
+				writer->WriteLine("ADD_STRUCT(::NonArithmeticProperty<%s>, %s, 0)", GetTypeNameForProperty(objectProperty).c_str(), originalProperty->GetName());
 		}
 		else
 			writer->WriteLine("// ERROR: Unknown object class '%s' for the property named '%s'!", originalProperty->object_class()->GetName(), originalProperty->GetName());
