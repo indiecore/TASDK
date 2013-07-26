@@ -546,6 +546,42 @@ struct ClassDescription
 		
 			dependencyManager.WriteToStream(wtr);
 
+			if (primitivePropertyCount > 0)
+			{
+				wtr->WriteLine("#define ADD_VAR(x, y, z) (x) get_##y() \\");
+				wtr->WriteLine("{ \\");
+				wtr->Indent++;
+				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x \" \" OBJECT_CONTEXT \".\" #y); \\");
+				wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
+				wtr->Indent--;
+				wtr->WriteLine("} \\");
+				wtr->WriteLine("__declspec(property(get=get_##y)) x y;");
+			}
+
+			if (structPropertyCount > 0)
+			{
+				wtr->WriteLine("#define ADD_STRUCT(x, y, z) (x) get_##y() \\");
+				wtr->WriteLine("{ \\");
+				wtr->Indent++;
+				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"StructProperty \" OBJECT_CONTEXT \".\" #y); \\");
+				wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
+				wtr->Indent--;
+				wtr->WriteLine("} \\");
+				wtr->WriteLine("__declspec(property(get=get_##y)) x y;");
+			}
+
+			if (objectPropertyCount > 0)
+			{
+				wtr->WriteLine("#define ADD_OBJECT(x, y) (class x*) get_##y() \\");
+				wtr->WriteLine("{ \\");
+				wtr->Indent++;
+				wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"ObjectProperty \" OBJECT_CONTEXT \".\" #y); \\");
+				wtr->WriteLine("return *(x**)(this + script_property->offset); \\");
+				wtr->Indent--;
+				wtr->WriteLine("} \\");
+				wtr->WriteLine("__declspec(property(get=get_##y)) class x* y;");
+			}
+
 			wtr->WriteLine("namespace UnrealScript");
 			wtr->WriteLine("{");
 			wtr->Indent++;
@@ -560,53 +596,23 @@ struct ClassDescription
 			wtr->WriteLine("public:");
 		wtr->Indent++;
 
+
 		for (unsigned int i = 0; i < nestedConstants.size(); i++)
 			nestedConstants[i].WriteDeclaration(wtr);
 		for (unsigned int i = 0; i < nestedEnums.size(); i++)
 			nestedEnums[i].WriteToStream(wtr);
 		for (unsigned int i = 0; i < nestedStructs.size(); i++)
 			nestedStructs[i].Write(wtr);
-
-		std::string propertyPrefix = originalClass->GetName();
-		for (auto outer = originalClass->outer(); outer; outer = outer->outer())
+		
+		if (properties.size() > 0)
 		{
-			propertyPrefix.insert(0, ".");
-			propertyPrefix.insert(0, outer->GetName());
-		}
-		if (primitivePropertyCount > 0)
-		{
-			wtr->WriteLine("#define ADD_VAR(x, y, z) (x) get_##y() \\");
-			wtr->WriteLine("{ \\");
-			wtr->Indent++;
-			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(#x \" %s.\" #y); \\", propertyPrefix.c_str());
-			wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
-			wtr->Indent--;
-			wtr->WriteLine("} \\");
-			wtr->WriteLine("__declspec(property(get=get_##y)) x y;");
-		}
-
-		if (structPropertyCount > 0)
-		{
-			wtr->WriteLine("#define ADD_STRUCT(x, y, z) (x) get_##y() \\");
-			wtr->WriteLine("{ \\");
-			wtr->Indent++;
-			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"StructProperty %s.\" #y); \\", propertyPrefix.c_str());
-			wtr->WriteLine("return (##x(this, script_property->offset, z)); \\");
-			wtr->Indent--;
-			wtr->WriteLine("} \\");
-			wtr->WriteLine("__declspec(property(get=get_##y)) x y;");
-		}
-
-		if (objectPropertyCount > 0)
-		{
-			wtr->WriteLine("#define ADD_OBJECT(x, y) (class x*) get_##y() \\");
-			wtr->WriteLine("{ \\");
-			wtr->Indent++;
-			wtr->WriteLine("static ScriptProperty* script_property = ScriptObject::Find<ScriptProperty>(\"ObjectProperty %s.\" #y); \\", propertyPrefix.c_str());
-			wtr->WriteLine("return *(x**)(this + script_property->offset); \\");
-			wtr->Indent--;
-			wtr->WriteLine("} \\");
-			wtr->WriteLine("__declspec(property(get=get_##y)) class x* y;");
+			std::string propertyPrefix = originalClass->GetName();
+			for (auto outer = originalClass->outer(); outer; outer = outer->outer())
+			{
+				propertyPrefix.insert(0, ".");
+				propertyPrefix.insert(0, outer->GetName());
+			}
+			wtr->WriteLine("#define OBJECT_CONTEXT \"%s\"", propertyPrefix.c_str());
 		}
 
 		for (unsigned int i = 0; i < properties.size(); i++)
@@ -614,12 +620,8 @@ struct ClassDescription
 		for (unsigned int i = 0; i < functions.size(); i++)
 			functions[i].WriteToStream(wtr);
 
-		if (primitivePropertyCount > 0)
-			wtr->WriteLine("#undef ADD_VAR");
-		if (structPropertyCount > 0)
-			wtr->WriteLine("#undef ADD_STRUCT");
-		if (objectPropertyCount > 0)
-			wtr->WriteLine("#undef ADD_OBJECT");
+		if (properties.size() > 0)
+			wtr->WriteLine("#undef OBJECT_CONTEXT");
 
 		wtr->Indent--;
 		wtr->WriteLine("};");
@@ -631,6 +633,13 @@ struct ClassDescription
 		{
 			wtr->Indent--;
 			wtr->WriteLine("}");
+			
+			if (primitivePropertyCount > 0)
+				wtr->WriteLine("#undef ADD_VAR");
+			if (structPropertyCount > 0)
+				wtr->WriteLine("#undef ADD_STRUCT");
+			if (objectPropertyCount > 0)
+				wtr->WriteLine("#undef ADD_OBJECT");
 		}
 	}
 };
