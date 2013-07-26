@@ -114,8 +114,8 @@ class ScriptObject
 private:
 	int object_internal_integer_;
 	QWord object_flags_;
-	void *hash_next_;
-	void *hash_outer_next_;
+	ScriptObject *hash_next_;
+	ScriptObject *hash_outer_next_;
 	void *state_frame_;
 	ScriptObject *linker_;
 	void *linker_index_;
