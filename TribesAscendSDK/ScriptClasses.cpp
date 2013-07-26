@@ -376,10 +376,34 @@ struct FunctionDescription
 	}
 };
 
+struct EnumDescription
+{
+	ScriptEnum* originalEnum;
+
+	EnumDescription(ScriptEnum* originalEnum_)
+	{
+		originalEnum = originalEnum_;
+	}
+
+	void WriteToStream(IndentedStreamWriter* wtr)
+	{
+		wtr->WriteLine("enum %s", originalEnum->GetName());
+		wtr->WriteLine("{");
+		wtr->Indent++;
+
+		for (int i = 0; i < originalEnum->value_names().count(); i++)
+			wtr->WriteLine("%s,", originalEnum->value_names().data()[i].GetName());
+		
+		wtr->Indent--;
+		wtr->WriteLine("};");
+	}
+};
+
 struct ClassDescription
 {
 	ScriptStruct* originalClass;
 	std::vector<ClassDescription> nestedStructs;
+	std::vector<EnumDescription> nestedEnums;
 	int primitivePropertyCount;
 	int structPropertyCount;
 	int objectPropertyCount;
@@ -404,7 +428,9 @@ struct ClassDescription
 				if (!strcmp(object->object_class()->GetName(), "Function"))
 					functions.push_back(FunctionDescription((ScriptFunction*)object));
 				else if (!strcmp(object->object_class()->GetName(), "ScriptStruct"))
-					nestedStructs.push_back((ScriptClass*)object);
+					nestedStructs.push_back(ClassDescription((ScriptClass*)object));
+				else if (!strcmp(object->object_class()->GetName(), "Enum"))
+					nestedEnums.push_back(EnumDescription((ScriptEnum*)object));
 				else
 				{
 					auto prop = PropertyDescription((ScriptProperty*)object);
@@ -464,6 +490,8 @@ struct ClassDescription
 			wtr->WriteLine("public:");
 		wtr->Indent++;
 
+		for (unsigned int i = 0; i < nestedEnums.size(); i++)
+			nestedEnums[i].WriteToStream(wtr);
 		for (unsigned int i = 0; i < nestedStructs.size(); i++)
 			nestedStructs[i].Write(wtr);
 
@@ -546,13 +574,10 @@ void ScriptObject::GenerateHeader()
 void ScriptObject::GenerateHeaders()
 {
 	static ScriptClass* core_class = ScriptObject::Find<ScriptClass>("Class Core.Class");
-	static ScriptClass* core_enum = ScriptObject::Find<ScriptClass>("Class Core.Enum");
 	for (int i = 0; i < object_array()->count(); i++)
 	{
 		ScriptObject* class_object = (*object_array())(i);
 		if(class_object && class_object->object_class() == core_class)
-			class_object->GenerateHeader();
-		else if (class_object && class_object->object_class() == core_enum)
 			class_object->GenerateHeader();
 	}
 
