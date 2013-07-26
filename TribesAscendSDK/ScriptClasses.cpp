@@ -546,10 +546,13 @@ void ScriptObject::GenerateHeader()
 void ScriptObject::GenerateHeaders()
 {
 	static ScriptClass* core_class = ScriptObject::Find<ScriptClass>("Class Core.Class");
+	static ScriptClass* core_enum = ScriptObject::Find<ScriptClass>("Class Core.Enum");
 	for (int i = 0; i < object_array()->count(); i++)
 	{
 		ScriptObject* class_object = (*object_array())(i);
 		if(class_object && class_object->object_class() == core_class)
+			class_object->GenerateHeader();
+		else if (class_object && class_object->object_class() == core_enum)
 			class_object->GenerateHeader();
 	}
 

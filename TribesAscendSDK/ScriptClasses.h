@@ -275,6 +275,18 @@ public:
 	}
 };
 
+class ScriptEnum : public ScriptField
+{
+private:
+	ScriptArray<ScriptName> value_names_;
+
+public:
+	inline ScriptArray<ScriptName> value_names()
+	{
+		return value_names_;
+	}
+};
+
 class ScriptStruct : public ScriptField
 {
 public:
