@@ -133,6 +133,8 @@ struct PropertyDescription
 		originalProperty = originalProperty_;
 	}
 
+	// TODO: Add support for DelegateProperty, ArrayProperty, MapProperty, FixedArrayProperty, PointerProperty, InterfaceProperty, and ComponentProperty
+
 	bool IsPrimitiveProperty()
 	{
 		return
@@ -372,6 +374,7 @@ struct FunctionDescription
 struct ClassDescription
 {
 	ScriptClass* originalClass;
+	std::vector<ClassDescription> nestedStructs;
 	int primitivePropertyCount;
 	int structPropertyCount;
 	int objectPropertyCount;
@@ -395,6 +398,8 @@ struct ClassDescription
 			{
 				if (!strcmp(object->object_class()->GetName(), "Function"))
 					functions.push_back(FunctionDescription((ScriptFunction*)object));
+				else if (!strcmp(object->object_class()->GetName(), "ScriptStruct"))
+					nestedStructs.push_back((ScriptClass*)object);
 				else
 				{
 					auto prop = PropertyDescription((ScriptProperty*)object);
@@ -482,11 +487,13 @@ struct ClassDescription
 			wtr->WriteLine("class %s", originalClass->GetName());
 		wtr->WriteLine("{");
 
-		if (properties.size() > 0 || functions.size() > 0)
+		if (properties.size() > 0 || functions.size() > 0 || nestedStructs.size() > 0)
 			wtr->WriteLine("public:");
 
 		wtr->Indent++;
 
+		for (unsigned int i = 0; i < nestedStructs.size(); i++)
+			wtr->WriteLine("// Here would be the struct '%s'", nestedStructs[i].originalClass->GetName());
 		for (unsigned int i = 0; i < properties.size(); i++)
 			properties[i].WriteToStream(wtr);
 		for (unsigned int i = 0; i < functions.size(); i++)
