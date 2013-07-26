@@ -54,7 +54,12 @@ std::string GetTypeNameForProperty(ScriptObject* prop)
 		}
 		return tp;
 	}
-	else if (!strcmp(prop->object_class()->GetName(), "Class"))
+	else if (
+		   !strcmp(prop->object_class()->GetName(), "Const")
+		|| !strcmp(prop->object_class()->GetName(), "Class")
+		|| !strcmp(prop->object_class()->GetName(), "Enum")
+		|| !strcmp(prop->object_class()->GetName(), "ScriptStruct")
+	)
 	{
 		std::string tp = prop->GetName();
 		for (auto outer = prop->outer(); outer->outer(); outer = outer->outer())
@@ -125,6 +130,13 @@ struct ClassDependencyManager
 	{
 		if (objType == parentClass)
 			return;
+		if (objType->outer()->outer())
+		{
+			// Ensure that we only require the class-level
+			// include.
+			RequireType(objType->outer());
+			return;
+		}
 		static std::string headerName;
 		headerName = GetHeaderName(objType);
 		if (requiredHeaders.count(headerName) > 0)
