@@ -464,9 +464,6 @@ struct ClassDescription
 			wtr->WriteLine("public:");
 		wtr->Indent++;
 
-		
-		for (unsigned int i = 0; i < nestedStructs.size(); i++)
-			wtr->WriteLine("class %s;", nestedStructs[i].originalClass->GetName());
 		for (unsigned int i = 0; i < nestedStructs.size(); i++)
 			nestedStructs[i].Write(wtr);
 
