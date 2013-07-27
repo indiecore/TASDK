@@ -1,10 +1,10 @@
 #include "TASDK.h"
-#include "HeaderDump/TribesGame.TrEquipInterface.h"
+//#include "HeaderDump/TribesGame.TrEquipInterface.h"
 //#include "Armor.h"
 
 const char *kLogName = "SDKTest.log";
 
-using namespace UnrealScript;
+//using namespace UnrealScript;
 
 inline float MetersToUnits( float meters )
 {
@@ -84,7 +84,7 @@ enum ClassTypes
 	Class_UNK = 0
 };
 
-HookType IsClassOwned( TrEquipInterface *equip, bool &result, int class_id )
+/*HookType IsClassOwned( TrEquipInterface *equip, bool &result, int class_id )
 {
 	OutputLog( "IsClassOwned\n" );
 	result = true;
@@ -145,7 +145,7 @@ HookType IsEquipOwned( TrEquipInterface *equip, bool &result, int class_id, int 
 	OutputLog( "IsEquipOwned\n" );
 	result = true;
 	return kHookBlock;
-}
+}*/
 
 /*HookType GetEquipDevice( TrEquipInterface *equip, ScriptClass* &result, ScriptClass *family_info, byte equip_slot )
 {
@@ -209,14 +209,14 @@ void ModInit()
 	ScriptObject *png = ScriptObject::Find< ScriptObject >( "Texture2D TribesHud.01_png" );
 	
 
-	script_hooks::AddHook( "Function TribesGame.TrEquipInterface.IsClassOwned", IsClassOwned );
+	/*script_hooks::AddHook( "Function TribesGame.TrEquipInterface.IsClassOwned", IsClassOwned );
 	script_hooks::AddHook( "Function TribesGame.TrEquipInterface.GetClassCount", GetClassCount );
 	script_hooks::AddHook( "Function TribesGame.TrEquipInterface.GetFirstClassId", GetFirstClassId );
 	script_hooks::AddHook( "Function TribesGame.TrEquipInterface.GetNextClassId", GetNextClassId );
 	script_hooks::AddHook( "Function TribesGame.TrEquipInterface.IsLoadoutOwned", IsLoadoutOwned );
 	script_hooks::AddHook( "Function TribesGame.TrPlayerController.InTraining", InTraining );
 
-	script_hooks::AddHook( "Function TribesGame.TrEquipInterface.IsEquipOwned", IsEquipOwned );
+	script_hooks::AddHook( "Function TribesGame.TrEquipInterface.IsEquipOwned", IsEquipOwned );*/
 	//script_hooks::AddHook( "Function TribesGame.TrPlayerReplicationInfo.GetCharacterEquipLocal", GetEquipDevice );
 
 	//ScriptObject::LogAll();
