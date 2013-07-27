@@ -379,7 +379,7 @@ struct FunctionDescription
 		wtr->WriteLine("{");
 		wtr->Indent++;
 
-		wtr->WriteLine("static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::script_array())(%i);", originalFunction->object_internal_integer());
+		wtr->WriteLine("static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(%i);", originalFunction->object_internal_integer());
 		if (paramSize > 0)
 			wtr->WriteLine("byte params[%i] = { NULL };", paramSize);
 
