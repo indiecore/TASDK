@@ -295,9 +295,9 @@ struct FunctionArgumentDescription
 		else
 		{
 			if (!strcmp(tnfp.c_str(), "byte"))
-				wtr->WriteLine("%s[0] = %s;", bufName, name.c_str());
+				wtr->WriteLine("*%s = %s;", bufName, name.c_str());
 			else
-				wtr->WriteLine("*(%s*)&%s[0] = %s;", tnfp.c_str(), bufName, name.c_str());
+				wtr->WriteLine("*(%s*)%s = %s;", tnfp.c_str(), bufName, name.c_str());
 		}
 	}
 
@@ -316,9 +316,9 @@ struct FunctionArgumentDescription
 			else
 			{
 				if (!strcmp(tnfp.c_str(), "byte"))
-					wtr->WriteLine("%s = %s[0];", name.c_str(), bufName);
+					wtr->WriteLine("%s = *%s;", name.c_str(), bufName);
 				else
-					wtr->WriteLine("%s = *(%s*)&%s[0];", name.c_str(), tnfp.c_str(), bufName);
+					wtr->WriteLine("%s = *(%s*)%s;", name.c_str(), tnfp.c_str(), bufName);
 			}
 		}
 	}
@@ -409,9 +409,9 @@ struct FunctionDescription
 			else
 			{
 				if (!strcmp(tnfp.c_str(), "byte"))
-					wtr->WriteLine("return params[0];");
+					wtr->WriteLine("return *params;");
 				else
-					wtr->WriteLine("return *(%s*)&params[0];", tnfp.c_str());
+					wtr->WriteLine("return *(%s*)params;", tnfp.c_str());
 			}
 		}
 
