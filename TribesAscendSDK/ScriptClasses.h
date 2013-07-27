@@ -450,6 +450,11 @@ struct ScriptObjectProperty : public ScriptProperty
 	ScriptClass *property_class;
 };
 
+struct ScriptArrayProperty : public ScriptProperty
+{
+	ScriptProperty* inner_property;
+};
+
 struct ScriptBoolProperty : public ScriptProperty
 {
 	DWORD bit_mask;

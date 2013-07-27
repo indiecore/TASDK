@@ -69,6 +69,14 @@ std::string GetTypeNameForProperty(ScriptObject* prop)
 		}
 		return tp;
 	}
+	else if (!strcmp(prop->object_class()->GetName(), "ArrayProperty"))
+	{
+		auto aProp = (ScriptArrayProperty*)prop;
+		std::string tp = "ScriptArray<";
+		tp += GetTypeNameForProperty(aProp->inner_property);
+		tp += ">";
+		return tp;
+	}
 	else if (!strcmp(prop->object_class()->GetName(), "ByteProperty"))
 	{
 		auto bProp = (ScriptByteProperty*)prop;
@@ -130,11 +138,14 @@ struct ClassDependencyManager
 		if (
 			   !strcmp(prop->object_class()->GetName(), "ObjectProperty")
 			|| !strcmp(prop->object_class()->GetName(), "StructProperty")
-			|| (!strcmp(prop->object_class()->GetName(), "ByteProperty") && ((ScriptByteProperty*)prop)->enum_type)
 		)
 		{
 			RequireType(((ScriptObjectProperty*)prop)->property_class);
 		}
+		else if (!strcmp(prop->object_class()->GetName(), "ByteProperty") && ((ScriptByteProperty*)prop)->enum_type)
+			RequireType(((ScriptByteProperty*)prop)->enum_type);
+		else if (!strcmp(prop->object_class()->GetName(), "ArrayProperty"))
+			ProcessProperty(((ScriptArrayProperty*)prop)->inner_property);
 	}
 
 	void RequireType(ScriptObject* objType)
@@ -172,7 +183,7 @@ struct PropertyDescription
 		originalProperty = originalProperty_;
 	}
 
-	// TODO: Add support for DelegateProperty, ArrayProperty, MapProperty, FixedArrayProperty, PointerProperty, InterfaceProperty, and ComponentProperty
+	// TODO: Add support for DelegateProperty, MapProperty, FixedArrayProperty, PointerProperty, InterfaceProperty, and ComponentProperty
 
 	bool IsBoolProperty()
 	{
@@ -187,6 +198,7 @@ struct PropertyDescription
 			|| !strcmp(originalProperty->object_class()->GetName(), "FloatProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "StrProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "NameProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "ArrayProperty")
 		;
 	}
 
@@ -226,6 +238,7 @@ struct PropertyDescription
 			|| !strcmp(originalProperty->object_class()->GetName(), "FloatProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "StrProperty")
 			|| !strcmp(originalProperty->object_class()->GetName(), "NameProperty")
+			|| !strcmp(originalProperty->object_class()->GetName(), "ArrayProperty")
 		)
 		{
 			writer->WriteLine("ADD_STRUCT(%s, %s, %i)", GetTypeNameForProperty(originalProperty).c_str(), originalProperty->GetName(), originalProperty->offset);
