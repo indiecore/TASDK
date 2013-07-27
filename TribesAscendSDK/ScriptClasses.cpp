@@ -500,6 +500,7 @@ struct EnumDescription
 struct ClassDescription
 {
 	ScriptStruct* originalClass;
+	bool isClassDefinition;
 	std::vector<ConstDescription> nestedConstants;
 	std::vector<EnumDescription> nestedEnums;
 	std::vector<ClassDescription> nestedStructs;
@@ -518,6 +519,7 @@ struct ClassDescription
 		primitivePropertyCount = 0;
 		structPropertyCount = 0;
 		objectPropertyCount = 0;
+		isClassDefinition = !strcmp(originalClass->object_class()->GetName(), "Class");
 		dependencyManager.parentClass = originalClass;
 
 		for (int i = 0; i < originalClass->object_array()->count(); i++)
@@ -582,14 +584,19 @@ struct ClassDescription
 
 	void WriteDeclaration(IndentedStreamWriter* wtr)
 	{
-		if (!strcmp(originalClass->object_class()->GetName(), "Class"))
+		if (isClassDefinition)
 		{
 			wtr->WriteLine("namespace UnrealScript");
 			wtr->WriteLine("{");
 			wtr->Indent++;
 		}
 		
-		wtr->Write("class %s", originalClass->GetName());
+		if (isClassDefinition)
+			wtr->Write("class");
+		else
+			wtr->Write("struct");
+
+		wtr->Write(" %s", originalClass->GetName());
 		if (nestedStructs.size() > 0 || nestedEnums.size() > 0)
 		{
 			wtr->WriteLine("");
@@ -607,7 +614,7 @@ struct ClassDescription
 		}
 		wtr->WriteLine(";");
 		
-		if (!strcmp(originalClass->object_class()->GetName(), "Class"))
+		if (isClassDefinition)
 		{
 			wtr->Indent--;
 			wtr->WriteLine("}");
@@ -616,7 +623,7 @@ struct ClassDescription
 
 	void Write(IndentedStreamWriter* wtr)
 	{
-		if (!strcmp(originalClass->object_class()->GetName(), "Class"))
+		if (isClassDefinition)
 		{
 			wtr->WriteLine("#pragma once");
 
@@ -665,10 +672,15 @@ struct ClassDescription
 			wtr->Indent++;
 		}
 
-		if (originalClass->super())
-			wtr->WriteLine("class %s : public %s", originalClass->GetName(), originalClass->super()->GetName());
+		if (isClassDefinition)
+			wtr->Write("class");
 		else
-			wtr->WriteLine("class %s", originalClass->GetName());
+			wtr->Write("struct");
+
+		if (originalClass->super())
+			wtr->WriteLine(" %s : public %s", originalClass->GetName(), originalClass->super()->GetName());
+		else
+			wtr->WriteLine(" %s", originalClass->GetName());
 		wtr->WriteLine("{");
 		if (properties.size() > 0 || functions.size() > 0 || nestedStructs.size() > 0)
 			wtr->WriteLine("public:");
@@ -765,7 +777,7 @@ struct ClassDescription
 		for (unsigned int i = 0; i < nestedConstants.size(); i++)
 			nestedConstants[i].WriteImplementation(wtr);
 		
-		if (!strcmp(originalClass->object_class()->GetName(), "Class"))
+		if (isClassDefinition)
 		{
 			wtr->Indent--;
 			wtr->WriteLine("}");
