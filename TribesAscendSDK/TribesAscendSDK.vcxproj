@@ -89,7 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Armor.h" />
-    <ClInclude Include="DynamicClasses.h" />
     <ClInclude Include="IndentedStreamWriter.h" />
     <ClInclude Include="Logging.h" />
     <ClInclude Include="ScriptHooks.h" />

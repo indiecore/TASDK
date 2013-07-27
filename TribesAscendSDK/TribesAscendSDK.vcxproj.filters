@@ -62,9 +62,6 @@
     <ClInclude Include="TASDK.h">
       <Filter>Header Files\SDK</Filter>
     </ClInclude>
-    <ClInclude Include="DynamicClasses.h">
-      <Filter>Header Files\SDK</Filter>
-    </ClInclude>
     <ClInclude Include="Armor.h">
       <Filter>Header Files\Tribes Classic</Filter>
     </ClInclude>

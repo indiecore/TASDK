@@ -524,6 +524,14 @@ struct ClassDescription
 				}
 			}
 		}
+
+		for (unsigned int i = 0; i < nestedStructs.size(); i++)
+		{
+			boolPropertyCount += nestedStructs[i].boolPropertyCount;
+			primitivePropertyCount += nestedStructs[i].primitivePropertyCount;
+			structPropertyCount += nestedStructs[i].structPropertyCount;
+			objectPropertyCount += nestedStructs[i].objectPropertyCount;
+		}
 		
 		this->RequireTypes(&dependencyManager);
 	}
