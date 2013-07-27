@@ -30,14 +30,14 @@ namespace UnrealScript
 			ESP_OffsetZero = 1,
 			ESP_MAX = 2,
 		};
-		class AICmdHistoryItem
+		struct AICmdHistoryItem
 		{
 		public:
 			ADD_OBJECT(ScriptClass, CmdClass, 0)
 			ADD_STRUCT(float, TimeStamp, 4)
 			ADD_STRUCT(ScriptString*, VerboseString, 8)
 		};
-		class SpecialMoveStruct
+		struct SpecialMoveStruct
 		{
 		public:
 			ADD_STRUCT(ScriptName, SpecialMoveName, 0)
@@ -45,26 +45,26 @@ namespace UnrealScript
 			ADD_OBJECT(Actor, InteractionActor, 12)
 			ADD_STRUCT(int, Flags, 16)
 		};
-		class GameSpecialMoveInfo
+		struct GameSpecialMoveInfo
 		{
 		public:
 			ADD_STRUCT(ScriptName, SpecialMoveName, 0)
 			ADD_OBJECT(ScriptClass, SpecialMoveClass, 8)
 			ADD_OBJECT(GameSpecialMove, SpecialMoveInstance, 12)
 		};
-		class TakeHitInfo
+		struct TakeHitInfo
 		{
 		public:
-			ADD_STRUCT(Object::Vector, HitLocation, 0)
-			ADD_STRUCT(Object::Vector, Momentum, 12)
+			ADD_STRUCT(Vector, HitLocation, 0)
+			ADD_STRUCT(Vector, Momentum, 12)
 			ADD_OBJECT(ScriptClass, DamageType, 24)
 			ADD_OBJECT(Pawn, InstigatedBy, 28)
 			ADD_STRUCT(byte, HitBoneIndex, 32)
 			ADD_OBJECT(PhysicalMaterial, PhysicalMaterial, 36)
 			ADD_STRUCT(float, Damage, 40)
-			ADD_STRUCT(Object::Vector, RadialDamageOrigin, 44)
+			ADD_STRUCT(Vector, RadialDamageOrigin, 44)
 		};
-		class ScreenShakeAnimStruct
+		struct ScreenShakeAnimStruct
 		{
 		public:
 			ADD_OBJECT(CameraAnim, Anim, 0)
@@ -80,7 +80,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, RandomSegmentDuration, 40)
 			ADD_BOOL(bSingleInstance, 44, 0x1)
 		};
-		class ShakeParams
+		struct ShakeParams
 		{
 		public:
 			ADD_STRUCT(GameTypes::EShakeParam, X, 0)
@@ -88,18 +88,18 @@ namespace UnrealScript
 			ADD_STRUCT(GameTypes::EShakeParam, Z, 2)
 			ADD_STRUCT(byte, Padding, 3)
 		};
-		class ScreenShakeStruct
+		struct ScreenShakeStruct
 		{
 		public:
 			ADD_STRUCT(float, TimeToGo, 0)
 			ADD_STRUCT(float, TimeDuration, 4)
-			ADD_STRUCT(Object::Vector, RotAmplitude, 8)
-			ADD_STRUCT(Object::Vector, RotFrequency, 20)
-			ADD_STRUCT(Object::Vector, RotSinOffset, 32)
+			ADD_STRUCT(Vector, RotAmplitude, 8)
+			ADD_STRUCT(Vector, RotFrequency, 20)
+			ADD_STRUCT(Vector, RotSinOffset, 32)
 			ADD_STRUCT(GameTypes::ShakeParams, RotParam, 44)
-			ADD_STRUCT(Object::Vector, LocAmplitude, 48)
-			ADD_STRUCT(Object::Vector, LocFrequency, 60)
-			ADD_STRUCT(Object::Vector, LocSinOffset, 72)
+			ADD_STRUCT(Vector, LocAmplitude, 48)
+			ADD_STRUCT(Vector, LocFrequency, 60)
+			ADD_STRUCT(Vector, LocSinOffset, 72)
 			ADD_STRUCT(GameTypes::ShakeParams, LocParam, 84)
 			ADD_STRUCT(float, FOVAmplitude, 88)
 			ADD_STRUCT(float, FOVFrequency, 92)

@@ -26,7 +26,7 @@ namespace UnrealScript
 	class Sequence : public SequenceOp
 	{
 	public:
-		class ActivateOp
+		struct ActivateOp
 		{
 		public:
 			ADD_STRUCT(float, RemainingDelay, 12)
@@ -34,7 +34,7 @@ namespace UnrealScript
 			ADD_OBJECT(SequenceOp, Op, 4)
 			ADD_OBJECT(SequenceOp, ActivatorOp, 0)
 		};
-		class QueuedActivationInfo
+		struct QueuedActivationInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<int>, ActivateIndices, 12)
@@ -56,9 +56,9 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, LogFile, 208)
 		void FindSeqObjectsByClass(ScriptClass* DesiredClass, bool bRecursive, ScriptArray<class SequenceObject*>& OutputObjects)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Sequence.FindSeqObjectsByClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4291);
 			byte params[20] = { NULL };
-			*(ScriptClass**)&params[0] = DesiredClass;
+			*(ScriptClass**)params = DesiredClass;
 			*(bool*)&params[4] = bRecursive;
 			*(ScriptArray<class SequenceObject*>*)&params[8] = OutputObjects;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -66,9 +66,9 @@ namespace UnrealScript
 		}
 		void FindSeqObjectsByName(ScriptString* SeqObjName, bool bCheckComment, ScriptArray<class SequenceObject*>& OutputObjects, bool bRecursive)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Sequence.FindSeqObjectsByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24824);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = SeqObjName;
+			*(ScriptString**)params = SeqObjName;
 			*(bool*)&params[12] = bCheckComment;
 			*(ScriptArray<class SequenceObject*>*)&params[16] = OutputObjects;
 			*(bool*)&params[28] = bRecursive;
@@ -77,14 +77,14 @@ namespace UnrealScript
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Sequence.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24830);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetEnabled(bool bInEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Sequence.SetEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24833);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bInEnabled;
+			*(bool*)params = bInEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -8,9 +8,9 @@ namespace UnrealScript
 	public:
 		class Weapon* GiveWeapon(ScriptString* WeaponClassStr)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCheatManager.GiveWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74480);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = WeaponClassStr;
+			*(ScriptString**)params = WeaponClassStr;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Weapon**)&params[12];
 		}

@@ -9,33 +9,33 @@ namespace UnrealScript
 	public:
 		void SetDataStoreBinding(ScriptString* MarkupText, int BindingIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStoreSubscriber.SetDataStoreBinding");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28889);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = MarkupText;
+			*(ScriptString**)params = MarkupText;
 			*(int*)&params[12] = BindingIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetDataStoreBinding(int BindingIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStoreSubscriber.GetDataStoreBinding");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28892);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = BindingIndex;
+			*(int*)params = BindingIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		bool RefreshSubscriberValue(int BindingIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStoreSubscriber.RefreshSubscriberValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28895);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = BindingIndex;
+			*(int*)params = BindingIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void NotifyDataStoreValueUpdated(class UIDataStore* SourceDataStore, bool bValuesInvalidated, ScriptName PropertyTag, class UIDataProvider* SourceProvider, int ArrayIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStoreSubscriber.NotifyDataStoreValueUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28898);
 			byte params[24] = { NULL };
-			*(class UIDataStore**)&params[0] = SourceDataStore;
+			*(class UIDataStore**)params = SourceDataStore;
 			*(bool*)&params[4] = bValuesInvalidated;
 			*(ScriptName*)&params[8] = PropertyTag;
 			*(class UIDataProvider**)&params[16] = SourceProvider;
@@ -44,15 +44,15 @@ namespace UnrealScript
 		}
 		void GetBoundDataStores(ScriptArray<class UIDataStore*>& out_BoundDataStores)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStoreSubscriber.GetBoundDataStores");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28904);
 			byte params[12] = { NULL };
-			*(ScriptArray<class UIDataStore*>*)&params[0] = out_BoundDataStores;
+			*(ScriptArray<class UIDataStore*>*)params = out_BoundDataStores;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_BoundDataStores = *(ScriptArray<class UIDataStore*>*)&params[0];
+			out_BoundDataStores = *(ScriptArray<class UIDataStore*>*)params;
 		}
 		void ClearBoundDataStores()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStoreSubscriber.ClearBoundDataStores");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28907);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

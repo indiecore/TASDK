@@ -34,32 +34,32 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fStationAnimTime, 1396)
 		void PawnEnteredStation(class TrPawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryStation.PawnEnteredStation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98206);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = P;
+			*(class TrPawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPowerStatusChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryStation.OnPowerStatusChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98211);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayStationEnteredEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryStation.PlayStationEnteredEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98212);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Timer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryStation.Timer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98216);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class Texture2D* GetMarker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryStation.GetMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98218);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Texture2D**)&params[0];
+			return *(class Texture2D**)params;
 		}
 	};
 }

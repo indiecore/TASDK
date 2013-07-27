@@ -7,9 +7,9 @@ namespace UnrealScript
 	public:
 		ScriptString* Translate(ScriptString* InArgument)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StringsTag.Translate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27224);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = InArgument;
+			*(ScriptString**)params = InArgument;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}

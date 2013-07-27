@@ -19,8 +19,8 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(float, Speed, 520)
-		ADD_STRUCT(Object::Vector, TargetImpactPoint, 536)
-		ADD_STRUCT(Object::Vector, TargetHitNormal, 524)
+		ADD_STRUCT(Vector, TargetImpactPoint, 536)
+		ADD_STRUCT(Vector, TargetHitNormal, 524)
 		ADD_STRUCT(float, LifeAfterImpact, 516)
 		ADD_OBJECT(SoundCue, ImpactSound, 512)
 		ADD_OBJECT(SoundCue, FallingSound, 508)
@@ -32,47 +32,47 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceTimeVarying, PodHitDecal, 476)
 		float GetTerminalVelocity()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.GetTerminalVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74035);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void Init(class TrCallIn_CrashLandInfo* CrashInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74037);
 			byte params[4] = { NULL };
-			*(class TrCallIn_CrashLandInfo**)&params[0] = CrashInfo;
+			*(class TrCallIn_CrashLandInfo**)params = CrashInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BreakApart()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.BreakApart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74039);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideMesh()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.HideMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74042);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ParticleSystemFinished(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* PSC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.ParticleSystemFinished");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74044);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = PSC;
+void**)params = PSC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74046);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_DeliveryPod.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74047);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

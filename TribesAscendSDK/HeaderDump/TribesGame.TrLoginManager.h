@@ -27,14 +27,14 @@ namespace UnrealScript
 		ADD_BOOL(bWaitingForLoginWaitPopup, 60, 0x2)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98659);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool Login(ScriptString* UserName, ScriptString* Password, bool bShouldRemember)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.Login");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98660);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = UserName;
+			*(ScriptString**)params = UserName;
 			*(ScriptString**)&params[12] = Password;
 			*(bool*)&params[24] = bShouldRemember;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -42,39 +42,39 @@ namespace UnrealScript
 		}
 		void OnUserLoginFailed(byte LocalUserNum, OnlineSubsystem::EOnlineServerConnectionStatus ErrorCode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.OnUserLoginFailed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98665);
 			byte params[2] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::EOnlineServerConnectionStatus*)&params[1] = ErrorCode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RetryLogin()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.RetryLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98669);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Logout()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.Logout");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98670);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SubmitPlayerName(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.SubmitPlayerName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98671);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoginWaitPopup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.LoginWaitPopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98673);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PopupData(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoginManager.PopupData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98674);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

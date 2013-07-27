@@ -38,17 +38,17 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, SettingsList, 124)
 		float GetCurrentValue(TrHUDSettings::EHUDSettingType Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDSettings.GetCurrentValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59226);
 			byte params[5] = { NULL };
-			*(TrHUDSettings::EHUDSettingType*)&params[0] = Index;
+			*(TrHUDSettings::EHUDSettingType*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		void SaveSetting(int Index, float val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDSettings.SaveSetting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96612);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(float*)&params[4] = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

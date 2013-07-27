@@ -8,9 +8,9 @@ namespace UnrealScript
 	public:
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ReverbVolumeToggleable.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25357);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

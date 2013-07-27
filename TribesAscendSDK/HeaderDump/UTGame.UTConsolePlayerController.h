@@ -20,7 +20,7 @@ namespace UnrealScript
 	class UTConsolePlayerController : public UTPlayerController
 	{
 	public:
-		class ProfileSettingToUE3BindingDatum
+		struct ProfileSettingToUE3BindingDatum
 		{
 		public:
 			ADD_STRUCT(ScriptName, UE3BindingName, 8)
@@ -32,58 +32,58 @@ namespace UnrealScript
 		ADD_BOOL(bTargetAdhesionEnabled, 2176, 0x1)
 		void UpdateRotation(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerController.UpdateRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44105);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AimingHelp(bool bInstantHit)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerController.AimingHelp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44112);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bInstantHit;
+			*(bool*)params = bInstantHit;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		float AimHelpModifier()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerController.AimHelpModifier");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44115);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		bool PerformedUseAction()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerController.PerformedUseAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44117);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void ClientSmartUse()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerController.ClientSmartUse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44119);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClientRestart(class Pawn* NewPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerController.ClientRestart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44120);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = NewPawn;
+			*(class Pawn**)params = NewPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PrevWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerController.PrevWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44122);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NextWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerController.NextWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44123);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ResetPlayerMovementInput()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsolePlayerController.ResetPlayerMovementInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44124);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

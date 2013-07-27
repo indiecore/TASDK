@@ -17,14 +17,14 @@ namespace UnrealScript
 		ADD_STRUCT(int, RatingId, 120)
 		void OnStatsWriteComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsWrite.OnStatsWriteComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22875);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool GetStatId(ScriptName StatName, int& StatId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsWrite.GetStatId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22877);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = StatName;
+			*(ScriptName*)params = StatName;
 			*(int*)&params[8] = StatId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			StatId = *(int*)&params[8];
@@ -32,57 +32,57 @@ namespace UnrealScript
 		}
 		ScriptName GetStatName(int StatId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsWrite.GetStatName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22881);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = StatId;
+			*(int*)params = StatId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[4];
 		}
 		void SetFloatStat(int StatId, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsWrite.SetFloatStat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22884);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = StatId;
+			*(int*)params = StatId;
 			*(float*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetIntStat(int StatId, int Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsWrite.SetIntStat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22887);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = StatId;
+			*(int*)params = StatId;
 			*(int*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void IncrementFloatStat(int StatId, float IncBy)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsWrite.IncrementFloatStat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22890);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = StatId;
+			*(int*)params = StatId;
 			*(float*)&params[4] = IncBy;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void IncrementIntStat(int StatId, int IncBy)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsWrite.IncrementIntStat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22893);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = StatId;
+			*(int*)params = StatId;
 			*(int*)&params[4] = IncBy;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DecrementFloatStat(int StatId, float DecBy)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsWrite.DecrementFloatStat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22896);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = StatId;
+			*(int*)params = StatId;
 			*(float*)&params[4] = DecBy;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DecrementIntStat(int StatId, int DecBy)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsWrite.DecrementIntStat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22899);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = StatId;
+			*(int*)params = StatId;
 			*(int*)&params[4] = DecBy;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

@@ -35,10 +35,10 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, PlaySound, 248)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_PlaySound.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25824);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

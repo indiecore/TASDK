@@ -21,76 +21,76 @@ namespace UnrealScript
 		ADD_STRUCT(int, Criteria, 356)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Followers.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58844);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FillData(class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Followers.FillData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58845);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = DataList;
+			*(class GFxObject**)params = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpecialAction(class GFxTrAction* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Followers.SpecialAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58850);
 			byte params[4] = { NULL };
-			*(class GFxTrAction**)&params[0] = Action;
+			*(class GFxTrAction**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CheckPricing(class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Followers.CheckPricing");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58853);
 			byte params[8] = { NULL };
-			*(class GFxObject**)&params[0] = DataList;
+			*(class GFxObject**)params = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		class GFxObject* FillPricing(class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Followers.FillPricing");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58858);
 			byte params[8] = { NULL };
-			*(class GFxObject**)&params[0] = DataList;
+			*(class GFxObject**)params = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GFxObject**)&params[4];
 		}
 		int ModifyAction(int ActionIndex, class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Followers.ModifyAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58864);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			*(class GFxObject**)&params[4] = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void RefreshButtons()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Followers.RefreshButtons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58869);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int TakeFocus(int ActionIndex, class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Followers.TakeFocus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58870);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			*(class GFxObject**)&params[4] = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		class GFxObject* FillOption(int ActionIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Followers.FillOption");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58875);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GFxObject**)&params[4];
 		}
 		int FindNextFollower()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Followers.FindNextFollower");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58882);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

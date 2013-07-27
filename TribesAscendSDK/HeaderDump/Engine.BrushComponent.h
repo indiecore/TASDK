@@ -26,7 +26,7 @@ namespace UnrealScript
 	class BrushComponent : public PrimitiveComponent
 	{
 	public:
-		class KCachedConvexData_Mirror
+		struct KCachedConvexData_Mirror
 		{
 		public:
 			ADD_STRUCT(ScriptArray<int>, CachedConvexElements, 0)

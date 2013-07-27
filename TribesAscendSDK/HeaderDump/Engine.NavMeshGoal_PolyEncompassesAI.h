@@ -11,19 +11,19 @@ namespace UnrealScript
 	class NavMeshGoal_PolyEncompassesAI : public NavMeshPathGoalEvaluator
 	{
 	public:
-		ADD_STRUCT(Object::Vector, OverrideExtentToCheck, 80)
-		bool MakeSureAIFits(class NavigationHandle* NavHandle, Object::Vector InOverrideExtentToCheck)
+		ADD_STRUCT(Vector, OverrideExtentToCheck, 80)
+		bool MakeSureAIFits(class NavigationHandle* NavHandle, Vector InOverrideExtentToCheck)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_PolyEncompassesAI.MakeSureAIFits");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20983);
 			byte params[20] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
-			*(Object::Vector*)&params[4] = InOverrideExtentToCheck;
+			*(class NavigationHandle**)params = NavHandle;
+			*(Vector*)&params[4] = InOverrideExtentToCheck;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_PolyEncompassesAI.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20988);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

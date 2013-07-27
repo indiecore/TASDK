@@ -32,24 +32,24 @@ namespace UnrealScript
 		ADD_STRUCT(int, m_nEffectInstanceId, 60)
 		void Apply(class Actor* Target, Actor::ImpactInfo Impact)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEffect.Apply");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87081);
 			byte params[84] = { NULL };
-			*(class Actor**)&params[0] = Target;
+			*(class Actor**)params = Target;
 			*(Actor::ImpactInfo*)&params[4] = Impact;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Remove(class Actor* Target)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEffect.Remove");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87084);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Target;
+			*(class Actor**)params = Target;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CanBeApplied(class Actor* Target)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEffect.CanBeApplied");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87086);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Target;
+			*(class Actor**)params = Target;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

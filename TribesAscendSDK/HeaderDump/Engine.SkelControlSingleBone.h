@@ -21,11 +21,11 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(ScriptName, RotationSpaceBoneName, 228)
-		ADD_STRUCT(Object::Rotator, BoneRotation, 216)
+		ADD_STRUCT(Rotator, BoneRotation, 216)
 		ADD_STRUCT(ScriptName, TranslationSpaceBoneName, 208)
 		ADD_STRUCT(SkelControlBase::EBoneControlSpace, BoneRotationSpace, 205)
 		ADD_STRUCT(SkelControlBase::EBoneControlSpace, BoneTranslationSpace, 204)
-		ADD_STRUCT(Object::Vector, BoneTranslation, 192)
+		ADD_STRUCT(Vector, BoneTranslation, 192)
 		ADD_BOOL(bRemoveMeshRotation, 188, 0x10)
 		ADD_BOOL(bAddRotation, 188, 0x8)
 		ADD_BOOL(bAddTranslation, 188, 0x4)

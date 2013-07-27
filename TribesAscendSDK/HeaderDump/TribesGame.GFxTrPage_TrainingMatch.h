@@ -9,37 +9,37 @@ namespace UnrealScript
 	public:
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_TrainingMatch.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61285);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpecialAction(class GFxTrAction* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_TrainingMatch.SpecialAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61288);
 			byte params[4] = { NULL };
-			*(class GFxTrAction**)&params[0] = Action;
+			*(class GFxTrAction**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void JoinLocalGame(ScriptString* SessionName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_TrainingMatch.JoinLocalGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61290);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = SessionName;
+			*(ScriptString**)params = SessionName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int TakeFocus(int ActionIndex, class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_TrainingMatch.TakeFocus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61292);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			*(class GFxObject**)&params[4] = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		class GFxObject* FillOption(int ActionIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_TrainingMatch.FillOption");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61297);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GFxObject**)&params[4];
 		}

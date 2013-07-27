@@ -35,41 +35,41 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, PS_CameraEffect, 488)
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterCameraLensEffectBase.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15201);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RegisterCamera(class Camera* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterCameraLensEffectBase.RegisterCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15202);
 			byte params[4] = { NULL };
-			*(class Camera**)&params[0] = C;
+			*(class Camera**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyRetriggered()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterCameraLensEffectBase.NotifyRetriggered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15204);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterCameraLensEffectBase.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15205);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ActivateLensEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterCameraLensEffectBase.ActivateLensEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15206);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void UpdateLocation(Object::Vector& CamLoc, Object::Rotator& CamRot, float CamFOVDeg)
+		void UpdateLocation(Vector& CamLoc, Rotator& CamRot, float CamFOVDeg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterCameraLensEffectBase.UpdateLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15208);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = CamLoc;
-			*(Object::Rotator*)&params[12] = CamRot;
+			*(Vector*)params = CamLoc;
+			*(Rotator*)&params[12] = CamRot;
 			*(float*)&params[24] = CamFOVDeg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			CamLoc = *(Object::Vector*)&params[0];
-			CamRot = *(Object::Rotator*)&params[12];
+			CamLoc = *(Vector*)params;
+			CamRot = *(Rotator*)&params[12];
 		}
 	};
 }

@@ -13,7 +13,7 @@ namespace UnrealScript
 	class TrSkin : public Object
 	{
 	public:
-		class SkinStruct
+		struct SkinStruct
 		{
 		public:
 			ADD_STRUCT(int, skinId, 0)
@@ -24,7 +24,7 @@ namespace UnrealScript
 			ADD_OBJECT(ParticleSystem, SkiThrustTemplate, 28)
 			ADD_STRUCT(ScriptArray<ScriptName>, JetpackThrustEffectSockets, 40)
 		};
-		class VehicleSkinStruct
+		struct VehicleSkinStruct
 		{
 		public:
 			ADD_OBJECT(AnimSet, SeatAnimSet, 4)

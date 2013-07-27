@@ -20,45 +20,45 @@ namespace UnrealScript
 		ADD_OBJECT(GameplayEventsReader, Reader, 84)
 		void SetReader(class GameplayEventsReader* NewReader)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.SetReader");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17559);
 			byte params[4] = { NULL };
-			*(class GameplayEventsReader**)&params[0] = NewReader;
+			*(class GameplayEventsReader**)params = NewReader;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PreProcessStream()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.PreProcessStream");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17561);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostProcessStream()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.PostProcessStream");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17562);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ResolveGroupFilters()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.ResolveGroupFilters");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17563);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddFilter(int EventID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.AddFilter");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17566);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveFilter(int EventID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.RemoveFilter");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17568);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsEventFiltered(int EventID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsHandler.IsEventFiltered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17570);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

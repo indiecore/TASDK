@@ -24,9 +24,9 @@ namespace UnrealScript
 		ADD_BOOL(bThrustEnabled, 476, 0x1)
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Thruster.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25354);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -47,16 +47,16 @@ namespace UnrealScript
 		ADD_BOOL(bOnlySkilled, 708, 0x8)
 		class Actor* GetMoveTarget()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.GetMoveTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(42630);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Actor**)&params[0];
+			return *(class Actor**)params;
 		}
 		bool HigherPriorityThan(class UTDefensePoint* S, class UTBot* B, bool bAutoPointsInUse, bool bPrioritizeSameGroup, int& NumChecked)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.HigherPriorityThan");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46332);
 			byte params[24] = { NULL };
-			*(class UTDefensePoint**)&params[0] = S;
+			*(class UTDefensePoint**)params = S;
 			*(class UTBot**)&params[4] = B;
 			*(bool*)&params[8] = bAutoPointsInUse;
 			*(bool*)&params[12] = bPrioritizeSameGroup;
@@ -67,24 +67,24 @@ namespace UnrealScript
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47055);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FreePoint()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.FreePoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47056);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CheckForErrors()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.CheckForErrors");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47057);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDefensePoint.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47059);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -13,7 +13,7 @@ namespace UnrealScript
 	class StaticMeshActorBasedOnExtremeContent : public Actor
 	{
 	public:
-		class SMMaterialSetterDatum
+		struct SMMaterialSetterDatum
 		{
 		public:
 			ADD_OBJECT(MaterialInterface, TheMaterial, 4)
@@ -23,12 +23,12 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<StaticMeshActorBasedOnExtremeContent::SMMaterialSetterDatum>, NonExtremeContent, 492)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshActorBasedOnExtremeContent.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27212);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetMaterialBasedOnExtremeContent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshActorBasedOnExtremeContent.SetMaterialBasedOnExtremeContent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27213);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

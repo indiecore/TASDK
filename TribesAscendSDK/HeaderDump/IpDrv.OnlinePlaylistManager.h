@@ -24,14 +24,14 @@ namespace UnrealScript
 	class OnlinePlaylistManager : public Object
 	{
 	public:
-		class PlaylistPopulation
+		struct PlaylistPopulation
 		{
 		public:
 			ADD_STRUCT(int, RegionTotal, 8)
 			ADD_STRUCT(int, WorldwideTotal, 4)
 			ADD_STRUCT(int, PlaylistId, 0)
 		};
-		class ConfiguredGameSetting
+		struct ConfiguredGameSetting
 		{
 		public:
 			ADD_OBJECT(OnlineGameSettings, GameSettings, 28)
@@ -39,13 +39,13 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptString*, GameSettingsClassName, 4)
 			ADD_STRUCT(int, GameSettingId, 0)
 		};
-		class InventorySwap
+		struct InventorySwap
 		{
 		public:
 			ADD_STRUCT(ScriptString*, SwapTo, 8)
 			ADD_STRUCT(ScriptName, Original, 0)
 		};
-		class Playlist
+		struct Playlist
 		{
 		public:
 			ADD_STRUCT(ScriptArray<OnlinePlaylistManager::ConfiguredGameSetting>, ConfiguredGames, 0)
@@ -83,67 +83,67 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_FTickableObject, 60)
 		void OnPlaylistPopulationDataUpdated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.OnPlaylistPopulationDataUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33686);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnReadPlaylistComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.OnReadPlaylistComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33688);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DownloadPlaylist()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.DownloadPlaylist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33733);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DetermineFilesToDownload()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.DetermineFilesToDownload");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33736);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnReadTitleFileComplete(bool bWasSuccessful, ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.OnReadTitleFileComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33737);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			*(ScriptString**)&params[4] = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FinalizePlaylistObjects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.FinalizePlaylistObjects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33742);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class OnlineGameSettings* GetGameSettings(int PlaylistId, int GameSettingsId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.GetGameSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33743);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			*(int*)&params[4] = GameSettingsId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class OnlineGameSettings**)&params[8];
 		}
 		bool HasAnyGameSettings(int PlaylistId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.HasAnyGameSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33749);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool PlaylistSupportsDedicatedServers(int PlaylistId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.PlaylistSupportsDedicatedServers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33754);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void GetTeamInfoFromPlaylist(int PlaylistId, int& TeamSize, int& TeamCount, int& MaxPartySize)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.GetTeamInfoFromPlaylist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33758);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			*(int*)&params[4] = TeamSize;
 			*(int*)&params[8] = TeamCount;
 			*(int*)&params[12] = MaxPartySize;
@@ -154,87 +154,87 @@ namespace UnrealScript
 		}
 		void GetLoadBalanceIdFromPlaylist(int PlaylistId, int& LoadBalanceId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.GetLoadBalanceIdFromPlaylist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33764);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			*(int*)&params[4] = LoadBalanceId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			LoadBalanceId = *(int*)&params[4];
 		}
 		bool IsPlaylistArbitrated(int PlaylistId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.IsPlaylistArbitrated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33768);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		ScriptString* GetUrlFromPlaylist(int PlaylistId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.GetUrlFromPlaylist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33772);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		void GetMapCycleFromPlaylist(int PlaylistId, ScriptArray<ScriptName>& MapCycle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.GetMapCycleFromPlaylist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33776);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			*(ScriptArray<ScriptName>*)&params[4] = MapCycle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			MapCycle = *(ScriptArray<ScriptName>*)&params[4];
 		}
 		ScriptClass* GetInventorySwapFromPlaylist(int PlaylistId, ScriptClass* SourceInventory)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.GetInventorySwapFromPlaylist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33781);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			*(ScriptClass**)&params[4] = SourceInventory;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[8];
 		}
 		void GetContentIdsFromPlaylist(int PlaylistId, ScriptArray<int>& ContentIds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.GetContentIdsFromPlaylist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33787);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			*(ScriptArray<int>*)&params[4] = ContentIds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ContentIds = *(ScriptArray<int>*)&params[4];
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33792);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReadPlaylistPopulation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.ReadPlaylistPopulation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33794);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnReadPlaylistPopulationComplete(bool bWasSuccessful, ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.OnReadPlaylistPopulationComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33796);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			*(ScriptString**)&params[4] = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ParsePlaylistPopulationData(ScriptArray<byte>& Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.ParsePlaylistPopulationData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33801);
 			byte params[12] = { NULL };
-			*(ScriptArray<byte>*)&params[0] = Data;
+			*(ScriptArray<byte>*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(ScriptArray<byte>*)&params[0];
+			Data = *(ScriptArray<byte>*)params;
 		}
 		void GetPopulationInfoFromPlaylist(int PlaylistId, int& WorldwideTotal, int& RegionTotal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.GetPopulationInfoFromPlaylist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33804);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			*(int*)&params[4] = WorldwideTotal;
 			*(int*)&params[8] = RegionTotal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -243,31 +243,31 @@ namespace UnrealScript
 		}
 		void SendPlaylistPopulationUpdate(int NumPlayers)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.SendPlaylistPopulationUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33809);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = NumPlayers;
+			*(int*)params = NumPlayers;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReadDataCenterId()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.ReadDataCenterId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33813);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnReadDataCenterIdComplete(bool bWasSuccessful, ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.OnReadDataCenterIdComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33815);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			*(ScriptString**)&params[4] = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ParseDataCenterId(ScriptArray<byte>& Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlinePlaylistManager.ParseDataCenterId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33820);
 			byte params[12] = { NULL };
-			*(ScriptArray<byte>*)&params[0] = Data;
+			*(ScriptArray<byte>*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(ScriptArray<byte>*)&params[0];
+			Data = *(ScriptArray<byte>*)params;
 		}
 	};
 }

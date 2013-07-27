@@ -74,19 +74,19 @@ namespace UnrealScript
 			RTM_AlphaComposite = 2,
 			RTM_MAX = 3,
 		};
-		class GFxWidgetBinding
+		struct GFxWidgetBinding
 		{
 		public:
 			ADD_STRUCT(ScriptName, WidgetName, 0)
 			ADD_OBJECT(ScriptClass, WidgetClass, 8)
 		};
-		class SoundThemeBinding
+		struct SoundThemeBinding
 		{
 		public:
 			ADD_STRUCT(ScriptName, ThemeName, 0)
 			ADD_OBJECT(UISoundTheme, Theme, 8)
 		};
-		class GFxDataStoreBinding
+		struct GFxDataStoreBinding
 		{
 		public:
 			ADD_STRUCT(UIRoot::UIDataStoreBinding, DataSource, 0)
@@ -101,13 +101,13 @@ namespace UnrealScript
 			ADD_STRUCT(Object::Pointer, ModelRef, 144)
 			ADD_STRUCT(Object::Pointer, ControlRef, 148)
 		};
-		class ExternalTexture
+		struct ExternalTexture
 		{
 		public:
 			ADD_STRUCT(ScriptString*, Resource, 0)
 			ADD_OBJECT(Texture, Texture, 12)
 		};
-		class ASValue
+		struct ASValue
 		{
 		public:
 			ADD_STRUCT(GFxMoviePlayer::ASType, Type, 0)
@@ -151,71 +151,71 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class GFxObject*>, ObjectValues, 356)
 		void OnFocusLost(int LocalPlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.OnFocusLost");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29656);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = LocalPlayerIndex;
+			*(int*)params = LocalPlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFocusGained(int LocalPlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.OnFocusGained");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29657);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = LocalPlayerIndex;
+			*(int*)params = LocalPlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConsoleCommand(ScriptString* Command)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.ConsoleCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29659);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)params = Command;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class PlayerController* GetPC()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetPC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29661);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class PlayerController**)&params[0];
+			return *(class PlayerController**)params;
 		}
 		class LocalPlayer* GetLP()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetLP");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29664);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class LocalPlayer**)&params[0];
+			return *(class LocalPlayer**)params;
 		}
 		void Init(class LocalPlayer* LocPlay)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29667);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = LocPlay;
+			*(class LocalPlayer**)params = LocPlay;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetWidgetPathBinding(class GFxObject* WidgetToBind, ScriptName Path)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetWidgetPathBinding");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29671);
 			byte params[12] = { NULL };
-			*(class GFxObject**)&params[0] = WidgetToBind;
+			*(class GFxObject**)params = WidgetToBind;
 			*(ScriptName*)&params[4] = Path;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Advance(float Time)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.Advance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29675);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = Time;
+			*(float*)params = Time;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostWidgetInit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.PostWidgetInit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29676);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool WidgetUnloaded(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.WidgetUnloaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29679);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)params = WidgetName;
 			*(ScriptName*)&params[8] = WidgetPath;
 			*(class GFxObject**)&params[16] = Widget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -223,9 +223,9 @@ namespace UnrealScript
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.WidgetInitialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29680);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)params = WidgetName;
 			*(ScriptName*)&params[8] = WidgetPath;
 			*(class GFxObject**)&params[16] = Widget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -233,81 +233,81 @@ namespace UnrealScript
 		}
 		class GFxObject* ActionScriptObject(ScriptString* Path)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.ActionScriptObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29685);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GFxObject**)&params[12];
 		}
 		ScriptString* ActionScriptString(ScriptString* Path)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.ActionScriptString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29690);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		float ActionScriptFloat(ScriptString* Path)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.ActionScriptFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29693);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
 		int ActionScriptInt(ScriptString* Path)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.ActionScriptInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29696);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		void ActionScriptVoid(ScriptString* Path)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.ActionScriptVoid");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29699);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		GFxMoviePlayer::ASValue Invoke(ScriptString* method, ScriptArray<GFxMoviePlayer::ASValue> args)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.Invoke");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29702);
 			byte params[48] = { NULL };
-			*(ScriptString**)&params[0] = method;
+			*(ScriptString**)params = method;
 			*(ScriptArray<GFxMoviePlayer::ASValue>*)&params[12] = args;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(GFxMoviePlayer::ASValue*)&params[24];
 		}
 		void ActionScriptSetFunction(class GFxObject* Object, ScriptString* Member)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.ActionScriptSetFunction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29704);
 			byte params[16] = { NULL };
-			*(class GFxObject**)&params[0] = Object;
+			*(class GFxObject**)params = Object;
 			*(ScriptString**)&params[4] = Member;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* CreateArray()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.CreateArray");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29716);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GFxObject**)&params[0];
+			return *(class GFxObject**)params;
 		}
 		class GFxObject* CreateObject(ScriptString* ASClass, ScriptClass* Type)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.CreateObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29719);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = ASClass;
+			*(ScriptString**)params = ASClass;
 			*(ScriptClass**)&params[12] = Type;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GFxObject**)&params[16];
 		}
 		bool SetVariableStringArray(ScriptString* Path, int Index, ScriptArray<ScriptString*> Arg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetVariableStringArray");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29721);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(int*)&params[12] = Index;
 			*(ScriptArray<ScriptString*>*)&params[16] = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -315,9 +315,9 @@ namespace UnrealScript
 		}
 		bool SetVariableFloatArray(ScriptString* Path, int Index, ScriptArray<float> Arg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetVariableFloatArray");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29725);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(int*)&params[12] = Index;
 			*(ScriptArray<float>*)&params[16] = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -325,9 +325,9 @@ namespace UnrealScript
 		}
 		bool SetVariableIntArray(ScriptString* Path, int Index, ScriptArray<int> Arg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetVariableIntArray");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29731);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(int*)&params[12] = Index;
 			*(ScriptArray<int>*)&params[16] = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -335,9 +335,9 @@ namespace UnrealScript
 		}
 		bool SetVariableArray(ScriptString* Path, int Index, ScriptArray<GFxMoviePlayer::ASValue> Arg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetVariableArray");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29737);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(int*)&params[12] = Index;
 			*(ScriptArray<GFxMoviePlayer::ASValue>*)&params[16] = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -345,9 +345,9 @@ namespace UnrealScript
 		}
 		bool GetVariableStringArray(ScriptString* Path, int Index, ScriptArray<ScriptString*>& Arg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetVariableStringArray");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29743);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(int*)&params[12] = Index;
 			*(ScriptArray<ScriptString*>*)&params[16] = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -356,9 +356,9 @@ namespace UnrealScript
 		}
 		bool GetVariableFloatArray(ScriptString* Path, int Index, ScriptArray<float>& Arg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetVariableFloatArray");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29749);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(int*)&params[12] = Index;
 			*(ScriptArray<float>*)&params[16] = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -367,9 +367,9 @@ namespace UnrealScript
 		}
 		bool GetVariableIntArray(ScriptString* Path, int Index, ScriptArray<int>& Arg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetVariableIntArray");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29755);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(int*)&params[12] = Index;
 			*(ScriptArray<int>*)&params[16] = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -378,9 +378,9 @@ namespace UnrealScript
 		}
 		bool GetVariableArray(ScriptString* Path, int Index, ScriptArray<GFxMoviePlayer::ASValue>& Arg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetVariableArray");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29761);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(int*)&params[12] = Index;
 			*(ScriptArray<GFxMoviePlayer::ASValue>*)&params[16] = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -389,90 +389,90 @@ namespace UnrealScript
 		}
 		void SetVariableObject(ScriptString* Path, class GFxObject* Object)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetVariableObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29767);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(class GFxObject**)&params[12] = Object;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetVariableString(ScriptString* Path, ScriptString* S)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetVariableString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29773);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(ScriptString**)&params[12] = S;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetVariableNumber(ScriptString* Path, float F)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetVariableNumber");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29776);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(float*)&params[12] = F;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetVariableBool(ScriptString* Path, bool B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetVariableBool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29779);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(bool*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetVariable(ScriptString* Path, GFxMoviePlayer::ASValue Arg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetVariable");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29782);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(GFxMoviePlayer::ASValue*)&params[12] = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* GetVariableObject(ScriptString* Path, ScriptClass* Type)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetVariableObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29785);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			*(ScriptClass**)&params[12] = Type;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GFxObject**)&params[16];
 		}
 		ScriptString* GetVariableString(ScriptString* Path)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetVariableString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29788);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		float GetVariableNumber(ScriptString* Path)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetVariableNumber");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29792);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
 		bool GetVariableBool(ScriptString* Path)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetVariableBool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29795);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		GFxMoviePlayer::ASValue GetVariable(ScriptString* Path)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetVariable");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29798);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = Path;
+			*(ScriptString**)params = Path;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(GFxMoviePlayer::ASValue*)&params[12];
 		}
 		bool FilterButtonInput(int ControllerId, ScriptName ButtonName, Object::EInputEvent InputEvent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.FilterButtonInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29801);
 			byte params[17] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptName*)&params[4] = ButtonName;
 			*(Object::EInputEvent*)&params[12] = InputEvent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -480,98 +480,98 @@ namespace UnrealScript
 		}
 		void FlushPlayerInput(bool capturekeysonly)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.FlushPlayerInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29804);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = capturekeysonly;
+			*(bool*)params = capturekeysonly;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearFocusIgnoreKeys()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.ClearFocusIgnoreKeys");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29809);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddFocusIgnoreKey(ScriptName Key)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.AddFocusIgnoreKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29811);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = Key;
+			*(ScriptName*)params = Key;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearCaptureKeys()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.ClearCaptureKeys");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29812);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddCaptureKey(ScriptName Key)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.AddCaptureKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29814);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = Key;
+			*(ScriptName*)params = Key;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetMovieCanReceiveInput(bool bCanReceiveInput)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetMovieCanReceiveInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29815);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bCanReceiveInput;
+			*(bool*)params = bCanReceiveInput;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetMovieCanReceiveFocus(bool bCanReceiveFocus)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetMovieCanReceiveFocus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29817);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bCanReceiveFocus;
+			*(bool*)params = bCanReceiveFocus;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPerspective3D(Object::Matrix& matPersp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetPerspective3D");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29819);
 			byte params[64] = { NULL };
-			*(Object::Matrix*)&params[0] = matPersp;
+			*(Object::Matrix*)params = matPersp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			matPersp = *(Object::Matrix*)&params[0];
+			matPersp = *(Object::Matrix*)params;
 		}
 		void SetView3D(Object::Matrix& matView)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetView3D");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29821);
 			byte params[64] = { NULL };
-			*(Object::Matrix*)&params[0] = matView;
+			*(Object::Matrix*)params = matView;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			matView = *(Object::Matrix*)&params[0];
+			matView = *(Object::Matrix*)params;
 		}
 		void GetVisibleFrameRect(float& x0, float& y0, float& X1, float& Y1)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetVisibleFrameRect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29823);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = x0;
+			*(float*)params = x0;
 			*(float*)&params[4] = y0;
 			*(float*)&params[8] = X1;
 			*(float*)&params[12] = Y1;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			x0 = *(float*)&params[0];
+			x0 = *(float*)params;
 			y0 = *(float*)&params[4];
 			X1 = *(float*)&params[8];
 			Y1 = *(float*)&params[12];
 		}
 		void SetAlignment(GFxMoviePlayer::GFxAlign A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetAlignment");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29825);
 			byte params[1] = { NULL };
-			*(GFxMoviePlayer::GFxAlign*)&params[0] = A;
+			*(GFxMoviePlayer::GFxAlign*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetViewScaleMode(GFxMoviePlayer::GFxScaleMode SM)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetViewScaleMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29830);
 			byte params[1] = { NULL };
-			*(GFxMoviePlayer::GFxScaleMode*)&params[0] = SM;
+			*(GFxMoviePlayer::GFxScaleMode*)params = SM;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetViewport(int X, int Y, int Width, int Height)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetViewport");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29834);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = X;
+			*(int*)params = X;
 			*(int*)&params[4] = Y;
 			*(int*)&params[8] = Width;
 			*(int*)&params[12] = Height;
@@ -579,108 +579,108 @@ namespace UnrealScript
 		}
 		class GameViewportClient* GetGameViewportClient()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.GetGameViewportClient");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29836);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GameViewportClient**)&params[0];
+			return *(class GameViewportClient**)params;
 		}
 		void SetPriority(byte NewPriority)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetPriority");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29841);
 			byte params[1] = { NULL };
-			params[0] = NewPriority;
+			*params = NewPriority;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PublishDataStoreValues()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.PublishDataStoreValues");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29843);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RefreshDataStoreBindings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.RefreshDataStoreBindings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29845);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool SetExternalTexture(ScriptString* Resource, class Texture* Texture)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetExternalTexture");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29846);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = Resource;
+			*(ScriptString**)params = Resource;
 			*(class Texture**)&params[12] = Texture;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void SetExternalInterface(class Object* H)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetExternalInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29847);
 			byte params[4] = { NULL };
-			*(class Object**)&params[0] = H;
+			*(class Object**)params = H;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetForceSmoothAnimation(bool bEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetForceSmoothAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29851);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnable;
+			*(bool*)params = bEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetTimingMode(GFxMoviePlayer::GFxTimingMode Mode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetTimingMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29854);
 			byte params[1] = { NULL };
-			*(GFxMoviePlayer::GFxTimingMode*)&params[0] = Mode;
+			*(GFxMoviePlayer::GFxTimingMode*)params = Mode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetMovieInfo(class SwfMovie* Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetMovieInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29856);
 			byte params[4] = { NULL };
-			*(class SwfMovie**)&params[0] = Data;
+			*(class SwfMovie**)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConditionalClearPause()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.ConditionalClearPause");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29860);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnClose()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.OnClose");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29862);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Close(bool Unload)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.Close");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29865);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = Unload;
+			*(bool*)params = Unload;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPause(bool bPausePlayback)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.SetPause");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29866);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPausePlayback;
+			*(bool*)params = bPausePlayback;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPostAdvance(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.OnPostAdvance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29868);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostAdvance(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.PostAdvance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29870);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool Start(bool StartPaused)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxMoviePlayer.Start");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29873);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = StartPaused;
+			*(bool*)params = StartPaused;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

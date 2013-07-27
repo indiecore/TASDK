@@ -24,9 +24,9 @@ namespace UnrealScript
 		ADD_BOOL(bIsPlayingCustomAnim, 260, 0x1)
 		float PlayCustomAnim(ScriptName AnimName, float Rate, float BlendInTime, float BlendOutTime, bool bLooping, bool bOverride)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodePlayCustomAnim.PlayCustomAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10980);
 			byte params[32] = { NULL };
-			*(ScriptName*)&params[0] = AnimName;
+			*(ScriptName*)params = AnimName;
 			*(float*)&params[8] = Rate;
 			*(float*)&params[12] = BlendInTime;
 			*(float*)&params[16] = BlendOutTime;
@@ -37,9 +37,9 @@ namespace UnrealScript
 		}
 		void PlayCustomAnimByDuration(ScriptName AnimName, float Duration, float BlendInTime, float BlendOutTime, bool bLooping, bool bOverride)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodePlayCustomAnim.PlayCustomAnimByDuration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10988);
 			byte params[28] = { NULL };
-			*(ScriptName*)&params[0] = AnimName;
+			*(ScriptName*)params = AnimName;
 			*(float*)&params[8] = Duration;
 			*(float*)&params[12] = BlendInTime;
 			*(float*)&params[16] = BlendOutTime;
@@ -49,37 +49,37 @@ namespace UnrealScript
 		}
 		void StopCustomAnim(float BlendOutTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodePlayCustomAnim.StopCustomAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10995);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = BlendOutTime;
+			*(float*)params = BlendOutTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetCustomAnim(ScriptName AnimName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodePlayCustomAnim.SetCustomAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10997);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = AnimName;
+			*(ScriptName*)params = AnimName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetActorAnimEndNotification(bool bNewStatus)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodePlayCustomAnim.SetActorAnimEndNotification");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11000);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewStatus;
+			*(bool*)params = bNewStatus;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class AnimNodeSequence* GetCustomAnimNodeSeq()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodePlayCustomAnim.GetCustomAnimNodeSeq");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11003);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class AnimNodeSequence**)&params[0];
+			return *(class AnimNodeSequence**)params;
 		}
 		void SetRootBoneAxisOption(AnimNodeSequence::ERootBoneAxis AxisX, AnimNodeSequence::ERootBoneAxis AxisY, AnimNodeSequence::ERootBoneAxis AxisZ)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodePlayCustomAnim.SetRootBoneAxisOption");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11005);
 			byte params[3] = { NULL };
-			*(AnimNodeSequence::ERootBoneAxis*)&params[0] = AxisX;
+			*(AnimNodeSequence::ERootBoneAxis*)params = AxisX;
 			*(AnimNodeSequence::ERootBoneAxis*)&params[1] = AxisY;
 			*(AnimNodeSequence::ERootBoneAxis*)&params[2] = AxisZ;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

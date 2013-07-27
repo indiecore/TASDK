@@ -20,14 +20,14 @@ namespace UnrealScript
 		ADD_STRUCT(int, MySeatIndex, 1556)
 		ADD_OBJECT(UDKWeapon, MyVehicleWeapon, 1552)
 		ADD_OBJECT(UDKVehicle, MyVehicle, 1548)
-		Object::Vector GetTargetLocation(class Actor* RequestedBy, bool bRequestAlternateLoc)
+		Vector GetTargetLocation(class Actor* RequestedBy, bool bRequestAlternateLoc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKWeaponPawn.GetTargetLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36282);
 			byte params[20] = { NULL };
-			*(class Actor**)&params[0] = RequestedBy;
+			*(class Actor**)params = RequestedBy;
 			*(bool*)&params[4] = bRequestAlternateLoc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[8];
+			return *(Vector*)&params[8];
 		}
 	};
 }

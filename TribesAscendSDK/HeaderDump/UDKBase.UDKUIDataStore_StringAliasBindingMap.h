@@ -11,14 +11,14 @@ namespace UnrealScript
 	{
 	public:
 		static const auto SABM_FIND_FIRST_BIND = -2;
-		class ControllerMap
+		struct ControllerMap
 		{
 		public:
 			ADD_STRUCT(ScriptString*, PS3Mapping, 20)
 			ADD_STRUCT(ScriptString*, XBoxMapping, 8)
 			ADD_STRUCT(ScriptName, KeyName, 0)
 		};
-		class BindCacheElement
+		struct BindCacheElement
 		{
 		public:
 			ADD_STRUCT(int, FieldIndex, 20)
@@ -30,9 +30,9 @@ namespace UnrealScript
 		ADD_STRUCT(int, FakePlatform, 196)
 		int GetStringWithFieldName(ScriptString* FieldName, ScriptString*& MappedString)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringAliasBindingMap.GetStringWithFieldName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35667);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = FieldName;
+			*(ScriptString**)params = FieldName;
 			*(ScriptString**)&params[12] = MappedString;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			MappedString = *(ScriptString**)&params[12];
@@ -40,9 +40,9 @@ namespace UnrealScript
 		}
 		int GetBoundStringWithFieldName(ScriptString* FieldName, ScriptString*& MappedString, int& StartIndex, ScriptString*& BindString)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringAliasBindingMap.GetBoundStringWithFieldName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35671);
 			byte params[44] = { NULL };
-			*(ScriptString**)&params[0] = FieldName;
+			*(ScriptString**)params = FieldName;
 			*(ScriptString**)&params[12] = MappedString;
 			*(int*)&params[24] = StartIndex;
 			*(ScriptString**)&params[28] = BindString;
@@ -54,9 +54,9 @@ namespace UnrealScript
 		}
 		bool FindMappingInBoundKeyCache(ScriptString* Command, ScriptString*& MappingStr, int& FieldIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringAliasBindingMap.FindMappingInBoundKeyCache");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35677);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)params = Command;
 			*(ScriptString**)&params[12] = MappingStr;
 			*(int*)&params[24] = FieldIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -66,16 +66,16 @@ namespace UnrealScript
 		}
 		void AddMappingToBoundKeyCache(ScriptString* Command, ScriptString* MappingStr, int FieldIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringAliasBindingMap.AddMappingToBoundKeyCache");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35682);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)params = Command;
 			*(ScriptString**)&params[12] = MappingStr;
 			*(int*)&params[24] = FieldIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearBoundKeyCache()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringAliasBindingMap.ClearBoundKeyCache");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35686);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

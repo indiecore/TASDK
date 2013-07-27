@@ -12,26 +12,26 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(float, InterpTime, 532)
-		ADD_STRUCT(Object::Vector, ColorScale, 520)
+		ADD_STRUCT(Vector, ColorScale, 520)
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ColorScaleVolume.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12778);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnTouch(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ColorScaleVolume.UnTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12785);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -34,16 +34,16 @@ namespace UnrealScript
 		ADD_BOOL(bDoControllerVibration, 124, 0x1)
 		ADD_STRUCT(float, FOVFrequency, 120)
 		ADD_STRUCT(float, FOVAmplitude, 116)
-		ADD_STRUCT(Object::Vector, LocFrequency, 104)
-		ADD_STRUCT(Object::Vector, LocAmplitude, 92)
-		ADD_STRUCT(Object::Vector, RotFrequency, 80)
-		ADD_STRUCT(Object::Vector, RotAmplitude, 68)
+		ADD_STRUCT(Vector, LocFrequency, 104)
+		ADD_STRUCT(Vector, LocAmplitude, 92)
+		ADD_STRUCT(Vector, RotFrequency, 80)
+		ADD_STRUCT(Vector, RotAmplitude, 68)
 		ADD_STRUCT(float, Duration, 64)
 		void Notify(class Actor* Owner, class AnimNodeSequence* AnimSeqInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNotify_ViewShake.Notify");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11472);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Owner;
+			*(class Actor**)params = Owner;
 			*(class AnimNodeSequence**)&params[4] = AnimSeqInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

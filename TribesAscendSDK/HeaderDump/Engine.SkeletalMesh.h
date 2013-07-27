@@ -75,47 +75,47 @@ namespace UnrealScript
 			ECMDM_Empty = 2,
 			ECMDM_MAX = 3,
 		};
-		class SoftBodyTetraLink
+		struct SoftBodyTetraLink
 		{
 		public:
 			ADD_STRUCT(int, Index, 0)
-			ADD_STRUCT(Object::Vector, Bary, 4)
+			ADD_STRUCT(Vector, Bary, 4)
 		};
-		class BoneMirrorExport
+		struct BoneMirrorExport
 		{
 		public:
 			ADD_STRUCT(ScriptName, BoneName, 0)
 			ADD_STRUCT(ScriptName, SourceBoneName, 8)
 			ADD_STRUCT(Object::EAxis, BoneFlipAxis, 16)
 		};
-		class BoneMirrorInfo
+		struct BoneMirrorInfo
 		{
 		public:
 			ADD_STRUCT(int, SourceIndex, 0)
 			ADD_STRUCT(Object::EAxis, BoneFlipAxis, 4)
 		};
-		class SoftBodySpecialBoneInfo
+		struct SoftBodySpecialBoneInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<int>, AttachedVertexIndices, 12)
 			ADD_STRUCT(SkeletalMesh::SoftBodyBoneType, BoneType, 8)
 			ADD_STRUCT(ScriptName, BoneName, 0)
 		};
-		class ClothSpecialBoneInfo
+		struct ClothSpecialBoneInfo
 		{
 		public:
 			ADD_STRUCT(ScriptName, BoneName, 0)
 			ADD_STRUCT(SkeletalMesh::ClothBoneType, BoneType, 8)
 			ADD_STRUCT(ScriptArray<int>, AttachedVertexIndices, 12)
 		};
-		class TriangleSortSettings
+		struct TriangleSortSettings
 		{
 		public:
 			ADD_STRUCT(SkeletalMesh::TriangleSortOption, TriangleSorting, 0)
 			ADD_STRUCT(SkeletalMesh::TriangleSortAxis, CustomLeftRightAxis, 1)
 			ADD_STRUCT(ScriptName, CustomLeftRightBoneName, 4)
 		};
-		class SkeletalMeshLODInfo
+		struct SkeletalMeshLODInfo
 		{
 		public:
 			ADD_STRUCT(float, DisplayFactor, 0)
@@ -129,8 +129,8 @@ namespace UnrealScript
 		ADD_STRUCT(Object::BoxSphereBounds, Bounds, 60)
 		ADD_STRUCT(ScriptArray<class MaterialInterface*>, Materials, 88)
 		ADD_STRUCT(ScriptArray<class ApexClothingAsset*>, ClothingAssets, 100)
-		ADD_STRUCT(Object::Vector, Origin, 112)
-		ADD_STRUCT(Object::Rotator, RotOrigin, 124)
+		ADD_STRUCT(Vector, Origin, 112)
+		ADD_STRUCT(Rotator, RotOrigin, 124)
 		ADD_STRUCT(ScriptArray<int>, RefSkeleton, 136)
 		ADD_STRUCT(int, SkeletalDepth, 148)
 		ADD_STRUCT(Object::IndirectArray_Mirror, LODModels, 212)
@@ -206,12 +206,12 @@ namespace UnrealScript
 		ADD_STRUCT(float, ClothTearFactor, 620)
 		ADD_STRUCT(int, ClothTearReserve, 624)
 		ADD_BOOL(bEnableValidBounds, 628, 0x1)
-		ADD_STRUCT(Object::Vector, ValidBoundsMin, 632)
-		ADD_STRUCT(Object::Vector, ValidBoundsMax, 644)
+		ADD_STRUCT(Vector, ValidBoundsMin, 632)
+		ADD_STRUCT(Vector, ValidBoundsMax, 644)
 		ADD_STRUCT(Object::Map_Mirror, ClothTornTriMap, 656)
 		ADD_STRUCT(ScriptArray<int>, SoftBodySurfaceToGraphicsVertMap, 716)
 		ADD_STRUCT(ScriptArray<int>, SoftBodySurfaceIndices, 728)
-		ADD_STRUCT(ScriptArray<Object::Vector>, SoftBodyTetraVertsUnscaled, 740)
+		ADD_STRUCT(ScriptArray<Vector>, SoftBodyTetraVertsUnscaled, 740)
 		ADD_STRUCT(ScriptArray<int>, SoftBodyTetraIndices, 752)
 		ADD_STRUCT(ScriptArray<SkeletalMesh::SoftBodyTetraLink>, SoftBodyTetraLinks, 764)
 		ADD_STRUCT(ScriptArray<Object::Pointer>, CachedSoftBodyMeshes, 776)
@@ -244,7 +244,7 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<float>, CachedStreamingTextureFactors, 912)
 		ADD_STRUCT(float, StreamingDistanceMultiplier, 924)
 		ADD_STRUCT(int, ReleaseResourcesFence, 928)
-		ADD_STRUCT(Object::QWord, SkelMeshRUID, 932)
+		ADD_STRUCT(QWord, SkelMeshRUID, 932)
 	};
 }
 #undef ADD_BOOL

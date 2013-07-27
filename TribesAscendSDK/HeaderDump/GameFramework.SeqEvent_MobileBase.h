@@ -8,14 +8,14 @@ namespace UnrealScript
 	public:
 		void RegisterEvent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_MobileBase.RegisterEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33020);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddToMobileInput(class MobilePlayerInput* MPI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_MobileBase.AddToMobileInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33024);
 			byte params[4] = { NULL };
-			*(class MobilePlayerInput**)&params[0] = MPI;
+			*(class MobilePlayerInput**)params = MPI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

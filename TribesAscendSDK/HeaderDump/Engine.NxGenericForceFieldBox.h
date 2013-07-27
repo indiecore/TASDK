@@ -10,10 +10,10 @@ namespace UnrealScript
 	class NxGenericForceFieldBox : public NxGenericForceField
 	{
 	public:
-		ADD_STRUCT(Object::Vector, BoxExtent, 700)
+		ADD_STRUCT(Vector, BoxExtent, 700)
 		void DoInitRBPhys()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxGenericForceFieldBox.DoInitRBPhys");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21283);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

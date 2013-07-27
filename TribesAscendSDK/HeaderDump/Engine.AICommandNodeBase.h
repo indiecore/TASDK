@@ -16,9 +16,9 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, CommandClass, 92)
 		class AICommandNodeBase* SelectBestChild(class AIController* InAI, AITree::AITreeHandle& Handle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AICommandNodeBase.SelectBestChild");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9704);
 			byte params[56] = { NULL };
-			*(class AIController**)&params[0] = InAI;
+			*(class AIController**)params = InAI;
 			*(AITree::AITreeHandle*)&params[4] = Handle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Handle = *(AITree::AITreeHandle*)&params[4];

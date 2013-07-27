@@ -29,7 +29,7 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(float, LastImpactSoundTime, 624)
 		ADD_STRUCT(float, CurrentVibrationLevel, 620)
-		ADD_STRUCT(Object::Vector, OldVelocity, 608)
+		ADD_STRUCT(Vector, OldVelocity, 608)
 		ADD_STRUCT(PrimitiveComponent::ERBCollisionChannel, AsleepRBChannel, 604)
 		ADD_STRUCT(float, FracPartGravScale, 600)
 		ADD_STRUCT(int, PartPoolIndex, 596)
@@ -41,24 +41,24 @@ namespace UnrealScript
 		ADD_STRUCT(float, DestroyPartRadiusFactor, 580)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16603);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RecyclePart(bool bAddToFreePool)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.RecyclePart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16604);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bAddToFreePool;
+			*(bool*)params = bAddToFreePool;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeDamage(int Damage, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.TakeDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16606);
 			byte params[68] = { NULL };
-			*(int*)&params[0] = Damage;
+			*(int*)params = Damage;
 			*(class Controller**)&params[4] = EventInstigator;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = Momentum;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = Momentum;
 			*(ScriptClass**)&params[32] = DamageType;
 			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
 			*(class Actor**)&params[64] = DamageCauser;
@@ -66,26 +66,26 @@ namespace UnrealScript
 		}
 		void TryToCleanUp()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.TryToCleanUp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16614);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FellOutOfWorld(ScriptClass* dmgType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.FellOutOfWorld");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16615);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = dmgType;
+			*(ScriptClass**)params = dmgType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Explode()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.Explode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16617);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void BreakOffPartsInRadius(Object::Vector Origin, float Radius, float RBStrength, bool bWantPhysChunksAndParticles)
+		void BreakOffPartsInRadius(Vector Origin, float Radius, float RBStrength, bool bWantPhysChunksAndParticles)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshPart.BreakOffPartsInRadius");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16618);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = Origin;
+			*(Vector*)params = Origin;
 			*(float*)&params[12] = Radius;
 			*(float*)&params[16] = RBStrength;
 			*(bool*)&params[20] = bWantPhysChunksAndParticles;

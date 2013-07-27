@@ -23,96 +23,96 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* MovableMesh)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.MakeDynamic");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4082);
 			byte params[8] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = MovableMesh;
+void**)params = MovableMesh;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class KActorFromStatic**)&params[4];
 		}
 		void DisablePrecomputedLighting()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.DisablePrecomputedLighting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19033);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnSleepRBPhysics()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.OnSleepRBPhysics");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19037);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnWakeRBPhysics()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.OnWakeRBPhysics");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19038);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void BecomeStatic()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.BecomeStatic");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19039);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void MakeStatic()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.MakeStatic");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19040);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ApplyImpulse(Object::Vector ImpulseDir, float ImpulseMag, Object::Vector HitLocation, Actor::TraceHitInfo HitInfo, ScriptClass* DamageType)
+		void ApplyImpulse(Vector ImpulseDir, float ImpulseMag, Vector HitLocation, Actor::TraceHitInfo HitInfo, ScriptClass* DamageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.ApplyImpulse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19042);
 			byte params[60] = { NULL };
-			*(Object::Vector*)&params[0] = ImpulseDir;
+			*(Vector*)params = ImpulseDir;
 			*(float*)&params[12] = ImpulseMag;
-			*(Object::Vector*)&params[16] = HitLocation;
+			*(Vector*)&params[16] = HitLocation;
 			*(Actor::TraceHitInfo*)&params[28] = HitInfo;
 			*(ScriptClass**)&params[56] = DamageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ReceiveImpulse(class Pawn* Other, Object::Vector HitLocation, Object::Vector HitNormal)
+		void ReceiveImpulse(class Pawn* Other, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.ReceiveImpulse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19051);
 			byte params[28] = { NULL };
-			*(class Pawn**)&params[0] = Other;
-			*(Object::Vector*)&params[4] = HitLocation;
-			*(Object::Vector*)&params[16] = HitNormal;
+			*(class Pawn**)params = Other;
+			*(Vector*)&params[4] = HitLocation;
+			*(Vector*)&params[16] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Bump(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitNormal)
+void* OtherComp, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.Bump");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19057);
 			byte params[20] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitNormal;
+			*(Vector*)&params[8] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19061);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeRadiusDamage(class Controller* InstigatedBy, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Object::Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
+		void TakeRadiusDamage(class Controller* InstigatedBy, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorFromStatic.TakeRadiusDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19066);
 			byte params[44] = { NULL };
-			*(class Controller**)&params[0] = InstigatedBy;
+			*(class Controller**)params = InstigatedBy;
 			*(float*)&params[4] = BaseDamage;
 			*(float*)&params[8] = DamageRadius;
 			*(ScriptClass**)&params[12] = DamageType;
 			*(float*)&params[16] = Momentum;
-			*(Object::Vector*)&params[20] = HurtOrigin;
+			*(Vector*)&params[20] = HurtOrigin;
 			*(bool*)&params[32] = bFullDamage;
 			*(class Actor**)&params[36] = DamageCauser;
 			*(float*)&params[40] = DamageFalloffExponent;

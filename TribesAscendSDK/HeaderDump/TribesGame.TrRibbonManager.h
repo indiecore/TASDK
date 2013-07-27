@@ -19,7 +19,7 @@ namespace UnrealScript
 	class TrRibbonManager : public Object
 	{
 	public:
-		class RibbonData
+		struct RibbonData
 		{
 		public:
 			ADD_STRUCT(int, Ribbon, 8)
@@ -38,34 +38,34 @@ namespace UnrealScript
 		ADD_STRUCT(int, PreviousXP, 60)
 		int GetClassRibbon(int ClassId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRibbonManager.GetClassRibbon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56839);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ClassId;
+			*(int*)params = ClassId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int GetTypeRibbon(int ClassId, int Type)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRibbonManager.GetTypeRibbon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56853);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ClassId;
+			*(int*)params = ClassId;
 			*(int*)&params[4] = Type;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int GetEquipRibbon(int EquipId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRibbonManager.GetEquipRibbon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58656);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = EquipId;
+			*(int*)params = EquipId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		void CalculateRibbons(int Gold, int XP, bool bForce)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRibbonManager.CalculateRibbons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110627);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = Gold;
+			*(int*)params = Gold;
 			*(int*)&params[4] = XP;
 			*(bool*)&params[8] = bForce;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

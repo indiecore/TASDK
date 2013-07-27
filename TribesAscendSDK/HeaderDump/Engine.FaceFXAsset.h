@@ -27,16 +27,16 @@ namespace UnrealScript
 		ADD_OBJECT(SkeletalMesh, DefaultSkelMesh, 60)
 		void MountFaceFXAnimSet(class FaceFXAnimSet* AnimSet)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FaceFXAsset.MountFaceFXAnimSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15642);
 			byte params[4] = { NULL };
-			*(class FaceFXAnimSet**)&params[0] = AnimSet;
+			*(class FaceFXAnimSet**)params = AnimSet;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnmountFaceFXAnimSet(class FaceFXAnimSet* AnimSet)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FaceFXAsset.UnmountFaceFXAnimSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15644);
 			byte params[4] = { NULL };
-			*(class FaceFXAnimSet**)&params[0] = AnimSet;
+			*(class FaceFXAnimSet**)params = AnimSet;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

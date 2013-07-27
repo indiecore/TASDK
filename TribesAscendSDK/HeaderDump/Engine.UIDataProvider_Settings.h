@@ -25,7 +25,7 @@ namespace UnrealScript
 	class UIDataProvider_Settings : public UIDynamicDataProvider
 	{
 	public:
-		class SettingsArrayProvider
+		struct SettingsArrayProvider
 		{
 		public:
 			ADD_OBJECT(UIDataProvider_SettingsArray, Provider, 12)
@@ -37,17 +37,17 @@ namespace UnrealScript
 		ADD_OBJECT(Settings, Settings, 124)
 		void ArrayProviderPropertyChanged(class UIDataProvider* SourceProvider, ScriptName PropTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_Settings.ArrayProviderPropertyChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28413);
 			byte params[12] = { NULL };
-			*(class UIDataProvider**)&params[0] = SourceProvider;
+			*(class UIDataProvider**)params = SourceProvider;
 			*(ScriptName*)&params[4] = PropTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnSettingValueUpdated(ScriptName SettingName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_Settings.OnSettingValueUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28418);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = SettingName;
+			*(ScriptName*)params = SettingName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

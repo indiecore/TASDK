@@ -19,7 +19,7 @@ namespace UnrealScript
 	class CurveEdPresetCurve : public Object
 	{
 	public:
-		class PresetGeneratedPoint
+		struct PresetGeneratedPoint
 		{
 		public:
 			ADD_STRUCT(Object::EInterpCurveMode, IntepMode, 20)

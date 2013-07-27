@@ -22,20 +22,20 @@ namespace UnrealScript
 	class TerrainComponent : public PrimitiveComponent
 	{
 	public:
-		class TerrainPatchBounds
+		struct TerrainPatchBounds
 		{
 		public:
 			ADD_STRUCT(float, MaxDisplacement, 8)
 			ADD_STRUCT(float, MaxHeight, 4)
 			ADD_STRUCT(float, MinHeight, 0)
 		};
-		class TerrainMaterialMask
+		struct TerrainMaterialMask
 		{
 		public:
 			ADD_STRUCT(int, NumBits, 8)
-			ADD_STRUCT(Object::QWord, BitMask, 0)
+			ADD_STRUCT(QWord, BitMask, 0)
 		};
-		class TerrainBVTree
+		struct TerrainBVTree
 		{
 		public:
 			ADD_STRUCT(ScriptArray<int>, Nodes, 0)
@@ -44,7 +44,7 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<Object::Guid>, IrrelevantLights, 500)
 		ADD_STRUCT(ScriptArray<TerrainComponent::TerrainPatchBounds>, PatchBounds, 544)
 		ADD_STRUCT(ScriptArray<TerrainComponent::TerrainMaterialMask>, BatchMaterials, 556)
-		ADD_STRUCT(ScriptArray<Object::Vector>, CollisionVertices, 584)
+		ADD_STRUCT(ScriptArray<Vector>, CollisionVertices, 584)
 		ADD_BOOL(bDisplayCollisionLevel, 600, 0x1)
 		ADD_STRUCT(Object::Pointer, RBHeightfield, 596)
 		ADD_STRUCT(TerrainComponent::TerrainBVTree, BVTree, 572)

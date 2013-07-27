@@ -24,16 +24,16 @@ namespace UnrealScript
 		ADD_BOOL(bAborted, 244, 0x1)
 		void AbortFor(class Actor* latentActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Latent.AbortFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25540);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = latentActor;
+			*(class Actor**)params = latentActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool Update(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Latent.Update");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25542);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

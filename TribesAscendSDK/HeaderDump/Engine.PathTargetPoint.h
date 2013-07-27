@@ -7,10 +7,10 @@ namespace UnrealScript
 	public:
 		bool ShouldBeHiddenBySHOW_NavigationNodes()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PathTargetPoint.ShouldBeHiddenBySHOW_NavigationNodes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24034);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

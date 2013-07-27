@@ -7,15 +7,15 @@ namespace UnrealScript
 	public:
 		void OnRefreshDataFieldValue()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_GameState.OnRefreshDataFieldValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28557);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool NotifyGameSessionEnded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_GameState.NotifyGameSessionEnded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28559);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

@@ -8,26 +8,26 @@ namespace UnrealScript
 	public:
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_RoamCTF.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60467);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpecialAction(class GFxTrAction* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_RoamCTF.SpecialAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60468);
 			byte params[4] = { NULL };
-			*(class GFxTrAction**)&params[0] = Action;
+			*(class GFxTrAction**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void JoinLocalGame(ScriptString* SessionName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_RoamCTF.JoinLocalGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60470);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = SessionName;
+			*(ScriptString**)params = SessionName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowModel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_RoamCTF.ShowModel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60472);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

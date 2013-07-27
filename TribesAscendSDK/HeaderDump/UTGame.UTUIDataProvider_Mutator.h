@@ -27,17 +27,17 @@ namespace UnrealScript
 		ADD_BOOL(bStandaloneOnly, 200, 0x1)
 		bool ShouldBeFiltered()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTUIDataProvider_Mutator.ShouldBeFiltered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38898);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool SupportsCurrentGameMode()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTUIDataProvider_Mutator.SupportsCurrentGameMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49611);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

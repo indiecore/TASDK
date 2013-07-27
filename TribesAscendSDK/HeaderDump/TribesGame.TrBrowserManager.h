@@ -24,90 +24,90 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, URLGold, 60)
 		void OpenURL(ScriptString* URL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.OpenURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73715);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OpenVideo(ScriptString* URL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.OpenVideo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73717);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetLanguageString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.GetLanguageString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73719);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void Alert()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.Alert");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73721);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Gold()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.Gold");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73722);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Store()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.Store");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73723);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Booster()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.Booster");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73724);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Support()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.Support");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73725);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Profile()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.Profile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73726);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ActivateKey()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.ActivateKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73727);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RecoverPassword()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.RecoverPassword");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73728);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RecoverUsername()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.RecoverUsername");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73729);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClassVideo(int Id)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.ClassVideo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73730);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Id;
+			*(int*)params = Id;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateAccount(bool bUsingSteam)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.CreateAccount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73732);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bUsingSteam;
+			*(bool*)params = bUsingSteam;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetLangParam()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBrowserManager.GetLangParam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73734);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

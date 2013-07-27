@@ -25,11 +25,11 @@ namespace UnrealScript
 		ADD_STRUCT(float, ImpulseRadius, 496)
 		ADD_STRUCT(float, ImpulseStrength, 492)
 		ADD_STRUCT(PrimitiveComponent::ERadialImpulseFalloff, ImpulseFalloff, 488)
-		void FireImpulse(Object::Vector Origin)
+		void FireImpulse(Vector Origin)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_RadialImpulseComponent.FireImpulse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25317);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = Origin;
+			*(Vector*)params = Origin;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

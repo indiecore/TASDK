@@ -12,7 +12,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, NewVisibilityModifier, 232)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_SetVisibilityModifier.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49141);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

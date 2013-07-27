@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DefaultPhysicsVolume.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14476);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

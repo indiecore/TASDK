@@ -8,19 +8,19 @@ namespace UnrealScript
 	public:
 		void SetSelectedOptionSet()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Settings.SetSelectedOptionSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39065);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateListDataProvider()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Settings.UpdateListDataProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39066);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PopulateOptionDataProviderForIndex(int Index, class GFxObject*& OutDataProvider, ScriptString*& OutDefaultValue, int& OutDefaultIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Settings.PopulateOptionDataProviderForIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39073);
 			byte params[24] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(class GFxObject**)&params[4] = OutDataProvider;
 			*(ScriptString**)&params[8] = OutDefaultValue;
 			*(int*)&params[20] = OutDefaultIndex;

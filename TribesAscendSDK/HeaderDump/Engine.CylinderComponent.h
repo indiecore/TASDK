@@ -28,9 +28,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, CollisionHeight, 488)
 		void SetCylinderSize(float NewRadius, float NewHeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CylinderComponent.SetCylinderSize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6374);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = NewRadius;
+			*(float*)params = NewRadius;
 			*(float*)&params[4] = NewHeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

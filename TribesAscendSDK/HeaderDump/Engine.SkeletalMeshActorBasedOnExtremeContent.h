@@ -13,7 +13,7 @@ namespace UnrealScript
 	class SkeletalMeshActorBasedOnExtremeContent : public SkeletalMeshActor
 	{
 	public:
-		class SkelMaterialSetterDatum
+		struct SkelMaterialSetterDatum
 		{
 		public:
 			ADD_OBJECT(MaterialInterface, TheMaterial, 4)
@@ -23,12 +23,12 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<SkeletalMeshActorBasedOnExtremeContent::SkelMaterialSetterDatum>, NonExtremeContent, 548)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorBasedOnExtremeContent.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26749);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetMaterialBasedOnExtremeContent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorBasedOnExtremeContent.SetMaterialBasedOnExtremeContent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26750);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

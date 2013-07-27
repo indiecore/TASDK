@@ -36,20 +36,20 @@ namespace UnrealScript
 			EDVMF_Mirror = 2,
 			EDVMF_MAX = 3,
 		};
-		class RawDistributionVector : public RawDistribution
+		struct RawDistributionVector : public RawDistribution
 		{
 		};
 		ADD_BOOL(bIsDirty, 76, 0x2)
 		ADD_BOOL(bCanBeBaked, 76, 0x1)
 		ADD_STRUCT(Object::Pointer, VfTable_FCurveEdInterface, 72)
-		Object::Vector GetVectorValue(float F, int LastExtreme)
+		Vector GetVectorValue(float F, int LastExtreme)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.DistributionVector.GetVectorValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3442);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = F;
+			*(float*)params = F;
 			*(int*)&params[4] = LastExtreme;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[8];
+			return *(Vector*)&params[8];
 		}
 	};
 }

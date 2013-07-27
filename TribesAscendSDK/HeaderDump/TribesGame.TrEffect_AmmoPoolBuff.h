@@ -8,17 +8,17 @@ namespace UnrealScript
 	public:
 		void Apply(class Actor* Target, Actor::ImpactInfo Impact)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEffect_AmmoPoolBuff.Apply");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87101);
 			byte params[84] = { NULL };
-			*(class Actor**)&params[0] = Target;
+			*(class Actor**)params = Target;
 			*(Actor::ImpactInfo*)&params[4] = Impact;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Remove(class Actor* Target)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEffect_AmmoPoolBuff.Remove");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87104);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Target;
+			*(class Actor**)params = Target;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

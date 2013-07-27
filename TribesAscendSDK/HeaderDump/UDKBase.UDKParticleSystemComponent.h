@@ -20,14 +20,14 @@ namespace UnrealScript
 	class UDKParticleSystemComponent : public ParticleSystemComponent
 	{
 	public:
-		ADD_STRUCT(Object::Vector, SavedScale3D, 744)
+		ADD_STRUCT(Vector, SavedScale3D, 744)
 		ADD_BOOL(bHasSavedScale3D, 740, 0x1)
 		ADD_STRUCT(float, FOV, 736)
 		void SetFOV(float NewFOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKParticleSystemComponent.SetFOV");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35020);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = NewFOV;
+			*(float*)params = NewFOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

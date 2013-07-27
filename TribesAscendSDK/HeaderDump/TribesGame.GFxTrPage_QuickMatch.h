@@ -14,21 +14,21 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, ActiveQueue, 356)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_QuickMatch.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60398);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpecialAction(class GFxTrAction* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_QuickMatch.SpecialAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60400);
 			byte params[4] = { NULL };
-			*(class GFxTrAction**)&params[0] = Action;
+			*(class GFxTrAction**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int TakeFocus(int ActionIndex, class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_QuickMatch.TakeFocus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60407);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			*(class GFxObject**)&params[4] = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];

@@ -15,7 +15,7 @@ namespace UnrealScript
 	class ActorFactoryFracturedStaticMesh : public ActorFactory
 	{
 	public:
-		ADD_STRUCT(Object::Vector, DrawScale3D, 96)
+		ADD_STRUCT(Vector, DrawScale3D, 96)
 		ADD_OBJECT(FracturedStaticMesh, FracturedStaticMesh, 92)
 	};
 }

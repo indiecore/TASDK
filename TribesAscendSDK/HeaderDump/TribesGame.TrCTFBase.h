@@ -35,59 +35,59 @@ namespace UnrealScript
 		ADD_OBJECT(TrAnimNodeBlendList, m_OpenCloseBlendList, 1116)
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFBase.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78248);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBlitzStandActive(bool bActive)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFBase.SetBlitzStandActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78250);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bActive;
+			*(bool*)params = bActive;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFBase.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78252);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFBase.PostRenderFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78255);
 			byte params[32] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = Canvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFBase.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78265);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFlagComesHome()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFBase.OnFlagComesHome");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78267);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnFlagTaken()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFBase.OnFlagTaken");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78268);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpawnHelpTextCollisionProxy(TrHelpTextManager::EHelpTextType HelpTextType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFBase.SpawnHelpTextCollisionProxy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78269);
 			byte params[1] = { NULL };
-			*(TrHelpTextManager::EHelpTextType*)&params[0] = HelpTextType;
+			*(TrHelpTextManager::EHelpTextType*)params = HelpTextType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

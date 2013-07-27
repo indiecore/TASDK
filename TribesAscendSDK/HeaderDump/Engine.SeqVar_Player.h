@@ -25,15 +25,15 @@ namespace UnrealScript
 		ADD_BOOL(bAllPlayers, 188, 0x1)
 		void UpdatePlayersList()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqVar_Player.UpdatePlayersList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26251);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class Object* GetObjectValue()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqVar_Player.GetObjectValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26252);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Object**)&params[0];
+			return *(class Object**)params;
 		}
 	};
 }

@@ -11,19 +11,19 @@ namespace UnrealScript
 	class Path_TowardPoint : public PathConstraint
 	{
 	public:
-		ADD_STRUCT(Object::Vector, GoalPoint, 68)
-		bool TowardPoint(class Pawn* P, Object::Vector Point)
+		ADD_STRUCT(Vector, GoalPoint, 68)
+		bool TowardPoint(class Pawn* P, Vector Point)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_TowardPoint.TowardPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23992);
 			byte params[20] = { NULL };
-			*(class Pawn**)&params[0] = P;
-			*(Object::Vector*)&params[4] = Point;
+			*(class Pawn**)params = P;
+			*(Vector*)&params[4] = Point;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_TowardPoint.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23997);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

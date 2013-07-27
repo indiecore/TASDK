@@ -20,27 +20,27 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceConstant, m_BackdropMIC, 908)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollTransient.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100548);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FadeInBackdrop()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollTransient.FadeInBackdrop");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100551);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollTransient.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100552);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetPosition(Object::Vector ViewPos, Object::Rotator ViewRot)
+		void SetPosition(Vector ViewPos, Rotator ViewRot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollTransient.SetPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100556);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = ViewPos;
-			*(Object::Rotator*)&params[12] = ViewRot;
+			*(Vector*)params = ViewPos;
+			*(Rotator*)&params[12] = ViewRot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -19,7 +19,7 @@ namespace UnrealScript
 	class OnlineMatchmakingStats : public Object
 	{
 	public:
-		class MMStats_Timer
+		struct MMStats_Timer
 		{
 		public:
 			ADD_STRUCT(Object::Double, MSecs, 4)
@@ -27,19 +27,19 @@ namespace UnrealScript
 		};
 		void StartTimer(OnlineMatchmakingStats::MMStats_Timer& Timer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineMatchmakingStats.StartTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21861);
 			byte params[12] = { NULL };
-			*(OnlineMatchmakingStats::MMStats_Timer*)&params[0] = Timer;
+			*(OnlineMatchmakingStats::MMStats_Timer*)params = Timer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Timer = *(OnlineMatchmakingStats::MMStats_Timer*)&params[0];
+			Timer = *(OnlineMatchmakingStats::MMStats_Timer*)params;
 		}
 		void StopTimer(OnlineMatchmakingStats::MMStats_Timer& Timer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineMatchmakingStats.StopTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21863);
 			byte params[12] = { NULL };
-			*(OnlineMatchmakingStats::MMStats_Timer*)&params[0] = Timer;
+			*(OnlineMatchmakingStats::MMStats_Timer*)params = Timer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Timer = *(OnlineMatchmakingStats::MMStats_Timer*)&params[0];
+			Timer = *(OnlineMatchmakingStats::MMStats_Timer*)params;
 		}
 	};
 }

@@ -13,9 +13,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fBlendTime, 288)
 		float GetBlendTime(int ChildIndex, bool bGetDefault)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendList.GetBlendTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66320);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ChildIndex;
+			*(int*)params = ChildIndex;
 			*(bool*)&params[4] = bGetDefault;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];

@@ -25,9 +25,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, MaxTraversalDist, 68)
 		bool DontExceedMaxDist(class Pawn* P, float InMaxTraversalDist, bool bInSoft)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_WithinTraversalDist.DontExceedMaxDist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24018);
 			byte params[16] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			*(float*)&params[4] = InMaxTraversalDist;
 			*(bool*)&params[8] = bInSoft;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -35,7 +35,7 @@ namespace UnrealScript
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_WithinTraversalDist.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24024);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

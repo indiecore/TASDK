@@ -23,31 +23,31 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Map_Mirror, TextureCachePathMap, 84)
 		bool InstallDLC(OnlineSubsystem::OnlineContent& DLCBundle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallDLC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14711);
 			byte params[72] = { NULL };
-			*(OnlineSubsystem::OnlineContent*)&params[0] = DLCBundle;
+			*(OnlineSubsystem::OnlineContent*)params = DLCBundle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			DLCBundle = *(OnlineSubsystem::OnlineContent*)&params[0];
+			DLCBundle = *(OnlineSubsystem::OnlineContent*)params;
 			return *(bool*)&params[68];
 		}
 		void InstallDLCs(ScriptArray<OnlineSubsystem::OnlineContent>& DLCBundles)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallDLCs");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14714);
 			byte params[12] = { NULL };
-			*(ScriptArray<OnlineSubsystem::OnlineContent>*)&params[0] = DLCBundles;
+			*(ScriptArray<OnlineSubsystem::OnlineContent>*)params = DLCBundles;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			DLCBundles = *(ScriptArray<OnlineSubsystem::OnlineContent>*)&params[0];
+			DLCBundles = *(ScriptArray<OnlineSubsystem::OnlineContent>*)params;
 		}
 		void ClearDLC()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.ClearDLC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14717);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool GetDLCTextureCachePath(ScriptName TextureCacheName, ScriptString*& Path)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.GetDLCTextureCachePath");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14718);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = TextureCacheName;
+			*(ScriptName*)params = TextureCacheName;
 			*(ScriptString**)&params[8] = Path;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Path = *(ScriptString**)&params[8];
@@ -55,76 +55,76 @@ namespace UnrealScript
 		}
 		void AddSectionToObjectList(ScriptString* Section)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.AddSectionToObjectList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14722);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Section;
+			*(ScriptString**)params = Section;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MarkPerObjectConfigPendingKill(ScriptString* Section)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.MarkPerObjectConfigPendingKill");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14724);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Section;
+			*(ScriptString**)params = Section;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateObjectLists()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.UpdateObjectLists");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14726);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InstallPackages(OnlineSubsystem::OnlineContent& DLCBundle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallPackages");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14727);
 			byte params[68] = { NULL };
-			*(OnlineSubsystem::OnlineContent*)&params[0] = DLCBundle;
+			*(OnlineSubsystem::OnlineContent*)params = DLCBundle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			DLCBundle = *(OnlineSubsystem::OnlineContent*)&params[0];
+			DLCBundle = *(OnlineSubsystem::OnlineContent*)params;
 		}
 		void InstallNonPackageFiles(OnlineSubsystem::OnlineContent& DLCBundle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.InstallNonPackageFiles");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14729);
 			byte params[68] = { NULL };
-			*(OnlineSubsystem::OnlineContent*)&params[0] = DLCBundle;
+			*(OnlineSubsystem::OnlineContent*)params = DLCBundle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			DLCBundle = *(OnlineSubsystem::OnlineContent*)&params[0];
+			DLCBundle = *(OnlineSubsystem::OnlineContent*)params;
 		}
 		void Init()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14731);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnLoginChange(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.OnLoginChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14733);
 			byte params[1] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnStorageDeviceChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.OnStorageDeviceChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14735);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnContentChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.OnContentChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14736);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RefreshDLC()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.RefreshDLC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14737);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RefreshDLCEnumComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.RefreshDLCEnumComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14741);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddPackagesToFullyLoad(ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentManager.AddPackagesToFullyLoad");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14743);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Filename;
+			*(ScriptString**)params = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -25,9 +25,9 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_FExec, 60)
 		void SwitchController(class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Player.SwitchController");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19471);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

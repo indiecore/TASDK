@@ -8,9 +8,9 @@ namespace UnrealScript
 	public:
 		void PawnLeavingVolume(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTScriptedBotVolume.PawnLeavingVolume");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49026);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

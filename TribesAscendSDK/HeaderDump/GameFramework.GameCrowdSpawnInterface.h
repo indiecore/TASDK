@@ -7,16 +7,16 @@ namespace UnrealScript
 	class GameCrowdSpawnInterface : public Interface
 	{
 	public:
-		void GetSpawnPosition(class SeqAct_GameCrowdSpawner* Spawner, Object::Vector& SpawnPos, Object::Rotator& SpawnRot)
+		void GetSpawnPosition(class SeqAct_GameCrowdSpawner* Spawner, Vector& SpawnPos, Rotator& SpawnRot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdSpawnInterface.GetSpawnPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31518);
 			byte params[28] = { NULL };
-			*(class SeqAct_GameCrowdSpawner**)&params[0] = Spawner;
-			*(Object::Vector*)&params[4] = SpawnPos;
-			*(Object::Rotator*)&params[16] = SpawnRot;
+			*(class SeqAct_GameCrowdSpawner**)params = Spawner;
+			*(Vector*)&params[4] = SpawnPos;
+			*(Rotator*)&params[16] = SpawnRot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			SpawnPos = *(Object::Vector*)&params[4];
-			SpawnRot = *(Object::Rotator*)&params[16];
+			SpawnPos = *(Vector*)&params[4];
+			SpawnRot = *(Rotator*)&params[16];
 		}
 	};
 }

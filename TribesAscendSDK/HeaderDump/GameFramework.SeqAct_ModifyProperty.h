@@ -19,7 +19,7 @@ namespace UnrealScript
 	class SeqAct_ModifyProperty : public SequenceAction
 	{
 	public:
-		class PropertyInfo
+		struct PropertyInfo
 		{
 		public:
 			ADD_STRUCT(ScriptString*, PropertyValue, 12)

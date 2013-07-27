@@ -29,48 +29,48 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class SoundCue*>, FractureSounds, 512)
 		ADD_STRUCT(ScriptArray<class ParticleSystem*>, FractureParticleEffects, 524)
 		ADD_BOOL(bFractureMaterialOverride, 480, 0x1)
-		void SpawnFractureEmitter(class ParticleSystem* EmitterTemplate, Object::Vector SpawnLocation, Object::Vector SpawnDirection)
+		void SpawnFractureEmitter(class ParticleSystem* EmitterTemplate, Vector SpawnLocation, Vector SpawnDirection)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ApexDestructibleActor.SpawnFractureEmitter");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11789);
 			byte params[28] = { NULL };
-			*(class ParticleSystem**)&params[0] = EmitterTemplate;
-			*(Object::Vector*)&params[4] = SpawnLocation;
-			*(Object::Vector*)&params[16] = SpawnDirection;
+			*(class ParticleSystem**)params = EmitterTemplate;
+			*(Vector*)&params[4] = SpawnLocation;
+			*(Vector*)&params[16] = SpawnDirection;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CacheFractureEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ApexDestructibleActor.CacheFractureEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11795);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ApexDestructibleActor.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11796);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void TakeDamage(int Damage, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ApexDestructibleActor.TakeDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11797);
 			byte params[68] = { NULL };
-			*(int*)&params[0] = Damage;
+			*(int*)params = Damage;
 			*(class Controller**)&params[4] = EventInstigator;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = Momentum;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = Momentum;
 			*(ScriptClass**)&params[32] = DamageType;
 			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
 			*(class Actor**)&params[64] = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeRadiusDamage(class Controller* InstigatedBy, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Object::Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
+		void TakeRadiusDamage(class Controller* InstigatedBy, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ApexDestructibleActor.TakeRadiusDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11805);
 			byte params[44] = { NULL };
-			*(class Controller**)&params[0] = InstigatedBy;
+			*(class Controller**)params = InstigatedBy;
 			*(float*)&params[4] = BaseDamage;
 			*(float*)&params[8] = DamageRadius;
 			*(ScriptClass**)&params[12] = DamageType;
 			*(float*)&params[16] = Momentum;
-			*(Object::Vector*)&params[20] = HurtOrigin;
+			*(Vector*)&params[20] = HurtOrigin;
 			*(bool*)&params[32] = bFullDamage;
 			*(class Actor**)&params[36] = DamageCauser;
 			*(float*)&params[40] = DamageFalloffExponent;

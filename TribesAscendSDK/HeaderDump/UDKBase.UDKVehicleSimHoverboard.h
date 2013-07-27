@@ -37,7 +37,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, SpinHeadingOffset, 236)
 		ADD_STRUCT(float, TrickJumpWarmup, 232)
 		ADD_STRUCT(float, TakeoffYaw, 228)
-		ADD_STRUCT(Object::Vector, GroundNormal, 216)
+		ADD_STRUCT(Vector, GroundNormal, 216)
 		ADD_OBJECT(SoundCue, OverWaterSound, 212)
 		ADD_STRUCT(float, WaterCheckLevel, 208)
 		ADD_STRUCT(float, StopThreshold, 204)
@@ -57,18 +57,18 @@ namespace UnrealScript
 		ADD_STRUCT(float, MaxThrustForce, 144)
 		void InitWheels(class UDKVehicle* Vehicle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleSimHoverboard.InitWheels");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36251);
 			byte params[4] = { NULL };
-			*(class UDKVehicle**)&params[0] = Vehicle;
+			*(class UDKVehicle**)params = Vehicle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void UpdateLeanConstraint(class RB_ConstraintInstance* LeanUprightConstraintInstance, Object::Vector LeanY, Object::Vector LeanZ)
+		void UpdateLeanConstraint(class RB_ConstraintInstance* LeanUprightConstraintInstance, Vector LeanY, Vector LeanZ)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleSimHoverboard.UpdateLeanConstraint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36253);
 			byte params[28] = { NULL };
-			*(class RB_ConstraintInstance**)&params[0] = LeanUprightConstraintInstance;
-			*(Object::Vector*)&params[4] = LeanY;
-			*(Object::Vector*)&params[16] = LeanZ;
+			*(class RB_ConstraintInstance**)params = LeanUprightConstraintInstance;
+			*(Vector*)&params[4] = LeanY;
+			*(Vector*)&params[16] = LeanZ;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

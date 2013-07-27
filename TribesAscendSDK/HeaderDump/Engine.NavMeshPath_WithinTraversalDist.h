@@ -25,9 +25,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, MaxTraversalDist, 80)
 		bool DontExceedMaxDist(class NavigationHandle* NavHandle, float InMaxTraversalDist, bool bInSoft)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_WithinTraversalDist.DontExceedMaxDist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21110);
 			byte params[16] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
+			*(class NavigationHandle**)params = NavHandle;
 			*(float*)&params[4] = InMaxTraversalDist;
 			*(bool*)&params[8] = bInSoft;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -35,7 +35,7 @@ namespace UnrealScript
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_WithinTraversalDist.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21116);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

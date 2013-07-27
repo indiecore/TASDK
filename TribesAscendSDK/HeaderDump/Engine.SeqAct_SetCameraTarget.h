@@ -19,10 +19,10 @@ namespace UnrealScript
 		ADD_STRUCT(Camera::ViewTargetTransitionParams, TransitionParams, 236)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_SetCameraTarget.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25853);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

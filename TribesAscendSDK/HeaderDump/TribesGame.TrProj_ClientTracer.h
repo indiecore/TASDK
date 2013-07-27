@@ -14,30 +14,30 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ScriptClass, m_InheritedClass, 816)
-		void InitProjectile(Object::Vector Direction, ScriptClass* ClassToInherit)
+		void InitProjectile(Vector Direction, ScriptClass* ClassToInherit)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_ClientTracer.InitProjectile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108279);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = Direction;
+			*(Vector*)params = Direction;
 			*(ScriptClass**)&params[12] = ClassToInherit;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class SoundCue* GetExplosionSound(class PhysicalMaterial* HitMaterial, class Actor* HitActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_ClientTracer.GetExplosionSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108282);
 			byte params[12] = { NULL };
-			*(class PhysicalMaterial**)&params[0] = HitMaterial;
+			*(class PhysicalMaterial**)params = HitMaterial;
 			*(class Actor**)&params[4] = HitActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class SoundCue**)&params[8];
 		}
-		void ProcessTouch(class Actor* Other, Object::Vector HitLocation, Object::Vector HitNormal)
+		void ProcessTouch(class Actor* Other, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_ClientTracer.ProcessTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108290);
 			byte params[28] = { NULL };
-			*(class Actor**)&params[0] = Other;
-			*(Object::Vector*)&params[4] = HitLocation;
-			*(Object::Vector*)&params[16] = HitNormal;
+			*(class Actor**)params = Other;
+			*(Vector*)&params[4] = HitLocation;
+			*(Vector*)&params[16] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

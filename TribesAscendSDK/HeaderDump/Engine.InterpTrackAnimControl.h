@@ -20,7 +20,7 @@ namespace UnrealScript
 	class InterpTrackAnimControl : public InterpTrackFloatBase
 	{
 	public:
-		class AnimControlTrackKey
+		struct AnimControlTrackKey
 		{
 		public:
 			ADD_BOOL(bReverse, 24, 0x2)

@@ -27,12 +27,12 @@ namespace UnrealScript
 		ADD_BOOL(bDelayActive, 248, 0x1)
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Delay.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25662);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ResetDelayActive()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Delay.ResetDelayActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25663);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

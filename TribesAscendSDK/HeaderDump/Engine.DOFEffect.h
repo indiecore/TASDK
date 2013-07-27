@@ -25,7 +25,7 @@ namespace UnrealScript
 		ADD_STRUCT(DOFEffect::EFocusType, FocusType, 124)
 		ADD_STRUCT(float, FocusInnerRadius, 128)
 		ADD_STRUCT(float, FocusDistance, 132)
-		ADD_STRUCT(Object::Vector, FocusPosition, 136)
+		ADD_STRUCT(Vector, FocusPosition, 136)
 	};
 }
 #undef ADD_STRUCT

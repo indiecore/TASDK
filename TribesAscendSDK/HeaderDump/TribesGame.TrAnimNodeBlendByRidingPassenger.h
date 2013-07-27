@@ -20,28 +20,28 @@ namespace UnrealScript
 		ADD_OBJECT(TrPawn, m_TrPawn, 292)
 		void PlayIdle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayIdle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66456);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayFire(float RefireTime, ScriptName FireAnimName, float ReloadTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66457);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = RefireTime;
+			*(float*)params = RefireTime;
 			*(ScriptName*)&params[4] = FireAnimName;
 			*(float*)&params[12] = ReloadTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayReload(float ReloadTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayReload");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66461);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ReloadTime;
+			*(float*)params = ReloadTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayOffhand()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByRidingPassenger.PlayOffhand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66463);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

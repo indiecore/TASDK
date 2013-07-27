@@ -25,7 +25,7 @@ namespace UnrealScript
 		ADD_OBJECT(GFxTrMenuMoviePlayer, MP, 84)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSettingsManager.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112354);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

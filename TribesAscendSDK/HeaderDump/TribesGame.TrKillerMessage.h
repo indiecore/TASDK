@@ -16,9 +16,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, YouKilled, 100)
 		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKillerMessage.GetString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79821);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(bool*)&params[4] = bPRI1HUD;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
@@ -28,9 +28,9 @@ namespace UnrealScript
 		}
 		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKillerMessage.ClientReceive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98459);
 			byte params[20] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			*(int*)&params[4] = Switch;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;

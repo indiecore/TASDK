@@ -17,7 +17,7 @@ namespace UnrealScript
 			EPBE_Right = 3,
 			EPBE_MAX = 4,
 		};
-		class RBEdgeAngleInfo
+		struct RBEdgeAngleInfo
 		{
 		public:
 			ADD_STRUCT(float, Angle, 0)

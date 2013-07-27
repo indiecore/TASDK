@@ -41,9 +41,9 @@ namespace UnrealScript
 		ADD_BOOL(bArmorStops, 60, 0x1)
 		float VehicleDamageScalingFor(class Vehicle* V)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DamageType.VehicleDamageScalingFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13630);
 			byte params[8] = { NULL };
-			*(class Vehicle**)&params[0] = V;
+			*(class Vehicle**)params = V;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}

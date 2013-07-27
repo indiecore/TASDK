@@ -270,7 +270,7 @@ namespace UnrealScript
 		static const auto STAT_AWDW_FLAG_RETURNS = 85;
 		static const auto STAT_AWDW_DEATHS = 1;
 		static const auto MIN_CREDITS_FOR_XP = 100;
-		class MVPAward
+		struct MVPAward
 		{
 		public:
 			ADD_STRUCT(int, Value, 0)
@@ -280,92 +280,92 @@ namespace UnrealScript
 		ADD_STRUCT(int, AWARD_TIER_SIZE, 60)
 		void SortPlayerAwards(ScriptArray<TgPlayerProfile::PropertyPair>& AwardArray)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.SortPlayerAwards");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63316);
 			byte params[12] = { NULL };
-			*(ScriptArray<TgPlayerProfile::PropertyPair>*)&params[0] = AwardArray;
+			*(ScriptArray<TgPlayerProfile::PropertyPair>*)params = AwardArray;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			AwardArray = *(ScriptArray<TgPlayerProfile::PropertyPair>*)&params[0];
+			AwardArray = *(ScriptArray<TgPlayerProfile::PropertyPair>*)params;
 		}
 		void SortMVPAwards(ScriptArray<TrSummaryHelper::MVPAward>& AwardArray)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.SortMVPAwards");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63324);
 			byte params[12] = { NULL };
-			*(ScriptArray<TrSummaryHelper::MVPAward>*)&params[0] = AwardArray;
+			*(ScriptArray<TrSummaryHelper::MVPAward>*)params = AwardArray;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			AwardArray = *(ScriptArray<TrSummaryHelper::MVPAward>*)&params[0];
+			AwardArray = *(ScriptArray<TrSummaryHelper::MVPAward>*)params;
 		}
 		int MVPSort(TrSummaryHelper::MVPAward A, TrSummaryHelper::MVPAward B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.MVPSort");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63336);
 			byte params[28] = { NULL };
-			*(TrSummaryHelper::MVPAward*)&params[0] = A;
+			*(TrSummaryHelper::MVPAward*)params = A;
 			*(TrSummaryHelper::MVPAward*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[24];
 		}
 		int AwardSort(TgPlayerProfile::PropertyPair A, TgPlayerProfile::PropertyPair B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.AwardSort");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63340);
 			byte params[20] = { NULL };
-			*(TgPlayerProfile::PropertyPair*)&params[0] = A;
+			*(TgPlayerProfile::PropertyPair*)params = A;
 			*(TgPlayerProfile::PropertyPair*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[16];
 		}
 		ScriptClass* GetAwardFromId(int AwardId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.GetAwardFromId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63625);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = AwardId;
+			*(int*)params = AwardId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}
 		ScriptString* GetTierTitle(int val, ScriptClass* award)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.GetTierTitle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63628);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = val;
+			*(int*)params = val;
 			*(ScriptClass**)&params[4] = award;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[8];
 		}
 		ScriptClass* GetAccoladeFromId(int AccoladeId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.GetAccoladeFromId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63636);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = AccoladeId;
+			*(int*)params = AccoladeId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}
 		ScriptClass* GetRankFromXP(int XP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.GetRankFromXP");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63752);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = XP;
+			*(int*)params = XP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}
 		ScriptClass* GetNextRank(ScriptClass* Rank)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.GetNextRank");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63754);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = Rank;
+			*(ScriptClass**)params = Rank;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}
 		int GetMinTierValue(int AwardId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.GetMinTierValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113073);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = AwardId;
+			*(int*)params = AwardId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		float GetTieredWeight(int AwardId, int val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSummaryHelper.GetTieredWeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113077);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = AwardId;
+			*(int*)params = AwardId;
 			*(int*)&params[4] = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];

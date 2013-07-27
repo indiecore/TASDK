@@ -22,54 +22,54 @@ namespace UnrealScript
 		ADD_STRUCT(int, NumLiveStreams, 356)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61499);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowModel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.ShowModel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61500);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpecialAction(class GFxTrAction* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.SpecialAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61502);
 			byte params[4] = { NULL };
-			*(class GFxTrAction**)&params[0] = Action;
+			*(class GFxTrAction**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateStreams()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.UpdateStreams");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61506);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FillData(class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.FillData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61512);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = DataList;
+			*(class GFxObject**)params = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* FillOption(int ActionIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.FillOption");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61514);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GFxObject**)&params[4];
 		}
 		class GFxObject* FillDescription(class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.FillDescription");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61529);
 			byte params[8] = { NULL };
-			*(class GFxObject**)&params[0] = DataList;
+			*(class GFxObject**)params = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GFxObject**)&params[4];
 		}
 		bool IsFeatured(int Num)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_WatchNow.IsFeatured");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61535);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Num;
+			*(int*)params = Num;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

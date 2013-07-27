@@ -26,21 +26,21 @@ namespace UnrealScript
 		ADD_BOOL(bUpdateRotation, 232, 0x1)
 		ADD_STRUCT(ScriptArray<class Volume*>, TeleportVolumes, 240)
 		ADD_STRUCT(float, TeleportDistance, 236)
-		bool ShouldTeleport(class Actor* TestActor, Object::Vector TeleportLocation)
+		bool ShouldTeleport(class Actor* TestActor, Vector TeleportLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Teleport.ShouldTeleport");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4372);
 			byte params[20] = { NULL };
-			*(class Actor**)&params[0] = TestActor;
-			*(Object::Vector*)&params[4] = TeleportLocation;
+			*(class Actor**)params = TestActor;
+			*(Vector*)&params[4] = TeleportLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Teleport.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25976);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

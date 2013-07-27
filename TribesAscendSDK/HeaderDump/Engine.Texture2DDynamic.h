@@ -26,9 +26,9 @@ namespace UnrealScript
 		ADD_STRUCT(int, SizeX, 236)
 		void Init(int InSizeX, int InSizeY, Texture::EPixelFormat InFormat, bool InIsResolveTarget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2DDynamic.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27953);
 			byte params[13] = { NULL };
-			*(int*)&params[0] = InSizeX;
+			*(int*)params = InSizeX;
 			*(int*)&params[4] = InSizeY;
 			*(Texture::EPixelFormat*)&params[8] = InFormat;
 			*(bool*)&params[12] = InIsResolveTarget;
@@ -36,9 +36,9 @@ namespace UnrealScript
 		}
 		class Texture2DDynamic* Create(int InSizeX, int InSizeY, Texture::EPixelFormat InFormat, bool InIsResolveTarget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2DDynamic.Create");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27958);
 			byte params[17] = { NULL };
-			*(int*)&params[0] = InSizeX;
+			*(int*)params = InSizeX;
 			*(int*)&params[4] = InSizeY;
 			*(Texture::EPixelFormat*)&params[8] = InFormat;
 			*(bool*)&params[12] = InIsResolveTarget;

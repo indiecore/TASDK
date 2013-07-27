@@ -29,7 +29,7 @@ namespace UnrealScript
 	class HUD : public Actor
 	{
 	public:
-		class KismetDrawTextInfo
+		struct KismetDrawTextInfo
 		{
 		public:
 			ADD_STRUCT(Object::Vector2D, MessageOffset, 36)
@@ -40,7 +40,7 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptString*, AppendedText, 12)
 			ADD_STRUCT(ScriptString*, MessageText, 0)
 		};
-		class ConsoleMessage
+		struct ConsoleMessage
 		{
 		public:
 			ADD_OBJECT(PlayerReplicationInfo, PRI, 20)
@@ -48,7 +48,7 @@ namespace UnrealScript
 			ADD_STRUCT(Object::Color, TextColor, 12)
 			ADD_STRUCT(ScriptString*, Text, 0)
 		};
-		class HudLocalizedMessage
+		struct HudLocalizedMessage
 		{
 		public:
 			ADD_OBJECT(Object, OptionalObject, 60)
@@ -101,26 +101,26 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Color, WhiteColor, 476)
 		bool ShouldDisplayDebug(ScriptName DebugType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.ShouldDisplayDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4184);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = DebugType;
+			*(ScriptName*)params = DebugType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
-		void Draw3DLine(Object::Vector Start, Object::Vector End, Object::Color LineColor)
+		void Draw3DLine(Vector Start, Vector End, Object::Color LineColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.Draw3DLine");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13718);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = Start;
-			*(Object::Vector*)&params[12] = End;
+			*(Vector*)params = Start;
+			*(Vector*)&params[12] = End;
 			*(Object::Color*)&params[24] = LineColor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Draw2DLine(int X1, int Y1, int X2, int Y2, Object::Color LineColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.Draw2DLine");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13722);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = X1;
+			*(int*)params = X1;
 			*(int*)&params[4] = Y1;
 			*(int*)&params[8] = X2;
 			*(int*)&params[12] = Y2;
@@ -129,110 +129,110 @@ namespace UnrealScript
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13728);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DrawActorOverlays(Object::Vector ViewPoint, Object::Rotator ViewRotation)
+		void DrawActorOverlays(Vector ViewPoint, Rotator ViewRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DrawActorOverlays");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13729);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = ViewPoint;
-			*(Object::Rotator*)&params[12] = ViewRotation;
+			*(Vector*)params = ViewPoint;
+			*(Rotator*)&params[12] = ViewRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemovePostRenderedActor(class Actor* A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.RemovePostRenderedActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13732);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = A;
+			*(class Actor**)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddPostRenderedActor(class Actor* A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.AddPostRenderedActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13735);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = A;
+			*(class Actor**)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ToggleHUD()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.ToggleHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13738);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowHUD()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.ShowHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13739);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowScores()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.ShowScores");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13740);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetShowScores(bool bNewValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.SetShowScores");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13741);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewValue;
+			*(bool*)params = bNewValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowDebug(ScriptName DebugType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.ShowDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13743);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = DebugType;
+			*(ScriptName*)params = DebugType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowDebugInfo(float& out_YL, float& out_YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.ShowDebugInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13748);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = out_YL;
+			*(float*)params = out_YL;
 			*(float*)&params[4] = out_YPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_YL = *(float*)&params[0];
+			out_YL = *(float*)params;
 			out_YPos = *(float*)&params[4];
 		}
 		void DrawRoute(class Pawn* Target)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DrawRoute");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13751);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Target;
+			*(class Pawn**)params = Target;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PreCalcValues()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.PreCalcValues");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13760);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostRender()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.PostRender");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13761);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawHUD()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DrawHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13767);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayBadConnectionAlert()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DisplayBadConnectionAlert");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13770);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearMessage(HUD::HudLocalizedMessage& M)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.ClearMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13771);
 			byte params[64] = { NULL };
-			*(HUD::HudLocalizedMessage*)&params[0] = M;
+			*(HUD::HudLocalizedMessage*)params = M;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			M = *(HUD::HudLocalizedMessage*)&params[0];
+			M = *(HUD::HudLocalizedMessage*)params;
 		}
 		void Message(class PlayerReplicationInfo* PRI, ScriptString* msg, ScriptName MsgType, float Lifetime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.Message");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13773);
 			byte params[28] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = PRI;
+			*(class PlayerReplicationInfo**)params = PRI;
 			*(ScriptString**)&params[4] = msg;
 			*(ScriptName*)&params[16] = MsgType;
 			*(float*)&params[24] = Lifetime;
@@ -240,14 +240,14 @@ namespace UnrealScript
 		}
 		void DisplayConsoleMessages()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DisplayConsoleMessages");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13778);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddConsoleMessage(ScriptString* M, ScriptClass* InMessageClass, class PlayerReplicationInfo* PRI, float Lifetime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.AddConsoleMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13784);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = M;
+			*(ScriptString**)params = M;
 			*(ScriptClass**)&params[12] = InMessageClass;
 			*(class PlayerReplicationInfo**)&params[16] = PRI;
 			*(float*)&params[20] = Lifetime;
@@ -255,9 +255,9 @@ namespace UnrealScript
 		}
 		void LocalizedMessage(ScriptClass* InMessageClass, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, ScriptString* CriticalString, int Switch, float Position, float Lifetime, int FontSize, Object::Color DrawColor, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.LocalizedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13795);
 			byte params[48] = { NULL };
-			*(ScriptClass**)&params[0] = InMessageClass;
+			*(ScriptClass**)params = InMessageClass;
 			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_2;
 			*(ScriptString**)&params[12] = CriticalString;
@@ -271,9 +271,9 @@ namespace UnrealScript
 		}
 		void AddLocalizedMessage(int Index, ScriptClass* InMessageClass, ScriptString* CriticalString, int Switch, float Position, float Lifetime, int FontSize, Object::Color DrawColor, int MessageCount, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.AddLocalizedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13815);
 			byte params[48] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(ScriptClass**)&params[4] = InMessageClass;
 			*(ScriptString**)&params[8] = CriticalString;
 			*(int*)&params[20] = Switch;
@@ -287,9 +287,9 @@ namespace UnrealScript
 		}
 		void GetScreenCoords(float PosY, float& ScreenX, float& ScreenY, HUD::HudLocalizedMessage& InMessage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.GetScreenCoords");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13826);
 			byte params[76] = { NULL };
-			*(float*)&params[0] = PosY;
+			*(float*)params = PosY;
 			*(float*)&params[4] = ScreenX;
 			*(float*)&params[8] = ScreenY;
 			*(HUD::HudLocalizedMessage*)&params[12] = InMessage;
@@ -300,9 +300,9 @@ namespace UnrealScript
 		}
 		void DrawMessage(int I, float PosY, float& DX, float& DY)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DrawMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13831);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = I;
+			*(int*)params = I;
 			*(float*)&params[4] = PosY;
 			*(float*)&params[8] = DX;
 			*(float*)&params[12] = DY;
@@ -312,28 +312,28 @@ namespace UnrealScript
 		}
 		void DrawMessageText(HUD::HudLocalizedMessage LocalMessage, float ScreenX, float ScreenY)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DrawMessageText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13839);
 			byte params[72] = { NULL };
-			*(HUD::HudLocalizedMessage*)&params[0] = LocalMessage;
+			*(HUD::HudLocalizedMessage*)params = LocalMessage;
 			*(float*)&params[64] = ScreenX;
 			*(float*)&params[68] = ScreenY;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayLocalMessages()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DisplayLocalMessages");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13844);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayKismetMessages()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DisplayKismetMessages");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13854);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawText(ScriptString* Text, Object::Vector2D Position, class Font* TextFont, Object::Vector2D FontScale, Object::Color TextColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.DrawText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13856);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			*(Object::Vector2D*)&params[12] = Position;
 			*(class Font**)&params[20] = TextFont;
 			*(Object::Vector2D*)&params[24] = FontScale;
@@ -342,22 +342,22 @@ namespace UnrealScript
 		}
 		class Font* GetFontSizeIndex(int FontSize)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.GetFontSizeIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13864);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = FontSize;
+			*(int*)params = FontSize;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Font**)&params[4];
 		}
 		void PlayerOwnerDied()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.PlayerOwnerDied");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13871);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnLostFocusPause(bool bEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HUD.OnLostFocusPause");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13872);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnable;
+			*(bool*)params = bEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

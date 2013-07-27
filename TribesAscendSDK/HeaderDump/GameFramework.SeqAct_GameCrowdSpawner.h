@@ -29,7 +29,7 @@ namespace UnrealScript
 	class SeqAct_GameCrowdSpawner : public SeqAct_Latent
 	{
 	public:
-		class AgentArchetypeInfo
+		struct AgentArchetypeInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class Object*>, GroupMembers, 16)
@@ -65,41 +65,41 @@ namespace UnrealScript
 		ADD_BOOL(bSpawningActive, 248, 0x1)
 		void SpawnedAgent(class GameCrowdAgent* NewAgent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.SpawnedAgent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32913);
 			byte params[4] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = NewAgent;
+			*(class GameCrowdAgent**)params = NewAgent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CacheSpawnerVars()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.CacheSpawnerVars");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32915);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void KillAgents()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.KillAgents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32916);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateSpawning(float DeltaSeconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.UpdateSpawning");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32917);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaSeconds;
+			*(float*)params = DeltaSeconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GameCrowdAgent* SpawnAgent(class Actor* SpawnLoc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.SpawnAgent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32919);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = SpawnLoc;
+			*(class Actor**)params = SpawnLoc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GameCrowdAgent**)&params[4];
 		}
 		class GameCrowdAgent* CreateNewAgent(class Actor* SpawnLoc, class GameCrowdAgent* AgentTemplate, class GameCrowdGroup* NewGroup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.CreateNewAgent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32929);
 			byte params[16] = { NULL };
-			*(class Actor**)&params[0] = SpawnLoc;
+			*(class Actor**)params = SpawnLoc;
 			*(class GameCrowdAgent**)&params[4] = AgentTemplate;
 			*(class GameCrowdGroup**)&params[8] = NewGroup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -107,10 +107,10 @@ namespace UnrealScript
 		}
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_GameCrowdSpawner.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32937);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

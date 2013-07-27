@@ -40,10 +40,10 @@ namespace UnrealScript
 		ADD_OBJECT(SwfMovie, Movie, 232)
 		bool IsValidLevelSequenceObject()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxAction_OpenMovie.IsValidLevelSequenceObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29962);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

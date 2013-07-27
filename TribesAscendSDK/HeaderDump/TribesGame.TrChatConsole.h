@@ -28,63 +28,63 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, ChannelStr, 456)
 		void Initialized()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsole.Initialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74294);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void GetPlayerController()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsole.GetPlayerController");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74295);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ConsoleCommand(ScriptString* Command)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsole.ConsoleCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74297);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)params = Command;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartTypingChat(ScriptString* Text, bool bFullConsole, ScriptString* startText)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsole.StartTypingChat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74300);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			*(bool*)&params[12] = bFullConsole;
 			*(ScriptString**)&params[16] = startText;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartTyping(ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsole.StartTyping");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74304);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsSlashCommand()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsole.IsSlashCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74306);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool IsPlayerTell()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsole.IsPlayerTell");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74308);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void PostRender_Console(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsole.PostRender_Console");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74310);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool InputKey(int ControllerId, ScriptName Key, Object::EInputEvent Event, float AmountDepressed, bool bGamepad)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsole.InputKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74312);
 			byte params[25] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptName*)&params[4] = Key;
 			*(Object::EInputEvent*)&params[12] = Event;
 			*(float*)&params[16] = AmountDepressed;
@@ -94,7 +94,7 @@ namespace UnrealScript
 		}
 		void AddOnlineFriendHelp()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsole.AddOnlineFriendHelp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74319);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

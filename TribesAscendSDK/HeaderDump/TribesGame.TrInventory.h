@@ -11,12 +11,12 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(float, m_fMaxPickupSpeed, 556)
-		void DropFrom(Object::Vector StartLocation, Object::Vector StartVelocity)
+		void DropFrom(Vector StartLocation, Vector StartVelocity)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventory.DropFrom");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96673);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = StartLocation;
-			*(Object::Vector*)&params[12] = StartVelocity;
+			*(Vector*)params = StartLocation;
+			*(Vector*)&params[12] = StartVelocity;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

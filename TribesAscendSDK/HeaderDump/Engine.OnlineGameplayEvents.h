@@ -19,7 +19,7 @@ namespace UnrealScript
 	class OnlineGameplayEvents : public Object
 	{
 	public:
-		class PlayerInformation
+		struct PlayerInformation
 		{
 		public:
 			ADD_STRUCT(int, LastPlayerEventIdx, 36)
@@ -28,18 +28,18 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptString*, PlayerName, 12)
 			ADD_STRUCT(ScriptString*, ControllerName, 0)
 		};
-		class GameplayEvent
+		struct GameplayEvent
 		{
 		public:
 			ADD_STRUCT(int, EventNameAndDesc, 4)
 			ADD_STRUCT(int, PlayerEventAndTarget, 0)
 		};
-		class PlayerEvent
+		struct PlayerEvent
 		{
 		public:
 			ADD_STRUCT(int, PlayerPitchAndRoll, 20)
 			ADD_STRUCT(int, PlayerIndexAndYaw, 16)
-			ADD_STRUCT(Object::Vector, EventLocation, 4)
+			ADD_STRUCT(Vector, EventLocation, 4)
 			ADD_STRUCT(float, EventTime, 0)
 		};
 		ADD_STRUCT(ScriptArray<OnlineGameplayEvents::PlayerInformation>, PlayerList, 60)

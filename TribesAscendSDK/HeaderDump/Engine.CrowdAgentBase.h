@@ -13,7 +13,7 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IInterface_NavigationHandle, 476)
 		void NotifyPathChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CrowdAgentBase.NotifyPathChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13599);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

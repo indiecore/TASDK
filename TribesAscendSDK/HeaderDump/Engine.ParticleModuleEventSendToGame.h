@@ -5,18 +5,18 @@ namespace UnrealScript
 	class ParticleModuleEventSendToGame : public Object
 	{
 	public:
-		void DoEvent(Object::Vector& InCollideDirection, Object::Vector& InHitLocation, Object::Vector& InHitNormal, ScriptName& InBoneName)
+		void DoEvent(Vector& InCollideDirection, Vector& InHitLocation, Vector& InHitNormal, ScriptName& InBoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleModuleEventSendToGame.DoEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23311);
 			byte params[44] = { NULL };
-			*(Object::Vector*)&params[0] = InCollideDirection;
-			*(Object::Vector*)&params[12] = InHitLocation;
-			*(Object::Vector*)&params[24] = InHitNormal;
+			*(Vector*)params = InCollideDirection;
+			*(Vector*)&params[12] = InHitLocation;
+			*(Vector*)&params[24] = InHitNormal;
 			*(ScriptName*)&params[36] = InBoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			InCollideDirection = *(Object::Vector*)&params[0];
-			InHitLocation = *(Object::Vector*)&params[12];
-			InHitNormal = *(Object::Vector*)&params[24];
+			InCollideDirection = *(Vector*)params;
+			InHitLocation = *(Vector*)&params[12];
+			InHitNormal = *(Vector*)&params[24];
 			InBoneName = *(ScriptName*)&params[36];
 		}
 	};

@@ -1659,7 +1659,7 @@ namespace UnrealScript
 		ADD_BOOL(bSceneCreated, 120, 0x1)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63259);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -26,7 +26,7 @@ namespace UnrealScript
 			FontICS_Symbol = 2,
 			FontICS_MAX = 3,
 		};
-		class FontImportOptionsData
+		struct FontImportOptionsData
 		{
 		public:
 			ADD_STRUCT(ScriptString*, FontName, 0)

@@ -19,7 +19,7 @@ namespace UnrealScript
 	class RB_ConstraintSetup : public Object
 	{
 	public:
-		class LinearDOFSetup
+		struct LinearDOFSetup
 		{
 		public:
 			ADD_STRUCT(float, LimitSize, 4)
@@ -53,14 +53,14 @@ namespace UnrealScript
 		ADD_BOOL(bLinearBreakable, 180, 0x4)
 		ADD_BOOL(bLinearLimitSoft, 180, 0x2)
 		ADD_BOOL(bEnableProjection, 180, 0x1)
-		ADD_STRUCT(Object::Vector, PulleyPivot2, 168)
-		ADD_STRUCT(Object::Vector, PulleyPivot1, 156)
-		ADD_STRUCT(Object::Vector, SecAxis2, 144)
-		ADD_STRUCT(Object::Vector, PriAxis2, 132)
-		ADD_STRUCT(Object::Vector, Pos2, 120)
-		ADD_STRUCT(Object::Vector, SecAxis1, 108)
-		ADD_STRUCT(Object::Vector, PriAxis1, 96)
-		ADD_STRUCT(Object::Vector, Pos1, 84)
+		ADD_STRUCT(Vector, PulleyPivot2, 168)
+		ADD_STRUCT(Vector, PulleyPivot1, 156)
+		ADD_STRUCT(Vector, SecAxis2, 144)
+		ADD_STRUCT(Vector, PriAxis2, 132)
+		ADD_STRUCT(Vector, Pos2, 120)
+		ADD_STRUCT(Vector, SecAxis1, 108)
+		ADD_STRUCT(Vector, PriAxis1, 96)
+		ADD_STRUCT(Vector, Pos1, 84)
 	};
 }
 #undef ADD_BOOL

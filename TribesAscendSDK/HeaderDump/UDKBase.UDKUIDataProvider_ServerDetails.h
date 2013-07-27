@@ -13,17 +13,17 @@ namespace UnrealScript
 		ADD_STRUCT(int, SearchResultsRow, 92)
 		class UIDataProvider_Settings* GetSearchResultsProvider()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataProvider_ServerDetails.GetSearchResultsProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35588);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class UIDataProvider_Settings**)&params[0];
+			return *(class UIDataProvider_Settings**)params;
 		}
 		int GetElementCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataProvider_ServerDetails.GetElementCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35590);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

@@ -34,18 +34,18 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_ChainGun_MKD.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68279);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ThirdPersonFireEffects(Object::Vector HitLocation)
+		void ThirdPersonFireEffects(Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_ChainGun_MKD.ThirdPersonFireEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68283);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
+			*(Vector*)params = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

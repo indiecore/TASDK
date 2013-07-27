@@ -47,17 +47,17 @@ namespace UnrealScript
 		ADD_STRUCT(int, SizeY, 240)
 		void Play()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureMovie.Play");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28005);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Pause()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureMovie.Pause");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28006);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Stop()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureMovie.Stop");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28007);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

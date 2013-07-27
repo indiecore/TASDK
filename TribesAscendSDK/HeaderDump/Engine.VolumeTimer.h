@@ -13,12 +13,12 @@ namespace UnrealScript
 		ADD_OBJECT(PhysicsVolume, V, 476)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.VolumeTimer.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29244);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Timer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.VolumeTimer.Timer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29245);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -10,7 +10,7 @@ namespace UnrealScript
 	class SeqVar_Vector : public SequenceVariable
 	{
 	public:
-		ADD_STRUCT(Object::Vector, VectValue, 148)
+		ADD_STRUCT(Vector, VectValue, 148)
 	};
 }
 #undef ADD_STRUCT

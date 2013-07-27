@@ -19,82 +19,82 @@ namespace UnrealScript
 		ADD_STRUCT(int, m_RegionSettingsCount, 120)
 		int GetPreferredSiteId()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.GetPreferredSiteId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54608);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		ScriptString* LoadRegionSetting()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.LoadRegionSetting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54701);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		ScriptString* GetRegionName(int siteId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.GetRegionName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58570);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = siteId;
+			*(int*)params = siteId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		int GetRegionIdAtIndex(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.GetRegionIdAtIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60425);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int GetRegionIndexByName(ScriptString* regionName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.GetRegionIndexByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60435);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = regionName;
+			*(ScriptString**)params = regionName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		void LoadRegions()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.LoadRegions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110496);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPreferredSiteId(int siteId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.SetPreferredSiteId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110497);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = siteId;
+			*(int*)params = siteId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadRegionLabels(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.LoadRegionLabels");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110499);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPreferredRegion(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.SetPreferredRegion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110509);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddRegion(ScriptString* regionName, int Id, bool bCustomOnly)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.AddRegion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110511);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = regionName;
+			*(ScriptString**)params = regionName;
 			*(int*)&params[12] = Id;
 			*(bool*)&params[16] = bCustomOnly;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddSetting(ScriptName regionName, int Id)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRegionSettings.AddSetting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110517);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = regionName;
+			*(ScriptName*)params = regionName;
 			*(int*)&params[8] = Id;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

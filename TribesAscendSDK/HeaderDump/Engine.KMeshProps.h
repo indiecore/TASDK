@@ -19,7 +19,7 @@ namespace UnrealScript
 	class KMeshProps : public Object
 	{
 	public:
-		class KSphereElem
+		struct KSphereElem
 		{
 		public:
 			ADD_BOOL(bPerPolyShape, 68, 0x2)
@@ -27,7 +27,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, Radius, 64)
 			ADD_STRUCT(Object::Matrix, TM, 0)
 		};
-		class KBoxElem
+		struct KBoxElem
 		{
 		public:
 			ADD_BOOL(bPerPolyShape, 76, 0x2)
@@ -37,7 +37,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, X, 64)
 			ADD_STRUCT(Object::Matrix, TM, 0)
 		};
-		class KSphylElem
+		struct KSphylElem
 		{
 		public:
 			ADD_BOOL(bPerPolyShape, 72, 0x2)
@@ -46,18 +46,18 @@ namespace UnrealScript
 			ADD_STRUCT(float, Radius, 64)
 			ADD_STRUCT(Object::Matrix, TM, 0)
 		};
-		class KConvexElem
+		struct KConvexElem
 		{
 		public:
-			ADD_STRUCT(ScriptArray<Object::Vector>, VertexData, 0)
+			ADD_STRUCT(ScriptArray<Vector>, VertexData, 0)
 			ADD_STRUCT(ScriptArray<Object::Plane>, PermutedVertexData, 12)
 			ADD_STRUCT(ScriptArray<int>, FaceTriData, 24)
-			ADD_STRUCT(ScriptArray<Object::Vector>, EdgeDirections, 36)
-			ADD_STRUCT(ScriptArray<Object::Vector>, FaceNormalDirections, 48)
+			ADD_STRUCT(ScriptArray<Vector>, EdgeDirections, 36)
+			ADD_STRUCT(ScriptArray<Vector>, FaceNormalDirections, 48)
 			ADD_STRUCT(ScriptArray<Object::Plane>, FacePlaneData, 60)
 			ADD_STRUCT(Object::Box, ElemBox, 72)
 		};
-		class KAggregateGeom
+		struct KAggregateGeom
 		{
 		public:
 			ADD_STRUCT(ScriptArray<KMeshProps::KSphereElem>, SphereElems, 0)
@@ -68,7 +68,7 @@ namespace UnrealScript
 			ADD_STRUCT(Object::Pointer, RenderInfo, 48)
 		};
 		ADD_STRUCT(KMeshProps::KAggregateGeom, AggGeom, 72)
-		ADD_STRUCT(Object::Vector, COMNudge, 60)
+		ADD_STRUCT(Vector, COMNudge, 60)
 	};
 }
 #undef ADD_BOOL

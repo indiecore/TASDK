@@ -26,42 +26,42 @@ namespace UnrealScript
 		ADD_BOOL(bStoppingBehavior, 84, 0x1)
 		bool HandleMovement()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitInQueue.HandleMovement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31286);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void ChangingDestination(class GameCrowdDestination* NewDest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitInQueue.ChangingDestination");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31288);
 			byte params[4] = { NULL };
-			*(class GameCrowdDestination**)&params[0] = NewDest;
+			*(class GameCrowdDestination**)params = NewDest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Actor* GetDestinationActor()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitInQueue.GetDestinationActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31290);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Actor**)&params[0];
+			return *(class Actor**)params;
 		}
 		ScriptString* GetBehaviorString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitInQueue.GetBehaviorString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31292);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		bool ShouldEndIdle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitInQueue.ShouldEndIdle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31294);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void StopBehavior()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitInQueue.StopBehavior");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31296);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

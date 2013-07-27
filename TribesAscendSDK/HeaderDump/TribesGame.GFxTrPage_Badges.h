@@ -282,100 +282,100 @@ namespace UnrealScript
 		ADD_STRUCT(int, ActiveType, 356)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57494);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpecialAction(class GFxTrAction* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.SpecialAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57495);
 			byte params[4] = { NULL };
-			*(class GFxTrAction**)&params[0] = Action;
+			*(class GFxTrAction**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int TakeAction(int ActionIndex, class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.TakeAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57497);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			*(class GFxObject**)&params[4] = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void ShowModel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.ShowModel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57501);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int TakeFocus(int ActionIndex, class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.TakeFocus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57503);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			*(class GFxObject**)&params[4] = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void FillData(class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.FillData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57507);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = DataList;
+			*(class GFxObject**)params = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* FillProfile()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.FillProfile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57510);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GFxObject**)&params[0];
+			return *(class GFxObject**)params;
 		}
 		void FillCombatType(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.FillCombatType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57515);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FillObjectiveType(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.FillObjectiveType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57520);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FillVehicleType(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.FillVehicleType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57525);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FillTacticalType(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.FillTacticalType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57530);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FillSingleType(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.FillSingleType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57535);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FillReferralType(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.FillReferralType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57540);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FillBadge(class GFxObject* Obj, int Count, int badgeIndex, bool bSkiBadge, bool bSingle, bool bReferralBadge)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.FillBadge");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57546);
 			byte params[24] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			*(int*)&params[4] = Count;
 			*(int*)&params[8] = badgeIndex;
 			*(bool*)&params[12] = bSkiBadge;
@@ -385,31 +385,31 @@ namespace UnrealScript
 		}
 		int GetHighestBadgeIndex(int ActivityId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.GetHighestBadgeIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57557);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ActivityId;
+			*(int*)params = ActivityId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int GetHighestSkiBadgeIndex()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.GetHighestSkiBadgeIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57564);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void ProfileUp(int ActionIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.ProfileUp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57569);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProfileDown(int ActionIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Badges.ProfileDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57571);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

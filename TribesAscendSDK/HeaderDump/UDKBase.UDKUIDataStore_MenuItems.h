@@ -23,35 +23,35 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementCellProvider, 196)
 		int GetProviderCount(ScriptName FieldName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.GetProviderCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35605);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		bool IsProviderFiltered(ScriptName FieldName, int ProviderIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.IsProviderFiltered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35608);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			*(int*)&params[8] = ProviderIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void GetAllResourceDataProviders(ScriptClass* ProviderClass, ScriptArray<class UDKUIResourceDataProvider*>& Providers)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.GetAllResourceDataProviders");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35612);
 			byte params[16] = { NULL };
-			*(ScriptClass**)&params[0] = ProviderClass;
+			*(ScriptClass**)params = ProviderClass;
 			*(ScriptArray<class UDKUIResourceDataProvider*>*)&params[4] = Providers;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Providers = *(ScriptArray<class UDKUIResourceDataProvider*>*)&params[4];
 		}
 		int FindValueInProviderSet(ScriptName ProviderFieldName, ScriptName SearchTag, ScriptString* SearchValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.FindValueInProviderSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35616);
 			byte params[32] = { NULL };
-			*(ScriptName*)&params[0] = ProviderFieldName;
+			*(ScriptName*)params = ProviderFieldName;
 			*(ScriptName*)&params[8] = SearchTag;
 			*(ScriptString**)&params[16] = SearchValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -59,9 +59,9 @@ namespace UnrealScript
 		}
 		bool GetValueFromProviderSet(ScriptName ProviderFieldName, ScriptName SearchTag, int ListIndex, ScriptString*& OutValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.GetValueFromProviderSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35621);
 			byte params[36] = { NULL };
-			*(ScriptName*)&params[0] = ProviderFieldName;
+			*(ScriptName*)params = ProviderFieldName;
 			*(ScriptName*)&params[8] = SearchTag;
 			*(int*)&params[16] = ListIndex;
 			*(ScriptString**)&params[20] = OutValue;
@@ -71,9 +71,9 @@ namespace UnrealScript
 		}
 		bool GetProviderSet(ScriptName ProviderFieldName, ScriptArray<class UDKUIResourceDataProvider*>& OutProviders)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.GetProviderSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35627);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ProviderFieldName;
+			*(ScriptName*)params = ProviderFieldName;
 			*(ScriptArray<class UDKUIResourceDataProvider*>*)&params[8] = OutProviders;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutProviders = *(ScriptArray<class UDKUIResourceDataProvider*>*)&params[8];
@@ -81,21 +81,21 @@ namespace UnrealScript
 		}
 		void InitializeListElementProviders()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.InitializeListElementProviders");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35632);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RemoveListElementProvidersKey(ScriptName KeyName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.RemoveListElementProvidersKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35637);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = KeyName;
+			*(ScriptName*)params = KeyName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddListElementProvidersKey(ScriptName KeyName, class UDKUIResourceDataProvider* Provider)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_MenuItems.AddListElementProvidersKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35639);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = KeyName;
+			*(ScriptName*)params = KeyName;
 			*(class UDKUIResourceDataProvider**)&params[8] = Provider;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

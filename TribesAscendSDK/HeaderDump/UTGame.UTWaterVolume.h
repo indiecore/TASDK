@@ -17,23 +17,23 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, PS_EnterWaterEffect_Pawn, 600)
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWaterVolume.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47334);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayEntrySplash(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWaterVolume.PlayEntrySplash");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47347);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

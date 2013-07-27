@@ -20,10 +20,10 @@ namespace UnrealScript
 	class SkelControlTrail : public SkelControlBase
 	{
 	public:
-		ADD_STRUCT(ScriptArray<Object::Vector>, TrailBoneLocations, 224)
+		ADD_STRUCT(ScriptArray<Vector>, TrailBoneLocations, 224)
 		ADD_STRUCT(Object::Matrix, OldLocalToWorld, 240)
 		ADD_STRUCT(float, ThisTimstep, 220)
-		ADD_STRUCT(Object::Vector, FakeVelocity, 208)
+		ADD_STRUCT(Vector, FakeVelocity, 208)
 		ADD_STRUCT(float, StretchLimit, 204)
 		ADD_STRUCT(float, TrailRelaxation, 200)
 		ADD_BOOL(bHadValidStrength, 196, 0x8)

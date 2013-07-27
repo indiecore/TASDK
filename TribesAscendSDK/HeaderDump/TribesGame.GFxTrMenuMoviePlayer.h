@@ -1443,7 +1443,7 @@ namespace UnrealScript
 			PUT_PORTAL_CONFIRM = 6,
 			PUT_MAX = 7,
 		};
-		class VendorItemData
+		struct VendorItemData
 		{
 		public:
 			ADD_STRUCT(ScriptString*, Description, 20)
@@ -1451,7 +1451,7 @@ namespace UnrealScript
 			ADD_STRUCT(int, LootId, 4)
 			ADD_STRUCT(int, Price, 0)
 		};
-		class AcquisitionData
+		struct AcquisitionData
 		{
 		public:
 			ADD_STRUCT(int, Icon, 36)
@@ -1459,7 +1459,7 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptString*, Text, 12)
 			ADD_STRUCT(ScriptString*, Title, 0)
 		};
-		class QueueUIData
+		struct QueueUIData
 		{
 		public:
 			ADD_STRUCT(int, LevelMax, 60)
@@ -1578,104 +1578,104 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<GFxTrMenuMoviePlayer::QueueUIData>, QueueUIList, 720)
 		void DelegateNoParam()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateNoParam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54312);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DelegateInt(int val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54313);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = val;
+			*(int*)params = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DelegateBool(bool bVal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateBool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54315);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bVal;
+			*(bool*)params = bVal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DelegateString(ScriptString* val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54317);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = val;
+			*(ScriptString**)params = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DelegateGFxList(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateGFxList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54319);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DelegateIntInt(int Val1, int Val2)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateIntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54321);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Val1;
+			*(int*)params = Val1;
 			*(int*)&params[4] = Val2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DelegateIntString(int Val1, ScriptString* Val2)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateIntString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54324);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Val1;
+			*(int*)params = Val1;
 			*(ScriptString**)&params[4] = Val2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DelegateStringInt(ScriptString* Val1, int Val2)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateStringInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54327);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Val1;
+			*(ScriptString**)params = Val1;
 			*(int*)&params[12] = Val2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DelegateStringBool(ScriptString* val, bool bVal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateStringBool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54330);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = val;
+			*(ScriptString**)params = val;
 			*(bool*)&params[12] = bVal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DelegateIntGFxList(int val, class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateIntGFxList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54333);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = val;
+			*(int*)params = val;
 			*(class GFxObject**)&params[4] = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DelegateOnMarshalEvent(Object::Pointer pMarEvent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateOnMarshalEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54336);
 			byte params[4] = { NULL };
-			*(Object::Pointer*)&params[0] = pMarEvent;
+			*(Object::Pointer*)params = pMarEvent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int DelegateGetInt()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateGetInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54338);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int DelegateGetPrice(float XPValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateGetPrice");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54340);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = XPValue;
+			*(float*)params = XPValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		bool DelegateIntIntInt(int Val1, int Val2, int Val3)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateIntIntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54343);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Val1;
+			*(int*)params = Val1;
 			*(int*)&params[4] = Val2;
 			*(int*)&params[8] = Val3;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1683,18 +1683,18 @@ namespace UnrealScript
 		}
 		bool DelegateGetBoolIntInt(int SlotId, int ClassId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateGetBoolIntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54348);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = SlotId;
+			*(int*)params = SlotId;
 			*(int*)&params[4] = ClassId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool DelegateLogin(ScriptString* UserName, ScriptString* Password, bool bRemember)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54352);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = UserName;
+			*(ScriptString**)params = UserName;
 			*(ScriptString**)&params[12] = Password;
 			*(bool*)&params[24] = bRemember;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1702,105 +1702,105 @@ namespace UnrealScript
 		}
 		bool DelegateBoolGetBool(bool val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateBoolGetBool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54357);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = val;
+			*(bool*)params = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		ScriptString* DelegateGetString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateGetString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54360);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void DelegateOptions(class GFxObject* List, int ClassId, int SkillId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateOptions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54362);
 			byte params[12] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			*(int*)&params[4] = ClassId;
 			*(int*)&params[8] = SkillId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int DelegateAction(int val, class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DelegateAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54366);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = val;
+			*(int*)params = val;
 			*(class GFxObject**)&params[4] = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		bool UseSteam()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UseSteam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54370);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void RequestPurchaseSteamItem(int LootId, int Price)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.RequestPurchaseSteamItem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54372);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = LootId;
+			*(int*)params = LootId;
 			*(int*)&params[4] = Price;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RequestSteamUserData()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.RequestSteamUserData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54375);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetGoldItemInfo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetGoldItemInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54376);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		bool UsePortal()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UsePortal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54378);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		int GetPortalBalance()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetPortalBalance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54380);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		ScriptString* GetPortalCurrencyName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetPortalCurrencyName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54382);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		bool RequestPurchasePortalItem(int LootItemId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.RequestPurchasePortalItem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54384);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = LootItemId;
+			*(int*)params = LootItemId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool CheckAutoLoginStatus()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.CheckAutoLoginStatus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54387);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void PurchasedItem(int VendorId, int LootId, bool bSuccess, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.PurchasedItem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54389);
 			byte params[24] = { NULL };
-			*(int*)&params[0] = VendorId;
+			*(int*)params = VendorId;
 			*(int*)&params[4] = LootId;
 			*(bool*)&params[8] = bSuccess;
 			*(ScriptString**)&params[12] = Message;
@@ -1808,105 +1808,105 @@ namespace UnrealScript
 		}
 		void OnMarshalEvent(Object::Pointer pMarEvent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.OnMarshalEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54394);
 			byte params[4] = { NULL };
-			*(Object::Pointer*)&params[0] = pMarEvent;
+			*(Object::Pointer*)params = pMarEvent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ReadPlayerProfileData(class TgPlayerProfile* Profile)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ReadPlayerProfileData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54396);
 			byte params[8] = { NULL };
-			*(class TgPlayerProfile**)&params[0] = Profile;
+			*(class TgPlayerProfile**)params = Profile;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void UserLoginChanged(Object::Pointer pMarEvent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UserLoginChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54399);
 			byte params[4] = { NULL };
-			*(Object::Pointer*)&params[0] = pMarEvent;
+			*(Object::Pointer*)params = pMarEvent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool RegisterMarshalCallback(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* MarshalEventDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.RegisterMarshalCallback");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54401);
 			byte params[16] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = MarshalEventDelegate;
+void**)params = MarshalEventDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		ScriptString* GetVersionString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetVersionString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54404);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void ForceFocus()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ForceFocus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54406);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool AddAcquisition(int VendorId, int LootId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.AddAcquisition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54407);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = VendorId;
+			*(int*)params = VendorId;
 			*(int*)&params[4] = LootId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void GetQueueUIInfo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetQueueUIInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54411);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetLanguageFontIndex()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetLanguageFontIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54412);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void RequestStreams()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.RequestStreams");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54414);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetEquipmentXP(int ActivityId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetEquipmentXP");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54415);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ActivityId;
+			*(int*)params = ActivityId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int GetEquipmentTierXP(int ActivityId, int Tier)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetEquipmentTierXP");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54418);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ActivityId;
+			*(int*)params = ActivityId;
 			*(int*)&params[4] = Tier;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		bool HaveClanTag()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.HaveClanTag");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54422);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool Start(bool StartPaused)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.Start");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54424);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = StartPaused;
+			*(bool*)params = StartPaused;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
@@ -1914,842 +1914,842 @@ void**)&params[0] = MarshalEventDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetLoginDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54453);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSubmitPlayerNameDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetSubmitPlayerNameDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54454);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLoadTeamMiscDataDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetLoadTeamMiscDataDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54455);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLoadTeamScoreboardDataDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetLoadTeamScoreboardDataDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54456);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLoadTeamStatsDataDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetLoadTeamStatsDataDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54457);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLoadTeamAccoladeDataDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetLoadTeamAccoladeDataDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54458);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLoadPlayerMiscDataDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetLoadPlayerMiscDataDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54459);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLoadPlayerStatsDataDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetLoadPlayerStatsDataDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54460);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLoadPlayerAccoladeDataDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetLoadPlayerAccoladeDataDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54461);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAcceptEULADelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetAcceptEULADelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54462);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSoundXPGain(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetSoundXPGain");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54463);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSoundClassType(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetSoundClassType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54464);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSoundSkillType(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetSoundSkillType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54465);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetEscapeClass(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetEscapeClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54467);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetExitGameDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetExitGameDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54468);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetGetPlatformDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetGetPlatformDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54469);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetGetViewModeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetGetViewModeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54470);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetShowSummaryDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetShowSummaryDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54471);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAlertDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetAlertDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54472);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBrowserGoldDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetBrowserGoldDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54473);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBrowserStoreDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetBrowserStoreDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54474);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBrowserSupportDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetBrowserSupportDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54475);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBrowserProfileDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetBrowserProfileDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54476);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBrowserBoosterDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetBrowserBoosterDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54477);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBrowserClassVideoDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetBrowserClassVideoDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54478);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBrowserActivateKeyDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetBrowserActivateKeyDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54479);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBrowserCreateAccountDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetBrowserCreateAccountDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54480);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBrowserRecoverPasswordDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetBrowserRecoverPasswordDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54481);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBrowserRecoverUsernameDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetBrowserRecoverUsernameDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54482);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetExitQueueDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetExitQueueDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54483);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetJoinCustomServerDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetJoinCustomServerDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54484);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFavoriteServerDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetFavoriteServerDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54485);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPasswordServerDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetPasswordServerDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54486);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetServerPageDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetServerPageDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54487);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetServerSortDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetServerSortDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54488);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetReticuleActionDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetReticuleActionDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54489);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSaveReticuleDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetSaveReticuleDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54490);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetRequestNewsDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetRequestNewsDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54491);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetStartLoginDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetStartLoginDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54492);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSmoothAnimDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetSmoothAnimDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54493);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ASC_SetFontIndex(int FontIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_SetFontIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54494);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = FontIdx;
+			*(int*)params = FontIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ASC_Resize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_Resize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54495);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPopupDataDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetPopupDataDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54497);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPopupCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetPopupCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54498);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFocusedActionDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetFocusedActionDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54499);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSelectedActionDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetSelectedActionDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54500);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetModifiedActionDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetModifiedActionDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54501);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetModifyFocusDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetModifyFocusDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54502);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetActionUpDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetActionUpDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54503);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetActionDownDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetActionDownDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54504);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetHelpButtonDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetHelpButtonDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54505);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetProfilePageUpDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetProfilePageUpDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54506);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetProfilePageDownDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetProfilePageDownDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54507);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetMutePlayerDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetMutePlayerDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54508);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSummaryActionDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetSummaryActionDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54509);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFriendPlayerDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetFriendPlayerDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54510);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLoadXPSummaryDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetLoadXPSummaryDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54511);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPromoActionDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetPromoActionDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54512);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSelectedFeatureDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetSelectedFeatureDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54513);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CompleteStartup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.CompleteStartup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54514);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SummaryAction(int ActionId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SummaryAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54517);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ActionId;
+			*(int*)params = ActionId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartMainMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.StartMainMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54521);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ToggleMutePlayer(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ToggleMutePlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54523);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* StripTag(ScriptString* sValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.StripTag");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54528);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = sValue;
+			*(ScriptString**)params = sValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		void StartPeach()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.StartPeach");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54532);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartLogin()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.StartLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54534);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowPeach()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ShowPeach");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54535);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_ShowPeach()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_ShowPeach");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54536);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EntryPlayerReady()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.EntryPlayerReady");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54537);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool HaveEntry()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.HaveEntry");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54540);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SetPlayerMainMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetPlayerMainMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54544);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClosePopup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ClosePopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54548);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPlayerInLogin(bool bServerDrop)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetPlayerInLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54549);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bServerDrop;
+			*(bool*)params = bServerDrop;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void QueuePopup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.QueuePopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54553);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPlayerInLobby()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetPlayerInLobby");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54554);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_StopLoading()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_StopLoading");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54560);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPlayerLoading()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetPlayerLoading");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54562);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_GotoState(ScriptString* NewState)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_GotoState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54563);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = NewState;
+			*(ScriptString**)params = NewState;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPlayerInGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetPlayerInGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54564);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetEndOfMatch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetEndOfMatch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54566);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowSummary()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ShowSummary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54567);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Escape()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.Escape");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54569);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CloseClasses()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.CloseClasses");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54570);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OpenMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.OpenMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54571);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OpenClasses()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.OpenClasses");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54572);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OpenFriends()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.OpenFriends");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54573);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OpenSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.OpenSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54574);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void QuitGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.QuitGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54575);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LeaveMatch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.LeaveMatch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54577);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void QuitGamePopup(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.QuitGamePopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54579);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LeaveMatchPopup(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.LeaveMatchPopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54585);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void QuitGamePopupComplete(int Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.QuitGamePopupComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54591);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Action;
+			*(int*)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LeaveMatchPopupComplete(int Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.LeaveMatchPopupComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54593);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Action;
+			*(int*)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Quit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.Quit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54595);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SendPlayerLogin(ScriptString* PlayerName, ScriptString* Reason, bool Success, bool bNeedEULA)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SendPlayerLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54597);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			*(ScriptString**)&params[12] = Reason;
 			*(bool*)&params[24] = Success;
 			*(bool*)&params[28] = bNeedEULA;
@@ -2757,119 +2757,119 @@ void**)&params[0] = In;
 		}
 		void AlienMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.AlienMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54612);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnProfileLoaded(bool bShowEula)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.OnProfileLoaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54614);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bShowEula;
+			*(bool*)params = bShowEula;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsLoadComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.IsLoadComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54621);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SendBack()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SendBack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54627);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EquipmentLoaded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.EquipmentLoaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54635);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EquipmentChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.EquipmentChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54637);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RefreshPage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.RefreshPage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54648);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SwapModel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SwapModel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54649);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void JoinFailed(ScriptString* Error)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.JoinFailed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54650);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Error;
+			*(ScriptString**)params = Error;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayJoinFailed(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DisplayJoinFailed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54654);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void JoinRequiresPassword()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.JoinRequiresPassword");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54658);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void JoinRequiresPasswordComplete(int Action, ScriptString* TextInput)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.JoinRequiresPasswordComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54660);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Action;
+			*(int*)params = Action;
 			*(ScriptString**)&params[4] = TextInput;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CheckRibbons(bool bForce)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.CheckRibbons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54664);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bForce;
+			*(bool*)params = bForce;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProfileUpdated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ProfileUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54667);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_ProfileUpdated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_ProfileUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54668);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ExitPopup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ExitPopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54669);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_PopupError(ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_PopupError");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54670);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Message;
+			*(ScriptString**)params = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayEULA()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DisplayEULA");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54671);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_HideLogin()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_HideLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54672);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_FillEULAText(ScriptString* EULAText, ScriptString* Title, ScriptString* Accept, ScriptString* Decline)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_FillEULAText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54673);
 			byte params[48] = { NULL };
-			*(ScriptString**)&params[0] = EULAText;
+			*(ScriptString**)params = EULAText;
 			*(ScriptString**)&params[12] = Title;
 			*(ScriptString**)&params[24] = Accept;
 			*(ScriptString**)&params[36] = Decline;
@@ -2877,61 +2877,61 @@ void**)&params[0] = In;
 		}
 		void CreateNewPlayer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.CreateNewPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54678);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayerNameNotAllowed(bool bTaken)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.PlayerNameNotAllowed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54679);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bTaken;
+			*(bool*)params = bTaken;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetUserSelectedClass()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetUserSelectedClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54683);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void FillProfileData()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.FillProfileData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54686);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SendProfileData()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SendProfileData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54696);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_FillProfile(class GFxObject* ObjList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_FillProfile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54710);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = ObjList;
+			*(class GFxObject**)params = ObjList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetBoostLabel(int Hours)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetBoostLabel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54711);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Hours;
+			*(int*)params = Hours;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptClass* GetRankFromXP(int XP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetRankFromXP");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54720);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = XP;
+			*(int*)params = XP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.WidgetInitialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54726);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)params = WidgetName;
 			*(ScriptName*)&params[8] = WidgetPath;
 			*(class GFxObject**)&params[16] = Widget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -2939,230 +2939,230 @@ void**)&params[0] = In;
 		}
 		void RestorePlayerHUD()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.RestorePlayerHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54731);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetPlatform()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetPlatform");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54734);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		ScriptString* GetViewMode()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetViewMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54736);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void ShowMovie(bool bFocus)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ShowMovie");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54738);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bFocus;
+			*(bool*)params = bFocus;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HideMovie()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.HideMovie");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54742);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_HideMovie()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_HideMovie");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54744);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ChatMessageReceived(int Channel, ScriptString* Sender, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ChatMessageReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54745);
 			byte params[28] = { NULL };
-			*(int*)&params[0] = Channel;
+			*(int*)params = Channel;
 			*(ScriptString**)&params[4] = Sender;
 			*(ScriptString**)&params[16] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateStatus(ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UpdateStatus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54749);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Message;
+			*(ScriptString**)params = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetCountdownTimer(int Seconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetCountdownTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54750);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Seconds;
+			*(int*)params = Seconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadingTimer(bool bStart)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.LoadingTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54753);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bStart;
+			*(bool*)params = bStart;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool RequestPaperDoll()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.RequestPaperDoll");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54757);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void KeyBindCaptured(ScriptString* KeyName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.KeyBindCaptured");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54759);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = KeyName;
+			*(ScriptString**)params = KeyName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool KeyPressCaptured(ScriptString* KeyName, bool bReleased)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.KeyPressCaptured");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54762);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = KeyName;
+			*(ScriptString**)params = KeyName;
 			*(bool*)&params[12] = bReleased;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		bool TeamSelectActive()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.TeamSelectActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54786);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool TeamSelectOpen()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.TeamSelectOpen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54790);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool PlayerNeedsTeam()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.PlayerNeedsTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54793);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool PlayerNeedsClass()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.PlayerNeedsClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54797);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		class TrHUD* GetPlayerHUD()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GetPlayerHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54801);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class TrHUD**)&params[0];
+			return *(class TrHUD**)params;
 		}
 		void StartHotkeyBlock()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.StartHotkeyBlock");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54804);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EndHotkeyBlock()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.EndHotkeyBlock");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54806);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UnlockedItem(ScriptString* Description, int ItemId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UnlockedItem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54807);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Description;
+			*(ScriptString**)params = Description;
 			*(int*)&params[12] = ItemId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnlockedGold(ScriptString* Description)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UnlockedGold");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54822);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Description;
+			*(ScriptString**)params = Description;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnlockedXP(ScriptString* Description)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UnlockedXP");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54825);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Description;
+			*(ScriptString**)params = Description;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnlockedBooster(ScriptString* Description)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UnlockedBooster");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54827);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Description;
+			*(ScriptString**)params = Description;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnlockedBadge(ScriptString* Description, ScriptString* RankStr, int Id)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UnlockedBadge");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54829);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = Description;
+			*(ScriptString**)params = Description;
 			*(ScriptString**)&params[12] = RankStr;
 			*(int*)&params[24] = Id;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnlockedNameChange(ScriptString* Description)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UnlockedNameChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54833);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Description;
+			*(ScriptString**)params = Description;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnlockedVIP()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UnlockedVIP");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54836);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UnlockedServerTime()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UnlockedServerTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54838);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UnlockedClanTag(bool bRemoved)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UnlockedClanTag");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54842);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bRemoved;
+			*(bool*)params = bRemoved;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnlockedSkill(int SkillId, int ParentId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UnlockedSkill");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54846);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = SkillId;
+			*(int*)params = SkillId;
 			*(int*)&params[4] = ParentId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void WinOfTheDay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.WinOfTheDay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54856);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClaimedPromotion(ScriptString* PromoName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ClaimedPromotion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54858);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = PromoName;
+			*(ScriptString**)params = PromoName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CheckVIPForLogin()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.CheckVIPForLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54861);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReadyAcquisition(ScriptString* TopName, ScriptString* BotName, GFxTrMenuMoviePlayer::AcquisitionType IconType, int IconId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ReadyAcquisition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54862);
 			byte params[29] = { NULL };
-			*(ScriptString**)&params[0] = TopName;
+			*(ScriptString**)params = TopName;
 			*(ScriptString**)&params[12] = BotName;
 			*(GFxTrMenuMoviePlayer::AcquisitionType*)&params[24] = IconType;
 			*(int*)&params[28] = IconId;
@@ -3170,19 +3170,19 @@ void**)&params[0] = In;
 		}
 		void DisplayAcquisitions()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DisplayAcquisitions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54871);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FireAcquisitions()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.FireAcquisitions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54873);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_UnlockedItem(ScriptString* TopName, ScriptString* BotName, ScriptString* IconType, int IconId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_UnlockedItem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54876);
 			byte params[40] = { NULL };
-			*(ScriptString**)&params[0] = TopName;
+			*(ScriptString**)params = TopName;
 			*(ScriptString**)&params[12] = BotName;
 			*(ScriptString**)&params[24] = IconType;
 			*(int*)&params[36] = IconId;
@@ -3190,244 +3190,244 @@ void**)&params[0] = In;
 		}
 		void KickVoteFeedback(bool bComplete, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.KickVoteFeedback");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54877);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bComplete;
+			*(bool*)params = bComplete;
 			*(ScriptString**)&params[4] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayerInLoginQueue(int Estimate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.PlayerInLoginQueue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54882);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Estimate;
+			*(int*)params = Estimate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoginQueuePopupData(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.LoginQueuePopupData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54885);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoginQueuePopupComplete(int Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.LoginQueuePopupComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54900);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Action;
+			*(int*)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerDropPopupData(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ServerDropPopupData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54902);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AFKKickPopupData(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.AFKKickPopupData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54906);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoginFailedPopup(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.LoginFailedPopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54911);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void WaitingForPurchaseReturn(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.WaitingForPurchaseReturn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54915);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PasswordPopup(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.PasswordPopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54920);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddFriendScoreboardPopup(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.AddFriendScoreboardPopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54925);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PurchaseFailed(ScriptString* FailMessage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.PurchaseFailed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54936);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = FailMessage;
+			*(ScriptString**)params = FailMessage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PurchaseFailedPopup(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.PurchaseFailedPopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54940);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PromoCodeFailed(ScriptString* Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.PromoCodeFailed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54951);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Reason;
+			*(ScriptString**)params = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PromoCodeFailedPopup(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.PromoCodeFailedPopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54955);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GenericFailure(ScriptString* Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GenericFailure");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54958);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Reason;
+			*(ScriptString**)params = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GenericFailurePopup(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.GenericFailurePopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54961);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NewPlayerNamePopup(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.NewPlayerNamePopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54964);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RevertSetting()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.RevertSetting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54972);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DealTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.DealTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54973);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RequestNews()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.RequestNews");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54977);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_ShowNews(ScriptString* News, bool bFeatured)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_ShowNews");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54978);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = News;
+			*(ScriptString**)params = News;
 			*(bool*)&params[12] = bFeatured;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void QueueTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.QueueTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54980);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void BeginExperienceTweens(bool bDailyCompleted, bool bWeeklyCompleted)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.BeginExperienceTweens");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54981);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bDailyCompleted;
+			*(bool*)params = bDailyCompleted;
 			*(bool*)&params[4] = bWeeklyCompleted;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TweenExperienceSummary()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.TweenExperienceSummary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54986);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TweenPlayerSummary()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.TweenPlayerSummary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54988);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ToggleWorkingGraphic(bool bEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ToggleWorkingGraphic");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54989);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnabled;
+			*(bool*)params = bEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowWorkingGraphic()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ShowWorkingGraphic");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54991);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideWorkingGraphic()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.HideWorkingGraphic");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54992);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UnlockedUnknown(int VendorId, int LootId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UnlockedUnknown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54993);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = VendorId;
+			*(int*)params = VendorId;
 			*(int*)&params[4] = LootId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SeedAccolades(class TgPlayerProfile* Profile)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SeedAccolades");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54998);
 			byte params[4] = { NULL };
-			*(class TgPlayerProfile**)&params[0] = Profile;
+			*(class TgPlayerProfile**)params = Profile;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UILoadSummary()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UILoadSummary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55010);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_LoadPlayerSummary()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_LoadPlayerSummary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55014);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearVehicleMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ClearVehicleMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55015);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowVehicleMenu(int Credits)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ShowVehicleMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55017);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Credits;
+			*(int*)params = Credits;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PullOpenMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.PullOpenMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55021);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_OpeningMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_OpeningMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55022);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_ForceFocus()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_ForceFocus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55023);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddVehicleMenuOption(ScriptString* ClassName, ScriptString* DisplayName, int Cost, int Icon, int CountSpawned, int CountAllowed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.AddVehicleMenuOption");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55024);
 			byte params[40] = { NULL };
-			*(ScriptString**)&params[0] = ClassName;
+			*(ScriptString**)params = ClassName;
 			*(ScriptString**)&params[12] = DisplayName;
 			*(int*)&params[24] = Cost;
 			*(int*)&params[28] = Icon;
@@ -3437,165 +3437,165 @@ void**)&params[0] = In;
 		}
 		void ShowChat()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ShowChat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55031);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideChat()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.HideChat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55032);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PushChat(ScriptString* chatStr)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.PushChat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55033);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = chatStr;
+			*(ScriptString**)params = chatStr;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ToggleChat()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ToggleChat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55035);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartSteamTransaction()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.StartSteamTransaction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55036);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowSteamResponse(bool bAuthorized)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ShowSteamResponse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55037);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bAuthorized;
+			*(bool*)params = bAuthorized;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool HandlePopup(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.HandlePopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55039);
 			byte params[8] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool HandlePopupComplete(int Id, ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.HandlePopupComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55053);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = Id;
+			*(int*)params = Id;
 			*(ScriptString**)&params[4] = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void NavigateSteamGold(bool bSuccess)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.NavigateSteamGold");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55058);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bSuccess;
+			*(bool*)params = bSuccess;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateAccount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.CreateAccount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55061);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowNotification(ScriptString* Message, ScriptString* Message2)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ShowNotification");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55063);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Message;
+			*(ScriptString**)params = Message;
 			*(ScriptString**)&params[12] = Message2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HideNotification()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.HideNotification");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55066);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateButton(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.UpdateButton");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55067);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HidePopup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.HidePopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55069);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_ShowQueue(ScriptString* Estimate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_ShowQueue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55070);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Estimate;
+			*(ScriptString**)params = Estimate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ASC_LeftGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_LeftGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55073);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_JoinGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_JoinGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55074);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_FocusLogin()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_FocusLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55075);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_LoadMatchSummary()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_LoadMatchSummary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55076);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_GlobalAlert(ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_GlobalAlert");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55078);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Message;
+			*(ScriptString**)params = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ASC_KeyPressCaptured(ScriptString* KeyName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_KeyPressCaptured");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55084);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = KeyName;
+			*(ScriptString**)params = KeyName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ASC_PromptNewPlayerName(ScriptString* ErrorString)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_PromptNewPlayerName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55086);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = ErrorString;
+			*(ScriptString**)params = ErrorString;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ASC_PurchaseComplete(bool bSuccess, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_PurchaseComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55088);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bSuccess;
+			*(bool*)params = bSuccess;
 			*(ScriptString**)&params[4] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ASC_ShowReticuleBuilder(class GFxObject* Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_ShowReticuleBuilder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55097);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Data;
+			*(class GFxObject**)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ASC_HideReticuleBuilder()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_HideReticuleBuilder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55099);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASC_SetMapLoadText(ScriptString* A, ScriptString* B, ScriptString* C, ScriptString* D, ScriptString* E, ScriptString* F, ScriptString* G, ScriptString* H)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.ASC_SetMapLoadText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55102);
 			byte params[96] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			*(ScriptString**)&params[24] = C;
 			*(ScriptString**)&params[36] = D;
@@ -3609,33 +3609,33 @@ void**)&params[0] = In;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetSoundSkillBar");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55139);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSoundPerkType(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetSoundPerkType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55142);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetShowingPopupDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* In)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuMoviePlayer.SetShowingPopupDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(55166);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = In;
+void**)params = In;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

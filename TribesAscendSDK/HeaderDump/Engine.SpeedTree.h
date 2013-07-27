@@ -25,7 +25,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(Object::Guid, LightingGuid, 112)
-		ADD_STRUCT(Object::Vector, WindDirection, 100)
+		ADD_STRUCT(Vector, WindDirection, 100)
 		ADD_STRUCT(float, WindStrength, 96)
 		ADD_OBJECT(MaterialInterface, BillboardMaterial, 92)
 		ADD_OBJECT(MaterialInterface, LeafMeshMaterial, 88)

@@ -16,7 +16,7 @@ namespace UnrealScript
 			LGCS_Hex = 1,
 			LGCS_MAX = 2,
 		};
-		class LevelGridCellCoordinate
+		struct LevelGridCellCoordinate
 		{
 		public:
 			ADD_STRUCT(int, Z, 8)

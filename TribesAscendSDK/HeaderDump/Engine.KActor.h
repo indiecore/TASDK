@@ -25,9 +25,9 @@ namespace UnrealScript
 	class KActor : public DynamicSMActor
 	{
 	public:
-		ADD_STRUCT(Object::Rotator, InitialRotation, 700)
-		ADD_STRUCT(Object::Vector, InitialLocation, 688)
-		ADD_STRUCT(Object::Vector, ReplicatedDrawScale3D, 676)
+		ADD_STRUCT(Rotator, InitialRotation, 700)
+		ADD_STRUCT(Vector, InitialLocation, 688)
+		ADD_STRUCT(Vector, ReplicatedDrawScale3D, 676)
 		ADD_STRUCT(float, AngErrorAccumulator, 672)
 		ADD_STRUCT(Actor::RigidBodyState, RBState, 608)
 		ADD_STRUCT(float, MaxPhysicsVelocity, 604)
@@ -47,84 +47,84 @@ namespace UnrealScript
 		ADD_BOOL(bDamageAppliesImpulse, 532, 0x1)
 		class PhysicalMaterial* GetKActorPhysMaterial()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.GetKActorPhysMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18980);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class PhysicalMaterial**)&params[0];
+			return *(class PhysicalMaterial**)params;
 		}
 		void ResolveRBState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.ResolveRBState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18982);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18983);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FellOutOfWorld(ScriptClass* dmgType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.FellOutOfWorld");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18984);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = dmgType;
+			*(ScriptClass**)params = dmgType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18986);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPhysicalCollisionProperties()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.SetPhysicalCollisionProperties");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18987);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpawnedByKismet()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.SpawnedByKismet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18989);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18990);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ApplyImpulse(Object::Vector ImpulseDir, float ImpulseMag, Object::Vector HitLocation, Actor::TraceHitInfo HitInfo, ScriptClass* DamageType)
+		void ApplyImpulse(Vector ImpulseDir, float ImpulseMag, Vector HitLocation, Actor::TraceHitInfo HitInfo, ScriptClass* DamageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.ApplyImpulse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18993);
 			byte params[60] = { NULL };
-			*(Object::Vector*)&params[0] = ImpulseDir;
+			*(Vector*)params = ImpulseDir;
 			*(float*)&params[12] = ImpulseMag;
-			*(Object::Vector*)&params[16] = HitLocation;
+			*(Vector*)&params[16] = HitLocation;
 			*(Actor::TraceHitInfo*)&params[28] = HitInfo;
 			*(ScriptClass**)&params[56] = DamageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeDamage(int Damage, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.TakeDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19000);
 			byte params[68] = { NULL };
-			*(int*)&params[0] = Damage;
+			*(int*)params = Damage;
 			*(class Controller**)&params[4] = EventInstigator;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = Momentum;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = Momentum;
 			*(ScriptClass**)&params[32] = DamageType;
 			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
 			*(class Actor**)&params[64] = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeRadiusDamage(class Controller* InstigatedBy, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Object::Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
+		void TakeRadiusDamage(class Controller* InstigatedBy, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.TakeRadiusDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19008);
 			byte params[44] = { NULL };
-			*(class Controller**)&params[0] = InstigatedBy;
+			*(class Controller**)params = InstigatedBy;
 			*(float*)&params[4] = BaseDamage;
 			*(float*)&params[8] = DamageRadius;
 			*(ScriptClass**)&params[12] = DamageType;
 			*(float*)&params[16] = Momentum;
-			*(Object::Vector*)&params[20] = HurtOrigin;
+			*(Vector*)&params[20] = HurtOrigin;
 			*(bool*)&params[32] = bFullDamage;
 			*(class Actor**)&params[36] = DamageCauser;
 			*(float*)&params[40] = DamageFalloffExponent;
@@ -132,21 +132,21 @@ namespace UnrealScript
 		}
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19020);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnTeleport(class SeqAct_Teleport* inAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.OnTeleport");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19022);
 			byte params[4] = { NULL };
-			*(class SeqAct_Teleport**)&params[0] = inAction;
+			*(class SeqAct_Teleport**)params = inAction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActor.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19028);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

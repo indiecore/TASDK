@@ -16,7 +16,7 @@ namespace UnrealScript
 	{
 	public:
 		static const auto INVALIDFIELD = -1;
-		class EStringListData
+		struct EStringListData
 		{
 		public:
 			ADD_STRUCT(ScriptArray<ScriptString*>, Strings, 36)
@@ -31,33 +31,33 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementProvider, 120)
 		void Registered(class LocalPlayer* PlayerOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.Registered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35705);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = PlayerOwner;
+			*(class LocalPlayer**)params = PlayerOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetFieldIndex(ScriptName FieldName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.GetFieldIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35708);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void AddStr(ScriptName FieldName, ScriptString* NewString, bool bBatchOp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.AddStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35711);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			*(ScriptString**)&params[8] = NewString;
 			*(bool*)&params[20] = bBatchOp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InsertStr(ScriptName FieldName, ScriptString* NewString, int InsertIndex, bool bBatchOp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.InsertStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35715);
 			byte params[28] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			*(ScriptString**)&params[8] = NewString;
 			*(int*)&params[20] = InsertIndex;
 			*(bool*)&params[24] = bBatchOp;
@@ -65,18 +65,18 @@ namespace UnrealScript
 		}
 		void RemoveStr(ScriptName FieldName, ScriptString* StringToRemove, bool bBatchOp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.RemoveStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35720);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			*(ScriptString**)&params[8] = StringToRemove;
 			*(bool*)&params[20] = bBatchOp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveStrByIndex(ScriptName FieldName, int Index, int Count, bool bBatchOp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.RemoveStrByIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35724);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			*(int*)&params[8] = Index;
 			*(int*)&params[12] = Count;
 			*(bool*)&params[16] = bBatchOp;
@@ -84,43 +84,43 @@ namespace UnrealScript
 		}
 		void Empty(ScriptName FieldName, bool bBatchOp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.Empty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35729);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			*(bool*)&params[8] = bBatchOp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int FindStr(ScriptName FieldName, ScriptString* SearchString)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.FindStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35732);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			*(ScriptString**)&params[8] = SearchString;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[20];
 		}
 		ScriptString* GetStr(ScriptName FieldName, int StrIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.GetStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35736);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			*(int*)&params[8] = StrIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		ScriptArray<ScriptString*> GetList(ScriptName FieldName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.GetList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35740);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptArray<ScriptString*>*)&params[8];
 		}
 		bool GetCurrentValue(ScriptName FieldName, ScriptString*& out_Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.GetCurrentValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35744);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			*(ScriptString**)&params[8] = out_Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			out_Value = *(ScriptString**)&params[8];
@@ -128,26 +128,26 @@ namespace UnrealScript
 		}
 		int GetCurrentValueIndex(ScriptName FieldName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.GetCurrentValueIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35750);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int SetCurrentValueIndex(ScriptName FieldName, int NewValueIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.SetCurrentValueIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35755);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			*(int*)&params[8] = NewValueIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		int Num(ScriptName FieldName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringList.Num");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35761);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}

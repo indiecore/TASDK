@@ -45,8 +45,8 @@ namespace UnrealScript
 			PSORTMODE_MAX = 5,
 		};
 		ADD_STRUCT(ScriptArray<ParticleEmitter::ParticleBurst>, BurstList, 128)
-		ADD_STRUCT(Object::Vector, NormalsCylinderDirection, 184)
-		ADD_STRUCT(Object::Vector, NormalsSphereCenter, 172)
+		ADD_STRUCT(Vector, NormalsCylinderDirection, 184)
+		ADD_STRUCT(Vector, NormalsSphereCenter, 172)
 		ADD_STRUCT(float, DownsampleThresholdScreenFraction, 168)
 		ADD_STRUCT(int, MaxDrawCount, 164)
 		ADD_STRUCT(int, RandomImageChanges, 160)

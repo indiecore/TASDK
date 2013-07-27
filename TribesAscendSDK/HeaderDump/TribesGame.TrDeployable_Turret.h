@@ -30,7 +30,7 @@ namespace UnrealScript
 	class TrDeployable_Turret : public TrDeployable
 	{
 	public:
-		class IgnorePawn
+		struct IgnorePawn
 		{
 		public:
 			ADD_STRUCT(float, UnignoreTime, 4)
@@ -53,120 +53,120 @@ namespace UnrealScript
 		ADD_BOOL(m_bEnabled, 1524, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71956);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71957);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DeployComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.DeployComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71960);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AcquireTarget()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.AcquireTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71961);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float GetAcquireDelayTime()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.GetAcquireDelayTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71966);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void CleanupIgnoreList()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.CleanupIgnoreList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71975);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CanTargetPawn(class Pawn* aPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.CanTargetPawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71978);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = aPawn;
+			*(class Pawn**)params = aPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		class Pawn* GetTargetPawn()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.GetTargetPawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71990);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Pawn**)&params[0];
+			return *(class Pawn**)params;
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72004);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateAim(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.UpdateAim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72006);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PlayFireEffects(class Weapon* InWeapon, bool bViaReplication, Object::Vector HitLocation)
+		void PlayFireEffects(class Weapon* InWeapon, bool bViaReplication, Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.PlayFireEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72011);
 			byte params[20] = { NULL };
-			*(class Weapon**)&params[0] = InWeapon;
+			*(class Weapon**)params = InWeapon;
 			*(bool*)&params[4] = bViaReplication;
-			*(Object::Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[8] = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CauseMuzzleFlash()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.CauseMuzzleFlash");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72016);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void MuzzleFlashTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.MuzzleFlashTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72018);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetMuzzleFlashParams(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* PSC, Object::Color MuzzleFlashColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.SetMuzzleFlashParams");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72019);
 			byte params[8] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = PSC;
+void**)params = PSC;
 			*(Object::Color*)&params[4] = MuzzleFlashColor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Object::Vector GetWeaponStartTraceLocation(class Weapon* CurrentWeapon)
+		Vector GetWeaponStartTraceLocation(class Weapon* CurrentWeapon)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.GetWeaponStartTraceLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72022);
 			byte params[16] = { NULL };
-			*(class Weapon**)&params[0] = CurrentWeapon;
+			*(class Weapon**)params = CurrentWeapon;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[4];
+			return *(Vector*)&params[4];
 		}
 		class Texture2D* GetMarker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.GetMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72029);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Texture2D**)&params[0];
+			return *(class Texture2D**)params;
 		}
 		void AwardKillAssists()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_Turret.AwardKillAssists");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72032);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

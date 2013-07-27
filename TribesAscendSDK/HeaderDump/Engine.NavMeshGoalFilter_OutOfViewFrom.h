@@ -11,14 +11,14 @@ namespace UnrealScript
 	class NavMeshGoalFilter_OutOfViewFrom : public NavMeshGoal_Filter
 	{
 	public:
-		ADD_STRUCT(Object::Vector, OutOfViewLocation, 76)
+		ADD_STRUCT(Vector, OutOfViewLocation, 76)
 		ADD_STRUCT(Object::Pointer, GoalPoly, 72)
-		bool MustBeHiddenFromThisPoint(class NavMeshGoal_GenericFilterContainer* FilterContainer, Object::Vector InOutOfViewLocation)
+		bool MustBeHiddenFromThisPoint(class NavMeshGoal_GenericFilterContainer* FilterContainer, Vector InOutOfViewLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoalFilter_OutOfViewFrom.MustBeHiddenFromThisPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21003);
 			byte params[20] = { NULL };
-			*(class NavMeshGoal_GenericFilterContainer**)&params[0] = FilterContainer;
-			*(Object::Vector*)&params[4] = InOutOfViewLocation;
+			*(class NavMeshGoal_GenericFilterContainer**)params = FilterContainer;
+			*(Vector*)&params[4] = InOutOfViewLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}

@@ -35,13 +35,13 @@ namespace UnrealScript
 			EBT_MeshSpace = 1,
 			EBT_MAX = 2,
 		};
-		class BranchInfo
+		struct BranchInfo
 		{
 		public:
 			ADD_STRUCT(float, PerBoneWeightIncrease, 8)
 			ADD_STRUCT(ScriptName, BoneName, 0)
 		};
-		class WeightNodeRule
+		struct WeightNodeRule
 		{
 		public:
 			ADD_STRUCT(int, ChildIndex, 20)
@@ -50,13 +50,13 @@ namespace UnrealScript
 			ADD_OBJECT(AnimNodeBlendBase, CachedNode, 8)
 			ADD_STRUCT(ScriptName, NodeName, 0)
 		};
-		class WeightRule
+		struct WeightRule
 		{
 		public:
 			ADD_STRUCT(AnimNode_MultiBlendPerBone::WeightNodeRule, SecondNode, 24)
 			ADD_STRUCT(AnimNode_MultiBlendPerBone::WeightNodeRule, FirstNode, 0)
 		};
-		class PerBoneMaskInfo
+		struct PerBoneMaskInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<AnimNode_MultiBlendPerBone::BranchInfo>, BranchList, 0)
@@ -75,9 +75,9 @@ namespace UnrealScript
 		ADD_STRUCT(AnimNode_MultiBlendPerBone::EBlendType, RotationBlendType, 260)
 		void SetMaskWeight(int MaskIndex, float DesiredWeight, float BlendTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNode_MultiBlendPerBone.SetMaskWeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10744);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = MaskIndex;
+			*(int*)params = MaskIndex;
 			*(float*)&params[4] = DesiredWeight;
 			*(float*)&params[8] = BlendTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

@@ -9,16 +9,16 @@ namespace UnrealScript
 	public:
 		void AddWeaponOverlay(class UTGameReplicationInfo* GRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPowerupPickupFactory.AddWeaponOverlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48866);
 			byte params[4] = { NULL };
-			*(class UTGameReplicationInfo**)&params[0] = GRI;
+			*(class UTGameReplicationInfo**)params = GRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpawnCopyFor(class Pawn* Recipient)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPowerupPickupFactory.SpawnCopyFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48869);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Recipient;
+			*(class Pawn**)params = Recipient;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

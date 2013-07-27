@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void NotifyPathChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interface_NavigationHandle.NotifyPathChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18349);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

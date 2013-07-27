@@ -29,7 +29,7 @@ namespace UnrealScript
 			PET2SRCM_Actor = 2,
 			PET2SRCM_MAX = 3,
 		};
-		ADD_STRUCT(ScriptArray<Object::Vector>, SourceOffsetDefaults, 120)
+		ADD_STRUCT(ScriptArray<Vector>, SourceOffsetDefaults, 120)
 		ADD_STRUCT(int, SourceOffsetCount, 116)
 		ADD_BOOL(bInheritRotation, 112, 0x2)
 		ADD_BOOL(bLockSourceStength, 112, 0x1)

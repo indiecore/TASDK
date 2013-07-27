@@ -18,52 +18,52 @@ namespace UnrealScript
 		ADD_OBJECT(GFxClikWidget, ServerInfoListMC, 168)
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinDialog.OnTopMostView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38377);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPlayOpenAnimation;
+			*(bool*)params = bPlayOpenAnimation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinDialog.DisableSubComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38379);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDisableComponents;
+			*(bool*)params = bDisableComponents;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopulateServerInfo(class OnlineGameSettings* GameSettings)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinDialog.PopulateServerInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38381);
 			byte params[4] = { NULL };
-			*(class OnlineGameSettings**)&params[0] = GameSettings;
+			*(class OnlineGameSettings**)params = GameSettings;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetJoinButtonPress(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* JoinButtonListener)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinDialog.SetJoinButtonPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38401);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = JoinButtonListener;
+void**)params = JoinButtonListener;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSpectateButtonPress(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* SpectateButtonListener)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinDialog.SetSpectateButtonPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38403);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = SpectateButtonListener;
+void**)params = SpectateButtonListener;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinDialog.WidgetInitialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38405);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)params = WidgetName;
 			*(ScriptName*)&params[8] = WidgetPath;
 			*(class GFxObject**)&params[16] = Widget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

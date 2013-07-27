@@ -28,7 +28,7 @@ namespace UnrealScript
 	class Canvas : public Object
 	{
 	public:
-		class CanvasIcon
+		struct CanvasIcon
 		{
 		public:
 			ADD_STRUCT(float, VL, 16)
@@ -37,7 +37,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, U, 4)
 			ADD_OBJECT(Texture, Texture, 0)
 		};
-		class DepthFieldGlowInfo
+		struct DepthFieldGlowInfo
 		{
 		public:
 			ADD_STRUCT(Object::Vector2D, GlowInnerRadius, 28)
@@ -45,14 +45,14 @@ namespace UnrealScript
 			ADD_STRUCT(Object::LinearColor, GlowColor, 4)
 			ADD_BOOL(bEnableGlow, 0, 0x1)
 		};
-		class FontRenderInfo
+		struct FontRenderInfo
 		{
 		public:
 			ADD_STRUCT(Canvas::DepthFieldGlowInfo, GlowInfo, 4)
 			ADD_BOOL(bEnableShadow, 0, 0x2)
 			ADD_BOOL(bClipText, 0, 0x1)
 		};
-		class CanvasUVTri
+		struct CanvasUVTri
 		{
 		public:
 			ADD_STRUCT(Object::Vector2D, V2_UV, 40)
@@ -62,7 +62,7 @@ namespace UnrealScript
 			ADD_STRUCT(Object::Vector2D, V0_UV, 8)
 			ADD_STRUCT(Object::Vector2D, V0_Pos, 0)
 		};
-		class TextSizingParameters
+		struct TextSizingParameters
 		{
 		public:
 			ADD_STRUCT(float, ViewportHeight, 36)
@@ -74,7 +74,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, DrawY, 4)
 			ADD_STRUCT(float, DrawX, 0)
 		};
-		class WrappedStringElement
+		struct WrappedStringElement
 		{
 		public:
 			ADD_STRUCT(Object::Vector2D, LineExtent, 12)
@@ -100,18 +100,18 @@ namespace UnrealScript
 		ADD_STRUCT(float, OrgX, 64)
 		void SetPos(float PosX, float PosY, float PosZ)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.SetPos");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4180);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = PosX;
+			*(float*)params = PosX;
 			*(float*)&params[4] = PosY;
 			*(float*)&params[8] = PosZ;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetDrawColor(byte R, byte G, byte B, byte A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.SetDrawColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4181);
 			byte params[4] = { NULL };
-			params[0] = R;
+			*params = R;
 			params[1] = G;
 			params[2] = B;
 			params[3] = A;
@@ -119,9 +119,9 @@ namespace UnrealScript
 		}
 		void DrawText(ScriptString* Text, bool CR, float XScale, float YScale, Canvas::FontRenderInfo& RenderInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4183);
 			byte params[64] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			*(bool*)&params[12] = CR;
 			*(float*)&params[16] = XScale;
 			*(float*)&params[20] = YScale;
@@ -129,19 +129,19 @@ namespace UnrealScript
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			RenderInfo = *(Canvas::FontRenderInfo*)&params[24];
 		}
-		Object::Vector Project(Object::Vector Location)
+		Vector Project(Vector Location)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.Project");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9338);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = Location;
+			*(Vector*)params = Location;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[12];
+			return *(Vector*)&params[12];
 		}
 		void StrLen(ScriptString* String, float& XL, float& YL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.StrLen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12128);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = String;
+			*(ScriptString**)params = String;
 			*(float*)&params[12] = XL;
 			*(float*)&params[16] = YL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -150,9 +150,9 @@ namespace UnrealScript
 		}
 		void DrawTile(class Texture* Tex, float XL, float YL, float U, float V, float UL, float VL, Object::LinearColor LColor, bool ClipTile, EngineTypes::EBlendMode Blend)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawTile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12443);
 			byte params[49] = { NULL };
-			*(class Texture**)&params[0] = Tex;
+			*(class Texture**)params = Tex;
 			*(float*)&params[4] = XL;
 			*(float*)&params[8] = YL;
 			*(float*)&params[12] = U;
@@ -166,18 +166,18 @@ namespace UnrealScript
 		}
 		void PreOptimizeDrawTiles(int Num, class Texture* Tex, EngineTypes::EBlendMode Blend)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.PreOptimizeDrawTiles");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12454);
 			byte params[9] = { NULL };
-			*(int*)&params[0] = Num;
+			*(int*)params = Num;
 			*(class Texture**)&params[4] = Tex;
 			*(EngineTypes::EBlendMode*)&params[8] = Blend;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawMaterialTile(class MaterialInterface* Mat, float XL, float YL, float U, float V, float UL, float VL, bool bClipTile)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawMaterialTile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12458);
 			byte params[32] = { NULL };
-			*(class MaterialInterface**)&params[0] = Mat;
+			*(class MaterialInterface**)params = Mat;
 			*(float*)&params[4] = XL;
 			*(float*)&params[8] = YL;
 			*(float*)&params[12] = U;
@@ -187,12 +187,12 @@ namespace UnrealScript
 			*(bool*)&params[28] = bClipTile;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DrawRotatedTile(class Texture* Tex, Object::Rotator Rotation, float XL, float YL, float U, float V, float UL, float VL, float AnchorX, float AnchorY)
+		void DrawRotatedTile(class Texture* Tex, Rotator Rotation, float XL, float YL, float U, float V, float UL, float VL, float AnchorX, float AnchorY)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawRotatedTile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12467);
 			byte params[48] = { NULL };
-			*(class Texture**)&params[0] = Tex;
-			*(Object::Rotator*)&params[4] = Rotation;
+			*(class Texture**)params = Tex;
+			*(Rotator*)&params[4] = Rotation;
 			*(float*)&params[16] = XL;
 			*(float*)&params[20] = YL;
 			*(float*)&params[24] = U;
@@ -203,12 +203,12 @@ namespace UnrealScript
 			*(float*)&params[44] = AnchorY;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DrawRotatedMaterialTile(class MaterialInterface* Mat, Object::Rotator Rotation, float XL, float YL, float U, float V, float UL, float VL, float AnchorX, float AnchorY)
+		void DrawRotatedMaterialTile(class MaterialInterface* Mat, Rotator Rotation, float XL, float YL, float U, float V, float UL, float VL, float AnchorX, float AnchorY)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawRotatedMaterialTile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12478);
 			byte params[48] = { NULL };
-			*(class MaterialInterface**)&params[0] = Mat;
-			*(Object::Rotator*)&params[4] = Rotation;
+			*(class MaterialInterface**)params = Mat;
+			*(Rotator*)&params[4] = Rotation;
 			*(float*)&params[16] = XL;
 			*(float*)&params[20] = YL;
 			*(float*)&params[24] = U;
@@ -221,9 +221,9 @@ namespace UnrealScript
 		}
 		void DrawTileStretched(class Texture* Tex, float XL, float YL, float U, float V, float UL, float VL, Object::LinearColor LColor, bool bStretchHorizontally, bool bStretchVertically, float ScalingFactor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawTileStretched");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12489);
 			byte params[56] = { NULL };
-			*(class Texture**)&params[0] = Tex;
+			*(class Texture**)params = Tex;
 			*(float*)&params[4] = XL;
 			*(float*)&params[8] = YL;
 			*(float*)&params[12] = U;
@@ -238,17 +238,17 @@ namespace UnrealScript
 		}
 		void DrawTris(class Texture* Tex, ScriptArray<Canvas::CanvasUVTri> Triangles)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawTris");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12501);
 			byte params[16] = { NULL };
-			*(class Texture**)&params[0] = Tex;
+			*(class Texture**)params = Tex;
 			*(ScriptArray<Canvas::CanvasUVTri>*)&params[4] = Triangles;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		Canvas::FontRenderInfo CreateFontRenderInfo(bool bClipText, bool bEnableShadow, Object::LinearColor GlowColor, Object::Vector2D GlowOuterRadius, Object::Vector2D GlowInnerRadius)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.CreateFontRenderInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12505);
 			byte params[80] = { NULL };
-			*(bool*)&params[0] = bClipText;
+			*(bool*)params = bClipText;
 			*(bool*)&params[4] = bEnableShadow;
 			*(Object::LinearColor*)&params[8] = GlowColor;
 			*(Object::Vector2D*)&params[24] = GlowOuterRadius;
@@ -258,83 +258,83 @@ namespace UnrealScript
 		}
 		void TextSize(ScriptString* String, float& XL, float& YL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.TextSize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12516);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = String;
+			*(ScriptString**)params = String;
 			*(float*)&params[12] = XL;
 			*(float*)&params[16] = YL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			XL = *(float*)&params[12];
 			YL = *(float*)&params[16];
 		}
-		void DeProject(Object::Vector2D ScreenPos, Object::Vector& WorldOrigin, Object::Vector& WorldDirection)
+		void DeProject(Object::Vector2D ScreenPos, Vector& WorldOrigin, Vector& WorldDirection)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DeProject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12526);
 			byte params[32] = { NULL };
-			*(Object::Vector2D*)&params[0] = ScreenPos;
-			*(Object::Vector*)&params[8] = WorldOrigin;
-			*(Object::Vector*)&params[20] = WorldDirection;
+			*(Object::Vector2D*)params = ScreenPos;
+			*(Vector*)&params[8] = WorldOrigin;
+			*(Vector*)&params[20] = WorldDirection;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			WorldOrigin = *(Object::Vector*)&params[8];
-			WorldDirection = *(Object::Vector*)&params[20];
+			WorldOrigin = *(Vector*)&params[8];
+			WorldDirection = *(Vector*)&params[20];
 		}
-		void PushTranslationMatrix(Object::Vector TranslationVector)
+		void PushTranslationMatrix(Vector TranslationVector)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.PushTranslationMatrix");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12530);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = TranslationVector;
+			*(Vector*)params = TranslationVector;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopTransform()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.PopTransform");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12532);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Reset(bool bKeepOrigin)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12533);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bKeepOrigin;
+			*(bool*)params = bKeepOrigin;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetOrigin(float X, float Y)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.SetOrigin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12538);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = X;
+			*(float*)params = X;
 			*(float*)&params[4] = Y;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClip(float X, float Y)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.SetClip");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12541);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = X;
+			*(float*)params = X;
 			*(float*)&params[4] = Y;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawTexture(class Texture* Tex, float Scale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawTexture");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12544);
 			byte params[8] = { NULL };
-			*(class Texture**)&params[0] = Tex;
+			*(class Texture**)params = Tex;
 			*(float*)&params[4] = Scale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawTextureBlended(class Texture* Tex, float Scale, EngineTypes::EBlendMode Blend)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawTextureBlended");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12547);
 			byte params[9] = { NULL };
-			*(class Texture**)&params[0] = Tex;
+			*(class Texture**)params = Tex;
 			*(float*)&params[4] = Scale;
 			*(EngineTypes::EBlendMode*)&params[8] = Blend;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		Canvas::CanvasIcon MakeIcon(class Texture* Texture, float U, float V, float UL, float VL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.MakeIcon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12552);
 			byte params[40] = { NULL };
-			*(class Texture**)&params[0] = Texture;
+			*(class Texture**)params = Texture;
 			*(float*)&params[4] = U;
 			*(float*)&params[8] = V;
 			*(float*)&params[12] = UL;
@@ -344,9 +344,9 @@ namespace UnrealScript
 		}
 		void DrawIcon(Canvas::CanvasIcon Icon, float X, float Y, float Scale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawIcon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12560);
 			byte params[32] = { NULL };
-			*(Canvas::CanvasIcon*)&params[0] = Icon;
+			*(Canvas::CanvasIcon*)params = Icon;
 			*(float*)&params[20] = X;
 			*(float*)&params[24] = Y;
 			*(float*)&params[28] = Scale;
@@ -354,45 +354,45 @@ namespace UnrealScript
 		}
 		void DrawRect(float RectX, float RectY, class Texture* Tex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawRect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12565);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = RectX;
+			*(float*)params = RectX;
 			*(float*)&params[4] = RectY;
 			*(class Texture**)&params[8] = Tex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawBox(float Width, float Height)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawBox");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12569);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = Width;
+			*(float*)params = Width;
 			*(float*)&params[4] = Height;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetDrawColorStruct(Object::Color C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.SetDrawColorStruct");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12578);
 			byte params[4] = { NULL };
-			*(Object::Color*)&params[0] = C;
+			*(Object::Color*)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Draw2DLine(float X1, float Y1, float X2, float Y2, Object::Color LineColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.Draw2DLine");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12580);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = X1;
+			*(float*)params = X1;
 			*(float*)&params[4] = Y1;
 			*(float*)&params[8] = X2;
 			*(float*)&params[12] = Y2;
 			*(Object::Color*)&params[16] = LineColor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DrawTextureLine(Object::Vector StartPoint, Object::Vector EndPoint, float Perc, float Width, Object::Color LineColor, class Texture* LineTexture, float U, float V, float UL, float VL)
+		void DrawTextureLine(Vector StartPoint, Vector EndPoint, float Perc, float Width, Object::Color LineColor, class Texture* LineTexture, float U, float V, float UL, float VL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawTextureLine");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12586);
 			byte params[56] = { NULL };
-			*(Object::Vector*)&params[0] = StartPoint;
-			*(Object::Vector*)&params[12] = EndPoint;
+			*(Vector*)params = StartPoint;
+			*(Vector*)&params[12] = EndPoint;
 			*(float*)&params[24] = Perc;
 			*(float*)&params[28] = Width;
 			*(Object::Color*)&params[32] = LineColor;
@@ -403,12 +403,12 @@ namespace UnrealScript
 			*(float*)&params[52] = VL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DrawTextureDoubleLine(Object::Vector StartPoint, Object::Vector EndPoint, float Perc, float Spacing, float Width, Object::Color LineColor, Object::Color AltLineColor, class Texture* Tex, float U, float V, float UL, float VL)
+		void DrawTextureDoubleLine(Vector StartPoint, Vector EndPoint, float Perc, float Spacing, float Width, Object::Color LineColor, Object::Color AltLineColor, class Texture* Tex, float U, float V, float UL, float VL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawTextureDoubleLine");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12597);
 			byte params[64] = { NULL };
-			*(Object::Vector*)&params[0] = StartPoint;
-			*(Object::Vector*)&params[12] = EndPoint;
+			*(Vector*)params = StartPoint;
+			*(Vector*)&params[12] = EndPoint;
 			*(float*)&params[24] = Perc;
 			*(float*)&params[28] = Spacing;
 			*(float*)&params[32] = Width;
@@ -423,9 +423,9 @@ namespace UnrealScript
 		}
 		void DrawDebugGraph(ScriptString* Title, float ValueX, float ValueY, float UL_X, float UL_Y, float W, float H, Object::Vector2D RangeX, Object::Vector2D RangeY)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Canvas.DrawDebugGraph");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12610);
 			byte params[52] = { NULL };
-			*(ScriptString**)&params[0] = Title;
+			*(ScriptString**)params = Title;
 			*(float*)&params[12] = ValueX;
 			*(float*)&params[16] = ValueY;
 			*(float*)&params[20] = UL_X;

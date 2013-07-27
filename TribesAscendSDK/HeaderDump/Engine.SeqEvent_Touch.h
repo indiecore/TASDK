@@ -29,9 +29,9 @@ namespace UnrealScript
 		ADD_BOOL(bForceOverlapping, 280, 0x1)
 		bool CheckTouchActivate(class Actor* InOriginator, class Actor* InInstigator, bool bTest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Touch.CheckTouchActivate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7867);
 			byte params[16] = { NULL };
-			*(class Actor**)&params[0] = InOriginator;
+			*(class Actor**)params = InOriginator;
 			*(class Actor**)&params[4] = InInstigator;
 			*(bool*)&params[8] = bTest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -39,9 +39,9 @@ namespace UnrealScript
 		}
 		bool CheckUnTouchActivate(class Actor* InOriginator, class Actor* InInstigator, bool bTest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Touch.CheckUnTouchActivate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26186);
 			byte params[16] = { NULL };
-			*(class Actor**)&params[0] = InOriginator;
+			*(class Actor**)params = InOriginator;
 			*(class Actor**)&params[4] = InInstigator;
 			*(bool*)&params[8] = bTest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -49,22 +49,22 @@ namespace UnrealScript
 		}
 		void Toggled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Touch.Toggled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26191);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NotifyTouchingPawnDied(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Touch.NotifyTouchingPawnDied");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26193);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Touch.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26195);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

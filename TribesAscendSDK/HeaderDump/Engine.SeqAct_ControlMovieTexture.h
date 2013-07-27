@@ -20,7 +20,7 @@ namespace UnrealScript
 		ADD_OBJECT(TextureMovie, MovieTexture, 232)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_ControlMovieTexture.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6859);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

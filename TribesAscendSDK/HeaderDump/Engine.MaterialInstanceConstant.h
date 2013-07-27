@@ -17,7 +17,7 @@ namespace UnrealScript
 	class MaterialInstanceConstant : public MaterialInstance
 	{
 	public:
-		class FontParameterValue
+		struct FontParameterValue
 		{
 		public:
 			ADD_STRUCT(Object::Guid, ExpressionGUID, 16)
@@ -25,21 +25,21 @@ namespace UnrealScript
 			ADD_OBJECT(Font, FontValue, 8)
 			ADD_STRUCT(ScriptName, ParameterName, 0)
 		};
-		class ScalarParameterValue
+		struct ScalarParameterValue
 		{
 		public:
 			ADD_STRUCT(Object::Guid, ExpressionGUID, 12)
 			ADD_STRUCT(float, ParameterValue, 8)
 			ADD_STRUCT(ScriptName, ParameterName, 0)
 		};
-		class TextureParameterValue
+		struct TextureParameterValue
 		{
 		public:
 			ADD_STRUCT(Object::Guid, ExpressionGUID, 12)
 			ADD_OBJECT(Texture, ParameterValue, 8)
 			ADD_STRUCT(ScriptName, ParameterName, 0)
 		};
-		class VectorParameterValue
+		struct VectorParameterValue
 		{
 		public:
 			ADD_STRUCT(Object::Guid, ExpressionGUID, 24)
@@ -52,48 +52,48 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<MaterialInstanceConstant::VectorParameterValue>, VectorParameterValues, 468)
 		void SetParent(class MaterialInterface* NewParent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceConstant.SetParent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19836);
 			byte params[4] = { NULL };
-			*(class MaterialInterface**)&params[0] = NewParent;
+			*(class MaterialInterface**)params = NewParent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetScalarParameterValue(ScriptName ParameterName, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceConstant.SetScalarParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19838);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(float*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetTextureParameterValue(ScriptName ParameterName, class Texture* Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceConstant.SetTextureParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19841);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(class Texture**)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetVectorParameterValue(ScriptName ParameterName, Object::LinearColor& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceConstant.SetVectorParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19844);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(Object::LinearColor*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(Object::LinearColor*)&params[8];
 		}
 		void SetFontParameterValue(ScriptName ParameterName, class Font* FontValue, int FontPage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceConstant.SetFontParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19847);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(class Font**)&params[8] = FontValue;
 			*(int*)&params[12] = FontPage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearParameterValues()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceConstant.ClearParameterValues");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19851);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -21,31 +21,31 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, SuccessfulGoal, 92)
 		class NavMeshGoal_GenericFilterContainer* CreateAndAddFilterToNavHandle(class NavigationHandle* NavHandle, int InMaxPathVisits)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_GenericFilterContainer.CreateAndAddFilterToNavHandle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20963);
 			byte params[12] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
+			*(class NavigationHandle**)params = NavHandle;
 			*(int*)&params[4] = InMaxPathVisits;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class NavMeshGoal_GenericFilterContainer**)&params[8];
 		}
 		class NavMeshGoal_Filter* GetFilterOfType(ScriptClass* Filter_Class)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_GenericFilterContainer.GetFilterOfType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20968);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = Filter_Class;
+			*(ScriptClass**)params = Filter_Class;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class NavMeshGoal_Filter**)&params[4];
 		}
-		Object::Vector GetGoalPoint()
+		Vector GetGoalPoint()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_GenericFilterContainer.GetGoalPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20971);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_GenericFilterContainer.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20973);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

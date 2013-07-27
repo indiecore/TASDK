@@ -20,9 +20,9 @@ namespace UnrealScript
 		ADD_BOOL(bForceDeathmatchAI, 132, 0x1)
 		void PostCreateActor(class Actor* NewActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTActorFactoryAI.PostCreateActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39150);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = NewActor;
+			*(class Actor**)params = NewActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

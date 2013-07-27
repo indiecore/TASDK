@@ -15,7 +15,7 @@ namespace UnrealScript
 	class GFxUDKFrontEnd_Multiplayer : public GFxUDKFrontEnd_Screen
 	{
 	public:
-		class Option
+		struct Option
 		{
 		public:
 			ADD_STRUCT(ScriptString*, OptionDesc, 24)
@@ -28,69 +28,69 @@ namespace UnrealScript
 		ADD_OBJECT(GFxClikWidget, ListMC, 232)
 		void OnViewLoaded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.OnViewLoaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38813);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.OnTopMostView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38814);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPlayOpenAnimation;
+			*(bool*)params = bPlayOpenAnimation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.DisableSubComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38816);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDisableComponents;
+			*(bool*)params = bDisableComponents;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Select_JoinGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.Select_JoinGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38818);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Select_HostGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.Select_HostGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38819);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnListItemPress(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.OnListItemPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38820);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnListChange(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.OnListChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38824);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateDescription()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.UpdateDescription");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38826);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateListDataProvider()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.UpdateListDataProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38829);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetList(class GFxObject* InList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.SetList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38833);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = InList;
+			*(class GFxObject**)params = InList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_Multiplayer.WidgetInitialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38835);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)params = WidgetName;
 			*(ScriptName*)&params[8] = WidgetPath;
 			*(class GFxObject**)&params[16] = Widget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

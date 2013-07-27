@@ -25,24 +25,24 @@ namespace UnrealScript
 		ADD_STRUCT(float, AutoSelectRadius, 488)
 		void EnableGroup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverGroup.EnableGroup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13102);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisableGroup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverGroup.DisableGroup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13103);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ToggleGroup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverGroup.ToggleGroup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13104);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverGroup.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13105);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

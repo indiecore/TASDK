@@ -28,14 +28,14 @@ namespace UnrealScript
 			MissileEvent_NotifyClientAboutSaberLauncher = 4,
 			MissileEvent_MAX = 5,
 		};
-		class TargetingSaberLauncherInfo
+		struct TargetingSaberLauncherInfo
 		{
 		public:
 			ADD_OBJECT(TrDevice_SaberLauncher, SaberLauncher, 0)
 			ADD_STRUCT(float, RemainingClientNotificationTime, 8)
 			ADD_OBJECT(TrPlayerController, VictimController, 4)
 		};
-		class SeekingMissileInfo
+		struct SeekingMissileInfo
 		{
 		public:
 			ADD_OBJECT(TrProj_TrackingMissile, Missile, 0)
@@ -46,131 +46,131 @@ namespace UnrealScript
 		ADD_STRUCT(int, RepCounter, 500)
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110782);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddSaberLauncher(class TrDevice_SaberLauncher* SaberLauncherToAdd, TrObject::EMissileLock MissileLockValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.AddSaberLauncher");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110792);
 			byte params[5] = { NULL };
-			*(class TrDevice_SaberLauncher**)&params[0] = SaberLauncherToAdd;
+			*(class TrDevice_SaberLauncher**)params = SaberLauncherToAdd;
 			*(TrObject::EMissileLock*)&params[4] = MissileLockValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveSaberLauncher(class TrDevice_SaberLauncher* SaberLauncherToRemove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.RemoveSaberLauncher");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110802);
 			byte params[4] = { NULL };
-			*(class TrDevice_SaberLauncher**)&params[0] = SaberLauncherToRemove;
+			*(class TrDevice_SaberLauncher**)params = SaberLauncherToRemove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetNumSaberLaunchersTargetingController(class TrPlayerController* Controller, bool bOnlyClientNotified)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.GetNumSaberLaunchersTargetingController");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110809);
 			byte params[12] = { NULL };
-			*(class TrPlayerController**)&params[0] = Controller;
+			*(class TrPlayerController**)params = Controller;
 			*(bool*)&params[4] = bOnlyClientNotified;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int GetNumSaberLaunchersTargetingVehicle(class TrVehicle* targetVehicle, bool bOnlyClientNotified)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.GetNumSaberLaunchersTargetingVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110815);
 			byte params[12] = { NULL };
-			*(class TrVehicle**)&params[0] = targetVehicle;
+			*(class TrVehicle**)params = targetVehicle;
 			*(bool*)&params[4] = bOnlyClientNotified;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void AddMissile(class TrProj_TrackingMissile* MissileToAdd)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.AddMissile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110821);
 			byte params[4] = { NULL };
-			*(class TrProj_TrackingMissile**)&params[0] = MissileToAdd;
+			*(class TrProj_TrackingMissile**)params = MissileToAdd;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveMissile(class TrProj_TrackingMissile* MissileToRemove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.RemoveMissile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110831);
 			byte params[4] = { NULL };
-			*(class TrProj_TrackingMissile**)&params[0] = MissileToRemove;
+			*(class TrProj_TrackingMissile**)params = MissileToRemove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetNumMissilesTrackingController(class TrPlayerController* Controller)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.GetNumMissilesTrackingController");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110837);
 			byte params[8] = { NULL };
-			*(class TrPlayerController**)&params[0] = Controller;
+			*(class TrPlayerController**)params = Controller;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int GetNumMissilesTrackingVehicle(class TrVehicle* targetVehicle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.GetNumMissilesTrackingVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110842);
 			byte params[8] = { NULL };
-			*(class TrVehicle**)&params[0] = targetVehicle;
+			*(class TrVehicle**)params = targetVehicle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		void VictimControllerUpdated(class TrPlayerController* VictimController, TrSeekingMissileManager::ETrackingMissileEvent MissileEvent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.VictimControllerUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110847);
 			byte params[5] = { NULL };
-			*(class TrPlayerController**)&params[0] = VictimController;
+			*(class TrPlayerController**)params = VictimController;
 			*(TrSeekingMissileManager::ETrackingMissileEvent*)&params[4] = MissileEvent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TargetVehicleUpdated(class TrVehicle* targetVehicle, TrSeekingMissileManager::ETrackingMissileEvent MissileEvent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.TargetVehicleUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110852);
 			byte params[5] = { NULL };
-			*(class TrVehicle**)&params[0] = targetVehicle;
+			*(class TrVehicle**)params = targetVehicle;
 			*(TrSeekingMissileManager::ETrackingMissileEvent*)&params[4] = MissileEvent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BeginSaberLauncherTargeting(class TrPlayerController* VictimController)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.BeginSaberLauncherTargeting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110859);
 			byte params[4] = { NULL };
-			*(class TrPlayerController**)&params[0] = VictimController;
+			*(class TrPlayerController**)params = VictimController;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopSaberLauncherTargeting(class TrPlayerController* VictimController)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.StopSaberLauncherTargeting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110861);
 			byte params[4] = { NULL };
-			*(class TrPlayerController**)&params[0] = VictimController;
+			*(class TrPlayerController**)params = VictimController;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BeginMissileTracking(class TrPlayerController* VictimController)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.BeginMissileTracking");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110863);
 			byte params[4] = { NULL };
-			*(class TrPlayerController**)&params[0] = VictimController;
+			*(class TrPlayerController**)params = VictimController;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopMissileTracking(class TrPlayerController* VictimController)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.StopMissileTracking");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110865);
 			byte params[4] = { NULL };
-			*(class TrPlayerController**)&params[0] = VictimController;
+			*(class TrPlayerController**)params = VictimController;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnLeftVehicle(class Pawn* LeavingPawn, class TrVehicle* Vehicle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.PawnLeftVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110867);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = LeavingPawn;
+			*(class Pawn**)params = LeavingPawn;
 			*(class TrVehicle**)&params[4] = Vehicle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnEnteredVehicle(class Pawn* EnteringPawn, class TrVehicle* Vehicle, int SeatIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeekingMissileManager.PawnEnteredVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110875);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = EnteringPawn;
+			*(class Pawn**)params = EnteringPawn;
 			*(class TrVehicle**)&params[4] = Vehicle;
 			*(int*)&params[8] = SeatIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

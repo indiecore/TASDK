@@ -20,7 +20,7 @@ namespace UnrealScript
 	class PBRuleNodeSplit : public PBRuleNodeBase
 	{
 	public:
-		class RBSplitInfo
+		struct RBSplitInfo
 		{
 		public:
 			ADD_STRUCT(ScriptName, SplitName, 12)

@@ -29,7 +29,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ReachSpec, CurrentSpec, 136)
-		ADD_STRUCT(Object::Vector, MoveVectDest, 124)
+		ADD_STRUCT(Vector, MoveVectDest, 124)
 		ADD_STRUCT(float, GoalDistance, 120)
 		ADD_STRUCT(float, SubGoalReachDist, 116)
 		ADD_STRUCT(float, CurrentHoverHeight, 112)
@@ -41,9 +41,9 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, Path, 88)
 		bool MoveToGoal(class GameAIController* AI, class Actor* InGoal, float InGoalDistance, float InHoverHeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICmd_Hover_MoveToGoal.MoveToGoal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30644);
 			byte params[20] = { NULL };
-			*(class GameAIController**)&params[0] = AI;
+			*(class GameAIController**)params = AI;
 			*(class Actor**)&params[4] = InGoal;
 			*(float*)&params[8] = InGoalDistance;
 			*(float*)&params[12] = InHoverHeight;
@@ -52,22 +52,22 @@ namespace UnrealScript
 		}
 		void Pushed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICmd_Hover_MoveToGoal.Pushed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30651);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool HandlePathObstruction(class Actor* BlockedBy)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICmd_Hover_MoveToGoal.HandlePathObstruction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30652);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = BlockedBy;
+			*(class Actor**)params = BlockedBy;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool IsEnemyBasedOnInterpActor(class Pawn* InEnemy)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICmd_Hover_MoveToGoal.IsEnemyBasedOnInterpActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30674);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = InEnemy;
+			*(class Pawn**)params = InEnemy;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

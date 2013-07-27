@@ -28,7 +28,7 @@ namespace UnrealScript
 	class GFxUDKFrontEnd_FilterDialog : public GFxUDKFrontEnd_Dialog
 	{
 	public:
-		class Option
+		struct Option
 		{
 		public:
 			ADD_STRUCT(ScriptArray<ScriptString*>, OptionData, 24)
@@ -45,86 +45,86 @@ namespace UnrealScript
 		ADD_OBJECT(UTUIDataStore_StringList, StringListDataStore, 168)
 		void OnSwitchedGameType()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.OnSwitchedGameType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38059);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnViewLoaded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.OnViewLoaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38074);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.OnTopMostView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38075);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPlayOpenAnimation;
+			*(bool*)params = bPlayOpenAnimation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnViewClosed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.OnViewClosed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38077);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisableSubComponents(bool bEnableComponents)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.DisableSubComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38078);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnableComponents;
+			*(bool*)params = bEnableComponents;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBackButtonListener(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* DelegateListener)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.SetBackButtonListener");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38080);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = DelegateListener;
+void**)params = DelegateListener;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ValidateServerType()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.ValidateServerType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38082);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ForceLANOption(int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.ForceLANOption");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38085);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetGameClassByFriendlyName(ScriptString* FriendlyName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.GetGameClassByFriendlyName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38089);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = FriendlyName;
+			*(ScriptString**)params = FriendlyName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		void OnFilterList_OptionChanged(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.OnFilterList_OptionChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38092);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetupListDataProvider()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.SetupListDataProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38102);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PushFilterListUpdate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.PushFilterListUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38111);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_FilterDialog.WidgetInitialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38112);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)params = WidgetName;
 			*(ScriptName*)&params[8] = WidgetPath;
 			*(class GFxObject**)&params[16] = Widget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

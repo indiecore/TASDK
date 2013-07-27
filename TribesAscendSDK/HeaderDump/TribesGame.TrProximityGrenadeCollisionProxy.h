@@ -10,30 +10,30 @@ namespace UnrealScript
 	public:
 		void OnPawnAdded(class Pawn* aPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProximityGrenadeCollisionProxy.OnPawnAdded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109484);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = aPawn;
+			*(class Pawn**)params = aPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPawnRemoved(class Pawn* aPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProximityGrenadeCollisionProxy.OnPawnRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109487);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = aPawn;
+			*(class Pawn**)params = aPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProximityGrenadeCollisionProxy.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109490);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

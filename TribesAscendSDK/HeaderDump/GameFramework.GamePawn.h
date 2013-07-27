@@ -19,19 +19,19 @@ namespace UnrealScript
 		ADD_BOOL(bLastHitWasHeadShot, 1144, 0x1)
 		void UpdateShadowSettings(bool bInWantShadow)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePawn.UpdateShadowSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31725);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bInWantShadow;
+			*(bool*)params = bInWantShadow;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReattachMesh()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePawn.ReattachMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31729);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReattachMeshWithoutBeingSeen()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePawn.ReattachMeshWithoutBeingSeen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31730);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

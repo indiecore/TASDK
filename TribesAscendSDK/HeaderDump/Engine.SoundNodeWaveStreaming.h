@@ -12,31 +12,31 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<byte>, QueuedAudio, 436)
 		void QueueAudio(ScriptArray<byte> Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SoundNodeWaveStreaming.QueueAudio");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26982);
 			byte params[12] = { NULL };
-			*(ScriptArray<byte>*)&params[0] = Data;
+			*(ScriptArray<byte>*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetAudio()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SoundNodeWaveStreaming.ResetAudio");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26985);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int AvailableAudioBytes()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SoundNodeWaveStreaming.AvailableAudioBytes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26986);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void GeneratePCMData(ScriptArray<byte>& Buffer, int SamplesNeeded)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SoundNodeWaveStreaming.GeneratePCMData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26988);
 			byte params[16] = { NULL };
-			*(ScriptArray<byte>*)&params[0] = Buffer;
+			*(ScriptArray<byte>*)params = Buffer;
 			*(int*)&params[12] = SamplesNeeded;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Buffer = *(ScriptArray<byte>*)&params[0];
+			Buffer = *(ScriptArray<byte>*)params;
 		}
 	};
 }

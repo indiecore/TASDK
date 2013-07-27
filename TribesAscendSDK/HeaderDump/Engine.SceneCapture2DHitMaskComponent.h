@@ -25,26 +25,26 @@ namespace UnrealScript
 		ADD_OBJECT(TextureRenderTarget2D, TextureTarget, 144)
 		void SetCaptureTargetTexture(class TextureRenderTarget2D* InTextureTarget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SceneCapture2DHitMaskComponent.SetCaptureTargetTexture");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25449);
 			byte params[4] = { NULL };
-			*(class TextureRenderTarget2D**)&params[0] = InTextureTarget;
+			*(class TextureRenderTarget2D**)params = InTextureTarget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetCaptureParameters(Object::Vector InMaskPosition, float InMaskRadius, Object::Vector InStartupPosition, bool bOnlyWhenFacing)
+		void SetCaptureParameters(Vector InMaskPosition, float InMaskRadius, Vector InStartupPosition, bool bOnlyWhenFacing)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SceneCapture2DHitMaskComponent.SetCaptureParameters");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25451);
 			byte params[32] = { NULL };
-			*(Object::Vector*)&params[0] = InMaskPosition;
+			*(Vector*)params = InMaskPosition;
 			*(float*)&params[12] = InMaskRadius;
-			*(Object::Vector*)&params[16] = InStartupPosition;
+			*(Vector*)&params[16] = InStartupPosition;
 			*(bool*)&params[28] = bOnlyWhenFacing;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFadingStartTimeSinceHit(float InFadingStartTimeSinceHit)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SceneCapture2DHitMaskComponent.SetFadingStartTimeSinceHit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25456);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = InFadingStartTimeSinceHit;
+			*(float*)params = InFadingStartTimeSinceHit;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

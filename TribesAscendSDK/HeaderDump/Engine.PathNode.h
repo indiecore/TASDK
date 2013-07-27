@@ -7,10 +7,10 @@ namespace UnrealScript
 	public:
 		ScriptString* GetDebugAbbrev()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PathNode.GetDebugAbbrev");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24026);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

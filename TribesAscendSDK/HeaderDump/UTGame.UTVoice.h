@@ -55,9 +55,9 @@ namespace UnrealScript
 		ADD_OBJECT(SoundNodeWave, IncomingSound, 196)
 		int GetAckMessageIndex(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.GetAckMessageIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50021);
 			byte params[20] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -65,9 +65,9 @@ namespace UnrealScript
 		}
 		int GetFriendlyFireMessageIndex(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.GetFriendlyFireMessageIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50026);
 			byte params[20] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -75,9 +75,9 @@ namespace UnrealScript
 		}
 		int GetGotYourBackMessageIndex(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.GetGotYourBackMessageIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50031);
 			byte params[20] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -85,9 +85,9 @@ namespace UnrealScript
 		}
 		int GetNeedOurFlagMessageIndex(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.GetNeedOurFlagMessageIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50036);
 			byte params[20] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -95,9 +95,9 @@ namespace UnrealScript
 		}
 		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.ClientReceive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50041);
 			byte params[20] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			*(int*)&params[4] = Switch;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
@@ -106,9 +106,9 @@ namespace UnrealScript
 		}
 		class SoundNodeWave* AnnouncementSound(int MessageIndex, class Object* OptionalObject, class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.AnnouncementSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50047);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = MessageIndex;
+			*(int*)params = MessageIndex;
 			*(class Object**)&params[4] = OptionalObject;
 			*(class PlayerController**)&params[8] = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -116,18 +116,18 @@ namespace UnrealScript
 		}
 		class SoundNodeWave* EnemySound(class PlayerController* PC, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.EnemySound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50055);
 			byte params[12] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Object**)&params[4] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class SoundNodeWave**)&params[8];
 		}
 		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.GetString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50063);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(bool*)&params[4] = bPRI1HUD;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
@@ -137,9 +137,9 @@ namespace UnrealScript
 		}
 		bool AllowVoiceMessage(ScriptName MessageType, class UTPlayerController* PC, class PlayerController* Recipient)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.AllowVoiceMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50070);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = MessageType;
+			*(ScriptName*)params = MessageType;
 			*(class UTPlayerController**)&params[8] = PC;
 			*(class PlayerController**)&params[12] = Recipient;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -147,9 +147,9 @@ namespace UnrealScript
 		}
 		void SendVoiceMessage(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType, ScriptClass* DamageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.SendVoiceMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50076);
 			byte params[20] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			*(ScriptClass**)&params[16] = DamageType;
@@ -157,9 +157,9 @@ namespace UnrealScript
 		}
 		int GetMessageIndex(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType, ScriptClass* DamageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.GetMessageIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50087);
 			byte params[24] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			*(ScriptClass**)&params[16] = DamageType;
@@ -168,36 +168,36 @@ namespace UnrealScript
 		}
 		void InitStatusUpdate(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.InitStatusUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50093);
 			byte params[16] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InitCombatUpdate(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.InitCombatUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50099);
 			byte params[16] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetHoldingFlagUpdate(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.SetHoldingFlagUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50104);
 			byte params[16] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendLocalizedMessage(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType, int MessageIndex, class Object* LocationObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.SendLocalizedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50109);
 			byte params[24] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			*(int*)&params[16] = MessageIndex;
@@ -206,54 +206,54 @@ namespace UnrealScript
 		}
 		void SendEnemyFlagCarrierHereUpdate(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.SendEnemyFlagCarrierHereUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50117);
 			byte params[16] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InitSniperUpdate(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.InitSniperUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50126);
 			byte params[16] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendEnemyStatusUpdate(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.SendEnemyStatusUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50132);
 			byte params[16] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendKilledVehicleMessage(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.SendKilledVehicleMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50140);
 			byte params[16] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class SoundNodeWave* KilledVehicleSound(class PlayerController* PC, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.KilledVehicleSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50145);
 			byte params[12] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Object**)&params[4] = OptionalObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class SoundNodeWave**)&params[8];
 		}
 		bool SendLocationUpdate(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType, class UTGame* G, class Pawn* StatusPawn, bool bDontSendMidfield)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.SendLocationUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50150);
 			byte params[32] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			*(class UTGame**)&params[16] = G;
@@ -264,18 +264,18 @@ namespace UnrealScript
 		}
 		void SendInPositionMessage(class Controller* Sender, class PlayerReplicationInfo* Recipient, ScriptName MessageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.SendInPositionMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50160);
 			byte params[16] = { NULL };
-			*(class Controller**)&params[0] = Sender;
+			*(class Controller**)params = Sender;
 			*(class PlayerReplicationInfo**)&params[4] = Recipient;
 			*(ScriptName*)&params[8] = MessageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ShouldBeRemoved(class UTQueuedAnnouncement* MyAnnouncement, ScriptClass* NewAnnouncementClass, int NewMessageIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.ShouldBeRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50164);
 			byte params[16] = { NULL };
-			*(class UTQueuedAnnouncement**)&params[0] = MyAnnouncement;
+			*(class UTQueuedAnnouncement**)params = MyAnnouncement;
 			*(ScriptClass**)&params[4] = NewAnnouncementClass;
 			*(int*)&params[8] = NewMessageIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -283,9 +283,9 @@ namespace UnrealScript
 		}
 		bool AddAnnouncement(class UTAnnouncer* Announcer, int MessageIndex, class PlayerReplicationInfo* PRI, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVoice.AddAnnouncement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50172);
 			byte params[20] = { NULL };
-			*(class UTAnnouncer**)&params[0] = Announcer;
+			*(class UTAnnouncer**)params = Announcer;
 			*(int*)&params[4] = MessageIndex;
 			*(class PlayerReplicationInfo**)&params[8] = PRI;
 			*(class Object**)&params[12] = OptionalObject;

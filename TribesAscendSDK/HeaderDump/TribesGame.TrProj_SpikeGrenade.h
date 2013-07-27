@@ -32,12 +32,12 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, m_FractalExplosionTemplate, 964)
 		ADD_STRUCT(float, m_fFractalDamageRadius, 960)
 		ADD_STRUCT(int, m_nFractalDamage, 956)
-		ADD_STRUCT(Object::Vector, r_vFlashExplosionLocation, 944)
-		ADD_STRUCT(Object::Vector, m_vAscentLocation, 932)
+		ADD_STRUCT(Vector, r_vFlashExplosionLocation, 944)
+		ADD_STRUCT(Vector, m_vAscentLocation, 932)
 		ADD_STRUCT(float, m_fZFractalShotDistance, 928)
 		ADD_STRUCT(float, m_fFractalShotDistance, 924)
 		ADD_OBJECT(SkelControlSingleBone, m_AscendControl, 920)
-		ADD_STRUCT(Object::Vector, m_CachedHitNormal, 908)
+		ADD_STRUCT(Vector, m_CachedHitNormal, 908)
 		ADD_STRUCT(float, m_fAscentHeight, 904)
 		ADD_STRUCT(float, m_fAscentTime, 900)
 		ADD_STRUCT(float, m_fFractalInterval, 896)
@@ -46,78 +46,78 @@ namespace UnrealScript
 		ADD_BOOL(m_bStartedFractal, 884, 0x1)
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109075);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109077);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void InitProjectile(Object::Vector Direction, ScriptClass* ClassToInherit)
+		void InitProjectile(Vector Direction, ScriptClass* ClassToInherit)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.InitProjectile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109079);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = Direction;
+			*(Vector*)params = Direction;
 			*(ScriptClass**)&params[12] = ClassToInherit;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Explode(Object::Vector HitLocation, Object::Vector HitNormal)
+		void Explode(Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.Explode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109082);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
-			*(Object::Vector*)&params[12] = HitNormal;
+			*(Vector*)params = HitLocation;
+			*(Vector*)&params[12] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientReceivedExplosionLocation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.ClientReceivedExplosionLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109087);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool IsFractalActive()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.IsFractalActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109088);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void StartFractalShots()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.StartFractalShots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109090);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShootFractalShot()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.ShootFractalShot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109091);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SpawnFractalExplosionEffects(Object::Vector ShotLocation)
+		void SpawnFractalExplosionEffects(Vector ShotLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.SpawnFractalExplosionEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109095);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = ShotLocation;
+			*(Vector*)params = ShotLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EndFractal()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.EndFractal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109098);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SpawnExplosionEffects(Object::Vector HitLocation, Object::Vector HitNormal)
+		void SpawnExplosionEffects(Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeGrenade.SpawnExplosionEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109099);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
-			*(Object::Vector*)&params[12] = HitNormal;
+			*(Vector*)params = HitLocation;
+			*(Vector*)&params[12] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -22,8 +22,8 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(ScriptName, RotationSpaceBoneName, 220)
 		ADD_STRUCT(SkelControlBase::EBoneControlSpace, LockRotationSpace, 216)
-		ADD_STRUCT(Object::Rotator, MaxDelta, 204)
-		ADD_STRUCT(Object::Rotator, LockRotation, 192)
+		ADD_STRUCT(Rotator, MaxDelta, 204)
+		ADD_STRUCT(Rotator, LockRotation, 192)
 		ADD_BOOL(bLockRoll, 188, 0x4)
 		ADD_BOOL(bLockYaw, 188, 0x2)
 		ADD_BOOL(bLockPitch, 188, 0x1)

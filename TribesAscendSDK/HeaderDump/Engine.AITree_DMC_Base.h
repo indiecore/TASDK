@@ -9,82 +9,82 @@ namespace UnrealScript
 	public:
 		void PrintString(ScriptString* InString)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.PrintString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10001);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = InString;
+			*(ScriptString**)params = InString;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetWorldTime(class Actor* inActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.GetWorldTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10003);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = inActor;
+			*(class Actor**)params = inActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float Conv_IntToFloat(int InInt)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.Conv_IntToFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10006);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = InInt;
+			*(int*)params = InInt;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		ScriptString* Conv_FloatToString(float InFloat)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.Conv_FloatToString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10009);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = InFloat;
+			*(float*)params = InFloat;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptString* Conv_IntToString(int InInt)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.Conv_IntToString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10012);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = InInt;
+			*(int*)params = InInt;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptString* Conv_BoolToString(bool InBool)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.Conv_BoolToString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10015);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = InBool;
+			*(bool*)params = InBool;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
-		ScriptString* Conv_VectorToString(Object::Vector InVec)
+		ScriptString* Conv_VectorToString(Vector InVec)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.Conv_VectorToString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10018);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = InVec;
+			*(Vector*)params = InVec;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
-		ScriptString* Conv_RotatorToString(Object::Rotator InRot)
+		ScriptString* Conv_RotatorToString(Rotator InRot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.Conv_RotatorToString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10021);
 			byte params[24] = { NULL };
-			*(Object::Rotator*)&params[0] = InRot;
+			*(Rotator*)params = InRot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
-		Object::Vector MakeVector(float X, float Y, float Z)
+		Vector MakeVector(float X, float Y, float Z)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.MakeVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10024);
 			byte params[24] = { NULL };
-			*(float*)&params[0] = X;
+			*(float*)params = X;
 			*(float*)&params[4] = Y;
 			*(float*)&params[8] = Z;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[12];
+			return *(Vector*)&params[12];
 		}
-		void BreakVector(Object::Vector InVec, float& X, float& Y, float& Z)
+		void BreakVector(Vector InVec, float& X, float& Y, float& Z)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.BreakVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10030);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = InVec;
+			*(Vector*)params = InVec;
 			*(float*)&params[12] = X;
 			*(float*)&params[16] = Y;
 			*(float*)&params[20] = Z;
@@ -93,21 +93,21 @@ namespace UnrealScript
 			Y = *(float*)&params[16];
 			Z = *(float*)&params[20];
 		}
-		Object::Rotator MakeRot(float Pitch, float Yaw, float Roll)
+		Rotator MakeRot(float Pitch, float Yaw, float Roll)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.MakeRot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10035);
 			byte params[24] = { NULL };
-			*(float*)&params[0] = Pitch;
+			*(float*)params = Pitch;
 			*(float*)&params[4] = Yaw;
 			*(float*)&params[8] = Roll;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[12];
+			return *(Rotator*)&params[12];
 		}
-		void BreakRot(Object::Rotator InRot, float& Pitch, float& Yaw, float& Roll)
+		void BreakRot(Rotator InRot, float& Pitch, float& Yaw, float& Roll)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.BreakRot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10041);
 			byte params[24] = { NULL };
-			*(Object::Rotator*)&params[0] = InRot;
+			*(Rotator*)params = InRot;
 			*(float*)&params[12] = Pitch;
 			*(float*)&params[16] = Yaw;
 			*(float*)&params[20] = Roll;
@@ -118,9 +118,9 @@ namespace UnrealScript
 		}
 		void CalculateUtilityRating(class AICommandNodeBase* CommandNode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree_DMC_Base.CalculateUtilityRating");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10046);
 			byte params[4] = { NULL };
-			*(class AICommandNodeBase**)&params[0] = CommandNode;
+			*(class AICommandNodeBase**)params = CommandNode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

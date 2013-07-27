@@ -26,7 +26,7 @@ namespace UnrealScript
 	class Landscape : public Info
 	{
 	public:
-		class LandscapeLayerInfo
+		struct LandscapeLayerInfo
 		{
 		public:
 			ADD_OBJECT(MaterialInstanceConstant, ThumbnailMIC, 16)
@@ -34,7 +34,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, Hardness, 8)
 			ADD_STRUCT(ScriptName, LayerName, 0)
 		};
-		class LandscapeWeightmapUsage
+		struct LandscapeWeightmapUsage
 		{
 		};
 		ADD_STRUCT(ScriptArray<ScriptName>, LayerNames, 484)

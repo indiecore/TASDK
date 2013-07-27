@@ -29,182 +29,182 @@ namespace UnrealScript
 		ADD_STRUCT(float, LastSeeFlagCarrier, 680)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46551);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool AllowDetourTo(class UTBot* B, class NavigationPoint* N)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.AllowDetourTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46552);
 			byte params[12] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			*(class NavigationPoint**)&params[4] = N;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool ShouldUseAlternatePaths()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.ShouldUseAlternatePaths");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46556);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SetAlternatePathTo(class NavigationPoint* NewRouteObjective, class UTBot* RouteMaker)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.SetAlternatePathTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46558);
 			byte params[8] = { NULL };
-			*(class NavigationPoint**)&params[0] = NewRouteObjective;
+			*(class NavigationPoint**)params = NewRouteObjective;
 			*(class UTBot**)&params[4] = RouteMaker;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool BeDevious(class Pawn* Enemy)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.BeDevious");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46562);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Enemy;
+			*(class Pawn**)params = Enemy;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool FindPathToObjective(class UTBot* B, class Actor* O)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.FindPathToObjective");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46565);
 			byte params[12] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			*(class Actor**)&params[4] = O;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool GoPickupFlag(class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.GoPickupFlag");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46569);
 			byte params[8] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		class Actor* FormationCenter(class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.FormationCenter");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46574);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = C;
+			*(class Controller**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[4];
 		}
 		bool VisibleToEnemiesOf(class Actor* A, class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.VisibleToEnemiesOf");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46577);
 			byte params[12] = { NULL };
-			*(class Actor**)&params[0] = A;
+			*(class Actor**)params = A;
 			*(class UTBot**)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		class NavigationPoint* FindHidePathFor(class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.FindHidePathFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46581);
 			byte params[8] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class NavigationPoint**)&params[4];
 		}
 		bool CheckVehicle(class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.CheckVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46585);
 			byte params[8] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool OrdersForFlagCarrier(class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.OrdersForFlagCarrier");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46588);
 			byte params[8] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool MustKeepEnemy(class Pawn* E)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.MustKeepEnemy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46592);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = E;
+			*(class Pawn**)params = E;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool NearEnemyBase(class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.NearEnemyBase");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46595);
 			byte params[8] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool NearHomeBase(class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.NearHomeBase");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46598);
 			byte params[8] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool FlagNearBase()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.FlagNearBase");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46601);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool OverrideFollowPlayer(class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.OverrideFollowPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46603);
 			byte params[8] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool CheckSquadObjectives(class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.CheckSquadObjectives");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46606);
 			byte params[8] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void EnemyFlagTakenBy(class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.EnemyFlagTakenBy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46612);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = C;
+			*(class Controller**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AllowTaunt(class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.AllowTaunt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46615);
 			byte params[8] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool ShouldDeferTo(class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.ShouldDeferTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46618);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = C;
+			*(class Controller**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		byte PriorityObjective(class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.PriorityObjective");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46621);
 			byte params[5] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return params[4];
 		}
 		float ModifyThreat(float Current, class Pawn* NewThreat, bool bThreatVisible, class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.ModifyThreat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46624);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = Current;
+			*(float*)params = Current;
 			*(class Pawn**)&params[4] = NewThreat;
 			*(bool*)&params[8] = bThreatVisible;
 			*(class UTBot**)&params[12] = B;
@@ -213,18 +213,18 @@ namespace UnrealScript
 		}
 		bool AllowContinueOnFoot(class UTBot* B, class UTVehicle* V)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.AllowContinueOnFoot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46630);
 			byte params[12] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			*(class UTVehicle**)&params[4] = V;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void ModifyAggression(class UTBot* B, float& Aggression)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFSquadAI.ModifyAggression");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46634);
 			byte params[8] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			*(float*)&params[4] = Aggression;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Aggression = *(float*)&params[4];

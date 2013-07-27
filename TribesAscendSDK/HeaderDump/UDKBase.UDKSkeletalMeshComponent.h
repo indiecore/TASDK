@@ -24,17 +24,17 @@ namespace UnrealScript
 		ADD_STRUCT(float, FOV, 1512)
 		void PreloadTextures(bool bForcePreload, float ClearTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkeletalMeshComponent.PreloadTextures");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35501);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bForcePreload;
+			*(bool*)params = bForcePreload;
 			*(float*)&params[4] = ClearTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFOV(float NewFOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkeletalMeshComponent.SetFOV");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35505);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = NewFOV;
+			*(float*)params = NewFOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

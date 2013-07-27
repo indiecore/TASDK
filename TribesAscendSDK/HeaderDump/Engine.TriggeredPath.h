@@ -26,24 +26,24 @@ namespace UnrealScript
 		ADD_BOOL(bOpen, 692, 0x1)
 		void OnToggle(class SeqAct_Toggle* inAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TriggeredPath.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28063);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = inAction;
+			*(class SeqAct_Toggle**)params = inAction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Actor* SpecialHandling(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TriggeredPath.SpecialHandling");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28065);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[4];
 		}
 		bool SuggestMovePreparation(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TriggeredPath.SuggestMovePreparation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28069);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

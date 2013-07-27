@@ -10,9 +10,9 @@ namespace UnrealScript
 	public:
 		bool OnReceivedNativeInputKey(int ControllerId, ScriptName Key, Object::EInputEvent EventType, float AmountDepressed, bool bGamepad)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interaction.OnReceivedNativeInputKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12902);
 			byte params[25] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptName*)&params[4] = Key;
 			*(Object::EInputEvent*)&params[12] = EventType;
 			*(float*)&params[16] = AmountDepressed;
@@ -22,23 +22,23 @@ namespace UnrealScript
 		}
 		void OnInitialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interaction.OnInitialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12910);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool OnReceivedNativeInputChar(int ControllerId, ScriptString* Unicode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interaction.OnReceivedNativeInputChar");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12912);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptString**)&params[4] = Unicode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		bool OnReceivedNativeInputAxis(int ControllerId, ScriptName Key, float Delta, float DeltaTime, bool bGamepad)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interaction.OnReceivedNativeInputAxis");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12914);
 			byte params[28] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptName*)&params[4] = Key;
 			*(float*)&params[12] = Delta;
 			*(float*)&params[16] = DeltaTime;
@@ -48,46 +48,46 @@ namespace UnrealScript
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interaction.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12925);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostRender(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interaction.PostRender");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12927);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Init()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interaction.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12929);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Initialized()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interaction.Initialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12930);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NotifyGameSessionEnded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interaction.NotifyGameSessionEnded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12931);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NotifyPlayerAdded(int PlayerIndex, class LocalPlayer* AddedPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interaction.NotifyPlayerAdded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12932);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			*(class LocalPlayer**)&params[4] = AddedPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyPlayerRemoved(int PlayerIndex, class LocalPlayer* RemovedPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interaction.NotifyPlayerRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12935);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			*(class LocalPlayer**)&params[4] = RemovedPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

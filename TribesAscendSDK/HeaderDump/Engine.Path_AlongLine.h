@@ -11,19 +11,19 @@ namespace UnrealScript
 	class Path_AlongLine : public PathConstraint
 	{
 	public:
-		ADD_STRUCT(Object::Vector, Direction, 68)
-		bool AlongLine(class Pawn* P, Object::Vector Dir)
+		ADD_STRUCT(Vector, Direction, 68)
+		bool AlongLine(class Pawn* P, Vector Dir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AlongLine.AlongLine");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23956);
 			byte params[20] = { NULL };
-			*(class Pawn**)&params[0] = P;
-			*(Object::Vector*)&params[4] = Dir;
+			*(class Pawn**)params = P;
+			*(Vector*)&params[4] = Dir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AlongLine.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23961);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

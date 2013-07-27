@@ -19,22 +19,22 @@ namespace UnrealScript
 		ADD_BOOL(bRecycleScaleToZero, 712, 0x1)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorSpawnable.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19080);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorSpawnable.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19081);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RecycleInternal()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorSpawnable.RecycleInternal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19082);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ResetComponents()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.KActorSpawnable.ResetComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19083);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

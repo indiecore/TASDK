@@ -16,9 +16,9 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSkelControl_JetThruster.TickSkelControl");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49352);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = SkelComp;

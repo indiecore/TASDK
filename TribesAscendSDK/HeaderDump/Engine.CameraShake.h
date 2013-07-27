@@ -30,21 +30,21 @@ namespace UnrealScript
 			EOO_OffsetZero = 1,
 			EOO_MAX = 2,
 		};
-		class FOscillator
+		struct FOscillator
 		{
 		public:
 			ADD_STRUCT(float, Amplitude, 0)
 			ADD_STRUCT(float, Frequency, 4)
 			ADD_STRUCT(CameraShake::EInitialOscillatorOffset, InitialOffset, 8)
 		};
-		class VOscillator
+		struct VOscillator
 		{
 		public:
 			ADD_STRUCT(CameraShake::FOscillator, X, 0)
 			ADD_STRUCT(CameraShake::FOscillator, Y, 12)
 			ADD_STRUCT(CameraShake::FOscillator, Z, 24)
 		};
-		class ROscillator
+		struct ROscillator
 		{
 		public:
 			ADD_STRUCT(CameraShake::FOscillator, Pitch, 0)
@@ -67,17 +67,17 @@ namespace UnrealScript
 		ADD_STRUCT(float, RandomAnimSegmentDuration, 180)
 		float GetLocOscillationMagnitude()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraShake.GetLocOscillationMagnitude");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12227);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetRotOscillationMagnitude()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraShake.GetRotOscillationMagnitude");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12228);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 	};
 }

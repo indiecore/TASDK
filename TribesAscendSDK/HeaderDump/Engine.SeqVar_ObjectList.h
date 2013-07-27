@@ -13,16 +13,16 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class Object*>, ObjList, 176)
 		class Object* GetObjectValue()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqVar_ObjectList.GetObjectValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26237);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Object**)&params[0];
+			return *(class Object**)params;
 		}
 		void SetObjectValue(class Object* NewValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqVar_ObjectList.SetObjectValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26239);
 			byte params[4] = { NULL };
-			*(class Object**)&params[0] = NewValue;
+			*(class Object**)params = NewValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

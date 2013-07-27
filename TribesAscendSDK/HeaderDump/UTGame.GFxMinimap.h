@@ -51,56 +51,56 @@ namespace UnrealScript
 		ADD_OBJECT(GFxMinimapHud, HUD, 120)
 		void Init(class GFxMinimapHud* H)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37319);
 			byte params[4] = { NULL };
-			*(class GFxMinimapHud**)&params[0] = H;
+			*(class GFxMinimapHud**)params = H;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateData()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.UpdateData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37330);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptArray<class GFxObject*> GenFriendIcons(int N)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.GenFriendIcons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37331);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = N;
+			*(int*)params = N;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptArray<class GFxObject*>*)&params[4];
 		}
 		ScriptArray<class GFxObject*> GenEnemyIcons(int N)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.GenEnemyIcons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37339);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = N;
+			*(int*)params = N;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptArray<class GFxObject*>*)&params[4];
 		}
 		ScriptArray<class GFxObject*> GenFlagIcons(int N)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.GenFlagIcons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37347);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = N;
+			*(int*)params = N;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptArray<class GFxObject*>*)&params[4];
 		}
 		void UpdateIcons(ScriptArray<class Actor*>& Actors, ScriptArray<class GFxObject*>& ActorIcons, bool bIsRedIconType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.UpdateIcons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37355);
 			byte params[28] = { NULL };
-			*(ScriptArray<class Actor*>*)&params[0] = Actors;
+			*(ScriptArray<class Actor*>*)params = Actors;
 			*(ScriptArray<class GFxObject*>*)&params[12] = ActorIcons;
 			*(bool*)&params[24] = bIsRedIconType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Actors = *(ScriptArray<class Actor*>*)&params[0];
+			Actors = *(ScriptArray<class Actor*>*)params;
 			ActorIcons = *(ScriptArray<class GFxObject*>*)&params[12];
 		}
 		void Update(float Scale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimap.Update");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37368);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = Scale;
+			*(float*)params = Scale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_KeybindCommunication.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59280);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

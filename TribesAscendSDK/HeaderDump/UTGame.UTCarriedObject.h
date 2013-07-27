@@ -40,10 +40,10 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(ScriptName, GameObjBone3P, 596)
-		ADD_STRUCT(Object::Rotator, GameObjRot3P, 616)
-		ADD_STRUCT(Object::Vector, GameObjOffset3P, 604)
-		ADD_STRUCT(Object::Rotator, GameObjRot1P, 640)
-		ADD_STRUCT(Object::Vector, GameObjOffset1P, 628)
+		ADD_STRUCT(Rotator, GameObjRot3P, 616)
+		ADD_STRUCT(Vector, GameObjOffset3P, 604)
+		ADD_STRUCT(Rotator, GameObjRot1P, 640)
+		ADD_STRUCT(Vector, GameObjOffset1P, 628)
 		ADD_STRUCT(ScriptArray<class Controller*>, Assists, 560)
 		ADD_STRUCT(ScriptArray<UDKPlayerController::ObjectiveAnnouncementInfo>, NeedToPickUpAnnouncements, 680)
 		ADD_OBJECT(ForceFeedbackWaveform, PickUpWaveForm, 764)
@@ -76,63 +76,63 @@ namespace UnrealScript
 		ADD_BOOL(bLastSecondSave, 532, 0x1)
 		bool FlagUse(class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.FlagUse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36609);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = C;
+			*(class Controller**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43635);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool ShouldMinimapRenderFor(class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.ShouldMinimapRenderFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43637);
 			byte params[8] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void HighlightOnMinimap(int Switch)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.HighlightOnMinimap");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43640);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Texture2D* GetIconTexture()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.GetIconTexture");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43642);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Texture2D**)&params[0];
+			return *(class Texture2D**)params;
 		}
-		void DrawIcon(class Canvas* Canvas, Object::Vector IconLocation, float IconWidth, float IconAlpha)
+		void DrawIcon(class Canvas* Canvas, Vector IconLocation, float IconWidth, float IconAlpha)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.DrawIcon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43644);
 			byte params[24] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
-			*(Object::Vector*)&params[4] = IconLocation;
+			*(class Canvas**)params = Canvas;
+			*(Vector*)&params[4] = IconLocation;
 			*(float*)&params[16] = IconWidth;
 			*(float*)&params[20] = IconAlpha;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RenderMapIcon(class UTMapInfo* MP, class Canvas* Canvas, class UTPlayerController* PlayerOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.RenderMapIcon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43651);
 			byte params[12] = { NULL };
-			*(class UTMapInfo**)&params[0] = MP;
+			*(class UTMapInfo**)params = MP;
 			*(class Canvas**)&params[4] = Canvas;
 			*(class UTPlayerController**)&params[8] = PlayerOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RenderEnemyMapIcon(class UTMapInfo* MP, class Canvas* Canvas, class UTPlayerController* PlayerOwner, class UTGameObjective* NearbyObjective)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.RenderEnemyMapIcon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43656);
 			byte params[16] = { NULL };
-			*(class UTMapInfo**)&params[0] = MP;
+			*(class UTMapInfo**)params = MP;
 			*(class Canvas**)&params[4] = Canvas;
 			*(class UTPlayerController**)&params[8] = PlayerOwner;
 			*(class UTGameObjective**)&params[12] = NearbyObjective;
@@ -140,188 +140,188 @@ namespace UnrealScript
 		}
 		void SetHolder(class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.SetHolder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43666);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = C;
+			*(class Controller**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendFlagMessage(class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.SendFlagMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43672);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = C;
+			*(class Controller**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Score()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.Score");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43674);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Drop(class Controller* Killer, bool bNoThrow)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.Drop");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43675);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)params = Killer;
 			*(bool*)&params[4] = bNoThrow;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendHome(class Controller* Returner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.SendHome");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43679);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = Returner;
+			*(class Controller**)params = Returner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KismetSendHome()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.KismetSendHome");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43682);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void BroadcastReturnedMessage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.BroadcastReturnedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43683);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void BroadcastDroppedMessage(class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.BroadcastDroppedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43684);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BroadcastTakenFromBaseMessage(class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.BroadcastTakenFromBaseMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43686);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BroadcastTakenDroppedMessage(class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.BroadcastTakenDroppedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43688);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CalcSetHome()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.CalcSetHome");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43690);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearHolder()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.ClearHolder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43692);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class Actor* Position()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.Position");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43697);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Actor**)&params[0];
+			return *(class Actor**)params;
 		}
 		bool ValidHolder(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.ValidHolder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43699);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43705);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FellOutOfWorld(ScriptClass* dmgType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.FellOutOfWorld");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43710);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = dmgType;
+			*(ScriptClass**)params = dmgType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43712);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientReturnedHome()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.ClientReturnedHome");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43714);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NotReachableBy(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.NotReachableBy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43715);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Landed(Object::Vector HitNormal, class Actor* FloorActor)
+		void Landed(Vector HitNormal, class Actor* FloorActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.Landed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43717);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = HitNormal;
+			*(Vector*)params = HitNormal;
 			*(class Actor**)&params[12] = FloorActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class UDKGameObjective* GetKismetEventObjective()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.GetKismetEventObjective");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43720);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class UDKGameObjective**)&params[0];
+			return *(class UDKGameObjective**)params;
 		}
 		void LogTaken(class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.LogTaken");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43722);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogReturned(class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.LogReturned");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43724);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogDropped(class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.LogDropped");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43726);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CheckTouching()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.CheckTouching");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43729);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AutoSendHome()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.AutoSendHome");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43733);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CheckFit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.CheckFit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43761);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CheckPain()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObject.CheckPain");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43762);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

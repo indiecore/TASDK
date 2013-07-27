@@ -19,7 +19,7 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, m_FireTail, 1792)
 		void RefireCheckTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon_FullAuto.RefireCheckTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115283);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

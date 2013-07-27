@@ -20,7 +20,7 @@ namespace UnrealScript
 	class OnlineNewsInterfaceMcp : public MCPBase
 	{
 	public:
-		class NewsCacheEntry
+		struct NewsCacheEntry
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, HttpDownloader, 36)
@@ -38,17 +38,17 @@ void*>, ReadNewsDelegates, 76)
 		ADD_BOOL(bNeedsTicking, 88, 0x1)
 		void OnReadNewsCompleted(bool bWasSuccessful, OnlineSubsystem::EOnlineNewsType NewsType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineNewsInterfaceMcp.OnReadNewsCompleted");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33649);
 			byte params[5] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			*(OnlineSubsystem::EOnlineNewsType*)&params[4] = NewsType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ReadNews(byte LocalUserNum, OnlineSubsystem::EOnlineNewsType NewsType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineNewsInterfaceMcp.ReadNews");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33659);
 			byte params[6] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::EOnlineNewsType*)&params[1] = NewsType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
@@ -57,29 +57,29 @@ void*>, ReadNewsDelegates, 76)
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadNewsDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineNewsInterfaceMcp.AddReadNewsCompletedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33665);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ReadNewsDelegate;
+void**)params = ReadNewsDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearReadNewsCompletedDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadGameNewsDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineNewsInterfaceMcp.ClearReadNewsCompletedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33667);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ReadGameNewsDelegate;
+void**)params = ReadGameNewsDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetNews(byte LocalUserNum, OnlineSubsystem::EOnlineNewsType NewsType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineNewsInterfaceMcp.GetNews");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33670);
 			byte params[14] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::EOnlineNewsType*)&params[1] = NewsType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];

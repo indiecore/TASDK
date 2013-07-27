@@ -8,24 +8,24 @@ namespace UnrealScript
 	public:
 		bool SendPartyGameInvites(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.SendPartyGameInvites");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21882);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void OnSendPartyGameInvitesComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.OnSendPartyGameInvitesComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21885);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPartyMembersInfoChanged(ScriptString* PlayerName, OnlineSubsystem::UniqueNetId PlayerID, int CustomData1, int CustomData2, int CustomData3, int CustomData4)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.OnPartyMembersInfoChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21888);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			*(OnlineSubsystem::UniqueNetId*)&params[12] = PlayerID;
 			*(int*)&params[20] = CustomData1;
 			*(int*)&params[24] = CustomData2;
@@ -35,9 +35,9 @@ namespace UnrealScript
 		}
 		void OnPartyMemberListChanged(bool bJoinedOrLeft, ScriptString* PlayerName, OnlineSubsystem::UniqueNetId PlayerID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.OnPartyMemberListChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21890);
 			byte params[24] = { NULL };
-			*(bool*)&params[0] = bJoinedOrLeft;
+			*(bool*)params = bJoinedOrLeft;
 			*(ScriptString**)&params[4] = PlayerName;
 			*(OnlineSubsystem::UniqueNetId*)&params[16] = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -46,9 +46,9 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* SendPartyGameInvitesCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.AddSendPartyGameInvitesCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21892);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = SendPartyGameInvitesCompleteDelegate;
@@ -58,9 +58,9 @@ void**)&params[4] = SendPartyGameInvitesCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* SendPartyGameInvitesCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.ClearSendPartyGameInvitesCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21895);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = SendPartyGameInvitesCompleteDelegate;
@@ -68,18 +68,18 @@ void**)&params[4] = SendPartyGameInvitesCompleteDelegate;
 		}
 		bool GetPartyMembersInformation(ScriptArray<OnlineSubsystem::OnlinePartyMember>& PartyMembers)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.GetPartyMembersInformation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21898);
 			byte params[16] = { NULL };
-			*(ScriptArray<OnlineSubsystem::OnlinePartyMember>*)&params[0] = PartyMembers;
+			*(ScriptArray<OnlineSubsystem::OnlinePartyMember>*)params = PartyMembers;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			PartyMembers = *(ScriptArray<OnlineSubsystem::OnlinePartyMember>*)&params[0];
+			PartyMembers = *(ScriptArray<OnlineSubsystem::OnlinePartyMember>*)params;
 			return *(bool*)&params[12];
 		}
 		bool GetPartyMemberInformation(OnlineSubsystem::UniqueNetId MemberId, OnlineSubsystem::OnlinePartyMember& PartyMember)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.GetPartyMemberInformation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21902);
 			byte params[68] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = MemberId;
+			*(OnlineSubsystem::UniqueNetId*)params = MemberId;
 			*(OnlineSubsystem::OnlinePartyMember*)&params[8] = PartyMember;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			PartyMember = *(OnlineSubsystem::OnlinePartyMember*)&params[8];
@@ -89,9 +89,9 @@ void**)&params[4] = SendPartyGameInvitesCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* PartyMemberListChangedDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.AddPartyMemberListChangedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21909);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = PartyMemberListChangedDelegate;
@@ -101,9 +101,9 @@ void**)&params[4] = PartyMemberListChangedDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* PartyMemberListChangedDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.ClearPartyMemberListChangedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21912);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = PartyMemberListChangedDelegate;
@@ -113,9 +113,9 @@ void**)&params[4] = PartyMemberListChangedDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* PartyMembersInfoChangedDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.AddPartyMembersInfoChangedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21921);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = PartyMembersInfoChangedDelegate;
@@ -125,9 +125,9 @@ void**)&params[4] = PartyMembersInfoChangedDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* PartyMembersInfoChangedDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.ClearPartyMembersInfoChangedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21924);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = PartyMembersInfoChangedDelegate;
@@ -135,9 +135,9 @@ void**)&params[4] = PartyMembersInfoChangedDelegate;
 		}
 		bool SetPartyMemberCustomData(byte LocalUserNum, int Data1, int Data2, int Data3, int Data4)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.SetPartyMemberCustomData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21927);
 			byte params[21] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = Data1;
 			*(int*)&params[8] = Data2;
 			*(int*)&params[12] = Data3;
@@ -147,40 +147,40 @@ void**)&params[4] = PartyMembersInfoChangedDelegate;
 		}
 		int GetPartyBandwidth()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.GetPartyBandwidth");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21934);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		bool ShowPartyUI(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.ShowPartyUI");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21936);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool ShowVoiceChannelUI(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.ShowVoiceChannelUI");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21939);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool ShowCommunitySessionsUI(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.ShowCommunitySessionsUI");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21942);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool IsInPartyChat(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePartyChatInterface.IsInPartyChat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21945);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

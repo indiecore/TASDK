@@ -34,7 +34,7 @@ namespace UnrealScript
 			PEBTM_Partial = 2,
 			PEBTM_MAX = 3,
 		};
-		class BeamTargetData
+		struct BeamTargetData
 		{
 		public:
 			ADD_STRUCT(float, TargetPercentage, 8)

@@ -24,7 +24,7 @@ namespace UnrealScript
 	class UDKAnimBlendByPhysicsVolume : public UDKAnimBlendBase
 	{
 	public:
-		class PhysicsVolumeParams
+		struct PhysicsVolumeParams
 		{
 		public:
 			ADD_STRUCT(float, MaxGravity, 12)
@@ -37,9 +37,9 @@ namespace UnrealScript
 		ADD_OBJECT(PhysicsVolume, LastPhysicsVolume, 308)
 		void PhysicsVolumeChanged(class PhysicsVolume* NewVolume)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendByPhysicsVolume.PhysicsVolumeChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34539);
 			byte params[4] = { NULL };
-			*(class PhysicsVolume**)&params[0] = NewVolume;
+			*(class PhysicsVolume**)params = NewVolume;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

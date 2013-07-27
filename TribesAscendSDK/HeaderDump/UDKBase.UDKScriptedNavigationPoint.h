@@ -21,17 +21,17 @@ namespace UnrealScript
 		ADD_BOOL(bScriptSpecifyEndAnchor, 692, 0x1)
 		class NavigationPoint* SpecifyEndAnchor(class Pawn* RouteFinder)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKScriptedNavigationPoint.SpecifyEndAnchor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35324);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = RouteFinder;
+			*(class Pawn**)params = RouteFinder;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class NavigationPoint**)&params[4];
 		}
 		void NotifyAnchorFindingResult(class NavigationPoint* EndAnchor, class Pawn* RouteFinder)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKScriptedNavigationPoint.NotifyAnchorFindingResult");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35327);
 			byte params[8] = { NULL };
-			*(class NavigationPoint**)&params[0] = EndAnchor;
+			*(class NavigationPoint**)params = EndAnchor;
 			*(class Pawn**)&params[4] = RouteFinder;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

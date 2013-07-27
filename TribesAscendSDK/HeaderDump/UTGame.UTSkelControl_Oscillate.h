@@ -23,14 +23,14 @@ namespace UnrealScript
 		ADD_BOOL(bReverseDirection, 256, 0x1)
 		ADD_STRUCT(float, CurrentTime, 252)
 		ADD_STRUCT(float, Period, 248)
-		ADD_STRUCT(Object::Vector, MaxDelta, 236)
+		ADD_STRUCT(Vector, MaxDelta, 236)
 		void TickSkelControl(float DeltaTime, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSkelControl_Oscillate.TickSkelControl");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49375);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = SkelComp;

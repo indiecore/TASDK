@@ -40,19 +40,19 @@ namespace UnrealScript
 		ADD_OBJECT(SeqAct_Interp, InterpAction, 476)
 		void AddAIGroupActor(class InterpGroupInstAI* AIGroupInst)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MatineeActor.AddAIGroupActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19930);
 			byte params[4] = { NULL };
-			*(class InterpGroupInstAI**)&params[0] = AIGroupInst;
+			*(class InterpGroupInstAI**)params = AIGroupInst;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Update()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MatineeActor.Update");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19932);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CheckPriorityRefresh()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MatineeActor.CheckPriorityRefresh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19940);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

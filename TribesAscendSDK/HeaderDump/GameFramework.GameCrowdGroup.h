@@ -14,23 +14,23 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class GameCrowdAgent*>, Members, 60)
 		void AddMember(class GameCrowdAgent* Agent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdGroup.AddMember");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31322);
 			byte params[4] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = Agent;
+			*(class GameCrowdAgent**)params = Agent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveMember(class GameCrowdAgent* Agent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdGroup.RemoveMember");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31324);
 			byte params[4] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = Agent;
+			*(class GameCrowdAgent**)params = Agent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateDestinations(class GameCrowdDestination* NewDestination)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdGroup.UpdateDestinations");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31326);
 			byte params[4] = { NULL };
-			*(class GameCrowdDestination**)&params[0] = NewDestination;
+			*(class GameCrowdDestination**)params = NewDestination;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

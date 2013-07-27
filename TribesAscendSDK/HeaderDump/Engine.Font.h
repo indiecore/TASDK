@@ -12,7 +12,7 @@ namespace UnrealScript
 	{
 	public:
 		static const auto NULLCHARACTER = 127;
-		class FontCharacter
+		struct FontCharacter
 		{
 		public:
 			ADD_STRUCT(int, VerticalOffset, 20)
@@ -35,44 +35,44 @@ namespace UnrealScript
 		ADD_STRUCT(int, IsRemapped, 144)
 		int GetResolutionPageIndex(float HeightTest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Font.GetResolutionPageIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12378);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = HeightTest;
+			*(float*)params = HeightTest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		float GetScalingFactor(float HeightTest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Font.GetScalingFactor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12381);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = HeightTest;
+			*(float*)params = HeightTest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float GetAuthoredViewportHeight(float ViewportHeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Font.GetAuthoredViewportHeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12384);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = ViewportHeight;
+			*(float*)params = ViewportHeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float GetMaxCharHeight()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Font.GetMaxCharHeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12387);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void GetStringHeightAndWidth(ScriptString*& InString, int& Height, int& Width)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Font.GetStringHeightAndWidth");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12389);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = InString;
+			*(ScriptString**)params = InString;
 			*(int*)&params[12] = Height;
 			*(int*)&params[16] = Width;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			InString = *(ScriptString**)&params[0];
+			InString = *(ScriptString**)params;
 			Height = *(int*)&params[12];
 			Width = *(int*)&params[16];
 		}

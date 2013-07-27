@@ -24,15 +24,15 @@ namespace UnrealScript
 		ADD_BOOL(bTopPriority, 236, 0x1)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_SetSoundMode.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25926);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_SetSoundMode.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25928);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

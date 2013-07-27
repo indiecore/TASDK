@@ -16,22 +16,22 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(ScriptClass, ReachSpecClass, 84)
-		ADD_STRUCT(Object::Vector, InitLocation, 72)
+		ADD_STRUCT(Vector, InitLocation, 72)
 		ADD_STRUCT(float, MinDistBetweenSpecTypes, 68)
-		bool EnforceMinDist(class Pawn* P, float InMinDist, ScriptClass* InSpecClass, Object::Vector LastLocation)
+		bool EnforceMinDist(class Pawn* P, float InMinDist, ScriptClass* InSpecClass, Vector LastLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_MinDistBetweenSpecsOfType.EnforceMinDist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23976);
 			byte params[28] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			*(float*)&params[4] = InMinDist;
 			*(ScriptClass**)&params[8] = InSpecClass;
-			*(Object::Vector*)&params[12] = LastLocation;
+			*(Vector*)&params[12] = LastLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_MinDistBetweenSpecsOfType.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23983);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -13,9 +13,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<Settings::StringIdToStringMapping>, ViewIdMappings, 60)
 		bool GetViewId(ScriptName ViewName, int& ViewId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStats.GetViewId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22749);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = ViewName;
+			*(ScriptName*)params = ViewName;
 			*(int*)&params[8] = ViewId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ViewId = *(int*)&params[8];
@@ -23,9 +23,9 @@ namespace UnrealScript
 		}
 		ScriptName GetViewName(int ViewId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStats.GetViewName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22753);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ViewId;
+			*(int*)params = ViewId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[4];
 		}

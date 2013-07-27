@@ -38,36 +38,36 @@ namespace UnrealScript
 		ADD_STRUCT(float, LatestDeltaTime, 216)
 		WorldInfo::ENetMode GetCurrentNetMode()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.GetCurrentNetMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17834);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(WorldInfo::ENetMode*)&params[0];
+			return *(WorldInfo::ENetMode*)params;
 		}
 		void RequestInputProcessingUpdate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.RequestInputProcessingUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17836);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CanUnpauseInternalUI()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.CanUnpauseInternalUI");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17837);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void PauseGame(bool bDesiredPauseState, int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.PauseGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17839);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bDesiredPauseState;
+			*(bool*)params = bDesiredPauseState;
 			*(int*)&params[4] = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyClientTravel(class PlayerController* TravellingPlayer, ScriptString* TravelURL, Actor::ETravelType TravelType, bool bIsSeamlessTravel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.NotifyClientTravel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17843);
 			byte params[21] = { NULL };
-			*(class PlayerController**)&params[0] = TravellingPlayer;
+			*(class PlayerController**)params = TravellingPlayer;
 			*(ScriptString**)&params[4] = TravelURL;
 			*(Actor::ETravelType*)&params[16] = TravelType;
 			*(bool*)&params[20] = bIsSeamlessTravel;
@@ -75,30 +75,30 @@ namespace UnrealScript
 		}
 		void NotifyGameSessionEnded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.NotifyGameSessionEnded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17848);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NotifyPlayerAdded(int PlayerIndex, class LocalPlayer* AddedPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.NotifyPlayerAdded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17849);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			*(class LocalPlayer**)&params[4] = AddedPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyPlayerRemoved(int PlayerIndex, class LocalPlayer* RemovedPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.NotifyPlayerRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17852);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			*(class LocalPlayer**)&params[4] = RemovedPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int FindLocalPlayerIndex(class Player* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameUISceneClient.FindLocalPlayerIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17855);
 			byte params[8] = { NULL };
-			*(class Player**)&params[0] = P;
+			*(class Player**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}

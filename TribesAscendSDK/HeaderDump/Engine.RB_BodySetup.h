@@ -31,19 +31,19 @@ namespace UnrealScript
 			SF_Sensitive = 1,
 			SF_MAX = 2,
 		};
-		class KCachedConvexDataElement
+		struct KCachedConvexDataElement
 		{
 		public:
 			ADD_STRUCT(ScriptArray<byte>, ConvexElementData, 0)
 		};
-		class KCachedConvexData
+		struct KCachedConvexData
 		{
 		public:
 			ADD_STRUCT(ScriptArray<RB_BodySetup::KCachedConvexDataElement>, CachedConvexElements, 0)
 		};
 		ADD_STRUCT(ScriptArray<Object::Pointer>, CollisionGeom, 152)
-		ADD_STRUCT(ScriptArray<Object::Vector>, CollisionGeomScale3D, 164)
-		ADD_STRUCT(ScriptArray<Object::Vector>, PreCachedPhysScale, 176)
+		ADD_STRUCT(ScriptArray<Vector>, CollisionGeomScale3D, 164)
+		ADD_STRUCT(ScriptArray<Vector>, PreCachedPhysScale, 176)
 		ADD_STRUCT(ScriptArray<RB_BodySetup::KCachedConvexData>, PreCachedPhysData, 188)
 		ADD_STRUCT(int, PreCachedPhysDataVersion, 200)
 		ADD_STRUCT(float, MassScale, 148)

@@ -14,9 +14,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<Object::BoneAtom>, m_PoseSpaceBases, 320)
 		void FillWithPose(class TrPawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeSequencePose.FillWithPose");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66481);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = P;
+			*(class TrPawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

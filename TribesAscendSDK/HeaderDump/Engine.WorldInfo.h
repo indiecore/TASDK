@@ -99,13 +99,13 @@ namespace UnrealScript
 			NM_Client = 3,
 			NM_MAX = 4,
 		};
-		class NavMeshPathGoalEvaluatorCacheDatum
+		struct NavMeshPathGoalEvaluatorCacheDatum
 		{
 		public:
 			ADD_STRUCT(int, ListIdx, 0)
 			ADD_OBJECT(NavMeshPathGoalEvaluator, List, 4)
 		};
-		class WorldFractureSettings
+		struct WorldFractureSettings
 		{
 		public:
 			ADD_STRUCT(float, ChanceOfPhysicsChunkOverride, 0)
@@ -117,13 +117,13 @@ namespace UnrealScript
 			ADD_STRUCT(int, MaxNumFacturedChunksToSpawnInAFrame, 20)
 			ADD_STRUCT(float, FractureExplosionVelScale, 24)
 		};
-		class NavMeshPathConstraintCacheDatum
+		struct NavMeshPathConstraintCacheDatum
 		{
 		public:
 			ADD_STRUCT(int, ListIdx, 0)
 			ADD_OBJECT(NavMeshPathConstraint, List, 4)
 		};
-		class LightmassWorldInfoSettings
+		struct LightmassWorldInfoSettings
 		{
 		public:
 			ADD_STRUCT(float, StaticLightingLevelScale, 0)
@@ -145,16 +145,16 @@ namespace UnrealScript
 			ADD_BOOL(bVisualizeMaterialDiffuse, 56, 0x1)
 			ADD_BOOL(bVisualizeAmbientOcclusion, 56, 0x2)
 		};
-		class ScreenMessageString
+		struct ScreenMessageString
 		{
 		public:
-			ADD_STRUCT(Object::QWord, Key, 0)
+			ADD_STRUCT(QWord, Key, 0)
 			ADD_STRUCT(ScriptString*, ScreenMessage, 8)
 			ADD_STRUCT(Object::Color, DisplayColor, 20)
 			ADD_STRUCT(float, TimeToDisplay, 24)
 			ADD_STRUCT(float, CurrentTimeDisplayed, 28)
 		};
-		class PhysXEmitterVerticalProperties
+		struct PhysXEmitterVerticalProperties
 		{
 		public:
 			ADD_BOOL(bDisableLod, 0, 0x1)
@@ -164,7 +164,7 @@ namespace UnrealScript
 			ADD_BOOL(bApplyCylindricalPacketCulling, 16, 0x1)
 			ADD_STRUCT(float, SpawnLodVsFifoBias, 20)
 		};
-		class ApexModuleDestructibleSettings
+		struct ApexModuleDestructibleSettings
 		{
 		public:
 			ADD_STRUCT(int, MaxChunkIslandCount, 0)
@@ -172,7 +172,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, MaxChunkSeparationLOD, 8)
 			ADD_BOOL(bOverrideMaxChunkSeparationLOD, 12, 0x1)
 		};
-		class PhysXSimulationProperties
+		struct PhysXSimulationProperties
 		{
 		public:
 			ADD_BOOL(bUseHardware, 0, 0x1)
@@ -180,7 +180,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, TimeStep, 4)
 			ADD_STRUCT(int, MaxSubSteps, 8)
 		};
-		class CompartmentRunList
+		struct CompartmentRunList
 		{
 		public:
 			ADD_BOOL(RigidBody, 0, 0x1)
@@ -188,15 +188,15 @@ namespace UnrealScript
 			ADD_BOOL(Cloth, 0, 0x4)
 			ADD_BOOL(SoftBody, 0, 0x8)
 		};
-		class NetViewer
+		struct NetViewer
 		{
 		public:
 			ADD_OBJECT(PlayerController, InViewer, 0)
 			ADD_OBJECT(Actor, Viewer, 4)
-			ADD_STRUCT(Object::Vector, ViewLocation, 8)
-			ADD_STRUCT(Object::Vector, ViewDir, 20)
+			ADD_STRUCT(Vector, ViewLocation, 8)
+			ADD_STRUCT(Vector, ViewDir, 20)
 		};
-		class HostMigrationState
+		struct HostMigrationState
 		{
 		public:
 			ADD_BOOL(bHostMigrationEnabled, 24, 0x1)
@@ -205,12 +205,12 @@ namespace UnrealScript
 			ADD_STRUCT(float, HostMigrationElapsedTime, 4)
 			ADD_STRUCT(WorldInfo::EHostMigrationProgress, HostMigrationProgress, 0)
 		};
-		class PhysXVerticalProperties
+		struct PhysXVerticalProperties
 		{
 		public:
 			ADD_STRUCT(WorldInfo::PhysXEmitterVerticalProperties, Emitters, 0)
 		};
-		class PhysXSceneProperties
+		struct PhysXSceneProperties
 		{
 		public:
 			ADD_STRUCT(WorldInfo::PhysXSimulationProperties, PrimaryScene, 0)
@@ -223,7 +223,7 @@ namespace UnrealScript
 		ADD_OBJECT(GameInfo, Game, 1088)
 		ADD_STRUCT(float, TimeSeconds, 960)
 		ADD_OBJECT(GameReplicationInfo, GRI, 1044)
-		ADD_STRUCT(Object::Vector, DefaultColorScale, 1168)
+		ADD_STRUCT(Vector, DefaultColorScale, 1168)
 		ADD_OBJECT(EmitterPool, MyEmitterPool, 1348)
 		ADD_STRUCT(float, TimeDilation, 952)
 		ADD_OBJECT(PlayerReplicationInfo, Pauser, 984)
@@ -373,133 +373,133 @@ namespace UnrealScript
 		ADD_STRUCT(float, HostMigrationTimeout, 1916)
 		class Sequence* GetGameSequence()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetGameSequence");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4289);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Sequence**)&params[0];
+			return *(class Sequence**)params;
 		}
 		void AllControllers(ScriptClass* BaseClass, class Controller*& C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.AllControllers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5715);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = BaseClass;
+			*(ScriptClass**)params = BaseClass;
 			*(class Controller**)&params[4] = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			C = *(class Controller**)&params[4];
 		}
 		bool IsConsoleBuild(WorldInfo::EConsoleType ConsoleType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.IsConsoleBuild");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5728);
 			byte params[5] = { NULL };
-			*(WorldInfo::EConsoleType*)&params[0] = ConsoleType;
+			*(WorldInfo::EConsoleType*)params = ConsoleType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		class WorldInfo* GetWorldInfo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetWorldInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7283);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class WorldInfo**)&params[0];
+			return *(class WorldInfo**)params;
 		}
 		ScriptString* GetMapName(bool bIncludePrefix)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetMapName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7713);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bIncludePrefix;
+			*(bool*)params = bIncludePrefix;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptClass* GetGameClass()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetGameClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7715);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptClass**)&params[0];
+			return *(ScriptClass**)params;
 		}
 		void AllNavigationPoints(ScriptClass* BaseClass, class NavigationPoint*& N)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.AllNavigationPoints");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(8413);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = BaseClass;
+			*(ScriptClass**)params = BaseClass;
 			*(class NavigationPoint**)&params[4] = N;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			N = *(class NavigationPoint**)&params[4];
 		}
 		void ForceGarbageCollection(bool bFullPurge)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.ForceGarbageCollection");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9153);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bFullPurge;
+			*(bool*)params = bFullPurge;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsPreparingMapChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.IsPreparingMapChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9175);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void PrepareMapChange(ScriptArray<ScriptName>& LevelNames)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.PrepareMapChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9177);
 			byte params[12] = { NULL };
-			*(ScriptArray<ScriptName>*)&params[0] = LevelNames;
+			*(ScriptArray<ScriptName>*)params = LevelNames;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			LevelNames = *(ScriptArray<ScriptName>*)&params[0];
+			LevelNames = *(ScriptArray<ScriptName>*)params;
 		}
 		void CommitMapChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.CommitMapChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9179);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CancelPendingMapChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.CancelPendingMapChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9181);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReleaseCachedConstraintsAndEvaluators()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.ReleaseCachedConstraintsAndEvaluators");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16085);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class NavMeshPathConstraint* GetNavMeshPathConstraintFromCache(ScriptClass* ConstraintClass, class NavigationHandle* Requestor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetNavMeshPathConstraintFromCache");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16086);
 			byte params[12] = { NULL };
-			*(ScriptClass**)&params[0] = ConstraintClass;
+			*(ScriptClass**)params = ConstraintClass;
 			*(class NavigationHandle**)&params[4] = Requestor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class NavMeshPathConstraint**)&params[8];
 		}
 		class NavMeshPathGoalEvaluator* GetNavMeshPathGoalEvaluatorFromCache(ScriptClass* GoalEvalClass, class NavigationHandle* Requestor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetNavMeshPathGoalEvaluatorFromCache");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16090);
 			byte params[12] = { NULL };
-			*(ScriptClass**)&params[0] = GoalEvalClass;
+			*(ScriptClass**)params = GoalEvalClass;
 			*(class NavigationHandle**)&params[4] = Requestor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class NavMeshPathGoalEvaluator**)&params[8];
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16094);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateMusicTrack(MusicTrackDataStructures::MusicTrackStruct NewMusicTrack)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.UpdateMusicTrack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16096);
 			byte params[36] = { NULL };
-			*(MusicTrackDataStructures::MusicTrackStruct*)&params[0] = NewMusicTrack;
+			*(MusicTrackDataStructures::MusicTrackStruct*)params = NewMusicTrack;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddOnScreenDebugMessage(int Key, float TimeToDisplay, Object::Color DisplayColor, ScriptString* DebugMessage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.AddOnScreenDebugMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16098);
 			byte params[24] = { NULL };
-			*(int*)&params[0] = Key;
+			*(int*)params = Key;
 			*(float*)&params[4] = TimeToDisplay;
 			*(Object::Color*)&params[8] = DisplayColor;
 			*(ScriptString**)&params[12] = DebugMessage;
@@ -507,268 +507,268 @@ namespace UnrealScript
 		}
 		bool IsMenuLevel(ScriptString* MapName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.IsMenuLevel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16103);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = MapName;
+			*(ScriptString**)params = MapName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		float GetGravityZ()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetGravityZ");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16116);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		ScriptArray<class Sequence*> GetAllRootSequences()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetAllRootSequences");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16118);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptArray<class Sequence*>*)&params[0];
+			return *(ScriptArray<class Sequence*>*)params;
 		}
-		void SetLevelRBGravity(Object::Vector NewGrav)
+		void SetLevelRBGravity(Vector NewGrav)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.SetLevelRBGravity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16121);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewGrav;
+			*(Vector*)params = NewGrav;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetLocalURL()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetLocalURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16123);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		bool IsDemoBuild()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.IsDemoBuild");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16125);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool IsPlayInEditor()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.IsPlayInEditor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16130);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool IsPlayInPreview()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.IsPlayInPreview");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16132);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void VerifyNavList()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.VerifyNavList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16135);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetAddressURL()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetAddressURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16136);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void ServerTravel(ScriptString* URL, bool bAbsolute, bool bShouldSkipGameNotify)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.ServerTravel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16138);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			*(bool*)&params[12] = bAbsolute;
 			*(bool*)&params[16] = bShouldSkipGameNotify;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsInSeamlessTravel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.IsInSeamlessTravel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16145);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void ThisIsNeverExecuted(class DefaultPhysicsVolume* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.ThisIsNeverExecuted");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16147);
 			byte params[4] = { NULL };
-			*(class DefaultPhysicsVolume**)&params[0] = P;
+			*(class DefaultPhysicsVolume**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16149);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16161);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16163);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void RadiusNavigationPoints(ScriptClass* BaseClass, class NavigationPoint*& N, Object::Vector Point, float Radius)
+		void RadiusNavigationPoints(ScriptClass* BaseClass, class NavigationPoint*& N, Vector Point, float Radius)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.RadiusNavigationPoints");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16166);
 			byte params[24] = { NULL };
-			*(ScriptClass**)&params[0] = BaseClass;
+			*(ScriptClass**)params = BaseClass;
 			*(class NavigationPoint**)&params[4] = N;
-			*(Object::Vector*)&params[8] = Point;
+			*(Vector*)&params[8] = Point;
 			*(float*)&params[20] = Radius;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			N = *(class NavigationPoint**)&params[4];
 		}
-		void NavigationPointCheck(Object::Vector Point, Object::Vector Extent, ScriptArray<class NavigationPoint*>& Navs, ScriptArray<class ReachSpec*>& Specs)
+		void NavigationPointCheck(Vector Point, Vector Extent, ScriptArray<class NavigationPoint*>& Navs, ScriptArray<class ReachSpec*>& Specs)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.NavigationPointCheck");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16171);
 			byte params[48] = { NULL };
-			*(Object::Vector*)&params[0] = Point;
-			*(Object::Vector*)&params[12] = Extent;
+			*(Vector*)params = Point;
+			*(Vector*)&params[12] = Extent;
 			*(ScriptArray<class NavigationPoint*>*)&params[24] = Navs;
 			*(ScriptArray<class ReachSpec*>*)&params[36] = Specs;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Navs = *(ScriptArray<class NavigationPoint*>*)&params[24];
 			Specs = *(ScriptArray<class ReachSpec*>*)&params[36];
 		}
-		void AllPawns(ScriptClass* BaseClass, class Pawn*& P, Object::Vector TestLocation, float TestRadius)
+		void AllPawns(ScriptClass* BaseClass, class Pawn*& P, Vector TestLocation, float TestRadius)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.AllPawns");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16180);
 			byte params[24] = { NULL };
-			*(ScriptClass**)&params[0] = BaseClass;
+			*(ScriptClass**)params = BaseClass;
 			*(class Pawn**)&params[4] = P;
-			*(Object::Vector*)&params[8] = TestLocation;
+			*(Vector*)&params[8] = TestLocation;
 			*(float*)&params[20] = TestRadius;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			P = *(class Pawn**)&params[4];
 		}
 		void NotifyMatchStarted(bool bShouldActivateLevelStartupEvents, bool bShouldActivateLevelBeginningEvents, bool bShouldActivateLevelLoadedEvents)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.NotifyMatchStarted");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16185);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = bShouldActivateLevelStartupEvents;
+			*(bool*)params = bShouldActivateLevelStartupEvents;
 			*(bool*)&params[4] = bShouldActivateLevelBeginningEvents;
 			*(bool*)&params[8] = bShouldActivateLevelLoadedEvents;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsMapChangeReady()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.IsMapChangeReady");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16191);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SeamlessTravel(ScriptString* URL, bool bAbsolute, Object::Guid MapPackageGuid)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.SeamlessTravel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16193);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			*(bool*)&params[12] = bAbsolute;
 			*(Object::Guid*)&params[16] = MapPackageGuid;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSeamlessTravelMidpointPause(bool bNowPaused)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.SetSeamlessTravelMidpointPause");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16198);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNowPaused;
+			*(bool*)params = bNowPaused;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class MapInfo* GetMapInfo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetMapInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16200);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class MapInfo**)&params[0];
+			return *(class MapInfo**)params;
 		}
 		void SetMapInfo(class MapInfo* NewMapInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.SetMapInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16202);
 			byte params[4] = { NULL };
-			*(class MapInfo**)&params[0] = NewMapInfo;
+			*(class MapInfo**)params = NewMapInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		Scene::EDetailMode GetDetailMode()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetDetailMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16205);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Scene::EDetailMode*)&params[0];
+			return *(Scene::EDetailMode*)params;
 		}
 		bool IsRecordingDemo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.IsRecordingDemo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16207);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool IsPlayingDemo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.IsPlayingDemo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16209);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void GetDemoFrameInfo(int& CurrentFrame, int& TotalFrames)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetDemoFrameInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16211);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = CurrentFrame;
+			*(int*)params = CurrentFrame;
 			*(int*)&params[4] = TotalFrames;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			CurrentFrame = *(int*)&params[0];
+			CurrentFrame = *(int*)params;
 			TotalFrames = *(int*)&params[4];
 		}
 		bool GetDemoRewindPoints(ScriptArray<int>& OutRewindPoints)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetDemoRewindPoints");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16214);
 			byte params[16] = { NULL };
-			*(ScriptArray<int>*)&params[0] = OutRewindPoints;
+			*(ScriptArray<int>*)params = OutRewindPoints;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutRewindPoints = *(ScriptArray<int>*)&params[0];
+			OutRewindPoints = *(ScriptArray<int>*)params;
 			return *(bool*)&params[12];
 		}
 		void DoMemoryTracking()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.DoMemoryTracking");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16218);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		WorldInfo::WorldFractureSettings GetWorldFractureSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.GetWorldFractureSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16219);
 			byte params[28] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(WorldInfo::WorldFractureSettings*)&params[0];
+			return *(WorldInfo::WorldFractureSettings*)params;
 		}
-		class EnvironmentVolume* FindEnvironmentVolume(Object::Vector TestLocation)
+		class EnvironmentVolume* FindEnvironmentVolume(Vector TestLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.FindEnvironmentVolume");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16230);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = TestLocation;
+			*(Vector*)params = TestLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class EnvironmentVolume**)&params[12];
 		}
 		bool BeginHostMigration()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.BeginHostMigration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16233);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void ToggleHostMigration(bool bEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.ToggleHostMigration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16235);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnabled;
+			*(bool*)params = bEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearPhysicsPools()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.WorldInfo.ClearPhysicsPools");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16237);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

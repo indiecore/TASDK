@@ -10,7 +10,7 @@ namespace UnrealScript
 	class K2Input_Rotator : public K2Input
 	{
 	public:
-		ADD_STRUCT(Object::Rotator, DefaultRotator, 84)
+		ADD_STRUCT(Rotator, DefaultRotator, 84)
 	};
 }
 #undef ADD_STRUCT

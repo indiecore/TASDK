@@ -14,18 +14,18 @@ namespace UnrealScript
 		ADD_OBJECT(TrChatConsole, ChatConsole, 408)
 		bool Init(ScriptString*& OutError)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGameViewportClient.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(95387);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = OutError;
+			*(ScriptString**)params = OutError;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutError = *(ScriptString**)&params[0];
+			OutError = *(ScriptString**)params;
 			return *(bool*)&params[12];
 		}
 		void PostRender(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGameViewportClient.PostRender");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(95390);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

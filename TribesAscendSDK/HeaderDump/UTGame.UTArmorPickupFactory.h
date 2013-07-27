@@ -16,43 +16,43 @@ namespace UnrealScript
 		ADD_STRUCT(int, ShieldAmount, 976)
 		void UpdateHUD(class UTHUD* H)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTArmorPickupFactory.UpdateHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40619);
 			byte params[4] = { NULL };
-			*(class UTHUD**)&params[0] = H;
+			*(class UTHUD**)params = H;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTArmorPickupFactory.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40622);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpawnCopyFor(class Pawn* Recipient)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTArmorPickupFactory.SpawnCopyFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40623);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Recipient;
+			*(class Pawn**)params = Recipient;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int CanUseShield(class UTPawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTArmorPickupFactory.CanUseShield");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40627);
 			byte params[8] = { NULL };
-			*(class UTPawn**)&params[0] = P;
+			*(class UTPawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		void AddShieldStrength(class UTPawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTArmorPickupFactory.AddShieldStrength");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40630);
 			byte params[4] = { NULL };
-			*(class UTPawn**)&params[0] = P;
+			*(class UTPawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float BotDesireability(class Pawn* Bot, class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTArmorPickupFactory.BotDesireability");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40644);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = Bot;
+			*(class Pawn**)params = Bot;
 			*(class Controller**)&params[4] = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];

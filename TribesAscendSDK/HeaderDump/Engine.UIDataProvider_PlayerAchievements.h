@@ -16,77 +16,77 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementCellProvider, 92)
 		int GetTotalGamerScore()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.GetTotalGamerScore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28358);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int GetMaxTotalGamerScore()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.GetMaxTotalGamerScore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28360);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void PopulateAchievementIcons()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.PopulateAchievementIcons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28362);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetAchievementIconPathName(int AchievementId, bool bReturnLockedIcon)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.GetAchievementIconPathName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28363);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = AchievementId;
+			*(int*)params = AchievementId;
 			*(bool*)&params[4] = bReturnLockedIcon;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[8];
 		}
 		void GetAchievementDetails(int AchievementId, OnlineSubsystem::AchievementDetails& OutAchievementDetails)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.GetAchievementDetails");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28367);
 			byte params[56] = { NULL };
-			*(int*)&params[0] = AchievementId;
+			*(int*)params = AchievementId;
 			*(OnlineSubsystem::AchievementDetails*)&params[4] = OutAchievementDetails;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutAchievementDetails = *(OnlineSubsystem::AchievementDetails*)&params[4];
 		}
 		void OnPlayerAchievementsChanged(int TitleId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.OnPlayerAchievementsChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28371);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = TitleId;
+			*(int*)params = TitleId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPlayerAchievementUnlocked(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.OnPlayerAchievementUnlocked");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28375);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnRegister(class LocalPlayer* InPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.OnRegister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28377);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = InPlayer;
+			*(class LocalPlayer**)params = InPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUnregister()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.OnUnregister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28380);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnLoginChange(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.OnLoginChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28382);
 			byte params[1] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateAchievements()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_PlayerAchievements.UpdateAchievements");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28384);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

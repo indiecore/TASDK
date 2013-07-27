@@ -9,8 +9,8 @@ namespace UnrealScript
 	class BookMark : public Object
 	{
 	public:
-		ADD_STRUCT(Object::Rotator, Rotation, 72)
-		ADD_STRUCT(Object::Vector, Location, 60)
+		ADD_STRUCT(Rotator, Rotation, 72)
+		ADD_STRUCT(Vector, Location, 60)
 	};
 }
 #undef ADD_STRUCT

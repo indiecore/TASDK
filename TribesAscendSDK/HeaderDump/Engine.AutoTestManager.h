@@ -26,7 +26,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(ScriptArray<ScriptString*>, AutomatedMapTestingList, 488)
-		ADD_STRUCT(ScriptArray<Object::Vector>, SentinelTravelArray, 576)
+		ADD_STRUCT(ScriptArray<Vector>, SentinelTravelArray, 576)
 		ADD_STRUCT(ScriptArray<ScriptString*>, CommandsToRunAtEachTravelTheWorldNode, 608)
 		ADD_STRUCT(ScriptString*, CommandStringToExec, 620)
 		ADD_STRUCT(int, NumMinutesPerMap, 604)
@@ -56,151 +56,151 @@ namespace UnrealScript
 		ADD_BOOL(bAutomatedPerfTesting, 476, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11934);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Timer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.Timer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11935);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitializeOptions(ScriptString* Options)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.InitializeOptions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11936);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Options;
+			*(ScriptString**)params = Options;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BeginSentinelRun(ScriptString* TaskDescription, ScriptString* TaskParameter, ScriptString* TagDesc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.BeginSentinelRun");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11940);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = TaskDescription;
+			*(ScriptString**)params = TaskDescription;
 			*(ScriptString**)&params[12] = TaskParameter;
 			*(ScriptString**)&params[24] = TagDesc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddSentinelPerTimePeriodStats(Object::Vector InLocation, Object::Rotator InRotation)
+		void AddSentinelPerTimePeriodStats(Vector InLocation, Rotator InRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.AddSentinelPerTimePeriodStats");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11944);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = InLocation;
-			*(Object::Rotator*)&params[12] = InRotation;
+			*(Vector*)params = InLocation;
+			*(Rotator*)&params[12] = InRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EndSentinelRun(Object::EAutomatedRunResult RunResult)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.EndSentinelRun");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11947);
 			byte params[1] = { NULL };
-			*(Object::EAutomatedRunResult*)&params[0] = RunResult;
+			*(Object::EAutomatedRunResult*)params = RunResult;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DoTravelTheWorld()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.DoTravelTheWorld");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11949);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DoSentinelActionPerLoadedMap()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.DoSentinelActionPerLoadedMap");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11969);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HandlePerLoadedMapAudioStats()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.HandlePerLoadedMapAudioStats");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11970);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void GetTravelLocations(ScriptName LevelName, class PlayerController* PC, ScriptArray<Object::Vector>& TravelPoints)
+		void GetTravelLocations(ScriptName LevelName, class PlayerController* PC, ScriptArray<Vector>& TravelPoints)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.GetTravelLocations");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11971);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = LevelName;
+			*(ScriptName*)params = LevelName;
 			*(class PlayerController**)&params[8] = PC;
-			*(ScriptArray<Object::Vector>*)&params[12] = TravelPoints;
+			*(ScriptArray<Vector>*)&params[12] = TravelPoints;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			TravelPoints = *(ScriptArray<Object::Vector>*)&params[12];
+			TravelPoints = *(ScriptArray<Vector>*)&params[12];
 		}
-		void DoSentinel_MemoryAtSpecificLocation(Object::Vector InLocation, Object::Rotator InRotation)
+		void DoSentinel_MemoryAtSpecificLocation(Vector InLocation, Rotator InRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.DoSentinel_MemoryAtSpecificLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11976);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = InLocation;
-			*(Object::Rotator*)&params[12] = InRotation;
+			*(Vector*)params = InLocation;
+			*(Rotator*)&params[12] = InRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DoSentinel_PerfAtSpecificLocation(Object::Vector& InLocation, Object::Rotator& InRotation)
+		void DoSentinel_PerfAtSpecificLocation(Vector& InLocation, Rotator& InRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.DoSentinel_PerfAtSpecificLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11979);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = InLocation;
-			*(Object::Rotator*)&params[12] = InRotation;
+			*(Vector*)params = InLocation;
+			*(Rotator*)&params[12] = InRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			InLocation = *(Object::Vector*)&params[0];
-			InRotation = *(Object::Rotator*)&params[12];
+			InLocation = *(Vector*)params;
+			InRotation = *(Rotator*)&params[12];
 		}
-		void DoSentinel_ViewDependentMemoryAtSpecificLocation(Object::Vector& InLocation, Object::Rotator& InRotation)
+		void DoSentinel_ViewDependentMemoryAtSpecificLocation(Vector& InLocation, Rotator& InRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.DoSentinel_ViewDependentMemoryAtSpecificLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11982);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = InLocation;
-			*(Object::Rotator*)&params[12] = InRotation;
+			*(Vector*)params = InLocation;
+			*(Rotator*)&params[12] = InRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			InLocation = *(Object::Vector*)&params[0];
-			InRotation = *(Object::Rotator*)&params[12];
+			InLocation = *(Vector*)params;
+			InRotation = *(Rotator*)&params[12];
 		}
 		void DoTimeBasedSentinelStatGathering()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.DoTimeBasedSentinelStatGathering");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11985);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DoMemoryTracking()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.DoMemoryTracking");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11989);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartAutomatedMapTestTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.StartAutomatedMapTestTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11990);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartAutomatedMapTestTimerWorker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.StartAutomatedMapTestTimerWorker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11991);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CloseAutomatedMapTestTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.CloseAutomatedMapTestTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11993);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void IncrementAutomatedTestingMapIndex()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.IncrementAutomatedTestingMapIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11994);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void IncrementNumberOfMatchesPlayed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.IncrementNumberOfMatchesPlayed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11995);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetNextAutomatedTestingMap()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.GetNextAutomatedTestingMap");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11996);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void StartMatch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.StartMatch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12002);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CheckForSentinelRun()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AutoTestManager.CheckForSentinelRun");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12004);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

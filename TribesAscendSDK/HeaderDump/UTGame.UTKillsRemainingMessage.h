@@ -21,9 +21,9 @@ namespace UnrealScript
 		ADD_OBJECT(SoundNodeWave, KillsRemainSounds, 100)
 		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTKillsRemainingMessage.GetString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48194);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(bool*)&params[4] = bPRI1HUD;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
@@ -33,9 +33,9 @@ namespace UnrealScript
 		}
 		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTKillsRemainingMessage.ClientReceive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48201);
 			byte params[20] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			*(int*)&params[4] = Switch;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
@@ -44,9 +44,9 @@ namespace UnrealScript
 		}
 		class SoundNodeWave* AnnouncementSound(int MessageIndex, class Object* OptionalObject, class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTKillsRemainingMessage.AnnouncementSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48208);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = MessageIndex;
+			*(int*)params = MessageIndex;
 			*(class Object**)&params[4] = OptionalObject;
 			*(class PlayerController**)&params[8] = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

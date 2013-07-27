@@ -21,40 +21,40 @@ namespace UnrealScript
 		ADD_OBJECT(PostProcessChain, EntryPostProcessChain, 2176)
 		void InitInputSystem()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.InitInputSystem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47416);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RestorePostProcessing()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.RestorePostProcessing");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47417);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47419);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnControllerChanged(int ControllerId, bool bIsConnected)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.OnControllerChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47420);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(bool*)&params[4] = bIsConnected;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnGameInviteReceived(byte LocalUserNum, ScriptString* RequestingNick)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.OnGameInviteReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47424);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptString**)&params[4] = RequestingNick;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFriendInviteReceived(byte LocalUserNum, OnlineSubsystem::UniqueNetId RequestingPlayer, ScriptString* RequestingNick, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.OnFriendInviteReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47427);
 			byte params[33] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = RequestingPlayer;
 			*(ScriptString**)&params[12] = RequestingNick;
 			*(ScriptString**)&params[24] = Message;
@@ -62,9 +62,9 @@ namespace UnrealScript
 		}
 		void OnFriendMessageReceived(byte LocalUserNum, OnlineSubsystem::UniqueNetId SendingPlayer, ScriptString* SendingNick, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.OnFriendMessageReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47432);
 			byte params[33] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = SendingPlayer;
 			*(ScriptString**)&params[12] = SendingNick;
 			*(ScriptString**)&params[24] = Message;
@@ -72,41 +72,41 @@ namespace UnrealScript
 		}
 		void OnConnectionStatusChange(OnlineSubsystem::EOnlineServerConnectionStatus ConnectionStatus)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.OnConnectionStatusChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47437);
 			byte params[1] = { NULL };
-			*(OnlineSubsystem::EOnlineServerConnectionStatus*)&params[0] = ConnectionStatus;
+			*(OnlineSubsystem::EOnlineServerConnectionStatus*)params = ConnectionStatus;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnLinkStatusChanged(bool bConnected)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.OnLinkStatusChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47440);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bConnected;
+			*(bool*)params = bConnected;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void QuitToMainMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.QuitToMainMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47443);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPawnConstructionScene(bool bShow)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.SetPawnConstructionScene");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47444);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bShow;
+			*(bool*)params = bShow;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowMidGameMenu(ScriptName TabTag, bool bEnableInput)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.ShowMidGameMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47446);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = TabTag;
+			*(ScriptName*)params = TabTag;
 			*(bool*)&params[8] = bEnableInput;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowScoreboard()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryPlayerController.ShowScoreboard");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47449);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

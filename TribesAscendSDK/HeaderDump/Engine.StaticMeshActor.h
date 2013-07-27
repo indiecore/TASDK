@@ -18,7 +18,7 @@ namespace UnrealScript
 		ADD_BOOL(bDisableAutoBaseOnProcBuilding, 480, 0x1)
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshActor.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18317);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -58,7 +58,7 @@ namespace UnrealScript
 			ZoneSlide_LeftRight = 1,
 			ZoneSlide_MAX = 2,
 		};
-		class TextureUVs
+		struct TextureUVs
 		{
 		public:
 			ADD_STRUCT(float, U, 0)
@@ -137,26 +137,26 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, InputKey, 76)
 		bool OnPreDrawZone(class MobileInputZone* Zone, class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnPreDrawZone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32378);
 			byte params[12] = { NULL };
-			*(class MobileInputZone**)&params[0] = Zone;
+			*(class MobileInputZone**)params = Zone;
 			*(class Canvas**)&params[4] = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void OnPostDrawZone(class MobileInputZone* Zone, class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnPostDrawZone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32471);
 			byte params[8] = { NULL };
-			*(class MobileInputZone**)&params[0] = Zone;
+			*(class MobileInputZone**)params = Zone;
 			*(class Canvas**)&params[4] = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool OnProcessSlide(class MobileInputZone* Zone, MobileInputZone::EZoneTouchEvent EventType, int SlideValue, Object::Vector2D ViewportSize)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnProcessSlide");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32473);
 			byte params[21] = { NULL };
-			*(class MobileInputZone**)&params[0] = Zone;
+			*(class MobileInputZone**)params = Zone;
 			*(MobileInputZone::EZoneTouchEvent*)&params[4] = EventType;
 			*(int*)&params[8] = SlideValue;
 			*(Object::Vector2D*)&params[12] = ViewportSize;
@@ -165,9 +165,9 @@ namespace UnrealScript
 		}
 		bool OnDoubleTapDelegate(class MobileInputZone* Zone, MobileInputZone::EZoneTouchEvent EventType, Object::Vector2D TouchLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnDoubleTapDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32475);
 			byte params[17] = { NULL };
-			*(class MobileInputZone**)&params[0] = Zone;
+			*(class MobileInputZone**)params = Zone;
 			*(MobileInputZone::EZoneTouchEvent*)&params[4] = EventType;
 			*(Object::Vector2D*)&params[8] = TouchLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -175,9 +175,9 @@ namespace UnrealScript
 		}
 		bool OnTapDelegate(class MobileInputZone* Zone, MobileInputZone::EZoneTouchEvent EventType, Object::Vector2D TouchLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnTapDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32477);
 			byte params[17] = { NULL };
-			*(class MobileInputZone**)&params[0] = Zone;
+			*(class MobileInputZone**)params = Zone;
 			*(MobileInputZone::EZoneTouchEvent*)&params[4] = EventType;
 			*(Object::Vector2D*)&params[8] = TouchLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -185,9 +185,9 @@ namespace UnrealScript
 		}
 		bool OnProcessInputDelegate(class MobileInputZone* Zone, float DeltaTime, int Handle, MobileInputZone::EZoneTouchEvent EventType, Object::Vector2D TouchLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.OnProcessInputDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32479);
 			byte params[25] = { NULL };
-			*(class MobileInputZone**)&params[0] = Zone;
+			*(class MobileInputZone**)params = Zone;
 			*(float*)&params[4] = DeltaTime;
 			*(int*)&params[8] = Handle;
 			*(MobileInputZone::EZoneTouchEvent*)&params[12] = EventType;
@@ -197,19 +197,19 @@ namespace UnrealScript
 		}
 		void ActivateZone()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.ActivateZone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32522);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DeactivateZone()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.DeactivateZone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32523);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddKismetEventHandler(class SeqEvent_MobileZoneBase* NewHandler)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileInputZone.AddKismetEventHandler");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32547);
 			byte params[4] = { NULL };
-			*(class SeqEvent_MobileZoneBase**)&params[0] = NewHandler;
+			*(class SeqEvent_MobileZoneBase**)params = NewHandler;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -53,16 +53,16 @@ namespace UnrealScript
 		ADD_BOOL(bEnablePostProcess, 88, 0x2)
 		void SetEnabled(bool bEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SceneCaptureComponent.SetEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24681);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnable;
+			*(bool*)params = bEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFrameRate(float NewFrameRate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SceneCaptureComponent.SetFrameRate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24701);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = NewFrameRate;
+			*(float*)params = NewFrameRate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

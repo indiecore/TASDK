@@ -25,36 +25,36 @@ namespace UnrealScript
 		ADD_STRUCT(float, StartScale, 500)
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedPickup.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47247);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPickupMesh(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* NewPickupMesh)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedPickup.SetPickupMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47248);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = NewPickupMesh;
+void**)params = NewPickupMesh;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPickupParticles(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* NewPickupParticles)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedPickup.SetPickupParticles");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47250);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = NewPickupParticles;
+void**)params = NewPickupParticles;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Landed(Object::Vector HitNormal, class Actor* FloorActor)
+		void Landed(Vector HitNormal, class Actor* FloorActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedPickup.Landed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47252);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = HitNormal;
+			*(Vector*)params = HitNormal;
 			*(class Actor**)&params[12] = FloorActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

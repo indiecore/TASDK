@@ -10,12 +10,12 @@ namespace UnrealScript
 	class OnlineTitleFileDownloadMcp : public MCPBase
 	{
 	public:
-		class TitleFileMcp : public TitleFile
+		struct TitleFileMcp : public TitleFile
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, HttpDownloader, 28)
 		};
-		class FileNameToURLMapping
+		struct FileNameToURLMapping
 		{
 		public:
 			ADD_STRUCT(ScriptName, UrlMapping, 8)
@@ -31,17 +31,17 @@ void*>, ReadTitleFileCompleteDelegates, 64)
 		ADD_STRUCT(int, DownloadCount, 88)
 		void OnReadTitleFileComplete(bool bWasSuccessful, ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineTitleFileDownloadMcp.OnReadTitleFileComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33846);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			*(ScriptString**)&params[4] = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ReadTitleFile(ScriptString* FileToRead)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineTitleFileDownloadMcp.ReadTitleFile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33862);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = FileToRead;
+			*(ScriptString**)params = FileToRead;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
@@ -49,29 +49,29 @@ void*>, ReadTitleFileCompleteDelegates, 64)
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadTitleFileCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineTitleFileDownloadMcp.AddReadTitleFileCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33865);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ReadTitleFileCompleteDelegate;
+void**)params = ReadTitleFileCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearReadTitleFileCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadTitleFileCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineTitleFileDownloadMcp.ClearReadTitleFileCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33867);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ReadTitleFileCompleteDelegate;
+void**)params = ReadTitleFileCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool GetTitleFileContents(ScriptString* Filename, ScriptArray<byte>& FileContents)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineTitleFileDownloadMcp.GetTitleFileContents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33870);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = Filename;
+			*(ScriptString**)params = Filename;
 			*(ScriptArray<byte>*)&params[12] = FileContents;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			FileContents = *(ScriptArray<byte>*)&params[12];
@@ -79,24 +79,24 @@ void**)&params[0] = ReadTitleFileCompleteDelegate;
 		}
 		OnlineSubsystem::EOnlineEnumerationReadState GetTitleFileState(ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineTitleFileDownloadMcp.GetTitleFileState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33875);
 			byte params[13] = { NULL };
-			*(ScriptString**)&params[0] = Filename;
+			*(ScriptString**)params = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(OnlineSubsystem::EOnlineEnumerationReadState*)&params[12];
 		}
 		bool ClearDownloadedFiles()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineTitleFileDownloadMcp.ClearDownloadedFiles");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33879);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool ClearDownloadedFile(ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineTitleFileDownloadMcp.ClearDownloadedFile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33881);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Filename;
+			*(ScriptString**)params = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}

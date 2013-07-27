@@ -27,7 +27,7 @@ namespace UnrealScript
 	class GFxProjectedUI : public UTGFxTweenableMoviePlayer
 	{
 	public:
-		class ItemData
+		struct ItemData
 		{
 		public:
 			ADD_STRUCT(byte, ItemFrame, 24)
@@ -38,7 +38,7 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<GFxProjectedUI::ItemData>, Items, 424)
 		ADD_STRUCT(ScriptString*, CancelString, 644)
 		ADD_STRUCT(ScriptString*, AcceptString, 632)
-		ADD_STRUCT(Object::Rotator, StartRotation, 620)
+		ADD_STRUCT(Rotator, StartRotation, 620)
 		ADD_OBJECT(ScriptClass, WeaponClass, 576)
 		ADD_STRUCT(float, leftThreshold, 572)
 		ADD_STRUCT(float, rightThreshold, 568)
@@ -83,189 +83,189 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, Root, 392)
 		bool Start(bool StartPaused)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.Start");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37640);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = StartPaused;
+			*(bool*)params = StartPaused;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void ConfigureInventory()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.ConfigureInventory");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37643);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddCaptureKeys()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.AddCaptureKeys");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37648);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartCloseAnimation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.StartCloseAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37649);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnCloseAnimComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnCloseAnimComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37650);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetupBG()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupBG");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37652);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetupBorder()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupBorder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37653);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetupArsenal()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupArsenal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37654);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetupBackpack()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupBackpack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37657);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetupInfo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37659);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PopulateBackpackFake()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.PopulateBackpackFake");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37660);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetupArsenalButtons()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupArsenalButtons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37662);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetupBackpackButtons()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetupBackpackButtons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37664);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SwitchWeapon(byte Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SwitchWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37666);
 			byte params[1] = { NULL };
-			params[0] = Index;
+			*params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFocusInSelection(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusInSelection");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37668);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFocusOutSelection(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusOutSelection");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37671);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnClickWeaponButton(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnClickWeaponButton");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37674);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFocusUpdateInfo(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusUpdateInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37677);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFocusArsenalTab(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusArsenalTab");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37680);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFocusBackpackTab(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnFocusBackpackTab");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37682);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnClickFakeItem(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.OnClickFakeItem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37684);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetInfo(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.SetInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37688);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopulateArsenal()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.PopulateArsenal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37691);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FakeUpdateEquippedWeapon(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.FakeUpdateEquippedWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37693);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateEquippedWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.UpdateEquippedWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37696);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ProcessTweenCallback(ScriptString* Callback, class GFxObject* TargetMC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.ProcessTweenCallback");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37699);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Callback;
+			*(ScriptString**)params = Callback;
 			*(class GFxObject**)&params[12] = TargetMC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TweenTurbines(bool Toggle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.TweenTurbines");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37702);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = Toggle;
+			*(bool*)params = Toggle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FloatSelectionUp(class GFxObject* ButtonIconMC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.FloatSelectionUp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37704);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = ButtonIconMC;
+			*(class GFxObject**)params = ButtonIconMC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FloatSelectionDown(class GFxObject* ButtonIconMC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.FloatSelectionDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37706);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = ButtonIconMC;
+			*(class GFxObject**)params = ButtonIconMC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdatePos()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.UpdatePos");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37708);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CreateItemData()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxProjectedUI.CreateItemData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37719);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

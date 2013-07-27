@@ -28,19 +28,19 @@ namespace UnrealScript
 	{
 	public:
 		static const auto MaxHistory = 16;
-		class scrollbackData
+		struct scrollbackData
 		{
 		public:
 			ADD_STRUCT(Object::Color, OverrideColor, 12)
 			ADD_STRUCT(ScriptString*, Text, 0)
 		};
-		class AutoCompleteCommand
+		struct AutoCompleteCommand
 		{
 		public:
 			ADD_STRUCT(ScriptString*, Desc, 12)
 			ADD_STRUCT(ScriptString*, Command, 0)
 		};
-		class AutoCompleteNode
+		struct AutoCompleteNode
 		{
 		public:
 			ADD_STRUCT(ScriptArray<int>, AutoCompleteListIndices, 4)
@@ -76,77 +76,77 @@ namespace UnrealScript
 		ADD_OBJECT(LocalPlayer, ConsoleTargetPlayer, 108)
 		void Initialized()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.Initialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12982);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetInputText(ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.SetInputText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12983);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetCursorPos(int Position)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.SetCursorPos");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12985);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Position;
+			*(int*)params = Position;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PurgeCommandFromHistory(ScriptString* Command)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.PurgeCommandFromHistory");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12987);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)params = Command;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConsoleCommand(ScriptString* Command)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.ConsoleCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12992);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)params = Command;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearOutput()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.ClearOutput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12996);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OutputTextLine(ScriptString* Text, Object::Color OverrideColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.OutputTextLine");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12997);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			*(Object::Color*)&params[12] = OverrideColor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OutputText(ScriptString* Text, Object::Color OverrideColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.OutputText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13001);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			*(Object::Color*)&params[12] = OverrideColor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartTyping(ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.StartTyping");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13007);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostRender_Console(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.PostRender_Console");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13009);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool InputKey(int ControllerId, ScriptName Key, Object::EInputEvent Event, float AmountDepressed, bool bGamepad)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.InputKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13011);
 			byte params[25] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptName*)&params[4] = Key;
 			*(Object::EInputEvent*)&params[12] = Event;
 			*(float*)&params[16] = AmountDepressed;
@@ -156,44 +156,44 @@ namespace UnrealScript
 		}
 		bool InputChar(int ControllerId, ScriptString* Unicode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.InputChar");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13018);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptString**)&params[4] = Unicode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void FlushPlayerInput()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.FlushPlayerInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13022);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool ProcessControlKey(ScriptName Key, Object::EInputEvent Event)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.ProcessControlKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13024);
 			byte params[13] = { NULL };
-			*(ScriptName*)&params[0] = Key;
+			*(ScriptName*)params = Key;
 			*(Object::EInputEvent*)&params[8] = Event;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void AppendInputText(ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.AppendInputText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13028);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BuildRuntimeAutoCompleteList(bool bForce)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.BuildRuntimeAutoCompleteList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13031);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bForce;
+			*(bool*)params = bForce;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateCompleteIndices()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Console.UpdateCompleteIndices");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13033);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

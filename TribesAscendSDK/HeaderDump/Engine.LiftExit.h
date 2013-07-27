@@ -25,24 +25,24 @@ namespace UnrealScript
 		ADD_OBJECT(LiftCenter, MyLiftCenter, 692)
 		bool CanBeReachedFromLiftBy(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftExit.CanBeReachedFromLiftBy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19419);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void WaitForLift(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftExit.WaitForLift");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19427);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SuggestMovePreparation(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftExit.SuggestMovePreparation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19429);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

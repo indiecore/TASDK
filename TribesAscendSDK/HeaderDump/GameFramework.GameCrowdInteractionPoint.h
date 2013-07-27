@@ -19,9 +19,9 @@ namespace UnrealScript
 		ADD_BOOL(bIsEnabled, 476, 0x1)
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdInteractionPoint.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30316);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

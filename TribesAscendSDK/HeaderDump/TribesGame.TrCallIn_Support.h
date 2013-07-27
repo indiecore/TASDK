@@ -16,19 +16,19 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(int, MaxDeployedLimit, 548)
 		ADD_OBJECT(ScriptClass, ItemInDeliveryPod, 544)
-		bool FireCompletedCallIn(int CallInOffs, Object::Vector TargetLocation, Object::Vector TargetNormal)
+		bool FireCompletedCallIn(int CallInOffs, Vector TargetLocation, Vector TargetNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_Support.FireCompletedCallIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74115);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = CallInOffs;
-			*(Object::Vector*)&params[4] = TargetLocation;
-			*(Object::Vector*)&params[16] = TargetNormal;
+			*(int*)params = CallInOffs;
+			*(Vector*)&params[4] = TargetLocation;
+			*(Vector*)&params[16] = TargetNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[28];
 		}
 		void DestroyOverLimit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_Support.DestroyOverLimit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74121);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

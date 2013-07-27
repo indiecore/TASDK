@@ -24,53 +24,53 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fInTakeHitFlashTimeLength, 1524)
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_ForceField.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80060);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnHealthChanged(bool wasDamage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_ForceField.OnHealthChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80066);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = wasDamage;
+			*(bool*)params = wasDamage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayDamageHealthEffects(int DamageAmount, int HitBoneIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_ForceField.PlayDamageHealthEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80068);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = DamageAmount;
+			*(int*)params = DamageAmount;
 			*(int*)&params[4] = HitBoneIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayHitOtherEffects(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_ForceField.PlayHitOtherEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80071);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_ForceField.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80073);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Texture2D* GetMarker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_ForceField.GetMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80076);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Texture2D**)&params[0];
+			return *(class Texture2D**)params;
 		}
 	};
 }

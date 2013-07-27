@@ -36,75 +36,75 @@ namespace UnrealScript
 		ADD_STRUCT(int, MinBounds, 356)
 		void SpecialAction(class GFxTrAction* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.SpecialAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60763);
 			byte params[4] = { NULL };
-			*(class GFxTrAction**)&params[0] = Action;
+			*(class GFxTrAction**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FillData(class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.FillData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60766);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = DataList;
+			*(class GFxObject**)params = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* FillOption(int ActionIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.FillOption");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60768);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GFxObject**)&params[4];
 		}
 		void SetSubTitle(float val, class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.SetSubTitle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60775);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = val;
+			*(float*)params = val;
 			*(class GFxObject**)&params[4] = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopupData(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.PopupData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60779);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopupComplete(int Action, ScriptString* TextInput)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.PopupComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60784);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Action;
+			*(int*)params = Action;
 			*(ScriptString**)&params[4] = TextInput;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowBoundsError(int PropId, int PropType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.ShowBoundsError");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60788);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PropId;
+			*(int*)params = PropId;
 			*(int*)&params[4] = PropType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CheckDescription(class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.CheckDescription");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60791);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = DataList;
+			*(class GFxObject**)params = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* FillDescription(class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.FillDescription");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60795);
 			byte params[8] = { NULL };
-			*(class GFxObject**)&params[0] = DataList;
+			*(class GFxObject**)params = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GFxObject**)&params[4];
 		}
 		void ShowModel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_ServerEditCallin.ShowModel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(60799);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

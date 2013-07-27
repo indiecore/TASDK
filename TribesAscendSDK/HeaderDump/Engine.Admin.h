@@ -7,78 +7,78 @@ namespace UnrealScript
 	public:
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9627);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Admin(ScriptString* CommandLine)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.Admin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9628);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = CommandLine;
+			*(ScriptString**)params = CommandLine;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerAdmin(ScriptString* CommandLine)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.ServerAdmin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9630);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = CommandLine;
+			*(ScriptString**)params = CommandLine;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KickBan(ScriptString* S)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.KickBan");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9633);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerKickBan(ScriptString* S)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.ServerKickBan");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9635);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Kick(ScriptString* S)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.Kick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9637);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerKick(ScriptString* S)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.ServerKick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9639);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayerList()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.PlayerList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9641);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RestartMap()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.RestartMap");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9643);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ServerRestartMap()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.ServerRestartMap");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9644);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Switch(ScriptString* URL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.Switch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9645);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerSwitch(ScriptString* URL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Admin.ServerSwitch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9647);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

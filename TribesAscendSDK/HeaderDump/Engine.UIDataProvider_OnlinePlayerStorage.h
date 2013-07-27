@@ -26,7 +26,7 @@ namespace UnrealScript
 	class UIDataProvider_OnlinePlayerStorage : public UIDataProvider_OnlinePlayerDataBase
 	{
 	public:
-		class PlayerStorageArrayProvider
+		struct PlayerStorageArrayProvider
 		{
 		public:
 			ADD_OBJECT(UIDataProvider_OnlinePlayerStorageArray, Provider, 12)
@@ -42,11 +42,11 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* PlayerInterface, byte LocalUserNum, int DeviceID, class OnlinePlayerStorage* PlayerStorage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.ReadData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28260);
 			byte params[21] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = PlayerInterface;
+void**)params = PlayerInterface;
 			params[8] = LocalUserNum;
 			*(int*)&params[12] = DeviceID;
 			*(class OnlinePlayerStorage**)&params[16] = PlayerStorage;
@@ -57,11 +57,11 @@ void**)&params[0] = PlayerInterface;
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* PlayerInterface, byte LocalUserNum, int DeviceID, class OnlinePlayerStorage* PlayerStorage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.WriteData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28266);
 			byte params[21] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = PlayerInterface;
+void**)params = PlayerInterface;
 			params[8] = LocalUserNum;
 			*(int*)&params[12] = DeviceID;
 			*(class OnlinePlayerStorage**)&params[16] = PlayerStorage;
@@ -72,11 +72,11 @@ void**)&params[0] = PlayerInterface;
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* PlayerInterface, byte LocalUserNum, class OnlinePlayerStorage* PlayerStorage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.GetData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28272);
 			byte params[17] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = PlayerInterface;
+void**)params = PlayerInterface;
 			params[8] = LocalUserNum;
 			*(class OnlinePlayerStorage**)&params[12] = PlayerStorage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -86,11 +86,11 @@ void**)&params[0] = PlayerInterface;
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* PlayerInterface, byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.AddReadCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28278);
 			byte params[9] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = PlayerInterface;
+void**)params = PlayerInterface;
 			params[8] = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -98,71 +98,71 @@ void**)&params[0] = PlayerInterface;
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* PlayerInterface, byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.ClearReadCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28281);
 			byte params[9] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = PlayerInterface;
+void**)params = PlayerInterface;
 			params[8] = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnRegister(class LocalPlayer* InPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.OnRegister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28284);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = InPlayer;
+			*(class LocalPlayer**)params = InPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUnregister()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.OnUnregister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28288);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnReadStorageComplete(byte LocalUserNum, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.OnReadStorageComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28291);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(bool*)&params[4] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnLoginChange(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.OnLoginChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28296);
 			byte params[1] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RefreshStorageData()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.RefreshStorageData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28302);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnDeviceSelectionComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.OnDeviceSelectionComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28305);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ArrayProviderPropertyChanged(class UIDataProvider* SourceProvider, ScriptName PropTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.ArrayProviderPropertyChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28309);
 			byte params[12] = { NULL };
-			*(class UIDataProvider**)&params[0] = SourceProvider;
+			*(class UIDataProvider**)params = SourceProvider;
 			*(ScriptName*)&params[4] = PropTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnSettingValueUpdated(ScriptName SettingName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.OnSettingValueUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28314);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = SettingName;
+			*(ScriptName*)params = SettingName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnStorageDeviceChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerStorage.OnStorageDeviceChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28318);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

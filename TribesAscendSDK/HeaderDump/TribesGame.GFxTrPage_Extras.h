@@ -31,33 +31,33 @@ namespace UnrealScript
 		ADD_STRUCT(int, ClaimPromotionAction, 356)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Extras.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58781);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowModel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Extras.ShowModel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58782);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpecialAction(class GFxTrAction* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Extras.SpecialAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58783);
 			byte params[4] = { NULL };
-			*(class GFxTrAction**)&params[0] = Action;
+			*(class GFxTrAction**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopupData(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Extras.PopupData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58785);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopupComplete(int Action, ScriptString* TextInput)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrPage_Extras.PopupComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58788);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Action;
+			*(int*)params = Action;
 			*(ScriptString**)&params[4] = TextInput;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

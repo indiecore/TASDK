@@ -12,9 +12,9 @@ namespace UnrealScript
 		ADD_STRUCT(int, FakePlatform, 196)
 		int GetStringWithFieldName(ScriptString* FieldName, ScriptString*& MappedString)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_StringAliasMap.GetStringWithFieldName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35688);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = FieldName;
+			*(ScriptString**)params = FieldName;
 			*(ScriptString**)&params[12] = MappedString;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			MappedString = *(ScriptString**)&params[12];

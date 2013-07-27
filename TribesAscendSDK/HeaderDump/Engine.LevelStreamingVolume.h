@@ -30,7 +30,7 @@ namespace UnrealScript
 			SVB_LoadingNotVisible = 4,
 			SVB_MAX = 5,
 		};
-		class CheckpointRecord
+		struct CheckpointRecord
 		{
 		public:
 			ADD_BOOL(bDisabled, 0, 0x1)
@@ -44,26 +44,26 @@ namespace UnrealScript
 		ADD_BOOL(bEditorPreVisOnly, 532, 0x1)
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LevelStreamingVolume.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19395);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateCheckpointRecord(LevelStreamingVolume::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LevelStreamingVolume.CreateCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19397);
 			byte params[4] = { NULL };
-			*(LevelStreamingVolume::CheckpointRecord*)&params[0] = Record;
+			*(LevelStreamingVolume::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(LevelStreamingVolume::CheckpointRecord*)&params[0];
+			Record = *(LevelStreamingVolume::CheckpointRecord*)params;
 		}
 		void ApplyCheckpointRecord(LevelStreamingVolume::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LevelStreamingVolume.ApplyCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19399);
 			byte params[4] = { NULL };
-			*(LevelStreamingVolume::CheckpointRecord*)&params[0] = Record;
+			*(LevelStreamingVolume::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(LevelStreamingVolume::CheckpointRecord*)&params[0];
+			Record = *(LevelStreamingVolume::CheckpointRecord*)params;
 		}
 	};
 }

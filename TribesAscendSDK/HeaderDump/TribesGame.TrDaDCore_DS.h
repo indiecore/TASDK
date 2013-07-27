@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCore_DS.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79639);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

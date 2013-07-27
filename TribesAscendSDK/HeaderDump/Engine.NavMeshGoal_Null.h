@@ -14,21 +14,21 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, PartialGoal, 80)
 		bool GoUntilBust(class NavigationHandle* NavHandle, int InMaxPathVisits)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_Null.GoUntilBust");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20975);
 			byte params[12] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
+			*(class NavigationHandle**)params = NavHandle;
 			*(int*)&params[4] = InMaxPathVisits;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void RecycleNative()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_Null.RecycleNative");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20980);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_Null.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20981);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -26,7 +26,7 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Vector2D, Aim, 332)
 		void CheckAnimsUpToDate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequenceBlendByAim.CheckAnimsUpToDate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11050);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -29,29 +29,29 @@ namespace UnrealScript
 		ADD_OBJECT(TrCTFBase_BloodEagle, BloodEagleFlagStands, 1468)
 		void ApplyServerSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCTFBlitz.ApplyServerSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90692);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RegisterFlagBase(class TrCTFBase* FlagBase)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCTFBlitz.RegisterFlagBase");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90695);
 			byte params[4] = { NULL };
-			*(class TrCTFBase**)&params[0] = FlagBase;
+			*(class TrCTFBase**)params = FlagBase;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ScoreFlag(class Controller* Scorer, class TrFlagBase* theFlag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCTFBlitz.ScoreFlag");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90697);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = Scorer;
+			*(class Controller**)params = Scorer;
 			*(class TrFlagBase**)&params[4] = theFlag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RotateFlag(class TrFlagBase* theFlag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrCTFBlitz.RotateFlag");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90700);
 			byte params[4] = { NULL };
-			*(class TrFlagBase**)&params[0] = theFlag;
+			*(class TrFlagBase**)params = theFlag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -9,7 +9,7 @@ namespace UnrealScript
 	class AnimNodeBlendMultiBone : public AnimNodeBlendBase
 	{
 	public:
-		class ChildBoneBlendInfo
+		struct ChildBoneBlendInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<float>, TargetPerBoneWeight, 0)
@@ -23,9 +23,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<byte>, SourceRequiredBones, 256)
 		void SetTargetStartBone(int TargetIdx, ScriptName StartBoneName, float PerBoneIncrease)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeBlendMultiBone.SetTargetStartBone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10875);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = TargetIdx;
+			*(int*)params = TargetIdx;
 			*(ScriptName*)&params[4] = StartBoneName;
 			*(float*)&params[12] = PerBoneIncrease;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

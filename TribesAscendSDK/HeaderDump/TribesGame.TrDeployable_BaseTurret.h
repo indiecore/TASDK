@@ -13,53 +13,53 @@ namespace UnrealScript
 	public:
 		void ApplyServerSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BaseTurret.ApplyServerSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72045);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool ReceivesPowerFromGenerator()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BaseTurret.ReceivesPowerFromGenerator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72048);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool ShouldShowHelpText(TrHelpTextManager::EHelpTextType HelpTextType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BaseTurret.ShouldShowHelpText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72050);
 			byte params[5] = { NULL };
-			*(TrHelpTextManager::EHelpTextType*)&params[0] = HelpTextType;
+			*(TrHelpTextManager::EHelpTextType*)params = HelpTextType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void SpawnHelpTextCollisionProxy(TrHelpTextManager::EHelpTextType HelpTextType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BaseTurret.SpawnHelpTextCollisionProxy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72059);
 			byte params[1] = { NULL };
-			*(TrHelpTextManager::EHelpTextType*)&params[0] = HelpTextType;
+			*(TrHelpTextManager::EHelpTextType*)params = HelpTextType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Texture2D* GetMarker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BaseTurret.GetMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72062);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Texture2D**)&params[0];
+			return *(class Texture2D**)params;
 		}
 		void GiveDestroyAccolade(class TrPlayerController* TrPC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BaseTurret.GiveDestroyAccolade");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72074);
 			byte params[4] = { NULL };
-			*(class TrPlayerController**)&params[0] = TrPC;
+			*(class TrPlayerController**)params = TrPC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BaseTurret.TakeDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72076);
 			byte params[68] = { NULL };
-			*(int*)&params[0] = DamageAmount;
+			*(int*)params = DamageAmount;
 			*(class Controller**)&params[4] = EventInstigator;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = Momentum;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = Momentum;
 			*(ScriptClass**)&params[32] = DamageType;
 			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
 			*(class Actor**)&params[64] = DamageCauser;
@@ -67,10 +67,10 @@ namespace UnrealScript
 		}
 		bool RequiresLOSForRepairDeployable()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_BaseTurret.RequiresLOSForRepairDeployable");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72088);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

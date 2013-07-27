@@ -29,282 +29,282 @@ namespace UnrealScript
 	public:
 		static const float DEPLOYMODE_GROUND_DELTA_CHECK_DIST;
 		static const float DEPLOYMODE_MINIMUM_RADIUS_CHECK_DIST;
-		ADD_STRUCT(Object::Rotator, m_rDesiredPlacementRotation, 2212)
-		ADD_STRUCT(Object::Vector, m_vDesiredPlacementLocation, 2200)
+		ADD_STRUCT(Rotator, m_rDesiredPlacementRotation, 2212)
+		ADD_STRUCT(Vector, m_vDesiredPlacementLocation, 2200)
 		ADD_BOOL(m_bIgnoreCollisionForPlacement, 2196, 0x1)
 		ADD_STRUCT(float, m_fOutsideCheckDistance, 2192)
 		ADD_STRUCT(float, m_fOtherDeployableProximityCheck, 2188)
-		ADD_STRUCT(Object::Vector, m_vDeployVolumePlacementExtent, 2176)
-		ADD_STRUCT(Object::Vector, m_vPlacementExtent, 2164)
+		ADD_STRUCT(Vector, m_vDeployVolumePlacementExtent, 2176)
+		ADD_STRUCT(Vector, m_vPlacementExtent, 2164)
 		ADD_STRUCT(float, m_fPlacementScale, 2160)
 		ADD_STRUCT(int, m_nPerPlayerMaxDeployed, 2156)
 		ADD_OBJECT(ScriptClass, c_DeployableHologramClass, 2152)
 		ADD_OBJECT(TrDeployableHologram, c_DeployableHologram, 2148)
 		int GetAmmoCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.GetAmmoCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(76442);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		bool CanAttemptDeploy()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.CanAttemptDeploy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(76468);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void UpdateDeployModeStatus()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.UpdateDeployModeStatus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80741);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TickInHandWeapon(float DeltaSeconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.TickInHandWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80742);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaSeconds;
+			*(float*)params = DeltaSeconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class TrDeployable* Deploy()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.Deploy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80744);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class TrDeployable**)&params[0];
+			return *(class TrDeployable**)params;
 		}
-		bool IsValidDeployTerrain(Object::Vector& OutLocation, Object::Rotator& OutRotation, bool VerificationCheck)
+		bool IsValidDeployTerrain(Vector& OutLocation, Rotator& OutRotation, bool VerificationCheck)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.IsValidDeployTerrain");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80746);
 			byte params[32] = { NULL };
-			*(Object::Vector*)&params[0] = OutLocation;
-			*(Object::Rotator*)&params[12] = OutRotation;
+			*(Vector*)params = OutLocation;
+			*(Rotator*)&params[12] = OutRotation;
 			*(bool*)&params[24] = VerificationCheck;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutLocation = *(Object::Vector*)&params[0];
-			OutRotation = *(Object::Rotator*)&params[12];
+			OutLocation = *(Vector*)params;
+			OutRotation = *(Rotator*)&params[12];
 			return *(bool*)&params[28];
 		}
-		bool IsValidDeployVolume(Object::Vector& OutLocation, Object::Rotator& OutRotation, bool VerificationCheck)
+		bool IsValidDeployVolume(Vector& OutLocation, Rotator& OutRotation, bool VerificationCheck)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.IsValidDeployVolume");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80751);
 			byte params[32] = { NULL };
-			*(Object::Vector*)&params[0] = OutLocation;
-			*(Object::Rotator*)&params[12] = OutRotation;
+			*(Vector*)params = OutLocation;
+			*(Rotator*)&params[12] = OutRotation;
 			*(bool*)&params[24] = VerificationCheck;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutLocation = *(Object::Vector*)&params[0];
-			OutRotation = *(Object::Rotator*)&params[12];
+			OutLocation = *(Vector*)params;
+			OutRotation = *(Rotator*)&params[12];
 			return *(bool*)&params[28];
 		}
-		bool IsValidDeployProximity(Object::Vector DeployLocation, bool VerificationCheck)
+		bool IsValidDeployProximity(Vector DeployLocation, bool VerificationCheck)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.IsValidDeployProximity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80756);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = DeployLocation;
+			*(Vector*)params = DeployLocation;
 			*(bool*)&params[12] = VerificationCheck;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
-		bool IsValidOutsideCheck(Object::Vector DeployLocation, bool VerificationCheck)
+		bool IsValidOutsideCheck(Vector DeployLocation, bool VerificationCheck)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.IsValidOutsideCheck");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80760);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = DeployLocation;
+			*(Vector*)params = DeployLocation;
 			*(bool*)&params[12] = VerificationCheck;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80764);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateReplicatedCarriedAmmo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.UpdateReplicatedCarriedAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80766);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnSwitchToWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.OnSwitchToWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80767);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnSwitchAwayFromWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.OnSwitchAwayFromWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80768);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CheckInHandWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.CheckInHandWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80769);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80770);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HolderEnteredVehicle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.HolderEnteredVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80771);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ResumeInhandWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.ResumeInhandWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80772);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool TryPutDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.TryPutDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80774);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		int GetMaxDeployedLimit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.GetMaxDeployedLimit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80777);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		bool IsDeployableOldest(class TrDeployable* OtherDep)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.IsDeployableOldest");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80782);
 			byte params[8] = { NULL };
-			*(class TrDeployable**)&params[0] = OtherDep;
+			*(class TrDeployable**)params = OtherDep;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool BelowMaxCountLimit(bool bDestroyOldest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.BelowMaxCountLimit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80788);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bDestroyOldest;
+			*(bool*)params = bDestroyOldest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void ConsumeAmmo(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.ConsumeAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80797);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int AddCarriedAmmo(int Amount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.AddCarriedAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80799);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Amount;
+			*(int*)params = Amount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int AddAmmo(int Amount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.AddAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80802);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Amount;
+			*(int*)params = Amount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		void EnterDeployMode()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.EnterDeployMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80805);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ExitDeployMode()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.ExitDeployMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80807);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AttachWeaponTo(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* MeshCpnt, ScriptName SocketName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.AttachWeaponTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80809);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = MeshCpnt;
+void**)params = MeshCpnt;
 			*(ScriptName*)&params[4] = SocketName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EndZoom(class UTPlayerController* PC, bool bReturningTo3P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.EndZoom");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80812);
 			byte params[8] = { NULL };
-			*(class UTPlayerController**)&params[0] = PC;
+			*(class UTPlayerController**)params = PC;
 			*(bool*)&params[4] = bReturningTo3P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ChangeVisibility(bool bIsVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.ChangeVisibility");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80816);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bIsVisible;
+			*(bool*)params = bIsVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EnterDeployModeDisplay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.EnterDeployModeDisplay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80818);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ExitDeployModeDisplay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.ExitDeployModeDisplay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80819);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartFire(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.StartFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80825);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool IsValidDesiredDeploy(Object::Vector DesiredPlacement, Object::Rotator DesiredRotation)
+		bool IsValidDesiredDeploy(Vector DesiredPlacement, Rotator DesiredRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.IsValidDesiredDeploy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80827);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = DesiredPlacement;
-			*(Object::Rotator*)&params[12] = DesiredRotation;
+			*(Vector*)params = DesiredPlacement;
+			*(Rotator*)&params[12] = DesiredRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
-		void ServerRequestDeploy(Object::Vector DesiredPlacement, Object::Rotator DesiredRotation)
+		void ServerRequestDeploy(Vector DesiredPlacement, Rotator DesiredRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.ServerRequestDeploy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80831);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = DesiredPlacement;
-			*(Object::Rotator*)&params[12] = DesiredRotation;
+			*(Vector*)params = DesiredPlacement;
+			*(Rotator*)&params[12] = DesiredRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CustomFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.CustomFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80836);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CanAutoDeviceFireNow()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.CanAutoDeviceFireNow");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80837);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool HasAnyAmmo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.HasAnyAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80839);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool HasAmmo(byte FireModeNum, int Amount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Deployable.HasAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80841);
 			byte params[9] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			*(int*)&params[4] = Amount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];

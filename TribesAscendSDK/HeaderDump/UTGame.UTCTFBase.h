@@ -34,30 +34,30 @@ namespace UnrealScript
 		ADD_OBJECT(UTCarriedObject, myFlag, 1032)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44504);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class Actor* GetBestViewTarget()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.GetBestViewTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44506);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Actor**)&params[0];
+			return *(class Actor**)params;
 		}
 		int GetLocationMessageIndex(class UTBot* B, class Pawn* StatusPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.GetLocationMessageIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44508);
 			byte params[12] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			*(class Pawn**)&params[4] = StatusPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		class SoundNodeWave* GetLocationSpeechFor(class PlayerController* PC, int LocationSpeechOffset, int MessageIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.GetLocationSpeechFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44514);
 			byte params[16] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(int*)&params[4] = LocationSpeechOffset;
 			*(int*)&params[8] = MessageIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -65,36 +65,36 @@ namespace UnrealScript
 		}
 		void ObjectiveChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.ObjectiveChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44519);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class UTCarriedObject* GetFlag()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.GetFlag");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44521);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class UTCarriedObject**)&params[0];
+			return *(class UTCarriedObject**)params;
 		}
 		void SetAlarm(bool bNowOn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.SetAlarm");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44523);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNowOn;
+			*(bool*)params = bNowOn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44525);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsActive()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFBase.IsActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44527);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

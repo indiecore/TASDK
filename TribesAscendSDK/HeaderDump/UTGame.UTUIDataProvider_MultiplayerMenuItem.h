@@ -23,10 +23,10 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, Description, 152)
 		bool ShouldBeFiltered()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTUIDataProvider_MultiplayerMenuItem.ShouldBeFiltered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49603);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

@@ -34,19 +34,19 @@ void*>, SplineMeshComps, 564)
 		ADD_BOOL(bAcceptsLights, 616, 0x2)
 		ADD_BOOL(bSmoothInterpRollAndScale, 616, 0x1)
 		ADD_STRUCT(Object::Vector2D, Offset, 608)
-		ADD_STRUCT(Object::Vector, WorldXDir, 596)
+		ADD_STRUCT(Vector, WorldXDir, 596)
 		ADD_STRUCT(float, Roll, 592)
 		ADD_OBJECT(StaticMesh, DeformMesh, 576)
 		ADD_STRUCT(float, ScaleY, 560)
 		ADD_STRUCT(float, ScaleX, 556)
 		void ClearLoftMesh()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineLoftActor.ClearLoftMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27174);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateSplineParams()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineLoftActor.UpdateSplineParams");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27175);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

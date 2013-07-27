@@ -17,34 +17,34 @@ namespace UnrealScript
 		ADD_OBJECT(UTVehicle, HoldVehicle, 740)
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47992);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class Actor* GetMoveTarget()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.GetMoveTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47993);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Actor**)&params[0];
+			return *(class Actor**)params;
 		}
 		void FreePoint()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.FreePoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47995);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class NavigationPoint* SpecifyEndAnchor(class Pawn* RouteFinder)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.SpecifyEndAnchor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47996);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = RouteFinder;
+			*(class Pawn**)params = RouteFinder;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class NavigationPoint**)&params[4];
 		}
 		void NotifyAnchorFindingResult(class NavigationPoint* EndAnchor, class Pawn* RouteFinder)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHoldSpot.NotifyAnchorFindingResult");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47999);
 			byte params[8] = { NULL };
-			*(class NavigationPoint**)&params[0] = EndAnchor;
+			*(class NavigationPoint**)params = EndAnchor;
 			*(class Pawn**)&params[4] = RouteFinder;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

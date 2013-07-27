@@ -24,7 +24,7 @@ namespace UnrealScript
 		ADD_BOOL(bLastPawnDriving, 296, 0x1)
 		void UpdateVehicleState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendByVehicle.UpdateVehicleState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34552);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

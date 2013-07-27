@@ -20,9 +20,9 @@ namespace UnrealScript
 		ADD_BOOL(bNeedsUpdate, 276, 0x1)
 		void Render(class Canvas* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ScriptedTexture.Render");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25527);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = C;
+			*(class Canvas**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

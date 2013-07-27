@@ -29,9 +29,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, HoverHeight, 308)
 		void SetVehicleControls(bool bInvert)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleSimChopper.SetVehicleControls");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(114831);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bInvert;
+			*(bool*)params = bInvert;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -26,9 +26,9 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementProvider, 112)
 		void InitializeProvider(bool bIsEditor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIResourceDataProvider.InitializeProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22607);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bIsEditor;
+			*(bool*)params = bIsEditor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

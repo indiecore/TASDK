@@ -32,12 +32,12 @@ namespace UnrealScript
 	class UDKBot : public AIController
 	{
 	public:
-		class EnemyPosition
+		struct EnemyPosition
 		{
 		public:
 			ADD_STRUCT(float, Time, 24)
-			ADD_STRUCT(Object::Vector, Velocity, 12)
-			ADD_STRUCT(Object::Vector, Position, 0)
+			ADD_STRUCT(Vector, Velocity, 12)
+			ADD_STRUCT(Vector, Position, 0)
 		};
 		ADD_STRUCT(ScriptArray<UDKBot::EnemyPosition>, SavedPositions, 960)
 		ADD_STRUCT(float, MultiJumpZ, 1120)
@@ -52,21 +52,21 @@ namespace UnrealScript
 		ADD_STRUCT(float, LastIterativeCheck, 1080)
 		ADD_OBJECT(Pawn, BlockedAimTarget, 1076)
 		ADD_OBJECT(NavigationPoint, SquadRouteGoal, 1072)
-		ADD_STRUCT(Object::Vector, TrackedVelocity, 1060)
+		ADD_STRUCT(Vector, TrackedVelocity, 1060)
 		ADD_STRUCT(float, BaseTrackingReactionTime, 1056)
 		ADD_STRUCT(float, TrackingReactionTime, 1052)
 		ADD_STRUCT(float, LastSeenTime, 1048)
-		ADD_STRUCT(Object::Vector, LastSeeingPos, 1036)
-		ADD_STRUCT(Object::Vector, LastSeenPos, 1024)
+		ADD_STRUCT(Vector, LastSeeingPos, 1036)
+		ADD_STRUCT(Vector, LastSeenPos, 1024)
 		ADD_STRUCT(float, MonitorMaxDistSq, 1020)
 		ADD_OBJECT(Pawn, MonitoredPawn, 1016)
-		ADD_STRUCT(Object::Vector, MonitorStartLoc, 1004)
+		ADD_STRUCT(Vector, MonitorStartLoc, 1004)
 		ADD_OBJECT(Projectile, WarningProjectile, 1000)
 		ADD_STRUCT(float, WarningDelay, 996)
 		ADD_STRUCT(float, RespawnPredictionTime, 992)
 		ADD_STRUCT(float, HearingThreshold, 988)
 		ADD_STRUCT(int, AcquisitionYawRate, 984)
-		ADD_STRUCT(Object::Vector, ImpactVelocity, 972)
+		ADD_STRUCT(Vector, ImpactVelocity, 972)
 		ADD_OBJECT(Pawn, CurrentlyTrackedEnemy, 956)
 		ADD_OBJECT(Vehicle, LastBlockingVehicle, 952)
 		ADD_OBJECT(Pawn, VisibleEnemy, 948)
@@ -91,99 +91,99 @@ namespace UnrealScript
 		ADD_OBJECT(UDKSquadAI, Squad, 924)
 		class Actor* FaceActor(float StrafingModifier)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.FaceActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34696);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = StrafingModifier;
+			*(float*)params = StrafingModifier;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[4];
 		}
 		void ExecuteWhatToDoNext()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.ExecuteWhatToDoNext");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34699);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ReceiveRunOverWarning(class UDKVehicle* V, float projSpeed, Object::Vector VehicleDir)
+		void ReceiveRunOverWarning(class UDKVehicle* V, float projSpeed, Vector VehicleDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.ReceiveRunOverWarning");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34700);
 			byte params[20] = { NULL };
-			*(class UDKVehicle**)&params[0] = V;
+			*(class UDKVehicle**)params = V;
 			*(float*)&params[4] = projSpeed;
-			*(Object::Vector*)&params[8] = VehicleDir;
+			*(Vector*)&params[8] = VehicleDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void WaitToSeeEnemy()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.WaitToSeeEnemy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34704);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LatentWhatToDoNext()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.LatentWhatToDoNext");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34705);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CanMakePathTo(class Actor* A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.CanMakePathTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34706);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = A;
+			*(class Actor**)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		class Actor* FindBestInventoryPath(float& MinWeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.FindBestInventoryPath");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34709);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = MinWeight;
+			*(float*)params = MinWeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			MinWeight = *(float*)&params[0];
+			MinWeight = *(float*)params;
 			return *(class Actor**)&params[4];
 		}
 		class Actor* FindPathToSquadRoute(bool bWeightDetours)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.FindPathToSquadRoute");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34712);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bWeightDetours;
+			*(bool*)params = bWeightDetours;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[4];
 		}
 		void BuildSquadRoute()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.BuildSquadRoute");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34715);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class Actor* FindBestSuperPickup(float MaxDist)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.FindBestSuperPickup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34716);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = MaxDist;
+			*(float*)params = MaxDist;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[4];
 		}
 		void WhatToDoNext()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.WhatToDoNext");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34719);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void MonitoredPawnAlert()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.MonitoredPawnAlert");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34720);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TimeDJReset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.TimeDJReset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34721);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void MayDodgeToMoveTarget()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.MayDodgeToMoveTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34722);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool SpecialJumpCost(float RequiredJumpZ, float& Cost)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.SpecialJumpCost");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34723);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = RequiredJumpZ;
+			*(float*)params = RequiredJumpZ;
 			*(float*)&params[4] = Cost;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Cost = *(float*)&params[4];
@@ -191,34 +191,34 @@ namespace UnrealScript
 		}
 		float SuperDesireability(class PickupFactory* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.SuperDesireability");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34727);
 			byte params[8] = { NULL };
-			*(class PickupFactory**)&params[0] = P;
+			*(class PickupFactory**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float AdjustAimError(float TargetDist, bool bInstantProj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.AdjustAimError");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34730);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = TargetDist;
+			*(float*)params = TargetDist;
 			*(bool*)&params[4] = bInstantProj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		void MissedDodge()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.MissedDodge");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34734);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DelayedWarning()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.DelayedWarning");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34735);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DelayedLeaveVehicle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKBot.DelayedLeaveVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34736);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

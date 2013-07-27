@@ -14,11 +14,11 @@ namespace UnrealScript
 	class InterpTrackInstVectorMaterialParam : public InterpTrackInst
 	{
 	public:
-		class VectorMaterialParamMICData
+		struct VectorMaterialParamMICData
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class MaterialInstanceConstant*>, MICs, 0)
-			ADD_STRUCT(ScriptArray<Object::Vector>, MICResetVectors, 12)
+			ADD_STRUCT(ScriptArray<Vector>, MICResetVectors, 12)
 		};
 		ADD_STRUCT(ScriptArray<InterpTrackInstVectorMaterialParam::VectorMaterialParamMICData>, MICInfos, 60)
 		ADD_OBJECT(InterpTrackVectorMaterialParam, InstancedTrack, 72)

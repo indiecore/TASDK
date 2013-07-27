@@ -15,64 +15,64 @@ namespace UnrealScript
 		ADD_STRUCT(byte, m_nTeamId, 476)
 		void SetTeamNum(byte TeamID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.SetTeamNum");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98506);
 			byte params[1] = { NULL };
-			params[0] = TeamID;
+			*params = TeamID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		byte GetTeamNum()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.GetTeamNum");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98508);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return params[0];
+			return *params;
 		}
-		void UpdateLocation(Object::Vector NewLocation)
+		void UpdateLocation(Vector NewLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.UpdateLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98510);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewLocation;
+			*(Vector*)params = NewLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98512);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98514);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.PostRenderFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98516);
 			byte params[32] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = Canvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void RenderForOwner(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir, float Distance)
+		void RenderForOwner(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir, float Distance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.RenderForOwner");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98522);
 			byte params[36] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = Canvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			*(float*)&params[32] = Distance;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void RenderForTeammate(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir, float Distance)
+		void RenderForTeammate(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir, float Distance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLaserTarget.RenderForTeammate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98533);
 			byte params[36] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = Canvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			*(float*)&params[32] = Distance;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

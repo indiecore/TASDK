@@ -20,14 +20,14 @@ namespace UnrealScript
 	class UDKSkelControl_TurretConstrained : public SkelControlSingleBone
 	{
 	public:
-		class TurretConstraintData
+		struct TurretConstraintData
 		{
 		public:
 			ADD_STRUCT(int, RollConstraint, 8)
 			ADD_STRUCT(int, YawConstraint, 4)
 			ADD_STRUCT(int, PitchConstraint, 0)
 		};
-		class TurretStepData
+		struct TurretStepData
 		{
 		public:
 			ADD_STRUCT(UDKSkelControl_TurretConstrained::TurretConstraintData, MinAngle, 20)
@@ -36,9 +36,9 @@ namespace UnrealScript
 			ADD_STRUCT(int, StepStartAngle, 0)
 		};
 		ADD_STRUCT(ScriptArray<UDKSkelControl_TurretConstrained::TurretStepData>, Steps, 264)
-		ADD_STRUCT(Object::Rotator, ConstrainedBoneRotation, 300)
+		ADD_STRUCT(Rotator, ConstrainedBoneRotation, 300)
 		ADD_STRUCT(int, AssociatedSeatIndex, 296)
-		ADD_STRUCT(Object::Rotator, DesiredBoneRotation, 284)
+		ADD_STRUCT(Rotator, DesiredBoneRotation, 284)
 		ADD_STRUCT(float, PitchSpeedScale, 280)
 		ADD_STRUCT(float, LagDegreesPerSecond, 276)
 		ADD_STRUCT(UDKSkelControl_TurretConstrained::TurretConstraintData, MinAngle, 252)
@@ -54,18 +54,18 @@ namespace UnrealScript
 		ADD_BOOL(bConstrainPitch, 236, 0x1)
 		void OnTurretStatusChange(bool bIsMoving)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_TurretConstrained.OnTurretStatusChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35459);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bIsMoving;
+			*(bool*)params = bIsMoving;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void InitTurret(Object::Rotator InitRot, 
+		void InitTurret(Rotator InitRot, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_TurretConstrained.InitTurret");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35485);
 			byte params[16] = { NULL };
-			*(Object::Rotator*)&params[0] = InitRot;
+			*(Rotator*)params = InitRot;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[12] = SkelComp;
@@ -75,9 +75,9 @@ void**)&params[12] = SkelComp;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_TurretConstrained.WouldConstrainPitch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35488);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = TestPitch;
+			*(int*)params = TestPitch;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = SkelComp;

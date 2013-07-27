@@ -31,7 +31,7 @@ namespace UnrealScript
 			TWEEN_Linear = 2,
 			TWEEN_MAX = 3,
 		};
-		class GFxTween
+		struct GFxTween
 		{
 		public:
 			ADD_STRUCT(UTGFxTweenableMoviePlayer::TweenType, ThisTweenType, 96)
@@ -49,9 +49,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<UTGFxTweenableMoviePlayer::GFxTween>, TweenList, 380)
 		void TweenTo(class GFxObject* MC, float Duration, ScriptString* Member, float Target, UTGFxTweenableMoviePlayer::TweenType NewTweenType, ScriptString* Callback)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxTweenableMoviePlayer.TweenTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37559);
 			byte params[37] = { NULL };
-			*(class GFxObject**)&params[0] = MC;
+			*(class GFxObject**)params = MC;
 			*(float*)&params[4] = Duration;
 			*(ScriptString**)&params[8] = Member;
 			*(float*)&params[20] = Target;
@@ -61,37 +61,37 @@ namespace UnrealScript
 		}
 		void ProcessTweenCallback(ScriptString* Callback, class GFxObject* TargetMC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxTweenableMoviePlayer.ProcessTweenCallback");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37567);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Callback;
+			*(ScriptString**)params = Callback;
 			*(class GFxObject**)&params[12] = TargetMC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxTweenableMoviePlayer.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37570);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearsTweensOnMovieClip(class GFxObject* MC, bool bReset)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxTweenableMoviePlayer.ClearsTweensOnMovieClip");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37575);
 			byte params[8] = { NULL };
-			*(class GFxObject**)&params[0] = MC;
+			*(class GFxObject**)params = MC;
 			*(bool*)&params[4] = bReset;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PrintTweensToLog()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxTweenableMoviePlayer.PrintTweensToLog");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37580);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TweenComplete(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxTweenableMoviePlayer.TweenComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37582);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

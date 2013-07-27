@@ -38,33 +38,33 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fBodyMatFadeInTime, 64)
 		class Material* GetOverwriteMat(ScriptArray<TrObject::EffectFormOverwrite> List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEffectForm.GetOverwriteMat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87227);
 			byte params[16] = { NULL };
-			*(ScriptArray<TrObject::EffectFormOverwrite>*)&params[0] = List;
+			*(ScriptArray<TrObject::EffectFormOverwrite>*)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Material**)&params[12];
 		}
 		class Material* GetMatApplyToPawn(ScriptClass* PawnClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEffectForm.GetMatApplyToPawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87232);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = PawnClass;
+			*(ScriptClass**)params = PawnClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Material**)&params[4];
 		}
 		class Material* GetMatApplyToWeapon(ScriptClass* devClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEffectForm.GetMatApplyToWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87235);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = devClass;
+			*(ScriptClass**)params = devClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Material**)&params[4];
 		}
 		class Material* GetMatApplyToAttachment(ScriptClass* attClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEffectForm.GetMatApplyToAttachment");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87238);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = attClass;
+			*(ScriptClass**)params = attClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Material**)&params[4];
 		}

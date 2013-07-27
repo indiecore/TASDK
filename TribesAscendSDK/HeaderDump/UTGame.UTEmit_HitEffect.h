@@ -8,15 +8,15 @@ namespace UnrealScript
 	public:
 		void AttachTo(class Pawn* P, ScriptName NewBoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEmit_HitEffect.AttachTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47370);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			*(ScriptName*)&params[4] = NewBoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnBaseDied()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEmit_HitEffect.PawnBaseDied");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47373);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

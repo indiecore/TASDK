@@ -24,9 +24,9 @@ namespace UnrealScript
 		ADD_OBJECT(Font, GlowFonts, 1360)
 		void DrawGlowText(ScriptString* Text, float X, float Y, float MaxHeightInPixels, float PulseTime, bool bRightJustified)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKHUD.DrawGlowText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34916);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			*(float*)&params[12] = X;
 			*(float*)&params[16] = Y;
 			*(float*)&params[20] = MaxHeightInPixels;
@@ -36,9 +36,9 @@ namespace UnrealScript
 		}
 		void TranslateBindToFont(ScriptString* InBindStr, class Font*& DrawFont, ScriptString*& OutBindStr)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKHUD.TranslateBindToFont");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34923);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = InBindStr;
+			*(ScriptString**)params = InBindStr;
 			*(class Font**)&params[12] = DrawFont;
 			*(ScriptString**)&params[16] = OutBindStr;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

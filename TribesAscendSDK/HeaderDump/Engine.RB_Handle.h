@@ -20,13 +20,13 @@ namespace UnrealScript
 	class RB_Handle : public ActorComponent
 	{
 	public:
-		ADD_STRUCT(Object::Vector, Location, 180)
-		ADD_STRUCT(Object::Vector, StepSize, 168)
-		ADD_STRUCT(Object::Vector, Destination, 156)
+		ADD_STRUCT(Vector, Location, 180)
+		ADD_STRUCT(Vector, StepSize, 168)
+		ADD_STRUCT(Vector, Destination, 156)
 		ADD_STRUCT(float, AngularStiffness, 152)
 		ADD_STRUCT(float, AngularDamping, 148)
-		ADD_STRUCT(Object::Vector, LinearDampingScale3D, 136)
-		ADD_STRUCT(Object::Vector, LinearStiffnessScale3D, 124)
+		ADD_STRUCT(Vector, LinearDampingScale3D, 136)
+		ADD_STRUCT(Vector, LinearStiffnessScale3D, 124)
 		ADD_STRUCT(float, LinearStiffness, 120)
 		ADD_STRUCT(float, LinearDamping, 116)
 		ADD_STRUCT(Object::Pointer, KinActorData, 112)
@@ -38,60 +38,60 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, GrabbedBoneName, 92)
 		void GrabComponent(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* Component, ScriptName InBoneName, Object::Vector GrabLocation, bool bConstrainRotation)
+void* Component, ScriptName InBoneName, Vector GrabLocation, bool bConstrainRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Handle.GrabComponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25251);
 			byte params[28] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = Component;
+void**)params = Component;
 			*(ScriptName*)&params[4] = InBoneName;
-			*(Object::Vector*)&params[12] = GrabLocation;
+			*(Vector*)&params[12] = GrabLocation;
 			*(bool*)&params[24] = bConstrainRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReleaseComponent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Handle.ReleaseComponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25256);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SetLocation(Object::Vector NewLocation)
+		void SetLocation(Vector NewLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Handle.SetLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25257);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewLocation;
+			*(Vector*)params = NewLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetSmoothLocation(Object::Vector NewLocation, float MoveTime)
+		void SetSmoothLocation(Vector NewLocation, float MoveTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Handle.SetSmoothLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25259);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = NewLocation;
+			*(Vector*)params = NewLocation;
 			*(float*)&params[12] = MoveTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void UpdateSmoothLocation(Object::Vector& NewLocation)
+		void UpdateSmoothLocation(Vector& NewLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Handle.UpdateSmoothLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25262);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewLocation;
+			*(Vector*)params = NewLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			NewLocation = *(Object::Vector*)&params[0];
+			NewLocation = *(Vector*)params;
 		}
 		void SetOrientation(Object::Quat& NewOrientation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Handle.SetOrientation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25264);
 			byte params[16] = { NULL };
-			*(Object::Quat*)&params[0] = NewOrientation;
+			*(Object::Quat*)params = NewOrientation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			NewOrientation = *(Object::Quat*)&params[0];
+			NewOrientation = *(Object::Quat*)params;
 		}
 		Object::Quat GetOrientation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Handle.GetOrientation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25266);
 			byte params[16] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Quat*)&params[0];
+			return *(Object::Quat*)params;
 		}
 	};
 }

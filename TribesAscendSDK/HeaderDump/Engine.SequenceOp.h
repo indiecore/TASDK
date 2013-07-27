@@ -29,7 +29,7 @@ namespace UnrealScript
 	class SequenceOp : public SequenceObject
 	{
 	public:
-		class SeqOpInputLink
+		struct SeqOpInputLink
 		{
 		public:
 			ADD_BOOL(bHasImpulse, 12, 0x1)
@@ -46,7 +46,7 @@ namespace UnrealScript
 			ADD_STRUCT(int, QueuedActivations, 16)
 			ADD_STRUCT(ScriptString*, LinkDesc, 0)
 		};
-		class SeqVarLink
+		struct SeqVarLink
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class SequenceVariable*>, LinkedVariables, 4)
@@ -68,7 +68,7 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptString*, LinkDesc, 16)
 			ADD_OBJECT(ScriptClass, ExpectedType, 0)
 		};
-		class SeqEventLink
+		struct SeqEventLink
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class SequenceEvent*>, LinkedEvents, 4)
@@ -81,13 +81,13 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptString*, LinkDesc, 16)
 			ADD_OBJECT(ScriptClass, ExpectedType, 0)
 		};
-		class SeqOpOutputInputLink
+		struct SeqOpOutputInputLink
 		{
 		public:
 			ADD_STRUCT(int, InputLinkIdx, 4)
 			ADD_OBJECT(SequenceOp, LinkedOp, 0)
 		};
-		class SeqOpOutputLink
+		struct SeqOpOutputLink
 		{
 		public:
 			ADD_STRUCT(ScriptArray<SequenceOp::SeqOpOutputInputLink>, Links, 0)
@@ -123,54 +123,54 @@ namespace UnrealScript
 		ADD_BOOL(bActive, 140, 0x1)
 		void GetObjectVars(ScriptArray<class Object*>& objVars, ScriptString* inDesc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.GetObjectVars");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4369);
 			byte params[24] = { NULL };
-			*(ScriptArray<class Object*>*)&params[0] = objVars;
+			*(ScriptArray<class Object*>*)params = objVars;
 			*(ScriptString**)&params[12] = inDesc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			objVars = *(ScriptArray<class Object*>*)&params[0];
+			objVars = *(ScriptArray<class Object*>*)params;
 		}
 		bool HasLinkedOps(bool bConsiderInputLinks)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.HasLinkedOps");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6801);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bConsiderInputLinks;
+			*(bool*)params = bConsiderInputLinks;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void GetLinkedObjects(ScriptArray<class SequenceObject*>& out_Objects, ScriptClass* ObjectType, bool bRecurse)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.GetLinkedObjects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6804);
 			byte params[20] = { NULL };
-			*(ScriptArray<class SequenceObject*>*)&params[0] = out_Objects;
+			*(ScriptArray<class SequenceObject*>*)params = out_Objects;
 			*(ScriptClass**)&params[12] = ObjectType;
 			*(bool*)&params[16] = bRecurse;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_Objects = *(ScriptArray<class SequenceObject*>*)&params[0];
+			out_Objects = *(ScriptArray<class SequenceObject*>*)params;
 		}
 		void GetInterpDataVars(ScriptArray<class InterpData*>& outIData, ScriptString* inDesc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.GetInterpDataVars");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6812);
 			byte params[24] = { NULL };
-			*(ScriptArray<class InterpData*>*)&params[0] = outIData;
+			*(ScriptArray<class InterpData*>*)params = outIData;
 			*(ScriptString**)&params[12] = inDesc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			outIData = *(ScriptArray<class InterpData*>*)&params[0];
+			outIData = *(ScriptArray<class InterpData*>*)params;
 		}
 		void GetBoolVars(ScriptArray<byte>& boolVars, ScriptString* inDesc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.GetBoolVars");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6816);
 			byte params[24] = { NULL };
-			*(ScriptArray<byte>*)&params[0] = boolVars;
+			*(ScriptArray<byte>*)params = boolVars;
 			*(ScriptString**)&params[12] = inDesc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			boolVars = *(ScriptArray<byte>*)&params[0];
+			boolVars = *(ScriptArray<byte>*)params;
 		}
 		void LinkedVariables(ScriptClass* VarClass, class SequenceVariable*& OutVariable, ScriptString* inDesc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.LinkedVariables");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6820);
 			byte params[20] = { NULL };
-			*(ScriptClass**)&params[0] = VarClass;
+			*(ScriptClass**)params = VarClass;
 			*(class SequenceVariable**)&params[4] = OutVariable;
 			*(ScriptString**)&params[8] = inDesc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -178,81 +178,81 @@ namespace UnrealScript
 		}
 		bool ActivateOutputLink(int OutputIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.ActivateOutputLink");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6824);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = OutputIdx;
+			*(int*)params = OutputIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool ActivateNamedOutputLink(ScriptString* LinkDesc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.ActivateNamedOutputLink");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6827);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = LinkDesc;
+			*(ScriptString**)params = LinkDesc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6830);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Deactivated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.Deactivated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6831);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void VersionUpdated(int OldVersion, int NewVersion)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.VersionUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6832);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = OldVersion;
+			*(int*)params = OldVersion;
 			*(int*)&params[4] = NewVersion;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopulateLinkedVariableValues()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.PopulateLinkedVariableValues");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6835);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PublishLinkedVariableValues()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.PublishLinkedVariableValues");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6836);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6837);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class Pawn* GetPawn(class Actor* TheActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.GetPawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6838);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = TheActor;
+			*(class Actor**)params = TheActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Pawn**)&params[4];
 		}
 		class Controller* GetController(class Actor* TheActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.GetController");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6843);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = TheActor;
+			*(class Actor**)params = TheActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Controller**)&params[4];
 		}
 		void ForceActivateInput(int InputIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.ForceActivateInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6848);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = InputIdx;
+			*(int*)params = InputIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ForceActivateOutput(int OutputIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceOp.ForceActivateOutput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6850);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = OutputIdx;
+			*(int*)params = OutputIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

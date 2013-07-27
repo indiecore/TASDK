@@ -42,27 +42,27 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, Owner, 60)
 		void SetLinearDriveScale(float InLinearSpringScale, float InLinearDampingScale, float InLinearForceLimitScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetLinearDriveScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24353);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = InLinearSpringScale;
+			*(float*)params = InLinearSpringScale;
 			*(float*)&params[4] = InLinearDampingScale;
 			*(float*)&params[8] = InLinearForceLimitScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAngularDriveScale(float InAngularSpringScale, float InAngularDampingScale, float InAngularForceLimitScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetAngularDriveScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24357);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = InAngularSpringScale;
+			*(float*)params = InAngularSpringScale;
 			*(float*)&params[4] = InAngularDampingScale;
 			*(float*)&params[8] = InAngularForceLimitScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetTotalMassBelowBone(ScriptName InBoneName, class PhysicsAsset* InAsset, class SkeletalMesh* InSkelMesh)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.GetTotalMassBelowBone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24361);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = InBoneName;
+			*(ScriptName*)params = InBoneName;
 			*(class PhysicsAsset**)&params[8] = InAsset;
 			*(class SkeletalMesh**)&params[12] = InSkelMesh;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -70,18 +70,18 @@ namespace UnrealScript
 		}
 		void SetAllBodiesFixed(bool bNewFixed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetAllBodiesFixed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24366);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewFixed;
+			*(bool*)params = bNewFixed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetNamedBodiesFixed(bool bNewFixed, ScriptArray<ScriptName> BoneNames, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelMesh, bool bSetOtherBodiesToComplement, bool bSkipFullAnimWeightBodies)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetNamedBodiesFixed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24368);
 			byte params[28] = { NULL };
-			*(bool*)&params[0] = bNewFixed;
+			*(bool*)params = bNewFixed;
 			*(ScriptArray<ScriptName>*)&params[4] = BoneNames;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
@@ -94,24 +94,24 @@ void**)&params[16] = SkelMesh;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* InSkelMesh, bool InbInstanceAlwaysFullAnimWeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.ForceAllBodiesBelowUnfixed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24375);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = InBoneName;
+			*(ScriptName*)params = InBoneName;
 			*(class PhysicsAsset**)&params[8] = InAsset;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[12] = InSkelMesh;
 			*(bool*)&params[16] = InbInstanceAlwaysFullAnimWeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			InBoneName = *(ScriptName*)&params[0];
+			InBoneName = *(ScriptName*)params;
 		}
 		void SetAllMotorsAngularPositionDrive(bool bEnableSwingDrive, bool bEnableTwistDrive, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelMesh, bool bSkipFullAnimWeightBodies)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetAllMotorsAngularPositionDrive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24380);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bEnableSwingDrive;
+			*(bool*)params = bEnableSwingDrive;
 			*(bool*)&params[4] = bEnableTwistDrive;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
@@ -123,9 +123,9 @@ void**)&params[8] = SkelMesh;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelMeshComp, bool bSkipFullAnimWeightBodies)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetAllMotorsAngularVelocityDrive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24385);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bEnableSwingDrive;
+			*(bool*)params = bEnableSwingDrive;
 			*(bool*)&params[4] = bEnableTwistDrive;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
@@ -137,9 +137,9 @@ void**)&params[8] = SkelMeshComp;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelMesh, bool bSkipFullAnimWeightBodies)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetAllMotorsAngularDriveParams");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24390);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = InSpring;
+			*(float*)params = InSpring;
 			*(float*)&params[4] = InDamping;
 			*(float*)&params[8] = InForceLimit;
 			*(
@@ -152,9 +152,9 @@ void**)&params[12] = SkelMesh;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelMeshComp, bool bSetOtherBodiesToComplement)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetNamedMotorsAngularPositionDrive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24396);
 			byte params[28] = { NULL };
-			*(bool*)&params[0] = bEnableSwingDrive;
+			*(bool*)params = bEnableSwingDrive;
 			*(bool*)&params[4] = bEnableTwistDrive;
 			*(ScriptArray<ScriptName>*)&params[8] = BoneNames;
 			*(
@@ -167,9 +167,9 @@ void**)&params[20] = SkelMeshComp;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelMeshComp, bool bSetOtherBodiesToComplement)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetNamedMotorsAngularVelocityDrive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24403);
 			byte params[28] = { NULL };
-			*(bool*)&params[0] = bEnableSwingDrive;
+			*(bool*)params = bEnableSwingDrive;
 			*(bool*)&params[4] = bEnableTwistDrive;
 			*(ScriptArray<ScriptName>*)&params[8] = BoneNames;
 			*(
@@ -182,9 +182,9 @@ void**)&params[20] = SkelMeshComp;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelMeshComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetNamedRBBoneSprings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24410);
 			byte params[28] = { NULL };
-			*(bool*)&params[0] = bEnable;
+			*(bool*)params = bEnable;
 			*(ScriptArray<ScriptName>*)&params[4] = BoneNames;
 			*(float*)&params[16] = InBoneLinearSpring;
 			*(float*)&params[20] = InBoneAngularSpring;
@@ -197,9 +197,9 @@ void**)&params[24] = SkelMeshComp;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelMesh)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetNamedBodiesBlockRigidBody");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24417);
 			byte params[20] = { NULL };
-			*(bool*)&params[0] = bNewBlockRigidBody;
+			*(bool*)params = bNewBlockRigidBody;
 			*(ScriptArray<ScriptName>*)&params[4] = BoneNames;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
@@ -210,9 +210,9 @@ void**)&params[16] = SkelMesh;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelMesh)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetFullAnimWeightBlockRigidBody");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24422);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bNewBlockRigidBody;
+			*(bool*)params = bNewBlockRigidBody;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = SkelMesh;
@@ -222,9 +222,9 @@ void**)&params[4] = SkelMesh;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelMesh)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.SetFullAnimWeightBonesFixed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24425);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bNewFixed;
+			*(bool*)params = bNewFixed;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = SkelMesh;
@@ -232,18 +232,18 @@ void**)&params[4] = SkelMesh;
 		}
 		class RB_BodyInstance* FindBodyInstance(ScriptName BodyName, class PhysicsAsset* InAsset)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.FindBodyInstance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24428);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = BodyName;
+			*(ScriptName*)params = BodyName;
 			*(class PhysicsAsset**)&params[8] = InAsset;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class RB_BodyInstance**)&params[12];
 		}
 		class RB_ConstraintInstance* FindConstraintInstance(ScriptName ConName, class PhysicsAsset* InAsset)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAssetInstance.FindConstraintInstance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24432);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = ConName;
+			*(ScriptName*)params = ConName;
 			*(class PhysicsAsset**)&params[8] = InAsset;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class RB_ConstraintInstance**)&params[12];

@@ -8,16 +8,16 @@ namespace UnrealScript
 	public:
 		void OnPawnAdded(class Pawn* aPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawnCollisionProxy.OnPawnAdded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100614);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = aPawn;
+			*(class Pawn**)params = aPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPawnRemoved(class Pawn* aPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawnCollisionProxy.OnPawnRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100617);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = aPawn;
+			*(class Pawn**)params = aPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

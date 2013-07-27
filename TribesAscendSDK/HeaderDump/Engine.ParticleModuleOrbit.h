@@ -27,7 +27,7 @@ namespace UnrealScript
 			EOChainMode_Link = 2,
 			EOChainMode_MAX = 3,
 		};
-		class OrbitOptions
+		struct OrbitOptions
 		{
 		public:
 			ADD_BOOL(bUseEmitterTime, 0, 0x4)

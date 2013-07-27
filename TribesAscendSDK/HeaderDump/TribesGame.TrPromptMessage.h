@@ -27,9 +27,9 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, UpgradeDeniedSound, 100)
 		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPromptMessage.GetString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74599);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(bool*)&params[4] = bPRI1HUD;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
@@ -39,9 +39,9 @@ namespace UnrealScript
 		}
 		ScriptString* FormatText(ScriptString* InString, class TrPlayerController* TrPC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPromptMessage.FormatText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109465);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = InString;
+			*(ScriptString**)params = InString;
 			*(class TrPlayerController**)&params[12] = TrPC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[16];

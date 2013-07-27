@@ -32,44 +32,44 @@ namespace UnrealScript
 		ADD_BOOL(bShowDirectional, 2684, 0x1)
 		void DisplayScoring()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamHUD.DisplayScoring");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46008);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayTeamScore()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamHUD.DisplayTeamScore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46009);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetTeamScore(byte TeamIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamHUD.GetTeamScore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46019);
 			byte params[5] = { NULL };
-			params[0] = TeamIndex;
+			*params = TeamIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		class Actor* GetDirectionalDest(byte TeamIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamHUD.GetDirectionalDest");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46022);
 			byte params[5] = { NULL };
-			params[0] = TeamIndex;
+			*params = TeamIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[4];
 		}
 		void DisplayTeamLogos(byte TeamIndex, Object::Vector2D pos, float DestScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamHUD.DisplayTeamLogos");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46025);
 			byte params[13] = { NULL };
-			params[0] = TeamIndex;
+			*params = TeamIndex;
 			*(Object::Vector2D*)&params[4] = pos;
 			*(float*)&params[12] = DestScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayDirectionIndicator(byte TeamIndex, Object::Vector2D pos, class Actor* destActor, float DestScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamHUD.DisplayDirectionIndicator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46029);
 			byte params[17] = { NULL };
-			params[0] = TeamIndex;
+			*params = TeamIndex;
 			*(Object::Vector2D*)&params[4] = pos;
 			*(class Actor**)&params[12] = destActor;
 			*(float*)&params[16] = DestScale;

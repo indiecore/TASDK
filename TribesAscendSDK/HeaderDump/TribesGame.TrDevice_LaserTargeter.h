@@ -1392,166 +1392,166 @@ namespace UnrealScript
 		static const auto ITEM_VOICE_T2BDERM03 = 8726;
 		ADD_STRUCT(byte, r_ActiveCallin, 2192)
 		ADD_OBJECT(TrCallIn, r_CallIns, 2180)
-		ADD_STRUCT(Object::Vector, m_LastTargetPos, 2212)
-		ADD_STRUCT(Object::Rotator, m_LastOwnerRot, 2200)
+		ADD_STRUCT(Vector, m_LastTargetPos, 2212)
+		ADD_STRUCT(Rotator, m_LastOwnerRot, 2200)
 		ADD_OBJECT(SoundCue, m_CallInConfirmation, 2196)
 		ADD_STRUCT(byte, m_PrevActiveCallin, 2193)
 		ADD_STRUCT(float, m_fCallInEndTime, 2172)
 		float CalcHUDAimChargePercent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.CalcHUDAimChargePercent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(53739);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		bool IsValidCallIn(byte CallInIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.IsValidCallIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(76800);
 			byte params[5] = { NULL };
-			params[0] = CallInIndex;
+			*params = CallInIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
-		bool IsValidTargetLocation(Object::Vector CurrentTarget, Object::Vector PreviousTarget, class Actor* HitTarget)
+		bool IsValidTargetLocation(Vector CurrentTarget, Vector PreviousTarget, class Actor* HitTarget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.IsValidTargetLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82927);
 			byte params[32] = { NULL };
-			*(Object::Vector*)&params[0] = CurrentTarget;
-			*(Object::Vector*)&params[12] = PreviousTarget;
+			*(Vector*)params = CurrentTarget;
+			*(Vector*)&params[12] = PreviousTarget;
 			*(class Actor**)&params[24] = HitTarget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[28];
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82932);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82934);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateCallins()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.UpdateCallins");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82942);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82945);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CanFireCallIn()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.CanFireCallIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82947);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SetActiveCallIn(byte CallInIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.SetActiveCallIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82951);
 			byte params[1] = { NULL };
-			params[0] = CallInIndex;
+			*params = CallInIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnEndConstantFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.OnEndConstantFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82953);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnStartConstantFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.OnStartConstantFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82955);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool GetLaserStartAndEnd(Object::Vector& StartLocation, Object::Vector& EndLocation, Object::Vector& EndLocationNormal)
+		bool GetLaserStartAndEnd(Vector& StartLocation, Vector& EndLocation, Vector& EndLocationNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.GetLaserStartAndEnd");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82967);
 			byte params[40] = { NULL };
-			*(Object::Vector*)&params[0] = StartLocation;
-			*(Object::Vector*)&params[12] = EndLocation;
-			*(Object::Vector*)&params[24] = EndLocationNormal;
+			*(Vector*)params = StartLocation;
+			*(Vector*)&params[12] = EndLocation;
+			*(Vector*)&params[24] = EndLocationNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			StartLocation = *(Object::Vector*)&params[0];
-			EndLocation = *(Object::Vector*)&params[12];
-			EndLocationNormal = *(Object::Vector*)&params[24];
+			StartLocation = *(Vector*)params;
+			EndLocation = *(Vector*)&params[12];
+			EndLocationNormal = *(Vector*)&params[24];
 			return *(bool*)&params[36];
 		}
 		void KillLaserEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.KillLaserEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82977);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpawnLaserEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.SpawnLaserEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82978);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateLaserEffect(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.UpdateLaserEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82987);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CallInConfirmed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.CallInConfirmed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82995);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ServerPerformCallIn(Object::Vector EndLocation, Object::Vector HitNormal)
+		void ServerPerformCallIn(Vector EndLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.ServerPerformCallIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82996);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = EndLocation;
-			*(Object::Vector*)&params[12] = HitNormal;
+			*(Vector*)params = EndLocation;
+			*(Vector*)&params[12] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void UpdateTarget(bool hasHitSomething, Object::Vector End, float DeltaTime)
+		void UpdateTarget(bool hasHitSomething, Vector End, float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.UpdateTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(83000);
 			byte params[20] = { NULL };
-			*(bool*)&params[0] = hasHitSomething;
-			*(Object::Vector*)&params[4] = End;
+			*(bool*)params = hasHitSomething;
+			*(Vector*)&params[4] = End;
 			*(float*)&params[16] = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Actor* GetTraceOwner()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.GetTraceOwner");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(83005);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Actor**)&params[0];
+			return *(class Actor**)params;
 		}
 		int GetAmmoCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.GetAmmoCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(83007);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void UpdateCreditMaterial()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.UpdateCreditMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(83009);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayWeaponEquip()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.PlayWeaponEquip");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(83011);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateCallInMaterial()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.UpdateCallInMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(83012);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateWeaponMICs()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_LaserTargeter.UpdateWeaponMICs");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(83014);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

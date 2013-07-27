@@ -22,33 +22,33 @@ namespace UnrealScript
 		ADD_STRUCT(float, JumpTime, 712)
 		ADD_OBJECT(SoundCue, JumpSound, 708)
 		ADD_OBJECT(PathNode, JumpTarget, 704)
-		ADD_STRUCT(Object::Vector, JumpVelocity, 692)
+		ADD_STRUCT(Vector, JumpVelocity, 692)
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKJumpPad.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34933);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostTouch(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKJumpPad.PostTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34938);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SuggestMovePreparation(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKJumpPad.SuggestMovePreparation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34943);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

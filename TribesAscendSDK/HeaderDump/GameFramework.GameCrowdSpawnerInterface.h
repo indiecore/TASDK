@@ -8,24 +8,24 @@ namespace UnrealScript
 	public:
 		bool AddToAgentPool(class GameCrowdAgent* Agent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdSpawnerInterface.AddToAgentPool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30973);
 			byte params[8] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = Agent;
+			*(class GameCrowdAgent**)params = Agent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		float GetMaxSpawnDist()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdSpawnerInterface.GetMaxSpawnDist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31010);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void AgentDestroyed(class GameCrowdAgent* Agent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdSpawnerInterface.AgentDestroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31514);
 			byte params[4] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = Agent;
+			*(class GameCrowdAgent**)params = Agent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

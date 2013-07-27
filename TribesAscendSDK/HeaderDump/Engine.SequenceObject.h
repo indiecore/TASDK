@@ -43,39 +43,39 @@ namespace UnrealScript
 		ADD_OBJECT(Sequence, ParentSequence, 64)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceObject.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4399);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void ScriptLog(ScriptString* LogText, bool bWarning)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceObject.ScriptLog");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6710);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = LogText;
+			*(ScriptString**)params = LogText;
 			*(bool*)&params[12] = bWarning;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class WorldInfo* GetWorldInfo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceObject.GetWorldInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6713);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class WorldInfo**)&params[0];
+			return *(class WorldInfo**)params;
 		}
 		bool IsValidLevelSequenceObject()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceObject.IsValidLevelSequenceObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6715);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool IsPastingIntoLevelSequenceAllowed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceObject.IsPastingIntoLevelSequenceAllowed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6717);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

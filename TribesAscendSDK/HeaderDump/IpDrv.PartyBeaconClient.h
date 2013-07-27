@@ -43,72 +43,72 @@ namespace UnrealScript
 		ADD_STRUCT(PartyBeacon::PartyReservation, PendingRequest, 112)
 		void OnHostHasCancelled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.OnHostHasCancelled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33911);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnHostIsReady()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.OnHostIsReady");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33913);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnTravelRequestReceived(ScriptName SessionName, ScriptClass* SearchClass, byte PlatformSpecificInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.OnTravelRequestReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33915);
 			byte params[13] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(ScriptClass**)&params[8] = SearchClass;
 			params[12] = PlatformSpecificInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnReservationCountUpdated(int ReservationRemaining)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.OnReservationCountUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33917);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ReservationRemaining;
+			*(int*)params = ReservationRemaining;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnReservationRequestComplete(PartyBeacon::EPartyReservationResult ReservationResult)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.OnReservationRequestComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33919);
 			byte params[1] = { NULL };
-			*(PartyBeacon::EPartyReservationResult*)&params[0] = ReservationResult;
+			*(PartyBeacon::EPartyReservationResult*)params = ReservationResult;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool RequestReservation(OnlineGameSearch::OnlineGameSearchResult& DesiredHost, OnlineSubsystem::UniqueNetId RequestingPartyLeader, ScriptArray<PartyBeacon::PlayerReservation>& Players)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.RequestReservation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33936);
 			byte params[32] = { NULL };
-			*(OnlineGameSearch::OnlineGameSearchResult*)&params[0] = DesiredHost;
+			*(OnlineGameSearch::OnlineGameSearchResult*)params = DesiredHost;
 			*(OnlineSubsystem::UniqueNetId*)&params[8] = RequestingPartyLeader;
 			*(ScriptArray<PartyBeacon::PlayerReservation>*)&params[16] = Players;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			DesiredHost = *(OnlineGameSearch::OnlineGameSearchResult*)&params[0];
+			DesiredHost = *(OnlineGameSearch::OnlineGameSearchResult*)params;
 			Players = *(ScriptArray<PartyBeacon::PlayerReservation>*)&params[16];
 			return *(bool*)&params[28];
 		}
 		bool RequestReservationUpdate(OnlineGameSearch::OnlineGameSearchResult& DesiredHost, OnlineSubsystem::UniqueNetId RequestingPartyLeader, ScriptArray<PartyBeacon::PlayerReservation>& PlayersToAdd)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.RequestReservationUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33942);
 			byte params[32] = { NULL };
-			*(OnlineGameSearch::OnlineGameSearchResult*)&params[0] = DesiredHost;
+			*(OnlineGameSearch::OnlineGameSearchResult*)params = DesiredHost;
 			*(OnlineSubsystem::UniqueNetId*)&params[8] = RequestingPartyLeader;
 			*(ScriptArray<PartyBeacon::PlayerReservation>*)&params[16] = PlayersToAdd;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			DesiredHost = *(OnlineGameSearch::OnlineGameSearchResult*)&params[0];
+			DesiredHost = *(OnlineGameSearch::OnlineGameSearchResult*)params;
 			PlayersToAdd = *(ScriptArray<PartyBeacon::PlayerReservation>*)&params[16];
 			return *(bool*)&params[28];
 		}
 		bool CancelReservation(OnlineSubsystem::UniqueNetId CancellingPartyLeader)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.CancelReservation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33948);
 			byte params[12] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = CancellingPartyLeader;
+			*(OnlineSubsystem::UniqueNetId*)params = CancellingPartyLeader;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void DestroyBeacon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeaconClient.DestroyBeacon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33951);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

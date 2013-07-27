@@ -59,170 +59,170 @@ namespace UnrealScript
 		ADD_OBJECT(GameInfo, Game, 336)
 		int ResolvePlayerIndex(class Controller* Player)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.ResolvePlayerIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17645);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = Player;
+			*(class Controller**)params = Player;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		void StartLogging(float HeartbeatDelta)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.StartLogging");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17648);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = HeartbeatDelta;
+			*(float*)params = HeartbeatDelta;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetLogging(float HeartbeatDelta)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.ResetLogging");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17650);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = HeartbeatDelta;
+			*(float*)params = HeartbeatDelta;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EndLogging()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.EndLogging");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17652);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool IsSessionInProgress()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.IsSessionInProgress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17653);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool OpenStatsFile(ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.OpenStatsFile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17655);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Filename;
+			*(ScriptString**)params = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void CloseStatsFile()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.CloseStatsFile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17658);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool SerializeHeader()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.SerializeHeader");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17659);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool SerializeFooter()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.SerializeFooter");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17661);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void Poll()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.Poll");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17663);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetGameTypeId()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.GetGameTypeId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17665);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void LogGameIntEvent(int EventID, int Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogGameIntEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17667);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(int*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogGameStringEvent(int EventID, ScriptString* Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogGameStringEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17670);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(ScriptString**)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogGameFloatEvent(int EventID, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogGameFloatEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17673);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(float*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void LogGamePositionEvent(int EventID, Object::Vector& Position, float Value)
+		void LogGamePositionEvent(int EventID, Vector& Position, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogGamePositionEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17676);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = EventID;
-			*(Object::Vector*)&params[4] = Position;
+			*(int*)params = EventID;
+			*(Vector*)&params[4] = Position;
 			*(float*)&params[16] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Position = *(Object::Vector*)&params[4];
+			Position = *(Vector*)&params[4];
 		}
 		void LogTeamIntEvent(int EventID, class TeamInfo* Team, int Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogTeamIntEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17680);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(class TeamInfo**)&params[4] = Team;
 			*(int*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogTeamFloatEvent(int EventID, class TeamInfo* Team, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogTeamFloatEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17684);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(class TeamInfo**)&params[4] = Team;
 			*(float*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogTeamStringEvent(int EventID, class TeamInfo* Team, ScriptString* Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogTeamStringEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17688);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(class TeamInfo**)&params[4] = Team;
 			*(ScriptString**)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogPlayerIntEvent(int EventID, class Controller* Player, int Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogPlayerIntEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17692);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(class Controller**)&params[4] = Player;
 			*(int*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogPlayerFloatEvent(int EventID, class Controller* Player, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogPlayerFloatEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17696);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(class Controller**)&params[4] = Player;
 			*(float*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogPlayerStringEvent(int EventID, class Controller* Player, ScriptString* EventString)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogPlayerStringEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17700);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(class Controller**)&params[4] = Player;
 			*(ScriptString**)&params[8] = EventString;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogPlayerSpawnEvent(int EventID, class Controller* Player, ScriptClass* PawnClass, int TeamID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogPlayerSpawnEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17704);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(class Controller**)&params[4] = Player;
 			*(ScriptClass**)&params[8] = PawnClass;
 			*(int*)&params[12] = TeamID;
@@ -230,9 +230,9 @@ namespace UnrealScript
 		}
 		void LogPlayerLoginChange(int EventID, class Controller* Player, ScriptString* PlayerName, OnlineSubsystem::UniqueNetId PlayerID, bool bSplitScreen)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogPlayerLoginChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17709);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(class Controller**)&params[4] = Player;
 			*(ScriptString**)&params[8] = PlayerName;
 			*(OnlineSubsystem::UniqueNetId*)&params[20] = PlayerID;
@@ -241,16 +241,16 @@ namespace UnrealScript
 		}
 		void LogAllPlayerPositionsEvent(int EventID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogAllPlayerPositionsEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17715);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogPlayerKillDeath(int EventID, int KillType, class Controller* Killer, ScriptClass* dmgType, class Controller* Dead)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogPlayerKillDeath");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17717);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(int*)&params[4] = KillType;
 			*(class Controller**)&params[8] = Killer;
 			*(ScriptClass**)&params[12] = dmgType;
@@ -259,18 +259,18 @@ namespace UnrealScript
 		}
 		void LogPlayerPlayerEvent(int EventID, class Controller* Player, class Controller* Target)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogPlayerPlayerEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17723);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(class Controller**)&params[4] = Player;
 			*(class Controller**)&params[8] = Target;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogWeaponIntEvent(int EventID, class Controller* Player, ScriptClass* WeaponClass, int Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogWeaponIntEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17727);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(class Controller**)&params[4] = Player;
 			*(ScriptClass**)&params[8] = WeaponClass;
 			*(int*)&params[12] = Value;
@@ -278,9 +278,9 @@ namespace UnrealScript
 		}
 		void LogDamageEvent(int EventID, class Controller* Player, ScriptClass* dmgType, class Controller* Target, int Amount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogDamageEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17732);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(class Controller**)&params[4] = Player;
 			*(ScriptClass**)&params[8] = dmgType;
 			*(class Controller**)&params[12] = Target;
@@ -289,9 +289,9 @@ namespace UnrealScript
 		}
 		void LogProjectileIntEvent(int EventID, class Controller* Player, ScriptClass* Proj, int Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogProjectileIntEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17738);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(class Controller**)&params[4] = Player;
 			*(ScriptClass**)&params[8] = Proj;
 			*(int*)&params[12] = Value;
@@ -299,30 +299,30 @@ namespace UnrealScript
 		}
 		void LogSystemPollEvents()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.LogSystemPollEvents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17743);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class GenericParamListStatEntry* GetGenericParamListEntry()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.GetGenericParamListEntry");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17744);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GenericParamListStatEntry**)&params[0];
+			return *(class GenericParamListStatEntry**)params;
 		}
-		void RecordAIPathFail(class Controller* AI, ScriptString* Reason, Object::Vector Dest)
+		void RecordAIPathFail(class Controller* AI, ScriptString* Reason, Vector Dest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.RecordAIPathFail");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17746);
 			byte params[28] = { NULL };
-			*(class Controller**)&params[0] = AI;
+			*(class Controller**)params = AI;
 			*(ScriptString**)&params[4] = Reason;
-			*(Object::Vector*)&params[16] = Dest;
+			*(Vector*)&params[16] = Dest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int RecordCoverLinkFireLinks(class CoverLink* Link, class Controller* Player)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsWriter.RecordCoverLinkFireLinks");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17750);
 			byte params[12] = { NULL };
-			*(class CoverLink**)&params[0] = Link;
+			*(class CoverLink**)params = Link;
 			*(class Controller**)&params[4] = Player;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];

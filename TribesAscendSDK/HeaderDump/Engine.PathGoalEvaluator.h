@@ -20,15 +20,15 @@ namespace UnrealScript
 		ADD_OBJECT(PathGoalEvaluator, NextEvaluator, 60)
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PathGoalEvaluator.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18164);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetDumpString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PathGoalEvaluator.GetDumpString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18165);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

@@ -10,7 +10,7 @@ namespace UnrealScript
 	class SeqAct_SetDOFParams : public SeqAct_Latent
 	{
 	public:
-		ADD_STRUCT(Object::Vector, OldFocusPosition, 332)
+		ADD_STRUCT(Vector, OldFocusPosition, 332)
 		ADD_STRUCT(float, OldFocusDistance, 328)
 		ADD_STRUCT(float, OldFocusInnerRadius, 324)
 		ADD_STRUCT(Object::Color, OldModulateBlurColor, 320)
@@ -21,7 +21,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, OldFalloffExponent, 300)
 		ADD_STRUCT(float, InterpolateElapsed, 296)
 		ADD_STRUCT(float, InterpolateSeconds, 292)
-		ADD_STRUCT(Object::Vector, FocusPosition, 280)
+		ADD_STRUCT(Vector, FocusPosition, 280)
 		ADD_STRUCT(float, FocusDistance, 276)
 		ADD_STRUCT(float, FocusInnerRadius, 272)
 		ADD_STRUCT(Object::Color, ModulateBlurColor, 268)

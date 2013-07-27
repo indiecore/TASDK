@@ -26,7 +26,7 @@ namespace UnrealScript
 			ERS_Random = 1,
 			ERS_MAX = 2,
 		};
-		class RecoilParams
+		struct RecoilParams
 		{
 		public:
 			ADD_STRUCT(byte, Padding, 3)
@@ -34,19 +34,19 @@ namespace UnrealScript
 			ADD_STRUCT(GameSkelCtrl_Recoil::ERecoilStart, Y, 1)
 			ADD_STRUCT(GameSkelCtrl_Recoil::ERecoilStart, X, 0)
 		};
-		class RecoilDef
+		struct RecoilDef
 		{
 		public:
-			ADD_STRUCT(Object::Vector, LocOffset, 100)
+			ADD_STRUCT(Vector, LocOffset, 100)
 			ADD_STRUCT(GameSkelCtrl_Recoil::RecoilParams, LocParams, 96)
-			ADD_STRUCT(Object::Vector, LocSinOffset, 84)
-			ADD_STRUCT(Object::Vector, LocFrequency, 72)
-			ADD_STRUCT(Object::Vector, LocAmplitude, 60)
-			ADD_STRUCT(Object::Rotator, RotOffset, 48)
+			ADD_STRUCT(Vector, LocSinOffset, 84)
+			ADD_STRUCT(Vector, LocFrequency, 72)
+			ADD_STRUCT(Vector, LocAmplitude, 60)
+			ADD_STRUCT(Rotator, RotOffset, 48)
 			ADD_STRUCT(GameSkelCtrl_Recoil::RecoilParams, RotParams, 44)
-			ADD_STRUCT(Object::Vector, RotSinOffset, 32)
-			ADD_STRUCT(Object::Vector, RotFrequency, 20)
-			ADD_STRUCT(Object::Vector, RotAmplitude, 8)
+			ADD_STRUCT(Vector, RotSinOffset, 32)
+			ADD_STRUCT(Vector, RotFrequency, 20)
+			ADD_STRUCT(Vector, RotAmplitude, 8)
 			ADD_STRUCT(float, TimeDuration, 4)
 			ADD_STRUCT(float, TimeToGo, 0)
 		};

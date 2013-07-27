@@ -24,7 +24,7 @@ namespace UnrealScript
 	class TrVehicle_BaseFlying : public TrVehicle
 	{
 	public:
-		class FlyingParticleEffects
+		struct FlyingParticleEffects
 		{
 		public:
 			ADD_OBJECT(ParticleSystem, ParticleTemplate, 12)
@@ -44,37 +44,37 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fThrustBuildUp, 3272)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_BaseFlying.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(114668);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CreateParticleSystems()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_BaseFlying.CreateParticleSystems");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(114669);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetInputs(float InForward, float InStrafe, float InUp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_BaseFlying.SetInputs");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(114671);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = InForward;
+			*(float*)params = InForward;
 			*(float*)&params[4] = InStrafe;
 			*(float*)&params[8] = InUp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void VehicleCalcCamera(float DeltaTime, int SeatIndex, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, Object::Vector& CamStart, bool bPivotOnly)
+		void VehicleCalcCamera(float DeltaTime, int SeatIndex, Vector& out_CamLoc, Rotator& out_CamRot, Vector& CamStart, bool bPivotOnly)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_BaseFlying.VehicleCalcCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(114675);
 			byte params[48] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			*(int*)&params[4] = SeatIndex;
-			*(Object::Vector*)&params[8] = out_CamLoc;
-			*(Object::Rotator*)&params[20] = out_CamRot;
-			*(Object::Vector*)&params[32] = CamStart;
+			*(Vector*)&params[8] = out_CamLoc;
+			*(Rotator*)&params[20] = out_CamRot;
+			*(Vector*)&params[32] = CamStart;
 			*(bool*)&params[44] = bPivotOnly;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_CamLoc = *(Object::Vector*)&params[8];
-			out_CamRot = *(Object::Rotator*)&params[20];
-			CamStart = *(Object::Vector*)&params[32];
+			out_CamLoc = *(Vector*)&params[8];
+			out_CamRot = *(Rotator*)&params[20];
+			CamStart = *(Vector*)&params[32];
 		}
 	};
 }

@@ -13,7 +13,7 @@ namespace UnrealScript
 	class Texture2DComposite : public Texture
 	{
 	public:
-		class SourceTexture2DRegion
+		struct SourceTexture2DRegion
 		{
 		public:
 			ADD_OBJECT(Texture2D, Texture2D, 16)
@@ -26,21 +26,21 @@ namespace UnrealScript
 		ADD_STRUCT(int, MaxTextureSize, 248)
 		bool SourceTexturesFullyStreamedIn()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2DComposite.SourceTexturesFullyStreamedIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27943);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void UpdateCompositeTexture(int NumMipsToGenerate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2DComposite.UpdateCompositeTexture");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27945);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = NumMipsToGenerate;
+			*(int*)params = NumMipsToGenerate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetSourceRegions()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2DComposite.ResetSourceRegions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27947);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

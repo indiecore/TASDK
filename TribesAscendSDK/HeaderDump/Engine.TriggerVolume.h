@@ -8,14 +8,14 @@ namespace UnrealScript
 	public:
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TriggerVolume.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14906);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool StopsProjectile(class Projectile* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TriggerVolume.StopsProjectile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14907);
 			byte params[8] = { NULL };
-			*(class Projectile**)&params[0] = P;
+			*(class Projectile**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

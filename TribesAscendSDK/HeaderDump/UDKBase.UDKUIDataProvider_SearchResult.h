@@ -16,10 +16,10 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, PlayerRatioTag, 144)
 		bool IsPrivateServer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataProvider_SearchResult.IsPrivateServer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35582);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

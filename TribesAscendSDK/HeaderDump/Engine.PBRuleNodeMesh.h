@@ -23,12 +23,12 @@ namespace UnrealScript
 	class PBRuleNodeMesh : public PBRuleNodeBase
 	{
 	public:
-		class BuildingMatOverrides
+		struct BuildingMatOverrides
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class MaterialInterface*>, MaterialOptions, 0)
 		};
-		class BuildingMeshInfo
+		struct BuildingMeshInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class MaterialInterface*>, MaterialOverrides, 32)
@@ -47,10 +47,10 @@ namespace UnrealScript
 		ADD_STRUCT(PBRuleNodeMesh::BuildingMeshInfo, PartialOccludedBuildingMesh, 116)
 		int PickRandomBuildingMesh()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PBRuleNodeMesh.PickRandomBuildingMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24258);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

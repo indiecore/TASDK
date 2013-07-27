@@ -20,7 +20,7 @@ namespace UnrealScript
 	class Input : public Interaction
 	{
 	public:
-		class KeyBind
+		struct KeyBind
 		{
 		public:
 			ADD_BOOL(bIgnoreAlt, 20, 0x20)
@@ -40,35 +40,35 @@ namespace UnrealScript
 		ADD_STRUCT(Object::EInputEvent, CurrentEvent, 132)
 		void ResetInput()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Input.ResetInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13920);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetBind(ScriptName& Key)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Input.GetBind");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13921);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = Key;
+			*(ScriptName*)params = Key;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Key = *(ScriptName*)&params[0];
+			Key = *(ScriptName*)params;
 			return *(ScriptString**)&params[8];
 		}
 		ScriptString* GetBindNameFromCommandScript(ScriptString*& KeyCommand)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Input.GetBindNameFromCommandScript");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13924);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = KeyCommand;
+			*(ScriptString**)params = KeyCommand;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			KeyCommand = *(ScriptString**)&params[0];
+			KeyCommand = *(ScriptString**)params;
 			return *(ScriptString**)&params[12];
 		}
 		void SetBind(ScriptName& BindName, ScriptString* Command)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Input.SetBind");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13927);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = BindName;
+			*(ScriptName*)params = BindName;
 			*(ScriptString**)&params[8] = Command;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			BindName = *(ScriptName*)&params[0];
+			BindName = *(ScriptName*)params;
 		}
 	};
 }

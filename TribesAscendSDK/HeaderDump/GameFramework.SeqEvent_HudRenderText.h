@@ -25,23 +25,23 @@ namespace UnrealScript
 		};
 		ADD_STRUCT(SeqEvent_HudRenderText::ETextDrawMethod, TextDrawMethod, 308)
 		ADD_STRUCT(ScriptString*, DisplayText, 296)
-		ADD_STRUCT(Object::Vector, DisplayLocation, 284)
+		ADD_STRUCT(Vector, DisplayLocation, 284)
 		ADD_STRUCT(Object::Color, DisplayColor, 280)
 		ADD_OBJECT(Font, DisplayFont, 276)
 		void Render(class Canvas* TargetCanvas, class HUD* TargetHud)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_HudRenderText.Render");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33005);
 			byte params[8] = { NULL };
-			*(class Canvas**)&params[0] = TargetCanvas;
+			*(class Canvas**)params = TargetCanvas;
 			*(class HUD**)&params[4] = TargetHud;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_HudRenderText.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33017);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

@@ -23,7 +23,7 @@ namespace UnrealScript
 	class SeqCond_SwitchObject : public SeqCond_SwitchBase
 	{
 	public:
-		class SwitchObjectCase
+		struct SwitchObjectCase
 		{
 		public:
 			ADD_BOOL(bDefaultValue, 4, 0x2)
@@ -33,29 +33,29 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<SeqCond_SwitchObject::SwitchObjectCase>, SupportedValues, 208)
 		void VerifyDefaultCaseValue()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqCond_SwitchObject.VerifyDefaultCaseValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26066);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool IsFallThruEnabled(int ValueIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqCond_SwitchObject.IsFallThruEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26068);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ValueIndex;
+			*(int*)params = ValueIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void InsertValueEntry(int InsertIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqCond_SwitchObject.InsertValueEntry");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26071);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = InsertIndex;
+			*(int*)params = InsertIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveValueEntry(int RemoveIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqCond_SwitchObject.RemoveValueEntry");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26073);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = RemoveIndex;
+			*(int*)params = RemoveIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

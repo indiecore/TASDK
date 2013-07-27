@@ -32,18 +32,18 @@ namespace UnrealScript
 		ADD_BOOL(bInterruptable, 248, 0x1)
 		class Actor* PickDestination(class Actor* Requestor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_AIMoveToActor.PickDestination");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9737);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Requestor;
+			*(class Actor**)params = Requestor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[4];
 		}
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_AIMoveToActor.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25585);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

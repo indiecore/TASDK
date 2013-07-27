@@ -46,12 +46,12 @@ namespace UnrealScript
 			EPSUM_FixedTime = 1,
 			EPSUM_MAX = 2,
 		};
-		class ParticleSystemLOD
+		struct ParticleSystemLOD
 		{
 		public:
 			ADD_BOOL(bLit, 0, 0x1)
 		};
-		class LODSoloTrack
+		struct LODSoloTrack
 		{
 		public:
 			ADD_STRUCT(ScriptArray<byte>, SoloEnableSetting, 0)
@@ -63,7 +63,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, UpdateTime_Delta, 68)
 		ADD_STRUCT(float, WarmupTime, 72)
 		ADD_STRUCT(ScriptArray<class ParticleEmitter*>, Emitters, 76)
-		ADD_STRUCT(Object::Rotator, ThumbnailAngle, 92)
+		ADD_STRUCT(Rotator, ThumbnailAngle, 92)
 		ADD_STRUCT(float, ThumbnailDistance, 104)
 		ADD_STRUCT(float, ThumbnailWarmup, 108)
 		ADD_BOOL(bLit, 112, 0x1)
@@ -85,52 +85,52 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Box, FixedRelativeBoundingBox, 152)
 		ADD_STRUCT(float, SecondsBeforeInactive, 180)
 		ADD_STRUCT(ScriptString*, FloorMesh, 184)
-		ADD_STRUCT(Object::Vector, FloorPosition, 196)
-		ADD_STRUCT(Object::Rotator, FloorRotation, 208)
+		ADD_STRUCT(Vector, FloorPosition, 196)
+		ADD_STRUCT(Rotator, FloorRotation, 208)
 		ADD_STRUCT(float, FloorScale, 220)
-		ADD_STRUCT(Object::Vector, FloorScale3D, 224)
+		ADD_STRUCT(Vector, FloorScale3D, 224)
 		ADD_STRUCT(Object::Color, BackgroundColor, 236)
 		ADD_OBJECT(Texture2D, ThumbnailImage, 240)
 		ADD_STRUCT(float, Delay, 244)
 		ADD_STRUCT(float, DelayLow, 248)
-		ADD_STRUCT(Object::Vector, MacroUVPosition, 252)
+		ADD_STRUCT(Vector, MacroUVPosition, 252)
 		ADD_STRUCT(float, MacroUVRadius, 264)
 		ADD_STRUCT(Object::Box, CustomOcclusionBounds, 268)
 		ADD_STRUCT(ScriptArray<ParticleSystem::LODSoloTrack>, SoloTracking, 296)
 		ParticleSystem::ParticleSystemLODMethod GetCurrentLODMethod()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystem.GetCurrentLODMethod");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23881);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ParticleSystem::ParticleSystemLODMethod*)&params[0];
+			return *(ParticleSystem::ParticleSystemLODMethod*)params;
 		}
 		int GetLODLevelCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystem.GetLODLevelCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23883);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		float GetLODDistance(int LODLevelIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystem.GetLODDistance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23885);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = LODLevelIndex;
+			*(int*)params = LODLevelIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		void SetCurrentLODMethod(ParticleSystem::ParticleSystemLODMethod InMethod)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystem.SetCurrentLODMethod");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23888);
 			byte params[1] = { NULL };
-			*(ParticleSystem::ParticleSystemLODMethod*)&params[0] = InMethod;
+			*(ParticleSystem::ParticleSystemLODMethod*)params = InMethod;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SetLODDistance(int LODLevelIndex, float InDistance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleSystem.SetLODDistance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23890);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = LODLevelIndex;
+			*(int*)params = LODLevelIndex;
 			*(float*)&params[4] = InDistance;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];

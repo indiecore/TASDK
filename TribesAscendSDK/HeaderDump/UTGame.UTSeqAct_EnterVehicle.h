@@ -12,7 +12,7 @@ namespace UnrealScript
 		ADD_STRUCT(int, SeatIndex, 232)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_EnterVehicle.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49095);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

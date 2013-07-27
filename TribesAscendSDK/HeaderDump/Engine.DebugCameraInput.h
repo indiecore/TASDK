@@ -8,9 +8,9 @@ namespace UnrealScript
 	public:
 		bool InputKey(int ControllerId, ScriptName Key, Object::EInputEvent Event, float AmountDepressed, bool bGamepad)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraInput.InputKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14027);
 			byte params[25] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptName*)&params[4] = Key;
 			*(Object::EInputEvent*)&params[12] = Event;
 			*(float*)&params[16] = AmountDepressed;

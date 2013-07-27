@@ -47,59 +47,59 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementProvider, 120)
 		void OnSettingProviderChanged(class UIDataProvider* SourceProvider, ScriptName SettingsName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnSettingProviderChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28750);
 			byte params[12] = { NULL };
-			*(class UIDataProvider**)&params[0] = SourceProvider;
+			*(class UIDataProvider**)params = SourceProvider;
 			*(ScriptName*)&params[4] = SettingsName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnRegister(class LocalPlayer* InPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnRegister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28753);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = InPlayer;
+			*(class LocalPlayer**)params = InPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUnregister()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnUnregister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28757);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnLoginChange(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnLoginChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28760);
 			byte params[1] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPlayerDataChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.OnPlayerDataChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28764);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RegisterDelegates()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.RegisterDelegates");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28766);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearDelegates()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.ClearDelegates");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28767);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class OnlineProfileSettings* GetCachedPlayerProfile(int ControllerId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.GetCachedPlayerProfile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28768);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class OnlineProfileSettings**)&params[4];
 		}
 		class OnlinePlayerStorage* GetCachedPlayerStorage(int ControllerId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlayerData.GetCachedPlayerStorage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28774);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class OnlinePlayerStorage**)&params[4];
 		}

@@ -17,24 +17,24 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fSpeedCapThreshold, 2196)
 		ADD_STRUCT(float, m_fLastActivationTimestamp, 2192)
 		ADD_STRUCT(float, m_fCooldownTime, 2188)
-		ADD_STRUCT(Object::Vector, m_vBlinkImpulse, 2168)
-		Object::Vector GetBlinkImpulse()
+		ADD_STRUCT(Vector, m_vBlinkImpulse, 2168)
+		Vector GetBlinkImpulse()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Blink.GetBlinkImpulse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(76587);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
 		void ToggleActivate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Blink.ToggleActivate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81098);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnBlink(float PercentEffectiveness)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Blink.OnBlink");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81101);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = PercentEffectiveness;
+			*(float*)params = PercentEffectiveness;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -26,17 +26,17 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementProvider, 120)
 		int GetProviderCount(ScriptName ProviderTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetProviderCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28789);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		bool GetResourceProviders(ScriptName ProviderTag, ScriptArray<class UIResourceDataProvider*>& out_Providers)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetResourceProviders");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28792);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			*(ScriptArray<class UIResourceDataProvider*>*)&params[8] = out_Providers;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			out_Providers = *(ScriptArray<class UIResourceDataProvider*>*)&params[8];
@@ -44,9 +44,9 @@ namespace UnrealScript
 		}
 		bool GetResourceProviderFields(ScriptName ProviderTag, ScriptArray<ScriptName>& ProviderFieldTags)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetResourceProviderFields");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28797);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			*(ScriptArray<ScriptName>*)&params[8] = ProviderFieldTags;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ProviderFieldTags = *(ScriptArray<ScriptName>*)&params[8];
@@ -54,9 +54,9 @@ namespace UnrealScript
 		}
 		bool GetProviderFieldValue(ScriptName ProviderTag, ScriptName SearchField, int ProviderIndex, UIRoot::UIProviderScriptFieldValue& out_FieldValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetProviderFieldValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28802);
 			byte params[108] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			*(ScriptName*)&params[8] = SearchField;
 			*(int*)&params[16] = ProviderIndex;
 			*(UIRoot::UIProviderScriptFieldValue*)&params[20] = out_FieldValue;
@@ -66,9 +66,9 @@ namespace UnrealScript
 		}
 		int FindProviderIndexByFieldValue(ScriptName ProviderTag, ScriptName SearchField, UIRoot::UIProviderScriptFieldValue& ValueToSearchFor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.FindProviderIndexByFieldValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28808);
 			byte params[104] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			*(ScriptName*)&params[8] = SearchField;
 			*(UIRoot::UIProviderScriptFieldValue*)&params[16] = ValueToSearchFor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -77,9 +77,9 @@ namespace UnrealScript
 		}
 		bool GetPlaylistProvider(ScriptName ProviderTag, int ProviderIndex, class UIResourceDataProvider*& out_Provider)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetPlaylistProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28813);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			*(int*)&params[8] = ProviderIndex;
 			*(class UIResourceDataProvider**)&params[12] = out_Provider;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -88,9 +88,9 @@ namespace UnrealScript
 		}
 		class OnlinePlaylistProvider* GetOnlinePlaylistProvider(ScriptName ProviderTag, int PlaylistId, int& ProviderIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlinePlaylists.GetOnlinePlaylistProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28818);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			*(int*)&params[8] = PlaylistId;
 			*(int*)&params[12] = ProviderIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

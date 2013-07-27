@@ -32,8 +32,8 @@ namespace UnrealScript
 		ADD_STRUCT(float, TimeToRespawn, 588)
 		ADD_OBJECT(StaticMesh, RespawnStaticMesh, 584)
 		ADD_STRUCT(float, RespawnTime, 580)
-		ADD_STRUCT(Object::Vector, SpawnPhysMeshAngularVel, 568)
-		ADD_STRUCT(Object::Vector, SpawnPhysMeshLinearVel, 556)
+		ADD_STRUCT(Vector, SpawnPhysMeshAngularVel, 568)
+		ADD_STRUCT(Vector, SpawnPhysMeshLinearVel, 556)
 		ADD_STRUCT(float, SpawnPhysMeshLifeSpan, 552)
 		ADD_OBJECT(StaticMesh, SpawnPhysMesh, 548)
 		ADD_OBJECT(ParticleSystem, ParticlesOnDestroy, 544)
@@ -45,27 +45,27 @@ namespace UnrealScript
 		ADD_BOOL(bDestroyOnDamage, 532, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49255);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void GoBoom()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.GoBoom");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49256);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RespawnDestructible()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.RespawnDestructible");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49258);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.TakeDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49259);
 			byte params[68] = { NULL };
-			*(int*)&params[0] = DamageAmount;
+			*(int*)params = DamageAmount;
 			*(class Controller**)&params[4] = EventInstigator;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = Momentum;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = Momentum;
 			*(ScriptClass**)&params[32] = DamageType;
 			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
 			*(class Actor**)&params[64] = DamageCauser;
@@ -73,21 +73,21 @@ namespace UnrealScript
 		}
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49267);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CheckRespawn()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSimpleDestroyable.CheckRespawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49272);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

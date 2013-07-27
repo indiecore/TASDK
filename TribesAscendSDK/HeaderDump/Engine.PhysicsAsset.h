@@ -25,9 +25,9 @@ namespace UnrealScript
 		ADD_OBJECT(SkeletalMesh, DefaultSkelMesh, 60)
 		int FindBodyIndex(ScriptName BodyName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicsAsset.FindBodyIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24337);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = BodyName;
+			*(ScriptName*)params = BodyName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}

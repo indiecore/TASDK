@@ -40,17 +40,17 @@ namespace UnrealScript
 	class SkeletalMeshActor : public Actor
 	{
 	public:
-		class SkelMeshActorControlTarget
+		struct SkelMeshActorControlTarget
 		{
 		public:
 			ADD_OBJECT(Actor, TargetActor, 8)
 			ADD_STRUCT(ScriptName, ControlName, 0)
 		};
-		class CheckpointRecord
+		struct CheckpointRecord
 		{
 		public:
-			ADD_STRUCT(Object::Rotator, Rotation, 16)
-			ADD_STRUCT(Object::Vector, Location, 4)
+			ADD_STRUCT(Rotator, Rotation, 16)
+			ADD_STRUCT(Vector, Location, 4)
 			ADD_BOOL(bSavedPosition, 0, 0x4)
 			ADD_BOOL(bHidden, 0, 0x2)
 			ADD_BOOL(bReplicated, 0, 0x1)
@@ -67,59 +67,59 @@ namespace UnrealScript
 		ADD_BOOL(bDamageAppliesImpulse, 476, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26654);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26655);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateAnimSetList()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.UpdateAnimSetList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26656);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26657);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26659);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnSetMaterial(class SeqAct_SetMaterial* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.OnSetMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26662);
 			byte params[4] = { NULL };
-			*(class SeqAct_SetMaterial**)&params[0] = Action;
+			*(class SeqAct_SetMaterial**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BeginAnimControl(class InterpGroup* InInterpGroup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.BeginAnimControl");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26664);
 			byte params[4] = { NULL };
-			*(class InterpGroup**)&params[0] = InInterpGroup;
+			*(class InterpGroup**)params = InInterpGroup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MAT_BeginAnimControl(class InterpGroup* InInterpGroup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.MAT_BeginAnimControl");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26666);
 			byte params[4] = { NULL };
-			*(class InterpGroup**)&params[0] = InInterpGroup;
+			*(class InterpGroup**)params = InInterpGroup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAnimPosition(ScriptName SlotName, int ChannelIndex, ScriptName InAnimSeqName, float InPosition, bool bFireNotifies, bool bLooping, bool bEnableRootMotion)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.SetAnimPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26668);
 			byte params[36] = { NULL };
-			*(ScriptName*)&params[0] = SlotName;
+			*(ScriptName*)params = SlotName;
 			*(int*)&params[8] = ChannelIndex;
 			*(ScriptName*)&params[12] = InAnimSeqName;
 			*(float*)&params[20] = InPosition;
@@ -130,23 +130,23 @@ namespace UnrealScript
 		}
 		void FinishAnimControl(class InterpGroup* InInterpGroup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.FinishAnimControl");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26677);
 			byte params[4] = { NULL };
-			*(class InterpGroup**)&params[0] = InInterpGroup;
+			*(class InterpGroup**)params = InInterpGroup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MAT_FinishAnimControl(class InterpGroup* InInterpGroup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.MAT_FinishAnimControl");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26679);
 			byte params[4] = { NULL };
-			*(class InterpGroup**)&params[0] = InInterpGroup;
+			*(class InterpGroup**)params = InInterpGroup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool PlayActorFaceFXAnim(class FaceFXAnimSet* AnimSet, ScriptString* GroupName, ScriptString* SeqName, class SoundCue* SoundCueToPlay)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.PlayActorFaceFXAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26681);
 			byte params[36] = { NULL };
-			*(class FaceFXAnimSet**)&params[0] = AnimSet;
+			*(class FaceFXAnimSet**)params = AnimSet;
 			*(ScriptString**)&params[4] = GroupName;
 			*(ScriptString**)&params[16] = SeqName;
 			*(class SoundCue**)&params[28] = SoundCueToPlay;
@@ -155,78 +155,78 @@ namespace UnrealScript
 		}
 		void StopActorFaceFXAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.StopActorFaceFXAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26687);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* GetFaceFXAudioComponent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.GetFaceFXAudioComponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26688);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0];
+void**)params;
 		}
 		void OnPlayFaceFXAnim(class SeqAct_PlayFaceFXAnim* inAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.OnPlayFaceFXAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26690);
 			byte params[4] = { NULL };
-			*(class SeqAct_PlayFaceFXAnim**)&params[0] = inAction;
+			*(class SeqAct_PlayFaceFXAnim**)params = inAction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class FaceFXAsset* GetActorFaceFXAsset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.GetActorFaceFXAsset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26693);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class FaceFXAsset**)&params[0];
+			return *(class FaceFXAsset**)params;
 		}
 		bool IsActorPlayingFaceFXAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.IsActorPlayingFaceFXAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26695);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void OnSetMesh(class SeqAct_SetMesh* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.OnSetMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26697);
 			byte params[4] = { NULL };
-			*(class SeqAct_SetMesh**)&params[0] = Action;
+			*(class SeqAct_SetMesh**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUpdatePhysBonesFromAnim(class SeqAct_UpdatePhysBonesFromAnim* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.OnUpdatePhysBonesFromAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26699);
 			byte params[4] = { NULL };
-			*(class SeqAct_UpdatePhysBonesFromAnim**)&params[0] = Action;
+			*(class SeqAct_UpdatePhysBonesFromAnim**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnSetSkelControlTarget(class SeqAct_SetSkelControlTarget* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.OnSetSkelControlTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26701);
 			byte params[4] = { NULL };
-			*(class SeqAct_SetSkelControlTarget**)&params[0] = Action;
+			*(class SeqAct_SetSkelControlTarget**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DoKismetAttachment(class Actor* Attachment, class SeqAct_AttachToActor* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.DoKismetAttachment");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26704);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Attachment;
+			*(class Actor**)params = Attachment;
 			*(class SeqAct_AttachToActor**)&params[4] = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeDamage(int Damage, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.TakeDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26711);
 			byte params[68] = { NULL };
-			*(int*)&params[0] = Damage;
+			*(int*)params = Damage;
 			*(class Controller**)&params[4] = EventInstigator;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = Momentum;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = Momentum;
 			*(ScriptClass**)&params[32] = DamageType;
 			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
 			*(class Actor**)&params[64] = DamageCauser;
@@ -234,32 +234,32 @@ void**)&params[0];
 		}
 		bool ShouldSaveForCheckpoint()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.ShouldSaveForCheckpoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26720);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void CreateCheckpointRecord(SkeletalMeshActor::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.CreateCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26722);
 			byte params[28] = { NULL };
-			*(SkeletalMeshActor::CheckpointRecord*)&params[0] = Record;
+			*(SkeletalMeshActor::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(SkeletalMeshActor::CheckpointRecord*)&params[0];
+			Record = *(SkeletalMeshActor::CheckpointRecord*)params;
 		}
 		void ApplyCheckpointRecord(SkeletalMeshActor::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.ApplyCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26724);
 			byte params[28] = { NULL };
-			*(SkeletalMeshActor::CheckpointRecord*)&params[0] = Record;
+			*(SkeletalMeshActor::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(SkeletalMeshActor::CheckpointRecord*)&params[0];
+			Record = *(SkeletalMeshActor::CheckpointRecord*)params;
 		}
 		bool PlayParticleEffect(class AnimNotify_PlayParticleEffect* AnimNotifyData)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.PlayParticleEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26726);
 			byte params[8] = { NULL };
-			*(class AnimNotify_PlayParticleEffect**)&params[0] = AnimNotifyData;
+			*(class AnimNotify_PlayParticleEffect**)params = AnimNotifyData;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
@@ -267,18 +267,18 @@ void**)&params[0];
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* PSC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.SkelMeshActorOnParticleSystemFinished");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26732);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = PSC;
+void**)params = PSC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CreateForceField(class AnimNotify_ForceField* AnimNotifyData)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActor.CreateForceField");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26734);
 			byte params[8] = { NULL };
-			*(class AnimNotify_ForceField**)&params[0] = AnimNotifyData;
+			*(class AnimNotify_ForceField**)params = AnimNotifyData;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

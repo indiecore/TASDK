@@ -14,7 +14,7 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, Target, 208)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqCond_CheckWeapon.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49167);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

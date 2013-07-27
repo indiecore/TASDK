@@ -12,14 +12,14 @@ namespace UnrealScript
 		ADD_STRUCT(float, DurationOfMITV, 232)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_MITV_Activate.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25763);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_MITV_Activate.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25765);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

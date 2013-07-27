@@ -62,133 +62,133 @@ namespace UnrealScript
 		ADD_OBJECT(PlayerController, PC, 60)
 		void gmMatchForce(int nQueueId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.gmMatchForce");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34397);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = nQueueId;
+			*(int*)params = nQueueId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void gmMatchNext(int nMapId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.gmMatchNext");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34399);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = nMapId;
+			*(int*)params = nMapId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void gmCommand(ScriptString* sCommand)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.gmCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34401);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = sCommand;
+			*(ScriptString**)params = sCommand;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void gmC(ScriptString* sCommand)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.gmC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34403);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = sCommand;
+			*(ScriptString**)params = sCommand;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GPerfDebugFeet(int feet)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.GPerfDebugFeet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34405);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = feet;
+			*(int*)params = feet;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GPerfDebugSkips(int skips)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.GPerfDebugSkips");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34407);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = skips;
+			*(int*)params = skips;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GPerfDebugRelevMode(int Mode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.GPerfDebugRelevMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34409);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Mode;
+			*(int*)params = Mode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void scLog(ScriptString* LogName, bool bEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.scLog");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34411);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = LogName;
+			*(ScriptString**)params = LogName;
 			*(bool*)&params[12] = bEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void scLogMark(ScriptString* Comment)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.scLogMark");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34415);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Comment;
+			*(ScriptString**)params = Comment;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void scStartGame(ScriptString* Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.scStartGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34417);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Reason;
+			*(ScriptString**)params = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void scEndGame(ScriptString* Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.scEndGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34420);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Reason;
+			*(ScriptString**)params = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void scScore(int nTeam, int nCount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.scScore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34423);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = nTeam;
+			*(int*)params = nTeam;
 			*(int*)&params[4] = nCount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void scTime(int nSeconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.scTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34427);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = nSeconds;
+			*(int*)params = nSeconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void scTimer(ScriptString* sCommand)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.scTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34430);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = sCommand;
+			*(ScriptString**)params = sCommand;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void scDemoRec()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.scDemoRec");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34433);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void scDemoStop()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.scDemoStop");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34434);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void scPerfDebugFeet(int feet)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.scPerfDebugFeet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34435);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = feet;
+			*(int*)params = feet;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void scPerfDebugSkip(int skips)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.scPerfDebugSkip");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34437);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = skips;
+			*(int*)params = skips;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void scPerfDebugRelevMode(int Mode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function PlatformCommon.TgSupportCommands.scPerfDebugRelevMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34439);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Mode;
+			*(int*)params = Mode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

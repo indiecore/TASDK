@@ -64,7 +64,7 @@ namespace UnrealScript
 			RIF_Linear = 1,
 			RIF_MAX = 2,
 		};
-		class RBCollisionChannelContainer
+		struct RBCollisionChannelContainer
 		{
 		public:
 			ADD_BOOL(Default, 0, 0x1)
@@ -87,7 +87,7 @@ namespace UnrealScript
 			ADD_BOOL(Clothing, 0, 0x20000)
 			ADD_BOOL(ClothingCollision, 0, 0x40000)
 		};
-		class MaterialViewRelevance
+		struct MaterialViewRelevance
 		{
 		public:
 			ADD_BOOL(bOpaque, 0, 0x1)
@@ -189,372 +189,372 @@ void*>, DecalsToReattach, 240)
 		ADD_OBJECT(PhysicalMaterial, PhysMaterialOverride, 348)
 		ADD_OBJECT(RB_BodyInstance, BodyInstance, 352)
 		ADD_STRUCT(Object::Matrix, CachedParentToWorld, 368)
-		ADD_STRUCT(Object::Vector, Translation, 432)
-		ADD_STRUCT(Object::Rotator, Rotation, 444)
+		ADD_STRUCT(Vector, Translation, 432)
+		ADD_STRUCT(Rotator, Rotation, 444)
 		ADD_STRUCT(float, Scale, 456)
-		ADD_STRUCT(Object::Vector, Scale3D, 460)
+		ADD_STRUCT(Vector, Scale3D, 460)
 		ADD_STRUCT(float, BoundsScale, 472)
 		ADD_STRUCT(float, LastSubmitTime, 476)
 		ADD_STRUCT(float, LastRenderTime, 480)
 		ADD_STRUCT(float, ScriptRigidBodyCollisionThreshold, 484)
 		void SetBlockRigidBody(bool bNewBlockRigidBody)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetBlockRigidBody");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4339);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewBlockRigidBody;
+			*(bool*)params = bNewBlockRigidBody;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetRBLinearVelocity(Object::Vector NewVel, bool bAddToCurrent)
+		void SetRBLinearVelocity(Vector NewVel, bool bAddToCurrent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBLinearVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4385);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = NewVel;
+			*(Vector*)params = NewVel;
 			*(bool*)&params[12] = bAddToCurrent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddImpulse(Object::Vector Impulse, Object::Vector Position, ScriptName BoneName, bool bVelChange)
+		void AddImpulse(Vector Impulse, Vector Position, ScriptName BoneName, bool bVelChange)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.AddImpulse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4749);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = Impulse;
-			*(Object::Vector*)&params[12] = Position;
+			*(Vector*)params = Impulse;
+			*(Vector*)&params[12] = Position;
 			*(ScriptName*)&params[24] = BoneName;
 			*(bool*)&params[32] = bVelChange;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddRadialImpulse(Object::Vector Origin, float Radius, float Strength, PrimitiveComponent::ERadialImpulseFalloff Falloff, bool bVelChange)
+		void AddRadialImpulse(Vector Origin, float Radius, float Strength, PrimitiveComponent::ERadialImpulseFalloff Falloff, bool bVelChange)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.AddRadialImpulse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4754);
 			byte params[25] = { NULL };
-			*(Object::Vector*)&params[0] = Origin;
+			*(Vector*)params = Origin;
 			*(float*)&params[12] = Radius;
 			*(float*)&params[16] = Strength;
 			*(PrimitiveComponent::ERadialImpulseFalloff*)&params[20] = Falloff;
 			*(bool*)&params[24] = bVelChange;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddForce(Object::Vector Force, Object::Vector Position, ScriptName BoneName)
+		void AddForce(Vector Force, Vector Position, ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.AddForce");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4760);
 			byte params[32] = { NULL };
-			*(Object::Vector*)&params[0] = Force;
-			*(Object::Vector*)&params[12] = Position;
+			*(Vector*)params = Force;
+			*(Vector*)&params[12] = Position;
 			*(ScriptName*)&params[24] = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddRadialForce(Object::Vector Origin, float Radius, float Strength, PrimitiveComponent::ERadialImpulseFalloff Falloff)
+		void AddRadialForce(Vector Origin, float Radius, float Strength, PrimitiveComponent::ERadialImpulseFalloff Falloff)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.AddRadialForce");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4764);
 			byte params[21] = { NULL };
-			*(Object::Vector*)&params[0] = Origin;
+			*(Vector*)params = Origin;
 			*(float*)&params[12] = Radius;
 			*(float*)&params[16] = Strength;
 			*(PrimitiveComponent::ERadialImpulseFalloff*)&params[20] = Falloff;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddTorque(Object::Vector Torque, ScriptName BoneName)
+		void AddTorque(Vector Torque, ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.AddTorque");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4769);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = Torque;
+			*(Vector*)params = Torque;
 			*(ScriptName*)&params[12] = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetRBAngularVelocity(Object::Vector NewAngVel, bool bAddToCurrent)
+		void SetRBAngularVelocity(Vector NewAngVel, bool bAddToCurrent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBAngularVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4774);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = NewAngVel;
+			*(Vector*)params = NewAngVel;
 			*(bool*)&params[12] = bAddToCurrent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void RetardRBLinearVelocity(Object::Vector RetardDir, float VelScale)
+		void RetardRBLinearVelocity(Vector RetardDir, float VelScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.RetardRBLinearVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4777);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = RetardDir;
+			*(Vector*)params = RetardDir;
 			*(float*)&params[12] = VelScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetRBPosition(Object::Vector NewPos, ScriptName BoneName)
+		void SetRBPosition(Vector NewPos, ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4780);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = NewPos;
+			*(Vector*)params = NewPos;
 			*(ScriptName*)&params[12] = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetRBRotation(Object::Rotator NewRot, ScriptName BoneName)
+		void SetRBRotation(Rotator NewRot, ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4783);
 			byte params[20] = { NULL };
-			*(Object::Rotator*)&params[0] = NewRot;
+			*(Rotator*)params = NewRot;
 			*(ScriptName*)&params[12] = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void WakeRigidBody(ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.WakeRigidBody");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4786);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PutRigidBodyToSleep(ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.PutRigidBodyToSleep");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4788);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool RigidBodyIsAwake(ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.RigidBodyIsAwake");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4790);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void SetRBCollidesWithChannel(PrimitiveComponent::ERBCollisionChannel Channel, bool bNewCollides)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBCollidesWithChannel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4794);
 			byte params[5] = { NULL };
-			*(PrimitiveComponent::ERBCollisionChannel*)&params[0] = Channel;
+			*(PrimitiveComponent::ERBCollisionChannel*)params = Channel;
 			*(bool*)&params[4] = bNewCollides;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetRBCollisionChannels(PrimitiveComponent::RBCollisionChannelContainer Channels)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBCollisionChannels");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4797);
 			byte params[4] = { NULL };
-			*(PrimitiveComponent::RBCollisionChannelContainer*)&params[0] = Channels;
+			*(PrimitiveComponent::RBCollisionChannelContainer*)params = Channels;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetRBChannel(PrimitiveComponent::ERBCollisionChannel Channel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBChannel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4818);
 			byte params[1] = { NULL };
-			*(PrimitiveComponent::ERBCollisionChannel*)&params[0] = Channel;
+			*(PrimitiveComponent::ERBCollisionChannel*)params = Channel;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetNotifyRigidBodyCollision(bool bNewNotifyRigidBodyCollision)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetNotifyRigidBodyCollision");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4820);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewNotifyRigidBodyCollision;
+			*(bool*)params = bNewNotifyRigidBodyCollision;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InitRBPhys()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.InitRBPhys");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4822);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPhysMaterialOverride(class PhysicalMaterial* NewPhysMaterial)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetPhysMaterialOverride");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4823);
 			byte params[4] = { NULL };
-			*(class PhysicalMaterial**)&params[0] = NewPhysMaterial;
+			*(class PhysicalMaterial**)params = NewPhysMaterial;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class RB_BodyInstance* GetRootBodyInstance()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.GetRootBodyInstance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4825);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class RB_BodyInstance**)&params[0];
+			return *(class RB_BodyInstance**)params;
 		}
 		void SetRBDominanceGroup(byte InDomGroup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRBDominanceGroup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4827);
 			byte params[1] = { NULL };
-			params[0] = InDomGroup;
+			*params = InDomGroup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ShouldComponentAddToScene()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.ShouldComponentAddToScene");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4829);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SetHidden(bool NewHidden)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetHidden");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4831);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = NewHidden;
+			*(bool*)params = NewHidden;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetOwnerNoSee(bool bNewOwnerNoSee)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetOwnerNoSee");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4833);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewOwnerNoSee;
+			*(bool*)params = bNewOwnerNoSee;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetOnlyOwnerSee(bool bNewOnlyOwnerSee)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetOnlyOwnerSee");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4835);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewOnlyOwnerSee;
+			*(bool*)params = bNewOnlyOwnerSee;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetIgnoreOwnerHidden(bool bNewIgnoreOwnerHidden)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetIgnoreOwnerHidden");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4837);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewIgnoreOwnerHidden;
+			*(bool*)params = bNewIgnoreOwnerHidden;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetShadowParent(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* NewShadowParent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetShadowParent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4839);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = NewShadowParent;
+void**)params = NewShadowParent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLightEnvironment(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* NewLightEnvironment)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetLightEnvironment");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4841);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = NewLightEnvironment;
+void**)params = NewLightEnvironment;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetCullDistance(float NewCullDistance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetCullDistance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4843);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = NewCullDistance;
+			*(float*)params = NewCullDistance;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLightingChannels(LightComponent::LightingChannelContainer NewLightingChannels)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetLightingChannels");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4873);
 			byte params[4] = { NULL };
-			*(LightComponent::LightingChannelContainer*)&params[0] = NewLightingChannels;
+			*(LightComponent::LightingChannelContainer*)params = NewLightingChannels;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetDepthPriorityGroup(Scene::ESceneDepthPriorityGroup NewDepthPriorityGroup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetDepthPriorityGroup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4875);
 			byte params[1] = { NULL };
-			*(Scene::ESceneDepthPriorityGroup*)&params[0] = NewDepthPriorityGroup;
+			*(Scene::ESceneDepthPriorityGroup*)params = NewDepthPriorityGroup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetViewOwnerDepthPriorityGroup(bool bNewUseViewOwnerDepthPriorityGroup, Scene::ESceneDepthPriorityGroup NewViewOwnerDepthPriorityGroup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetViewOwnerDepthPriorityGroup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4877);
 			byte params[5] = { NULL };
-			*(bool*)&params[0] = bNewUseViewOwnerDepthPriorityGroup;
+			*(bool*)params = bNewUseViewOwnerDepthPriorityGroup;
 			*(Scene::ESceneDepthPriorityGroup*)&params[4] = NewViewOwnerDepthPriorityGroup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetTraceBlocking(bool NewBlockZeroExtent, bool NewBlockNonZeroExtent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetTraceBlocking");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4880);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = NewBlockZeroExtent;
+			*(bool*)params = NewBlockZeroExtent;
 			*(bool*)&params[4] = NewBlockNonZeroExtent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetActorCollision(bool NewCollideActors, bool NewBlockActors, bool NewAlwaysCheckCollision)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetActorCollision");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4883);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = NewCollideActors;
+			*(bool*)params = NewCollideActors;
 			*(bool*)&params[4] = NewBlockActors;
 			*(bool*)&params[8] = NewAlwaysCheckCollision;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetTranslation(Object::Vector NewTranslation)
+		void SetTranslation(Vector NewTranslation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetTranslation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4887);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewTranslation;
+			*(Vector*)params = NewTranslation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetRotation(Object::Rotator NewRotation)
+		void SetRotation(Rotator NewRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4889);
 			byte params[12] = { NULL };
-			*(Object::Rotator*)&params[0] = NewRotation;
+			*(Rotator*)params = NewRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetScale(float NewScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4891);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = NewScale;
+			*(float*)params = NewScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetScale3D(Object::Vector NewScale3D)
+		void SetScale3D(Vector NewScale3D)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetScale3D");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4893);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewScale3D;
+			*(Vector*)params = NewScale3D;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAbsolute(bool NewAbsoluteTranslation, bool NewAbsoluteRotation, bool NewAbsoluteScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.SetAbsolute");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4895);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = NewAbsoluteTranslation;
+			*(bool*)params = NewAbsoluteTranslation;
 			*(bool*)&params[4] = NewAbsoluteRotation;
 			*(bool*)&params[8] = NewAbsoluteScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Object::Vector GetPosition()
+		Vector GetPosition()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.GetPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4899);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
-		Object::Rotator GetRotation()
+		Rotator GetRotation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.GetRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4903);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[0];
+			return *(Rotator*)params;
 		}
-		PrimitiveComponent::GJKResult ClosestPointOnComponentToPoint(Object::Vector& POI, Object::Vector& Extent, Object::Vector& OutPointA, Object::Vector& OutPointB)
+		PrimitiveComponent::GJKResult ClosestPointOnComponentToPoint(Vector& POI, Vector& Extent, Vector& OutPointA, Vector& OutPointB)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.ClosestPointOnComponentToPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4905);
 			byte params[49] = { NULL };
-			*(Object::Vector*)&params[0] = POI;
-			*(Object::Vector*)&params[12] = Extent;
-			*(Object::Vector*)&params[24] = OutPointA;
-			*(Object::Vector*)&params[36] = OutPointB;
+			*(Vector*)params = POI;
+			*(Vector*)&params[12] = Extent;
+			*(Vector*)&params[24] = OutPointA;
+			*(Vector*)&params[36] = OutPointB;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			POI = *(Object::Vector*)&params[0];
-			Extent = *(Object::Vector*)&params[12];
-			OutPointA = *(Object::Vector*)&params[24];
-			OutPointB = *(Object::Vector*)&params[36];
+			POI = *(Vector*)params;
+			Extent = *(Vector*)&params[12];
+			OutPointA = *(Vector*)&params[24];
+			OutPointB = *(Vector*)&params[36];
 			return *(PrimitiveComponent::GJKResult*)&params[48];
 		}
 		PrimitiveComponent::GJKResult ClosestPointOnComponentToComponent(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void*& OtherComponent, Object::Vector& PointOnComponentA, Object::Vector& PointOnComponentB)
+void*& OtherComponent, Vector& PointOnComponentA, Vector& PointOnComponentB)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrimitiveComponent.ClosestPointOnComponentToComponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4911);
 			byte params[29] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = OtherComponent;
-			*(Object::Vector*)&params[4] = PointOnComponentA;
-			*(Object::Vector*)&params[16] = PointOnComponentB;
+void**)params = OtherComponent;
+			*(Vector*)&params[4] = PointOnComponentA;
+			*(Vector*)&params[16] = PointOnComponentB;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OtherComponent = *(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0];
-			PointOnComponentA = *(Object::Vector*)&params[4];
-			PointOnComponentB = *(Object::Vector*)&params[16];
+void**)params;
+			PointOnComponentA = *(Vector*)&params[4];
+			PointOnComponentB = *(Vector*)&params[16];
 			return *(PrimitiveComponent::GJKResult*)&params[28];
 		}
 	};

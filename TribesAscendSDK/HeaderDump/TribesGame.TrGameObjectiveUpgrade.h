@@ -20,9 +20,9 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, m_ClassPropertyPointer, 72)
 		void InitUpgrade(class TrGameObjective* OwnerObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGameObjectiveUpgrade.InitUpgrade");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(91139);
 			byte params[4] = { NULL };
-			*(class TrGameObjective**)&params[0] = OwnerObject;
+			*(class TrGameObjective**)params = OwnerObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

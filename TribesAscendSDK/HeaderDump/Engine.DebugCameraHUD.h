@@ -7,16 +7,16 @@ namespace UnrealScript
 	public:
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraHUD.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13874);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool DisplayMaterials(float X, float& Y, float DY, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* MeshComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraHUD.DisplayMaterials");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13875);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = X;
+			*(float*)params = X;
 			*(float*)&params[4] = Y;
 			*(float*)&params[8] = DY;
 			*(
@@ -28,7 +28,7 @@ void**)&params[12] = MeshComp;
 		}
 		void PostRender()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DebugCameraHUD.PostRender");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13884);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

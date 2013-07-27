@@ -90,26 +90,26 @@ namespace UnrealScript
 			MDSM_Substract = 1,
 			MDSM_MAX = 2,
 		};
-		class BonePair
+		struct BonePair
 		{
 		public:
 			ADD_STRUCT(ScriptName, Bones, 0)
 		};
-		class Attachment
+		struct Attachment
 		{
 		public:
 			ADD_STRUCT(ScriptName, BoneName, 4)
-			ADD_STRUCT(Object::Vector, RelativeLocation, 12)
-			ADD_STRUCT(Object::Rotator, RelativeRotation, 24)
-			ADD_STRUCT(Object::Vector, RelativeScale, 36)
+			ADD_STRUCT(Vector, RelativeLocation, 12)
+			ADD_STRUCT(Rotator, RelativeRotation, 24)
+			ADD_STRUCT(Vector, RelativeScale, 36)
 		};
-		class ActiveMorph
+		struct ActiveMorph
 		{
 		public:
 			ADD_OBJECT(MorphTarget, Target, 0)
 			ADD_STRUCT(float, Weight, 4)
 		};
-		class SkelMeshComponentLODInfo
+		struct SkelMeshComponentLODInfo
 		{
 		public:
 			ADD_STRUCT(SkeletalMeshComponent::EInstanceWeightUsage, InstanceWeightUsage, 16)
@@ -203,7 +203,7 @@ namespace UnrealScript
 		ADD_BOOL(bChartDistanceFactor, 944, 0x8000000)
 		ADD_BOOL(bEnableLineCheckWithBounds, 944, 0x10000000)
 		ADD_BOOL(bCanHighlightSelectedSections, 944, 0x20000000)
-		ADD_STRUCT(Object::Vector, LineCheckBoundsScale, 948)
+		ADD_STRUCT(Vector, LineCheckBoundsScale, 948)
 		ADD_BOOL(bEnableClothSimulation, 960, 0x1)
 		ADD_BOOL(bDisableClothCollision, 960, 0x2)
 		ADD_BOOL(bClothFrozen, 960, 0x4)
@@ -223,30 +223,30 @@ namespace UnrealScript
 		ADD_BOOL(bUpdateComposeSkeletonPasses, 960, 0x10000)
 		ADD_BOOL(bValidTemporarySavedAnimSets, 960, 0x20000)
 		ADD_STRUCT(ScriptArray<SkeletalMeshComponent::BonePair>, InstanceVertexWeightBones, 964)
-		ADD_STRUCT(Object::Vector, FrozenLocalToWorldPos, 988)
-		ADD_STRUCT(Object::Rotator, FrozenLocalToWorldRot, 1000)
-		ADD_STRUCT(Object::Vector, ClothExternalForce, 1012)
-		ADD_STRUCT(Object::Vector, ClothWind, 1024)
-		ADD_STRUCT(Object::Vector, ClothBaseVelClampRange, 1036)
+		ADD_STRUCT(Vector, FrozenLocalToWorldPos, 988)
+		ADD_STRUCT(Rotator, FrozenLocalToWorldRot, 1000)
+		ADD_STRUCT(Vector, ClothExternalForce, 1012)
+		ADD_STRUCT(Vector, ClothWind, 1024)
+		ADD_STRUCT(Vector, ClothBaseVelClampRange, 1036)
 		ADD_STRUCT(float, ClothBlendWeight, 1048)
 		ADD_STRUCT(float, ClothDynamicBlendWeight, 1052)
 		ADD_STRUCT(float, ClothBlendMinDistanceFactor, 1056)
 		ADD_STRUCT(float, ClothBlendMaxDistanceFactor, 1060)
-		ADD_STRUCT(Object::Vector, MinPosDampRange, 1064)
-		ADD_STRUCT(Object::Vector, MaxPosDampRange, 1076)
-		ADD_STRUCT(Object::Vector, MinPosDampScale, 1088)
-		ADD_STRUCT(Object::Vector, MaxPosDampScale, 1100)
+		ADD_STRUCT(Vector, MinPosDampRange, 1064)
+		ADD_STRUCT(Vector, MaxPosDampRange, 1076)
+		ADD_STRUCT(Vector, MinPosDampScale, 1088)
+		ADD_STRUCT(Vector, MaxPosDampScale, 1100)
 		ADD_STRUCT(Object::Pointer, ClothSim, 1112)
 		ADD_STRUCT(int, SceneIndex, 1116)
-		ADD_STRUCT(ScriptArray<Object::Vector>, ClothMeshPosData, 1120)
-		ADD_STRUCT(ScriptArray<Object::Vector>, ClothMeshNormalData, 1132)
+		ADD_STRUCT(ScriptArray<Vector>, ClothMeshPosData, 1120)
+		ADD_STRUCT(ScriptArray<Vector>, ClothMeshNormalData, 1132)
 		ADD_STRUCT(ScriptArray<int>, ClothMeshIndexData, 1144)
 		ADD_STRUCT(int, NumClothMeshVerts, 1156)
 		ADD_STRUCT(int, NumClothMeshIndices, 1160)
 		ADD_STRUCT(ScriptArray<int>, ClothMeshParentData, 1164)
 		ADD_STRUCT(int, NumClothMeshParentIndices, 1176)
-		ADD_STRUCT(ScriptArray<Object::Vector>, ClothMeshWeldedPosData, 1180)
-		ADD_STRUCT(ScriptArray<Object::Vector>, ClothMeshWeldedNormalData, 1192)
+		ADD_STRUCT(ScriptArray<Vector>, ClothMeshWeldedPosData, 1180)
+		ADD_STRUCT(ScriptArray<Vector>, ClothMeshWeldedNormalData, 1192)
 		ADD_STRUCT(ScriptArray<int>, ClothMeshWeldedIndexData, 1204)
 		ADD_STRUCT(int, ClothDirtyBufferFlag, 1216)
 		ADD_STRUCT(PrimitiveComponent::ERBCollisionChannel, ClothRBChannel, 1220)
@@ -256,17 +256,17 @@ namespace UnrealScript
 		ADD_STRUCT(float, ClothAttachmentTearFactor, 1236)
 		ADD_BOOL(bClothUseCompartment, 1240, 0x1)
 		ADD_STRUCT(float, MinDistanceForClothReset, 1244)
-		ADD_STRUCT(Object::Vector, LastClothLocation, 1248)
+		ADD_STRUCT(Vector, LastClothLocation, 1248)
 		ADD_STRUCT(PrimitiveComponent::ERBCollisionChannel, ApexClothingRBChannel, 1260)
 		ADD_STRUCT(PrimitiveComponent::RBCollisionChannelContainer, ApexClothingRBCollideWithChannels, 1264)
 		ADD_BOOL(bAutoFreezeApexClothingWhenNotRendered, 1268, 0x1)
-		ADD_STRUCT(Object::Vector, WindVelocity, 1272)
+		ADD_STRUCT(Vector, WindVelocity, 1272)
 		ADD_STRUCT(float, WindVelocityBlendTime, 1284)
 		ADD_BOOL(bSkipInitClothing, 1288, 0x1)
 		ADD_STRUCT(Object::Pointer, SoftBodySim, 1292)
 		ADD_STRUCT(int, SoftBodySceneIndex, 1296)
 		ADD_BOOL(bEnableSoftBodySimulation, 1300, 0x1)
-		ADD_STRUCT(ScriptArray<Object::Vector>, SoftBodyTetraPosData, 1304)
+		ADD_STRUCT(ScriptArray<Vector>, SoftBodyTetraPosData, 1304)
 		ADD_STRUCT(ScriptArray<int>, SoftBodyTetraIndexData, 1316)
 		ADD_STRUCT(int, NumSoftBodyTetraVerts, 1328)
 		ADD_STRUCT(int, NumSoftBodyTetraIndices, 1332)
@@ -280,9 +280,9 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, SoftBodyASVPlane, 1352)
 		ADD_OBJECT(Material, LimitMaterial, 1356)
 		ADD_STRUCT(Object::BoneAtom, RootMotionDelta, 1360)
-		ADD_STRUCT(Object::Vector, RootMotionVelocity, 1392)
-		ADD_STRUCT(Object::Vector, RootBoneTranslation, 1404)
-		ADD_STRUCT(Object::Vector, RootMotionAccelScale, 1416)
+		ADD_STRUCT(Vector, RootMotionVelocity, 1392)
+		ADD_STRUCT(Vector, RootBoneTranslation, 1404)
+		ADD_STRUCT(Vector, RootMotionAccelScale, 1416)
 		ADD_STRUCT(SkeletalMeshComponent::ERootMotionMode, RootMotionMode, 1428)
 		ADD_STRUCT(SkeletalMeshComponent::ERootMotionMode, PreviousRMM, 1429)
 		ADD_STRUCT(SkeletalMeshComponent::ERootMotionMode, PendingRMM, 1430)
@@ -297,68 +297,68 @@ namespace UnrealScript
 		ADD_STRUCT(byte, CustomSortAlternateIndexMode, 1508)
 		void AttachComponent(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* Component, ScriptName BoneName, Object::Vector RelativeLocation, Object::Rotator RelativeRotation, Object::Vector RelativeScale)
+void* Component, ScriptName BoneName, Vector RelativeLocation, Rotator RelativeRotation, Vector RelativeScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.AttachComponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6946);
 			byte params[48] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = Component;
+void**)params = Component;
 			*(ScriptName*)&params[4] = BoneName;
-			*(Object::Vector*)&params[12] = RelativeLocation;
-			*(Object::Rotator*)&params[24] = RelativeRotation;
-			*(Object::Vector*)&params[36] = RelativeScale;
+			*(Vector*)&params[12] = RelativeLocation;
+			*(Rotator*)&params[24] = RelativeRotation;
+			*(Vector*)&params[36] = RelativeScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DetachComponent(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* Component)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.DetachComponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6952);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = Component;
+void**)params = Component;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AttachComponentToSocket(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* Component, ScriptName SocketName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.AttachComponentToSocket");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6954);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = Component;
+void**)params = Component;
 			*(ScriptName*)&params[4] = SocketName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool GetSocketWorldLocationAndRotation(ScriptName InSocketName, Object::Vector& OutLocation, Object::Rotator& OutRotation, int Space)
+		bool GetSocketWorldLocationAndRotation(ScriptName InSocketName, Vector& OutLocation, Rotator& OutRotation, int Space)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetSocketWorldLocationAndRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6957);
 			byte params[40] = { NULL };
-			*(ScriptName*)&params[0] = InSocketName;
-			*(Object::Vector*)&params[8] = OutLocation;
-			*(Object::Rotator*)&params[20] = OutRotation;
+			*(ScriptName*)params = InSocketName;
+			*(Vector*)&params[8] = OutLocation;
+			*(Rotator*)&params[20] = OutRotation;
 			*(int*)&params[32] = Space;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutLocation = *(Object::Vector*)&params[8];
-			OutRotation = *(Object::Rotator*)&params[20];
+			OutLocation = *(Vector*)&params[8];
+			OutRotation = *(Rotator*)&params[20];
 			return *(bool*)&params[36];
 		}
 		class SkeletalMeshSocket* GetSocketByName(ScriptName InSocketName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetSocketByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6963);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = InSocketName;
+			*(ScriptName*)params = InSocketName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class SkeletalMeshSocket**)&params[8];
 		}
 		ScriptName GetSocketBoneName(ScriptName InSocketName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetSocketBoneName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6966);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = InSocketName;
+			*(ScriptName*)params = InSocketName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[8];
 		}
@@ -366,9 +366,9 @@ void**)&params[0] = Component;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* FindComponentAttachedToBone(ScriptName InBoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.FindComponentAttachedToBone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6969);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = InBoneName;
+			*(ScriptName*)params = InBoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
@@ -378,11 +378,11 @@ void**)&params[8];
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* Component, ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.IsComponentAttached");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6972);
 			byte params[16] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = Component;
+void**)params = Component;
 			*(ScriptName*)&params[4] = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
@@ -391,9 +391,9 @@ void**)&params[0] = Component;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void*& OutComponent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.AttachedComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6976);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = BaseClass;
+			*(ScriptClass**)params = BaseClass;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OutComponent;
@@ -404,616 +404,616 @@ void**)&params[4];
 		}
 		Object::Matrix GetTransformMatrix()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetTransformMatrix");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6979);
 			byte params[64] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Matrix*)&params[0];
+			return *(Object::Matrix*)params;
 		}
 		void SetSkeletalMesh(class SkeletalMesh* NewMesh, bool bKeepSpaceBases)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetSkeletalMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6981);
 			byte params[8] = { NULL };
-			*(class SkeletalMesh**)&params[0] = NewMesh;
+			*(class SkeletalMesh**)params = NewMesh;
 			*(bool*)&params[4] = bKeepSpaceBases;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPhysicsAsset(class PhysicsAsset* NewPhysicsAsset, bool bForceReInit)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetPhysicsAsset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6984);
 			byte params[8] = { NULL };
-			*(class PhysicsAsset**)&params[0] = NewPhysicsAsset;
+			*(class PhysicsAsset**)params = NewPhysicsAsset;
 			*(bool*)&params[4] = bForceReInit;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetForceRefPose(bool bNewForceRefPose)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetForceRefPose");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6987);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewForceRefPose;
+			*(bool*)params = bNewForceRefPose;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetEnableClothSimulation(bool bInEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetEnableClothSimulation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6989);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bInEnable;
+			*(bool*)params = bInEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothFrozen(bool bNewFrozen)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothFrozen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6991);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewFrozen;
+			*(bool*)params = bNewFrozen;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetEnableClothingSimulation(bool bInEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetEnableClothingSimulation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6993);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bInEnable;
+			*(bool*)params = bInEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateClothParams()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.UpdateClothParams");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6995);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SetClothExternalForce(Object::Vector InForce)
+		void SetClothExternalForce(Vector InForce)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothExternalForce");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6996);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = InForce;
+			*(Vector*)params = InForce;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAttachClothVertsToBaseBody(bool bAttachVerts)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetAttachClothVertsToBaseBody");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6998);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bAttachVerts;
+			*(bool*)params = bAttachVerts;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetClothVertsToRefPose()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.ResetClothVertsToRefPose");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7000);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float GetClothAttachmentResponseCoefficient()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothAttachmentResponseCoefficient");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7001);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetClothAttachmentTearFactor()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothAttachmentTearFactor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7003);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetClothBendingStiffness()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothBendingStiffness");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7005);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetClothCollisionResponseCoefficient()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothCollisionResponseCoefficient");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7007);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetClothDampingCoefficient()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothDampingCoefficient");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7009);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		int GetClothFlags()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothFlags");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7011);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		float GetClothFriction()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothFriction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7013);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetClothPressure()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothPressure");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7015);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetClothSleepLinearVelocity()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothSleepLinearVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7017);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		int GetClothSolverIterations()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothSolverIterations");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7019);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		float GetClothStretchingStiffness()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothStretchingStiffness");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7021);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetClothTearFactor()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothTearFactor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7023);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetClothThickness()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClothThickness");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7025);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void SetClothAttachmentResponseCoefficient(float ClothAttachmentResponseCoefficient)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothAttachmentResponseCoefficient");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7027);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ClothAttachmentResponseCoefficient;
+			*(float*)params = ClothAttachmentResponseCoefficient;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothAttachmentTearFactor(float ClothAttachTearFactor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothAttachmentTearFactor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7029);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ClothAttachTearFactor;
+			*(float*)params = ClothAttachTearFactor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothBendingStiffness(float ClothBendingStiffness)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothBendingStiffness");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7031);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ClothBendingStiffness;
+			*(float*)params = ClothBendingStiffness;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothCollisionResponseCoefficient(float ClothCollisionResponseCoefficient)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothCollisionResponseCoefficient");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7033);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ClothCollisionResponseCoefficient;
+			*(float*)params = ClothCollisionResponseCoefficient;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothDampingCoefficient(float ClothDampingCoefficient)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothDampingCoefficient");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7035);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ClothDampingCoefficient;
+			*(float*)params = ClothDampingCoefficient;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothFlags(int ClothFlags)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothFlags");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7037);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ClothFlags;
+			*(int*)params = ClothFlags;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothFriction(float ClothFriction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothFriction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7039);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ClothFriction;
+			*(float*)params = ClothFriction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothPressure(float ClothPressure)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothPressure");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7041);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ClothPressure;
+			*(float*)params = ClothPressure;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothSleepLinearVelocity(float ClothSleepLinearVelocity)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothSleepLinearVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7043);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ClothSleepLinearVelocity;
+			*(float*)params = ClothSleepLinearVelocity;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothSolverIterations(int ClothSolverIterations)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothSolverIterations");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7045);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ClothSolverIterations;
+			*(int*)params = ClothSolverIterations;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothStretchingStiffness(float ClothStretchingStiffness)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothStretchingStiffness");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7047);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ClothStretchingStiffness;
+			*(float*)params = ClothStretchingStiffness;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothTearFactor(float ClothTearFactor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothTearFactor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7049);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ClothTearFactor;
+			*(float*)params = ClothTearFactor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothThickness(float ClothThickness)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothThickness");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7051);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ClothThickness;
+			*(float*)params = ClothThickness;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetClothSleep(bool IfClothSleep)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothSleep");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7053);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = IfClothSleep;
+			*(bool*)params = IfClothSleep;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetClothPosition(Object::Vector ClothOffSet)
+		void SetClothPosition(Vector ClothOffSet)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7055);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = ClothOffSet;
+			*(Vector*)params = ClothOffSet;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetClothVelocity(Object::Vector VelocityOffSet)
+		void SetClothVelocity(Vector VelocityOffSet)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7057);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = VelocityOffSet;
+			*(Vector*)params = VelocityOffSet;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AttachClothToCollidingShapes(bool AttatchTwoWay, bool AttachTearable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.AttachClothToCollidingShapes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7059);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = AttatchTwoWay;
+			*(bool*)params = AttatchTwoWay;
 			*(bool*)&params[4] = AttachTearable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EnableClothValidBounds(bool IfEnableClothValidBounds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.EnableClothValidBounds");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7062);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = IfEnableClothValidBounds;
+			*(bool*)params = IfEnableClothValidBounds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetClothValidBounds(Object::Vector ClothValidBoundsMin, Object::Vector ClothValidBoundsMax)
+		void SetClothValidBounds(Vector ClothValidBoundsMin, Vector ClothValidBoundsMax)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetClothValidBounds");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7064);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = ClothValidBoundsMin;
-			*(Object::Vector*)&params[12] = ClothValidBoundsMax;
+			*(Vector*)params = ClothValidBoundsMin;
+			*(Vector*)&params[12] = ClothValidBoundsMax;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateSoftBodyParams()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.UpdateSoftBodyParams");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7067);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetSoftBodyFrozen(bool bNewFrozen)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetSoftBodyFrozen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7068);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewFrozen;
+			*(bool*)params = bNewFrozen;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void WakeSoftBody()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.WakeSoftBody");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7070);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class AnimSequence* FindAnimSequence(ScriptName AnimSeqName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.FindAnimSequence");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7071);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = AnimSeqName;
+			*(ScriptName*)params = AnimSeqName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class AnimSequence**)&params[8];
 		}
 		void SaveAnimSets()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SaveAnimSets");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7074);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RestoreSavedAnimSets()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.RestoreSavedAnimSets");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7075);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float GetAnimRateByDuration(ScriptName AnimSeqName, float Duration)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetAnimRateByDuration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7076);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = AnimSeqName;
+			*(ScriptName*)params = AnimSeqName;
 			*(float*)&params[8] = Duration;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
 		float GetAnimLength(ScriptName AnimSeqName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetAnimLength");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7082);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = AnimSeqName;
+			*(ScriptName*)params = AnimSeqName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		class MorphTarget* FindMorphTarget(ScriptName MorphTargetName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.FindMorphTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7087);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = MorphTargetName;
+			*(ScriptName*)params = MorphTargetName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class MorphTarget**)&params[8];
 		}
 		class AnimNode* FindAnimNode(ScriptName InNodeName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.FindAnimNode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7090);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = InNodeName;
+			*(ScriptName*)params = InNodeName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class AnimNode**)&params[8];
 		}
 		void AllAnimNodes(ScriptClass* BaseClass, class AnimNode*& Node)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.AllAnimNodes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7093);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = BaseClass;
+			*(ScriptClass**)params = BaseClass;
 			*(class AnimNode**)&params[4] = Node;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Node = *(class AnimNode**)&params[4];
 		}
 		class SkelControlBase* FindSkelControl(ScriptName InControlName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.FindSkelControl");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7096);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = InControlName;
+			*(ScriptName*)params = InControlName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class SkelControlBase**)&params[8];
 		}
 		class MorphNodeBase* FindMorphNode(ScriptName InNodeName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.FindMorphNode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7099);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = InNodeName;
+			*(ScriptName*)params = InNodeName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class MorphNodeBase**)&params[8];
 		}
 		Object::Quat GetBoneQuaternion(ScriptName BoneName, int Space)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetBoneQuaternion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7102);
 			byte params[28] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			*(int*)&params[8] = Space;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Quat*)&params[16];
 		}
-		Object::Vector GetBoneLocation(ScriptName BoneName, int Space)
+		Vector GetBoneLocation(ScriptName BoneName, int Space)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetBoneLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7106);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			*(int*)&params[8] = Space;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[12];
+			return *(Vector*)&params[12];
 		}
 		int MatchRefBone(ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.MatchRefBone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7110);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		ScriptName GetBoneName(int BoneIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetBoneName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7113);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = BoneIndex;
+			*(int*)params = BoneIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[4];
 		}
 		Object::Matrix GetBoneMatrix(int BoneIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetBoneMatrix");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7116);
 			byte params[68] = { NULL };
-			*(int*)&params[0] = BoneIndex;
+			*(int*)params = BoneIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Matrix*)&params[16];
 		}
 		ScriptName GetParentBone(ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetParentBone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7119);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[8];
 		}
 		void GetBoneNames(ScriptArray<ScriptName>& BoneNames)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetBoneNames");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7122);
 			byte params[12] = { NULL };
-			*(ScriptArray<ScriptName>*)&params[0] = BoneNames;
+			*(ScriptArray<ScriptName>*)params = BoneNames;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			BoneNames = *(ScriptArray<ScriptName>*)&params[0];
+			BoneNames = *(ScriptArray<ScriptName>*)params;
 		}
 		bool BoneIsChildOf(ScriptName BoneName, ScriptName ParentBoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.BoneIsChildOf");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7125);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			*(ScriptName*)&params[8] = ParentBoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
-		Object::Vector GetRefPosePosition(int BoneIndex)
+		Vector GetRefPosePosition(int BoneIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetRefPosePosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7129);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = BoneIndex;
+			*(int*)params = BoneIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[4];
+			return *(Vector*)&params[4];
 		}
-		Object::Vector GetBoneAxis(ScriptName BoneName, Object::EAxis Axis)
+		Vector GetBoneAxis(ScriptName BoneName, Object::EAxis Axis)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetBoneAxis");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7132);
 			byte params[21] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			*(Object::EAxis*)&params[8] = Axis;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[12];
+			return *(Vector*)&params[12];
 		}
-		void TransformToBoneSpace(ScriptName BoneName, Object::Vector InPosition, Object::Rotator InRotation, Object::Vector& OutPosition, Object::Rotator& OutRotation)
+		void TransformToBoneSpace(ScriptName BoneName, Vector InPosition, Rotator InRotation, Vector& OutPosition, Rotator& OutRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.TransformToBoneSpace");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7136);
 			byte params[56] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
-			*(Object::Vector*)&params[8] = InPosition;
-			*(Object::Rotator*)&params[20] = InRotation;
-			*(Object::Vector*)&params[32] = OutPosition;
-			*(Object::Rotator*)&params[44] = OutRotation;
+			*(ScriptName*)params = BoneName;
+			*(Vector*)&params[8] = InPosition;
+			*(Rotator*)&params[20] = InRotation;
+			*(Vector*)&params[32] = OutPosition;
+			*(Rotator*)&params[44] = OutRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutPosition = *(Object::Vector*)&params[32];
-			OutRotation = *(Object::Rotator*)&params[44];
+			OutPosition = *(Vector*)&params[32];
+			OutRotation = *(Rotator*)&params[44];
 		}
-		void TransformFromBoneSpace(ScriptName BoneName, Object::Vector InPosition, Object::Rotator InRotation, Object::Vector& OutPosition, Object::Rotator& OutRotation)
+		void TransformFromBoneSpace(ScriptName BoneName, Vector InPosition, Rotator InRotation, Vector& OutPosition, Rotator& OutRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.TransformFromBoneSpace");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7142);
 			byte params[56] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
-			*(Object::Vector*)&params[8] = InPosition;
-			*(Object::Rotator*)&params[20] = InRotation;
-			*(Object::Vector*)&params[32] = OutPosition;
-			*(Object::Rotator*)&params[44] = OutRotation;
+			*(ScriptName*)params = BoneName;
+			*(Vector*)&params[8] = InPosition;
+			*(Rotator*)&params[20] = InRotation;
+			*(Vector*)&params[32] = OutPosition;
+			*(Rotator*)&params[44] = OutRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutPosition = *(Object::Vector*)&params[32];
-			OutRotation = *(Object::Rotator*)&params[44];
+			OutPosition = *(Vector*)&params[32];
+			OutRotation = *(Rotator*)&params[44];
 		}
-		ScriptName FindClosestBone(Object::Vector TestLocation, Object::Vector& BoneLocation, float IgnoreScale)
+		ScriptName FindClosestBone(Vector TestLocation, Vector& BoneLocation, float IgnoreScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.FindClosestBone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7148);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = TestLocation;
-			*(Object::Vector*)&params[12] = BoneLocation;
+			*(Vector*)params = TestLocation;
+			*(Vector*)&params[12] = BoneLocation;
 			*(float*)&params[24] = IgnoreScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			BoneLocation = *(Object::Vector*)&params[12];
+			BoneLocation = *(Vector*)&params[12];
 			return *(ScriptName*)&params[28];
 		}
-		Object::Vector GetClosestCollidingBoneLocation(Object::Vector TestLocation, bool bCheckZeroExtent, bool bCheckNonZeroExtent)
+		Vector GetClosestCollidingBoneLocation(Vector TestLocation, bool bCheckZeroExtent, bool bCheckNonZeroExtent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetClosestCollidingBoneLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7153);
 			byte params[32] = { NULL };
-			*(Object::Vector*)&params[0] = TestLocation;
+			*(Vector*)params = TestLocation;
 			*(bool*)&params[12] = bCheckZeroExtent;
 			*(bool*)&params[16] = bCheckNonZeroExtent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[20];
+			return *(Vector*)&params[20];
 		}
 		void SetAnimTreeTemplate(class AnimTree* NewTemplate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetAnimTreeTemplate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7158);
 			byte params[4] = { NULL };
-			*(class AnimTree**)&params[0] = NewTemplate;
+			*(class AnimTree**)params = NewTemplate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetParentAnimComponent(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* NewParentAnimComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetParentAnimComponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7160);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = NewParentAnimComp;
+void**)params = NewParentAnimComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateParentBoneMap()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.UpdateParentBoneMap");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7162);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitSkelControls()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.InitSkelControls");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7163);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitMorphTargets()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.InitMorphTargets");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7164);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int FindConstraintIndex(ScriptName ConstraintName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.FindConstraintIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7165);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ConstraintName;
+			*(ScriptName*)params = ConstraintName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		ScriptName FindConstraintBoneName(int ConstraintIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.FindConstraintBoneName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7168);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ConstraintIndex;
+			*(int*)params = ConstraintIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[4];
 		}
 		class RB_BodyInstance* FindBodyInstanceNamed(ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.FindBodyInstanceNamed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7171);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class RB_BodyInstance**)&params[8];
 		}
 		void SetHasPhysicsAssetInstance(bool bHasInstance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetHasPhysicsAssetInstance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7174);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bHasInstance;
+			*(bool*)params = bHasInstance;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateRBBonesFromSpaceBases(bool bMoveUnfixedBodies, bool bTeleport)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.UpdateRBBonesFromSpaceBases");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7176);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bMoveUnfixedBodies;
+			*(bool*)params = bMoveUnfixedBodies;
 			*(bool*)&params[4] = bTeleport;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ForceSkelUpdate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.ForceSkelUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7179);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateAnimations()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.UpdateAnimations");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7180);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool GetBonesWithinRadius(Object::Vector Origin, float Radius, int TraceFlags, ScriptArray<ScriptName>& out_Bones)
+		bool GetBonesWithinRadius(Vector Origin, float Radius, int TraceFlags, ScriptArray<ScriptName>& out_Bones)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetBonesWithinRadius");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7181);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = Origin;
+			*(Vector*)params = Origin;
 			*(float*)&params[12] = Radius;
 			*(int*)&params[16] = TraceFlags;
 			*(ScriptArray<ScriptName>*)&params[20] = out_Bones;
@@ -1023,47 +1023,47 @@ void**)&params[0] = NewParentAnimComp;
 		}
 		void AddInstanceVertexWeightBoneParented(ScriptName BoneName, bool bPairWithParent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.AddInstanceVertexWeightBoneParented");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7188);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			*(bool*)&params[8] = bPairWithParent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveInstanceVertexWeightBoneParented(ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.RemoveInstanceVertexWeightBoneParented");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7191);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int FindInstanceVertexweightBonePair(SkeletalMeshComponent::BonePair Bones)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.FindInstanceVertexweightBonePair");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7193);
 			byte params[20] = { NULL };
-			*(SkeletalMeshComponent::BonePair*)&params[0] = Bones;
+			*(SkeletalMeshComponent::BonePair*)params = Bones;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[16];
 		}
 		void UpdateInstanceVertexWeightBones(ScriptArray<SkeletalMeshComponent::BonePair> BonePairs)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.UpdateInstanceVertexWeightBones");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7199);
 			byte params[12] = { NULL };
-			*(ScriptArray<SkeletalMeshComponent::BonePair>*)&params[0] = BonePairs;
+			*(ScriptArray<SkeletalMeshComponent::BonePair>*)params = BonePairs;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ToggleInstanceVertexWeights(bool bEnable, int LODIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.ToggleInstanceVertexWeights");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7202);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bEnable;
+			*(bool*)params = bEnable;
 			*(int*)&params[4] = LODIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool PlayFaceFXAnim(class FaceFXAnimSet* FaceFXAnimSetRef, ScriptString* AnimName, ScriptString* GroupName, class SoundCue* SoundCueToPlay)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.PlayFaceFXAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7205);
 			byte params[36] = { NULL };
-			*(class FaceFXAnimSet**)&params[0] = FaceFXAnimSetRef;
+			*(class FaceFXAnimSet**)params = FaceFXAnimSetRef;
 			*(ScriptString**)&params[4] = AnimName;
 			*(ScriptString**)&params[16] = GroupName;
 			*(class SoundCue**)&params[28] = SoundCueToPlay;
@@ -1072,36 +1072,36 @@ void**)&params[0] = NewParentAnimComp;
 		}
 		void StopFaceFXAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.StopFaceFXAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7211);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool IsPlayingFaceFXAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.IsPlayingFaceFXAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7212);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void DeclareFaceFXRegister(ScriptString* RegName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.DeclareFaceFXRegister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7214);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = RegName;
+			*(ScriptString**)params = RegName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetFaceFXRegister(ScriptString* RegName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.GetFaceFXRegister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7216);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = RegName;
+			*(ScriptString**)params = RegName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
 		void SetFaceFXRegister(ScriptString* RegName, float RegVal, SkeletalMeshComponent::EFaceFXRegOp RegOp, float InterpDuration)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetFaceFXRegister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7219);
 			byte params[21] = { NULL };
-			*(ScriptString**)&params[0] = RegName;
+			*(ScriptString**)params = RegName;
 			*(float*)&params[12] = RegVal;
 			*(SkeletalMeshComponent::EFaceFXRegOp*)&params[16] = RegOp;
 			*(float*)&params[20] = InterpDuration;
@@ -1109,9 +1109,9 @@ void**)&params[0] = NewParentAnimComp;
 		}
 		void SetFaceFXRegisterEx(ScriptString* RegName, SkeletalMeshComponent::EFaceFXRegOp RegOp, float FirstValue, float FirstInterpDuration, float NextValue, float NextInterpDuration)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SetFaceFXRegisterEx");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7224);
 			byte params[29] = { NULL };
-			*(ScriptString**)&params[0] = RegName;
+			*(ScriptString**)params = RegName;
 			*(SkeletalMeshComponent::EFaceFXRegOp*)&params[12] = RegOp;
 			*(float*)&params[16] = FirstValue;
 			*(float*)&params[20] = FirstInterpDuration;
@@ -1121,61 +1121,61 @@ void**)&params[0] = NewParentAnimComp;
 		}
 		void HideBone(int BoneIndex, SkeletalMeshComponent::EPhysBodyOp PhysBodyOption)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.HideBone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7231);
 			byte params[5] = { NULL };
-			*(int*)&params[0] = BoneIndex;
+			*(int*)params = BoneIndex;
 			*(SkeletalMeshComponent::EPhysBodyOp*)&params[4] = PhysBodyOption;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnHideBone(int BoneIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.UnHideBone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7234);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = BoneIndex;
+			*(int*)params = BoneIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsBoneHidden(int BoneIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.IsBoneHidden");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7236);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = BoneIndex;
+			*(int*)params = BoneIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void HideBoneByName(ScriptName BoneName, SkeletalMeshComponent::EPhysBodyOp PhysBodyOption)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.HideBoneByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7239);
 			byte params[9] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			*(SkeletalMeshComponent::EPhysBodyOp*)&params[8] = PhysBodyOption;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnHideBoneByName(ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.UnHideBoneByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7242);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateMeshForBrokenConstraints()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.UpdateMeshForBrokenConstraints");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7244);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowMaterialSection(int MaterialID, bool bShow, int LODIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.ShowMaterialSection");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7245);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = MaterialID;
+			*(int*)params = MaterialID;
 			*(bool*)&params[4] = bShow;
 			*(int*)&params[8] = LODIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayAnim(ScriptName AnimName, float Duration, bool bLoop, bool bRestartIfAlreadyPlaying, float StartTime, bool bPlayBackwards)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.PlayAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7249);
 			byte params[28] = { NULL };
-			*(ScriptName*)&params[0] = AnimName;
+			*(ScriptName*)params = AnimName;
 			*(float*)&params[8] = Duration;
 			*(bool*)&params[12] = bLoop;
 			*(bool*)&params[16] = bRestartIfAlreadyPlaying;
@@ -1185,22 +1185,22 @@ void**)&params[0] = NewParentAnimComp;
 		}
 		void StopAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.StopAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7267);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CreateForceField(class AnimNotify_ForceField* AnimNotifyData)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.CreateForceField");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7269);
 			byte params[8] = { NULL };
-			*(class AnimNotify_ForceField**)&params[0] = AnimNotifyData;
+			*(class AnimNotify_ForceField**)params = AnimNotifyData;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool PlayParticleEffect(class AnimNotify_PlayParticleEffect* AnimNotifyData)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.PlayParticleEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7276);
 			byte params[8] = { NULL };
-			*(class AnimNotify_PlayParticleEffect**)&params[0] = AnimNotifyData;
+			*(class AnimNotify_PlayParticleEffect**)params = AnimNotifyData;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
@@ -1208,19 +1208,19 @@ void**)&params[0] = NewParentAnimComp;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* PSC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.SkelMeshCompOnParticleSystemFinished");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7302);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = PSC;
+void**)params = PSC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void BreakConstraint(Object::Vector Impulse, Object::Vector HitLocation, ScriptName InBoneName, bool bVelChange)
+		void BreakConstraint(Vector Impulse, Vector HitLocation, ScriptName InBoneName, bool bVelChange)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshComponent.BreakConstraint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7304);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = Impulse;
-			*(Object::Vector*)&params[12] = HitLocation;
+			*(Vector*)params = Impulse;
+			*(Vector*)&params[12] = HitLocation;
 			*(ScriptName*)&params[24] = InBoneName;
 			*(bool*)&params[32] = bVelChange;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

@@ -32,79 +32,79 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fBuildupTime, 2172)
 		float GetBuildUpTime(class PlayerReplicationInfo* PRI, bool bForInterpSpeed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.GetBuildUpTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68259);
 			byte params[12] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = PRI;
+			*(class PlayerReplicationInfo**)params = PRI;
 			*(bool*)&params[4] = bForInterpSpeed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81138);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81140);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81143);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateSoundModulation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.UpdateSoundModulation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81145);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayBuildupAnimation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.PlayBuildupAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81153);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnSwitchToWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.OnSwitchToWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81186);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayWeaponPutDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.PlayWeaponPutDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81187);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void BuffMaxCarriedAmmo(int Amount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.BuffMaxCarriedAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81188);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Amount;
+			*(int*)params = Amount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int AddCarriedAmmo(int Amount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.AddCarriedAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81190);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Amount;
+			*(int*)params = Amount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int GetBasePickupAmmoAmount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ChainGun.GetBasePickupAmmoAmount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81193);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

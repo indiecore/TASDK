@@ -7,9 +7,9 @@ namespace UnrealScript
 	public:
 		int Main(ScriptString* Params)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.HelpCommandlet.Main");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3458);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Params;
+			*(ScriptString**)params = Params;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}

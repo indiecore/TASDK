@@ -15,7 +15,7 @@ namespace UnrealScript
 	class TerrainWeightMapTexture : public Texture2D
 	{
 	public:
-		class TerrainWeightedMaterial
+		struct TerrainWeightedMaterial
 		{
 		};
 		ADD_STRUCT(ScriptArray<Object::Pointer>, WeightedMaterials, 372)

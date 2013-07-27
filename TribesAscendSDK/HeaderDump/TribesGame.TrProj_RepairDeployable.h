@@ -30,29 +30,29 @@ void*>, RepairBeams, 932)
 		ADD_STRUCT(float, m_fCheckNearbyActorsFrequency, 900)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_RepairDeployable.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108974);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void InitProjectile(Object::Vector Direction, ScriptClass* ClassToInherit)
+		void InitProjectile(Vector Direction, ScriptClass* ClassToInherit)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_RepairDeployable.InitProjectile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108975);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = Direction;
+			*(Vector*)params = Direction;
 			*(ScriptClass**)&params[12] = ClassToInherit;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ArmedTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_RepairDeployable.ArmedTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108981);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void HitWall(Object::Vector HitNormal, class Actor* Wall, 
+		void HitWall(Vector HitNormal, class Actor* Wall, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* WallComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_RepairDeployable.HitWall");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108982);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = HitNormal;
+			*(Vector*)params = HitNormal;
 			*(class Actor**)&params[12] = Wall;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
@@ -61,22 +61,22 @@ void**)&params[16] = WallComp;
 		}
 		void CheckRepair()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_RepairDeployable.CheckRepair");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108987);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Explode(Object::Vector HitLocation, Object::Vector HitNormal)
+		void Explode(Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_RepairDeployable.Explode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108993);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
-			*(Object::Vector*)&params[12] = HitNormal;
+			*(Vector*)params = HitLocation;
+			*(Vector*)&params[12] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DetonateObsolete(bool bDetonateFromDamage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_RepairDeployable.DetonateObsolete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108996);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDetonateFromDamage;
+			*(bool*)params = bDetonateFromDamage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -11,9 +11,9 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(float, ConeMaxAngle, 180)
-		ADD_STRUCT(Object::Vector, ConeAxis, 168)
+		ADD_STRUCT(Vector, ConeAxis, 168)
 		ADD_STRUCT(float, ConeRadius, 164)
-		ADD_STRUCT(Object::Vector, ConeVertex, 152)
+		ADD_STRUCT(Vector, ConeVertex, 152)
 		ADD_STRUCT(float, MaxDensity, 148)
 	};
 }

@@ -23,7 +23,7 @@ namespace UnrealScript
 	class TerrainLayerSetup : public Object
 	{
 	public:
-		class FilterLimit
+		struct FilterLimit
 		{
 		public:
 			ADD_STRUCT(float, NoiseAmount, 12)
@@ -31,7 +31,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, Base, 4)
 			ADD_BOOL(Enabled, 0, 0x1)
 		};
-		class TerrainFilteredMaterial
+		struct TerrainFilteredMaterial
 		{
 		public:
 			ADD_OBJECT(TerrainMaterial, Material, 80)
@@ -47,7 +47,7 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<TerrainLayerSetup::TerrainFilteredMaterial>, Materials, 60)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TerrainLayerSetup.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27917);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

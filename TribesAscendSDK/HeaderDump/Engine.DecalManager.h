@@ -11,7 +11,7 @@ namespace UnrealScript
 	class DecalManager : public Actor
 	{
 	public:
-		class ActiveDecalInfo
+		struct ActiveDecalInfo
 		{
 		public:
 			ADD_STRUCT(float, LifetimeRemaining, 4)
@@ -26,43 +26,43 @@ void*>, PoolDecals, 480)
 		ADD_STRUCT(int, MaxActiveDecals, 492)
 		bool AreDynamicDecalsEnabled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DecalManager.AreDynamicDecalsEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14123);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void DecalFinished(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* Decal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DecalManager.DecalFinished");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14125);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = Decal;
+void**)params = Decal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CanSpawnDecals()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DecalManager.CanSpawnDecals");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14127);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SetDecalParameters(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* TheDecal, class MaterialInterface* DecalMaterial, Object::Vector DecalLocation, Object::Rotator DecalOrientation, float Width, float Height, float Thickness, bool bNoClip, float DecalRotation, 
+void* TheDecal, class MaterialInterface* DecalMaterial, Vector DecalLocation, Rotator DecalOrientation, float Width, float Height, float Thickness, bool bNoClip, float DecalRotation, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* HitComponent, bool bProjectOnTerrain, bool bProjectOnSkeletalMeshes, ScriptName HitBone, int HitNodeIndex, int HitLevelIndex, int InFracturedStaticMeshComponentIndex, float DepthBias, Object::Vector2D BlendRange)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DecalManager.SetDecalParameters");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14129);
 			byte params[96] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = TheDecal;
+void**)params = TheDecal;
 			*(class MaterialInterface**)&params[4] = DecalMaterial;
-			*(Object::Vector*)&params[8] = DecalLocation;
-			*(Object::Rotator*)&params[20] = DecalOrientation;
+			*(Vector*)&params[8] = DecalLocation;
+			*(Rotator*)&params[20] = DecalOrientation;
 			*(float*)&params[32] = Width;
 			*(float*)&params[36] = Height;
 			*(float*)&params[40] = Thickness;
@@ -85,24 +85,24 @@ void**)&params[52] = HitComponent;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* GetPooledComponent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DecalManager.GetPooledComponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14148);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0];
+void**)params;
 		}
 		
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* SpawnDecal(class MaterialInterface* DecalMaterial, Object::Vector DecalLocation, Object::Rotator DecalOrientation, float Width, float Height, float Thickness, bool bNoClip, float DecalRotation, 
+void* SpawnDecal(class MaterialInterface* DecalMaterial, Vector DecalLocation, Rotator DecalOrientation, float Width, float Height, float Thickness, bool bNoClip, float DecalRotation, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* HitComponent, bool bProjectOnTerrain, bool bProjectOnSkeletalMeshes, ScriptName HitBone, int HitNodeIndex, int HitLevelIndex, float InDecalLifeSpan, int InFracturedStaticMeshComponentIndex, float InDepthBias, Object::Vector2D InBlendRange)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DecalManager.SpawnDecal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14152);
 			byte params[100] = { NULL };
-			*(class MaterialInterface**)&params[0] = DecalMaterial;
-			*(Object::Vector*)&params[4] = DecalLocation;
-			*(Object::Rotator*)&params[16] = DecalOrientation;
+			*(class MaterialInterface**)params = DecalMaterial;
+			*(Vector*)&params[4] = DecalLocation;
+			*(Rotator*)&params[16] = DecalOrientation;
 			*(float*)&params[28] = Width;
 			*(float*)&params[32] = Height;
 			*(float*)&params[36] = Thickness;

@@ -20,38 +20,38 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIDataStorePublisher, 60)
 		void PublishValues()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxDataStoreSubscriber.PublishValues");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30255);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetDataStoreBinding(ScriptString* MarkupText, int BindingIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxDataStoreSubscriber.SetDataStoreBinding");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30256);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = MarkupText;
+			*(ScriptString**)params = MarkupText;
 			*(int*)&params[12] = BindingIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetDataStoreBinding(int BindingIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxDataStoreSubscriber.GetDataStoreBinding");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30259);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = BindingIndex;
+			*(int*)params = BindingIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		bool RefreshSubscriberValue(int BindingIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxDataStoreSubscriber.RefreshSubscriberValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30262);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = BindingIndex;
+			*(int*)params = BindingIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void NotifyDataStoreValueUpdated(class UIDataStore* SourceDataStore, bool bValuesInvalidated, ScriptName PropertyTag, class UIDataProvider* SourceProvider, int ArrayIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxDataStoreSubscriber.NotifyDataStoreValueUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30265);
 			byte params[24] = { NULL };
-			*(class UIDataStore**)&params[0] = SourceDataStore;
+			*(class UIDataStore**)params = SourceDataStore;
 			*(bool*)&params[4] = bValuesInvalidated;
 			*(ScriptName*)&params[8] = PropertyTag;
 			*(class UIDataProvider**)&params[16] = SourceProvider;
@@ -60,25 +60,25 @@ namespace UnrealScript
 		}
 		void GetBoundDataStores(ScriptArray<class UIDataStore*>& out_BoundDataStores)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxDataStoreSubscriber.GetBoundDataStores");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30271);
 			byte params[12] = { NULL };
-			*(ScriptArray<class UIDataStore*>*)&params[0] = out_BoundDataStores;
+			*(ScriptArray<class UIDataStore*>*)params = out_BoundDataStores;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_BoundDataStores = *(ScriptArray<class UIDataStore*>*)&params[0];
+			out_BoundDataStores = *(ScriptArray<class UIDataStore*>*)params;
 		}
 		void ClearBoundDataStores()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxDataStoreSubscriber.ClearBoundDataStores");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30274);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool SaveSubscriberValue(ScriptArray<class UIDataStore*>& out_BoundDataStores, int BindingIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxDataStoreSubscriber.SaveSubscriberValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30275);
 			byte params[20] = { NULL };
-			*(ScriptArray<class UIDataStore*>*)&params[0] = out_BoundDataStores;
+			*(ScriptArray<class UIDataStore*>*)params = out_BoundDataStores;
 			*(int*)&params[12] = BindingIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_BoundDataStores = *(ScriptArray<class UIDataStore*>*)&params[0];
+			out_BoundDataStores = *(ScriptArray<class UIDataStore*>*)params;
 			return *(bool*)&params[16];
 		}
 	};

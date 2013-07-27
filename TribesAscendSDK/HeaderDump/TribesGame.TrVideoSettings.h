@@ -50,7 +50,7 @@ namespace UnrealScript
 			EVQ_VHigh = 4,
 			EVQ_MAX = 5,
 		};
-		class ResolutionData
+		struct ResolutionData
 		{
 		public:
 			ADD_STRUCT(int, ResY, 4)
@@ -69,147 +69,147 @@ namespace UnrealScript
 		ADD_STRUCT(int, m_Cached_SmoothFramerate, 160)
 		int GetCurrentSettingValue(TrVideoSettings::EVideoSettingType Type)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.GetCurrentSettingValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61372);
 			byte params[5] = { NULL };
-			*(TrVideoSettings::EVideoSettingType*)&params[0] = Type;
+			*(TrVideoSettings::EVideoSettingType*)params = Type;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int GetSmoothFramerateValue()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.GetSmoothFramerateValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61451);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void GetAllowedResolutions(ScriptArray<TrVideoSettings::ResolutionData>& ResolutionList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.GetAllowedResolutions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115534);
 			byte params[12] = { NULL };
-			*(ScriptArray<TrVideoSettings::ResolutionData>*)&params[0] = ResolutionList;
+			*(ScriptArray<TrVideoSettings::ResolutionData>*)params = ResolutionList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			ResolutionList = *(ScriptArray<TrVideoSettings::ResolutionData>*)&params[0];
+			ResolutionList = *(ScriptArray<TrVideoSettings::ResolutionData>*)params;
 		}
 		void ApplyVideoSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.ApplyVideoSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115537);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ChangeScreenType(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.ChangeScreenType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115538);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ChangeResolution(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.ChangeResolution");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115540);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ChangeShadowDetail(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.ChangeShadowDetail");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115542);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ChangeTextureDetail(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.ChangeTextureDetail");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115544);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GetResolutions(ScriptArray<TgPlayerProfile::PropertyPair>& ResolutionList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.GetResolutions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115546);
 			byte params[12] = { NULL };
-			*(ScriptArray<TgPlayerProfile::PropertyPair>*)&params[0] = ResolutionList;
+			*(ScriptArray<TgPlayerProfile::PropertyPair>*)params = ResolutionList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			ResolutionList = *(ScriptArray<TgPlayerProfile::PropertyPair>*)&params[0];
+			ResolutionList = *(ScriptArray<TgPlayerProfile::PropertyPair>*)params;
 		}
 		void SetVSync(bool bEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.SetVSync");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115549);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnable;
+			*(bool*)params = bEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetMotionBlur(bool bEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.SetMotionBlur");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115551);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnable;
+			*(bool*)params = bEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadVideoSettings(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.LoadVideoSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115553);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddVideoSettingToList(ScriptString* SettingName, int val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.AddVideoSettingToList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115560);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = SettingName;
+			*(ScriptString**)params = SettingName;
 			*(int*)&params[12] = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadVideoResolutions(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.LoadVideoResolutions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115564);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadResolutions(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.LoadResolutions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115566);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddResolutionToList(ScriptString* Resolution)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.AddResolutionToList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115574);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Resolution;
+			*(ScriptString**)params = Resolution;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetSettingNameFromType(TrVideoSettings::EVideoSettingType Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.GetSettingNameFromType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115577);
 			byte params[13] = { NULL };
-			*(TrVideoSettings::EVideoSettingType*)&params[0] = Index;
+			*(TrVideoSettings::EVideoSettingType*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		TrVideoSettings::EVideoSettingType GetSettingTypeFromName(ScriptString* val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.GetSettingTypeFromName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115580);
 			byte params[13] = { NULL };
-			*(ScriptString**)&params[0] = val;
+			*(ScriptString**)params = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(TrVideoSettings::EVideoSettingType*)&params[12];
 		}
 		void CacheVideoSetting(int Index, int val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.CacheVideoSetting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115583);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(int*)&params[4] = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSmoothFramerateValue(int val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVideoSettings.SetSmoothFramerateValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115593);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = val;
+			*(int*)params = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

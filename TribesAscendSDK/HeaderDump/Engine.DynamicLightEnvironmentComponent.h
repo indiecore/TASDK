@@ -65,7 +65,7 @@ void*>, OverriddenLightComponents, 284)
 		ADD_STRUCT(float, LightDistance, 184)
 		ADD_STRUCT(float, LightDesaturation, 180)
 		ADD_STRUCT(Object::LinearColor, AmbientGlow, 164)
-		ADD_STRUCT(Object::Vector, AmbientShadowSourceDirection, 152)
+		ADD_STRUCT(Vector, AmbientShadowSourceDirection, 152)
 		ADD_STRUCT(Object::LinearColor, AmbientShadowColor, 136)
 		ADD_STRUCT(float, LightingBoundsScale, 132)
 		ADD_STRUCT(int, NumVolumeVisibilitySamples, 128)
@@ -74,7 +74,7 @@ void*>, OverriddenLightComponents, 284)
 		ADD_STRUCT(float, InvisibleUpdateTime, 116)
 		void ResetEnvironment()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicLightEnvironmentComponent.ResetEnvironment");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11772);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

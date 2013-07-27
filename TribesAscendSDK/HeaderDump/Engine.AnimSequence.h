@@ -44,7 +44,7 @@ namespace UnrealScript
 			AKF_PerTrackCompression = 2,
 			AKF_MAX = 3,
 		};
-		class CompressedTrack
+		struct CompressedTrack
 		{
 		public:
 			ADD_STRUCT(ScriptArray<byte>, ByteStream, 0)
@@ -52,37 +52,37 @@ namespace UnrealScript
 			ADD_STRUCT(float, Ranges, 36)
 			ADD_STRUCT(float, Mins, 24)
 		};
-		class AnimTag
+		struct AnimTag
 		{
 		public:
 			ADD_STRUCT(ScriptArray<ScriptString*>, Contains, 12)
 			ADD_STRUCT(ScriptString*, Tag, 0)
 		};
-		class CurveTrack
+		struct CurveTrack
 		{
 		public:
 			ADD_STRUCT(ScriptName, CurveName, 0)
 			ADD_STRUCT(ScriptArray<float>, CurveWeights, 8)
 		};
-		class RotationTrack
+		struct RotationTrack
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Object::Quat>, RotKeys, 0)
 			ADD_STRUCT(ScriptArray<float>, Times, 12)
 		};
-		class TranslationTrack
+		struct TranslationTrack
 		{
 		public:
-			ADD_STRUCT(ScriptArray<Object::Vector>, PosKeys, 0)
+			ADD_STRUCT(ScriptArray<Vector>, PosKeys, 0)
 			ADD_STRUCT(ScriptArray<float>, Times, 12)
 		};
-		class TimeModifier
+		struct TimeModifier
 		{
 		public:
 			ADD_STRUCT(float, Time, 0)
 			ADD_STRUCT(float, TargetStrength, 4)
 		};
-		class AnimNotifyEvent
+		struct AnimNotifyEvent
 		{
 		public:
 			ADD_STRUCT(float, Time, 0)
@@ -90,13 +90,13 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptName, Comment, 8)
 			ADD_STRUCT(float, Duration, 16)
 		};
-		class RawAnimSequenceTrack
+		struct RawAnimSequenceTrack
 		{
 		public:
-			ADD_STRUCT(ScriptArray<Object::Vector>, PosKeys, 0)
+			ADD_STRUCT(ScriptArray<Vector>, PosKeys, 0)
 			ADD_STRUCT(ScriptArray<Object::Quat>, RotKeys, 12)
 		};
-		class SkelControlModifier
+		struct SkelControlModifier
 		{
 		public:
 			ADD_STRUCT(ScriptName, SkelControlName, 0)
@@ -139,9 +139,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<AnimSequence::AnimTag>, AnimTags, 300)
 		float GetNotifyTimeByClass(ScriptClass* NotifyClass, float PlayRate, float StartPosition, class AnimNotify*& out_Notify, float& out_Duration)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimSequence.GetNotifyTimeByClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10514);
 			byte params[24] = { NULL };
-			*(ScriptClass**)&params[0] = NotifyClass;
+			*(ScriptClass**)params = NotifyClass;
 			*(float*)&params[4] = PlayRate;
 			*(float*)&params[8] = StartPosition;
 			*(class AnimNotify**)&params[12] = out_Notify;

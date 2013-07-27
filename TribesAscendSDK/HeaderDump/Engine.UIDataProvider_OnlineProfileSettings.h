@@ -10,11 +10,11 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* PlayerInterface, byte LocalUserNum, int DeviceID, class OnlinePlayerStorage* PlayerStorage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineProfileSettings.ReadData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28328);
 			byte params[21] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = PlayerInterface;
+void**)params = PlayerInterface;
 			params[8] = LocalUserNum;
 			*(int*)&params[12] = DeviceID;
 			*(class OnlinePlayerStorage**)&params[16] = PlayerStorage;
@@ -25,11 +25,11 @@ void**)&params[0] = PlayerInterface;
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* PlayerInterface, byte LocalUserNum, int DeviceID, class OnlinePlayerStorage* PlayerStorage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineProfileSettings.WriteData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28334);
 			byte params[21] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = PlayerInterface;
+void**)params = PlayerInterface;
 			params[8] = LocalUserNum;
 			*(int*)&params[12] = DeviceID;
 			*(class OnlinePlayerStorage**)&params[16] = PlayerStorage;
@@ -40,11 +40,11 @@ void**)&params[0] = PlayerInterface;
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* PlayerInterface, byte LocalUserNum, class OnlinePlayerStorage* PlayerStorage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineProfileSettings.GetData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28340);
 			byte params[17] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = PlayerInterface;
+void**)params = PlayerInterface;
 			params[8] = LocalUserNum;
 			*(class OnlinePlayerStorage**)&params[12] = PlayerStorage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -54,11 +54,11 @@ void**)&params[0] = PlayerInterface;
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* PlayerInterface, byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineProfileSettings.AddReadCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28346);
 			byte params[9] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = PlayerInterface;
+void**)params = PlayerInterface;
 			params[8] = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -66,17 +66,17 @@ void**)&params[0] = PlayerInterface;
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* PlayerInterface, byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineProfileSettings.ClearReadCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28349);
 			byte params[9] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = PlayerInterface;
+void**)params = PlayerInterface;
 			params[8] = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RefreshStorageData()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineProfileSettings.RefreshStorageData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28352);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

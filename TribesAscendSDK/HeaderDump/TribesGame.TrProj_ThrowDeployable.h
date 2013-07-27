@@ -13,26 +13,26 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, m_DeployableToSpawn, 900)
 		class TrDeployable* SpawnDeployable()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_ThrowDeployable.SpawnDeployable");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109244);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class TrDeployable**)&params[0];
+			return *(class TrDeployable**)params;
 		}
 		void DestroyOldestOverLimit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_ThrowDeployable.DestroyOldestOverLimit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109246);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetMaxDeployedLimit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_ThrowDeployable.GetMaxDeployedLimit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109253);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void ArmedTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_ThrowDeployable.ArmedTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109257);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

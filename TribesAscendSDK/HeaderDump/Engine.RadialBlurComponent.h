@@ -38,52 +38,52 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInterface, Material, 88)
 		void SetMaterial(class MaterialInterface* InMaterial)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.SetMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24943);
 			byte params[4] = { NULL };
-			*(class MaterialInterface**)&params[0] = InMaterial;
+			*(class MaterialInterface**)params = InMaterial;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBlurScale(float InBlurScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.SetBlurScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24945);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = InBlurScale;
+			*(float*)params = InBlurScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBlurFalloffExponent(float InBlurFalloffExponent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.SetBlurFalloffExponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24947);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = InBlurFalloffExponent;
+			*(float*)params = InBlurFalloffExponent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBlurOpacity(float InBlurOpacity)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.SetBlurOpacity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24949);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = InBlurOpacity;
+			*(float*)params = InBlurOpacity;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetEnabled(bool bInEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.SetEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24951);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bInEnabled;
+			*(bool*)params = bInEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUpdatePropertyBlurScale()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.OnUpdatePropertyBlurScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24953);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnUpdatePropertyBlurFalloffExponent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.OnUpdatePropertyBlurFalloffExponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24954);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnUpdatePropertyBlurOpacity()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RadialBlurComponent.OnUpdatePropertyBlurOpacity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24955);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

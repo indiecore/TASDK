@@ -21,299 +21,299 @@ namespace UnrealScript
 		ADD_OBJECT(DebugCameraController, DebugCameraControllerRef, 60)
 		void FXPlay(ScriptClass* aClass, ScriptString* FXAnimPath)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.FXPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12628);
 			byte params[16] = { NULL };
-			*(ScriptClass**)&params[0] = aClass;
+			*(ScriptClass**)params = aClass;
 			*(ScriptString**)&params[4] = FXAnimPath;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FXStop(ScriptClass* aClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.FXStop");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12638);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = aClass;
+			*(ScriptClass**)params = aClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DebugAI(ScriptName Category)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.DebugAI");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12644);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = Category;
+			*(ScriptName*)params = Category;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EditAIByTrace()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.EditAIByTrace");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12646);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DebugPause()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.DebugPause");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12653);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ListDynamicActors()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.ListDynamicActors");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12654);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FreezeFrame(float Delay)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.FreezeFrame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12655);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = Delay;
+			*(float*)params = Delay;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void WriteToLog(ScriptString* Param)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.WriteToLog");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12658);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Param;
+			*(ScriptString**)params = Param;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KillViewedActor()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.KillViewedActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12660);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Teleport()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.Teleport");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12661);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ChangeSize(float F)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.ChangeSize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12667);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = F;
+			*(float*)params = F;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EndPath()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.EndPath");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12669);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Amphibious()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.Amphibious");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12670);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Fly()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.Fly");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12671);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Walk()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.Walk");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12674);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Ghost()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.Ghost");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12677);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AllAmmo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.AllAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12680);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void God()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.God");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12681);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Slomo(float T)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.Slomo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12682);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = T;
+			*(float*)params = T;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetJumpZ(float F)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.SetJumpZ");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12684);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = F;
+			*(float*)params = F;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetGravity(float F)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.SetGravity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12686);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = F;
+			*(float*)params = F;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSpeed(float F)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.SetSpeed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12689);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = F;
+			*(float*)params = F;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KillAll(ScriptClass* aClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.KillAll");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12691);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = aClass;
+			*(ScriptClass**)params = aClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KillAllPawns(ScriptClass* aClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.KillAllPawns");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12694);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = aClass;
+			*(ScriptClass**)params = aClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KillPawns()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.KillPawns");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12699);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Avatar(ScriptName ClassName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.Avatar");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12700);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = ClassName;
+			*(ScriptName*)params = ClassName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Summon(ScriptString* ClassName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.Summon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12707);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = ClassName;
+			*(ScriptString**)params = ClassName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Weapon* GiveWeapon(ScriptString* WeaponClassStr)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.GiveWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12711);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = WeaponClassStr;
+			*(ScriptString**)params = WeaponClassStr;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Weapon**)&params[12];
 		}
 		void PlayersOnly()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.PlayersOnly");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12720);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DestroyFractures(float Radius)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.DestroyFractures");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12722);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = Radius;
+			*(float*)params = Radius;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FractureAllMeshes()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.FractureAllMeshes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12725);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FractureAllMeshesToMaximizeMemoryUsage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.FractureAllMeshesToMaximizeMemoryUsage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12727);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RememberSpot()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.RememberSpot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12729);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ViewSelf(bool bQuiet)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.ViewSelf");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12730);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bQuiet;
+			*(bool*)params = bQuiet;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ViewPlayer(ScriptString* S)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.ViewPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12732);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ViewActor(ScriptName ActorName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.ViewActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12735);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = ActorName;
+			*(ScriptName*)params = ActorName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ViewBot()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.ViewBot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12738);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ViewClass(ScriptClass* aClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.ViewClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12742);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = aClass;
+			*(ScriptClass**)params = aClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Loaded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.Loaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12747);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AllWeapons()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.AllWeapons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12748);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetLevelStreamingStatus(ScriptName PackageName, bool bShouldBeLoaded, bool bShouldBeVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.SetLevelStreamingStatus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12749);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = PackageName;
+			*(ScriptName*)params = PackageName;
 			*(bool*)&params[8] = bShouldBeLoaded;
 			*(bool*)&params[12] = bShouldBeVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EnableDebugCamera()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.EnableDebugCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12755);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitCheatManager()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.InitCheatManager");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12761);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LogPlaySoundCalls(bool bShouldLog)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.LogPlaySoundCalls");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12762);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bShouldLog;
+			*(bool*)params = bShouldLog;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogParticleActivateSystemCalls(bool bShouldLog)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.LogParticleActivateSystemCalls");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12764);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bShouldLog;
+			*(bool*)params = bShouldLog;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void VerifyNavMeshObjects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.VerifyNavMeshObjects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12766);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawUnsupportingEdges(ScriptString* PawnClassName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.DrawUnsupportingEdges");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12767);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = PawnClassName;
+			*(ScriptString**)params = PawnClassName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PrintNavMeshObstacles()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.PrintNavMeshObstacles");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12769);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DumpCoverStats()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CheatManager.DumpCoverStats");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12770);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

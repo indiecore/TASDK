@@ -14,15 +14,15 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, Winner, 256)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqEvent_GameEnded.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49220);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqEvent_GameEnded.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49222);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

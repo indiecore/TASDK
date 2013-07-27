@@ -37,16 +37,16 @@ namespace UnrealScript
 		ADD_STRUCT(float, BlendInTime, 260)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_PlayAgentAnimation.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32961);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void SetCurrentAnimationActionFor(class GameCrowdAgentSkeletal* Agent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqAct_PlayAgentAnimation.SetCurrentAnimationActionFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32963);
 			byte params[4] = { NULL };
-			*(class GameCrowdAgentSkeletal**)&params[0] = Agent;
+			*(class GameCrowdAgentSkeletal**)params = Agent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

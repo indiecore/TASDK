@@ -29,7 +29,7 @@ namespace UnrealScript
 			VST_NEWS = 5,
 			VST_MAX = 6,
 		};
-		class GameStream
+		struct GameStream
 		{
 		public:
 			ADD_STRUCT(TrStreamManager::STREAMTYPE, Type, 4)
@@ -54,155 +54,155 @@ namespace UnrealScript
 		ADD_BOOL(bUpdateReady, 60, 0x1)
 		ScriptString* GetTitleAtIndex(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.GetTitleAtIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(58442);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		bool IsLiveAtIndex(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.IsLiveAtIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59357);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		ScriptString* GetViewersAtIndex(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.GetViewersAtIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59359);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptString* GetDescriptionAtIndex(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.GetDescriptionAtIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59367);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		bool HaveFeature()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.HaveFeature");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59588);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		ScriptString* GetFeatureName(int Count)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.GetFeatureName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59590);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Count;
+			*(int*)params = Count;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		bool IsStream(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.IsStream");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61504);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		int GetTypeCountWatching(TrStreamManager::STREAMTYPE Type)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.GetTypeCountWatching");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61524);
 			byte params[5] = { NULL };
-			*(TrStreamManager::STREAMTYPE*)&params[0] = Type;
+			*(TrStreamManager::STREAMTYPE*)params = Type;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int GetTypeCount(TrStreamManager::STREAMTYPE Type)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.GetTypeCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61526);
 			byte params[5] = { NULL };
-			*(TrStreamManager::STREAMTYPE*)&params[0] = Type;
+			*(TrStreamManager::STREAMTYPE*)params = Type;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		ScriptString* GetFeatureDescription(int Count)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.GetFeatureDescription");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61533);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Count;
+			*(int*)params = Count;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		int ViewerSort(TrStreamManager::GameStream A, TrStreamManager::GameStream B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.ViewerSort");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112931);
 			byte params[140] = { NULL };
-			*(TrStreamManager::GameStream*)&params[0] = A;
+			*(TrStreamManager::GameStream*)params = A;
 			*(TrStreamManager::GameStream*)&params[68] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[136];
 		}
 		void LoadStreams()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.LoadStreams");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112945);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void GetStreamData()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.GetStreamData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112946);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OpenStream(ScriptString* URL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.OpenStream");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112947);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112949);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ViewStreamIndex(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.ViewStreamIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112950);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ViewVideoIndex(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.ViewVideoIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112952);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartTVTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.StartTVTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112954);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateStreams(bool bForce)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.UpdateStreams");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112956);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bForce;
+			*(bool*)params = bForce;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CheckForUpdate(bool bRunIfReady)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.CheckForUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112958);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bRunIfReady;
+			*(bool*)params = bRunIfReady;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GetLatestNews()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.GetLatestNews");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112960);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CompleteUpdate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStreamManager.CompleteUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112963);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

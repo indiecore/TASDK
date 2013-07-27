@@ -14,9 +14,9 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Color, NotifyColor, 60)
 		bool FindNextNotifyOfClass(class AnimNodeSequence* AnimSeqInstigator, ScriptClass* NotifyClass, AnimSequence::AnimNotifyEvent& OutEvent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNotify.FindNextNotifyOfClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11128);
 			byte params[32] = { NULL };
-			*(class AnimNodeSequence**)&params[0] = AnimSeqInstigator;
+			*(class AnimNodeSequence**)params = AnimSeqInstigator;
 			*(ScriptClass**)&params[4] = NotifyClass;
 			*(AnimSequence::AnimNotifyEvent*)&params[8] = OutEvent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

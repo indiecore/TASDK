@@ -40,7 +40,7 @@ namespace UnrealScript
 	class UTHUD : public UTHUDBase
 	{
 	public:
-		class DamageInfo
+		struct DamageInfo
 		{
 		public:
 			ADD_OBJECT(MaterialInstanceConstant, MatConstant, 8)
@@ -231,9 +231,9 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, WeaponSwitchMessage, 1524)
 		void DrawTileCentered(class Texture2D* Tex, float XL, float YL, float U, float V, float UL, float VL, Object::LinearColor C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawTileCentered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45714);
 			byte params[44] = { NULL };
-			*(class Texture2D**)&params[0] = Tex;
+			*(class Texture2D**)params = Tex;
 			*(float*)&params[4] = XL;
 			*(float*)&params[8] = YL;
 			*(float*)&params[12] = U;
@@ -245,21 +245,21 @@ namespace UnrealScript
 		}
 		void SetDisplayedOrders(ScriptString* OrderText)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.SetDisplayedOrders");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45725);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = OrderText;
+			*(ScriptString**)params = OrderText;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45727);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Message(class PlayerReplicationInfo* PRI, ScriptString* msg, ScriptName MsgType, float Lifetime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.Message");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45729);
 			byte params[28] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = PRI;
+			*(class PlayerReplicationInfo**)params = PRI;
 			*(ScriptString**)&params[4] = msg;
 			*(ScriptName*)&params[16] = MsgType;
 			*(float*)&params[24] = Lifetime;
@@ -267,9 +267,9 @@ namespace UnrealScript
 		}
 		Object::Vector2D ResolveHUDPosition(Object::Vector2D Position, float Width, float Height)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.ResolveHUDPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45737);
 			byte params[24] = { NULL };
-			*(Object::Vector2D*)&params[0] = Position;
+			*(Object::Vector2D*)params = Position;
 			*(float*)&params[8] = Width;
 			*(float*)&params[12] = Height;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -277,9 +277,9 @@ namespace UnrealScript
 		}
 		void GetScreenCoords(float PosY, float& ScreenX, float& ScreenY, HUD::HudLocalizedMessage& InMessage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetScreenCoords");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45743);
 			byte params[76] = { NULL };
-			*(float*)&params[0] = PosY;
+			*(float*)params = PosY;
 			*(float*)&params[4] = ScreenX;
 			*(float*)&params[8] = ScreenY;
 			*(HUD::HudLocalizedMessage*)&params[12] = InMessage;
@@ -290,119 +290,119 @@ namespace UnrealScript
 		}
 		void DrawMessageText(HUD::HudLocalizedMessage LocalMessage, float ScreenX, float ScreenY)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawMessageText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45750);
 			byte params[72] = { NULL };
-			*(HUD::HudLocalizedMessage*)&params[0] = LocalMessage;
+			*(HUD::HudLocalizedMessage*)params = LocalMessage;
 			*(float*)&params[64] = ScreenX;
 			*(float*)&params[68] = ScreenY;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostRender()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.PostRender");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45756);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawHUD()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45759);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawGameHud()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawGameHud");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45770);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawMicIcon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawMicIcon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45779);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayLocalMessages()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayLocalMessages");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45781);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawLivingHud()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawLivingHud");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45782);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawPostGameHud()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawPostGameHud");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45786);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayWeaponBar()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayWeaponBar");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45788);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayMap()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayMap");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45813);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawAIOverlays()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawAIOverlays");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45829);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class UIInteraction* GetUIController(class LocalPlayer*& LP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetUIController");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45837);
 			byte params[8] = { NULL };
-			*(class LocalPlayer**)&params[0] = LP;
+			*(class LocalPlayer**)params = LP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			LP = *(class LocalPlayer**)&params[0];
+			LP = *(class LocalPlayer**)params;
 			return *(class UIInteraction**)&params[4];
 		}
 		void StartMusic()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.StartMusic");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45840);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void GetTeamColor(int TeamIndex, Object::LinearColor& ImageColor, Object::Color& TextColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetTeamColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45841);
 			byte params[24] = { NULL };
-			*(int*)&params[0] = TeamIndex;
+			*(int*)params = TeamIndex;
 			*(Object::LinearColor*)&params[4] = ImageColor;
 			*(Object::Color*)&params[20] = TextColor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ImageColor = *(Object::LinearColor*)&params[4];
 			TextColor = *(Object::Color*)&params[20];
 		}
-		void DisplayHit(Object::Vector HitDir, int Damage, ScriptClass* DamageType)
+		void DisplayHit(Vector HitDir, int Damage, ScriptClass* DamageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayHit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45845);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = HitDir;
+			*(Vector*)params = HitDir;
 			*(int*)&params[12] = Damage;
 			*(ScriptClass**)&params[16] = DamageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FlashDamage(float FlashPosition)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.FlashDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45865);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = FlashPosition;
+			*(float*)params = FlashPosition;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateDamage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.UpdateDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45870);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayDamage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45874);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawBackground(float X, float Y, float Width, float Height, Object::LinearColor DrawColor, class Canvas* DrawCanvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawBackground");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45876);
 			byte params[36] = { NULL };
-			*(float*)&params[0] = X;
+			*(float*)params = X;
 			*(float*)&params[4] = Y;
 			*(float*)&params[8] = Width;
 			*(float*)&params[12] = Height;
@@ -412,9 +412,9 @@ namespace UnrealScript
 		}
 		void DrawBeaconBackground(float X, float Y, float Width, float Height, Object::LinearColor DrawColor, class Canvas* DrawCanvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawBeaconBackground");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45883);
 			byte params[36] = { NULL };
-			*(float*)&params[0] = X;
+			*(float*)params = X;
 			*(float*)&params[4] = Y;
 			*(float*)&params[8] = Width;
 			*(float*)&params[12] = Height;
@@ -424,9 +424,9 @@ namespace UnrealScript
 		}
 		void DrawHealth(float X, float Y, float Width, float MaxWidth, float Height, class Canvas* DrawCanvas, byte Alpha)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawHealth");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45890);
 			byte params[25] = { NULL };
-			*(float*)&params[0] = X;
+			*(float*)params = X;
 			*(float*)&params[4] = Y;
 			*(float*)&params[8] = Width;
 			*(float*)&params[12] = MaxWidth;
@@ -437,9 +437,9 @@ namespace UnrealScript
 		}
 		void DrawBarGraph(float X, float Y, float Width, float MaxWidth, float Height, class Canvas* DrawCanvas, Object::Color BarColor, Object::Color BackColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawBarGraph");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45901);
 			byte params[32] = { NULL };
-			*(float*)&params[0] = X;
+			*(float*)params = X;
 			*(float*)&params[4] = Y;
 			*(float*)&params[8] = Width;
 			*(float*)&params[12] = MaxWidth;
@@ -451,89 +451,89 @@ namespace UnrealScript
 		}
 		ScriptString* FormatTime(int Seconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.FormatTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45910);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Seconds;
+			*(int*)params = Seconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		class Font* GetFontSizeIndex(int FontSize)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.GetFontSizeIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45916);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = FontSize;
+			*(int*)params = FontSize;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Font**)&params[4];
 		}
 		void ShowPortrait(class UTPlayerReplicationInfo* ShowPRI, float PortraitDuration, bool bOverrideCurrentSpeaker)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.ShowPortrait");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45919);
 			byte params[12] = { NULL };
-			*(class UTPlayerReplicationInfo**)&params[0] = ShowPRI;
+			*(class UTPlayerReplicationInfo**)params = ShowPRI;
 			*(float*)&params[4] = PortraitDuration;
 			*(bool*)&params[8] = bOverrideCurrentSpeaker;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HidePortrait()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.HidePortrait");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45923);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayPortrait(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayPortrait");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45925);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayHUDMessage(ScriptString* Message, float XOffsetPct, float YOffsetPct)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayHUDMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45933);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = Message;
+			*(ScriptString**)params = Message;
 			*(float*)&params[12] = XOffsetPct;
 			*(float*)&params[16] = YOffsetPct;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayClock()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayClock");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45944);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayPawnDoll()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayPawnDoll");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45947);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayAmmo(class UTWeapon* Weapon)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45956);
 			byte params[4] = { NULL };
-			*(class UTWeapon**)&params[0] = Weapon;
+			*(class UTWeapon**)params = Weapon;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayPowerups()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayPowerups");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45963);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayScoring()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayScoring");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45966);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayFragCount(Object::Vector2D pos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayFragCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45968);
 			byte params[8] = { NULL };
-			*(Object::Vector2D*)&params[0] = pos;
+			*(Object::Vector2D*)params = pos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawNameplateBackground(Object::Vector2D pos, float WordWidth, Object::LinearColor NameplateColor, float WordHeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DrawNameplateBackground");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45972);
 			byte params[32] = { NULL };
-			*(Object::Vector2D*)&params[0] = pos;
+			*(Object::Vector2D*)params = pos;
 			*(float*)&params[8] = WordWidth;
 			*(Object::LinearColor*)&params[12] = NameplateColor;
 			*(float*)&params[28] = WordHeight;
@@ -541,14 +541,14 @@ namespace UnrealScript
 		}
 		void DisplayLeaderBoard(Object::Vector2D pos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayLeaderBoard");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45979);
 			byte params[8] = { NULL };
-			*(Object::Vector2D*)&params[0] = pos;
+			*(Object::Vector2D*)params = pos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayConsoleMessages()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUD.DisplayConsoleMessages");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45992);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

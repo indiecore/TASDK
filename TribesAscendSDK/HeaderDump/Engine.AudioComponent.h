@@ -31,7 +31,7 @@ namespace UnrealScript
 	class AudioComponent : public ActorComponent
 	{
 	public:
-		class AudioComponentParam
+		struct AudioComponentParam
 		{
 		public:
 			ADD_OBJECT(SoundNodeWave, WaveParam, 12)
@@ -39,7 +39,7 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptName, ParamName, 0)
 		};
 		ADD_BOOL(bUseOwnerLocation, 108, 0x1)
-		ADD_STRUCT(Object::Vector, Location, 280)
+		ADD_STRUCT(Vector, Location, 280)
 		ADD_BOOL(bAllowSpatialization, 108, 0x100)
 		ADD_STRUCT(float, VolumeMultiplier, 488)
 		ADD_STRUCT(float, PitchMultiplier, 492)
@@ -55,7 +55,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, HighFrequencyGainMultiplier, 496)
 		ADD_STRUCT(int, LastReverbVolumeIndex, 484)
 		ADD_STRUCT(ReverbVolume::InteriorSettings, LastInteriorSettings, 448)
-		ADD_STRUCT(Object::Vector, LastLocation, 436)
+		ADD_STRUCT(Vector, LastLocation, 436)
 		ADD_STRUCT(float, CurrentInteriorLPF, 432)
 		ADD_STRUCT(float, CurrentInteriorVolume, 428)
 		ADD_STRUCT(float, SourceInteriorLPF, 424)
@@ -72,7 +72,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, CurrentHighFrequencyGain, 376)
 		ADD_STRUCT(float, CurrentPitch, 372)
 		ADD_STRUCT(float, CurrentVolume, 368)
-		ADD_STRUCT(Object::Vector, CurrentLocation, 356)
+		ADD_STRUCT(Vector, CurrentLocation, 356)
 		ADD_OBJECT(SoundNode, CurrentNotifyBufferFinishedHook, 352)
 		ADD_STRUCT(float, CurrAdjustVolumeTargetVolume, 348)
 		ADD_STRUCT(float, AdjustVolumeTargetVolume, 344)
@@ -85,7 +85,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, FadeInStopTime, 316)
 		ADD_STRUCT(float, FadeInStartTime, 312)
 		ADD_OBJECT(Actor, LastOwner, 304)
-		ADD_STRUCT(Object::Vector, ComponentLocation, 292)
+		ADD_STRUCT(Vector, ComponentLocation, 292)
 		ADD_OBJECT(PortalVolume, PortalVolume, 276)
 		ADD_STRUCT(float, PlaybackTime, 272)
 		ADD_STRUCT(Object::Pointer, Listener, 268)
@@ -110,35 +110,35 @@ namespace UnrealScript
 		ADD_OBJECT(SoundNode, CueFirstNode, 92)
 		void ResetToDefaults()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.ResetToDefaults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7895);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Play()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.Play");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7915);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FadeIn(float FadeInDuration, float FadeVolumeLevel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.FadeIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7937);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = FadeInDuration;
+			*(float*)params = FadeInDuration;
 			*(float*)&params[4] = FadeVolumeLevel;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FadeOut(float FadeOutDuration, float FadeVolumeLevel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.FadeOut");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7945);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = FadeOutDuration;
+			*(float*)params = FadeOutDuration;
 			*(float*)&params[4] = FadeVolumeLevel;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnQueueSubtitles(ScriptArray<EngineTypes::SubtitleCue> Subtitles, float CueDuration)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.OnQueueSubtitles");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10200);
 			byte params[16] = { NULL };
-			*(ScriptArray<EngineTypes::SubtitleCue>*)&params[0] = Subtitles;
+			*(ScriptArray<EngineTypes::SubtitleCue>*)params = Subtitles;
 			*(float*)&params[12] = CueDuration;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -146,54 +146,54 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* AC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.OnAudioFinished");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10202);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = AC;
+void**)params = AC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Stop()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.Stop");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10266);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool IsPlaying()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.IsPlaying");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10267);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void AdjustVolume(float AdjustVolumeDuration, float AdjustVolumeLevel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.AdjustVolume");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10273);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = AdjustVolumeDuration;
+			*(float*)params = AdjustVolumeDuration;
 			*(float*)&params[4] = AdjustVolumeLevel;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFloatParameter(ScriptName InName, float InFloat)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.SetFloatParameter");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10276);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = InName;
+			*(ScriptName*)params = InName;
 			*(float*)&params[8] = InFloat;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetWaveParameter(ScriptName InName, class SoundNodeWave* InWave)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.SetWaveParameter");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10279);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = InName;
+			*(ScriptName*)params = InName;
 			*(class SoundNodeWave**)&params[8] = InWave;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OcclusionChanged(bool bNowOccluded)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioComponent.OcclusionChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10290);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNowOccluded;
+			*(bool*)params = bNowOccluded;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -28,17 +28,17 @@ namespace UnrealScript
 		ADD_STRUCT(float, MinDamageAmount, 256)
 		bool IsValidDamageType(ScriptClass* inDamageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_TakeDamage.IsValidDamageType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26157);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = inDamageType;
+			*(ScriptClass**)params = inDamageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void HandleDamage(class Actor* InOriginator, class Actor* InInstigator, ScriptClass* inDamageType, int inAmount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_TakeDamage.HandleDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26162);
 			byte params[16] = { NULL };
-			*(class Actor**)&params[0] = InOriginator;
+			*(class Actor**)params = InOriginator;
 			*(class Actor**)&params[4] = InInstigator;
 			*(ScriptClass**)&params[8] = inDamageType;
 			*(int*)&params[12] = inAmount;
@@ -46,19 +46,19 @@ namespace UnrealScript
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_TakeDamage.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26170);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_TakeDamage.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26171);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void Toggled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_TakeDamage.Toggled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26173);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

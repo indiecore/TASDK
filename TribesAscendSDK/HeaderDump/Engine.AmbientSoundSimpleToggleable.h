@@ -20,7 +20,7 @@ namespace UnrealScript
 	class AmbientSoundSimpleToggleable : public AmbientSoundSimple
 	{
 	public:
-		class CheckpointRecord
+		struct CheckpointRecord
 		{
 		public:
 			ADD_BOOL(bCurrentlyPlaying, 0, 0x1)
@@ -34,48 +34,48 @@ namespace UnrealScript
 		ADD_BOOL(bCurrentlyPlaying, 500, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10477);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10478);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartPlaying()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.StartPlaying");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10480);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StopPlaying()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.StopPlaying");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10481);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10482);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateCheckpointRecord(AmbientSoundSimpleToggleable::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.CreateCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10484);
 			byte params[4] = { NULL };
-			*(AmbientSoundSimpleToggleable::CheckpointRecord*)&params[0] = Record;
+			*(AmbientSoundSimpleToggleable::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(AmbientSoundSimpleToggleable::CheckpointRecord*)&params[0];
+			Record = *(AmbientSoundSimpleToggleable::CheckpointRecord*)params;
 		}
 		void ApplyCheckpointRecord(AmbientSoundSimpleToggleable::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AmbientSoundSimpleToggleable.ApplyCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10486);
 			byte params[4] = { NULL };
-			*(AmbientSoundSimpleToggleable::CheckpointRecord*)&params[0] = Record;
+			*(AmbientSoundSimpleToggleable::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(AmbientSoundSimpleToggleable::CheckpointRecord*)&params[0];
+			Record = *(AmbientSoundSimpleToggleable::CheckpointRecord*)params;
 		}
 	};
 }

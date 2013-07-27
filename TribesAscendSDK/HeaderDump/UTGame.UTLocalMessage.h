@@ -33,9 +33,9 @@ namespace UnrealScript
 		ADD_STRUCT(int, MessageArea, 80)
 		class SoundNodeWave* AnnouncementSound(int MessageIndex, class Object* OptionalObject, class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTLocalMessage.AnnouncementSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40596);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = MessageIndex;
+			*(int*)params = MessageIndex;
 			*(class Object**)&params[4] = OptionalObject;
 			*(class PlayerController**)&params[8] = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -43,17 +43,17 @@ namespace UnrealScript
 		}
 		byte AnnouncementLevel(byte MessageIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTLocalMessage.AnnouncementLevel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40609);
 			byte params[2] = { NULL };
-			params[0] = MessageIndex;
+			*params = MessageIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return params[1];
 		}
 		bool AddAnnouncement(class UTAnnouncer* Announcer, int MessageIndex, class PlayerReplicationInfo* PRI, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTLocalMessage.AddAnnouncement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40612);
 			byte params[20] = { NULL };
-			*(class UTAnnouncer**)&params[0] = Announcer;
+			*(class UTAnnouncer**)params = Announcer;
 			*(int*)&params[4] = MessageIndex;
 			*(class PlayerReplicationInfo**)&params[8] = PRI;
 			*(class Object**)&params[12] = OptionalObject;
@@ -62,9 +62,9 @@ namespace UnrealScript
 		}
 		bool ShouldBeRemoved(class UTQueuedAnnouncement* MyAnnouncement, ScriptClass* NewAnnouncementClass, int NewMessageIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTLocalMessage.ShouldBeRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43797);
 			byte params[16] = { NULL };
-			*(class UTQueuedAnnouncement**)&params[0] = MyAnnouncement;
+			*(class UTQueuedAnnouncement**)params = MyAnnouncement;
 			*(ScriptClass**)&params[4] = NewAnnouncementClass;
 			*(int*)&params[8] = NewMessageIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -72,18 +72,18 @@ namespace UnrealScript
 		}
 		float GetPos(int Switch, class HUD* myHUD)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTLocalMessage.GetPos");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43810);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(class HUD**)&params[4] = myHUD;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		bool KilledByVictoryMessage(int AnnouncementIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTLocalMessage.KilledByVictoryMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43815);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = AnnouncementIndex;
+			*(int*)params = AnnouncementIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

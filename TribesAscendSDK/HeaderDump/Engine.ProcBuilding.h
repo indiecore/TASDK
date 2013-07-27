@@ -59,24 +59,24 @@ namespace UnrealScript
 			EPBC_Round = 2,
 			EPBC_MAX = 3,
 		};
-		class PBMaterialParam
+		struct PBMaterialParam
 		{
 		public:
 			ADD_STRUCT(ScriptName, ParamName, 0)
 			ADD_STRUCT(Object::LinearColor, Color, 8)
 		};
-		class PBFracMeshCompInfo
+		struct PBFracMeshCompInfo
 		{
 		public:
 			ADD_STRUCT(int, TopLevelScopeIndex, 4)
 		};
-		class PBFaceUVInfo
+		struct PBFaceUVInfo
 		{
 		public:
 			ADD_STRUCT(Object::Vector2D, Offset, 0)
 			ADD_STRUCT(Object::Vector2D, Size, 8)
 		};
-		class PBMemUsageInfo
+		struct PBMemUsageInfo
 		{
 		public:
 			ADD_OBJECT(ProcBuilding, Building, 0)
@@ -89,12 +89,12 @@ namespace UnrealScript
 			ADD_STRUCT(int, LODDiffuseMemBytes, 28)
 			ADD_STRUCT(int, LODLightingMemBytes, 32)
 		};
-		class PBMeshCompInfo
+		struct PBMeshCompInfo
 		{
 		public:
 			ADD_STRUCT(int, TopLevelScopeIndex, 4)
 		};
-		class PBScopeProcessInfo
+		struct PBScopeProcessInfo
 		{
 		public:
 			ADD_OBJECT(ProcBuilding, OwningBuilding, 0)
@@ -103,18 +103,18 @@ namespace UnrealScript
 			ADD_BOOL(bGenerateLODPoly, 16, 0x1)
 			ADD_BOOL(bPartOfNonRect, 16, 0x2)
 		};
-		class PBScope2D
+		struct PBScope2D
 		{
 		public:
 			ADD_STRUCT(Object::Matrix, ScopeFrame, 0)
 			ADD_STRUCT(float, DimX, 64)
 			ADD_STRUCT(float, DimZ, 68)
 		};
-		class PBEdgeInfo
+		struct PBEdgeInfo
 		{
 		public:
-			ADD_STRUCT(Object::Vector, EdgeEnd, 0)
-			ADD_STRUCT(Object::Vector, EdgeStart, 12)
+			ADD_STRUCT(Vector, EdgeEnd, 0)
+			ADD_STRUCT(Vector, EdgeStart, 12)
 			ADD_STRUCT(int, ScopeAIndex, 24)
 			ADD_STRUCT(ProcBuilding::EScopeEdge, ScopeAEdge, 28)
 			ADD_STRUCT(int, ScopeBIndex, 32)
@@ -160,48 +160,48 @@ void*>, LODMeshComps, 556)
 		ADD_STRUCT(int, BuildingInstanceVersion, 728)
 		int FindEdgeForTopLevelScope(int TopLevelScopeIndex, ProcBuilding::EScopeEdge Edge)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ProcBuilding.FindEdgeForTopLevelScope");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24086);
 			byte params[9] = { NULL };
-			*(int*)&params[0] = TopLevelScopeIndex;
+			*(int*)params = TopLevelScopeIndex;
 			*(ProcBuilding::EScopeEdge*)&params[4] = Edge;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void BreakFractureComponent(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* Comp, Object::Vector BoxMin, Object::Vector BoxMax)
+void* Comp, Vector BoxMin, Vector BoxMax)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ProcBuilding.BreakFractureComponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24087);
 			byte params[28] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = Comp;
-			*(Object::Vector*)&params[4] = BoxMin;
-			*(Object::Vector*)&params[16] = BoxMax;
+void**)params = Comp;
+			*(Vector*)&params[4] = BoxMin;
+			*(Vector*)&params[16] = BoxMax;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GetAllGroupedProcBuildings(ScriptArray<class ProcBuilding*>& OutSet)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ProcBuilding.GetAllGroupedProcBuildings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24093);
 			byte params[12] = { NULL };
-			*(ScriptArray<class ProcBuilding*>*)&params[0] = OutSet;
+			*(ScriptArray<class ProcBuilding*>*)params = OutSet;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutSet = *(ScriptArray<class ProcBuilding*>*)&params[0];
+			OutSet = *(ScriptArray<class ProcBuilding*>*)params;
 		}
 		class ProcBuilding* GetBaseMostBuilding()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ProcBuilding.GetBaseMostBuilding");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24097);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class ProcBuilding**)&params[0];
+			return *(class ProcBuilding**)params;
 		}
 		ScriptArray<
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void*> FindComponentsForTopLevelScope(int TopLevelScopeIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ProcBuilding.FindComponentsForTopLevelScope");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24100);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = TopLevelScopeIndex;
+			*(int*)params = TopLevelScopeIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptArray<
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
@@ -209,7 +209,7 @@ void*>*)&params[4];
 		}
 		void ClearBuildingMeshes()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ProcBuilding.ClearBuildingMeshes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24102);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

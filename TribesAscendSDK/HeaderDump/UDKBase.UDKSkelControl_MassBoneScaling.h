@@ -12,17 +12,17 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<float>, BoneScales, 188)
 		void SetBoneScale(ScriptName BoneName, float Scale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_MassBoneScaling.SetBoneScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35440);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			*(float*)&params[8] = Scale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetBoneScale(ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_MassBoneScaling.GetBoneScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35443);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = BoneName;
+			*(ScriptName*)params = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}

@@ -26,32 +26,32 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, LinearKernel, 720)
 		ADD_STRUCT(Object::Pointer, ForceField, 680)
 		ADD_STRUCT(float, TorusRadius, 676)
-		ADD_STRUCT(Object::Vector, FalloffQuadratic, 664)
-		ADD_STRUCT(Object::Vector, FalloffLinear, 652)
-		ADD_STRUCT(Object::Vector, Noise, 640)
-		ADD_STRUCT(Object::Vector, VelocityTarget, 628)
-		ADD_STRUCT(Object::Vector, VelocityMultiplierZ, 616)
-		ADD_STRUCT(Object::Vector, VelocityMultiplierY, 604)
-		ADD_STRUCT(Object::Vector, VelocityMultiplierX, 592)
-		ADD_STRUCT(Object::Vector, PositionTarget, 580)
-		ADD_STRUCT(Object::Vector, PositionMultiplierZ, 568)
-		ADD_STRUCT(Object::Vector, PositionMultiplierY, 556)
-		ADD_STRUCT(Object::Vector, PositionMultiplierX, 544)
-		ADD_STRUCT(Object::Vector, Constant, 532)
+		ADD_STRUCT(Vector, FalloffQuadratic, 664)
+		ADD_STRUCT(Vector, FalloffLinear, 652)
+		ADD_STRUCT(Vector, Noise, 640)
+		ADD_STRUCT(Vector, VelocityTarget, 628)
+		ADD_STRUCT(Vector, VelocityMultiplierZ, 616)
+		ADD_STRUCT(Vector, VelocityMultiplierY, 604)
+		ADD_STRUCT(Vector, VelocityMultiplierX, 592)
+		ADD_STRUCT(Vector, PositionTarget, 580)
+		ADD_STRUCT(Vector, PositionMultiplierZ, 568)
+		ADD_STRUCT(Vector, PositionMultiplierY, 556)
+		ADD_STRUCT(Vector, PositionMultiplierX, 544)
+		ADD_STRUCT(Vector, Constant, 532)
 		ADD_STRUCT(NxGenericForceFieldBrush::FFB_ForceFieldCoordinates, Coordinates, 529)
 		ADD_STRUCT(PrimitiveComponent::ERBCollisionChannel, RBChannel, 528)
 		ADD_STRUCT(PrimitiveComponent::RBCollisionChannelContainer, CollideWithChannels, 524)
 		ADD_STRUCT(int, ExcludeChannel, 520)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxGenericForceFieldBrush.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21311);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool StopsProjectile(class Projectile* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxGenericForceFieldBrush.StopsProjectile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21312);
 			byte params[8] = { NULL };
-			*(class Projectile**)&params[0] = P;
+			*(class Projectile**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

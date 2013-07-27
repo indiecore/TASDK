@@ -13,9 +13,9 @@ namespace UnrealScript
 		ADD_OBJECT(UTDataStore_GameSearchHistory, HistoryGameSearchDataStore, 356)
 		bool HasOutstandingQueries(bool bRestrictCheckToSelf)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchFavorites.HasOutstandingQueries");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46904);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bRestrictCheckToSelf;
+			*(bool*)params = bRestrictCheckToSelf;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

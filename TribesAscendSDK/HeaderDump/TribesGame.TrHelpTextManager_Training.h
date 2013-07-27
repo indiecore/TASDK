@@ -53,50 +53,50 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, m_TrainingHelpTextSkiAdv5MenuTitle, 1540)
 		void InitHelpTextManager()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager_Training.InitHelpTextManager");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(95425);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateTypesToRemoveOnTimers(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager_Training.UpdateTypesToRemoveOnTimers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(95426);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CheckDestroy()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager_Training.CheckDestroy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(95428);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool RequestHelpText(TrHelpTextManager::EHelpTextType RequestedType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager_Training.RequestHelpText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(95430);
 			byte params[5] = { NULL };
-			*(TrHelpTextManager::EHelpTextType*)&params[0] = RequestedType;
+			*(TrHelpTextManager::EHelpTextType*)params = RequestedType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void RemoveHelpText(TrHelpTextManager::EHelpTextType TypeToRemove, float Time, bool bDoNotSuppress)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager_Training.RemoveHelpText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(95433);
 			byte params[9] = { NULL };
-			*(TrHelpTextManager::EHelpTextType*)&params[0] = TypeToRemove;
+			*(TrHelpTextManager::EHelpTextType*)params = TypeToRemove;
 			*(float*)&params[4] = Time;
 			*(bool*)&params[8] = bDoNotSuppress;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RequestHelpText_Training(TrHelpTextManager_Training::EHelpTextTrainingType RequestedType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager_Training.RequestHelpText_Training");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(95437);
 			byte params[1] = { NULL };
-			*(TrHelpTextManager_Training::EHelpTextTrainingType*)&params[0] = RequestedType;
+			*(TrHelpTextManager_Training::EHelpTextTrainingType*)params = RequestedType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateHUD()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHelpTextManager_Training.UpdateHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(95440);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

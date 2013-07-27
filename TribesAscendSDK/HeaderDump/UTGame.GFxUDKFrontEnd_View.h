@@ -21,65 +21,65 @@ namespace UnrealScript
 		ADD_OBJECT(GFxUDKFrontEnd, MenuManager, 124)
 		void OnViewLoaded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.OnViewLoaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37996);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.OnTopMostView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37997);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPlayOpenAnimation;
+			*(bool*)params = bPlayOpenAnimation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnViewActivated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.OnViewActivated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37999);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnViewClosed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.OnViewClosed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38000);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.DisableSubComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38001);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDisableComponents;
+			*(bool*)params = bDisableComponents;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayOpenAnimation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.PlayOpenAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38003);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayCloseAnimation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.PlayCloseAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38004);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Select_Back(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.Select_Back");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38005);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MoveBackImpl()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.MoveBackImpl");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38007);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnEscapeKeyPress()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.OnEscapeKeyPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38008);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_View.WidgetInitialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38009);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)params = WidgetName;
 			*(ScriptName*)&params[8] = WidgetPath;
 			*(class GFxObject**)&params[16] = Widget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

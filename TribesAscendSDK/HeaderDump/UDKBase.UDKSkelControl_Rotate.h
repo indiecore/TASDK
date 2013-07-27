@@ -10,8 +10,8 @@ namespace UnrealScript
 	class UDKSkelControl_Rotate : public SkelControlSingleBone
 	{
 	public:
-		ADD_STRUCT(Object::Rotator, DesiredBoneRotationRate, 248)
-		ADD_STRUCT(Object::Rotator, DesiredBoneRotation, 236)
+		ADD_STRUCT(Rotator, DesiredBoneRotationRate, 248)
+		ADD_STRUCT(Rotator, DesiredBoneRotation, 236)
 	};
 }
 #undef ADD_STRUCT

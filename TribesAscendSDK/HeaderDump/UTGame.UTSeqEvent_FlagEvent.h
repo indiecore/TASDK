@@ -8,18 +8,18 @@ namespace UnrealScript
 	public:
 		void Trigger(ScriptName EventType, class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqEvent_FlagEvent.Trigger");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49208);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = EventType;
+			*(ScriptName*)params = EventType;
 			*(class Controller**)&params[8] = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqEvent_FlagEvent.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49215);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

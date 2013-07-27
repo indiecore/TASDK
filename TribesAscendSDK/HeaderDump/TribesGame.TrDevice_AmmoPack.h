@@ -15,15 +15,15 @@ namespace UnrealScript
 		ADD_STRUCT(int, m_nAmmoPackMultPrimary, 2168)
 		void AddAmmoBuff(class TrDevice* Dev, float Mult)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_AmmoPack.AddAmmoBuff");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80717);
 			byte params[8] = { NULL };
-			*(class TrDevice**)&params[0] = Dev;
+			*(class TrDevice**)params = Dev;
 			*(float*)&params[4] = Mult;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ApplyAmmoBuff()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_AmmoPack.ApplyAmmoBuff");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80720);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

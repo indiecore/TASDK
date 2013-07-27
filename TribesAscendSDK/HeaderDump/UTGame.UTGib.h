@@ -32,7 +32,7 @@ namespace UnrealScript
 	class UTGib : public Actor
 	{
 	public:
-		class StaticMeshDatum
+		struct StaticMeshDatum
 		{
 		public:
 			ADD_BOOL(bUseSecondaryGibMeshMITV, 16, 0x1)
@@ -45,8 +45,8 @@ namespace UnrealScript
 		ADD_STRUCT(float, DecalWaitTimeBeforeDissolve, 508)
 		ADD_BOOL(bUseUnrealPhysics, 540, 0x1)
 		ADD_STRUCT(ScriptArray<UTGib::StaticMeshDatum>, GibMeshesData, 544)
-		ADD_STRUCT(Object::Rotator, OldCamRot, 568)
-		ADD_STRUCT(Object::Vector, OldCamLoc, 556)
+		ADD_STRUCT(Rotator, OldCamRot, 568)
+		ADD_STRUCT(Vector, OldCamLoc, 556)
 		ADD_BOOL(bStopMovingCamera, 540, 0x2)
 		ADD_OBJECT(ParticleSystem, PS_CustomEffect, 536)
 		ADD_STRUCT(float, GibMeshWaitTimeBeforeDissolve, 528)
@@ -59,21 +59,21 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, HitSound, 480)
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47878);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetTexturesToBeResident(float TimeToBeResident)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.SetTexturesToBeResident");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47879);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = TimeToBeResident;
+			*(float*)params = TimeToBeResident;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.DisplayDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47882);
 			byte params[12] = { NULL };
-			*(class HUD**)&params[0] = HUD;
+			*(class HUD**)params = HUD;
 			*(float*)&params[4] = out_YL;
 			*(float*)&params[8] = out_YPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -82,44 +82,44 @@ namespace UnrealScript
 		}
 		void SetGibStaticMesh(class StaticMesh* NewStaticMesh)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.SetGibStaticMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47886);
 			byte params[4] = { NULL };
-			*(class StaticMesh**)&params[0] = NewStaticMesh;
+			*(class StaticMesh**)params = NewStaticMesh;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ChooseGib()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.ChooseGib");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47890);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DoCustomGibEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.DoCustomGibEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47899);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Timer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.Timer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47900);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void BecomeViewTarget(class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.BecomeViewTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47902);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool CalcCamera(float fDeltaTime, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, float& out_FOV)
+		bool CalcCamera(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.CalcCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47904);
 			byte params[36] = { NULL };
-			*(float*)&params[0] = fDeltaTime;
-			*(Object::Vector*)&params[4] = out_CamLoc;
-			*(Object::Rotator*)&params[16] = out_CamRot;
+			*(float*)params = fDeltaTime;
+			*(Vector*)&params[4] = out_CamLoc;
+			*(Rotator*)&params[16] = out_CamRot;
 			*(float*)&params[28] = out_FOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_CamLoc = *(Object::Vector*)&params[4];
-			out_CamRot = *(Object::Rotator*)&params[16];
+			out_CamLoc = *(Vector*)&params[4];
+			out_CamRot = *(Rotator*)&params[16];
 			out_FOV = *(float*)&params[28];
 			return *(bool*)&params[32];
 		}
@@ -129,11 +129,11 @@ void* HitComponent,
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* OtherComponent, Actor::CollisionImpactData& RigidCollisionData, int ContactIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.RigidBodyCollision");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47914);
 			byte params[48] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = HitComponent;
+void**)params = HitComponent;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComponent;
@@ -142,34 +142,34 @@ void**)&params[4] = OtherComponent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			RigidCollisionData = *(Actor::CollisionImpactData*)&params[8];
 		}
-		void LeaveADecal(Object::Vector HitLoc, Object::Vector HitNorm)
+		void LeaveADecal(Vector HitLoc, Vector HitNorm)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.LeaveADecal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47919);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLoc;
-			*(Object::Vector*)&params[12] = HitNorm;
+			*(Vector*)params = HitLoc;
+			*(Vector*)&params[12] = HitNorm;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TurnOnCollision()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.TurnOnCollision");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47929);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Landed(Object::Vector HitNormal, class Actor* FloorActor)
+		void Landed(Vector HitNormal, class Actor* FloorActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.Landed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47930);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = HitNormal;
+			*(Vector*)params = HitNormal;
 			*(class Actor**)&params[12] = FloorActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void HitWall(Object::Vector HitNormal, class Actor* Wall, 
+		void HitWall(Vector HitNormal, class Actor* Wall, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* WallComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib.HitWall");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47933);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = HitNormal;
+			*(Vector*)params = HitNormal;
 			*(class Actor**)&params[12] = Wall;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!

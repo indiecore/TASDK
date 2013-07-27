@@ -21,7 +21,7 @@ namespace UnrealScript
 	class Trigger : public Actor
 	{
 	public:
-		class CheckpointRecord
+		struct CheckpointRecord
 		{
 		public:
 			ADD_BOOL(bCollideActors, 0, 0x1)
@@ -30,58 +30,58 @@ namespace UnrealScript
 		ADD_STRUCT(float, AITriggerDelay, 484)
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Trigger.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28019);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyTriggered()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Trigger.NotifyTriggered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28024);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UnTrigger()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Trigger.UnTrigger");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28025);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool StopsProjectile(class Projectile* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Trigger.StopsProjectile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28026);
 			byte params[8] = { NULL };
-			*(class Projectile**)&params[0] = P;
+			*(class Projectile**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool ShouldSaveForCheckpoint()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Trigger.ShouldSaveForCheckpoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28029);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void CreateCheckpointRecord(Trigger::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Trigger.CreateCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28031);
 			byte params[4] = { NULL };
-			*(Trigger::CheckpointRecord*)&params[0] = Record;
+			*(Trigger::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(Trigger::CheckpointRecord*)&params[0];
+			Record = *(Trigger::CheckpointRecord*)params;
 		}
 		void ApplyCheckpointRecord(Trigger::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Trigger.ApplyCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28033);
 			byte params[4] = { NULL };
-			*(Trigger::CheckpointRecord*)&params[0] = Record;
+			*(Trigger::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(Trigger::CheckpointRecord*)&params[0];
+			Record = *(Trigger::CheckpointRecord*)params;
 		}
 	};
 }

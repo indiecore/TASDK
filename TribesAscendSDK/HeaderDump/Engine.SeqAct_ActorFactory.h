@@ -34,8 +34,8 @@ namespace UnrealScript
 			PS_MAX = 3,
 		};
 		ADD_STRUCT(ScriptArray<class Actor*>, SpawnPoints, 260)
-		ADD_STRUCT(ScriptArray<Object::Vector>, SpawnLocations, 272)
-		ADD_STRUCT(ScriptArray<Object::Vector>, SpawnOrientations, 284)
+		ADD_STRUCT(ScriptArray<Vector>, SpawnLocations, 272)
+		ADD_STRUCT(ScriptArray<Vector>, SpawnOrientations, 284)
 		ADD_STRUCT(float, RemainingDelay, 312)
 		ADD_STRUCT(int, SpawnedCount, 308)
 		ADD_STRUCT(int, LastSpawnIdx, 304)
@@ -48,10 +48,10 @@ namespace UnrealScript
 		ADD_BOOL(bEnabled, 248, 0x1)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_ActorFactory.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25562);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

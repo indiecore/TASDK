@@ -83,286 +83,286 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class UDKUIDataProvider_SearchResult*>, ServerListData, 300)
 		void OnViewLoaded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnViewLoaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38414);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnViewActivated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnViewActivated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38421);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ForceLANOption(int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.ForceLANOption");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38429);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateFilterButton()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.UpdateFilterButton");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38430);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnTopMostView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38431);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPlayOpenAnimation;
+			*(bool*)params = bPlayOpenAnimation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnViewClosed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnViewClosed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38434);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.DisableSubComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38435);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDisableComponents;
+			*(bool*)params = bDisableComponents;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ValidateServerType()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.ValidateServerType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38438);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Cleanup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.Cleanup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38444);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetGameTypeSearchProviderIndex(ScriptString* GameClassName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.GetGameTypeSearchProviderIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38450);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = GameClassName;
+			*(ScriptString**)params = GameClassName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		void OnGameTypeChanged(int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnGameTypeChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38455);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConditionalRefreshServerList(int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.ConditionalRefreshServerList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38459);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UseLANMode()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.UseLANMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38463);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateButtonStates()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.UpdateButtonStates");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38464);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PromptForServerPassword()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.PromptForServerPassword");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38466);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* StripInvalidPasswordCharacters(ScriptString* PasswordString, ScriptString* InvalidChars)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.StripInvalidPasswordCharacters");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38468);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = PasswordString;
+			*(ScriptString**)params = PasswordString;
 			*(ScriptString**)&params[12] = InvalidChars;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[24];
 		}
 		void OnPasswordDialog_OK(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnPasswordDialog_OK");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38473);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProcessJoin()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.ProcessJoin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38479);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateServerCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.UpdateServerCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38480);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* BuildJoinURL(ScriptString* ResolvedConnectionURL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.BuildJoinURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38485);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = ResolvedConnectionURL;
+			*(ScriptString**)params = ResolvedConnectionURL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		void RefreshServerList(int InPlayerIndex, int MaxResults)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.RefreshServerList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38490);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = InPlayerIndex;
+			*(int*)params = InPlayerIndex;
 			*(int*)&params[4] = MaxResults;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SubmitServerListQuery(int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.SubmitServerListQuery");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38495);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFindOnlineGamesCompleteDelegate(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnFindOnlineGamesCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38497);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFindOnlineGamesComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnFindOnlineGamesComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38500);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetDesiredMatchType()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.GetDesiredMatchType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38504);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void OnRefreshButtonPress(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnRefreshButtonPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38506);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFilterButtonPress(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnFilterButtonPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38508);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerFilterChangedGameType()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.ServerFilterChangedGameType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38511);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateListDataProvider()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.UpdateListDataProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38512);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnServerHeaderPress(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnServerHeaderPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38523);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnMapHeaderPress(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnMapHeaderPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38525);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPlayersHeaderPress(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnPlayersHeaderPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38527);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPingHeaderPress(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnPingHeaderPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38529);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnServerListItemPress(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnServerListItemPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38531);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpectateServer(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.SpectateServer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38538);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void JoinServerClikListener(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.JoinServerClikListener");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38540);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void JoinServer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.JoinServer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38542);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnJoinGameComplete(ScriptName SessionName, bool bSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnJoinGameComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38550);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(bool*)&params[8] = bSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AllowJoinServer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.AllowJoinServer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38555);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void CancelQuery(GFxUDKFrontEnd_JoinGame::EQueryCompletionAction DesiredCancelAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.CancelQuery");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38558);
 			byte params[1] = { NULL };
-			*(GFxUDKFrontEnd_JoinGame::EQueryCompletionAction*)&params[0] = DesiredCancelAction;
+			*(GFxUDKFrontEnd_JoinGame::EQueryCompletionAction*)params = DesiredCancelAction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetRefreshing(bool IsRefreshing)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.SetRefreshing");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38560);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = IsRefreshing;
+			*(bool*)params = IsRefreshing;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnCancelSearchComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.OnCancelSearchComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38563);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyGameTypeChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.NotifyGameTypeChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38567);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_JoinGame.WidgetInitialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38568);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)params = WidgetName;
 			*(ScriptName*)&params[8] = WidgetPath;
 			*(class GFxObject**)&params[16] = Widget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

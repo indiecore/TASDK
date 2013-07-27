@@ -31,11 +31,11 @@ namespace UnrealScript
 	class GameExplosionActor : public Actor
 	{
 	public:
-		ADD_STRUCT(Object::Vector, ExplosionDirection, 552)
+		ADD_STRUCT(Vector, ExplosionDirection, 552)
 		ADD_STRUCT(float, DirectionalExplosionMinDot, 548)
 		ADD_OBJECT(Controller, AttacheeController, 544)
 		ADD_OBJECT(Actor, Attachee, 540)
-		ADD_STRUCT(Object::Vector, HitLocationFromPhysMaterialTrace, 528)
+		ADD_STRUCT(Vector, HitLocationFromPhysMaterialTrace, 528)
 		ADD_OBJECT(Actor, HitActorFromPhysMaterialTrace, 524)
 		ADD_OBJECT(Controller, InstigatorController, 520)
 		ADD_OBJECT(GameExplosion, ExplosionTemplate, 512)
@@ -50,128 +50,128 @@ namespace UnrealScript
 		ADD_BOOL(bHasExploded, 476, 0x1)
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31590);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class PhysicalMaterial* GetPhysicalMaterial()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.GetPhysicalMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31591);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class PhysicalMaterial**)&params[0];
+			return *(class PhysicalMaterial**)params;
 		}
 		bool DoFullDamageToActor(class Actor* Victim)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.DoFullDamageToActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31599);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Victim;
+			*(class Actor**)params = Victim;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool IsBehindExplosion(class Actor* A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.IsBehindExplosion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31602);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = A;
+			*(class Actor**)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
-		float BoxDistanceToPoint(Object::Vector Start, Object::Box BBox)
+		float BoxDistanceToPoint(Vector Start, Object::Box BBox)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.BoxDistanceToPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31605);
 			byte params[44] = { NULL };
-			*(Object::Vector*)&params[0] = Start;
+			*(Vector*)params = Start;
 			*(Object::Box*)&params[12] = BBox;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[40];
 		}
 		void DoExplosionDamage(bool bCauseDamage, bool bCauseEffects)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.DoExplosionDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31609);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bCauseDamage;
+			*(bool*)params = bCauseDamage;
 			*(bool*)&params[4] = bCauseEffects;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetEffectCheckRadius()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.GetEffectCheckRadius");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31637);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void SpecialPawnEffectsFor(class GamePawn* VictimPawn, float VictimDist)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.SpecialPawnEffectsFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31640);
 			byte params[8] = { NULL };
-			*(class GamePawn**)&params[0] = VictimPawn;
+			*(class GamePawn**)params = VictimPawn;
 			*(float*)&params[4] = VictimDist;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateExplosionTemplateWithPerMaterialFX(class PhysicalMaterial* PhysMaterial)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.UpdateExplosionTemplateWithPerMaterialFX");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31643);
 			byte params[4] = { NULL };
-			*(class PhysicalMaterial**)&params[0] = PhysMaterial;
+			*(class PhysicalMaterial**)params = PhysMaterial;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpawnExplosionParticleSystem(class ParticleSystem* Template)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.SpawnExplosionParticleSystem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31645);
 			byte params[4] = { NULL };
-			*(class ParticleSystem**)&params[0] = Template;
+			*(class ParticleSystem**)params = Template;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpawnExplosionDecal()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.SpawnExplosionDecal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31647);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpawnExplosionFogVolume()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.SpawnExplosionFogVolume");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31648);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Explode(class GameExplosion* NewExplosionTemplate, Object::Vector Direction)
+		void Explode(class GameExplosion* NewExplosionTemplate, Vector Direction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.Explode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31649);
 			byte params[16] = { NULL };
-			*(class GameExplosion**)&params[0] = NewExplosionTemplate;
-			*(Object::Vector*)&params[4] = Direction;
+			*(class GameExplosion**)params = NewExplosionTemplate;
+			*(Vector*)&params[4] = Direction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DelayedExplosionDamage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.DelayedExplosionDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31654);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawDebug()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.DrawDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31655);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31658);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DoExplosionCameraEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.DoExplosionCameraEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31661);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpawnCameraLensEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.SpawnCameraLensEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31665);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		class CameraShake* ChooseCameraShake(Object::Vector Epicenter, class PlayerController* PC)
+		class CameraShake* ChooseCameraShake(Vector Epicenter, class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameExplosionActor.ChooseCameraShake");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31667);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = Epicenter;
+			*(Vector*)params = Epicenter;
 			*(class PlayerController**)&params[12] = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class CameraShake**)&params[16];

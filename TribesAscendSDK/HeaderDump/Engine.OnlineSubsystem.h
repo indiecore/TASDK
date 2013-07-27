@@ -131,18 +131,18 @@ namespace UnrealScript
 			LS_LoggedIn = 2,
 			LS_MAX = 3,
 		};
-		class UniqueNetId
+		struct UniqueNetId
 		{
 		public:
-			ADD_STRUCT(Object::QWord, Uid, 0)
+			ADD_STRUCT(QWord, Uid, 0)
 		};
-		class NamedInterface
+		struct NamedInterface
 		{
 		public:
 			ADD_OBJECT(Object, InterfaceObject, 8)
 			ADD_STRUCT(ScriptName, InterfaceName, 0)
 		};
-		class AchievementDetails
+		struct AchievementDetails
 		{
 		public:
 			ADD_STRUCT(int, Id, 0)
@@ -155,13 +155,13 @@ namespace UnrealScript
 			ADD_BOOL(bWasAchievedOnline, 48, 0x2)
 			ADD_BOOL(bWasAchievedOffline, 48, 0x4)
 		};
-		class CommunityContentMetadata
+		struct CommunityContentMetadata
 		{
 		public:
 			ADD_STRUCT(int, ContentType, 0)
 			ADD_STRUCT(ScriptArray<Settings::SettingsProperty>, MetadataItems, 4)
 		};
-		class CommunityContentFile
+		struct CommunityContentFile
 		{
 		public:
 			ADD_STRUCT(int, ContentId, 0)
@@ -175,13 +175,13 @@ namespace UnrealScript
 			ADD_STRUCT(int, LastRatingGiven, 36)
 			ADD_STRUCT(ScriptString*, LocalFilePath, 40)
 		};
-		class NamedInterfaceDef
+		struct NamedInterfaceDef
 		{
 		public:
 			ADD_STRUCT(ScriptName, InterfaceName, 0)
 			ADD_STRUCT(ScriptString*, InterfaceClassName, 8)
 		};
-		class OnlineFriendMessage
+		struct OnlineFriendMessage
 		{
 		public:
 			ADD_STRUCT(OnlineSubsystem::UniqueNetId, SendingPlayerId, 0)
@@ -192,7 +192,7 @@ namespace UnrealScript
 			ADD_BOOL(bWasDenied, 20, 0x8)
 			ADD_STRUCT(ScriptString*, Message, 24)
 		};
-		class RemoteTalker
+		struct RemoteTalker
 		{
 		public:
 			ADD_STRUCT(OnlineSubsystem::UniqueNetId, TalkerId, 0)
@@ -201,7 +201,7 @@ namespace UnrealScript
 			ADD_BOOL(bIsTalking, 12, 0x2)
 			ADD_BOOL(bIsRegistered, 12, 0x4)
 		};
-		class LocalTalker
+		struct LocalTalker
 		{
 		public:
 			ADD_BOOL(bHasVoice, 0, 0x1)
@@ -211,38 +211,38 @@ namespace UnrealScript
 			ADD_BOOL(bIsTalking, 0, 0x10)
 			ADD_BOOL(bIsRegistered, 0, 0x20)
 		};
-		class OnlinePlayerScore
+		struct OnlinePlayerScore
 		{
 		public:
 			ADD_STRUCT(OnlineSubsystem::UniqueNetId, PlayerID, 0)
 			ADD_STRUCT(int, TeamID, 8)
 			ADD_STRUCT(int, Score, 12)
 		};
-		class SpeechRecognizedWord
+		struct SpeechRecognizedWord
 		{
 		public:
 			ADD_STRUCT(int, WordId, 0)
 			ADD_STRUCT(ScriptString*, WordText, 4)
 			ADD_STRUCT(float, Confidence, 16)
 		};
-		class FriendsQuery
+		struct FriendsQuery
 		{
 		public:
 			ADD_STRUCT(OnlineSubsystem::UniqueNetId, UniqueId, 0)
 			ADD_BOOL(bIsFriend, 8, 0x1)
 		};
-		class OnlineRegistrant
+		struct OnlineRegistrant
 		{
 		public:
 			ADD_STRUCT(OnlineSubsystem::UniqueNetId, PlayerNetId, 0)
 		};
-		class OnlineArbitrationRegistrant : public OnlineRegistrant
+		struct OnlineArbitrationRegistrant : public OnlineRegistrant
 		{
 		public:
-			ADD_STRUCT(Object::QWord, MachineId, 8)
+			ADD_STRUCT(QWord, MachineId, 8)
 			ADD_STRUCT(int, Trustworthiness, 16)
 		};
-		class OnlinePartyMember
+		struct OnlinePartyMember
 		{
 		public:
 			ADD_STRUCT(OnlineSubsystem::UniqueNetId, UniqueId, 0)
@@ -255,20 +255,20 @@ namespace UnrealScript
 			ADD_BOOL(bIsTalking, 28, 0x4)
 			ADD_BOOL(bIsInGameSession, 28, 0x8)
 			ADD_BOOL(bIsPlayingThisGame, 28, 0x10)
-			ADD_STRUCT(Object::QWord, SessionId, 32)
+			ADD_STRUCT(QWord, SessionId, 32)
 			ADD_STRUCT(int, Data1, 40)
 			ADD_STRUCT(int, Data2, 44)
 			ADD_STRUCT(int, Data3, 48)
 			ADD_STRUCT(int, Data4, 52)
 		};
-		class TitleFile
+		struct TitleFile
 		{
 		public:
 			ADD_STRUCT(ScriptString*, Filename, 0)
 			ADD_STRUCT(OnlineSubsystem::EOnlineEnumerationReadState, AsyncState, 12)
 			ADD_STRUCT(ScriptArray<byte>, Data, 16)
 		};
-		class OnlineContent
+		struct OnlineContent
 		{
 		public:
 			ADD_STRUCT(OnlineSubsystem::EOnlineContentType, ContentType, 0)
@@ -280,11 +280,11 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptArray<ScriptString*>, ContentPackages, 44)
 			ADD_STRUCT(ScriptArray<ScriptString*>, ContentFiles, 56)
 		};
-		class OnlineFriend
+		struct OnlineFriend
 		{
 		public:
 			ADD_STRUCT(OnlineSubsystem::UniqueNetId, UniqueId, 0)
-			ADD_STRUCT(Object::QWord, SessionId, 8)
+			ADD_STRUCT(QWord, SessionId, 8)
 			ADD_STRUCT(ScriptString*, NickName, 16)
 			ADD_STRUCT(ScriptString*, PresenceInfo, 28)
 			ADD_STRUCT(OnlineSubsystem::EOnlineFriendState, FriendState, 40)
@@ -296,7 +296,7 @@ namespace UnrealScript
 			ADD_BOOL(bHaveInvited, 44, 0x20)
 			ADD_BOOL(bHasInvitedYou, 44, 0x40)
 		};
-		class NamedSession
+		struct NamedSession
 		{
 		public:
 			ADD_OBJECT(OnlineGameSettings, GameSettings, 12)
@@ -316,47 +316,47 @@ namespace UnrealScript
 		ADD_STRUCT(float, AsyncMinCompletionTime, 220)
 		void SetDebugSpewLevel(int DebugSpewLevel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetDebugSpewLevel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5436);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = DebugSpewLevel;
+			*(int*)params = DebugSpewLevel;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DumpVoiceRegistration()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.DumpVoiceRegistration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5437);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DumpSessionState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.DumpSessionState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5439);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DumpGameSettings(class OnlineGameSettings* GameSettings)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.DumpGameSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5440);
 			byte params[4] = { NULL };
-			*(class OnlineGameSettings**)&params[0] = GameSettings;
+			*(class OnlineGameSettings**)params = GameSettings;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetNumSupportedLogins()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.GetNumSupportedLogins");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5456);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int GetBuildUniqueId()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.GetBuildUniqueId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5458);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		bool StringToUniqueNetId(ScriptString* UniqueNetIdString, OnlineSubsystem::UniqueNetId& out_UniqueId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.StringToUniqueNetId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5460);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = UniqueNetIdString;
+			*(ScriptString**)params = UniqueNetIdString;
 			*(OnlineSubsystem::UniqueNetId*)&params[12] = out_UniqueId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			out_UniqueId = *(OnlineSubsystem::UniqueNetId*)&params[12];
@@ -364,143 +364,143 @@ namespace UnrealScript
 		}
 		ScriptString* UniqueNetIdToString(OnlineSubsystem::UniqueNetId& IdToConvert)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.UniqueNetIdToString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5462);
 			byte params[20] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = IdToConvert;
+			*(OnlineSubsystem::UniqueNetId*)params = IdToConvert;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			IdToConvert = *(OnlineSubsystem::UniqueNetId*)&params[0];
+			IdToConvert = *(OnlineSubsystem::UniqueNetId*)params;
 			return *(ScriptString**)&params[8];
 		}
 		class Object* GetNamedInterface(ScriptName InterfaceName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.GetNamedInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5466);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = InterfaceName;
+			*(ScriptName*)params = InterfaceName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Object**)&params[8];
 		}
 		void SetNamedInterface(ScriptName InterfaceName, class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetNamedInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5469);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = InterfaceName;
+			*(ScriptName*)params = InterfaceName;
 			*(class Object**)&params[8] = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SetGameChatInterface(class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetGameChatInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5476);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = NewInterface;
+			*(class Object**)params = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetTitleFileInterface(class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetTitleFileInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5481);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = NewInterface;
+			*(class Object**)params = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetPartyChatInterface(class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetPartyChatInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5486);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = NewInterface;
+			*(class Object**)params = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetNewsInterface(class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetNewsInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5491);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = NewInterface;
+			*(class Object**)params = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetStatsInterface(class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetStatsInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5496);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = NewInterface;
+			*(class Object**)params = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetVoiceInterface(class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetVoiceInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5501);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = NewInterface;
+			*(class Object**)params = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetContentInterface(class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetContentInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5506);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = NewInterface;
+			*(class Object**)params = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetGameInterface(class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetGameInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5511);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = NewInterface;
+			*(class Object**)params = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetSystemInterface(class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetSystemInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5516);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = NewInterface;
+			*(class Object**)params = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetPlayerInterfaceEx(class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetPlayerInterfaceEx");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5521);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = NewInterface;
+			*(class Object**)params = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetPlayerInterface(class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetPlayerInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5526);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = NewInterface;
+			*(class Object**)params = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetAccountInterface(class Object* NewInterface)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.SetAccountInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5531);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = NewInterface;
+			*(class Object**)params = NewInterface;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void Exit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.Exit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5536);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool PostInit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.PostInit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5541);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool Init()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineSubsystem.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5542);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

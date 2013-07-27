@@ -21,31 +21,31 @@ namespace UnrealScript
 		ADD_STRUCT(int, m_nLastUpgradeLevel, 504)
 		void OnPawnAdded(class Pawn* aPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_PromptText.OnPawnAdded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74593);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = aPawn;
+			*(class Pawn**)params = aPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RequestPromptText()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_PromptText.RequestPromptText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74596);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CheckForUpgradeLevel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_PromptText.CheckForUpgradeLevel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74601);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TryTraceAgainTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_PromptText.TryTraceAgainTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74604);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnPawnRemoved(class Pawn* aPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_PromptText.OnPawnRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74606);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = aPawn;
+			*(class Pawn**)params = aPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

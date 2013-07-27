@@ -30,18 +30,18 @@ namespace UnrealScript
 		ADD_BOOL(bCamOverridePostProcess, 476, 0x2)
 		void GetCameraView(float DeltaTime, Object::TPOV& OutPOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraActor.GetCameraView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12119);
 			byte params[32] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			*(Object::TPOV*)&params[4] = OutPOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutPOV = *(Object::TPOV*)&params[4];
 		}
 		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraActor.DisplayDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12122);
 			byte params[12] = { NULL };
-			*(class HUD**)&params[0] = HUD;
+			*(class HUD**)params = HUD;
 			*(float*)&params[4] = out_YL;
 			*(float*)&params[8] = out_YPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

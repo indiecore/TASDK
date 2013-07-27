@@ -23,7 +23,7 @@ namespace UnrealScript
 	class MusicTrackDataStructures : public Object
 	{
 	public:
-		class MusicTrackStruct
+		struct MusicTrackStruct
 		{
 		public:
 			ADD_STRUCT(ScriptString*, MP3Filename, 24)

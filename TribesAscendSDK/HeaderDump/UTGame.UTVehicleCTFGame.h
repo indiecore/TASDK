@@ -7,9 +7,9 @@ namespace UnrealScript
 	public:
 		bool AllowMutator(ScriptString* MutatorClassName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleCTFGame.AllowMutator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49670);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = MutatorClassName;
+			*(ScriptString**)params = MutatorClassName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}

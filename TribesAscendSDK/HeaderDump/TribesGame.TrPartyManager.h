@@ -24,136 +24,136 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, InvitingPlayer, 64)
 		bool InParty()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.InParty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54628);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool AmLeader()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.AmLeader");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54630);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool CanInvite()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.CanInvite");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59813);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		int GetMemberCap()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.GetMemberCap");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59815);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int GetMemberCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.GetMemberCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59817);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		bool Kick(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.Kick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59853);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		bool SendInvite(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.SendInvite");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59878);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		int GetMemberId(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.GetMemberId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59908);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		ScriptString* GetMemberName(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.GetMemberName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59925);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		bool ActiveMember(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.ActiveMember");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59927);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool Leave()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.Leave");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100577);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool AcceptInvite()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.AcceptInvite");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100582);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		ScriptString* GetLeaderName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.GetLeaderName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100584);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100587);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowInvitation(ScriptString* LeaderName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.ShowInvitation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100588);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = LeaderName;
+			*(ScriptString**)params = LeaderName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InvitationPopup(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.InvitationPopup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100590);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InvitationComplete(int Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.InvitationComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100595);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Action;
+			*(int*)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUpdate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.OnUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100597);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LeaveParty(bool bHandle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartyManager.LeaveParty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100598);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bHandle;
+			*(bool*)params = bHandle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

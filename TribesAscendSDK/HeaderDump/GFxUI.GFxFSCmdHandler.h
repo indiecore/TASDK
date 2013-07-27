@@ -9,9 +9,9 @@ namespace UnrealScript
 	public:
 		bool FSCommand(class GFxMoviePlayer* Movie, class GFxEvent_FSCommand* Event, ScriptString* Cmd, ScriptString* Arg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxFSCmdHandler.FSCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30290);
 			byte params[36] = { NULL };
-			*(class GFxMoviePlayer**)&params[0] = Movie;
+			*(class GFxMoviePlayer**)params = Movie;
 			*(class GFxEvent_FSCommand**)&params[4] = Event;
 			*(ScriptString**)&params[8] = Cmd;
 			*(ScriptString**)&params[20] = Arg;

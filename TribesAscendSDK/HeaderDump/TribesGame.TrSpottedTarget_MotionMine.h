@@ -15,31 +15,31 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fCurrentMarkerTime, 512)
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSpottedTarget_MotionMine.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112580);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Texture2D* GetMarker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSpottedTarget_MotionMine.GetMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112582);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Texture2D**)&params[0];
+			return *(class Texture2D**)params;
 		}
 		Object::LinearColor GetMarkerColor()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSpottedTarget_MotionMine.GetMarkerColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112584);
 			byte params[16] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::LinearColor*)&params[0];
+			return *(Object::LinearColor*)params;
 		}
 		bool ShouldRenderMarker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSpottedTarget_MotionMine.ShouldRenderMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112586);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

@@ -46,8 +46,8 @@ namespace UnrealScript
 		ADD_BOOL(bShouldBeVisibleInEditor, 96, 0x8)
 		ADD_BOOL(bHasUnloadRequestPending, 96, 0x4)
 		ADD_BOOL(bIsVisible, 96, 0x1)
-		ADD_STRUCT(Object::Vector, OldOffset, 84)
-		ADD_STRUCT(Object::Vector, Offset, 72)
+		ADD_STRUCT(Vector, OldOffset, 84)
+		ADD_STRUCT(Vector, Offset, 72)
 		ADD_OBJECT(Level, LoadedLevel, 68)
 	};
 }

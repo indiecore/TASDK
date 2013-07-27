@@ -8,18 +8,18 @@ namespace UnrealScript
 	public:
 		bool ReadNews(byte LocalUserNum, OnlineSubsystem::EOnlineNewsType NewsType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineNewsInterface.ReadNews");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21865);
 			byte params[6] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::EOnlineNewsType*)&params[1] = NewsType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void OnReadNewsCompleted(bool bWasSuccessful, OnlineSubsystem::EOnlineNewsType NewsType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineNewsInterface.OnReadNewsCompleted");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21869);
 			byte params[5] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			*(OnlineSubsystem::EOnlineNewsType*)&params[4] = NewsType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -27,29 +27,29 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadNewsDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineNewsInterface.AddReadNewsCompletedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21873);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ReadNewsDelegate;
+void**)params = ReadNewsDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearReadNewsCompletedDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadNewsDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineNewsInterface.ClearReadNewsCompletedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21875);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ReadNewsDelegate;
+void**)params = ReadNewsDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetNews(byte LocalUserNum, OnlineSubsystem::EOnlineNewsType NewsType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineNewsInterface.GetNews");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21877);
 			byte params[14] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::EOnlineNewsType*)&params[1] = NewsType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];

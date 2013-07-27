@@ -27,7 +27,7 @@ namespace UnrealScript
 			ST_2D = 1,
 			ST_MAX = 2,
 		};
-		class CurveKey
+		struct CurveKey
 		{
 		public:
 			ADD_STRUCT(float, Weight, 8)
@@ -56,44 +56,44 @@ namespace UnrealScript
 		ADD_BOOL(bRelevant, 96, 0x1)
 		void OnInit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNode.OnInit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10687);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnBecomeRelevant()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNode.OnBecomeRelevant");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10688);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnCeaseRelevant()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNode.OnCeaseRelevant");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10689);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class AnimNode* FindAnimNode(ScriptName InNodeName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNode.FindAnimNode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10690);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = InNodeName;
+			*(ScriptName*)params = InNodeName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class AnimNode**)&params[8];
 		}
 		void PlayAnim(bool bLoop, float Rate, float StartTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNode.PlayAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10693);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = bLoop;
+			*(bool*)params = bLoop;
 			*(float*)&params[4] = Rate;
 			*(float*)&params[8] = StartTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNode.StopAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10697);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplayAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNode.ReplayAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10698);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

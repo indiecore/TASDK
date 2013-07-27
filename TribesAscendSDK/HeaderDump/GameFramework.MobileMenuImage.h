@@ -29,9 +29,9 @@ namespace UnrealScript
 		ADD_OBJECT(Texture2D, Image, 132)
 		void RenderObject(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuImage.RenderObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32650);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

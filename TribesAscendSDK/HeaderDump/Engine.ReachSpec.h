@@ -42,36 +42,36 @@ namespace UnrealScript
 		ADD_STRUCT(int, CollisionRadius, 104)
 		ADD_STRUCT(Actor::ActorReference, End, 84)
 		ADD_OBJECT(NavigationPoint, Start, 80)
-		ADD_STRUCT(Object::Vector, Direction, 68)
+		ADD_STRUCT(Vector, Direction, 68)
 		ADD_STRUCT(int, Distance, 64)
 		ADD_STRUCT(Object::Pointer, NavOctreeObject, 60)
 		int CostFor(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ReachSpec.CostFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9671);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		class NavigationPoint* GetEnd()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ReachSpec.GetEnd");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9674);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class NavigationPoint**)&params[0];
+			return *(class NavigationPoint**)params;
 		}
-		Object::Vector GetDirection()
+		Vector GetDirection()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ReachSpec.GetDirection");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9676);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
 		bool IsBlockedFor(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ReachSpec.IsBlockedFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9678);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

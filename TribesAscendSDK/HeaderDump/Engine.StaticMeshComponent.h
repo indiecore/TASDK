@@ -33,12 +33,12 @@ namespace UnrealScript
 			MLMF_ModulateAlpha = 1,
 			MLMF_MAX = 2,
 		};
-		class StaticMeshComponentLODInfo
+		struct StaticMeshComponentLODInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class ShadowMap2D*>, ShadowMaps, 0)
 			ADD_STRUCT(ScriptArray<class Object*>, ShadowVertexBuffers, 12)
-			ADD_STRUCT(ScriptArray<Object::Vector>, VertexColorPositions, 32)
+			ADD_STRUCT(ScriptArray<Vector>, VertexColorPositions, 32)
 			ADD_STRUCT(Object::Pointer, OverrideVertexColors, 28)
 			ADD_STRUCT(Object::Pointer, LightMap, 24)
 		};
@@ -66,16 +66,16 @@ namespace UnrealScript
 		ADD_STRUCT(int, PreviousLODLevel, 504)
 		bool CanBecomeDynamic()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshComponent.CanBecomeDynamic");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4080);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool SetStaticMesh(class StaticMesh* NewMesh, bool bForce)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshComponent.SetStaticMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12100);
 			byte params[12] = { NULL };
-			*(class StaticMesh**)&params[0] = NewMesh;
+			*(class StaticMesh**)params = NewMesh;
 			*(bool*)&params[4] = bForce;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
@@ -84,19 +84,19 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* OtherSMC, bool bDisabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshComponent.DisableRBCollisionWithSMC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12104);
 			byte params[8] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = OtherSMC;
+void**)params = OtherSMC;
 			*(bool*)&params[4] = bDisabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetForceStaticDecals(bool bInForceStaticDecals)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.StaticMeshComponent.SetForceStaticDecals");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12107);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bInForceStaticDecals;
+			*(bool*)params = bInForceStaticDecals;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

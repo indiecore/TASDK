@@ -34,108 +34,108 @@ namespace UnrealScript
 		ADD_OBJECT(TrDevice, m_RealLastDevice, 532)
 		class TrDevice* GetDeviceByEquipPoint(TrObject::TR_EQUIP_POINT EquipPoint)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.GetDeviceByEquipPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72629);
 			byte params[5] = { NULL };
-			*(TrObject::TR_EQUIP_POINT*)&params[0] = EquipPoint;
+			*(TrObject::TR_EQUIP_POINT*)params = EquipPoint;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class TrDevice**)&params[4];
 		}
 		bool AddInventory(class Inventory* NewItem, bool bDoNotActivate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.AddInventory");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(76825);
 			byte params[12] = { NULL };
-			*(class Inventory**)&params[0] = NewItem;
+			*(class Inventory**)params = NewItem;
 			*(bool*)&params[4] = bDoNotActivate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98103);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98104);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class TrDevice* GetDeviceByWeaponClass(ScriptClass* DeviceClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.GetDeviceByWeaponClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98111);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = DeviceClass;
+			*(ScriptClass**)params = DeviceClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class TrDevice**)&params[4];
 		}
 		class TrDevice* GetDeviceByWeaponId(int WeaponId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.GetDeviceByWeaponId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98117);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = WeaponId;
+			*(int*)params = WeaponId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class TrDevice**)&params[4];
 		}
 		void TrGetWeaponList(ScriptArray<class TrDevice*>& WeaponList, bool bInhandOnly)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.TrGetWeaponList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98123);
 			byte params[16] = { NULL };
-			*(ScriptArray<class TrDevice*>*)&params[0] = WeaponList;
+			*(ScriptArray<class TrDevice*>*)params = WeaponList;
 			*(bool*)&params[12] = bInhandOnly;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			WeaponList = *(ScriptArray<class TrDevice*>*)&params[0];
+			WeaponList = *(ScriptArray<class TrDevice*>*)params;
 		}
 		void DiscardEquippedDeployable()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.DiscardEquippedDeployable");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98128);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AdjustWeapon(int NewOffset)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.AdjustWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98130);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = NewOffset;
+			*(int*)params = NewOffset;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPendingWeapon(class Weapon* DesiredWeapon)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.SetPendingWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98137);
 			byte params[4] = { NULL };
-			*(class Weapon**)&params[0] = DesiredWeapon;
+			*(class Weapon**)params = DesiredWeapon;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveFromInventory(class Inventory* ItemToRemove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.RemoveFromInventory");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98146);
 			byte params[4] = { NULL };
-			*(class Inventory**)&params[0] = ItemToRemove;
+			*(class Inventory**)params = ItemToRemove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AutoFireWeapon(TrObject::TR_EQUIP_POINT EquipPoint)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.AutoFireWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98149);
 			byte params[1] = { NULL };
-			*(TrObject::TR_EQUIP_POINT*)&params[0] = EquipPoint;
+			*(TrObject::TR_EQUIP_POINT*)params = EquipPoint;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SwitchWeaponByEquipPoint(TrObject::TR_EQUIP_POINT EquipPoint)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.SwitchWeaponByEquipPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98154);
 			byte params[1] = { NULL };
-			*(TrObject::TR_EQUIP_POINT*)&params[0] = EquipPoint;
+			*(TrObject::TR_EQUIP_POINT*)params = EquipPoint;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SwitchToPreviousWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.SwitchToPreviousWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98158);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ServerAutoFireWeapon(TrObject::TR_EQUIP_POINT EquipPoint)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryManager.ServerAutoFireWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98159);
 			byte params[1] = { NULL };
-			*(TrObject::TR_EQUIP_POINT*)&params[0] = EquipPoint;
+			*(TrObject::TR_EQUIP_POINT*)params = EquipPoint;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

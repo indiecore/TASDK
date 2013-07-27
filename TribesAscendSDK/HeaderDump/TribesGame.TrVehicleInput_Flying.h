@@ -7,9 +7,9 @@ namespace UnrealScript
 	public:
 		void AdjustMouseSensitivity(float FOVScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleInput_Flying.AdjustMouseSensitivity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(114951);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = FOVScale;
+			*(float*)params = FOVScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

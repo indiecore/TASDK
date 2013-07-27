@@ -31,7 +31,7 @@ namespace UnrealScript
 	class OnlineSubsystemMcts : public OnlineSubsystemCommonImpl
 	{
 	public:
-		class ControllerConnectionState
+		struct ControllerConnectionState
 		{
 		public:
 			ADD_STRUCT(int, bLastIsControllerConnected, 4)
@@ -78,75 +78,75 @@ void*>, KeyboardInputDelegates, 404)
 		ADD_OBJECT(OnlineGameInterfaceMcts, MctsGameInt, 244)
 		void OnConnectionStatusChange(OnlineSubsystem::EOnlineServerConnectionStatus ConnectionStatus)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnConnectionStatusChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156507);
 			byte params[1] = { NULL };
-			*(OnlineSubsystem::EOnlineServerConnectionStatus*)&params[0] = ConnectionStatus;
+			*(OnlineSubsystem::EOnlineServerConnectionStatus*)params = ConnectionStatus;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnLoginChange(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLoginChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156510);
 			byte params[1] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnLoginFailed(byte LocalUserNum, OnlineSubsystem::EOnlineServerConnectionStatus ErrorCode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLoginFailed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156513);
 			byte params[2] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::EOnlineServerConnectionStatus*)&params[1] = ErrorCode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnLogoutCompleted(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLogoutCompleted");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156516);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnLinkStatusChange(bool bIsConnected)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLinkStatusChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156519);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bIsConnected;
+			*(bool*)params = bIsConnected;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnChatMessage(int Channel, ScriptString* Sender, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnChatMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156522);
 			byte params[28] = { NULL };
-			*(int*)&params[0] = Channel;
+			*(int*)params = Channel;
 			*(ScriptString**)&params[4] = Sender;
 			*(ScriptString**)&params[16] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnKeyboardInputComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnKeyboardInputComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156525);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnReadAchievementsComplete(int TitleId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReadAchievementsComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156527);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = TitleId;
+			*(int*)params = TitleId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUnlockAchievementComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnUnlockAchievementComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156529);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFriendMessageReceived(byte LocalUserNum, OnlineSubsystem::UniqueNetId SendingPlayer, ScriptString* SendingNick, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnFriendMessageReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156531);
 			byte params[33] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = SendingPlayer;
 			*(ScriptString**)&params[12] = SendingNick;
 			*(ScriptString**)&params[24] = Message;
@@ -154,24 +154,24 @@ void*>, KeyboardInputDelegates, 404)
 		}
 		void OnJoinFriendGameComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnJoinFriendGameComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156533);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnReceivedGameInvite(byte LocalUserNum, ScriptString* InviterName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReceivedGameInvite");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156535);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptString**)&params[4] = InviterName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFriendInviteReceived(byte LocalUserNum, OnlineSubsystem::UniqueNetId RequestingPlayer, ScriptString* RequestingNick, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnFriendInviteReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156537);
 			byte params[33] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = RequestingPlayer;
 			*(ScriptString**)&params[12] = RequestingNick;
 			*(ScriptString**)&params[24] = Message;
@@ -179,113 +179,113 @@ void*>, KeyboardInputDelegates, 404)
 		}
 		void OnAddFriendByNameComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnAddFriendByNameComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156539);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnReadFriendsComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReadFriendsComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156542);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFriendsChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnFriendsChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156544);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnWritePlayerStorageComplete(byte LocalUserNum, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnWritePlayerStorageComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156546);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(bool*)&params[4] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnReadPlayerStorageForNetIdComplete(OnlineSubsystem::UniqueNetId NetId, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReadPlayerStorageForNetIdComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156548);
 			byte params[12] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = NetId;
+			*(OnlineSubsystem::UniqueNetId*)params = NetId;
 			*(bool*)&params[8] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnReadPlayerStorageComplete(byte LocalUserNum, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReadPlayerStorageComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156550);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(bool*)&params[4] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnWriteProfileSettingsComplete(byte LocalUserNum, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnWriteProfileSettingsComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156552);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(bool*)&params[4] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnReadProfileSettingsComplete(byte LocalUserNum, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnReadProfileSettingsComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156554);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(bool*)&params[4] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnMutingChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnMutingChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156556);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnLoginCancelled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLoginCancelled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156558);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnLoginStatusChange(OnlineSubsystem::ELoginStatus NewStatus, OnlineSubsystem::UniqueNetId NewId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnLoginStatusChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156560);
 			byte params[9] = { NULL };
-			*(OnlineSubsystem::ELoginStatus*)&params[0] = NewStatus;
+			*(OnlineSubsystem::ELoginStatus*)params = NewStatus;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = NewId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnStorageDeviceChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnStorageDeviceChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156563);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnControllerChange(int ControllerId, bool bIsConnected)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnControllerChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156566);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(bool*)&params[4] = bIsConnected;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnExternalUIChange(bool bIsOpening)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.OnExternalUIChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156568);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bIsOpening;
+			*(bool*)params = bIsOpening;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool Init()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156594);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool Login(byte LocalUserNum, ScriptString* LoginName, ScriptString* Password, bool bWantsLocalOnly)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.Login");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156597);
 			byte params[33] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptString**)&params[4] = LoginName;
 			*(ScriptString**)&params[16] = Password;
 			*(bool*)&params[28] = bWantsLocalOnly;
@@ -294,9 +294,9 @@ void*>, KeyboardInputDelegates, 404)
 		}
 		bool RequestNewPlayer(byte LocalUserNum, ScriptString* LoginName, ScriptString* Password, ScriptString* DesiredPlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.RequestNewPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156603);
 			byte params[41] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptString**)&params[4] = LoginName;
 			*(ScriptString**)&params[16] = Password;
 			*(ScriptString**)&params[28] = DesiredPlayerName;
@@ -305,18 +305,18 @@ void*>, KeyboardInputDelegates, 404)
 		}
 		bool AutoLogin()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AutoLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156609);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void AddLoginFailedDelegate(byte LocalUserNum, 
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* LoginFailedDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddLoginFailedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156613);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = LoginFailedDelegate;
@@ -326,9 +326,9 @@ void**)&params[4] = LoginFailedDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* LoginFailedDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearLoginFailedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156616);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = LoginFailedDelegate;
@@ -336,9 +336,9 @@ void**)&params[4] = LoginFailedDelegate;
 		}
 		bool Logout(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.Logout");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156620);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
@@ -346,9 +346,9 @@ void**)&params[4] = LoginFailedDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* LogoutDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddLogoutCompletedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156624);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = LogoutDelegate;
@@ -358,9 +358,9 @@ void**)&params[4] = LogoutDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* LogoutDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearLogoutCompletedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156627);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = LogoutDelegate;
@@ -368,33 +368,33 @@ void**)&params[4] = LogoutDelegate;
 		}
 		OnlineSubsystem::ELoginStatus GetLoginStatus(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetLoginStatus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156631);
 			byte params[2] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(OnlineSubsystem::ELoginStatus*)&params[1];
 		}
 		bool IsGuestLogin(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.IsGuestLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156634);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool IsLocalLogin(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.IsLocalLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156637);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool GetUniquePlayerId(byte LocalUserNum, OnlineSubsystem::UniqueNetId& PlayerID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetUniquePlayerId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156640);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			PlayerID = *(OnlineSubsystem::UniqueNetId*)&params[4];
@@ -402,66 +402,66 @@ void**)&params[4] = LogoutDelegate;
 		}
 		ScriptString* GetPlayerNickname(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetPlayerNickname");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156644);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		OnlineSubsystem::EFeaturePrivilegeLevel CanPlayOnline(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.CanPlayOnline");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156647);
 			byte params[2] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(OnlineSubsystem::EFeaturePrivilegeLevel*)&params[1];
 		}
 		OnlineSubsystem::EFeaturePrivilegeLevel CanDownloadUserContent(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.CanDownloadUserContent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156650);
 			byte params[2] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(OnlineSubsystem::EFeaturePrivilegeLevel*)&params[1];
 		}
 		OnlineSubsystem::EFeaturePrivilegeLevel CanPurchaseContent(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.CanPurchaseContent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156653);
 			byte params[2] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(OnlineSubsystem::EFeaturePrivilegeLevel*)&params[1];
 		}
 		OnlineSubsystem::EFeaturePrivilegeLevel CanViewPlayerProfiles(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.CanViewPlayerProfiles");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156656);
 			byte params[2] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(OnlineSubsystem::EFeaturePrivilegeLevel*)&params[1];
 		}
 		OnlineSubsystem::EFeaturePrivilegeLevel CanShowPresenceInformation(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.CanShowPresenceInformation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156659);
 			byte params[2] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(OnlineSubsystem::EFeaturePrivilegeLevel*)&params[1];
 		}
 		bool IsFriend(byte LocalUserNum, OnlineSubsystem::UniqueNetId PlayerID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.IsFriend");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156662);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		bool AreAnyFriends(byte LocalUserNum, ScriptArray<OnlineSubsystem::FriendsQuery>& Query)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AreAnyFriends");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156666);
 			byte params[17] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptArray<OnlineSubsystem::FriendsQuery>*)&params[4] = Query;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Query = *(ScriptArray<OnlineSubsystem::FriendsQuery>*)&params[4];
@@ -469,141 +469,141 @@ void**)&params[4] = LogoutDelegate;
 		}
 		ScriptString* GetPlayerMctsName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetPlayerMctsName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156671);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void AddLoginChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* LoginDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddLoginChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156673);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = LoginDelegate;
+void**)params = LoginDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearLoginChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* LoginDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearLoginChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156675);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = LoginDelegate;
+void**)params = LoginDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool NeedEULA()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.NeedEULA");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156678);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		ScriptString* GetPlayerNicknameFromIndex(int UserIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetPlayerNicknameFromIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156680);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = UserIndex;
+			*(int*)params = UserIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		OnlineSubsystem::UniqueNetId GetPlayerUniqueNetIdFromIndex(int UserIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetPlayerUniqueNetIdFromIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156683);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = UserIndex;
+			*(int*)params = UserIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(OnlineSubsystem::UniqueNetId*)&params[4];
 		}
 		bool HasLinkConnection()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.HasLinkConnection");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156687);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void AddLinkStatusChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* LinkStatusDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddLinkStatusChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156690);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = LinkStatusDelegate;
+void**)params = LinkStatusDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearLinkStatusChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* LinkStatusDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearLinkStatusChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156692);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = LinkStatusDelegate;
+void**)params = LinkStatusDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddExternalUIChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ExternalUIDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddExternalUIChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156696);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ExternalUIDelegate;
+void**)params = ExternalUIDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearExternalUIChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ExternalUIDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearExternalUIChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156698);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ExternalUIDelegate;
+void**)params = ExternalUIDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		OnlineSubsystem::ENetworkNotificationPosition GetNetworkNotificationPosition()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetNetworkNotificationPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156700);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(OnlineSubsystem::ENetworkNotificationPosition*)&params[0];
+			return *(OnlineSubsystem::ENetworkNotificationPosition*)params;
 		}
 		void AddControllerChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ControllerChangeDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddControllerChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156704);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ControllerChangeDelegate;
+void**)params = ControllerChangeDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearControllerChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ControllerChangeDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearControllerChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156706);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ControllerChangeDelegate;
+void**)params = ControllerChangeDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsControllerConnected(int ControllerId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.IsControllerConnected");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156708);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
@@ -611,162 +611,162 @@ void**)&params[0] = ControllerChangeDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ConnectionStatusDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddConnectionStatusChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156712);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ConnectionStatusDelegate;
+void**)params = ConnectionStatusDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearConnectionStatusChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ConnectionStatusDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearConnectionStatusChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156714);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ConnectionStatusDelegate;
+void**)params = ConnectionStatusDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		OnlineSubsystem::ENATType GetNATType()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetNATType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156717);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(OnlineSubsystem::ENATType*)&params[0];
+			return *(OnlineSubsystem::ENATType*)params;
 		}
 		void AddStorageDeviceChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* StorageDeviceChangeDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddStorageDeviceChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156719);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = StorageDeviceChangeDelegate;
+void**)params = StorageDeviceChangeDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearStorageDeviceChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* StorageDeviceChangeDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearStorageDeviceChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156721);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = StorageDeviceChangeDelegate;
+void**)params = StorageDeviceChangeDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddChatMessageDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ChatDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddChatMessageDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156726);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ChatDelegate;
+void**)params = ChatDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearChatMessageDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ChatDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearChatMessageDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156728);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ChatDelegate;
+void**)params = ChatDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendChatMessage(int Channel, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.SendChatMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156731);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Channel;
+			*(int*)params = Channel;
 			*(ScriptString**)&params[4] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendPrivateChatMessage(ScriptString* PlayerName, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.SendPrivateChatMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156734);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			*(ScriptString**)&params[12] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void WriteActiveCharacterClass(int ClassId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.WriteActiveCharacterClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156737);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ClassId;
+			*(int*)params = ClassId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReadCharacterClasses(ScriptArray<int>& CharList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadCharacterClasses");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156739);
 			byte params[12] = { NULL };
-			*(ScriptArray<int>*)&params[0] = CharList;
+			*(ScriptArray<int>*)params = CharList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			CharList = *(ScriptArray<int>*)&params[0];
+			CharList = *(ScriptArray<int>*)params;
 		}
 		int ReadActiveCharacterClass()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadActiveCharacterClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156742);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
-		bool WritePlayerProfileData(Object::QWord UniqueId, class TgPlayerProfile* Profile)
+		bool WritePlayerProfileData(QWord UniqueId, class TgPlayerProfile* Profile)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.WritePlayerProfileData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156744);
 			byte params[16] = { NULL };
-			*(Object::QWord*)&params[0] = UniqueId;
+			*(QWord*)params = UniqueId;
 			*(class TgPlayerProfile**)&params[8] = Profile;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
-		bool ReadPlayerProfileData(Object::QWord UniqueId, class TgPlayerProfile* Profile)
+		bool ReadPlayerProfileData(QWord UniqueId, class TgPlayerProfile* Profile)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadPlayerProfileData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156748);
 			byte params[16] = { NULL };
-			*(Object::QWord*)&params[0] = UniqueId;
+			*(QWord*)params = UniqueId;
 			*(class TgPlayerProfile**)&params[8] = Profile;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
-		void NotifyTeamChange(Object::QWord PlayerUid, byte TeamID)
+		void NotifyTeamChange(QWord PlayerUid, byte TeamID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.NotifyTeamChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156752);
 			byte params[9] = { NULL };
-			*(Object::QWord*)&params[0] = PlayerUid;
+			*(QWord*)params = PlayerUid;
 			params[8] = TeamID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		int GetCharacterIdFromClassId(Object::QWord UniqueId, int nClassId)
+		int GetCharacterIdFromClassId(QWord UniqueId, int nClassId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetCharacterIdFromClassId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156755);
 			byte params[16] = { NULL };
-			*(Object::QWord*)&params[0] = UniqueId;
+			*(QWord*)params = UniqueId;
 			*(int*)&params[8] = nClassId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		bool IsMuted(byte LocalUserNum, OnlineSubsystem::UniqueNetId PlayerID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.IsMuted");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156759);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		OnlineSubsystem::EFeaturePrivilegeLevel CanCommunicate(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.CanCommunicate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156763);
 			byte params[2] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(OnlineSubsystem::EFeaturePrivilegeLevel*)&params[1];
 		}
@@ -774,11 +774,11 @@ void**)&params[0] = ChatDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* LoginStatusDelegate, byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddLoginStatusChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156768);
 			byte params[13] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = LoginStatusDelegate;
+void**)params = LoginStatusDelegate;
 			params[12] = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -786,11 +786,11 @@ void**)&params[0] = LoginStatusDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* LoginStatusDelegate, byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearLoginStatusChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156771);
 			byte params[13] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = LoginStatusDelegate;
+void**)params = LoginStatusDelegate;
 			params[12] = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -798,47 +798,47 @@ void**)&params[0] = LoginStatusDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* CancelledDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddLoginCancelledDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156774);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = CancelledDelegate;
+void**)params = CancelledDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearLoginCancelledDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* CancelledDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearLoginCancelledDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156776);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = CancelledDelegate;
+void**)params = CancelledDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ReadProfileSettings(byte LocalUserNum, class OnlineProfileSettings* ProfileSettings)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadProfileSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156778);
 			byte params[9] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(class OnlineProfileSettings**)&params[4] = ProfileSettings;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool WriteProfileSettings(byte LocalUserNum, class OnlineProfileSettings* ProfileSettings)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.WriteProfileSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156782);
 			byte params[9] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(class OnlineProfileSettings**)&params[4] = ProfileSettings;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		class OnlineProfileSettings* GetProfileSettings(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetProfileSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156786);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class OnlineProfileSettings**)&params[4];
 		}
@@ -846,31 +846,31 @@ void**)&params[0] = CancelledDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* MutingDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddMutingChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156789);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = MutingDelegate;
+void**)params = MutingDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearMutingChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* MutingDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearMutingChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156791);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = MutingDelegate;
+void**)params = MutingDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddReadProfileSettingsCompleteDelegate(byte LocalUserNum, 
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadProfileSettingsCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReadProfileSettingsCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156795);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = ReadProfileSettingsCompleteDelegate;
@@ -880,9 +880,9 @@ void**)&params[4] = ReadProfileSettingsCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadProfileSettingsCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReadProfileSettingsCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156798);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = ReadProfileSettingsCompleteDelegate;
@@ -892,9 +892,9 @@ void**)&params[4] = ReadProfileSettingsCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* WriteProfileSettingsCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddWriteProfileSettingsCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156803);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = WriteProfileSettingsCompleteDelegate;
@@ -904,9 +904,9 @@ void**)&params[4] = WriteProfileSettingsCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* WriteProfileSettingsCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearWriteProfileSettingsCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156806);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = WriteProfileSettingsCompleteDelegate;
@@ -914,9 +914,9 @@ void**)&params[4] = WriteProfileSettingsCompleteDelegate;
 		}
 		bool ReadPlayerStorage(byte LocalUserNum, class OnlinePlayerStorage* PlayerStorage, int DeviceID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadPlayerStorage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156809);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(class OnlinePlayerStorage**)&params[4] = PlayerStorage;
 			*(int*)&params[8] = DeviceID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -926,9 +926,9 @@ void**)&params[4] = WriteProfileSettingsCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadPlayerStorageCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReadPlayerStorageCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156816);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = ReadPlayerStorageCompleteDelegate;
@@ -938,9 +938,9 @@ void**)&params[4] = ReadPlayerStorageCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadPlayerStorageCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReadPlayerStorageCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156819);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = ReadPlayerStorageCompleteDelegate;
@@ -948,9 +948,9 @@ void**)&params[4] = ReadPlayerStorageCompleteDelegate;
 		}
 		bool ReadPlayerStorageForNetId(byte LocalUserNum, OnlineSubsystem::UniqueNetId NetId, class OnlinePlayerStorage* PlayerStorage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadPlayerStorageForNetId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156822);
 			byte params[17] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = NetId;
 			*(class OnlinePlayerStorage**)&params[12] = PlayerStorage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -960,9 +960,9 @@ void**)&params[4] = ReadPlayerStorageCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadPlayerStorageForNetIdCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReadPlayerStorageForNetIdCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156829);
 			byte params[20] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = NetId;
+			*(OnlineSubsystem::UniqueNetId*)params = NetId;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[8] = ReadPlayerStorageForNetIdCompleteDelegate;
@@ -972,9 +972,9 @@ void**)&params[8] = ReadPlayerStorageForNetIdCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadPlayerStorageForNetIdCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReadPlayerStorageForNetIdCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156832);
 			byte params[20] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = NetId;
+			*(OnlineSubsystem::UniqueNetId*)params = NetId;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[8] = ReadPlayerStorageForNetIdCompleteDelegate;
@@ -982,17 +982,17 @@ void**)&params[8] = ReadPlayerStorageForNetIdCompleteDelegate;
 		}
 		class OnlinePlayerStorage* GetPlayerStorage(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetPlayerStorage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156835);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class OnlinePlayerStorage**)&params[4];
 		}
 		bool WritePlayerStorage(byte LocalUserNum, class OnlinePlayerStorage* PlayerStorage, int DeviceID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.WritePlayerStorage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156838);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(class OnlinePlayerStorage**)&params[4] = PlayerStorage;
 			*(int*)&params[8] = DeviceID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1002,9 +1002,9 @@ void**)&params[8] = ReadPlayerStorageForNetIdCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* WritePlayerStorageCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddWritePlayerStorageCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156845);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = WritePlayerStorageCompleteDelegate;
@@ -1014,9 +1014,9 @@ void**)&params[4] = WritePlayerStorageCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* WritePlayerStorageCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearWritePlayerStorageCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156848);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = WritePlayerStorageCompleteDelegate;
@@ -1026,9 +1026,9 @@ void**)&params[4] = WritePlayerStorageCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* FriendsDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddFriendsChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156851);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = FriendsDelegate;
@@ -1038,9 +1038,9 @@ void**)&params[4] = FriendsDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* FriendsDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearFriendsChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156854);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = FriendsDelegate;
@@ -1048,9 +1048,9 @@ void**)&params[4] = FriendsDelegate;
 		}
 		bool ReadFriendsList(byte LocalUserNum, int Count, int StartingAt)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadFriendsList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156857);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = Count;
 			*(int*)&params[8] = StartingAt;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1060,9 +1060,9 @@ void**)&params[4] = FriendsDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadFriendsCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReadFriendsCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156863);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = ReadFriendsCompleteDelegate;
@@ -1072,9 +1072,9 @@ void**)&params[4] = ReadFriendsCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadFriendsCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReadFriendsCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156866);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = ReadFriendsCompleteDelegate;
@@ -1082,9 +1082,9 @@ void**)&params[4] = ReadFriendsCompleteDelegate;
 		}
 		OnlineSubsystem::EOnlineEnumerationReadState GetFriendsList(byte LocalUserNum, ScriptArray<OnlineSubsystem::OnlineFriend>& Friends, int Count, int StartingAt)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetFriendsList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156869);
 			byte params[22] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptArray<OnlineSubsystem::OnlineFriend>*)&params[4] = Friends;
 			*(int*)&params[16] = Count;
 			*(int*)&params[20] = StartingAt;
@@ -1094,9 +1094,9 @@ void**)&params[4] = ReadFriendsCompleteDelegate;
 		}
 		void SetOnlineStatus(byte LocalUserNum, int StatusId, ScriptArray<Settings::LocalizedStringSetting>& LocalizedStringSettings, ScriptArray<Settings::SettingsProperty>& Properties)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.SetOnlineStatus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156876);
 			byte params[29] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = StatusId;
 			*(ScriptArray<Settings::LocalizedStringSetting>*)&params[8] = LocalizedStringSettings;
 			*(ScriptArray<Settings::SettingsProperty>*)&params[20] = Properties;
@@ -1106,9 +1106,9 @@ void**)&params[4] = ReadFriendsCompleteDelegate;
 		}
 		bool ShowKeyboardUI(byte LocalUserNum, ScriptString* TitleText, ScriptString* DescriptionText, bool bIsPassword, bool bShouldValidate, ScriptString* DefaultText, int MaxResultLength)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ShowKeyboardUI");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156883);
 			byte params[53] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptString**)&params[4] = TitleText;
 			*(ScriptString**)&params[16] = DescriptionText;
 			*(bool*)&params[28] = bIsPassword;
@@ -1122,38 +1122,38 @@ void**)&params[4] = ReadFriendsCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InputDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddKeyboardInputDoneDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156893);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = InputDelegate;
+void**)params = InputDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearKeyboardInputDoneDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InputDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearKeyboardInputDoneDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156895);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = InputDelegate;
+void**)params = InputDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetKeyboardInputResults(byte& bWasCanceled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetKeyboardInputResults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156897);
 			byte params[13] = { NULL };
-			params[0] = bWasCanceled;
+			*params = bWasCanceled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			bWasCanceled = params[0];
+			bWasCanceled = *params;
 			return *(ScriptString**)&params[4];
 		}
 		bool AddFriend(byte LocalUserNum, OnlineSubsystem::UniqueNetId NewFriend, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddFriend");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156900);
 			byte params[25] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = NewFriend;
 			*(ScriptString**)&params[12] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1161,9 +1161,9 @@ void**)&params[0] = InputDelegate;
 		}
 		bool AddFriendByName(byte LocalUserNum, ScriptString* FriendName, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddFriendByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156905);
 			byte params[29] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptString**)&params[4] = FriendName;
 			*(ScriptString**)&params[16] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1173,9 +1173,9 @@ void**)&params[0] = InputDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* FriendDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddAddFriendByNameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156911);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = FriendDelegate;
@@ -1185,9 +1185,9 @@ void**)&params[4] = FriendDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* FriendDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearAddFriendByNameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156914);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = FriendDelegate;
@@ -1195,27 +1195,27 @@ void**)&params[4] = FriendDelegate;
 		}
 		bool AcceptFriendInvite(byte LocalUserNum, OnlineSubsystem::UniqueNetId RequestingPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AcceptFriendInvite");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156917);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = RequestingPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		bool DenyFriendInvite(byte LocalUserNum, OnlineSubsystem::UniqueNetId RequestingPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.DenyFriendInvite");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156921);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = RequestingPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		bool RemoveFriend(byte LocalUserNum, OnlineSubsystem::UniqueNetId FormerFriend)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.RemoveFriend");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156925);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = FormerFriend;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
@@ -1224,9 +1224,9 @@ void**)&params[4] = FriendDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InviteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddFriendInviteReceivedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156933);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = InviteDelegate;
@@ -1236,9 +1236,9 @@ void**)&params[4] = InviteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InviteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearFriendInviteReceivedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156936);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = InviteDelegate;
@@ -1246,9 +1246,9 @@ void**)&params[4] = InviteDelegate;
 		}
 		bool SendMessageToFriend(byte LocalUserNum, OnlineSubsystem::UniqueNetId Friend, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.SendMessageToFriend");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156939);
 			byte params[25] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = Friend;
 			*(ScriptString**)&params[12] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1256,9 +1256,9 @@ void**)&params[4] = InviteDelegate;
 		}
 		bool SendGameInviteToFriend(byte LocalUserNum, OnlineSubsystem::UniqueNetId Friend, ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.SendGameInviteToFriend");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156944);
 			byte params[25] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = Friend;
 			*(ScriptString**)&params[12] = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1266,9 +1266,9 @@ void**)&params[4] = InviteDelegate;
 		}
 		bool SendGameInviteToFriends(byte LocalUserNum, ScriptArray<OnlineSubsystem::UniqueNetId> Friends, ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.SendGameInviteToFriends");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156949);
 			byte params[29] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[4] = Friends;
 			*(ScriptString**)&params[16] = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1278,9 +1278,9 @@ void**)&params[4] = InviteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReceivedGameInviteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReceivedGameInviteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156957);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = ReceivedGameInviteDelegate;
@@ -1290,9 +1290,9 @@ void**)&params[4] = ReceivedGameInviteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReceivedGameInviteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReceivedGameInviteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156960);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = ReceivedGameInviteDelegate;
@@ -1300,9 +1300,9 @@ void**)&params[4] = ReceivedGameInviteDelegate;
 		}
 		bool JoinFriendGame(byte LocalUserNum, OnlineSubsystem::UniqueNetId Friend)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.JoinFriendGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156963);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = Friend;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
@@ -1311,29 +1311,29 @@ void**)&params[4] = ReceivedGameInviteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* JoinFriendGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddJoinFriendGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156968);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = JoinFriendGameCompleteDelegate;
+void**)params = JoinFriendGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearJoinFriendGameCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* JoinFriendGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearJoinFriendGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156970);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = JoinFriendGameCompleteDelegate;
+void**)params = JoinFriendGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GetFriendMessages(byte LocalUserNum, ScriptArray<OnlineSubsystem::OnlineFriendMessage>& FriendMessages)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetFriendMessages");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156972);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptArray<OnlineSubsystem::OnlineFriendMessage>*)&params[4] = FriendMessages;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			FriendMessages = *(ScriptArray<OnlineSubsystem::OnlineFriendMessage>*)&params[4];
@@ -1342,9 +1342,9 @@ void**)&params[0] = JoinFriendGameCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* MessageDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddFriendMessageReceivedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156980);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = MessageDelegate;
@@ -1354,9 +1354,9 @@ void**)&params[4] = MessageDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* MessageDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearFriendMessageReceivedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156983);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = MessageDelegate;
@@ -1364,18 +1364,18 @@ void**)&params[4] = MessageDelegate;
 		}
 		bool UnlockAchievement(byte LocalUserNum, int AchievementId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.UnlockAchievement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156986);
 			byte params[9] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = AchievementId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool ReadAchievements(byte LocalUserNum, int TitleId, bool bShouldReadText, bool bShouldReadImages)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ReadAchievements");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156990);
 			byte params[17] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = TitleId;
 			*(bool*)&params[8] = bShouldReadText;
 			*(bool*)&params[12] = bShouldReadImages;
@@ -1384,9 +1384,9 @@ void**)&params[4] = MessageDelegate;
 		}
 		OnlineSubsystem::EOnlineEnumerationReadState GetAchievements(byte LocalUserNum, ScriptArray<OnlineSubsystem::AchievementDetails>& Achievements, int TitleId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetAchievements");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(156996);
 			byte params[18] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptArray<OnlineSubsystem::AchievementDetails>*)&params[4] = Achievements;
 			*(int*)&params[16] = TitleId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1397,9 +1397,9 @@ void**)&params[4] = MessageDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* UnlockAchievementCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddUnlockAchievementCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157003);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = UnlockAchievementCompleteDelegate;
@@ -1409,9 +1409,9 @@ void**)&params[4] = UnlockAchievementCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* UnlockAchievementCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearUnlockAchievementCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157006);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = UnlockAchievementCompleteDelegate;
@@ -1421,9 +1421,9 @@ void**)&params[4] = UnlockAchievementCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadAchievementsCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.AddReadAchievementsCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157010);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = ReadAchievementsCompleteDelegate;
@@ -1433,9 +1433,9 @@ void**)&params[4] = ReadAchievementsCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadAchievementsCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ClearReadAchievementsCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157013);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = ReadAchievementsCompleteDelegate;
@@ -1443,42 +1443,42 @@ void**)&params[4] = ReadAchievementsCompleteDelegate;
 		}
 		bool DeleteMessage(byte LocalUserNum, int MessageIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.DeleteMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157016);
 			byte params[9] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = MessageIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool ShowFriendsUI(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ShowFriendsUI");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157020);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool ShowLoginUI(bool bShowOnlineOnly)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.ShowLoginUI");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157023);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bShowOnlineOnly;
+			*(bool*)params = bShowOnlineOnly;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void SetNetworkNotificationPosition(OnlineSubsystem::ENetworkNotificationPosition NewPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.SetNetworkNotificationPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157026);
 			byte params[1] = { NULL };
-			*(OnlineSubsystem::ENetworkNotificationPosition*)&params[0] = NewPos;
+			*(OnlineSubsystem::ENetworkNotificationPosition*)params = NewPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetLocale()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineSubsystemMcts.GetLocale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157028);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

@@ -13,7 +13,7 @@ namespace UnrealScript
 	class GFxClikWidget : public GFxObject
 	{
 	public:
-		class EventData
+		struct EventData
 		{
 		public:
 			ADD_STRUCT(int, lastIndex, 32)
@@ -26,18 +26,18 @@ namespace UnrealScript
 		};
 		void EventListener(GFxClikWidget::EventData Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxClikWidget.EventListener");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30228);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = Data;
+			*(GFxClikWidget::EventData*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddEventListener(ScriptName Type, 
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* Listener)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxClikWidget.AddEventListener");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30231);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = Type;
+			*(ScriptName*)params = Type;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[8] = Listener;
@@ -45,9 +45,9 @@ void**)&params[8] = Listener;
 		}
 		ScriptString* GetEventStringFromTypename(ScriptName Typename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxClikWidget.GetEventStringFromTypename");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30236);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = Typename;
+			*(ScriptName*)params = Typename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[8];
 		}
@@ -55,9 +55,9 @@ void**)&params[8] = Listener;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* Listener)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxClikWidget.SetListener");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30237);
 			byte params[28] = { NULL };
-			*(class GFxObject**)&params[0] = O;
+			*(class GFxObject**)params = O;
 			*(ScriptString**)&params[4] = Member;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
@@ -66,25 +66,25 @@ void**)&params[16] = Listener;
 		}
 		void ASAddEventListener(ScriptString* Type, class GFxObject* O, ScriptString* func)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxClikWidget.ASAddEventListener");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30238);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = Type;
+			*(ScriptString**)params = Type;
 			*(class GFxObject**)&params[12] = O;
 			*(ScriptString**)&params[16] = func;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveAllEventListeners(ScriptString* Event)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxClikWidget.RemoveAllEventListeners");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30239);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Event;
+			*(ScriptString**)params = Event;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ASRemoveAllEventListeners(ScriptString* Event)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxClikWidget.ASRemoveAllEventListeners");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30241);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Event;
+			*(ScriptString**)params = Event;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

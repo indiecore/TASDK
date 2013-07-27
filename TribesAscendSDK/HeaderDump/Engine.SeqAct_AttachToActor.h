@@ -24,15 +24,15 @@ namespace UnrealScript
 		ADD_BOOL(bHardAttach, 232, 0x2)
 		ADD_BOOL(bUseRelativeOffset, 232, 0x4)
 		ADD_BOOL(bUseRelativeRotation, 232, 0x8)
-		ADD_STRUCT(Object::Rotator, RelativeRotation, 256)
-		ADD_STRUCT(Object::Vector, RelativeOffset, 244)
+		ADD_STRUCT(Rotator, RelativeRotation, 256)
+		ADD_STRUCT(Vector, RelativeOffset, 244)
 		ADD_STRUCT(ScriptName, BoneName, 236)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_AttachToActor.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25600);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

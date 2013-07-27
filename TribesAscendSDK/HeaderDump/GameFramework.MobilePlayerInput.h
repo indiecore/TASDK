@@ -41,26 +41,26 @@ namespace UnrealScript
 			UI_LandscapeLeft = 4,
 			UI_MAX = 5,
 		};
-		class MobileInputGroup
+		struct MobileInputGroup
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class MobileInputZone*>, AssociatedZones, 12)
 			ADD_STRUCT(ScriptString*, GroupName, 0)
 		};
-		class MobileInputZoneClassMap
+		struct MobileInputZoneClassMap
 		{
 		public:
 			ADD_OBJECT(ScriptClass, ClassType, 12)
 			ADD_STRUCT(ScriptString*, Name, 0)
 		};
-		class TouchDataEvent
+		struct TouchDataEvent
 		{
 		public:
 			ADD_STRUCT(Object::Double, DeviceTime, 12)
 			ADD_STRUCT(Object::Vector2D, Location, 4)
 			ADD_STRUCT(MobileInputZone::EZoneTouchEvent, EventType, 0)
 		};
-		class TouchData
+		struct TouchData
 		{
 		public:
 			ADD_BOOL(bInUse, 40, 0x1)
@@ -76,13 +76,13 @@ namespace UnrealScript
 			ADD_STRUCT(float, TotalMoveDistance, 12)
 			ADD_STRUCT(Object::Vector2D, Location, 4)
 		};
-		ADD_STRUCT(Object::Vector, DeviceAccelerometerRawData, 928)
+		ADD_STRUCT(Vector, DeviceAccelerometerRawData, 928)
 		ADD_BOOL(bDeviceHasGyroscope, 764, 0x10)
-		ADD_STRUCT(Object::Vector, DeviceGyroRawData, 916)
-		ADD_STRUCT(Object::Vector, DeviceMotionAttitude, 844)
-		ADD_STRUCT(Object::Vector, DeviceMotionRotationRate, 856)
-		ADD_STRUCT(Object::Vector, DeviceMotionGravity, 868)
-		ADD_STRUCT(Object::Vector, DeviceMotionAcceleration, 880)
+		ADD_STRUCT(Vector, DeviceGyroRawData, 916)
+		ADD_STRUCT(Vector, DeviceMotionAttitude, 844)
+		ADD_STRUCT(Vector, DeviceMotionRotationRate, 856)
+		ADD_STRUCT(Vector, DeviceMotionGravity, 868)
+		ADD_STRUCT(Vector, DeviceMotionAcceleration, 880)
 		ADD_STRUCT(MobilePlayerInput::TouchData, Touches, 380)
 		ADD_STRUCT(float, MobileYaw, 780)
 		ADD_STRUCT(float, MobileYawCenter, 784)
@@ -113,32 +113,32 @@ namespace UnrealScript
 		ADD_OBJECT(MobileMenuObject, InteractiveObject, 720)
 		bool HasZones()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.HasZones");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32366);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		ScriptArray<class MobileInputZone*> GetCurrentZones()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.GetCurrentZones");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32368);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptArray<class MobileInputZone*>*)&params[0];
+			return *(ScriptArray<class MobileInputZone*>*)params;
 		}
 		class MobileMenuScene* OpenMenuScene(ScriptClass* SceneClass, ScriptString* Mode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.OpenMenuScene");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32638);
 			byte params[20] = { NULL };
-			*(ScriptClass**)&params[0] = SceneClass;
+			*(ScriptClass**)params = SceneClass;
 			*(ScriptString**)&params[4] = Mode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class MobileMenuScene**)&params[16];
 		}
 		void OnInputTouch(int Handle, MobileInputZone::EZoneTouchEvent Type, Object::Vector2D TouchLocation, float DeviceTimestamp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.OnInputTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32759);
 			byte params[17] = { NULL };
-			*(int*)&params[0] = Handle;
+			*(int*)params = Handle;
 			*(MobileInputZone::EZoneTouchEvent*)&params[4] = Type;
 			*(Object::Vector2D*)&params[8] = TouchLocation;
 			*(float*)&params[16] = DeviceTimestamp;
@@ -146,137 +146,137 @@ namespace UnrealScript
 		}
 		bool OnPreviewTouch(float X, float Y)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.OnPreviewTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32761);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = X;
+			*(float*)params = X;
 			*(float*)&params[4] = Y;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void OnTouchNotHandledInMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.OnTouchNotHandledInMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32763);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void OnMobileMotion(class PlayerInput* PlayerInput, Object::Vector CurrentAttitude, Object::Vector CurrentRotationRate, Object::Vector CurrentGravity, Object::Vector CurrentAcceleration)
+		void OnMobileMotion(class PlayerInput* PlayerInput, Vector CurrentAttitude, Vector CurrentRotationRate, Vector CurrentGravity, Vector CurrentAcceleration)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.OnMobileMotion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32765);
 			byte params[52] = { NULL };
-			*(class PlayerInput**)&params[0] = PlayerInput;
-			*(Object::Vector*)&params[4] = CurrentAttitude;
-			*(Object::Vector*)&params[16] = CurrentRotationRate;
-			*(Object::Vector*)&params[28] = CurrentGravity;
-			*(Object::Vector*)&params[40] = CurrentAcceleration;
+			*(class PlayerInput**)params = PlayerInput;
+			*(Vector*)&params[4] = CurrentAttitude;
+			*(Vector*)&params[16] = CurrentRotationRate;
+			*(Vector*)&params[28] = CurrentGravity;
+			*(Vector*)&params[40] = CurrentAcceleration;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NativeInitializeInputSystem()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.NativeInitializeInputSystem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32798);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NativeInitializeInputZones()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.NativeInitializeInputZones");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32799);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SendInputKey(ScriptName Key, Object::EInputEvent Event, float AmountDepressed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.SendInputKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32800);
 			byte params[13] = { NULL };
-			*(ScriptName*)&params[0] = Key;
+			*(ScriptName*)params = Key;
 			*(Object::EInputEvent*)&params[8] = Event;
 			*(float*)&params[12] = AmountDepressed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendInputAxis(ScriptName Key, float Delta, float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.SendInputAxis");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32804);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = Key;
+			*(ScriptName*)params = Key;
 			*(float*)&params[8] = Delta;
 			*(float*)&params[12] = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InitInputSystem()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.InitInputSystem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32808);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClientInitInputSystem()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.ClientInitInputSystem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32809);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitTouchSystem()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.InitTouchSystem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32810);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitializeInputZones()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.InitializeInputZones");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32811);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RefreshKismetLinks()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.RefreshKismetLinks");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32816);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddKismetEventHandler(class SeqEvent_MobileBase* NewHandler)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.AddKismetEventHandler");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32821);
 			byte params[4] = { NULL };
-			*(class SeqEvent_MobileBase**)&params[0] = NewHandler;
+			*(class SeqEvent_MobileBase**)params = NewHandler;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddKismetRawInputEventHandler(class SeqEvent_MobileRawInput* NewHandler)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.AddKismetRawInputEventHandler");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32824);
 			byte params[4] = { NULL };
-			*(class SeqEvent_MobileRawInput**)&params[0] = NewHandler;
+			*(class SeqEvent_MobileRawInput**)params = NewHandler;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class MobileInputZone* FindZone(ScriptString* ZoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.FindZone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32827);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = ZoneName;
+			*(ScriptString**)params = ZoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class MobileInputZone**)&params[12];
 		}
 		class MobileInputZone* FindorAddZone(ScriptString* ZoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.FindorAddZone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32831);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = ZoneName;
+			*(ScriptString**)params = ZoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class MobileInputZone**)&params[12];
 		}
 		void CloseMenuScene(class MobileMenuScene* SceneToClose)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.CloseMenuScene");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32842);
 			byte params[4] = { NULL };
-			*(class MobileMenuScene**)&params[0] = SceneToClose;
+			*(class MobileMenuScene**)params = SceneToClose;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CloseAllMenus()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.CloseAllMenus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32847);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RenderMenus(class Canvas* Canvas, float RenderDelta)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.RenderMenus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32848);
 			byte params[8] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			*(float*)&params[4] = RenderDelta;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PreClientTravel(ScriptString* PendingURL, Actor::ETravelType TravelType, bool bIsSeamlessTravel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobilePlayerInput.PreClientTravel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32852);
 			byte params[17] = { NULL };
-			*(ScriptString**)&params[0] = PendingURL;
+			*(ScriptString**)params = PendingURL;
 			*(Actor::ETravelType*)&params[12] = TravelType;
 			*(bool*)&params[16] = bIsSeamlessTravel;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

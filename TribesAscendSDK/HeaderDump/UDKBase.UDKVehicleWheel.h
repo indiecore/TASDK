@@ -26,9 +26,9 @@ namespace UnrealScript
 		ADD_BOOL(bUseMaterialSpecificEffects, 276, 0x1)
 		void SetParticleEffect(class UDKVehicle* OwnerVehicle, class ParticleSystem* NewTemplate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleWheel.SetParticleEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36261);
 			byte params[8] = { NULL };
-			*(class UDKVehicle**)&params[0] = OwnerVehicle;
+			*(class UDKVehicle**)params = OwnerVehicle;
 			*(class ParticleSystem**)&params[4] = NewTemplate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -36,11 +36,11 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* PSystem)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleWheel.OldEffectFinished");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36264);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = PSystem;
+void**)params = PSystem;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

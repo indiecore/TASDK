@@ -12,24 +12,24 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, EULA, 132)
 		void LoadEULA()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_EULA.LoadEULA");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63265);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AcceptEULA()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_EULA.AcceptEULA");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63266);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_EULA.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63267);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EULAReponse(bool bAccepted)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_EULA.EULAReponse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63268);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bAccepted;
+			*(bool*)params = bAccepted;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

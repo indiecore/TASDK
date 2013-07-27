@@ -36,134 +36,134 @@ namespace UnrealScript
 		ADD_BOOL(bOnlyReplicateHidden, 692, 0x1)
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24480);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24482);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitializePickup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.InitializePickup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24483);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetInitialState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.SetInitialState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24484);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShutDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.ShutDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24485);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPickupMesh()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.SetPickupMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24486);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24487);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CheckForErrors()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.CheckForErrors");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24488);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SetRespawn()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.SetRespawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24493);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartSleeping()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.StartSleeping");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24494);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float DetourWeight(class Pawn* Other, float PathWeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.DetourWeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24495);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			*(float*)&params[4] = PathWeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		void SpawnCopyFor(class Pawn* Recipient)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.SpawnCopyFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24499);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Recipient;
+			*(class Pawn**)params = Recipient;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ReadyToPickup(float MaxWait)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.ReadyToPickup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24502);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = MaxWait;
+			*(float*)params = MaxWait;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void GiveTo(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.GiveTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24505);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PickedUpBy(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.PickedUpBy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24507);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RecheckValidTouch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.RecheckValidTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24510);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float GetRespawnTime()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.GetRespawnTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24533);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void RespawnEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.RespawnEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24535);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPickupHidden()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.SetPickupHidden");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24536);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPickupVisible()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.SetPickupVisible");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24537);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24538);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool DelayRespawn()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PickupFactory.DelayRespawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24548);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

@@ -12,10 +12,10 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<ScriptString*>, Strings, 92)
 		int GetElementCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataProvider_StringArray.GetElementCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35594);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

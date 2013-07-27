@@ -38,48 +38,48 @@ namespace UnrealScript
 		static const auto GAMEEVENT_AGGREGATED_WEAPON_FIRED = 10300;
 		static const auto GAMEEVENT_AGGREGATED_PAWN_SPAWN = 10400;
 		static const auto GAMEEVENT_AGGREGATED_GAME_SPECIFIC = 11000;
-		class AggregateEventMapping
+		struct AggregateEventMapping
 		{
 		public:
 			ADD_STRUCT(int, TargetAggregateID, 8)
 			ADD_STRUCT(int, AggregateID, 4)
 			ADD_STRUCT(int, EventID, 0)
 		};
-		class GameEvents
+		struct GameEvents
 		{
 		public:
 			ADD_STRUCT(Object::Map_Mirror, Events, 0)
 		};
-		class GameEvent
+		struct GameEvent
 		{
 		public:
 			ADD_STRUCT(ScriptArray<float>, EventCountByTimePeriod, 0)
 		};
-		class DamageEvents
+		struct DamageEvents
 		{
 		public:
 			ADD_STRUCT(ScriptArray<GameStatsAggregator::GameEvents>, EventsByDamageClass, 60)
 			ADD_STRUCT(GameStatsAggregator::GameEvents, TotalEvents, 0)
 		};
-		class PawnEvents
+		struct PawnEvents
 		{
 		public:
 			ADD_STRUCT(ScriptArray<GameStatsAggregator::GameEvents>, EventsByPawnClass, 60)
 			ADD_STRUCT(GameStatsAggregator::GameEvents, TotalEvents, 0)
 		};
-		class ProjectileEvents
+		struct ProjectileEvents
 		{
 		public:
 			ADD_STRUCT(ScriptArray<GameStatsAggregator::GameEvents>, EventsByProjectileClass, 60)
 			ADD_STRUCT(GameStatsAggregator::GameEvents, TotalEvents, 0)
 		};
-		class WeaponEvents
+		struct WeaponEvents
 		{
 		public:
 			ADD_STRUCT(ScriptArray<GameStatsAggregator::GameEvents>, EventsByWeaponClass, 60)
 			ADD_STRUCT(GameStatsAggregator::GameEvents, TotalEvents, 0)
 		};
-		class TeamEvents
+		struct TeamEvents
 		{
 		public:
 			ADD_STRUCT(GameStatsAggregator::PawnEvents, PawnEvents, 348)
@@ -89,7 +89,7 @@ namespace UnrealScript
 			ADD_STRUCT(GameStatsAggregator::WeaponEvents, WeaponEvents, 60)
 			ADD_STRUCT(GameStatsAggregator::GameEvents, TotalEvents, 0)
 		};
-		class PlayerEvents
+		struct PlayerEvents
 		{
 		public:
 			ADD_STRUCT(GameStatsAggregator::PawnEvents, PawnEvents, 348)
@@ -112,19 +112,19 @@ namespace UnrealScript
 		ADD_OBJECT(GameStateObject, GameState, 88)
 		void PreProcessStream()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameStatsAggregator.PreProcessStream");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32033);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostProcessStream()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameStatsAggregator.PostProcessStream");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32034);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool GetAggregateMappingIDs(int EventID, int& AggregateID, int& TargetAggregateID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameStatsAggregator.GetAggregateMappingIDs");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32035);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = EventID;
+			*(int*)params = EventID;
 			*(int*)&params[4] = AggregateID;
 			*(int*)&params[8] = TargetAggregateID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

@@ -19,7 +19,7 @@ namespace UnrealScript
 	class InterpTrackBoolProp : public InterpTrack
 	{
 	public:
-		class BoolTrackKey
+		struct BoolTrackKey
 		{
 		public:
 			ADD_BOOL(Value, 4, 0x1)

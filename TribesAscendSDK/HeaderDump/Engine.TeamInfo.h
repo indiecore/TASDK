@@ -18,44 +18,44 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, TeamName, 476)
 		ScriptString* GetHumanReadableName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TeamInfo.GetHumanReadableName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17470);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TeamInfo.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27715);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TeamInfo.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27717);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool AddToTeam(class Controller* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TeamInfo.AddToTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27719);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = Other;
+			*(class Controller**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void RemoveFromTeam(class Controller* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TeamInfo.RemoveFromTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27722);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = Other;
+			*(class Controller**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		byte GetTeamNum()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TeamInfo.GetTeamNum");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27724);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return params[0];
+			return *params;
 		}
 	};
 }

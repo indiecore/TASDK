@@ -29,22 +29,22 @@ namespace UnrealScript
 	{
 	public:
 		static const auto INFINITE_PATH_COST = 10000000;
-		class DebugNavCost
+		struct DebugNavCost
 		{
 		public:
 			ADD_STRUCT(int, Cost, 12)
 			ADD_STRUCT(ScriptString*, Desc, 0)
 		};
-		class NavigationOctreeObject
+		struct NavigationOctreeObject
 		{
 		public:
 			ADD_STRUCT(byte, OwnerType, 48)
 			ADD_OBJECT(Object, Owner, 44)
 			ADD_STRUCT(Object::Pointer, OctreeNode, 40)
-			ADD_STRUCT(Object::Vector, BoxCenter, 28)
+			ADD_STRUCT(Vector, BoxCenter, 28)
 			ADD_STRUCT(Object::Box, BoundingBox, 0)
 		};
-		class CheckpointRecord
+		struct CheckpointRecord
 		{
 		public:
 			ADD_BOOL(bBlocked, 0, 0x2)
@@ -107,110 +107,110 @@ namespace UnrealScript
 		ADD_BOOL(bEndPoint, 476, 0x1)
 		bool ProceedWithMove(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.ProceedWithMove");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6203);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void GetBoundingCylinder(float& CollisionRadius, float& CollisionHeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.GetBoundingCylinder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9839);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = CollisionRadius;
+			*(float*)params = CollisionRadius;
 			*(float*)&params[4] = CollisionHeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			CollisionRadius = *(float*)&params[0];
+			CollisionRadius = *(float*)params;
 			CollisionHeight = *(float*)&params[4];
 		}
 		class ReachSpec* GetReachSpecTo(class NavigationPoint* Nav, ScriptClass* SpecClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.GetReachSpecTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9842);
 			byte params[12] = { NULL };
-			*(class NavigationPoint**)&params[0] = Nav;
+			*(class NavigationPoint**)params = Nav;
 			*(ScriptClass**)&params[4] = SpecClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class ReachSpec**)&params[8];
 		}
 		bool IsUsableAnchorFor(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.IsUsableAnchorFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9846);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool CanTeleport(class Actor* A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.CanTeleport");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9849);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = A;
+			*(class Actor**)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		int SpecialCost(class Pawn* Seeker, class ReachSpec* Path)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.SpecialCost");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9852);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = Seeker;
+			*(class Pawn**)params = Seeker;
 			*(class ReachSpec**)&params[4] = Path;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		bool Accept(class Actor* Incoming, class Actor* Source)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.Accept");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9856);
 			byte params[12] = { NULL };
-			*(class Actor**)&params[0] = Incoming;
+			*(class Actor**)params = Incoming;
 			*(class Actor**)&params[4] = Source;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		float DetourWeight(class Pawn* Other, float PathWeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.DetourWeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9861);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			*(float*)&params[4] = PathWeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		bool SuggestMovePreparation(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.SuggestMovePreparation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9865);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		class NavigationPoint* GetNearestNavToActor(class Actor* ChkActor, ScriptClass* RequiredClass, ScriptArray<class NavigationPoint*> ExcludeList, float MinDist)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.GetNearestNavToActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9872);
 			byte params[28] = { NULL };
-			*(class Actor**)&params[0] = ChkActor;
+			*(class Actor**)params = ChkActor;
 			*(ScriptClass**)&params[4] = RequiredClass;
 			*(ScriptArray<class NavigationPoint*>*)&params[8] = ExcludeList;
 			*(float*)&params[20] = MinDist;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class NavigationPoint**)&params[24];
 		}
-		class NavigationPoint* GetNearestNavToPoint(class Actor* ChkActor, Object::Vector ChkPoint, ScriptClass* RequiredClass, ScriptArray<class NavigationPoint*> ExcludeList)
+		class NavigationPoint* GetNearestNavToPoint(class Actor* ChkActor, Vector ChkPoint, ScriptClass* RequiredClass, ScriptArray<class NavigationPoint*> ExcludeList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.GetNearestNavToPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9883);
 			byte params[36] = { NULL };
-			*(class Actor**)&params[0] = ChkActor;
-			*(Object::Vector*)&params[4] = ChkPoint;
+			*(class Actor**)params = ChkActor;
+			*(Vector*)&params[4] = ChkPoint;
 			*(ScriptClass**)&params[16] = RequiredClass;
 			*(ScriptArray<class NavigationPoint*>*)&params[20] = ExcludeList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class NavigationPoint**)&params[32];
 		}
-		bool GetAllNavInRadius(class Actor* ChkActor, Object::Vector ChkPoint, float Radius, ScriptArray<class NavigationPoint*>& out_NavList, bool bSkipBlocked, int inNetworkID, Object::Cylinder MinSize)
+		bool GetAllNavInRadius(class Actor* ChkActor, Vector ChkPoint, float Radius, ScriptArray<class NavigationPoint*>& out_NavList, bool bSkipBlocked, int inNetworkID, Object::Cylinder MinSize)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.GetAllNavInRadius");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9894);
 			byte params[52] = { NULL };
-			*(class Actor**)&params[0] = ChkActor;
-			*(Object::Vector*)&params[4] = ChkPoint;
+			*(class Actor**)params = ChkActor;
+			*(Vector*)&params[4] = ChkPoint;
 			*(float*)&params[16] = Radius;
 			*(ScriptArray<class NavigationPoint*>*)&params[20] = out_NavList;
 			*(bool*)&params[32] = bSkipBlocked;
@@ -222,53 +222,53 @@ namespace UnrealScript
 		}
 		bool IsOnDifferentNetwork(class NavigationPoint* Nav)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.IsOnDifferentNetwork");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9904);
 			byte params[8] = { NULL };
-			*(class NavigationPoint**)&params[0] = Nav;
+			*(class NavigationPoint**)params = Nav;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void OnToggle(class SeqAct_Toggle* inAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9907);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = inAction;
+			*(class SeqAct_Toggle**)params = inAction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShutDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.ShutDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9909);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool ShouldSaveForCheckpoint()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.ShouldSaveForCheckpoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9910);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void CreateCheckpointRecord(NavigationPoint::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.CreateCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9912);
 			byte params[4] = { NULL };
-			*(NavigationPoint::CheckpointRecord*)&params[0] = Record;
+			*(NavigationPoint::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(NavigationPoint::CheckpointRecord*)&params[0];
+			Record = *(NavigationPoint::CheckpointRecord*)params;
 		}
 		void ApplyCheckpointRecord(NavigationPoint::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.ApplyCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9914);
 			byte params[4] = { NULL };
-			*(NavigationPoint::CheckpointRecord*)&params[0] = Record;
+			*(NavigationPoint::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(NavigationPoint::CheckpointRecord*)&params[0];
+			Record = *(NavigationPoint::CheckpointRecord*)params;
 		}
 		ScriptString* GetDebugAbbrev()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationPoint.GetDebugAbbrev");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9916);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

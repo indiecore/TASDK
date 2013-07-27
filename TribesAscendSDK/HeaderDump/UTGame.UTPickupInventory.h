@@ -10,9 +10,9 @@ namespace UnrealScript
 	public:
 		float BotDesireability(class Actor* PickupHolder, class Pawn* P, class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTPickupInventory.BotDesireability");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48737);
 			byte params[16] = { NULL };
-			*(class Actor**)&params[0] = PickupHolder;
+			*(class Actor**)params = PickupHolder;
 			*(class Pawn**)&params[4] = P;
 			*(class Controller**)&params[8] = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

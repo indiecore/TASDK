@@ -16,22 +16,22 @@ namespace UnrealScript
 		ADD_STRUCT(int, Radius, 68)
 		void CachePawnReacFlags(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AvoidInEscapableNodes.CachePawnReacFlags");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23966);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool DontGetStuck(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AvoidInEscapableNodes.DontGetStuck");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23968);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_AvoidInEscapableNodes.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23972);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

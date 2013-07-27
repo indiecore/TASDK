@@ -24,7 +24,7 @@ namespace UnrealScript
 			OPAS_Write = 2,
 			OPAS_MAX = 3,
 		};
-		class OnlineProfileSetting
+		struct OnlineProfileSetting
 		{
 		public:
 			ADD_STRUCT(Settings::SettingsProperty, ProfileSetting, 4)
@@ -38,9 +38,9 @@ namespace UnrealScript
 		ADD_STRUCT(int, VersionSettingsId, 64)
 		bool GetProfileSettingId(ScriptName ProfileSettingName, int& ProfileSettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22410);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = ProfileSettingName;
+			*(ScriptName*)params = ProfileSettingName;
 			*(int*)&params[8] = ProfileSettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ProfileSettingId = *(int*)&params[8];
@@ -48,65 +48,65 @@ namespace UnrealScript
 		}
 		ScriptName GetProfileSettingName(int ProfileSettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22414);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[4];
 		}
 		ScriptString* GetProfileSettingColumnHeader(int ProfileSettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingColumnHeader");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22417);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		int FindProfileSettingIndex(int ProfileSettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.FindProfileSettingIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22420);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int FindProfileMappingIndex(int ProfileSettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.FindProfileMappingIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22423);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int FindProfileMappingIndexByName(ScriptName ProfileSettingName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.FindProfileMappingIndexByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22426);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ProfileSettingName;
+			*(ScriptName*)params = ProfileSettingName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int FindDefaultProfileMappingIndexByName(ScriptName ProfileSettingName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.FindDefaultProfileMappingIndexByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22429);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ProfileSettingName;
+			*(ScriptName*)params = ProfileSettingName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		bool IsProfileSettingIdMapped(int ProfileSettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.IsProfileSettingIdMapped");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22432);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool GetProfileSettingValue(int ProfileSettingId, ScriptString*& Value, int ValueMapID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22435);
 			byte params[24] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(ScriptString**)&params[4] = Value;
 			*(int*)&params[16] = ValueMapID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -115,17 +115,17 @@ namespace UnrealScript
 		}
 		ScriptName GetProfileSettingValueName(int ProfileSettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingValueName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22440);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[4];
 		}
 		bool GetProfileSettingValues(int ProfileSettingId, ScriptArray<ScriptName>& Values)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingValues");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22443);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(ScriptArray<ScriptName>*)&params[4] = Values;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Values = *(ScriptArray<ScriptName>*)&params[4];
@@ -133,9 +133,9 @@ namespace UnrealScript
 		}
 		bool GetProfileSettingValueByName(ScriptName ProfileSettingName, ScriptString*& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingValueByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22448);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ProfileSettingName;
+			*(ScriptName*)params = ProfileSettingName;
 			*(ScriptString**)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(ScriptString**)&params[8];
@@ -143,9 +143,9 @@ namespace UnrealScript
 		}
 		bool SetProfileSettingValueByName(ScriptName ProfileSettingName, ScriptString*& NewValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.SetProfileSettingValueByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22452);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ProfileSettingName;
+			*(ScriptName*)params = ProfileSettingName;
 			*(ScriptString**)&params[8] = NewValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			NewValue = *(ScriptString**)&params[8];
@@ -153,9 +153,9 @@ namespace UnrealScript
 		}
 		bool SetProfileSettingValue(int ProfileSettingId, ScriptString*& NewValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.SetProfileSettingValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22456);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(ScriptString**)&params[4] = NewValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			NewValue = *(ScriptString**)&params[4];
@@ -163,9 +163,9 @@ namespace UnrealScript
 		}
 		bool GetProfileSettingValueId(int ProfileSettingId, int& ValueId, int& ListIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingValueId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22460);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(int*)&params[4] = ValueId;
 			*(int*)&params[8] = ListIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -175,9 +175,9 @@ namespace UnrealScript
 		}
 		bool GetProfileSettingValueFromListIndex(int ProfileSettingId, int ListIndex, int& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingValueFromListIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22465);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(int*)&params[4] = ListIndex;
 			*(int*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -186,9 +186,9 @@ namespace UnrealScript
 		}
 		bool GetProfileSettingValueInt(int ProfileSettingId, int& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingValueInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22470);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(int*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(int*)&params[4];
@@ -196,9 +196,9 @@ namespace UnrealScript
 		}
 		bool GetProfileSettingValueFloat(int ProfileSettingId, float& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingValueFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22474);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(float*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(float*)&params[4];
@@ -206,36 +206,36 @@ namespace UnrealScript
 		}
 		bool SetProfileSettingValueId(int ProfileSettingId, int Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.SetProfileSettingValueId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22478);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(int*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool SetProfileSettingValueInt(int ProfileSettingId, int Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.SetProfileSettingValueInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22482);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(int*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool SetProfileSettingValueFloat(int ProfileSettingId, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.SetProfileSettingValueFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22486);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(float*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool GetProfileSettingMappingType(int ProfileId, Settings::EPropertyValueMappingType& OutType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingMappingType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22490);
 			byte params[9] = { NULL };
-			*(int*)&params[0] = ProfileId;
+			*(int*)params = ProfileId;
 			*(Settings::EPropertyValueMappingType*)&params[4] = OutType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutType = *(Settings::EPropertyValueMappingType*)&params[4];
@@ -243,9 +243,9 @@ namespace UnrealScript
 		}
 		bool GetProfileSettingMappingIds(int ProfileId, ScriptArray<int>& Ids)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingMappingIds");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22494);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = ProfileId;
+			*(int*)params = ProfileId;
 			*(ScriptArray<int>*)&params[4] = Ids;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Ids = *(ScriptArray<int>*)&params[4];
@@ -253,9 +253,9 @@ namespace UnrealScript
 		}
 		bool GetProfileSettingRange(int ProfileId, float& OutMinValue, float& OutMaxValue, float& RangeIncrement, byte& bFormatAsInt)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetProfileSettingRange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22499);
 			byte params[21] = { NULL };
-			*(int*)&params[0] = ProfileId;
+			*(int*)params = ProfileId;
 			*(float*)&params[4] = OutMinValue;
 			*(float*)&params[8] = OutMaxValue;
 			*(float*)&params[12] = RangeIncrement;
@@ -269,18 +269,18 @@ namespace UnrealScript
 		}
 		bool SetRangedProfileSettingValue(int ProfileId, float NewValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.SetRangedProfileSettingValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22506);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ProfileId;
+			*(int*)params = ProfileId;
 			*(float*)&params[4] = NewValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool GetRangedProfileSettingValue(int ProfileId, float& OutValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetRangedProfileSettingValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22510);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ProfileId;
+			*(int*)params = ProfileId;
 			*(float*)&params[4] = OutValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutValue = *(float*)&params[4];
@@ -288,38 +288,38 @@ namespace UnrealScript
 		}
 		void AddSettingInt(int SettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.AddSettingInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22514);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = SettingId;
+			*(int*)params = SettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddSettingFloat(int SettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.AddSettingFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22516);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = SettingId;
+			*(int*)params = SettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetToDefaults()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.SetToDefaults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22518);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AppendVersionToSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.AppendVersionToSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22519);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetVersionNumber()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.GetVersionNumber");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22520);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void SetDefaultVersionNumber()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlinePlayerStorage.SetDefaultVersionNumber");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22522);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -18,27 +18,27 @@ namespace UnrealScript
 		ADD_BOOL(bMoving, 832, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicPylon.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14852);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RebuildDynamicEdges()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicPylon.RebuildDynamicEdges");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14853);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FlushDynamicEdges()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicPylon.FlushDynamicEdges");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14854);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartedMoving()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicPylon.StartedMoving");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14855);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StoppedMoving()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicPylon.StoppedMoving");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14856);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

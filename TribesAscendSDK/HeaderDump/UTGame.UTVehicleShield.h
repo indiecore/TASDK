@@ -33,24 +33,24 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, ActivatedSound, 480)
 		void SetActive(bool bNowActive)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleShield.SetActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49803);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNowActive;
+			*(bool*)params = bNowActive;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShieldFullyOnline()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleShield.ShieldFullyOnline");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49805);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void TakeDamage(int Damage, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int Damage, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleShield.TakeDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49806);
 			byte params[68] = { NULL };
-			*(int*)&params[0] = Damage;
+			*(int*)params = Damage;
 			*(class Controller**)&params[4] = EventInstigator;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = Momentum;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = Momentum;
 			*(ScriptClass**)&params[32] = DamageType;
 			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
 			*(class Actor**)&params[64] = DamageCauser;

@@ -32,34 +32,34 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VoiceEngine, 224)
 		ScriptString* GetPlayerNicknameFromIndex(int UserIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineSubsystemCommonImpl.GetPlayerNicknameFromIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33828);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = UserIndex;
+			*(int*)params = UserIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		OnlineSubsystem::UniqueNetId GetPlayerUniqueNetIdFromIndex(int UserIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineSubsystemCommonImpl.GetPlayerUniqueNetIdFromIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33831);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = UserIndex;
+			*(int*)params = UserIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(OnlineSubsystem::UniqueNetId*)&params[4];
 		}
 		bool IsPlayerInSession(ScriptName SessionName, OnlineSubsystem::UniqueNetId PlayerID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineSubsystemCommonImpl.IsPlayerInSession");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33834);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(OnlineSubsystem::UniqueNetId*)&params[8] = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void GetRegisteredPlayers(ScriptName SessionName, ScriptArray<OnlineSubsystem::UniqueNetId>& OutRegisteredPlayers)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineSubsystemCommonImpl.GetRegisteredPlayers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33838);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[8] = OutRegisteredPlayers;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutRegisteredPlayers = *(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[8];

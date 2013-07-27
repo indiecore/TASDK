@@ -14,9 +14,9 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, AmmoCountTF, 380)
 		void Init(class LocalPlayer* Player)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxDeviceAmmoCount.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51023);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = Player;
+			*(class LocalPlayer**)params = Player;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

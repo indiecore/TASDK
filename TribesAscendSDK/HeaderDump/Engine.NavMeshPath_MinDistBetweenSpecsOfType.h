@@ -13,22 +13,22 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(Pylon::ENavMeshEdgeType, EdgeType, 96)
-		ADD_STRUCT(Object::Vector, InitLocation, 84)
+		ADD_STRUCT(Vector, InitLocation, 84)
 		ADD_STRUCT(float, MinDistBetweenEdgeTypes, 80)
-		bool EnforceMinDist(class NavigationHandle* NavHandle, float InMinDist, Pylon::ENavMeshEdgeType InEdgeType, Object::Vector LastLocation)
+		bool EnforceMinDist(class NavigationHandle* NavHandle, float InMinDist, Pylon::ENavMeshEdgeType InEdgeType, Vector LastLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_MinDistBetweenSpecsOfType.EnforceMinDist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21063);
 			byte params[25] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
+			*(class NavigationHandle**)params = NavHandle;
 			*(float*)&params[4] = InMinDist;
 			*(Pylon::ENavMeshEdgeType*)&params[8] = InEdgeType;
-			*(Object::Vector*)&params[12] = LastLocation;
+			*(Vector*)&params[12] = LastLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_MinDistBetweenSpecsOfType.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21070);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -14,7 +14,7 @@ namespace UnrealScript
 	class ParticleModuleTypeDataPhysX : public ParticleModuleTypeDataBase
 	{
 	public:
-		class PhysXEmitterVerticalLodProperties
+		struct PhysXEmitterVerticalLodProperties
 		{
 		public:
 			ADD_STRUCT(float, RelativeFadeoutTime, 12)

@@ -59,93 +59,93 @@ namespace UnrealScript
 		ADD_STRUCT(int, AWARD_TIER_SIZE, 132)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63709);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearSummary()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.ClearSummary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63710);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearEarnedBadgeValue()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.ClearEarnedBadgeValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63712);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SummaryReady()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.SummaryReady");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63714);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LoadXPData(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.LoadXPData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63716);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadPlayerStatsData(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.LoadPlayerStatsData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63718);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadPlayerAccoladeData(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.LoadPlayerAccoladeData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63723);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadPlayerMiscData(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.LoadPlayerMiscData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63726);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddAward(int AwardId, int val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.AddAward");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63728);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = AwardId;
+			*(int*)params = AwardId;
 			*(int*)&params[4] = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddBadge(TgPlayerProfile::BadgeStruct Badge)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.AddBadge");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63734);
 			byte params[52] = { NULL };
-			*(TgPlayerProfile::BadgeStruct*)&params[0] = Badge;
+			*(TgPlayerProfile::BadgeStruct*)params = Badge;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddAccolade(int AccoladeId, int val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.AddAccolade");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63737);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = AccoladeId;
+			*(int*)params = AccoladeId;
 			*(int*)&params[4] = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddMiscData()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.AddMiscData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63742);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetFlagGrabCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.GetFlagGrabCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63756);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int GetFlagReturnCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_PlayerSummary.GetFlagReturnCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63760);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

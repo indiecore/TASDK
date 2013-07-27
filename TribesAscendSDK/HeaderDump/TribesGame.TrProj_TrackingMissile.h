@@ -33,9 +33,9 @@ namespace UnrealScript
 			ETrackingMissileStage_MAX = 3,
 		};
 		ADD_STRUCT(float, m_fLoseTightTrackingDistance, 884)
-		ADD_STRUCT(Object::Rotator, m_MissileCaratRotation, 872)
+		ADD_STRUCT(Rotator, m_MissileCaratRotation, 872)
 		ADD_STRUCT(float, m_fStage1MinGroundDist, 868)
-		ADD_STRUCT(Object::Vector, m_vLastKnownTargetLocation, 856)
+		ADD_STRUCT(Vector, m_vLastKnownTargetLocation, 856)
 		ADD_STRUCT(float, m_fInitialLocationZ, 852)
 		ADD_STRUCT(float, m_fMinHeightGainForGoodLOS, 844)
 		ADD_STRUCT(float, m_fIdealHeightAboveTargetForGoodLOS, 840)
@@ -48,88 +48,88 @@ namespace UnrealScript
 		ADD_STRUCT(TrProj_TrackingMissile::ETrackingMissileStage, m_MissileStage, 816)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109357);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Init(Object::Vector Direction)
+		void Init(Vector Direction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109359);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = Direction;
+			*(Vector*)params = Direction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ProcessTouch(class Actor* Other, Object::Vector HitLocation, Object::Vector HitNormal)
+		void ProcessTouch(class Actor* Other, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.ProcessTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109361);
 			byte params[28] = { NULL };
-			*(class Actor**)&params[0] = Other;
-			*(Object::Vector*)&params[4] = HitLocation;
-			*(Object::Vector*)&params[16] = HitNormal;
+			*(class Actor**)params = Other;
+			*(Vector*)&params[4] = HitLocation;
+			*(Vector*)&params[16] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EnableCollisionTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.EnableCollisionTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109365);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetSeekTarget(class Actor* NewSeekTarget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.SetSeekTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109366);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = NewSeekTarget;
+			*(class Actor**)params = NewSeekTarget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void NativeExplode(Object::Vector HitLocation, Object::Vector HitNormal)
+		void NativeExplode(Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.NativeExplode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109369);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
-			*(Object::Vector*)&params[12] = HitNormal;
+			*(Vector*)params = HitLocation;
+			*(Vector*)&params[12] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnExploded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.OnExploded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109372);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void Explode(Object::Vector HitLocation, Object::Vector HitNormal)
+		void Explode(Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.Explode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109374);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
-			*(Object::Vector*)&params[12] = HitNormal;
+			*(Vector*)params = HitLocation;
+			*(Vector*)&params[12] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109377);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class TrSeekingMissileManager* GetSeekingMissileManager()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.GetSeekingMissileManager");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109378);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class TrSeekingMissileManager**)&params[0];
+			return *(class TrSeekingMissileManager**)params;
 		}
 		void SpawnFlightEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.SpawnFlightEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109381);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpawnFlightEffectsTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.SpawnFlightEffectsTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109382);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.TakeDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109388);
 			byte params[68] = { NULL };
-			*(int*)&params[0] = DamageAmount;
+			*(int*)params = DamageAmount;
 			*(class Controller**)&params[4] = EventInstigator;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = Momentum;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = Momentum;
 			*(ScriptClass**)&params[32] = DamageType;
 			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
 			*(class Actor**)&params[64] = DamageCauser;
@@ -137,19 +137,19 @@ namespace UnrealScript
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109400);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile.PostRenderFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109402);
 			byte params[32] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = Canvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

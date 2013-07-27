@@ -24,7 +24,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, StayUprightMaxTorque, 148)
 		ADD_STRUCT(float, StayUprightTorqueFactor, 144)
 		ADD_STRUCT(PrimitiveComponent::ERBCollisionChannel, RBChannel, 140)
-		ADD_STRUCT(Object::Vector, InitialVelocity, 120)
+		ADD_STRUCT(Vector, InitialVelocity, 120)
 		ADD_BOOL(bEnableStayUprightSpring, 116, 0x8)
 		ADD_BOOL(bLocalSpaceInitialVelocity, 116, 0x4)
 		ADD_BOOL(bDamageAppliesImpulse, 116, 0x2)

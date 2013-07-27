@@ -42,7 +42,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, Restitution, 68)
 		ADD_BOOL(bForceConeFriction, 72, 0x1)
 		ADD_BOOL(bEnableAnisotropicFriction, 72, 0x2)
-		ADD_STRUCT(Object::Vector, AnisoFrictionDir, 76)
+		ADD_STRUCT(Vector, AnisoFrictionDir, 76)
 		ADD_STRUCT(float, FrictionV, 88)
 		ADD_STRUCT(float, Density, 92)
 		ADD_STRUCT(float, AngularDamping, 96)
@@ -59,27 +59,27 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, SlideSound, 140)
 		Actor::PhysEffectInfo FindPhysEffectInfo(PhysicalMaterial::EPhysEffectType Type)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicalMaterial.FindPhysEffectInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16492);
 			byte params[17] = { NULL };
-			*(PhysicalMaterial::EPhysEffectType*)&params[0] = Type;
+			*(PhysicalMaterial::EPhysEffectType*)params = Type;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Actor::PhysEffectInfo*)&params[4];
 		}
 		void FindFractureSounds(class SoundCue*& OutSoundExplosion, class SoundCue*& OutSoundSingle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicalMaterial.FindFractureSounds");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24299);
 			byte params[8] = { NULL };
-			*(class SoundCue**)&params[0] = OutSoundExplosion;
+			*(class SoundCue**)params = OutSoundExplosion;
 			*(class SoundCue**)&params[4] = OutSoundSingle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutSoundExplosion = *(class SoundCue**)&params[0];
+			OutSoundExplosion = *(class SoundCue**)params;
 			OutSoundSingle = *(class SoundCue**)&params[4];
 		}
 		class PhysicalMaterialPropertyBase* GetPhysicalMaterialProperty(ScriptClass* DesiredClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PhysicalMaterial.GetPhysicalMaterialProperty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24306);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = DesiredClass;
+			*(ScriptClass**)params = DesiredClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class PhysicalMaterialPropertyBase**)&params[4];
 		}

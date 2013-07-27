@@ -18,16 +18,16 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, Content, 132)
 		void SetContent(ScriptString* newContent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_InventoryButton.SetContent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39083);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = newContent;
+			*(ScriptString**)params = newContent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetIconMC(class GFxObject* iconClip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_InventoryButton.SetIconMC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39085);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = iconClip;
+			*(class GFxObject**)params = iconClip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

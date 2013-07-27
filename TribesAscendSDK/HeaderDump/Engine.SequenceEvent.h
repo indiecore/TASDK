@@ -39,9 +39,9 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, Originator, 220)
 		bool CheckActivate(class Actor* InOriginator, class Actor* InInstigator, bool bTest, ScriptArray<int>& ActivateIndices, bool bPushTop)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceEvent.CheckActivate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4292);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = InOriginator;
+			*(class Actor**)params = InOriginator;
 			*(class Actor**)&params[4] = InInstigator;
 			*(bool*)&params[8] = bTest;
 			*(ScriptArray<int>*)&params[12] = ActivateIndices;
@@ -52,17 +52,17 @@ namespace UnrealScript
 		}
 		void RegisterEvent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceEvent.RegisterEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26085);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceEvent.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26092);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Toggled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SequenceEvent.Toggled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26093);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

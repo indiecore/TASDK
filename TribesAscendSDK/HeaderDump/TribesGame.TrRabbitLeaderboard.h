@@ -26,7 +26,7 @@ namespace UnrealScript
 	class TrRabbitLeaderboard : public Object
 	{
 	public:
-		class LeaderboardSlot
+		struct LeaderboardSlot
 		{
 		public:
 			ADD_STRUCT(int, Score, 8)
@@ -42,39 +42,39 @@ namespace UnrealScript
 		ADD_STRUCT(int, PrevSlots, 60)
 		void Initialize(class TrPlayerController* PC, class GfxTrHud* MP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRabbitLeaderboard.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109790);
 			byte params[8] = { NULL };
-			*(class TrPlayerController**)&params[0] = PC;
+			*(class TrPlayerController**)params = PC;
 			*(class GfxTrHud**)&params[4] = MP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Show()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRabbitLeaderboard.Show");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109793);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Hide()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRabbitLeaderboard.Hide");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109794);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Tick()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRabbitLeaderboard.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109795);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdatePlayers(class TrGameReplicationInfo* GRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRabbitLeaderboard.UpdatePlayers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109797);
 			byte params[4] = { NULL };
-			*(class TrGameReplicationInfo**)&params[0] = GRI;
+			*(class TrGameReplicationInfo**)params = GRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool UpdateLeaderboard(int Index, ScriptName PRIName, ScriptString* PlayerName, int Score)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRabbitLeaderboard.UpdateLeaderboard");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109801);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(ScriptName*)&params[4] = PRIName;
 			*(ScriptString**)&params[12] = PlayerName;
 			*(int*)&params[24] = Score;
@@ -83,22 +83,22 @@ namespace UnrealScript
 		}
 		void UpdateTime(class TrGameReplicationInfo* GRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRabbitLeaderboard.UpdateTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109808);
 			byte params[4] = { NULL };
-			*(class TrGameReplicationInfo**)&params[0] = GRI;
+			*(class TrGameReplicationInfo**)params = GRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* FormatTime(int Seconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRabbitLeaderboard.FormatTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109810);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Seconds;
+			*(int*)params = Seconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		void ForceUpdate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRabbitLeaderboard.ForceUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109816);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

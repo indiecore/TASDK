@@ -19,7 +19,7 @@ namespace UnrealScript
 	class SoundMode : public Object
 	{
 	public:
-		class SoundClassAdjuster
+		struct SoundClassAdjuster
 		{
 		public:
 			ADD_STRUCT(float, VoiceCenterChannelVolumeAdjuster, 24)
@@ -29,7 +29,7 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptName, SoundClass, 4)
 			ADD_STRUCT(AudioDevice::ESoundClassName, SoundClassName, 0)
 		};
-		class AudioEQEffect
+		struct AudioEQEffect
 		{
 		public:
 			ADD_STRUCT(float, LFGain, 32)

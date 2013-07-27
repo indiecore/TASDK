@@ -48,34 +48,34 @@ namespace UnrealScript
 			PVMT_IdMapped = 3,
 			PVMT_MAX = 4,
 		};
-		class IdToStringMapping
+		struct IdToStringMapping
 		{
 		public:
 			ADD_STRUCT(int, Id, 0)
 			ADD_STRUCT(ScriptName, Name, 4)
 		};
-		class StringIdToStringMapping
+		struct StringIdToStringMapping
 		{
 		public:
 			ADD_STRUCT(int, Id, 0)
 			ADD_STRUCT(ScriptName, Name, 4)
 			ADD_BOOL(bIsWildcard, 12, 0x1)
 		};
-		class LocalizedStringSetting
+		struct LocalizedStringSetting
 		{
 		public:
 			ADD_STRUCT(int, Id, 0)
 			ADD_STRUCT(int, ValueIndex, 4)
 			ADD_STRUCT(Settings::EOnlineDataAdvertisementType, AdvertisementType, 8)
 		};
-		class SettingsData
+		struct SettingsData
 		{
 		public:
 			ADD_STRUCT(Settings::ESettingsDataType, Type, 0)
 			ADD_STRUCT(int, Value1, 4)
 			ADD_STRUCT(Object::Pointer, Value2, 8)
 		};
-		class LocalizedStringSettingMetaData
+		struct LocalizedStringSettingMetaData
 		{
 		public:
 			ADD_STRUCT(int, Id, 0)
@@ -83,7 +83,7 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptString*, ColumnHeaderText, 12)
 			ADD_STRUCT(ScriptArray<Settings::StringIdToStringMapping>, ValueMappings, 24)
 		};
-		class SettingsPropertyPropertyMetaData
+		struct SettingsPropertyPropertyMetaData
 		{
 		public:
 			ADD_STRUCT(int, Id, 0)
@@ -96,7 +96,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, MaxVal, 56)
 			ADD_STRUCT(float, RangeIncrement, 60)
 		};
-		class SettingsProperty
+		struct SettingsProperty
 		{
 		public:
 			ADD_STRUCT(int, PropertyId, 0)
@@ -109,66 +109,66 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<Settings::SettingsPropertyPropertyMetaData>, PropertyMappings, 96)
 		void UpdateFromURL(ScriptString*& URL, class GameInfo* Game)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.UpdateFromURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5197);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			*(class GameInfo**)&params[12] = Game;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			URL = *(ScriptString**)&params[0];
+			URL = *(ScriptString**)params;
 		}
 		void BuildURL(ScriptString*& URL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.BuildURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5198);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			URL = *(ScriptString**)&params[0];
+			URL = *(ScriptString**)params;
 		}
 		void AppendContextsToURL(ScriptString*& URL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.AppendContextsToURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5201);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			URL = *(ScriptString**)&params[0];
+			URL = *(ScriptString**)params;
 		}
 		void AppendPropertiesToURL(ScriptString*& URL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.AppendPropertiesToURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5203);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			URL = *(ScriptString**)&params[0];
+			URL = *(ScriptString**)params;
 		}
 		void AppendDataBindingsToURL(ScriptString*& URL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.AppendDataBindingsToURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5205);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			URL = *(ScriptString**)&params[0];
+			URL = *(ScriptString**)params;
 		}
 		void GetQoSAdvertisedStringSettings(ScriptArray<Settings::LocalizedStringSetting>& QoSSettings)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetQoSAdvertisedStringSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5207);
 			byte params[12] = { NULL };
-			*(ScriptArray<Settings::LocalizedStringSetting>*)&params[0] = QoSSettings;
+			*(ScriptArray<Settings::LocalizedStringSetting>*)params = QoSSettings;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			QoSSettings = *(ScriptArray<Settings::LocalizedStringSetting>*)&params[0];
+			QoSSettings = *(ScriptArray<Settings::LocalizedStringSetting>*)params;
 		}
 		void GetQoSAdvertisedProperties(ScriptArray<Settings::SettingsProperty>& QoSProps)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetQoSAdvertisedProperties");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5209);
 			byte params[12] = { NULL };
-			*(ScriptArray<Settings::SettingsProperty>*)&params[0] = QoSProps;
+			*(ScriptArray<Settings::SettingsProperty>*)params = QoSProps;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			QoSProps = *(ScriptArray<Settings::SettingsProperty>*)&params[0];
+			QoSProps = *(ScriptArray<Settings::SettingsProperty>*)params;
 		}
 		bool GetRangedPropertyValue(int PropertyId, float& OutValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetRangedPropertyValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5217);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			*(float*)&params[4] = OutValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutValue = *(float*)&params[4];
@@ -176,18 +176,18 @@ namespace UnrealScript
 		}
 		bool SetRangedPropertyValue(int PropertyId, float NewValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetRangedPropertyValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5229);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			*(float*)&params[4] = NewValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool GetPropertyRange(int PropertyId, float& OutMinValue, float& OutMaxValue, float& RangeIncrement, byte& bFormatAsInt)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetPropertyRange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5233);
 			byte params[21] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			*(float*)&params[4] = OutMinValue;
 			*(float*)&params[8] = OutMaxValue;
 			*(float*)&params[12] = RangeIncrement;
@@ -201,9 +201,9 @@ namespace UnrealScript
 		}
 		bool GetPropertyMappingType(int PropertyId, Settings::EPropertyValueMappingType& OutType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetPropertyMappingType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5237);
 			byte params[9] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			*(Settings::EPropertyValueMappingType*)&params[4] = OutType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutType = *(Settings::EPropertyValueMappingType*)&params[4];
@@ -211,51 +211,51 @@ namespace UnrealScript
 		}
 		bool HasStringSetting(int SettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.HasStringSetting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5244);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = SettingId;
+			*(int*)params = SettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool HasProperty(int PropertyId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.HasProperty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5250);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void UpdateProperties(ScriptArray<Settings::SettingsProperty>& Props, bool bShouldAddIfMissing)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.UpdateProperties");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5253);
 			byte params[16] = { NULL };
-			*(ScriptArray<Settings::SettingsProperty>*)&params[0] = Props;
+			*(ScriptArray<Settings::SettingsProperty>*)params = Props;
 			*(bool*)&params[12] = bShouldAddIfMissing;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Props = *(ScriptArray<Settings::SettingsProperty>*)&params[0];
+			Props = *(ScriptArray<Settings::SettingsProperty>*)params;
 		}
 		void UpdateStringSettings(ScriptArray<Settings::LocalizedStringSetting>& Settings, bool bShouldAddIfMissing)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.UpdateStringSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5256);
 			byte params[16] = { NULL };
-			*(ScriptArray<Settings::LocalizedStringSetting>*)&params[0] = Settings;
+			*(ScriptArray<Settings::LocalizedStringSetting>*)params = Settings;
 			*(bool*)&params[12] = bShouldAddIfMissing;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Settings = *(ScriptArray<Settings::LocalizedStringSetting>*)&params[0];
+			Settings = *(ScriptArray<Settings::LocalizedStringSetting>*)params;
 		}
 		Settings::ESettingsDataType GetPropertyType(int PropertyId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetPropertyType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5260);
 			byte params[5] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Settings::ESettingsDataType*)&params[4];
 		}
 		bool GetPropertyValueId(int PropertyId, int& ValueId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetPropertyValueId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5264);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			*(int*)&params[4] = ValueId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ValueId = *(int*)&params[4];
@@ -263,18 +263,18 @@ namespace UnrealScript
 		}
 		bool SetPropertyValueId(int PropertyId, int ValueId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetPropertyValueId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5267);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			*(int*)&params[4] = ValueId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool GetStringProperty(int PropertyId, ScriptString*& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetStringProperty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5271);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			*(ScriptString**)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(ScriptString**)&params[4];
@@ -282,17 +282,17 @@ namespace UnrealScript
 		}
 		void SetStringProperty(int PropertyId, ScriptString* Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetStringProperty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5275);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			*(ScriptString**)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool GetIntProperty(int PropertyId, int& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetIntProperty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5279);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			*(int*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(int*)&params[4];
@@ -300,17 +300,17 @@ namespace UnrealScript
 		}
 		void SetIntProperty(int PropertyId, int Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetIntProperty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5282);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			*(int*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool GetFloatProperty(int PropertyId, float& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetFloatProperty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5286);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			*(float*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(float*)&params[4];
@@ -318,17 +318,17 @@ namespace UnrealScript
 		}
 		void SetFloatProperty(int PropertyId, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetFloatProperty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5289);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			*(float*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SetPropertyFromStringByName(ScriptName PropertyName, ScriptString*& NewValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetPropertyFromStringByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5293);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = PropertyName;
+			*(ScriptName*)params = PropertyName;
 			*(ScriptString**)&params[8] = NewValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			NewValue = *(ScriptString**)&params[8];
@@ -336,41 +336,41 @@ namespace UnrealScript
 		}
 		ScriptString* GetPropertyAsStringByName(ScriptName PropertyName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetPropertyAsStringByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5296);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = PropertyName;
+			*(ScriptName*)params = PropertyName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[8];
 		}
 		ScriptString* GetPropertyAsString(int PropertyId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetPropertyAsString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5300);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptString* GetPropertyColumnHeader(int PropertyId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetPropertyColumnHeader");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5303);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptName GetPropertyName(int PropertyId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetPropertyName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5306);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PropertyId;
+			*(int*)params = PropertyId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[4];
 		}
 		bool GetPropertyId(ScriptName PropertyName, int& PropertyId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetPropertyId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5309);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = PropertyName;
+			*(ScriptName*)params = PropertyName;
 			*(int*)&params[8] = PropertyId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			PropertyId = *(int*)&params[8];
@@ -378,9 +378,9 @@ namespace UnrealScript
 		}
 		bool SetStringSettingValueFromStringByName(ScriptName StringSettingName, ScriptString*& NewValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetStringSettingValueFromStringByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5312);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = StringSettingName;
+			*(ScriptName*)params = StringSettingName;
 			*(ScriptString**)&params[8] = NewValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			NewValue = *(ScriptString**)&params[8];
@@ -388,50 +388,50 @@ namespace UnrealScript
 		}
 		ScriptName GetStringSettingValueNameByName(ScriptName StringSettingName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetStringSettingValueNameByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5316);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = StringSettingName;
+			*(ScriptName*)params = StringSettingName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[8];
 		}
 		ScriptName GetStringSettingValueName(int StringSettingId, int ValueIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetStringSettingValueName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5320);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = StringSettingId;
+			*(int*)params = StringSettingId;
 			*(int*)&params[4] = ValueIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[8];
 		}
 		bool IsWildcardStringSetting(int StringSettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.IsWildcardStringSetting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5323);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = StringSettingId;
+			*(int*)params = StringSettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		ScriptString* GetStringSettingColumnHeader(int StringSettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetStringSettingColumnHeader");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5327);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = StringSettingId;
+			*(int*)params = StringSettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptName GetStringSettingName(int StringSettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetStringSettingName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5330);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = StringSettingId;
+			*(int*)params = StringSettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[4];
 		}
 		bool GetStringSettingId(ScriptName StringSettingName, int& StringSettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetStringSettingId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5333);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = StringSettingName;
+			*(ScriptName*)params = StringSettingName;
 			*(int*)&params[8] = StringSettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			StringSettingId = *(int*)&params[8];
@@ -439,9 +439,9 @@ namespace UnrealScript
 		}
 		bool GetStringSettingValueByName(ScriptName StringSettingName, int& ValueIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetStringSettingValueByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5336);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = StringSettingName;
+			*(ScriptName*)params = StringSettingName;
 			*(int*)&params[8] = ValueIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ValueIndex = *(int*)&params[8];
@@ -449,18 +449,18 @@ namespace UnrealScript
 		}
 		void SetStringSettingValueByName(ScriptName StringSettingName, int ValueIndex, bool bShouldAutoAdd)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetStringSettingValueByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5340);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = StringSettingName;
+			*(ScriptName*)params = StringSettingName;
 			*(int*)&params[8] = ValueIndex;
 			*(bool*)&params[12] = bShouldAutoAdd;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool GetStringSettingValueNames(int StringSettingId, ScriptArray<Settings::IdToStringMapping>& Values)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetStringSettingValueNames");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5344);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = StringSettingId;
+			*(int*)params = StringSettingId;
 			*(ScriptArray<Settings::IdToStringMapping>*)&params[4] = Values;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Values = *(ScriptArray<Settings::IdToStringMapping>*)&params[4];
@@ -468,9 +468,9 @@ namespace UnrealScript
 		}
 		bool IncrementStringSettingValue(int StringSettingId, int Direction, bool bShouldWrap)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.IncrementStringSettingValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5348);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = StringSettingId;
+			*(int*)params = StringSettingId;
 			*(int*)&params[4] = Direction;
 			*(bool*)&params[8] = bShouldWrap;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -478,9 +478,9 @@ namespace UnrealScript
 		}
 		bool GetStringSettingValue(int StringSettingId, int& ValueIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetStringSettingValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5356);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = StringSettingId;
+			*(int*)params = StringSettingId;
 			*(int*)&params[4] = ValueIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ValueIndex = *(int*)&params[4];
@@ -488,126 +488,126 @@ namespace UnrealScript
 		}
 		void SetStringSettingValue(int StringSettingId, int ValueIndex, bool bShouldAutoAdd)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetStringSettingValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5361);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = StringSettingId;
+			*(int*)params = StringSettingId;
 			*(int*)&params[4] = ValueIndex;
 			*(bool*)&params[8] = bShouldAutoAdd;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GetSettingsDataDateTime(Settings::SettingsData& Data, int& OutInt1, int& OutInt2)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetSettingsDataDateTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5365);
 			byte params[20] = { NULL };
-			*(Settings::SettingsData*)&params[0] = Data;
+			*(Settings::SettingsData*)params = Data;
 			*(int*)&params[12] = OutInt1;
 			*(int*)&params[16] = OutInt2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(Settings::SettingsData*)&params[0];
+			Data = *(Settings::SettingsData*)params;
 			OutInt1 = *(int*)&params[12];
 			OutInt2 = *(int*)&params[16];
 		}
 		void GetSettingsDataBlob(Settings::SettingsData& Data, ScriptArray<byte>& OutBlob)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetSettingsDataBlob");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5369);
 			byte params[24] = { NULL };
-			*(Settings::SettingsData*)&params[0] = Data;
+			*(Settings::SettingsData*)params = Data;
 			*(ScriptArray<byte>*)&params[12] = OutBlob;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(Settings::SettingsData*)&params[0];
+			Data = *(Settings::SettingsData*)params;
 			OutBlob = *(ScriptArray<byte>*)&params[12];
 		}
 		int GetSettingsDataInt(Settings::SettingsData& Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetSettingsDataInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5373);
 			byte params[16] = { NULL };
-			*(Settings::SettingsData*)&params[0] = Data;
+			*(Settings::SettingsData*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(Settings::SettingsData*)&params[0];
+			Data = *(Settings::SettingsData*)params;
 			return *(int*)&params[12];
 		}
 		float GetSettingsDataFloat(Settings::SettingsData& Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetSettingsDataFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5377);
 			byte params[16] = { NULL };
-			*(Settings::SettingsData*)&params[0] = Data;
+			*(Settings::SettingsData*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(Settings::SettingsData*)&params[0];
+			Data = *(Settings::SettingsData*)params;
 			return *(float*)&params[12];
 		}
 		ScriptString* GetSettingsDataString(Settings::SettingsData& Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.GetSettingsDataString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5380);
 			byte params[24] = { NULL };
-			*(Settings::SettingsData*)&params[0] = Data;
+			*(Settings::SettingsData*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(Settings::SettingsData*)&params[0];
+			Data = *(Settings::SettingsData*)params;
 			return *(ScriptString**)&params[12];
 		}
 		void EmptySettingsData(Settings::SettingsData& Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.EmptySettingsData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5383);
 			byte params[12] = { NULL };
-			*(Settings::SettingsData*)&params[0] = Data;
+			*(Settings::SettingsData*)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(Settings::SettingsData*)&params[0];
+			Data = *(Settings::SettingsData*)params;
 		}
 		void SetSettingsData(Settings::SettingsData& Data, Settings::SettingsData& Data2Copy)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetSettingsData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5386);
 			byte params[24] = { NULL };
-			*(Settings::SettingsData*)&params[0] = Data;
+			*(Settings::SettingsData*)params = Data;
 			*(Settings::SettingsData*)&params[12] = Data2Copy;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(Settings::SettingsData*)&params[0];
+			Data = *(Settings::SettingsData*)params;
 			Data2Copy = *(Settings::SettingsData*)&params[12];
 		}
 		void SetSettingsDataBlob(Settings::SettingsData& Data, ScriptArray<byte>& InBlob)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetSettingsDataBlob");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5388);
 			byte params[24] = { NULL };
-			*(Settings::SettingsData*)&params[0] = Data;
+			*(Settings::SettingsData*)params = Data;
 			*(ScriptArray<byte>*)&params[12] = InBlob;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(Settings::SettingsData*)&params[0];
+			Data = *(Settings::SettingsData*)params;
 			InBlob = *(ScriptArray<byte>*)&params[12];
 		}
 		void SetSettingsDataDateTime(Settings::SettingsData& Data, int InInt1, int InInt2)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetSettingsDataDateTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5391);
 			byte params[20] = { NULL };
-			*(Settings::SettingsData*)&params[0] = Data;
+			*(Settings::SettingsData*)params = Data;
 			*(int*)&params[12] = InInt1;
 			*(int*)&params[16] = InInt2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(Settings::SettingsData*)&params[0];
+			Data = *(Settings::SettingsData*)params;
 		}
 		void SetSettingsDataInt(Settings::SettingsData& Data, int InInt)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetSettingsDataInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5395);
 			byte params[16] = { NULL };
-			*(Settings::SettingsData*)&params[0] = Data;
+			*(Settings::SettingsData*)params = Data;
 			*(int*)&params[12] = InInt;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(Settings::SettingsData*)&params[0];
+			Data = *(Settings::SettingsData*)params;
 		}
 		void SetSettingsDataFloat(Settings::SettingsData& Data, float InFloat)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetSettingsDataFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5399);
 			byte params[16] = { NULL };
-			*(Settings::SettingsData*)&params[0] = Data;
+			*(Settings::SettingsData*)params = Data;
 			*(float*)&params[12] = InFloat;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(Settings::SettingsData*)&params[0];
+			Data = *(Settings::SettingsData*)params;
 		}
 		void SetSettingsDataString(Settings::SettingsData& Data, ScriptString* InString)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Settings.SetSettingsDataString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5402);
 			byte params[24] = { NULL };
-			*(Settings::SettingsData*)&params[0] = Data;
+			*(Settings::SettingsData*)params = Data;
 			*(ScriptString**)&params[12] = InString;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Data = *(Settings::SettingsData*)&params[0];
+			Data = *(Settings::SettingsData*)params;
 		}
 	};
 }

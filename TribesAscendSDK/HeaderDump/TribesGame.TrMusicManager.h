@@ -36,16 +36,16 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_CTFTeamScores, 532)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100250);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* CreateNewTrack(class SoundCue* MusicCue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.CreateNewTrack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100251);
 			byte params[8] = { NULL };
-			*(class SoundCue**)&params[0] = MusicCue;
+			*(class SoundCue**)params = MusicCue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
@@ -53,45 +53,45 @@ void**)&params[4];
 		}
 		void StartMusic()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.StartMusic");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100256);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetStateBasedOnGameState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.SetStateBasedOnGameState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100258);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100263);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MusicEvent(int NewEventIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.MusicEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100267);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = NewEventIndex;
+			*(int*)params = NewEventIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPendingState(TrMusicManager::ETgMusicState NewState)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.SetPendingState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100273);
 			byte params[1] = { NULL };
-			*(TrMusicManager::ETgMusicState*)&params[0] = NewState;
+			*(TrMusicManager::ETgMusicState*)params = NewState;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetCurrentState(TrMusicManager::ETgMusicState NewState)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.SetCurrentState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100275);
 			byte params[1] = { NULL };
-			*(TrMusicManager::ETgMusicState*)&params[0] = NewState;
+			*(TrMusicManager::ETgMusicState*)params = NewState;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayerScoredFlag()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMusicManager.PlayerScoredFlag");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100280);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

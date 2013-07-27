@@ -24,7 +24,7 @@ namespace UnrealScript
 	class AnimNodeRandom : public AnimNodeBlendList
 	{
 	public:
-		class RandomAnimInfo
+		struct RandomAnimInfo
 		{
 		public:
 			ADD_STRUCT(float, LastPosition, 28)

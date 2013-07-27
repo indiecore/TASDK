@@ -12,14 +12,14 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(float, MomentumPortion, 444)
 		ADD_STRUCT(float, LastHitTime, 440)
-		ADD_STRUCT(Object::Vector, LastHitMomentum, 428)
+		ADD_STRUCT(Vector, LastHitMomentum, 428)
 		ADD_STRUCT(float, RandomPortion, 424)
-		ADD_STRUCT(Object::Rotator, CurrentAngle, 412)
+		ADD_STRUCT(Rotator, CurrentAngle, 412)
 		ADD_STRUCT(float, AVModifier, 408)
 		ADD_STRUCT(float, SpringStiffness, 404)
 		ADD_STRUCT(float, Falloff, 400)
-		ADD_STRUCT(Object::Rotator, MinAngle, 388)
-		ADD_STRUCT(Object::Rotator, MaxAngle, 376)
+		ADD_STRUCT(Rotator, MinAngle, 388)
+		ADD_STRUCT(Rotator, MaxAngle, 376)
 	};
 }
 #undef ADD_STRUCT

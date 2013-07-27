@@ -40,19 +40,19 @@ namespace UnrealScript
 			NAVEDGE_Jump = 7,
 			NAVEDGE_MAX = 8,
 		};
-		class PolyReference
+		struct PolyReference
 		{
 		public:
 			ADD_STRUCT(int, PolyId, 20)
 			ADD_STRUCT(Actor::ActorReference, OwningPylon, 0)
 		};
-		ADD_STRUCT(ScriptArray<Object::Vector>, NextPassSeedList, 716)
+		ADD_STRUCT(ScriptArray<Vector>, NextPassSeedList, 716)
 		ADD_STRUCT(ScriptArray<class Volume*>, ExpansionVolumes, 744)
 		ADD_STRUCT(ScriptArray<class Pylon*>, ImposterPylons, 792)
 		ADD_STRUCT(ScriptArray<class Actor*>, OnBuild_DisableCollisionForThese, 804)
 		ADD_STRUCT(ScriptArray<class Actor*>, OnBuild_EnableCollisionForThese, 816)
 		ADD_STRUCT(int, DebugEdgeCount, 828)
-		ADD_STRUCT(Object::Vector, ExpansionSphereCenter, 772)
+		ADD_STRUCT(Vector, ExpansionSphereCenter, 772)
 		ADD_BOOL(bForceObstacleMeshCollision, 768, 0x400)
 		ADD_BOOL(bDisabled, 768, 0x200)
 		ADD_BOOL(bBuildThisPylon, 768, 0x100)
@@ -77,40 +77,40 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IEditorLinkSelectionInterface, 692)
 		void OnPylonStatusChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.OnPylonStatusChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9967);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9968);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetEnabled(bool bEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.SetEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9969);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnabled;
+			*(bool*)params = bEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsEnabled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.IsEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9971);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9973);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CanReachPylon(class Pylon* DestPylon, class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Pylon.CanReachPylon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9975);
 			byte params[12] = { NULL };
-			*(class Pylon**)&params[0] = DestPylon;
+			*(class Pylon**)params = DestPylon;
 			*(class Controller**)&params[4] = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];

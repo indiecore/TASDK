@@ -37,40 +37,40 @@ namespace UnrealScript
 		ADD_OBJECT(PortalTeleporter, SisterPortal, 488)
 		bool TransformActor(class Actor* A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PortalTeleporter.TransformActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24726);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = A;
+			*(class Actor**)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
-		Object::Vector TransformVectorDir(Object::Vector V)
+		Vector TransformVectorDir(Vector V)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PortalTeleporter.TransformVectorDir");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24729);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = V;
+			*(Vector*)params = V;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[12];
+			return *(Vector*)&params[12];
 		}
-		Object::Vector TransformHitLocation(Object::Vector HitLocation)
+		Vector TransformHitLocation(Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PortalTeleporter.TransformHitLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24732);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
+			*(Vector*)params = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[12];
+			return *(Vector*)&params[12];
 		}
 		class TextureRenderTarget2D* CreatePortalTexture()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PortalTeleporter.CreatePortalTexture");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24735);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class TextureRenderTarget2D**)&params[0];
+			return *(class TextureRenderTarget2D**)params;
 		}
 		bool StopsProjectile(class Projectile* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PortalTeleporter.StopsProjectile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24737);
 			byte params[8] = { NULL };
-			*(class Projectile**)&params[0] = P;
+			*(class Projectile**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

@@ -25,7 +25,7 @@ namespace UnrealScript
 	class InterpTrackInstHeadTracking : public InterpTrackInst
 	{
 	public:
-		class ActorToLookAt
+		struct ActorToLookAt
 		{
 		public:
 			ADD_BOOL(CurrentlyBeingLookedAt, 20, 0x1)

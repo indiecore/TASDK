@@ -8,9 +8,9 @@ namespace UnrealScript
 	public:
 		void Speak(class SoundCue* Cue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interface_Speaker.Speak");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18354);
 			byte params[4] = { NULL };
-			*(class SoundCue**)&params[0] = Cue;
+			*(class SoundCue**)params = Cue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

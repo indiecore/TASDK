@@ -28,10 +28,10 @@ namespace UnrealScript
 		ADD_STRUCT(int, IterationsCount, 232)
 		ADD_STRUCT(int, MaxPerBoneIterations, 228)
 		ADD_STRUCT(int, NumBones, 224)
-		ADD_STRUCT(Object::Vector, EffectorTranslationFromBone, 212)
+		ADD_STRUCT(Vector, EffectorTranslationFromBone, 212)
 		ADD_STRUCT(ScriptName, EffectorSpaceBoneName, 204)
 		ADD_STRUCT(SkelControlBase::EBoneControlSpace, EffectorLocationSpace, 200)
-		ADD_STRUCT(Object::Vector, EffectorLocation, 188)
+		ADD_STRUCT(Vector, EffectorLocation, 188)
 	};
 }
 #undef ADD_BOOL

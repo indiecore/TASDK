@@ -31,37 +31,37 @@ namespace UnrealScript
 		ADD_BOOL(r_bFiringLoopSound, 1572, 0x1)
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrWeaponPawn.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115617);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayReload()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrWeaponPawn.PlayReload");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115619);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ProcessViewRotation(float DeltaTime, Object::Rotator& out_ViewRotation, Object::Rotator& out_DeltaRot)
+		void ProcessViewRotation(float DeltaTime, Rotator& out_ViewRotation, Rotator& out_DeltaRot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrWeaponPawn.ProcessViewRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115620);
 			byte params[28] = { NULL };
-			*(float*)&params[0] = DeltaTime;
-			*(Object::Rotator*)&params[4] = out_ViewRotation;
-			*(Object::Rotator*)&params[16] = out_DeltaRot;
+			*(float*)params = DeltaTime;
+			*(Rotator*)&params[4] = out_ViewRotation;
+			*(Rotator*)&params[16] = out_DeltaRot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_ViewRotation = *(Object::Rotator*)&params[4];
-			out_DeltaRot = *(Object::Rotator*)&params[16];
+			out_ViewRotation = *(Rotator*)&params[4];
+			out_DeltaRot = *(Rotator*)&params[16];
 		}
 		void ClientPlayLoopSound()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrWeaponPawn.ClientPlayLoopSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115624);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayLoopingSound(class SoundCue* InSound, bool Play)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrWeaponPawn.PlayLoopingSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115625);
 			byte params[8] = { NULL };
-			*(class SoundCue**)&params[0] = InSound;
+			*(class SoundCue**)params = InSound;
 			*(bool*)&params[4] = Play;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

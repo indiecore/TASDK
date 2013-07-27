@@ -13,14 +13,14 @@ namespace UnrealScript
 		ADD_STRUCT(int, PlayerControllerId, 88)
 		void OnRegister(class LocalPlayer* InPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerDataBase.OnRegister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28152);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = InPlayer;
+			*(class LocalPlayer**)params = InPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUnregister()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlinePlayerDataBase.OnUnregister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28154);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

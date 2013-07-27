@@ -34,7 +34,7 @@ namespace UnrealScript
 			FTA_180 = 2,
 			FTA_MAX = 3,
 		};
-		class RotTransitionInfo
+		struct RotTransitionInfo
 		{
 		public:
 			ADD_STRUCT(ScriptName, TransName, 4)
@@ -43,7 +43,7 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class TrAnimNodeAimOffset*>, m_OffsetNodes, 296)
 		ADD_STRUCT(ScriptArray<TrAnimNodeTurnInPlace::RotTransitionInfo>, m_RotTransitions, 308)
 		ADD_STRUCT(ScriptArray<class TrAnimNodeTurnInPlace_Player*>, m_PlayerNodes, 348)
-		ADD_STRUCT(Object::Rotator, m_InterpRotation, 368)
+		ADD_STRUCT(Rotator, m_InterpRotation, 368)
 		ADD_STRUCT(float, m_fTurnInterpTime, 364)
 		ADD_STRUCT(float, m_fIgnoredTransitionTime, 360)
 		ADD_STRUCT(float, m_RemainingInterpolationTime, 344)

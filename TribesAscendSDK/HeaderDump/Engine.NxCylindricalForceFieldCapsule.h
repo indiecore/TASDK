@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void DoInitRBPhys()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxCylindricalForceFieldCapsule.DoInitRBPhys");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21147);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

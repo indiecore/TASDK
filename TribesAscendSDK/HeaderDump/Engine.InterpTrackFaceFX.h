@@ -15,14 +15,14 @@ namespace UnrealScript
 	class InterpTrackFaceFX : public InterpTrack
 	{
 	public:
-		class FaceFXTrackKey
+		struct FaceFXTrackKey
 		{
 		public:
 			ADD_STRUCT(ScriptString*, FaceFXSeqName, 16)
 			ADD_STRUCT(ScriptString*, FaceFXGroupName, 4)
 			ADD_STRUCT(float, StartTime, 0)
 		};
-		class FaceFXSoundCueKey
+		struct FaceFXSoundCueKey
 		{
 		public:
 			ADD_OBJECT(SoundCue, FaceFXSoundCue, 0)

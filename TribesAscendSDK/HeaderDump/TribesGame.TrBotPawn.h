@@ -7,21 +7,21 @@ namespace UnrealScript
 	public:
 		void SetMovementPhysics()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBotPawn.SetMovementPhysics");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73644);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBotPawn.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73645);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RechargeHealthPool(float DeltaSeconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBotPawn.RechargeHealthPool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73648);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaSeconds;
+			*(float*)params = DeltaSeconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

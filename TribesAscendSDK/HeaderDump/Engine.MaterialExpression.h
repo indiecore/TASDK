@@ -24,7 +24,7 @@ namespace UnrealScript
 	class MaterialExpression : public Object
 	{
 	public:
-		class ExpressionInput
+		struct ExpressionInput
 		{
 		public:
 			ADD_STRUCT(int, GCC64_Padding, 24)

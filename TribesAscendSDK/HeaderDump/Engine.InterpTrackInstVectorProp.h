@@ -10,7 +10,7 @@ namespace UnrealScript
 	class InterpTrackInstVectorProp : public InterpTrackInstProperty
 	{
 	public:
-		ADD_STRUCT(Object::Vector, ResetVector, 72)
+		ADD_STRUCT(Vector, ResetVector, 72)
 		ADD_STRUCT(Object::Pointer, VectorProp, 68)
 	};
 }

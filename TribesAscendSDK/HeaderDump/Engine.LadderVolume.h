@@ -27,46 +27,46 @@ namespace UnrealScript
 	class LadderVolume : public PhysicsVolume
 	{
 	public:
-		ADD_STRUCT(Object::Vector, ClimbDir, 608)
+		ADD_STRUCT(Vector, ClimbDir, 608)
 		ADD_BOOL(bAllowLadderStrafing, 624, 0x4)
 		ADD_OBJECT(Pawn, PendingClimber, 628)
 		ADD_BOOL(bAutoPath, 624, 0x2)
 		ADD_BOOL(bNoPhysicalLadder, 624, 0x1)
 		ADD_OBJECT(Ladder, LadderList, 620)
-		ADD_STRUCT(Object::Vector, LookDir, 596)
-		ADD_STRUCT(Object::Rotator, WallDir, 584)
+		ADD_STRUCT(Vector, LookDir, 596)
+		ADD_STRUCT(Rotator, WallDir, 584)
 		bool InUse(class Pawn* Ignored)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LadderVolume.InUse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11896);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Ignored;
+			*(class Pawn**)params = Ignored;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LadderVolume.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19140);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PawnEnteredVolume(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LadderVolume.PawnEnteredVolume");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19146);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnLeavingVolume(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LadderVolume.PawnLeavingVolume");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19151);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PhysicsChangedFor(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LadderVolume.PhysicsChangedFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19154);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

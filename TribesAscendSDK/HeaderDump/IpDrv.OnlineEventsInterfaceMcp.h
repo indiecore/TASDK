@@ -32,7 +32,7 @@ namespace UnrealScript
 			EUT_PlaylistPopulation = 3,
 			EUT_MAX = 4,
 		};
-		class EventUploadConfig
+		struct EventUploadConfig
 		{
 		public:
 			ADD_BOOL(bUseCompression, 20, 0x1)
@@ -46,9 +46,9 @@ namespace UnrealScript
 		ADD_BOOL(bBinaryStats, 100, 0x1)
 		bool UploadPlayerData(OnlineSubsystem::UniqueNetId UniqueId, ScriptString* PlayerNick, class OnlineProfileSettings* ProfileSettings, class OnlinePlayerStorage* PlayerStorage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineEventsInterfaceMcp.UploadPlayerData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33357);
 			byte params[32] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = UniqueId;
+			*(OnlineSubsystem::UniqueNetId*)params = UniqueId;
 			*(ScriptString**)&params[8] = PlayerNick;
 			*(class OnlineProfileSettings**)&params[20] = ProfileSettings;
 			*(class OnlinePlayerStorage**)&params[24] = PlayerStorage;
@@ -57,9 +57,9 @@ namespace UnrealScript
 		}
 		bool UploadGameplayEventsData(OnlineSubsystem::UniqueNetId UniqueId, ScriptArray<byte>& Payload)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineEventsInterfaceMcp.UploadGameplayEventsData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33363);
 			byte params[24] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = UniqueId;
+			*(OnlineSubsystem::UniqueNetId*)params = UniqueId;
 			*(ScriptArray<byte>*)&params[8] = Payload;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Payload = *(ScriptArray<byte>*)&params[8];
@@ -67,18 +67,18 @@ namespace UnrealScript
 		}
 		bool UpdatePlaylistPopulation(int PlaylistId, int NumPlayers)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineEventsInterfaceMcp.UpdatePlaylistPopulation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33368);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			*(int*)&params[4] = NumPlayers;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool UploadMatchmakingStats(OnlineSubsystem::UniqueNetId UniqueId, class OnlineMatchmakingStats* MMStats)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineEventsInterfaceMcp.UploadMatchmakingStats");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33372);
 			byte params[16] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = UniqueId;
+			*(OnlineSubsystem::UniqueNetId*)params = UniqueId;
 			*(class OnlineMatchmakingStats**)&params[8] = MMStats;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];

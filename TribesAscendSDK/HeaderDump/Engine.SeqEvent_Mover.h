@@ -13,33 +13,33 @@ namespace UnrealScript
 		ADD_STRUCT(float, StayOpenTime, 256)
 		void RegisterEvent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.RegisterEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26111);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NotifyEncroachingOn(class Actor* Hit)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.NotifyEncroachingOn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26113);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Hit;
+			*(class Actor**)params = Hit;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyAttached(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.NotifyAttached");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26118);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyDetached(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.NotifyDetached");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26122);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyFinishedOpen()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_Mover.NotifyFinishedOpen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26127);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

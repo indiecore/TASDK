@@ -35,7 +35,7 @@ namespace UnrealScript
 			MBCS_Closed = 5,
 			MBCS_MAX = 6,
 		};
-		class ClientBandwidthTestData
+		struct ClientBandwidthTestData
 		{
 		public:
 			ADD_STRUCT(float, ElapsedTestTime, 16)
@@ -45,7 +45,7 @@ namespace UnrealScript
 			ADD_STRUCT(MeshBeacon::EMeshBeaconBandwidthTestState, CurrentState, 1)
 			ADD_STRUCT(MeshBeacon::EMeshBeaconBandwidthTestType, TestType, 0)
 		};
-		class ClientConnectionRequest
+		struct ClientConnectionRequest
 		{
 		public:
 			ADD_STRUCT(ScriptArray<MeshBeacon::ConnectionBandwidthStats>, BandwidthHistory, 20)
@@ -68,9 +68,9 @@ namespace UnrealScript
 		ADD_STRUCT(OnlineGameSearch::OnlineGameSearchResult, HostPendingRequest, 120)
 		void OnCreateNewSessionRequestReceived(ScriptName SessionName, ScriptClass* SearchClass, ScriptArray<MeshBeacon::PlayerMember>& Players)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.OnCreateNewSessionRequestReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33194);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(ScriptClass**)&params[8] = SearchClass;
 			*(ScriptArray<MeshBeacon::PlayerMember>*)&params[12] = Players;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -78,9 +78,9 @@ namespace UnrealScript
 		}
 		void OnTravelRequestReceived(ScriptName SessionName, ScriptClass* SearchClass, byte& PlatformSpecificInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.OnTravelRequestReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33196);
 			byte params[13] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(ScriptClass**)&params[8] = SearchClass;
 			params[12] = PlatformSpecificInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -88,9 +88,9 @@ namespace UnrealScript
 		}
 		void OnReceivedBandwidthTestResults(MeshBeacon::EMeshBeaconBandwidthTestType TestType, MeshBeacon::EMeshBeaconBandwidthTestResult TestResult, MeshBeacon::ConnectionBandwidthStats& BandwidthStats)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.OnReceivedBandwidthTestResults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33198);
 			byte params[14] = { NULL };
-			*(MeshBeacon::EMeshBeaconBandwidthTestType*)&params[0] = TestType;
+			*(MeshBeacon::EMeshBeaconBandwidthTestType*)params = TestType;
 			*(MeshBeacon::EMeshBeaconBandwidthTestResult*)&params[1] = TestResult;
 			*(MeshBeacon::ConnectionBandwidthStats*)&params[4] = BandwidthStats;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -98,49 +98,49 @@ namespace UnrealScript
 		}
 		void OnReceivedBandwidthTestRequest(MeshBeacon::EMeshBeaconBandwidthTestType TestType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.OnReceivedBandwidthTestRequest");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33200);
 			byte params[1] = { NULL };
-			*(MeshBeacon::EMeshBeaconBandwidthTestType*)&params[0] = TestType;
+			*(MeshBeacon::EMeshBeaconBandwidthTestType*)params = TestType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnConnectionRequestResult(MeshBeacon::EMeshBeaconConnectionResult ConnectionResult)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.OnConnectionRequestResult");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33202);
 			byte params[1] = { NULL };
-			*(MeshBeacon::EMeshBeaconConnectionResult*)&params[0] = ConnectionResult;
+			*(MeshBeacon::EMeshBeaconConnectionResult*)params = ConnectionResult;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DestroyBeacon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.DestroyBeacon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33230);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool RequestConnection(OnlineGameSearch::OnlineGameSearchResult& DesiredHost, MeshBeaconClient::ClientConnectionRequest& ClientRequest, bool bRegisterSecureAddress)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.RequestConnection");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33231);
 			byte params[52] = { NULL };
-			*(OnlineGameSearch::OnlineGameSearchResult*)&params[0] = DesiredHost;
+			*(OnlineGameSearch::OnlineGameSearchResult*)params = DesiredHost;
 			*(MeshBeaconClient::ClientConnectionRequest*)&params[8] = ClientRequest;
 			*(bool*)&params[44] = bRegisterSecureAddress;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			DesiredHost = *(OnlineGameSearch::OnlineGameSearchResult*)&params[0];
+			DesiredHost = *(OnlineGameSearch::OnlineGameSearchResult*)params;
 			ClientRequest = *(MeshBeaconClient::ClientConnectionRequest*)&params[8];
 			return *(bool*)&params[48];
 		}
 		bool BeginBandwidthTest(MeshBeacon::EMeshBeaconBandwidthTestType TestType, int TestBufferSize)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.BeginBandwidthTest");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33236);
 			byte params[9] = { NULL };
-			*(MeshBeacon::EMeshBeaconBandwidthTestType*)&params[0] = TestType;
+			*(MeshBeacon::EMeshBeaconBandwidthTestType*)params = TestType;
 			*(int*)&params[4] = TestBufferSize;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool SendHostNewGameSessionResponse(bool bSuccess, ScriptName SessionName, ScriptClass* SearchClass, byte& PlatformSpecificInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeaconClient.SendHostNewGameSessionResponse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33252);
 			byte params[21] = { NULL };
-			*(bool*)&params[0] = bSuccess;
+			*(bool*)params = bSuccess;
 			*(ScriptName*)&params[4] = SessionName;
 			*(ScriptClass**)&params[12] = SearchClass;
 			params[16] = PlatformSpecificInfo;

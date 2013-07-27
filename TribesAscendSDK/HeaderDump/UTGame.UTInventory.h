@@ -20,34 +20,34 @@ namespace UnrealScript
 		ADD_BOOL(bReceiveOwnerEvents, 552, 0x1)
 		void AddWeaponOverlay(class UTGameReplicationInfo* GRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTInventory.AddWeaponOverlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48017);
 			byte params[4] = { NULL };
-			*(class UTGameReplicationInfo**)&params[0] = GRI;
+			*(class UTGameReplicationInfo**)params = GRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientLostItem()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTInventory.ClientLostItem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48019);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTInventory.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48020);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DropFrom(Object::Vector StartLocation, Object::Vector StartVelocity)
+		void DropFrom(Vector StartLocation, Vector StartVelocity)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTInventory.DropFrom");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48022);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = StartLocation;
-			*(Object::Vector*)&params[12] = StartVelocity;
+			*(Vector*)params = StartLocation;
+			*(Vector*)&params[12] = StartVelocity;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OwnerEvent(ScriptName EventName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTInventory.OwnerEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48025);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = EventName;
+			*(ScriptName*)params = EventName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

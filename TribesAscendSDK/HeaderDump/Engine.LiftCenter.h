@@ -31,35 +31,35 @@ namespace UnrealScript
 		ADD_OBJECT(Trigger, LiftTrigger, 720)
 		ADD_STRUCT(float, CollisionHeight, 716)
 		ADD_BOOL(bJumpLift, 712, 0x1)
-		ADD_STRUCT(Object::Vector, LiftOffset, 700)
+		ADD_STRUCT(Vector, LiftOffset, 700)
 		ADD_STRUCT(float, MaxDist2D, 696)
 		ADD_OBJECT(InterpActor, MyLift, 692)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftCenter.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19408);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class Actor* SpecialHandling(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftCenter.SpecialHandling");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19409);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[4];
 		}
 		bool SuggestMovePreparation(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftCenter.SuggestMovePreparation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19413);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool ProceedWithMove(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LiftCenter.ProceedWithMove");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19416);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

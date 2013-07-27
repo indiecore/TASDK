@@ -38,7 +38,7 @@ namespace UnrealScript
 		ADD_OBJECT(TrCollisionProxy, m_CollisionProxy, 856)
 		ADD_STRUCT(float, m_fStuckMomentumMultiplier, 852)
 		ADD_STRUCT(float, m_fStuckDamageMultiplier, 848)
-		ADD_STRUCT(Object::Vector, m_OverloadHitNormal, 836)
+		ADD_STRUCT(Vector, m_OverloadHitNormal, 836)
 		ADD_OBJECT(SoundCue, m_StuckOnPawnLoopingSound, 832)
 		ADD_OBJECT(ParticleSystem, m_StuckOnTargetTemplate, 828)
 		ADD_STRUCT(float, m_fExplosionTime, 820)
@@ -51,127 +51,127 @@ namespace UnrealScript
 		ADD_BOOL(m_bTimedExplosion, 816, 0x2)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107823);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void InitProjectile(Object::Vector Direction, ScriptClass* ClassToInherit)
+		void InitProjectile(Vector Direction, ScriptClass* ClassToInherit)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.InitProjectile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107824);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = Direction;
+			*(Vector*)params = Direction;
 			*(ScriptClass**)&params[12] = ClassToInherit;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpawnCollisionProxy()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.SpawnCollisionProxy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107828);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DestroyCollisionProxy()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.DestroyCollisionProxy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107829);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShutDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.ShutDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107830);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ApplyInheritance(Object::Vector ProjectileDir)
+		void ApplyInheritance(Vector ProjectileDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.ApplyInheritance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107831);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = ProjectileDir;
+			*(Vector*)params = ProjectileDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Timer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.Timer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107834);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void HitWall(Object::Vector HitNormal, class Actor* Wall, 
+		void HitWall(Vector HitNormal, class Actor* Wall, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* WallComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.HitWall");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107835);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = HitNormal;
+			*(Vector*)params = HitNormal;
 			*(class Actor**)&params[12] = Wall;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[16] = WallComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ProcessTouch(class Actor* Other, Object::Vector HitLocation, Object::Vector HitNormal)
+		void ProcessTouch(class Actor* Other, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.ProcessTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107839);
 			byte params[28] = { NULL };
-			*(class Actor**)&params[0] = Other;
-			*(Object::Vector*)&params[4] = HitLocation;
-			*(Object::Vector*)&params[16] = HitNormal;
+			*(class Actor**)params = Other;
+			*(Vector*)&params[4] = HitLocation;
+			*(Vector*)&params[16] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PhysicsVolumeChange(class PhysicsVolume* NewVolume)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.PhysicsVolumeChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107843);
 			byte params[4] = { NULL };
-			*(class PhysicsVolume**)&params[0] = NewVolume;
+			*(class PhysicsVolume**)params = NewVolume;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Explode(Object::Vector HitLocation, Object::Vector HitNormal)
+		void Explode(Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.Explode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107845);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
-			*(Object::Vector*)&params[12] = HitNormal;
+			*(Vector*)params = HitLocation;
+			*(Vector*)&params[12] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool StickToTarget(class Actor* Target, Object::Vector HitLocation, Object::Vector HitNormal)
+		bool StickToTarget(class Actor* Target, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.StickToTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107848);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Target;
-			*(Object::Vector*)&params[4] = HitLocation;
-			*(Object::Vector*)&params[16] = HitNormal;
+			*(class Actor**)params = Target;
+			*(Vector*)&params[4] = HitLocation;
+			*(Vector*)&params[16] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[28];
 		}
 		void PlayStuckOnEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.PlayStuckOnEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107854);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void MyOnParticleSystemFinished(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* PSC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.MyOnParticleSystemFinished");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107856);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = PSC;
+void**)params = PSC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnEnteredDetonationArea(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.PawnEnteredDetonationArea");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107858);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnLeftDetonationArea(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.PawnLeftDetonationArea");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107860);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void NativeExplode(Object::Vector HitLocation, Object::Vector HitNormal)
+		void NativeExplode(Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Grenade.NativeExplode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107862);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
-			*(Object::Vector*)&params[12] = HitNormal;
+			*(Vector*)params = HitLocation;
+			*(Vector*)&params[12] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

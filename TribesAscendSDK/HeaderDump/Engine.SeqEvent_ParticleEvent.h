@@ -29,18 +29,18 @@ namespace UnrealScript
 			ePARTICLEOUT_MAX = 4,
 		};
 		ADD_BOOL(UseRelfectedImpactVector, 304, 0x1)
-		ADD_STRUCT(Object::Vector, EventNormal, 292)
+		ADD_STRUCT(Vector, EventNormal, 292)
 		ADD_STRUCT(float, EventParticleTime, 288)
-		ADD_STRUCT(Object::Vector, EventVelocity, 276)
+		ADD_STRUCT(Vector, EventVelocity, 276)
 		ADD_STRUCT(float, EventEmitterTime, 272)
-		ADD_STRUCT(Object::Vector, EventPosition, 260)
+		ADD_STRUCT(Vector, EventPosition, 260)
 		ADD_STRUCT(SeqEvent_ParticleEvent::EParticleEventOutputType, EventType, 256)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqEvent_ParticleEvent.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26138);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

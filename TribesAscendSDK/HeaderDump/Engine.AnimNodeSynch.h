@@ -24,7 +24,7 @@ namespace UnrealScript
 	class AnimNodeSynch : public AnimNodeBlendBase
 	{
 	public:
-		class SynchGroup
+		struct SynchGroup
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class AnimNodeSequence*>, SeqNodes, 0)
@@ -36,49 +36,49 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<AnimNodeSynch::SynchGroup>, Groups, 244)
 		void AddNodeToGroup(class AnimNodeSequence* SeqNode, ScriptName GroupName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSynch.AddNodeToGroup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11109);
 			byte params[12] = { NULL };
-			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			*(class AnimNodeSequence**)params = SeqNode;
 			*(ScriptName*)&params[4] = GroupName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveNodeFromGroup(class AnimNodeSequence* SeqNode, ScriptName GroupName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSynch.RemoveNodeFromGroup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11112);
 			byte params[12] = { NULL };
-			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			*(class AnimNodeSequence**)params = SeqNode;
 			*(ScriptName*)&params[4] = GroupName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class AnimNodeSequence* GetMasterNodeOfGroup(ScriptName GroupName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSynch.GetMasterNodeOfGroup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11115);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = GroupName;
+			*(ScriptName*)params = GroupName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class AnimNodeSequence**)&params[8];
 		}
 		void ForceRelativePosition(ScriptName GroupName, float RelativePosition)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSynch.ForceRelativePosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11118);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = GroupName;
+			*(ScriptName*)params = GroupName;
 			*(float*)&params[8] = RelativePosition;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetRelativePosition(ScriptName GroupName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSynch.GetRelativePosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11121);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = GroupName;
+			*(ScriptName*)params = GroupName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		void SetGroupRateScale(ScriptName GroupName, float NewRateScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSynch.SetGroupRateScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11124);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = GroupName;
+			*(ScriptName*)params = GroupName;
 			*(float*)&params[8] = NewRateScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

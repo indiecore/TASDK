@@ -11,7 +11,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(int, LoopCount, 576)
-		ADD_STRUCT(Object::Vector, LocationOffset, 564)
+		ADD_STRUCT(Vector, LocationOffset, 564)
 		ADD_STRUCT(Object::InterpCurveVector2D, AnimatedPosition, 548)
 		ADD_STRUCT(Object::InterpCurveLinearColor, AnimatedColor, 532)
 		ADD_STRUCT(Object::InterpCurveFloat, AnimatedScale, 516)

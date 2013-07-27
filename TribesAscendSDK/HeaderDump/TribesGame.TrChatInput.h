@@ -38,49 +38,49 @@ namespace UnrealScript
 		ADD_OBJECT(LocalPlayer, ConsoleTargetPlayer, 108)
 		void Initialized()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.Initialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74419);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetInputText(ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.SetInputText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74420);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetCursorPos(int Position)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.SetCursorPos");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74422);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Position;
+			*(int*)params = Position;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConsoleCommand(ScriptString* Command)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.ConsoleCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74424);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)params = Command;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartTyping(ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.StartTyping");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74426);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostRender_Console(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.PostRender_Console");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74428);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool InputKey(int ControllerId, ScriptName Key, Object::EInputEvent Event, float AmountDepressed, bool bGamepad)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.InputKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74430);
 			byte params[25] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptName*)&params[4] = Key;
 			*(Object::EInputEvent*)&params[12] = Event;
 			*(float*)&params[16] = AmountDepressed;
@@ -90,32 +90,32 @@ namespace UnrealScript
 		}
 		bool InputChar(int ControllerId, ScriptString* Unicode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.InputChar");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74437);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptString**)&params[4] = Unicode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void FlushPlayerInput()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.FlushPlayerInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74441);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool ProcessControlKey(ScriptName Key, Object::EInputEvent Event)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.ProcessControlKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74443);
 			byte params[13] = { NULL };
-			*(ScriptName*)&params[0] = Key;
+			*(ScriptName*)params = Key;
 			*(Object::EInputEvent*)&params[8] = Event;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void AppendInputText(ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatInput.AppendInputText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74447);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

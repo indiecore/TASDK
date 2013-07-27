@@ -28,30 +28,30 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, AssociatedActor, 512)
 		bool Encompasses(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Volume.Encompasses");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10142);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
-		bool EncompassesPoint(Object::Vector Loc)
+		bool EncompassesPoint(Vector Loc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Volume.EncompassesPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10145);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = Loc;
+			*(Vector*)params = Loc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Volume.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10148);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Volume.DisplayDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10149);
 			byte params[12] = { NULL };
-			*(class HUD**)&params[0] = HUD;
+			*(class HUD**)params = HUD;
 			*(float*)&params[4] = out_YL;
 			*(float*)&params[8] = out_YPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -60,21 +60,21 @@ namespace UnrealScript
 		}
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Volume.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10164);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CollisionChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Volume.CollisionChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10166);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ProcessActorSetVolume(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Volume.ProcessActorSetVolume");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10167);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

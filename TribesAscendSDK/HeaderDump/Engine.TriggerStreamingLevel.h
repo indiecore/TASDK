@@ -25,7 +25,7 @@ namespace UnrealScript
 	class TriggerStreamingLevel : public Trigger
 	{
 	public:
-		class LevelStreamingData
+		struct LevelStreamingData
 		{
 		public:
 			ADD_OBJECT(LevelStreaming, Level, 4)
@@ -36,16 +36,16 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<TriggerStreamingLevel::LevelStreamingData>, Levels, 488)
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TriggerStreamingLevel.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28082);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

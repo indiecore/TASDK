@@ -54,24 +54,24 @@ namespace UnrealScript
 		ADD_STRUCT(float, TimeIntoMovie, 372)
 		void Play()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureFlipBook.Play");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27984);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Pause()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureFlipBook.Pause");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27985);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Stop()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureFlipBook.Stop");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27986);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetCurrentFrame(int Row, int Col)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureFlipBook.SetCurrentFrame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27987);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Row;
+			*(int*)params = Row;
 			*(int*)&params[4] = Col;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

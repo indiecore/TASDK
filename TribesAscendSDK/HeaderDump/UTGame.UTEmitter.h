@@ -9,22 +9,22 @@ namespace UnrealScript
 	class UTEmitter : public Emitter
 	{
 	public:
-		class ParticleSystem* GetTemplateForDistance(ScriptArray<UDKPawn::DistanceBasedParticleTemplate>& TemplateList, Object::Vector SpawnLocation, class WorldInfo* WI)
+		class ParticleSystem* GetTemplateForDistance(ScriptArray<UDKPawn::DistanceBasedParticleTemplate>& TemplateList, Vector SpawnLocation, class WorldInfo* WI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEmitter.GetTemplateForDistance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40133);
 			byte params[32] = { NULL };
-			*(ScriptArray<UDKPawn::DistanceBasedParticleTemplate>*)&params[0] = TemplateList;
-			*(Object::Vector*)&params[12] = SpawnLocation;
+			*(ScriptArray<UDKPawn::DistanceBasedParticleTemplate>*)params = TemplateList;
+			*(Vector*)&params[12] = SpawnLocation;
 			*(class WorldInfo**)&params[24] = WI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			TemplateList = *(ScriptArray<UDKPawn::DistanceBasedParticleTemplate>*)&params[0];
+			TemplateList = *(ScriptArray<UDKPawn::DistanceBasedParticleTemplate>*)params;
 			return *(class ParticleSystem**)&params[28];
 		}
 		void SetTemplate(class ParticleSystem* NewTemplate, bool bDestroyOnFinish)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEmitter.SetTemplate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47361);
 			byte params[8] = { NULL };
-			*(class ParticleSystem**)&params[0] = NewTemplate;
+			*(class ParticleSystem**)params = NewTemplate;
 			*(bool*)&params[4] = bDestroyOnFinish;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -32,11 +32,11 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* Light)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEmitter.SetLightEnvironment");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47366);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = Light;
+void**)params = Light;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

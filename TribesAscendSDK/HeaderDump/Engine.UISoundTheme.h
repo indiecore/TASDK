@@ -14,7 +14,7 @@ namespace UnrealScript
 	class UISoundTheme : public Object
 	{
 	public:
-		class SoundEventMapping
+		struct SoundEventMapping
 		{
 		public:
 			ADD_OBJECT(SoundCue, SoundToPlay, 8)
@@ -23,9 +23,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<UISoundTheme::SoundEventMapping>, SoundEventBindings, 60)
 		void ProcessSoundEvent(ScriptName SoundEventName, class PlayerController* SoundOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UISoundTheme.ProcessSoundEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29228);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SoundEventName;
+			*(ScriptName*)params = SoundEventName;
 			*(class PlayerController**)&params[8] = SoundOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

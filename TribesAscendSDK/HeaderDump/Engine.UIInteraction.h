@@ -30,13 +30,13 @@ namespace UnrealScript
 	class UIInteraction : public Interaction
 	{
 	public:
-		class UIKeyRepeatData
+		struct UIKeyRepeatData
 		{
 		public:
 			ADD_STRUCT(Object::Double, NextRepeatTime, 8)
 			ADD_STRUCT(ScriptName, CurrentRepeatKey, 0)
 		};
-		class UIAxisEmulationData : public UIKeyRepeatData
+		struct UIAxisEmulationData : public UIKeyRepeatData
 		{
 		public:
 			ADD_BOOL(bEnabled, 16, 0x1)
@@ -62,130 +62,130 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_FExec, 108)
 		class DataStoreClient* GetDataStoreClient()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetDataStoreClient");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7799);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class DataStoreClient**)&params[0];
+			return *(class DataStoreClient**)params;
 		}
 		bool IsLoggedIn(int ControllerId, bool bRequireOnlineLogin)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.IsLoggedIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17951);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(bool*)&params[4] = bRequireOnlineLogin;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool IsGamepadConnected(int ControllerId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.IsGamepadConnected");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17953);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		int GetPlayerCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetPlayerCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18103);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int GetPlayerIndex(int ControllerId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetPlayerIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29058);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int GetPlayerControllerId(int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetPlayerControllerId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29061);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		class LocalPlayer* GetLocalPlayer(int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetLocalPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29064);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class LocalPlayer**)&params[4];
 		}
 		void NotifyPlayerAdded(int PlayerIndex, class LocalPlayer* AddedPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.NotifyPlayerAdded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29069);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			*(class LocalPlayer**)&params[4] = AddedPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyPlayerRemoved(int PlayerIndex, class LocalPlayer* RemovedPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.NotifyPlayerRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29073);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			*(class LocalPlayer**)&params[4] = RemovedPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		OnlineSubsystem::ELoginStatus GetLoginStatus(int ControllerId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetLoginStatus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29080);
 			byte params[5] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(OnlineSubsystem::ELoginStatus*)&params[4];
 		}
 		OnlineSubsystem::ELoginStatus GetLowestLoginStatusOfControllers()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetLowestLoginStatusOfControllers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29086);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(OnlineSubsystem::ELoginStatus*)&params[0];
+			return *(OnlineSubsystem::ELoginStatus*)params;
 		}
 		bool HasLinkConnection()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.HasLinkConnection");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29091);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		int GetLoggedInPlayerCount(bool bRequireOnlineLogin)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetLoggedInPlayerCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29100);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bRequireOnlineLogin;
+			*(bool*)params = bRequireOnlineLogin;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int GetNumGuestsLoggedIn()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetNumGuestsLoggedIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29105);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int GetConnectedGamepadCount(ScriptArray<bool> ControllerConnectionStatusOverrides)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetConnectedGamepadCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29114);
 			byte params[16] = { NULL };
-			*(ScriptArray<bool>*)&params[0] = ControllerConnectionStatusOverrides;
+			*(ScriptArray<bool>*)params = ControllerConnectionStatusOverrides;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		OnlineSubsystem::ENATType GetNATType()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.GetNATType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29120);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(OnlineSubsystem::ENATType*)&params[0];
+			return *(OnlineSubsystem::ENATType*)params;
 		}
 		void NotifyGameSessionEnded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIInteraction.NotifyGameSessionEnded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29125);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

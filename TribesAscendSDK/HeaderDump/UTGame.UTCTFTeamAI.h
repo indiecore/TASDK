@@ -22,18 +22,18 @@ namespace UnrealScript
 		ADD_STRUCT(float, LastGotFlag, 676)
 		class UTSquadAI* AddSquadWithLeader(class Controller* C, class UTGameObjective* O)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFTeamAI.AddSquadWithLeader");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46740);
 			byte params[12] = { NULL };
-			*(class Controller**)&params[0] = C;
+			*(class Controller**)params = C;
 			*(class UTGameObjective**)&params[4] = O;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class UTSquadAI**)&params[8];
 		}
 		class UTGameObjective* GetPriorityFreelanceObjectiveFor(class UTSquadAI* InFreelanceSquad)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFTeamAI.GetPriorityFreelanceObjectiveFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46745);
 			byte params[8] = { NULL };
-			*(class UTSquadAI**)&params[0] = InFreelanceSquad;
+			*(class UTSquadAI**)params = InFreelanceSquad;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class UTGameObjective**)&params[4];
 		}

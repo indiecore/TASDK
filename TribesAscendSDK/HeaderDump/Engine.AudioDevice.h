@@ -80,16 +80,16 @@ namespace UnrealScript
 			TTSSPEAKER_Wendy = 8,
 			TTSSPEAKER_MAX = 9,
 		};
-		class Listener
+		struct Listener
 		{
 		public:
-			ADD_STRUCT(Object::Vector, Front, 40)
-			ADD_STRUCT(Object::Vector, Right, 28)
-			ADD_STRUCT(Object::Vector, Up, 16)
-			ADD_STRUCT(Object::Vector, Location, 4)
+			ADD_STRUCT(Vector, Front, 40)
+			ADD_STRUCT(Vector, Right, 28)
+			ADD_STRUCT(Vector, Up, 16)
+			ADD_STRUCT(Vector, Location, 4)
 			ADD_OBJECT(PortalVolume, PortalVolume, 0)
 		};
-		class AudioClassInfo
+		struct AudioClassInfo
 		{
 		public:
 			ADD_STRUCT(int, SizeRealTime, 12)
@@ -125,7 +125,7 @@ void*>, AudioComponents, 128)
 		ADD_OBJECT(SoundMode, CurrentMode, 556)
 		ADD_STRUCT(ScriptName, BaseSoundModeName, 548)
 		ADD_STRUCT(Object::Pointer, Effects, 544)
-		ADD_STRUCT(Object::QWord, CurrentTick, 236)
+		ADD_STRUCT(QWord, CurrentTick, 236)
 		ADD_STRUCT(int, CommonAudioPoolFreeBytes, 124)
 		ADD_STRUCT(Object::Pointer, CommonAudioPool, 120)
 		ADD_BOOL(bGameWasTicking, 116, 0x2)
@@ -141,17 +141,17 @@ void*>, AudioComponents, 128)
 		ADD_STRUCT(int, MaxChannels, 64)
 		bool SetSoundMode(ScriptName NewMode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioDevice.SetSoundMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9511);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = NewMode;
+			*(ScriptName*)params = NewMode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		class SoundClass* FindSoundClass(ScriptName SoundClassName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AudioDevice.FindSoundClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10363);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SoundClassName;
+			*(ScriptName*)params = SoundClassName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class SoundClass**)&params[8];
 		}

@@ -33,9 +33,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class ShadowMap2D*>, ShadowMaps, 704)
 		ADD_STRUCT(Object::Pointer, FluidSimulation, 720)
 		ADD_STRUCT(EngineTypes::LightMapRef, LightMap, 716)
-		ADD_STRUCT(Object::Vector, EditorViewPosition, 680)
-		ADD_STRUCT(Object::Vector, DetailPosition, 668)
-		ADD_STRUCT(Object::Vector, SimulationPosition, 656)
+		ADD_STRUCT(Vector, EditorViewPosition, 680)
+		ADD_STRUCT(Vector, DetailPosition, 668)
+		ADD_STRUCT(Vector, SimulationPosition, 656)
 		ADD_STRUCT(float, ViewDistance, 652)
 		ADD_STRUCT(float, DeactivationTimer, 648)
 		ADD_STRUCT(float, TestRippleAngle, 644)
@@ -81,28 +81,28 @@ namespace UnrealScript
 		ADD_STRUCT(EngineTypes::LightmassPrimitiveSettings, LightmassSettings, 496)
 		ADD_STRUCT(int, LightMapResolution, 492)
 		ADD_OBJECT(MaterialInterface, FluidMaterial, 488)
-		void ApplyForce(Object::Vector WorldPos, float Strength, float Radius, bool bImpulse)
+		void ApplyForce(Vector WorldPos, float Strength, float Radius, bool bImpulse)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FluidSurfaceComponent.ApplyForce");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4229);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = WorldPos;
+			*(Vector*)params = WorldPos;
 			*(float*)&params[12] = Strength;
 			*(float*)&params[16] = Radius;
 			*(bool*)&params[20] = bImpulse;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetDetailPosition(Object::Vector WorldPos)
+		void SetDetailPosition(Vector WorldPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FluidSurfaceComponent.SetDetailPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15822);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = WorldPos;
+			*(Vector*)params = WorldPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetSimulationPosition(Object::Vector WorldPos)
+		void SetSimulationPosition(Vector WorldPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FluidSurfaceComponent.SetSimulationPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15824);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = WorldPos;
+			*(Vector*)params = WorldPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

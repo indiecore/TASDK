@@ -25,12 +25,12 @@ namespace UnrealScript
 	class LensFlareComponent : public PrimitiveComponent
 	{
 	public:
-		class LensFlareElementMaterials
+		struct LensFlareElementMaterials
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class MaterialInterface*>, ElementMaterials, 0)
 		};
-		class LensFlareElementInstance
+		struct LensFlareElementInstance
 		{
 		};
 		ADD_STRUCT(ScriptArray<LensFlareComponent::LensFlareElementMaterials>, Materials, 540)
@@ -51,24 +51,24 @@ namespace UnrealScript
 		ADD_OBJECT(LensFlare, Template, 488)
 		void SetTemplate(class LensFlare* NewTemplate, bool bForceSet)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LensFlareComponent.SetTemplate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19314);
 			byte params[8] = { NULL };
-			*(class LensFlare**)&params[0] = NewTemplate;
+			*(class LensFlare**)params = NewTemplate;
 			*(bool*)&params[4] = bForceSet;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSourceColor(Object::LinearColor InSourceColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LensFlareComponent.SetSourceColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19317);
 			byte params[16] = { NULL };
-			*(Object::LinearColor*)&params[0] = InSourceColor;
+			*(Object::LinearColor*)params = InSourceColor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetIsActive(bool bInIsActive)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LensFlareComponent.SetIsActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19319);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bInIsActive;
+			*(bool*)params = bInIsActive;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

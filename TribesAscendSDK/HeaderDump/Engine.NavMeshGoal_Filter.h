@@ -24,10 +24,10 @@ namespace UnrealScript
 		ADD_BOOL(bShowDebug, 60, 0x1)
 		ScriptString* GetDumpString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_Filter.GetDumpString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20957);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

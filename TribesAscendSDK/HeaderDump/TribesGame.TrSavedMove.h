@@ -31,58 +31,58 @@ namespace UnrealScript
 		ADD_BOOL(m_bAirSpeedBoundToGroundSpeed, 232, 0x1)
 		void Clear()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSavedMove.Clear");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110652);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostUpdate(class PlayerController* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSavedMove.PostUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110653);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CanCombineWith(class SavedMove* NewMove, class Pawn* inPawn, float MaxDelta)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSavedMove.CanCombineWith");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110656);
 			byte params[16] = { NULL };
-			*(class SavedMove**)&params[0] = NewMove;
+			*(class SavedMove**)params = NewMove;
 			*(class Pawn**)&params[4] = inPawn;
 			*(float*)&params[8] = MaxDelta;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
-		void SetMoveFor(class PlayerController* P, float DeltaTime, Object::Vector newAccel, Actor::EDoubleClickDir InDoubleClick)
+		void SetMoveFor(class PlayerController* P, float DeltaTime, Vector newAccel, Actor::EDoubleClickDir InDoubleClick)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSavedMove.SetMoveFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110662);
 			byte params[21] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			*(float*)&params[4] = DeltaTime;
-			*(Object::Vector*)&params[8] = newAccel;
+			*(Vector*)&params[8] = newAccel;
 			*(Actor::EDoubleClickDir*)&params[20] = InDoubleClick;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		byte CompressedFlags()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSavedMove.CompressedFlags");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110668);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return params[0];
+			return *params;
 		}
 		Actor::EDoubleClickDir SetFlags(byte Flags, class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSavedMove.SetFlags");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110671);
 			byte params[6] = { NULL };
-			params[0] = Flags;
+			*params = Flags;
 			*(class PlayerController**)&params[4] = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Actor::EDoubleClickDir*)&params[8];
 		}
 		ScriptString* GetDebugString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSavedMove.GetDebugString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110676);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

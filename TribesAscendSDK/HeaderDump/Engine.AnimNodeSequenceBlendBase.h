@@ -13,14 +13,14 @@ namespace UnrealScript
 	class AnimNodeSequenceBlendBase : public AnimNodeSequence
 	{
 	public:
-		class AnimInfo
+		struct AnimInfo
 		{
 		public:
 			ADD_STRUCT(int, AnimLinkupIndex, 12)
 			ADD_OBJECT(AnimSequence, AnimSeq, 8)
 			ADD_STRUCT(ScriptName, AnimSeqName, 0)
 		};
-		class AnimBlendInfo
+		struct AnimBlendInfo
 		{
 		public:
 			ADD_STRUCT(float, Weight, 24)

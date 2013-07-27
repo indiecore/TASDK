@@ -36,9 +36,9 @@ namespace UnrealScript
 		ADD_BOOL(m_bIgnoreCTF, 152, 0x1)
 		ScriptClass* ProcessKeyInput(ScriptName Key, class TrPlayerInput* PlayerInput, ScriptClass* GameClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVGSNode.ProcessKeyInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77960);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = Key;
+			*(ScriptName*)params = Key;
 			*(class TrPlayerInput**)&params[8] = PlayerInput;
 			*(ScriptClass**)&params[12] = GameClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -46,39 +46,39 @@ namespace UnrealScript
 		}
 		bool VerifyVGSCommandEntry(TrVGSCommandList::VGSCommandType Command, ScriptClass* GameClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVGSNode.VerifyVGSCommandEntry");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77963);
 			byte params[9] = { NULL };
-			*(TrVGSCommandList::VGSCommandType*)&params[0] = Command;
+			*(TrVGSCommandList::VGSCommandType*)params = Command;
 			*(ScriptClass**)&params[4] = GameClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool VerifyVGSChild(ScriptClass* VGSNodeClass, ScriptClass* GameClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVGSNode.VerifyVGSChild");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115429);
 			byte params[12] = { NULL };
-			*(ScriptClass**)&params[0] = VGSNodeClass;
+			*(ScriptClass**)params = VGSNodeClass;
 			*(ScriptClass**)&params[4] = GameClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void GetGametypeSpecificCommands(ScriptArray<TrVGSCommandList::VGSCommandType>& outGametypeSpecificCommands, ScriptClass* GameClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVGSNode.GetGametypeSpecificCommands");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115433);
 			byte params[16] = { NULL };
-			*(ScriptArray<TrVGSCommandList::VGSCommandType>*)&params[0] = outGametypeSpecificCommands;
+			*(ScriptArray<TrVGSCommandList::VGSCommandType>*)params = outGametypeSpecificCommands;
 			*(ScriptClass**)&params[12] = GameClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			outGametypeSpecificCommands = *(ScriptArray<TrVGSCommandList::VGSCommandType>*)&params[0];
+			outGametypeSpecificCommands = *(ScriptArray<TrVGSCommandList::VGSCommandType>*)params;
 		}
 		void GetGametypeSpecificChildrenNodes(ScriptArray<ScriptClass*>& outVGSNodeChildrenClasses, ScriptClass* GameClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVGSNode.GetGametypeSpecificChildrenNodes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115438);
 			byte params[16] = { NULL };
-			*(ScriptArray<ScriptClass*>*)&params[0] = outVGSNodeChildrenClasses;
+			*(ScriptArray<ScriptClass*>*)params = outVGSNodeChildrenClasses;
 			*(ScriptClass**)&params[12] = GameClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			outVGSNodeChildrenClasses = *(ScriptArray<ScriptClass*>*)&params[0];
+			outVGSNodeChildrenClasses = *(ScriptArray<ScriptClass*>*)params;
 		}
 	};
 }

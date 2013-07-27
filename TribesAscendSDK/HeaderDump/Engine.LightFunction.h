@@ -15,7 +15,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(float, DisabledBrightness, 76)
-		ADD_STRUCT(Object::Vector, Scale, 64)
+		ADD_STRUCT(Vector, Scale, 64)
 		ADD_OBJECT(MaterialInterface, SourceMaterial, 60)
 	};
 }

@@ -26,7 +26,7 @@ namespace UnrealScript
 	class SoundNodeAmbient : public SoundNode
 	{
 	public:
-		class AmbientSoundSlot
+		struct AmbientSoundSlot
 		{
 		public:
 			ADD_STRUCT(float, Weight, 12)

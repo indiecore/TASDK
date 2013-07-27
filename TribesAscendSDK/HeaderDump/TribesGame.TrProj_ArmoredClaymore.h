@@ -13,9 +13,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, DetonationSpeed, 900)
 		bool MeetsDetonationRequirements(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_ArmoredClaymore.MeetsDetonationRequirements");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108020);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

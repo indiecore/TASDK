@@ -12,7 +12,7 @@ namespace UnrealScript
 		ADD_STRUCT(int, TeamIndex, 232)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_ReturnCTFFlag.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49120);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

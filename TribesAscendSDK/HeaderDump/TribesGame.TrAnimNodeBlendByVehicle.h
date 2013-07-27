@@ -22,27 +22,27 @@ namespace UnrealScript
 		ADD_OBJECT(TrPawn, m_TrPawn, 292)
 		void PlayNoVehicleAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByVehicle.PlayNoVehicleAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66474);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayDrivingAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByVehicle.PlayDrivingAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66475);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayEnterAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByVehicle.PlayEnterAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66476);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayExitAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByVehicle.PlayExitAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66477);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayChangeSeatAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByVehicle.PlayChangeSeatAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66478);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

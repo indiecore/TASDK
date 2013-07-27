@@ -13,13 +13,13 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(int, m_nNumberBounces, 820)
 		ADD_STRUCT(int, m_nBouncesAllowed, 816)
-		void HitWall(Object::Vector HitNormal, class Actor* Wall, 
+		void HitWall(Vector HitNormal, class Actor* Wall, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* WallComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_NovaColt.HitWall");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108803);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = HitNormal;
+			*(Vector*)params = HitNormal;
 			*(class Actor**)&params[12] = Wall;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!

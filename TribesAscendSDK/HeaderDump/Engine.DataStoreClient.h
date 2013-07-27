@@ -15,7 +15,7 @@ namespace UnrealScript
 	class DataStoreClient : public UIRoot
 	{
 	public:
-		class PlayerDataStoreGroup
+		struct PlayerDataStoreGroup
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class UIDataStore*>, DataStores, 4)
@@ -28,72 +28,72 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<DataStoreClient::PlayerDataStoreGroup>, PlayerDataStores, 108)
 		class UIDataStore* FindDataStore(ScriptName DataStoreTag, class LocalPlayer* PlayerOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DataStoreClient.FindDataStore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7802);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = DataStoreTag;
+			*(ScriptName*)params = DataStoreTag;
 			*(class LocalPlayer**)&params[8] = PlayerOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class UIDataStore**)&params[12];
 		}
 		ScriptClass* FindDataStoreClass(ScriptClass* RequiredMetaClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DataStoreClient.FindDataStoreClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7804);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = RequiredMetaClass;
+			*(ScriptClass**)params = RequiredMetaClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}
 		class UIDataStore* CreateDataStore(ScriptClass* DataStoreClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DataStoreClient.CreateDataStore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7806);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = DataStoreClass;
+			*(ScriptClass**)params = DataStoreClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class UIDataStore**)&params[4];
 		}
 		bool RegisterDataStore(class UIDataStore* DataStore, class LocalPlayer* PlayerOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DataStoreClient.RegisterDataStore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7808);
 			byte params[12] = { NULL };
-			*(class UIDataStore**)&params[0] = DataStore;
+			*(class UIDataStore**)params = DataStore;
 			*(class LocalPlayer**)&params[4] = PlayerOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void GetPlayerDataStoreClasses(ScriptArray<ScriptClass*>& out_DataStoreClasses)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DataStoreClient.GetPlayerDataStoreClasses");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7818);
 			byte params[12] = { NULL };
-			*(ScriptArray<ScriptClass*>*)&params[0] = out_DataStoreClasses;
+			*(ScriptArray<ScriptClass*>*)params = out_DataStoreClasses;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_DataStoreClasses = *(ScriptArray<ScriptClass*>*)&params[0];
+			out_DataStoreClasses = *(ScriptArray<ScriptClass*>*)params;
 		}
 		bool UnregisterDataStore(class UIDataStore* DataStore)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DataStoreClient.UnregisterDataStore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7824);
 			byte params[8] = { NULL };
-			*(class UIDataStore**)&params[0] = DataStore;
+			*(class UIDataStore**)params = DataStore;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		int FindPlayerDataStoreIndex(class LocalPlayer* PlayerOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DataStoreClient.FindPlayerDataStoreIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13653);
 			byte params[8] = { NULL };
-			*(class LocalPlayer**)&params[0] = PlayerOwner;
+			*(class LocalPlayer**)params = PlayerOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		void NotifyGameSessionEnded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DataStoreClient.NotifyGameSessionEnded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13661);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DebugDumpDataStoreInfo(bool bVerbose)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DataStoreClient.DebugDumpDataStoreInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13668);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bVerbose;
+			*(bool*)params = bVerbose;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

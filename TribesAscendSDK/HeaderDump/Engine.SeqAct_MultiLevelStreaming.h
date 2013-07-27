@@ -23,7 +23,7 @@ namespace UnrealScript
 	class SeqAct_MultiLevelStreaming : public SeqAct_LevelStreamingBase
 	{
 	public:
-		class LevelStreamingNameCombo
+		struct LevelStreamingNameCombo
 		{
 		public:
 			ADD_STRUCT(ScriptName, LevelName, 4)

@@ -62,83 +62,83 @@ namespace UnrealScript
 		ADD_STRUCT(int, nTeam, 60)
 		void Init(bool bEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50990);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnable;
+			*(bool*)params = bEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Close()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.Close");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50992);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Queued()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.Queued");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50993);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Objective()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.Objective");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50994);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SwapWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.SwapWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50995);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CheckHealth()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.CheckHealth");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50996);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void menu(bool bOpen)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.menu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50997);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bOpen;
+			*(bool*)params = bOpen;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Damage(AlienFXManager::FXArea Area)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.Damage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50999);
 			byte params[1] = { NULL };
-			*(AlienFXManager::FXArea*)&params[0] = Area;
+			*(AlienFXManager::FXArea*)params = Area;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetTeam(int TeamNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.SetTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51001);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = TeamNum;
+			*(int*)params = TeamNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetHealth(int Health)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.SetHealth");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51003);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Health;
+			*(int*)params = Health;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51005);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Overlay(AlienFXManager::FXOverlay Type)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.Overlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51007);
 			byte params[1] = { NULL };
-			*(AlienFXManager::FXOverlay*)&params[0] = Type;
+			*(AlienFXManager::FXOverlay*)params = Type;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DamageConvert(ScriptString* Area)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.AlienFXManager.DamageConvert");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51009);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Area;
+			*(ScriptString**)params = Area;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

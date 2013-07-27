@@ -32,14 +32,14 @@ namespace UnrealScript
 	{
 	public:
 		static const auto TR_MAX_FACTION_NBR = 3;
-		class DeviceSelectionList
+		struct DeviceSelectionList
 		{
 		public:
 			ADD_OBJECT(ScriptClass, DeviceClass, 4)
 			ADD_STRUCT(TrObject::TR_EQUIP_POINT, EquipPoint, 0)
 			ADD_STRUCT(ScriptString*, ContentDeviceClassString, 8)
 		};
-		class SkillNode
+		struct SkillNode
 		{
 		public:
 			ADD_STRUCT(int, Cost, 24)
@@ -140,17 +140,17 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fJetpackInitAccelMultiplier, 472)
 		ScriptClass* GetDeviceClassByEquipPoint(TrObject::TR_EQUIP_POINT EquipPoint)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFamilyInfo.GetDeviceClassByEquipPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87674);
 			byte params[5] = { NULL };
-			*(TrObject::TR_EQUIP_POINT*)&params[0] = EquipPoint;
+			*(TrObject::TR_EQUIP_POINT*)params = EquipPoint;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}
 		ScriptString* GetContentDeviceClassStringByEquipPoint(TrObject::TR_EQUIP_POINT EquipPoint)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFamilyInfo.GetContentDeviceClassStringByEquipPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87678);
 			byte params[13] = { NULL };
-			*(TrObject::TR_EQUIP_POINT*)&params[0] = EquipPoint;
+			*(TrObject::TR_EQUIP_POINT*)params = EquipPoint;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}

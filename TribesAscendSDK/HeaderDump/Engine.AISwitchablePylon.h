@@ -18,22 +18,22 @@ namespace UnrealScript
 		ADD_BOOL(bOpen, 832, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AISwitchablePylon.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9981);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetEnabled(bool bEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AISwitchablePylon.SetEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9982);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnabled;
+			*(bool*)params = bEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsEnabled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AISwitchablePylon.IsEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9984);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

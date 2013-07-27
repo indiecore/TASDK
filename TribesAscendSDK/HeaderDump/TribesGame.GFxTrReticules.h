@@ -40,129 +40,129 @@ namespace UnrealScript
 		ADD_OBJECT(GfxTrHud, HUD, 120)
 		void CallShowReticule(int nIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.CallShowReticule");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61567);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = nIndex;
+			*(int*)params = nIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CallSetReticuleColor(int nType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.CallSetReticuleColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61569);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = nType;
+			*(int*)params = nType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ASC_SetCustomReticule(class GFxObject* Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.ASC_SetCustomReticule");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61571);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Data;
+			*(class GFxObject**)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CallSetReticuleDepth(float fDepth)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.CallSetReticuleDepth");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61573);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = fDepth;
+			*(float*)params = fDepth;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ChangeReticule(int nIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.ChangeReticule");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61576);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = nIndex;
+			*(int*)params = nIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SetCustomReticule()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.SetCustomReticule");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61578);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		int GetCurrentReticuleIndex()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.GetCurrentReticuleIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61586);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void CallSetAccuracy(int nAccuracy)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.CallSetAccuracy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61588);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = nAccuracy;
+			*(int*)params = nAccuracy;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CallShowHit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.CallShowHit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61590);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisableVehicleAmmoClip()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.DisableVehicleAmmoClip");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61591);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EnableVehicleAmmoClip()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.EnableVehicleAmmoClip");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61592);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetVehicleAmmoClip(ScriptString* AmmoCount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.SetVehicleAmmoClip");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61593);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = AmmoCount;
+			*(ScriptString**)params = AmmoCount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPowerupPercentage(int pPercentage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.SetPowerupPercentage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61595);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = pPercentage;
+			*(int*)params = pPercentage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLaserPowerupPercentage(int pPercentage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.SetLaserPowerupPercentage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61597);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = pPercentage;
+			*(int*)params = pPercentage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetVehiclePowerupPercentage(int pPercentage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.SetVehiclePowerupPercentage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61599);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = pPercentage;
+			*(int*)params = pPercentage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetGenericPowerupPercentage(int pPercentage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.SetGenericPowerupPercentage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61601);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = pPercentage;
+			*(int*)params = pPercentage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Init(class GfxTrHud* H)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61603);
 			byte params[4] = { NULL };
-			*(class GfxTrHud**)&params[0] = H;
+			*(class GfxTrHud**)params = H;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetReticuleVisible(bool bNewVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.SetReticuleVisible");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61605);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewVisible;
+			*(bool*)params = bNewVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateReticule(class Pawn* pPawn, bool bForceUpdate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrReticules.UpdateReticule");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(61607);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = pPawn;
+			*(class Pawn**)params = pPawn;
 			*(bool*)&params[4] = bForceUpdate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

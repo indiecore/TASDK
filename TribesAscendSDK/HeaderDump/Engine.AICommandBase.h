@@ -8,9 +8,9 @@ namespace UnrealScript
 	public:
 		int GetUtility(class AIController* InAI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AICommandBase.GetUtility");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9681);
 			byte params[8] = { NULL };
-			*(class AIController**)&params[0] = InAI;
+			*(class AIController**)params = InAI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}

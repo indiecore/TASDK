@@ -22,7 +22,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(float, PP_Scene_Desaturation, 620)
-		ADD_STRUCT(Object::Vector, PP_Scene_HighLights, 608)
+		ADD_STRUCT(Vector, PP_Scene_HighLights, 608)
 		ADD_STRUCT(float, WarningTime, 604)
 		ADD_STRUCT(float, TransitionDuration, 600)
 		ADD_STRUCT(float, TransitionTime, 596)
@@ -33,57 +33,57 @@ namespace UnrealScript
 		ADD_STRUCT(float, TimeRemaining, 560)
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113186);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GivenTo(class Pawn* NewOwner, bool bDoNotActivate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.GivenTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113188);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = NewOwner;
+			*(class Pawn**)params = NewOwner;
 			*(bool*)&params[4] = bDoNotActivate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientGivenTo(class Pawn* NewOwner, bool bDoNotActivate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.ClientGivenTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113191);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = NewOwner;
+			*(class Pawn**)params = NewOwner;
 			*(bool*)&params[4] = bDoNotActivate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AdjustPPEffects(class Pawn* P, bool bRemove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.AdjustPPEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113194);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			*(bool*)&params[4] = bRemove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientLostItem()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.ClientLostItem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113197);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClientSetTimeRemaining(float NewTimeRemaining)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.ClientSetTimeRemaining");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113198);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = NewTimeRemaining;
+			*(float*)params = NewTimeRemaining;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TimeRemaingUpdated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.TimeRemaingUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113200);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayPowerup(class Canvas* Canvas, class HUD* HUD, float ResolutionScale, float& YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.DisplayPowerup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113201);
 			byte params[16] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			*(class HUD**)&params[4] = HUD;
 			*(float*)&params[8] = ResolutionScale;
 			*(float*)&params[12] = YPos;
@@ -92,23 +92,23 @@ namespace UnrealScript
 		}
 		bool DenyPickupQuery(ScriptClass* ItemClass, class Actor* Pickup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.DenyPickupQuery");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113206);
 			byte params[12] = { NULL };
-			*(ScriptClass**)&params[0] = ItemClass;
+			*(ScriptClass**)params = ItemClass;
 			*(class Actor**)&params[4] = Pickup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void TimeExpired()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.TimeExpired");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113211);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float BotDesireability(class Actor* PickupHolder, class Pawn* P, class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.BotDesireability");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113212);
 			byte params[16] = { NULL };
-			*(class Actor**)&params[0] = PickupHolder;
+			*(class Actor**)params = PickupHolder;
 			*(class Pawn**)&params[4] = P;
 			*(class Controller**)&params[8] = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -116,19 +116,19 @@ namespace UnrealScript
 		}
 		float DetourWeight(class Pawn* Other, float PathWeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.DetourWeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113217);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			*(float*)&params[4] = PathWeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		ScriptName GetPowerupStatName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTimedPowerup.GetPowerupStatName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113221);
 			byte params[8] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptName*)&params[0];
+			return *(ScriptName*)params;
 		}
 	};
 }

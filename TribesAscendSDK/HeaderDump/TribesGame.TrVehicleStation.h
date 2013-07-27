@@ -30,11 +30,11 @@ namespace UnrealScript
 	{
 	public:
 		static const auto SPAWNED_VEHICLE_LIST_MASK = 0xF;
-		class VehicleSpawnInfo
+		struct VehicleSpawnInfo
 		{
 		public:
-			ADD_STRUCT(Object::Rotator, m_rSpawnRotOffset, 20)
-			ADD_STRUCT(Object::Vector, m_vSpawnLocOffset, 8)
+			ADD_STRUCT(Rotator, m_rSpawnRotOffset, 20)
+			ADD_STRUCT(Vector, m_vSpawnLocOffset, 8)
 			ADD_STRUCT(int, m_nMaxCount, 4)
 			ADD_OBJECT(ScriptClass, m_VehicleClass, 0)
 		};
@@ -54,129 +54,129 @@ namespace UnrealScript
 		ADD_STRUCT(TrVehicleStation::VehicleSpawnInfo, m_SpawnList, 1396)
 		bool RequestSpawnVehicle(TrObject::EVehicleTypes VehicleType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.RequestSpawnVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(76897);
 			byte params[5] = { NULL };
-			*(TrObject::EVehicleTypes*)&params[0] = VehicleType;
+			*(TrObject::EVehicleTypes*)params = VehicleType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		int GetNumVehiclesSpawnedByType(TrObject::EVehicleTypes VehicleType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.GetNumVehiclesSpawnedByType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77814);
 			byte params[5] = { NULL };
-			*(TrObject::EVehicleTypes*)&params[0] = VehicleType;
+			*(TrObject::EVehicleTypes*)params = VehicleType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int GetMaxVehicleCountAllowed(TrObject::EVehicleTypes VehicleType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.GetMaxVehicleCountAllowed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77816);
 			byte params[5] = { NULL };
-			*(TrObject::EVehicleTypes*)&params[0] = VehicleType;
+			*(TrObject::EVehicleTypes*)params = VehicleType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(114999);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115001);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnEnteredStation(class TrPawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PawnEnteredStation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115003);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = P;
+			*(class TrPawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnLeftStation(class TrPawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PawnLeftStation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115007);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = P;
+			*(class TrPawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayStationEnteredEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PlayStationEnteredEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115009);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayStationLeftEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PlayStationLeftEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115011);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayRetractAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PlayRetractAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115012);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayVehiclePadDeployAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PlayVehiclePadDeployAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115013);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayVehiclePadCollapseAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.PlayVehiclePadCollapseAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115014);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpawnVehicle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.SpawnVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115017);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TeleportDriverToVehicle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.TeleportDriverToVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115020);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Unlock()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.Unlock");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115021);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool AbleToSpawnVehicleType(TrObject::EVehicleTypes VehicleType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.AbleToSpawnVehicleType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115022);
 			byte params[5] = { NULL };
-			*(TrObject::EVehicleTypes*)&params[0] = VehicleType;
+			*(TrObject::EVehicleTypes*)params = VehicleType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void AddVehicleToPackedList(TrObject::EVehicleTypes VehicleType, int Num)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.AddVehicleToPackedList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115029);
 			byte params[5] = { NULL };
-			*(TrObject::EVehicleTypes*)&params[0] = VehicleType;
+			*(TrObject::EVehicleTypes*)params = VehicleType;
 			*(int*)&params[4] = Num;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Texture2D* GetMarker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.GetMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115034);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Texture2D**)&params[0];
+			return *(class Texture2D**)params;
 		}
 		bool ShouldPostRenderForCaH()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleStation.ShouldPostRenderForCaH");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115036);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

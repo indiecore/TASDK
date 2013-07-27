@@ -16,8 +16,8 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(ScriptArray<class Object*>, Targets, 304)
 		ADD_OBJECT(Object, FinalTouchObject, 300)
-		ADD_STRUCT(Object::Vector, FinalTouchNormal, 288)
-		ADD_STRUCT(Object::Vector, FinalTouchLocation, 276)
+		ADD_STRUCT(Vector, FinalTouchNormal, 288)
+		ADD_STRUCT(Vector, FinalTouchLocation, 276)
 		ADD_STRUCT(float, TraceDistance, 272)
 	};
 }

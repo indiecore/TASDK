@@ -9,17 +9,17 @@ namespace UnrealScript
 	public:
 		void ScoreKill(class Controller* Killer, class Controller* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRTDM.ScoreKill");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90976);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)params = Killer;
 			*(class Controller**)&params[4] = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CheckScore(class PlayerReplicationInfo* Scorer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TRTDM.CheckScore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90980);
 			byte params[8] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = Scorer;
+			*(class PlayerReplicationInfo**)params = Scorer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

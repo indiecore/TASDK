@@ -13,15 +13,15 @@ namespace UnrealScript
 		ADD_STRUCT(float, PercentBeamVelocityTransfer, 364)
 		ADD_STRUCT(float, SpringDamping, 360)
 		ADD_STRUCT(float, SpringStiffness, 356)
-		ADD_STRUCT(Object::Vector, Velocity, 344)
-		ADD_STRUCT(Object::Vector, InitialWorldSpaceGoalOffset, 332)
-		ADD_STRUCT(Object::Vector, WorldSpaceGoal, 320)
-		Object::Vector EntireBeamVelocity()
+		ADD_STRUCT(Vector, Velocity, 344)
+		ADD_STRUCT(Vector, InitialWorldSpaceGoalOffset, 332)
+		ADD_STRUCT(Vector, WorldSpaceGoal, 320)
+		Vector EntireBeamVelocity()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_CantileverBeam.EntireBeamVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35332);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
 	};
 }

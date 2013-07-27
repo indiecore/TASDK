@@ -12,9 +12,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<float>, ResolutionTestTable, 332)
 		int GetResolutionTestTableIndex(float HeightTest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MultiFont.GetResolutionTestTableIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20669);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = HeightTest;
+			*(float*)params = HeightTest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}

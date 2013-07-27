@@ -13,7 +13,7 @@ namespace UnrealScript
 	class DMC_Prototype : public K2GraphBase
 	{
 	public:
-		class DMCNewVar
+		struct DMCNewVar
 		{
 		public:
 			ADD_STRUCT(ScriptName, VarType, 8)

@@ -26,33 +26,33 @@ namespace UnrealScript
 		ADD_OBJECT(GFxMinimapHud, HUD, 120)
 		void Init(class GFxMinimapHud* H)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrDevices.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51039);
 			byte params[4] = { NULL };
-			*(class GFxMinimapHud**)&params[0] = H;
+			*(class GFxMinimapHud**)params = H;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* GetAmmonClip()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrDevices.GetAmmonClip");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51041);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GFxObject**)&params[0];
+			return *(class GFxObject**)params;
 		}
 		class GFxObject* GetAmmonPool()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrDevices.GetAmmonPool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51043);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GFxObject**)&params[0];
+			return *(class GFxObject**)params;
 		}
 		void UpdateData()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrDevices.UpdateData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51045);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Update()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrDevices.Update");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51046);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

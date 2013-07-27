@@ -45,7 +45,7 @@ namespace UnrealScript
 			PRR_ReservationDenied = 7,
 			PRR_MAX = 8,
 		};
-		class PlayerReservation
+		struct PlayerReservation
 		{
 		public:
 			ADD_STRUCT(float, ElapsedSessionTime, 32)
@@ -55,7 +55,7 @@ namespace UnrealScript
 			ADD_STRUCT(int, Skill, 8)
 			ADD_STRUCT(OnlineSubsystem::UniqueNetId, NetId, 0)
 		};
-		class PartyReservation
+		struct PartyReservation
 		{
 		public:
 			ADD_STRUCT(ScriptArray<PartyBeacon::PlayerReservation>, PartyMembers, 12)
@@ -73,12 +73,12 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_FTickableObject, 60)
 		void OnDestroyComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeacon.OnDestroyComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33885);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DestroyBeacon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.PartyBeacon.DestroyBeacon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33909);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

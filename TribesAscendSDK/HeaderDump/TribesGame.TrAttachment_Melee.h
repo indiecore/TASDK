@@ -8,21 +8,21 @@ namespace UnrealScript
 	class TrAttachment_Melee : public TrDeviceAttachment
 	{
 	public:
-		void PlayImpactSound(class Actor* HitActor, class SoundCue* SoundToPlay, Object::Vector FireDir, Object::Vector HitLocation)
+		void PlayImpactSound(class Actor* HitActor, class SoundCue* SoundToPlay, Vector FireDir, Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_Melee.PlayImpactSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68481);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = HitActor;
+			*(class Actor**)params = HitActor;
 			*(class SoundCue**)&params[4] = SoundToPlay;
-			*(Object::Vector*)&params[8] = FireDir;
-			*(Object::Vector*)&params[20] = HitLocation;
+			*(Vector*)&params[8] = FireDir;
+			*(Vector*)&params[20] = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PlayImpactEffects(Object::Vector HitLocation)
+		void PlayImpactEffects(Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_Melee.PlayImpactEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68488);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
+			*(Vector*)params = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -24,20 +24,20 @@ namespace UnrealScript
 	class SeqAct_Trace : public SequenceAction
 	{
 	public:
-		ADD_STRUCT(Object::Vector, HitLocation, 280)
+		ADD_STRUCT(Vector, HitLocation, 280)
 		ADD_STRUCT(float, Distance, 276)
 		ADD_OBJECT(Object, HitObject, 272)
-		ADD_STRUCT(Object::Vector, EndOffset, 260)
-		ADD_STRUCT(Object::Vector, StartOffset, 248)
-		ADD_STRUCT(Object::Vector, TraceExtent, 236)
+		ADD_STRUCT(Vector, EndOffset, 260)
+		ADD_STRUCT(Vector, StartOffset, 248)
+		ADD_STRUCT(Vector, TraceExtent, 236)
 		ADD_BOOL(bTraceWorld, 232, 0x2)
 		ADD_BOOL(bTraceActors, 232, 0x1)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Trace.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26004);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

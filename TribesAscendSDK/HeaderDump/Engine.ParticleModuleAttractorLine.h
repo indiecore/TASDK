@@ -13,8 +13,8 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(DistributionFloat::RawDistributionFloat, Strength, 124)
 		ADD_STRUCT(DistributionFloat::RawDistributionFloat, Range, 96)
-		ADD_STRUCT(Object::Vector, EndPoint1, 84)
-		ADD_STRUCT(Object::Vector, EndPoint0, 72)
+		ADD_STRUCT(Vector, EndPoint1, 84)
+		ADD_STRUCT(Vector, EndPoint0, 72)
 	};
 }
 #undef ADD_STRUCT

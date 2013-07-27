@@ -28,85 +28,85 @@ void*>, ClosedAdDelegates, 76)
 		ADD_BOOL(bShouldPauseWhileAdOpen, 60, 0x1)
 		void OnUserClickedBanner()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InGameAdManager.OnUserClickedBanner");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18230);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnUserClosedAdvertisement()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InGameAdManager.OnUserClosedAdvertisement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18233);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Init()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InGameAdManager.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18237);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowBanner(bool bShowBottomOfScreen)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InGameAdManager.ShowBanner");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18238);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bShowBottomOfScreen;
+			*(bool*)params = bShowBottomOfScreen;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HideBanner()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InGameAdManager.HideBanner");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18240);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ForceCloseAd()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InGameAdManager.ForceCloseAd");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18241);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPauseWhileAdOpen(bool bShouldPause)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InGameAdManager.SetPauseWhileAdOpen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18242);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bShouldPause;
+			*(bool*)params = bShouldPause;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddClickedBannerDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InGameAdManager.AddClickedBannerDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18244);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = InDelegate;
+void**)params = InDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearClickedBannerDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InGameAdManager.ClearClickedBannerDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18246);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = InDelegate;
+void**)params = InDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddClosedAdDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InGameAdManager.AddClosedAdDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18249);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = InDelegate;
+void**)params = InDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearClosedAdDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InGameAdManager.ClearClosedAdDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18251);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = InDelegate;
+void**)params = InDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

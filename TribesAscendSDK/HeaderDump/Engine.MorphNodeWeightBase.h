@@ -9,7 +9,7 @@ namespace UnrealScript
 	class MorphNodeWeightBase : public MorphNodeBase
 	{
 	public:
-		class MorphNodeConn
+		struct MorphNodeConn
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class MorphNodeBase*>, ChildNodes, 0)

@@ -27,50 +27,50 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fStationZOffset, 1360)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98171);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98172);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98174);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PawnEnteredStation(class TrPawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.PawnEnteredStation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98175);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = P;
+			*(class TrPawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnLeftStation(class TrPawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.PawnLeftStation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98178);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = P;
+			*(class TrPawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayStationEnteredEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.PlayStationEnteredEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98181);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayStationLeftEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.PlayStationLeftEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98184);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool BlocksLineChecksFromSourceActor(class Actor* SourceActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStation.BlocksLineChecksFromSourceActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98185);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = SourceActor;
+			*(class Actor**)params = SourceActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

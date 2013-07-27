@@ -23,13 +23,13 @@ namespace UnrealScript
 	public:
 		ADD_BOOL(bAttractionFalloff, 488, 0x1)
 		ADD_STRUCT(float, Attraction, 484)
-		Object::Vector AppliedForce(class GameCrowdAgent* Agent)
+		Vector AppliedForce(class GameCrowdAgent* Agent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAttractor.AppliedForce");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31213);
 			byte params[16] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = Agent;
+			*(class GameCrowdAgent**)params = Agent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[4];
+			return *(Vector*)&params[4];
 		}
 	};
 }

@@ -7,12 +7,12 @@ namespace UnrealScript
 	public:
 		void OnViewActivated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InstantAction.OnViewActivated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38365);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnStartGame_Confirm()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InstantAction.OnStartGame_Confirm");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38366);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

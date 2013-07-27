@@ -63,16 +63,16 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, ControlName, 96)
 		void SetSkelControlActive(bool bInActive)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlBase.SetSkelControlActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26298);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bInActive;
+			*(bool*)params = bInActive;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSkelControlStrength(float NewStrength, float InBlendTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlBase.SetSkelControlStrength");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26300);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = NewStrength;
+			*(float*)params = NewStrength;
 			*(float*)&params[4] = InBlendTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -80,9 +80,9 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlBase.TickSkelControl");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26303);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = SkelComp;

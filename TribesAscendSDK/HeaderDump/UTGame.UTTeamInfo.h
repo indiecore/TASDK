@@ -29,95 +29,95 @@ namespace UnrealScript
 		ADD_STRUCT(int, DesiredTeamSize, 504)
 		UTCharInfo::CharacterInfo GetBotInfo(ScriptString* BotName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.GetBotInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44823);
 			byte params[124] = { NULL };
-			*(ScriptString**)&params[0] = BotName;
+			*(ScriptString**)params = BotName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(UTCharInfo::CharacterInfo*)&params[12];
 		}
 		bool AllBotsSpawned()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.AllBotsSpawned");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45171);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		Object::Color GetHUDColor()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.GetHUDColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45835);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Color*)&params[0];
+			return *(Object::Color*)params;
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47144);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetHumanReadableName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.GetHumanReadableName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47147);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47149);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Initialize(int NewTeamIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47150);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = NewTeamIndex;
+			*(int*)params = NewTeamIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool NeedsBotMoreThan(class UTTeamInfo* T)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.NeedsBotMoreThan");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47152);
 			byte params[8] = { NULL };
-			*(class UTTeamInfo**)&params[0] = T;
+			*(class UTTeamInfo**)params = T;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void SetBotOrders(class UTBot* NewBot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.SetBotOrders");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47155);
 			byte params[4] = { NULL };
-			*(class UTBot**)&params[0] = NewBot;
+			*(class UTBot**)params = NewBot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveFromTeam(class Controller* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.RemoveFromTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47157);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = Other;
+			*(class Controller**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool BotNameTaken(ScriptString* BotName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.BotNameTaken");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47159);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = BotName;
+			*(ScriptString**)params = BotName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void GetAvailableBotList(ScriptArray<int>& AvailableBots, ScriptString* FactionFilter, bool bMalesOnly)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.GetAvailableBotList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47165);
 			byte params[28] = { NULL };
-			*(ScriptArray<int>*)&params[0] = AvailableBots;
+			*(ScriptArray<int>*)params = AvailableBots;
 			*(ScriptString**)&params[12] = FactionFilter;
 			*(bool*)&params[24] = bMalesOnly;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			AvailableBots = *(ScriptArray<int>*)&params[0];
+			AvailableBots = *(ScriptArray<int>*)params;
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamInfo.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47176);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

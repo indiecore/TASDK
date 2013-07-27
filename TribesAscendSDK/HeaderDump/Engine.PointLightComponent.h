@@ -13,28 +13,28 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(EngineTypes::LightmassPointLightSettings, LightmassSettings, 564)
 		ADD_STRUCT(Object::Plane, ShadowPlane, 544)
-		ADD_STRUCT(Object::Vector, Translation, 528)
+		ADD_STRUCT(Vector, Translation, 528)
 		ADD_STRUCT(Object::Matrix, CachedParentToWorld, 464)
 		ADD_STRUCT(float, MinShadowFalloffRadius, 448)
 		ADD_STRUCT(float, ShadowFalloffExponent, 444)
 		ADD_STRUCT(float, FalloffExponent, 440)
 		ADD_STRUCT(float, Radius, 436)
 		ADD_STRUCT(float, ShadowRadiusMultiplier, 432)
-		void SetTranslation(Object::Vector NewTranslation)
+		void SetTranslation(Vector NewTranslation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PointLightComponent.SetTranslation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14634);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewTranslation;
+			*(Vector*)params = NewTranslation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUpdatePropertyLightColor()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PointLightComponent.OnUpdatePropertyLightColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14636);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnUpdatePropertyBrightness()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PointLightComponent.OnUpdatePropertyBrightness");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14637);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

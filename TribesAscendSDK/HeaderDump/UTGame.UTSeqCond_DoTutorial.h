@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqCond_DoTutorial.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49173);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -23,7 +23,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(float, LastFired, 728)
-		ADD_STRUCT(Object::Vector, TargetVelocity, 716)
+		ADD_STRUCT(Vector, TargetVelocity, 716)
 		ADD_BOOL(bCanTeleportVehicles, 712, 0x40)
 		ADD_BOOL(bEnabled, 712, 0x20)
 		ADD_BOOL(bReversesZ, 712, 0x10)
@@ -35,52 +35,52 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, URL, 692)
 		bool CanTeleport(class Actor* A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Teleporter.CanTeleport");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27737);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = A;
+			*(class Actor**)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Teleporter.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27740);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool Accept(class Actor* Incoming, class Actor* Source)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Teleporter.Accept");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27741);
 			byte params[12] = { NULL };
-			*(class Actor**)&params[0] = Incoming;
+			*(class Actor**)params = Incoming;
 			*(class Actor**)&params[4] = Source;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Teleporter.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27750);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostTouch(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Teleporter.PostTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27755);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Actor* SpecialHandling(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Teleporter.SpecialHandling");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27760);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[4];
 		}

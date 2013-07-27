@@ -26,7 +26,7 @@ namespace UnrealScript
 	class UIDataStore_GameResource : public UIDataStore
 	{
 	public:
-		class GameResourceDataProvider
+		struct GameResourceDataProvider
 		{
 		public:
 			ADD_OBJECT(ScriptClass, ProviderClass, 24)
@@ -39,34 +39,34 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementProvider, 120)
 		int FindProviderTypeIndex(ScriptName ProviderTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_GameResource.FindProviderTypeIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28526);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		ScriptName GenerateProviderAccessTag(int ProviderIndex, int InstanceIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_GameResource.GenerateProviderAccessTag");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28529);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = ProviderIndex;
+			*(int*)params = ProviderIndex;
 			*(int*)&params[4] = InstanceIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[8];
 		}
 		int GetProviderCount(ScriptName ProviderTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_GameResource.GetProviderCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28533);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		bool GetResourceProviders(ScriptName ProviderTag, ScriptArray<class UIResourceDataProvider*>& out_Providers)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_GameResource.GetResourceProviders");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28536);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			*(ScriptArray<class UIResourceDataProvider*>*)&params[8] = out_Providers;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			out_Providers = *(ScriptArray<class UIResourceDataProvider*>*)&params[8];
@@ -74,9 +74,9 @@ namespace UnrealScript
 		}
 		bool GetResourceProviderFields(ScriptName ProviderTag, ScriptArray<ScriptName>& ProviderFieldTags)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_GameResource.GetResourceProviderFields");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28541);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			*(ScriptArray<ScriptName>*)&params[8] = ProviderFieldTags;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ProviderFieldTags = *(ScriptArray<ScriptName>*)&params[8];
@@ -84,9 +84,9 @@ namespace UnrealScript
 		}
 		bool GetProviderFieldValue(ScriptName ProviderTag, ScriptName SearchField, int ProviderIndex, UIRoot::UIProviderScriptFieldValue& out_FieldValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_GameResource.GetProviderFieldValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28546);
 			byte params[108] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			*(ScriptName*)&params[8] = SearchField;
 			*(int*)&params[16] = ProviderIndex;
 			*(UIRoot::UIProviderScriptFieldValue*)&params[20] = out_FieldValue;
@@ -96,9 +96,9 @@ namespace UnrealScript
 		}
 		int FindProviderIndexByFieldValue(ScriptName ProviderTag, ScriptName SearchField, UIRoot::UIProviderScriptFieldValue& ValueToSearchFor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_GameResource.FindProviderIndexByFieldValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28552);
 			byte params[104] = { NULL };
-			*(ScriptName*)&params[0] = ProviderTag;
+			*(ScriptName*)params = ProviderTag;
 			*(ScriptName*)&params[8] = SearchField;
 			*(UIRoot::UIProviderScriptFieldValue*)&params[16] = ValueToSearchFor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

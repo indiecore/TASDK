@@ -39,9 +39,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, JumpLeanStrength, 316)
 		void SetLeanWeight(float WeightTarget, float BlendTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimNodeJumpLeanOffset.SetLeanWeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34603);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = WeightTarget;
+			*(float*)params = WeightTarget;
 			*(float*)&params[4] = BlendTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

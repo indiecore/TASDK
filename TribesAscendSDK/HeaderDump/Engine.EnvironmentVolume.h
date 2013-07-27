@@ -25,9 +25,9 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IInterface_NavMeshPathObstacle, 520)
 		void SetSplitNavMesh(bool bNewValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EnvironmentVolume.SetSplitNavMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15594);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewValue;
+			*(bool*)params = bNewValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

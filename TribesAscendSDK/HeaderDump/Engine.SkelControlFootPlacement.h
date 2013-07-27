@@ -26,7 +26,7 @@ namespace UnrealScript
 		ADD_BOOL(bOnlyEnableForUpAdjustment, 272, 0x4)
 		ADD_BOOL(bOrientFootToGround, 272, 0x2)
 		ADD_BOOL(bInvertFootUpAxis, 272, 0x1)
-		ADD_STRUCT(Object::Rotator, FootRotOffset, 260)
+		ADD_STRUCT(Rotator, FootRotOffset, 260)
 		ADD_STRUCT(Object::EAxis, FootUpAxis, 256)
 		ADD_STRUCT(float, FootOffset, 252)
 	};

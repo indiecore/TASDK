@@ -32,29 +32,29 @@ namespace UnrealScript
 		ADD_STRUCT(byte, m_DefenderTeamIndex, 484)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamBlockerStaticMeshActor.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113113);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisableBlocking()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamBlockerStaticMeshActor.DisableBlocking");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113114);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EnableBlocking()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamBlockerStaticMeshActor.EnableBlocking");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113115);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateMaterialForPawn(class TrPawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamBlockerStaticMeshActor.UpdateMaterialForPawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113116);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = P;
+			*(class TrPawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateMICs()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamBlockerStaticMeshActor.CreateMICs");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113119);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

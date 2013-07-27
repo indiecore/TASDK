@@ -26,7 +26,7 @@ namespace UnrealScript
 	class GFxTrScene_MatchSummary : public GFxTrScene
 	{
 	public:
-		class ScoreSlot
+		struct ScoreSlot
 		{
 		public:
 			ADD_STRUCT(ScriptString*, PlayerName, 20)
@@ -60,79 +60,79 @@ namespace UnrealScript
 		ADD_STRUCT(int, SCOREBOARD_SIZE, 132)
 		int CreditsSort(class TrPlayerReplicationInfo* A, class TrPlayerReplicationInfo* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.CreditsSort");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63292);
 			byte params[12] = { NULL };
-			*(class TrPlayerReplicationInfo**)&params[0] = A;
+			*(class TrPlayerReplicationInfo**)params = A;
 			*(class TrPlayerReplicationInfo**)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63312);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearSummary()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.ClearSummary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63313);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SummaryReady()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.SummaryReady");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63315);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LoadTeamStatsData(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.LoadTeamStatsData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63604);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadTeamAccoladeData(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.LoadTeamAccoladeData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63609);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadTeamScoreboardData(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.LoadTeamScoreboardData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63612);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadTeamMiscData(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.LoadTeamMiscData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63615);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddAward(int PlayerID, int AwardId, int val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.AddAward");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63617);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PlayerID;
+			*(int*)params = PlayerID;
 			*(int*)&params[4] = AwardId;
 			*(int*)&params[8] = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddAccolade(int PlayerID, int AccoladeId, int val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.AddAccolade");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63630);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PlayerID;
+			*(int*)params = PlayerID;
 			*(int*)&params[4] = AccoladeId;
 			*(int*)&params[8] = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddScoreSlot(ScriptString* PlayerName, int Kills, int Assists, int Credits, int Rank)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.AddScoreSlot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63638);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			*(int*)&params[12] = Kills;
 			*(int*)&params[16] = Assists;
 			*(int*)&params[20] = Credits;
@@ -141,36 +141,36 @@ namespace UnrealScript
 		}
 		void AddMiscData()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.AddMiscData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63645);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* FormatResult(int aWinningTeam)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.FormatResult");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63647);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = aWinningTeam;
+			*(int*)params = aWinningTeam;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptString* FormatTime(int Seconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.FormatTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63652);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Seconds;
+			*(int*)params = Seconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptString* FindPlayerName(int PlayerID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.FindPlayerName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63658);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = PlayerID;
+			*(int*)params = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		void PopulateScoreboardDataFromGRI()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_MatchSummary.PopulateScoreboardDataFromGRI");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63662);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -26,7 +26,7 @@ namespace UnrealScript
 	class FracturedStaticMeshComponent : public FracturedBaseComponent
 	{
 	public:
-		class FragmentGroup
+		struct FragmentGroup
 		{
 		public:
 			ADD_STRUCT(ScriptArray<int>, FragmentIndices, 0)
@@ -44,86 +44,86 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Box, VisibleBox, 652)
 		void SetVisibleFragments(ScriptArray<byte> VisibilityFactors)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshComponent.SetVisibleFragments");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16040);
 			byte params[12] = { NULL };
-			*(ScriptArray<byte>*)&params[0] = VisibilityFactors;
+			*(ScriptArray<byte>*)params = VisibilityFactors;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsFragmentDestroyable(int FragmentIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshComponent.IsFragmentDestroyable");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16043);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = FragmentIndex;
+			*(int*)params = FragmentIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool IsRootFragment(int FragmentIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshComponent.IsRootFragment");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16046);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = FragmentIndex;
+			*(int*)params = FragmentIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool IsNoPhysFragment(int FragmentIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshComponent.IsNoPhysFragment");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16049);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = FragmentIndex;
+			*(int*)params = FragmentIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		Object::Box GetFragmentBox(int FragmentIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshComponent.GetFragmentBox");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16052);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = FragmentIndex;
+			*(int*)params = FragmentIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Box*)&params[4];
 		}
-		Object::Vector GetFragmentAverageExteriorNormal(int FragmentIndex)
+		Vector GetFragmentAverageExteriorNormal(int FragmentIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshComponent.GetFragmentAverageExteriorNormal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16055);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = FragmentIndex;
+			*(int*)params = FragmentIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[4];
+			return *(Vector*)&params[4];
 		}
 		int GetCoreFragmentIndex()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshComponent.GetCoreFragmentIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16058);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		ScriptArray<FracturedStaticMeshComponent::FragmentGroup> GetFragmentGroups(ScriptArray<int> IgnoreFragments, float MinConnectionArea)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshComponent.GetFragmentGroups");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16060);
 			byte params[28] = { NULL };
-			*(ScriptArray<int>*)&params[0] = IgnoreFragments;
+			*(ScriptArray<int>*)params = IgnoreFragments;
 			*(float*)&params[12] = MinConnectionArea;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptArray<FracturedStaticMeshComponent::FragmentGroup>*)&params[16];
 		}
 		ScriptArray<int> GetBoundaryHiddenFragments(ScriptArray<int> AdditionalVisibleFragments)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshComponent.GetBoundaryHiddenFragments");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16066);
 			byte params[24] = { NULL };
-			*(ScriptArray<int>*)&params[0] = AdditionalVisibleFragments;
+			*(ScriptArray<int>*)params = AdditionalVisibleFragments;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptArray<int>*)&params[12];
 		}
 		void RecreatePhysState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshComponent.RecreatePhysState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16071);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class PhysicalMaterial* GetFracturedMeshPhysMaterial()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedStaticMeshComponent.GetFracturedMeshPhysMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16072);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class PhysicalMaterial**)&params[0];
+			return *(class PhysicalMaterial**)params;
 		}
 	};
 }

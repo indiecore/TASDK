@@ -15,13 +15,13 @@ namespace UnrealScript
 	class AITree : public K2GraphBase
 	{
 	public:
-		class AITreeUtilityInfo
+		struct AITreeUtilityInfo
 		{
 		public:
 			ADD_STRUCT(float, UtilityRating, 4)
 			ADD_OBJECT(ScriptClass, CommandClass, 0)
 		};
-		class AITreeHandle
+		struct AITreeHandle
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class AICommandNodeBase*>, DisabledNodes, 12)
@@ -34,9 +34,9 @@ namespace UnrealScript
 		ADD_OBJECT(K2GraphBase, GatherList, 84)
 		bool SetActiveRoot(ScriptName InName, AITree::AITreeHandle& Handle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree.SetActiveRoot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9992);
 			byte params[60] = { NULL };
-			*(ScriptName*)&params[0] = InName;
+			*(ScriptName*)params = InName;
 			*(AITree::AITreeHandle*)&params[8] = Handle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Handle = *(AITree::AITreeHandle*)&params[8];
@@ -44,9 +44,9 @@ namespace UnrealScript
 		}
 		ScriptArray<ScriptClass*> EvaluateTree(class AIController* InAI, AITree::AITreeHandle& Handle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AITree.EvaluateTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9996);
 			byte params[64] = { NULL };
-			*(class AIController**)&params[0] = InAI;
+			*(class AIController**)params = InAI;
 			*(AITree::AITreeHandle*)&params[4] = Handle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Handle = *(AITree::AITreeHandle*)&params[4];

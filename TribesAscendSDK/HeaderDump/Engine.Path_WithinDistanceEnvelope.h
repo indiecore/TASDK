@@ -21,18 +21,18 @@ namespace UnrealScript
 	class Path_WithinDistanceEnvelope : public PathConstraint
 	{
 	public:
-		ADD_STRUCT(Object::Vector, EnvelopeTestPoint, 84)
+		ADD_STRUCT(Vector, EnvelopeTestPoint, 84)
 		ADD_STRUCT(float, SoftStartPenalty, 80)
 		ADD_BOOL(bOnlyThrowOutNodesThatLeaveEnvelope, 76, 0x2)
 		ADD_BOOL(bSoft, 76, 0x1)
 		ADD_STRUCT(float, MinDistance, 72)
 		ADD_STRUCT(float, MaxDistance, 68)
-		bool StayWithinEnvelopeToLoc(class Pawn* P, Object::Vector InEnvelopeTestPoint, float InMaxDistance, float InMinDistance, bool bInSoft, float InSoftStartPenalty, bool bOnlyTossOutSpecsThatLeave)
+		bool StayWithinEnvelopeToLoc(class Pawn* P, Vector InEnvelopeTestPoint, float InMaxDistance, float InMinDistance, bool bInSoft, float InSoftStartPenalty, bool bOnlyTossOutSpecsThatLeave)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_WithinDistanceEnvelope.StayWithinEnvelopeToLoc");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24004);
 			byte params[40] = { NULL };
-			*(class Pawn**)&params[0] = P;
-			*(Object::Vector*)&params[4] = InEnvelopeTestPoint;
+			*(class Pawn**)params = P;
+			*(Vector*)&params[4] = InEnvelopeTestPoint;
 			*(float*)&params[16] = InMaxDistance;
 			*(float*)&params[20] = InMinDistance;
 			*(bool*)&params[24] = bInSoft;
@@ -43,7 +43,7 @@ namespace UnrealScript
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_WithinDistanceEnvelope.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24014);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

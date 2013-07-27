@@ -53,78 +53,78 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, BoneSpring, 100)
 		ADD_STRUCT(Object::Pointer, BodyData, 96)
 		ADD_STRUCT(int, SceneIndex, 92)
-		ADD_STRUCT(Object::Vector, PreviousVelocity, 80)
-		ADD_STRUCT(Object::Vector, Velocity, 68)
+		ADD_STRUCT(Vector, PreviousVelocity, 80)
+		ADD_STRUCT(Vector, Velocity, 68)
 		ADD_STRUCT(int, BodyIndex, 64)
 		bool IsFixed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.IsFixed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7324);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SetFixed(bool bNewFixed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetFixed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7326);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewFixed;
+			*(bool*)params = bNewFixed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetBodyMass()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetBodyMass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19049);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		bool IsValidBodyInstance()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.IsValidBodyInstance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24992);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		class PhysicsAssetInstance* GetPhysicsAssetInstance()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetPhysicsAssetInstance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24994);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class PhysicsAssetInstance**)&params[0];
+			return *(class PhysicsAssetInstance**)params;
 		}
 		Object::Matrix GetUnrealWorldTM()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetUnrealWorldTM");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24996);
 			byte params[64] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Matrix*)&params[0];
+			return *(Object::Matrix*)params;
 		}
-		Object::Vector GetUnrealWorldVelocity()
+		Vector GetUnrealWorldVelocity()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetUnrealWorldVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24998);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
-		Object::Vector GetUnrealWorldAngularVelocity()
+		Vector GetUnrealWorldAngularVelocity()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetUnrealWorldAngularVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25000);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
-		Object::Vector GetUnrealWorldVelocityAtPoint(Object::Vector Point)
+		Vector GetUnrealWorldVelocityAtPoint(Vector Point)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.GetUnrealWorldVelocityAtPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25002);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = Point;
+			*(Vector*)params = Point;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[12];
+			return *(Vector*)&params[12];
 		}
 		void EnableBoneSpring(bool bInEnableLinear, bool bInEnableAngular, Object::Matrix& InBoneTarget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.EnableBoneSpring");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25005);
 			byte params[72] = { NULL };
-			*(bool*)&params[0] = bInEnableLinear;
+			*(bool*)params = bInEnableLinear;
 			*(bool*)&params[4] = bInEnableAngular;
 			*(Object::Matrix*)&params[16] = InBoneTarget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -132,9 +132,9 @@ namespace UnrealScript
 		}
 		void SetBoneSpringParams(float InLinearSpring, float InLinearDamping, float InAngularSpring, float InAngularDamping)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetBoneSpringParams");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25009);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = InLinearSpring;
+			*(float*)params = InLinearSpring;
 			*(float*)&params[4] = InLinearDamping;
 			*(float*)&params[8] = InAngularSpring;
 			*(float*)&params[12] = InAngularDamping;
@@ -142,51 +142,51 @@ namespace UnrealScript
 		}
 		void SetBoneSpringTarget(Object::Matrix& InBoneTarget, bool bTeleport)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetBoneSpringTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25014);
 			byte params[68] = { NULL };
-			*(Object::Matrix*)&params[0] = InBoneTarget;
+			*(Object::Matrix*)params = InBoneTarget;
 			*(bool*)&params[64] = bTeleport;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			InBoneTarget = *(Object::Matrix*)&params[0];
+			InBoneTarget = *(Object::Matrix*)params;
 		}
 		void SetBlockRigidBody(bool bNewBlockRigidBody)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetBlockRigidBody");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25017);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewBlockRigidBody;
+			*(bool*)params = bNewBlockRigidBody;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPhysMaterialOverride(class PhysicalMaterial* NewPhysMaterial)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetPhysMaterialOverride");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25019);
 			byte params[4] = { NULL };
-			*(class PhysicalMaterial**)&params[0] = NewPhysMaterial;
+			*(class PhysicalMaterial**)params = NewPhysMaterial;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EnableCollisionResponse(bool bEnableResponse)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.EnableCollisionResponse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25021);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnableResponse;
+			*(bool*)params = bEnableResponse;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetContactReportForceThreshold(float Threshold)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.SetContactReportForceThreshold");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25023);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = Threshold;
+			*(float*)params = Threshold;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateMassProperties(class RB_BodySetup* Setup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.UpdateMassProperties");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25025);
 			byte params[4] = { NULL };
-			*(class RB_BodySetup**)&params[0] = Setup;
+			*(class RB_BodySetup**)params = Setup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateDampingProperties()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_BodyInstance.UpdateDampingProperties");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25027);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

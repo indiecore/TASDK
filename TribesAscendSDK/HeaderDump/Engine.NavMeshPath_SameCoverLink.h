@@ -14,15 +14,15 @@ namespace UnrealScript
 		ADD_OBJECT(CoverLink, TestLink, 80)
 		void SameCoverLink(class NavigationHandle* NavHandle, class CoverLink* InLink)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_SameCoverLink.SameCoverLink");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21072);
 			byte params[8] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
+			*(class NavigationHandle**)params = NavHandle;
 			*(class CoverLink**)&params[4] = InLink;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_SameCoverLink.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21076);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

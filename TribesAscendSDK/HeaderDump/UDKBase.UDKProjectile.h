@@ -32,7 +32,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, TerminalVelocity, 580)
 		ADD_STRUCT(float, LockWarningInterval, 576)
 		ADD_STRUCT(float, LastLockWarningTime, 572)
-		ADD_STRUCT(Object::Vector, InitialDir, 560)
+		ADD_STRUCT(Vector, InitialDir, 560)
 		ADD_STRUCT(float, HomingTrackingStrength, 556)
 		ADD_STRUCT(float, BaseTrackingStrength, 552)
 		ADD_OBJECT(Actor, SeekTarget, 548)
@@ -44,14 +44,14 @@ namespace UnrealScript
 		ADD_BOOL(bWideCheck, 536, 0x1)
 		float GetTerminalVelocity()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKProjectile.GetTerminalVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35306);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void CreateProjectileLight()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKProjectile.CreateProjectileLight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35308);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

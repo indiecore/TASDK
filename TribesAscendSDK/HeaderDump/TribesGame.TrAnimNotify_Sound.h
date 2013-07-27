@@ -13,7 +13,7 @@ namespace UnrealScript
 	class TrAnimNotify_Sound : public AnimNotify_Sound
 	{
 	public:
-		class DeviceOverride
+		struct DeviceOverride
 		{
 		public:
 			ADD_OBJECT(ScriptClass, DeviceClass, 4)

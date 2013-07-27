@@ -60,127 +60,127 @@ namespace UnrealScript
 		ADD_BOOL(bWasOptionalSet, 672, 0x4)
 		ADD_BOOL(bCanThrow, 672, 0x2)
 		ADD_BOOL(bWeaponPutDown, 672, 0x1)
-		ADD_STRUCT(Object::Vector, FireOffset, 660)
+		ADD_STRUCT(Vector, FireOffset, 660)
 		ADD_STRUCT(float, PutDownTime, 656)
 		ADD_STRUCT(float, EquipTime, 652)
 		float GetTraceRange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetTraceRange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(8466);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		bool HasAnyAmmo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.HasAnyAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18883);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		float GetAIRating()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetAIRating");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18885);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetWeaponRating()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetWeaponRating");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18894);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		bool TryPutDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.TryPutDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18915);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool DenyClientWeaponSet()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.DenyClientWeaponSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18929);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool CanAttack(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.CanAttack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20152);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool FireOnRelease()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.FireOnRelease");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20159);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool IsFiring()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.IsFiring");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20165);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool CanThrow()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.CanThrow");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20471);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29299);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ItemRemovedFromInvManager()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ItemRemovedFromInvManager");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29300);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HolderDied()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.HolderDied");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29301);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool DoOverrideNextWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.DoOverrideNextWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29302);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool DoOverridePrevWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.DoOverridePrevWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29304);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
-		void DropFrom(Object::Vector StartLocation, Object::Vector StartVelocity)
+		void DropFrom(Vector StartLocation, Vector StartVelocity)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.DropFrom");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29306);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = StartLocation;
-			*(Object::Vector*)&params[12] = StartVelocity;
+			*(Vector*)params = StartLocation;
+			*(Vector*)&params[12] = StartVelocity;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientWeaponThrown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ClientWeaponThrown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29309);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.DisplayDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29310);
 			byte params[12] = { NULL };
-			*(class HUD**)&params[0] = HUD;
+			*(class HUD**)params = HUD;
 			*(float*)&params[4] = out_YL;
 			*(float*)&params[8] = out_YPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -189,101 +189,101 @@ namespace UnrealScript
 		}
 		void GetWeaponDebug(ScriptArray<ScriptString*>& DebugInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetWeaponDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29317);
 			byte params[12] = { NULL };
-			*(ScriptArray<ScriptString*>*)&params[0] = DebugInfo;
+			*(ScriptArray<ScriptString*>*)params = DebugInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			DebugInfo = *(ScriptArray<ScriptString*>*)&params[0];
+			DebugInfo = *(ScriptArray<ScriptString*>*)params;
 		}
 		int GetPendingFireLength()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetPendingFireLength");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29322);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		bool PendingFire(int FireMode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.PendingFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29323);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = FireMode;
+			*(int*)params = FireMode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void ConsumeAmmo(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ConsumeAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29324);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int AddAmmo(int Amount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.AddAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29326);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Amount;
+			*(int*)params = Amount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		bool HasAmmo(byte FireModeNum, int Amount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.HasAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29329);
 			byte params[9] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			*(int*)&params[4] = Amount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void SetPendingFire(int FireMode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.SetPendingFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29336);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = FireMode;
+			*(int*)params = FireMode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearPendingFire(int FireMode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ClearPendingFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29338);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = FireMode;
+			*(int*)params = FireMode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptClass* GetProjectileClass()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetProjectileClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29340);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptClass**)&params[0];
+			return *(ScriptClass**)params;
 		}
-		Object::Rotator AddSpread(Object::Rotator BaseAim)
+		Rotator AddSpread(Rotator BaseAim)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.AddSpread");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29342);
 			byte params[24] = { NULL };
-			*(Object::Rotator*)&params[0] = BaseAim;
+			*(Rotator*)params = BaseAim;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[12];
+			return *(Rotator*)&params[12];
 		}
 		float MaxRange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.MaxRange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29351);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		class AnimNodeSequence* GetWeaponAnimNodeSeq()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetWeaponAnimNodeSeq");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29355);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class AnimNodeSequence**)&params[0];
+			return *(class AnimNodeSequence**)params;
 		}
 		void PlayWeaponAnimation(ScriptName Sequence, float fDesiredDuration, bool bLoop, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelMesh)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.PlayWeaponAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29360);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = Sequence;
+			*(ScriptName*)params = Sequence;
 			*(float*)&params[8] = fDesiredDuration;
 			*(bool*)&params[12] = bLoop;
 			*(
@@ -293,333 +293,333 @@ void**)&params[16] = SkelMesh;
 		}
 		void StopWeaponAnimation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.StopWeaponAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29367);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void PlayFireEffects(byte FireModeNum, Object::Vector HitLocation)
+		void PlayFireEffects(byte FireModeNum, Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.PlayFireEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29369);
 			byte params[13] = { NULL };
-			params[0] = FireModeNum;
-			*(Object::Vector*)&params[4] = HitLocation;
+			*params = FireModeNum;
+			*(Vector*)&params[4] = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopFireEffects(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.StopFireEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29372);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetFireInterval(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetFireInterval");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29374);
 			byte params[5] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		void TimeWeaponFiring(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.TimeWeaponFiring");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29377);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RefireCheckTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.RefireCheckTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29379);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TimeWeaponPutDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.TimeWeaponPutDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29380);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TimeWeaponEquipping()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.TimeWeaponEquipping");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29381);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Activate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.Activate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29382);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PutDownWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.PutDownWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29383);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool DenyPickupQuery(ScriptClass* ItemClass, class Actor* Pickup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.DenyPickupQuery");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29384);
 			byte params[12] = { NULL };
-			*(ScriptClass**)&params[0] = ItemClass;
+			*(ScriptClass**)params = ItemClass;
 			*(class Actor**)&params[4] = Pickup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void WeaponEmpty()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.WeaponEmpty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29388);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void IncrementFlashCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.IncrementFlashCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29389);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearFlashCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ClearFlashCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29390);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SetFlashLocation(Object::Vector HitLocation)
+		void SetFlashLocation(Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.SetFlashLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29391);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
+			*(Vector*)params = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearFlashLocation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ClearFlashLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29393);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AttachWeaponTo(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* MeshCpnt, ScriptName SocketName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.AttachWeaponTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29394);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = MeshCpnt;
+void**)params = MeshCpnt;
 			*(ScriptName*)&params[4] = SocketName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DetachWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.DetachWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29397);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClientGivenTo(class Pawn* NewOwner, bool bDoNotActivate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ClientGivenTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29398);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = NewOwner;
+			*(class Pawn**)params = NewOwner;
 			*(bool*)&params[4] = bDoNotActivate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientWeaponSet(bool bOptionalSet, bool bDoNotActivate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ClientWeaponSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29401);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bOptionalSet;
+			*(bool*)params = bOptionalSet;
 			*(bool*)&params[4] = bDoNotActivate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartFire(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.StartFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29404);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerStartFire(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ServerStartFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29406);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BeginFire(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.BeginFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29408);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopFire(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.StopFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29410);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerStopFire(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ServerStopFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29412);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EndFire(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.EndFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29414);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ForceEndFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ForceEndFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29416);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SendToFiringState(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.SendToFiringState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29419);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetCurrentFireMode(byte FiringModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.SetCurrentFireMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29421);
 			byte params[1] = { NULL };
-			params[0] = FiringModeNum;
+			*params = FiringModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FireModeUpdated(byte FiringMode, bool bViaReplication)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.FireModeUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29423);
 			byte params[5] = { NULL };
-			params[0] = FiringMode;
+			*params = FiringMode;
 			*(bool*)&params[4] = bViaReplication;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FireAmmunition()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.FireAmmunition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29426);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		Object::Rotator GetAdjustedAim(Object::Vector StartFireLoc)
+		Rotator GetAdjustedAim(Vector StartFireLoc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetAdjustedAim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29427);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = StartFireLoc;
+			*(Vector*)params = StartFireLoc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[12];
+			return *(Rotator*)&params[12];
 		}
 		class Actor* GetTraceOwner()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetTraceOwner");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29431);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Actor**)&params[0];
+			return *(class Actor**)params;
 		}
-		Actor::ImpactInfo CalcWeaponFire(Object::Vector StartTrace, Object::Vector EndTrace, ScriptArray<Actor::ImpactInfo>& ImpactList, Object::Vector Extent)
+		Actor::ImpactInfo CalcWeaponFire(Vector StartTrace, Vector EndTrace, ScriptArray<Actor::ImpactInfo>& ImpactList, Vector Extent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.CalcWeaponFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29433);
 			byte params[128] = { NULL };
-			*(Object::Vector*)&params[0] = StartTrace;
-			*(Object::Vector*)&params[12] = EndTrace;
+			*(Vector*)params = StartTrace;
+			*(Vector*)&params[12] = EndTrace;
 			*(ScriptArray<Actor::ImpactInfo>*)&params[24] = ImpactList;
-			*(Object::Vector*)&params[36] = Extent;
+			*(Vector*)&params[36] = Extent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ImpactList = *(ScriptArray<Actor::ImpactInfo>*)&params[24];
 			return *(Actor::ImpactInfo*)&params[48];
 		}
 		bool PassThroughDamage(class Actor* HitActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.PassThroughDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29450);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = HitActor;
+			*(class Actor**)params = HitActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void InstantFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.InstantFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29453);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ProcessInstantHit(byte FiringMode, Actor::ImpactInfo Impact, int NumHits)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ProcessInstantHit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29460);
 			byte params[85] = { NULL };
-			params[0] = FiringMode;
+			*params = FiringMode;
 			*(Actor::ImpactInfo*)&params[4] = Impact;
 			*(int*)&params[84] = NumHits;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Projectile* ProjectileFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ProjectileFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29467);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Projectile**)&params[0];
+			return *(class Projectile**)params;
 		}
 		void CustomFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.CustomFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29475);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		Object::Vector GetMuzzleLoc()
+		Vector GetMuzzleLoc()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetMuzzleLoc");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29476);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
-		Object::Vector GetPhysicalFireStartLoc(Object::Vector AimDir)
+		Vector GetPhysicalFireStartLoc(Vector AimDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetPhysicalFireStartLoc");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29478);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = AimDir;
+			*(Vector*)params = AimDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[12];
+			return *(Vector*)&params[12];
 		}
 		void HandleFinishedFiring()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.HandleFinishedFiring");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29515);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NotifyWeaponFired(byte FireMode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.NotifyWeaponFired");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29516);
 			byte params[1] = { NULL };
-			params[0] = FireMode;
+			*params = FireMode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyWeaponFinishedFiring(byte FireMode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.NotifyWeaponFinishedFiring");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29518);
 			byte params[1] = { NULL };
-			params[0] = FireMode;
+			*params = FireMode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ShouldRefire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.ShouldRefire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29520);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool StillFiring(byte FireMode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.StillFiring");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29522);
 			byte params[5] = { NULL };
-			params[0] = FireMode;
+			*params = FireMode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void WeaponIsDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.WeaponIsDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29541);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CacheAIController()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.CacheAIController");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29548);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float GetTargetDistance()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Weapon.GetTargetDistance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29549);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 	};
 }

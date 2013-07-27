@@ -9,17 +9,17 @@ namespace UnrealScript
 	public:
 		bool WantsPickups(class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDeathmatch.WantsPickups");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(42815);
 			byte params[8] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		int GetHandicapNeed(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDeathmatch.GetHandicapNeed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45130);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}

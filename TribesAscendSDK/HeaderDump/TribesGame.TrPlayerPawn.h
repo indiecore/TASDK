@@ -68,7 +68,7 @@ void*>, m_FootThrusterPSCs, 3268)
 		ADD_STRUCT(float, m_Cam3pZoomInSpeed, 3320)
 		ADD_STRUCT(float, m_Cam3pZoomOutSpeed, 3316)
 		ADD_OBJECT(Actor, m_DeathCamFocus, 3312)
-		ADD_STRUCT(Object::Rotator, m_CamRotOffset, 3300)
+		ADD_STRUCT(Rotator, m_CamRotOffset, 3300)
 		ADD_STRUCT(float, m_fRibbonZVelocity, 3296)
 		ADD_OBJECT(ParticleSystem, m_SonicPunchEffect3p, 3292)
 		ADD_OBJECT(ParticleSystem, m_SonicPunchEffect1p, 3288)
@@ -79,204 +79,204 @@ void*>, m_FootThrusterPSCs, 3268)
 		ADD_STRUCT(float, m_fRemainingJetpackSoundFadeOutTime, 3196)
 		void SetCharacterClassFromInfo(ScriptClass* Info, bool bForce)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.SetCharacterClassFromInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73446);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = Info;
+			*(ScriptClass**)params = Info;
 			*(bool*)&params[4] = bForce;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateEyeHeight(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.UpdateEyeHeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73451);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		ScriptName GetMaterialBelowFeetByLoc(Object::Vector TestLocation)
+		ScriptName GetMaterialBelowFeetByLoc(Vector TestLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.GetMaterialBelowFeetByLoc");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73466);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = TestLocation;
+			*(Vector*)params = TestLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[12];
 		}
 		ScriptName GetMaterialBelowFeet()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.GetMaterialBelowFeet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73477);
 			byte params[8] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptName*)&params[0];
+			return *(ScriptName*)params;
 		}
 		void ActuallyPlayFootstepSound(int FootDown)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.ActuallyPlayFootstepSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73479);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = FootDown;
+			*(int*)params = FootDown;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Object::Vector WeaponBob(float BobDamping, float JumpDamping)
+		Vector WeaponBob(float BobDamping, float JumpDamping)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.WeaponBob");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73488);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = BobDamping;
+			*(float*)params = BobDamping;
 			*(float*)&params[4] = JumpDamping;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[8];
+			return *(Vector*)&params[8];
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73493);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73495);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PlayHardLandingEffect(Object::Vector HitLocation)
+		void PlayHardLandingEffect(Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.PlayHardLandingEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73498);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
+			*(Vector*)params = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlaySonicPunchEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.PlaySonicPunchEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73503);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CreateSkiParticleEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.CreateSkiParticleEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73508);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearSkiParticleEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.ClearSkiParticleEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73516);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlaySkiEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.PlaySkiEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73518);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StopSkiEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.StopSkiEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73520);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CreateJetpackParticleEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.CreateJetpackParticleEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73522);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearJetpackParticleEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.ClearJetpackParticleEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73535);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayJetpackEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.PlayJetpackEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73537);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateJetpackEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.UpdateJetpackEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73540);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StopJetpackEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.StopJetpackEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73542);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayReload(TrObject::TR_EQUIP_POINT EquipPoint)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.PlayReload");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73544);
 			byte params[1] = { NULL };
-			*(TrObject::TR_EQUIP_POINT*)&params[0] = EquipPoint;
+			*(TrObject::TR_EQUIP_POINT*)params = EquipPoint;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73549);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool CalcCamera(float fDeltaTime, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, float& out_FOV)
+		bool CalcCamera(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.CalcCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73551);
 			byte params[36] = { NULL };
-			*(float*)&params[0] = fDeltaTime;
-			*(Object::Vector*)&params[4] = out_CamLoc;
-			*(Object::Rotator*)&params[16] = out_CamRot;
+			*(float*)params = fDeltaTime;
+			*(Vector*)&params[4] = out_CamLoc;
+			*(Rotator*)&params[16] = out_CamRot;
 			*(float*)&params[28] = out_FOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_CamLoc = *(Object::Vector*)&params[4];
-			out_CamRot = *(Object::Rotator*)&params[16];
+			out_CamLoc = *(Vector*)&params[4];
+			out_CamRot = *(Rotator*)&params[16];
 			out_FOV = *(float*)&params[28];
 			return *(bool*)&params[32];
 		}
 		void SetThirdPersonCamera(bool bNewBehindView)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.SetThirdPersonCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73557);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewBehindView;
+			*(bool*)params = bNewBehindView;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool CalcThirdPersonCam(float fDeltaTime, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, float& out_FOV)
+		bool CalcThirdPersonCam(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.CalcThirdPersonCam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73559);
 			byte params[36] = { NULL };
-			*(float*)&params[0] = fDeltaTime;
-			*(Object::Vector*)&params[4] = out_CamLoc;
-			*(Object::Rotator*)&params[16] = out_CamRot;
+			*(float*)params = fDeltaTime;
+			*(Vector*)&params[4] = out_CamLoc;
+			*(Rotator*)&params[16] = out_CamRot;
 			*(float*)&params[28] = out_FOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_CamLoc = *(Object::Vector*)&params[4];
-			out_CamRot = *(Object::Rotator*)&params[16];
+			out_CamLoc = *(Vector*)&params[4];
+			out_CamRot = *(Rotator*)&params[16];
 			out_FOV = *(float*)&params[28];
 			return *(bool*)&params[32];
 		}
-		bool CalcOtherWatchingCam(float fDeltaTime, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, float& out_FOV, class TrPlayerController* WatcherController)
+		bool CalcOtherWatchingCam(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV, class TrPlayerController* WatcherController)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.CalcOtherWatchingCam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73576);
 			byte params[40] = { NULL };
-			*(float*)&params[0] = fDeltaTime;
-			*(Object::Vector*)&params[4] = out_CamLoc;
-			*(Object::Rotator*)&params[16] = out_CamRot;
+			*(float*)params = fDeltaTime;
+			*(Vector*)&params[4] = out_CamLoc;
+			*(Rotator*)&params[16] = out_CamRot;
 			*(float*)&params[28] = out_FOV;
 			*(class TrPlayerController**)&params[32] = WatcherController;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_CamLoc = *(Object::Vector*)&params[4];
-			out_CamRot = *(Object::Rotator*)&params[16];
+			out_CamLoc = *(Vector*)&params[4];
+			out_CamRot = *(Rotator*)&params[16];
 			out_FOV = *(float*)&params[28];
 			return *(bool*)&params[36];
 		}
 		void ClearMeshAnimSeqNodes()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.ClearMeshAnimSeqNodes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73590);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CacheMeshAnimSeqNodes()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.CacheMeshAnimSeqNodes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73591);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SuppressAnimNotifies(bool bSuppress)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerPawn.SuppressAnimNotifies");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73593);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bSuppress;
+			*(bool*)params = bSuppress;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

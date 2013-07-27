@@ -8,9 +8,9 @@ namespace UnrealScript
 	public:
 		void Apply(class Actor* Target, Actor::ImpactInfo Impact)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEffect_Blink.Apply");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87108);
 			byte params[84] = { NULL };
-			*(class Actor**)&params[0] = Target;
+			*(class Actor**)params = Target;
 			*(Actor::ImpactInfo*)&params[4] = Impact;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

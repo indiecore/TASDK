@@ -26,31 +26,31 @@ namespace UnrealScript
 		ADD_STRUCT(int, HealingAmount, 976)
 		void UpdateHUD(class UTHUD* H)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHealthPickupFactory.UpdateHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47961);
 			byte params[4] = { NULL };
-			*(class UTHUD**)&params[0] = H;
+			*(class UTHUD**)params = H;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpawnCopyFor(class Pawn* Recipient)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHealthPickupFactory.SpawnCopyFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47963);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Recipient;
+			*(class Pawn**)params = Recipient;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int HealAmount(class Pawn* Recipient)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHealthPickupFactory.HealAmount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47965);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Recipient;
+			*(class Pawn**)params = Recipient;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		float BotDesireability(class Pawn* P, class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHealthPickupFactory.BotDesireability");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47978);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			*(class Controller**)&params[4] = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];

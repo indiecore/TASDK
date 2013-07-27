@@ -20,9 +20,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, MaxDesireability, 512)
 		float BotDesireability(class Pawn* Bot, class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.BotDesireability");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47275);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = Bot;
+			*(class Pawn**)params = Bot;
 			*(class Controller**)&params[4] = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
@@ -31,35 +31,35 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* NewPickupMesh)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.SetPickupMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47279);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = NewPickupMesh;
+void**)params = NewPickupMesh;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47281);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47282);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DroppedFrom(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.DroppedFrom");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47283);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PickedUpBy(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDroppedItemPickup.PickedUpBy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47285);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

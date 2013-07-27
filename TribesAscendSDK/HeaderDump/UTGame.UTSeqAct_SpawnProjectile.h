@@ -12,7 +12,7 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, ProjectileClass, 232)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_SpawnProjectile.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49146);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -35,9 +35,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, Caption, 132)
 		void RenderObject(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuLabel.RenderObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32667);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -34,7 +34,7 @@ namespace UnrealScript
 	class GFxMinimapHud : public GFxMoviePlayer
 	{
 	public:
-		class MessageRow
+		struct MessageRow
 		{
 		public:
 			ADD_STRUCT(int, Y, 12)
@@ -42,7 +42,7 @@ namespace UnrealScript
 			ADD_OBJECT(GFxObject, TF, 4)
 			ADD_OBJECT(GFxObject, MC, 0)
 		};
-		class HeEnDisplay
+		struct HeEnDisplay
 		{
 		public:
 			ADD_OBJECT(GFxObject, EnergyBarMC, 32)
@@ -93,166 +93,166 @@ namespace UnrealScript
 		ADD_OBJECT(WorldInfo, ThisWorld, 380)
 		void registerMiniMapView(class GFxMinimap* MC, float R)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.registerMiniMapView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37442);
 			byte params[8] = { NULL };
-			*(class GFxMinimap**)&params[0] = MC;
+			*(class GFxMinimap**)params = MC;
 			*(float*)&params[4] = R;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAmmoCountTF(class Weapon* Wep, ScriptString* Ammo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.SetAmmoCountTF");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37445);
 			byte params[16] = { NULL };
-			*(class Weapon**)&params[0] = Wep;
+			*(class Weapon**)params = Wep;
 			*(ScriptString**)&params[4] = Ammo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* CreateMessageRow()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.CreateMessageRow");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37448);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GFxObject**)&params[0];
+			return *(class GFxObject**)params;
 		}
 		class GFxObject* InitMessageRow()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.InitMessageRow");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37450);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GFxObject**)&params[0];
+			return *(class GFxObject**)params;
 		}
 		void Init(class LocalPlayer* Player)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37453);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = Player;
+			*(class LocalPlayer**)params = Player;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadHeEn(GFxMinimapHud::HeEnDisplay& Info, ScriptString* Base)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.LoadHeEn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37457);
 			byte params[48] = { NULL };
-			*(GFxMinimapHud::HeEnDisplay*)&params[0] = Info;
+			*(GFxMinimapHud::HeEnDisplay*)params = Info;
 			*(ScriptString**)&params[36] = Base;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Info = *(GFxMinimapHud::HeEnDisplay*)&params[0];
+			Info = *(GFxMinimapHud::HeEnDisplay*)params;
 		}
 		void UpdateHealth(GFxMinimapHud::HeEnDisplay& Info, float NewHealth, float HealthMax)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.UpdateHealth");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37460);
 			byte params[44] = { NULL };
-			*(GFxMinimapHud::HeEnDisplay*)&params[0] = Info;
+			*(GFxMinimapHud::HeEnDisplay*)params = Info;
 			*(float*)&params[36] = NewHealth;
 			*(float*)&params[40] = HealthMax;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Info = *(GFxMinimapHud::HeEnDisplay*)&params[0];
+			Info = *(GFxMinimapHud::HeEnDisplay*)params;
 		}
 		void UpdateEnergy(GFxMinimapHud::HeEnDisplay& Info, float NewEnergy, float EnergyMax)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.UpdateEnergy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37465);
 			byte params[44] = { NULL };
-			*(GFxMinimapHud::HeEnDisplay*)&params[0] = Info;
+			*(GFxMinimapHud::HeEnDisplay*)params = Info;
 			*(float*)&params[36] = NewEnergy;
 			*(float*)&params[40] = EnergyMax;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Info = *(GFxMinimapHud::HeEnDisplay*)&params[0];
+			Info = *(GFxMinimapHud::HeEnDisplay*)params;
 		}
 		ScriptString* FormatTime(int Seconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.FormatTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37470);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Seconds;
+			*(int*)params = Seconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		void ClearStats(bool clearScores)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.ClearStats");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37476);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = clearScores;
+			*(bool*)params = clearScores;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveMessage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.RemoveMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37479);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddMessage(ScriptString* Type, ScriptString* msg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.AddMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37480);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Type;
+			*(ScriptString**)params = Type;
 			*(ScriptString**)&params[12] = msg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateGameHUD(class UTPlayerReplicationInfo* PRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.UpdateGameHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37486);
 			byte params[4] = { NULL };
-			*(class UTPlayerReplicationInfo**)&params[0] = PRI;
+			*(class UTPlayerReplicationInfo**)params = PRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TickHud(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.TickHud");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37491);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ToggleCrosshair(bool bToggle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.ToggleCrosshair");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37503);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bToggle;
+			*(bool*)params = bToggle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MinimapZoomOut()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.MinimapZoomOut");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37507);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void MinimapZoomIn()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.MinimapZoomIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37508);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DisplayHit(Object::Vector HitDir, int Damage, ScriptClass* DamageType)
+		void DisplayHit(Vector HitDir, int Damage, ScriptClass* DamageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.DisplayHit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37509);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = HitDir;
+			*(Vector*)params = HitDir;
 			*(int*)&params[12] = Damage;
 			*(ScriptClass**)&params[16] = DamageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowMultiKill(int N, ScriptString* msg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.ShowMultiKill");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37523);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = N;
+			*(int*)params = N;
 			*(ScriptString**)&params[4] = msg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetCenterText(ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.SetCenterText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37526);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetRank(class PlayerReplicationInfo* PRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.GetRank");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37528);
 			byte params[16] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = PRI;
+			*(class PlayerReplicationInfo**)params = PRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		void AddDeathMessage(class PlayerReplicationInfo* Killer, class PlayerReplicationInfo* Killed, ScriptClass* Dmg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxMinimapHud.AddDeathMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37533);
 			byte params[12] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = Killer;
+			*(class PlayerReplicationInfo**)params = Killer;
 			*(class PlayerReplicationInfo**)&params[4] = Killed;
 			*(ScriptClass**)&params[8] = Dmg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

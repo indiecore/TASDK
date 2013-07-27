@@ -28,70 +28,70 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80619);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetFlashLocation(Object::Vector HitLocation)
+		void SetFlashLocation(Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.SetFlashLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80621);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
+			*(Vector*)params = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PerformInactiveReload()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.PerformInactiveReload");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80623);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CustomFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.CustomFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80625);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FireAmmunition()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.FireAmmunition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80627);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartFire(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.StartFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80628);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConsumeAmmo(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.ConsumeAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80630);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConsumeAmmo_Internal(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.ConsumeAmmo_Internal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80632);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProcessInstantHit_Internal(byte FiringMode, Actor::ImpactInfo Impact, bool bHeadShot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.ProcessInstantHit_Internal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80634);
 			byte params[85] = { NULL };
-			params[0] = FiringMode;
+			*params = FiringMode;
 			*(Actor::ImpactInfo*)&params[4] = Impact;
 			*(bool*)&params[84] = bHeadShot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnAnimEnd(class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Shotgun.OnAnimEnd");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80638);
 			byte params[12] = { NULL };
-			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			*(class AnimNodeSequence**)params = SeqNode;
 			*(float*)&params[4] = PlayedTime;
 			*(float*)&params[8] = ExcessTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

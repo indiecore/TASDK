@@ -13,9 +13,9 @@ namespace UnrealScript
 		ADD_STRUCT(int, DamageGivenForSelfDestruct, 300)
 		int IncrementKills(class UTPlayerReplicationInfo* KillerPRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDmgType_ScorpionSelfDestruct.IncrementKills");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47121);
 			byte params[8] = { NULL };
-			*(class UTPlayerReplicationInfo**)&params[0] = KillerPRI;
+			*(class UTPlayerReplicationInfo**)params = KillerPRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}

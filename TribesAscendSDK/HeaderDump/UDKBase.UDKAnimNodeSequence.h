@@ -24,25 +24,25 @@ namespace UnrealScript
 		ADD_BOOL(bAutoStart, 320, 0x1)
 		void PlayAnimation(ScriptName Sequence, float SeqRate, bool bSeqLoop)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimNodeSequence.PlayAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34610);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = Sequence;
+			*(ScriptName*)params = Sequence;
 			*(float*)&params[8] = SeqRate;
 			*(bool*)&params[12] = bSeqLoop;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayAnimationSet(ScriptArray<ScriptName> Sequences, float SeqRate, bool bLoopLast)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimNodeSequence.PlayAnimationSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34614);
 			byte params[20] = { NULL };
-			*(ScriptArray<ScriptName>*)&params[0] = Sequences;
+			*(ScriptArray<ScriptName>*)params = Sequences;
 			*(float*)&params[12] = SeqRate;
 			*(bool*)&params[16] = bLoopLast;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnInit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimNodeSequence.OnInit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34619);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

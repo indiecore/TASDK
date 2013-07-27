@@ -16,7 +16,7 @@ namespace UnrealScript
 	class SoundCue : public Object
 	{
 	public:
-		class SoundNodeEditorData
+		struct SoundNodeEditorData
 		{
 		public:
 			ADD_STRUCT(int, NodePosY, 4)
@@ -37,10 +37,10 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, SoundClass, 60)
 		float GetCueDuration()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SoundCue.GetCueDuration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10380);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 	};
 }

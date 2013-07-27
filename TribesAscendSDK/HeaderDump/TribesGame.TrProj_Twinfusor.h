@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void SpawnFlightEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_Twinfusor.SpawnFlightEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109428);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

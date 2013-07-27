@@ -31,7 +31,7 @@ namespace UnrealScript
 			EOS_INGAME = 2,
 			EOS_MAX = 3,
 		};
-		class FriendStruct
+		struct FriendStruct
 		{
 		public:
 			ADD_STRUCT(ScriptString*, PlayerName, 4)
@@ -50,94 +50,94 @@ namespace UnrealScript
 		ADD_STRUCT(int, PrevFriendCount, 60)
 		void RequestFriendsList()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.RequestFriendsList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57686);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddFriend(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.AddFriend");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57687);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool JoinFriend(ScriptString* PlayerName, ScriptString* Password)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.JoinFriend");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57689);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			*(ScriptString**)&params[12] = Password;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		void IgnoreFriend(ScriptString* PlayerName, bool bIgnore)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.IgnoreFriend");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57693);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			*(bool*)&params[12] = bIgnore;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveFriend(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.RemoveFriend");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57696);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Update()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.Update");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57698);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RemoveFromList(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.RemoveFromList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57703);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetOnlineFriendCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.GetOnlineFriendCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57707);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int GetInGameFriendCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.GetInGameFriendCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57712);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int GetOnlineFollowerCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.GetOnlineFollowerCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57716);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		bool IsFriend(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.IsFriend");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57720);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		int GetFriendListIndex(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.GetFriendListIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57724);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		void AddFriendScoreboard(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFriendManager.AddFriendScoreboard");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(57728);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

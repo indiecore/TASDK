@@ -9,7 +9,7 @@ namespace UnrealScript
 	class SoundNodeDistanceCrossFade : public SoundNode
 	{
 	public:
-		class DistanceDatum
+		struct DistanceDatum
 		{
 		public:
 			ADD_STRUCT(DistributionFloat::RawDistributionFloat, FadeOutDistance, 48)

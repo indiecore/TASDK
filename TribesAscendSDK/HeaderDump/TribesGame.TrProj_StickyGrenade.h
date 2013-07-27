@@ -25,44 +25,44 @@ namespace UnrealScript
 		ADD_BOOL(m_bHasStuckToTarget, 884, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_StickyGrenade.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108038);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void HitWall(Object::Vector HitNormal, class Actor* Wall, 
+		void HitWall(Vector HitNormal, class Actor* Wall, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* WallComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_StickyGrenade.HitWall");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108039);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = HitNormal;
+			*(Vector*)params = HitNormal;
 			*(class Actor**)&params[12] = Wall;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[16] = WallComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ProcessTouch(class Actor* Other, Object::Vector HitLocation, Object::Vector HitNormal)
+		void ProcessTouch(class Actor* Other, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_StickyGrenade.ProcessTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108043);
 			byte params[28] = { NULL };
-			*(class Actor**)&params[0] = Other;
-			*(Object::Vector*)&params[4] = HitLocation;
-			*(Object::Vector*)&params[16] = HitNormal;
+			*(class Actor**)params = Other;
+			*(Vector*)&params[4] = HitLocation;
+			*(Vector*)&params[16] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool StickToTarget(class Actor* Target, Object::Vector HitLocation, Object::Vector HitNormal)
+		bool StickToTarget(class Actor* Target, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_StickyGrenade.StickToTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108047);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Target;
-			*(Object::Vector*)&params[4] = HitLocation;
-			*(Object::Vector*)&params[16] = HitNormal;
+			*(class Actor**)params = Target;
+			*(Vector*)&params[4] = HitLocation;
+			*(Vector*)&params[16] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[28];
 		}
 		void OnBaseChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_StickyGrenade.OnBaseChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108052);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

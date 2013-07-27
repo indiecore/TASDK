@@ -13,9 +13,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class TranslatorTag*>, TranslatorTags, 60)
 		bool RegisterTranslatorTag(class TranslatorTag* InTagHandler)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TranslationContext.RegisterTranslatorTag");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28012);
 			byte params[8] = { NULL };
-			*(class TranslatorTag**)&params[0] = InTagHandler;
+			*(class TranslatorTag**)params = InTagHandler;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

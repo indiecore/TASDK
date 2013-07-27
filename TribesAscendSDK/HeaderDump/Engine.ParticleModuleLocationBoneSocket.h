@@ -38,10 +38,10 @@ namespace UnrealScript
 			BONESOCKETSEL_RandomExhaustive = 2,
 			BONESOCKETSEL_MAX = 3,
 		};
-		class LocationBoneSocketInfo
+		struct LocationBoneSocketInfo
 		{
 		public:
-			ADD_STRUCT(Object::Vector, Offset, 8)
+			ADD_STRUCT(Vector, Offset, 8)
 			ADD_STRUCT(ScriptName, BoneSocketName, 0)
 		};
 		ADD_STRUCT(ScriptArray<ParticleModuleLocationBoneSocket::LocationBoneSocketInfo>, SourceLocations, 88)
@@ -49,7 +49,7 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, SkelMeshActorParamName, 104)
 		ADD_BOOL(bOrientMeshEmitters, 100, 0x2)
 		ADD_BOOL(bUpdatePositionEachFrame, 100, 0x1)
-		ADD_STRUCT(Object::Vector, UniversalOffset, 76)
+		ADD_STRUCT(Vector, UniversalOffset, 76)
 		ADD_STRUCT(ParticleModuleLocationBoneSocket::ELocationBoneSocketSelectionMethod, SelectionMethod, 73)
 		ADD_STRUCT(ParticleModuleLocationBoneSocket::ELocationBoneSocketSource, SourceType, 72)
 	};

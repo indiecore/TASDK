@@ -19,32 +19,32 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceConstant, m_HologramMaterial, 536)
 		void SetValidDeployableLocation(bool bValidLocation, int InvalidDeployReason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableHologram.SetValidDeployableLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80496);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bValidLocation;
+			*(bool*)params = bValidLocation;
 			*(int*)&params[4] = InvalidDeployReason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearAllMessages()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableHologram.ClearAllMessages");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80500);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableHologram.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80502);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableHologram.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80503);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Init(ScriptClass* DeployableClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableHologram.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80504);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = DeployableClass;
+			*(ScriptClass**)params = DeployableClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

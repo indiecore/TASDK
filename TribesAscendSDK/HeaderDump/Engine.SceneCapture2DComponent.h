@@ -34,20 +34,20 @@ namespace UnrealScript
 		ADD_OBJECT(TextureRenderTarget2D, TextureTarget, 144)
 		void SetCaptureParameters(class TextureRenderTarget2D* NewTextureTarget, float NewFOV, float NewNearPlane, float NewFarPlane)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SceneCapture2DComponent.SetCaptureParameters");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25429);
 			byte params[16] = { NULL };
-			*(class TextureRenderTarget2D**)&params[0] = NewTextureTarget;
+			*(class TextureRenderTarget2D**)params = NewTextureTarget;
 			*(float*)&params[4] = NewFOV;
 			*(float*)&params[8] = NewNearPlane;
 			*(float*)&params[12] = NewFarPlane;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetView(Object::Vector NewLocation, Object::Rotator NewRotation)
+		void SetView(Vector NewLocation, Rotator NewRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SceneCapture2DComponent.SetView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25434);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = NewLocation;
-			*(Object::Rotator*)&params[12] = NewRotation;
+			*(Vector*)params = NewLocation;
+			*(Rotator*)&params[12] = NewRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -29,38 +29,38 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceConstant, m_ShieldBarMIC, 1360)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCore.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79558);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SpawnShield(int ShieldIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCore.SpawnShield");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79561);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ShieldIndex;
+			*(int*)params = ShieldIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnCapacitorBlownUp(int CapacitorIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCore.OnCapacitorBlownUp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79563);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = CapacitorIndex;
+			*(int*)params = CapacitorIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnCapacitorRestored(int CapacitorIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCore.OnCapacitorRestored");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79568);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = CapacitorIndex;
+			*(int*)params = CapacitorIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCore.TakeDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79570);
 			byte params[68] = { NULL };
-			*(int*)&params[0] = DamageAmount;
+			*(int*)params = DamageAmount;
 			*(class Controller**)&params[4] = EventInstigator;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = Momentum;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = Momentum;
 			*(ScriptClass**)&params[32] = DamageType;
 			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
 			*(class Actor**)&params[64] = DamageCauser;
@@ -68,25 +68,25 @@ namespace UnrealScript
 		}
 		void OnCoreDestroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCore.OnCoreDestroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79585);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCore.PostRenderFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79586);
 			byte params[32] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = Canvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetCeilPctScore()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCore.GetCeilPctScore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79608);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

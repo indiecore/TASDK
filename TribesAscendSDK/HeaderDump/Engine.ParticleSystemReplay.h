@@ -9,14 +9,14 @@ namespace UnrealScript
 	class ParticleSystemReplay : public Object
 	{
 	public:
-		class ParticleEmitterReplayFrame
+		struct ParticleEmitterReplayFrame
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, FrameState, 8)
 			ADD_STRUCT(int, OriginalEmitterIndex, 4)
 			ADD_STRUCT(int, EmitterType, 0)
 		};
-		class ParticleSystemReplayFrame
+		struct ParticleSystemReplayFrame
 		{
 		public:
 			ADD_STRUCT(ScriptArray<ParticleSystemReplay::ParticleEmitterReplayFrame>, Emitters, 0)

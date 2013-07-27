@@ -8,9 +8,9 @@ namespace UnrealScript
 	public:
 		void SitDriver(class UTPawn* UTP, int SeatIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Shrike.SitDriver");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(114912);
 			byte params[8] = { NULL };
-			*(class UTPawn**)&params[0] = UTP;
+			*(class UTPawn**)params = UTP;
 			*(int*)&params[4] = SeatIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

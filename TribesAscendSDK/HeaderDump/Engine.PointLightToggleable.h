@@ -15,33 +15,33 @@ namespace UnrealScript
 	class PointLightToggleable : public PointLight
 	{
 	public:
-		class CheckpointRecord
+		struct CheckpointRecord
 		{
 		public:
 			ADD_BOOL(bEnabled, 0, 0x1)
 		};
 		bool ShouldSaveForCheckpoint()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PointLightToggleable.ShouldSaveForCheckpoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24664);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void CreateCheckpointRecord(PointLightToggleable::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PointLightToggleable.CreateCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24666);
 			byte params[4] = { NULL };
-			*(PointLightToggleable::CheckpointRecord*)&params[0] = Record;
+			*(PointLightToggleable::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(PointLightToggleable::CheckpointRecord*)&params[0];
+			Record = *(PointLightToggleable::CheckpointRecord*)params;
 		}
 		void ApplyCheckpointRecord(PointLightToggleable::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PointLightToggleable.ApplyCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24668);
 			byte params[4] = { NULL };
-			*(PointLightToggleable::CheckpointRecord*)&params[0] = Record;
+			*(PointLightToggleable::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(PointLightToggleable::CheckpointRecord*)&params[0];
+			Record = *(PointLightToggleable::CheckpointRecord*)params;
 		}
 	};
 }

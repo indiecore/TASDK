@@ -7,111 +7,111 @@ namespace UnrealScript
 	public:
 		void ChatConsoleCommand(ScriptString* Command)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.ChatConsoleCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74377);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)params = Command;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReportPlayer(ScriptString* PlayerName, ScriptString* Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.ReportPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74379);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			*(ScriptString**)&params[12] = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Say(ScriptString* msg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Say");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74382);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = msg;
+			*(ScriptString**)params = msg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TeamSay(ScriptString* msg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.TeamSay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74384);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = msg;
+			*(ScriptString**)params = msg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Mute(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Mute");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74386);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Unmute(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Unmute");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74388);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Votekick(ScriptString* PlayerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Votekick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74390);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Report(ScriptString* PlayerName, ScriptString* Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Report");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74392);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			*(ScriptString**)&params[12] = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tell(ScriptString* PlayerName, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Tell");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74395);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			*(ScriptString**)&params[12] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Exit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Exit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74398);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Quit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.Quit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74399);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void GiveCredits(int Count)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.GiveCredits");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74400);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Count;
+			*(int*)params = Count;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SC(ScriptString* fsRequest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.SC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74402);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = fsRequest;
+			*(ScriptString**)params = fsRequest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendCtrlRequest(ScriptString* fsRequest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.SendCtrlRequest");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74404);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = fsRequest;
+			*(ScriptString**)params = fsRequest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendGameRequest(ScriptString* fsRequest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.SendGameRequest");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74406);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = fsRequest;
+			*(ScriptString**)params = fsRequest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpecList()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrChatConsoleCommands.SpecList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74408);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

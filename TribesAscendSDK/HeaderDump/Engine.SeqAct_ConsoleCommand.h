@@ -13,18 +13,18 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, Command, 232)
 		void VersionUpdated(int OldVersion, int NewVersion)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_ConsoleCommand.VersionUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25645);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = OldVersion;
+			*(int*)params = OldVersion;
 			*(int*)&params[4] = NewVersion;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_ConsoleCommand.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25648);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

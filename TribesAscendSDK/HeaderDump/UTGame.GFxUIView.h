@@ -123,70 +123,70 @@ namespace UnrealScript
 		ADD_BOOL(bRequiresNetwork, 120, 0x1)
 		bool HasLinkConnection()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIView.HasLinkConnection");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37849);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		class LocalPlayer* GetPlayerOwner(int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIView.GetPlayerOwner");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37968);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class LocalPlayer**)&params[4];
 		}
 		class UDKPlayerController* GetUDKPlayerOwner(int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIView.GetUDKPlayerOwner");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37971);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class UDKPlayerController**)&params[4];
 		}
 		ScriptString* GetPlayerName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIView.GetPlayerName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37974);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		bool IsLoggedIn(int ControllerId, bool bRequireOnlineLogin)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIView.IsLoggedIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37976);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(bool*)&params[4] = bRequireOnlineLogin;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		ScriptString* GetCommonOptionsURL()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIView.GetCommonOptionsURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37980);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		int GetPlayerIndex()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIView.GetPlayerIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37984);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int GetPlayerControllerId(int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIView.GetPlayerControllerId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37988);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		void ConsoleCommand(ScriptString* Cmd, bool bWriteToLog)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUIView.ConsoleCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37991);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Cmd;
+			*(ScriptString**)params = Cmd;
 			*(bool*)&params[12] = bWriteToLog;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

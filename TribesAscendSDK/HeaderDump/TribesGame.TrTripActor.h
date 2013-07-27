@@ -35,35 +35,35 @@ namespace UnrealScript
 		ADD_BOOL(r_bIsPowered, 484, 0x1)
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113260);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateTripComponent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.CreateTripComponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113262);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClientCreateVisualEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.ClientCreateVisualEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113263);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DestroyNotify(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* Notifier)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.DestroyNotify");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113267);
 			byte params[8] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = Notifier;
+void**)params = Notifier;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113269);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitializeTripPhysics(
@@ -72,11 +72,11 @@ void* Left,
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* Right)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.InitializeTripPhysics");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113270);
 			byte params[16] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = Left;
+void**)params = Left;
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void**)&params[8] = Right;
@@ -84,30 +84,30 @@ void**)&params[8] = Right;
 		}
 		void GoToSleep(bool bIsPowered)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.GoToSleep");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113273);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bIsPowered;
+			*(bool*)params = bIsPowered;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113275);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTripActor.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113278);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

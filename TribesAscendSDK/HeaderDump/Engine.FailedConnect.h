@@ -14,17 +14,17 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, FailMessage, 80)
 		int GetFailSwitch(ScriptString* FailString)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FailedConnect.GetFailSwitch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15694);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = FailString;
+			*(ScriptString**)params = FailString;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FailedConnect.GetString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15697);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(bool*)&params[4] = bPRI1HUD;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;

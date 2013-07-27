@@ -29,7 +29,7 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceConstant, MIC_VisibilitySecondMaterial, 860)
 		ADD_OBJECT(MaterialInstanceConstant, MIC_Visibility, 856)
 		ADD_STRUCT(ScriptName, VisibilityParamName, 848)
-		ADD_STRUCT(Object::Vector, PivotTranslation, 836)
+		ADD_STRUCT(Vector, PivotTranslation, 836)
 		ADD_STRUCT(float, YawRotationRate, 832)
 		ADD_STRUCT(float, BobBaseOffset, 828)
 		ADD_STRUCT(float, BobSpeed, 824)
@@ -54,12 +54,12 @@ namespace UnrealScript
 		ADD_BOOL(bIsRespawning, 720, 0x1)
 		void SetPickupVisible()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPickupFactory.SetPickupVisible");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35231);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPickupHidden()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPickupFactory.SetPickupHidden");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35232);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

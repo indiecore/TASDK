@@ -21,53 +21,53 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, ServerUniqueId, 176)
 		bool HasOutstandingQueries(bool bRestrictCheckToSelf)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.HasOutstandingQueries");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46900);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bRestrictCheckToSelf;
+			*(bool*)params = bRestrictCheckToSelf;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool OverrideQuerySubmission(byte ControllerId, class OnlineGameSearch* Search)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.OverrideQuerySubmission");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46940);
 			byte params[9] = { NULL };
-			params[0] = ControllerId;
+			*params = ControllerId;
 			*(class OnlineGameSearch**)&params[4] = Search;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		ScriptString* GetPlayerName(int ControllerId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.GetPlayerName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46951);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		bool GetPlayerNetId(OnlineSubsystem::UniqueNetId& out_PlayerId, int ControllerId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.GetPlayerNetId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46956);
 			byte params[16] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = out_PlayerId;
+			*(OnlineSubsystem::UniqueNetId*)params = out_PlayerId;
 			*(int*)&params[8] = ControllerId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_PlayerId = *(OnlineSubsystem::UniqueNetId*)&params[0];
+			out_PlayerId = *(OnlineSubsystem::UniqueNetId*)params;
 			return *(bool*)&params[12];
 		}
 		int FindServerIndexByString(int ControllerId, ScriptString* IdToFind)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.FindServerIndexByString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46962);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptString**)&params[4] = IdToFind;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[16];
 		}
 		int FindServerIndexById(int ControllerId, OnlineSubsystem::UniqueNetId& IdToFind)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.FindServerIndexById");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46968);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = IdToFind;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			IdToFind = *(OnlineSubsystem::UniqueNetId*)&params[4];
@@ -75,37 +75,37 @@ namespace UnrealScript
 		}
 		bool AddServer(int ControllerId, OnlineSubsystem::UniqueNetId IdToAdd)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.AddServer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46972);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = IdToAdd;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		bool RemoveServer(int ControllerId, OnlineSubsystem::UniqueNetId IdToRemove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.RemoveServer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46980);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = IdToRemove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void GetServerIdList(ScriptArray<OnlineSubsystem::UniqueNetId>& out_ServerList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.GetServerIdList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46987);
 			byte params[12] = { NULL };
-			*(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[0] = out_ServerList;
+			*(ScriptArray<OnlineSubsystem::UniqueNetId>*)params = out_ServerList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_ServerList = *(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[0];
+			out_ServerList = *(ScriptArray<OnlineSubsystem::UniqueNetId>*)params;
 		}
 		void GetServerStringList(ScriptArray<ScriptString*>& out_ServerList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchPersonal.GetServerStringList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46992);
 			byte params[12] = { NULL };
-			*(ScriptArray<ScriptString*>*)&params[0] = out_ServerList;
+			*(ScriptArray<ScriptString*>*)params = out_ServerList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_ServerList = *(ScriptArray<ScriptString*>*)&params[0];
+			out_ServerList = *(ScriptArray<ScriptString*>*)params;
 		}
 	};
 }

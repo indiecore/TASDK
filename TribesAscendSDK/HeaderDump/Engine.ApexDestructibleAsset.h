@@ -27,7 +27,7 @@ namespace UnrealScript
 	class ApexDestructibleAsset : public ApexAsset
 	{
 	public:
-		class NxDestructibleDepthParameters
+		struct NxDestructibleDepthParameters
 		{
 		public:
 			ADD_BOOL(USER_FLAG_3, 0, 0x80)
@@ -39,7 +39,7 @@ namespace UnrealScript
 			ADD_BOOL(IGNORE_POSE_UPDATES, 0, 0x2)
 			ADD_BOOL(TAKE_IMPACT_DAMAGE, 0, 0x1)
 		};
-		class NxDestructibleParametersFlag
+		struct NxDestructibleParametersFlag
 		{
 		public:
 			ADD_BOOL(USE_VALID_BOUNDS, 0, 0x80)
@@ -51,7 +51,7 @@ namespace UnrealScript
 			ADD_BOOL(ASSET_DEFINED_SUPPORT, 0, 0x2)
 			ADD_BOOL(ACCUMULATE_DAMAGE, 0, 0x1)
 		};
-		class NxDestructibleParameters
+		struct NxDestructibleParameters
 		{
 		public:
 			ADD_STRUCT(ScriptArray<ApexDestructibleAsset::NxDestructibleDepthParameters>, DepthParameters, 116)

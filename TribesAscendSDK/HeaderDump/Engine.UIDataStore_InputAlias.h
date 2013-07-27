@@ -10,13 +10,13 @@ namespace UnrealScript
 	class UIDataStore_InputAlias : public UIDataStore_StringBase
 	{
 	public:
-		class UIInputKeyData
+		struct UIInputKeyData
 		{
 		public:
 			ADD_STRUCT(ScriptString*, ButtonFontMarkupString, 12)
 			ADD_STRUCT(UIRoot::RawInputKeyEventData, InputKeyData, 0)
 		};
-		class UIDataStoreInputAlias
+		struct UIDataStoreInputAlias
 		{
 		public:
 			ADD_STRUCT(UIDataStore_InputAlias::UIInputKeyData, PlatformInputKeys, 8)
@@ -25,75 +25,75 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<UIDataStore_InputAlias::UIDataStoreInputAlias>, InputAliases, 120)
 		ScriptString* GetAliasFontMarkup(ScriptName DesiredAlias, UIRoot::EInputPlatformType OverridePlatform)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_InputAlias.GetAliasFontMarkup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28570);
 			byte params[21] = { NULL };
-			*(ScriptName*)&params[0] = DesiredAlias;
+			*(ScriptName*)params = DesiredAlias;
 			*(UIRoot::EInputPlatformType*)&params[8] = OverridePlatform;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		ScriptString* GetAliasFontMarkupByIndex(int AliasIndex, UIRoot::EInputPlatformType OverridePlatform)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_InputAlias.GetAliasFontMarkupByIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28574);
 			byte params[17] = { NULL };
-			*(int*)&params[0] = AliasIndex;
+			*(int*)params = AliasIndex;
 			*(UIRoot::EInputPlatformType*)&params[4] = OverridePlatform;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[8];
 		}
 		ScriptName GetAliasInputKeyName(ScriptName DesiredAlias, UIRoot::EInputPlatformType OverridePlatform)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_InputAlias.GetAliasInputKeyName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28578);
 			byte params[17] = { NULL };
-			*(ScriptName*)&params[0] = DesiredAlias;
+			*(ScriptName*)params = DesiredAlias;
 			*(UIRoot::EInputPlatformType*)&params[8] = OverridePlatform;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[12];
 		}
 		ScriptName GetAliasInputKeyNameByIndex(int AliasIndex, UIRoot::EInputPlatformType OverridePlatform)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_InputAlias.GetAliasInputKeyNameByIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28582);
 			byte params[13] = { NULL };
-			*(int*)&params[0] = AliasIndex;
+			*(int*)params = AliasIndex;
 			*(UIRoot::EInputPlatformType*)&params[4] = OverridePlatform;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[8];
 		}
 		bool GetAliasInputKeyData(UIRoot::RawInputKeyEventData& out_InputKeyData, ScriptName DesiredAlias, UIRoot::EInputPlatformType OverridePlatform)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_InputAlias.GetAliasInputKeyData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28586);
 			byte params[25] = { NULL };
-			*(UIRoot::RawInputKeyEventData*)&params[0] = out_InputKeyData;
+			*(UIRoot::RawInputKeyEventData*)params = out_InputKeyData;
 			*(ScriptName*)&params[12] = DesiredAlias;
 			*(UIRoot::EInputPlatformType*)&params[20] = OverridePlatform;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_InputKeyData = *(UIRoot::RawInputKeyEventData*)&params[0];
+			out_InputKeyData = *(UIRoot::RawInputKeyEventData*)params;
 			return *(bool*)&params[24];
 		}
 		bool GetAliasInputKeyDataByIndex(UIRoot::RawInputKeyEventData& out_InputKeyData, int AliasIndex, UIRoot::EInputPlatformType OverridePlatform)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_InputAlias.GetAliasInputKeyDataByIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28591);
 			byte params[21] = { NULL };
-			*(UIRoot::RawInputKeyEventData*)&params[0] = out_InputKeyData;
+			*(UIRoot::RawInputKeyEventData*)params = out_InputKeyData;
 			*(int*)&params[12] = AliasIndex;
 			*(UIRoot::EInputPlatformType*)&params[16] = OverridePlatform;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_InputKeyData = *(UIRoot::RawInputKeyEventData*)&params[0];
+			out_InputKeyData = *(UIRoot::RawInputKeyEventData*)params;
 			return *(bool*)&params[20];
 		}
 		int FindInputAliasIndex(ScriptName DesiredAlias)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_InputAlias.FindInputAliasIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28596);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = DesiredAlias;
+			*(ScriptName*)params = DesiredAlias;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		bool HasAliasMappingForPlatform(ScriptName DesiredAlias, UIRoot::EInputPlatformType DesiredPlatform)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_InputAlias.HasAliasMappingForPlatform");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28599);
 			byte params[13] = { NULL };
-			*(ScriptName*)&params[0] = DesiredAlias;
+			*(ScriptName*)params = DesiredAlias;
 			*(UIRoot::EInputPlatformType*)&params[8] = DesiredPlatform;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];

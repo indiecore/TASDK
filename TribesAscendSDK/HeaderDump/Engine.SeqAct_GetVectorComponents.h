@@ -13,7 +13,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, Z, 252)
 		ADD_STRUCT(float, Y, 248)
 		ADD_STRUCT(float, X, 244)
-		ADD_STRUCT(Object::Vector, InVector, 232)
+		ADD_STRUCT(Vector, InVector, 232)
 	};
 }
 #undef ADD_STRUCT

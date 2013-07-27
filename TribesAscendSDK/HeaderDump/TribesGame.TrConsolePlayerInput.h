@@ -40,8 +40,8 @@ namespace UnrealScript
 		ADD_STRUCT(float, MagicScaleForSensitivityMiddle, 608)
 		ADD_STRUCT(float, RightThumbStickDeadZoneThreshold, 604)
 		ADD_STRUCT(float, LeftThumbStickDeadZoneThreshold, 600)
-		ADD_STRUCT(Object::Rotator, LastDeltaRot, 588)
-		ADD_STRUCT(Object::Vector, LastCamLoc, 576)
+		ADD_STRUCT(Rotator, LastDeltaRot, 588)
+		ADD_STRUCT(Vector, LastCamLoc, 576)
 		ADD_STRUCT(float, LastAdjustZ, 572)
 		ADD_STRUCT(float, LastAdjustY, 568)
 		ADD_STRUCT(float, LastDistFromAimZa, 564)
@@ -82,42 +82,42 @@ namespace UnrealScript
 		ADD_STRUCT(float, SensitivityMultiplier, 456)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerInput.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78083);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PreProcessInput(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerInput.PreProcessInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78084);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ApplyViewAutoPitchCentering(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerInput.ApplyViewAutoPitchCentering");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78088);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ApplyViewAutoVehiclePitchCentering(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerInput.ApplyViewAutoVehiclePitchCentering");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78092);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ApplyViewAcceleration(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerInput.ApplyViewAcceleration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78100);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ApplyTargetAdhesion(float DeltaTime, class UTWeapon* W, int& out_YawRot, int& out_PitchRot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerInput.ApplyTargetAdhesion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78104);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			*(class UTWeapon**)&params[4] = W;
 			*(int*)&params[8] = out_YawRot;
 			*(int*)&params[12] = out_PitchRot;
@@ -127,24 +127,24 @@ namespace UnrealScript
 		}
 		void AdjustMouseSensitivity(float FOVScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerInput.AdjustMouseSensitivity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78132);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = FOVScale;
+			*(float*)params = FOVScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ApplyTargetFriction(float DeltaTime, class UTWeapon* W)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerInput.ApplyTargetFriction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78134);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			*(class UTWeapon**)&params[4] = W;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		Actor::EDoubleClickDir CheckForDoubleClickMove(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerInput.CheckForDoubleClickMove");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78154);
 			byte params[5] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Actor::EDoubleClickDir*)&params[4];
 		}

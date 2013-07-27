@@ -25,10 +25,10 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, ClassPathName, 124)
 		bool IsProviderDisabled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIWeaponSummary.IsProviderDisabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(29237);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

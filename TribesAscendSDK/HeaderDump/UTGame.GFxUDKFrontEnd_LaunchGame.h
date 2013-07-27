@@ -19,7 +19,7 @@ namespace UnrealScript
 	{
 	public:
 		static const float MarkupForNoMapImage;
-		class Option
+		struct Option
 		{
 		public:
 			ADD_STRUCT(ScriptString*, OptionDesc, 24)
@@ -57,85 +57,85 @@ namespace UnrealScript
 		ADD_OBJECT(UIDataStore_OnlineGameSettings, SettingsDataStore, 220)
 		ScriptString* GetGameModeFriendlyString(ScriptString* InGameMode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.GetGameModeFriendlyString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38192);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = InGameMode;
+			*(ScriptString**)params = InGameMode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		void OnViewLoaded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnViewLoaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38240);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnViewActivated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnViewActivated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38242);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.DisableSubComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38248);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDisableComponents;
+			*(bool*)params = bDisableComponents;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnTopMostView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38250);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPlayOpenAnimation;
+			*(bool*)params = bPlayOpenAnimation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateGameSettingsPanel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.UpdateGameSettingsPanel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38252);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayOpenAnimation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.PlayOpenAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38253);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayCloseAnimation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.PlayCloseAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38254);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnStartGame_Confirm()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnStartGame_Confirm");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38255);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnListItemPress(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnListItemPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38263);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnListChange(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.OnListChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38267);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateDescription()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.UpdateDescription");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38269);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateListDataProvider()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.UpdateListDataProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38272);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.WidgetInitialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38278);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)params = WidgetName;
 			*(ScriptName*)&params[8] = WidgetPath;
 			*(class GFxObject**)&params[16] = Widget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -143,9 +143,9 @@ namespace UnrealScript
 		}
 		ScriptString* GetStringFromMarkup(ScriptString* MarkupString)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_LaunchGame.GetStringFromMarkup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38284);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = MarkupString;
+			*(ScriptString**)params = MarkupString;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}

@@ -49,39 +49,39 @@ namespace UnrealScript
 		ADD_STRUCT(float, StingerVolumeMultiplier, 508)
 		bool AlreadyInActionMusic()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.AlreadyInActionMusic");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36812);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48511);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartMusic()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.StartMusic");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48512);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void IntroFinished(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* AC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.IntroFinished");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48522);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = AC;
+void**)params = AC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* CreateNewTrack(class SoundCue* MusicCue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.CreateNewTrack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48525);
 			byte params[8] = { NULL };
-			*(class SoundCue**)&params[0] = MusicCue;
+			*(class SoundCue**)params = MusicCue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
@@ -89,28 +89,28 @@ void**)&params[4];
 		}
 		void MusicEvent(int NewEventIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.MusicEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48529);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = NewEventIndex;
+			*(int*)params = NewEventIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProcessMusicEvent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.ProcessMusicEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48536);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48541);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ChangeTrack(UTMusicManager::EMusicState NewState)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMusicManager.ChangeTrack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48546);
 			byte params[1] = { NULL };
-			*(UTMusicManager::EMusicState*)&params[0] = NewState;
+			*(UTMusicManager::EMusicState*)params = NewState;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

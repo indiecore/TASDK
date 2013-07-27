@@ -44,17 +44,17 @@ namespace UnrealScript
 		ADD_BOOL(m_bGotInputKey, 120, 0x1)
 		ScriptString* GetCurrentBind(TrObject::ESettingsList Key)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.GetCurrentBind");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59263);
 			byte params[13] = { NULL };
-			*(TrObject::ESettingsList*)&params[0] = Key;
+			*(TrObject::ESettingsList*)params = Key;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptString* SaveKeyBind(int Index, ScriptString* KeyName, bool bStore)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.SaveKeyBind");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(59276);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(ScriptString**)&params[4] = KeyName;
 			*(bool*)&params[16] = bStore;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -62,84 +62,84 @@ namespace UnrealScript
 		}
 		void FlushSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.FlushSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98370);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearSettingById(int SettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ClearSettingById");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98371);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = SettingId;
+			*(int*)params = SettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearSettingByValue(ScriptString* StrValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ClearSettingByValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98373);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = StrValue;
+			*(ScriptString**)params = StrValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StoreSetting(int SettingId, ScriptString* KeyBind)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.StoreSetting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98375);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = SettingId;
+			*(int*)params = SettingId;
 			*(ScriptString**)&params[4] = KeyBind;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* ReadSetting(int SettingId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ReadSetting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98378);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = SettingId;
+			*(int*)params = SettingId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		void CaptureNextKey()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.CaptureNextKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98381);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ResetDefaultKeyBindings(class PlayerInput* pInput)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ResetDefaultKeyBindings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98382);
 			byte params[4] = { NULL };
-			*(class PlayerInput**)&params[0] = pInput;
+			*(class PlayerInput**)params = pInput;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetDefaultSpectatorBindings(class TrPlayerInput_Spectator* pInput)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ResetDefaultSpectatorBindings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98384);
 			byte params[4] = { NULL };
-			*(class TrPlayerInput_Spectator**)&params[0] = pInput;
+			*(class TrPlayerInput_Spectator**)params = pInput;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReadBindings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ReadBindings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98386);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddBinding(ScriptString* Command, ScriptString* KeyName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.AddBinding");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98392);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)params = Command;
 			*(ScriptString**)&params[12] = KeyName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ApplyKeyBinding(int Index, ScriptString* val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ApplyKeyBinding");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98396);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(ScriptString**)&params[4] = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* SavePlayerKeyBind(int Index, ScriptString* KeyName, bool bStore)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.SavePlayerKeyBind");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98403);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(ScriptString**)&params[4] = KeyName;
 			*(bool*)&params[16] = bStore;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -147,9 +147,9 @@ namespace UnrealScript
 		}
 		ScriptString* SaveSpectatorKeyBind(int Index, ScriptString* KeyName, bool bStore)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.SaveSpectatorKeyBind");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98412);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(ScriptString**)&params[4] = KeyName;
 			*(bool*)&params[16] = bStore;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -157,73 +157,73 @@ namespace UnrealScript
 		}
 		void UnbindPlayerCommand(class PlayerInput* pInput, ScriptString* Command)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.UnbindPlayerCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98421);
 			byte params[16] = { NULL };
-			*(class PlayerInput**)&params[0] = pInput;
+			*(class PlayerInput**)params = pInput;
 			*(ScriptString**)&params[4] = Command;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnbindSpectatorCommand(class TrPlayerInput_Spectator* pInput, ScriptString* Command)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.UnbindSpectatorCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98426);
 			byte params[16] = { NULL };
-			*(class TrPlayerInput_Spectator**)&params[0] = pInput;
+			*(class TrPlayerInput_Spectator**)params = pInput;
 			*(ScriptString**)&params[4] = Command;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetCurrentBinding(class PlayerInput* pInput, ScriptString* Command)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.GetCurrentBinding");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98431);
 			byte params[28] = { NULL };
-			*(class PlayerInput**)&params[0] = pInput;
+			*(class PlayerInput**)params = pInput;
 			*(ScriptString**)&params[4] = Command;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[16];
 		}
 		ScriptString* GetCommandName(TrObject::ESettingsList Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.GetCommandName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98436);
 			byte params[13] = { NULL };
-			*(TrObject::ESettingsList*)&params[0] = Index;
+			*(TrObject::ESettingsList*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		void ApplyDefaultSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.ApplyDefaultSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98439);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class PlayerInput* GetPlayerInput()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.GetPlayerInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98443);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class PlayerInput**)&params[0];
+			return *(class PlayerInput**)params;
 		}
 		class TrPlayerInput_Spectator* GetSpectatorInput()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.GetSpectatorInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98446);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class TrPlayerInput_Spectator**)&params[0];
+			return *(class TrPlayerInput_Spectator**)params;
 		}
 		void UpdateRuntimePlayer(class PlayerInput* EngineInput)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.UpdateRuntimePlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98449);
 			byte params[4] = { NULL };
-			*(class PlayerInput**)&params[0] = EngineInput;
+			*(class PlayerInput**)params = EngineInput;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateRuntimeSpectator(class TrPlayerInput_Spectator* SpecInput)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.UpdateRuntimeSpectator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98452);
 			byte params[4] = { NULL };
-			*(class TrPlayerInput_Spectator**)&params[0] = SpecInput;
+			*(class TrPlayerInput_Spectator**)params = SpecInput;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SaveInterceptKeys()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrKeyBindings.SaveInterceptKeys");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98455);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

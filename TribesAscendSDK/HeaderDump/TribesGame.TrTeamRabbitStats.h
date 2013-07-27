@@ -36,64 +36,64 @@ namespace UnrealScript
 		ADD_STRUCT(int, MyTeam, 60)
 		void Initialize(class TrPlayerController* PC, class GfxTrHud* MP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamRabbitStats.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113152);
 			byte params[8] = { NULL };
-			*(class TrPlayerController**)&params[0] = PC;
+			*(class TrPlayerController**)params = PC;
 			*(class GfxTrHud**)&params[4] = MP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Show()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamRabbitStats.Show");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113155);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Hide()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamRabbitStats.Hide");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113156);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Tick()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamRabbitStats.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113157);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateTeam()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamRabbitStats.UpdateTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113159);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateFlagStatus(class TrGameReplicationInfo* GRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamRabbitStats.UpdateFlagStatus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113160);
 			byte params[4] = { NULL };
-			*(class TrGameReplicationInfo**)&params[0] = GRI;
+			*(class TrGameReplicationInfo**)params = GRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateTeamScore(class TrGameReplicationInfo* GRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamRabbitStats.UpdateTeamScore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113162);
 			byte params[4] = { NULL };
-			*(class TrGameReplicationInfo**)&params[0] = GRI;
+			*(class TrGameReplicationInfo**)params = GRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateTime(class TrGameReplicationInfo* GRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamRabbitStats.UpdateTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113165);
 			byte params[4] = { NULL };
-			*(class TrGameReplicationInfo**)&params[0] = GRI;
+			*(class TrGameReplicationInfo**)params = GRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* FormatTime(int Seconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamRabbitStats.FormatTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113167);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Seconds;
+			*(int*)params = Seconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		void ForceUpdate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrTeamRabbitStats.ForceUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113173);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

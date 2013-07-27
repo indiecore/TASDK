@@ -25,16 +25,16 @@ namespace UnrealScript
 	{
 	public:
 		ADD_OBJECT(Object, Target, 260)
-		ADD_STRUCT(Object::Rotator, RotationValue, 248)
-		ADD_STRUCT(Object::Vector, LocationValue, 236)
+		ADD_STRUCT(Rotator, RotationValue, 248)
+		ADD_STRUCT(Vector, LocationValue, 236)
 		ADD_BOOL(bSetRotation, 232, 0x2)
 		ADD_BOOL(bSetLocation, 232, 0x1)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_SetLocation.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25891);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

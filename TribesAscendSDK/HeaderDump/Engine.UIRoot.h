@@ -47,7 +47,7 @@ namespace UnrealScript
 			DATATYPE_ProviderCollection = 5,
 			DATATYPE_MAX = 6,
 		};
-		class UIRangeData
+		struct UIRangeData
 		{
 		public:
 			ADD_BOOL(bIntRange, 16, 0x1)
@@ -56,7 +56,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, MinValue, 4)
 			ADD_STRUCT(float, CurrentValue, 0)
 		};
-		class TextureCoordinates
+		struct TextureCoordinates
 		{
 		public:
 			ADD_STRUCT(float, VL, 12)
@@ -64,7 +64,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, V, 4)
 			ADD_STRUCT(float, U, 0)
 		};
-		class InputKeyAction
+		struct InputKeyAction
 		{
 		public:
 			ADD_STRUCT(ScriptArray<SequenceOp::SeqOpOutputInputLink>, TriggeredOps, 12)
@@ -72,7 +72,7 @@ namespace UnrealScript
 			ADD_STRUCT(Object::EInputEvent, InputKeyState, 8)
 			ADD_STRUCT(ScriptName, InputKeyName, 0)
 		};
-		class InputEventParameters
+		struct InputEventParameters
 		{
 		public:
 			ADD_BOOL(bShiftPressed, 28, 0x4)
@@ -85,12 +85,12 @@ namespace UnrealScript
 			ADD_STRUCT(int, ControllerId, 4)
 			ADD_STRUCT(int, PlayerIndex, 0)
 		};
-		class SubscribedInputEventParameters : public InputEventParameters
+		struct SubscribedInputEventParameters : public InputEventParameters
 		{
 		public:
 			ADD_STRUCT(ScriptName, InputAliasName, 32)
 		};
-		class UIAxisEmulationDefinition
+		struct UIAxisEmulationDefinition
 		{
 		public:
 			ADD_STRUCT(ScriptName, InputKeyToEmulate, 20)
@@ -98,13 +98,13 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptName, AdjacentAxisInputKey, 8)
 			ADD_STRUCT(ScriptName, AxisInputKey, 0)
 		};
-		class RawInputKeyEventData
+		struct RawInputKeyEventData
 		{
 		public:
 			ADD_STRUCT(byte, ModifierKeyFlags, 8)
 			ADD_STRUCT(ScriptName, InputKeyName, 0)
 		};
-		class UIProviderScriptFieldValue
+		struct UIProviderScriptFieldValue
 		{
 		public:
 			ADD_STRUCT(ScriptArray<int>, ArrayValue, 28)
@@ -116,12 +116,12 @@ namespace UnrealScript
 			ADD_STRUCT(UIRoot::EUIDataProviderFieldType, PropertyType, 8)
 			ADD_STRUCT(ScriptName, PropertyTag, 0)
 		};
-		class UIProviderFieldValue : public UIProviderScriptFieldValue
+		struct UIProviderFieldValue : public UIProviderScriptFieldValue
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, CustomStringNode, 84)
 		};
-		class UIDataStoreBinding
+		struct UIDataStoreBinding
 		{
 		public:
 			ADD_OBJECT(UIDataStore, ResolvedDataStore, 44)
@@ -133,9 +133,9 @@ namespace UnrealScript
 		};
 		bool GetDataStoreStringValue(ScriptString* InDataStoreMarkup, ScriptString*& OutStringValue, class LocalPlayer* OwnerPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.GetDataStoreStringValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9285);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = InDataStoreMarkup;
+			*(ScriptString**)params = InDataStoreMarkup;
 			*(ScriptString**)&params[12] = OutStringValue;
 			*(class LocalPlayer**)&params[24] = OwnerPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -144,9 +144,9 @@ namespace UnrealScript
 		}
 		bool SetDataStoreStringValue(ScriptString* InDataStoreMarkup, ScriptString* InStringValue, class LocalPlayer* OwnerPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.SetDataStoreStringValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9287);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = InDataStoreMarkup;
+			*(ScriptString**)params = InDataStoreMarkup;
 			*(ScriptString**)&params[12] = InStringValue;
 			*(class LocalPlayer**)&params[24] = OwnerPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -154,40 +154,40 @@ namespace UnrealScript
 		}
 		UIRoot::EInputPlatformType GetInputPlatformType(class LocalPlayer* OwningPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.GetInputPlatformType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12858);
 			byte params[5] = { NULL };
-			*(class LocalPlayer**)&params[0] = OwningPlayer;
+			*(class LocalPlayer**)params = OwningPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(UIRoot::EInputPlatformType*)&params[4];
 		}
 		class UIInteraction* GetCurrentUIController()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.GetCurrentUIController");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12861);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class UIInteraction**)&params[0];
+			return *(class UIInteraction**)params;
 		}
 		class GameUISceneClient* GetSceneClient()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.GetSceneClient");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12863);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GameUISceneClient**)&params[0];
+			return *(class GameUISceneClient**)params;
 		}
 		class UIDataStore* StaticResolveDataStore(ScriptName DataStoreTag, class LocalPlayer* InPlayerOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.StaticResolveDataStore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12865);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = DataStoreTag;
+			*(ScriptName*)params = DataStoreTag;
 			*(class LocalPlayer**)&params[8] = InPlayerOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class UIDataStore**)&params[12];
 		}
 		bool SetDataStoreFieldValue(ScriptString* InDataStoreMarkup, UIRoot::UIProviderFieldValue& InFieldValue, class LocalPlayer* OwnerPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.SetDataStoreFieldValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12871);
 			byte params[108] = { NULL };
-			*(ScriptString**)&params[0] = InDataStoreMarkup;
+			*(ScriptString**)params = InDataStoreMarkup;
 			*(UIRoot::UIProviderFieldValue*)&params[12] = InFieldValue;
 			*(class LocalPlayer**)&params[100] = OwnerPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -196,9 +196,9 @@ namespace UnrealScript
 		}
 		bool GetDataStoreFieldValue(ScriptString* InDataStoreMarkup, UIRoot::UIProviderFieldValue& OutFieldValue, class LocalPlayer* OwnerPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.GetDataStoreFieldValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12880);
 			byte params[108] = { NULL };
-			*(ScriptString**)&params[0] = InDataStoreMarkup;
+			*(ScriptString**)params = InDataStoreMarkup;
 			*(UIRoot::UIProviderFieldValue*)&params[12] = OutFieldValue;
 			*(class LocalPlayer**)&params[100] = OwnerPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -209,34 +209,34 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* GetOnlineGameInterface()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.GetOnlineGameInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12890);
 			byte params[8] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0];
+void**)params;
 		}
 		
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* GetOnlinePlayerInterface()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.GetOnlinePlayerInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12894);
 			byte params[8] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0];
+void**)params;
 		}
 		
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* GetOnlinePlayerInterfaceEx()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIRoot.GetOnlinePlayerInterfaceEx");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12898);
 			byte params[8] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0];
+void**)params;
 		}
 	};
 }

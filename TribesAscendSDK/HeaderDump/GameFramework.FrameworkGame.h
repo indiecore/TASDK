@@ -19,7 +19,7 @@ namespace UnrealScript
 	class FrameworkGame : public GameInfo
 	{
 	public:
-		class RequiredMobileInputConfig
+		struct RequiredMobileInputConfig
 		{
 		public:
 			ADD_STRUCT(ScriptArray<ScriptString*>, RequireZoneNames, 12)
@@ -29,50 +29,50 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<FrameworkGame::RequiredMobileInputConfig>, RequiredMobileInputConfigs, 884)
 		void TgStartGame(ScriptString*& Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.FrameworkGame.TgStartGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30549);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Reason;
+			*(ScriptString**)params = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Reason = *(ScriptString**)&params[0];
+			Reason = *(ScriptString**)params;
 		}
 		void TgEndGame(ScriptString*& Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.FrameworkGame.TgEndGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30551);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Reason;
+			*(ScriptString**)params = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Reason = *(ScriptString**)&params[0];
+			Reason = *(ScriptString**)params;
 		}
 		void TgTimer(ScriptString*& sTimerCommand)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.FrameworkGame.TgTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30553);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = sTimerCommand;
+			*(ScriptString**)params = sTimerCommand;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			sTimerCommand = *(ScriptString**)&params[0];
+			sTimerCommand = *(ScriptString**)params;
 		}
 		void TgChangeScore(int nTeam, int nCount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.FrameworkGame.TgChangeScore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30555);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = nTeam;
+			*(int*)params = nTeam;
 			*(int*)&params[4] = nCount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TgChangeTime(int nSeconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.FrameworkGame.TgChangeTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30558);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = nSeconds;
+			*(int*)params = nSeconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TgGetSpectators(ScriptArray<ScriptString*>& List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.FrameworkGame.TgGetSpectators");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30560);
 			byte params[12] = { NULL };
-			*(ScriptArray<ScriptString*>*)&params[0] = List;
+			*(ScriptArray<ScriptString*>*)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			List = *(ScriptArray<ScriptString*>*)&params[0];
+			List = *(ScriptArray<ScriptString*>*)params;
 		}
 	};
 }

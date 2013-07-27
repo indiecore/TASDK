@@ -135,7 +135,7 @@ namespace UnrealScript
 			TMGS_Blur5 = 19,
 			TMGS_MAX = 20,
 		};
-		class TextureGroupContainer
+		struct TextureGroupContainer
 		{
 		public:
 			ADD_BOOL(TEXTUREGROUP_ImageBasedReflection, 0, 0x4000000)

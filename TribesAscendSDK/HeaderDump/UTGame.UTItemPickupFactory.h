@@ -23,14 +23,14 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, PickupSound, 944)
 		void InitializePickup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.InitializePickup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40459);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetLocalString(int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.GetLocalString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40460);
 			byte params[24] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -38,28 +38,28 @@ namespace UnrealScript
 		}
 		void SpawnCopyFor(class Pawn* Recipient)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.SpawnCopyFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40465);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Recipient;
+			*(class Pawn**)params = Recipient;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetRespawn()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.SetRespawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40467);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float GetRespawnTime()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.GetRespawnTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40468);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float BotDesireability(class Pawn* P, class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTItemPickupFactory.BotDesireability");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40470);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			*(class Controller**)&params[4] = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];

@@ -20,14 +20,14 @@ namespace UnrealScript
 	class Texture2D : public Texture
 	{
 	public:
-		class Texture2DMipMap
+		struct Texture2DMipMap
 		{
 		public:
 			ADD_STRUCT(int, SizeY, 56)
 			ADD_STRUCT(int, SizeX, 52)
 			ADD_STRUCT(Object::UntypedBulkData_Mirror, Data, 0)
 		};
-		class TextureLinkedListMirror
+		struct TextureLinkedListMirror
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, PrevLink, 8)
@@ -63,17 +63,17 @@ namespace UnrealScript
 		ADD_STRUCT(Object::IndirectArray_Mirror, Mips, 236)
 		void SetForceMipLevelsToBeResident(float Seconds, int CinematicTextureGroups)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2D.SetForceMipLevelsToBeResident");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5141);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = Seconds;
+			*(float*)params = Seconds;
 			*(int*)&params[4] = CinematicTextureGroups;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Texture2D* Create(int InSizeX, int InSizeY, Texture::EPixelFormat InFormat)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Texture2D.Create");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5144);
 			byte params[13] = { NULL };
-			*(int*)&params[0] = InSizeX;
+			*(int*)params = InSizeX;
 			*(int*)&params[4] = InSizeY;
 			*(Texture::EPixelFormat*)&params[8] = InFormat;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

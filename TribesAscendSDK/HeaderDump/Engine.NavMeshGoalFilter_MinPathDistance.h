@@ -13,9 +13,9 @@ namespace UnrealScript
 		ADD_STRUCT(int, MinDistancePathShouldBe, 72)
 		bool MustBeLongerPathThan(class NavMeshGoal_GenericFilterContainer* FilterContainer, int InMinDistancePathShouldBe)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoalFilter_MinPathDistance.MustBeLongerPathThan");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20990);
 			byte params[12] = { NULL };
-			*(class NavMeshGoal_GenericFilterContainer**)&params[0] = FilterContainer;
+			*(class NavMeshGoal_GenericFilterContainer**)params = FilterContainer;
 			*(int*)&params[4] = InMinDistancePathShouldBe;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];

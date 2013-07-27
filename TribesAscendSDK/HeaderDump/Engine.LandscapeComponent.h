@@ -30,13 +30,13 @@ namespace UnrealScript
 			TCN_SE = 7,
 			TCN_MAX = 8,
 		};
-		class LandscapeComponentAlphaInfo
+		struct LandscapeComponentAlphaInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<byte>, AlphaValues, 4)
 			ADD_STRUCT(int, LayerIndex, 0)
 		};
-		class WeightmapLayerAllocationInfo
+		struct WeightmapLayerAllocationInfo
 		{
 		public:
 			ADD_STRUCT(byte, WeightmapTextureChannel, 9)

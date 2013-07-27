@@ -43,7 +43,7 @@ namespace UnrealScript
 		ADD_BOOL(bAllowInvites, 132, 0x10)
 		ADD_BOOL(bAllowJoinInProgress, 132, 0x8)
 		ADD_BOOL(bShouldAdvertise, 132, 0x1)
-		ADD_STRUCT(Object::QWord, ServerNonce, 124)
+		ADD_STRUCT(QWord, ServerNonce, 124)
 		ADD_STRUCT(int, NumPrivateConnections, 112)
 	};
 }

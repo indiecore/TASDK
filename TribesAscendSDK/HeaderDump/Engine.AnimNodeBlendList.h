@@ -29,9 +29,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, BlendTimeToGo, 256)
 		void SetActiveChild(int ChildIndex, float BlendTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeBlendList.SetActiveChild");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10822);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ChildIndex;
+			*(int*)params = ChildIndex;
 			*(float*)&params[4] = BlendTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

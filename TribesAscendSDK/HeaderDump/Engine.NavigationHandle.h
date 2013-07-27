@@ -32,33 +32,33 @@ namespace UnrealScript
 	public:
 		static const float LINECHECK_GRANULARITY;
 		static const auto NUM_PATHFINDING_PARAMS = 9;
-		class PolySegmentSpan
+		struct PolySegmentSpan
 		{
 		public:
-			ADD_STRUCT(Object::Vector, P2, 16)
-			ADD_STRUCT(Object::Vector, P1, 4)
+			ADD_STRUCT(Vector, P2, 16)
+			ADD_STRUCT(Vector, P1, 4)
 			ADD_STRUCT(Object::Pointer, Poly, 0)
 		};
-		class NavMeshPathParams
+		struct NavMeshPathParams
 		{
 		public:
 			ADD_STRUCT(float, MaxHoverDistance, 44)
 			ADD_STRUCT(float, MinWalkableZ, 40)
 			ADD_STRUCT(float, MaxDropHeight, 36)
-			ADD_STRUCT(Object::Vector, SearchStart, 24)
+			ADD_STRUCT(Vector, SearchStart, 24)
 			ADD_STRUCT(float, SearchLaneMultiplier, 20)
-			ADD_STRUCT(Object::Vector, SearchExtent, 8)
+			ADD_STRUCT(Vector, SearchExtent, 8)
 			ADD_BOOL(bAbleToSearch, 4, 0x4)
 			ADD_BOOL(bNeedsMantleValidityTest, 4, 0x2)
 			ADD_BOOL(bCanMantle, 4, 0x1)
 			ADD_STRUCT(Object::Pointer, Interface, 0)
 		};
-		class EdgePointer
+		struct EdgePointer
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, Dummy, 0)
 		};
-		class PathStore
+		struct PathStore
 		{
 		public:
 			ADD_STRUCT(ScriptArray<NavigationHandle::EdgePointer>, EdgeList, 0)
@@ -81,303 +81,303 @@ namespace UnrealScript
 		ADD_OBJECT(Pylon, AnchorPylon, 60)
 		void ClearConstraints()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.ClearConstraints");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20784);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddPathConstraint(class NavMeshPathConstraint* Constraint)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.AddPathConstraint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20785);
 			byte params[4] = { NULL };
-			*(class NavMeshPathConstraint**)&params[0] = Constraint;
+			*(class NavMeshPathConstraint**)params = Constraint;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddGoalEvaluator(class NavMeshPathGoalEvaluator* Evaluator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.AddGoalEvaluator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20787);
 			byte params[4] = { NULL };
-			*(class NavMeshPathGoalEvaluator**)&params[0] = Evaluator;
+			*(class NavMeshPathGoalEvaluator**)params = Evaluator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class NavMeshPathConstraint* CreatePathConstraint(ScriptClass* ConstraintClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.CreatePathConstraint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20789);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = ConstraintClass;
+			*(ScriptClass**)params = ConstraintClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class NavMeshPathConstraint**)&params[4];
 		}
 		class NavMeshPathGoalEvaluator* CreatePathGoalEvaluator(ScriptClass* GoalEvalClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.CreatePathGoalEvaluator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20792);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = GoalEvalClass;
+			*(ScriptClass**)params = GoalEvalClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class NavMeshPathGoalEvaluator**)&params[4];
 		}
 		int GetPathCacheLength()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.GetPathCacheLength");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20795);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void PathCache_Empty()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.PathCache_Empty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20797);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		Object::Vector PathCache_GetGoalPoint()
+		Vector PathCache_GetGoalPoint()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.PathCache_GetGoalPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20798);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
 		void PathCache_RemoveIndex(int InIdx, int Count)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.PathCache_RemoveIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20800);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = InIdx;
+			*(int*)params = InIdx;
 			*(int*)&params[4] = Count;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Object::Vector GetBestUnfinishedPathPoint()
+		Vector GetBestUnfinishedPathPoint()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.GetBestUnfinishedPathPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20803);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
 		bool FindPylon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.FindPylon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20805);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
-		class Pylon* GetPylonFromPos(Object::Vector Position)
+		class Pylon* GetPylonFromPos(Vector Position)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.GetPylonFromPos");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20807);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = Position;
+			*(Vector*)params = Position;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Pylon**)&params[12];
 		}
-		bool GetNextMoveLocation(Object::Vector& out_MoveDest, float ArrivalDistance)
+		bool GetNextMoveLocation(Vector& out_MoveDest, float ArrivalDistance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.GetNextMoveLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20810);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = out_MoveDest;
+			*(Vector*)params = out_MoveDest;
 			*(float*)&params[12] = ArrivalDistance;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_MoveDest = *(Object::Vector*)&params[0];
+			out_MoveDest = *(Vector*)params;
 			return *(bool*)&params[16];
 		}
-		bool SetFinalDestination(Object::Vector FinalDest)
+		bool SetFinalDestination(Vector FinalDest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.SetFinalDestination");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20814);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = FinalDest;
+			*(Vector*)params = FinalDest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
-		bool ComputeValidFinalDestination(Object::Vector& out_ComputedPosition)
+		bool ComputeValidFinalDestination(Vector& out_ComputedPosition)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.ComputeValidFinalDestination");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20817);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = out_ComputedPosition;
+			*(Vector*)params = out_ComputedPosition;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_ComputedPosition = *(Object::Vector*)&params[0];
+			out_ComputedPosition = *(Vector*)params;
 			return *(bool*)&params[12];
 		}
 		bool FindPath(class Actor*& out_DestActor, int& out_DestItem)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.FindPath");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20820);
 			byte params[12] = { NULL };
-			*(class Actor**)&params[0] = out_DestActor;
+			*(class Actor**)params = out_DestActor;
 			*(int*)&params[4] = out_DestItem;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_DestActor = *(class Actor**)&params[0];
+			out_DestActor = *(class Actor**)params;
 			out_DestItem = *(int*)&params[4];
 			return *(bool*)&params[8];
 		}
-		bool SuggestMovePreparation(Object::Vector& MovePt, class Controller* C)
+		bool SuggestMovePreparation(Vector& MovePt, class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.SuggestMovePreparation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20824);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = MovePt;
+			*(Vector*)params = MovePt;
 			*(class Controller**)&params[12] = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			MovePt = *(Object::Vector*)&params[0];
+			MovePt = *(Vector*)params;
 			return *(bool*)&params[16];
 		}
-		bool ObstacleLineCheck(Object::Vector Start, Object::Vector End, Object::Vector Extent, Object::Vector& out_HitLoc, Object::Vector& out_HitNorm)
+		bool ObstacleLineCheck(Vector Start, Vector End, Vector Extent, Vector& out_HitLoc, Vector& out_HitNorm)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.ObstacleLineCheck");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20828);
 			byte params[64] = { NULL };
-			*(Object::Vector*)&params[0] = Start;
-			*(Object::Vector*)&params[12] = End;
-			*(Object::Vector*)&params[24] = Extent;
-			*(Object::Vector*)&params[36] = out_HitLoc;
-			*(Object::Vector*)&params[48] = out_HitNorm;
+			*(Vector*)params = Start;
+			*(Vector*)&params[12] = End;
+			*(Vector*)&params[24] = Extent;
+			*(Vector*)&params[36] = out_HitLoc;
+			*(Vector*)&params[48] = out_HitNorm;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_HitLoc = *(Object::Vector*)&params[36];
-			out_HitNorm = *(Object::Vector*)&params[48];
+			out_HitLoc = *(Vector*)&params[36];
+			out_HitNorm = *(Vector*)&params[48];
 			return *(bool*)&params[60];
 		}
-		bool ObstaclePointCheck(Object::Vector Pt, Object::Vector Extent)
+		bool ObstaclePointCheck(Vector Pt, Vector Extent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.ObstaclePointCheck");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20835);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = Pt;
-			*(Object::Vector*)&params[12] = Extent;
+			*(Vector*)params = Pt;
+			*(Vector*)&params[12] = Extent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
-		bool LineCheck(Object::Vector Start, Object::Vector End, Object::Vector Extent, Object::Vector& out_HitLocation, Object::Vector& out_HitNormal)
+		bool LineCheck(Vector Start, Vector End, Vector Extent, Vector& out_HitLocation, Vector& out_HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.LineCheck");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20839);
 			byte params[64] = { NULL };
-			*(Object::Vector*)&params[0] = Start;
-			*(Object::Vector*)&params[12] = End;
-			*(Object::Vector*)&params[24] = Extent;
-			*(Object::Vector*)&params[36] = out_HitLocation;
-			*(Object::Vector*)&params[48] = out_HitNormal;
+			*(Vector*)params = Start;
+			*(Vector*)&params[12] = End;
+			*(Vector*)&params[24] = Extent;
+			*(Vector*)&params[36] = out_HitLocation;
+			*(Vector*)&params[48] = out_HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_HitLocation = *(Object::Vector*)&params[36];
-			out_HitNormal = *(Object::Vector*)&params[48];
+			out_HitLocation = *(Vector*)&params[36];
+			out_HitNormal = *(Vector*)&params[48];
 			return *(bool*)&params[60];
 		}
-		bool PointCheck(Object::Vector Pt, Object::Vector Extent)
+		bool PointCheck(Vector Pt, Vector Extent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.PointCheck");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20846);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = Pt;
-			*(Object::Vector*)&params[12] = Extent;
+			*(Vector*)params = Pt;
+			*(Vector*)&params[12] = Extent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
-		bool PointReachable(Object::Vector Point, Object::Vector OverrideStartPoint, bool bAllowHitsInEndCollisionBox)
+		bool PointReachable(Vector Point, Vector OverrideStartPoint, bool bAllowHitsInEndCollisionBox)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.PointReachable");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20850);
 			byte params[32] = { NULL };
-			*(Object::Vector*)&params[0] = Point;
-			*(Object::Vector*)&params[12] = OverrideStartPoint;
+			*(Vector*)params = Point;
+			*(Vector*)&params[12] = OverrideStartPoint;
 			*(bool*)&params[24] = bAllowHitsInEndCollisionBox;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[28];
 		}
 		bool ActorReachable(class Actor* A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.ActorReachable");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20855);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = A;
+			*(class Actor**)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
-		void DrawPathCache(Object::Vector DrawOffset, bool bPersistent, Object::Color DrawColor)
+		void DrawPathCache(Vector DrawOffset, bool bPersistent, Object::Color DrawColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.DrawPathCache");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20858);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = DrawOffset;
+			*(Vector*)params = DrawOffset;
 			*(bool*)&params[12] = bPersistent;
 			*(Object::Color*)&params[16] = DrawColor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetCurrentEdgeDebugText()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.GetCurrentEdgeDebugText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20862);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void ClearCurrentEdge()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.ClearCurrentEdge");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20864);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		Pylon::ENavMeshEdgeType GetCurrentEdgeType()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.GetCurrentEdgeType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20865);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Pylon::ENavMeshEdgeType*)&params[0];
+			return *(Pylon::ENavMeshEdgeType*)params;
 		}
-		void GetAllPolyCentersWithinBounds(Object::Vector pos, Object::Vector Extent, ScriptArray<Object::Vector>& out_PolyCtrs)
+		void GetAllPolyCentersWithinBounds(Vector pos, Vector Extent, ScriptArray<Vector>& out_PolyCtrs)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.GetAllPolyCentersWithinBounds");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20867);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = pos;
-			*(Object::Vector*)&params[12] = Extent;
-			*(ScriptArray<Object::Vector>*)&params[24] = out_PolyCtrs;
+			*(Vector*)params = pos;
+			*(Vector*)&params[12] = Extent;
+			*(ScriptArray<Vector>*)&params[24] = out_PolyCtrs;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_PolyCtrs = *(ScriptArray<Object::Vector>*)&params[24];
+			out_PolyCtrs = *(ScriptArray<Vector>*)&params[24];
 		}
-		void GetValidPositionsForBox(Object::Vector pos, float Radius, Object::Vector Extent, bool bMustBeReachableFromStartPos, ScriptArray<Object::Vector>& out_ValidPositions, int MaxPositions, float MinRadius, Object::Vector ValidBoxAroundStartPos)
+		void GetValidPositionsForBox(Vector pos, float Radius, Vector Extent, bool bMustBeReachableFromStartPos, ScriptArray<Vector>& out_ValidPositions, int MaxPositions, float MinRadius, Vector ValidBoxAroundStartPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.GetValidPositionsForBox");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20872);
 			byte params[64] = { NULL };
-			*(Object::Vector*)&params[0] = pos;
+			*(Vector*)params = pos;
 			*(float*)&params[12] = Radius;
-			*(Object::Vector*)&params[16] = Extent;
+			*(Vector*)&params[16] = Extent;
 			*(bool*)&params[28] = bMustBeReachableFromStartPos;
-			*(ScriptArray<Object::Vector>*)&params[32] = out_ValidPositions;
+			*(ScriptArray<Vector>*)&params[32] = out_ValidPositions;
 			*(int*)&params[44] = MaxPositions;
 			*(float*)&params[48] = MinRadius;
-			*(Object::Vector*)&params[52] = ValidBoxAroundStartPos;
+			*(Vector*)&params[52] = ValidBoxAroundStartPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_ValidPositions = *(ScriptArray<Object::Vector>*)&params[32];
+			out_ValidPositions = *(ScriptArray<Vector>*)&params[32];
 		}
 		void LimitPathCacheDistance(float MaxDist)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.LimitPathCacheDistance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20882);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = MaxDist;
+			*(float*)params = MaxDist;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsAnchorInescapable()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.IsAnchorInescapable");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20884);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
-		Object::Vector GetFirstMoveLocation()
+		Vector GetFirstMoveLocation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.GetFirstMoveLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20886);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
-		float CalculatePathDistance(Object::Vector FinalDest)
+		float CalculatePathDistance(Vector FinalDest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.CalculatePathDistance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20888);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = FinalDest;
+			*(Vector*)params = FinalDest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
-		Object::Vector MoveToDesiredHeightAboveMesh(Object::Vector Point, float Height)
+		Vector MoveToDesiredHeightAboveMesh(Vector Point, float Height)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.MoveToDesiredHeightAboveMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20891);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = Point;
+			*(Vector*)params = Point;
 			*(float*)&params[12] = Height;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[16];
+			return *(Vector*)&params[16];
 		}
 		bool PopulatePathfindingParamCache()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.PopulatePathfindingParamCache");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20895);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
-		bool GetAllCoverSlotsInRadius(Object::Vector FromLoc, float Radius, ScriptArray<CoverLink::CoverInfo>& out_CoverList)
+		bool GetAllCoverSlotsInRadius(Vector FromLoc, float Radius, ScriptArray<CoverLink::CoverInfo>& out_CoverList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavigationHandle.GetAllCoverSlotsInRadius");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20897);
 			byte params[32] = { NULL };
-			*(Object::Vector*)&params[0] = FromLoc;
+			*(Vector*)params = FromLoc;
 			*(float*)&params[12] = Radius;
 			*(ScriptArray<CoverLink::CoverInfo>*)&params[16] = out_CoverList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

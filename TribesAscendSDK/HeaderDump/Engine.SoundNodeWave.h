@@ -68,12 +68,12 @@ namespace UnrealScript
 		ADD_STRUCT(int, CompressionQuality, 76)
 		void GeneratePCMData(ScriptArray<byte>& Buffer, int SamplesNeeded)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SoundNodeWave.GeneratePCMData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26975);
 			byte params[16] = { NULL };
-			*(ScriptArray<byte>*)&params[0] = Buffer;
+			*(ScriptArray<byte>*)params = Buffer;
 			*(int*)&params[12] = SamplesNeeded;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Buffer = *(ScriptArray<byte>*)&params[0];
+			Buffer = *(ScriptArray<byte>*)params;
 		}
 	};
 }

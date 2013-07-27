@@ -22,25 +22,25 @@ namespace UnrealScript
 	{
 	public:
 		ADD_BOOL(bShowDebug, 96, 0x1)
-		ADD_STRUCT(Object::Vector, OutOfViewLocation, 84)
+		ADD_STRUCT(Vector, OutOfViewLocation, 84)
 		ADD_STRUCT(Object::Pointer, GoalPoly, 80)
 		void RecycleNative()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.NavMeshGoal_OutOfViewFrom.RecycleNative");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32860);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool MustBeHiddenFromThisPoint(class NavigationHandle* NavHandle, Object::Vector InOutOfViewLocation)
+		bool MustBeHiddenFromThisPoint(class NavigationHandle* NavHandle, Vector InOutOfViewLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.NavMeshGoal_OutOfViewFrom.MustBeHiddenFromThisPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32861);
 			byte params[20] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
-			*(Object::Vector*)&params[4] = InOutOfViewLocation;
+			*(class NavigationHandle**)params = NavHandle;
+			*(Vector*)&params[4] = InOutOfViewLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.NavMeshGoal_OutOfViewFrom.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32866);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

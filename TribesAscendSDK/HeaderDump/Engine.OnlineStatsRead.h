@@ -10,20 +10,20 @@ namespace UnrealScript
 	class OnlineStatsRead : public OnlineStats
 	{
 	public:
-		class ColumnMetaData
+		struct ColumnMetaData
 		{
 		public:
 			ADD_STRUCT(ScriptString*, ColumnName, 12)
 			ADD_STRUCT(ScriptName, Name, 4)
 			ADD_STRUCT(int, Id, 0)
 		};
-		class OnlineStatsColumn
+		struct OnlineStatsColumn
 		{
 		public:
 			ADD_STRUCT(Settings::SettingsData, StatValue, 4)
 			ADD_STRUCT(int, ColumnNo, 0)
 		};
-		class OnlineStatsRow
+		struct OnlineStatsRow
 		{
 		public:
 			ADD_STRUCT(ScriptArray<OnlineStatsRead::OnlineStatsColumn>, Columns, 32)
@@ -41,14 +41,14 @@ namespace UnrealScript
 		ADD_STRUCT(int, ViewId, 72)
 		void OnReadComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.OnReadComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22839);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool GetIntStatValueForPlayer(OnlineSubsystem::UniqueNetId PlayerID, int StatColumnNo, int& StatValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.GetIntStatValueForPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22840);
 			byte params[20] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			*(OnlineSubsystem::UniqueNetId*)params = PlayerID;
 			*(int*)&params[8] = StatColumnNo;
 			*(int*)&params[12] = StatValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -57,9 +57,9 @@ namespace UnrealScript
 		}
 		bool SetIntStatValueForPlayer(OnlineSubsystem::UniqueNetId PlayerID, int StatColumnNo, int StatValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.SetIntStatValueForPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22845);
 			byte params[20] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			*(OnlineSubsystem::UniqueNetId*)params = PlayerID;
 			*(int*)&params[8] = StatColumnNo;
 			*(int*)&params[12] = StatValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -67,9 +67,9 @@ namespace UnrealScript
 		}
 		bool GetFloatStatValueForPlayer(OnlineSubsystem::UniqueNetId PlayerID, int StatColumnNo, float& StatValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.GetFloatStatValueForPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22850);
 			byte params[20] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			*(OnlineSubsystem::UniqueNetId*)params = PlayerID;
 			*(int*)&params[8] = StatColumnNo;
 			*(float*)&params[12] = StatValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -78,9 +78,9 @@ namespace UnrealScript
 		}
 		bool SetFloatStatValueForPlayer(OnlineSubsystem::UniqueNetId PlayerID, int StatColumnNo, float StatValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.SetFloatStatValueForPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22855);
 			byte params[20] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			*(OnlineSubsystem::UniqueNetId*)params = PlayerID;
 			*(int*)&params[8] = StatColumnNo;
 			*(float*)&params[12] = StatValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -88,17 +88,17 @@ namespace UnrealScript
 		}
 		void AddPlayer(ScriptString* PlayerName, OnlineSubsystem::UniqueNetId PlayerID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.AddPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22860);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = PlayerName;
+			*(ScriptString**)params = PlayerName;
 			*(OnlineSubsystem::UniqueNetId*)&params[12] = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetRankForPlayer(OnlineSubsystem::UniqueNetId PlayerID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineStatsRead.GetRankForPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22863);
 			byte params[12] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			*(OnlineSubsystem::UniqueNetId*)params = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}

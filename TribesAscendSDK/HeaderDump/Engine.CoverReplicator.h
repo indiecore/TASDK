@@ -15,13 +15,13 @@ namespace UnrealScript
 	class CoverReplicator : public ReplicationInfo
 	{
 	public:
-		class ManualCoverTypeInfo
+		struct ManualCoverTypeInfo
 		{
 		public:
 			ADD_STRUCT(CoverLink::ECoverType, ManualCoverType, 1)
 			ADD_STRUCT(byte, SlotIndex, 0)
 		};
-		class CoverReplicationInfo
+		struct CoverReplicationInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<byte>, SlotsEnabled, 4)
@@ -33,33 +33,33 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<CoverReplicator::CoverReplicationInfo>, CoverReplicationData, 476)
 		void PurgeOldEntries()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.PurgeOldEntries");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13464);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplicateInitialCoverInfo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ReplicateInitialCoverInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13466);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClientSetOwner(class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ClientSetOwner");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13468);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerSendInitialCoverReplicationInfo(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ServerSendInitialCoverReplicationInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13470);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientReceiveInitialCoverReplicationInfo(int Index, class CoverLink* Link, bool bLinkDisabled, byte NumSlotsEnabled, byte SlotsEnabled, byte NumSlotsDisabled, byte SlotsDisabled, byte NumSlotsAdjusted, byte SlotsAdjusted, byte NumCoverTypesChanged, CoverReplicator::ManualCoverTypeInfo SlotsCoverTypeChanged, bool bDone)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ClientReceiveInitialCoverReplicationInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13483);
 			byte params[27] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(class CoverLink**)&params[4] = Link;
 			*(bool*)&params[8] = bLinkDisabled;
 			params[12] = NumSlotsEnabled;
@@ -75,25 +75,25 @@ namespace UnrealScript
 		}
 		void NotifyEnabledSlots(class CoverLink* Link, ScriptArray<int>& SlotIndices)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.NotifyEnabledSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13497);
 			byte params[16] = { NULL };
-			*(class CoverLink**)&params[0] = Link;
+			*(class CoverLink**)params = Link;
 			*(ScriptArray<int>*)&params[4] = SlotIndices;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			SlotIndices = *(ScriptArray<int>*)&params[4];
 		}
 		void ServerSendEnabledSlots(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ServerSendEnabledSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13505);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientReceiveEnabledSlots(int Index, class CoverLink* Link, byte NumSlotsEnabled, byte SlotsEnabled, bool bDone)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ClientReceiveEnabledSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13512);
 			byte params[14] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(class CoverLink**)&params[4] = Link;
 			params[8] = NumSlotsEnabled;
 			params[9] = SlotsEnabled;
@@ -102,25 +102,25 @@ namespace UnrealScript
 		}
 		void NotifyDisabledSlots(class CoverLink* Link, ScriptArray<int>& SlotIndices)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.NotifyDisabledSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13519);
 			byte params[16] = { NULL };
-			*(class CoverLink**)&params[0] = Link;
+			*(class CoverLink**)params = Link;
 			*(ScriptArray<int>*)&params[4] = SlotIndices;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			SlotIndices = *(ScriptArray<int>*)&params[4];
 		}
 		void ServerSendDisabledSlots(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ServerSendDisabledSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13527);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientReceiveDisabledSlots(int Index, class CoverLink* Link, byte NumSlotsDisabled, byte SlotsDisabled, bool bDone)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ClientReceiveDisabledSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13534);
 			byte params[14] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(class CoverLink**)&params[4] = Link;
 			params[8] = NumSlotsDisabled;
 			params[9] = SlotsDisabled;
@@ -129,25 +129,25 @@ namespace UnrealScript
 		}
 		void NotifyAutoAdjustSlots(class CoverLink* Link, ScriptArray<int>& SlotIndices)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.NotifyAutoAdjustSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13541);
 			byte params[16] = { NULL };
-			*(class CoverLink**)&params[0] = Link;
+			*(class CoverLink**)params = Link;
 			*(ScriptArray<int>*)&params[4] = SlotIndices;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			SlotIndices = *(ScriptArray<int>*)&params[4];
 		}
 		void ServerSendAdjustedSlots(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ServerSendAdjustedSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13549);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientReceiveAdjustedSlots(int Index, class CoverLink* Link, byte NumSlotsAdjusted, byte SlotsAdjusted, bool bDone)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ClientReceiveAdjustedSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13556);
 			byte params[14] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(class CoverLink**)&params[4] = Link;
 			params[8] = NumSlotsAdjusted;
 			params[9] = SlotsAdjusted;
@@ -156,9 +156,9 @@ namespace UnrealScript
 		}
 		void NotifySetManualCoverTypeForSlots(class CoverLink* Link, ScriptArray<int>& SlotIndices, CoverLink::ECoverType NewCoverType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.NotifySetManualCoverTypeForSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13563);
 			byte params[17] = { NULL };
-			*(class CoverLink**)&params[0] = Link;
+			*(class CoverLink**)params = Link;
 			*(ScriptArray<int>*)&params[4] = SlotIndices;
 			*(CoverLink::ECoverType*)&params[16] = NewCoverType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -166,16 +166,16 @@ namespace UnrealScript
 		}
 		void ServerSendManualCoverTypeSlots(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ServerSendManualCoverTypeSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13572);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientReceiveManualCoverTypeSlots(int Index, class CoverLink* Link, byte NumCoverTypesChanged, CoverReplicator::ManualCoverTypeInfo SlotsCoverTypeChanged, bool bDone)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ClientReceiveManualCoverTypeSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13579);
 			byte params[17] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(class CoverLink**)&params[4] = Link;
 			params[8] = NumCoverTypesChanged;
 			*(CoverReplicator::ManualCoverTypeInfo*)&params[12] = SlotsCoverTypeChanged;
@@ -184,23 +184,23 @@ namespace UnrealScript
 		}
 		void NotifyLinkDisabledStateChange(class CoverLink* Link)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.NotifyLinkDisabledStateChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13586);
 			byte params[4] = { NULL };
-			*(class CoverLink**)&params[0] = Link;
+			*(class CoverLink**)params = Link;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerSendLinkDisabledState(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ServerSendLinkDisabledState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13590);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientReceiveLinkDisabledState(int Index, class CoverLink* Link, bool bLinkDisabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverReplicator.ClientReceiveLinkDisabledState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13592);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(class CoverLink**)&params[4] = Link;
 			*(bool*)&params[8] = bLinkDisabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

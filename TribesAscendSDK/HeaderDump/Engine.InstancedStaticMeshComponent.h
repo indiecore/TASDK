@@ -13,14 +13,14 @@ namespace UnrealScript
 	class InstancedStaticMeshComponent : public StaticMeshComponent
 	{
 	public:
-		class InstancedStaticMeshInstanceData
+		struct InstancedStaticMeshInstanceData
 		{
 		public:
 			ADD_STRUCT(Object::Vector2D, ShadowmapUVBias, 72)
 			ADD_STRUCT(Object::Vector2D, LightmapUVBias, 64)
 			ADD_STRUCT(Object::Matrix, Transform, 0)
 		};
-		class InstancedStaticMeshMappingInfo
+		struct InstancedStaticMeshMappingInfo
 		{
 		public:
 			ADD_OBJECT(ShadowMap2D, ShadowmapTexture, 12)

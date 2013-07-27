@@ -35,61 +35,61 @@ namespace UnrealScript
 		ADD_STRUCT(TrStormControlPoint::ControlPointState, r_CurrentControlPointState, 1360)
 		void OnPawnTouched(class TrPawn* TRP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormControlPoint.OnPawnTouched");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112762);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = TRP;
+			*(class TrPawn**)params = TRP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		TrStormControlPoint::ControlPointState GetControlPointState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormControlPoint.GetControlPointState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112765);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(TrStormControlPoint::ControlPointState*)&params[0];
+			return *(TrStormControlPoint::ControlPointState*)params;
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormControlPoint.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112767);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FireMissile(byte TeamNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormControlPoint.FireMissile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112769);
 			byte params[1] = { NULL };
-			params[0] = TeamNum;
+			*params = TeamNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BeginTransition(byte TeamNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormControlPoint.BeginTransition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112772);
 			byte params[1] = { NULL };
-			params[0] = TeamNum;
+			*params = TeamNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetControlPointState(TrStormControlPoint::ControlPointState NewControlPointState)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormControlPoint.SetControlPointState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112775);
 			byte params[1] = { NULL };
-			*(TrStormControlPoint::ControlPointState*)&params[0] = NewControlPointState;
+			*(TrStormControlPoint::ControlPointState*)params = NewControlPointState;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormControlPoint.PostRenderFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112780);
 			byte params[32] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = Canvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetScreenName(class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStormControlPoint.GetScreenName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112791);
 			byte params[16] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}

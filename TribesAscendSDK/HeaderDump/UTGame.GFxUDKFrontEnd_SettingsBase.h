@@ -25,112 +25,112 @@ namespace UnrealScript
 		ADD_OBJECT(GFxClikWidget, ListMC, 220)
 		void OnViewLoaded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.OnViewLoaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38968);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnViewActivated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.OnViewActivated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38969);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.OnTopMostView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38970);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPlayOpenAnimation;
+			*(bool*)params = bPlayOpenAnimation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.DisableSubComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38972);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDisableComponents;
+			*(bool*)params = bDisableComponents;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSelectedOptionSet()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.SetSelectedOptionSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38974);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LoadDataFromStore()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.LoadDataFromStore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38975);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Select_Back(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.Select_Back");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38985);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SaveState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.SaveState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38987);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetList(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.SetList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38995);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnListChange(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.OnListChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38997);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnOptionChanged(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.OnOptionChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38999);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateDescription()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.UpdateDescription");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39001);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateListDataProvider()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.UpdateListDataProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39004);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int FindLocalizedSettingIndexByName(ScriptString* InSettingName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.FindLocalizedSettingIndexByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39005);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = InSettingName;
+			*(ScriptString**)params = InSettingName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		void OnEscapeKeyPress()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.OnEscapeKeyPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39011);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Select_BackImpl()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.Select_BackImpl");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39012);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int FindPropertyIndexByName(ScriptString* InPropertyName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.FindPropertyIndexByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39013);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = InPropertyName;
+			*(ScriptString**)params = InPropertyName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_SettingsBase.WidgetInitialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39019);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)params = WidgetName;
 			*(ScriptName*)&params[8] = WidgetPath;
 			*(class GFxObject**)&params[16] = Widget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

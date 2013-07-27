@@ -24,13 +24,13 @@ namespace UnrealScript
 	class PostProcessVolume : public Volume
 	{
 	public:
-		class LUTBlender
+		struct LUTBlender
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class Texture*>, LUTTextures, 0)
 			ADD_STRUCT(ScriptArray<float>, LUTWeights, 12)
 		};
-		class PostProcessSettings
+		struct PostProcessSettings
 		{
 		public:
 			ADD_STRUCT(PostProcessVolume::LUTBlender, ColorGradingLUT, 196)
@@ -38,12 +38,12 @@ namespace UnrealScript
 			ADD_STRUCT(float, RimShader_InterpolationDuration, 188)
 			ADD_STRUCT(Object::LinearColor, RimShader_Color, 172)
 			ADD_STRUCT(float, Scene_InterpolationDuration, 168)
-			ADD_STRUCT(Object::Vector, Scene_Shadows, 156)
-			ADD_STRUCT(Object::Vector, Scene_MidTones, 144)
-			ADD_STRUCT(Object::Vector, Scene_HighLights, 132)
+			ADD_STRUCT(Vector, Scene_Shadows, 156)
+			ADD_STRUCT(Vector, Scene_MidTones, 144)
+			ADD_STRUCT(Vector, Scene_HighLights, 132)
 			ADD_STRUCT(float, Scene_ImageGrainScale, 128)
 			ADD_STRUCT(float, Scene_TonemapperScale, 124)
-			ADD_STRUCT(Object::Vector, Scene_Colorize, 112)
+			ADD_STRUCT(Vector, Scene_Colorize, 112)
 			ADD_STRUCT(float, Scene_Desaturation, 108)
 			ADD_STRUCT(float, MotionBlur_InterpolationDuration, 104)
 			ADD_STRUCT(float, MotionBlur_CameraTranslationThreshold, 100)
@@ -52,7 +52,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, MotionBlur_Amount, 88)
 			ADD_STRUCT(float, MotionBlur_MaxVelocity, 84)
 			ADD_STRUCT(float, DOF_InterpolationDuration, 80)
-			ADD_STRUCT(Object::Vector, DOF_FocusPosition, 68)
+			ADD_STRUCT(Vector, DOF_FocusPosition, 68)
 			ADD_STRUCT(float, DOF_FocusDistance, 64)
 			ADD_STRUCT(float, DOF_FocusInnerRadius, 60)
 			ADD_STRUCT(DOFEffect::EFocusType, DOF_FocusType, 56)
@@ -121,9 +121,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, Priority, 520)
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PostProcessVolume.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24755);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

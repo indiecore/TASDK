@@ -14,16 +14,16 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, GoalActor, 68)
 		bool TowardGoal(class Pawn* P, class Actor* Goal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_TowardGoal.TowardGoal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23985);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			*(class Actor**)&params[4] = Goal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Path_TowardGoal.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23990);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

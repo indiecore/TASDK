@@ -16,7 +16,7 @@ namespace UnrealScript
 	class UIDataStore_OnlineGameSearch : public UIDataStore_Remote
 	{
 	public:
-		class GameSearchCfg
+		struct GameSearchCfg
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class UIDataProvider_Settings*>, SearchResults, 16)
@@ -36,46 +36,46 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementProvider, 120)
 		void Init()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28644);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool InvalidateCurrentSearchResults()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.InvalidateCurrentSearchResults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28645);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool SubmitGameSearch(byte ControllerIndex, bool bInvalidateExistingSearchResults)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.SubmitGameSearch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28649);
 			byte params[9] = { NULL };
-			params[0] = ControllerIndex;
+			*params = ControllerIndex;
 			*(bool*)&params[4] = bInvalidateExistingSearchResults;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool OverrideQuerySubmission(byte ControllerId, class OnlineGameSearch* Search)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.OverrideQuerySubmission");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28653);
 			byte params[9] = { NULL };
-			params[0] = ControllerId;
+			*params = ControllerId;
 			*(class OnlineGameSearch**)&params[4] = Search;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void OnSearchComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.OnSearchComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28657);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool GetSearchResultFromIndex(int ListIndex, OnlineGameSearch::OnlineGameSearchResult& Result)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.GetSearchResultFromIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28659);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = ListIndex;
+			*(int*)params = ListIndex;
 			*(OnlineGameSearch::OnlineGameSearchResult*)&params[4] = Result;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Result = *(OnlineGameSearch::OnlineGameSearchResult*)&params[4];
@@ -83,73 +83,73 @@ namespace UnrealScript
 		}
 		bool ShowHostGamercard(byte ControllerIndex, int ListIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.ShowHostGamercard");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28663);
 			byte params[9] = { NULL };
-			params[0] = ControllerIndex;
+			*params = ControllerIndex;
 			*(int*)&params[4] = ListIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void BuildSearchResults()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.BuildSearchResults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28669);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class OnlineGameSearch* GetCurrentGameSearch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.GetCurrentGameSearch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28670);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class OnlineGameSearch**)&params[0];
+			return *(class OnlineGameSearch**)params;
 		}
 		class OnlineGameSearch* GetActiveGameSearch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.GetActiveGameSearch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28672);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class OnlineGameSearch**)&params[0];
+			return *(class OnlineGameSearch**)params;
 		}
 		int FindSearchConfigurationIndex(ScriptName SearchTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.FindSearchConfigurationIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28674);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SearchTag;
+			*(ScriptName*)params = SearchTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void SetCurrentByIndex(int NewIndex, bool bInvalidateExistingSearchResults)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.SetCurrentByIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28678);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = NewIndex;
+			*(int*)params = NewIndex;
 			*(bool*)&params[4] = bInvalidateExistingSearchResults;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetCurrentByName(ScriptName SearchName, bool bInvalidateExistingSearchResults)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.SetCurrentByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28681);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SearchName;
+			*(ScriptName*)params = SearchName;
 			*(bool*)&params[8] = bInvalidateExistingSearchResults;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MoveToNext(bool bInvalidateExistingSearchResults)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.MoveToNext");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28685);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bInvalidateExistingSearchResults;
+			*(bool*)params = bInvalidateExistingSearchResults;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MoveToPrevious(bool bInvalidateExistingSearchResults)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.MoveToPrevious");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28687);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bInvalidateExistingSearchResults;
+			*(bool*)params = bInvalidateExistingSearchResults;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearAllSearchResults()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSearch.ClearAllSearchResults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28689);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

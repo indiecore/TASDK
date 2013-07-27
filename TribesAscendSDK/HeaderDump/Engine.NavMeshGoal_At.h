@@ -26,29 +26,29 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, GoalPoly, 100)
 		ADD_BOOL(bKeepPartial, 96, 0x1)
 		ADD_STRUCT(float, GoalDist, 92)
-		ADD_STRUCT(Object::Vector, Goal, 80)
+		ADD_STRUCT(Vector, Goal, 80)
 		void RecycleNative()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_At.RecycleNative");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20922);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool AtActor(class NavigationHandle* NavHandle, class Actor* GoalActor, float Dist, bool bReturnPartial)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_At.AtActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20923);
 			byte params[20] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
+			*(class NavigationHandle**)params = NavHandle;
 			*(class Actor**)&params[4] = GoalActor;
 			*(float*)&params[8] = Dist;
 			*(bool*)&params[12] = bReturnPartial;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
-		bool AtLocation(class NavigationHandle* NavHandle, Object::Vector GoalLocation, float Dist, bool bReturnPartial)
+		bool AtLocation(class NavigationHandle* NavHandle, Vector GoalLocation, float Dist, bool bReturnPartial)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_At.AtLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20934);
 			byte params[28] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
-			*(Object::Vector*)&params[4] = GoalLocation;
+			*(class NavigationHandle**)params = NavHandle;
+			*(Vector*)&params[4] = GoalLocation;
 			*(float*)&params[16] = Dist;
 			*(bool*)&params[20] = bReturnPartial;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -56,7 +56,7 @@ namespace UnrealScript
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_At.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20941);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

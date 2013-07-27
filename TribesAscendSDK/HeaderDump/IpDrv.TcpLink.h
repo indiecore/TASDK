@@ -33,73 +33,73 @@ namespace UnrealScript
 		ADD_STRUCT(TcpLink::ELinkState, LinkState, 500)
 		int BindPort(int PortNum, bool bUseNextAvailable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.BindPort");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34054);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PortNum;
+			*(int*)params = PortNum;
 			*(bool*)&params[4] = bUseNextAvailable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		bool Listen()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Listen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34058);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool Open(InternetLink::IpAddr Addr)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Open");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34060);
 			byte params[12] = { NULL };
-			*(InternetLink::IpAddr*)&params[0] = Addr;
+			*(InternetLink::IpAddr*)params = Addr;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool Close()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Close");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34063);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool IsConnected()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.IsConnected");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34065);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		int SendText(ScriptString* Str)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.SendText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34067);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Str;
+			*(ScriptString**)params = Str;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		int SendBinary(int Count, byte B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.SendBinary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34070);
 			byte params[9] = { NULL };
-			*(int*)&params[0] = Count;
+			*(int*)params = Count;
 			params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[260];
 		}
 		int ReadText(ScriptString*& Str)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.ReadText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34074);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Str;
+			*(ScriptString**)params = Str;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Str = *(ScriptString**)&params[0];
+			Str = *(ScriptString**)params;
 			return *(int*)&params[12];
 		}
 		int ReadBinary(int Count, byte& B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.ReadBinary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34077);
 			byte params[9] = { NULL };
-			*(int*)&params[0] = Count;
+			*(int*)params = Count;
 			params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			B = params[4];
@@ -107,38 +107,38 @@ namespace UnrealScript
 		}
 		void Accepted()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Accepted");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34081);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Opened()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Opened");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34082);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Closed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.Closed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34083);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReceivedText(ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.ReceivedText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34084);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReceivedLine(ScriptString* Line)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.ReceivedLine");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34086);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Line;
+			*(ScriptString**)params = Line;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReceivedBinary(int Count, byte B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.TcpLink.ReceivedBinary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34088);
 			byte params[5] = { NULL };
-			*(int*)&params[0] = Count;
+			*(int*)params = Count;
 			params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

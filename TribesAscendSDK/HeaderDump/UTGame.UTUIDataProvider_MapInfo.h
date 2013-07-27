@@ -7,17 +7,17 @@ namespace UnrealScript
 	public:
 		bool ShouldBeFiltered()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTUIDataProvider_MapInfo.ShouldBeFiltered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38662);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool SupportedByCurrentGameMode()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTUIDataProvider_MapInfo.SupportedByCurrentGameMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49589);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

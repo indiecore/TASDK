@@ -43,103 +43,103 @@ namespace UnrealScript
 		ADD_OBJECT(GameCameraBase, ThirdPersonCam, 1088)
 		class GameCameraBase* CreateCamera(ScriptClass* CameraClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.CreateCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31745);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = CameraClass;
+			*(ScriptClass**)params = CameraClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GameCameraBase**)&params[4];
 		}
 		void CacheLastTargetBaseInfo(class Actor* TargetBase)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.CacheLastTargetBaseInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31749);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = TargetBase;
+			*(class Actor**)params = TargetBase;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31751);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31752);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class GameCameraBase* FindBestCameraType(class Actor* CameraTarget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.FindBestCameraType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31753);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = CameraTarget;
+			*(class Actor**)params = CameraTarget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GameCameraBase**)&params[4];
 		}
 		bool ShouldConstrainAspectRatio()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.ShouldConstrainAspectRatio");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31757);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void UpdateViewTarget(Camera::TViewTarget& OutVT, float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.UpdateViewTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31759);
 			byte params[48] = { NULL };
-			*(Camera::TViewTarget*)&params[0] = OutVT;
+			*(Camera::TViewTarget*)params = OutVT;
 			*(float*)&params[44] = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutVT = *(Camera::TViewTarget*)&params[0];
+			OutVT = *(Camera::TViewTarget*)params;
 		}
 		float AdjustFOVForViewport(float inHorizFOV, class Pawn* CameraTargetPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.AdjustFOVForViewport");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31765);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = inHorizFOV;
+			*(float*)params = inHorizFOV;
 			*(class Pawn**)&params[4] = CameraTargetPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		void UpdateCameraLensEffects(Camera::TViewTarget& OutVT)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.UpdateCameraLensEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31766);
 			byte params[44] = { NULL };
-			*(Camera::TViewTarget*)&params[0] = OutVT;
+			*(Camera::TViewTarget*)params = OutVT;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutVT = *(Camera::TViewTarget*)&params[0];
+			OutVT = *(Camera::TViewTarget*)params;
 		}
 		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.DisplayDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31769);
 			byte params[12] = { NULL };
-			*(class HUD**)&params[0] = HUD;
+			*(class HUD**)params = HUD;
 			*(float*)&params[4] = out_YL;
 			*(float*)&params[8] = out_YPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			out_YL = *(float*)&params[4];
 			out_YPos = *(float*)&params[8];
 		}
-		void SetColorScale(Object::Vector NewColorScale)
+		void SetColorScale(Vector NewColorScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.SetColorScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31774);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewColorScale;
+			*(Vector*)params = NewColorScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetInterpolation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.ResetInterpolation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31776);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ProcessViewRotation(float DeltaTime, Object::Rotator& out_ViewRotation, Object::Rotator& out_DeltaRot)
+		void ProcessViewRotation(float DeltaTime, Rotator& out_ViewRotation, Rotator& out_DeltaRot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GamePlayerCamera.ProcessViewRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31777);
 			byte params[28] = { NULL };
-			*(float*)&params[0] = DeltaTime;
-			*(Object::Rotator*)&params[4] = out_ViewRotation;
-			*(Object::Rotator*)&params[16] = out_DeltaRot;
+			*(float*)params = DeltaTime;
+			*(Rotator*)&params[4] = out_ViewRotation;
+			*(Rotator*)&params[16] = out_DeltaRot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_ViewRotation = *(Object::Rotator*)&params[4];
-			out_DeltaRot = *(Object::Rotator*)&params[16];
+			out_ViewRotation = *(Rotator*)&params[4];
+			out_DeltaRot = *(Rotator*)&params[16];
 		}
 	};
 }

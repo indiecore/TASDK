@@ -20,22 +20,22 @@ namespace UnrealScript
 	class SplineMeshComponent : public StaticMeshComponent
 	{
 	public:
-		class SplineMeshParams
+		struct SplineMeshParams
 		{
 		public:
 			ADD_STRUCT(Object::Vector2D, EndOffset, 80)
 			ADD_STRUCT(float, EndRoll, 76)
 			ADD_STRUCT(Object::Vector2D, EndScale, 68)
-			ADD_STRUCT(Object::Vector, EndTangent, 56)
-			ADD_STRUCT(Object::Vector, EndPos, 44)
+			ADD_STRUCT(Vector, EndTangent, 56)
+			ADD_STRUCT(Vector, EndPos, 44)
 			ADD_STRUCT(Object::Vector2D, StartOffset, 36)
 			ADD_STRUCT(float, StartRoll, 32)
 			ADD_STRUCT(Object::Vector2D, StartScale, 24)
-			ADD_STRUCT(Object::Vector, StartTangent, 12)
-			ADD_STRUCT(Object::Vector, StartPos, 0)
+			ADD_STRUCT(Vector, StartTangent, 12)
+			ADD_STRUCT(Vector, StartPos, 0)
 		};
 		ADD_BOOL(bSmoothInterpRollScale, 708, 0x1)
-		ADD_STRUCT(Object::Vector, SplineXDir, 696)
+		ADD_STRUCT(Vector, SplineXDir, 696)
 		ADD_STRUCT(SplineMeshComponent::SplineMeshParams, SplineParams, 608)
 	};
 }

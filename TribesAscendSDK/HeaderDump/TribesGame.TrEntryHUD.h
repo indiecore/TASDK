@@ -7,12 +7,12 @@ namespace UnrealScript
 	public:
 		void CreateMainMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryHUD.CreateMainMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87285);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEntryHUD.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87286);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

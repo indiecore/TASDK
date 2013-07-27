@@ -23,7 +23,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, FootAdjustHeightLastTick, 320)
 		ADD_STRUCT(float, OffContactFootAdjustInterpSpeed, 316)
 		ADD_STRUCT(float, OnContactFootAdjustInterpSpeed, 312)
-		ADD_STRUCT(Object::Vector, FootUpDirLastTick, 300)
+		ADD_STRUCT(Vector, FootUpDirLastTick, 300)
 		ADD_STRUCT(float, FootOrientInterpSpeed, 296)
 		ADD_STRUCT(float, MaxFootOrientAdjust, 292)
 		ADD_STRUCT(float, MaxDownAdjustment, 288)
@@ -32,7 +32,7 @@ namespace UnrealScript
 		ADD_BOOL(bOnlyEnableForUpAdjustment, 280, 0x4)
 		ADD_BOOL(bOrientFootToGround, 280, 0x2)
 		ADD_BOOL(bInvertFootUpAxis, 280, 0x1)
-		ADD_STRUCT(Object::Rotator, FootRotOffset, 268)
+		ADD_STRUCT(Rotator, FootRotOffset, 268)
 		ADD_STRUCT(Object::EAxis, FootUpAxis, 264)
 		ADD_STRUCT(float, FootOffset, 260)
 	};

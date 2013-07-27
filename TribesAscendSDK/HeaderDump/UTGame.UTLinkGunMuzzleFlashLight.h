@@ -13,9 +13,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<UDKExplosionLight::LightValues>, BlueTeamTimeShift, 636)
 		void SetTeam(byte NewTeam)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTLinkGunMuzzleFlashLight.SetTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48308);
 			byte params[1] = { NULL };
-			params[0] = NewTeam;
+			*params = NewTeam;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -15,24 +15,24 @@ namespace UnrealScript
 		ADD_STRUCT(Object::MultiMap_Mirror, OptionProviders, 196)
 		void ClearSet(ScriptName SetName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_Options.ClearSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35645);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = SetName;
+			*(ScriptName*)params = SetName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AppendToSet(ScriptName SetName, int NumOptions)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_Options.AppendToSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35647);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SetName;
+			*(ScriptName*)params = SetName;
 			*(int*)&params[8] = NumOptions;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GetSet(ScriptName SetName, ScriptArray<class UDKUIResourceDataProvider*>& OutProviders)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataStore_Options.GetSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35650);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = SetName;
+			*(ScriptName*)params = SetName;
 			*(ScriptArray<class UDKUIResourceDataProvider*>*)&params[8] = OutProviders;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutProviders = *(ScriptArray<class UDKUIResourceDataProvider*>*)&params[8];

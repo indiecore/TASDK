@@ -30,9 +30,9 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, GoalActor, 76)
 		bool AtActor(class Pawn* P, class Actor* Goal, float Dist, bool bReturnPartial)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Goal_AtActor.AtActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18170);
 			byte params[20] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			*(class Actor**)&params[4] = Goal;
 			*(float*)&params[8] = Dist;
 			*(bool*)&params[12] = bReturnPartial;
@@ -41,7 +41,7 @@ namespace UnrealScript
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Goal_AtActor.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18186);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

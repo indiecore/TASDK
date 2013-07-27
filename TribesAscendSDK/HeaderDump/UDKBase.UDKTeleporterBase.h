@@ -28,21 +28,21 @@ namespace UnrealScript
 		ADD_OBJECT(TextureRenderTarget2D, TextureTarget, 736)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKTeleporterBase.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35537);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitializePortalEffect(class Actor* Dest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKTeleporterBase.InitializePortalEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35539);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Dest;
+			*(class Actor**)params = Dest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool Accept(class Actor* Incoming, class Actor* Source)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKTeleporterBase.Accept");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35542);
 			byte params[12] = { NULL };
-			*(class Actor**)&params[0] = Incoming;
+			*(class Actor**)params = Incoming;
 			*(class Actor**)&params[4] = Source;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];

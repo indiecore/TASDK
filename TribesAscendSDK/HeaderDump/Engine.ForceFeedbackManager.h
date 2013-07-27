@@ -34,24 +34,24 @@ namespace UnrealScript
 		ADD_BOOL(bIsPaused, 60, 0x2)
 		void PlayForceFeedbackWaveform(class ForceFeedbackWaveform* WaveForm, class Actor* WaveInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFeedbackManager.PlayForceFeedbackWaveform");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15899);
 			byte params[8] = { NULL };
-			*(class ForceFeedbackWaveform**)&params[0] = WaveForm;
+			*(class ForceFeedbackWaveform**)params = WaveForm;
 			*(class Actor**)&params[4] = WaveInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopForceFeedbackWaveform(class ForceFeedbackWaveform* WaveForm)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFeedbackManager.StopForceFeedbackWaveform");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15903);
 			byte params[4] = { NULL };
-			*(class ForceFeedbackWaveform**)&params[0] = WaveForm;
+			*(class ForceFeedbackWaveform**)params = WaveForm;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PauseWaveform(bool bPause)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFeedbackManager.PauseWaveform");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15905);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPause;
+			*(bool*)params = bPause;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

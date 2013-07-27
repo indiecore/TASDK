@@ -21,28 +21,28 @@ namespace UnrealScript
 		ADD_OBJECT(UTCTFBase, FlagBases, 2740)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFHUD.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46103);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Timer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFHUD.Timer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46105);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayTeamLogos(byte TeamIndex, Object::Vector2D pos, float DestScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFHUD.DisplayTeamLogos");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46108);
 			byte params[13] = { NULL };
-			params[0] = TeamIndex;
+			*params = TeamIndex;
 			*(Object::Vector2D*)&params[4] = pos;
 			*(float*)&params[12] = DestScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Actor* GetDirectionalDest(byte TeamIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCTFHUD.GetDirectionalDest");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46117);
 			byte params[5] = { NULL };
-			params[0] = TeamIndex;
+			*params = TeamIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[4];
 		}

@@ -13,7 +13,7 @@ namespace UnrealScript
 		ADD_STRUCT(UDKPlayerController::ObjectiveAnnouncementInfo, Announcement, 232)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_PlayAnnouncement.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49112);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

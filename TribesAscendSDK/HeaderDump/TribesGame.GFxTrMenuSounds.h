@@ -27,77 +27,77 @@ namespace UnrealScript
 		};
 		void SoundToolTip(bool bOpened)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.SoundToolTip");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56597);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bOpened;
+			*(bool*)params = bOpened;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SoundXPGain(int val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.SoundXPGain");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56599);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = val;
+			*(int*)params = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SoundSkillType(int val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.SoundSkillType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56601);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = val;
+			*(int*)params = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SoundClassType(int val)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.SoundClassType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56603);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = val;
+			*(int*)params = val;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SoundPurchaseSkill()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.SoundPurchaseSkill");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56605);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SoundSelectedQueue()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.SoundSelectedQueue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56606);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LeaveQueue()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.LeaveQueue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56607);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PageForward()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.PageForward");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56608);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PageBack()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.PageBack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56609);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClassRollover()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.ClassRollover");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56610);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClassSelected()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.ClassSelected");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56611);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClassLocked()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.ClassLocked");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56612);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayMenuSound(GFxTrMenuSounds::EMenuSound MenuSound)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrMenuSounds.PlayMenuSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56613);
 			byte params[1] = { NULL };
-			*(GFxTrMenuSounds::EMenuSound*)&params[0] = MenuSound;
+			*(GFxTrMenuSounds::EMenuSound*)params = MenuSound;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

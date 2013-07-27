@@ -20,9 +20,9 @@ namespace UnrealScript
 		ADD_OBJECT(TextureRenderTarget2D, TextureTarget, 144)
 		void SetCaptureParameters(class TextureRenderTarget2D* NewTextureTarget, float NewScaleFOV, class Actor* NewViewDest)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SceneCapturePortalComponent.SetCaptureParameters");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24713);
 			byte params[12] = { NULL };
-			*(class TextureRenderTarget2D**)&params[0] = NewTextureTarget;
+			*(class TextureRenderTarget2D**)params = NewTextureTarget;
 			*(float*)&params[4] = NewScaleFOV;
 			*(class Actor**)&params[8] = NewViewDest;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

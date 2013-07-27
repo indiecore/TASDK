@@ -17,7 +17,7 @@ namespace UnrealScript
 	class UIDataStore_OnlineGameSettings : public UIDataStore_Settings
 	{
 	public:
-		class GameSettingsCfg
+		struct GameSettingsCfg
 		{
 		public:
 			ADD_STRUCT(ScriptName, SettingsName, 12)
@@ -30,70 +30,70 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, SettingsProviderClass, 132)
 		void OnSettingProviderChanged(class UIDataProvider* SourceProvider, ScriptName SettingsName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSettings.OnSettingProviderChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28701);
 			byte params[12] = { NULL };
-			*(class UIDataProvider**)&params[0] = SourceProvider;
+			*(class UIDataProvider**)params = SourceProvider;
 			*(ScriptName*)&params[4] = SettingsName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CreateGame(byte ControllerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSettings.CreateGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28704);
 			byte params[5] = { NULL };
-			params[0] = ControllerIndex;
+			*params = ControllerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		class OnlineGameSettings* GetCurrentGameSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSettings.GetCurrentGameSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28709);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class OnlineGameSettings**)&params[0];
+			return *(class OnlineGameSettings**)params;
 		}
 		class UIDataProvider_Settings* GetCurrentProvider()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSettings.GetCurrentProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28711);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class UIDataProvider_Settings**)&params[0];
+			return *(class UIDataProvider_Settings**)params;
 		}
 		void SetCurrentByIndex(int NewIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSettings.SetCurrentByIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28713);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = NewIndex;
+			*(int*)params = NewIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetCurrentByName(ScriptName SettingsName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSettings.SetCurrentByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28715);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = SettingsName;
+			*(ScriptName*)params = SettingsName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MoveToNext()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSettings.MoveToNext");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28718);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void MoveToPrevious()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSettings.MoveToPrevious");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28720);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Registered(class LocalPlayer* PlayerOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSettings.Registered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28722);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = PlayerOwner;
+			*(class LocalPlayer**)params = PlayerOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Unregistered(class LocalPlayer* PlayerOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineGameSettings.Unregistered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28726);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = PlayerOwner;
+			*(class LocalPlayer**)params = PlayerOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

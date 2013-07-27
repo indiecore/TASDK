@@ -14,22 +14,22 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, ArenaWeaponClassPath, 496)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_Arena.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48571);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CheckReplacement(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_Arena.CheckReplacement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48573);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void ModifyPlayer(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_Arena.ModifyPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48576);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

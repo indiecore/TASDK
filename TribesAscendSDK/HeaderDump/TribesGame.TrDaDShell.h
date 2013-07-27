@@ -21,24 +21,24 @@ namespace UnrealScript
 		ADD_BOOL(r_bIsRotating, 588, 0x8)
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDShell.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79707);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDShell.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79709);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartRotation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDShell.StartRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79710);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StopRotation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDShell.StopRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79711);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

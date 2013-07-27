@@ -29,88 +29,88 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, m_nSocketTraceName, 1544)
 		ADD_STRUCT(float, m_fPrismRadius, 1540)
 		ADD_STRUCT(Object::Pointer, VfTable_IInterface_TrTripNotifier, 1524)
-		void CreateTripActor(class TrDeployable_PrismMine* Right, Object::Vector LeftLocation, Object::Vector RightLocation)
+		void CreateTripActor(class TrDeployable_PrismMine* Right, Vector LeftLocation, Vector RightLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.CreateTripActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80237);
 			byte params[28] = { NULL };
-			*(class TrDeployable_PrismMine**)&params[0] = Right;
-			*(Object::Vector*)&params[4] = LeftLocation;
-			*(Object::Vector*)&params[16] = RightLocation;
+			*(class TrDeployable_PrismMine**)params = Right;
+			*(Vector*)&params[4] = LeftLocation;
+			*(Vector*)&params[16] = RightLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DestroyTripActor(class TrTripActor* DestroyTrip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.DestroyTripActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80245);
 			byte params[4] = { NULL };
-			*(class TrTripActor**)&params[0] = DestroyTrip;
+			*(class TrTripActor**)params = DestroyTrip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddTripActor(class TrTripActor* NewTrip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.AddTripActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80247);
 			byte params[4] = { NULL };
-			*(class TrTripActor**)&params[0] = NewTrip;
+			*(class TrTripActor**)params = NewTrip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveTripActor(class TrTripActor* RemoveTrip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.RemoveTripActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80250);
 			byte params[4] = { NULL };
-			*(class TrTripActor**)&params[0] = RemoveTrip;
+			*(class TrTripActor**)params = RemoveTrip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TripActivated(class Pawn* Other, Object::Vector ActivateLocation, class TrTripActor* TripActor)
+		void TripActivated(class Pawn* Other, Vector ActivateLocation, class TrTripActor* TripActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.TripActivated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80253);
 			byte params[20] = { NULL };
-			*(class Pawn**)&params[0] = Other;
-			*(Object::Vector*)&params[4] = ActivateLocation;
+			*(class Pawn**)params = Other;
+			*(Vector*)&params[4] = ActivateLocation;
 			*(class TrTripActor**)&params[16] = TripActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class ParticleSystem* GetParticleSystemName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.GetParticleSystemName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80257);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class ParticleSystem**)&params[0];
+			return *(class ParticleSystem**)params;
 		}
-		bool GetTripSocketPosition(bool bIsLeft, Object::Vector& SocketPosition)
+		bool GetTripSocketPosition(bool bIsLeft, Vector& SocketPosition)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.GetTripSocketPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80259);
 			byte params[20] = { NULL };
-			*(bool*)&params[0] = bIsLeft;
-			*(Object::Vector*)&params[4] = SocketPosition;
+			*(bool*)params = bIsLeft;
+			*(Vector*)&params[4] = SocketPosition;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			SocketPosition = *(Object::Vector*)&params[4];
+			SocketPosition = *(Vector*)&params[4];
 			return *(bool*)&params[16];
 		}
 		void OnTripAwake()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.OnTripAwake");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80264);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnTripSleep()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.OnTripSleep");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80265);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DeployComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.DeployComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80266);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool NoConnectionExists(class TrDeployable_PrismMine* AdjacentMine)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.NoConnectionExists");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80270);
 			byte params[8] = { NULL };
-			*(class TrDeployable_PrismMine**)&params[0] = AdjacentMine;
+			*(class TrDeployable_PrismMine**)params = AdjacentMine;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void OnPowerStatusChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_PrismMine.OnPowerStatusChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80276);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

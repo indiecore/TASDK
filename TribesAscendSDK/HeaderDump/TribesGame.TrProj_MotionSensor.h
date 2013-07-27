@@ -6,19 +6,19 @@ namespace UnrealScript
 	class TrProj_MotionSensor : public TrProj_Mine
 	{
 	public:
-		void Explode(Object::Vector HitLocation, Object::Vector HitNormal)
+		void Explode(Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MotionSensor.Explode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108757);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
-			*(Object::Vector*)&params[12] = HitNormal;
+			*(Vector*)params = HitLocation;
+			*(Vector*)&params[12] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DetonateObsolete(bool bDetonateFromDamage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MotionSensor.DetonateObsolete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108762);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDetonateFromDamage;
+			*(bool*)params = bDetonateFromDamage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -8,28 +8,28 @@ namespace UnrealScript
 	public:
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTClientSideWeaponPawn.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44063);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AttachDriver(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTClientSideWeaponPawn.AttachDriver");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44064);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DetachDriver(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTClientSideWeaponPawn.DetachDriver");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44066);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTClientSideWeaponPawn.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44068);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

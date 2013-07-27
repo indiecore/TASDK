@@ -13,7 +13,7 @@ namespace UnrealScript
 	class TrMapMusicInfo : public UDKMapMusicInfo
 	{
 	public:
-		class TrMapStingers
+		struct TrMapStingers
 		{
 		public:
 			ADD_OBJECT(SoundCue, TeamRabbitFriendlyPickedUpFlag, 52)
@@ -31,7 +31,7 @@ namespace UnrealScript
 			ADD_OBJECT(SoundCue, PlayerLost, 4)
 			ADD_OBJECT(SoundCue, PlayerWon, 0)
 		};
-		class TrMapMusic
+		struct TrMapMusic
 		{
 		public:
 			ADD_OBJECT(SoundCue, AmbientMusic, 28)

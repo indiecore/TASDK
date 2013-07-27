@@ -19,39 +19,39 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, ItemAttachPointName, 488)
 		void GetBoundingCylinder(float& CollisionRadius, float& CollisionHeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_SupportItemPlatform.GetBoundingCylinder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74134);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = CollisionRadius;
+			*(float*)params = CollisionRadius;
 			*(float*)&params[4] = CollisionHeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			CollisionRadius = *(float*)&params[0];
+			CollisionRadius = *(float*)params;
 			CollisionHeight = *(float*)&params[4];
 		}
 		void Init(class Actor* DeployableOwner, ScriptClass* GameObjectiveClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_SupportItemPlatform.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74137);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = DeployableOwner;
+			*(class Actor**)params = DeployableOwner;
 			*(ScriptClass**)&params[4] = GameObjectiveClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		byte ScriptGetTeamNum()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_SupportItemPlatform.ScriptGetTeamNum");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74140);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return params[0];
+			return *params;
 		}
 		void HideMesh()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_SupportItemPlatform.HideMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74142);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_SupportItemPlatform.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74144);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -19,7 +19,7 @@ namespace UnrealScript
 			CFT_EndOfMeasure = 1,
 			CFT_MAX = 2,
 		};
-		class StingersForAMap
+		struct StingersForAMap
 		{
 		public:
 			ADD_OBJECT(SoundCue, ScoreWinning, 56)
@@ -38,7 +38,7 @@ namespace UnrealScript
 			ADD_OBJECT(SoundCue, DoubleKill, 4)
 			ADD_OBJECT(SoundCue, Died, 0)
 		};
-		class MusicSegment
+		struct MusicSegment
 		{
 		public:
 			ADD_OBJECT(SoundCue, TheCue, 12)
@@ -46,7 +46,7 @@ namespace UnrealScript
 			ADD_STRUCT(UDKMapMusicInfo::ECrossfadeType, CrossfadeRule, 4)
 			ADD_STRUCT(float, TempoOverride, 0)
 		};
-		class MusicForAMap
+		struct MusicForAMap
 		{
 		public:
 			ADD_STRUCT(UDKMapMusicInfo::MusicSegment, Victory, 84)

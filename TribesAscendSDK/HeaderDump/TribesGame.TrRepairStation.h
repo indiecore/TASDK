@@ -33,55 +33,55 @@ namespace UnrealScript
 		ADD_BOOL(m_bIsStationOpen, 1396, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRepairStation.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110525);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRepairStation.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110526);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnAnimEnd(class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRepairStation.OnAnimEnd");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110528);
 			byte params[12] = { NULL };
-			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			*(class AnimNodeSequence**)params = SeqNode;
 			*(float*)&params[4] = PlayedTime;
 			*(float*)&params[8] = ExcessTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayStationEnteredEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRepairStation.PlayStationEnteredEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110532);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayStationLeftEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRepairStation.PlayStationLeftEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110533);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PawnGrabbedRepairTool()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRepairStation.PawnGrabbedRepairTool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110534);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CloseStation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRepairStation.CloseStation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110535);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class Texture2D* GetMarker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrRepairStation.GetMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110536);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Texture2D**)&params[0];
+			return *(class Texture2D**)params;
 		}
 	};
 }

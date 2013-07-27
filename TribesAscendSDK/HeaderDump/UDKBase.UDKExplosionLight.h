@@ -19,7 +19,7 @@ namespace UnrealScript
 	class UDKExplosionLight : public PointLightComponent
 	{
 	public:
-		class LightValues
+		struct LightValues
 		{
 		public:
 			ADD_STRUCT(Object::Color, LightColor, 12)
@@ -37,16 +37,16 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* Light)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKExplosionLight.OnLightFinished");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34820);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = Light;
+void**)params = Light;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetLight()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKExplosionLight.ResetLight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34830);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

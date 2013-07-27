@@ -35,9 +35,9 @@ namespace UnrealScript
 		ADD_OBJECT(FaceFXAnimSet, FaceFXAnimSetRef, 64)
 		void Notify(class Actor* Owner, class AnimNodeSequence* AnimSeqInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNotify_PlayFaceFXAnim.Notify");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11407);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Owner;
+			*(class Actor**)params = Owner;
 			*(class AnimNodeSequence**)&params[4] = AnimSeqInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

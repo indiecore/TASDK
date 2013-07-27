@@ -46,65 +46,65 @@ namespace UnrealScript
 		ADD_OBJECT(PhysicalMaterial, PhysMaterial, 336)
 		void SetParent(class MaterialInterface* NewParent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetParent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19789);
 			byte params[4] = { NULL };
-			*(class MaterialInterface**)&params[0] = NewParent;
+			*(class MaterialInterface**)params = NewParent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetVectorParameterValue(ScriptName ParameterName, Object::LinearColor& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetVectorParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19791);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(Object::LinearColor*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(Object::LinearColor*)&params[8];
 		}
 		void SetScalarParameterValue(ScriptName ParameterName, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetScalarParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19794);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(float*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetScalarCurveParameterValue(ScriptName ParameterName, Object::InterpCurveFloat& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetScalarCurveParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19797);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(Object::InterpCurveFloat*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(Object::InterpCurveFloat*)&params[8];
 		}
 		void SetTextureParameterValue(ScriptName ParameterName, class Texture* Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetTextureParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19800);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(class Texture**)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFontParameterValue(ScriptName ParameterName, class Font* FontValue, int FontPage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.SetFontParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19803);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(class Font**)&params[8] = FontValue;
 			*(int*)&params[12] = FontPage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearParameterValues()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.ClearParameterValues");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19807);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool IsInMapOrTransientPackage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstance.IsInMapOrTransientPackage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19808);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

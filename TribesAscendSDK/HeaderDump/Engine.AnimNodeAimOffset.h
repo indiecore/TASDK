@@ -58,13 +58,13 @@ namespace UnrealScript
 			EAID_CellRD = 16,
 			EAID_MAX = 17,
 		};
-		class AimTransform
+		struct AimTransform
 		{
 		public:
-			ADD_STRUCT(Object::Vector, Translation, 16)
+			ADD_STRUCT(Vector, Translation, 16)
 			ADD_STRUCT(Object::Quat, Quaternion, 0)
 		};
-		class AimComponent
+		struct AimComponent
 		{
 		public:
 			ADD_STRUCT(AnimNodeAimOffset::AimTransform, RD, 272)
@@ -78,7 +78,7 @@ namespace UnrealScript
 			ADD_STRUCT(AnimNodeAimOffset::AimTransform, LU, 16)
 			ADD_STRUCT(ScriptName, BoneName, 0)
 		};
-		class AimOffsetProfile
+		struct AimOffsetProfile
 		{
 		public:
 			ADD_STRUCT(ScriptArray<AnimNodeAimOffset::AimComponent>, AimComponents, 24)
@@ -110,16 +110,16 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Vector2D, Aim, 244)
 		void SetActiveProfileByName(ScriptName ProfileName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeAimOffset.SetActiveProfileByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10809);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = ProfileName;
+			*(ScriptName*)params = ProfileName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetActiveProfileByIndex(int ProfileIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeAimOffset.SetActiveProfileByIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10811);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ProfileIndex;
+			*(int*)params = ProfileIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

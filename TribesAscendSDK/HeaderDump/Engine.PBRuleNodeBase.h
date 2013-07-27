@@ -13,7 +13,7 @@ namespace UnrealScript
 	class PBRuleNodeBase : public Object
 	{
 	public:
-		class PBRuleLink
+		struct PBRuleLink
 		{
 		public:
 			ADD_STRUCT(int, DrawY, 12)

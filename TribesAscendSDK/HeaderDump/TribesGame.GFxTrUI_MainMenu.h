@@ -12,9 +12,9 @@ namespace UnrealScript
 		ADD_OBJECT(GFxUI_PauseMenu, FamilyMenuMovie, 448)
 		bool Start(bool StartPaused)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_MainMenu.Start");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65157);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = StartPaused;
+			*(bool*)params = StartPaused;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

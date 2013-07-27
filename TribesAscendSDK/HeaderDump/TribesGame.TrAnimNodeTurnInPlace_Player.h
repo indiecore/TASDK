@@ -9,7 +9,7 @@ namespace UnrealScript
 	class TrAnimNodeTurnInPlace_Player : public AnimNodeSequence
 	{
 	public:
-		class TIP_Transition
+		struct TIP_Transition
 		{
 		public:
 			ADD_STRUCT(ScriptName, AnimName, 8)

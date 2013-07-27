@@ -27,17 +27,17 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, FriendlyName, 124)
 		bool IsFiltered()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIResourceDataProvider.IsFiltered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35553);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool ShouldBeFiltered()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIResourceDataProvider.ShouldBeFiltered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35555);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

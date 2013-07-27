@@ -7,10 +7,10 @@ namespace UnrealScript
 	public:
 		ScriptString* GetSpectatorName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFBase_BloodEagle.GetSpectatorName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78277);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

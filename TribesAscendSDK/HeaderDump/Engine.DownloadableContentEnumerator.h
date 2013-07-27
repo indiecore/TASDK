@@ -17,58 +17,58 @@ void*>, FindDLCDelegates, 84)
 		ADD_STRUCT(ScriptString*, DLCRootDir, 72)
 		void OnFindDLCComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.OnFindDLCComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14683);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FindDLC()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.FindDLC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14686);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddFindDLCDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.AddFindDLCDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14687);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = InDelegate;
+void**)params = InDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearFindDLCDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.ClearFindDLCDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14689);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = InDelegate;
+void**)params = InDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DeleteDLC(ScriptString* DLCName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.DeleteDLC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14692);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = DLCName;
+			*(ScriptString**)params = DLCName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InstallAllDLC()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.InstallAllDLC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14694);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InstallDLC(ScriptString* DLCName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.InstallDLC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14698);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = DLCName;
+			*(ScriptString**)params = DLCName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TriggerFindDLCDelegates()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DownloadableContentEnumerator.TriggerFindDLCDelegates");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14700);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

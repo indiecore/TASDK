@@ -6,19 +6,19 @@ namespace UnrealScript
 	class UTSkelControl_DamageSpring : public UDKSkelControl_DamageSpring
 	{
 	public:
-		void BreakApart(Object::Vector PartLocation, bool bIsVisible)
+		void BreakApart(Vector PartLocation, bool bIsVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSkelControl_DamageSpring.BreakApart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49331);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = PartLocation;
+			*(Vector*)params = PartLocation;
 			*(bool*)&params[12] = bIsVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void BreakApartOnDeath(Object::Vector PartLocation, bool bIsVisible)
+		void BreakApartOnDeath(Vector PartLocation, bool bIsVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSkelControl_DamageSpring.BreakApartOnDeath");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49335);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = PartLocation;
+			*(Vector*)params = PartLocation;
 			*(bool*)&params[12] = bIsVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

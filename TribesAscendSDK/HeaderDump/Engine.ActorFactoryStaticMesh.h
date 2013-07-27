@@ -15,7 +15,7 @@ namespace UnrealScript
 	class ActorFactoryStaticMesh : public ActorFactory
 	{
 	public:
-		ADD_STRUCT(Object::Vector, DrawScale3D, 96)
+		ADD_STRUCT(Vector, DrawScale3D, 96)
 		ADD_OBJECT(StaticMesh, StaticMesh, 92)
 	};
 }

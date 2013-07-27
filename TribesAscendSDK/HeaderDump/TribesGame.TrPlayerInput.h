@@ -41,149 +41,149 @@ namespace UnrealScript
 		ADD_STRUCT(int, m_VGSClassId, 380)
 		bool InVGSClassMode()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.InVGSClassMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(53575);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool InVGSLoadoutMode()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.InVGSLoadoutMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(53585);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		int GetVGSClassId()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.GetVGSClassId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(53587);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		bool PlaySpottedCommand()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.PlaySpottedCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77100);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void InitInputSystem()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.InitInputSystem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77951);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AdjustMouseSensitivity(float FOVScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.AdjustMouseSensitivity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77952);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = FOVScale;
+			*(float*)params = FOVScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsMouseSmoothEnabled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.IsMouseSmoothEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77954);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void OnVGSKeyPressed(ScriptName KeyPressed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.OnVGSKeyPressed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77956);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = KeyPressed;
+			*(ScriptName*)params = KeyPressed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnVGSNumKeyPressed(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.OnVGSNumKeyPressed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77965);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayVGSCommand(TrVGSCommandList::VGSCommandType VGSCommandIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.PlayVGSCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77992);
 			byte params[1] = { NULL };
-			*(TrVGSCommandList::VGSCommandType*)&params[0] = VGSCommandIndex;
+			*(TrVGSCommandList::VGSCommandType*)params = VGSCommandIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsValidVGSTarget(class Actor* ActorUnderReticule)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.IsValidVGSTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77994);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = ActorUnderReticule;
+			*(class Actor**)params = ActorUnderReticule;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void StartVGS()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.StartVGS");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78000);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartVGSClasses()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.StartVGSClasses");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78002);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartVGSLoadouts(int ClassId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.StartVGSLoadouts");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78003);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ClassId;
+			*(int*)params = ClassId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EndVGS()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.EndVGS");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78005);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetHUDTarget(class TrHUD* TrH)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.SetHUDTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78006);
 			byte params[4] = { NULL };
-			*(class TrHUD**)&params[0] = TrH;
+			*(class TrHUD**)params = TrH;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetStickAngle(float UpDown, float LeftRight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.GetStickAngle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78008);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = UpDown;
+			*(float*)params = UpDown;
 			*(float*)&params[4] = LeftRight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void PushAnalogJoysticksToScaleform()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.PushAnalogJoysticksToScaleform");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78015);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PreProcessInput(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.PreProcessInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78018);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayerInput(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.PlayerInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78020);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFlyingPitchSensitivity(float F)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.SetFlyingPitchSensitivity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78026);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = F;
+			*(float*)params = F;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFlyingYawSensitivity(float F)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerInput.SetFlyingYawSensitivity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78028);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = F;
+			*(float*)params = F;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

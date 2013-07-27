@@ -25,21 +25,21 @@ namespace UnrealScript
 	class AnimNotify_Trails : public AnimNotify
 	{
 	public:
-		class TrailSample
+		struct TrailSample
 		{
 		public:
-			ADD_STRUCT(Object::Vector, SecondEdgeSample, 28)
-			ADD_STRUCT(Object::Vector, ControlPointSample, 16)
-			ADD_STRUCT(Object::Vector, FirstEdgeSample, 4)
+			ADD_STRUCT(Vector, SecondEdgeSample, 28)
+			ADD_STRUCT(Vector, ControlPointSample, 16)
+			ADD_STRUCT(Vector, FirstEdgeSample, 4)
 			ADD_STRUCT(float, RelativeTime, 0)
 		};
-		class TrailSocketSamplePoint
+		struct TrailSocketSamplePoint
 		{
 		public:
-			ADD_STRUCT(Object::Vector, Velocity, 12)
-			ADD_STRUCT(Object::Vector, Position, 0)
+			ADD_STRUCT(Vector, Velocity, 12)
+			ADD_STRUCT(Vector, Position, 0)
 		};
-		class TrailSamplePoint
+		struct TrailSamplePoint
 		{
 		public:
 			ADD_STRUCT(AnimNotify_Trails::TrailSocketSamplePoint, SecondEdgeSample, 52)
@@ -66,9 +66,9 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, PSTemplate, 64)
 		int GetNumSteps(int InLastTrailIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNotify_Trails.GetNumSteps");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11457);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = InLastTrailIndex;
+			*(int*)params = InLastTrailIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}

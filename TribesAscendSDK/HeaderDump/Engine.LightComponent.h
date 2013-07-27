@@ -59,7 +59,7 @@ namespace UnrealScript
 			LAC_DYNAMIC_AND_STATIC_AFFECTING = 3,
 			LAC_MAX = 4,
 		};
-		class LightingChannelContainer
+		struct LightingChannelContainer
 		{
 		public:
 			ADD_BOOL(Crowd, 0, 0x4000000)
@@ -147,67 +147,67 @@ namespace UnrealScript
 		ADD_STRUCT(float, ReflectionScale, 428)
 		void SetEnabled(bool bSetEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.SetEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11644);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bSetEnabled;
+			*(bool*)params = bSetEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLightProperties(float NewBrightness, Object::Color NewLightColor, class LightFunction* NewLightFunction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.SetLightProperties");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11647);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = NewBrightness;
+			*(float*)params = NewBrightness;
 			*(Object::Color*)&params[4] = NewLightColor;
 			*(class LightFunction**)&params[8] = NewLightFunction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Object::Vector GetOrigin()
+		Vector GetOrigin()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.GetOrigin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11654);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
-		Object::Vector GetDirection()
+		Vector GetDirection()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.GetDirection");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11656);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
 		void UpdateColorAndBrightness()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.UpdateColorAndBrightness");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11658);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateLightShaftParameters()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.UpdateLightShaftParameters");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11659);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnUpdatePropertyBloomScale()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.OnUpdatePropertyBloomScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11660);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnUpdatePropertyBloomTint()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.OnUpdatePropertyBloomTint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11661);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnUpdatePropertyOcclusionMaskDarkness()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.OnUpdatePropertyOcclusionMaskDarkness");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11662);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnUpdatePropertyBrightness()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.OnUpdatePropertyBrightness");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11663);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnUpdatePropertyLightColor()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightComponent.OnUpdatePropertyLightColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11664);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

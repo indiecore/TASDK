@@ -39,20 +39,20 @@ namespace UnrealScript
 			FULLYLOAD_Mutator = 4,
 			FULLYLOAD_MAX = 5,
 		};
-		class LevelStreamingStatus
+		struct LevelStreamingStatus
 		{
 		public:
 			ADD_STRUCT(ScriptName, PackageName, 0)
 			ADD_BOOL(bShouldBeLoaded, 8, 0x1)
 			ADD_BOOL(bShouldBeVisible, 8, 0x2)
 		};
-		class NamedNetDriver
+		struct NamedNetDriver
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, NetDriver, 8)
 			ADD_STRUCT(ScriptName, NetDriverName, 0)
 		};
-		class URL
+		struct URL
 		{
 		public:
 			ADD_STRUCT(ScriptString*, Protocol, 0)
@@ -63,7 +63,7 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptString*, Portal, 52)
 			ADD_STRUCT(int, Valid, 64)
 		};
-		class FullyLoadedPackagesInfo
+		struct FullyLoadedPackagesInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<ScriptName>, PackagesToLoad, 16)
@@ -98,46 +98,46 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<GameEngine::NamedNetDriver>, NamedNetDrivers, 1796)
 		class OnlineSubsystem* GetOnlineSubsystem()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameEngine.GetOnlineSubsystem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7627);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class OnlineSubsystem**)&params[0];
+			return *(class OnlineSubsystem**)params;
 		}
 		class DownloadableContentManager* GetDLCManager()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameEngine.GetDLCManager");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14696);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class DownloadableContentManager**)&params[0];
+			return *(class DownloadableContentManager**)params;
 		}
 		class DownloadableContentEnumerator* GetDLCEnumerator()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameEngine.GetDLCEnumerator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14739);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class DownloadableContentEnumerator**)&params[0];
+			return *(class DownloadableContentEnumerator**)params;
 		}
 		bool CreateNamedNetDriver(ScriptName NetDriverName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameEngine.CreateNamedNetDriver");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16684);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = NetDriverName;
+			*(ScriptName*)params = NetDriverName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void DestroyNamedNetDriver(ScriptName NetDriverName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameEngine.DestroyNamedNetDriver");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16687);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = NetDriverName;
+			*(ScriptName*)params = NetDriverName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class InGameAdManager* GetAdManager()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameEngine.GetAdManager");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16689);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class InGameAdManager**)&params[0];
+			return *(class InGameAdManager**)params;
 		}
 	};
 }

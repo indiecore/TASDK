@@ -15,13 +15,13 @@ namespace UnrealScript
 	class UTDataStore_GameSearchDM : public UDKDataStore_GameSearchBase
 	{
 	public:
-		class PersistentLocalizedSettingValue
+		struct PersistentLocalizedSettingValue
 		{
 		public:
 			ADD_STRUCT(int, ValueId, 4)
 			ADD_STRUCT(int, SettingId, 0)
 		};
-		class GameSearchSettingsStorage
+		struct GameSearchSettingsStorage
 		{
 		public:
 			ADD_STRUCT(ScriptArray<UTDataStore_GameSearchDM::PersistentLocalizedSettingValue>, StoredValues, 8)
@@ -32,41 +32,41 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, HistoryGameSearchDataStoreClass, 172)
 		void Registered(class LocalPlayer* PlayerOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.Registered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46887);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = PlayerOwner;
+			*(class LocalPlayer**)params = PlayerOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SubmitGameSearch(byte ControllerIndex, bool bInvalidateExistingSearchResults)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.SubmitGameSearch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46891);
 			byte params[9] = { NULL };
-			params[0] = ControllerIndex;
+			*params = ControllerIndex;
 			*(bool*)&params[4] = bInvalidateExistingSearchResults;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool HasOutstandingQueries(bool bRestrictCheckToSelf)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.HasOutstandingQueries");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46895);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bRestrictCheckToSelf;
+			*(bool*)params = bRestrictCheckToSelf;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		int FindStoredSearchIndex(ScriptName GameSearchName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.FindStoredSearchIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46906);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = GameSearchName;
+			*(ScriptName*)params = GameSearchName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int FindStoredSettingValueIndex(int StoredGameSearchIndex, int LocalizedSettingId, bool bAddIfNecessary)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.FindStoredSettingValueIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46911);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = StoredGameSearchIndex;
+			*(int*)params = StoredGameSearchIndex;
 			*(int*)&params[4] = LocalizedSettingId;
 			*(bool*)&params[8] = bAddIfNecessary;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -74,12 +74,12 @@ namespace UnrealScript
 		}
 		void LoadGameSearchParameters()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.LoadGameSearchParameters");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46918);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SaveGameSearchParameters()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDataStore_GameSearchDM.SaveGameSearchParameters");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46926);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

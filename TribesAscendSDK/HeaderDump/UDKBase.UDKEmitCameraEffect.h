@@ -19,41 +19,41 @@ namespace UnrealScript
 		ADD_STRUCT(float, DistFromCamera, 488)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34778);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34779);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RegisterCamera(class UDKPlayerController* inCam)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.RegisterCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34780);
 			byte params[4] = { NULL };
-			*(class UDKPlayerController**)&params[0] = inCam;
+			*(class UDKPlayerController**)params = inCam;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Activate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.Activate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34782);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Deactivate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.Deactivate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34783);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void UpdateLocation(Object::Vector& CamLoc, Object::Rotator& CamRot, float CamFOVDeg)
+		void UpdateLocation(Vector& CamLoc, Rotator& CamRot, float CamFOVDeg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKEmitCameraEffect.UpdateLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34784);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = CamLoc;
-			*(Object::Rotator*)&params[12] = CamRot;
+			*(Vector*)params = CamLoc;
+			*(Rotator*)&params[12] = CamRot;
 			*(float*)&params[24] = CamFOVDeg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			CamLoc = *(Object::Vector*)&params[0];
-			CamRot = *(Object::Rotator*)&params[12];
+			CamLoc = *(Vector*)params;
+			CamRot = *(Rotator*)&params[12];
 		}
 	};
 }

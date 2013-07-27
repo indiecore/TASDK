@@ -68,14 +68,14 @@ namespace UnrealScript
 			MB_BandwidthTestType_RoundtripLatency = 2,
 			MB_BandwidthTestType_MAX = 3,
 		};
-		class ConnectionBandwidthStats
+		struct ConnectionBandwidthStats
 		{
 		public:
 			ADD_STRUCT(int, RoundtripLatency, 8)
 			ADD_STRUCT(int, DownstreamRate, 4)
 			ADD_STRUCT(int, UpstreamRate, 0)
 		};
-		class PlayerMember
+		struct PlayerMember
 		{
 		public:
 			ADD_STRUCT(OnlineSubsystem::UniqueNetId, NetId, 8)
@@ -100,7 +100,7 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_FTickableObject, 60)
 		void DestroyBeacon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.MeshBeacon.DestroyBeacon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33192);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

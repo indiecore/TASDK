@@ -19,13 +19,13 @@ namespace UnrealScript
 	class SoundClass : public Object
 	{
 	public:
-		class SoundClassEditorData
+		struct SoundClassEditorData
 		{
 		public:
 			ADD_STRUCT(int, NodePosY, 4)
 			ADD_STRUCT(int, NodePosX, 0)
 		};
-		class SoundClassProperties
+		struct SoundClassProperties
 		{
 		public:
 			ADD_BOOL(bBassBoost, 28, 0x40)

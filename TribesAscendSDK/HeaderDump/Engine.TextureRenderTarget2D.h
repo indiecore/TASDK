@@ -30,9 +30,9 @@ namespace UnrealScript
 		ADD_STRUCT(int, SizeX, 244)
 		class TextureRenderTarget2D* Create(int InSizeX, int InSizeY, Texture::EPixelFormat InFormat, Object::LinearColor InClearColor, bool bOnlyRenderOnce)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.TextureRenderTarget2D.Create");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25519);
 			byte params[33] = { NULL };
-			*(int*)&params[0] = InSizeX;
+			*(int*)params = InSizeX;
 			*(int*)&params[4] = InSizeY;
 			*(Texture::EPixelFormat*)&params[8] = InFormat;
 			*(Object::LinearColor*)&params[12] = InClearColor;

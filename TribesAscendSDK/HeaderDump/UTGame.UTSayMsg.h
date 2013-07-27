@@ -15,9 +15,9 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Color, RedTeamColor, 100)
 		Object::Color GetConsoleColor(class PlayerReplicationInfo* RelatedPRI_1)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSayMsg.GetConsoleColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49007);
 			byte params[8] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = RelatedPRI_1;
+			*(class PlayerReplicationInfo**)params = RelatedPRI_1;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Color*)&params[4];
 		}

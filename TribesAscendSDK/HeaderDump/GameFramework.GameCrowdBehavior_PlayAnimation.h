@@ -41,46 +41,46 @@ namespace UnrealScript
 		ADD_STRUCT(float, BlendInTime, 96)
 		void InitBehavior(class GameCrowdAgent* Agent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_PlayAnimation.InitBehavior");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31233);
 			byte params[4] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = Agent;
+			*(class GameCrowdAgent**)params = Agent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FinishedTargetRotation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_PlayAnimation.FinishedTargetRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31240);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetSequenceOutput()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_PlayAnimation.SetSequenceOutput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31241);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnAnimEnd(class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_PlayAnimation.OnAnimEnd");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31242);
 			byte params[12] = { NULL };
-			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			*(class AnimNodeSequence**)params = SeqNode;
 			*(float*)&params[4] = PlayedTime;
 			*(float*)&params[8] = ExcessTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayAgentAnimationNow()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_PlayAnimation.PlayAgentAnimationNow");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31246);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StopBehavior()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_PlayAnimation.StopBehavior");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31250);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetBehaviorString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_PlayAnimation.GetBehaviorString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31251);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

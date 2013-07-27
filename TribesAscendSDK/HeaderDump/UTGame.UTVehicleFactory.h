@@ -32,7 +32,7 @@ namespace UnrealScript
 	public:
 		ADD_BOOL(bStartNeutral, 740, 0x2)
 		ADD_BOOL(bKeyVehicle, 740, 0x8)
-		ADD_STRUCT(ScriptArray<Object::Rotator>, InitialGunRotations, 748)
+		ADD_STRUCT(ScriptArray<Rotator>, InitialGunRotations, 748)
 		ADD_OBJECT(UTGameObjective, ReverseObjective, 744)
 		ADD_BOOL(bForceAvoidReversing, 740, 0x10)
 		ADD_BOOL(bDisabled, 740, 0x4)
@@ -40,24 +40,24 @@ namespace UnrealScript
 		ADD_STRUCT(float, SpawnZOffset, 736)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49688);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddToClosestObjective()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.AddToClosestObjective");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49689);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetInitialState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.SetInitialState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49694);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RenderMapIcon(class UTMapInfo* MP, class Canvas* Canvas, class UTPlayerController* PlayerOwner, Object::LinearColor FinalColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.RenderMapIcon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49695);
 			byte params[28] = { NULL };
-			*(class UTMapInfo**)&params[0] = MP;
+			*(class UTMapInfo**)params = MP;
 			*(class Canvas**)&params[4] = Canvas;
 			*(class UTPlayerController**)&params[8] = PlayerOwner;
 			*(Object::LinearColor*)&params[12] = FinalColor;
@@ -65,46 +65,46 @@ namespace UnrealScript
 		}
 		void Activate(byte T)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.Activate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49701);
 			byte params[1] = { NULL };
-			params[0] = T;
+			*params = T;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Deactivate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.Deactivate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49703);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void VehicleTaken()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.VehicleTaken");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49706);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void VehicleDestroyed(class UTVehicle* V)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.VehicleDestroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49707);
 			byte params[4] = { NULL };
-			*(class UTVehicle**)&params[0] = V;
+			*(class UTVehicle**)params = V;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TriggerSpawnedEvent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.TriggerSpawnedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49709);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49710);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Object::Rotator GetSpawnRotation()
+		Rotator GetSpawnRotation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleFactory.GetSpawnRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49713);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[0];
+			return *(Rotator*)params;
 		}
 	};
 }

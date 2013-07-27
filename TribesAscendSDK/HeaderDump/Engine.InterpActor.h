@@ -28,15 +28,15 @@ namespace UnrealScript
 	class InterpActor : public DynamicSMActor
 	{
 	public:
-		class CheckpointRecord
+		struct CheckpointRecord
 		{
 		public:
 			ADD_BOOL(bNeedsPositionReplication, 28, 0x4)
 			ADD_BOOL(bIsShutdown, 28, 0x2)
 			ADD_BOOL(bHidden, 28, 0x1)
 			ADD_STRUCT(Actor::ECollisionType, CollisionType, 24)
-			ADD_STRUCT(Object::Rotator, Rotation, 12)
-			ADD_STRUCT(Object::Vector, Location, 0)
+			ADD_STRUCT(Rotator, Rotation, 12)
+			ADD_STRUCT(Vector, Location, 0)
 		};
 		ADD_BOOL(bMonitorMover, 532, 0x2)
 		ADD_OBJECT(NavigationPoint, MyMarker, 536)
@@ -57,109 +57,109 @@ namespace UnrealScript
 		ADD_BOOL(bShouldSaveForCheckpoint, 532, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18379);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetShadowParentOnAllAttachedComponents()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.SetShadowParentOnAllAttachedComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18380);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool EncroachingOn(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.EncroachingOn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18381);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void RanInto(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.RanInto");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18395);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Attach(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.Attach");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18399);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Detach(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.Detach");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18403);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Restart()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.Restart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18407);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FinishedOpen()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.FinishedOpen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18409);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayMovingSound(bool bClosing)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.PlayMovingSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18412);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bClosing;
+			*(bool*)params = bClosing;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InterpolationStarted(class SeqAct_Interp* InterpAction, class InterpGroupInst* GroupInst)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.InterpolationStarted");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18416);
 			byte params[8] = { NULL };
-			*(class SeqAct_Interp**)&params[0] = InterpAction;
+			*(class SeqAct_Interp**)params = InterpAction;
 			*(class InterpGroupInst**)&params[4] = GroupInst;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InterpolationFinished(class SeqAct_Interp* InterpAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.InterpolationFinished");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18420);
 			byte params[4] = { NULL };
-			*(class SeqAct_Interp**)&params[0] = InterpAction;
+			*(class SeqAct_Interp**)params = InterpAction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InterpolationChanged(class SeqAct_Interp* InterpAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.InterpolationChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18427);
 			byte params[4] = { NULL };
-			*(class SeqAct_Interp**)&params[0] = InterpAction;
+			*(class SeqAct_Interp**)params = InterpAction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShutDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.ShutDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18429);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool ShouldSaveForCheckpoint()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.ShouldSaveForCheckpoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18430);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void CreateCheckpointRecord(InterpActor::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.CreateCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18432);
 			byte params[32] = { NULL };
-			*(InterpActor::CheckpointRecord*)&params[0] = Record;
+			*(InterpActor::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(InterpActor::CheckpointRecord*)&params[0];
+			Record = *(InterpActor::CheckpointRecord*)params;
 		}
 		void ApplyCheckpointRecord(InterpActor::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.InterpActor.ApplyCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18434);
 			byte params[32] = { NULL };
-			*(InterpActor::CheckpointRecord*)&params[0] = Record;
+			*(InterpActor::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(InterpActor::CheckpointRecord*)&params[0];
+			Record = *(InterpActor::CheckpointRecord*)params;
 		}
 	};
 }

@@ -20,48 +20,48 @@ namespace UnrealScript
 	class TrAttachment_RepairTool : public TrDeviceAttachment
 	{
 	public:
-		ADD_STRUCT(Object::Vector, m_Tangent, 804)
-		ADD_STRUCT(Object::Vector, m_Location, 792)
+		ADD_STRUCT(Vector, m_Tangent, 804)
+		ADD_STRUCT(Vector, m_Location, 792)
 		ADD_BOOL(m_bIsTracerActive, 784, 0x1)
 		void KillRepairEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.KillRepairEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68655);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SpawnRepairEffect(Object::Vector HitLocation, Object::Vector HitNormal)
+		void SpawnRepairEffect(Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.SpawnRepairEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68656);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
-			*(Object::Vector*)&params[12] = HitNormal;
+			*(Vector*)params = HitLocation;
+			*(Vector*)&params[12] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void UpdateRepairEffect(float DeltaTime, Object::Vector HitLocation, Object::Vector HitNormal)
+		void UpdateRepairEffect(float DeltaTime, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.UpdateRepairEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68659);
 			byte params[28] = { NULL };
-			*(float*)&params[0] = DeltaTime;
-			*(Object::Vector*)&params[4] = HitLocation;
-			*(Object::Vector*)&params[16] = HitNormal;
+			*(float*)params = DeltaTime;
+			*(Vector*)&params[4] = HitLocation;
+			*(Vector*)&params[16] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PlayImpactEffects(Object::Vector HitLocation)
+		void PlayImpactEffects(Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.PlayImpactEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68663);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
+			*(Vector*)params = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ThirdPersonFireEffects(Object::Vector HitLocation)
+		void ThirdPersonFireEffects(Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.ThirdPersonFireEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68670);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
+			*(Vector*)params = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopThirdPersonFireEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_RepairTool.StopThirdPersonFireEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68674);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

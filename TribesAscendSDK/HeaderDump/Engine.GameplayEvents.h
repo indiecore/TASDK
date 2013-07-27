@@ -34,7 +34,7 @@ namespace UnrealScript
 			GSG_Aggregate = 9,
 			GSG_MAX = 10,
 		};
-		class PlayerInformationNew
+		struct PlayerInformationNew
 		{
 		public:
 			ADD_BOOL(bIsBot, 32, 0x1)
@@ -42,7 +42,7 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptString*, PlayerName, 12)
 			ADD_STRUCT(ScriptString*, ControllerName, 0)
 		};
-		class TeamInformation
+		struct TeamInformation
 		{
 		public:
 			ADD_STRUCT(int, MaxSize, 20)
@@ -50,27 +50,27 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptString*, TeamName, 4)
 			ADD_STRUCT(int, TeamIndex, 0)
 		};
-		class WeaponClassEventData
+		struct WeaponClassEventData
 		{
 		public:
 			ADD_STRUCT(ScriptString*, WeaponClassName, 0)
 		};
-		class DamageClassEventData
+		struct DamageClassEventData
 		{
 		public:
 			ADD_STRUCT(ScriptString*, DamageClassName, 0)
 		};
-		class ProjectileClassEventData
+		struct ProjectileClassEventData
 		{
 		public:
 			ADD_STRUCT(ScriptString*, ProjectileClassName, 0)
 		};
-		class PawnClassEventData
+		struct PawnClassEventData
 		{
 		public:
 			ADD_STRUCT(ScriptString*, PawnClassName, 0)
 		};
-		class GameplayEventsHeader
+		struct GameplayEventsHeader
 		{
 		public:
 			ADD_STRUCT(int, Flags, 40)
@@ -83,7 +83,7 @@ namespace UnrealScript
 			ADD_STRUCT(int, StatsWriterVersion, 4)
 			ADD_STRUCT(int, EngineVersion, 0)
 		};
-		class GameSessionInformation
+		struct GameSessionInformation
 		{
 		public:
 			ADD_STRUCT(OnlineSubsystem::UniqueNetId, OwningNetId, 100)
@@ -101,13 +101,13 @@ namespace UnrealScript
 			ADD_STRUCT(int, PlatformType, 4)
 			ADD_STRUCT(int, AppTitleID, 0)
 		};
-		class GameStatGroup
+		struct GameStatGroup
 		{
 		public:
 			ADD_STRUCT(int, Level, 4)
 			ADD_STRUCT(GameplayEvents::EGameStatGroups, Group, 0)
 		};
-		class GameplayEventMetaData
+		struct GameplayEventMetaData
 		{
 		public:
 			ADD_STRUCT(int, EventDataType, 20)
@@ -130,23 +130,23 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, Archive, 60)
 		bool OpenStatsFile(ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEvents.OpenStatsFile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17548);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Filename;
+			*(ScriptString**)params = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void CloseStatsFile()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEvents.CloseStatsFile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17551);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetFilename()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEvents.GetFilename");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17552);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

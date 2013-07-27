@@ -29,25 +29,25 @@ namespace UnrealScript
 	class UTWeaponLocker : public UTPickupFactory
 	{
 	public:
-		class WeaponEntry
+		struct WeaponEntry
 		{
 		public:
 			ADD_OBJECT(ScriptClass, WeaponClass, 0)
 		};
-		class PawnToucher
+		struct PawnToucher
 		{
 		public:
 			ADD_STRUCT(float, NextTouchTime, 4)
 			ADD_OBJECT(Pawn, P, 0)
 		};
-		class ReplacementWeaponEntry
+		struct ReplacementWeaponEntry
 		{
 		public:
 			ADD_OBJECT(ScriptClass, WeaponClass, 4)
 			ADD_BOOL(bReplaced, 0, 0x1)
 		};
 		ADD_STRUCT(ScriptArray<UTWeaponLocker::WeaponEntry>, Weapons, 944)
-		ADD_STRUCT(ScriptArray<Object::Vector>, LockerPositions, 1004)
+		ADD_STRUCT(ScriptArray<Vector>, LockerPositions, 1004)
 		ADD_STRUCT(ScriptArray<UTWeaponLocker::PawnToucher>, Customers, 1028)
 		ADD_STRUCT(float, NextProximityCheckTime, 1076)
 		ADD_STRUCT(float, ScaleRate, 1072)
@@ -63,123 +63,123 @@ namespace UnrealScript
 		ADD_STRUCT(UTWeaponLocker::ReplacementWeaponEntry, ReplacementWeapons, 956)
 		float BotDesireability(class Pawn* Bot, class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.BotDesireability");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40956);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = Bot;
+			*(class Pawn**)params = Bot;
 			*(class Controller**)&params[4] = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		void SetInitialState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.SetInitialState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50230);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool ShouldCamp(class UTBot* B, float MaxWait)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.ShouldCamp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50231);
 			byte params[12] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			*(float*)&params[4] = MaxWait;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool AddCustomer(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.AddCustomer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50235);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool HasCustomer(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.HasCustomer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50240);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50244);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitializeWeapons()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.InitializeWeapons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50245);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50247);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReplaceWeapon(int Index, ScriptClass* NewWeaponClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.ReplaceWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50250);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(ScriptClass**)&params[4] = NewWeaponClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50253);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetHumanReadableName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.GetHumanReadableName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50254);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		float DetourWeight(class Pawn* Other, float PathWeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.DetourWeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50261);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			*(float*)&params[4] = PathWeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		void InitializePickup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.InitializePickup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50268);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowActive()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.ShowActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50269);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NotifyLocalPlayerDead(class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.NotifyLocalPlayerDead");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50270);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPlayerNearby(class PlayerController* PC, bool bNewPlayerNearby, bool bPlayEffects)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.SetPlayerNearby");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50272);
 			byte params[12] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(bool*)&params[4] = bNewPlayerNearby;
 			*(bool*)&params[8] = bPlayEffects;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DestroyWeapons()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.DestroyWeapons");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50280);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowHidden()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponLocker.ShowHidden");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50282);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -13,17 +13,17 @@ namespace UnrealScript
 		ADD_OBJECT(PrefabInstance, OwnerPrefab, 300)
 		void SetOwnerPrefab(class PrefabInstance* InOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrefabSequence.SetOwnerPrefab");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24836);
 			byte params[4] = { NULL };
-			*(class PrefabInstance**)&params[0] = InOwner;
+			*(class PrefabInstance**)params = InOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class PrefabInstance* GetOwnerPrefab()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PrefabSequence.GetOwnerPrefab");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24838);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class PrefabInstance**)&params[0];
+			return *(class PrefabInstance**)params;
 		}
 	};
 }

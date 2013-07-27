@@ -13,10 +13,10 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementCellProvider, 88)
 		int GetElementCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKUIDataProvider_SimpleElementProvider.GetElementCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35585);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

@@ -15,9 +15,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, DefaultFOV, 68)
 		void UpdateCamera(class Pawn* P, class GamePlayerCamera* CameraActor, float DeltaTime, Camera::TViewTarget& OutVT)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameFixedCamera.UpdateCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31703);
 			byte params[56] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			*(class GamePlayerCamera**)&params[4] = CameraActor;
 			*(float*)&params[8] = DeltaTime;
 			*(Camera::TViewTarget*)&params[12] = OutVT;
@@ -26,9 +26,9 @@ namespace UnrealScript
 		}
 		void OnBecomeActive(class GameCameraBase* OldCamera)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameFixedCamera.OnBecomeActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31709);
 			byte params[4] = { NULL };
-			*(class GameCameraBase**)&params[0] = OldCamera;
+			*(class GameCameraBase**)params = OldCamera;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

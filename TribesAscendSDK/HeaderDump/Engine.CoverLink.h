@@ -83,18 +83,18 @@ namespace UnrealScript
 			FLI_RejectedFireLink = 1,
 			FLI_MAX = 2,
 		};
-		class CovPosInfo
+		struct CovPosInfo
 		{
 		public:
 			ADD_OBJECT(CoverLink, Link, 0)
 			ADD_STRUCT(int, LtSlotIdx, 4)
 			ADD_STRUCT(int, RtSlotIdx, 8)
 			ADD_STRUCT(float, LtToRtPct, 12)
-			ADD_STRUCT(Object::Vector, Location, 16)
-			ADD_STRUCT(Object::Vector, Normal, 28)
-			ADD_STRUCT(Object::Vector, Tangent, 40)
+			ADD_STRUCT(Vector, Location, 16)
+			ADD_STRUCT(Vector, Normal, 28)
+			ADD_STRUCT(Vector, Tangent, 40)
 		};
-		class FireLink
+		struct FireLink
 		{
 		public:
 			ADD_STRUCT(ScriptArray<byte>, Interactions, 0)
@@ -102,31 +102,31 @@ namespace UnrealScript
 			ADD_BOOL(bFallbackLink, 16, 0x1)
 			ADD_STRUCT(int, PackedProperties_CoverPairRefAndDynamicInfo, 12)
 		};
-		class DynamicLinkInfo
+		struct DynamicLinkInfo
 		{
 		public:
-			ADD_STRUCT(Object::Vector, LastSrcLocation, 12)
-			ADD_STRUCT(Object::Vector, LastTargetLocation, 0)
+			ADD_STRUCT(Vector, LastSrcLocation, 12)
+			ADD_STRUCT(Vector, LastTargetLocation, 0)
 		};
-		class CoverReference : public ActorReference
+		struct CoverReference : public ActorReference
 		{
 		public:
 			ADD_STRUCT(int, SlotIdx, 20)
 		};
-		class SlotMoveRef
+		struct SlotMoveRef
 		{
 		public:
 			ADD_STRUCT(int, Direction, 76)
 			ADD_STRUCT(Actor::BasedPosition, Dest, 24)
 			ADD_STRUCT(Pylon::PolyReference, Poly, 0)
 		};
-		class CoverInfo
+		struct CoverInfo
 		{
 		public:
 			ADD_OBJECT(CoverLink, Link, 0)
 			ADD_STRUCT(int, SlotIdx, 4)
 		};
-		class FireLinkItem
+		struct FireLinkItem
 		{
 		public:
 			ADD_STRUCT(CoverLink::ECoverAction, DestAction, 3)
@@ -134,13 +134,13 @@ namespace UnrealScript
 			ADD_STRUCT(CoverLink::ECoverAction, SrcAction, 1)
 			ADD_STRUCT(CoverLink::ECoverType, SrcType, 0)
 		};
-		class ExposedLink
+		struct ExposedLink
 		{
 		public:
 			ADD_STRUCT(byte, ExposedScale, 24)
 			ADD_STRUCT(CoverLink::CoverReference, TargetActor, 0)
 		};
-		class CoverSlot
+		struct CoverSlot
 		{
 		public:
 			ADD_STRUCT(ScriptArray<CoverLink::ECoverAction>, Actions, 36)
@@ -172,8 +172,8 @@ namespace UnrealScript
 			ADD_BOOL(bLeanRight, 112, 0x2)
 			ADD_BOOL(bLeanLeft, 112, 0x1)
 			ADD_STRUCT(int, TurnTargetPackedProperties, 84)
-			ADD_STRUCT(Object::Rotator, RotationOffset, 24)
-			ADD_STRUCT(Object::Vector, LocationOffset, 12)
+			ADD_STRUCT(Rotator, RotationOffset, 24)
+			ADD_STRUCT(Vector, LocationOffset, 12)
 			ADD_STRUCT(CoverLink::ECoverLocationDescription, LocationDescription, 10)
 			ADD_STRUCT(CoverLink::ECoverType, CoverType, 9)
 			ADD_STRUCT(CoverLink::ECoverType, ForceCoverType, 8)
@@ -200,15 +200,15 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<CoverLink::DynamicLinkInfo>, DynamicLinkInfos, 712)
 		ADD_STRUCT(float, InvalidateDistance, 736)
 		ADD_STRUCT(float, MaxFireLinkDist, 740)
-		ADD_STRUCT(Object::Vector, CircularOrigin, 744)
+		ADD_STRUCT(Vector, CircularOrigin, 744)
 		ADD_STRUCT(float, CircularRadius, 756)
 		ADD_STRUCT(float, AlignDist, 760)
 		ADD_STRUCT(float, AutoCoverSlotInterval, 764)
 		ADD_STRUCT(float, StandHeight, 768)
 		ADD_STRUCT(float, MidHeight, 772)
-		ADD_STRUCT(Object::Vector, StandingLeanOffset, 776)
-		ADD_STRUCT(Object::Vector, CrouchLeanOffset, 788)
-		ADD_STRUCT(Object::Vector, PopupOffset, 800)
+		ADD_STRUCT(Vector, StandingLeanOffset, 776)
+		ADD_STRUCT(Vector, CrouchLeanOffset, 788)
+		ADD_STRUCT(Vector, PopupOffset, 800)
 		ADD_STRUCT(float, SlipDist, 812)
 		ADD_STRUCT(float, TurnDist, 816)
 		ADD_STRUCT(float, DangerScale, 820)
@@ -216,9 +216,9 @@ namespace UnrealScript
 		ADD_STRUCT(CoverLink::ECoverLocationDescription, LocationDescription, 828)
 		bool GetFireLinkTargetCoverInfo(int SlotIdx, int FireLinkIdx, CoverLink::CoverInfo& out_Info, CoverLink::EFireLinkID ArrayID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetFireLinkTargetCoverInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13204);
 			byte params[21] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(int*)&params[4] = FireLinkIdx;
 			*(CoverLink::CoverInfo*)&params[8] = out_Info;
 			*(CoverLink::EFireLinkID*)&params[16] = ArrayID;
@@ -228,9 +228,9 @@ namespace UnrealScript
 		}
 		byte PackFireLinkInteractionInfo(CoverLink::ECoverType SrcType, CoverLink::ECoverAction SrcAction, CoverLink::ECoverType DestType, CoverLink::ECoverAction DestAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.PackFireLinkInteractionInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13210);
 			byte params[5] = { NULL };
-			*(CoverLink::ECoverType*)&params[0] = SrcType;
+			*(CoverLink::ECoverType*)params = SrcType;
 			*(CoverLink::ECoverAction*)&params[1] = SrcAction;
 			*(CoverLink::ECoverType*)&params[2] = DestType;
 			*(CoverLink::ECoverAction*)&params[3] = DestAction;
@@ -239,9 +239,9 @@ namespace UnrealScript
 		}
 		void UnPackFireLinkInteractionInfo(byte PackedByte, CoverLink::ECoverType& SrcType, CoverLink::ECoverAction& SrcAction, CoverLink::ECoverType& DestType, CoverLink::ECoverAction& DestAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.UnPackFireLinkInteractionInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13216);
 			byte params[5] = { NULL };
-			params[0] = PackedByte;
+			*params = PackedByte;
 			*(CoverLink::ECoverType*)&params[1] = SrcType;
 			*(CoverLink::ECoverAction*)&params[2] = SrcAction;
 			*(CoverLink::ECoverType*)&params[3] = DestType;
@@ -252,39 +252,39 @@ namespace UnrealScript
 			DestType = *(CoverLink::ECoverType*)&params[3];
 			DestAction = *(CoverLink::ECoverAction*)&params[4];
 		}
-		Object::Vector GetSlotLocation(int SlotIdx, bool bForceUseOffset)
+		Vector GetSlotLocation(int SlotIdx, bool bForceUseOffset)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetSlotLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13222);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(bool*)&params[4] = bForceUseOffset;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[8];
+			return *(Vector*)&params[8];
 		}
-		Object::Rotator GetSlotRotation(int SlotIdx, bool bForceUseOffset)
+		Rotator GetSlotRotation(int SlotIdx, bool bForceUseOffset)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetSlotRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13226);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(bool*)&params[4] = bForceUseOffset;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[8];
+			return *(Rotator*)&params[8];
 		}
-		Object::Vector GetSlotViewPoint(int SlotIdx, CoverLink::ECoverType Type, CoverLink::ECoverAction Action)
+		Vector GetSlotViewPoint(int SlotIdx, CoverLink::ECoverType Type, CoverLink::ECoverAction Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetSlotViewPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13230);
 			byte params[18] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(CoverLink::ECoverType*)&params[4] = Type;
 			*(CoverLink::ECoverAction*)&params[5] = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[8];
+			return *(Vector*)&params[8];
 		}
 		bool IsExposedTo(int SlotIdx, CoverLink::CoverInfo ChkSlot, float& out_ExposedScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.IsExposedTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13235);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(CoverLink::CoverInfo*)&params[4] = ChkSlot;
 			*(float*)&params[12] = out_ExposedScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -293,26 +293,26 @@ namespace UnrealScript
 		}
 		void SetInvalidUntil(int SlotIdx, float TimeToBecomeValid)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.SetInvalidUntil");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13240);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(float*)&params[4] = TimeToBecomeValid;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool Claim(class Pawn* NewClaim, int SlotIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.Claim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13244);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = NewClaim;
+			*(class Pawn**)params = NewClaim;
 			*(int*)&params[4] = SlotIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool UnClaim(class Pawn* OldClaim, int SlotIdx, bool bUnclaimAll)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.UnClaim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13255);
 			byte params[16] = { NULL };
-			*(class Pawn**)&params[0] = OldClaim;
+			*(class Pawn**)params = OldClaim;
 			*(int*)&params[4] = SlotIdx;
 			*(bool*)&params[8] = bUnclaimAll;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -320,9 +320,9 @@ namespace UnrealScript
 		}
 		bool IsValidClaim(class Pawn* ChkClaim, int SlotIdx, bool bSkipTeamCheck, bool bSkipOverlapCheck)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.IsValidClaim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13263);
 			byte params[20] = { NULL };
-			*(class Pawn**)&params[0] = ChkClaim;
+			*(class Pawn**)params = ChkClaim;
 			*(int*)&params[4] = SlotIdx;
 			*(bool*)&params[8] = bSkipTeamCheck;
 			*(bool*)&params[12] = bSkipOverlapCheck;
@@ -331,9 +331,9 @@ namespace UnrealScript
 		}
 		bool IsValidClaimBetween(class Pawn* ChkClaim, int StartSlotIdx, int EndSlotIdx, bool bSkipTeamCheck, bool bSkipOverlapCheck)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.IsValidClaimBetween");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13269);
 			byte params[24] = { NULL };
-			*(class Pawn**)&params[0] = ChkClaim;
+			*(class Pawn**)params = ChkClaim;
 			*(int*)&params[4] = StartSlotIdx;
 			*(int*)&params[8] = EndSlotIdx;
 			*(bool*)&params[12] = bSkipTeamCheck;
@@ -343,26 +343,26 @@ namespace UnrealScript
 		}
 		bool IsStationarySlot(int SlotIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.IsStationarySlot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13276);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool IsEdgeSlot(int SlotIdx, bool bIgnoreLeans)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.IsEdgeSlot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13280);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(bool*)&params[4] = bIgnoreLeans;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
-		bool FindSlots(Object::Vector CheckLocation, float MaxDistance, int& LeftSlotIdx, int& RightSlotIdx)
+		bool FindSlots(Vector CheckLocation, float MaxDistance, int& LeftSlotIdx, int& RightSlotIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.FindSlots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13281);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = CheckLocation;
+			*(Vector*)params = CheckLocation;
 			*(float*)&params[12] = MaxDistance;
 			*(int*)&params[16] = LeftSlotIdx;
 			*(int*)&params[20] = RightSlotIdx;
@@ -373,61 +373,61 @@ namespace UnrealScript
 		}
 		bool IsLeftEdgeSlot(int SlotIdx, bool bIgnoreLeans)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.IsLeftEdgeSlot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13290);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(bool*)&params[4] = bIgnoreLeans;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool IsRightEdgeSlot(int SlotIdx, bool bIgnoreLeans)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.IsRightEdgeSlot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13294);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(bool*)&params[4] = bIgnoreLeans;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		int GetSlotIdxToLeft(int SlotIdx, int Cnt)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetSlotIdxToLeft");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13298);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(int*)&params[4] = Cnt;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int GetSlotIdxToRight(int SlotIdx, int Cnt)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetSlotIdxToRight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13302);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(int*)&params[4] = Cnt;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		bool AllowRightTransition(int SlotIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.AllowRightTransition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13306);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool AllowLeftTransition(int SlotIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.AllowLeftTransition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13310);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool GetFireLinkTo(int SlotIdx, CoverLink::CoverInfo ChkCover, CoverLink::ECoverAction ChkAction, CoverLink::ECoverType ChkType, int& out_FireLinkIdx, ScriptArray<int>& out_Items)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetFireLinkTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13314);
 			byte params[34] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(CoverLink::CoverInfo*)&params[4] = ChkCover;
 			*(CoverLink::ECoverAction*)&params[12] = ChkAction;
 			*(CoverLink::ECoverType*)&params[13] = ChkType;
@@ -440,9 +440,9 @@ namespace UnrealScript
 		}
 		bool HasFireLinkTo(int SlotIdx, CoverLink::CoverInfo ChkCover, bool bAllowFallbackLinks)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.HasFireLinkTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13323);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(CoverLink::CoverInfo*)&params[4] = ChkCover;
 			*(bool*)&params[12] = bAllowFallbackLinks;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -450,122 +450,122 @@ namespace UnrealScript
 		}
 		void GetSlotActions(int SlotIdx, ScriptArray<CoverLink::ECoverAction>& Actions)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetSlotActions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13328);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(ScriptArray<CoverLink::ECoverAction>*)&params[4] = Actions;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Actions = *(ScriptArray<CoverLink::ECoverAction>*)&params[4];
 		}
 		void SetDisabled(bool bNewDisabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.SetDisabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13332);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewDisabled;
+			*(bool*)params = bNewDisabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSlotEnabled(int SlotIdx, bool bEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.SetSlotEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13339);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(bool*)&params[4] = bEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifySlotOwnerCoverDisabled(int SlotIdx, bool bAIOnly)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.NotifySlotOwnerCoverDisabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13342);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(bool*)&params[4] = bAIOnly;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSlotPlayerOnly(int SlotIdx, bool bInPlayerOnly)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.SetSlotPlayerOnly");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13347);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(bool*)&params[4] = bInPlayerOnly;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnModifyCover(class SeqAct_ModifyCover* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.OnModifyCover");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13350);
 			byte params[4] = { NULL };
-			*(class SeqAct_ModifyCover**)&params[0] = Action;
+			*(class SeqAct_ModifyCover**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AutoAdjustSlot(int SlotIdx, bool bOnlyCheckLeans)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.AutoAdjustSlot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13358);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(bool*)&params[4] = bOnlyCheckLeans;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool IsEnabled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.IsEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13364);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void OnToggle(class SeqAct_Toggle* inAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13366);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = inAction;
+			*(class SeqAct_Toggle**)params = inAction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateCheckpointRecord(NavigationPoint::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.CreateCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13369);
 			byte params[4] = { NULL };
-			*(NavigationPoint::CheckpointRecord*)&params[0] = Record;
+			*(NavigationPoint::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(NavigationPoint::CheckpointRecord*)&params[0];
+			Record = *(NavigationPoint::CheckpointRecord*)params;
 		}
 		void ApplyCheckpointRecord(NavigationPoint::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.ApplyCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13371);
 			byte params[4] = { NULL };
-			*(NavigationPoint::CheckpointRecord*)&params[0] = Record;
+			*(NavigationPoint::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(NavigationPoint::CheckpointRecord*)&params[0];
+			Record = *(NavigationPoint::CheckpointRecord*)params;
 		}
 		void ShutDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.ShutDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13374);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool GetSwatTurnTarget(int SlotIdx, int Direction, CoverLink::CoverInfo& out_Info)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetSwatTurnTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13375);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			*(int*)&params[4] = Direction;
 			*(CoverLink::CoverInfo*)&params[8] = out_Info;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			out_Info = *(CoverLink::CoverInfo*)&params[8];
 			return *(bool*)&params[16];
 		}
-		void BreakFracturedMeshes(Object::Vector Origin, float Radius, float RBStrength, ScriptClass* DamageType)
+		void BreakFracturedMeshes(Vector Origin, float Radius, float RBStrength, ScriptClass* DamageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.BreakFracturedMeshes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13380);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = Origin;
+			*(Vector*)params = Origin;
 			*(float*)&params[12] = Radius;
 			*(float*)&params[16] = RBStrength;
 			*(ScriptClass**)&params[20] = DamageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		int AddCoverSlot(Object::Vector SlotLocation, Object::Rotator SlotRotation, int SlotIdx, bool bForceSlotUpdate, class Scout* Scout)
+		int AddCoverSlot(Vector SlotLocation, Rotator SlotRotation, int SlotIdx, bool bForceSlotUpdate, class Scout* Scout)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.AddCoverSlot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13392);
 			byte params[40] = { NULL };
-			*(Object::Vector*)&params[0] = SlotLocation;
-			*(Object::Rotator*)&params[12] = SlotRotation;
+			*(Vector*)params = SlotLocation;
+			*(Rotator*)&params[12] = SlotRotation;
 			*(int*)&params[24] = SlotIdx;
 			*(bool*)&params[28] = bForceSlotUpdate;
 			*(class Scout**)&params[32] = Scout;
@@ -574,26 +574,26 @@ namespace UnrealScript
 		}
 		ScriptString* GetDebugString(int SlotIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetDebugString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13399);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		CoverLink::ECoverLocationDescription GetLocationDescription(int SlotIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetLocationDescription");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13402);
 			byte params[5] = { NULL };
-			*(int*)&params[0] = SlotIdx;
+			*(int*)params = SlotIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(CoverLink::ECoverLocationDescription*)&params[4];
 		}
 		ScriptString* GetDebugAbbrev()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CoverLink.GetDebugAbbrev");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13405);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 	const float CoverLink::COVERLINK_DangerDist = 1536.f;

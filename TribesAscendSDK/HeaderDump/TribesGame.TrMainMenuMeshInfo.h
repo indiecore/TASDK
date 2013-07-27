@@ -14,7 +14,7 @@ namespace UnrealScript
 	class TrMainMenuMeshInfo : public Object
 	{
 	public:
-		class ParticleSystemInfo
+		struct ParticleSystemInfo
 		{
 		public:
 			ADD_STRUCT(ScriptName, SocketName, 4)
@@ -26,9 +26,9 @@ namespace UnrealScript
 		ADD_STRUCT(TrObject::PaperDollInfo, MeshInfo, 60)
 		void PreloadTextures(float ForceDuration)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMainMenuMeshInfo.PreloadTextures");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98700);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ForceDuration;
+			*(float*)params = ForceDuration;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

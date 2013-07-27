@@ -8,16 +8,16 @@ namespace UnrealScript
 	public:
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeqEvent_TakeDamage.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110940);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void HandleDamage(class Actor* InOriginator, class Actor* InInstigator, ScriptClass* inDamageType, int inAmount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeqEvent_TakeDamage.HandleDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110942);
 			byte params[16] = { NULL };
-			*(class Actor**)&params[0] = InOriginator;
+			*(class Actor**)params = InOriginator;
 			*(class Actor**)&params[4] = InInstigator;
 			*(ScriptClass**)&params[8] = inDamageType;
 			*(int*)&params[12] = inAmount;

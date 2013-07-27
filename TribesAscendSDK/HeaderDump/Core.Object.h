@@ -103,21 +103,10 @@ namespace UnrealScript
 			ABT_EaseInOutExponent5 = 6,
 			ABT_MAX = 7,
 		};
-		class Rotator
-		{
-		public:
-			ADD_STRUCT(int, Pitch, 0)
-			ADD_STRUCT(int, Yaw, 4)
-			ADD_STRUCT(int, Roll, 8)
-		};
-		class Vector
-		{
-		public:
-			ADD_STRUCT(float, X, 0)
-			ADD_STRUCT(float, Y, 4)
-			ADD_STRUCT(float, Z, 8)
-		};
-		class Guid
+		// struct Rotator is manually defined
+		// struct Vector is manually defined
+		// struct QWord is manually defined
+		struct Guid
 		{
 		public:
 			ADD_STRUCT(int, A, 0)
@@ -125,13 +114,13 @@ namespace UnrealScript
 			ADD_STRUCT(int, C, 8)
 			ADD_STRUCT(int, D, 12)
 		};
-		class Vector2D
+		struct Vector2D
 		{
 		public:
 			ADD_STRUCT(float, X, 0)
 			ADD_STRUCT(float, Y, 4)
 		};
-		class Vector4
+		struct Vector4
 		{
 		public:
 			ADD_STRUCT(float, X, 0)
@@ -139,7 +128,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, Z, 8)
 			ADD_STRUCT(float, W, 12)
 		};
-		class LinearColor
+		struct LinearColor
 		{
 		public:
 			ADD_STRUCT(float, R, 0)
@@ -147,7 +136,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, B, 8)
 			ADD_STRUCT(float, A, 12)
 		};
-		class Color
+		struct Color
 		{
 		public:
 			ADD_STRUCT(byte, R, 2)
@@ -155,13 +144,13 @@ namespace UnrealScript
 			ADD_STRUCT(byte, B, 0)
 			ADD_STRUCT(byte, A, 3)
 		};
-		class Cylinder
+		struct Cylinder
 		{
 		public:
 			ADD_STRUCT(float, Radius, 0)
 			ADD_STRUCT(float, Height, 4)
 		};
-		class Quat
+		struct Quat
 		{
 		public:
 			ADD_STRUCT(float, X, 0)
@@ -169,37 +158,37 @@ namespace UnrealScript
 			ADD_STRUCT(float, Z, 8)
 			ADD_STRUCT(float, W, 12)
 		};
-		class BoxSphereBounds
+		struct BoxSphereBounds
 		{
 		public:
-			ADD_STRUCT(Object::Vector, Origin, 0)
-			ADD_STRUCT(Object::Vector, BoxExtent, 12)
+			ADD_STRUCT(Vector, Origin, 0)
+			ADD_STRUCT(Vector, BoxExtent, 12)
 			ADD_STRUCT(float, SphereRadius, 24)
 		};
-		class TwoVectors
+		struct TwoVectors
 		{
 		public:
-			ADD_STRUCT(Object::Vector, v1, 0)
-			ADD_STRUCT(Object::Vector, v2, 12)
+			ADD_STRUCT(Vector, v1, 0)
+			ADD_STRUCT(Vector, v2, 12)
 		};
-		class BoneAtom
+		struct BoneAtom
 		{
 		public:
 			ADD_STRUCT(Object::Quat, Rotation, 0)
-			ADD_STRUCT(Object::Vector, Translation, 16)
+			ADD_STRUCT(Vector, Translation, 16)
 			ADD_STRUCT(float, Scale, 28)
 		};
-		class RenderCommandFence
+		struct RenderCommandFence
 		{
 		public:
 			ADD_STRUCT(int, NumPendingFences, 0)
 		};
-		class Pointer
+		struct Pointer
 		{
 		public:
 			ADD_STRUCT(int, Dummy, 0)
 		};
-		class RawDistribution
+		struct RawDistribution
 		{
 		public:
 			ADD_STRUCT(byte, Type, 0)
@@ -210,47 +199,47 @@ namespace UnrealScript
 			ADD_STRUCT(float, LookupTableTimeScale, 16)
 			ADD_STRUCT(float, LookupTableStartTime, 20)
 		};
-		class Box
+		struct Box
 		{
 		public:
-			ADD_STRUCT(Object::Vector, Min, 0)
-			ADD_STRUCT(Object::Vector, Max, 12)
+			ADD_STRUCT(Vector, Min, 0)
+			ADD_STRUCT(Vector, Max, 12)
 			ADD_STRUCT(byte, IsValid, 24)
 		};
-		class TPOV
+		struct TPOV
 		{
 		public:
-			ADD_STRUCT(Object::Vector, Location, 0)
-			ADD_STRUCT(Object::Rotator, Rotation, 12)
+			ADD_STRUCT(Vector, Location, 0)
+			ADD_STRUCT(Rotator, Rotation, 12)
 			ADD_STRUCT(float, FOV, 24)
 		};
-		class SHVector
+		struct SHVector
 		{
 		public:
 			ADD_STRUCT(float, V, 0)
 			ADD_STRUCT(float, Padding, 36)
 		};
-		class IntPoint
+		struct IntPoint
 		{
 		public:
 			ADD_STRUCT(int, X, 0)
 			ADD_STRUCT(int, Y, 4)
 		};
-		class Array_Mirror
+		struct Array_Mirror
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, Data, 0)
 			ADD_STRUCT(int, ArrayNum, 4)
 			ADD_STRUCT(int, ArrayMax, 8)
 		};
-		class IndirectArray_Mirror
+		struct IndirectArray_Mirror
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, Data, 0)
 			ADD_STRUCT(int, ArrayNum, 4)
 			ADD_STRUCT(int, ArrayMax, 8)
 		};
-		class FColorVertexBuffer_Mirror
+		struct FColorVertexBuffer_Mirror
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, VfTable, 0)
@@ -259,12 +248,12 @@ namespace UnrealScript
 			ADD_STRUCT(int, Stride, 12)
 			ADD_STRUCT(int, NumVertices, 16)
 		};
-		class RenderCommandFence_Mirror
+		struct RenderCommandFence_Mirror
 		{
 		public:
 			ADD_STRUCT(int, NumPendingFences, 0)
 		};
-		class UntypedBulkData_Mirror
+		struct UntypedBulkData_Mirror
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, VfTable, 0)
@@ -281,7 +270,7 @@ namespace UnrealScript
 			ADD_STRUCT(Object::Pointer, AttachedAr, 44)
 			ADD_STRUCT(int, bShouldFreeOnEmpty, 48)
 		};
-		class BitArray_Mirror
+		struct BitArray_Mirror
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, IndirectData, 0)
@@ -289,29 +278,23 @@ namespace UnrealScript
 			ADD_STRUCT(int, NumBits, 20)
 			ADD_STRUCT(int, MaxBits, 24)
 		};
-		class ThreadSafeCounter
+		struct ThreadSafeCounter
 		{
 		public:
 			ADD_STRUCT(int, Value, 0)
 		};
-		class Double
+		struct Double
 		{
 		public:
 			ADD_STRUCT(int, A, 0)
 			ADD_STRUCT(int, B, 4)
 		};
-		class QWord
-		{
-		public:
-			ADD_STRUCT(int, A, 0)
-			ADD_STRUCT(int, B, 4)
-		};
-		class Plane : public Vector
+		struct Plane : public Vector
 		{
 		public:
 			ADD_STRUCT(float, W, 12)
 		};
-		class InterpCurvePointVector2D
+		struct InterpCurvePointVector2D
 		{
 		public:
 			ADD_STRUCT(float, InVal, 0)
@@ -320,16 +303,16 @@ namespace UnrealScript
 			ADD_STRUCT(Object::Vector2D, LeaveTangent, 20)
 			ADD_STRUCT(Object::EInterpCurveMode, InterpMode, 28)
 		};
-		class InterpCurvePointVector
+		struct InterpCurvePointVector
 		{
 		public:
 			ADD_STRUCT(float, InVal, 0)
-			ADD_STRUCT(Object::Vector, OutVal, 4)
-			ADD_STRUCT(Object::Vector, ArriveTangent, 16)
-			ADD_STRUCT(Object::Vector, LeaveTangent, 28)
+			ADD_STRUCT(Vector, OutVal, 4)
+			ADD_STRUCT(Vector, ArriveTangent, 16)
+			ADD_STRUCT(Vector, LeaveTangent, 28)
 			ADD_STRUCT(Object::EInterpCurveMode, InterpMode, 40)
 		};
-		class InterpCurvePointFloat
+		struct InterpCurvePointFloat
 		{
 		public:
 			ADD_STRUCT(float, InVal, 0)
@@ -338,7 +321,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, LeaveTangent, 12)
 			ADD_STRUCT(Object::EInterpCurveMode, InterpMode, 16)
 		};
-		class Matrix
+		struct Matrix
 		{
 		public:
 			ADD_STRUCT(Object::Plane, XPlane, 0)
@@ -346,7 +329,7 @@ namespace UnrealScript
 			ADD_STRUCT(Object::Plane, ZPlane, 32)
 			ADD_STRUCT(Object::Plane, WPlane, 48)
 		};
-		class TAlphaBlend
+		struct TAlphaBlend
 		{
 		public:
 			ADD_STRUCT(float, AlphaIn, 0)
@@ -356,13 +339,13 @@ namespace UnrealScript
 			ADD_STRUCT(float, BlendTimeToGo, 16)
 			ADD_STRUCT(Object::AlphaBlendType, BlendType, 20)
 		};
-		class OctreeElementId
+		struct OctreeElementId
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, Node, 0)
 			ADD_STRUCT(int, ElementIndex, 4)
 		};
-		class InterpCurvePointLinearColor
+		struct InterpCurvePointLinearColor
 		{
 		public:
 			ADD_STRUCT(float, InVal, 0)
@@ -371,7 +354,7 @@ namespace UnrealScript
 			ADD_STRUCT(Object::LinearColor, LeaveTangent, 36)
 			ADD_STRUCT(Object::EInterpCurveMode, InterpMode, 52)
 		};
-		class InterpCurvePointQuat
+		struct InterpCurvePointQuat
 		{
 		public:
 			ADD_STRUCT(float, InVal, 0)
@@ -380,7 +363,7 @@ namespace UnrealScript
 			ADD_STRUCT(Object::Quat, LeaveTangent, 48)
 			ADD_STRUCT(Object::EInterpCurveMode, InterpMode, 64)
 		};
-		class InterpCurvePointTwoVectors
+		struct InterpCurvePointTwoVectors
 		{
 		public:
 			ADD_STRUCT(float, InVal, 0)
@@ -389,20 +372,20 @@ namespace UnrealScript
 			ADD_STRUCT(Object::TwoVectors, LeaveTangent, 52)
 			ADD_STRUCT(Object::EInterpCurveMode, InterpMode, 76)
 		};
-		class SHVectorRGB
+		struct SHVectorRGB
 		{
 		public:
 			ADD_STRUCT(Object::SHVector, R, 0)
 			ADD_STRUCT(Object::SHVector, G, 48)
 			ADD_STRUCT(Object::SHVector, B, 96)
 		};
-		class InlinePointerArray_Mirror
+		struct InlinePointerArray_Mirror
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, InlineData, 0)
 			ADD_STRUCT(Object::Array_Mirror, SecondaryData, 4)
 		};
-		class SparseArray_Mirror
+		struct SparseArray_Mirror
 		{
 		public:
 			ADD_STRUCT(ScriptArray<int>, Elements, 0)
@@ -410,43 +393,43 @@ namespace UnrealScript
 			ADD_STRUCT(int, FirstFreeIndex, 40)
 			ADD_STRUCT(int, NumFreeIndices, 44)
 		};
-		class InterpCurveVector2D
+		struct InterpCurveVector2D
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Object::InterpCurvePointVector2D>, Points, 0)
 			ADD_STRUCT(Object::EInterpMethodType, InterpMethod, 12)
 		};
-		class InterpCurveFloat
+		struct InterpCurveFloat
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Object::InterpCurvePointFloat>, Points, 0)
 			ADD_STRUCT(Object::EInterpMethodType, InterpMethod, 12)
 		};
-		class InterpCurveVector
+		struct InterpCurveVector
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Object::InterpCurvePointVector>, Points, 0)
 			ADD_STRUCT(Object::EInterpMethodType, InterpMethod, 12)
 		};
-		class InterpCurveLinearColor
+		struct InterpCurveLinearColor
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Object::InterpCurvePointLinearColor>, Points, 0)
 			ADD_STRUCT(Object::EInterpMethodType, InterpMethod, 12)
 		};
-		class InterpCurveQuat
+		struct InterpCurveQuat
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Object::InterpCurvePointQuat>, Points, 0)
 			ADD_STRUCT(Object::EInterpMethodType, InterpMethod, 12)
 		};
-		class InterpCurveTwoVectors
+		struct InterpCurveTwoVectors
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Object::InterpCurvePointTwoVectors>, Points, 0)
 			ADD_STRUCT(Object::EInterpMethodType, InterpMethod, 12)
 		};
-		class Set_Mirror
+		struct Set_Mirror
 		{
 		public:
 			ADD_STRUCT(Object::SparseArray_Mirror, Elements, 0)
@@ -454,12 +437,12 @@ namespace UnrealScript
 			ADD_STRUCT(int, InlineHash, 52)
 			ADD_STRUCT(int, HashSize, 56)
 		};
-		class MultiMap_Mirror
+		struct MultiMap_Mirror
 		{
 		public:
 			ADD_STRUCT(Object::Set_Mirror, Pairs, 0)
 		};
-		class Map_Mirror
+		struct Map_Mirror
 		{
 		public:
 			ADD_STRUCT(Object::Set_Mirror, Pairs, 0)
@@ -468,7 +451,7 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, Name, 44)
 		ADD_STRUCT(Object::Pointer, VfTableObject, 0)
 		ADD_STRUCT(int, ObjectInternalInteger, 4)
-		ADD_STRUCT(Object::QWord, ObjectFlags, 8)
+		ADD_STRUCT(QWord, ObjectFlags, 8)
 		ADD_STRUCT(Object::Pointer, HashNext, 16)
 		ADD_STRUCT(Object::Pointer, HashOuterNext, 20)
 		ADD_STRUCT(Object::Pointer, StateFrame, 24)
@@ -479,23 +462,23 @@ namespace UnrealScript
 		ADD_OBJECT(Object, ObjectArchetype, 56)
 		int GetBuildChangelistNumber()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetBuildChangelistNumber");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(1987);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int GetEngineVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetEngineVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(1988);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void GetSystemTime(int& Year, int& Month, int& DayOfWeek, int& Day, int& Hour, int& Min, int& Sec, int& MSec)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetSystemTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(1990);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Year;
+			*(int*)params = Year;
 			*(int*)&params[4] = Month;
 			*(int*)&params[8] = DayOfWeek;
 			*(int*)&params[12] = Day;
@@ -504,7 +487,7 @@ namespace UnrealScript
 			*(int*)&params[24] = Sec;
 			*(int*)&params[28] = MSec;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Year = *(int*)&params[0];
+			Year = *(int*)params;
 			Month = *(int*)&params[4];
 			DayOfWeek = *(int*)&params[8];
 			Day = *(int*)&params[12];
@@ -515,181 +498,181 @@ namespace UnrealScript
 		}
 		ScriptString* TimeStamp()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.TimeStamp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(1992);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
-		Object::Vector TransformVectorByRotation(Object::Rotator SourceRotation, Object::Vector SourceVector, bool bInverse)
+		Vector TransformVectorByRotation(Rotator SourceRotation, Vector SourceVector, bool bInverse)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.TransformVectorByRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2001);
 			byte params[40] = { NULL };
-			*(Object::Rotator*)&params[0] = SourceRotation;
-			*(Object::Vector*)&params[12] = SourceVector;
+			*(Rotator*)params = SourceRotation;
+			*(Vector*)&params[12] = SourceVector;
 			*(bool*)&params[24] = bInverse;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[28];
+			return *(Vector*)&params[28];
 		}
 		ScriptName GetPackageName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetPackageName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2003);
 			byte params[8] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptName*)&params[0];
+			return *(ScriptName*)params;
 		}
 		bool IsPendingKill()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.IsPendingKill");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2018);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		float ByteToFloat(byte inputByte, bool bSigned)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ByteToFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2023);
 			byte params[9] = { NULL };
-			params[0] = inputByte;
+			*params = inputByte;
 			*(bool*)&params[4] = bSigned;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		byte FloatToByte(float inputFloat, bool bSigned)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FloatToByte");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2025);
 			byte params[9] = { NULL };
-			*(float*)&params[0] = inputFloat;
+			*(float*)params = inputFloat;
 			*(bool*)&params[4] = bSigned;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return params[8];
 		}
 		float UnwindHeading(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.UnwindHeading");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2029);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float FindDeltaAngle(float A1, float A2)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FindDeltaAngle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2033);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A1;
+			*(float*)params = A1;
 			*(float*)&params[4] = A2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
-		float GetHeadingAngle(Object::Vector Dir)
+		float GetHeadingAngle(Vector Dir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetHeadingAngle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2036);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = Dir;
+			*(Vector*)params = Dir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
 		void GetAngularDegreesFromRadians(Object::Vector2D& OutFOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetAngularDegreesFromRadians");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2041);
 			byte params[8] = { NULL };
-			*(Object::Vector2D*)&params[0] = OutFOV;
+			*(Object::Vector2D*)params = OutFOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutFOV = *(Object::Vector2D*)&params[0];
+			OutFOV = *(Object::Vector2D*)params;
 		}
 		float Acos(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Acos");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2044);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		void GetAngularFromDotDist(Object::Vector2D& OutAngDist, Object::Vector2D DotDist)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetAngularFromDotDist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2046);
 			byte params[16] = { NULL };
-			*(Object::Vector2D*)&params[0] = OutAngDist;
+			*(Object::Vector2D*)params = OutAngDist;
 			*(Object::Vector2D*)&params[8] = DotDist;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutAngDist = *(Object::Vector2D*)&params[0];
+			OutAngDist = *(Object::Vector2D*)params;
 		}
-		bool GetAngularDistance(Object::Vector2D& OutAngularDist, Object::Vector Direction, Object::Vector AxisX, Object::Vector AxisY, Object::Vector AxisZ)
+		bool GetAngularDistance(Object::Vector2D& OutAngularDist, Vector Direction, Vector AxisX, Vector AxisY, Vector AxisZ)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetAngularDistance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2052);
 			byte params[60] = { NULL };
-			*(Object::Vector2D*)&params[0] = OutAngularDist;
-			*(Object::Vector*)&params[8] = Direction;
-			*(Object::Vector*)&params[20] = AxisX;
-			*(Object::Vector*)&params[32] = AxisY;
-			*(Object::Vector*)&params[44] = AxisZ;
+			*(Object::Vector2D*)params = OutAngularDist;
+			*(Vector*)&params[8] = Direction;
+			*(Vector*)&params[20] = AxisX;
+			*(Vector*)&params[32] = AxisY;
+			*(Vector*)&params[44] = AxisZ;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutAngularDist = *(Object::Vector2D*)&params[0];
+			OutAngularDist = *(Object::Vector2D*)params;
 			return *(bool*)&params[56];
 		}
-		bool GetDotDistance(Object::Vector2D& OutDotDist, Object::Vector Direction, Object::Vector AxisX, Object::Vector AxisY, Object::Vector AxisZ)
+		bool GetDotDistance(Object::Vector2D& OutDotDist, Vector Direction, Vector AxisX, Vector AxisY, Vector AxisZ)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetDotDistance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2055);
 			byte params[60] = { NULL };
-			*(Object::Vector2D*)&params[0] = OutDotDist;
-			*(Object::Vector*)&params[8] = Direction;
-			*(Object::Vector*)&params[20] = AxisX;
-			*(Object::Vector*)&params[32] = AxisY;
-			*(Object::Vector*)&params[44] = AxisZ;
+			*(Object::Vector2D*)params = OutDotDist;
+			*(Vector*)&params[8] = Direction;
+			*(Vector*)&params[20] = AxisX;
+			*(Vector*)&params[32] = AxisY;
+			*(Vector*)&params[44] = AxisZ;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutDotDist = *(Object::Vector2D*)&params[0];
+			OutDotDist = *(Object::Vector2D*)params;
 			return *(bool*)&params[56];
 		}
-		Object::Vector PointProjectToPlane(Object::Vector Point, Object::Vector A, Object::Vector B, Object::Vector C)
+		Vector PointProjectToPlane(Vector Point, Vector A, Vector B, Vector C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.PointProjectToPlane");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2062);
 			byte params[60] = { NULL };
-			*(Object::Vector*)&params[0] = Point;
-			*(Object::Vector*)&params[12] = A;
-			*(Object::Vector*)&params[24] = B;
-			*(Object::Vector*)&params[36] = C;
+			*(Vector*)params = Point;
+			*(Vector*)&params[12] = A;
+			*(Vector*)&params[24] = B;
+			*(Vector*)&params[36] = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[48];
+			return *(Vector*)&params[48];
 		}
-		float PointDistToPlane(Object::Vector Point, Object::Rotator Orientation, Object::Vector Origin, Object::Vector& out_ClosestPoint)
+		float PointDistToPlane(Vector Point, Rotator Orientation, Vector Origin, Vector& out_ClosestPoint)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.PointDistToPlane");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2069);
 			byte params[52] = { NULL };
-			*(Object::Vector*)&params[0] = Point;
-			*(Object::Rotator*)&params[12] = Orientation;
-			*(Object::Vector*)&params[24] = Origin;
-			*(Object::Vector*)&params[36] = out_ClosestPoint;
+			*(Vector*)params = Point;
+			*(Rotator*)&params[12] = Orientation;
+			*(Vector*)&params[24] = Origin;
+			*(Vector*)&params[36] = out_ClosestPoint;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_ClosestPoint = *(Object::Vector*)&params[36];
+			out_ClosestPoint = *(Vector*)&params[36];
 			return *(float*)&params[48];
 		}
-		float PointDistToSegment(Object::Vector Point, Object::Vector StartPoint, Object::Vector EndPoint, Object::Vector& OutClosestPoint)
+		float PointDistToSegment(Vector Point, Vector StartPoint, Vector EndPoint, Vector& OutClosestPoint)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.PointDistToSegment");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2075);
 			byte params[52] = { NULL };
-			*(Object::Vector*)&params[0] = Point;
-			*(Object::Vector*)&params[12] = StartPoint;
-			*(Object::Vector*)&params[24] = EndPoint;
-			*(Object::Vector*)&params[36] = OutClosestPoint;
+			*(Vector*)params = Point;
+			*(Vector*)&params[12] = StartPoint;
+			*(Vector*)&params[24] = EndPoint;
+			*(Vector*)&params[36] = OutClosestPoint;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutClosestPoint = *(Object::Vector*)&params[36];
+			OutClosestPoint = *(Vector*)&params[36];
 			return *(float*)&params[48];
 		}
-		float PointDistToLine(Object::Vector Point, Object::Vector Line, Object::Vector Origin, Object::Vector& OutClosestPoint)
+		float PointDistToLine(Vector Point, Vector Line, Vector Origin, Vector& OutClosestPoint)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.PointDistToLine");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2088);
 			byte params[52] = { NULL };
-			*(Object::Vector*)&params[0] = Point;
-			*(Object::Vector*)&params[12] = Line;
-			*(Object::Vector*)&params[24] = Origin;
-			*(Object::Vector*)&params[36] = OutClosestPoint;
+			*(Vector*)params = Point;
+			*(Vector*)&params[12] = Line;
+			*(Vector*)&params[24] = Origin;
+			*(Vector*)&params[36] = OutClosestPoint;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutClosestPoint = *(Object::Vector*)&params[36];
+			OutClosestPoint = *(Vector*)&params[36];
 			return *(float*)&params[48];
 		}
 		bool GetPerObjectConfigSections(ScriptClass* SearchClass, ScriptArray<ScriptString*>& out_SectionNames, class Object* ObjectOuter, int MaxResults)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetPerObjectConfigSections");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2094);
 			byte params[28] = { NULL };
-			*(ScriptClass**)&params[0] = SearchClass;
+			*(ScriptClass**)params = SearchClass;
 			*(ScriptArray<ScriptString*>*)&params[4] = out_SectionNames;
 			*(class Object**)&params[16] = ObjectOuter;
 			*(int*)&params[20] = MaxResults;
@@ -699,28 +682,28 @@ namespace UnrealScript
 		}
 		void StaticSaveConfig()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.StaticSaveConfig");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2100);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SaveConfig()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SaveConfig");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2107);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class Object* FindObject(ScriptString* ObjectName, ScriptClass* ObjectClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FindObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2108);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = ObjectName;
+			*(ScriptString**)params = ObjectName;
 			*(ScriptClass**)&params[12] = ObjectClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Object**)&params[16];
 		}
 		class Object* DynamicLoadObject(ScriptString* ObjectName, ScriptClass* ObjectClass, bool MayFail)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.DynamicLoadObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2109);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = ObjectName;
+			*(ScriptString**)params = ObjectName;
 			*(ScriptClass**)&params[12] = ObjectClass;
 			*(bool*)&params[16] = MayFail;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -728,111 +711,111 @@ namespace UnrealScript
 		}
 		ScriptName GetEnum(class Object* E, int I)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetEnum");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2113);
 			byte params[16] = { NULL };
-			*(class Object**)&params[0] = E;
+			*(class Object**)params = E;
 			*(int*)&params[4] = I;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[8];
 		}
 		void Disable(ScriptName ProbeFunc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Disable");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2118);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = ProbeFunc;
+			*(ScriptName*)params = ProbeFunc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Enable(ScriptName ProbeFunc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Enable");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2122);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = ProbeFunc;
+			*(ScriptName*)params = ProbeFunc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ContinuedState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ContinuedState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2124);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PausedState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.PausedState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2126);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PoppedState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.PoppedState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2127);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PushedState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.PushedState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2128);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EndState(ScriptName NextStateName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EndState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2129);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = NextStateName;
+			*(ScriptName*)params = NextStateName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BeginState(ScriptName PreviousStateName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.BeginState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2130);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = PreviousStateName;
+			*(ScriptName*)params = PreviousStateName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DumpStateStack()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.DumpStateStack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2132);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PopState(bool bPopAll)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.PopState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2134);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPopAll;
+			*(bool*)params = bPopAll;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PushState(ScriptName NewState, ScriptName NewLabel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.PushState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2135);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = NewState;
+			*(ScriptName*)params = NewState;
 			*(ScriptName*)&params[8] = NewLabel;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptName GetStateName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetStateName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2137);
 			byte params[8] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptName*)&params[0];
+			return *(ScriptName*)params;
 		}
 		bool IsChildState(ScriptName TestState, ScriptName TestParentState)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.IsChildState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2140);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = TestState;
+			*(ScriptName*)params = TestState;
 			*(ScriptName*)&params[8] = TestParentState;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		bool IsInState(ScriptName TestState, bool bTestStateStack)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.IsInState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2142);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = TestState;
+			*(ScriptName*)params = TestState;
 			*(bool*)&params[8] = bTestStateStack;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void GotoState(ScriptName NewState, ScriptName Label, bool bForceEvents, bool bKeepStack)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GotoState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2146);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = NewState;
+			*(ScriptName*)params = NewState;
 			*(ScriptName*)&params[8] = Label;
 			*(bool*)&params[16] = bForceEvents;
 			*(bool*)&params[20] = bKeepStack;
@@ -840,58 +823,58 @@ namespace UnrealScript
 		}
 		bool IsUTracing()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.IsUTracing");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2150);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SetUTracing(bool bShouldUTrace)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SetUTracing");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2155);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bShouldUTrace;
+			*(bool*)params = bShouldUTrace;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptName GetFuncName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetFuncName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2157);
 			byte params[8] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptName*)&params[0];
+			return *(ScriptName*)params;
 		}
 		void DebugBreak(int UserFlags, Object::EDebugBreakType DebuggerType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.DebugBreak");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2159);
 			byte params[5] = { NULL };
-			*(int*)&params[0] = UserFlags;
+			*(int*)params = UserFlags;
 			*(Object::EDebugBreakType*)&params[4] = DebuggerType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetScriptTrace()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetScriptTrace");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2161);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void ScriptTrace()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ScriptTrace");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2166);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* ParseLocalizedPropertyPath(ScriptString* PathName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ParseLocalizedPropertyPath");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2168);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = PathName;
+			*(ScriptString**)params = PathName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		ScriptString* Localize(ScriptString* SectionName, ScriptString* KeyName, ScriptString* PackageName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Localize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2169);
 			byte params[48] = { NULL };
-			*(ScriptString**)&params[0] = SectionName;
+			*(ScriptString**)params = SectionName;
 			*(ScriptString**)&params[12] = KeyName;
 			*(ScriptString**)&params[24] = PackageName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -899,9 +882,9 @@ namespace UnrealScript
 		}
 		void ParseStringIntoArray(ScriptString* BaseString, ScriptArray<ScriptString*>& Pieces, ScriptString* delim, bool bCullEmpty)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ParseStringIntoArray");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2171);
 			byte params[40] = { NULL };
-			*(ScriptString**)&params[0] = BaseString;
+			*(ScriptString**)params = BaseString;
 			*(ScriptArray<ScriptString*>*)&params[12] = Pieces;
 			*(ScriptString**)&params[24] = delim;
 			*(bool*)&params[36] = bCullEmpty;
@@ -910,50 +893,50 @@ namespace UnrealScript
 		}
 		void WarnInternal(ScriptString* S)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.WarnInternal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2175);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogInternal(ScriptString* S, ScriptName Tag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.LogInternal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2180);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			*(ScriptName*)&params[12] = Tag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		Object::LinearColor Subtract_LinearColorLinearColor(Object::LinearColor A, Object::LinearColor B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_LinearColorLinearColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2182);
 			byte params[48] = { NULL };
-			*(Object::LinearColor*)&params[0] = A;
+			*(Object::LinearColor*)params = A;
 			*(Object::LinearColor*)&params[16] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::LinearColor*)&params[32];
 		}
 		Object::LinearColor Multiply_LinearColorFloat(Object::LinearColor LC, float Mult)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_LinearColorFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2185);
 			byte params[36] = { NULL };
-			*(Object::LinearColor*)&params[0] = LC;
+			*(Object::LinearColor*)params = LC;
 			*(float*)&params[16] = Mult;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::LinearColor*)&params[20];
 		}
 		Object::LinearColor ColorToLinearColor(Object::Color OldColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ColorToLinearColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2195);
 			byte params[20] = { NULL };
-			*(Object::Color*)&params[0] = OldColor;
+			*(Object::Color*)params = OldColor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::LinearColor*)&params[4];
 		}
 		Object::LinearColor MakeLinearColor(float R, float G, float B, float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MakeLinearColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2199);
 			byte params[32] = { NULL };
-			*(float*)&params[0] = R;
+			*(float*)params = R;
 			*(float*)&params[4] = G;
 			*(float*)&params[8] = B;
 			*(float*)&params[12] = A;
@@ -962,9 +945,9 @@ namespace UnrealScript
 		}
 		Object::Color LerpColor(Object::Color A, Object::Color B, float Alpha)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.LerpColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2207);
 			byte params[16] = { NULL };
-			*(Object::Color*)&params[0] = A;
+			*(Object::Color*)params = A;
 			*(Object::Color*)&params[4] = B;
 			*(float*)&params[8] = Alpha;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -972,9 +955,9 @@ namespace UnrealScript
 		}
 		Object::Color MakeColor(byte R, byte G, byte B, byte A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MakeColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2214);
 			byte params[8] = { NULL };
-			params[0] = R;
+			*params = R;
 			params[1] = G;
 			params[2] = B;
 			params[3] = A;
@@ -983,81 +966,81 @@ namespace UnrealScript
 		}
 		Object::Color Add_ColorColor(Object::Color A, Object::Color B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Add_ColorColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2226);
 			byte params[12] = { NULL };
-			*(Object::Color*)&params[0] = A;
+			*(Object::Color*)params = A;
 			*(Object::Color*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Color*)&params[8];
 		}
 		Object::Color Multiply_ColorFloat(Object::Color A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_ColorFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2233);
 			byte params[12] = { NULL };
-			*(Object::Color*)&params[0] = A;
+			*(Object::Color*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Color*)&params[8];
 		}
 		Object::Color Multiply_FloatColor(float A, Object::Color B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_FloatColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2237);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(Object::Color*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Color*)&params[8];
 		}
 		Object::Color Subtract_ColorColor(Object::Color A, Object::Color B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_ColorColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2241);
 			byte params[12] = { NULL };
-			*(Object::Color*)&params[0] = A;
+			*(Object::Color*)params = A;
 			*(Object::Color*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Color*)&params[8];
 		}
 		Object::Vector2D EvalInterpCurveVector2D(Object::InterpCurveVector2D Vector2DCurve, float InVal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EvalInterpCurveVector2D");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2245);
 			byte params[28] = { NULL };
-			*(Object::InterpCurveVector2D*)&params[0] = Vector2DCurve;
+			*(Object::InterpCurveVector2D*)params = Vector2DCurve;
 			*(float*)&params[16] = InVal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Vector2D*)&params[20];
 		}
-		Object::Vector EvalInterpCurveVector(Object::InterpCurveVector VectorCurve, float InVal)
+		Vector EvalInterpCurveVector(Object::InterpCurveVector VectorCurve, float InVal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EvalInterpCurveVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2249);
 			byte params[32] = { NULL };
-			*(Object::InterpCurveVector*)&params[0] = VectorCurve;
+			*(Object::InterpCurveVector*)params = VectorCurve;
 			*(float*)&params[16] = InVal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[20];
+			return *(Vector*)&params[20];
 		}
 		float EvalInterpCurveFloat(Object::InterpCurveFloat FloatCurve, float InVal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EvalInterpCurveFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2267);
 			byte params[24] = { NULL };
-			*(Object::InterpCurveFloat*)&params[0] = FloatCurve;
+			*(Object::InterpCurveFloat*)params = FloatCurve;
 			*(float*)&params[16] = InVal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[20];
 		}
 		Object::Vector2D vect2d(float InX, float InY)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.vect2d");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2281);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = InX;
+			*(float*)params = InX;
 			*(float*)&params[4] = InY;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Vector2D*)&params[8];
 		}
 		float GetMappedRangeValue(Object::Vector2D InputRange, Object::Vector2D OutputRange, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetMappedRangeValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2294);
 			byte params[24] = { NULL };
-			*(Object::Vector2D*)&params[0] = InputRange;
+			*(Object::Vector2D*)params = InputRange;
 			*(Object::Vector2D*)&params[8] = OutputRange;
 			*(float*)&params[16] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1065,314 +1048,314 @@ namespace UnrealScript
 		}
 		float GetRangePctByValue(Object::Vector2D Range, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetRangePctByValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2299);
 			byte params[16] = { NULL };
-			*(Object::Vector2D*)&params[0] = Range;
+			*(Object::Vector2D*)params = Range;
 			*(float*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
 		float GetRangeValueByPct(Object::Vector2D Range, float Pct)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetRangeValueByPct");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2304);
 			byte params[16] = { NULL };
-			*(Object::Vector2D*)&params[0] = Range;
+			*(Object::Vector2D*)params = Range;
 			*(float*)&params[8] = Pct;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
 		Object::Vector2D SubtractEqual_Vector2DVector2D(Object::Vector2D& A, Object::Vector2D B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SubtractEqual_Vector2DVector2D");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2308);
 			byte params[24] = { NULL };
-			*(Object::Vector2D*)&params[0] = A;
+			*(Object::Vector2D*)params = A;
 			*(Object::Vector2D*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Vector2D*)&params[0];
+			A = *(Object::Vector2D*)params;
 			return *(Object::Vector2D*)&params[16];
 		}
 		Object::Vector2D AddEqual_Vector2DVector2D(Object::Vector2D& A, Object::Vector2D B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AddEqual_Vector2DVector2D");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2312);
 			byte params[24] = { NULL };
-			*(Object::Vector2D*)&params[0] = A;
+			*(Object::Vector2D*)params = A;
 			*(Object::Vector2D*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Vector2D*)&params[0];
+			A = *(Object::Vector2D*)params;
 			return *(Object::Vector2D*)&params[16];
 		}
 		Object::Vector2D DivideEqual_Vector2DFloat(Object::Vector2D& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.DivideEqual_Vector2DFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2316);
 			byte params[20] = { NULL };
-			*(Object::Vector2D*)&params[0] = A;
+			*(Object::Vector2D*)params = A;
 			*(float*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Vector2D*)&params[0];
+			A = *(Object::Vector2D*)params;
 			return *(Object::Vector2D*)&params[12];
 		}
 		Object::Vector2D MultiplyEqual_Vector2DFloat(Object::Vector2D& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MultiplyEqual_Vector2DFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2320);
 			byte params[20] = { NULL };
-			*(Object::Vector2D*)&params[0] = A;
+			*(Object::Vector2D*)params = A;
 			*(float*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Vector2D*)&params[0];
+			A = *(Object::Vector2D*)params;
 			return *(Object::Vector2D*)&params[12];
 		}
 		Object::Vector2D Divide_Vector2DFloat(Object::Vector2D A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Divide_Vector2DFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2324);
 			byte params[20] = { NULL };
-			*(Object::Vector2D*)&params[0] = A;
+			*(Object::Vector2D*)params = A;
 			*(float*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Vector2D*)&params[12];
 		}
 		Object::Vector2D Multiply_Vector2DFloat(Object::Vector2D A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_Vector2DFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2328);
 			byte params[20] = { NULL };
-			*(Object::Vector2D*)&params[0] = A;
+			*(Object::Vector2D*)params = A;
 			*(float*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Vector2D*)&params[12];
 		}
 		Object::Vector2D Subtract_Vector2DVector2D(Object::Vector2D A, Object::Vector2D B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_Vector2DVector2D");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2332);
 			byte params[24] = { NULL };
-			*(Object::Vector2D*)&params[0] = A;
+			*(Object::Vector2D*)params = A;
 			*(Object::Vector2D*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Vector2D*)&params[16];
 		}
 		Object::Vector2D Add_Vector2DVector2D(Object::Vector2D A, Object::Vector2D B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Add_Vector2DVector2D");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2336);
 			byte params[24] = { NULL };
-			*(Object::Vector2D*)&params[0] = A;
+			*(Object::Vector2D*)params = A;
 			*(Object::Vector2D*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Vector2D*)&params[16];
 		}
 		Object::Quat Subtract_QuatQuat(Object::Quat A, Object::Quat B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_QuatQuat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2340);
 			byte params[48] = { NULL };
-			*(Object::Quat*)&params[0] = A;
+			*(Object::Quat*)params = A;
 			*(Object::Quat*)&params[16] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Quat*)&params[32];
 		}
 		Object::Quat Add_QuatQuat(Object::Quat A, Object::Quat B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Add_QuatQuat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2344);
 			byte params[48] = { NULL };
-			*(Object::Quat*)&params[0] = A;
+			*(Object::Quat*)params = A;
 			*(Object::Quat*)&params[16] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Quat*)&params[32];
 		}
 		Object::Quat QuatSlerp(Object::Quat A, Object::Quat B, float Alpha, bool bShortestPath)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatSlerp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2353);
 			byte params[56] = { NULL };
-			*(Object::Quat*)&params[0] = A;
+			*(Object::Quat*)params = A;
 			*(Object::Quat*)&params[16] = B;
 			*(float*)&params[32] = Alpha;
 			*(bool*)&params[36] = bShortestPath;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Quat*)&params[48];
 		}
-		Object::Rotator QuatToRotator(Object::Quat A)
+		Rotator QuatToRotator(Object::Quat A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatToRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2357);
 			byte params[28] = { NULL };
-			*(Object::Quat*)&params[0] = A;
+			*(Object::Quat*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[16];
+			return *(Rotator*)&params[16];
 		}
-		Object::Quat QuatFromRotator(Object::Rotator A)
+		Object::Quat QuatFromRotator(Rotator A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatFromRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2363);
 			byte params[28] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
+			*(Rotator*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Quat*)&params[16];
 		}
-		Object::Quat QuatFromAxisAndAngle(Object::Vector Axis, float Angle)
+		Object::Quat QuatFromAxisAndAngle(Vector Axis, float Angle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatFromAxisAndAngle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2366);
 			byte params[32] = { NULL };
-			*(Object::Vector*)&params[0] = Axis;
+			*(Vector*)params = Axis;
 			*(float*)&params[12] = Angle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Quat*)&params[16];
 		}
-		Object::Quat QuatFindBetween(Object::Vector A, Object::Vector B)
+		Object::Quat QuatFindBetween(Vector A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatFindBetween");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2369);
 			byte params[40] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Quat*)&params[32];
 		}
-		Object::Vector QuatRotateVector(Object::Quat A, Object::Vector B)
+		Vector QuatRotateVector(Object::Quat A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatRotateVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2373);
 			byte params[40] = { NULL };
-			*(Object::Quat*)&params[0] = A;
-			*(Object::Vector*)&params[16] = B;
+			*(Object::Quat*)params = A;
+			*(Vector*)&params[16] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[28];
+			return *(Vector*)&params[28];
 		}
 		Object::Quat QuatInvert(Object::Quat A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatInvert");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2377);
 			byte params[32] = { NULL };
-			*(Object::Quat*)&params[0] = A;
+			*(Object::Quat*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Quat*)&params[16];
 		}
 		float QuatDot(Object::Quat A, Object::Quat B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatDot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2381);
 			byte params[36] = { NULL };
-			*(Object::Quat*)&params[0] = A;
+			*(Object::Quat*)params = A;
 			*(Object::Quat*)&params[16] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[32];
 		}
 		Object::Quat QuatProduct(Object::Quat A, Object::Quat B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.QuatProduct");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2384);
 			byte params[48] = { NULL };
-			*(Object::Quat*)&params[0] = A;
+			*(Object::Quat*)params = A;
 			*(Object::Quat*)&params[16] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Quat*)&params[32];
 		}
-		Object::Vector MatrixGetAxis(Object::Matrix TM, Object::EAxis Axis)
+		Vector MatrixGetAxis(Object::Matrix TM, Object::EAxis Axis)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MatrixGetAxis");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2388);
 			byte params[77] = { NULL };
-			*(Object::Matrix*)&params[0] = TM;
+			*(Object::Matrix*)params = TM;
 			*(Object::EAxis*)&params[64] = Axis;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[68];
+			return *(Vector*)&params[68];
 		}
-		Object::Vector MatrixGetOrigin(Object::Matrix TM)
+		Vector MatrixGetOrigin(Object::Matrix TM)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MatrixGetOrigin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2392);
 			byte params[76] = { NULL };
-			*(Object::Matrix*)&params[0] = TM;
+			*(Object::Matrix*)params = TM;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[64];
+			return *(Vector*)&params[64];
 		}
-		Object::Rotator MatrixGetRotator(Object::Matrix TM)
+		Rotator MatrixGetRotator(Object::Matrix TM)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MatrixGetRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2406);
 			byte params[76] = { NULL };
-			*(Object::Matrix*)&params[0] = TM;
+			*(Object::Matrix*)params = TM;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[64];
+			return *(Rotator*)&params[64];
 		}
-		Object::Matrix MakeRotationMatrix(Object::Rotator Rotation)
+		Object::Matrix MakeRotationMatrix(Rotator Rotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MakeRotationMatrix");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2409);
 			byte params[76] = { NULL };
-			*(Object::Rotator*)&params[0] = Rotation;
+			*(Rotator*)params = Rotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Matrix*)&params[16];
 		}
-		Object::Matrix MakeRotationTranslationMatrix(Object::Vector Translation, Object::Rotator Rotation)
+		Object::Matrix MakeRotationTranslationMatrix(Vector Translation, Rotator Rotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MakeRotationTranslationMatrix");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2412);
 			byte params[88] = { NULL };
-			*(Object::Vector*)&params[0] = Translation;
-			*(Object::Rotator*)&params[12] = Rotation;
+			*(Vector*)params = Translation;
+			*(Rotator*)&params[12] = Rotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Matrix*)&params[32];
 		}
-		Object::Vector InverseTransformNormal(Object::Matrix TM, Object::Vector A)
+		Vector InverseTransformNormal(Object::Matrix TM, Vector A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.InverseTransformNormal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2415);
 			byte params[88] = { NULL };
-			*(Object::Matrix*)&params[0] = TM;
-			*(Object::Vector*)&params[64] = A;
+			*(Object::Matrix*)params = TM;
+			*(Vector*)&params[64] = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[76];
+			return *(Vector*)&params[76];
 		}
-		Object::Vector TransformNormal(Object::Matrix TM, Object::Vector A)
+		Vector TransformNormal(Object::Matrix TM, Vector A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.TransformNormal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2419);
 			byte params[88] = { NULL };
-			*(Object::Matrix*)&params[0] = TM;
-			*(Object::Vector*)&params[64] = A;
+			*(Object::Matrix*)params = TM;
+			*(Vector*)&params[64] = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[76];
+			return *(Vector*)&params[76];
 		}
-		Object::Vector InverseTransformVector(Object::Matrix TM, Object::Vector A)
+		Vector InverseTransformVector(Object::Matrix TM, Vector A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.InverseTransformVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2423);
 			byte params[88] = { NULL };
-			*(Object::Matrix*)&params[0] = TM;
-			*(Object::Vector*)&params[64] = A;
+			*(Object::Matrix*)params = TM;
+			*(Vector*)&params[64] = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[76];
+			return *(Vector*)&params[76];
 		}
-		Object::Vector TransformVector(Object::Matrix TM, Object::Vector A)
+		Vector TransformVector(Object::Matrix TM, Vector A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.TransformVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2427);
 			byte params[88] = { NULL };
-			*(Object::Matrix*)&params[0] = TM;
-			*(Object::Vector*)&params[64] = A;
+			*(Object::Matrix*)params = TM;
+			*(Vector*)&params[64] = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[76];
+			return *(Vector*)&params[76];
 		}
 		Object::Matrix Multiply_MatrixMatrix(Object::Matrix A, Object::Matrix B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_MatrixMatrix");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2431);
 			byte params[192] = { NULL };
-			*(Object::Matrix*)&params[0] = A;
+			*(Object::Matrix*)params = A;
 			*(Object::Matrix*)&params[64] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Object::Matrix*)&params[128];
 		}
 		bool NotEqual_NameName(ScriptName A, ScriptName B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.NotEqual_NameName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2435);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = A;
+			*(ScriptName*)params = A;
 			*(ScriptName*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		bool EqualEqual_NameName(ScriptName A, ScriptName B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EqualEqual_NameName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2439);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = A;
+			*(ScriptName*)params = A;
 			*(ScriptName*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		bool IsA(ScriptName ClassName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.IsA");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2443);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ClassName;
+			*(ScriptName*)params = ClassName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool ClassIsChildOf(ScriptClass* TestClass, ScriptClass* ParentClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ClassIsChildOf");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2447);
 			byte params[12] = { NULL };
-			*(ScriptClass**)&params[0] = TestClass;
+			*(ScriptClass**)params = TestClass;
 			*(ScriptClass**)&params[4] = ParentClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
@@ -1383,11 +1366,11 @@ void* A,
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.NotEqual_InterfaceInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2450);
 			byte params[20] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = A;
+void**)params = A;
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void**)&params[8] = B;
@@ -1400,11 +1383,11 @@ void* A,
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EqualEqual_InterfaceInterface");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2454);
 			byte params[20] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
-void**)&params[0] = A;
+void**)params = A;
 			*(
 // ERROR: Unknown object class 'Class Core.InterfaceProperty'!
 void**)&params[8] = B;
@@ -1413,35 +1396,35 @@ void**)&params[8] = B;
 		}
 		bool NotEqual_ObjectObject(class Object* A, class Object* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.NotEqual_ObjectObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2458);
 			byte params[12] = { NULL };
-			*(class Object**)&params[0] = A;
+			*(class Object**)params = A;
 			*(class Object**)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool EqualEqual_ObjectObject(class Object* A, class Object* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EqualEqual_ObjectObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2462);
 			byte params[12] = { NULL };
-			*(class Object**)&params[0] = A;
+			*(class Object**)params = A;
 			*(class Object**)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		ScriptString* PathName(class Object* CheckObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.PathName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2466);
 			byte params[16] = { NULL };
-			*(class Object**)&params[0] = CheckObject;
+			*(class Object**)params = CheckObject;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptArray<ScriptString*> SplitString(ScriptString* Source, ScriptString* Delimiter, bool bCullEmpty)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SplitString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2470);
 			byte params[40] = { NULL };
-			*(ScriptString**)&params[0] = Source;
+			*(ScriptString**)params = Source;
 			*(ScriptString**)&params[12] = Delimiter;
 			*(bool*)&params[24] = bCullEmpty;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1449,9 +1432,9 @@ void**)&params[8] = B;
 		}
 		void JoinArray(ScriptArray<ScriptString*> StringArray, ScriptString*& out_Result, ScriptString* delim, bool bIgnoreBlanks)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.JoinArray");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2480);
 			byte params[40] = { NULL };
-			*(ScriptArray<ScriptString*>*)&params[0] = StringArray;
+			*(ScriptArray<ScriptString*>*)params = StringArray;
 			*(ScriptString**)&params[12] = out_Result;
 			*(ScriptString**)&params[24] = delim;
 			*(bool*)&params[36] = bIgnoreBlanks;
@@ -1460,27 +1443,27 @@ void**)&params[8] = B;
 		}
 		ScriptString* GetRightMost(ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetRightMost");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2486);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		ScriptString* ConcatEqual_StrStr(ScriptString*& A, ScriptString* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ConcatEqual_StrStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2491);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(ScriptString**)&params[0];
+			A = *(ScriptString**)params;
 			return *(ScriptString**)&params[24];
 		}
 		ScriptString* Split(ScriptString* Text, ScriptString* SplitStr, bool bOmitSplitStr)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Split");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2495);
 			byte params[40] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			*(ScriptString**)&params[12] = SplitStr;
 			*(bool*)&params[24] = bOmitSplitStr;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1488,9 +1471,9 @@ void**)&params[8] = B;
 		}
 		ScriptString* Repl(ScriptString* Src, ScriptString* Match, ScriptString* With, bool bCaseSensitive)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Repl");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2499);
 			byte params[52] = { NULL };
-			*(ScriptString**)&params[0] = Src;
+			*(ScriptString**)params = Src;
 			*(ScriptString**)&params[12] = Match;
 			*(ScriptString**)&params[24] = With;
 			*(bool*)&params[36] = bCaseSensitive;
@@ -1499,59 +1482,59 @@ void**)&params[8] = B;
 		}
 		int Asc(ScriptString* S)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Asc");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2505);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		ScriptString* Chr(int I)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Chr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2511);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = I;
+			*(int*)params = I;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		ScriptString* Locs(ScriptString* S)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Locs");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2514);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		ScriptString* Caps(ScriptString* S)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Caps");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2517);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		ScriptString* Right(ScriptString* S, int I)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Right");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2520);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			*(int*)&params[12] = I;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[16];
 		}
 		ScriptString* Left(ScriptString* S, int I)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Left");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2523);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			*(int*)&params[12] = I;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[16];
 		}
 		ScriptString* Mid(ScriptString* S, int I, int J)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Mid");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2527);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			*(int*)&params[12] = I;
 			*(int*)&params[16] = J;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1559,9 +1542,9 @@ void**)&params[8] = B;
 		}
 		int InStr(ScriptString* S, ScriptString* T, bool bSearchFromRight, bool bIgnoreCase, int StartPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.InStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2531);
 			byte params[40] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			*(ScriptString**)&params[12] = T;
 			*(bool*)&params[24] = bSearchFromRight;
 			*(bool*)&params[28] = bIgnoreCase;
@@ -1571,128 +1554,128 @@ void**)&params[8] = B;
 		}
 		int Len(ScriptString* S)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Len");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2536);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		ScriptString* SubtractEqual_StrStr(ScriptString*& A, ScriptString* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SubtractEqual_StrStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2543);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(ScriptString**)&params[0];
+			A = *(ScriptString**)params;
 			return *(ScriptString**)&params[24];
 		}
 		ScriptString* AtEqual_StrStr(ScriptString*& A, ScriptString* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AtEqual_StrStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2546);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(ScriptString**)&params[0];
+			A = *(ScriptString**)params;
 			return *(ScriptString**)&params[24];
 		}
 		bool ComplementEqual_StrStr(ScriptString* A, ScriptString* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ComplementEqual_StrStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2553);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		bool NotEqual_StrStr(ScriptString* A, ScriptString* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.NotEqual_StrStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2556);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		bool EqualEqual_StrStr(ScriptString* A, ScriptString* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EqualEqual_StrStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2560);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		bool GreaterEqual_StrStr(ScriptString* A, ScriptString* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GreaterEqual_StrStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2564);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		bool LessEqual_StrStr(ScriptString* A, ScriptString* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.LessEqual_StrStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2568);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		bool Greater_StrStr(ScriptString* A, ScriptString* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Greater_StrStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2572);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		bool Less_StrStr(ScriptString* A, ScriptString* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Less_StrStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2576);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		ScriptString* At_StrStr(ScriptString* A, ScriptString* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.At_StrStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2580);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[24];
 		}
 		ScriptString* Concat_StrStr(ScriptString* A, ScriptString* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Concat_StrStr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2584);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = A;
+			*(ScriptString**)params = A;
 			*(ScriptString**)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[24];
 		}
-		Object::Rotator MakeRotator(int Pitch, int Yaw, int Roll)
+		Rotator MakeRotator(int Pitch, int Yaw, int Roll)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MakeRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2588);
 			byte params[24] = { NULL };
-			*(int*)&params[0] = Pitch;
+			*(int*)params = Pitch;
 			*(int*)&params[4] = Yaw;
 			*(int*)&params[8] = Roll;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[12];
+			return *(Rotator*)&params[12];
 		}
 		bool SClampRotAxis(float DeltaTime, int ViewAxis, int& out_DeltaViewAxis, int MaxLimit, int MinLimit, float InterpolationSpeed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SClampRotAxis");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2592);
 			byte params[28] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			*(int*)&params[4] = ViewAxis;
 			*(int*)&params[8] = out_DeltaViewAxis;
 			*(int*)&params[12] = MaxLimit;
@@ -1704,9 +1687,9 @@ void**)&params[8] = B;
 		}
 		int ClampRotAxisFromRange(int Current, int Min, int Max)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ClampRotAxisFromRange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2598);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Current;
+			*(int*)params = Current;
 			*(int*)&params[4] = Min;
 			*(int*)&params[8] = Max;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1714,17 +1697,17 @@ void**)&params[8] = B;
 		}
 		int NormalizeRotAxis(int Angle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.NormalizeRotAxis");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2601);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Angle;
+			*(int*)params = Angle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		float FInterpTo(float Current, float Target, float DeltaTime, float InterpSpeed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FInterpTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2605);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = Current;
+			*(float*)params = Current;
 			*(float*)&params[4] = Target;
 			*(float*)&params[8] = DeltaTime;
 			*(float*)&params[12] = InterpSpeed;
@@ -1733,9 +1716,9 @@ void**)&params[8] = B;
 		}
 		int ClampRotAxisFromBase(int Current, int Center, int MaxDelta)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ClampRotAxisFromBase");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2609);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Current;
+			*(int*)params = Current;
 			*(int*)&params[4] = Center;
 			*(int*)&params[8] = MaxDelta;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -1743,572 +1726,572 @@ void**)&params[8] = B;
 		}
 		void ClampRotAxis(int ViewAxis, int& out_DeltaViewAxis, int MaxLimit, int MinLimit)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ClampRotAxis");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2616);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = ViewAxis;
+			*(int*)params = ViewAxis;
 			*(int*)&params[4] = out_DeltaViewAxis;
 			*(int*)&params[8] = MaxLimit;
 			*(int*)&params[12] = MinLimit;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			out_DeltaViewAxis = *(int*)&params[4];
 		}
-		float RSize(Object::Rotator R)
+		float RSize(Rotator R)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.RSize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2622);
 			byte params[16] = { NULL };
-			*(Object::Rotator*)&params[0] = R;
+			*(Rotator*)params = R;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
-		float RDiff(Object::Rotator A, Object::Rotator B)
+		float RDiff(Rotator A, Rotator B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.RDiff");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2628);
 			byte params[28] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
-			*(Object::Rotator*)&params[12] = B;
+			*(Rotator*)params = A;
+			*(Rotator*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[24];
 		}
-		Object::Rotator RInterpTo(Object::Rotator Current, Object::Rotator Target, float DeltaTime, float InterpSpeed, bool bConstantInterpSpeed)
+		Rotator RInterpTo(Rotator Current, Rotator Target, float DeltaTime, float InterpSpeed, bool bConstantInterpSpeed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.RInterpTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2634);
 			byte params[48] = { NULL };
-			*(Object::Rotator*)&params[0] = Current;
-			*(Object::Rotator*)&params[12] = Target;
+			*(Rotator*)params = Current;
+			*(Rotator*)&params[12] = Target;
 			*(float*)&params[24] = DeltaTime;
 			*(float*)&params[28] = InterpSpeed;
 			*(bool*)&params[32] = bConstantInterpSpeed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[36];
+			return *(Rotator*)&params[36];
 		}
-		Object::Rotator RTransform(Object::Rotator R, Object::Rotator RBasis)
+		Rotator RTransform(Rotator R, Rotator RBasis)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.RTransform");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2637);
 			byte params[36] = { NULL };
-			*(Object::Rotator*)&params[0] = R;
-			*(Object::Rotator*)&params[12] = RBasis;
+			*(Rotator*)params = R;
+			*(Rotator*)&params[12] = RBasis;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[24];
+			return *(Rotator*)&params[24];
 		}
-		Object::Rotator RSmerp(Object::Rotator A, Object::Rotator B, float Alpha, bool bShortestPath)
+		Rotator RSmerp(Rotator A, Rotator B, float Alpha, bool bShortestPath)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.RSmerp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2644);
 			byte params[44] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
-			*(Object::Rotator*)&params[12] = B;
+			*(Rotator*)params = A;
+			*(Rotator*)&params[12] = B;
 			*(float*)&params[24] = Alpha;
 			*(bool*)&params[28] = bShortestPath;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[32];
+			return *(Rotator*)&params[32];
 		}
-		Object::Rotator RLerp(Object::Rotator A, Object::Rotator B, float Alpha, bool bShortestPath)
+		Rotator RLerp(Rotator A, Rotator B, float Alpha, bool bShortestPath)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.RLerp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2648);
 			byte params[44] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
-			*(Object::Rotator*)&params[12] = B;
+			*(Rotator*)params = A;
+			*(Rotator*)&params[12] = B;
 			*(float*)&params[24] = Alpha;
 			*(bool*)&params[28] = bShortestPath;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[32];
+			return *(Rotator*)&params[32];
 		}
-		Object::Rotator Normalize(Object::Rotator Rot)
+		Rotator Normalize(Rotator Rot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Normalize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2654);
 			byte params[24] = { NULL };
-			*(Object::Rotator*)&params[0] = Rot;
+			*(Rotator*)params = Rot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[12];
+			return *(Rotator*)&params[12];
 		}
-		Object::Rotator OrthoRotation(Object::Vector X, Object::Vector Y, Object::Vector Z)
+		Rotator OrthoRotation(Vector X, Vector Y, Vector Z)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.OrthoRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2660);
 			byte params[48] = { NULL };
-			*(Object::Vector*)&params[0] = X;
-			*(Object::Vector*)&params[12] = Y;
-			*(Object::Vector*)&params[24] = Z;
+			*(Vector*)params = X;
+			*(Vector*)&params[12] = Y;
+			*(Vector*)&params[24] = Z;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[36];
+			return *(Rotator*)&params[36];
 		}
-		Object::Rotator RotRand(bool bRoll)
+		Rotator RotRand(bool bRoll)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.RotRand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2663);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bRoll;
+			*(bool*)params = bRoll;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[4];
+			return *(Rotator*)&params[4];
 		}
-		Object::Vector GetRotatorAxis(Object::Rotator A, int Axis)
+		Vector GetRotatorAxis(Rotator A, int Axis)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetRotatorAxis");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2668);
 			byte params[28] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
+			*(Rotator*)params = A;
 			*(int*)&params[12] = Axis;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[16];
+			return *(Vector*)&params[16];
 		}
-		void GetUnAxes(Object::Rotator A, Object::Vector& X, Object::Vector& Y, Object::Vector& Z)
+		void GetUnAxes(Rotator A, Vector& X, Vector& Y, Vector& Z)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetUnAxes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2671);
 			byte params[48] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
-			*(Object::Vector*)&params[12] = X;
-			*(Object::Vector*)&params[24] = Y;
-			*(Object::Vector*)&params[36] = Z;
+			*(Rotator*)params = A;
+			*(Vector*)&params[12] = X;
+			*(Vector*)&params[24] = Y;
+			*(Vector*)&params[36] = Z;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			X = *(Object::Vector*)&params[12];
-			Y = *(Object::Vector*)&params[24];
-			Z = *(Object::Vector*)&params[36];
+			X = *(Vector*)&params[12];
+			Y = *(Vector*)&params[24];
+			Z = *(Vector*)&params[36];
 		}
-		void GetAxes(Object::Rotator A, Object::Vector& X, Object::Vector& Y, Object::Vector& Z)
+		void GetAxes(Rotator A, Vector& X, Vector& Y, Vector& Z)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GetAxes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2675);
 			byte params[48] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
-			*(Object::Vector*)&params[12] = X;
-			*(Object::Vector*)&params[24] = Y;
-			*(Object::Vector*)&params[36] = Z;
+			*(Rotator*)params = A;
+			*(Vector*)&params[12] = X;
+			*(Vector*)&params[24] = Y;
+			*(Vector*)&params[36] = Z;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			X = *(Object::Vector*)&params[12];
-			Y = *(Object::Vector*)&params[24];
-			Z = *(Object::Vector*)&params[36];
+			X = *(Vector*)&params[12];
+			Y = *(Vector*)&params[24];
+			Z = *(Vector*)&params[36];
 		}
 		bool ClockwiseFrom_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ClockwiseFrom_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2680);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
-		Object::Rotator SubtractEqual_RotatorRotator(Object::Rotator& A, Object::Rotator B)
+		Rotator SubtractEqual_RotatorRotator(Rotator& A, Rotator B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SubtractEqual_RotatorRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2685);
 			byte params[36] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
-			*(Object::Rotator*)&params[12] = B;
+			*(Rotator*)params = A;
+			*(Rotator*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Rotator*)&params[0];
-			return *(Object::Rotator*)&params[24];
+			A = *(Rotator*)params;
+			return *(Rotator*)&params[24];
 		}
-		Object::Rotator AddEqual_RotatorRotator(Object::Rotator& A, Object::Rotator B)
+		Rotator AddEqual_RotatorRotator(Rotator& A, Rotator B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AddEqual_RotatorRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2689);
 			byte params[36] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
-			*(Object::Rotator*)&params[12] = B;
+			*(Rotator*)params = A;
+			*(Rotator*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Rotator*)&params[0];
-			return *(Object::Rotator*)&params[24];
+			A = *(Rotator*)params;
+			return *(Rotator*)&params[24];
 		}
-		Object::Rotator Subtract_RotatorRotator(Object::Rotator A, Object::Rotator B)
+		Rotator Subtract_RotatorRotator(Rotator A, Rotator B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_RotatorRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2693);
 			byte params[36] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
-			*(Object::Rotator*)&params[12] = B;
+			*(Rotator*)params = A;
+			*(Rotator*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[24];
+			return *(Rotator*)&params[24];
 		}
-		Object::Rotator Add_RotatorRotator(Object::Rotator A, Object::Rotator B)
+		Rotator Add_RotatorRotator(Rotator A, Rotator B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Add_RotatorRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2697);
 			byte params[36] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
-			*(Object::Rotator*)&params[12] = B;
+			*(Rotator*)params = A;
+			*(Rotator*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[24];
+			return *(Rotator*)&params[24];
 		}
-		Object::Rotator DivideEqual_RotatorFloat(Object::Rotator& A, float B)
+		Rotator DivideEqual_RotatorFloat(Rotator& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.DivideEqual_RotatorFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2701);
 			byte params[28] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
+			*(Rotator*)params = A;
 			*(float*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Rotator*)&params[0];
-			return *(Object::Rotator*)&params[16];
+			A = *(Rotator*)params;
+			return *(Rotator*)&params[16];
 		}
-		Object::Rotator MultiplyEqual_RotatorFloat(Object::Rotator& A, float B)
+		Rotator MultiplyEqual_RotatorFloat(Rotator& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MultiplyEqual_RotatorFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2705);
 			byte params[28] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
+			*(Rotator*)params = A;
 			*(float*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Rotator*)&params[0];
-			return *(Object::Rotator*)&params[16];
+			A = *(Rotator*)params;
+			return *(Rotator*)&params[16];
 		}
-		Object::Rotator Divide_RotatorFloat(Object::Rotator A, float B)
+		Rotator Divide_RotatorFloat(Rotator A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Divide_RotatorFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2709);
 			byte params[28] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
+			*(Rotator*)params = A;
 			*(float*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[16];
+			return *(Rotator*)&params[16];
 		}
-		Object::Rotator Multiply_FloatRotator(float A, Object::Rotator B)
+		Rotator Multiply_FloatRotator(float A, Rotator B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_FloatRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2713);
 			byte params[28] = { NULL };
-			*(float*)&params[0] = A;
-			*(Object::Rotator*)&params[4] = B;
+			*(float*)params = A;
+			*(Rotator*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[16];
+			return *(Rotator*)&params[16];
 		}
-		Object::Rotator Multiply_RotatorFloat(Object::Rotator A, float B)
+		Rotator Multiply_RotatorFloat(Rotator A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_RotatorFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2717);
 			byte params[28] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
+			*(Rotator*)params = A;
 			*(float*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[16];
+			return *(Rotator*)&params[16];
 		}
-		bool NotEqual_RotatorRotator(Object::Rotator A, Object::Rotator B)
+		bool NotEqual_RotatorRotator(Rotator A, Rotator B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.NotEqual_RotatorRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2721);
 			byte params[28] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
-			*(Object::Rotator*)&params[12] = B;
+			*(Rotator*)params = A;
+			*(Rotator*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
-		bool EqualEqual_RotatorRotator(Object::Rotator A, Object::Rotator B)
+		bool EqualEqual_RotatorRotator(Rotator A, Rotator B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EqualEqual_RotatorRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2725);
 			byte params[28] = { NULL };
-			*(Object::Rotator*)&params[0] = A;
-			*(Object::Rotator*)&params[12] = B;
+			*(Rotator*)params = A;
+			*(Rotator*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
-		bool InCylinder(Object::Vector Origin, Object::Rotator Dir, float Width, Object::Vector A, bool bIgnoreZ)
+		bool InCylinder(Vector Origin, Rotator Dir, float Width, Vector A, bool bIgnoreZ)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.InCylinder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2729);
 			byte params[48] = { NULL };
-			*(Object::Vector*)&params[0] = Origin;
-			*(Object::Rotator*)&params[12] = Dir;
+			*(Vector*)params = Origin;
+			*(Rotator*)&params[12] = Dir;
 			*(float*)&params[24] = Width;
-			*(Object::Vector*)&params[28] = A;
+			*(Vector*)&params[28] = A;
 			*(bool*)&params[40] = bIgnoreZ;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[44];
 		}
-		float NoZDot(Object::Vector A, Object::Vector B)
+		float NoZDot(Vector A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.NoZDot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2733);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[24];
 		}
-		Object::Vector ClampLength(Object::Vector V, float MaxLength)
+		Vector ClampLength(Vector V, float MaxLength)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ClampLength");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2742);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = V;
+			*(Vector*)params = V;
 			*(float*)&params[12] = MaxLength;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[16];
+			return *(Vector*)&params[16];
 		}
-		Object::Vector VInterpTo(Object::Vector Current, Object::Vector Target, float DeltaTime, float InterpSpeed)
+		Vector VInterpTo(Vector Current, Vector Target, float DeltaTime, float InterpSpeed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.VInterpTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2746);
 			byte params[44] = { NULL };
-			*(Object::Vector*)&params[0] = Current;
-			*(Object::Vector*)&params[12] = Target;
+			*(Vector*)params = Current;
+			*(Vector*)&params[12] = Target;
 			*(float*)&params[24] = DeltaTime;
 			*(float*)&params[28] = InterpSpeed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[32];
+			return *(Vector*)&params[32];
 		}
-		bool IsZero(Object::Vector A)
+		bool IsZero(Vector A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.IsZero");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2750);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = A;
+			*(Vector*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
-		Object::Vector ProjectOnTo(Object::Vector X, Object::Vector Y)
+		Vector ProjectOnTo(Vector X, Vector Y)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ProjectOnTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2756);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = X;
-			*(Object::Vector*)&params[12] = Y;
+			*(Vector*)params = X;
+			*(Vector*)&params[12] = Y;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[24];
+			return *(Vector*)&params[24];
 		}
-		Object::Vector MirrorVectorByNormal(Object::Vector InVect, Object::Vector InNormal)
+		Vector MirrorVectorByNormal(Vector InVect, Vector InNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MirrorVectorByNormal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2759);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = InVect;
-			*(Object::Vector*)&params[12] = InNormal;
+			*(Vector*)params = InVect;
+			*(Vector*)&params[12] = InNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[24];
+			return *(Vector*)&params[24];
 		}
-		Object::Vector VRandCone2(Object::Vector Dir, float HorizontalConeHalfAngleRadians, float VerticalConeHalfAngleRadians)
+		Vector VRandCone2(Vector Dir, float HorizontalConeHalfAngleRadians, float VerticalConeHalfAngleRadians)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.VRandCone2");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2763);
 			byte params[32] = { NULL };
-			*(Object::Vector*)&params[0] = Dir;
+			*(Vector*)params = Dir;
 			*(float*)&params[12] = HorizontalConeHalfAngleRadians;
 			*(float*)&params[16] = VerticalConeHalfAngleRadians;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[20];
+			return *(Vector*)&params[20];
 		}
-		Object::Vector VRandCone(Object::Vector Dir, float ConeHalfAngleRadians)
+		Vector VRandCone(Vector Dir, float ConeHalfAngleRadians)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.VRandCone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2767);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = Dir;
+			*(Vector*)params = Dir;
 			*(float*)&params[12] = ConeHalfAngleRadians;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[16];
+			return *(Vector*)&params[16];
 		}
-		Object::Vector VRand()
+		Vector VRand()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.VRand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2772);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
-		Object::Vector VSmerp(Object::Vector A, Object::Vector B, float Alpha)
+		Vector VSmerp(Vector A, Vector B, float Alpha)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.VSmerp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2776);
 			byte params[40] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			*(float*)&params[24] = Alpha;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[28];
+			return *(Vector*)&params[28];
 		}
-		Object::Vector VLerp(Object::Vector A, Object::Vector B, float Alpha)
+		Vector VLerp(Vector A, Vector B, float Alpha)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.VLerp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2778);
 			byte params[40] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			*(float*)&params[24] = Alpha;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[28];
+			return *(Vector*)&params[28];
 		}
-		Object::Vector Normal(Object::Vector A)
+		Vector Normal(Vector A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Normal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2783);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = A;
+			*(Vector*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[12];
+			return *(Vector*)&params[12];
 		}
-		float VSizeSq2D(Object::Vector A)
+		float VSizeSq2D(Vector A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.VSizeSq2D");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2788);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = A;
+			*(Vector*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
-		float VSizeSq(Object::Vector A)
+		float VSizeSq(Vector A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.VSizeSq");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2791);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = A;
+			*(Vector*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
-		float VSize2D(Object::Vector A)
+		float VSize2D(Vector A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.VSize2D");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2794);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = A;
+			*(Vector*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
-		float VSize(Object::Vector A)
+		float VSize(Vector A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.VSize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2797);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = A;
+			*(Vector*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[12];
 		}
-		Object::Vector SubtractEqual_VectorVector(Object::Vector& A, Object::Vector B)
+		Vector SubtractEqual_VectorVector(Vector& A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SubtractEqual_VectorVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2800);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Vector*)&params[0];
-			return *(Object::Vector*)&params[24];
+			A = *(Vector*)params;
+			return *(Vector*)&params[24];
 		}
-		Object::Vector AddEqual_VectorVector(Object::Vector& A, Object::Vector B)
+		Vector AddEqual_VectorVector(Vector& A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AddEqual_VectorVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2803);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Vector*)&params[0];
-			return *(Object::Vector*)&params[24];
+			A = *(Vector*)params;
+			return *(Vector*)&params[24];
 		}
-		Object::Vector DivideEqual_VectorFloat(Object::Vector& A, float B)
+		Vector DivideEqual_VectorFloat(Vector& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.DivideEqual_VectorFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2807);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = A;
+			*(Vector*)params = A;
 			*(float*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Vector*)&params[0];
-			return *(Object::Vector*)&params[16];
+			A = *(Vector*)params;
+			return *(Vector*)&params[16];
 		}
-		Object::Vector MultiplyEqual_VectorVector(Object::Vector& A, Object::Vector B)
+		Vector MultiplyEqual_VectorVector(Vector& A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MultiplyEqual_VectorVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2811);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Vector*)&params[0];
-			return *(Object::Vector*)&params[24];
+			A = *(Vector*)params;
+			return *(Vector*)&params[24];
 		}
-		Object::Vector MultiplyEqual_VectorFloat(Object::Vector& A, float B)
+		Vector MultiplyEqual_VectorFloat(Vector& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MultiplyEqual_VectorFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2815);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = A;
+			*(Vector*)params = A;
 			*(float*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Object::Vector*)&params[0];
-			return *(Object::Vector*)&params[16];
+			A = *(Vector*)params;
+			return *(Vector*)&params[16];
 		}
-		Object::Vector Cross_VectorVector(Object::Vector A, Object::Vector B)
+		Vector Cross_VectorVector(Vector A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Cross_VectorVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2819);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[24];
+			return *(Vector*)&params[24];
 		}
-		float Dot_VectorVector(Object::Vector A, Object::Vector B)
+		float Dot_VectorVector(Vector A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Dot_VectorVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2823);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[24];
 		}
-		bool NotEqual_VectorVector(Object::Vector A, Object::Vector B)
+		bool NotEqual_VectorVector(Vector A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.NotEqual_VectorVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2827);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
-		bool EqualEqual_VectorVector(Object::Vector A, Object::Vector B)
+		bool EqualEqual_VectorVector(Vector A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EqualEqual_VectorVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2831);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
-		Object::Vector GreaterGreater_VectorRotator(Object::Vector A, Object::Rotator B)
+		Vector GreaterGreater_VectorRotator(Vector A, Rotator B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GreaterGreater_VectorRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2835);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Rotator*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Rotator*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[24];
+			return *(Vector*)&params[24];
 		}
-		Object::Vector LessLess_VectorRotator(Object::Vector A, Object::Rotator B)
+		Vector LessLess_VectorRotator(Vector A, Rotator B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.LessLess_VectorRotator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2839);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Rotator*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Rotator*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[24];
+			return *(Vector*)&params[24];
 		}
-		Object::Vector Subtract_VectorVector(Object::Vector A, Object::Vector B)
+		Vector Subtract_VectorVector(Vector A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_VectorVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2843);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[24];
+			return *(Vector*)&params[24];
 		}
-		Object::Vector Add_VectorVector(Object::Vector A, Object::Vector B)
+		Vector Add_VectorVector(Vector A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Add_VectorVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2847);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[24];
+			return *(Vector*)&params[24];
 		}
-		Object::Vector Divide_VectorFloat(Object::Vector A, float B)
+		Vector Divide_VectorFloat(Vector A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Divide_VectorFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2851);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = A;
+			*(Vector*)params = A;
 			*(float*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[16];
+			return *(Vector*)&params[16];
 		}
-		Object::Vector Multiply_VectorVector(Object::Vector A, Object::Vector B)
+		Vector Multiply_VectorVector(Vector A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_VectorVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2855);
 			byte params[36] = { NULL };
-			*(Object::Vector*)&params[0] = A;
-			*(Object::Vector*)&params[12] = B;
+			*(Vector*)params = A;
+			*(Vector*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[24];
+			return *(Vector*)&params[24];
 		}
-		Object::Vector Multiply_FloatVector(float A, Object::Vector B)
+		Vector Multiply_FloatVector(float A, Vector B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_FloatVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2859);
 			byte params[28] = { NULL };
-			*(float*)&params[0] = A;
-			*(Object::Vector*)&params[4] = B;
+			*(float*)params = A;
+			*(Vector*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[16];
+			return *(Vector*)&params[16];
 		}
-		Object::Vector Multiply_VectorFloat(Object::Vector A, float B)
+		Vector Multiply_VectorFloat(Vector A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_VectorFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2863);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = A;
+			*(Vector*)params = A;
 			*(float*)&params[12] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[16];
+			return *(Vector*)&params[16];
 		}
-		Object::Vector Subtract_PreVector(Object::Vector A)
+		Vector Subtract_PreVector(Vector A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_PreVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2867);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = A;
+			*(Vector*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[12];
+			return *(Vector*)&params[12];
 		}
 		float FInterpConstantTo(float Current, float Target, float DeltaTime, float InterpSpeed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FInterpConstantTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2871);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = Current;
+			*(float*)params = Current;
 			*(float*)&params[4] = Target;
 			*(float*)&params[8] = DeltaTime;
 			*(float*)&params[12] = InterpSpeed;
@@ -2317,9 +2300,9 @@ void**)&params[8] = B;
 		}
 		float FPctByRange(float Value, float InMin, float InMax)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FPctByRange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2879);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = Value;
+			*(float*)params = Value;
 			*(float*)&params[4] = InMin;
 			*(float*)&params[8] = InMax;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -2327,18 +2310,18 @@ void**)&params[8] = B;
 		}
 		float RandRange(float InMin, float InMax)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.RandRange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2885);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = InMin;
+			*(float*)params = InMin;
 			*(float*)&params[4] = InMax;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		float FInterpEaseInOut(float A, float B, float Alpha, float Exp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FInterpEaseInOut");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2890);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			*(float*)&params[8] = Alpha;
 			*(float*)&params[12] = Exp;
@@ -2347,9 +2330,9 @@ void**)&params[8] = B;
 		}
 		float FInterpEaseOut(float A, float B, float Alpha, float Exp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FInterpEaseOut");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2894);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			*(float*)&params[8] = Alpha;
 			*(float*)&params[12] = Exp;
@@ -2358,9 +2341,9 @@ void**)&params[8] = B;
 		}
 		float FInterpEaseIn(float A, float B, float Alpha, float Exp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FInterpEaseIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2900);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			*(float*)&params[8] = Alpha;
 			*(float*)&params[12] = Exp;
@@ -2369,9 +2352,9 @@ void**)&params[8] = B;
 		}
 		float FCubicInterp(float P0, float T0, float P1, float T1, float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FCubicInterp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2906);
 			byte params[24] = { NULL };
-			*(float*)&params[0] = P0;
+			*(float*)params = P0;
 			*(float*)&params[4] = T0;
 			*(float*)&params[8] = P1;
 			*(float*)&params[12] = T1;
@@ -2381,33 +2364,33 @@ void**)&params[8] = B;
 		}
 		int FCeil(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FCeil");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2912);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int FFloor(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FFloor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2919);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int Round(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Round");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2922);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		float Lerp(float A, float B, float Alpha)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Lerp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2925);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			*(float*)&params[8] = Alpha;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -2415,9 +2398,9 @@ void**)&params[8] = B;
 		}
 		float FClamp(float V, float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FClamp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2928);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = V;
+			*(float*)params = V;
 			*(float*)&params[4] = A;
 			*(float*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -2425,296 +2408,296 @@ void**)&params[8] = B;
 		}
 		float FMax(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FMax");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2933);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		float FMin(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FMin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2938);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		float FRand()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.FRand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2942);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float Square(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Square");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2946);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float Sqrt(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Sqrt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2948);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float Loge(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Loge");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2951);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float Exp(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Exp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2954);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float Atan2(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Atan2");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2957);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		float Atan(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Atan");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2960);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float Tan(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Tan");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2964);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float Cos(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Cos");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2969);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float Asin(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Asin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2972);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float Sin(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Sin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2975);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float Abs(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Abs");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2978);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float SubtractEqual_FloatFloat(float& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SubtractEqual_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2981);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(float*)&params[0];
+			A = *(float*)params;
 			return *(float*)&params[8];
 		}
 		float AddEqual_FloatFloat(float& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AddEqual_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2984);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(float*)&params[0];
+			A = *(float*)params;
 			return *(float*)&params[8];
 		}
 		float DivideEqual_FloatFloat(float& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.DivideEqual_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2988);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(float*)&params[0];
+			A = *(float*)params;
 			return *(float*)&params[8];
 		}
 		float MultiplyEqual_FloatFloat(float& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MultiplyEqual_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2992);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(float*)&params[0];
+			A = *(float*)params;
 			return *(float*)&params[8];
 		}
 		bool NotEqual_FloatFloat(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.NotEqual_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(2996);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool ComplementEqual_FloatFloat(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ComplementEqual_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3000);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool EqualEqual_FloatFloat(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EqualEqual_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3004);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool GreaterEqual_FloatFloat(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GreaterEqual_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3008);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool LessEqual_FloatFloat(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.LessEqual_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3012);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool Greater_FloatFloat(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Greater_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3016);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool Less_FloatFloat(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Less_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3020);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		float Subtract_FloatFloat(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3024);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		float Add_FloatFloat(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Add_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3028);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		float Percent_FloatFloat(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Percent_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3032);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		float Divide_FloatFloat(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Divide_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3036);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		float Multiply_FloatFloat(float A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3040);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		float MultiplyMultiply_FloatFloat(float Base, float Exp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MultiplyMultiply_FloatFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3044);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = Base;
+			*(float*)params = Base;
 			*(float*)&params[4] = Exp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		float Subtract_PreFloat(float A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_PreFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3048);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = A;
+			*(float*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		ScriptString* ToHex(int A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.ToHex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3052);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		int Clamp(int V, int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Clamp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3055);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = V;
+			*(int*)params = V;
 			*(int*)&params[4] = A;
 			*(int*)&params[8] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -2722,411 +2705,411 @@ void**)&params[8] = B;
 		}
 		int Max(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Max");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3058);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int Min(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Min");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3063);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int Rand(int Max)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Rand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3067);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Max;
+			*(int*)params = Max;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int SubtractSubtract_Int(int& A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SubtractSubtract_Int");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3071);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(int*)&params[0];
+			A = *(int*)params;
 			return *(int*)&params[4];
 		}
 		int AddAdd_Int(int& A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AddAdd_Int");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3074);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(int*)&params[0];
+			A = *(int*)params;
 			return *(int*)&params[4];
 		}
 		int SubtractSubtract_PreInt(int& A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SubtractSubtract_PreInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3077);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(int*)&params[0];
+			A = *(int*)params;
 			return *(int*)&params[4];
 		}
 		int AddAdd_PreInt(int& A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AddAdd_PreInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3080);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(int*)&params[0];
+			A = *(int*)params;
 			return *(int*)&params[4];
 		}
 		int SubtractEqual_IntInt(int& A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SubtractEqual_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3083);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(int*)&params[0];
+			A = *(int*)params;
 			return *(int*)&params[8];
 		}
 		int AddEqual_IntInt(int& A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AddEqual_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3086);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(int*)&params[0];
+			A = *(int*)params;
 			return *(int*)&params[8];
 		}
 		int DivideEqual_IntFloat(int& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.DivideEqual_IntFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3090);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(int*)&params[0];
+			A = *(int*)params;
 			return *(int*)&params[8];
 		}
 		int MultiplyEqual_IntFloat(int& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MultiplyEqual_IntFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3094);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(int*)&params[0];
+			A = *(int*)params;
 			return *(int*)&params[8];
 		}
 		int Or_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Or_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3098);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int Xor_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Xor_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3102);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int And_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.And_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3106);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		bool NotEqual_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.NotEqual_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3110);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool EqualEqual_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EqualEqual_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3114);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool GreaterEqual_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GreaterEqual_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3118);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool LessEqual_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.LessEqual_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3122);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool Greater_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Greater_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3126);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool Less_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Less_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3130);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		int GreaterGreaterGreater_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GreaterGreaterGreater_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3134);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int GreaterGreater_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.GreaterGreater_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3138);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int LessLess_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.LessLess_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3142);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int Subtract_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3146);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int Add_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Add_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3150);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int Percent_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Percent_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3154);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int Divide_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Divide_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3158);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int Multiply_IntInt(int A, int B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Multiply_IntInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3162);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			*(int*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int Subtract_PreInt(int A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Subtract_PreInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3166);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int Complement_PreInt(int A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Complement_PreInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3170);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = A;
+			*(int*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		byte SubtractSubtract_Byte(byte& A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SubtractSubtract_Byte");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3173);
 			byte params[2] = { NULL };
-			params[0] = A;
+			*params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = params[0];
+			A = *params;
 			return params[1];
 		}
 		byte AddAdd_Byte(byte& A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AddAdd_Byte");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3176);
 			byte params[2] = { NULL };
-			params[0] = A;
+			*params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = params[0];
+			A = *params;
 			return params[1];
 		}
 		byte SubtractSubtract_PreByte(byte& A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SubtractSubtract_PreByte");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3179);
 			byte params[2] = { NULL };
-			params[0] = A;
+			*params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = params[0];
+			A = *params;
 			return params[1];
 		}
 		byte AddAdd_PreByte(byte& A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AddAdd_PreByte");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3182);
 			byte params[2] = { NULL };
-			params[0] = A;
+			*params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = params[0];
+			A = *params;
 			return params[1];
 		}
 		byte SubtractEqual_ByteByte(byte& A, byte B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.SubtractEqual_ByteByte");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3185);
 			byte params[3] = { NULL };
-			params[0] = A;
+			*params = A;
 			params[1] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = params[0];
+			A = *params;
 			return params[2];
 		}
 		byte AddEqual_ByteByte(byte& A, byte B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AddEqual_ByteByte");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3188);
 			byte params[3] = { NULL };
-			params[0] = A;
+			*params = A;
 			params[1] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = params[0];
+			A = *params;
 			return params[2];
 		}
 		byte DivideEqual_ByteByte(byte& A, byte B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.DivideEqual_ByteByte");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3192);
 			byte params[3] = { NULL };
-			params[0] = A;
+			*params = A;
 			params[1] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = params[0];
+			A = *params;
 			return params[2];
 		}
 		byte MultiplyEqual_ByteFloat(byte& A, float B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MultiplyEqual_ByteFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3196);
 			byte params[6] = { NULL };
-			params[0] = A;
+			*params = A;
 			*(float*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = params[0];
+			A = *params;
 			return params[8];
 		}
 		byte MultiplyEqual_ByteByte(byte& A, byte B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.MultiplyEqual_ByteByte");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3200);
 			byte params[3] = { NULL };
-			params[0] = A;
+			*params = A;
 			params[1] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = params[0];
+			A = *params;
 			return params[2];
 		}
 		bool OrOr_BoolBool(bool A, bool B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.OrOr_BoolBool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3204);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = A;
+			*(bool*)params = A;
 			*(bool*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool XorXor_BoolBool(bool A, bool B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.XorXor_BoolBool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3208);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = A;
+			*(bool*)params = A;
 			*(bool*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool AndAnd_BoolBool(bool A, bool B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.AndAnd_BoolBool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3212);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = A;
+			*(bool*)params = A;
 			*(bool*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool NotEqual_BoolBool(bool A, bool B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.NotEqual_BoolBool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3216);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = A;
+			*(bool*)params = A;
 			*(bool*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool EqualEqual_BoolBool(bool A, bool B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.EqualEqual_BoolBool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3220);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = A;
+			*(bool*)params = A;
 			*(bool*)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool Not_PreBool(bool A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.Object.Not_PreBool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3224);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = A;
+			*(bool*)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

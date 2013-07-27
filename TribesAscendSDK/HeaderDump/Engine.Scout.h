@@ -24,7 +24,7 @@ namespace UnrealScript
 	class Scout : public Pawn
 	{
 	public:
-		class PathSizeInfo
+		struct PathSizeInfo
 		{
 		public:
 			ADD_STRUCT(byte, PathColor, 20)
@@ -67,7 +67,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, TestJumpZ, 1156)
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Scout.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25506);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

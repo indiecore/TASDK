@@ -20,16 +20,16 @@ namespace UnrealScript
 		ADD_BOOL(bActive, 488, 0x1)
 		void OnToggle(class SeqAct_Toggle* inAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FluidInfluenceActor.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15759);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = inAction;
+			*(class SeqAct_Toggle**)params = inAction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FluidInfluenceActor.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15761);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

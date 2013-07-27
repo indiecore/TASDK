@@ -24,8 +24,8 @@ namespace UnrealScript
 		ADD_STRUCT(DistributionVector::EDistributionVectorLockFlags, LockedAxes, 108)
 		ADD_BOOL(bUseExtremes, 104, 0x2)
 		ADD_BOOL(bLockAxes, 104, 0x1)
-		ADD_STRUCT(Object::Vector, Min, 92)
-		ADD_STRUCT(Object::Vector, Max, 80)
+		ADD_STRUCT(Vector, Min, 92)
+		ADD_STRUCT(Vector, Max, 80)
 	};
 }
 #undef ADD_BOOL

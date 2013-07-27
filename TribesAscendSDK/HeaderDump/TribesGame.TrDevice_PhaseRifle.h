@@ -14,14 +14,14 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_DamagePerEnergy, 2148)
 		void InstantFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_PhaseRifle.InstantFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85704);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float ModifyInstantHitDamage(byte FiringMode, Actor::ImpactInfo Impact, float Damage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_PhaseRifle.ModifyInstantHitDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85705);
 			byte params[89] = { NULL };
-			params[0] = FiringMode;
+			*params = FiringMode;
 			*(Actor::ImpactInfo*)&params[4] = Impact;
 			*(float*)&params[84] = Damage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

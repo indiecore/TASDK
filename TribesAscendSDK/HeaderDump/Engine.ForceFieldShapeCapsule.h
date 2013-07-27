@@ -8,45 +8,45 @@ namespace UnrealScript
 	public:
 		float GetHeight()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFieldShapeCapsule.GetHeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15951);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetRadius()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFieldShapeCapsule.GetRadius");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15953);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void FillBySphere(float Radius)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFieldShapeCapsule.FillBySphere");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15955);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = Radius;
+			*(float*)params = Radius;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void FillByBox(Object::Vector Extent)
+		void FillByBox(Vector Extent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFieldShapeCapsule.FillByBox");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15957);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = Extent;
+			*(Vector*)params = Extent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FillByCapsule(float Height, float Radius)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFieldShapeCapsule.FillByCapsule");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15959);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = Height;
+			*(float*)params = Height;
 			*(float*)&params[4] = Radius;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FillByCylinder(float BottomRadius, float TopRadius, float Height, float HeightOffset)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFieldShapeCapsule.FillByCylinder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15962);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = BottomRadius;
+			*(float*)params = BottomRadius;
 			*(float*)&params[4] = TopRadius;
 			*(float*)&params[8] = Height;
 			*(float*)&params[12] = HeightOffset;
@@ -56,12 +56,12 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* GetDrawComponent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ForceFieldShapeCapsule.GetDrawComponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15967);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0];
+void**)params;
 		}
 	};
 }

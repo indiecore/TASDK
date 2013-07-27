@@ -13,39 +13,39 @@ namespace UnrealScript
 		ADD_OBJECT(UDKUIDataProvider_ServerDetails, ServerDetailsProvider, 168)
 		void Init()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDataStore_OnlineGameSearch.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79781);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool SubmitGameSearch(byte ControllerIndex, bool bInvalidateExistingSearchResults)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDataStore_OnlineGameSearch.SubmitGameSearch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79782);
 			byte params[9] = { NULL };
-			params[0] = ControllerIndex;
+			*params = ControllerIndex;
 			*(bool*)&params[4] = bInvalidateExistingSearchResults;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void OnSearchComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDataStore_OnlineGameSearch.OnSearchComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79787);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool HasOutstandingQueries(bool bRestrictCheckToSelf)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDataStore_OnlineGameSearch.HasOutstandingQueries");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79789);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bRestrictCheckToSelf;
+			*(bool*)params = bRestrictCheckToSelf;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool HasExistingSearchResults()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDataStore_OnlineGameSearch.HasExistingSearchResults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79794);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

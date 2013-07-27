@@ -40,49 +40,49 @@ namespace UnrealScript
 		ADD_OBJECT(TrPawn, m_TrPawn, 292)
 		void PlayIdle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendBy3pDevice.PlayIdle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66339);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayBuildup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendBy3pDevice.PlayBuildup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66340);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayFire(float RefireTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendBy3pDevice.PlayFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66341);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = RefireTime;
+			*(float*)params = RefireTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayPutaway(float PutAwayTime, float ForcedRateBuff)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendBy3pDevice.PlayPutaway");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66343);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = PutAwayTime;
+			*(float*)params = PutAwayTime;
 			*(float*)&params[4] = ForcedRateBuff;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayRetrieve(float RetrieveTime, float ForcedRateBuff)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendBy3pDevice.PlayRetrieve");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66346);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = RetrieveTime;
+			*(float*)params = RetrieveTime;
 			*(float*)&params[4] = ForcedRateBuff;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayReload(float ReloadTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendBy3pDevice.PlayReload");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66349);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ReloadTime;
+			*(float*)params = ReloadTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayOffhand(ScriptName OffhandAnimName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendBy3pDevice.PlayOffhand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66351);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = OffhandAnimName;
+			*(ScriptName*)params = OffhandAnimName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

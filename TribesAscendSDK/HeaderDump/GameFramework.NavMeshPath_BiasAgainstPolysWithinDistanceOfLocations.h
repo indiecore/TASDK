@@ -11,25 +11,25 @@ namespace UnrealScript
 	class NavMeshPath_BiasAgainstPolysWithinDistanceOfLocations : public NavMeshPathConstraint
 	{
 	public:
-		ADD_STRUCT(ScriptArray<Object::Vector>, LocationsToCheck, 108)
+		ADD_STRUCT(ScriptArray<Vector>, LocationsToCheck, 108)
 		ADD_STRUCT(float, DistanceToCheck, 104)
-		ADD_STRUCT(Object::Vector, Rotation, 92)
-		ADD_STRUCT(Object::Vector, Location, 80)
-		bool BiasAgainstPolysWithinDistanceOfLocations(class NavigationHandle* NavHandle, Object::Vector InLocation, Object::Rotator InRotation, float InDistanceToCheck, ScriptArray<Object::Vector> InLocationsToCheck)
+		ADD_STRUCT(Vector, Rotation, 92)
+		ADD_STRUCT(Vector, Location, 80)
+		bool BiasAgainstPolysWithinDistanceOfLocations(class NavigationHandle* NavHandle, Vector InLocation, Rotator InRotation, float InDistanceToCheck, ScriptArray<Vector> InLocationsToCheck)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.NavMeshPath_BiasAgainstPolysWithinDistanceOfLocations.BiasAgainstPolysWithinDistanceOfLocations");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32872);
 			byte params[48] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
-			*(Object::Vector*)&params[4] = InLocation;
-			*(Object::Rotator*)&params[16] = InRotation;
+			*(class NavigationHandle**)params = NavHandle;
+			*(Vector*)&params[4] = InLocation;
+			*(Rotator*)&params[16] = InRotation;
 			*(float*)&params[28] = InDistanceToCheck;
-			*(ScriptArray<Object::Vector>*)&params[32] = InLocationsToCheck;
+			*(ScriptArray<Vector>*)&params[32] = InLocationsToCheck;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[44];
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.NavMeshPath_BiasAgainstPolysWithinDistanceOfLocations.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32881);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

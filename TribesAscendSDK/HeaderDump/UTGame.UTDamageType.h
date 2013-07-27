@@ -88,196 +88,196 @@ namespace UnrealScript
 		ADD_STRUCT(float, DeathOverlayTime, 120)
 		ScriptClass* GetDeathCameraEffectInstigator(class UTPawn* UTP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.GetDeathCameraEffectInstigator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39477);
 			byte params[8] = { NULL };
-			*(class UTPawn**)&params[0] = UTP;
+			*(class UTPawn**)params = UTP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}
 		float GetHitEffectDuration(class Pawn* P, float Damage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.GetHitEffectDuration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39820);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			*(float*)&params[4] = Damage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		bool ShouldGib(class UTPawn* DeadPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.ShouldGib");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(41750);
 			byte params[8] = { NULL };
-			*(class UTPawn**)&params[0] = DeadPawn;
+			*(class UTPawn**)params = DeadPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		ScriptClass* GetDeathCameraEffectVictim(class UTPawn* UTP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.GetDeathCameraEffectVictim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(41770);
 			byte params[8] = { NULL };
-			*(class UTPawn**)&params[0] = UTP;
+			*(class UTPawn**)params = UTP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}
 		ScriptString* DeathMessage(class PlayerReplicationInfo* Killer, class PlayerReplicationInfo* Victim)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.DeathMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46779);
 			byte params[20] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = Killer;
+			*(class PlayerReplicationInfo**)params = Killer;
 			*(class PlayerReplicationInfo**)&params[4] = Victim;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[8];
 		}
 		ScriptString* SuicideMessage(class PlayerReplicationInfo* Victim)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.SuicideMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46783);
 			byte params[16] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = Victim;
+			*(class PlayerReplicationInfo**)params = Victim;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
-		void SpawnHitEffect(class Pawn* P, float Damage, Object::Vector Momentum, ScriptName BoneName, Object::Vector HitLocation)
+		void SpawnHitEffect(class Pawn* P, float Damage, Vector Momentum, ScriptName BoneName, Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.SpawnHitEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46786);
 			byte params[40] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			*(float*)&params[4] = Damage;
-			*(Object::Vector*)&params[8] = Momentum;
+			*(Vector*)&params[8] = Momentum;
 			*(ScriptName*)&params[20] = BoneName;
-			*(Object::Vector*)&params[28] = HitLocation;
+			*(Vector*)&params[28] = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int IncrementKills(class UTPlayerReplicationInfo* KillerPRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.IncrementKills");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46794);
 			byte params[8] = { NULL };
-			*(class UTPlayerReplicationInfo**)&params[0] = KillerPRI;
+			*(class UTPlayerReplicationInfo**)params = KillerPRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		void IncrementDeaths(class UTPlayerReplicationInfo* KilledPRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.IncrementDeaths");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46798);
 			byte params[4] = { NULL };
-			*(class UTPlayerReplicationInfo**)&params[0] = KilledPRI;
+			*(class UTPlayerReplicationInfo**)params = KilledPRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void IncrementSuicides(class UTPlayerReplicationInfo* KilledPRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.IncrementSuicides");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46800);
 			byte params[4] = { NULL };
-			*(class UTPlayerReplicationInfo**)&params[0] = KilledPRI;
+			*(class UTPlayerReplicationInfo**)params = KilledPRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptName GetStatsName(ScriptName StatType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.GetStatsName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46802);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = StatType;
+			*(ScriptName*)params = StatType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[8];
 		}
 		void ScoreKill(class UTPlayerReplicationInfo* KillerPRI, class UTPlayerReplicationInfo* KilledPRI, class Pawn* KilledPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.ScoreKill");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46805);
 			byte params[12] = { NULL };
-			*(class UTPlayerReplicationInfo**)&params[0] = KillerPRI;
+			*(class UTPlayerReplicationInfo**)params = KillerPRI;
 			*(class UTPlayerReplicationInfo**)&params[4] = KilledPRI;
 			*(class Pawn**)&params[8] = KilledPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PawnTornOff(class UTPawn* DeadPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.PawnTornOff");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46809);
 			byte params[4] = { NULL };
-			*(class UTPawn**)&params[0] = DeadPawn;
+			*(class UTPawn**)params = DeadPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpawnGibEffects(class UTGib* Gib)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.SpawnGibEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46811);
 			byte params[4] = { NULL };
-			*(class UTGib**)&params[0] = Gib;
+			*(class UTGib**)params = Gib;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DoCustomDamageEffects(class UTPawn* ThePawn, ScriptClass* TheDamageType, Actor::TraceHitInfo& HitInfo, Object::Vector HitLocation)
+		void DoCustomDamageEffects(class UTPawn* ThePawn, ScriptClass* TheDamageType, Actor::TraceHitInfo& HitInfo, Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.DoCustomDamageEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46815);
 			byte params[48] = { NULL };
-			*(class UTPawn**)&params[0] = ThePawn;
+			*(class UTPawn**)params = ThePawn;
 			*(ScriptClass**)&params[4] = TheDamageType;
 			*(Actor::TraceHitInfo*)&params[8] = HitInfo;
-			*(Object::Vector*)&params[36] = HitLocation;
+			*(Vector*)&params[36] = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			HitInfo = *(Actor::TraceHitInfo*)&params[8];
 		}
-		void CreateDeathSkeleton(class UTPawn* ThePawn, ScriptClass* TheDamageType, Actor::TraceHitInfo& HitInfo, Object::Vector HitLocation)
+		void CreateDeathSkeleton(class UTPawn* ThePawn, ScriptClass* TheDamageType, Actor::TraceHitInfo& HitInfo, Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.CreateDeathSkeleton");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46820);
 			byte params[48] = { NULL };
-			*(class UTPawn**)&params[0] = ThePawn;
+			*(class UTPawn**)params = ThePawn;
 			*(ScriptClass**)&params[4] = TheDamageType;
 			*(Actor::TraceHitInfo*)&params[8] = HitInfo;
-			*(Object::Vector*)&params[36] = HitLocation;
+			*(Vector*)&params[36] = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			HitInfo = *(Actor::TraceHitInfo*)&params[8];
 		}
 		void BoneBreaker(class UTPawn* ThePawn, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* TheMesh, Object::Vector Impulse, Object::Vector HitLocation, ScriptName BoneName)
+void* TheMesh, Vector Impulse, Vector HitLocation, ScriptName BoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.BoneBreaker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46837);
 			byte params[40] = { NULL };
-			*(class UTPawn**)&params[0] = ThePawn;
+			*(class UTPawn**)params = ThePawn;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = TheMesh;
-			*(Object::Vector*)&params[8] = Impulse;
-			*(Object::Vector*)&params[20] = HitLocation;
+			*(Vector*)&params[8] = Impulse;
+			*(Vector*)&params[20] = HitLocation;
 			*(ScriptName*)&params[32] = BoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void CreateDeathGoreChunks(class UTPawn* ThePawn, ScriptClass* TheDamageType, Actor::TraceHitInfo& HitInfo, Object::Vector HitLocation)
+		void CreateDeathGoreChunks(class UTPawn* ThePawn, ScriptClass* TheDamageType, Actor::TraceHitInfo& HitInfo, Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.CreateDeathGoreChunks");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46846);
 			byte params[48] = { NULL };
-			*(class UTPawn**)&params[0] = ThePawn;
+			*(class UTPawn**)params = ThePawn;
 			*(ScriptClass**)&params[4] = TheDamageType;
 			*(Actor::TraceHitInfo*)&params[8] = HitInfo;
-			*(Object::Vector*)&params[36] = HitLocation;
+			*(Vector*)&params[36] = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			HitInfo = *(Actor::TraceHitInfo*)&params[8];
 		}
 		void SpawnExtraGibEffects(class UTGib* TheGib)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.SpawnExtraGibEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46855);
 			byte params[4] = { NULL };
-			*(class UTGib**)&params[0] = TheGib;
+			*(class UTGib**)params = TheGib;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawKillIcon(class Canvas* Canvas, float ScreenX, float ScreenY, float HUDScaleX, float HUDScaleY)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.DrawKillIcon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46857);
 			byte params[20] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			*(float*)&params[4] = ScreenX;
 			*(float*)&params[8] = ScreenY;
 			*(float*)&params[12] = HUDScaleX;
 			*(float*)&params[16] = HUDScaleY;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void CalcDeathCamera(class UTPawn* P, float DeltaTime, Object::Vector& CameraLocation, Object::Rotator& CameraRotation, float& CameraFOV)
+		void CalcDeathCamera(class UTPawn* P, float DeltaTime, Vector& CameraLocation, Rotator& CameraRotation, float& CameraFOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDamageType.CalcDeathCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(46863);
 			byte params[36] = { NULL };
-			*(class UTPawn**)&params[0] = P;
+			*(class UTPawn**)params = P;
 			*(float*)&params[4] = DeltaTime;
-			*(Object::Vector*)&params[8] = CameraLocation;
-			*(Object::Rotator*)&params[20] = CameraRotation;
+			*(Vector*)&params[8] = CameraLocation;
+			*(Rotator*)&params[20] = CameraRotation;
 			*(float*)&params[32] = CameraFOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			CameraLocation = *(Object::Vector*)&params[8];
-			CameraRotation = *(Object::Rotator*)&params[20];
+			CameraLocation = *(Vector*)&params[8];
+			CameraRotation = *(Rotator*)&params[20];
 			CameraFOV = *(float*)&params[32];
 		}
 	};

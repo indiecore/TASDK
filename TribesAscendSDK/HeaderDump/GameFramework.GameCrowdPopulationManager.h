@@ -70,67 +70,67 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IInterface_NavigationHandle, 476)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31372);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NotifyPathChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.NotifyPathChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31374);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float GetMaxSpawnDist()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.GetMaxSpawnDist");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31375);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void AddSpawnPoint(class GameCrowdDestination* GCD)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.AddSpawnPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31377);
 			byte params[4] = { NULL };
-			*(class GameCrowdDestination**)&params[0] = GCD;
+			*(class GameCrowdDestination**)params = GCD;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveSpawnPoint(class GameCrowdDestination* GCD)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.RemoveSpawnPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31388);
 			byte params[4] = { NULL };
-			*(class GameCrowdDestination**)&params[0] = GCD;
+			*(class GameCrowdDestination**)params = GCD;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnGameCrowdPopulationManagerToggle(class SeqAct_GameCrowdPopulationManagerToggle* inAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.OnGameCrowdPopulationManagerToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31390);
 			byte params[4] = { NULL };
-			*(class SeqAct_GameCrowdPopulationManagerToggle**)&params[0] = inAction;
+			*(class SeqAct_GameCrowdPopulationManagerToggle**)params = inAction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void FlushAgents()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.FlushAgents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31402);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AgentDestroyed(class GameCrowdAgent* Agent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.AgentDestroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31404);
 			byte params[4] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = Agent;
+			*(class GameCrowdAgent**)params = Agent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AddToAgentPool(class GameCrowdAgent* Agent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.AddToAgentPool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31407);
 			byte params[8] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = Agent;
+			*(class GameCrowdAgent**)params = Agent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.DisplayDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31410);
 			byte params[12] = { NULL };
-			*(class HUD**)&params[0] = HUD;
+			*(class HUD**)params = HUD;
 			*(float*)&params[4] = out_YL;
 			*(float*)&params[8] = out_YPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -139,71 +139,71 @@ namespace UnrealScript
 		}
 		bool IsSpawningActive()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.IsSpawningActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31430);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void Tick(float DeltaSeconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31432);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaSeconds;
+			*(float*)params = DeltaSeconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GameCrowdDestination* PickSpawnPoint()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.PickSpawnPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31437);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GameCrowdDestination**)&params[0];
+			return *(class GameCrowdDestination**)params;
 		}
 		void PrioritizeSpawnPoints(float DeltaSeconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.PrioritizeSpawnPoints");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31441);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaSeconds;
+			*(float*)params = DeltaSeconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AnalyzeSpawnPoints(int StartIndex, int StopIndex, Object::Vector ViewLocation, Object::Vector PredictionLocation)
+		void AnalyzeSpawnPoints(int StartIndex, int StopIndex, Vector ViewLocation, Vector PredictionLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.AnalyzeSpawnPoints");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31451);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = StartIndex;
+			*(int*)params = StartIndex;
 			*(int*)&params[4] = StopIndex;
-			*(Object::Vector*)&params[8] = ViewLocation;
-			*(Object::Vector*)&params[20] = PredictionLocation;
+			*(Vector*)&params[8] = ViewLocation;
+			*(Vector*)&params[20] = PredictionLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddPrioritizedSpawnPoint(class GameCrowdDestination* GCD, Object::Vector ViewLocation)
+		void AddPrioritizedSpawnPoint(class GameCrowdDestination* GCD, Vector ViewLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.AddPrioritizedSpawnPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31463);
 			byte params[16] = { NULL };
-			*(class GameCrowdDestination**)&params[0] = GCD;
-			*(Object::Vector*)&params[4] = ViewLocation;
+			*(class GameCrowdDestination**)params = GCD;
+			*(Vector*)&params[4] = ViewLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ValidateSpawnAt(class GameCrowdDestination* Candidate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.ValidateSpawnAt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31467);
 			byte params[8] = { NULL };
-			*(class GameCrowdDestination**)&params[0] = Candidate;
+			*(class GameCrowdDestination**)params = Candidate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		class GameCrowdAgent* SpawnAgent(class GameCrowdDestination* SpawnLoc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.SpawnAgent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31477);
 			byte params[8] = { NULL };
-			*(class GameCrowdDestination**)&params[0] = SpawnLoc;
+			*(class GameCrowdDestination**)params = SpawnLoc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GameCrowdAgent**)&params[4];
 		}
 		class GameCrowdAgent* CreateNewAgent(class GameCrowdDestination* SpawnLoc, class GameCrowdAgent* AgentTemplate, class GameCrowdGroup* NewGroup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdPopulationManager.CreateNewAgent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31487);
 			byte params[16] = { NULL };
-			*(class GameCrowdDestination**)&params[0] = SpawnLoc;
+			*(class GameCrowdDestination**)params = SpawnLoc;
 			*(class GameCrowdAgent**)&params[4] = AgentTemplate;
 			*(class GameCrowdGroup**)&params[8] = NewGroup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

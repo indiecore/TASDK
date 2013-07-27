@@ -23,7 +23,7 @@ namespace UnrealScript
 	class InterpTrackSound : public InterpTrackVectorBase
 	{
 	public:
-		class SoundTrackKey
+		struct SoundTrackKey
 		{
 		public:
 			ADD_OBJECT(SoundCue, Sound, 12)

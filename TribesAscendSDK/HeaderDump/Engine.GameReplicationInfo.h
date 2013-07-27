@@ -43,92 +43,92 @@ namespace UnrealScript
 		ADD_BOOL(bStopCountDown, 480, 0x1)
 		bool ShouldShowGore()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.ShouldShowGore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7289);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17769);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17772);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReceivedGameClass()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.ReceivedGameClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17774);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17776);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Timer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.Timer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17777);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool OnSameTeam(class Actor* A, class Actor* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.OnSameTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17778);
 			byte params[12] = { NULL };
-			*(class Actor**)&params[0] = A;
+			*(class Actor**)params = A;
 			*(class Actor**)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void AddPRI(class PlayerReplicationInfo* PRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.AddPRI");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17782);
 			byte params[4] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = PRI;
+			*(class PlayerReplicationInfo**)params = PRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemovePRI(class PlayerReplicationInfo* PRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.RemovePRI");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17785);
 			byte params[4] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = PRI;
+			*(class PlayerReplicationInfo**)params = PRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetTeam(int Index, class TeamInfo* TI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.SetTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17788);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(class TeamInfo**)&params[4] = TI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartMatch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.StartMatch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17791);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EndGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.EndGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17792);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool IsMultiplayerGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.IsMultiplayerGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17793);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool IsCoopMultiplayerGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameReplicationInfo.IsCoopMultiplayerGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17795);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

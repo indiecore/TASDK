@@ -13,9 +13,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, TargetZoneName, 256)
 		void AddToMobileInput(class MobilePlayerInput* MPI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_MobileZoneBase.AddToMobileInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33027);
 			byte params[4] = { NULL };
-			*(class MobilePlayerInput**)&params[0] = MPI;
+			*(class MobilePlayerInput**)params = MPI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

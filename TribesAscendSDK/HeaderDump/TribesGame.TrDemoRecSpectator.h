@@ -34,69 +34,69 @@ namespace UnrealScript
 		ADD_BOOL(bFindPlayer, 3432, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79833);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReceivedPlayer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.ReceivedPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79838);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitPlayerReplicationInfo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.InitPlayerReplicationInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79839);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Slomo(float NewTimeDilation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.Slomo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79840);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = NewTimeDilation;
+			*(float*)params = NewTimeDilation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ViewClass(ScriptClass* aClass, bool bQuiet, bool bCheat)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.ViewClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79842);
 			byte params[12] = { NULL };
-			*(ScriptClass**)&params[0] = aClass;
+			*(ScriptClass**)params = aClass;
 			*(bool*)&params[4] = bQuiet;
 			*(bool*)&params[8] = bCheat;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DemoViewNextPlayer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.DemoViewNextPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79849);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetViewTarget(class Actor* NewViewTarget, Camera::ViewTargetTransitionParams TransitionParams)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.SetViewTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79853);
 			byte params[20] = { NULL };
-			*(class Actor**)&params[0] = NewViewTarget;
+			*(class Actor**)params = NewViewTarget;
 			*(Camera::ViewTargetTransitionParams*)&params[4] = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ServerViewSelf(Camera::ViewTargetTransitionParams TransitionParams)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.ServerViewSelf");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79856);
 			byte params[16] = { NULL };
-			*(Camera::ViewTargetTransitionParams*)&params[0] = TransitionParams;
+			*(Camera::ViewTargetTransitionParams*)params = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientSetRealViewTarget(class PlayerReplicationInfo* NewTarget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.ClientSetRealViewTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79858);
 			byte params[4] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = NewTarget;
+			*(class PlayerReplicationInfo**)params = NewTarget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SetPause(bool bPause, 
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* CanUnpauseDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.SetPause");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79860);
 			byte params[20] = { NULL };
-			*(bool*)&params[0] = bPause;
+			*(bool*)params = bPause;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = CanUnpauseDelegate;
@@ -105,24 +105,24 @@ void**)&params[4] = CanUnpauseDelegate;
 		}
 		void Pause()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.Pause");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79864);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void GetPlayerViewPoint(Object::Vector& CameraLocation, Object::Rotator& CameraRotation)
+		void GetPlayerViewPoint(Vector& CameraLocation, Rotator& CameraRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.GetPlayerViewPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79865);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = CameraLocation;
-			*(Object::Rotator*)&params[12] = CameraRotation;
+			*(Vector*)params = CameraLocation;
+			*(Rotator*)&params[12] = CameraRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			CameraLocation = *(Object::Vector*)&params[0];
-			CameraRotation = *(Object::Rotator*)&params[12];
+			CameraLocation = *(Vector*)params;
+			CameraRotation = *(Rotator*)&params[12];
 		}
 		void UpdateRotation(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDemoRecSpectator.UpdateRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79868);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

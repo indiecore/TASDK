@@ -40,7 +40,7 @@ namespace UnrealScript
 		ADD_OBJECT(ForceFieldShape, Shape, 488)
 		void DoInitRBPhys()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxForceFieldComponent.DoInitRBPhys");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21167);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

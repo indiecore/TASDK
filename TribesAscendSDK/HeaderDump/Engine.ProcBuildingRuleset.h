@@ -33,13 +33,13 @@ namespace UnrealScript
 			EPBAxis_Z = 1,
 			EPBAxis_MAX = 2,
 		};
-		class PBParamSwatch
+		struct PBParamSwatch
 		{
 		public:
 			ADD_STRUCT(ScriptName, SwatchName, 0)
 			ADD_STRUCT(ScriptArray<ProcBuilding::PBMaterialParam>, Params, 8)
 		};
-		class PBVariationInfo
+		struct PBVariationInfo
 		{
 		public:
 			ADD_STRUCT(ScriptName, VariationName, 0)

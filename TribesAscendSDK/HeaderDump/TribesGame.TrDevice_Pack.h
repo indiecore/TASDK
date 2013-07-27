@@ -14,7 +14,7 @@ namespace UnrealScript
 	class TrDevice_Pack : public TrDevice
 	{
 	public:
-		class PowerPoolCostInfo
+		struct PowerPoolCostInfo
 		{
 		public:
 			ADD_OBJECT(ScriptClass, m_TrFamilyInfo, 4)
@@ -25,77 +25,77 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fDefaultPowerPoolCostPerSec, 2148)
 		bool UsesPower()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.UsesPower");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80672);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		float GetPowerPool(class TrPawn* aPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.GetPowerPool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80674);
 			byte params[8] = { NULL };
-			*(class TrPawn**)&params[0] = aPawn;
+			*(class TrPawn**)params = aPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		bool CanBeActive()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.CanBeActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80678);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void ConsumePowerPool(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.ConsumePowerPool");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80681);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ToggleActivate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.ToggleActivate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80688);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ServerToggleActivate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.ServerToggleActivate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80689);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ForceActivate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.ForceActivate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80690);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClientForceActive()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.ClientForceActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80691);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClientForceInactive()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.ClientForceInactive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80692);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartFire(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.StartFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80704);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopFire(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.StopFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80706);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendToFiringState(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Pack.SendToFiringState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80708);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -17,12 +17,12 @@ namespace UnrealScript
 		ADD_STRUCT(float, TraceDistance, 432)
 		void OnUpdatePropertyLightColor()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DirectionalLightComponent.OnUpdatePropertyLightColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14489);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnUpdatePropertyBrightness()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DirectionalLightComponent.OnUpdatePropertyBrightness");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14490);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

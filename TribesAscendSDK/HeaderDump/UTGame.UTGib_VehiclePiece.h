@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib_VehiclePiece.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47952);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

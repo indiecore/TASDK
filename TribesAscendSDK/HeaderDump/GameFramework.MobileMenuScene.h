@@ -52,40 +52,40 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, MenuName, 60)
 		float GetGlobalScaleX()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.GetGlobalScaleX");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32600);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetGlobalScaleY()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.GetGlobalScaleY");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32602);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void InitMenuScene(class MobilePlayerInput* PlayerInput, int ScreenWidth, int ScreenHeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.InitMenuScene");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32692);
 			byte params[12] = { NULL };
-			*(class MobilePlayerInput**)&params[0] = PlayerInput;
+			*(class MobilePlayerInput**)params = PlayerInput;
 			*(int*)&params[4] = ScreenWidth;
 			*(int*)&params[8] = ScreenHeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RenderScene(class Canvas* Canvas, float RenderDelta)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.RenderScene");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32701);
 			byte params[8] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			*(float*)&params[4] = RenderDelta;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnTouch(class MobileMenuObject* Sender, float TouchX, float TouchY, bool bCancel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.OnTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32705);
 			byte params[16] = { NULL };
-			*(class MobileMenuObject**)&params[0] = Sender;
+			*(class MobileMenuObject**)params = Sender;
 			*(float*)&params[4] = TouchX;
 			*(float*)&params[8] = TouchY;
 			*(bool*)&params[12] = bCancel;
@@ -93,9 +93,9 @@ namespace UnrealScript
 		}
 		bool OnSceneTouch(MobileInputZone::EZoneTouchEvent EventType, float TouchX, float TouchY)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.OnSceneTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32710);
 			byte params[13] = { NULL };
-			*(MobileInputZone::EZoneTouchEvent*)&params[0] = EventType;
+			*(MobileInputZone::EZoneTouchEvent*)params = EventType;
 			*(float*)&params[4] = TouchX;
 			*(float*)&params[8] = TouchY;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -103,46 +103,46 @@ namespace UnrealScript
 		}
 		void Opened(ScriptString* Mode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.Opened");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32715);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Mode;
+			*(ScriptString**)params = Mode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MadeTopMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.MadeTopMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32717);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool Closing()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.Closing");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32718);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void Closed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.Closed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32720);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CleanUpScene()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.CleanUpScene");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32721);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class MobileMenuObject* FindMenuObject(ScriptString* Tag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.FindMenuObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32722);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Tag;
+			*(ScriptString**)params = Tag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class MobileMenuObject**)&params[12];
 		}
 		bool MobileMenuCommand(ScriptString* Command)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuScene.MobileMenuCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32726);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)params = Command;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}

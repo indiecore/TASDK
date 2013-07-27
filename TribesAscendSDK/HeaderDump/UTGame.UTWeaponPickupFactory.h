@@ -34,101 +34,101 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, WeaponPickupClass, 944)
 		bool AllowPickup(class UTBot* Bot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.AllowPickup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40958);
 			byte params[8] = { NULL };
-			*(class UTBot**)&params[0] = Bot;
+			*(class UTBot**)params = Bot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void InitializePickup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.InitializePickup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50329);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPickupVisible()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.SetPickupVisible");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50331);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPickupHidden()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.SetPickupHidden");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50332);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPickupMesh()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.SetPickupMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50333);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50334);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CheckForErrors()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.CheckForErrors");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50336);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SetWeaponStay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.SetWeaponStay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50338);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartSleeping()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.StartSleeping");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50339);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool AddCustomer(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.AddCustomer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50340);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool HasCustomer(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.HasCustomer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50345);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void PickedUpBy(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.PickedUpBy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50351);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpawnCopyFor(class Pawn* Recipient)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.SpawnCopyFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50353);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Recipient;
+			*(class Pawn**)params = Recipient;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowActive()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.ShowActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50356);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowHidden()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.ShowHidden");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50357);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NotifyLocalPlayerDead(class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTWeaponPickupFactory.NotifyLocalPlayerDead");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(50358);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

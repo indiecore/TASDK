@@ -18,7 +18,7 @@ namespace UnrealScript
 		ADD_BOOL(bEnabled, 520, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicTriggerVolume.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14913);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

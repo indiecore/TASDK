@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void InstantFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_H1.InstantFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81374);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

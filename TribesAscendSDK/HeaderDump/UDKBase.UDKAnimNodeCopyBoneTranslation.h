@@ -16,7 +16,7 @@ namespace UnrealScript
 	class UDKAnimNodeCopyBoneTranslation : public AnimNodeBlendBase
 	{
 	public:
-		class BoneCopyInfo
+		struct BoneCopyInfo
 		{
 		public:
 			ADD_STRUCT(int, DstBoneIndex, 20)

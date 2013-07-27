@@ -9,7 +9,7 @@ namespace UnrealScript
 	class UTCharInfo : public Object
 	{
 	public:
-		class CustomAIData
+		struct CustomAIData
 		{
 		public:
 			ADD_STRUCT(ScriptString*, FavoriteWeapon, 28)
@@ -21,7 +21,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, StrafingAbility, 4)
 			ADD_STRUCT(float, Tactics, 0)
 		};
-		class CharacterInfo
+		struct CharacterInfo
 		{
 		public:
 			ADD_STRUCT(UTCharInfo::CustomAIData, AIData, 72)
@@ -39,18 +39,18 @@ namespace UnrealScript
 		ADD_STRUCT(float, LOD1DisplayFactor, 84)
 		ScriptClass* FindFamilyInfo(ScriptString* InFamilyID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCharInfo.FindFamilyInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(42761);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = InFamilyID;
+			*(ScriptString**)params = InFamilyID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[12];
 		}
 		ScriptString* GetRandomCharClassName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCharInfo.GetRandomCharClassName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43892);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

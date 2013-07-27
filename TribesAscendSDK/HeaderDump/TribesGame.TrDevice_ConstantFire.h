@@ -32,45 +32,45 @@ namespace UnrealScript
 		ADD_BOOL(m_bSoundLinkedWithState, 2152, 0x1)
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80968);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnEndConstantFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.OnEndConstantFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80970);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnStartConstantFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.OnStartConstantFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80971);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnTickConstantFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.OnTickConstantFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80972);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EndFire(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.EndFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80973);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartFire(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.StartFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80975);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayFireAnimation(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_ConstantFire.PlayFireAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80993);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

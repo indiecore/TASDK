@@ -38,19 +38,19 @@ namespace UnrealScript
 		ADD_BOOL(bAdjustFromWalls, 900, 0x1)
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9716);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9718);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.DisplayDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9719);
 			byte params[12] = { NULL };
-			*(class HUD**)&params[0] = HUD;
+			*(class HUD**)params = HUD;
 			*(float*)&params[4] = out_YL;
 			*(float*)&params[8] = out_YPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -59,49 +59,49 @@ namespace UnrealScript
 		}
 		void SetTeam(int inTeamIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.SetTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9728);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = inTeamIdx;
+			*(int*)params = inTeamIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void GetPlayerViewPoint(Object::Vector& out_Location, Object::Rotator& out_Rotation)
+		void GetPlayerViewPoint(Vector& out_Location, Rotator& out_Rotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.GetPlayerViewPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9730);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = out_Location;
-			*(Object::Rotator*)&params[12] = out_Rotation;
+			*(Vector*)params = out_Location;
+			*(Rotator*)&params[12] = out_Rotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_Location = *(Object::Vector*)&params[0];
-			out_Rotation = *(Object::Rotator*)&params[12];
+			out_Location = *(Vector*)params;
+			out_Rotation = *(Rotator*)&params[12];
 		}
 		void OnAIMoveToActor(class SeqAct_AIMoveToActor* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.OnAIMoveToActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9733);
 			byte params[4] = { NULL };
-			*(class SeqAct_AIMoveToActor**)&params[0] = Action;
+			*(class SeqAct_AIMoveToActor**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyWeaponFired(class Weapon* W, byte FireMode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.NotifyWeaponFired");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9748);
 			byte params[5] = { NULL };
-			*(class Weapon**)&params[0] = W;
+			*(class Weapon**)params = W;
 			params[4] = FireMode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyWeaponFinishedFiring(class Weapon* W, byte FireMode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.NotifyWeaponFinishedFiring");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9751);
 			byte params[5] = { NULL };
-			*(class Weapon**)&params[0] = W;
+			*(class Weapon**)params = W;
 			params[4] = FireMode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CanFireWeapon(class Weapon* Wpn, byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AIController.CanFireWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9754);
 			byte params[9] = { NULL };
-			*(class Weapon**)&params[0] = Wpn;
+			*(class Weapon**)params = Wpn;
 			params[4] = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];

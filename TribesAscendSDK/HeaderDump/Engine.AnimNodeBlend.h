@@ -25,9 +25,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, Child2Weight, 244)
 		void SetBlendTarget(float BlendTarget, float BlendTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeBlend.SetBlendTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10755);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = BlendTarget;
+			*(float*)params = BlendTarget;
 			*(float*)&params[4] = BlendTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

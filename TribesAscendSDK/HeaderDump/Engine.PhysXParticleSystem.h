@@ -45,7 +45,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, KernelRadiusMultiplier, 136)
 		ADD_STRUCT(float, RestDensity, 132)
 		ADD_STRUCT(float, RestParticleDistance, 128)
-		ADD_STRUCT(Object::Vector, ExternalAcceleration, 116)
+		ADD_STRUCT(Vector, ExternalAcceleration, 116)
 		ADD_STRUCT(float, Damping, 112)
 		ADD_STRUCT(float, MaxMotionDistance, 108)
 		ADD_BOOL(bIsInGame, 104, 0x40)

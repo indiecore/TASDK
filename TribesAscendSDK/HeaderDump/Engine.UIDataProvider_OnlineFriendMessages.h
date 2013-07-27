@@ -22,26 +22,26 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementCellProvider, 92)
 		void OnRegister(class LocalPlayer* InPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnRegister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28164);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = InPlayer;
+			*(class LocalPlayer**)params = InPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUnregister()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnUnregister");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28168);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReadMessages()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.ReadMessages");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28171);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnFriendInviteReceived(byte LocalUserNum, OnlineSubsystem::UniqueNetId RequestingPlayer, ScriptString* RequestingNick, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnFriendInviteReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28174);
 			byte params[33] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = RequestingPlayer;
 			*(ScriptString**)&params[12] = RequestingNick;
 			*(ScriptString**)&params[24] = Message;
@@ -49,9 +49,9 @@ namespace UnrealScript
 		}
 		void OnFriendMessageReceived(byte LocalUserNum, OnlineSubsystem::UniqueNetId SendingPlayer, ScriptString* SendingNick, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnFriendMessageReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28179);
 			byte params[33] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = SendingPlayer;
 			*(ScriptString**)&params[12] = SendingNick;
 			*(ScriptString**)&params[24] = Message;
@@ -59,16 +59,16 @@ namespace UnrealScript
 		}
 		void OnLoginChange(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnLoginChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28184);
 			byte params[1] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnGameInviteReceived(byte LocalUserNum, ScriptString* InviterName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_OnlineFriendMessages.OnGameInviteReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28186);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptString**)&params[4] = InviterName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

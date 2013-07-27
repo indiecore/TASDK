@@ -29,19 +29,19 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(ParticleSystem, PS_DeathTrail, 372)
 		ADD_OBJECT(ParticleSystem, PS_DeathOnBreak, 368)
-		ADD_STRUCT(Object::Vector, DeathScale, 356)
-		ADD_STRUCT(Object::Vector, DeathImpulseDir, 344)
+		ADD_STRUCT(Vector, DeathScale, 356)
+		ADD_STRUCT(Vector, DeathImpulseDir, 344)
 		ADD_OBJECT(StaticMesh, DeathStaticMesh, 340)
 		ADD_STRUCT(float, DeathBoneScale, 336)
 		ADD_STRUCT(float, DeathPercentToActuallySpawn, 332)
-		ADD_STRUCT(Object::Vector, BreakSpeed, 320)
+		ADD_STRUCT(Vector, BreakSpeed, 320)
 		ADD_STRUCT(float, OwnerVehicleMaxHealth, 316)
 		ADD_STRUCT(float, BreakTimer, 312)
 		ADD_STRUCT(ScriptName, BrokenBone, 304)
 		ADD_OBJECT(ParticleSystem, PS_DamageTrail, 300)
 		ADD_OBJECT(ParticleSystem, PS_DamageOnBreak, 296)
-		ADD_STRUCT(Object::Vector, DamageScale, 284)
-		ADD_STRUCT(Object::Vector, DefaultBreakDir, 272)
+		ADD_STRUCT(Vector, DamageScale, 284)
+		ADD_STRUCT(Vector, DefaultBreakDir, 272)
 		ADD_STRUCT(float, BreakTime, 268)
 		ADD_STRUCT(float, BreakThreshold, 264)
 		ADD_OBJECT(StaticMesh, BreakMesh, 260)
@@ -58,28 +58,28 @@ namespace UnrealScript
 		ADD_BOOL(bControlStrFollowsHealth, 236, 0x4)
 		ADD_BOOL(bOnDamageActive, 236, 0x2)
 		ADD_BOOL(bInitialized, 236, 0x1)
-		void BreakApart(Object::Vector PartLocation, bool bIsVisible)
+		void BreakApart(Vector PartLocation, bool bIsVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_Damage.BreakApart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35371);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = PartLocation;
+			*(Vector*)params = PartLocation;
 			*(bool*)&params[12] = bIsVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void BreakApartOnDeath(Object::Vector PartLocation, bool bIsVisible)
+		void BreakApartOnDeath(Vector PartLocation, bool bIsVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_Damage.BreakApartOnDeath");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35374);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = PartLocation;
+			*(Vector*)params = PartLocation;
 			*(bool*)&params[12] = bIsVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float RestorePart()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKSkelControl_Damage.RestorePart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35377);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 	};
 }

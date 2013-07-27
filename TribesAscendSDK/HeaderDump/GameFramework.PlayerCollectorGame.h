@@ -16,9 +16,9 @@ namespace UnrealScript
 		ADD_STRUCT(int, NumberOfClientsToWaitFor, 884)
 		class PlayerController* Login(ScriptString* Portal, ScriptString* Options, OnlineSubsystem::UniqueNetId UniqueId, ScriptString*& ErrorMessage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.PlayerCollectorGame.Login");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32885);
 			byte params[48] = { NULL };
-			*(ScriptString**)&params[0] = Portal;
+			*(ScriptString**)params = Portal;
 			*(ScriptString**)&params[12] = Options;
 			*(OnlineSubsystem::UniqueNetId*)&params[24] = UniqueId;
 			*(ScriptString**)&params[32] = ErrorMessage;
@@ -28,9 +28,9 @@ namespace UnrealScript
 		}
 		void GetSeamlessTravelActorList(bool bToEntry, ScriptArray<class Actor*>& ActorList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.PlayerCollectorGame.GetSeamlessTravelActorList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32892);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bToEntry;
+			*(bool*)params = bToEntry;
 			*(ScriptArray<class Actor*>*)&params[4] = ActorList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ActorList = *(ScriptArray<class Actor*>*)&params[4];

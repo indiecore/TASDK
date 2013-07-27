@@ -18,37 +18,37 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, ScoreBarMC, 3116)
 		void Init(class LocalPlayer* Player)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GfxTrHudTeam.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54270);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = Player;
+			*(class LocalPlayer**)params = Player;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* InitMessageRow()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GfxTrHudTeam.InitMessageRow");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54272);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GFxObject**)&params[0];
+			return *(class GFxObject**)params;
 		}
 		void ClearStats(bool clearScores)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GfxTrHudTeam.ClearStats");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54274);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = clearScores;
+			*(bool*)params = clearScores;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateGameHUD(class UTPlayerReplicationInfo* PRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GfxTrHudTeam.UpdateGameHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54277);
 			byte params[4] = { NULL };
-			*(class UTPlayerReplicationInfo**)&params[0] = PRI;
+			*(class UTPlayerReplicationInfo**)params = PRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetRank(class PlayerReplicationInfo* PRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GfxTrHudTeam.GetRank");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54284);
 			byte params[16] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = PRI;
+			*(class PlayerReplicationInfo**)params = PRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}

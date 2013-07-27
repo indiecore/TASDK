@@ -47,7 +47,7 @@ namespace UnrealScript
 			eSZ_RIGHT = 3,
 			eSZ_MAX = 4,
 		};
-		class TitleSafeZoneArea
+		struct TitleSafeZoneArea
 		{
 		public:
 			ADD_STRUCT(float, MaxPercentX, 0)
@@ -55,7 +55,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, MaxPercentY, 4)
 			ADD_STRUCT(float, RecommendedPercentY, 12)
 		};
-		class PerPlayerSplitscreenData
+		struct PerPlayerSplitscreenData
 		{
 		public:
 			ADD_STRUCT(float, OriginY, 12)
@@ -63,12 +63,12 @@ namespace UnrealScript
 			ADD_STRUCT(float, SizeY, 4)
 			ADD_STRUCT(float, SizeX, 0)
 		};
-		class SplitscreenData
+		struct SplitscreenData
 		{
 		public:
 			ADD_STRUCT(ScriptArray<GameViewportClient::PerPlayerSplitscreenData>, PlayerData, 0)
 		};
-		class DebugDisplayProperty
+		struct DebugDisplayProperty
 		{
 		public:
 			ADD_BOOL(bSpecialProperty, 12, 0x1)
@@ -99,7 +99,7 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_FExec, 64)
 		ADD_STRUCT(Object::Pointer, Viewport, 68)
 		ADD_STRUCT(Object::Pointer, ViewportFrame, 72)
-		ADD_STRUCT(Object::QWord, ShowFlags, 100)
+		ADD_STRUCT(QWord, ShowFlags, 100)
 		ADD_BOOL(bDisplayingUIMouseCursor, 168, 0x2)
 		ADD_BOOL(bUIMouseCaptureOverride, 168, 0x4)
 		ADD_BOOL(bOverrideDiffuseAndSpecular, 168, 0x8)
@@ -111,17 +111,17 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, ScaleformInteraction, 248)
 		ScriptString* ConsoleCommand(ScriptString* Command)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.ConsoleCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12994);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Command;
+			*(ScriptString**)params = Command;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		bool HandleInputKey(int ControllerId, ScriptName Key, Object::EInputEvent EventType, float AmountDepressed, bool bGamepad)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.HandleInputKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17875);
 			byte params[25] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptName*)&params[4] = Key;
 			*(Object::EInputEvent*)&params[12] = EventType;
 			*(float*)&params[16] = AmountDepressed;
@@ -131,9 +131,9 @@ namespace UnrealScript
 		}
 		bool HandleInputAxis(int ControllerId, ScriptName Key, float Delta, float DeltaTime, bool bGamepad)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.HandleInputAxis");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17882);
 			byte params[28] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptName*)&params[4] = Key;
 			*(float*)&params[12] = Delta;
 			*(float*)&params[16] = DeltaTime;
@@ -143,62 +143,62 @@ namespace UnrealScript
 		}
 		bool HandleInputChar(int ControllerId, ScriptString* Unicode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.HandleInputChar");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17889);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptString**)&params[4] = Unicode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void GetViewportSize(Object::Vector2D& out_ViewportSize)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.GetViewportSize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17894);
 			byte params[8] = { NULL };
-			*(Object::Vector2D*)&params[0] = out_ViewportSize;
+			*(Object::Vector2D*)params = out_ViewportSize;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_ViewportSize = *(Object::Vector2D*)&params[0];
+			out_ViewportSize = *(Object::Vector2D*)params;
 		}
 		bool IsFullScreenViewport()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.IsFullScreenViewport");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17896);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool ShouldForceFullscreenViewport()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.ShouldForceFullscreenViewport");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17898);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		int GetNumCustomInteractions()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.GetNumCustomInteractions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17900);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		ScriptClass* GetCustomInteractionClass(int InIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.GetCustomInteractionClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17902);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = InIndex;
+			*(int*)params = InIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}
 		void SetCustomInteractionObject(class Interaction* InInteraction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.SetCustomInteractionObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17905);
 			byte params[4] = { NULL };
-			*(class Interaction**)&params[0] = InInteraction;
+			*(class Interaction**)params = InInteraction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class LocalPlayer* CreatePlayer(int ControllerId, ScriptString*& OutError, bool bSpawnActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.CreatePlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17907);
 			byte params[24] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptString**)&params[4] = OutError;
 			*(bool*)&params[16] = bSpawnActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -207,57 +207,57 @@ namespace UnrealScript
 		}
 		int AddLocalPlayer(class LocalPlayer* NewPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.AddLocalPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17914);
 			byte params[8] = { NULL };
-			*(class LocalPlayer**)&params[0] = NewPlayer;
+			*(class LocalPlayer**)params = NewPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		int RemoveLocalPlayer(class LocalPlayer* ExistingPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.RemoveLocalPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17917);
 			byte params[8] = { NULL };
-			*(class LocalPlayer**)&params[0] = ExistingPlayer;
+			*(class LocalPlayer**)params = ExistingPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		void NotifyPlayerAdded(int PlayerIndex, class LocalPlayer* AddedPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.NotifyPlayerAdded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17919);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			*(class LocalPlayer**)&params[4] = AddedPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool RemovePlayer(class LocalPlayer* ExPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.RemovePlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17920);
 			byte params[8] = { NULL };
-			*(class LocalPlayer**)&params[0] = ExPlayer;
+			*(class LocalPlayer**)params = ExPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void NotifyPlayerRemoved(int PlayerIndex, class LocalPlayer* RemovedPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.NotifyPlayerRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17924);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			*(class LocalPlayer**)&params[4] = RemovedPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class LocalPlayer* FindPlayerByControllerId(int ControllerId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.FindPlayerByControllerId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17925);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class LocalPlayer**)&params[4];
 		}
 		bool CreateViewportConsole(ScriptClass* vpcClass, ScriptString*& OutError)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.CreateViewportConsole");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17929);
 			byte params[20] = { NULL };
-			*(ScriptClass**)&params[0] = vpcClass;
+			*(ScriptClass**)params = vpcClass;
 			*(ScriptString**)&params[4] = OutError;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutError = *(ScriptString**)&params[4];
@@ -265,140 +265,140 @@ namespace UnrealScript
 		}
 		bool Init(ScriptString*& OutError)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17933);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = OutError;
+			*(ScriptString**)params = OutError;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutError = *(ScriptString**)&params[0];
+			OutError = *(ScriptString**)params;
 			return *(bool*)&params[12];
 		}
 		bool CreateInitialPlayer(ScriptString*& OutError)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.CreateInitialPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17945);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = OutError;
+			*(ScriptString**)params = OutError;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutError = *(ScriptString**)&params[0];
+			OutError = *(ScriptString**)params;
 			return *(bool*)&params[12];
 		}
 		int InsertInteraction(class Interaction* NewInteraction, int InIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.InsertInteraction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17955);
 			byte params[12] = { NULL };
-			*(class Interaction**)&params[0] = NewInteraction;
+			*(class Interaction**)params = NewInteraction;
 			*(int*)&params[4] = InIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void GameSessionEnded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.GameSessionEnded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17961);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetSplitscreenConfiguration(GameViewportClient::ESplitScreenType SplitType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.SetSplitscreenConfiguration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17963);
 			byte params[1] = { NULL };
-			*(GameViewportClient::ESplitScreenType*)&params[0] = SplitType;
+			*(GameViewportClient::ESplitScreenType*)params = SplitType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		GameViewportClient::ESplitScreenType GetSplitscreenConfiguration()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.GetSplitscreenConfiguration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17965);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(GameViewportClient::ESplitScreenType*)&params[0];
+			return *(GameViewportClient::ESplitScreenType*)params;
 		}
 		void UpdateActiveSplitscreenType()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.UpdateActiveSplitscreenType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17967);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LayoutPlayers()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.LayoutPlayers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17971);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void GetSubtitleRegion(Object::Vector2D& MinPos, Object::Vector2D& MaxPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.GetSubtitleRegion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17977);
 			byte params[16] = { NULL };
-			*(Object::Vector2D*)&params[0] = MinPos;
+			*(Object::Vector2D*)params = MinPos;
 			*(Object::Vector2D*)&params[8] = MaxPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			MinPos = *(Object::Vector2D*)&params[0];
+			MinPos = *(Object::Vector2D*)params;
 			MaxPos = *(Object::Vector2D*)&params[8];
 		}
 		int ConvertLocalPlayerToGamePlayerIndex(class LocalPlayer* LPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.ConvertLocalPlayerToGamePlayerIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17980);
 			byte params[8] = { NULL };
-			*(class LocalPlayer**)&params[0] = LPlayer;
+			*(class LocalPlayer**)params = LPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		bool HasTopSafeZone(int LocalPlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.HasTopSafeZone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17983);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = LocalPlayerIndex;
+			*(int*)params = LocalPlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool HasBottomSafeZone(int LocalPlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.HasBottomSafeZone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17986);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = LocalPlayerIndex;
+			*(int*)params = LocalPlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool HasLeftSafeZone(int LocalPlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.HasLeftSafeZone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17989);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = LocalPlayerIndex;
+			*(int*)params = LocalPlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool HasRightSafeZone(int LocalPlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.HasRightSafeZone");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17992);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = LocalPlayerIndex;
+			*(int*)params = LocalPlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void GetPixelSizeOfScreen(float& out_Width, float& out_Height, class Canvas* Canvas, int LocalPlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.GetPixelSizeOfScreen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17995);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = out_Width;
+			*(float*)params = out_Width;
 			*(float*)&params[4] = out_Height;
 			*(class Canvas**)&params[8] = Canvas;
 			*(int*)&params[12] = LocalPlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_Width = *(float*)&params[0];
+			out_Width = *(float*)params;
 			out_Height = *(float*)&params[4];
 		}
 		void CalculateSafeZoneValues(float& out_Horizontal, float& out_Vertical, class Canvas* Canvas, int LocalPlayerIndex, bool bUseMaxPercent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.CalculateSafeZoneValues");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18000);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = out_Horizontal;
+			*(float*)params = out_Horizontal;
 			*(float*)&params[4] = out_Vertical;
 			*(class Canvas**)&params[8] = Canvas;
 			*(int*)&params[12] = LocalPlayerIndex;
 			*(bool*)&params[16] = bUseMaxPercent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_Horizontal = *(float*)&params[0];
+			out_Horizontal = *(float*)params;
 			out_Vertical = *(float*)&params[4];
 		}
 		bool CalculateDeadZoneForAllSides(class LocalPlayer* LPlayer, class Canvas* Canvas, float& fTopSafeZone, float& fBottomSafeZone, float& fLeftSafeZone, float& fRightSafeZone, bool bUseMaxPercent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.CalculateDeadZoneForAllSides");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18015);
 			byte params[32] = { NULL };
-			*(class LocalPlayer**)&params[0] = LPlayer;
+			*(class LocalPlayer**)params = LPlayer;
 			*(class Canvas**)&params[4] = Canvas;
 			*(float*)&params[8] = fTopSafeZone;
 			*(float*)&params[12] = fBottomSafeZone;
@@ -414,52 +414,52 @@ namespace UnrealScript
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18031);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawTitleSafeArea(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.DrawTitleSafeArea");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18033);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostRender(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.PostRender");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18035);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayProgressMessage(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.DisplayProgressMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18038);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawTransition(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.DrawTransition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18051);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawTransitionMessage(class Canvas* Canvas, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.DrawTransitionMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18058);
 			byte params[16] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			*(ScriptString**)&params[4] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetProgressMessage(PlayerController::EProgressMessageType MessageType, ScriptString* Message, ScriptString* Title, bool bIgnoreFutureNetworkMessages)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.SetProgressMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18075);
 			byte params[29] = { NULL };
-			*(PlayerController::EProgressMessageType*)&params[0] = MessageType;
+			*(PlayerController::EProgressMessageType*)params = MessageType;
 			*(ScriptString**)&params[4] = Message;
 			*(ScriptString**)&params[16] = Title;
 			*(bool*)&params[28] = bIgnoreFutureNetworkMessages;
@@ -467,57 +467,57 @@ namespace UnrealScript
 		}
 		void NotifyConnectionError(ScriptString* Message, ScriptString* Title)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.NotifyConnectionError");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18081);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Message;
+			*(ScriptString**)params = Message;
 			*(ScriptString**)&params[12] = Title;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetProgressTime(float T)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.SetProgressTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18085);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = T;
+			*(float*)params = T;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearProgressMessages()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.ClearProgressMessages");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18087);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class LocalPlayer* GetPlayerOwner(int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.GetPlayerOwner");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18089);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class LocalPlayer**)&params[4];
 		}
 		void FixupOwnerReferences()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.FixupOwnerReferences");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18092);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnPrimaryPlayerSwitch(class LocalPlayer* OldPrimaryPlayer, class LocalPlayer* NewPrimaryPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.OnPrimaryPlayerSwitch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18093);
 			byte params[8] = { NULL };
-			*(class LocalPlayer**)&params[0] = OldPrimaryPlayer;
+			*(class LocalPlayer**)params = OldPrimaryPlayer;
 			*(class LocalPlayer**)&params[4] = NewPrimaryPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BecomePrimaryPlayer(int PlayerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.BecomePrimaryPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18096);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DebugSetUISystemEnabled(bool bOldUISystemActive, bool bGFxUISystemActive)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameViewportClient.DebugSetUISystemEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18105);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bOldUISystemActive;
+			*(bool*)params = bOldUISystemActive;
 			*(bool*)&params[4] = bGFxUISystemActive;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

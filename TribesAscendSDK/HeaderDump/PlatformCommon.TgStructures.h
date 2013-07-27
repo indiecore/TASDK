@@ -15,7 +15,7 @@ namespace UnrealScript
 			CMTT_Deployable = 1,
 			CMTT_MAX = 2,
 		};
-		class CombatMessageInfo
+		struct CombatMessageInfo
 		{
 		public:
 			ADD_STRUCT(int, nSourceItemId, 32)

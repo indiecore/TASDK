@@ -15,7 +15,7 @@ namespace UnrealScript
 			DPOM_Multiplier = 1,
 			DPOM_MAX = 2,
 		};
-		class DamageParameters
+		struct DamageParameters
 		{
 		public:
 			ADD_STRUCT(float, Momentum, 12)
@@ -23,7 +23,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, BaseDamage, 4)
 			ADD_STRUCT(ApexDestructibleDamageParameters::EDamageParameterOverrideMode, OverrideMode, 0)
 		};
-		class DamagePair
+		struct DamagePair
 		{
 		public:
 			ADD_STRUCT(ApexDestructibleDamageParameters::DamageParameters, Params, 8)

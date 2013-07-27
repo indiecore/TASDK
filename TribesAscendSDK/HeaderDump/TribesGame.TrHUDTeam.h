@@ -12,7 +12,7 @@ namespace UnrealScript
 		ADD_STRUCT(int, m_nLastMessageCode, 2492)
 		void Timer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUDTeam.Timer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96623);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -512,7 +512,7 @@ namespace UnrealScript
 			GWS_TIE = 3,
 			GWS_MAX = 4,
 		};
-		class PaperDollInfo
+		struct PaperDollInfo
 		{
 		public:
 			ADD_BOOL(bIsLoading, 52, 0x2)
@@ -524,32 +524,32 @@ namespace UnrealScript
 			ADD_OBJECT(PhysicsAsset, PhysAsset, 32)
 			ADD_OBJECT(SkeletalMesh, SkelMesh, 28)
 			ADD_STRUCT(float, Scale, 24)
-			ADD_STRUCT(Object::Rotator, Rotation, 12)
-			ADD_STRUCT(Object::Vector, Translation, 0)
+			ADD_STRUCT(Rotator, Rotation, 12)
+			ADD_STRUCT(Vector, Translation, 0)
 		};
-		class TrTakeEffectInfo
+		struct TrTakeEffectInfo
 		{
 		public:
-			ADD_STRUCT(Object::Vector, HitLocation, 0)
+			ADD_STRUCT(Vector, HitLocation, 0)
 			ADD_OBJECT(ScriptClass, EffectForm, 12)
 		};
-		class TrTakeHitInfo
+		struct TrTakeHitInfo
 		{
 		public:
 			ADD_STRUCT(int, Damage, 0)
-			ADD_STRUCT(Object::Vector, HitLocation, 4)
-			ADD_STRUCT(Object::Vector, Momentum, 16)
+			ADD_STRUCT(Vector, HitLocation, 4)
+			ADD_STRUCT(Vector, Momentum, 16)
 			ADD_OBJECT(ScriptClass, DamageType, 28)
 			ADD_STRUCT(ScriptName, HitBone, 32)
 		};
-		class OffhandAnimation
+		struct OffhandAnimation
 		{
 		public:
 			ADD_STRUCT(ScriptName, m_OffhandUseType, 0)
 			ADD_STRUCT(ScriptName, m_AnimName, 8)
 			ADD_BOOL(m_bFullBody, 16, 0x1)
 		};
-		class ObjectiveMICInfo
+		struct ObjectiveMICInfo
 		{
 		public:
 			ADD_STRUCT(int, MyTeam, 0)
@@ -558,13 +558,13 @@ namespace UnrealScript
 			ADD_STRUCT(int, IsContested, 12)
 			ADD_STRUCT(int, Flip, 16)
 		};
-		class EffectFormOverwrite
+		struct EffectFormOverwrite
 		{
 		public:
 			ADD_OBJECT(Material, Mat, 4)
 			ADD_STRUCT(TrObject::EffectFormMatTypes, eType, 0)
 		};
-		class TrEventCredits
+		struct TrEventCredits
 		{
 		public:
 			ADD_STRUCT(TrObject::TrCreditEventType, EventType, 0)
@@ -573,10 +573,10 @@ namespace UnrealScript
 			ADD_STRUCT(int, MsgIdx, 12)
 			ADD_BOOL(bIsBroadcast, 16, 0x1)
 		};
-		class TR_HUD_INFO
+		struct TR_HUD_INFO
 		{
 		public:
-			ADD_STRUCT(Object::Vector, vScreenLoc, 0)
+			ADD_STRUCT(Vector, vScreenLoc, 0)
 			ADD_STRUCT(float, fScale, 12)
 			ADD_STRUCT(float, fAlphaLevel, 16)
 			ADD_STRUCT(float, fLastSeenTime, 20)

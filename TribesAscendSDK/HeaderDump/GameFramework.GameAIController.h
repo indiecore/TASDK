@@ -47,112 +47,112 @@ namespace UnrealScript
 		ADD_OBJECT(AITree, AITree, 924)
 		void AllCommands(ScriptClass* BaseClass, class GameAICommand*& Cmd)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.AllCommands");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30827);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = BaseClass;
+			*(ScriptClass**)params = BaseClass;
 			*(class GameAICommand**)&params[4] = Cmd;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Cmd = *(class GameAICommand**)&params[4];
 		}
 		void PushCommand(class GameAICommand* NewCommand)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.PushCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30830);
 			byte params[4] = { NULL };
-			*(class GameAICommand**)&params[0] = NewCommand;
+			*(class GameAICommand**)params = NewCommand;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopCommand(class GameAICommand* ToBePoppedCommand)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.PopCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30832);
 			byte params[4] = { NULL };
-			*(class GameAICommand**)&params[0] = ToBePoppedCommand;
+			*(class GameAICommand**)params = ToBePoppedCommand;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AbortCommand(class GameAICommand* AbortCmd, ScriptClass* AbortClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.AbortCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30834);
 			byte params[12] = { NULL };
-			*(class GameAICommand**)&params[0] = AbortCmd;
+			*(class GameAICommand**)params = AbortCmd;
 			*(ScriptClass**)&params[4] = AbortClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		class GameAICommand* GetActiveCommand()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.GetActiveCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30838);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GameAICommand**)&params[0];
+			return *(class GameAICommand**)params;
 		}
 		void CheckCommandCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.CheckCommandCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30840);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DumpCommandStack()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.DumpCommandStack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30841);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class GameAICommand* FindCommandOfClass(ScriptClass* SearchClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.FindCommandOfClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30842);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = SearchClass;
+			*(ScriptClass**)params = SearchClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GameAICommand**)&params[4];
 		}
 		class GameAICommand* GetAICommandInStack(ScriptClass* InClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.GetAICommandInStack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30845);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = InClass;
+			*(ScriptClass**)params = InClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GameAICommand**)&params[4];
 		}
 		float GetDestinationOffset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.GetDestinationOffset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30848);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void ReachedMoveGoal()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.ReachedMoveGoal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30850);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReachedIntermediateMoveGoal()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.ReachedIntermediateMoveGoal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30851);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30852);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RecordDemoAILog(ScriptString* LogText)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.RecordDemoAILog");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30853);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = LogText;
+			*(ScriptString**)params = LogText;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AILog_Internal(ScriptString* LogText, ScriptName LogCategory, bool bForce)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.AILog_Internal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30855);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = LogText;
+			*(ScriptString**)params = LogText;
 			*(ScriptName*)&params[12] = LogCategory;
 			*(bool*)&params[20] = bForce;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetDesiredRotation(Object::Rotator TargetDesiredRotation, bool InLockDesiredRotation, bool InUnlockWhenReached, float InterpolationTime)
+		void SetDesiredRotation(Rotator TargetDesiredRotation, bool InLockDesiredRotation, bool InUnlockWhenReached, float InterpolationTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.SetDesiredRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30859);
 			byte params[24] = { NULL };
-			*(Object::Rotator*)&params[0] = TargetDesiredRotation;
+			*(Rotator*)params = TargetDesiredRotation;
 			*(bool*)&params[12] = InLockDesiredRotation;
 			*(bool*)&params[16] = InUnlockWhenReached;
 			*(float*)&params[20] = InterpolationTime;
@@ -160,10 +160,10 @@ namespace UnrealScript
 		}
 		ScriptString* GetActionString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAIController.GetActionString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30873);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

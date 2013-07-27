@@ -10,7 +10,7 @@ namespace UnrealScript
 	class K2Input_Vector : public K2Input
 	{
 	public:
-		ADD_STRUCT(Object::Vector, DefaultVector, 84)
+		ADD_STRUCT(Vector, DefaultVector, 84)
 	};
 }
 #undef ADD_STRUCT

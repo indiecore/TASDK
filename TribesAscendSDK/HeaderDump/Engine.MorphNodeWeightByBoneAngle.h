@@ -25,7 +25,7 @@ namespace UnrealScript
 	class MorphNodeWeightByBoneAngle : public MorphNodeWeightBase
 	{
 	public:
-		class BoneAngleMorph
+		struct BoneAngleMorph
 		{
 		public:
 			ADD_STRUCT(float, TargetWeight, 4)

@@ -39,9 +39,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, ServerName, 540)
 		class WebApplication* GetApplication(ScriptString* URI, ScriptString*& SubURI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.GetApplication");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34118);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = URI;
+			*(ScriptString**)params = URI;
 			*(ScriptString**)&params[12] = SubURI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			SubURI = *(ScriptString**)&params[12];
@@ -49,26 +49,26 @@ namespace UnrealScript
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34251);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34256);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void GainedChild(class Actor* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.GainedChild");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34258);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = C;
+			*(class Actor**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LostChild(class Actor* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebServer.LostChild");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34260);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = C;
+			*(class Actor**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

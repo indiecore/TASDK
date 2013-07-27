@@ -238,216 +238,216 @@ namespace UnrealScript
 		ADD_OBJECT(GFxTrPage_Queued, QueuedPage, 96)
 		class GFxTrPage* GetActivePage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.GetActivePage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54632);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GFxTrPage**)&params[0];
+			return *(class GFxTrPage**)params;
 		}
 		class GFxTrPage* PopPage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PopPage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56728);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GFxTrPage**)&params[0];
+			return *(class GFxTrPage**)params;
 		}
 		bool NavigateGold(bool bViaStore)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.NavigateGold");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56739);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bViaStore;
+			*(bool*)params = bViaStore;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100332);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PopupData(class GFxObject* Obj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PopupData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100333);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Obj;
+			*(class GFxObject**)params = Obj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopupComplete(int Action, ScriptString* TextInput)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PopupComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100335);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Action;
+			*(int*)params = Action;
 			*(ScriptString**)&params[4] = TextInput;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int TakeFocus(int Index, class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TakeFocus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100341);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(class GFxObject**)&params[4] = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int TakeAction(int Index, class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TakeAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100345);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(class GFxObject**)&params[4] = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void ActionUp()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ActionUp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100350);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ActionDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ActionDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100351);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int ModifyAction(int ActionIndex, class GFxObject* DataList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ModifyAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100352);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			*(class GFxObject**)&params[4] = DataList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void ModifyFocus(int ActionIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ModifyFocus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100356);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HelpButton(int ActionIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.HelpButton");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100358);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProfileUp(int ActionIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ProfileUp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100360);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProfileDown(int ActionIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ProfileDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100362);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PushPage(class GFxTrPage* Page)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PushPage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100364);
 			byte params[4] = { NULL };
-			*(class GFxTrPage**)&params[0] = Page;
+			*(class GFxTrPage**)params = Page;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PushOpen(class GFxTrPage* Page)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PushOpen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100366);
 			byte params[4] = { NULL };
-			*(class GFxTrPage**)&params[0] = Page;
+			*(class GFxTrPage**)params = Page;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PopBack()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PopBack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100368);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearStack()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ClearStack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100369);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PushOpenMain()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PushOpenMain");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100371);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PushOpenParty()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PushOpenParty");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100372);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PushOpenClassSelect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PushOpenClassSelect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100373);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PushOpenLogin()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PushOpenLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100374);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TravelToMain()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TravelToMain");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100375);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TravelToClasses()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TravelToClasses");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100376);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TravelToFriends()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TravelToFriends");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100377);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TravelToSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TravelToSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100378);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TravelToBundles()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TravelToBundles");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100379);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TravelToStore()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.TravelToStore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100380);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowInGameModel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ShowInGameModel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100382);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PromoAction(int ActionIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.PromoAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100383);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SelectedFeature(int ActionIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.SelectedFeature");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100385);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ActionIndex;
+			*(int*)params = ActionIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowReticule(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.ShowReticule");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100387);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SaveReticule(class GFxObject* Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPageManager.SaveReticule");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100389);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = Data;
+			*(class GFxObject**)params = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

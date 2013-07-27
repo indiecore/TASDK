@@ -7,42 +7,42 @@ namespace UnrealScript
 	public:
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ErrorDialog.OnTopMostView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38043);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPlayOpenAnimation;
+			*(bool*)params = bPlayOpenAnimation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetTitle(ScriptString* Title)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ErrorDialog.SetTitle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38045);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Title;
+			*(ScriptString**)params = Title;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetInfo(ScriptString* Info)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ErrorDialog.SetInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38047);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Info;
+			*(ScriptString**)params = Info;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetButtonLabel(ScriptString* ButtonLabel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ErrorDialog.SetButtonLabel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38049);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = ButtonLabel;
+			*(ScriptString**)params = ButtonLabel;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnViewClosed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ErrorDialog.OnViewClosed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38051);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_ErrorDialog.DisableSubComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38052);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDisableComponents;
+			*(bool*)params = bDisableComponents;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

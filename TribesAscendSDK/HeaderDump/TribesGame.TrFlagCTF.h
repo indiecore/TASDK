@@ -15,66 +15,66 @@ namespace UnrealScript
 		ADD_STRUCT(int, m_LastReturnedTime, 932)
 		void LogTaken(class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.LogTaken");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88574);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogDropped(class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.LogDropped");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88576);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearHolder()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.ClearHolder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88578);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SendHome(class Controller* Returner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.SendHome");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88586);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = Returner;
+			*(class Controller**)params = Returner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemindPlayerAboutFlagTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.RemindPlayerAboutFlagTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88589);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void BroadcastTakenFromBaseMessage(class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastTakenFromBaseMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88592);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BroadcastTakenDroppedMessage(class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastTakenDroppedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88595);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BroadcastCapturedMessage(class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastCapturedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88598);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BroadcastReturnedMessage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastReturnedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88600);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void BroadcastDroppedMessage(class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagCTF.BroadcastDroppedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88603);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

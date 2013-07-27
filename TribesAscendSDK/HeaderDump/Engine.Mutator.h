@@ -34,30 +34,30 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<ScriptString*>, GroupNames, 480)
 		ADD_OBJECT(Mutator, NextMutator, 476)
 		ADD_BOOL(bUserAdded, 492, 0x1)
-		bool PreventDeath(class Pawn* Killed, class Controller* Killer, ScriptClass* DamageType, Object::Vector HitLocation)
+		bool PreventDeath(class Pawn* Killed, class Controller* Killer, ScriptClass* DamageType, Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.PreventDeath");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17066);
 			byte params[28] = { NULL };
-			*(class Pawn**)&params[0] = Killed;
+			*(class Pawn**)params = Killed;
 			*(class Controller**)&params[4] = Killer;
 			*(ScriptClass**)&params[8] = DamageType;
-			*(Object::Vector*)&params[12] = HitLocation;
+			*(Vector*)&params[12] = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		bool CheckRelevance(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.CheckRelevance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17091);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool OverridePickupQuery(class Pawn* Other, ScriptClass* ItemClass, class Actor* Pickup, byte& bAllowPickup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.OverridePickupQuery");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17100);
 			byte params[17] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			*(ScriptClass**)&params[4] = ItemClass;
 			*(class Actor**)&params[8] = Pickup;
 			params[12] = bAllowPickup;
@@ -67,25 +67,25 @@ namespace UnrealScript
 		}
 		bool HandleRestartGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.HandleRestartGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17132);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool CheckEndGame(class PlayerReplicationInfo* Winner, ScriptString* Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.CheckEndGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17164);
 			byte params[20] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			*(class PlayerReplicationInfo**)params = Winner;
 			*(ScriptString**)&params[4] = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		class NavigationPoint* FindPlayerStart(class Controller* Player, byte InTeam, ScriptString* IncomingName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.FindPlayerStart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17202);
 			byte params[21] = { NULL };
-			*(class Controller**)&params[0] = Player;
+			*(class Controller**)params = Player;
 			params[4] = InTeam;
 			*(ScriptString**)&params[8] = IncomingName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -93,165 +93,165 @@ namespace UnrealScript
 		}
 		bool CanLeaveVehicle(class Vehicle* V, class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.CanLeaveVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17246);
 			byte params[12] = { NULL };
-			*(class Vehicle**)&params[0] = V;
+			*(class Vehicle**)params = V;
 			*(class Pawn**)&params[4] = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20673);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool MutatorIsAllowed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.MutatorIsAllowed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20674);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20676);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Mutate(ScriptString* MutateString, class PlayerController* Sender)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.Mutate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20677);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = MutateString;
+			*(ScriptString**)params = MutateString;
 			*(class PlayerController**)&params[12] = Sender;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ModifyLogin(ScriptString*& Portal, ScriptString*& Options)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.ModifyLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20680);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Portal;
+			*(ScriptString**)params = Portal;
 			*(ScriptString**)&params[12] = Options;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Portal = *(ScriptString**)&params[0];
+			Portal = *(ScriptString**)params;
 			Options = *(ScriptString**)&params[12];
 		}
 		void ModifyPlayer(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.ModifyPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20683);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddMutator(class Mutator* M)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.AddMutator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20685);
 			byte params[4] = { NULL };
-			*(class Mutator**)&params[0] = M;
+			*(class Mutator**)params = M;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AlwaysKeep(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.AlwaysKeep");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20687);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool IsRelevant(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.IsRelevant");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20690);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool CheckReplacement(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.CheckReplacement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20696);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void NotifyLogout(class Controller* Exiting)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.NotifyLogout");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20699);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = Exiting;
+			*(class Controller**)params = Exiting;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyLogin(class Controller* NewPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.NotifyLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20701);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = NewPlayer;
+			*(class Controller**)params = NewPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DriverEnteredVehicle(class Vehicle* V, class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.DriverEnteredVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20703);
 			byte params[8] = { NULL };
-			*(class Vehicle**)&params[0] = V;
+			*(class Vehicle**)params = V;
 			*(class Pawn**)&params[4] = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DriverLeftVehicle(class Vehicle* V, class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.DriverLeftVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20708);
 			byte params[8] = { NULL };
-			*(class Vehicle**)&params[0] = V;
+			*(class Vehicle**)params = V;
 			*(class Pawn**)&params[4] = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InitMutator(ScriptString* Options, ScriptString*& ErrorMessage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.InitMutator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20711);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Options;
+			*(ScriptString**)params = Options;
 			*(ScriptString**)&params[12] = ErrorMessage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ErrorMessage = *(ScriptString**)&params[12];
 		}
 		void GetSeamlessTravelActorList(bool bToEntry, ScriptArray<class Actor*>& ActorList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.GetSeamlessTravelActorList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20714);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bToEntry;
+			*(bool*)params = bToEntry;
 			*(ScriptArray<class Actor*>*)&params[4] = ActorList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ActorList = *(ScriptArray<class Actor*>*)&params[4];
 		}
 		void ScoreObjective(class PlayerReplicationInfo* Scorer, int Score)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.ScoreObjective");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20731);
 			byte params[8] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = Scorer;
+			*(class PlayerReplicationInfo**)params = Scorer;
 			*(int*)&params[4] = Score;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ScoreKill(class Controller* Killer, class Controller* Killed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.ScoreKill");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20734);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)params = Killer;
 			*(class Controller**)&params[4] = Killed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void NetDamage(int OriginalDamage, int& Damage, class Pawn* injured, class Controller* InstigatedBy, Object::Vector HitLocation, Object::Vector& Momentum, ScriptClass* DamageType, class Actor* DamageCauser)
+		void NetDamage(int OriginalDamage, int& Damage, class Pawn* injured, class Controller* InstigatedBy, Vector HitLocation, Vector& Momentum, ScriptClass* DamageType, class Actor* DamageCauser)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Mutator.NetDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20737);
 			byte params[48] = { NULL };
-			*(int*)&params[0] = OriginalDamage;
+			*(int*)params = OriginalDamage;
 			*(int*)&params[4] = Damage;
 			*(class Pawn**)&params[8] = injured;
 			*(class Controller**)&params[12] = InstigatedBy;
-			*(Object::Vector*)&params[16] = HitLocation;
-			*(Object::Vector*)&params[28] = Momentum;
+			*(Vector*)&params[16] = HitLocation;
+			*(Vector*)&params[28] = Momentum;
 			*(ScriptClass**)&params[40] = DamageType;
 			*(class Actor**)&params[44] = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Damage = *(int*)&params[4];
-			Momentum = *(Object::Vector*)&params[28];
+			Momentum = *(Vector*)&params[28];
 		}
 	};
 }

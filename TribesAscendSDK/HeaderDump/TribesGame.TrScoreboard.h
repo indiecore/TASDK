@@ -28,14 +28,14 @@ namespace UnrealScript
 	class TrScoreboard : public Object
 	{
 	public:
-		class TrScoreboardState
+		struct TrScoreboardState
 		{
 		public:
 			ADD_STRUCT(int, DiamondSwordScore, 8)
 			ADD_STRUCT(int, BloodEagleScore, 4)
 			ADD_STRUCT(int, RemainingTime, 0)
 		};
-		class TrScoreSlot
+		struct TrScoreSlot
 		{
 		public:
 			ADD_STRUCT(int, RankIcon, 44)
@@ -67,123 +67,123 @@ namespace UnrealScript
 		ADD_STRUCT(int, MAX_PLAYER_INDEX, 60)
 		int CreditsSort(class TrPlayerReplicationInfo* A, class TrPlayerReplicationInfo* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.CreditsSort");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110681);
 			byte params[12] = { NULL };
-			*(class TrPlayerReplicationInfo**)&params[0] = A;
+			*(class TrPlayerReplicationInfo**)params = A;
 			*(class TrPlayerReplicationInfo**)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int AssistsSort(class TrPlayerReplicationInfo* A, class TrPlayerReplicationInfo* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.AssistsSort");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110683);
 			byte params[12] = { NULL };
-			*(class TrPlayerReplicationInfo**)&params[0] = A;
+			*(class TrPlayerReplicationInfo**)params = A;
 			*(class TrPlayerReplicationInfo**)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		int KillsSort(class TrPlayerReplicationInfo* A, class TrPlayerReplicationInfo* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.KillsSort");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110685);
 			byte params[12] = { NULL };
-			*(class TrPlayerReplicationInfo**)&params[0] = A;
+			*(class TrPlayerReplicationInfo**)params = A;
 			*(class TrPlayerReplicationInfo**)&params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void Initialize(class TrPlayerController* PC, class GfxTrHud* MP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110715);
 			byte params[8] = { NULL };
-			*(class TrPlayerController**)&params[0] = PC;
+			*(class TrPlayerController**)params = PC;
 			*(class GfxTrHud**)&params[4] = MP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Show(bool bIsTeamGame)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.Show");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110718);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bIsTeamGame;
+			*(bool*)params = bIsTeamGame;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Hide()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.Hide");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110720);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ConfigScoreboard()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.ConfigScoreboard");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110721);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110723);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdatePRILists(class TrGameReplicationInfo* TrGRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.UpdatePRILists");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110726);
 			byte params[4] = { NULL };
-			*(class TrGameReplicationInfo**)&params[0] = TrGRI;
+			*(class TrGameReplicationInfo**)params = TrGRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptArray<class PlayerReplicationInfo*> GetBestSortArray(ScriptArray<class PlayerReplicationInfo*> PRIArray)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.GetBestSortArray");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110734);
 			byte params[24] = { NULL };
-			*(ScriptArray<class PlayerReplicationInfo*>*)&params[0] = PRIArray;
+			*(ScriptArray<class PlayerReplicationInfo*>*)params = PRIArray;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptArray<class PlayerReplicationInfo*>*)&params[12];
 		}
 		int GetRank(ScriptArray<class PlayerReplicationInfo*> PRIArray)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.GetRank");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110745);
 			byte params[16] = { NULL };
-			*(ScriptArray<class PlayerReplicationInfo*>*)&params[0] = PRIArray;
+			*(ScriptArray<class PlayerReplicationInfo*>*)params = PRIArray;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[12];
 		}
 		bool ClearSlot(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.ClearSlot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110759);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool UpdateSlot(int Index, class TrPlayerReplicationInfo* PRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.UpdateSlot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110762);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(class TrPlayerReplicationInfo**)&params[4] = PRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		ScriptString* FormatTime(int Seconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.FormatTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110766);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Seconds;
+			*(int*)params = Seconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		void UpdateHeaders(class TrGameReplicationInfo* GRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.UpdateHeaders");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110772);
 			byte params[4] = { NULL };
-			*(class TrGameReplicationInfo**)&params[0] = GRI;
+			*(class TrGameReplicationInfo**)params = GRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsValidScoreboardPlayer(class TrPlayerReplicationInfo* PRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrScoreboard.IsValidScoreboardPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110776);
 			byte params[8] = { NULL };
-			*(class TrPlayerReplicationInfo**)&params[0] = PRI;
+			*(class TrPlayerReplicationInfo**)params = PRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

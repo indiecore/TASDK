@@ -26,20 +26,20 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(ScriptArray<ScriptString*>, EventNames, 240)
-		ADD_STRUCT(Object::Vector, EventNormal, 292)
-		ADD_STRUCT(Object::Vector, EventVelocity, 280)
-		ADD_STRUCT(Object::Vector, EventDirection, 268)
-		ADD_STRUCT(Object::Vector, EventLocation, 256)
+		ADD_STRUCT(Vector, EventNormal, 292)
+		ADD_STRUCT(Vector, EventVelocity, 280)
+		ADD_STRUCT(Vector, EventDirection, 268)
+		ADD_STRUCT(Vector, EventLocation, 256)
 		ADD_STRUCT(float, EventTime, 252)
 		ADD_OBJECT(Actor, Instigator, 236)
 		ADD_BOOL(bUseEmitterLocation, 232, 0x2)
 		ADD_BOOL(bEnabled, 232, 0x1)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_ParticleEventGenerator.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25801);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

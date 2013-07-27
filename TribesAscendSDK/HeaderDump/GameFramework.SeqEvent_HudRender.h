@@ -27,14 +27,14 @@ namespace UnrealScript
 		ADD_STRUCT(float, AuthoredGlobalScale, 272)
 		void RegisterEvent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_HudRender.RegisterEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32970);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Render(class Canvas* TargetCanvas, class HUD* TargetHud)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_HudRender.Render");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32974);
 			byte params[8] = { NULL };
-			*(class Canvas**)&params[0] = TargetCanvas;
+			*(class Canvas**)params = TargetCanvas;
 			*(class HUD**)&params[4] = TargetHud;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

@@ -28,7 +28,7 @@ namespace UnrealScript
 	public:
 		ADD_BOOL(bSuppressSounds, 284, 0x1)
 		ADD_OBJECT(Actor, Target, 268)
-		ADD_STRUCT(Object::Rotator, MaxSpread, 272)
+		ADD_STRUCT(Rotator, MaxSpread, 272)
 		ADD_OBJECT(Actor, Origin, 264)
 		ADD_STRUCT(int, ShotsFired, 288)
 		ADD_STRUCT(byte, FireMode, 260)
@@ -37,19 +37,19 @@ namespace UnrealScript
 		ADD_OBJECT(UTDummyPawn, DummyPawn, 248)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_DummyWeaponFire.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49086);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NotifyDummyFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_DummyWeaponFire.NotifyDummyFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49088);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool Update(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_DummyWeaponFire.Update");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49089);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

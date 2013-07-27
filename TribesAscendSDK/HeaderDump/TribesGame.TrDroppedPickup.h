@@ -35,7 +35,7 @@ namespace UnrealScript
 		ADD_OBJECT(TrCollisionProxy, m_CollisionProxy, 552)
 		ADD_STRUCT(float, m_fMarkerOpacity, 548)
 		ADD_STRUCT(float, m_fCurrentMarkerTime, 544)
-		ADD_STRUCT(Object::Rotator, m_rMarkerRot, 532)
+		ADD_STRUCT(Rotator, m_rMarkerRot, 532)
 		ADD_STRUCT(float, m_fMarkerBlinkSpeed, 528)
 		ADD_STRUCT(float, m_fMarkerScale, 524)
 		ADD_STRUCT(float, m_fMarkerZOffset, 520)
@@ -43,36 +43,36 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, m_AmmoPickupSound, 512)
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87023);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void GiveTo(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.GiveTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87024);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87026);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DoBounce(class Actor* Other, Object::Vector HitNormal)
+		void DoBounce(class Actor* Other, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.DoBounce");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87028);
 			byte params[16] = { NULL };
-			*(class Actor**)&params[0] = Other;
-			*(Object::Vector*)&params[4] = HitNormal;
+			*(class Actor**)params = Other;
+			*(Vector*)&params[4] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void HitWall(Object::Vector HitNormal, class Actor* Wall, 
+		void HitWall(Vector HitNormal, class Actor* Wall, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* WallComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.HitWall");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87031);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = HitNormal;
+			*(Vector*)params = HitNormal;
 			*(class Actor**)&params[12] = Wall;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
@@ -81,26 +81,26 @@ void**)&params[16] = WallComp;
 		}
 		void OnCollisionProxyTouched(class TrPawn* TRP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.OnCollisionProxyTouched");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87035);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = TRP;
+			*(class TrPawn**)params = TRP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87060);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDroppedPickup.PostRenderFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87062);
 			byte params[32] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = Canvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

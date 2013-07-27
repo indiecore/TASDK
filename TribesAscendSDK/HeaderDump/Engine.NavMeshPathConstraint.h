@@ -20,15 +20,15 @@ namespace UnrealScript
 		ADD_OBJECT(NavMeshPathConstraint, NextConstraint, 60)
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPathConstraint.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21046);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetDumpString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPathConstraint.GetDumpString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21047);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

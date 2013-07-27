@@ -13,7 +13,7 @@ namespace UnrealScript
 	class GFxEngine : public Object
 	{
 	public:
-		class GCReference
+		struct GCReference
 		{
 		public:
 			ADD_STRUCT(int, m_statid, 8)

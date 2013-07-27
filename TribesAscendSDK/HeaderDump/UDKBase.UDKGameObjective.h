@@ -35,50 +35,50 @@ namespace UnrealScript
 		ADD_STRUCT(byte, DefenderTeamIndex, 740)
 		ADD_STRUCT(UIRoot::TextureCoordinates, IconCoords, 724)
 		ADD_OBJECT(Texture2D, IconHudTexture, 720)
-		ADD_STRUCT(Object::Vector, HUDLocation, 708)
+		ADD_STRUCT(Vector, HUDLocation, 708)
 		ADD_BOOL(bUnderAttack, 704, 0x2)
 		ADD_BOOL(bAllowOnlyShootable, 704, 0x1)
 		void ObjectiveChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameObjective.ObjectiveChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34876);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class Actor* GetBestViewTarget()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameObjective.GetBestViewTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34877);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Actor**)&params[0];
+			return *(class Actor**)params;
 		}
 		bool BotNearObjective(class AIController* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameObjective.BotNearObjective");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34879);
 			byte params[8] = { NULL };
-			*(class AIController**)&params[0] = C;
+			*(class AIController**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void TriggerFlagEvent(ScriptName EventType, class Controller* EventInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameObjective.TriggerFlagEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34882);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = EventType;
+			*(ScriptName*)params = EventType;
 			*(class Controller**)&params[8] = EventInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetHUDLocation(Object::Vector NewHUDLocation)
+		void SetHUDLocation(Vector NewHUDLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameObjective.SetHUDLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34885);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewHUDLocation;
+			*(Vector*)params = NewHUDLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DrawIcon(class Canvas* Canvas, Object::Vector IconLocation, float IconWidth, float IconAlpha, class UDKPlayerController* PlayerOwner, Object::LinearColor DrawColor)
+		void DrawIcon(class Canvas* Canvas, Vector IconLocation, float IconWidth, float IconAlpha, class UDKPlayerController* PlayerOwner, Object::LinearColor DrawColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameObjective.DrawIcon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34887);
 			byte params[44] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
-			*(Object::Vector*)&params[4] = IconLocation;
+			*(class Canvas**)params = Canvas;
+			*(Vector*)&params[4] = IconLocation;
 			*(float*)&params[16] = IconWidth;
 			*(float*)&params[20] = IconAlpha;
 			*(class UDKPlayerController**)&params[24] = PlayerOwner;
@@ -87,10 +87,10 @@ namespace UnrealScript
 		}
 		byte GetTeamNum()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameObjective.GetTeamNum");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34894);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return params[0];
+			return *params;
 		}
 	};
 }

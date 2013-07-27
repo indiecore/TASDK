@@ -20,34 +20,34 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fHelpTextRemovalTime, 500)
 		bool ShouldShowHelpText_Delegate(TrHelpTextManager::EHelpTextType HelpTextType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_HelpText.ShouldShowHelpText_Delegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74564);
 			byte params[5] = { NULL };
-			*(TrHelpTextManager::EHelpTextType*)&params[0] = HelpTextType;
+			*(TrHelpTextManager::EHelpTextType*)params = HelpTextType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void OnPawnAdded(class Pawn* aPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_HelpText.OnPawnAdded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74569);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = aPawn;
+			*(class Pawn**)params = aPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RequestHelpText()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_HelpText.RequestHelpText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74571);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TryTraceAgainTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_HelpText.TryTraceAgainTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74573);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnPawnRemoved(class Pawn* aPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCollisionProxy_HelpText.OnPawnRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74575);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = aPawn;
+			*(class Pawn**)params = aPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

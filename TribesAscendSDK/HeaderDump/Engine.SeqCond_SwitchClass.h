@@ -9,7 +9,7 @@ namespace UnrealScript
 	class SeqCond_SwitchClass : public SeqCond_SwitchBase
 	{
 	public:
-		class SwitchClassInfo
+		struct SwitchClassInfo
 		{
 		public:
 			ADD_STRUCT(byte, bFallThru, 8)
@@ -18,29 +18,29 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<SeqCond_SwitchClass::SwitchClassInfo>, ClassArray, 208)
 		void VerifyDefaultCaseValue()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqCond_SwitchClass.VerifyDefaultCaseValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26052);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool IsFallThruEnabled(int ValueIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqCond_SwitchClass.IsFallThruEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26053);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ValueIndex;
+			*(int*)params = ValueIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void InsertValueEntry(int InsertIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqCond_SwitchClass.InsertValueEntry");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26056);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = InsertIndex;
+			*(int*)params = InsertIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveValueEntry(int RemoveIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqCond_SwitchClass.RemoveValueEntry");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26058);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = RemoveIndex;
+			*(int*)params = RemoveIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

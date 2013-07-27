@@ -80,103 +80,103 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class SkelControlBase*>, MetaDataSkelControlList, 308)
 		void SetAnim(ScriptName Sequence)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.SetAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10909);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = Sequence;
+			*(ScriptName*)params = Sequence;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayAnim(bool bLoop, float InRate, float StartTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.PlayAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10911);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = bLoop;
+			*(bool*)params = bLoop;
 			*(float*)&params[4] = InRate;
 			*(float*)&params[8] = StartTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.StopAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10915);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplayAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.ReplayAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10916);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPosition(float NewTime, bool bFireNotifies)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.SetPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10917);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = NewTime;
+			*(float*)params = NewTime;
 			*(bool*)&params[4] = bFireNotifies;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetNormalizedPosition()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetNormalizedPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10920);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float FindGroupRelativePosition(float GroupRelativePosition)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.FindGroupRelativePosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10922);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = GroupRelativePosition;
+			*(float*)params = GroupRelativePosition;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float FindGroupPosition(float GroupRelativePosition)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.FindGroupPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10925);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = GroupRelativePosition;
+			*(float*)params = GroupRelativePosition;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		float GetGroupRelativePosition()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetGroupRelativePosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10928);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetGlobalPlayRate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetGlobalPlayRate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10930);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetAnimPlaybackLength()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetAnimPlaybackLength");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10932);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetTimeLeft()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.GetTimeLeft");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10934);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void SetRootBoneAxisOption(AnimNodeSequence::ERootBoneAxis AxisX, AnimNodeSequence::ERootBoneAxis AxisY, AnimNodeSequence::ERootBoneAxis AxisZ)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.SetRootBoneAxisOption");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10936);
 			byte params[3] = { NULL };
-			*(AnimNodeSequence::ERootBoneAxis*)&params[0] = AxisX;
+			*(AnimNodeSequence::ERootBoneAxis*)params = AxisX;
 			*(AnimNodeSequence::ERootBoneAxis*)&params[1] = AxisY;
 			*(AnimNodeSequence::ERootBoneAxis*)&params[2] = AxisZ;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetRootBoneRotationOption(AnimNodeSequence::ERootRotationOption AxisX, AnimNodeSequence::ERootRotationOption AxisY, AnimNodeSequence::ERootRotationOption AxisZ)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeSequence.SetRootBoneRotationOption");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10941);
 			byte params[3] = { NULL };
-			*(AnimNodeSequence::ERootRotationOption*)&params[0] = AxisX;
+			*(AnimNodeSequence::ERootRotationOption*)params = AxisX;
 			*(AnimNodeSequence::ERootRotationOption*)&params[1] = AxisY;
 			*(AnimNodeSequence::ERootRotationOption*)&params[2] = AxisZ;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

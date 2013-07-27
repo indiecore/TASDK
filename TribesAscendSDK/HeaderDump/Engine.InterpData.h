@@ -26,7 +26,7 @@ namespace UnrealScript
 	class InterpData : public SequenceVariable
 	{
 	public:
-		class AnimSetBakeAndPruneStatus
+		struct AnimSetBakeAndPruneStatus
 		{
 		public:
 			ADD_BOOL(bSkipBakeAndPrune, 12, 0x2)

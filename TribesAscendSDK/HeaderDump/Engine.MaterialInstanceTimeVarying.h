@@ -27,7 +27,7 @@ namespace UnrealScript
 	class MaterialInstanceTimeVarying : public MaterialInstance
 	{
 	public:
-		class ParameterValueOverTime
+		struct ParameterValueOverTime
 		{
 		public:
 			ADD_BOOL(bOffsetFromEnd, 44, 0x1)
@@ -40,24 +40,24 @@ namespace UnrealScript
 			ADD_STRUCT(float, StartTime, 16)
 			ADD_STRUCT(Object::Guid, ExpressionGUID, 0)
 		};
-		class FontParameterValueOverTime : public ParameterValueOverTime
+		struct FontParameterValueOverTime : public ParameterValueOverTime
 		{
 		public:
 			ADD_STRUCT(int, FontPage, 52)
 			ADD_OBJECT(Font, FontValue, 48)
 		};
-		class ScalarParameterValueOverTime : public ParameterValueOverTime
+		struct ScalarParameterValueOverTime : public ParameterValueOverTime
 		{
 		public:
 			ADD_STRUCT(Object::InterpCurveFloat, ParameterValueCurve, 52)
 			ADD_STRUCT(float, ParameterValue, 48)
 		};
-		class TextureParameterValueOverTime : public ParameterValueOverTime
+		struct TextureParameterValueOverTime : public ParameterValueOverTime
 		{
 		public:
 			ADD_OBJECT(Texture, ParameterValue, 48)
 		};
-		class VectorParameterValueOverTime : public ParameterValueOverTime
+		struct VectorParameterValueOverTime : public ParameterValueOverTime
 		{
 		public:
 			ADD_STRUCT(Object::InterpCurveVector, ParameterValueCurve, 64)
@@ -71,97 +71,97 @@ namespace UnrealScript
 		ADD_BOOL(bAutoActivateAll, 432, 0x1)
 		void SetParent(class MaterialInterface* NewParent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetParent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19883);
 			byte params[4] = { NULL };
-			*(class MaterialInterface**)&params[0] = NewParent;
+			*(class MaterialInterface**)params = NewParent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetScalarParameterValue(ScriptName ParameterName, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetScalarParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19885);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(float*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetScalarCurveParameterValue(ScriptName ParameterName, Object::InterpCurveFloat& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetScalarCurveParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19888);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(Object::InterpCurveFloat*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(Object::InterpCurveFloat*)&params[8];
 		}
 		void SetScalarStartTime(ScriptName ParameterName, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetScalarStartTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19891);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(float*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetDuration(float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetDuration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19894);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = Value;
+			*(float*)params = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetTextureParameterValue(ScriptName ParameterName, class Texture* Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetTextureParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19896);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(class Texture**)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetVectorParameterValue(ScriptName ParameterName, Object::LinearColor& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetVectorParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19899);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(Object::LinearColor*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(Object::LinearColor*)&params[8];
 		}
 		void SetVectorCurveParameterValue(ScriptName ParameterName, Object::InterpCurveVector& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetVectorCurveParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19902);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(Object::InterpCurveVector*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(Object::InterpCurveVector*)&params[8];
 		}
 		void SetVectorStartTime(ScriptName ParameterName, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetVectorStartTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19905);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(float*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFontParameterValue(ScriptName ParameterName, class Font* FontValue, int FontPage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.SetFontParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19908);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(class Font**)&params[8] = FontValue;
 			*(int*)&params[12] = FontPage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearParameterValues()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.ClearParameterValues");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19912);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float GetMaxDurationFromAllParameters()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInstanceTimeVarying.GetMaxDurationFromAllParameters");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19913);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 	};
 }

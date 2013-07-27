@@ -28,16 +28,16 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, PrototypePawnClass, 1292)
 		ADD_STRUCT(float, MaxDoubleJumpHeight, 1288)
 		ADD_BOOL(bRequiresDoubleJump, 1284, 0x1)
-		bool SuggestJumpVelocity(Object::Vector& JumpVelocity, Object::Vector Destination, Object::Vector Start, bool bRequireFallLanding)
+		bool SuggestJumpVelocity(Vector& JumpVelocity, Vector Destination, Vector Start, bool bRequireFallLanding)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKScout.SuggestJumpVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35314);
 			byte params[44] = { NULL };
-			*(Object::Vector*)&params[0] = JumpVelocity;
-			*(Object::Vector*)&params[12] = Destination;
-			*(Object::Vector*)&params[24] = Start;
+			*(Vector*)params = JumpVelocity;
+			*(Vector*)&params[12] = Destination;
+			*(Vector*)&params[24] = Start;
 			*(bool*)&params[36] = bRequireFallLanding;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			JumpVelocity = *(Object::Vector*)&params[0];
+			JumpVelocity = *(Vector*)params;
 			return *(bool*)&params[40];
 		}
 	};

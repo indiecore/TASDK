@@ -26,11 +26,11 @@ namespace UnrealScript
 	class GameSpecialMove : public Object
 	{
 	public:
-		ADD_STRUCT(Object::Rotator, PreciseRotation, 112)
+		ADD_STRUCT(Rotator, PreciseRotation, 112)
 		ADD_STRUCT(float, PreciseRotationInterpolationTime, 108)
-		ADD_STRUCT(Object::Vector, PreciseDestRelOffset, 96)
+		ADD_STRUCT(Vector, PreciseDestRelOffset, 96)
 		ADD_OBJECT(Actor, PreciseDestBase, 92)
-		ADD_STRUCT(Object::Vector, PreciseDestination, 80)
+		ADD_STRUCT(Vector, PreciseDestination, 80)
 		ADD_BOOL(bForcePrecisePosition, 76, 0x20)
 		ADD_BOOL(bReachedPreciseRotation, 76, 0x10)
 		ADD_BOOL(bReachPreciseRotation, 76, 0x8)
@@ -42,161 +42,161 @@ namespace UnrealScript
 		ADD_OBJECT(GamePawn, PawnOwner, 60)
 		void InitSpecialMove(class GamePawn* inPawn, ScriptName InHandle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.InitSpecialMove");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31883);
 			byte params[12] = { NULL };
-			*(class GamePawn**)&params[0] = inPawn;
+			*(class GamePawn**)params = inPawn;
 			*(ScriptName*)&params[4] = InHandle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InitSpecialMoveFlags(int& out_Flags)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.InitSpecialMoveFlags");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31886);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = out_Flags;
+			*(int*)params = out_Flags;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_Flags = *(int*)&params[0];
+			out_Flags = *(int*)params;
 		}
 		void ExtractSpecialMoveFlags(int Flags)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.ExtractSpecialMoveFlags");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31888);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Flags;
+			*(int*)params = Flags;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CanChainMove(ScriptName NextMove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.CanChainMove");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31890);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = NextMove;
+			*(ScriptName*)params = NextMove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool CanOverrideMoveWith(ScriptName NewMove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.CanOverrideMoveWith");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31893);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = NewMove;
+			*(ScriptName*)params = NewMove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool CanOverrideSpecialMove(ScriptName InMove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.CanOverrideSpecialMove");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31896);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = InMove;
+			*(ScriptName*)params = InMove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool CanDoSpecialMove(bool bForceCheck)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.CanDoSpecialMove");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31899);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bForceCheck;
+			*(bool*)params = bForceCheck;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool InternalCanDoSpecialMove()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.InternalCanDoSpecialMove");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31902);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SpecialMoveStarted(bool bForced, ScriptName PrevMove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.SpecialMoveStarted");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31904);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = bForced;
+			*(bool*)params = bForced;
 			*(ScriptName*)&params[4] = PrevMove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpecialMoveEnded(ScriptName PrevMove, ScriptName NextMove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.SpecialMoveEnded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31907);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = PrevMove;
+			*(ScriptName*)params = PrevMove;
 			*(ScriptName*)&params[8] = NextMove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31910);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SpecialMoveFlagsUpdated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.SpecialMoveFlagsUpdated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31912);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool ShouldReplicate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.ShouldReplicate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31913);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
-		void SetReachPreciseDestination(Object::Vector DestinationToReach, bool bCancel)
+		void SetReachPreciseDestination(Vector DestinationToReach, bool bCancel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.SetReachPreciseDestination");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31915);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = DestinationToReach;
+			*(Vector*)params = DestinationToReach;
 			*(bool*)&params[12] = bCancel;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SetFacePreciseRotation(Object::Rotator RotationToFace, float InterpolationTime)
+		void SetFacePreciseRotation(Rotator RotationToFace, float InterpolationTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.SetFacePreciseRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31918);
 			byte params[16] = { NULL };
-			*(Object::Rotator*)&params[0] = RotationToFace;
+			*(Rotator*)params = RotationToFace;
 			*(float*)&params[12] = InterpolationTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReachedPrecisePosition()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.ReachedPrecisePosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31921);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ResetFacePreciseRotation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.ResetFacePreciseRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31922);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool MessageEvent(ScriptName EventName, class Object* Sender)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.MessageEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31923);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = EventName;
+			*(ScriptName*)params = EventName;
 			*(class Object**)&params[8] = Sender;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
-		void ForcePawnRotation(class Pawn* P, Object::Rotator NewRotation)
+		void ForcePawnRotation(class Pawn* P, Rotator NewRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.ForcePawnRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31927);
 			byte params[16] = { NULL };
-			*(class Pawn**)&params[0] = P;
-			*(Object::Rotator*)&params[4] = NewRotation;
+			*(class Pawn**)params = P;
+			*(Rotator*)&params[4] = NewRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Object::Vector WorldToRelativeOffset(Object::Rotator InRotation, Object::Vector WorldSpaceOffset)
+		Vector WorldToRelativeOffset(Rotator InRotation, Vector WorldSpaceOffset)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.WorldToRelativeOffset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31930);
 			byte params[36] = { NULL };
-			*(Object::Rotator*)&params[0] = InRotation;
-			*(Object::Vector*)&params[12] = WorldSpaceOffset;
+			*(Rotator*)params = InRotation;
+			*(Vector*)&params[12] = WorldSpaceOffset;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[24];
+			return *(Vector*)&params[24];
 		}
-		Object::Vector RelativeToWorldOffset(Object::Rotator InRotation, Object::Vector RelativeSpaceOffset)
+		Vector RelativeToWorldOffset(Rotator InRotation, Vector RelativeSpaceOffset)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameSpecialMove.RelativeToWorldOffset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31934);
 			byte params[36] = { NULL };
-			*(Object::Rotator*)&params[0] = InRotation;
-			*(Object::Vector*)&params[12] = RelativeSpaceOffset;
+			*(Rotator*)params = InRotation;
+			*(Vector*)&params[12] = RelativeSpaceOffset;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[24];
+			return *(Vector*)&params[24];
 		}
 	};
 }

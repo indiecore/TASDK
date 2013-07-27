@@ -153,9 +153,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<Settings::IdToStringMapping>, OwnerMappings, 124)
 		bool GetProfileSettingDefaultId(int ProfileSettingId, int& DefaultId, int& ListIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineProfileSettings.GetProfileSettingDefaultId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22645);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(int*)&params[4] = DefaultId;
 			*(int*)&params[8] = ListIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -165,9 +165,9 @@ namespace UnrealScript
 		}
 		bool GetProfileSettingDefaultInt(int ProfileSettingId, int& DefaultInt)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineProfileSettings.GetProfileSettingDefaultInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22650);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(int*)&params[4] = DefaultInt;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			DefaultInt = *(int*)&params[4];
@@ -175,9 +175,9 @@ namespace UnrealScript
 		}
 		bool GetProfileSettingDefaultFloat(int ProfileSettingId, float& DefaultFloat)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineProfileSettings.GetProfileSettingDefaultFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22654);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ProfileSettingId;
+			*(int*)params = ProfileSettingId;
 			*(float*)&params[4] = DefaultFloat;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			DefaultFloat = *(float*)&params[4];
@@ -185,17 +185,17 @@ namespace UnrealScript
 		}
 		void SetToDefaults()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineProfileSettings.SetToDefaults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22658);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AppendVersionToReadIds()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineProfileSettings.AppendVersionToReadIds");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22659);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ModifyAvailableProfileSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineProfileSettings.ModifyAvailableProfileSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22660);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

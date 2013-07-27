@@ -17,8 +17,8 @@ namespace UnrealScript
 	class TrProj_PrismMine : public TrProj_Mine
 	{
 	public:
-		ADD_STRUCT(Object::Vector, r_vRightHit, 936)
-		ADD_STRUCT(Object::Vector, r_vLeftHit, 924)
+		ADD_STRUCT(Vector, r_vRightHit, 936)
+		ADD_STRUCT(Vector, r_vLeftHit, 924)
 		ADD_STRUCT(ScriptName, m_nSocketTraceName, 916)
 		ADD_OBJECT(ParticleSystem, m_LaserTemplate, 912)
 		ADD_STRUCT(float, m_fTripDistance, 908)
@@ -26,82 +26,82 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IInterface_TrTripNotifier, 900)
 		void PawnEnteredDetonationArea(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_PrismMine.PawnEnteredDetonationArea");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108871);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void InitProjectile(Object::Vector Direction, ScriptClass* ClassToInherit)
+		void InitProjectile(Vector Direction, ScriptClass* ClassToInherit)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_PrismMine.InitProjectile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108873);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = Direction;
+			*(Vector*)params = Direction;
 			*(ScriptClass**)&params[12] = ClassToInherit;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ArmedTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_PrismMine.ArmedTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108876);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShutDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_PrismMine.ShutDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108885);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CreateTripActor()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_PrismMine.CreateTripActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108886);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void TripActivated(class Pawn* Other, Object::Vector ActivateLocation, class TrTripActor* TripActor)
+		void TripActivated(class Pawn* Other, Vector ActivateLocation, class TrTripActor* TripActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_PrismMine.TripActivated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108890);
 			byte params[20] = { NULL };
-			*(class Pawn**)&params[0] = Other;
-			*(Object::Vector*)&params[4] = ActivateLocation;
+			*(class Pawn**)params = Other;
+			*(Vector*)&params[4] = ActivateLocation;
 			*(class TrTripActor**)&params[16] = TripActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class ParticleSystem* GetParticleSystemName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_PrismMine.GetParticleSystemName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108894);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class ParticleSystem**)&params[0];
+			return *(class ParticleSystem**)params;
 		}
-		bool GetTripSocketPosition(bool bIsLeft, Object::Vector& SocketPosition)
+		bool GetTripSocketPosition(bool bIsLeft, Vector& SocketPosition)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_PrismMine.GetTripSocketPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108896);
 			byte params[20] = { NULL };
-			*(bool*)&params[0] = bIsLeft;
-			*(Object::Vector*)&params[4] = SocketPosition;
+			*(bool*)params = bIsLeft;
+			*(Vector*)&params[4] = SocketPosition;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			SocketPosition = *(Object::Vector*)&params[4];
+			SocketPosition = *(Vector*)&params[4];
 			return *(bool*)&params[16];
 		}
 		void OnTripAwake()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_PrismMine.OnTripAwake");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108900);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnTripSleep()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_PrismMine.OnTripSleep");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108901);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddTripActor(class TrTripActor* NewTrip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_PrismMine.AddTripActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108902);
 			byte params[4] = { NULL };
-			*(class TrTripActor**)&params[0] = NewTrip;
+			*(class TrTripActor**)params = NewTrip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveTripActor(class TrTripActor* RemoveTrip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_PrismMine.RemoveTripActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108904);
 			byte params[4] = { NULL };
-			*(class TrTripActor**)&params[0] = RemoveTrip;
+			*(class TrTripActor**)params = RemoveTrip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

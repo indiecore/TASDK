@@ -25,7 +25,7 @@ namespace UnrealScript
 	class CoverMeshComponent : public StaticMeshComponent
 	{
 	public:
-		class CoverMeshes
+		struct CoverMeshes
 		{
 		public:
 			ADD_OBJECT(StaticMesh, PlayerOnly, 40)
@@ -45,7 +45,7 @@ namespace UnrealScript
 		ADD_OBJECT(StaticMesh, Disabled, 640)
 		ADD_OBJECT(StaticMesh, AutoAdjustOff, 636)
 		ADD_OBJECT(StaticMesh, AutoAdjustOn, 632)
-		ADD_STRUCT(Object::Vector, LocationOffset, 620)
+		ADD_STRUCT(Vector, LocationOffset, 620)
 	};
 }
 #undef ADD_BOOL

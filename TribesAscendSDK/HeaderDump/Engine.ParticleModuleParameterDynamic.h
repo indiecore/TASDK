@@ -28,7 +28,7 @@ namespace UnrealScript
 			EDPV_VelocityMag = 4,
 			EDPV_MAX = 5,
 		};
-		class EmitterDynamicParameter
+		struct EmitterDynamicParameter
 		{
 		public:
 			ADD_STRUCT(DistributionFloat::RawDistributionFloat, ParamValue, 20)

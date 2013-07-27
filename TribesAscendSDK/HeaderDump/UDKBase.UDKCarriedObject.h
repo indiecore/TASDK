@@ -28,40 +28,40 @@ namespace UnrealScript
 	class UDKCarriedObject : public Actor
 	{
 	public:
-		ADD_STRUCT(Object::Vector, HUDLocation, 520)
+		ADD_STRUCT(Vector, HUDLocation, 520)
 		ADD_OBJECT(Actor, OldBaseBase, 516)
 		ADD_OBJECT(Actor, OldBase, 512)
-		ADD_STRUCT(Object::Vector, HomeBaseOffset, 500)
+		ADD_STRUCT(Vector, HomeBaseOffset, 500)
 		ADD_OBJECT(UDKGameObjective, HomeBase, 496)
 		ADD_BOOL(bHome, 492, 0x1)
 		ADD_STRUCT(float, LastValidAnchorTime, 484)
 		ADD_OBJECT(NavigationPoint, LastAnchor, 480)
 		ADD_OBJECT(TeamInfo, Team, 476)
-		void SetHUDLocation(Object::Vector NewHUDLocation)
+		void SetHUDLocation(Vector NewHUDLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKCarriedObject.SetHUDLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34748);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewHUDLocation;
+			*(Vector*)params = NewHUDLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotReachableBy(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKCarriedObject.NotReachableBy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34750);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnBaseChainChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKCarriedObject.OnBaseChainChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34752);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		byte GetTeamNum()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKCarriedObject.GetTeamNum");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34753);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return params[0];
+			return *params;
 		}
 	};
 }

@@ -14,19 +14,19 @@ namespace UnrealScript
 		ADD_OBJECT(TrPlayerController, m_SpawnedFromController, 924)
 		bool CanFireWeapon(class Weapon* Wpn, byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableController.CanFireWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80486);
 			byte params[9] = { NULL };
-			*(class Weapon**)&params[0] = Wpn;
+			*(class Weapon**)params = Wpn;
 			params[4] = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		byte ScriptGetTeamNum()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployableController.ScriptGetTeamNum");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80490);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return params[0];
+			return *params;
 		}
 	};
 }

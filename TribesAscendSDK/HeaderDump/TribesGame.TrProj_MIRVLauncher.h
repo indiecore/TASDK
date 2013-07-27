@@ -17,35 +17,35 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(int, m_nSecondaryExplosions, 888)
 		ADD_OBJECT(ScriptClass, m_SecondaryProjectile, 884)
-		Object::Rotator GetRandomSpread(Object::Rotator BaseDirection)
+		Rotator GetRandomSpread(Rotator BaseDirection)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MIRVLauncher.GetRandomSpread");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108677);
 			byte params[24] = { NULL };
-			*(Object::Rotator*)&params[0] = BaseDirection;
+			*(Rotator*)params = BaseDirection;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[12];
+			return *(Rotator*)&params[12];
 		}
-		void SpawnSecondaryProjectile(Object::Vector Direction)
+		void SpawnSecondaryProjectile(Vector Direction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MIRVLauncher.SpawnSecondaryProjectile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108687);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = Direction;
+			*(Vector*)params = Direction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Explode(Object::Vector HitLocation, Object::Vector HitNormal)
+		void Explode(Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MIRVLauncher.Explode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108690);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
-			*(Object::Vector*)&params[12] = HitNormal;
+			*(Vector*)params = HitLocation;
+			*(Vector*)&params[12] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Bounce(class Actor* Other, Object::Vector WallNormal)
+		void Bounce(class Actor* Other, Vector WallNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_MIRVLauncher.Bounce");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108695);
 			byte params[16] = { NULL };
-			*(class Actor**)&params[0] = Other;
-			*(Object::Vector*)&params[4] = WallNormal;
+			*(class Actor**)params = Other;
+			*(Vector*)&params[4] = WallNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -41,9 +41,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, ForceStrength, 480)
 		void OnToggle(class SeqAct_Toggle* inAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_RadialForceActor.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25308);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = inAction;
+			*(class SeqAct_Toggle**)params = inAction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

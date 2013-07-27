@@ -46,49 +46,49 @@ namespace UnrealScript
 		ADD_STRUCT(TrObject::ETrPlayerCallIns, CallInId, 476)
 		void Initialize(int NewPrice, int NewBuildup, int NewCooldown)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73958);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = NewPrice;
+			*(int*)params = NewPrice;
 			*(int*)&params[4] = NewBuildup;
 			*(int*)&params[8] = NewCooldown;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetCreditCost()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn.GetCreditCost");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73962);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		bool VerifyCredits()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn.VerifyCredits");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73964);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool VerifyPower()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn.VerifyPower");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73966);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
-		bool FireCompletedCallIn(int CallInOffs, Object::Vector TargetLocation, Object::Vector TargetNormal)
+		bool FireCompletedCallIn(int CallInOffs, Vector TargetLocation, Vector TargetNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn.FireCompletedCallIn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73971);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = CallInOffs;
-			*(Object::Vector*)&params[4] = TargetLocation;
-			*(Object::Vector*)&params[16] = TargetNormal;
+			*(int*)params = CallInOffs;
+			*(Vector*)&params[4] = TargetLocation;
+			*(Vector*)&params[16] = TargetNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[28];
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73979);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

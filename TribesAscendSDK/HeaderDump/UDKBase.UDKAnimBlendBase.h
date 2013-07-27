@@ -24,26 +24,26 @@ namespace UnrealScript
 		ADD_STRUCT(float, BlendTime, 276)
 		float GetBlendTime(int ChildIndex, bool bGetDefault)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendBase.GetBlendTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34482);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ChildIndex;
+			*(int*)params = ChildIndex;
 			*(bool*)&params[4] = bGetDefault;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		float GetAnimDuration(int ChildIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendBase.GetAnimDuration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34486);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ChildIndex;
+			*(int*)params = ChildIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		void TickAnim(float DeltaSeconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendBase.TickAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34489);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaSeconds;
+			*(float*)params = DeltaSeconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

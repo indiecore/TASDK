@@ -8,9 +8,9 @@ namespace UnrealScript
 	public:
 		void SmallReward(class UTPlayerController* Killer, int KillCount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDmgType_Pancake.SmallReward");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47115);
 			byte params[8] = { NULL };
-			*(class UTPlayerController**)&params[0] = Killer;
+			*(class UTPlayerController**)params = Killer;
 			*(int*)&params[4] = KillCount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

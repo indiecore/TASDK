@@ -20,7 +20,7 @@ namespace UnrealScript
 	class UDKVehicleSimChopper : public SVehicleSimBase
 	{
 	public:
-		class AnglePID
+		struct AnglePID
 		{
 		public:
 			ADD_STRUCT(float, PrevError, 16)
@@ -31,12 +31,12 @@ namespace UnrealScript
 		};
 		ADD_STRUCT(float, HardLimitAirSpeedScale, 304)
 		ADD_STRUCT(float, StoppedBrakeTorque, 300)
-		ADD_STRUCT(Object::Vector, OldVelocity, 288)
+		ADD_STRUCT(Vector, OldVelocity, 288)
 		ADD_STRUCT(float, CurrentStabilizationMultiplier, 284)
 		ADD_STRUCT(float, StabilizationForceMultiplier, 280)
 		ADD_STRUCT(float, AccumulatedTime, 276)
-		ADD_STRUCT(Object::Vector, RandTorque, 264)
-		ADD_STRUCT(Object::Vector, RandForce, 252)
+		ADD_STRUCT(Vector, RandTorque, 264)
+		ADD_STRUCT(Vector, RandForce, 252)
 		ADD_STRUCT(float, PitchViewCorrelation, 248)
 		ADD_STRUCT(float, TargetPitch, 244)
 		ADD_STRUCT(float, TargetHeading, 240)

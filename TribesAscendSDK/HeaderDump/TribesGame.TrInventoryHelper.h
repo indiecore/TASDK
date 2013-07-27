@@ -1380,25 +1380,25 @@ namespace UnrealScript
 		static const auto ITEM_VOICE_T2BDERM03 = 8726;
 		ScriptClass* GetEquipClass(int DeviceID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryHelper.GetEquipClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54043);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = DeviceID;
+			*(int*)params = DeviceID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}
 		ScriptClass* GetFamilyClass(int ClassId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryHelper.GetFamilyClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54704);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ClassId;
+			*(int*)params = ClassId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}
 		ScriptClass* GetSkinClass(int skinId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrInventoryHelper.GetSkinClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(54815);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = skinId;
+			*(int*)params = skinId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptClass**)&params[4];
 		}

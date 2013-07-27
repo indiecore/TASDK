@@ -34,14 +34,14 @@ namespace UnrealScript
 		ADD_STRUCT(int, ExcludeChannel, 476)
 		void DoInitRBPhys()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxForceField.DoInitRBPhys");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21131);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnToggle(class SeqAct_Toggle* inAction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxForceField.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21132);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = inAction;
+			*(class SeqAct_Toggle**)params = inAction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

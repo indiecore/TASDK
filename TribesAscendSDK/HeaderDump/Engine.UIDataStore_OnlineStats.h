@@ -23,13 +23,13 @@ namespace UnrealScript
 			SFT_TopRankings = 3,
 			SFT_MAX = 4,
 		};
-		class RankMetaData
+		struct RankMetaData
 		{
 		public:
 			ADD_STRUCT(ScriptString*, RankColumnName, 8)
 			ADD_STRUCT(ScriptName, RankName, 0)
 		};
-		class PlayerNickMetaData
+		struct PlayerNickMetaData
 		{
 		public:
 			ADD_STRUCT(ScriptString*, PlayerNickColumnName, 8)
@@ -47,41 +47,41 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementProvider, 120)
 		void Init()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28847);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetStatsReadInfo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.SetStatsReadInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28849);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool RefreshStats(byte ControllerIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.RefreshStats");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28850);
 			byte params[5] = { NULL };
-			params[0] = ControllerIndex;
+			*params = ControllerIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool ShowGamercard(byte ConrollerIndex, int ListIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.ShowGamercard");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28856);
 			byte params[9] = { NULL };
-			params[0] = ConrollerIndex;
+			*params = ConrollerIndex;
 			*(int*)&params[4] = ListIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void OnReadComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.OnReadComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28863);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SortResultsByRank()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_OnlineStats.SortResultsByRank");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28865);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

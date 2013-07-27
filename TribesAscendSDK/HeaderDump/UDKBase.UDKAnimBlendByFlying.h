@@ -43,7 +43,7 @@ namespace UnrealScript
 		ADD_STRUCT(UDKAnimBlendByFlying::EFlyingState, FlyingState, 296)
 		void UpdateFlyingState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendByFlying.UpdateFlyingState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34511);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

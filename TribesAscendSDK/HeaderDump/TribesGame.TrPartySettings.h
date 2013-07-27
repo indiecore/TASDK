@@ -19,26 +19,26 @@ namespace UnrealScript
 		ADD_OBJECT(OnlineSubsystem, OnlineSub, 172)
 		void Init(class LocalPlayer* InPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartySettings.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100605);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = InPlayer;
+			*(class LocalPlayer**)params = InPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Close()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartySettings.Close");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100607);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnLoginChange(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartySettings.OnLoginChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100608);
 			byte params[1] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RefreshMembersList()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPartySettings.RefreshMembersList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100612);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

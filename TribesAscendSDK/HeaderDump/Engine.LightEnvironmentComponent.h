@@ -30,17 +30,17 @@ void*>, AffectedComponents, 100)
 		ADD_BOOL(bEnabled, 88, 0x1)
 		void SetEnabled(bool bNewEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightEnvironmentComponent.SetEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11640);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewEnabled;
+			*(bool*)params = bNewEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsEnabled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LightEnvironmentComponent.IsEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11642);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

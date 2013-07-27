@@ -40,13 +40,13 @@ namespace UnrealScript
 			EPSSM_Sequential = 1,
 			EPSSM_MAX = 2,
 		};
-		class ParticleCurvePair
+		struct ParticleCurvePair
 		{
 		public:
 			ADD_OBJECT(Object, CurveObject, 12)
 			ADD_STRUCT(ScriptString*, CurveName, 0)
 		};
-		class ParticleRandomSeedInfo
+		struct ParticleRandomSeedInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<int>, RandomSeeds, 12)

@@ -51,7 +51,7 @@ namespace UnrealScript
 			CAPS_UserDefined = 2,
 			CAPS_MAX = 3,
 		};
-		class TViewTarget
+		struct TViewTarget
 		{
 		public:
 			ADD_OBJECT(Actor, Target, 0)
@@ -60,13 +60,13 @@ namespace UnrealScript
 			ADD_OBJECT(Controller, Controller, 4)
 			ADD_OBJECT(PlayerReplicationInfo, PRI, 40)
 		};
-		class TCameraCache
+		struct TCameraCache
 		{
 		public:
 			ADD_STRUCT(Object::TPOV, POV, 4)
 			ADD_STRUCT(float, TimeStamp, 0)
 		};
-		class ViewTargetTransitionParams
+		struct ViewTargetTransitionParams
 		{
 		public:
 			ADD_BOOL(bLockOutgoing, 12, 0x1)
@@ -85,9 +85,9 @@ namespace UnrealScript
 		ADD_BOOL(bLockedFOV, 492, 0x1)
 		ADD_STRUCT(float, LockedFOV, 496)
 		ADD_BOOL(bEnableColorScaling, 492, 0x8)
-		ADD_STRUCT(Object::Vector, ColorScale, 748)
-		ADD_STRUCT(Object::Vector, OriginalColorScale, 772)
-		ADD_STRUCT(Object::Vector, DesiredColorScale, 760)
+		ADD_STRUCT(Vector, ColorScale, 748)
+		ADD_STRUCT(Vector, OriginalColorScale, 772)
+		ADD_STRUCT(Vector, DesiredColorScale, 760)
 		ADD_STRUCT(float, ColorScaleInterpStartTime, 788)
 		ADD_STRUCT(float, ColorScaleInterpDuration, 784)
 		ADD_BOOL(bEnableColorScaleInterp, 492, 0x10)
@@ -107,7 +107,7 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class CameraModifier*>, ModifierList, 964)
 		ADD_STRUCT(ScriptArray<class EmitterCameraLensEffectBase*>, CameraLensEffects, 1008)
 		ADD_STRUCT(ScriptArray<class CameraAnimInst*>, ActiveAnims, 1060)
-		ADD_STRUCT(Object::Vector, FreeCamOffset, 980)
+		ADD_STRUCT(Vector, FreeCamOffset, 980)
 		ADD_STRUCT(float, FreeCamDistance, 976)
 		ADD_STRUCT(PostProcessVolume::PostProcessSettings, CamPostProcessSettings, 528)
 		ADD_STRUCT(Object::Color, FadeColor, 516)
@@ -117,145 +117,145 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, CameraStyle, 480)
 		class CameraModifier* CreateCameraModifier(ScriptClass* ModifierClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.CreateCameraModifier");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6404);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = ModifierClass;
+			*(ScriptClass**)params = ModifierClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class CameraModifier**)&params[4];
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6410);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6417);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ApplyCameraModifiers(float DeltaTime, Object::TPOV& OutPOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.ApplyCameraModifiers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6418);
 			byte params[32] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			*(Object::TPOV*)&params[4] = OutPOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutPOV = *(Object::TPOV*)&params[4];
 		}
 		void InitializeFor(class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.InitializeFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6421);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetViewTarget(class Actor* NewViewTarget, Camera::ViewTargetTransitionParams TransitionParams)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.SetViewTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6428);
 			byte params[20] = { NULL };
-			*(class Actor**)&params[0] = NewViewTarget;
+			*(class Actor**)params = NewViewTarget;
 			*(Camera::ViewTargetTransitionParams*)&params[4] = TransitionParams;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetFOVAngle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.GetFOVAngle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6431);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void SetFOV(float NewFOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.SetFOV");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6435);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = NewFOV;
+			*(float*)params = NewFOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void GetCameraViewPoint(Object::Vector& OutCamLoc, Object::Rotator& OutCamRot)
+		void GetCameraViewPoint(Vector& OutCamLoc, Rotator& OutCamRot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.GetCameraViewPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6437);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = OutCamLoc;
-			*(Object::Rotator*)&params[12] = OutCamRot;
+			*(Vector*)params = OutCamLoc;
+			*(Rotator*)&params[12] = OutCamRot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutCamLoc = *(Object::Vector*)&params[0];
-			OutCamRot = *(Object::Rotator*)&params[12];
+			OutCamLoc = *(Vector*)params;
+			OutCamRot = *(Rotator*)&params[12];
 		}
-		Object::Rotator GetCameraRotation()
+		Rotator GetCameraRotation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.GetCameraRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6440);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[0];
+			return *(Rotator*)params;
 		}
-		void SetDesiredColorScale(Object::Vector NewColorScale, float InterpTime)
+		void SetDesiredColorScale(Vector NewColorScale, float InterpTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.SetDesiredColorScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6442);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = NewColorScale;
+			*(Vector*)params = NewColorScale;
 			*(float*)&params[12] = InterpTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateCamera(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.UpdateCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6452);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		Object::TPOV BlendViewTargets(Camera::TViewTarget& A, Camera::TViewTarget& B, float Alpha)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.BlendViewTargets");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6472);
 			byte params[120] = { NULL };
-			*(Camera::TViewTarget*)&params[0] = A;
+			*(Camera::TViewTarget*)params = A;
 			*(Camera::TViewTarget*)&params[44] = B;
 			*(float*)&params[88] = Alpha;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			A = *(Camera::TViewTarget*)&params[0];
+			A = *(Camera::TViewTarget*)params;
 			B = *(Camera::TViewTarget*)&params[44];
 			return *(Object::TPOV*)&params[92];
 		}
 		void FillCameraCache(Object::TPOV& NewPOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.FillCameraCache");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6474);
 			byte params[28] = { NULL };
-			*(Object::TPOV*)&params[0] = NewPOV;
+			*(Object::TPOV*)params = NewPOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			NewPOV = *(Object::TPOV*)&params[0];
+			NewPOV = *(Object::TPOV*)params;
 		}
 		void CheckViewTarget(Camera::TViewTarget& VT)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.CheckViewTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6489);
 			byte params[44] = { NULL };
-			*(Camera::TViewTarget*)&params[0] = VT;
+			*(Camera::TViewTarget*)params = VT;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			VT = *(Camera::TViewTarget*)&params[0];
+			VT = *(Camera::TViewTarget*)params;
 		}
 		void UpdateViewTarget(Camera::TViewTarget& OutVT, float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.UpdateViewTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6593);
 			byte params[48] = { NULL };
-			*(Camera::TViewTarget*)&params[0] = OutVT;
+			*(Camera::TViewTarget*)params = OutVT;
 			*(float*)&params[44] = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutVT = *(Camera::TViewTarget*)&params[0];
+			OutVT = *(Camera::TViewTarget*)params;
 		}
-		void ProcessViewRotation(float DeltaTime, Object::Rotator& OutViewRotation, Object::Rotator& OutDeltaRot)
+		void ProcessViewRotation(float DeltaTime, Rotator& OutViewRotation, Rotator& OutDeltaRot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.ProcessViewRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6613);
 			byte params[28] = { NULL };
-			*(float*)&params[0] = DeltaTime;
-			*(Object::Rotator*)&params[4] = OutViewRotation;
-			*(Object::Rotator*)&params[16] = OutDeltaRot;
+			*(float*)params = DeltaTime;
+			*(Rotator*)&params[4] = OutViewRotation;
+			*(Rotator*)&params[16] = OutDeltaRot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutViewRotation = *(Object::Rotator*)&params[4];
-			OutDeltaRot = *(Object::Rotator*)&params[16];
+			OutViewRotation = *(Rotator*)&params[4];
+			OutDeltaRot = *(Rotator*)&params[16];
 		}
 		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.DisplayDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6620);
 			byte params[12] = { NULL };
-			*(class HUD**)&params[0] = HUD;
+			*(class HUD**)params = HUD;
 			*(float*)&params[4] = out_YL;
 			*(float*)&params[8] = out_YPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -264,67 +264,67 @@ namespace UnrealScript
 		}
 		class EmitterCameraLensEffectBase* FindCameraLensEffect(ScriptClass* LensEffectEmitterClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.FindCameraLensEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6627);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = LensEffectEmitterClass;
+			*(ScriptClass**)params = LensEffectEmitterClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class EmitterCameraLensEffectBase**)&params[4];
 		}
 		void AddCameraLensEffect(ScriptClass* LensEffectEmitterClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.AddCameraLensEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6632);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = LensEffectEmitterClass;
+			*(ScriptClass**)params = LensEffectEmitterClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveCameraLensEffect(class EmitterCameraLensEffectBase* Emitter)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.RemoveCameraLensEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6640);
 			byte params[4] = { NULL };
-			*(class EmitterCameraLensEffectBase**)&params[0] = Emitter;
+			*(class EmitterCameraLensEffectBase**)params = Emitter;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearCameraLensEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.ClearCameraLensEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6642);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void PlayCameraShake(class CameraShake* Shake, float Scale, Camera::ECameraAnimPlaySpace PlaySpace, Object::Rotator UserPlaySpaceRot)
+		void PlayCameraShake(class CameraShake* Shake, float Scale, Camera::ECameraAnimPlaySpace PlaySpace, Rotator UserPlaySpaceRot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.PlayCameraShake");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6644);
 			byte params[21] = { NULL };
-			*(class CameraShake**)&params[0] = Shake;
+			*(class CameraShake**)params = Shake;
 			*(float*)&params[4] = Scale;
 			*(Camera::ECameraAnimPlaySpace*)&params[8] = PlaySpace;
-			*(Object::Rotator*)&params[12] = UserPlaySpaceRot;
+			*(Rotator*)&params[12] = UserPlaySpaceRot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopCameraShake(class CameraShake* Shake)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.StopCameraShake");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6649);
 			byte params[4] = { NULL };
-			*(class CameraShake**)&params[0] = Shake;
+			*(class CameraShake**)params = Shake;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		float CalcRadialShakeScale(class Camera* Cam, Object::Vector Epicenter, float InnerRadius, float OuterRadius, float Falloff)
+		float CalcRadialShakeScale(class Camera* Cam, Vector Epicenter, float InnerRadius, float OuterRadius, float Falloff)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.CalcRadialShakeScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6651);
 			byte params[32] = { NULL };
-			*(class Camera**)&params[0] = Cam;
-			*(Object::Vector*)&params[4] = Epicenter;
+			*(class Camera**)params = Cam;
+			*(Vector*)&params[4] = Epicenter;
 			*(float*)&params[16] = InnerRadius;
 			*(float*)&params[20] = OuterRadius;
 			*(float*)&params[24] = Falloff;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[28];
 		}
-		void PlayWorldCameraShake(class CameraShake* Shake, class Actor* ShakeInstigator, Object::Vector Epicenter, float InnerRadius, float OuterRadius, float Falloff, bool bTryForceFeedback, bool bOrientShakeTowardsEpicenter)
+		void PlayWorldCameraShake(class CameraShake* Shake, class Actor* ShakeInstigator, Vector Epicenter, float InnerRadius, float OuterRadius, float Falloff, bool bTryForceFeedback, bool bOrientShakeTowardsEpicenter)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.PlayWorldCameraShake");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6660);
 			byte params[40] = { NULL };
-			*(class CameraShake**)&params[0] = Shake;
+			*(class CameraShake**)params = Shake;
 			*(class Actor**)&params[4] = ShakeInstigator;
-			*(Object::Vector*)&params[8] = Epicenter;
+			*(Vector*)&params[8] = Epicenter;
 			*(float*)&params[20] = InnerRadius;
 			*(float*)&params[24] = OuterRadius;
 			*(float*)&params[28] = Falloff;
@@ -334,14 +334,14 @@ namespace UnrealScript
 		}
 		void ClearAllCameraShakes()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.ClearAllCameraShakes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6674);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class CameraAnimInst* PlayCameraAnim(class CameraAnim* Anim, float Rate, float Scale, float BlendInTime, float BlendOutTime, bool bLoop, bool bRandomStartTime, float Duration, bool bSingleInstance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.PlayCameraAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6675);
 			byte params[40] = { NULL };
-			*(class CameraAnim**)&params[0] = Anim;
+			*(class CameraAnim**)params = Anim;
 			*(float*)&params[4] = Rate;
 			*(float*)&params[8] = Scale;
 			*(float*)&params[12] = BlendInTime;
@@ -355,24 +355,24 @@ namespace UnrealScript
 		}
 		void StopAllCameraAnims(bool bImmediate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.StopAllCameraAnims");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6686);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bImmediate;
+			*(bool*)params = bImmediate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopAllCameraAnimsByType(class CameraAnim* Anim, bool bImmediate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.StopAllCameraAnimsByType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6688);
 			byte params[8] = { NULL };
-			*(class CameraAnim**)&params[0] = Anim;
+			*(class CameraAnim**)params = Anim;
 			*(bool*)&params[4] = bImmediate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopCameraAnim(class CameraAnimInst* AnimInst, bool bImmediate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Camera.StopCameraAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6691);
 			byte params[8] = { NULL };
-			*(class CameraAnimInst**)&params[0] = AnimInst;
+			*(class CameraAnimInst**)params = AnimInst;
 			*(bool*)&params[4] = bImmediate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

@@ -8,9 +8,9 @@ namespace UnrealScript
 	public:
 		bool AIActivateSwitch(class AIController* AI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Interface_NavMeshPathSwitch.AIActivateSwitch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18351);
 			byte params[8] = { NULL };
-			*(class AIController**)&params[0] = AI;
+			*(class AIController**)params = AI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

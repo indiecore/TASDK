@@ -19,54 +19,54 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_IUIListElementCellProvider, 112)
 		bool BindProviderInstance(class Object* DataSourceInstance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDynamicDataProvider.BindProviderInstance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28389);
 			byte params[8] = { NULL };
-			*(class Object**)&params[0] = DataSourceInstance;
+			*(class Object**)params = DataSourceInstance;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool UnbindProviderInstance()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDynamicDataProvider.UnbindProviderInstance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28392);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void ProviderInstanceBound(class Object* DataSourceInstance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDynamicDataProvider.ProviderInstanceBound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28394);
 			byte params[4] = { NULL };
-			*(class Object**)&params[0] = DataSourceInstance;
+			*(class Object**)params = DataSourceInstance;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProviderInstanceUnbound(class Object* DataSourceInstance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDynamicDataProvider.ProviderInstanceUnbound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28396);
 			byte params[4] = { NULL };
-			*(class Object**)&params[0] = DataSourceInstance;
+			*(class Object**)params = DataSourceInstance;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsValidDataSourceClass(ScriptClass* PotentialDataSourceClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDynamicDataProvider.IsValidDataSourceClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28398);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = PotentialDataSourceClass;
+			*(ScriptClass**)params = PotentialDataSourceClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		class Object* GetDataSource()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDynamicDataProvider.GetDataSource");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28401);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Object**)&params[0];
+			return *(class Object**)params;
 		}
 		bool CleanupDataProvider()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDynamicDataProvider.CleanupDataProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28403);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

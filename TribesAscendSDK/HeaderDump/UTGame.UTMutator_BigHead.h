@@ -8,9 +8,9 @@ namespace UnrealScript
 	public:
 		void ModifyPlayer(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_BigHead.ModifyPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48581);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

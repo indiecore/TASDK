@@ -29,13 +29,13 @@ namespace UnrealScript
 		ADD_BOOL(bInvertJointAxis, 232, 0x2)
 		ADD_BOOL(bInvertBoneAxis, 232, 0x1)
 		ADD_STRUCT(ScriptName, JointTargetSpaceBoneName, 224)
-		ADD_STRUCT(Object::Vector, JointTargetLocation, 212)
+		ADD_STRUCT(Vector, JointTargetLocation, 212)
 		ADD_STRUCT(ScriptName, EffectorSpaceBoneName, 204)
 		ADD_STRUCT(Object::EAxis, JointAxis, 203)
 		ADD_STRUCT(Object::EAxis, BoneAxis, 202)
 		ADD_STRUCT(SkelControlBase::EBoneControlSpace, JointTargetLocationSpace, 201)
 		ADD_STRUCT(SkelControlBase::EBoneControlSpace, EffectorLocationSpace, 200)
-		ADD_STRUCT(Object::Vector, EffectorLocation, 188)
+		ADD_STRUCT(Vector, EffectorLocation, 188)
 	};
 }
 #undef ADD_BOOL

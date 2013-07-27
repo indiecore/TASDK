@@ -14,21 +14,21 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, InitialSceneToDisplayClass, 884)
 		void PostLogin(class PlayerController* NewPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuGame.PostLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32635);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = NewPlayer;
+			*(class PlayerController**)params = NewPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartMatch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuGame.StartMatch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32640);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RestartPlayer(class Controller* NewPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuGame.RestartPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32641);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = NewPlayer;
+			*(class Controller**)params = NewPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

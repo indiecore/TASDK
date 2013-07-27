@@ -22,7 +22,7 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(DistributionVector::EDistributionVectorLockFlags, LockedAxes, 96)
 		ADD_BOOL(bLockAxes, 92, 0x1)
-		ADD_STRUCT(Object::Vector, Constant, 80)
+		ADD_STRUCT(Vector, Constant, 80)
 	};
 }
 #undef ADD_BOOL

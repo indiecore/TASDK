@@ -12,7 +12,7 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<int>, ChosenClasses, 132)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrScene_Profile.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(63769);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

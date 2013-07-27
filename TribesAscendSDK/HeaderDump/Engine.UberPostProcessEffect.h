@@ -42,11 +42,11 @@ namespace UnrealScript
 		ADD_STRUCT(float, TonemapperToeFactor, 256)
 		ADD_STRUCT(float, TonemapperRange, 252)
 		ADD_STRUCT(UberPostProcessEffect::ETonemapperType, TonemapperType, 248)
-		ADD_STRUCT(Object::Vector, SceneShadows, 196)
-		ADD_STRUCT(Object::Vector, SceneColorize, 236)
+		ADD_STRUCT(Vector, SceneShadows, 196)
+		ADD_STRUCT(Vector, SceneColorize, 236)
 		ADD_STRUCT(float, SceneDesaturation, 232)
-		ADD_STRUCT(Object::Vector, SceneMidTones, 220)
-		ADD_STRUCT(Object::Vector, SceneHighLights, 208)
+		ADD_STRUCT(Vector, SceneMidTones, 220)
+		ADD_STRUCT(Vector, SceneHighLights, 208)
 	};
 }
 #undef ADD_BOOL

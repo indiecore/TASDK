@@ -12,7 +12,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fPulseSpeedThreshold, 2168)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_Stealth.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(81519);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -21,14 +21,14 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(float, VelocityMag, 244)
-		ADD_STRUCT(Object::Vector, VelocityDir, 232)
+		ADD_STRUCT(Vector, VelocityDir, 232)
 		ADD_BOOL(bVelocityRelativeToActorRotation, 248, 0x1)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_SetVelocity.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25947);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

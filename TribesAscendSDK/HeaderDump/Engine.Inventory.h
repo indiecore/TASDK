@@ -43,37 +43,37 @@ namespace UnrealScript
 		ADD_OBJECT(Inventory, Inventory, 476)
 		float DetourWeight(class Pawn* Other, float PathWeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Inventory.DetourWeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14796);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			*(float*)&params[4] = PathWeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
 		void GiveTo(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Inventory.GiveTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14803);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetHumanReadableName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Inventory.GetHumanReadableName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18783);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Inventory.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18785);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float BotDesireability(class Actor* PickupHolder, class Pawn* P, class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Inventory.BotDesireability");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18786);
 			byte params[16] = { NULL };
-			*(class Actor**)&params[0] = PickupHolder;
+			*(class Actor**)params = PickupHolder;
 			*(class Pawn**)&params[4] = P;
 			*(class Controller**)&params[8] = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -81,54 +81,54 @@ namespace UnrealScript
 		}
 		void AnnouncePickup(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Inventory.AnnouncePickup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18798);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GivenTo(class Pawn* thisPawn, bool bDoNotActivate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Inventory.GivenTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18800);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = thisPawn;
+			*(class Pawn**)params = thisPawn;
 			*(bool*)&params[4] = bDoNotActivate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClientGivenTo(class Pawn* NewOwner, bool bDoNotActivate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Inventory.ClientGivenTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18803);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = NewOwner;
+			*(class Pawn**)params = NewOwner;
 			*(bool*)&params[4] = bDoNotActivate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ItemRemovedFromInvManager()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Inventory.ItemRemovedFromInvManager");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18806);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool DenyPickupQuery(ScriptClass* ItemClass, class Actor* Pickup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Inventory.DenyPickupQuery");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18807);
 			byte params[12] = { NULL };
-			*(ScriptClass**)&params[0] = ItemClass;
+			*(ScriptClass**)params = ItemClass;
 			*(class Actor**)&params[4] = Pickup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
-		void DropFrom(Object::Vector StartLocation, Object::Vector StartVelocity)
+		void DropFrom(Vector StartLocation, Vector StartVelocity)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Inventory.DropFrom");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18811);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = StartLocation;
-			*(Object::Vector*)&params[12] = StartVelocity;
+			*(Vector*)params = StartLocation;
+			*(Vector*)&params[12] = StartVelocity;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetLocalString(int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Inventory.GetLocalString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18815);
 			byte params[24] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

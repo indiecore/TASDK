@@ -10,9 +10,9 @@ namespace UnrealScript
 	public:
 		UDKPlayerController::ObjectiveAnnouncementInfo GetObjectiveAnnouncement(byte MessageIndex, class Object* Objective, class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTKismetAnnouncement.GetObjectiveAnnouncement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48265);
 			byte params[25] = { NULL };
-			params[0] = MessageIndex;
+			*params = MessageIndex;
 			*(class Object**)&params[4] = Objective;
 			*(class PlayerController**)&params[8] = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -20,9 +20,9 @@ namespace UnrealScript
 		}
 		byte AnnouncementLevel(byte MessageIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTKismetAnnouncement.AnnouncementLevel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48274);
 			byte params[2] = { NULL };
-			params[0] = MessageIndex;
+			*params = MessageIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return params[1];
 		}

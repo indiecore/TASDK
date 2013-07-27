@@ -25,9 +25,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, DefaultAnimSeqName, 260)
 		void PlayOneShotAnim(ScriptName AnimSeqName, float BlendInTime, float BlendOutTime, bool bDontBlendOut, float Rate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeCrossfader.PlayOneShotAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10892);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = AnimSeqName;
+			*(ScriptName*)params = AnimSeqName;
 			*(float*)&params[8] = BlendInTime;
 			*(float*)&params[12] = BlendOutTime;
 			*(bool*)&params[16] = bDontBlendOut;
@@ -36,26 +36,26 @@ namespace UnrealScript
 		}
 		void BlendToLoopingAnim(ScriptName AnimSeqName, float BlendInTime, float Rate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeCrossfader.BlendToLoopingAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10898);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = AnimSeqName;
+			*(ScriptName*)params = AnimSeqName;
 			*(float*)&params[8] = BlendInTime;
 			*(float*)&params[12] = Rate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptName GetAnimName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeCrossfader.GetAnimName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10902);
 			byte params[8] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptName*)&params[0];
+			return *(ScriptName*)params;
 		}
 		class AnimNodeSequence* GetActiveChild()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeCrossfader.GetActiveChild");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10904);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class AnimNodeSequence**)&params[0];
+			return *(class AnimNodeSequence**)params;
 		}
 	};
 }

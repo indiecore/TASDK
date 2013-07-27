@@ -9,17 +9,17 @@ namespace UnrealScript
 	public:
 		void Notify(class Actor* Owner, class AnimNodeSequence* AnimSeqInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNotify_Scripted.Notify");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11144);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Owner;
+			*(class Actor**)params = Owner;
 			*(class AnimNodeSequence**)&params[4] = AnimSeqInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyEnd(class Actor* Owner, class AnimNodeSequence* AnimSeqInstigator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNotify_Scripted.NotifyEnd");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(11147);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Owner;
+			*(class Actor**)params = Owner;
 			*(class AnimNodeSequence**)&params[4] = AnimSeqInstigator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

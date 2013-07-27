@@ -14,7 +14,7 @@ namespace UnrealScript
 	class InterpTrackInstFloatMaterialParam : public InterpTrackInst
 	{
 	public:
-		class FloatMaterialParamMICData
+		struct FloatMaterialParamMICData
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class MaterialInstanceConstant*>, MICs, 0)

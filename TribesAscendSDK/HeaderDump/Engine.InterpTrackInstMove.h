@@ -12,8 +12,8 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(Object::Quat, InitialQuat, 160)
 		ADD_STRUCT(Object::Matrix, InitialTM, 96)
-		ADD_STRUCT(Object::Rotator, ResetRotation, 72)
-		ADD_STRUCT(Object::Vector, ResetLocation, 60)
+		ADD_STRUCT(Rotator, ResetRotation, 72)
+		ADD_STRUCT(Vector, ResetLocation, 60)
 	};
 }
 #undef ADD_STRUCT

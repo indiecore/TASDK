@@ -13,101 +13,101 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class GameplayEventsHandler*>, RegisteredHandlers, 336)
 		bool OpenStatsFile(ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.OpenStatsFile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17575);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Filename;
+			*(ScriptString**)params = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void CloseStatsFile()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.CloseStatsFile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17578);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool SerializeHeader()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.SerializeHeader");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17579);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void RegisterHandler(class GameplayEventsHandler* NewHandler)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.RegisterHandler");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17581);
 			byte params[4] = { NULL };
-			*(class GameplayEventsHandler**)&params[0] = NewHandler;
+			*(class GameplayEventsHandler**)params = NewHandler;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnregisterHandler(class GameplayEventsHandler* ExistingHandler)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.UnregisterHandler");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17584);
 			byte params[4] = { NULL };
-			*(class GameplayEventsHandler**)&params[0] = ExistingHandler;
+			*(class GameplayEventsHandler**)params = ExistingHandler;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProcessStreamStart()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.ProcessStreamStart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17587);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ProcessStream()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.ProcessStream");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17588);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ProcessStreamEnd()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.ProcessStreamEnd");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17589);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetSessionID()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetSessionID");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17590);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		int GetTitleID()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetTitleID");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17592);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int GetPlatform()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetPlatform");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17594);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		ScriptString* GetSessionTimestamp()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetSessionTimestamp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17596);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		float GetSessionStart()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetSessionStart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17598);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetSessionEnd()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetSessionEnd");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17600);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetSessionDuration()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GameplayEventsReader.GetSessionDuration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17602);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 	};
 }

@@ -35,7 +35,7 @@ namespace UnrealScript
 	class SVehicle : public Vehicle
 	{
 	public:
-		class VehicleState
+		struct VehicleState
 		{
 		public:
 			ADD_STRUCT(int, ServerView, 72)
@@ -55,7 +55,7 @@ void*>, Wheels, 1264)
 		ADD_STRUCT(int, DriverViewYaw, 1452)
 		ADD_STRUCT(int, DriverViewPitch, 1448)
 		ADD_STRUCT(float, CamDist, 1444)
-		ADD_STRUCT(Object::Vector, BaseOffset, 1432)
+		ADD_STRUCT(Vector, BaseOffset, 1432)
 		ADD_STRUCT(int, NumPoweredWheels, 1428)
 		ADD_STRUCT(float, ForwardVel, 1424)
 		ADD_STRUCT(float, OutputRise, 1420)
@@ -99,190 +99,190 @@ void*>, Wheels, 1264)
 		ADD_BOOL(bUpdateWheelShapes, 1300, 0x4)
 		ADD_BOOL(bUseSuspensionAxis, 1300, 0x2)
 		ADD_BOOL(bStayUpright, 1300, 0x1)
-		ADD_STRUCT(Object::Vector, InertiaTensorMultiplier, 1288)
-		ADD_STRUCT(Object::Vector, COMOffset, 1276)
-		void AddForce(Object::Vector Force)
+		ADD_STRUCT(Vector, InertiaTensorMultiplier, 1288)
+		ADD_STRUCT(Vector, COMOffset, 1276)
+		void AddForce(Vector Force)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.AddForce");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27501);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = Force;
+			*(Vector*)params = Force;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddImpulse(Object::Vector Impulse)
+		void AddImpulse(Vector Impulse)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.AddImpulse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27503);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = Impulse;
+			*(Vector*)params = Impulse;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddTorque(Object::Vector Torque)
+		void AddTorque(Vector Torque)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.AddTorque");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27505);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = Torque;
+			*(Vector*)params = Torque;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsSleeping()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.IsSleeping");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27507);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SetWheelCollision(int WheelNum, bool bCollision)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.SetWheelCollision");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27509);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = WheelNum;
+			*(int*)params = WheelNum;
 			*(bool*)&params[4] = bCollision;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27512);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27513);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27519);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TurnOff()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.TurnOff");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27520);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StopVehicleSounds()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.StopVehicleSounds");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27521);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void TakeRadiusDamage(class Controller* InstigatedBy, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Object::Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
+		void TakeRadiusDamage(class Controller* InstigatedBy, float BaseDamage, float DamageRadius, ScriptClass* DamageType, float Momentum, Vector HurtOrigin, bool bFullDamage, class Actor* DamageCauser, float DamageFalloffExponent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.TakeRadiusDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27522);
 			byte params[44] = { NULL };
-			*(class Controller**)&params[0] = InstigatedBy;
+			*(class Controller**)params = InstigatedBy;
 			*(float*)&params[4] = BaseDamage;
 			*(float*)&params[8] = DamageRadius;
 			*(ScriptClass**)&params[12] = DamageType;
 			*(float*)&params[16] = Momentum;
-			*(Object::Vector*)&params[20] = HurtOrigin;
+			*(Vector*)&params[20] = HurtOrigin;
 			*(bool*)&params[32] = bFullDamage;
 			*(class Actor**)&params[36] = DamageCauser;
 			*(float*)&params[40] = DamageFalloffExponent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void InitVehicleRagdoll(class SkeletalMesh* RagdollMesh, class PhysicsAsset* RagdollPhysAsset, Object::Vector ActorMove, bool bClearAnimTree)
+		void InitVehicleRagdoll(class SkeletalMesh* RagdollMesh, class PhysicsAsset* RagdollPhysAsset, Vector ActorMove, bool bClearAnimTree)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.InitVehicleRagdoll");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27538);
 			byte params[24] = { NULL };
-			*(class SkeletalMesh**)&params[0] = RagdollMesh;
+			*(class SkeletalMesh**)params = RagdollMesh;
 			*(class PhysicsAsset**)&params[4] = RagdollPhysAsset;
-			*(Object::Vector*)&params[8] = ActorMove;
+			*(Vector*)&params[8] = ActorMove;
 			*(bool*)&params[20] = bClearAnimTree;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddVelocity(Object::Vector NewVelocity, Object::Vector HitLocation, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo)
+		void AddVelocity(Vector NewVelocity, Vector HitLocation, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.AddVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27543);
 			byte params[56] = { NULL };
-			*(Object::Vector*)&params[0] = NewVelocity;
-			*(Object::Vector*)&params[12] = HitLocation;
+			*(Vector*)params = NewVelocity;
+			*(Vector*)&params[12] = HitLocation;
 			*(ScriptClass**)&params[24] = DamageType;
 			*(Actor::TraceHitInfo*)&params[28] = HitInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool Died(class Controller* Killer, ScriptClass* DamageType, Object::Vector HitLocation)
+		bool Died(class Controller* Killer, ScriptClass* DamageType, Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.Died");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27548);
 			byte params[24] = { NULL };
-			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)params = Killer;
 			*(ScriptClass**)&params[4] = DamageType;
-			*(Object::Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[8] = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[20];
 		}
-		bool CalcCamera(float fDeltaTime, Object::Vector& out_CamLoc, Object::Rotator& out_CamRot, float& out_FOV)
+		bool CalcCamera(float fDeltaTime, Vector& out_CamLoc, Rotator& out_CamRot, float& out_FOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.CalcCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27553);
 			byte params[36] = { NULL };
-			*(float*)&params[0] = fDeltaTime;
-			*(Object::Vector*)&params[4] = out_CamLoc;
-			*(Object::Rotator*)&params[16] = out_CamRot;
+			*(float*)params = fDeltaTime;
+			*(Vector*)&params[4] = out_CamLoc;
+			*(Rotator*)&params[16] = out_CamRot;
 			*(float*)&params[28] = out_FOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_CamLoc = *(Object::Vector*)&params[4];
-			out_CamRot = *(Object::Rotator*)&params[16];
+			out_CamLoc = *(Vector*)&params[4];
+			out_CamRot = *(Rotator*)&params[16];
 			out_FOV = *(float*)&params[28];
 			return *(bool*)&params[32];
 		}
 		ScriptName GetDefaultCameraMode(class PlayerController* RequestedBy)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.GetDefaultCameraMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27562);
 			byte params[12] = { NULL };
-			*(class PlayerController**)&params[0] = RequestedBy;
+			*(class PlayerController**)params = RequestedBy;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptName*)&params[4];
 		}
 		bool TryToDrive(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.TryToDrive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27565);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool HasWheelsOnGround()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.HasWheelsOnGround");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27568);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void StartEngineSound()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.StartEngineSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27570);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartEngineSoundTimed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.StartEngineSoundTimed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27571);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StopEngineSound()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.StopEngineSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27572);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StopEngineSoundTimed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.StopEngineSoundTimed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27573);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void VehiclePlayEnterSound()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.VehiclePlayEnterSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27574);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void VehiclePlayExitSound()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.VehiclePlayExitSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27575);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrivingStatusChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.DrivingStatusChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27576);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RigidBodyCollision(
@@ -291,11 +291,11 @@ void* HitComponent,
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* OtherComponent, Actor::CollisionImpactData& RigidCollisionData, int ContactIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.RigidBodyCollision");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27577);
 			byte params[48] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = HitComponent;
+void**)params = HitComponent;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComponent;
@@ -306,23 +306,23 @@ void**)&params[4] = OtherComponent;
 		}
 		void SuspensionHeavyShift(float Delta)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.SuspensionHeavyShift");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27582);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = Delta;
+			*(float*)params = Delta;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostTeleport(class Teleporter* OutTeleporter)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.PostTeleport");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27584);
 			byte params[4] = { NULL };
-			*(class Teleporter**)&params[0] = OutTeleporter;
+			*(class Teleporter**)params = OutTeleporter;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisplayDebug(class HUD* HUD, float& out_YL, float& out_YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.DisplayDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27586);
 			byte params[12] = { NULL };
-			*(class HUD**)&params[0] = HUD;
+			*(class HUD**)params = HUD;
 			*(float*)&params[4] = out_YL;
 			*(float*)&params[8] = out_YPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -331,27 +331,27 @@ void**)&params[4] = OtherComponent;
 		}
 		void DisplayWheelsDebug(class HUD* HUD, float YL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.DisplayWheelsDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27593);
 			byte params[8] = { NULL };
-			*(class HUD**)&params[0] = HUD;
+			*(class HUD**)params = HUD;
 			*(float*)&params[4] = YL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float HermiteEval(float Slip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.HermiteEval");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27622);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = Slip;
+			*(float*)params = Slip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		void GetSVehicleDebug(ScriptArray<ScriptString*>& DebugInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SVehicle.GetSVehicleDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27637);
 			byte params[12] = { NULL };
-			*(ScriptArray<ScriptString*>*)&params[0] = DebugInfo;
+			*(ScriptArray<ScriptString*>*)params = DebugInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			DebugInfo = *(ScriptArray<ScriptString*>*)&params[0];
+			DebugInfo = *(ScriptArray<ScriptString*>*)params;
 		}
 	};
 }

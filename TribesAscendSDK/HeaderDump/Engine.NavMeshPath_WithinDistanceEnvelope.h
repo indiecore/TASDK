@@ -21,18 +21,18 @@ namespace UnrealScript
 	class NavMeshPath_WithinDistanceEnvelope : public NavMeshPathConstraint
 	{
 	public:
-		ADD_STRUCT(Object::Vector, EnvelopeTestPoint, 96)
+		ADD_STRUCT(Vector, EnvelopeTestPoint, 96)
 		ADD_STRUCT(float, SoftStartPenalty, 92)
 		ADD_BOOL(bOnlyThrowOutNodesThatLeaveEnvelope, 88, 0x2)
 		ADD_BOOL(bSoft, 88, 0x1)
 		ADD_STRUCT(float, MinDistance, 84)
 		ADD_STRUCT(float, MaxDistance, 80)
-		bool StayWithinEnvelopeToLoc(class NavigationHandle* NavHandle, Object::Vector InEnvelopeTestPoint, float InMaxDistance, float InMinDistance, bool bInSoft, float InSoftStartPenalty, bool bOnlyTossOutSpecsThatLeave)
+		bool StayWithinEnvelopeToLoc(class NavigationHandle* NavHandle, Vector InEnvelopeTestPoint, float InMaxDistance, float InMinDistance, bool bInSoft, float InSoftStartPenalty, bool bOnlyTossOutSpecsThatLeave)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_WithinDistanceEnvelope.StayWithinEnvelopeToLoc");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21096);
 			byte params[40] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
-			*(Object::Vector*)&params[4] = InEnvelopeTestPoint;
+			*(class NavigationHandle**)params = NavHandle;
+			*(Vector*)&params[4] = InEnvelopeTestPoint;
 			*(float*)&params[16] = InMaxDistance;
 			*(float*)&params[20] = InMinDistance;
 			*(bool*)&params[24] = bInSoft;
@@ -43,7 +43,7 @@ namespace UnrealScript
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_WithinDistanceEnvelope.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21106);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

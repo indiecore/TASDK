@@ -33,13 +33,13 @@ namespace UnrealScript
 			IMF_RelativeToInitial = 1,
 			IMF_MAX = 2,
 		};
-		class InterpLookupPoint
+		struct InterpLookupPoint
 		{
 		public:
 			ADD_STRUCT(float, Time, 8)
 			ADD_STRUCT(ScriptName, GroupName, 0)
 		};
-		class InterpLookupTrack
+		struct InterpLookupTrack
 		{
 		public:
 			ADD_STRUCT(ScriptArray<InterpTrackMove::InterpLookupPoint>, Points, 0)

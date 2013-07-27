@@ -12,9 +12,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, NodeWeight, 120)
 		void SetNodeWeight(float NewWeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MorphNodeWeight.SetNodeWeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20620);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = NewWeight;
+			*(float*)params = NewWeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -22,9 +22,9 @@ namespace UnrealScript
 	public:
 		ADD_STRUCT(int, ControlBoneIndex, 316)
 		ADD_STRUCT(float, LastCalcTime, 312)
-		ADD_STRUCT(Object::Vector, BaseBonePos, 300)
-		ADD_STRUCT(Object::Vector, BaseLookDir, 288)
-		ADD_STRUCT(Object::Vector, LimitLookDir, 276)
+		ADD_STRUCT(Vector, BaseBonePos, 300)
+		ADD_STRUCT(Vector, BaseLookDir, 288)
+		ADD_STRUCT(Vector, LimitLookDir, 276)
 		ADD_STRUCT(float, LookAtAlphaBlendTimeToGo, 272)
 		ADD_STRUCT(float, LookAtAlphaTarget, 268)
 		ADD_STRUCT(float, LookAtAlpha, 264)
@@ -32,8 +32,8 @@ namespace UnrealScript
 		ADD_STRUCT(float, DeadZoneAngle, 252)
 		ADD_STRUCT(float, OuterMaxAngle, 248)
 		ADD_STRUCT(float, MaxAngle, 244)
-		ADD_STRUCT(Object::Vector, ActorSpaceLookAtTarget, 232)
-		ADD_STRUCT(Object::Vector, DesiredTargetLocation, 220)
+		ADD_STRUCT(Vector, ActorSpaceLookAtTarget, 232)
+		ADD_STRUCT(Vector, DesiredTargetLocation, 220)
 		ADD_STRUCT(float, TargetLocationInterpSpeed, 216)
 		ADD_BOOL(bAllowRotationZ, 212, 0x400)
 		ADD_BOOL(bAllowRotationY, 212, 0x200)
@@ -51,34 +51,34 @@ namespace UnrealScript
 		ADD_STRUCT(Object::EAxis, UpAxis, 202)
 		ADD_STRUCT(Object::EAxis, LookAtAxis, 201)
 		ADD_STRUCT(SkelControlBase::EBoneControlSpace, TargetLocationSpace, 200)
-		ADD_STRUCT(Object::Vector, TargetLocation, 188)
-		void SetTargetLocation(Object::Vector NewTargetLocation)
+		ADD_STRUCT(Vector, TargetLocation, 188)
+		void SetTargetLocation(Vector NewTargetLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.SetTargetLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26395);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewTargetLocation;
+			*(Vector*)params = NewTargetLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InterpolateTargetLocation(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.InterpolateTargetLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26397);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetLookAtAlpha(float DesiredAlpha, float DesiredBlendTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.SetLookAtAlpha");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26399);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = DesiredAlpha;
+			*(float*)params = DesiredAlpha;
 			*(float*)&params[4] = DesiredBlendTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool CanLookAtPoint(Object::Vector PointLoc, bool bDrawDebugInfo, bool bDebugUsePersistentLines, bool bDebugFlushLinesFirst)
+		bool CanLookAtPoint(Vector PointLoc, bool bDrawDebugInfo, bool bDebugUsePersistentLines, bool bDebugFlushLinesFirst)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkelControlLookAt.CanLookAtPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26402);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = PointLoc;
+			*(Vector*)params = PointLoc;
 			*(bool*)&params[12] = bDrawDebugInfo;
 			*(bool*)&params[16] = bDebugUsePersistentLines;
 			*(bool*)&params[20] = bDebugFlushLinesFirst;

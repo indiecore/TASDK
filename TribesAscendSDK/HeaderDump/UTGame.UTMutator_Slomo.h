@@ -12,9 +12,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, GameSpeed, 496)
 		void InitMutator(ScriptString* Options, ScriptString*& ErrorMessage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_Slomo.InitMutator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48611);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Options;
+			*(ScriptString**)params = Options;
 			*(ScriptString**)&params[12] = ErrorMessage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ErrorMessage = *(ScriptString**)&params[12];

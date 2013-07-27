@@ -34,28 +34,28 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, Scene, 72)
 		void SetTickGroup(Object::ETickingGroup NewTickGroup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorComponent.SetTickGroup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4734);
 			byte params[1] = { NULL };
-			*(Object::ETickingGroup*)&params[0] = NewTickGroup;
+			*(Object::ETickingGroup*)params = NewTickGroup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetComponentRBFixed(bool bFixed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorComponent.SetComponentRBFixed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4736);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bFixed;
+			*(bool*)params = bFixed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ForceUpdate(bool bTransformOnly)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorComponent.ForceUpdate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4738);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bTransformOnly;
+			*(bool*)params = bTransformOnly;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DetachFromAny()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ActorComponent.DetachFromAny");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(4740);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -19,7 +19,7 @@ namespace UnrealScript
 	class InterpTrackParticleReplay : public InterpTrack
 	{
 	public:
-		class ParticleReplayTrackKey
+		struct ParticleReplayTrackKey
 		{
 		public:
 			ADD_STRUCT(int, ClipIDNumber, 8)

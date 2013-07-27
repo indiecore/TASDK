@@ -33,158 +33,158 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Map_Mirror, ReplacementMap, 72)
 		void Subst(ScriptString* Variable, ScriptString* Value, bool bClear)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.Subst");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33108);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = Variable;
+			*(ScriptString**)params = Variable;
 			*(ScriptString**)&params[12] = Value;
 			*(bool*)&params[24] = bClear;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IncludeUHTM(ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.IncludeUHTM");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33109);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Filename;
+			*(ScriptString**)params = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		bool FileExists(ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.FileExists");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33117);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Filename;
+			*(ScriptString**)params = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		bool IncludeBinaryFile(ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.IncludeBinaryFile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33119);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Filename;
+			*(ScriptString**)params = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void ClearSubst()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.ClearSubst");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34195);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* LoadParsedUHTM(ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.LoadParsedUHTM");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34198);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Filename;
+			*(ScriptString**)params = Filename;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		ScriptString* GetHTTPExpiration(int OffsetSeconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.GetHTTPExpiration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34201);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = OffsetSeconds;
+			*(int*)params = OffsetSeconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		void Dump()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.Dump");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34204);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SendText(ScriptString* Text, bool bNoCRLF)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.SendText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34205);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			*(bool*)&params[12] = bNoCRLF;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendBinary(int Count, byte B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.SendBinary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34208);
 			byte params[5] = { NULL };
-			*(int*)&params[0] = Count;
+			*(int*)params = Count;
 			params[4] = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SendCachedFile(ScriptString* Filename, ScriptString* ContentType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.SendCachedFile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34211);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = Filename;
+			*(ScriptString**)params = Filename;
 			*(ScriptString**)&params[12] = ContentType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		void FailAuthentication(ScriptString* Realm)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.FailAuthentication");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34215);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Realm;
+			*(ScriptString**)params = Realm;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HTTPResponse(ScriptString* Header)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.HTTPResponse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34217);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Header;
+			*(ScriptString**)params = Header;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HTTPHeader(ScriptString* Header)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.HTTPHeader");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34219);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Header;
+			*(ScriptString**)params = Header;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddHeader(ScriptString* Header, bool bReplace)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.AddHeader");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34221);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Header;
+			*(ScriptString**)params = Header;
 			*(bool*)&params[12] = bReplace;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendHeaders()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.SendHeaders");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34228);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HTTPError(int ErrorNum, ScriptString* Data)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.HTTPError");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34230);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = ErrorNum;
+			*(int*)params = ErrorNum;
 			*(ScriptString**)&params[4] = Data;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendStandardHeaders(ScriptString* ContentType, bool bCache)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.SendStandardHeaders");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34233);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = ContentType;
+			*(ScriptString**)params = ContentType;
 			*(bool*)&params[12] = bCache;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Redirect(ScriptString* URL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.Redirect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34237);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SentText()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.SentText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34239);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool SentResponse()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebResponse.SentResponse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34241);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

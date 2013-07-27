@@ -21,7 +21,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_BOOL(bUseAcceleration, 268, 0x1)
-		ADD_STRUCT(Object::Rotator, RotationOffset, 256)
+		ADD_STRUCT(Rotator, RotationOffset, 256)
 		ADD_STRUCT(int, SingleAnimAtOrAboveLOD, 252)
 		ADD_STRUCT(float, DirAngle, 248)
 		ADD_STRUCT(float, DirDegreesPerSecond, 244)

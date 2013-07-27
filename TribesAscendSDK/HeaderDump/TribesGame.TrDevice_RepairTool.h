@@ -21,8 +21,8 @@ namespace UnrealScript
 	class TrDevice_RepairTool : public TrDevice_ConstantFire
 	{
 	public:
-		ADD_STRUCT(Object::Vector, m_Location, 2212)
-		ADD_STRUCT(Object::Vector, m_Tangent, 2200)
+		ADD_STRUCT(Vector, m_Location, 2212)
+		ADD_STRUCT(Vector, m_Tangent, 2200)
 		ADD_STRUCT(float, m_fTargetHealth, 2196)
 		ADD_STRUCT(float, m_fDisplayOn, 2192)
 		ADD_BOOL(m_bIsBehindView, 2188, 0x1)
@@ -31,98 +31,98 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fRepairPercentage, 2172)
 		bool CanActorBeRepaired(class Actor* HitActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.CanActorBeRepaired");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85852);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = HitActor;
+			*(class Actor**)params = HitActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		float GetActorHealth(class Actor* HitActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.GetActorHealth");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85855);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = HitActor;
+			*(class Actor**)params = HitActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		int GetAmmoCount()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.GetAmmoCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85860);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void OnEndConstantFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.OnEndConstantFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85862);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnStartConstantFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.OnStartConstantFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85864);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InstantFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.InstantFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85865);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ProcessInstantHit_Internal(byte FiringMode, Actor::ImpactInfo Impact, bool bHeadShot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.ProcessInstantHit_Internal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85874);
 			byte params[85] = { NULL };
-			params[0] = FiringMode;
+			*params = FiringMode;
 			*(Actor::ImpactInfo*)&params[4] = Impact;
 			*(bool*)&params[84] = bHeadShot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool GetRepairEndAndTangent(Object::Vector& EndLocation, Object::Vector& Tangent, class Actor*& HitActor)
+		bool GetRepairEndAndTangent(Vector& EndLocation, Vector& Tangent, class Actor*& HitActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.GetRepairEndAndTangent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85889);
 			byte params[32] = { NULL };
-			*(Object::Vector*)&params[0] = EndLocation;
-			*(Object::Vector*)&params[12] = Tangent;
+			*(Vector*)params = EndLocation;
+			*(Vector*)&params[12] = Tangent;
 			*(class Actor**)&params[24] = HitActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			EndLocation = *(Object::Vector*)&params[0];
-			Tangent = *(Object::Vector*)&params[12];
+			EndLocation = *(Vector*)params;
+			Tangent = *(Vector*)&params[12];
 			HitActor = *(class Actor**)&params[24];
 			return *(bool*)&params[28];
 		}
 		void KillRepairEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.KillRepairEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85897);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool HasViewModeSwitched()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.HasViewModeSwitched");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85898);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SpawnRepairEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.SpawnRepairEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85902);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateRepairEffect(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.UpdateRepairEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85909);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateDamageMaterial()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.UpdateDamageMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85914);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float ModifyInstantHitDamage(byte FiringMode, Actor::ImpactInfo Impact, float Damage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.ModifyInstantHitDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85917);
 			byte params[89] = { NULL };
-			params[0] = FiringMode;
+			*params = FiringMode;
 			*(Actor::ImpactInfo*)&params[4] = Impact;
 			*(float*)&params[84] = Damage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -130,10 +130,10 @@ namespace UnrealScript
 		}
 		bool HasAnyAmmo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDevice_RepairTool.HasAnyAmmo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(85933);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

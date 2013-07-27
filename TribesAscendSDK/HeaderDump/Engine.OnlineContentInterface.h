@@ -8,14 +8,14 @@ namespace UnrealScript
 	public:
 		void OnContentChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.OnContentChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21494);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnWriteSaveGameDataComplete(bool bWasSuccessful, byte LocalUserNum, int DeviceID, ScriptString* FriendlyName, ScriptString* Filename, ScriptString* SaveFileName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.OnWriteSaveGameDataComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21496);
 			byte params[45] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			params[4] = LocalUserNum;
 			*(int*)&params[8] = DeviceID;
 			*(ScriptString**)&params[12] = FriendlyName;
@@ -25,9 +25,9 @@ namespace UnrealScript
 		}
 		void OnReadSaveGameDataComplete(bool bWasSuccessful, byte LocalUserNum, int DeviceID, ScriptString* FriendlyName, ScriptString* Filename, ScriptString* SaveFileName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.OnReadSaveGameDataComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21498);
 			byte params[45] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			params[4] = LocalUserNum;
 			*(int*)&params[8] = DeviceID;
 			*(ScriptString**)&params[12] = FriendlyName;
@@ -37,27 +37,27 @@ namespace UnrealScript
 		}
 		void OnQueryAvailableDownloadsComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.OnQueryAvailableDownloadsComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21500);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnReadContentComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.OnReadContentComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21502);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddContentChangeDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ContentDelegate, byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.AddContentChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21504);
 			byte params[13] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ContentDelegate;
+void**)params = ContentDelegate;
 			params[12] = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -65,11 +65,11 @@ void**)&params[0] = ContentDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ContentDelegate, byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.ClearContentChangeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21507);
 			byte params[13] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ContentDelegate;
+void**)params = ContentDelegate;
 			params[12] = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -77,9 +77,9 @@ void**)&params[0] = ContentDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadContentCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.AddReadContentComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21511);
 			byte params[14] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::EOnlineContentType*)&params[1] = ContentType;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
@@ -90,9 +90,9 @@ void**)&params[4] = ReadContentCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadContentCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.ClearReadContentComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21515);
 			byte params[14] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::EOnlineContentType*)&params[1] = ContentType;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
@@ -101,9 +101,9 @@ void**)&params[4] = ReadContentCompleteDelegate;
 		}
 		bool ReadContentList(byte LocalUserNum, OnlineSubsystem::EOnlineContentType ContentType, int DeviceID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.ReadContentList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21519);
 			byte params[10] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::EOnlineContentType*)&params[1] = ContentType;
 			*(int*)&params[4] = DeviceID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -111,17 +111,17 @@ void**)&params[4] = ReadContentCompleteDelegate;
 		}
 		void ClearContentList(byte LocalUserNum, OnlineSubsystem::EOnlineContentType ContentType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.ClearContentList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21524);
 			byte params[2] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::EOnlineContentType*)&params[1] = ContentType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		OnlineSubsystem::EOnlineEnumerationReadState GetContentList(byte LocalUserNum, OnlineSubsystem::EOnlineContentType ContentType, ScriptArray<OnlineSubsystem::OnlineContent>& ContentList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.GetContentList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21527);
 			byte params[15] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::EOnlineContentType*)&params[1] = ContentType;
 			*(ScriptArray<OnlineSubsystem::OnlineContent>*)&params[4] = ContentList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -130,9 +130,9 @@ void**)&params[4] = ReadContentCompleteDelegate;
 		}
 		bool QueryAvailableDownloads(byte LocalUserNum, int CategoryMask)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.QueryAvailableDownloads");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21533);
 			byte params[9] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = CategoryMask;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
@@ -141,9 +141,9 @@ void**)&params[4] = ReadContentCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* QueryDownloadsDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.AddQueryAvailableDownloadsComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21538);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = QueryDownloadsDelegate;
@@ -153,9 +153,9 @@ void**)&params[4] = QueryDownloadsDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* QueryDownloadsDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.ClearQueryAvailableDownloadsComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21541);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = QueryDownloadsDelegate;
@@ -163,9 +163,9 @@ void**)&params[4] = QueryDownloadsDelegate;
 		}
 		void GetAvailableDownloadCounts(byte LocalUserNum, int& NewDownloads, int& TotalDownloads)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.GetAvailableDownloadCounts");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21544);
 			byte params[9] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = NewDownloads;
 			*(int*)&params[8] = TotalDownloads;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -174,9 +174,9 @@ void**)&params[4] = QueryDownloadsDelegate;
 		}
 		bool ReadSaveGameData(byte LocalUserNum, int DeviceID, ScriptString* FriendlyName, ScriptString* Filename, ScriptString* SaveFileName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.ReadSaveGameData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21548);
 			byte params[45] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = DeviceID;
 			*(ScriptString**)&params[8] = FriendlyName;
 			*(ScriptString**)&params[20] = Filename;
@@ -186,9 +186,9 @@ void**)&params[4] = QueryDownloadsDelegate;
 		}
 		bool GetSaveGameData(byte LocalUserNum, int DeviceID, ScriptString* FriendlyName, ScriptString* Filename, ScriptString* SaveFileName, ScriptArray<byte>& SaveGameData)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.GetSaveGameData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21555);
 			byte params[57] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = DeviceID;
 			*(ScriptString**)&params[8] = FriendlyName;
 			*(ScriptString**)&params[20] = Filename;
@@ -202,9 +202,9 @@ void**)&params[4] = QueryDownloadsDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadSaveGameDataCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.AddReadSaveGameDataComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21570);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = ReadSaveGameDataCompleteDelegate;
@@ -214,9 +214,9 @@ void**)&params[4] = ReadSaveGameDataCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ReadSaveGameDataCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.ClearReadSaveGameDataComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21573);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = ReadSaveGameDataCompleteDelegate;
@@ -224,9 +224,9 @@ void**)&params[4] = ReadSaveGameDataCompleteDelegate;
 		}
 		bool WriteSaveGameData(byte LocalUserNum, int DeviceID, ScriptString* FriendlyName, ScriptString* Filename, ScriptString* SaveFileName, ScriptArray<byte>& SaveGameData)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.WriteSaveGameData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21576);
 			byte params[57] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = DeviceID;
 			*(ScriptString**)&params[8] = FriendlyName;
 			*(ScriptString**)&params[20] = Filename;
@@ -240,9 +240,9 @@ void**)&params[4] = ReadSaveGameDataCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* WriteSaveGameDataCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.AddWriteSaveGameDataComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21591);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = WriteSaveGameDataCompleteDelegate;
@@ -252,9 +252,9 @@ void**)&params[4] = WriteSaveGameDataCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* WriteSaveGameDataCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.ClearWriteSaveGameDataComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21594);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = WriteSaveGameDataCompleteDelegate;
@@ -262,9 +262,9 @@ void**)&params[4] = WriteSaveGameDataCompleteDelegate;
 		}
 		bool DeleteSaveGame(byte LocalUserNum, int DeviceID, ScriptString* FriendlyName, ScriptString* Filename)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.DeleteSaveGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21597);
 			byte params[33] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = DeviceID;
 			*(ScriptString**)&params[8] = FriendlyName;
 			*(ScriptString**)&params[20] = Filename;
@@ -273,9 +273,9 @@ void**)&params[4] = WriteSaveGameDataCompleteDelegate;
 		}
 		bool ClearSaveGames(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineContentInterface.ClearSaveGames");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21603);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

@@ -7,60 +7,60 @@ namespace UnrealScript
 	public:
 		void OnViewClosed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.OnViewClosed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38349);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.OnTopMostView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38350);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPlayOpenAnimation;
+			*(bool*)params = bPlayOpenAnimation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.DisableSubComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38352);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDisableComponents;
+			*(bool*)params = bDisableComponents;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetTitle(ScriptString* Title)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.SetTitle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38354);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Title;
+			*(ScriptString**)params = Title;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetInfo(ScriptString* Info)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.SetInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38356);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Info;
+			*(ScriptString**)params = Info;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAcceptButtonLabel(ScriptString* Label)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.SetAcceptButtonLabel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38358);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Label;
+			*(ScriptString**)params = Label;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetBackButtonLabel(ScriptString* Label)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.SetBackButtonLabel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38360);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Label;
+			*(ScriptString**)params = Label;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetAcceptButton_OnPress(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* EventListener)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_InfoDialog.SetAcceptButton_OnPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38362);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = EventListener;
+void**)params = EventListener;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -10,19 +10,19 @@ namespace UnrealScript
 	class TrProj_CallInBase : public TrProjectile
 	{
 	public:
-		ADD_STRUCT(Object::Vector, r_TargetLocation, 816)
+		ADD_STRUCT(Vector, r_TargetLocation, 816)
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_CallInBase.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108177);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool EffectIsRelevant(Object::Vector SpawnLocation, bool bForceDedicated, float VisibleCullDistance, float HiddenCullDistance)
+		bool EffectIsRelevant(Vector SpawnLocation, bool bForceDedicated, float VisibleCullDistance, float HiddenCullDistance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_CallInBase.EffectIsRelevant");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108179);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = SpawnLocation;
+			*(Vector*)params = SpawnLocation;
 			*(bool*)&params[12] = bForceDedicated;
 			*(float*)&params[16] = VisibleCullDistance;
 			*(float*)&params[20] = HiddenCullDistance;

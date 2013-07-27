@@ -16,7 +16,7 @@ namespace UnrealScript
 	class UDKSquadAI : public UDKTeamOwnedInfo
 	{
 	public:
-		class AlternateRoute
+		struct AlternateRoute
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class NavigationPoint*>, RouteCache, 0)

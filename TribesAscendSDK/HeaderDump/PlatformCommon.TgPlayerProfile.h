@@ -19,7 +19,7 @@ namespace UnrealScript
 	class TgPlayerProfile : public OnlinePlayerStorage
 	{
 	public:
-		class BadgeStruct
+		struct BadgeStruct
 		{
 		public:
 			ADD_STRUCT(ScriptString*, Description, 40)
@@ -32,13 +32,13 @@ namespace UnrealScript
 			ADD_STRUCT(int, ActivityId, 4)
 			ADD_STRUCT(int, BadgeId, 0)
 		};
-		class PropertyPair
+		struct PropertyPair
 		{
 		public:
 			ADD_STRUCT(int, Value, 4)
 			ADD_STRUCT(int, PropertyId, 0)
 		};
-		class AccoladeStruct
+		struct AccoladeStruct
 		{
 		public:
 			ADD_STRUCT(int, Value, 12)

@@ -19,7 +19,7 @@ namespace UnrealScript
 	class CullDistanceVolume : public Volume
 	{
 	public:
-		class CullDistanceSizePair
+		struct CullDistanceSizePair
 		{
 		public:
 			ADD_STRUCT(float, CullDistance, 4)

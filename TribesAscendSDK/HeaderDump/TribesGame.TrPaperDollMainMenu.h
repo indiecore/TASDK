@@ -26,68 +26,68 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void*>, m_ChildSkeletalMeshComponents, 916)
 		ADD_STRUCT(TrObject::EContentDataType, m_OldContentDataType, 940)
-		ADD_STRUCT(Object::Rotator, m_rZeroedRotation, 928)
+		ADD_STRUCT(Rotator, m_rZeroedRotation, 928)
 		ADD_STRUCT(float, m_fFullCharacterLightingContrastFactor, 912)
 		ADD_BOOL(m_bWasLastMeshSwapRequestMainMenuContentScene, 908, 0x2)
 		ADD_BOOL(m_bEditorMode, 908, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100497);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100498);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		TrObject::PaperDollInfo GetDevicePaperDollInfo(ScriptClass* WeaponClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.GetDevicePaperDollInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100500);
 			byte params[60] = { NULL };
-			*(ScriptClass**)&params[0] = WeaponClass;
+			*(ScriptClass**)params = WeaponClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(TrObject::PaperDollInfo*)&params[4];
 		}
 		void SetMainMesh(TrObject::PaperDollInfo NewInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.SetMainMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100503);
 			byte params[56] = { NULL };
-			*(TrObject::PaperDollInfo*)&params[0] = NewInfo;
+			*(TrObject::PaperDollInfo*)params = NewInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnCharacterMeshContentDataClassLoaded(ScriptClass* Skin3PDataClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.OnCharacterMeshContentDataClassLoaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100505);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = Skin3PDataClass;
+			*(ScriptClass**)params = Skin3PDataClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnDeviceContentDataClassLoaded(ScriptClass* DeviceContentDataClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.OnDeviceContentDataClassLoaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100507);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = DeviceContentDataClass;
+			*(ScriptClass**)params = DeviceContentDataClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TryUpdatingPaperDoll()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.TryUpdatingPaperDoll");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100509);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetWeaponOnlyMesh(ScriptClass* WeaponClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.SetWeaponOnlyMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100510);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = WeaponClass;
+			*(ScriptClass**)params = WeaponClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetFamilyInfo(ScriptClass* NewFamilyInfoClass, ScriptClass* DeviceClass, ScriptClass* skinClass, int TeamNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.SetFamilyInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100512);
 			byte params[16] = { NULL };
-			*(ScriptClass**)&params[0] = NewFamilyInfoClass;
+			*(ScriptClass**)params = NewFamilyInfoClass;
 			*(ScriptClass**)&params[4] = DeviceClass;
 			*(ScriptClass**)&params[8] = skinClass;
 			*(int*)&params[12] = TeamNum;
@@ -95,9 +95,9 @@ void*>, m_ChildSkeletalMeshComponents, 916)
 		}
 		void SetMainMeshInfo(class TrMainMenuMeshInfo* NewMainMeshInfo, TrObject::EContentDataType ContentDataType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.SetMainMeshInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100517);
 			byte params[5] = { NULL };
-			*(class TrMainMenuMeshInfo**)&params[0] = NewMainMeshInfo;
+			*(class TrMainMenuMeshInfo**)params = NewMainMeshInfo;
 			*(TrObject::EContentDataType*)&params[4] = ContentDataType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -105,11 +105,11 @@ void*>, m_ChildSkeletalMeshComponents, 916)
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* MeshComponent, ScriptArray<TrMainMenuMeshInfo::ParticleSystemInfo> ParticleSystems)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.CreateAndAttachParticleSystems");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100520);
 			byte params[16] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = MeshComponent;
+void**)params = MeshComponent;
 			*(ScriptArray<TrMainMenuMeshInfo::ParticleSystemInfo>*)&params[4] = ParticleSystems;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -117,31 +117,31 @@ void**)&params[0] = MeshComponent;
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* MeshComponent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.DetachAndDestroyMeshAttachments");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100526);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = MeshComponent;
+void**)params = MeshComponent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSpinning(bool bShouldSpin, bool bReset)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.SetSpinning");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100529);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bShouldSpin;
+			*(bool*)params = bShouldSpin;
 			*(bool*)&params[4] = bReset;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EmptyChildrenMeshes()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.EmptyChildrenMeshes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100532);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddChildrenMeshes(class TrMainMenuMeshInfo* Parent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPaperDollMainMenu.AddChildrenMeshes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100534);
 			byte params[4] = { NULL };
-			*(class TrMainMenuMeshInfo**)&params[0] = Parent;
+			*(class TrMainMenuMeshInfo**)params = Parent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

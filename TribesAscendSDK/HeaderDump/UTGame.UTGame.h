@@ -54,13 +54,13 @@ namespace UnrealScript
 			VC_Team2 = 2,
 			VC_MAX = 3,
 		};
-		class GameMapCycle
+		struct GameMapCycle
 		{
 		public:
 			ADD_STRUCT(ScriptArray<ScriptString*>, Maps, 8)
 			ADD_STRUCT(ScriptName, GameClassName, 0)
 		};
-		class ActiveBotInfo
+		struct ActiveBotInfo
 		{
 		public:
 			ADD_BOOL(bInUse, 12, 0x1)
@@ -162,32 +162,32 @@ namespace UnrealScript
 		ADD_BOOL(bExportMenuData, 896, 0x1)
 		class Actor* GetAutoObjectiveFor(class UTPlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetAutoObjectiveFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36535);
 			byte params[8] = { NULL };
-			*(class UTPlayerController**)&params[0] = PC;
+			*(class UTPlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[4];
 		}
 		bool ForceRespawn()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ForceRespawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36762);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool JustStarted(float MaxElapsedTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.JustStarted");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39767);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = MaxElapsedTime;
+			*(float*)params = MaxElapsedTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		class UTTeamInfo* GetBotTeam(int TeamBots, bool bUseTeamIndex, int TeamIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetBotTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(41546);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = TeamBots;
+			*(int*)params = TeamBots;
 			*(bool*)&params[4] = bUseTeamIndex;
 			*(int*)&params[8] = TeamIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -195,38 +195,38 @@ namespace UnrealScript
 		}
 		bool UseLowGore(class WorldInfo* WI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.UseLowGore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(41762);
 			byte params[8] = { NULL };
-			*(class WorldInfo**)&params[0] = WI;
+			*(class WorldInfo**)params = WI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool TooManyBots(class Controller* botToRemove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.TooManyBots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(42769);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = botToRemove;
+			*(class Controller**)params = botToRemove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44615);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool AllowMutator(ScriptString* MutatorClassName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AllowMutator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44618);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = MutatorClassName;
+			*(ScriptString**)params = MutatorClassName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		ScriptClass* SetGameType(ScriptString* MapName, ScriptString* Options, ScriptString* Portal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SetGameType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44621);
 			byte params[40] = { NULL };
-			*(ScriptString**)&params[0] = MapName;
+			*(ScriptString**)params = MapName;
 			*(ScriptString**)&params[12] = Options;
 			*(ScriptString**)&params[24] = Portal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -234,52 +234,52 @@ namespace UnrealScript
 		}
 		void DriverEnteredVehicle(class Vehicle* V, class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.DriverEnteredVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44631);
 			byte params[8] = { NULL };
-			*(class Vehicle**)&params[0] = V;
+			*(class Vehicle**)params = V;
 			*(class Pawn**)&params[4] = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DriverLeftVehicle(class Vehicle* V, class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.DriverLeftVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44636);
 			byte params[8] = { NULL };
-			*(class Vehicle**)&params[0] = V;
+			*(class Vehicle**)params = V;
 			*(class Pawn**)&params[4] = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AllowBecomeActivePlayer(class PlayerController* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AllowBecomeActivePlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44640);
 			byte params[8] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44643);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FindNewObjectives(class UTGameObjective* DisabledObjective)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.FindNewObjectives");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44646);
 			byte params[4] = { NULL };
-			*(class UTGameObjective**)&params[0] = DisabledObjective;
+			*(class UTGameObjective**)params = DisabledObjective;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyNavigationChanged(class NavigationPoint* N)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.NotifyNavigationChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44648);
 			byte params[4] = { NULL };
-			*(class NavigationPoint**)&params[0] = N;
+			*(class NavigationPoint**)params = N;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* ParseKillMessage(ScriptString* KillerName, ScriptString* VictimName, ScriptString* DeathMessage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ParseKillMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44651);
 			byte params[48] = { NULL };
-			*(ScriptString**)&params[0] = KillerName;
+			*(ScriptString**)params = KillerName;
 			*(ScriptString**)&params[12] = VictimName;
 			*(ScriptString**)&params[24] = DeathMessage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -287,49 +287,49 @@ namespace UnrealScript
 		}
 		bool SkipPlaySound()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SkipPlaySound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44656);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SetGameSpeed(float T)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SetGameSpeed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44658);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = T;
+			*(float*)params = T;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BroadcastDeathMessage(class Controller* Killer, class Controller* Other, ScriptClass* DamageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.BroadcastDeathMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44661);
 			byte params[12] = { NULL };
-			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)params = Killer;
 			*(class Controller**)&params[4] = Other;
 			*(ScriptClass**)&params[8] = DamageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ScoreKill(class Controller* Killer, class Controller* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ScoreKill");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44665);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)params = Killer;
 			*(class Controller**)&params[4] = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AdjustSkill(class AIController* B, class PlayerController* P, bool bWinner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AdjustSkill");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44671);
 			byte params[12] = { NULL };
-			*(class AIController**)&params[0] = B;
+			*(class AIController**)params = B;
 			*(class PlayerController**)&params[4] = P;
 			*(bool*)&params[8] = bWinner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Killed(class Controller* Killer, class Controller* KilledPlayer, class Pawn* KilledPawn, ScriptClass* DamageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.Killed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44676);
 			byte params[16] = { NULL };
-			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)params = Killer;
 			*(class Controller**)&params[4] = KilledPlayer;
 			*(class Pawn**)&params[8] = KilledPawn;
 			*(ScriptClass**)&params[12] = DamageType;
@@ -337,27 +337,27 @@ namespace UnrealScript
 		}
 		void InitGame(ScriptString* Options, ScriptString*& ErrorMessage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.InitGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44695);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Options;
+			*(ScriptString**)params = Options;
 			*(ScriptString**)&params[12] = ErrorMessage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ErrorMessage = *(ScriptString**)&params[12];
 		}
 		void GenericPlayerInitialization(class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GenericPlayerInitialization");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44700);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = C;
+			*(class Controller**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool SetPause(class PlayerController* PC, 
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* CanUnpauseDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SetPause");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44702);
 			byte params[20] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = CanUnpauseDelegate;
@@ -366,16 +366,16 @@ void**)&params[4] = CanUnpauseDelegate;
 		}
 		int LevelRecommendedPlayers()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.LevelRecommendedPlayers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44706);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		class PlayerController* Login(ScriptString* Portal, ScriptString* Options, OnlineSubsystem::UniqueNetId UniqueId, ScriptString*& ErrorMessage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.Login");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44711);
 			byte params[48] = { NULL };
-			*(ScriptString**)&params[0] = Portal;
+			*(ScriptString**)params = Portal;
 			*(ScriptString**)&params[12] = Options;
 			*(OnlineSubsystem::UniqueNetId*)&params[24] = UniqueId;
 			*(ScriptString**)&params[32] = ErrorMessage;
@@ -385,172 +385,172 @@ void**)&params[4] = CanUnpauseDelegate;
 		}
 		bool ShouldRespawn(class PickupFactory* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ShouldRespawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44721);
 			byte params[8] = { NULL };
-			*(class PickupFactory**)&params[0] = Other;
+			*(class PickupFactory**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool WantFastSpawnFor(class AIController* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.WantFastSpawnFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44724);
 			byte params[8] = { NULL };
-			*(class AIController**)&params[0] = B;
+			*(class AIController**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		float SpawnWait(class AIController* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SpawnWait");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44727);
 			byte params[8] = { NULL };
-			*(class AIController**)&params[0] = B;
+			*(class AIController**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		void RestartGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.RestartGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44731);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CheckEndGame(class PlayerReplicationInfo* Winner, ScriptString* Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.CheckEndGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44732);
 			byte params[20] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			*(class PlayerReplicationInfo**)params = Winner;
 			*(ScriptString**)&params[4] = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void SetEndGameFocus(class PlayerReplicationInfo* Winner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SetEndGameFocus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44738);
 			byte params[4] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			*(class PlayerReplicationInfo**)params = Winner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AtCapacity(bool bSpectator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AtCapacity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44742);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bSpectator;
+			*(bool*)params = bSpectator;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void PostLogin(class PlayerController* NewPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.PostLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44747);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = NewPlayer;
+			*(class PlayerController**)params = NewPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateGameSettingsCounts()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.UpdateGameSettingsCounts");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44751);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AssignHoverboard(class UTPawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AssignHoverboard");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44755);
 			byte params[4] = { NULL };
-			*(class UTPawn**)&params[0] = P;
+			*(class UTPawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetHandicapNeed(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetHandicapNeed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44757);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		void RestartPlayer(class Controller* aPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.RestartPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44760);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = aPlayer;
+			*(class Controller**)params = aPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CampaignSkillAdjust(class UTBot* aBot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.CampaignSkillAdjust");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44768);
 			byte params[4] = { NULL };
-			*(class UTBot**)&params[0] = aBot;
+			*(class UTBot**)params = aBot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddDefaultInventory(class Pawn* PlayerPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AddDefaultInventory");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44770);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = PlayerPawn;
+			*(class Pawn**)params = PlayerPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CanSpectate(class PlayerController* Viewer, class PlayerReplicationInfo* ViewTarget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.CanSpectate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44777);
 			byte params[12] = { NULL };
-			*(class PlayerController**)&params[0] = Viewer;
+			*(class PlayerController**)params = Viewer;
 			*(class PlayerReplicationInfo**)&params[4] = ViewTarget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void ChangeName(class Controller* Other, ScriptString* S, bool bNameChange)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ChangeName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44781);
 			byte params[20] = { NULL };
-			*(class Controller**)&params[0] = Other;
+			*(class Controller**)params = Other;
 			*(ScriptString**)&params[4] = S;
 			*(bool*)&params[16] = bNameChange;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DiscardInventory(class Pawn* Other, class Controller* Killer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.DiscardInventory");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44786);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			*(class Controller**)&params[4] = Killer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Logout(class Controller* Exiting)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.Logout");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44790);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = Exiting;
+			*(class Controller**)params = Exiting;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KillBots()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.KillBots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44795);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void KillOthers()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.KillOthers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44797);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void KillThis()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.KillThis");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44801);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void KillBot(class UTBot* B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.KillBot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44804);
 			byte params[4] = { NULL };
-			*(class UTBot**)&params[0] = B;
+			*(class UTBot**)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool NeedPlayers()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.NeedPlayers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44806);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		class UTBot* AddBot(ScriptString* BotName, bool bUseTeamIndex, int TeamIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AddBot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44808);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = BotName;
+			*(ScriptString**)params = BotName;
 			*(bool*)&params[12] = bUseTeamIndex;
 			*(int*)&params[16] = TeamIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -558,9 +558,9 @@ void**)&params[4] = CanUnpauseDelegate;
 		}
 		class UTBot* SpawnBot(ScriptString* BotName, bool bUseTeamIndex, int TeamIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SpawnBot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44815);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = BotName;
+			*(ScriptString**)params = BotName;
 			*(bool*)&params[12] = bUseTeamIndex;
 			*(int*)&params[16] = TeamIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -568,9 +568,9 @@ void**)&params[4] = CanUnpauseDelegate;
 		}
 		void InitializeBot(class UTBot* NewBot, class UTTeamInfo* BotTeam, UTCharInfo::CharacterInfo& BotInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.InitializeBot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44825);
 			byte params[120] = { NULL };
-			*(class UTBot**)&params[0] = NewBot;
+			*(class UTBot**)params = NewBot;
 			*(class UTTeamInfo**)&params[4] = BotTeam;
 			*(UTCharInfo::CharacterInfo*)&params[8] = BotInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -578,91 +578,91 @@ void**)&params[4] = CanUnpauseDelegate;
 		}
 		void InitGameReplicationInfo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.InitGameReplicationInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44834);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetMapTypeRule()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetMapTypeRule");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44844);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		ScriptString* GetEndGameConditionRule()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetEndGameConditionRule");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44846);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void NotifySpree(class UTPlayerReplicationInfo* Other, int Num)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.NotifySpree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44848);
 			byte params[8] = { NULL };
-			*(class UTPlayerReplicationInfo**)&params[0] = Other;
+			*(class UTPlayerReplicationInfo**)params = Other;
 			*(int*)&params[4] = Num;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EndSpree(class UTPlayerReplicationInfo* Killer, class UTPlayerReplicationInfo* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.EndSpree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44853);
 			byte params[8] = { NULL };
-			*(class UTPlayerReplicationInfo**)&params[0] = Killer;
+			*(class UTPlayerReplicationInfo**)params = Killer;
 			*(class UTPlayerReplicationInfo**)&params[4] = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateGameplayMuteList(class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.UpdateGameplayMuteList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44857);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetupPlayerMuteList(class UTPlayerController* PC, bool bForceSpectatorChannel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.SetupPlayerMuteList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44860);
 			byte params[8] = { NULL };
-			*(class UTPlayerController**)&params[0] = PC;
+			*(class UTPlayerController**)params = PC;
 			*(bool*)&params[4] = bForceSpectatorChannel;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemovePlayerFromMuteLists(class UTPlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.RemovePlayerFromMuteLists");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44869);
 			byte params[4] = { NULL };
-			*(class UTPlayerController**)&params[0] = PC;
+			*(class UTPlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetAllPlayerMuteListsToSpectatorChannel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ResetAllPlayerMuteListsToSpectatorChannel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44872);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StartMatch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.StartMatch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44874);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EndGame(class PlayerReplicationInfo* Winner, ScriptString* Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.EndGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44877);
 			byte params[16] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			*(class PlayerReplicationInfo**)params = Winner;
 			*(ScriptString**)&params[4] = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EndLogging(ScriptString* Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.EndLogging");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44885);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Reason;
+			*(ScriptString**)params = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class NavigationPoint* FindPlayerStart(class Controller* Player, byte InTeam, ScriptString* IncomingName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.FindPlayerStart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44887);
 			byte params[21] = { NULL };
-			*(class Controller**)&params[0] = Player;
+			*(class Controller**)params = Player;
 			params[4] = InTeam;
 			*(ScriptString**)&params[8] = IncomingName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -670,81 +670,81 @@ void**)&params[4] = CanUnpauseDelegate;
 		}
 		bool DominatingVictory()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.DominatingVictory");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44893);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool IsAWinner(class PlayerController* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.IsAWinner");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44895);
 			byte params[8] = { NULL };
-			*(class PlayerController**)&params[0] = C;
+			*(class PlayerController**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void PlayEndOfMatchMessage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.PlayEndOfMatchMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44898);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayRegularEndOfMatchMessage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.PlayRegularEndOfMatchMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44900);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayStartupMessage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.PlayStartupMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44902);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EndRound(class Actor* EndRoundFocus)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.EndRound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44905);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = EndRoundFocus;
+			*(class Actor**)params = EndRoundFocus;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool MatchIsInProgress()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.MatchIsInProgress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44908);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void AddInitialBots()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AddInitialBots");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44910);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int CalculatedNetSpeed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.CalculatedNetSpeed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44912);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		bool IsConsoleDedicatedServer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.IsConsoleDedicatedServer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44915);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		class PlayerStart* ChoosePlayerStart(class Controller* Player, byte InTeam)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ChoosePlayerStart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45001);
 			byte params[9] = { NULL };
-			*(class Controller**)&params[0] = Player;
+			*(class Controller**)params = Player;
 			params[4] = InTeam;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class PlayerStart**)&params[8];
 		}
 		float RatePlayerStart(class PlayerStart* P, byte Team, class Controller* Player)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.RatePlayerStart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45014);
 			byte params[13] = { NULL };
-			*(class PlayerStart**)&params[0] = P;
+			*(class PlayerStart**)params = P;
 			params[4] = Team;
 			*(class Controller**)&params[8] = Player;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -752,152 +752,152 @@ void**)&params[4] = CanUnpauseDelegate;
 		}
 		bool CheckMaxLives(class PlayerReplicationInfo* Scorer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.CheckMaxLives");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45023);
 			byte params[8] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = Scorer;
+			*(class PlayerReplicationInfo**)params = Scorer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool CheckScore(class PlayerReplicationInfo* Scorer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.CheckScore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45029);
 			byte params[8] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = Scorer;
+			*(class PlayerReplicationInfo**)params = Scorer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void RegisterVehicle(class UTVehicle* V)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.RegisterVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45034);
 			byte params[4] = { NULL };
-			*(class UTVehicle**)&params[0] = V;
+			*(class UTVehicle**)params = V;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ActivateVehicleFactory(class UTVehicleFactory* VF)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ActivateVehicleFactory");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45036);
 			byte params[4] = { NULL };
-			*(class UTVehicleFactory**)&params[0] = VF;
+			*(class UTVehicleFactory**)params = VF;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ViewObjective(class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ViewObjective");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45043);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddMutator(ScriptString* mutname, bool bUserAdded)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AddMutator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45049);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = mutname;
+			*(ScriptString**)params = mutname;
 			*(bool*)&params[12] = bUserAdded;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AllowClientToTeleport(class UTPlayerReplicationInfo* ClientPRI, class Actor* DestinationActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AllowClientToTeleport");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45052);
 			byte params[12] = { NULL };
-			*(class UTPlayerReplicationInfo**)&params[0] = ClientPRI;
+			*(class UTPlayerReplicationInfo**)params = ClientPRI;
 			*(class Actor**)&params[4] = DestinationActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void ShowPathTo(class PlayerController* P, int TeamNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ShowPathTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45056);
 			byte params[8] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			*(int*)&params[4] = TeamNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GetSeamlessTravelActorList(bool bToEntry, ScriptArray<class Actor*>& ActorList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetSeamlessTravelActorList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45059);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bToEntry;
+			*(bool*)params = bToEntry;
 			*(ScriptArray<class Actor*>*)&params[4] = ActorList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ActorList = *(ScriptArray<class Actor*>*)&params[4];
 		}
 		void PostSeamlessTravel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.PostSeamlessTravel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45064);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HandleSeamlessTravelPlayer(class Controller*& C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.HandleSeamlessTravelPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45067);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = C;
+			*(class Controller**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			C = *(class Controller**)&params[0];
+			C = *(class Controller**)params;
 		}
 		class UTMutator* GetBaseUTMutator()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetBaseUTMutator");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45074);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class UTMutator**)&params[0];
+			return *(class UTMutator**)params;
 		}
 		void ProcessSpeechRecognition(class UTPlayerController* Speaker, ScriptArray<OnlineSubsystem::SpeechRecognizedWord>& Words)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ProcessSpeechRecognition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45078);
 			byte params[16] = { NULL };
-			*(class UTPlayerController**)&params[0] = Speaker;
+			*(class UTPlayerController**)params = Speaker;
 			*(ScriptArray<OnlineSubsystem::SpeechRecognizedWord>*)&params[4] = Words;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Words = *(ScriptArray<OnlineSubsystem::SpeechRecognizedWord>*)&params[4];
 		}
 		void WriteOnlinePlayerScores()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.WriteOnlinePlayerScores");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45083);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetCurrentMapCycleIndex(ScriptArray<ScriptString*>& MapList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetCurrentMapCycleIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45090);
 			byte params[16] = { NULL };
-			*(ScriptArray<ScriptString*>*)&params[0] = MapList;
+			*(ScriptArray<ScriptString*>*)params = MapList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			MapList = *(ScriptArray<ScriptString*>*)&params[0];
+			MapList = *(ScriptArray<ScriptString*>*)params;
 			return *(int*)&params[12];
 		}
 		ScriptString* GetNextMap()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetNextMap");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45094);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void ProcessServerTravel(ScriptString* URL, bool bAbsolute)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ProcessServerTravel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45099);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			*(bool*)&params[12] = bAbsolute;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ContinueSeamlessTravel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.ContinueSeamlessTravel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45103);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetEndOfMatchRules(int InGoalScore, int InTimeLimit)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetEndOfMatchRules");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45104);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = InGoalScore;
+			*(int*)params = InGoalScore;
 			*(int*)&params[4] = InTimeLimit;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[8];
 		}
 		bool GetLocationFor(class Pawn* StatusPawn, class Actor*& LocationObject, int& MessageIndex, int LocationSpeechOffset)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.GetLocationFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45109);
 			byte params[20] = { NULL };
-			*(class Pawn**)&params[0] = StatusPawn;
+			*(class Pawn**)params = StatusPawn;
 			*(class Actor**)&params[4] = LocationObject;
 			*(int*)&params[8] = MessageIndex;
 			*(int*)&params[12] = LocationSpeechOffset;
@@ -908,15 +908,15 @@ void**)&params[4] = CanUnpauseDelegate;
 		}
 		bool AllowCheats(class PlayerController* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.AllowCheats");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45121);
 			byte params[8] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void UpdateGameSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGame.UpdateGameSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45124);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

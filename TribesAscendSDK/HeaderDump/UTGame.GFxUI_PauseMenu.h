@@ -27,51 +27,51 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, RootMC, 392)
 		bool Start(bool StartPaused)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.Start");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39099);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = StartPaused;
+			*(bool*)params = StartPaused;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void OnPressResumeButton(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.OnPressResumeButton");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39102);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPressExitButton(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.OnPressExitButton");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39104);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayOpenAnimation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.PlayOpenAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39106);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayCloseAnimation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.PlayCloseAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39107);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnPlayAnimationComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.OnPlayAnimationComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39108);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnCloseAnimationComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.OnCloseAnimationComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39109);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UT_ConsoleCommand(ScriptString* Cmd, bool bWriteToLog)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUI_PauseMenu.UT_ConsoleCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39110);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Cmd;
+			*(ScriptString**)params = Cmd;
 			*(bool*)&params[12] = bWriteToLog;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

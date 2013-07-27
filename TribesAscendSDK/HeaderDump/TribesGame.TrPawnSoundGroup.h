@@ -49,72 +49,72 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, m_JetpackCooldownSound, 172)
 		void PlayShieldPackActivateSound(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawnSoundGroup.PlayShieldPackActivateSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100645);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayShieldPackDeactivateSound(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawnSoundGroup.PlayShieldPackDeactivateSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100647);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayStealthPackActivateSound(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawnSoundGroup.PlayStealthPackActivateSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100649);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayStealthPackDeactivateSound(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawnSoundGroup.PlayStealthPackDeactivateSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100651);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayJammerPackActivateSound(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawnSoundGroup.PlayJammerPackActivateSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100653);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayJammerPackDeactivateSound(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawnSoundGroup.PlayJammerPackDeactivateSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100655);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayRageActivateSound(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawnSoundGroup.PlayRageActivateSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100657);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayRageDeactivateSound(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawnSoundGroup.PlayRageDeactivateSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100659);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayDyingSound(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawnSoundGroup.PlayDyingSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100661);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayBlinkPackSound(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPawnSoundGroup.PlayBlinkPackSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100663);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

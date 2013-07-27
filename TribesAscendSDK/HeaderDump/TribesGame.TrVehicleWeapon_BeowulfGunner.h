@@ -13,12 +13,12 @@ namespace UnrealScript
 		ADD_OBJECT(TrSkelControl_SpinControl, m_BarrelSpinControl, 1804)
 		void InitVehicleGun()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon_BeowulfGunner.InitVehicleGun");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115307);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Activate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicleWeapon_BeowulfGunner.Activate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(115308);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -12,9 +12,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, HintLocFileName, 288)
 		ScriptString* LoadRandomLocalizedHintMessage(ScriptString* Category1Name, ScriptString* Category2Name)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameViewportClient.LoadRandomLocalizedHintMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34905);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = Category1Name;
+			*(ScriptString**)params = Category1Name;
 			*(ScriptString**)&params[12] = Category2Name;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[24];

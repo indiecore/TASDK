@@ -9,16 +9,16 @@ namespace UnrealScript
 	public:
 		void ModifyPlayer(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_SuperBerserk.ModifyPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48637);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CheckReplacement(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_SuperBerserk.CheckReplacement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48640);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

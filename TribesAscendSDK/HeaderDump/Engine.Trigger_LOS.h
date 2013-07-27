@@ -13,9 +13,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class PlayerController*>, PCsWithLOS, 488)
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Trigger_LOS.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28045);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

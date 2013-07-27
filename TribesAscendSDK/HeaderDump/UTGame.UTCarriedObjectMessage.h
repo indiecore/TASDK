@@ -36,9 +36,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, ReturnBlue, 100)
 		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObjectMessage.ClientReceive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43835);
 			byte params[20] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			*(int*)&params[4] = Switch;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
@@ -47,9 +47,9 @@ namespace UnrealScript
 		}
 		class SoundNodeWave* AnnouncementSound(int MessageIndex, class Object* OptionalObject, class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObjectMessage.AnnouncementSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43844);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = MessageIndex;
+			*(int*)params = MessageIndex;
 			*(class Object**)&params[4] = OptionalObject;
 			*(class PlayerController**)&params[8] = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -57,17 +57,17 @@ namespace UnrealScript
 		}
 		byte AnnouncementLevel(byte MessageIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObjectMessage.AnnouncementLevel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43849);
 			byte params[2] = { NULL };
-			params[0] = MessageIndex;
+			*params = MessageIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return params[1];
 		}
 		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObjectMessage.GetString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43852);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(bool*)&params[4] = bPRI1HUD;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
@@ -77,9 +77,9 @@ namespace UnrealScript
 		}
 		bool ShouldBeRemoved(class UTQueuedAnnouncement* MyAnnouncement, ScriptClass* NewAnnouncementClass, int NewMessageIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObjectMessage.ShouldBeRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43859);
 			byte params[16] = { NULL };
-			*(class UTQueuedAnnouncement**)&params[0] = MyAnnouncement;
+			*(class UTQueuedAnnouncement**)params = MyAnnouncement;
 			*(ScriptClass**)&params[4] = NewAnnouncementClass;
 			*(int*)&params[8] = NewMessageIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -87,9 +87,9 @@ namespace UnrealScript
 		}
 		bool ShouldRemoveFlagAnnouncement(int MyMessageIndex, ScriptClass* NewAnnouncementClass, int NewMessageIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObjectMessage.ShouldRemoveFlagAnnouncement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43864);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = MyMessageIndex;
+			*(int*)params = MyMessageIndex;
 			*(ScriptClass**)&params[4] = NewAnnouncementClass;
 			*(int*)&params[8] = NewMessageIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -97,9 +97,9 @@ namespace UnrealScript
 		}
 		bool AddAnnouncement(class UTAnnouncer* Announcer, int MessageIndex, class PlayerReplicationInfo* PRI, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObjectMessage.AddAnnouncement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43869);
 			byte params[20] = { NULL };
-			*(class UTAnnouncer**)&params[0] = Announcer;
+			*(class UTAnnouncer**)params = Announcer;
 			*(int*)&params[4] = MessageIndex;
 			*(class PlayerReplicationInfo**)&params[8] = PRI;
 			*(class Object**)&params[12] = OptionalObject;
@@ -108,9 +108,9 @@ namespace UnrealScript
 		}
 		bool PartiallyDuplicates(int Switch1, int Switch2, class Object* OptionalObject1, class Object* OptionalObject2)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTCarriedObjectMessage.PartiallyDuplicates");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(43875);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = Switch1;
+			*(int*)params = Switch1;
 			*(int*)&params[4] = Switch2;
 			*(class Object**)&params[8] = OptionalObject1;
 			*(class Object**)&params[12] = OptionalObject2;

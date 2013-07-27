@@ -31,7 +31,7 @@ namespace UnrealScript
 	class Material : public MaterialInterface
 	{
 	public:
-		class MaterialInput
+		struct MaterialInput
 		{
 		public:
 			ADD_STRUCT(int, GCC64_Padding, 24)
@@ -42,25 +42,25 @@ namespace UnrealScript
 			ADD_STRUCT(int, Mask, 4)
 			ADD_OBJECT(MaterialExpression, Expression, 0)
 		};
-		class ColorMaterialInput : public MaterialInput
+		struct ColorMaterialInput : public MaterialInput
 		{
 		public:
 			ADD_STRUCT(Object::Color, Constant, 32)
 			ADD_BOOL(UseConstant, 28, 0x1)
 		};
-		class ScalarMaterialInput : public MaterialInput
+		struct ScalarMaterialInput : public MaterialInput
 		{
 		public:
 			ADD_STRUCT(float, Constant, 32)
 			ADD_BOOL(UseConstant, 28, 0x1)
 		};
-		class VectorMaterialInput : public MaterialInput
+		struct VectorMaterialInput : public MaterialInput
 		{
 		public:
-			ADD_STRUCT(Object::Vector, Constant, 32)
+			ADD_STRUCT(Vector, Constant, 32)
 			ADD_BOOL(UseConstant, 28, 0x1)
 		};
-		class Vector2MaterialInput : public MaterialInput
+		struct Vector2MaterialInput : public MaterialInput
 		{
 		public:
 			ADD_STRUCT(float, ConstantY, 36)

@@ -616,34 +616,34 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, FriendlyName, 60)
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrValueModifier.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113990);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Merge(class TrValueModifier* ModifierToMerge)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrValueModifier.Merge");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113991);
 			byte params[4] = { NULL };
-			*(class TrValueModifier**)&params[0] = ModifierToMerge;
+			*(class TrValueModifier**)params = ModifierToMerge;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MergeClass(ScriptClass* ModifierClassToMerge)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrValueModifier.MergeClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113993);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = ModifierClassToMerge;
+			*(ScriptClass**)params = ModifierClassToMerge;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MergeModification(int ModType, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrValueModifier.MergeModification");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113995);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ModType;
+			*(int*)params = ModType;
 			*(float*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LogModifiedValues()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrValueModifier.LogModifiedValues");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(113998);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

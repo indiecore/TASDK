@@ -71,7 +71,7 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceConstant, BioDeathMICParent, 244)
 		ADD_OBJECT(MaterialInstanceConstant, BaseMICParent, 240)
 		ADD_OBJECT(ScriptClass, VoiceClass, 236)
-		ADD_STRUCT(Object::Vector, PortraitExtraOffset, 176)
+		ADD_STRUCT(Vector, PortraitExtraOffset, 176)
 		ADD_STRUCT(ScriptString*, NeckStumpName, 164)
 		ADD_OBJECT(MaterialInterface, BlueArmMaterial, 160)
 		ADD_OBJECT(MaterialInterface, RedArmMaterial, 156)
@@ -81,47 +81,47 @@ namespace UnrealScript
 		ADD_OBJECT(Texture, DefaultHeadPortrait, 60)
 		class MaterialInterface* GetFirstPersonArmsMaterial(int TeamNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTFamilyInfo.GetFirstPersonArmsMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(41402);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = TeamNum;
+			*(int*)params = TeamNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class MaterialInterface**)&params[4];
 		}
 		class SkeletalMesh* GetFirstPersonArms()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTFamilyInfo.GetFirstPersonArms");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(41418);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class SkeletalMesh**)&params[0];
+			return *(class SkeletalMesh**)params;
 		}
 		ScriptClass* GetVoiceClass()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTFamilyInfo.GetVoiceClass");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(41423);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptClass**)&params[0];
+			return *(ScriptClass**)params;
 		}
 		class Texture* GetCharPortrait(int TeamNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTFamilyInfo.GetCharPortrait");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(41426);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = TeamNum;
+			*(int*)params = TeamNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Texture**)&params[4];
 		}
 		int GetEmoteIndex(ScriptName EmoteTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTFamilyInfo.GetEmoteIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(41510);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = EmoteTag;
+			*(ScriptName*)params = EmoteTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void GetTeamMaterials(int TeamNum, class MaterialInterface*& TeamMaterialHead, class MaterialInterface*& TeamMaterialBody)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTFamilyInfo.GetTeamMaterials");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47481);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = TeamNum;
+			*(int*)params = TeamNum;
 			*(class MaterialInterface**)&params[4] = TeamMaterialHead;
 			*(class MaterialInterface**)&params[8] = TeamMaterialBody;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -130,17 +130,17 @@ namespace UnrealScript
 		}
 		int GetEmoteGroupCnt(ScriptName Category)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTFamilyInfo.GetEmoteGroupCnt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47486);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = Category;
+			*(ScriptName*)params = Category;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[8];
 		}
 		void GetEmotes(ScriptName Category, ScriptArray<ScriptString*>& Captions, ScriptArray<ScriptName>& EmoteTags)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTFamilyInfo.GetEmotes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47491);
 			byte params[32] = { NULL };
-			*(ScriptName*)&params[0] = Category;
+			*(ScriptName*)params = Category;
 			*(ScriptArray<ScriptString*>*)&params[8] = Captions;
 			*(ScriptArray<ScriptName>*)&params[20] = EmoteTags;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

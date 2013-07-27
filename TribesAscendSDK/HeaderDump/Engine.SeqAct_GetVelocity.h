@@ -10,14 +10,14 @@ namespace UnrealScript
 	class SeqAct_GetVelocity : public SequenceAction
 	{
 	public:
-		ADD_STRUCT(Object::Vector, VelocityVect, 236)
+		ADD_STRUCT(Vector, VelocityVect, 236)
 		ADD_STRUCT(float, VelocityMag, 232)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_GetVelocity.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25702);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

@@ -21,16 +21,16 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(ScriptString*, LogMessage, 252)
-		ADD_STRUCT(Object::Vector, TargetOffset, 240)
+		ADD_STRUCT(Vector, TargetOffset, 240)
 		ADD_STRUCT(float, TargetDuration, 236)
 		ADD_BOOL(bIncludeObjComment, 232, 0x2)
 		ADD_BOOL(bOutputToScreen, 232, 0x1)
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Log.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25759);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

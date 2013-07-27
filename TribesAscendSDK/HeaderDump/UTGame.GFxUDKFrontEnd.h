@@ -42,7 +42,7 @@ namespace UnrealScript
 	class GFxUDKFrontEnd : public GFxMoviePlayer
 	{
 	public:
-		class ViewInfo
+		struct ViewInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<ScriptName>, DependantViews, 20)
@@ -72,53 +72,53 @@ namespace UnrealScript
 		ADD_OBJECT(GFxObject, RootMC, 380)
 		void EscapeDelegate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.EscapeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37740);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool Start(bool StartPaused)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.Start");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37782);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = StartPaused;
+			*(bool*)params = StartPaused;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void ConfigFrontEnd()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.ConfigFrontEnd");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37785);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ASShowCursor(bool bShowCursor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.ASShowCursor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37786);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bShowCursor;
+			*(bool*)params = bShowCursor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadViews()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.LoadViews");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37787);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LoadView(GFxUDKFrontEnd::ViewInfo InViewInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.LoadView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37789);
 			byte params[32] = { NULL };
-			*(GFxUDKFrontEnd::ViewInfo*)&params[0] = InViewInfo;
+			*(GFxUDKFrontEnd::ViewInfo*)params = InViewInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void LoadViewByName(ScriptName InViewName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.LoadViewByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37796);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = InViewName;
+			*(ScriptName*)params = InViewName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsViewLoaded(ScriptName InViewName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.IsViewLoaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37799);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = InViewName;
+			*(ScriptName*)params = InViewName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
@@ -126,127 +126,127 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.SetEscapeDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37803);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = InDelegate;
+void**)params = InDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PushViewByName(ScriptName TargetViewName, class GFxUDKFrontEnd_Screen* ParentView)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.PushViewByName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37806);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = TargetViewName;
+			*(ScriptName*)params = TargetViewName;
 			*(class GFxUDKFrontEnd_Screen**)&params[8] = ParentView;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxUDKFrontEnd_Dialog* SpawnDialog(ScriptName TargetDialogName, class GFxUDKFrontEnd_Screen* ParentView)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.SpawnDialog");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37809);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = TargetDialogName;
+			*(ScriptName*)params = TargetDialogName;
 			*(class GFxUDKFrontEnd_Screen**)&params[8] = ParentView;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GFxUDKFrontEnd_Dialog**)&params[12];
 		}
 		void ConfigureTargetDialog(class GFxUDKFrontEnd_View* TargetDialog)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.ConfigureTargetDialog");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37813);
 			byte params[4] = { NULL };
-			*(class GFxUDKFrontEnd_View**)&params[0] = TargetDialog;
+			*(class GFxUDKFrontEnd_View**)params = TargetDialog;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ConfigureTargetView(class GFxUDKFrontEnd_View* TargetView)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.ConfigureTargetView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37815);
 			byte params[4] = { NULL };
-			*(class GFxUDKFrontEnd_View**)&params[0] = TargetView;
+			*(class GFxUDKFrontEnd_View**)params = TargetView;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsViewAllowed(class GFxUDKFrontEnd_View* TargetView)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.IsViewAllowed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37817);
 			byte params[8] = { NULL };
-			*(class GFxUDKFrontEnd_View**)&params[0] = TargetView;
+			*(class GFxUDKFrontEnd_View**)params = TargetView;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void PushView(class GFxUDKFrontEnd_View* TargetView)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.PushView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37823);
 			byte params[4] = { NULL };
-			*(class GFxUDKFrontEnd_View**)&params[0] = TargetView;
+			*(class GFxUDKFrontEnd_View**)params = TargetView;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PushDialogView(class GFxUDKFrontEnd_View* dialogView)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.PushDialogView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37825);
 			byte params[4] = { NULL };
-			*(class GFxUDKFrontEnd_View**)&params[0] = dialogView;
+			*(class GFxUDKFrontEnd_View**)params = dialogView;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSelectionFocus(class GFxObject* MovieClip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.SetSelectionFocus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37827);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = MovieClip;
+			*(class GFxObject**)params = MovieClip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ASSetSelectionFocus(class GFxObject* MovieClip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.ASSetSelectionFocus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37829);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = MovieClip;
+			*(class GFxObject**)params = MovieClip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class GFxObject* PopView()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.PopView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37831);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GFxObject**)&params[0];
+			return *(class GFxObject**)params;
 		}
 		class GFxObject* PopViewStub()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.PopViewStub");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37833);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class GFxObject**)&params[0];
+			return *(class GFxObject**)params;
 		}
 		void UpdateViewLayout()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.UpdateViewLayout");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37835);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ConfigureView(class GFxUDKFrontEnd_View* InView, ScriptName WidgetName, ScriptName WidgetPath)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.ConfigureView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37836);
 			byte params[20] = { NULL };
-			*(class GFxUDKFrontEnd_View**)&params[0] = InView;
+			*(class GFxUDKFrontEnd_View**)params = InView;
 			*(ScriptName*)&params[4] = WidgetName;
 			*(ScriptName*)&params[12] = WidgetPath;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostWidgetInit()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.PostWidgetInit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37842);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CheckLinkConnectionAndError(ScriptString* AlternateTitle, ScriptString* AlternateMessage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.CheckLinkConnectionAndError");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37843);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = AlternateTitle;
+			*(ScriptString**)params = AlternateTitle;
 			*(ScriptString**)&params[12] = AlternateMessage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.WidgetInitialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37851);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)params = WidgetName;
 			*(ScriptName*)&params[8] = WidgetPath;
 			*(class GFxObject**)&params[16] = Widget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -254,16 +254,16 @@ void**)&params[0] = InDelegate;
 		}
 		void LoadDependantViews(ScriptName InViewName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.LoadDependantViews");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37858);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = InViewName;
+			*(ScriptName*)params = InViewName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DestroyDependantViews(ScriptName InViewName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd.DestroyDependantViews");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(37860);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = InViewName;
+			*(ScriptName*)params = InViewName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

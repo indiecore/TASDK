@@ -9,13 +9,13 @@ namespace UnrealScript
 	class Info : public Actor
 	{
 	public:
-		class KeyValuePair
+		struct KeyValuePair
 		{
 		public:
 			ADD_STRUCT(ScriptString*, Value, 12)
 			ADD_STRUCT(ScriptString*, Key, 0)
 		};
-		class PlayerResponseLine
+		struct PlayerResponseLine
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Info::KeyValuePair>, PlayerInfo, 32)
@@ -26,7 +26,7 @@ namespace UnrealScript
 			ADD_STRUCT(int, PlayerID, 4)
 			ADD_STRUCT(int, PlayerNum, 0)
 		};
-		class ServerResponseLine
+		struct ServerResponseLine
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Info::KeyValuePair>, ServerInfo, 72)

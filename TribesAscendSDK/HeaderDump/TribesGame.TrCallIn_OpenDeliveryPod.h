@@ -19,12 +19,12 @@ namespace UnrealScript
 		ADD_STRUCT(float, TimeToDelete, 476)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_OpenDeliveryPod.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74062);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RemovePod()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_OpenDeliveryPod.RemovePod");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74064);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

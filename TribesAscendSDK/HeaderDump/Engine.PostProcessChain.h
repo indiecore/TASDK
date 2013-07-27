@@ -13,9 +13,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class PostProcessEffect*>, Effects, 60)
 		class PostProcessEffect* FindPostProcessEffect(ScriptName EffectName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PostProcessChain.FindPostProcessEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24747);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = EffectName;
+			*(ScriptName*)params = EffectName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class PostProcessEffect**)&params[8];
 		}

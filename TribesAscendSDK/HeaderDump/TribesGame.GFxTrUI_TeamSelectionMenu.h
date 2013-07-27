@@ -43,93 +43,93 @@ namespace UnrealScript
 		ADD_STRUCT(int, AllowedTeamDiscrepancyNoTeam, 380)
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65175);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool Start(bool StartPaused)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.Start");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65176);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = StartPaused;
+			*(bool*)params = StartPaused;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void SetFontIndex(int FontIdx)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.SetFontIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65179);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = FontIdx;
+			*(int*)params = FontIdx;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Show()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.Show");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65181);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetLabels(ScriptString* Title, ScriptString* Spectate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.SetLabels");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65182);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Title;
+			*(ScriptString**)params = Title;
 			*(ScriptString**)&params[12] = Spectate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(class GameReplicationInfo* GRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65186);
 			byte params[4] = { NULL };
-			*(class GameReplicationInfo**)&params[0] = GRI;
+			*(class GameReplicationInfo**)params = GRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EnableBloodEagle(bool bEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.EnableBloodEagle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65196);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnable;
+			*(bool*)params = bEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AsTeamChooseEnableButton(int TeamID, ScriptString* bEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.AsTeamChooseEnableButton");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65198);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = TeamID;
+			*(int*)params = TeamID;
 			*(ScriptString**)&params[4] = bEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EnableDiamondSword(bool bEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.EnableDiamondSword");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65199);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnable;
+			*(bool*)params = bEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EnableSpectate(bool bEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.EnableSpectate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65201);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnable;
+			*(bool*)params = bEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void choseTeamBE()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.choseTeamBE");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65203);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void choseTeamDS()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.choseTeamDS");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65208);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void choseTeamSpectate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.choseTeamSpectate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65211);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CompleteMovie(bool bHaveTeam)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_TeamSelectionMenu.CompleteMovie");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65212);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bHaveTeam;
+			*(bool*)params = bHaveTeam;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

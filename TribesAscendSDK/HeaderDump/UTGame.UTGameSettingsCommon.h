@@ -118,48 +118,48 @@ namespace UnrealScript
 		ADD_STRUCT(int, MinNetPlayers, 176)
 		void SetCustomMapName(ScriptString* MapName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameSettingsCommon.SetCustomMapName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47727);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = MapName;
+			*(ScriptString**)params = MapName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetOfficialMutatorBitmask(int MutatorBitmask)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameSettingsCommon.SetOfficialMutatorBitmask");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47730);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = MutatorBitmask;
+			*(int*)params = MutatorBitmask;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BuildURL(ScriptString*& OutURL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameSettingsCommon.BuildURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47732);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = OutURL;
+			*(ScriptString**)params = OutURL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			OutURL = *(ScriptString**)&params[0];
+			OutURL = *(ScriptString**)params;
 		}
 		void UpdateFromURL(ScriptString*& URL, class GameInfo* Game)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameSettingsCommon.UpdateFromURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47740);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			*(class GameInfo**)&params[12] = Game;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			URL = *(ScriptString**)&params[0];
+			URL = *(ScriptString**)params;
 		}
 		void SetMutators(ScriptString*& URL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameSettingsCommon.SetMutators");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47747);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			URL = *(ScriptString**)&params[0];
+			URL = *(ScriptString**)params;
 		}
 		int GenerateMutatorBitmaskFromURL(class UTUIDataStore_MenuItems* MenuDataStore, ScriptArray<ScriptString*>& MutatorClassNames)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameSettingsCommon.GenerateMutatorBitmaskFromURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47754);
 			byte params[20] = { NULL };
-			*(class UTUIDataStore_MenuItems**)&params[0] = MenuDataStore;
+			*(class UTUIDataStore_MenuItems**)params = MenuDataStore;
 			*(ScriptArray<ScriptString*>*)&params[4] = MutatorClassNames;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			MutatorClassNames = *(ScriptArray<ScriptString*>*)&params[4];
@@ -167,9 +167,9 @@ namespace UnrealScript
 		}
 		void SetCustomMutators(class UTUIDataStore_MenuItems* MenuDataStore, ScriptArray<ScriptString*>& MutatorClassNames)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGameSettingsCommon.SetCustomMutators");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47763);
 			byte params[16] = { NULL };
-			*(class UTUIDataStore_MenuItems**)&params[0] = MenuDataStore;
+			*(class UTUIDataStore_MenuItems**)params = MenuDataStore;
 			*(ScriptArray<ScriptString*>*)&params[4] = MutatorClassNames;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			MutatorClassNames = *(ScriptArray<ScriptString*>*)&params[4];

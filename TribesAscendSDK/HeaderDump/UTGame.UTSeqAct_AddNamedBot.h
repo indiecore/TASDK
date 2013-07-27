@@ -32,15 +32,15 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, BotName, 232)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_AddNamedBot.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49065);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_AddNamedBot.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49067);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

@@ -28,13 +28,13 @@ namespace UnrealScript
 	class Terrain : public Info
 	{
 	public:
-		class TerrainHeight
+		struct TerrainHeight
 		{
 		};
-		class TerrainInfoData
+		struct TerrainInfoData
 		{
 		};
-		class TerrainLayer
+		struct TerrainLayer
 		{
 		public:
 			ADD_STRUCT(int, MaxY, 44)
@@ -50,20 +50,20 @@ namespace UnrealScript
 			ADD_OBJECT(TerrainLayerSetup, Setup, 12)
 			ADD_STRUCT(ScriptString*, Name, 0)
 		};
-		class AlphaMap
+		struct AlphaMap
 		{
 		};
-		class TerrainWeightedMaterial
+		struct TerrainWeightedMaterial
 		{
 		};
-		class SelectedTerrainVertex
+		struct SelectedTerrainVertex
 		{
 		public:
 			ADD_STRUCT(int, Weight, 8)
 			ADD_STRUCT(int, Y, 4)
 			ADD_STRUCT(int, X, 0)
 		};
-		class TerrainDecorationInstance
+		struct TerrainDecorationInstance
 		{
 		public:
 			ADD_STRUCT(int, Yaw, 16)
@@ -71,7 +71,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, Y, 8)
 			ADD_STRUCT(float, X, 4)
 		};
-		class TerrainDecoration
+		struct TerrainDecoration
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Terrain::TerrainDecorationInstance>, Instances, 24)
@@ -82,15 +82,15 @@ namespace UnrealScript
 			ADD_STRUCT(float, MinScale, 4)
 			ADD_OBJECT(PrimitiveComponentFactory, Factory, 0)
 		};
-		class TerrainMaterialResource
+		struct TerrainMaterialResource
 		{
 		};
-		class CachedTerrainMaterialArray
+		struct CachedTerrainMaterialArray
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Object::Pointer>, CachedMaterials, 0)
 		};
-		class TerrainDecoLayer
+		struct TerrainDecoLayer
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Terrain::TerrainDecoration>, Decorations, 12)
@@ -148,12 +148,12 @@ void*>, TerrainComponents, 540)
 		ADD_STRUCT(int, NormalMapLayer, 512)
 		void CalcLayerBounds()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Terrain.CalcLayerBounds");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27865);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Terrain.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27866);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

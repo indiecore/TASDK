@@ -30,7 +30,7 @@ namespace UnrealScript
 			ETAC_GoreDisabled = 2,
 			ETAC_MAX = 3,
 		};
-		class SubTrackGroup
+		struct SubTrackGroup
 		{
 		public:
 			ADD_STRUCT(ScriptArray<int>, TrackIndices, 12)
@@ -38,7 +38,7 @@ namespace UnrealScript
 			ADD_BOOL(bIsCollapsed, 24, 0x1)
 			ADD_STRUCT(ScriptString*, GroupName, 0)
 		};
-		class SupportedSubTrackInfo
+		struct SupportedSubTrackInfo
 		{
 		public:
 			ADD_STRUCT(int, GroupIndex, 16)

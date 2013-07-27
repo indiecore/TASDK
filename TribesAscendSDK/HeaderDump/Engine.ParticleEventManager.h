@@ -7,19 +7,19 @@ namespace UnrealScript
 	class ParticleEventManager : public Actor
 	{
 	public:
-		void HandleParticleModuleEventSendToGame(class ParticleModuleEventSendToGame* InEvent, Object::Vector& InCollideDirection, Object::Vector& InHitLocation, Object::Vector& InHitNormal, ScriptName& InBoneName)
+		void HandleParticleModuleEventSendToGame(class ParticleModuleEventSendToGame* InEvent, Vector& InCollideDirection, Vector& InHitLocation, Vector& InHitNormal, ScriptName& InBoneName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.ParticleEventManager.HandleParticleModuleEventSendToGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(23084);
 			byte params[48] = { NULL };
-			*(class ParticleModuleEventSendToGame**)&params[0] = InEvent;
-			*(Object::Vector*)&params[4] = InCollideDirection;
-			*(Object::Vector*)&params[16] = InHitLocation;
-			*(Object::Vector*)&params[28] = InHitNormal;
+			*(class ParticleModuleEventSendToGame**)params = InEvent;
+			*(Vector*)&params[4] = InCollideDirection;
+			*(Vector*)&params[16] = InHitLocation;
+			*(Vector*)&params[28] = InHitNormal;
 			*(ScriptName*)&params[40] = InBoneName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			InCollideDirection = *(Object::Vector*)&params[4];
-			InHitLocation = *(Object::Vector*)&params[16];
-			InHitNormal = *(Object::Vector*)&params[28];
+			InCollideDirection = *(Vector*)&params[4];
+			InHitLocation = *(Vector*)&params[16];
+			InHitNormal = *(Vector*)&params[28];
 			InBoneName = *(ScriptName*)&params[40];
 		}
 	};

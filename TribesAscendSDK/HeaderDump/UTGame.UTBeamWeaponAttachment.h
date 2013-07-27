@@ -21,22 +21,22 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, BeamTemplate, 704)
 		void AddBeamEmitter()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeaponAttachment.AddBeamEmitter");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(42416);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideEmitter(int Index, bool bHide)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeaponAttachment.HideEmitter");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(42418);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(bool*)&params[4] = bHide;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateBeam(byte FireModeNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTBeamWeaponAttachment.UpdateBeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(42421);
 			byte params[1] = { NULL };
-			params[0] = FireModeNum;
+			*params = FireModeNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

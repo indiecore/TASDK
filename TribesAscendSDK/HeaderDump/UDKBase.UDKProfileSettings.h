@@ -8,16 +8,16 @@ namespace UnrealScript
 	public:
 		void ResetToDefault(int ProfileId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKProfileSettings.ResetToDefault");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35286);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = ProfileId;
+			*(int*)params = ProfileId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetKeysToDefault(class LocalPlayer* InPlayerOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKProfileSettings.ResetKeysToDefault");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35288);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = InPlayerOwner;
+			*(class LocalPlayer**)params = InPlayerOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

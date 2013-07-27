@@ -19,7 +19,7 @@ namespace UnrealScript
 	class InterpTrackEvent : public InterpTrack
 	{
 	public:
-		class EventTrackKey
+		struct EventTrackKey
 		{
 		public:
 			ADD_STRUCT(ScriptName, EventName, 4)

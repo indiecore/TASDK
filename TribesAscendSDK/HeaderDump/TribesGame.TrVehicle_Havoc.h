@@ -15,16 +15,16 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fPitchAimAngle, 3292)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Havoc.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(114836);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		Object::Rotator GetWeaponAim(class UTVehicleWeapon* VWeapon)
+		Rotator GetWeaponAim(class UTVehicleWeapon* VWeapon)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVehicle_Havoc.GetWeaponAim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(114837);
 			byte params[16] = { NULL };
-			*(class UTVehicleWeapon**)&params[0] = VWeapon;
+			*(class UTVehicleWeapon**)params = VWeapon;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[4];
+			return *(Rotator*)&params[4];
 		}
 	};
 }

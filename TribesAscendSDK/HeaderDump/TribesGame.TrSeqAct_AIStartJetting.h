@@ -21,7 +21,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_BOOL(m_bResetVelocity, 248, 0x1)
-		ADD_STRUCT(Object::Vector, Direction, 236)
+		ADD_STRUCT(Vector, Direction, 236)
 		ADD_STRUCT(float, Magnitude, 232)
 	};
 }

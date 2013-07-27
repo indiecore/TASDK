@@ -40,7 +40,7 @@ namespace UnrealScript
 			DecalTransform_SpawnRelative = 2,
 			DecalTransform_MAX = 3,
 		};
-		class DecalReceiver
+		struct DecalReceiver
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, RenderData, 4)
@@ -53,10 +53,10 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void*>, ReceiverImages, 724)
-		ADD_STRUCT(Object::Vector, OriginalParentRelativeOrientationVec, 772)
-		ADD_STRUCT(Object::Vector, OriginalParentRelativeLocation, 760)
-		ADD_STRUCT(Object::Rotator, ParentRelativeOrientation, 748)
-		ADD_STRUCT(Object::Vector, ParentRelativeLocation, 736)
+		ADD_STRUCT(Vector, OriginalParentRelativeOrientationVec, 772)
+		ADD_STRUCT(Vector, OriginalParentRelativeLocation, 760)
+		ADD_STRUCT(Rotator, ParentRelativeOrientation, 748)
+		ADD_STRUCT(Vector, ParentRelativeLocation, 736)
 		ADD_STRUCT(DecalComponent::EFilterMode, FilterMode, 709)
 		ADD_STRUCT(DecalComponent::EDecalTransform, DecalTransform, 708)
 		ADD_STRUCT(Object::Vector2D, BlendRange, 700)
@@ -81,12 +81,12 @@ void*>, ReceiverImages, 724)
 		ADD_BOOL(m_bGameplayRequired, 604, 0x4)
 		ADD_BOOL(bStaticDecal, 604, 0x2)
 		ADD_BOOL(bNoClip, 604, 0x1)
-		ADD_STRUCT(Object::Vector, HitBinormal, 592)
-		ADD_STRUCT(Object::Vector, HitTangent, 580)
-		ADD_STRUCT(Object::Vector, HitNormal, 568)
-		ADD_STRUCT(Object::Vector, HitLocation, 556)
-		ADD_STRUCT(Object::Rotator, Orientation, 544)
-		ADD_STRUCT(Object::Vector, Location, 532)
+		ADD_STRUCT(Vector, HitBinormal, 592)
+		ADD_STRUCT(Vector, HitTangent, 580)
+		ADD_STRUCT(Vector, HitNormal, 568)
+		ADD_STRUCT(Vector, HitLocation, 556)
+		ADD_STRUCT(Rotator, Orientation, 544)
+		ADD_STRUCT(Vector, Location, 532)
 		ADD_STRUCT(float, FarPlane, 528)
 		ADD_STRUCT(float, NearPlane, 524)
 		ADD_STRUCT(float, FieldOfView, 520)
@@ -100,28 +100,28 @@ void*>, ReceiverImages, 724)
 		ADD_OBJECT(MaterialInterface, DecalMaterial, 488)
 		void ResetToDefaults()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DecalComponent.ResetToDefaults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14100);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetDecalMaterial(class MaterialInterface* NewDecalMaterial)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DecalComponent.SetDecalMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14101);
 			byte params[4] = { NULL };
-			*(class MaterialInterface**)&params[0] = NewDecalMaterial;
+			*(class MaterialInterface**)params = NewDecalMaterial;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class MaterialInterface* GetDecalMaterial()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DecalComponent.GetDecalMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14103);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class MaterialInterface**)&params[0];
+			return *(class MaterialInterface**)params;
 		}
 		void SetGameplayRequired(bool bIsGameplayRelevant)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DecalComponent.SetGameplayRequired");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14105);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bIsGameplayRelevant;
+			*(bool*)params = bIsGameplayRelevant;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

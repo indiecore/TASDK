@@ -12,9 +12,9 @@ namespace UnrealScript
 	public:
 		UDKPlayerController::ObjectiveAnnouncementInfo GetObjectiveAnnouncement(byte MessageIndex, class Object* Objective, class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTObjectiveAnnouncement.GetObjectiveAnnouncement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48650);
 			byte params[25] = { NULL };
-			params[0] = MessageIndex;
+			*params = MessageIndex;
 			*(class Object**)&params[4] = Objective;
 			*(class PlayerController**)&params[8] = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -22,9 +22,9 @@ namespace UnrealScript
 		}
 		bool ShouldBeRemoved(class UTQueuedAnnouncement* MyAnnouncement, ScriptClass* NewAnnouncementClass, int NewMessageIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTObjectiveAnnouncement.ShouldBeRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48660);
 			byte params[16] = { NULL };
-			*(class UTQueuedAnnouncement**)&params[0] = MyAnnouncement;
+			*(class UTQueuedAnnouncement**)params = MyAnnouncement;
 			*(ScriptClass**)&params[4] = NewAnnouncementClass;
 			*(int*)&params[8] = NewMessageIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -32,9 +32,9 @@ namespace UnrealScript
 		}
 		void SetHUDDisplay(class PlayerController* P, int Switch, ScriptString* Text, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTObjectiveAnnouncement.SetHUDDisplay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48665);
 			byte params[32] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			*(int*)&params[4] = Switch;
 			*(ScriptString**)&params[8] = Text;
 			*(class PlayerReplicationInfo**)&params[20] = RelatedPRI_1;

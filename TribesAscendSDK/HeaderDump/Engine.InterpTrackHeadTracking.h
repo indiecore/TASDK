@@ -25,7 +25,7 @@ namespace UnrealScript
 			EHTA_EnableHeadTracking = 1,
 			EHTA_MAX = 2,
 		};
-		class HeadTrackingKey
+		struct HeadTrackingKey
 		{
 		public:
 			ADD_STRUCT(InterpTrackHeadTracking::EHeadTrackingAction, Action, 4)

@@ -13,7 +13,7 @@ namespace UnrealScript
 		ADD_OBJECT(MaterialInstanceConstant, m_MeshMaterial, 480)
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrStealthResidue.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112734);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

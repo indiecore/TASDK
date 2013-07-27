@@ -24,14 +24,14 @@ namespace UnrealScript
 	class StaticMesh : public Object
 	{
 	public:
-		class StaticMeshLODElement
+		struct StaticMeshLODElement
 		{
 		public:
 			ADD_OBJECT(MaterialInterface, Material, 0)
 			ADD_BOOL(bEnableShadowCasting, 4, 0x1)
 			ADD_BOOL(bEnableCollision, 12, 0x1)
 		};
-		class StaticMeshLODInfo
+		struct StaticMeshLODInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<StaticMesh::StaticMeshLODElement>, Elements, 0)

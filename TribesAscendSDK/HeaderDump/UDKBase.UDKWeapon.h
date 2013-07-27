@@ -29,33 +29,33 @@ namespace UnrealScript
 		ADD_BOOL(bLeadTarget, 720, 0x1)
 		bool IsAimCorrect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKWeapon.IsAimCorrect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35784);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		byte BestMode()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKWeapon.BestMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35805);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return params[0];
+			return *params;
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKWeapon.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36274);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EnsureWeaponOverlayComponentLast()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKWeapon.EnsureWeaponOverlayComponentLast");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36275);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPosition(class UDKPawn* Holder, float DeltaSeconds)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKWeapon.SetPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36276);
 			byte params[8] = { NULL };
-			*(class UDKPawn**)&params[0] = Holder;
+			*(class UDKPawn**)params = Holder;
 			*(float*)&params[4] = DeltaSeconds;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

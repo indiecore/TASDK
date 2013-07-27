@@ -15,58 +15,58 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<class AnimNodeSlot*>, SlotNodes, 536)
 		void MAT_SetAnimWeights(ScriptArray<Actor::AnimSlotInfo> SlotInfos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorMAT.MAT_SetAnimWeights");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26761);
 			byte params[12] = { NULL };
-			*(ScriptArray<Actor::AnimSlotInfo>*)&params[0] = SlotInfos;
+			*(ScriptArray<Actor::AnimSlotInfo>*)params = SlotInfos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MAT_SetMorphWeight(ScriptName MorphNodeName, float MorphWeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorMAT.MAT_SetMorphWeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26764);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = MorphNodeName;
+			*(ScriptName*)params = MorphNodeName;
 			*(float*)&params[8] = MorphWeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MAT_SetSkelControlScale(ScriptName SkelControlName, float Scale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorMAT.MAT_SetSkelControlScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26767);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SkelControlName;
+			*(ScriptName*)params = SkelControlName;
 			*(float*)&params[8] = Scale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorMAT.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26770);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorMAT.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26771);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CacheAnimNodes()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorMAT.CacheAnimNodes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26773);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearAnimNodes()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorMAT.ClearAnimNodes");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26775);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetAnimPosition(ScriptName SlotName, int ChannelIndex, ScriptName InAnimSeqName, float InPosition, bool bFireNotifies, bool bLooping, bool bEnableRootMotion)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorMAT.SetAnimPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26776);
 			byte params[36] = { NULL };
-			*(ScriptName*)&params[0] = SlotName;
+			*(ScriptName*)params = SlotName;
 			*(int*)&params[8] = ChannelIndex;
 			*(ScriptName*)&params[12] = InAnimSeqName;
 			*(float*)&params[20] = InPosition;
@@ -77,9 +77,9 @@ void**)&params[0] = SkelComp;
 		}
 		void MAT_SetAnimPosition(ScriptName SlotName, int ChannelIndex, ScriptName InAnimSeqName, float InPosition, bool bFireNotifies, bool bLooping, bool bEnableRootMotion)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorMAT.MAT_SetAnimPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26784);
 			byte params[36] = { NULL };
-			*(ScriptName*)&params[0] = SlotName;
+			*(ScriptName*)params = SlotName;
 			*(int*)&params[8] = ChannelIndex;
 			*(ScriptName*)&params[12] = InAnimSeqName;
 			*(float*)&params[20] = InPosition;
@@ -90,24 +90,24 @@ void**)&params[0] = SkelComp;
 		}
 		void FinishAnimControl(class InterpGroup* InInterpGroup)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorMAT.FinishAnimControl");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26792);
 			byte params[4] = { NULL };
-			*(class InterpGroup**)&params[0] = InInterpGroup;
+			*(class InterpGroup**)params = InInterpGroup;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetMorphWeight(ScriptName MorphNodeName, float MorphWeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorMAT.SetMorphWeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26794);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = MorphNodeName;
+			*(ScriptName*)params = MorphNodeName;
 			*(float*)&params[8] = MorphWeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetSkelControlScale(ScriptName SkelControlName, float Scale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SkeletalMeshActorMAT.SetSkelControlScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(26797);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SkelControlName;
+			*(ScriptName*)params = SkelControlName;
 			*(float*)&params[8] = Scale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

@@ -9,17 +9,17 @@ namespace UnrealScript
 	public:
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSubDevice.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112994);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		Actor::ImpactInfo CalcWeaponFire(Object::Vector StartTrace, Object::Vector EndTrace, ScriptArray<Actor::ImpactInfo>& ImpactList, Object::Vector Extent)
+		Actor::ImpactInfo CalcWeaponFire(Vector StartTrace, Vector EndTrace, ScriptArray<Actor::ImpactInfo>& ImpactList, Vector Extent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSubDevice.CalcWeaponFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112995);
 			byte params[128] = { NULL };
-			*(Object::Vector*)&params[0] = StartTrace;
-			*(Object::Vector*)&params[12] = EndTrace;
+			*(Vector*)params = StartTrace;
+			*(Vector*)&params[12] = EndTrace;
 			*(ScriptArray<Actor::ImpactInfo>*)&params[24] = ImpactList;
-			*(Object::Vector*)&params[36] = Extent;
+			*(Vector*)&params[36] = Extent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ImpactList = *(ScriptArray<Actor::ImpactInfo>*)&params[24];
 			return *(Actor::ImpactInfo*)&params[48];

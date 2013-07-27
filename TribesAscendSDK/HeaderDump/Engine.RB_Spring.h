@@ -36,27 +36,27 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, BoneName1, 92)
 		void SetComponents(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* InComponent1, ScriptName InBoneName1, Object::Vector Position1, 
+void* InComponent1, ScriptName InBoneName1, Vector Position1, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* InComponent2, ScriptName InBoneName2, Object::Vector Position2)
+void* InComponent2, ScriptName InBoneName2, Vector Position2)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Spring.SetComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25344);
 			byte params[48] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = InComponent1;
+void**)params = InComponent1;
 			*(ScriptName*)&params[4] = InBoneName1;
-			*(Object::Vector*)&params[12] = Position1;
+			*(Vector*)&params[12] = Position1;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[24] = InComponent2;
 			*(ScriptName*)&params[28] = InBoneName2;
-			*(Object::Vector*)&params[36] = Position2;
+			*(Vector*)&params[36] = Position2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Clear()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.RB_Spring.Clear");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25351);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

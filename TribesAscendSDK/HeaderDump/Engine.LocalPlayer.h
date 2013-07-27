@@ -30,7 +30,7 @@ namespace UnrealScript
 	class LocalPlayer : public Player
 	{
 	public:
-		class PostProcessSettingsOverride
+		struct PostProcessSettingsOverride
 		{
 		public:
 			ADD_STRUCT(float, BlendStartTime, 240)
@@ -42,7 +42,7 @@ namespace UnrealScript
 			ADD_BOOL(bBlendingIn, 220, 0x1)
 			ADD_STRUCT(PostProcessVolume::PostProcessSettings, Settings, 0)
 		};
-		class CurrentPostProcessVolumeInfo
+		struct CurrentPostProcessVolumeInfo
 		{
 		public:
 			ADD_STRUCT(float, LastBlendTime, 228)
@@ -50,7 +50,7 @@ namespace UnrealScript
 			ADD_OBJECT(PostProcessVolume, LastVolumeUsed, 220)
 			ADD_STRUCT(PostProcessVolume::PostProcessSettings, LastSettings, 0)
 		};
-		class SynchronizedActorVisibilityHistory
+		struct SynchronizedActorVisibilityHistory
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, CriticalSection, 4)
@@ -69,15 +69,15 @@ namespace UnrealScript
 		ADD_STRUCT(Object::EAspectRatioAxisConstraint, AspectRatioAxisConstraint, 636)
 		ADD_STRUCT(LocalPlayer::CurrentPostProcessVolumeInfo, LevelPPInfo, 392)
 		ADD_STRUCT(LocalPlayer::CurrentPostProcessVolumeInfo, CurrentPPInfo, 160)
-		ADD_STRUCT(Object::Vector, LastViewLocation, 148)
+		ADD_STRUCT(Vector, LastViewLocation, 148)
 		ADD_STRUCT(LocalPlayer::SynchronizedActorVisibilityHistory, ActorVisibilityHistory, 140)
 		ADD_STRUCT(Object::Pointer, ViewState, 136)
 		ADD_OBJECT(PostProcessChain, PlayerPostProcess, 120)
 		bool SpawnPlayActor(ScriptString* URL, ScriptString*& OutError)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.SpawnPlayActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17915);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			*(ScriptString**)&params[12] = OutError;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutError = *(ScriptString**)&params[12];
@@ -85,51 +85,51 @@ namespace UnrealScript
 		}
 		void SendSplitJoin()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.SendSplitJoin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17918);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool GetActorVisibility(class Actor* TestActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.GetActorVisibility");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19507);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = TestActor;
+			*(class Actor**)params = TestActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void OverridePostProcessSettings(PostProcessVolume::PostProcessSettings OverrideSettings, float BlendInTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.OverridePostProcessSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19510);
 			byte params[224] = { NULL };
-			*(PostProcessVolume::PostProcessSettings*)&params[0] = OverrideSettings;
+			*(PostProcessVolume::PostProcessSettings*)params = OverrideSettings;
 			*(float*)&params[220] = BlendInTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearPostProcessSettingsOverride(float BlendOutTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.ClearPostProcessSettingsOverride");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19513);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = BlendOutTime;
+			*(float*)params = BlendOutTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetControllerId(int NewControllerId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.SetControllerId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19515);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = NewControllerId;
+			*(int*)params = NewControllerId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class TranslationContext* GetTranslationContext()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.GetTranslationContext");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19519);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class TranslationContext**)&params[0];
+			return *(class TranslationContext**)params;
 		}
 		bool InsertPostProcessingChain(class PostProcessChain* InChain, int InIndex, bool bInClone)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.InsertPostProcessingChain");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19521);
 			byte params[16] = { NULL };
-			*(class PostProcessChain**)&params[0] = InChain;
+			*(class PostProcessChain**)params = InChain;
 			*(int*)&params[4] = InIndex;
 			*(bool*)&params[8] = bInClone;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -137,56 +137,56 @@ namespace UnrealScript
 		}
 		bool RemovePostProcessingChain(int InIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.RemovePostProcessingChain");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19526);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = InIndex;
+			*(int*)params = InIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool RemoveAllPostProcessingChains()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.RemoveAllPostProcessingChains");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19529);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		class PostProcessChain* GetPostProcessChain(int InIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.GetPostProcessChain");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19531);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = InIndex;
+			*(int*)params = InIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class PostProcessChain**)&params[4];
 		}
 		void TouchPlayerPostProcessChain()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.TouchPlayerPostProcessChain");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19534);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DeProject(Object::Vector2D RelativeScreenPos, Object::Vector& WorldOrigin, Object::Vector& WorldDirection)
+		void DeProject(Object::Vector2D RelativeScreenPos, Vector& WorldOrigin, Vector& WorldDirection)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.DeProject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19535);
 			byte params[32] = { NULL };
-			*(Object::Vector2D*)&params[0] = RelativeScreenPos;
-			*(Object::Vector*)&params[8] = WorldOrigin;
-			*(Object::Vector*)&params[20] = WorldDirection;
+			*(Object::Vector2D*)params = RelativeScreenPos;
+			*(Vector*)&params[8] = WorldOrigin;
+			*(Vector*)&params[20] = WorldDirection;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			WorldOrigin = *(Object::Vector*)&params[8];
-			WorldDirection = *(Object::Vector*)&params[20];
+			WorldOrigin = *(Vector*)&params[8];
+			WorldDirection = *(Vector*)&params[20];
 		}
 		OnlineSubsystem::UniqueNetId GetUniqueNetId()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.GetUniqueNetId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19539);
 			byte params[8] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(OnlineSubsystem::UniqueNetId*)&params[0];
+			return *(OnlineSubsystem::UniqueNetId*)params;
 		}
 		ScriptString* GetNickname()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.LocalPlayer.GetNickname");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(19543);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

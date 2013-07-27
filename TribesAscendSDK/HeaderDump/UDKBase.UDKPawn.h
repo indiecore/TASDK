@@ -38,31 +38,31 @@ namespace UnrealScript
 	class UDKPawn : public GamePawn
 	{
 	public:
-		class DrivenWeaponPawnInfo
+		struct DrivenWeaponPawnInfo
 		{
 		public:
 			ADD_OBJECT(PlayerReplicationInfo, PRI, 8)
 			ADD_STRUCT(byte, SeatIndex, 4)
 			ADD_OBJECT(UDKVehicle, BaseVehicle, 0)
 		};
-		class UTTakeHitInfo
+		struct UTTakeHitInfo
 		{
 		public:
 			ADD_BOOL(m_bDamagedSelf, 40, 0x1)
 			ADD_STRUCT(ScriptName, HitBone, 32)
 			ADD_OBJECT(ScriptClass, DamageType, 28)
-			ADD_STRUCT(Object::Vector, Momentum, 16)
-			ADD_STRUCT(Object::Vector, HitLocation, 4)
+			ADD_STRUCT(Vector, Momentum, 16)
+			ADD_STRUCT(Vector, HitLocation, 4)
 			ADD_STRUCT(int, Damage, 0)
 		};
-		class PlayEmoteInfo
+		struct PlayEmoteInfo
 		{
 		public:
 			ADD_BOOL(bNewData, 12, 0x1)
 			ADD_STRUCT(int, EmoteID, 8)
 			ADD_STRUCT(ScriptName, EmoteTag, 0)
 		};
-		class MaterialImpactEffect
+		struct MaterialImpactEffect
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class MaterialInterface*>, DecalMaterials, 12)
@@ -74,25 +74,25 @@ namespace UnrealScript
 			ADD_OBJECT(SoundCue, Sound, 8)
 			ADD_STRUCT(ScriptName, MaterialType, 0)
 		};
-		class MaterialSoundEffect
+		struct MaterialSoundEffect
 		{
 		public:
 			ADD_OBJECT(SoundCue, Sound, 8)
 			ADD_STRUCT(ScriptName, MaterialType, 0)
 		};
-		class MaterialParticleEffect
+		struct MaterialParticleEffect
 		{
 		public:
 			ADD_OBJECT(ParticleSystem, ParticleTemplate, 8)
 			ADD_STRUCT(ScriptName, MaterialType, 0)
 		};
-		class DistanceBasedParticleTemplate
+		struct DistanceBasedParticleTemplate
 		{
 		public:
 			ADD_STRUCT(float, MinDistance, 4)
 			ADD_OBJECT(ParticleSystem, Template, 0)
 		};
-		class EmoteInfo
+		struct EmoteInfo
 		{
 		public:
 			ADD_BOOL(bRequiresPlayer, 48, 0x1)
@@ -108,7 +108,7 @@ namespace UnrealScript
 		ADD_BOOL(bReadyToDoubleJump, 1148, 0x1)
 		ADD_STRUCT(ScriptArray<class MaterialInstanceConstant*>, BodyMaterialInstances, 1316)
 		ADD_STRUCT(ScriptArray<class UDKBot*>, Trackers, 1352)
-		ADD_STRUCT(Object::Vector, HUDLocation, 1604)
+		ADD_STRUCT(Vector, HUDLocation, 1604)
 		ADD_STRUCT(Object::Vector2D, CurrentSkelAim, 1596)
 		ADD_STRUCT(int, MaxYawAim, 1592)
 		ADD_STRUCT(float, RootYawSpeed, 1588)
@@ -143,7 +143,7 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, FallImpactSound, 1432)
 		ADD_STRUCT(ScriptName, TorsoBoneName, 1424)
 		ADD_STRUCT(float, StartFallImpactTime, 1420)
-		ADD_STRUCT(Object::Rotator, CompressedBodyMatColor, 1408)
+		ADD_STRUCT(Rotator, CompressedBodyMatColor, 1408)
 		ADD_STRUCT(Object::LinearColor, BodyMatColor, 1392)
 		ADD_STRUCT(float, ClientBodyMatDuration, 1388)
 		ADD_STRUCT(float, RemainingBodyMatDuration, 1384)
@@ -160,7 +160,7 @@ namespace UnrealScript
 		ADD_STRUCT(UDKPawn::DrivenWeaponPawnInfo, DrivenWeaponPawn, 1292)
 		ADD_OBJECT(SoundCue, PawnAmbientSoundCue, 1288)
 		ADD_STRUCT(float, OldZ, 1280)
-		ADD_STRUCT(Object::Vector, MeshTranslationOffset, 1268)
+		ADD_STRUCT(Vector, MeshTranslationOffset, 1268)
 		ADD_STRUCT(float, SmoothNetUpdateTime, 1264)
 		ADD_STRUCT(float, NoSmoothNetUpdateDist, 1260)
 		ADD_STRUCT(float, MaxSmoothNetUpdateDist, 1256)
@@ -195,129 +195,129 @@ namespace UnrealScript
 		ADD_BOOL(bRequiresDoubleJump, 1148, 0x2)
 		void GetBoundingCylinder(float& CollisionRadius, float& CollisionHeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.GetBoundingCylinder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35159);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = CollisionRadius;
+			*(float*)params = CollisionRadius;
 			*(float*)&params[4] = CollisionHeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			CollisionRadius = *(float*)&params[0];
+			CollisionRadius = *(float*)params;
 			CollisionHeight = *(float*)&params[4];
 		}
 		void RestorePreRagdollCollisionComponent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.RestorePreRagdollCollisionComponent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35162);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EnsureOverlayComponentLast()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.EnsureOverlayComponentLast");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35163);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		Object::Vector GetTargetLocation(class Actor* RequestedBy, bool bRequestAlternateLoc)
+		Vector GetTargetLocation(class Actor* RequestedBy, bool bRequestAlternateLoc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.GetTargetLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35164);
 			byte params[20] = { NULL };
-			*(class Actor**)&params[0] = RequestedBy;
+			*(class Actor**)params = RequestedBy;
 			*(bool*)&params[4] = bRequestAlternateLoc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[8];
+			return *(Vector*)&params[8];
 		}
 		bool IsInvisible()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.IsInvisible");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35168);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void HoldGameObject(class UDKCarriedObject* UDKGameObj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.HoldGameObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35170);
 			byte params[4] = { NULL };
-			*(class UDKCarriedObject**)&params[0] = UDKGameObj;
+			*(class UDKCarriedObject**)params = UDKGameObj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StoppedFalling()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.StoppedFalling");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35172);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EndCrouch(float HeightAdjust)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.EndCrouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35173);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = HeightAdjust;
+			*(float*)params = HeightAdjust;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartCrouch(float HeightAdjust)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.StartCrouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35175);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = HeightAdjust;
+			*(float*)params = HeightAdjust;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		bool SuggestJumpVelocity(Object::Vector& JumpVelocity, Object::Vector Destination, Object::Vector Start, bool bRequireFallLanding)
+		bool SuggestJumpVelocity(Vector& JumpVelocity, Vector Destination, Vector Start, bool bRequireFallLanding)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.SuggestJumpVelocity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35177);
 			byte params[44] = { NULL };
-			*(Object::Vector*)&params[0] = JumpVelocity;
-			*(Object::Vector*)&params[12] = Destination;
-			*(Object::Vector*)&params[24] = Start;
+			*(Vector*)params = JumpVelocity;
+			*(Vector*)&params[12] = Destination;
+			*(Vector*)&params[24] = Start;
 			*(bool*)&params[36] = bRequireFallLanding;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			JumpVelocity = *(Object::Vector*)&params[0];
+			JumpVelocity = *(Vector*)params;
 			return *(bool*)&params[40];
 		}
-		void SetHUDLocation(Object::Vector NewHUDLocation)
+		void SetHUDLocation(Vector NewHUDLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.SetHUDLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35183);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewHUDLocation;
+			*(Vector*)params = NewHUDLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void NativePostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
+		void NativePostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.NativePostRenderFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35185);
 			byte params[32] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = Canvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetWeaponAttachmentVisibility(bool bAttachmentVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.SetWeaponAttachmentVisibility");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35190);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bAttachmentVisible;
+			*(bool*)params = bAttachmentVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetHandIKEnabled(bool bEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.SetHandIKEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35192);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnabled;
+			*(bool*)params = bEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartFeignDeathRecoveryAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.StartFeignDeathRecoveryAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35194);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TakeHitBlendedOut()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.TakeHitBlendedOut");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35195);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateEyeHeight(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.UpdateEyeHeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35196);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StuckFalling()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKPawn.StuckFalling");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35198);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

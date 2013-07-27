@@ -24,42 +24,42 @@ namespace UnrealScript
 		ADD_BOOL(bPreserveInternalGeo, 480, 0x2)
 		ADD_BOOL(bEnabled, 480, 0x1)
 		ADD_STRUCT(Object::Pointer, VfTable_IInterface_NavMeshPathObstacle, 476)
-		bool GetObstacleBoudingShape(ScriptArray<Object::Vector>& Shape)
+		bool GetObstacleBoudingShape(ScriptArray<Vector>& Shape)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshObstacle.GetObstacleBoudingShape");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21027);
 			byte params[16] = { NULL };
-			*(ScriptArray<Object::Vector>*)&params[0] = Shape;
+			*(ScriptArray<Vector>*)params = Shape;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Shape = *(ScriptArray<Object::Vector>*)&params[0];
+			Shape = *(ScriptArray<Vector>*)params;
 			return *(bool*)&params[12];
 		}
 		void RegisterObstacle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshObstacle.RegisterObstacle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21033);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UnRegisterObstacle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshObstacle.UnRegisterObstacle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21034);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshObstacle.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21035);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnToggle(class SeqAct_Toggle* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshObstacle.OnToggle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21036);
 			byte params[4] = { NULL };
-			*(class SeqAct_Toggle**)&params[0] = Action;
+			*(class SeqAct_Toggle**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetEnabled(bool bInEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshObstacle.SetEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21038);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bInEnabled;
+			*(bool*)params = bInEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

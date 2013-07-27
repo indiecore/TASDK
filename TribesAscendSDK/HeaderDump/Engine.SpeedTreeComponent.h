@@ -39,7 +39,7 @@ namespace UnrealScript
 			STMT_Billboards = 6,
 			STMT_Max = 7,
 		};
-		class SpeedTreeStaticLight
+		struct SpeedTreeStaticLight
 		{
 		public:
 			ADD_OBJECT(ShadowMap1D, BillboardShadowMap, 32)
@@ -77,17 +77,17 @@ namespace UnrealScript
 		ADD_OBJECT(SpeedTree, SpeedTree, 488)
 		class MaterialInterface* GetMaterial(SpeedTreeComponent::ESpeedTreeMeshType MeshType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SpeedTreeComponent.GetMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27073);
 			byte params[5] = { NULL };
-			*(SpeedTreeComponent::ESpeedTreeMeshType*)&params[0] = MeshType;
+			*(SpeedTreeComponent::ESpeedTreeMeshType*)params = MeshType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class MaterialInterface**)&params[4];
 		}
 		void SetMaterial(SpeedTreeComponent::ESpeedTreeMeshType MeshType, class MaterialInterface* Material)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SpeedTreeComponent.SetMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27076);
 			byte params[5] = { NULL };
-			*(SpeedTreeComponent::ESpeedTreeMeshType*)&params[0] = MeshType;
+			*(SpeedTreeComponent::ESpeedTreeMeshType*)params = MeshType;
 			*(class MaterialInterface**)&params[4] = Material;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

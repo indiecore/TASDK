@@ -24,9 +24,9 @@ namespace UnrealScript
 		ADD_BOOL(bLooping, 300, 0x1)
 		void AnimFire(ScriptName FireSequence, bool bAutoFire, float AnimRate, float SpecialBlendTime, ScriptName LoopSequence)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendByWeapon.AnimFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34556);
 			byte params[28] = { NULL };
-			*(ScriptName*)&params[0] = FireSequence;
+			*(ScriptName*)params = FireSequence;
 			*(bool*)&params[8] = bAutoFire;
 			*(float*)&params[12] = AnimRate;
 			*(float*)&params[16] = SpecialBlendTime;
@@ -35,9 +35,9 @@ namespace UnrealScript
 		}
 		void AnimStopFire(float SpecialBlendTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendByWeapon.AnimStopFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34563);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = SpecialBlendTime;
+			*(float*)params = SpecialBlendTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

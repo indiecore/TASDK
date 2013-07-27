@@ -33,41 +33,41 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, ComponentBaseResources, 608)
 		bool SetStaticMesh(class StaticMesh* NewMesh, bool bForce)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedBaseComponent.SetStaticMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16003);
 			byte params[12] = { NULL };
-			*(class StaticMesh**)&params[0] = NewMesh;
+			*(class StaticMesh**)params = NewMesh;
 			*(bool*)&params[4] = bForce;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		ScriptArray<byte> GetVisibleFragments()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedBaseComponent.GetVisibleFragments");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16007);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptArray<byte>*)&params[0];
+			return *(ScriptArray<byte>*)params;
 		}
 		bool IsFragmentVisible(int FragmentIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedBaseComponent.IsFragmentVisible");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16010);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = FragmentIndex;
+			*(int*)params = FragmentIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		int GetNumFragments()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedBaseComponent.GetNumFragments");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16013);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		int GetNumVisibleFragments()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FracturedBaseComponent.GetNumVisibleFragments");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16015);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

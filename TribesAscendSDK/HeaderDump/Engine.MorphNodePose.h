@@ -19,9 +19,9 @@ namespace UnrealScript
 		ADD_OBJECT(MorphTarget, Target, 108)
 		void SetMorphTarget(ScriptName MorphTargetName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MorphNodePose.SetMorphTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20610);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = MorphTargetName;
+			*(ScriptName*)params = MorphTargetName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -20,7 +20,7 @@ namespace UnrealScript
 	class TrConsolePlayerController : public TrPlayerController
 	{
 	public:
-		class ProfileSettingToUE3BindingDatum
+		struct ProfileSettingToUE3BindingDatum
 		{
 		public:
 			ADD_STRUCT(ScriptName, UE3BindingName, 8)
@@ -32,58 +32,58 @@ namespace UnrealScript
 		ADD_BOOL(bTargetAdhesionEnabled, 3432, 0x1)
 		void UpdateRotation(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.UpdateRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77889);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AimingHelp(bool bInstantHit)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.AimingHelp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77895);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bInstantHit;
+			*(bool*)params = bInstantHit;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		float AimHelpModifier()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.AimHelpModifier");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77898);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		bool PerformedUseAction()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.PerformedUseAction");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77900);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void ClientSmartUse()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.ClientSmartUse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77902);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClientRestart(class Pawn* NewPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.ClientRestart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77903);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = NewPawn;
+			*(class Pawn**)params = NewPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PrevWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.PrevWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77905);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NextWeapon()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.NextWeapon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77906);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ResetPlayerMovementInput()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrConsolePlayerController.ResetPlayerMovementInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(77907);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -29,9 +29,9 @@ namespace UnrealScript
 		ADD_BOOL(bEnabled, 88, 0x1)
 		void SetEnabled(bool bSetEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.HeightFogComponent.SetEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18202);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bSetEnabled;
+			*(bool*)params = bSetEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

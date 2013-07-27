@@ -25,9 +25,9 @@ namespace UnrealScript
 		ADD_BOOL(bTeamLocked, 96, 0x1)
 		void PostCreateActor(class Actor* NewActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTActorFactoryVehicle.PostCreateActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(39175);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = NewActor;
+			*(class Actor**)params = NewActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

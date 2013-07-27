@@ -8,25 +8,25 @@ namespace UnrealScript
 	public:
 		float CalculateHijackMetric(class TrProj_TrackingMissile* Tracker)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_HavocPilot.CalculateHijackMetric");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108432);
 			byte params[8] = { NULL };
-			*(class TrProj_TrackingMissile**)&params[0] = Tracker;
+			*(class TrProj_TrackingMissile**)params = Tracker;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_HavocPilot.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108435);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HijackMissileGuidance()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_HavocPilot.HijackMissileGuidance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108436);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_HavocPilot.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(108438);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

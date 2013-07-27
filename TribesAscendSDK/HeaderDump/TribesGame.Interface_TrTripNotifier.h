@@ -11,52 +11,52 @@ namespace UnrealScript
 	public:
 		void AddTripActor(class TrTripActor* NewTrip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.Interface_TrTripNotifier.AddTripActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65248);
 			byte params[4] = { NULL };
-			*(class TrTripActor**)&params[0] = NewTrip;
+			*(class TrTripActor**)params = NewTrip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveTripActor(class TrTripActor* RemoveTrip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.Interface_TrTripNotifier.RemoveTripActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65250);
 			byte params[4] = { NULL };
-			*(class TrTripActor**)&params[0] = RemoveTrip;
+			*(class TrTripActor**)params = RemoveTrip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TripActivated(class Pawn* Other, Object::Vector ActivateLocation, class TrTripActor* TripActor)
+		void TripActivated(class Pawn* Other, Vector ActivateLocation, class TrTripActor* TripActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.Interface_TrTripNotifier.TripActivated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65252);
 			byte params[20] = { NULL };
-			*(class Pawn**)&params[0] = Other;
-			*(Object::Vector*)&params[4] = ActivateLocation;
+			*(class Pawn**)params = Other;
+			*(Vector*)&params[4] = ActivateLocation;
 			*(class TrTripActor**)&params[16] = TripActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class ParticleSystem* GetParticleSystemName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.Interface_TrTripNotifier.GetParticleSystemName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65256);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class ParticleSystem**)&params[0];
+			return *(class ParticleSystem**)params;
 		}
-		bool GetTripSocketPosition(bool bIsLeft, Object::Vector& SocketPosition)
+		bool GetTripSocketPosition(bool bIsLeft, Vector& SocketPosition)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.Interface_TrTripNotifier.GetTripSocketPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65258);
 			byte params[20] = { NULL };
-			*(bool*)&params[0] = bIsLeft;
-			*(Object::Vector*)&params[4] = SocketPosition;
+			*(bool*)params = bIsLeft;
+			*(Vector*)&params[4] = SocketPosition;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			SocketPosition = *(Object::Vector*)&params[4];
+			SocketPosition = *(Vector*)&params[4];
 			return *(bool*)&params[16];
 		}
 		void OnTripAwake()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.Interface_TrTripNotifier.OnTripAwake");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65262);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnTripSleep()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.Interface_TrTripNotifier.OnTripSleep");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65263);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -12,7 +12,7 @@ namespace UnrealScript
 		ADD_STRUCT(int, TeamNum, 232)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqAct_GetTeamNum.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49104);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

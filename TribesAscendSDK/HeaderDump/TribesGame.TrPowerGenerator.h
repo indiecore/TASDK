@@ -45,67 +45,67 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fMaxMorphDamage, 1360)
 		bool IsGeneratingPower()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.IsGeneratingPower");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79907);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void ApplyServerSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.ApplyServerSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107459);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107463);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ShouldShowHelpText(TrHelpTextManager::EHelpTextType HelpTextType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.ShouldShowHelpText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107465);
 			byte params[5] = { NULL };
-			*(TrHelpTextManager::EHelpTextType*)&params[0] = HelpTextType;
+			*(TrHelpTextManager::EHelpTextType*)params = HelpTextType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107468);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107470);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107472);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayDamageHealthEffects(int DamageAmount, int HitBoneIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.PlayDamageHealthEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107474);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = DamageAmount;
+			*(int*)params = DamageAmount;
 			*(int*)&params[4] = HitBoneIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DoRepairs(int HealAmount, class Controller* EventInstigator, class Actor* DamageCauser, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.DoRepairs");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107481);
 			byte params[44] = { NULL };
-			*(int*)&params[0] = HealAmount;
+			*(int*)params = HealAmount;
 			*(class Controller**)&params[4] = EventInstigator;
 			*(class Actor**)&params[8] = DamageCauser;
 			*(ScriptClass**)&params[12] = DamageType;
@@ -114,52 +114,52 @@ void**)&params[0] = SkelComp;
 		}
 		void DamageAllMorphs(float DamageAmount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.DamageAllMorphs");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107487);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DamageAmount;
+			*(float*)params = DamageAmount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayRestoreHealthEffects(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.PlayRestoreHealthEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107493);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateGeneratorDowntime()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.UpdateGeneratorDowntime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107500);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateGeneratorPower(bool bPowered)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.UpdateGeneratorPower");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107502);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPowered;
+			*(bool*)params = bPowered;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AutoRestoreHealth(bool bFullyRestore)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.AutoRestoreHealth");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107508);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bFullyRestore;
+			*(bool*)params = bFullyRestore;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddToPoweredObjectives(class TrDeployable* dep)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.AddToPoweredObjectives");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107528);
 			byte params[4] = { NULL };
-			*(class TrDeployable**)&params[0] = dep;
+			*(class TrDeployable**)params = dep;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Object::Vector HitLocation, Object::Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
+		void TakeDamage(int DamageAmount, class Controller* EventInstigator, Vector HitLocation, Vector Momentum, ScriptClass* DamageType, Actor::TraceHitInfo HitInfo, class Actor* DamageCauser)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.TakeDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107530);
 			byte params[68] = { NULL };
-			*(int*)&params[0] = DamageAmount;
+			*(int*)params = DamageAmount;
 			*(class Controller**)&params[4] = EventInstigator;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = Momentum;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = Momentum;
 			*(ScriptClass**)&params[32] = DamageType;
 			*(Actor::TraceHitInfo*)&params[36] = HitInfo;
 			*(class Actor**)&params[64] = DamageCauser;
@@ -167,21 +167,21 @@ void**)&params[0] = SkelComp;
 		}
 		class Texture2D* GetMarker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.GetMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107542);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Texture2D**)&params[0];
+			return *(class Texture2D**)params;
 		}
 		void GiveDestroyAccolade(class TrPlayerController* TrPC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.GiveDestroyAccolade");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107544);
 			byte params[4] = { NULL };
-			*(class TrPlayerController**)&params[0] = TrPC;
+			*(class TrPlayerController**)params = TrPC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AwardUpgradeAssists()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPowerGenerator.AwardUpgradeAssists");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(107546);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

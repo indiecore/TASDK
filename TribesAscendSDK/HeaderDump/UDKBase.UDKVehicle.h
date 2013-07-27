@@ -39,13 +39,13 @@ namespace UnrealScript
 	class UDKVehicle : public UDKVehicleBase
 	{
 	public:
-		class BurnOutDatum
+		struct BurnOutDatum
 		{
 		public:
 			ADD_STRUCT(float, CurrValue, 4)
 			ADD_OBJECT(MaterialInstanceTimeVarying, MITV, 0)
 		};
-		class VehicleAnim
+		struct VehicleAnim
 		{
 		public:
 			ADD_STRUCT(ScriptArray<ScriptName>, AnimSeqs, 8)
@@ -54,20 +54,20 @@ namespace UnrealScript
 			ADD_STRUCT(float, AnimRate, 20)
 			ADD_STRUCT(ScriptName, AnimTag, 0)
 		};
-		class VehicleSound
+		struct VehicleSound
 		{
 		public:
 			ADD_OBJECT(SoundCue, SoundTemplate, 16)
 			ADD_STRUCT(ScriptName, SoundEndTag, 8)
 			ADD_STRUCT(ScriptName, SoundStartTag, 0)
 		};
-		class DamageParamScales
+		struct DamageParamScales
 		{
 		public:
 			ADD_STRUCT(float, Scale, 8)
 			ADD_STRUCT(ScriptName, DamageParamName, 0)
 		};
-		class FDamageMorphTargets
+		struct FDamageMorphTargets
 		{
 		public:
 			ADD_STRUCT(ScriptArray<ScriptName>, DamagePropNames, 36)
@@ -78,7 +78,7 @@ namespace UnrealScript
 			ADD_OBJECT(MorphNodeWeight, MorphNode, 8)
 			ADD_STRUCT(ScriptName, MorphNodeName, 0)
 		};
-		class VehicleEffect
+		struct VehicleEffect
 		{
 		public:
 			ADD_STRUCT(ScriptName, EffectSocket, 28)
@@ -89,14 +89,14 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptName, EffectEndTag, 8)
 			ADD_STRUCT(ScriptName, EffectStartTag, 0)
 		};
-		class WeaponEffectInfo
+		struct WeaponEffectInfo
 		{
 		public:
-			ADD_STRUCT(Object::Vector, Scale3D, 20)
-			ADD_STRUCT(Object::Vector, Offset, 8)
+			ADD_STRUCT(Vector, Scale3D, 20)
+			ADD_STRUCT(Vector, Offset, 8)
 			ADD_STRUCT(ScriptName, SocketName, 0)
 		};
-		class VehicleSeatAnimInfo
+		struct VehicleSeatAnimInfo
 		{
 		public:
 			ADD_OBJECT(AnimTree, SeatAnimTree, 16)
@@ -107,7 +107,7 @@ namespace UnrealScript
 			ADD_BOOL(bIsFactionDependent, 0, 0x2)
 			ADD_BOOL(bIsArmorDependent, 0, 0x1)
 		};
-		class VehicleSeat
+		struct VehicleSeat
 		{
 		public:
 			ADD_STRUCT(ScriptArray<ScriptName>, GunSocket, 16)
@@ -119,12 +119,12 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptArray<class GameSkelCtrl_Recoil*>, m_TurretRecoilControls, 368)
 			ADD_STRUCT(ScriptArray<ScriptName>, m_TurretRecoilControlNames, 380)
 			ADD_BOOL(ValidFlagSeat, 428, 0x1)
-			ADD_STRUCT(Object::Rotator, FlagRotation, 416)
-			ADD_STRUCT(Object::Vector, FlagOffset, 404)
+			ADD_STRUCT(Rotator, FlagRotation, 416)
+			ADD_STRUCT(Vector, FlagOffset, 404)
 			ADD_STRUCT(ScriptName, FlagSocketName, 396)
 			ADD_STRUCT(float, m_fTurnInterpSpeed, 392)
-			ADD_STRUCT(Object::Vector, m_vIdealExitLocation, 356)
-			ADD_STRUCT(Object::Vector, m_vRidingPassengerMeshOffset, 344)
+			ADD_STRUCT(Vector, m_vIdealExitLocation, 356)
+			ADD_STRUCT(Vector, m_vRidingPassengerMeshOffset, 344)
 			ADD_STRUCT(float, m_fViewYawLimit, 340)
 			ADD_BOOL(m_bAttachPawnDirectly, 336, 0x1)
 			ADD_STRUCT(Object::Vector2D, SeatIconPOS, 316)
@@ -133,25 +133,25 @@ namespace UnrealScript
 			ADD_OBJECT(ScriptClass, ImpactFlashLightClass, 300)
 			ADD_OBJECT(ScriptClass, MuzzleFlashLightClass, 292)
 			ADD_STRUCT(ScriptName, SeatSocket, 284)
-			ADD_STRUCT(Object::Rotator, SeatRotation, 272)
-			ADD_STRUCT(Object::Vector, SeatOffset, 260)
+			ADD_STRUCT(Rotator, SeatRotation, 272)
+			ADD_STRUCT(Vector, SeatOffset, 260)
 			ADD_STRUCT(ScriptName, SeatBone, 252)
 			ADD_BOOL(bSeatVisible, 248, 0x1)
 			ADD_STRUCT(float, ViewPitchMax, 244)
 			ADD_STRUCT(float, ViewPitchMin, 240)
 			ADD_STRUCT(float, CameraZoomOffset, 236)
-			ADD_STRUCT(Object::Vector, CameraZoomBaseOffset, 224)
+			ADD_STRUCT(Vector, CameraZoomBaseOffset, 224)
 			ADD_STRUCT(ScriptName, CameraZoomTag, 216)
 			ADD_STRUCT(float, CameraEyeHeight, 212)
 			ADD_STRUCT(float, CameraOffset, 208)
-			ADD_STRUCT(Object::Vector, CameraSafeOffset, 196)
-			ADD_STRUCT(Object::Vector, CameraBaseOffset, 184)
+			ADD_STRUCT(Vector, CameraSafeOffset, 196)
+			ADD_STRUCT(Vector, CameraBaseOffset, 184)
 			ADD_STRUCT(ScriptName, CameraTag, 176)
 			ADD_BOOL(bDisableOffsetZAdjust, 172, 0x1)
 			ADD_STRUCT(float, PivotFireOffsetZ, 168)
 			ADD_OBJECT(Actor, AimTarget, 164)
-			ADD_STRUCT(Object::Vector, AimPoint, 152)
-			ADD_STRUCT(Object::Rotator, LastWeaponRotation, 116)
+			ADD_STRUCT(Vector, AimPoint, 152)
+			ADD_STRUCT(Rotator, LastWeaponRotation, 116)
 			ADD_STRUCT(Object::Pointer, FiringModeProperty, 112)
 			ADD_STRUCT(Object::Pointer, FlashCountProperty, 108)
 			ADD_STRUCT(Object::Pointer, FlashLocationProperty, 104)
@@ -182,7 +182,7 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<UDKVehicle::VehicleEffect>, VehicleEffects, 1860)
 		ADD_STRUCT(ScriptArray<int>, ContrailEffectIndices, 1888)
 		ADD_STRUCT(ScriptArray<class UDKBot*>, Trackers, 1912)
-		ADD_STRUCT(Object::Vector, HUDLocation, 1960)
+		ADD_STRUCT(Vector, HUDLocation, 1960)
 		ADD_STRUCT(float, ShowLockedMaxDist, 1956)
 		ADD_STRUCT(float, LastPostRenderTraceTime, 1952)
 		ADD_STRUCT(float, TeamBeaconMaxDist, 1948)
@@ -210,7 +210,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, DestroyOnPenetrationThreshold, 1736)
 		ADD_STRUCT(ScriptName, DrivingAnim, 1728)
 		ADD_STRUCT(int, SeatMask, 1700)
-		ADD_STRUCT(Object::Rotator, WeaponRotation, 1676)
+		ADD_STRUCT(Rotator, WeaponRotation, 1676)
 		ADD_OBJECT(ParticleSystem, WaterGroundEffect, 1672)
 		ADD_STRUCT(ScriptName, GroundEffectDistParameterName, 1664)
 		ADD_STRUCT(float, MaxGroundEffectDist, 1660)
@@ -250,44 +250,44 @@ namespace UnrealScript
 		ADD_BOOL(bHomingTarget, 1548, 0x2)
 		bool OnTouchForcedDirVolume(class UDKForcedDirectionVolume* Vol)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.OnTouchForcedDirVolume");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34850);
 			byte params[8] = { NULL };
-			*(class UDKForcedDirectionVolume**)&params[0] = Vol;
+			*(class UDKForcedDirectionVolume**)params = Vol;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		ScriptClass* GetRanOverDamageType()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.GetRanOverDamageType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(35818);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptClass**)&params[0];
+			return *(ScriptClass**)params;
 		}
-		Object::Rotator SeatWeaponRotation(int SeatIndex, Object::Rotator NewRot, bool bReadValue)
+		Rotator SeatWeaponRotation(int SeatIndex, Rotator NewRot, bool bReadValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.SeatWeaponRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36035);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = SeatIndex;
-			*(Object::Rotator*)&params[4] = NewRot;
+			*(int*)params = SeatIndex;
+			*(Rotator*)&params[4] = NewRot;
 			*(bool*)&params[16] = bReadValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[20];
+			return *(Rotator*)&params[20];
 		}
-		Object::Vector SeatFlashLocation(int SeatIndex, Object::Vector NewLoc, bool bReadValue)
+		Vector SeatFlashLocation(int SeatIndex, Vector NewLoc, bool bReadValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.SeatFlashLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36040);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = SeatIndex;
-			*(Object::Vector*)&params[4] = NewLoc;
+			*(int*)params = SeatIndex;
+			*(Vector*)&params[4] = NewLoc;
 			*(bool*)&params[16] = bReadValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[20];
+			return *(Vector*)&params[20];
 		}
 		byte SeatFlashCount(int SeatIndex, byte NewCount, bool bReadValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.SeatFlashCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36045);
 			byte params[10] = { NULL };
-			*(int*)&params[0] = SeatIndex;
+			*(int*)params = SeatIndex;
 			params[4] = NewCount;
 			*(bool*)&params[8] = bReadValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -295,208 +295,208 @@ namespace UnrealScript
 		}
 		byte SeatFiringMode(int SeatIndex, byte NewFireMode, bool bReadValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.SeatFiringMode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36050);
 			byte params[10] = { NULL };
-			*(int*)&params[0] = SeatIndex;
+			*(int*)params = SeatIndex;
 			params[4] = NewFireMode;
 			*(bool*)&params[8] = bReadValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return params[12];
 		}
-		void ForceWeaponRotation(int SeatIndex, Object::Rotator NewRotation)
+		void ForceWeaponRotation(int SeatIndex, Rotator NewRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.ForceWeaponRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36055);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = SeatIndex;
-			*(Object::Rotator*)&params[4] = NewRotation;
+			*(int*)params = SeatIndex;
+			*(Rotator*)&params[4] = NewRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Object::Vector GetSeatPivotPoint(int SeatIndex)
+		Vector GetSeatPivotPoint(int SeatIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.GetSeatPivotPoint");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36058);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = SeatIndex;
+			*(int*)params = SeatIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[4];
+			return *(Vector*)&params[4];
 		}
 		int GetBarrelIndex(int SeatIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.GetBarrelIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36061);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = SeatIndex;
+			*(int*)params = SeatIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		bool IsSeatControllerReplicationViewer(int SeatIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.IsSeatControllerReplicationViewer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36064);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = SeatIndex;
+			*(int*)params = SeatIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool IsLocalOnVehicle(class Pawn* InP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.IsLocalOnVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36067);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = InP;
+			*(class Pawn**)params = InP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void LockOnWarning(class UDKProjectile* IncomingMissile)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.LockOnWarning");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36073);
 			byte params[4] = { NULL };
-			*(class UDKProjectile**)&params[0] = IncomingMissile;
+			*(class UDKProjectile**)params = IncomingMissile;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPropertyChange(ScriptName PropName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.OnPropertyChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36075);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = PropName;
+			*(ScriptName*)params = PropName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetGravityZ()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.GetGravityZ");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36077);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void PlayTakeHitEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.PlayTakeHitEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36080);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReceivedHealthChange()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.ReceivedHealthChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36081);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void JumpOutCheck()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.JumpOutCheck");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36082);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float GetMaxRiseForce()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.GetMaxRiseForce");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36083);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		bool CheckAutoDestruct(class TeamInfo* InstigatorTeam, float CheckRadius)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.CheckAutoDestruct");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36085);
 			byte params[12] = { NULL };
-			*(class TeamInfo**)&params[0] = InstigatorTeam;
+			*(class TeamInfo**)params = InstigatorTeam;
 			*(float*)&params[4] = CheckRadius;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void SelfDestruct(class Actor* ImpactedActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.SelfDestruct");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36089);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = ImpactedActor;
+			*(class Actor**)params = ImpactedActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		byte GetTeamNum()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.GetTeamNum");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36091);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return params[0];
+			return *params;
 		}
-		void NativePostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
+		void NativePostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.NativePostRenderFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36093);
 			byte params[32] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = Canvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool InUseableRange(class UDKPlayerController* PC, float Dist)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.InUseableRange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36098);
 			byte params[12] = { NULL };
-			*(class UDKPlayerController**)&params[0] = PC;
+			*(class UDKPlayerController**)params = PC;
 			*(float*)&params[4] = Dist;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
-		void SetHUDLocation(Object::Vector NewHUDLocation)
+		void SetHUDLocation(Vector NewHUDLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.SetHUDLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36102);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewHUDLocation;
+			*(Vector*)params = NewHUDLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InitDamageSkel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.InitDamageSkel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36104);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateDamageMaterial()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.UpdateDamageMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36105);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void ApplyMorphDamage(Object::Vector HitLocation, int Damage, Object::Vector Momentum)
+		void ApplyMorphDamage(Vector HitLocation, int Damage, Vector Momentum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.ApplyMorphDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36106);
 			byte params[28] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
+			*(Vector*)params = HitLocation;
 			*(int*)&params[12] = Damage;
-			*(Object::Vector*)&params[16] = Momentum;
+			*(Vector*)&params[16] = Momentum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MorphTargetDestroyed(int MorphNodeIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.MorphTargetDestroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36110);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = MorphNodeIndex;
+			*(int*)params = MorphNodeIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RBPenetrationDestroy()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.RBPenetrationDestroy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36112);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TakeWaterDamage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.TakeWaterDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36113);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CheckReset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.CheckReset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36114);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TakeFireDamage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.TakeFireDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36115);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostInitRigidBody(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* PrimComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.PostInitRigidBody");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36116);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = PrimComp;
+void**)params = PrimComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateHoverboardDustEffect(float DustHeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicle.UpdateHoverboardDustEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36118);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DustHeight;
+			*(float*)params = DustHeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

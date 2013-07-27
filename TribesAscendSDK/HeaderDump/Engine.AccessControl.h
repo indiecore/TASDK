@@ -43,127 +43,127 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, IPBanned, 500)
 		bool IsAdmin(class PlayerController* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.IsAdmin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5697);
 			byte params[8] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetAdminPassword(ScriptString* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.SetAdminPassword");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5702);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = P;
+			*(ScriptString**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		void SetGamePassword(ScriptString* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.SetGamePassword");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5705);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = P;
+			*(ScriptString**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool RequiresPassword()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.RequiresPassword");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5707);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		class Controller* GetControllerFromString(ScriptString* Target)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.GetControllerFromString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5709);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Target;
+			*(ScriptString**)params = Target;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Controller**)&params[12];
 		}
 		void Kick(ScriptString* Target)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.Kick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5720);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Target;
+			*(ScriptString**)params = Target;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void KickBan(ScriptString* Target)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.KickBan");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5723);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Target;
+			*(ScriptString**)params = Target;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ForceKickPlayer(class PlayerController* C, ScriptString* KickReason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.ForceKickPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5733);
 			byte params[20] = { NULL };
-			*(class PlayerController**)&params[0] = C;
+			*(class PlayerController**)params = C;
 			*(ScriptString**)&params[4] = KickReason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		bool KickPlayer(class PlayerController* C, ScriptString* KickReason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.KickPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5737);
 			byte params[20] = { NULL };
-			*(class PlayerController**)&params[0] = C;
+			*(class PlayerController**)params = C;
 			*(ScriptString**)&params[4] = KickReason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		bool AdminLogin(class PlayerController* P, ScriptString* Password)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.AdminLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5741);
 			byte params[20] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			*(ScriptString**)&params[4] = Password;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		bool AdminLogout(class PlayerController* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.AdminLogout");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5745);
 			byte params[8] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void AdminEntered(class PlayerController* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.AdminEntered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5749);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AdminExited(class PlayerController* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.AdminExited");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5752);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ParseAdminOptions(ScriptString* Options)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.ParseAdminOptions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5755);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Options;
+			*(ScriptString**)params = Options;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		bool ValidLogin(ScriptString* UserName, ScriptString* Password)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.ValidLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5762);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = UserName;
+			*(ScriptString**)params = UserName;
 			*(ScriptString**)&params[12] = Password;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[24];
 		}
 		void PreLogin(ScriptString* Options, ScriptString* Address, ScriptString*& OutError, bool bSpectator)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.PreLogin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5766);
 			byte params[40] = { NULL };
-			*(ScriptString**)&params[0] = Options;
+			*(ScriptString**)params = Options;
 			*(ScriptString**)&params[12] = Address;
 			*(ScriptString**)&params[24] = OutError;
 			*(bool*)&params[36] = bSpectator;
@@ -172,19 +172,19 @@ namespace UnrealScript
 		}
 		bool CheckIPPolicy(ScriptString* Address)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.CheckIPPolicy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5775);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Address;
+			*(ScriptString**)params = Address;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		bool IsIDBanned(OnlineSubsystem::UniqueNetId& NetId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AccessControl.IsIDBanned");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5784);
 			byte params[12] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = NetId;
+			*(OnlineSubsystem::UniqueNetId*)params = NetId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			NetId = *(OnlineSubsystem::UniqueNetId*)&params[0];
+			NetId = *(OnlineSubsystem::UniqueNetId*)params;
 			return *(bool*)&params[8];
 		}
 	};

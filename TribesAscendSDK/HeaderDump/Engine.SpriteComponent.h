@@ -33,16 +33,16 @@ namespace UnrealScript
 		ADD_OBJECT(Texture2D, Sprite, 488)
 		void SetSprite(class Texture2D* NewSprite)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SpriteComponent.SetSprite");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5156);
 			byte params[4] = { NULL };
-			*(class Texture2D**)&params[0] = NewSprite;
+			*(class Texture2D**)params = NewSprite;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetUV(int NewU, int NewUL, int NewV, int NewVL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SpriteComponent.SetUV");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5158);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = NewU;
+			*(int*)params = NewU;
 			*(int*)&params[4] = NewUL;
 			*(int*)&params[8] = NewV;
 			*(int*)&params[12] = NewVL;
@@ -50,9 +50,9 @@ namespace UnrealScript
 		}
 		void SetSpriteAndUV(class Texture2D* NewSprite, int NewU, int NewUL, int NewV, int NewVL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SpriteComponent.SetSpriteAndUV");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(5163);
 			byte params[20] = { NULL };
-			*(class Texture2D**)&params[0] = NewSprite;
+			*(class Texture2D**)params = NewSprite;
 			*(int*)&params[4] = NewU;
 			*(int*)&params[8] = NewUL;
 			*(int*)&params[12] = NewV;

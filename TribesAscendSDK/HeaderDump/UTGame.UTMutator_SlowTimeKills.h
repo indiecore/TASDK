@@ -15,22 +15,22 @@ namespace UnrealScript
 		ADD_STRUCT(float, SlowTime, 496)
 		bool MutatorIsAllowed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_SlowTimeKills.MutatorIsAllowed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48619);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void ScoreKill(class Controller* Killer, class Controller* Killed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_SlowTimeKills.ScoreKill");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48621);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = Killer;
+			*(class Controller**)params = Killer;
 			*(class Controller**)&params[4] = Killed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Timer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_SlowTimeKills.Timer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48624);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -28,13 +28,13 @@ namespace UnrealScript
 			GT_Multiplayer = 3,
 			GT_MAX = 4,
 		};
-		class TeamState
+		struct TeamState
 		{
 		public:
 			ADD_STRUCT(ScriptArray<int>, PlayerIndices, 4)
 			ADD_STRUCT(int, TeamIndex, 0)
 		};
-		class PlayerState
+		struct PlayerState
 		{
 		public:
 			ADD_STRUCT(float, TimeAliveSinceLastDeath, 12)
@@ -51,12 +51,12 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Array_Mirror, TeamStates, 88)
 		void PreProcessStream()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameStateObject.PreProcessStream");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31955);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameStateObject.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31956);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

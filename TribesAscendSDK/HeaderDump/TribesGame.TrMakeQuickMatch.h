@@ -1411,80 +1411,80 @@ namespace UnrealScript
 		ADD_STRUCT(byte, ControllerId, 60)
 		bool Init(byte ControllerIndex, int GameMode)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMakeQuickMatch.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100087);
 			byte params[9] = { NULL };
-			params[0] = ControllerIndex;
+			*params = ControllerIndex;
 			*(int*)&params[4] = GameMode;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void Launch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMakeQuickMatch.Launch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100091);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Cleanup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMakeQuickMatch.Cleanup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100092);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool SubmitGameSearch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMakeQuickMatch.SubmitGameSearch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100093);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		class LocalPlayer* GetLP()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMakeQuickMatch.GetLP");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100095);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class LocalPlayer**)&params[0];
+			return *(class LocalPlayer**)params;
 		}
 		class PlayerController* GetPC()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMakeQuickMatch.GetPC");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100099);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class PlayerController**)&params[0];
+			return *(class PlayerController**)params;
 		}
 		void ConsoleCommand(ScriptString* Cmd, bool bWriteToLog)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMakeQuickMatch.ConsoleCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100102);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Cmd;
+			*(ScriptString**)params = Cmd;
 			*(bool*)&params[12] = bWriteToLog;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* BuildJoinURL(ScriptString* ResolvedConnectionURL)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMakeQuickMatch.BuildJoinURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100106);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = ResolvedConnectionURL;
+			*(ScriptString**)params = ResolvedConnectionURL;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		bool RequestJoin(OnlineGameSearch::OnlineGameSearchResult GameToJoin)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMakeQuickMatch.RequestJoin");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100110);
 			byte params[12] = { NULL };
-			*(OnlineGameSearch::OnlineGameSearchResult*)&params[0] = GameToJoin;
+			*(OnlineGameSearch::OnlineGameSearchResult*)params = GameToJoin;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void OnSearchComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMakeQuickMatch.OnSearchComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100113);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnJoinGameComplete(ScriptName SessionName, bool bSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMakeQuickMatch.OnJoinGameComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100116);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(bool*)&params[8] = bSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

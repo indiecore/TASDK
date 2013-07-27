@@ -20,9 +20,9 @@ namespace UnrealScript
 		ADD_OBJECT(SkeletalMesh, BaseSkelMesh, 72)
 		class MorphTarget* FindMorphTarget(ScriptName MorphTargetName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MorphTargetSet.FindMorphTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20659);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = MorphTargetName;
+			*(ScriptName*)params = MorphTargetName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class MorphTarget**)&params[8];
 		}

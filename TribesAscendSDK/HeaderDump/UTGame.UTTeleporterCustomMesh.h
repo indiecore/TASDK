@@ -22,25 +22,25 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, TeleportingSound, 736)
 		bool Accept(class Actor* Incoming, class Actor* Source)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeleporterCustomMesh.Accept");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49474);
 			byte params[12] = { NULL };
-			*(class Actor**)&params[0] = Incoming;
+			*(class Actor**)params = Incoming;
 			*(class Actor**)&params[4] = Source;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeleporterCustomMesh.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49479);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

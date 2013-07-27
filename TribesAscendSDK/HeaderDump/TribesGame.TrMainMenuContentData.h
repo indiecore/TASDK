@@ -15,7 +15,7 @@ namespace UnrealScript
 	class TrMainMenuContentData : public Object
 	{
 	public:
-		class MeshData
+		struct MeshData
 		{
 		public:
 			ADD_OBJECT(TrMainMenuMeshInfo, MainMeshInfo, 4)
@@ -24,17 +24,17 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<TrMainMenuContentData::MeshData>, m_MeshData, 60)
 		void SendPaperDollANewMesh(class TrPaperDollMainMenu* MainMenuPaperDoll, TrObject::EContentDataType ContentDataType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMainMenuContentData.SendPaperDollANewMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98683);
 			byte params[5] = { NULL };
-			*(class TrPaperDollMainMenu**)&params[0] = MainMenuPaperDoll;
+			*(class TrPaperDollMainMenu**)params = MainMenuPaperDoll;
 			*(TrObject::EContentDataType*)&params[4] = ContentDataType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PreloadTextures(float ForceDuration)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrMainMenuContentData.PreloadTextures");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98687);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = ForceDuration;
+			*(float*)params = ForceDuration;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

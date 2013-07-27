@@ -14,7 +14,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, TiltYScale, 264)
 		ADD_STRUCT(float, TiltDeadZone, 260)
 		ADD_STRUCT(float, TiltScale, 256)
-		ADD_STRUCT(Object::Vector, UpVector, 244)
+		ADD_STRUCT(Vector, UpVector, 244)
 	};
 }
 #undef ADD_STRUCT

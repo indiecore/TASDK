@@ -8,26 +8,26 @@ namespace UnrealScript
 	public:
 		void SetHolder(class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagRabbit.SetHolder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88625);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = C;
+			*(class Controller**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearHolder()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagRabbit.ClearHolder");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88628);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SendHome(class Controller* Returner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagRabbit.SendHome");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88629);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = Returner;
+			*(class Controller**)params = Returner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void BroadcastReturnedMessage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrFlagRabbit.BroadcastReturnedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(88631);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

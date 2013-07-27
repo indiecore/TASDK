@@ -28,41 +28,41 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, m_SecondProjectile, 892)
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeLauncher.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109140);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		bool StickToTarget(class Actor* Target, Object::Vector HitLocation, Object::Vector HitNormal)
+		bool StickToTarget(class Actor* Target, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeLauncher.StickToTarget");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109141);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Target;
-			*(Object::Vector*)&params[4] = HitLocation;
-			*(Object::Vector*)&params[16] = HitNormal;
+			*(class Actor**)params = Target;
+			*(Vector*)&params[4] = HitLocation;
+			*(Vector*)&params[16] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[28];
 		}
-		void ProcessTouch(class Actor* Other, Object::Vector HitLocation, Object::Vector HitNormal)
+		void ProcessTouch(class Actor* Other, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeLauncher.ProcessTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109146);
 			byte params[28] = { NULL };
-			*(class Actor**)&params[0] = Other;
-			*(Object::Vector*)&params[4] = HitLocation;
-			*(Object::Vector*)&params[16] = HitNormal;
+			*(class Actor**)params = Other;
+			*(Vector*)&params[4] = HitLocation;
+			*(Vector*)&params[16] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void Explode(Object::Vector HitLocation, Object::Vector HitNormal)
+		void Explode(Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeLauncher.Explode");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109150);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
-			*(Object::Vector*)&params[12] = HitNormal;
+			*(Vector*)params = HitLocation;
+			*(Vector*)&params[12] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SpawnSecondaryProjectile(Object::Vector Direction)
+		void SpawnSecondaryProjectile(Vector Direction)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_SpikeLauncher.SpawnSecondaryProjectile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109153);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = Direction;
+			*(Vector*)params = Direction;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

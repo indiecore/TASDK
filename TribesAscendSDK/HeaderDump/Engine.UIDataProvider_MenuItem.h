@@ -55,10 +55,10 @@ namespace UnrealScript
 		ADD_STRUCT(UIDataProvider_MenuItem::EMenuOptionType, OptionType, 124)
 		bool IsFiltered()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider_MenuItem.IsFiltered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28149);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

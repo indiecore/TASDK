@@ -30,7 +30,7 @@ namespace UnrealScript
 			WF_Noise = 6,
 			WF_MAX = 7,
 		};
-		class WaveformSample
+		struct WaveformSample
 		{
 		public:
 			ADD_STRUCT(float, Duration, 4)

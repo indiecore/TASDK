@@ -47,7 +47,7 @@ namespace UnrealScript
 			OGSSO_Descending = 1,
 			OGSSO_MAX = 2,
 		};
-		class OverrideSkill
+		struct OverrideSkill
 		{
 		public:
 			ADD_STRUCT(int, LeaderboardId, 0)
@@ -55,19 +55,19 @@ namespace UnrealScript
 			ADD_STRUCT(ScriptArray<Object::Double>, Mus, 16)
 			ADD_STRUCT(ScriptArray<Object::Double>, Sigmas, 28)
 		};
-		class NamedObjectProperty
+		struct NamedObjectProperty
 		{
 		public:
 			ADD_STRUCT(ScriptName, ObjectPropertyName, 0)
 			ADD_STRUCT(ScriptString*, ObjectPropertyValue, 8)
 		};
-		class OnlineGameSearchResult
+		struct OnlineGameSearchResult
 		{
 		public:
 			ADD_OBJECT(OnlineGameSettings, GameSettings, 0)
 			ADD_STRUCT(Object::Pointer, PlatformData, 4)
 		};
-		class OnlineGameSearchSortClause
+		struct OnlineGameSearchSortClause
 		{
 		public:
 			ADD_STRUCT(int, EntryId, 0)
@@ -75,7 +75,7 @@ namespace UnrealScript
 			ADD_STRUCT(OnlineGameSearch::EOnlineGameSearchEntryType, EntryType, 12)
 			ADD_STRUCT(OnlineGameSearch::EOnlineGameSearchSortType, SortType, 13)
 		};
-		class OnlineGameSearchParameter
+		struct OnlineGameSearchParameter
 		{
 		public:
 			ADD_STRUCT(int, EntryId, 0)
@@ -83,12 +83,12 @@ namespace UnrealScript
 			ADD_STRUCT(OnlineGameSearch::EOnlineGameSearchEntryType, EntryType, 12)
 			ADD_STRUCT(OnlineGameSearch::EOnlineGameSearchComparisonType, ComparisonType, 13)
 		};
-		class OnlineGameSearchORClause
+		struct OnlineGameSearchORClause
 		{
 		public:
 			ADD_STRUCT(ScriptArray<OnlineGameSearch::OnlineGameSearchParameter>, OrParams, 0)
 		};
-		class OnlineGameSearchQuery
+		struct OnlineGameSearchQuery
 		{
 		public:
 			ADD_STRUCT(ScriptArray<OnlineGameSearch::OnlineGameSearchORClause>, OrClauses, 0)
@@ -108,14 +108,14 @@ namespace UnrealScript
 		ADD_STRUCT(int, PingBucketSize, 232)
 		void SortSearchResults()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineGameSearch.SortSearchResults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6865);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetSkillOverride(int LeaderboardId, ScriptArray<OnlineSubsystem::UniqueNetId>& Players)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineGameSearch.SetSkillOverride");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6866);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = LeaderboardId;
+			*(int*)params = LeaderboardId;
 			*(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[4] = Players;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Players = *(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[4];

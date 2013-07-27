@@ -29,18 +29,18 @@ namespace UnrealScript
 	class TrDeployable_MotionSensor : public TrDeployable_Sensor
 	{
 	public:
-		class MotionSensorEnemyInfo
+		struct MotionSensorEnemyInfo
 		{
 		public:
 			ADD_STRUCT(float, LastDetectedTimeStamp, 16)
-			ADD_STRUCT(Object::Vector, LastLocation, 4)
+			ADD_STRUCT(Vector, LastLocation, 4)
 			ADD_OBJECT(TrPawn, SensedPawn, 0)
 		};
 		ADD_STRUCT(ScriptArray<TrDeployable_MotionSensor::MotionSensorEnemyInfo>, m_EnemyPawnsInRange, 1540)
 		ADD_OBJECT(Texture2D, m_AlarmIcon, 1616)
-		ADD_STRUCT(Object::Vector, LastCameraPos, 1604)
-		ADD_STRUCT(Object::Vector, LastCameraDir, 1592)
-		ADD_STRUCT(Object::Vector, LastScreenLoc, 1580)
+		ADD_STRUCT(Vector, LastCameraPos, 1604)
+		ADD_STRUCT(Vector, LastCameraDir, 1592)
+		ADD_STRUCT(Vector, LastScreenLoc, 1580)
 		ADD_STRUCT(float, m_IconAlpha, 1576)
 		ADD_STRUCT(float, m_fHUDAlarmTime, 1572)
 		ADD_BOOL(m_bDrawHUDAlarm, 1568, 0x1)
@@ -49,75 +49,75 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fMotionSenseExpireTime, 1556)
 		void DeployComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_MotionSensor.DeployComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80134);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnPawnDetectedByCollisionProxy(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_MotionSensor.OnPawnDetectedByCollisionProxy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80135);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPawnExitedCollisionProxy(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_MotionSensor.OnPawnExitedCollisionProxy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80138);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateInRangeEnemyPawns()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_MotionSensor.UpdateInRangeEnemyPawns");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80141);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CanSetOffAlarm(class TrPawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_MotionSensor.CanSetOffAlarm");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80145);
 			byte params[8] = { NULL };
-			*(class TrPawn**)&params[0] = P;
+			*(class TrPawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void ModifyDetectedPawn(class Pawn* DetectedPawn, bool detected)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_MotionSensor.ModifyDetectedPawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80148);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = DetectedPawn;
+			*(class Pawn**)params = DetectedPawn;
 			*(bool*)&params[4] = detected;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayAlarm()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_MotionSensor.PlayAlarm");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80151);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TriggerHUDAlarm()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_MotionSensor.TriggerHUDAlarm");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80156);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideHUDAlarm()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_MotionSensor.HideHUDAlarm");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80157);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_MotionSensor.PostRenderFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80158);
 			byte params[32] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = Canvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class Texture2D* GetMarker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDeployable_MotionSensor.GetMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(80169);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Texture2D**)&params[0];
+			return *(class Texture2D**)params;
 		}
 	};
 }

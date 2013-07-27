@@ -26,7 +26,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(int, TeamNum, 732)
-		ADD_STRUCT(Object::Vector, HUDLocation, 720)
+		ADD_STRUCT(Vector, HUDLocation, 720)
 		ADD_STRUCT(float, RespawnProgress, 716)
 		ADD_OBJECT(UDKVehicle, ChildVehicle, 712)
 		ADD_OBJECT(ScriptClass, VehicleClass, 708)
@@ -35,22 +35,22 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, VehicleClassPath, 692)
 		void SpawnVehicle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleFactory.SpawnVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36132);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SetHUDLocation(Object::Vector NewHUDLocation)
+		void SetHUDLocation(Vector NewHUDLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleFactory.SetHUDLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36133);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = NewHUDLocation;
+			*(Vector*)params = NewHUDLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		byte GetTeamNum()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKVehicleFactory.GetTeamNum");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(36135);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return params[0];
+			return *params;
 		}
 	};
 }

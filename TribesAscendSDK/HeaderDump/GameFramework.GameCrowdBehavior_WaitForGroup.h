@@ -8,28 +8,28 @@ namespace UnrealScript
 	public:
 		void InitBehavior(class GameCrowdAgent* Agent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitForGroup.InitBehavior");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31276);
 			byte params[4] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = Agent;
+			*(class GameCrowdAgent**)params = Agent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetBehaviorString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitForGroup.GetBehaviorString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31278);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		bool ShouldEndIdle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitForGroup.ShouldEndIdle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31281);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void StopBehavior()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_WaitForGroup.StopBehavior");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31283);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -13,7 +13,7 @@ namespace UnrealScript
 		ADD_OBJECT(UTVehicle, SpawnedVehicle, 256)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqEvent_VehicleFactory.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49230);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

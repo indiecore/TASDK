@@ -8,9 +8,9 @@ namespace UnrealScript
 	public:
 		bool CheckReplacement(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTMutator_NoPowerups.CheckReplacement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48604);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

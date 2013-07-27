@@ -29,20 +29,20 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, Tip, 60)
 		ScriptString* GetRandomTip(int GameIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoadingData.GetRandomTip");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98606);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = GameIndex;
+			*(int*)params = GameIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
 		void Initialize()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoadingData.Initialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98609);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetDataFields()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrLoadingData.SetDataFields");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(98610);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

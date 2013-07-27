@@ -19,20 +19,20 @@ namespace UnrealScript
 	class SpeechRecognition : public Object
 	{
 	public:
-		class RecognisableWord
+		struct RecognisableWord
 		{
 		public:
 			ADD_STRUCT(ScriptString*, PhoneticWord, 16)
 			ADD_STRUCT(ScriptString*, ReferenceWord, 4)
 			ADD_STRUCT(int, Id, 0)
 		};
-		class RecogUserData
+		struct RecogUserData
 		{
 		public:
 			ADD_STRUCT(ScriptArray<byte>, UserData, 4)
 			ADD_STRUCT(int, ActiveVocabularies, 0)
 		};
-		class RecogVocabulary
+		struct RecogVocabulary
 		{
 		public:
 			ADD_STRUCT(ScriptArray<SpeechRecognition::RecognisableWord>, WhoDictionary, 0)

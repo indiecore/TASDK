@@ -19,36 +19,36 @@ namespace UnrealScript
 	class DynamicBlockingVolume : public BlockingVolume
 	{
 	public:
-		class CheckpointRecord
+		struct CheckpointRecord
 		{
 		public:
 			ADD_BOOL(bNeedsReplication, 24, 0x4)
 			ADD_BOOL(bBlockActors, 24, 0x2)
 			ADD_BOOL(bCollideActors, 24, 0x1)
-			ADD_STRUCT(Object::Rotator, Rotation, 12)
-			ADD_STRUCT(Object::Vector, Location, 0)
+			ADD_STRUCT(Rotator, Rotation, 12)
+			ADD_STRUCT(Vector, Location, 0)
 		};
 		ADD_BOOL(bEnabled, 524, 0x1)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicBlockingVolume.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14840);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CreateCheckpointRecord(DynamicBlockingVolume::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicBlockingVolume.CreateCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14841);
 			byte params[28] = { NULL };
-			*(DynamicBlockingVolume::CheckpointRecord*)&params[0] = Record;
+			*(DynamicBlockingVolume::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(DynamicBlockingVolume::CheckpointRecord*)&params[0];
+			Record = *(DynamicBlockingVolume::CheckpointRecord*)params;
 		}
 		void ApplyCheckpointRecord(DynamicBlockingVolume::CheckpointRecord& Record)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DynamicBlockingVolume.ApplyCheckpointRecord");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14843);
 			byte params[28] = { NULL };
-			*(DynamicBlockingVolume::CheckpointRecord*)&params[0] = Record;
+			*(DynamicBlockingVolume::CheckpointRecord*)params = Record;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Record = *(DynamicBlockingVolume::CheckpointRecord*)&params[0];
+			Record = *(DynamicBlockingVolume::CheckpointRecord*)params;
 		}
 	};
 }

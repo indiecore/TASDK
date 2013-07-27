@@ -14,9 +14,9 @@ namespace UnrealScript
 		ADD_OBJECT(PortalTeleporter, MyPortal, 692)
 		bool CanTeleport(class Actor* A)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PortalMarker.CanTeleport");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24672);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = A;
+			*(class Actor**)params = A;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

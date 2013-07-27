@@ -27,7 +27,7 @@ namespace UnrealScript
 	class TrAnimNodeBlendByDeviceAnim : public TrAnimNodeBlendList
 	{
 	public:
-		class DeviceNodeCameraAnimation
+		struct DeviceNodeCameraAnimation
 		{
 		public:
 			ADD_BOOL(bRandomStartTime, 28, 0x2)
@@ -62,87 +62,87 @@ namespace UnrealScript
 		ADD_OBJECT(TrPawn, m_TrPawn, 292)
 		void StopAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.StopAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66388);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetActiveChild(int ChildIndex, float BlendTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.SetActiveChild");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66389);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ChildIndex;
+			*(int*)params = ChildIndex;
 			*(float*)&params[4] = BlendTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayIdle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayIdle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66392);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayAltIdle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayAltIdle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66393);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayBuildup(float BuildupTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayBuildup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66394);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = BuildupTime;
+			*(float*)params = BuildupTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayFire(int SocketIndex, float RefireTime, int RoundsRemainingInClip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66396);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = SocketIndex;
+			*(int*)params = SocketIndex;
 			*(float*)&params[4] = RefireTime;
 			*(int*)&params[8] = RoundsRemainingInClip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayPutaway(float PutAwayTime, float ForcedRateBuff)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayPutaway");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66400);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = PutAwayTime;
+			*(float*)params = PutAwayTime;
 			*(float*)&params[4] = ForcedRateBuff;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayRetrieve(float RetrieveTime, float ForcedRateBuff)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayRetrieve");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66403);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = RetrieveTime;
+			*(float*)params = RetrieveTime;
 			*(float*)&params[4] = ForcedRateBuff;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayReload(float ReloadTime, int RoundsRemainingInClip)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayReload");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66406);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = ReloadTime;
+			*(float*)params = ReloadTime;
 			*(int*)&params[4] = RoundsRemainingInClip;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayOffhand(float Rate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayOffhand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66409);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = Rate;
+			*(float*)params = Rate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnStopFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.OnStopFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66411);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayDryFire()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayDryFire");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66412);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayQuickRetrieve()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnimNodeBlendByDeviceAnim.PlayQuickRetrieve");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66413);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

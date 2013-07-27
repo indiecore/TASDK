@@ -16,9 +16,9 @@ namespace UnrealScript
 		ADD_STRUCT(Object::MultiMap_Mirror, PolyToGoalActorMap, 92)
 		class NavMeshGoal_ClosestActorInList* ClosestActorInList(class NavigationHandle* NavHandle, ScriptArray<NavMeshPathGoalEvaluator::BiasedGoalActor>& InGoalList)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_ClosestActorInList.ClosestActorInList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20946);
 			byte params[20] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
+			*(class NavigationHandle**)params = NavHandle;
 			*(ScriptArray<NavMeshPathGoalEvaluator::BiasedGoalActor>*)&params[4] = InGoalList;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			InGoalList = *(ScriptArray<NavMeshPathGoalEvaluator::BiasedGoalActor>*)&params[4];
@@ -26,12 +26,12 @@ namespace UnrealScript
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_ClosestActorInList.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20952);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RecycleInternal()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoal_ClosestActorInList.RecycleInternal");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20953);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

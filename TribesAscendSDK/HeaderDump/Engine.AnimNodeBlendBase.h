@@ -24,7 +24,7 @@ namespace UnrealScript
 	class AnimNodeBlendBase : public AnimNode
 	{
 	public:
-		class AnimBlendChild
+		struct AnimBlendChild
 		{
 		public:
 			ADD_OBJECT(AnimNode, Anim, 8)
@@ -40,21 +40,21 @@ namespace UnrealScript
 		ADD_BOOL(bFixNumChildren, 236, 0x1)
 		void PlayAnim(bool bLoop, float Rate, float StartTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeBlendBase.PlayAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10708);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = bLoop;
+			*(bool*)params = bLoop;
 			*(float*)&params[4] = Rate;
 			*(float*)&params[8] = StartTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeBlendBase.StopAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10712);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplayAnim()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.AnimNodeBlendBase.ReplayAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(10713);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

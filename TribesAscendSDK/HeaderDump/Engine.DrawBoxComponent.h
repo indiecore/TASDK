@@ -28,7 +28,7 @@ namespace UnrealScript
 		ADD_BOOL(bDrawOnlyIfSelected, 508, 0x4)
 		ADD_BOOL(bDrawLitBox, 508, 0x2)
 		ADD_BOOL(bDrawWireBox, 508, 0x1)
-		ADD_STRUCT(Object::Vector, BoxExtent, 496)
+		ADD_STRUCT(Vector, BoxExtent, 496)
 		ADD_OBJECT(Material, BoxMaterial, 492)
 		ADD_STRUCT(Object::Color, BoxColor, 488)
 	};

@@ -13,7 +13,7 @@ namespace UnrealScript
 	class InterpCurveEdSetup : public Object
 	{
 	public:
-		class CurveEdEntry
+		struct CurveEdEntry
 		{
 		public:
 			ADD_STRUCT(float, ClampHigh, 40)
@@ -26,7 +26,7 @@ namespace UnrealScript
 			ADD_STRUCT(Object::Color, CurveColor, 4)
 			ADD_OBJECT(Object, CurveObject, 0)
 		};
-		class CurveEdTab
+		struct CurveEdTab
 		{
 		public:
 			ADD_STRUCT(ScriptArray<InterpCurveEdSetup::CurveEdEntry>, Curves, 12)

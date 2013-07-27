@@ -7,19 +7,19 @@ namespace UnrealScript
 	public:
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameKActorSpawnableEffect.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31713);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FellOutOfWorld(ScriptClass* dmgType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameKActorSpawnableEffect.FellOutOfWorld");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31714);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = dmgType;
+			*(ScriptClass**)params = dmgType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartScalingDown()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameKActorSpawnableEffect.StartScalingDown");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31716);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

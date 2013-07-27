@@ -8,21 +8,21 @@ namespace UnrealScript
 	public:
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTJumpLiftExit.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48130);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void WaitForLift(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTJumpLiftExit.WaitForLift");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48131);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CanBeReachedFromLiftBy(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTJumpLiftExit.CanBeReachedFromLiftBy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48133);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

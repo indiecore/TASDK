@@ -25,13 +25,13 @@ namespace UnrealScript
 	class TrAnimNodeBlendByPhysics : public TrAnimNodeBlendList
 	{
 	public:
-		class ChildBlendInfo
+		struct ChildBlendInfo
 		{
 		public:
 			ADD_STRUCT(float, m_fBlendTime, 4)
 			ADD_STRUCT(Actor::EPhysics, m_PhysicsState, 0)
 		};
-		class ChildrenBlendInfo
+		struct ChildrenBlendInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<TrAnimNodeBlendByPhysics::ChildBlendInfo>, m_ChildBlendInfo, 4)

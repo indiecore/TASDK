@@ -65,152 +65,152 @@ void*>, CancelFindOnlineGamesCompleteDelegates, 204)
 		ADD_OBJECT(OnlineSubsystemCommonImpl, OwningSubsystem, 60)
 		void OnCreateOnlineGameComplete(ScriptName SessionName, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnCreateOnlineGameComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33378);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(bool*)&params[8] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUpdateOnlineGameComplete(ScriptName SessionName, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnUpdateOnlineGameComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33381);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(bool*)&params[8] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnDestroyOnlineGameComplete(ScriptName SessionName, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnDestroyOnlineGameComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33384);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(bool*)&params[8] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnJoinOnlineGameComplete(ScriptName SessionName, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnJoinOnlineGameComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33387);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(bool*)&params[8] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnMigrateOnlineGameComplete(ScriptName SessionName, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnMigrateOnlineGameComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33390);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(bool*)&params[8] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnJoinMigratedOnlineGameComplete(ScriptName SessionName, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnJoinMigratedOnlineGameComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33393);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(bool*)&params[8] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnRecalculateSkillRatingComplete(ScriptName SessionName, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnRecalculateSkillRatingComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33396);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(bool*)&params[8] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnStartOnlineGameComplete(ScriptName SessionName, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnStartOnlineGameComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33399);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(bool*)&params[8] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnEndOnlineGameComplete(ScriptName SessionName, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnEndOnlineGameComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33402);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(bool*)&params[8] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnFindOnlineGamesComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnFindOnlineGamesComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33405);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnCancelFindOnlineGamesComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnCancelFindOnlineGamesComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33408);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnQosStatusChanged(int NumComplete, int NumTotal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnQosStatusChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33410);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = NumComplete;
+			*(int*)params = NumComplete;
 			*(int*)&params[4] = NumTotal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnGameInviteAccepted(OnlineGameSearch::OnlineGameSearchResult& InviteResult)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnGameInviteAccepted");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33415);
 			byte params[8] = { NULL };
-			*(OnlineGameSearch::OnlineGameSearchResult*)&params[0] = InviteResult;
+			*(OnlineGameSearch::OnlineGameSearchResult*)params = InviteResult;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			InviteResult = *(OnlineGameSearch::OnlineGameSearchResult*)&params[0];
+			InviteResult = *(OnlineGameSearch::OnlineGameSearchResult*)params;
 		}
 		void OnArbitrationRegistrationComplete(ScriptName SessionName, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnArbitrationRegistrationComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33417);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(bool*)&params[8] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnUnregisterPlayerComplete(ScriptName SessionName, OnlineSubsystem::UniqueNetId PlayerID, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnUnregisterPlayerComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33421);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(OnlineSubsystem::UniqueNetId*)&params[8] = PlayerID;
 			*(bool*)&params[16] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnRegisterPlayerComplete(ScriptName SessionName, OnlineSubsystem::UniqueNetId PlayerID, bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.OnRegisterPlayerComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33423);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(OnlineSubsystem::UniqueNetId*)&params[8] = PlayerID;
 			*(bool*)&params[16] = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		class OnlineGameSettings* GetGameSettings(ScriptName SessionName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.GetGameSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33444);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class OnlineGameSettings**)&params[8];
 		}
 		class OnlineGameSearch* GetGameSearch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.GetGameSearch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33447);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class OnlineGameSearch**)&params[0];
+			return *(class OnlineGameSearch**)params;
 		}
 		bool CreateOnlineGame(byte HostingPlayerNum, ScriptName SessionName, class OnlineGameSettings* NewGameSettings)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.CreateOnlineGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33449);
 			byte params[17] = { NULL };
-			params[0] = HostingPlayerNum;
+			*params = HostingPlayerNum;
 			*(ScriptName*)&params[4] = SessionName;
 			*(class OnlineGameSettings**)&params[12] = NewGameSettings;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -220,29 +220,29 @@ void*>, CancelFindOnlineGamesCompleteDelegates, 204)
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* CreateOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddCreateOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33456);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = CreateOnlineGameCompleteDelegate;
+void**)params = CreateOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearCreateOnlineGameCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* CreateOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearCreateOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33458);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = CreateOnlineGameCompleteDelegate;
+void**)params = CreateOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool UpdateOnlineGame(ScriptName SessionName, class OnlineGameSettings* UpdatedGameSettings, bool bShouldRefreshOnlineData)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.UpdateOnlineGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33461);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(class OnlineGameSettings**)&params[8] = UpdatedGameSettings;
 			*(bool*)&params[12] = bShouldRefreshOnlineData;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -252,29 +252,29 @@ void**)&params[0] = CreateOnlineGameCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* UpdateOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddUpdateOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33468);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = UpdateOnlineGameCompleteDelegate;
+void**)params = UpdateOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearUpdateOnlineGameCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* UpdateOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearUpdateOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33470);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = UpdateOnlineGameCompleteDelegate;
+void**)params = UpdateOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool DestroyOnlineGame(ScriptName SessionName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.DestroyOnlineGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33473);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
@@ -282,29 +282,29 @@ void**)&params[0] = UpdateOnlineGameCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* DestroyOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddDestroyOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33478);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = DestroyOnlineGameCompleteDelegate;
+void**)params = DestroyOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearDestroyOnlineGameCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* DestroyOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearDestroyOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33480);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = DestroyOnlineGameCompleteDelegate;
+void**)params = DestroyOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool FindOnlineGames(byte SearchingPlayerNum, class OnlineGameSearch* SearchSettings)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.FindOnlineGames");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33483);
 			byte params[9] = { NULL };
-			params[0] = SearchingPlayerNum;
+			*params = SearchingPlayerNum;
 			*(class OnlineGameSearch**)&params[4] = SearchSettings;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
@@ -313,66 +313,66 @@ void**)&params[0] = DestroyOnlineGameCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* FindOnlineGamesCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddFindOnlineGamesCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33487);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = FindOnlineGamesCompleteDelegate;
+void**)params = FindOnlineGamesCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearFindOnlineGamesCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* FindOnlineGamesCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearFindOnlineGamesCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33489);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = FindOnlineGamesCompleteDelegate;
+void**)params = FindOnlineGamesCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool CancelFindOnlineGames()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.CancelFindOnlineGames");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33492);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void AddCancelFindOnlineGamesCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* CancelFindOnlineGamesCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddCancelFindOnlineGamesCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33495);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = CancelFindOnlineGamesCompleteDelegate;
+void**)params = CancelFindOnlineGamesCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearCancelFindOnlineGamesCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* CancelFindOnlineGamesCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearCancelFindOnlineGamesCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33497);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = CancelFindOnlineGamesCompleteDelegate;
+void**)params = CancelFindOnlineGamesCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool FreeSearchResults(class OnlineGameSearch* Search)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.FreeSearchResults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33500);
 			byte params[8] = { NULL };
-			*(class OnlineGameSearch**)&params[0] = Search;
+			*(class OnlineGameSearch**)params = Search;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool JoinOnlineGame(byte PlayerNum, ScriptName SessionName, OnlineGameSearch::OnlineGameSearchResult& DesiredGame)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.JoinOnlineGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33503);
 			byte params[21] = { NULL };
-			params[0] = PlayerNum;
+			*params = PlayerNum;
 			*(ScriptName*)&params[4] = SessionName;
 			*(OnlineGameSearch::OnlineGameSearchResult*)&params[12] = DesiredGame;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -383,29 +383,29 @@ void**)&params[0] = CancelFindOnlineGamesCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* JoinOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddJoinOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33510);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = JoinOnlineGameCompleteDelegate;
+void**)params = JoinOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearJoinOnlineGameCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* JoinOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearJoinOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33512);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = JoinOnlineGameCompleteDelegate;
+void**)params = JoinOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool GetResolvedConnectString(ScriptName SessionName, ScriptString*& ConnectInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.GetResolvedConnectString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33515);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(ScriptString**)&params[8] = ConnectInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ConnectInfo = *(ScriptString**)&params[8];
@@ -413,9 +413,9 @@ void**)&params[0] = JoinOnlineGameCompleteDelegate;
 		}
 		bool RegisterPlayer(ScriptName SessionName, OnlineSubsystem::UniqueNetId PlayerID, bool bWasInvited)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.RegisterPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33519);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(OnlineSubsystem::UniqueNetId*)&params[8] = PlayerID;
 			*(bool*)&params[16] = bWasInvited;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -425,29 +425,29 @@ void**)&params[0] = JoinOnlineGameCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* RegisterPlayerCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddRegisterPlayerCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33527);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = RegisterPlayerCompleteDelegate;
+void**)params = RegisterPlayerCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearRegisterPlayerCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* RegisterPlayerCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearRegisterPlayerCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33529);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = RegisterPlayerCompleteDelegate;
+void**)params = RegisterPlayerCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool UnregisterPlayer(ScriptName SessionName, OnlineSubsystem::UniqueNetId PlayerID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.UnregisterPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33531);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(OnlineSubsystem::UniqueNetId*)&params[8] = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
@@ -456,29 +456,29 @@ void**)&params[0] = RegisterPlayerCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* UnregisterPlayerCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddUnregisterPlayerCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33538);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = UnregisterPlayerCompleteDelegate;
+void**)params = UnregisterPlayerCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearUnregisterPlayerCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* UnregisterPlayerCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearUnregisterPlayerCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33540);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = UnregisterPlayerCompleteDelegate;
+void**)params = UnregisterPlayerCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool StartOnlineGame(ScriptName SessionName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.StartOnlineGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33542);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
@@ -486,29 +486,29 @@ void**)&params[0] = UnregisterPlayerCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* StartOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddStartOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33547);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = StartOnlineGameCompleteDelegate;
+void**)params = StartOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearStartOnlineGameCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* StartOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearStartOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33549);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = StartOnlineGameCompleteDelegate;
+void**)params = StartOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool EndOnlineGame(ScriptName SessionName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.EndOnlineGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33552);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
@@ -516,29 +516,29 @@ void**)&params[0] = StartOnlineGameCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* EndOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddEndOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33557);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = EndOnlineGameCompleteDelegate;
+void**)params = EndOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearEndOnlineGameCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* EndOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearEndOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33559);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = EndOnlineGameCompleteDelegate;
+void**)params = EndOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool RegisterForArbitration(ScriptName SessionName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.RegisterForArbitration");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33562);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
@@ -546,29 +546,29 @@ void**)&params[0] = EndOnlineGameCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ArbitrationRegistrationCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddArbitrationRegistrationCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33567);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ArbitrationRegistrationCompleteDelegate;
+void**)params = ArbitrationRegistrationCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearArbitrationRegistrationCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* ArbitrationRegistrationCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearArbitrationRegistrationCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33569);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = ArbitrationRegistrationCompleteDelegate;
+void**)params = ArbitrationRegistrationCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptArray<OnlineSubsystem::OnlineArbitrationRegistrant> GetArbitratedPlayers(ScriptName SessionName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.GetArbitratedPlayers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33571);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptArray<OnlineSubsystem::OnlineArbitrationRegistrant>*)&params[8];
 		}
@@ -576,9 +576,9 @@ void**)&params[0] = ArbitrationRegistrationCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* GameInviteAcceptedDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddGameInviteAcceptedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33576);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = GameInviteAcceptedDelegate;
@@ -588,9 +588,9 @@ void**)&params[4] = GameInviteAcceptedDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* GameInviteAcceptedDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearGameInviteAcceptedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33579);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = GameInviteAcceptedDelegate;
@@ -598,18 +598,18 @@ void**)&params[4] = GameInviteAcceptedDelegate;
 		}
 		bool AcceptGameInvite(byte LocalUserNum, ScriptName SessionName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AcceptGameInvite");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33582);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptName*)&params[4] = SessionName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		bool RecalculateSkillRating(ScriptName SessionName, ScriptArray<OnlineSubsystem::UniqueNetId>& Players)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.RecalculateSkillRating");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33586);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			*(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[8] = Players;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Players = *(ScriptArray<OnlineSubsystem::UniqueNetId>*)&params[8];
@@ -619,29 +619,29 @@ void**)&params[4] = GameInviteAcceptedDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* RecalculateSkillRatingCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddRecalculateSkillRatingCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33593);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = RecalculateSkillRatingCompleteDelegate;
+void**)params = RecalculateSkillRatingCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearRecalculateSkillRatingCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* RecalculateSkillRatingGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearRecalculateSkillRatingCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33595);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = RecalculateSkillRatingGameCompleteDelegate;
+void**)params = RecalculateSkillRatingGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool MigrateOnlineGame(byte HostingPlayerNum, ScriptName SessionName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.MigrateOnlineGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33598);
 			byte params[13] = { NULL };
-			params[0] = HostingPlayerNum;
+			*params = HostingPlayerNum;
 			*(ScriptName*)&params[4] = SessionName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
@@ -650,29 +650,29 @@ void**)&params[0] = RecalculateSkillRatingGameCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* MigrateOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddMigrateOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33604);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = MigrateOnlineGameCompleteDelegate;
+void**)params = MigrateOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearMigrateOnlineGameCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* MigrateOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearMigrateOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33606);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = MigrateOnlineGameCompleteDelegate;
+void**)params = MigrateOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool JoinMigratedOnlineGame(byte PlayerNum, ScriptName SessionName, OnlineGameSearch::OnlineGameSearchResult& DesiredGame)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.JoinMigratedOnlineGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33609);
 			byte params[21] = { NULL };
-			params[0] = PlayerNum;
+			*params = PlayerNum;
 			*(ScriptName*)&params[4] = SessionName;
 			*(OnlineGameSearch::OnlineGameSearchResult*)&params[12] = DesiredGame;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -683,49 +683,49 @@ void**)&params[0] = MigrateOnlineGameCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* JoinMigratedOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddJoinMigratedOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33616);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = JoinMigratedOnlineGameCompleteDelegate;
+void**)params = JoinMigratedOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearJoinMigratedOnlineGameCompleteDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* JoinMigratedOnlineGameCompleteDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearJoinMigratedOnlineGameCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33618);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = JoinMigratedOnlineGameCompleteDelegate;
+void**)params = JoinMigratedOnlineGameCompleteDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool QueryNonAdvertisedData(int StartAt, int NumberToQuery)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.QueryNonAdvertisedData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33621);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = StartAt;
+			*(int*)params = StartAt;
 			*(int*)&params[4] = NumberToQuery;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool ReadPlatformSpecificSessionInfo(OnlineGameSearch::OnlineGameSearchResult& DesiredGame, byte& PlatformSpecificInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ReadPlatformSpecificSessionInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33625);
 			byte params[13] = { NULL };
-			*(OnlineGameSearch::OnlineGameSearchResult*)&params[0] = DesiredGame;
+			*(OnlineGameSearch::OnlineGameSearchResult*)params = DesiredGame;
 			params[8] = PlatformSpecificInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			DesiredGame = *(OnlineGameSearch::OnlineGameSearchResult*)&params[0];
+			DesiredGame = *(OnlineGameSearch::OnlineGameSearchResult*)params;
 			PlatformSpecificInfo = params[8];
 			return *(bool*)&params[88];
 		}
 		bool ReadPlatformSpecificSessionInfoBySessionName(ScriptName SessionName, byte& PlatformSpecificInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ReadPlatformSpecificSessionInfoBySessionName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33629);
 			byte params[13] = { NULL };
-			*(ScriptName*)&params[0] = SessionName;
+			*(ScriptName*)params = SessionName;
 			params[8] = PlatformSpecificInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			PlatformSpecificInfo = params[8];
@@ -733,9 +733,9 @@ void**)&params[0] = JoinMigratedOnlineGameCompleteDelegate;
 		}
 		bool BindPlatformSpecificSessionToSearch(byte SearchingPlayerNum, class OnlineGameSearch* SearchSettings, byte PlatformSpecificInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.BindPlatformSpecificSessionToSearch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33633);
 			byte params[10] = { NULL };
-			params[0] = SearchingPlayerNum;
+			*params = SearchingPlayerNum;
 			*(class OnlineGameSearch**)&params[4] = SearchSettings;
 			params[8] = PlatformSpecificInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -745,22 +745,22 @@ void**)&params[0] = JoinMigratedOnlineGameCompleteDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* QosStatusChangedDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.AddQosStatusChangedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33640);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = QosStatusChangedDelegate;
+void**)params = QosStatusChangedDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearQosStatusChangedDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* QosStatusChangedDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.OnlineGameInterfaceImpl.ClearQosStatusChangedDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33642);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = QosStatusChangedDelegate;
+void**)params = QosStatusChangedDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

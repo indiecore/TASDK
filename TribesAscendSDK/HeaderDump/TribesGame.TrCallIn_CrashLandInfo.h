@@ -30,49 +30,49 @@ namespace UnrealScript
 		ADD_STRUCT(float, Damage, 524)
 		ADD_STRUCT(float, DamageRadius, 520)
 		ADD_OBJECT(ScriptClass, DamageTypeClass, 516)
-		ADD_STRUCT(Object::Vector, r_CrashLandNormal, 504)
-		ADD_STRUCT(Object::Vector, r_CrashLandPoint, 492)
+		ADD_STRUCT(Vector, r_CrashLandNormal, 504)
+		ADD_STRUCT(Vector, r_CrashLandPoint, 492)
 		ADD_STRUCT(float, r_fCrashLandTime, 488)
 		ADD_BOOL(r_bPodLanded, 484, 0x1)
 		ADD_OBJECT(Controller, m_Owner, 480)
 		ADD_OBJECT(ScriptClass, m_ItemToDeploy, 476)
-		bool SpawnCrashLandInfo(class Controller* Initializer, float CrashLandTime, Object::Vector CrashLandPoint, Object::Vector CrashLandNormal, ScriptClass* ItemInDeliveryPod)
+		bool SpawnCrashLandInfo(class Controller* Initializer, float CrashLandTime, Vector CrashLandPoint, Vector CrashLandNormal, ScriptClass* ItemInDeliveryPod)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.SpawnCrashLandInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73992);
 			byte params[40] = { NULL };
-			*(class Controller**)&params[0] = Initializer;
+			*(class Controller**)params = Initializer;
 			*(float*)&params[4] = CrashLandTime;
-			*(Object::Vector*)&params[8] = CrashLandPoint;
-			*(Object::Vector*)&params[20] = CrashLandNormal;
+			*(Vector*)&params[8] = CrashLandPoint;
+			*(Vector*)&params[20] = CrashLandNormal;
 			*(ScriptClass**)&params[32] = ItemInDeliveryPod;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[36];
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74000);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.InitTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74001);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DeliveryPodLanded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.DeliveryPodLanded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74005);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void MoveSameTeamPawn(class TrPawn* PawnToMove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.MoveSameTeamPawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74007);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = PawnToMove;
+			*(class TrPawn**)params = PawnToMove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PerformLandingDamage()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCallIn_CrashLandInfo.PerformLandingDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(74013);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

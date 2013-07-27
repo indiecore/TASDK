@@ -36,59 +36,59 @@ namespace UnrealScript
 		ADD_OBJECT(GameCrowdInteractionPoint, PreviousQueuePosition, 488)
 		bool HasCustomer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.HasCustomer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30511);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool HasSpace()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.HasSpace");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30516);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
-		bool QueueReachedBy(class GameCrowdAgent* Agent, Object::Vector TestPosition)
+		bool QueueReachedBy(class GameCrowdAgent* Agent, Vector TestPosition)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.QueueReachedBy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31302);
 			byte params[20] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = Agent;
-			*(Object::Vector*)&params[4] = TestPosition;
+			*(class GameCrowdAgent**)params = Agent;
+			*(Vector*)&params[4] = TestPosition;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void ReachedDestination(class GameCrowdAgent* Agent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.ReachedDestination");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31306);
 			byte params[4] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = Agent;
+			*(class GameCrowdAgent**)params = Agent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AdvanceCustomerTo(class GameCrowdInteractionPoint* FrontPosition)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.AdvanceCustomerTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31309);
 			byte params[4] = { NULL };
-			*(class GameCrowdInteractionPoint**)&params[0] = FrontPosition;
+			*(class GameCrowdInteractionPoint**)params = FrontPosition;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ActuallyAdvance()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.ActuallyAdvance");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31311);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddCustomer(class GameCrowdAgent* NewCustomer, class GameCrowdInteractionPoint* PreviousPosition)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.AddCustomer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31315);
 			byte params[8] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = NewCustomer;
+			*(class GameCrowdAgent**)params = NewCustomer;
 			*(class GameCrowdInteractionPoint**)&params[4] = PreviousPosition;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearQueue(class GameCrowdAgent* OldCustomer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdDestinationQueuePoint.ClearQueue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31318);
 			byte params[4] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = OldCustomer;
+			*(class GameCrowdAgent**)params = OldCustomer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

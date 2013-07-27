@@ -20,7 +20,7 @@ namespace UnrealScript
 	class AnimSet : public Object
 	{
 	public:
-		class AnimSetMeshLinkup
+		struct AnimSetMeshLinkup
 		{
 		public:
 			ADD_STRUCT(ScriptArray<int>, BoneToTrackTable, 0)

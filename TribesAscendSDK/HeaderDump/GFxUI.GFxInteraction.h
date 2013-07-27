@@ -15,36 +15,36 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_FCallbackEventDevice, 108)
 		class GFxMoviePlayer* GetFocusMovie(int ControllerId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxInteraction.GetFocusMovie");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30303);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class GFxMoviePlayer**)&params[4];
 		}
 		void NotifyGameSessionEnded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxInteraction.NotifyGameSessionEnded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30306);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void NotifyPlayerAdded(int PlayerIndex, class LocalPlayer* AddedPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxInteraction.NotifyPlayerAdded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30307);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			*(class LocalPlayer**)&params[4] = AddedPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void NotifyPlayerRemoved(int PlayerIndex, class LocalPlayer* RemovedPlayer)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxInteraction.NotifyPlayerRemoved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30310);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = PlayerIndex;
+			*(int*)params = PlayerIndex;
 			*(class LocalPlayer**)&params[4] = RemovedPlayer;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CloseAllMoviePlayers()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GFxUI.GFxInteraction.CloseAllMoviePlayers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30313);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

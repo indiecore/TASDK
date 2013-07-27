@@ -29,94 +29,94 @@ namespace UnrealScript
 		ADD_OBJECT(Inventory, Inventory, 476)
 		void AddToNavigation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.AddToNavigation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14775);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RemoveFromNavigation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.RemoveFromNavigation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14776);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14777);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14778);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14782);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPickupMesh(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* PickupMesh)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.SetPickupMesh");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14783);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = PickupMesh;
+void**)params = PickupMesh;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPickupParticles(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* PickupParticles)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.SetPickupParticles");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14786);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = PickupParticles;
+void**)params = PickupParticles;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EncroachedBy(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.EncroachedBy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14790);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float DetourWeight(class Pawn* Other, float PathWeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.DetourWeight");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14792);
 			byte params[12] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			*(float*)&params[4] = PathWeight;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[8];
 		}
-		void Landed(Object::Vector HitNormal, class Actor* FloorActor)
+		void Landed(Vector HitNormal, class Actor* FloorActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.Landed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14798);
 			byte params[16] = { NULL };
-			*(Object::Vector*)&params[0] = HitNormal;
+			*(Vector*)params = HitNormal;
 			*(class Actor**)&params[12] = FloorActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GiveTo(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.GiveTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14801);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PickedUpBy(class Pawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.PickedUpBy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14804);
 			byte params[4] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RecheckValidTouch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DroppedPickup.RecheckValidTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14806);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -16,7 +16,7 @@ namespace UnrealScript
 			ACCESS_WriteAll = 2,
 			ACCESS_MAX = 3,
 		};
-		class UIDataProviderField
+		struct UIDataProviderField
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class UIDataProvider*>, FieldProviders, 12)
@@ -29,17 +29,17 @@ void*>, ProviderChangedNotifies, 64)
 		ADD_STRUCT(UIDataProvider::EProviderAccessType, WriteAccessType, 60)
 		void OnDataProviderPropertyChange(class UIDataProvider* SourceProvider, ScriptName PropTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.OnDataProviderPropertyChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22531);
 			byte params[12] = { NULL };
-			*(class UIDataProvider**)&params[0] = SourceProvider;
+			*(class UIDataProvider**)params = SourceProvider;
 			*(ScriptName*)&params[4] = PropTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool GetProviderFieldType(ScriptString* DataTag, UIRoot::EUIDataProviderFieldType& out_ProviderFieldType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.GetProviderFieldType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22536);
 			byte params[17] = { NULL };
-			*(ScriptString**)&params[0] = DataTag;
+			*(ScriptString**)params = DataTag;
 			*(UIRoot::EUIDataProviderFieldType*)&params[12] = out_ProviderFieldType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			out_ProviderFieldType = *(UIRoot::EUIDataProviderFieldType*)&params[12];
@@ -47,35 +47,35 @@ void*>, ProviderChangedNotifies, 64)
 		}
 		int ParseArrayDelimiter(ScriptString*& DataTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.ParseArrayDelimiter");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22540);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = DataTag;
+			*(ScriptString**)params = DataTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			DataTag = *(ScriptString**)&params[0];
+			DataTag = *(ScriptString**)params;
 			return *(int*)&params[12];
 		}
 		void GetSupportedScriptFields(ScriptArray<UIDataProvider::UIDataProviderField>& out_Fields)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.GetSupportedScriptFields");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22543);
 			byte params[12] = { NULL };
-			*(ScriptArray<UIDataProvider::UIDataProviderField>*)&params[0] = out_Fields;
+			*(ScriptArray<UIDataProvider::UIDataProviderField>*)params = out_Fields;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_Fields = *(ScriptArray<UIDataProvider::UIDataProviderField>*)&params[0];
+			out_Fields = *(ScriptArray<UIDataProvider::UIDataProviderField>*)params;
 		}
 		bool AllowPublishingToField(ScriptString* FieldName, int ArrayIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.AllowPublishingToField");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22546);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = FieldName;
+			*(ScriptString**)params = FieldName;
 			*(int*)&params[12] = ArrayIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		bool GetFieldValue(ScriptString* FieldName, UIRoot::UIProviderScriptFieldValue& FieldValue, int ArrayIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.GetFieldValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22550);
 			byte params[104] = { NULL };
-			*(ScriptString**)&params[0] = FieldName;
+			*(ScriptString**)params = FieldName;
 			*(UIRoot::UIProviderScriptFieldValue*)&params[12] = FieldValue;
 			*(int*)&params[96] = ArrayIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -84,9 +84,9 @@ void*>, ProviderChangedNotifies, 64)
 		}
 		bool SetFieldValue(ScriptString* FieldName, UIRoot::UIProviderScriptFieldValue& FieldValue, int ArrayIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.SetFieldValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22555);
 			byte params[104] = { NULL };
-			*(ScriptString**)&params[0] = FieldName;
+			*(ScriptString**)params = FieldName;
 			*(UIRoot::UIProviderScriptFieldValue*)&params[12] = FieldValue;
 			*(int*)&params[96] = ArrayIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -95,51 +95,51 @@ void*>, ProviderChangedNotifies, 64)
 		}
 		ScriptString* GenerateScriptMarkupString(ScriptName DataTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.GenerateScriptMarkupString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22560);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = DataTag;
+			*(ScriptName*)params = DataTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[8];
 		}
 		ScriptString* GenerateFillerData(ScriptString* DataTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.GenerateFillerData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22563);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = DataTag;
+			*(ScriptString**)params = DataTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		bool IsProviderDisabled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.IsProviderDisabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22566);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool IsCollectionDataType(UIRoot::EUIDataProviderFieldType FieldType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.IsCollectionDataType");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22568);
 			byte params[5] = { NULL };
-			*(UIRoot::EUIDataProviderFieldType*)&params[0] = FieldType;
+			*(UIRoot::EUIDataProviderFieldType*)params = FieldType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void NotifyPropertyChanged(ScriptName PropTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.NotifyPropertyChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22571);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = PropTag;
+			*(ScriptName*)params = PropTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AddPropertyNotificationChangeRequest(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InDelegate, bool bAllowDuplicates)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.AddPropertyNotificationChangeRequest");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22577);
 			byte params[20] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = InDelegate;
+void**)params = InDelegate;
 			*(bool*)&params[12] = bAllowDuplicates;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
@@ -148,21 +148,21 @@ void**)&params[0] = InDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* InDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.RemovePropertyNotificationChangeRequest");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22583);
 			byte params[16] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = InDelegate;
+void**)params = InDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[12];
 		}
 		int ParseTagArrayDelimiter(ScriptName& FieldName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataProvider.ParseTagArrayDelimiter");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(22588);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = FieldName;
+			*(ScriptName*)params = FieldName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			FieldName = *(ScriptName*)&params[0];
+			FieldName = *(ScriptName*)params;
 			return *(int*)&params[8];
 		}
 	};

@@ -140,13 +140,13 @@ namespace UnrealScript
 			Quality_NoGlobalIllumination = 4,
 			Quality_MAX = 5,
 		};
-		class SubtitleCue
+		struct SubtitleCue
 		{
 		public:
 			ADD_STRUCT(float, Time, 12)
 			ADD_STRUCT(ScriptString*, Text, 0)
 		};
-		class LocalizedSubtitle
+		struct LocalizedSubtitle
 		{
 		public:
 			ADD_STRUCT(ScriptArray<EngineTypes::SubtitleCue>, Subtitles, 12)
@@ -154,12 +154,12 @@ namespace UnrealScript
 			ADD_BOOL(bMature, 24, 0x1)
 			ADD_STRUCT(ScriptString*, LanguageExt, 0)
 		};
-		class LightMapRef
+		struct LightMapRef
 		{
 		public:
 			ADD_STRUCT(Object::Pointer, Reference, 0)
 		};
-		class DominantShadowInfo
+		struct DominantShadowInfo
 		{
 		public:
 			ADD_STRUCT(int, ShadowMapSizeY, 160)
@@ -168,24 +168,24 @@ namespace UnrealScript
 			ADD_STRUCT(Object::Matrix, LightToWorld, 64)
 			ADD_STRUCT(Object::Matrix, WorldToLight, 0)
 		};
-		class LightmassLightSettings
+		struct LightmassLightSettings
 		{
 		public:
 			ADD_STRUCT(float, ShadowExponent, 8)
 			ADD_STRUCT(float, IndirectLightingSaturation, 4)
 			ADD_STRUCT(float, IndirectLightingScale, 0)
 		};
-		class LightmassPointLightSettings : public LightmassLightSettings
+		struct LightmassPointLightSettings : public LightmassLightSettings
 		{
 		public:
 			ADD_STRUCT(float, LightSourceRadius, 12)
 		};
-		class LightmassDirectionalLightSettings : public LightmassLightSettings
+		struct LightmassDirectionalLightSettings : public LightmassLightSettings
 		{
 		public:
 			ADD_STRUCT(float, LightSourceAngle, 12)
 		};
-		class LightmassPrimitiveSettings
+		struct LightmassPrimitiveSettings
 		{
 		public:
 			ADD_STRUCT(float, FullyOccludedSamplesFraction, 24)
@@ -198,7 +198,7 @@ namespace UnrealScript
 			ADD_BOOL(bShadowIndirectOnly, 0, 0x2)
 			ADD_BOOL(bUseTwoSidedLighting, 0, 0x1)
 		};
-		class LightmassDebugOptions
+		struct LightmassDebugOptions
 		{
 		public:
 			ADD_BOOL(bInitialized, 16, 0x1)
@@ -220,26 +220,26 @@ namespace UnrealScript
 			ADD_BOOL(bStatsEnabled, 0, 0x2)
 			ADD_BOOL(bDebugMode, 0, 0x1)
 		};
-		class SwarmDebugOptions
+		struct SwarmDebugOptions
 		{
 		public:
 			ADD_BOOL(bInitialized, 0, 0x4)
 			ADD_BOOL(bForceContentExport, 0, 0x2)
 			ADD_BOOL(bDistributionEnabled, 0, 0x1)
 		};
-		class RootMotionCurve
+		struct RootMotionCurve
 		{
 		public:
 			ADD_STRUCT(float, MaxCurveTime, 24)
 			ADD_STRUCT(Object::InterpCurveVector, Curve, 8)
 			ADD_STRUCT(ScriptName, AnimName, 0)
 		};
-		class PrimitiveMaterialRef
+		struct PrimitiveMaterialRef
 		{
 		public:
 			ADD_STRUCT(int, MaterialIndex, 4)
 		};
-		class MaterialReferenceList
+		struct MaterialReferenceList
 		{
 		public:
 			ADD_STRUCT(ScriptArray<EngineTypes::PrimitiveMaterialRef>, AffectedMaterialRefs, 4)

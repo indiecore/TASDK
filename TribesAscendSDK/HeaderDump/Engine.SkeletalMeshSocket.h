@@ -17,9 +17,9 @@ namespace UnrealScript
 	public:
 		ADD_OBJECT(StaticMesh, PreviewStaticMesh, 120)
 		ADD_OBJECT(SkeletalMesh, PreviewSkelMesh, 112)
-		ADD_STRUCT(Object::Vector, RelativeScale, 100)
-		ADD_STRUCT(Object::Rotator, RelativeRotation, 88)
-		ADD_STRUCT(Object::Vector, RelativeLocation, 76)
+		ADD_STRUCT(Vector, RelativeScale, 100)
+		ADD_STRUCT(Rotator, RelativeRotation, 88)
+		ADD_STRUCT(Vector, RelativeLocation, 76)
 		ADD_STRUCT(ScriptName, BoneName, 68)
 		ADD_STRUCT(ScriptName, SocketName, 60)
 	};

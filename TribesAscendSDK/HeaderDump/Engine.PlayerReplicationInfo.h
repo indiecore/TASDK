@@ -29,7 +29,7 @@ namespace UnrealScript
 	class PlayerReplicationInfo : public ReplicationInfo
 	{
 	public:
-		class AutomatedTestingDatum
+		struct AutomatedTestingDatum
 		{
 		public:
 			ADD_STRUCT(int, NumberOfMatchesPlayed, 0)
@@ -78,74 +78,74 @@ namespace UnrealScript
 		ADD_STRUCT(int, Deaths, 480)
 		class PlayerReplicationInfo* Duplicate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.Duplicate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17276);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class PlayerReplicationInfo**)&params[0];
+			return *(class PlayerReplicationInfo**)params;
 		}
 		void UpdatePing(float TimeStamp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.UpdatePing");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24596);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = TimeStamp;
+			*(float*)params = TimeStamp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24598);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClientInitialize(class Controller* C)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.ClientInitialize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24599);
 			byte params[4] = { NULL };
-			*(class Controller**)&params[0] = C;
+			*(class Controller**)params = C;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPlayerTeam(class TeamInfo* NewTeam)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.SetPlayerTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24603);
 			byte params[4] = { NULL };
-			*(class TeamInfo**)&params[0] = NewTeam;
+			*(class TeamInfo**)params = NewTeam;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24605);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ShouldBroadCastWelcomeMessage(bool bExiting)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.ShouldBroadCastWelcomeMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24612);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bExiting;
+			*(bool*)params = bExiting;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24615);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24618);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetHumanReadableName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.GetHumanReadableName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24619);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void DisplayDebug(class HUD* HUD, float& YL, float& YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.DisplayDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24621);
 			byte params[12] = { NULL };
-			*(class HUD**)&params[0] = HUD;
+			*(class HUD**)params = HUD;
 			*(float*)&params[4] = YL;
 			*(float*)&params[8] = YPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -154,83 +154,83 @@ namespace UnrealScript
 		}
 		void SetPlayerName(ScriptString* S)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.SetPlayerName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24627);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = S;
+			*(ScriptString**)params = S;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetWaitingPlayer(bool B)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.SetWaitingPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24629);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = B;
+			*(bool*)params = B;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OverrideWith(class PlayerReplicationInfo* PRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.OverrideWith");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24632);
 			byte params[4] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = PRI;
+			*(class PlayerReplicationInfo**)params = PRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CopyProperties(class PlayerReplicationInfo* PRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.CopyProperties");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24634);
 			byte params[4] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = PRI;
+			*(class PlayerReplicationInfo**)params = PRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void IncrementDeaths(int Amt)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.IncrementDeaths");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24636);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Amt;
+			*(int*)params = Amt;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SeamlessTravelTo(class PlayerReplicationInfo* NewPRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.SeamlessTravelTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24638);
 			byte params[4] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = NewPRI;
+			*(class PlayerReplicationInfo**)params = NewPRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetUniqueId(OnlineSubsystem::UniqueNetId PlayerUniqueId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.SetUniqueId");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24640);
 			byte params[8] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerUniqueId;
+			*(OnlineSubsystem::UniqueNetId*)params = PlayerUniqueId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		byte GetTeamNum()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.GetTeamNum");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24642);
 			byte params[1] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return params[0];
+			return *params;
 		}
 		bool IsInvalidName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.IsInvalidName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24644);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void RegisterPlayerWithSession()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.RegisterPlayerWithSession");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24650);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UnregisterPlayerFromSession()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.UnregisterPlayerFromSession");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24653);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetSpectatorName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerReplicationInfo.GetSpectatorName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(24656);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

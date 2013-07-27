@@ -11,7 +11,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(float, SphereRadius, 164)
-		ADD_STRUCT(Object::Vector, SphereCenter, 152)
+		ADD_STRUCT(Vector, SphereCenter, 152)
 		ADD_STRUCT(float, MaxDensity, 148)
 	};
 }

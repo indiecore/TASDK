@@ -61,9 +61,9 @@ namespace UnrealScript
 		ADD_STRUCT(int, DBWeaponBaseId, 304)
 		float CalculateRangeDamageFalloff(float Dist, float damageRange, class TrPlayerController* TrPCDamager, TrObject::TR_EQUIP_POINT EquipPoint, bool bMinDamageAlwaysApplied)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.CalculateRangeDamageFalloff");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(67461);
 			byte params[21] = { NULL };
-			*(float*)&params[0] = Dist;
+			*(float*)params = Dist;
 			*(float*)&params[4] = damageRange;
 			*(class TrPlayerController**)&params[8] = TrPCDamager;
 			*(TrObject::TR_EQUIP_POINT*)&params[12] = EquipPoint;
@@ -73,26 +73,26 @@ namespace UnrealScript
 		}
 		class Actor* GetActorCausingDamage(class Controller* EventInstigator, class Actor* DamageCauser)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.GetActorCausingDamage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71538);
 			byte params[12] = { NULL };
-			*(class Controller**)&params[0] = EventInstigator;
+			*(class Controller**)params = EventInstigator;
 			*(class Actor**)&params[4] = DamageCauser;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[8];
 		}
-		Object::Vector ModifyOverheadNumberLocation(Object::Vector InLocation)
+		Vector ModifyOverheadNumberLocation(Vector InLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.ModifyOverheadNumberLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71540);
 			byte params[24] = { NULL };
-			*(Object::Vector*)&params[0] = InLocation;
+			*(Vector*)params = InLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[12];
+			return *(Vector*)&params[12];
 		}
 		float GetDamageScale(class Actor* DamageCauser, float Dist, ScriptClass* dmgType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.GetDamageScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71815);
 			byte params[16] = { NULL };
-			*(class Actor**)&params[0] = DamageCauser;
+			*(class Actor**)params = DamageCauser;
 			*(float*)&params[4] = Dist;
 			*(ScriptClass**)&params[8] = dmgType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -100,24 +100,24 @@ namespace UnrealScript
 		}
 		ScriptName GetRandomDeathAnimName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.GetRandomDeathAnimName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73055);
 			byte params[8] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptName*)&params[0];
+			return *(ScriptName*)params;
 		}
 		float VehicleDamageScalingFor(class Vehicle* V)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.VehicleDamageScalingFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(86444);
 			byte params[8] = { NULL };
-			*(class Vehicle**)&params[0] = V;
+			*(class Vehicle**)params = V;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}
 		void GetCameraShake(int Damage, ScriptName& outCameraShakeName, float& outScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDmgType_Base.GetCameraShake");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(86471);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Damage;
+			*(int*)params = Damage;
 			*(ScriptName*)&params[4] = outCameraShakeName;
 			*(float*)&params[12] = outScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

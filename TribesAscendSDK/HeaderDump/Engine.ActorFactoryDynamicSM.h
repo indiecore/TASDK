@@ -32,7 +32,7 @@ namespace UnrealScript
 		ADD_BOOL(bBlockRigidBody, 108, 0x4)
 		ADD_BOOL(bNotifyRigidBodyCollision, 108, 0x2)
 		ADD_BOOL(bNoEncroachCheck, 108, 0x1)
-		ADD_STRUCT(Object::Vector, DrawScale3D, 96)
+		ADD_STRUCT(Vector, DrawScale3D, 96)
 		ADD_OBJECT(StaticMesh, StaticMesh, 92)
 	};
 }

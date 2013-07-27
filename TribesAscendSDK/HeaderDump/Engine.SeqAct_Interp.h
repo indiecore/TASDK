@@ -28,17 +28,17 @@ namespace UnrealScript
 	class SeqAct_Interp : public SeqAct_Latent
 	{
 	public:
-		class CameraCutInfo
+		struct CameraCutInfo
 		{
 		public:
 			ADD_STRUCT(float, TimeStamp, 12)
-			ADD_STRUCT(Object::Vector, Location, 0)
+			ADD_STRUCT(Vector, Location, 0)
 		};
-		class SavedTransform
+		struct SavedTransform
 		{
 		public:
-			ADD_STRUCT(Object::Rotator, Rotation, 12)
-			ADD_STRUCT(Object::Vector, Location, 0)
+			ADD_STRUCT(Rotator, Rotation, 12)
+			ADD_STRUCT(Vector, Location, 0)
 		};
 		ADD_BOOL(bReversePlayback, 380, 0x80)
 		ADD_BOOL(bNoResetOnRewind, 380, 0x20)
@@ -68,35 +68,35 @@ namespace UnrealScript
 		ADD_STRUCT(float, ForceStartPosition, 376)
 		void AddPlayerToDirectorTracks(class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Interp.AddPlayerToDirectorTracks");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7793);
 			byte params[4] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPosition(float NewPosition, bool bJump)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Interp.SetPosition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25736);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = NewPosition;
+			*(float*)params = NewPosition;
 			*(bool*)&params[4] = bJump;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Stop()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Interp.Stop");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25739);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Reset()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Interp.Reset");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25741);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetObjClassVersion()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_Interp.GetObjClassVersion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25742);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 	};
 }

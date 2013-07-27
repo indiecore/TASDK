@@ -25,18 +25,18 @@ namespace UnrealScript
 		};
 		ADD_STRUCT(Object::Pointer, LinearKernel, 712)
 		ADD_STRUCT(float, TorusRadius, 708)
-		ADD_STRUCT(Object::Vector, FalloffQuadratic, 696)
-		ADD_STRUCT(Object::Vector, FalloffLinear, 684)
-		ADD_STRUCT(Object::Vector, Noise, 672)
-		ADD_STRUCT(Object::Vector, VelocityTarget, 660)
-		ADD_STRUCT(Object::Vector, VelocityMultiplierZ, 648)
-		ADD_STRUCT(Object::Vector, VelocityMultiplierY, 636)
-		ADD_STRUCT(Object::Vector, VelocityMultiplierX, 624)
-		ADD_STRUCT(Object::Vector, PositionTarget, 612)
-		ADD_STRUCT(Object::Vector, PositionMultiplierZ, 600)
-		ADD_STRUCT(Object::Vector, PositionMultiplierY, 588)
-		ADD_STRUCT(Object::Vector, PositionMultiplierX, 576)
-		ADD_STRUCT(Object::Vector, Constant, 564)
+		ADD_STRUCT(Vector, FalloffQuadratic, 696)
+		ADD_STRUCT(Vector, FalloffLinear, 684)
+		ADD_STRUCT(Vector, Noise, 672)
+		ADD_STRUCT(Vector, VelocityTarget, 660)
+		ADD_STRUCT(Vector, VelocityMultiplierZ, 648)
+		ADD_STRUCT(Vector, VelocityMultiplierY, 636)
+		ADD_STRUCT(Vector, VelocityMultiplierX, 624)
+		ADD_STRUCT(Vector, PositionTarget, 612)
+		ADD_STRUCT(Vector, PositionMultiplierZ, 600)
+		ADD_STRUCT(Vector, PositionMultiplierY, 588)
+		ADD_STRUCT(Vector, PositionMultiplierX, 576)
+		ADD_STRUCT(Vector, Constant, 564)
 		ADD_STRUCT(NxForceFieldGeneric::FFG_ForceFieldCoordinates, Coordinates, 560)
 		ADD_OBJECT(ForceFieldShape, Shape, 540)
 		ADD_STRUCT(float, RoughExtentZ, 556)
@@ -44,7 +44,7 @@ namespace UnrealScript
 		ADD_STRUCT(float, RoughExtentX, 548)
 		void DoInitRBPhys()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NxForceFieldGeneric.DoInitRBPhys");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21201);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

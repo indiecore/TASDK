@@ -29,82 +29,82 @@ namespace UnrealScript
 		ADD_OBJECT(UIDataStore_OnlineGameSettings, SettingsDataStore, 220)
 		void OnViewLoaded()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_GameMode.OnViewLoaded");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38152);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnTopMostView(bool bPlayOpenAnimation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_GameMode.OnTopMostView");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38157);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bPlayOpenAnimation;
+			*(bool*)params = bPlayOpenAnimation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DisableSubComponents(bool bDisableComponents)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_GameMode.DisableSubComponents");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38159);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDisableComponents;
+			*(bool*)params = bDisableComponents;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnGameModeSelected(ScriptString* InGameMode, ScriptString* InDefaultMap, ScriptString* InGameSettingsClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_GameMode.OnGameModeSelected");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38161);
 			byte params[36] = { NULL };
-			*(ScriptString**)&params[0] = InGameMode;
+			*(ScriptString**)params = InGameMode;
 			*(ScriptString**)&params[12] = InDefaultMap;
 			*(ScriptString**)&params[24] = InGameSettingsClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnGameModeChange(int SelectedIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_GameMode.OnGameModeChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38168);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = SelectedIndex;
+			*(int*)params = SelectedIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnListItemPress(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_GameMode.OnListItemPress");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38178);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnListChange(GFxClikWidget::EventData ev)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_GameMode.OnListChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38181);
 			byte params[36] = { NULL };
-			*(GFxClikWidget::EventData*)&params[0] = ev;
+			*(GFxClikWidget::EventData*)params = ev;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateDescription()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_GameMode.UpdateDescription");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38183);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateListDataProvider()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_GameMode.UpdateListDataProvider");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38187);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetImgScroller(class GFxClikWidget* InImgScroller)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_GameMode.SetImgScroller");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38195);
 			byte params[4] = { NULL };
-			*(class GFxClikWidget**)&params[0] = InImgScroller;
+			*(class GFxClikWidget**)params = InImgScroller;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ASSetList(class GFxObject* List)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_GameMode.ASSetList");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38197);
 			byte params[4] = { NULL };
-			*(class GFxObject**)&params[0] = List;
+			*(class GFxObject**)params = List;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool WidgetInitialized(ScriptName WidgetName, ScriptName WidgetPath, class GFxObject* Widget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.GFxUDKFrontEnd_GameMode.WidgetInitialized");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(38199);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = WidgetName;
+			*(ScriptName*)params = WidgetName;
 			*(ScriptName*)&params[8] = WidgetPath;
 			*(class GFxObject**)&params[16] = Widget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

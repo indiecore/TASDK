@@ -28,9 +28,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, YouHaveFlagString, 100)
 		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFHUDMessage.ClientReceive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78300);
 			byte params[20] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			*(int*)&params[4] = Switch;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
@@ -39,9 +39,9 @@ namespace UnrealScript
 		}
 		Object::Color GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFHUDMessage.GetColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78306);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_2;
 			*(class Object**)&params[12] = OptionalObject;
@@ -50,9 +50,9 @@ namespace UnrealScript
 		}
 		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFHUDMessage.GetString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78312);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(bool*)&params[4] = bPRI1HUD;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
@@ -62,9 +62,9 @@ namespace UnrealScript
 		}
 		bool AddAnnouncement(class UTAnnouncer* Announcer, int MessageIndex, class PlayerReplicationInfo* PRI, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCTFHUDMessage.AddAnnouncement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(78319);
 			byte params[20] = { NULL };
-			*(class UTAnnouncer**)&params[0] = Announcer;
+			*(class UTAnnouncer**)params = Announcer;
 			*(int*)&params[4] = MessageIndex;
 			*(class PlayerReplicationInfo**)&params[8] = PRI;
 			*(class Object**)&params[12] = OptionalObject;

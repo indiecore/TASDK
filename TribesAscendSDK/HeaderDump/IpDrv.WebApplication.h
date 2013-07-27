@@ -22,41 +22,41 @@ namespace UnrealScript
 		ADD_OBJECT(WorldInfo, WorldInfo, 60)
 		void Init()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33079);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Cleanup()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.Cleanup");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33080);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CleanupApp()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.CleanupApp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33081);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool PreQuery(class WebRequest* Request, class WebResponse* Response)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.PreQuery");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33082);
 			byte params[12] = { NULL };
-			*(class WebRequest**)&params[0] = Request;
+			*(class WebRequest**)params = Request;
 			*(class WebResponse**)&params[4] = Response;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void Query(class WebRequest* Request, class WebResponse* Response)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.Query");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33086);
 			byte params[8] = { NULL };
-			*(class WebRequest**)&params[0] = Request;
+			*(class WebRequest**)params = Request;
 			*(class WebResponse**)&params[4] = Response;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostQuery(class WebRequest* Request, class WebResponse* Response)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.WebApplication.PostQuery");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33089);
 			byte params[8] = { NULL };
-			*(class WebRequest**)&params[0] = Request;
+			*(class WebRequest**)params = Request;
 			*(class WebResponse**)&params[4] = Response;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

@@ -20,7 +20,7 @@ namespace UnrealScript
 	class PBRuleNodeCorner : public PBRuleNodeBase
 	{
 	public:
-		class RBCornerAngleInfo
+		struct RBCornerAngleInfo
 		{
 		public:
 			ADD_STRUCT(float, CornerSize, 4)

@@ -19,7 +19,7 @@ namespace UnrealScript
 	class ParticleModuleEventGenerator : public ParticleModuleEventBase
 	{
 	public:
-		class ParticleEvent_GenerateInfo
+		struct ParticleEvent_GenerateInfo
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class ParticleModuleEventSendToGame*>, ParticleModuleEventsToSendToGame, 28)

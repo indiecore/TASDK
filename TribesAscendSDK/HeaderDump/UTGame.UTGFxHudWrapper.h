@@ -18,72 +18,72 @@ namespace UnrealScript
 		ADD_OBJECT(GFxMinimapHud, HudMovie, 1524)
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47814);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RemoveMovies()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.RemoveMovies");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47815);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47816);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CreateHUDMovie()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.CreateHUDMovie");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47817);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetLocalPlayerOwnerIndex()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.GetLocalPlayerOwnerIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47818);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void SetVisible(bool bNewVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.SetVisible");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47820);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewVisible;
+			*(bool*)params = bNewVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DisplayHit(Object::Vector HitDir, int Damage, ScriptClass* DamageType)
+		void DisplayHit(Vector HitDir, int Damage, ScriptClass* DamageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.DisplayHit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47822);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = HitDir;
+			*(Vector*)params = HitDir;
 			*(int*)&params[12] = Damage;
 			*(ScriptClass**)&params[16] = DamageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CloseOtherMenus()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.CloseOtherMenus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47826);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ResolutionChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.ResolutionChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47827);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostRender()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.PostRender");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47829);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawHUD()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.DrawHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47830);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LocalizedMessage(ScriptClass* InMessageClass, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, ScriptString* CriticalString, int Switch, float Position, float Lifetime, int FontSize, Object::Color DrawColor, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.LocalizedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47836);
 			byte params[48] = { NULL };
-			*(ScriptClass**)&params[0] = InMessageClass;
+			*(ScriptClass**)params = InMessageClass;
 			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_2;
 			*(ScriptString**)&params[12] = CriticalString;
@@ -97,9 +97,9 @@ namespace UnrealScript
 		}
 		void AddConsoleMessage(ScriptString* M, ScriptClass* InMessageClass, class PlayerReplicationInfo* PRI, float Lifetime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.AddConsoleMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47848);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = M;
+			*(ScriptString**)params = M;
 			*(ScriptClass**)&params[12] = InMessageClass;
 			*(class PlayerReplicationInfo**)&params[16] = PRI;
 			*(float*)&params[20] = Lifetime;
@@ -107,12 +107,12 @@ namespace UnrealScript
 		}
 		void CompleteCloseInventory()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.CompleteCloseInventory");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47853);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CompleteCloseTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGFxHudWrapper.CompleteCloseTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47854);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

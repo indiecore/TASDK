@@ -21,7 +21,7 @@ namespace UnrealScript
 	class ParticleModuleTypeDataTrail : public ParticleModuleTypeDataBase
 	{
 	public:
-		ADD_STRUCT(Object::Vector, SpawnDistance, 108)
+		ADD_STRUCT(Vector, SpawnDistance, 108)
 		ADD_STRUCT(DistributionFloat::RawDistributionFloat, Tension, 80)
 		ADD_STRUCT(int, TessellationFactor, 76)
 		ADD_BOOL(SpawnByDistance, 72, 0x10)

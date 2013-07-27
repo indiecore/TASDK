@@ -26,38 +26,38 @@ namespace UnrealScript
 		ADD_STRUCT(byte, m_DefenderTeamIndex, 532)
 		void Init(int ShieldIndex, class TrDaDCore* Core, class TrDaDShell* Shell)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79660);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = ShieldIndex;
+			*(int*)params = ShieldIndex;
 			*(class TrDaDCore**)&params[4] = Core;
 			*(class TrDaDShell**)&params[8] = Shell;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79667);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DisableBlocking()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.DisableBlocking");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79668);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EnableBlocking()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.EnableBlocking");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79669);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateMaterialForPawn(class TrPawn* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.UpdateMaterialForPawn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79670);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = P;
+			*(class TrPawn**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateMICs()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrDaDCoreShield.CreateMICs");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(79673);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

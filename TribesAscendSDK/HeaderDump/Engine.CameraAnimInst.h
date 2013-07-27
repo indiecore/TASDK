@@ -31,7 +31,7 @@ namespace UnrealScript
 	class CameraAnimInst : public Object
 	{
 	public:
-		ADD_STRUCT(Object::Vector, LastCameraLoc, 416)
+		ADD_STRUCT(Vector, LastCameraLoc, 416)
 		ADD_STRUCT(float, LastPPSettingsAlpha, 412)
 		ADD_STRUCT(PostProcessVolume::PostProcessSettings, LastPPSettings, 192)
 		ADD_STRUCT(Object::Matrix, UserPlaySpaceMatrix, 128)
@@ -56,19 +56,19 @@ namespace UnrealScript
 		ADD_STRUCT(float, CurTime, 68)
 		ADD_OBJECT(InterpGroupInst, InterpGroupInst, 64)
 		ADD_OBJECT(CameraAnim, CamAnim, 60)
-		void SetPlaySpace(Camera::ECameraAnimPlaySpace NewSpace, Object::Rotator UserPlaySpace)
+		void SetPlaySpace(Camera::ECameraAnimPlaySpace NewSpace, Rotator UserPlaySpace)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraAnimInst.SetPlaySpace");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9499);
 			byte params[13] = { NULL };
-			*(Camera::ECameraAnimPlaySpace*)&params[0] = NewSpace;
-			*(Object::Rotator*)&params[4] = UserPlaySpace;
+			*(Camera::ECameraAnimPlaySpace*)params = NewSpace;
+			*(Rotator*)&params[4] = UserPlaySpace;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Play(class CameraAnim* Anim, class Actor* CamActor, float InRate, float InScale, float InBlendInTime, float InBlendOutTime, bool bInLoop, bool bRandomStartTime, float Duration)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraAnimInst.Play");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12164);
 			byte params[36] = { NULL };
-			*(class CameraAnim**)&params[0] = Anim;
+			*(class CameraAnim**)params = Anim;
 			*(class Actor**)&params[4] = CamActor;
 			*(float*)&params[8] = InRate;
 			*(float*)&params[12] = InScale;
@@ -81,9 +81,9 @@ namespace UnrealScript
 		}
 		void Update(float NewRate, float NewScale, float NewBlendInTime, float NewBlendOutTime, float NewDuration)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraAnimInst.Update");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12174);
 			byte params[20] = { NULL };
-			*(float*)&params[0] = NewRate;
+			*(float*)params = NewRate;
 			*(float*)&params[4] = NewScale;
 			*(float*)&params[8] = NewBlendInTime;
 			*(float*)&params[12] = NewBlendOutTime;
@@ -92,24 +92,24 @@ namespace UnrealScript
 		}
 		void AdvanceAnim(float DeltaTime, bool bJump)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraAnimInst.AdvanceAnim");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12180);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			*(bool*)&params[4] = bJump;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Stop(bool bImmediate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraAnimInst.Stop");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12183);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bImmediate;
+			*(bool*)params = bImmediate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ApplyTransientScaling(float Scalar)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraAnimInst.ApplyTransientScaling");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12185);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = Scalar;
+			*(float*)params = Scalar;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

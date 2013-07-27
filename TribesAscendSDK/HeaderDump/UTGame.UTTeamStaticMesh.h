@@ -19,14 +19,14 @@ namespace UnrealScript
 		ADD_OBJECT(Material, NeutralMaterial, 496)
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamStaticMesh.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49460);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetTeamNum(byte NewTeam)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTTeamStaticMesh.SetTeamNum");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49465);
 			byte params[1] = { NULL };
-			params[0] = NewTeam;
+			*params = NewTeam;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

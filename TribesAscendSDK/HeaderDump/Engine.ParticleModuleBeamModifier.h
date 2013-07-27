@@ -27,7 +27,7 @@ namespace UnrealScript
 			PEB2MT_Target = 1,
 			PEB2MT_MAX = 2,
 		};
-		class BeamModifierOptions
+		struct BeamModifierOptions
 		{
 		public:
 			ADD_BOOL(Block, 0, 0x4)

@@ -1438,34 +1438,34 @@ namespace UnrealScript
 		ADD_STRUCT(int, ScoreLimit, 484)
 		int GetClassCount(TrObject::TrClassType ClassType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.GetClassCount");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(56819);
 			byte params[5] = { NULL };
-			*(TrObject::TrClassType*)&params[0] = ClassType;
+			*(TrObject::TrClassType*)params = ClassType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		bool IsCallinAllowed(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.IsCallinAllowed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(82937);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool IsClassAllowed(TrObject::TrClassType ClassType, int CurrentCount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.IsClassAllowed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(92566);
 			byte params[9] = { NULL };
-			*(TrObject::TrClassType*)&params[0] = ClassType;
+			*(TrObject::TrClassType*)params = ClassType;
 			*(int*)&params[4] = CurrentCount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool GetPropAsFloat(int PropId, float& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.GetPropAsFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112331);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PropId;
+			*(int*)params = PropId;
 			*(float*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(float*)&params[4];
@@ -1473,9 +1473,9 @@ namespace UnrealScript
 		}
 		bool GetPropAsInt(int PropId, int& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.GetPropAsInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112335);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PropId;
+			*(int*)params = PropId;
 			*(int*)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(int*)&params[4];
@@ -1483,9 +1483,9 @@ namespace UnrealScript
 		}
 		bool GetPropAsString(int PropId, ScriptString*& Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.GetPropAsString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112339);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = PropId;
+			*(int*)params = PropId;
 			*(ScriptString**)&params[4] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Value = *(ScriptString**)&params[4];
@@ -1493,19 +1493,19 @@ namespace UnrealScript
 		}
 		void ApplyServerSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.ApplyServerSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112343);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LoadServerSettings()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.LoadServerSettings");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112344);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetVehicleLimit(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrServerSettingsInfo.GetVehicleLimit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(112346);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}

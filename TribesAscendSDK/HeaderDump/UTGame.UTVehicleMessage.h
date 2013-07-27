@@ -19,9 +19,9 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<int>, CustomMessageArea, 136)
 		void ClientReceive(class PlayerController* P, int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleMessage.ClientReceive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49766);
 			byte params[20] = { NULL };
-			*(class PlayerController**)&params[0] = P;
+			*(class PlayerController**)params = P;
 			*(int*)&params[4] = Switch;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
@@ -30,17 +30,17 @@ namespace UnrealScript
 		}
 		byte AnnouncementLevel(byte MessageIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleMessage.AnnouncementLevel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49772);
 			byte params[2] = { NULL };
-			params[0] = MessageIndex;
+			*params = MessageIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return params[1];
 		}
 		ScriptString* GetString(int Switch, bool bPRI1HUD, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleMessage.GetString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49775);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(bool*)&params[4] = bPRI1HUD;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[12] = RelatedPRI_2;
@@ -50,9 +50,9 @@ namespace UnrealScript
 		}
 		Object::Color GetColor(int Switch, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleMessage.GetColor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49782);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = Switch;
+			*(int*)params = Switch;
 			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_2;
 			*(class Object**)&params[12] = OptionalObject;
@@ -61,9 +61,9 @@ namespace UnrealScript
 		}
 		class SoundNodeWave* AnnouncementSound(int MessageIndex, class Object* OptionalObject, class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTVehicleMessage.AnnouncementSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49788);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = MessageIndex;
+			*(int*)params = MessageIndex;
 			*(class Object**)&params[4] = OptionalObject;
 			*(class PlayerController**)&params[8] = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

@@ -36,7 +36,7 @@ namespace UnrealScript
 	class TrCaHCapturePoint : public TrGameObjective
 	{
 	public:
-		class NearbyPlayer
+		struct NearbyPlayer
 		{
 		public:
 			ADD_STRUCT(float, LastCheckedTimestamp, 8)
@@ -61,16 +61,16 @@ namespace UnrealScript
 		ADD_STRUCT(byte, r_nFlashPointPulse, 1545)
 		ADD_STRUCT(TrObject::CaHCapturePointLabel, m_CapturePointLabel, 1544)
 		ADD_BOOL(r_bIsHeld, 1540, 0x1)
-		ADD_STRUCT(Object::Vector, LastCameraPos, 1528)
-		ADD_STRUCT(Object::Vector, LastCameraDir, 1516)
-		ADD_STRUCT(Object::Vector, LastScreenLoc, 1504)
+		ADD_STRUCT(Vector, LastCameraPos, 1528)
+		ADD_STRUCT(Vector, LastCameraDir, 1516)
+		ADD_STRUCT(Vector, LastScreenLoc, 1504)
 		ADD_STRUCT(float, m_fInfluenceRadiusSize, 1500)
 		ADD_OBJECT(SkelControlSingleBone, m_SkyHologramSkelControl, 1496)
 		ADD_STRUCT(float, m_fSkyHologramScaleDS, 1492)
 		ADD_STRUCT(float, m_fSkyHologramScaleBE, 1488)
 		ADD_STRUCT(float, m_fSkyHologramScaleOffset, 1484)
-		ADD_STRUCT(Object::Vector, m_vSkyHologramOffsetDS, 1472)
-		ADD_STRUCT(Object::Vector, m_vSkyHologramOffsetBE, 1460)
+		ADD_STRUCT(Vector, m_vSkyHologramOffsetDS, 1472)
+		ADD_STRUCT(Vector, m_vSkyHologramOffsetBE, 1460)
 		ADD_STRUCT(float, m_fSkyHologramOffsetZ, 1456)
 		ADD_STRUCT(float, m_fSkyHologramOffsetY, 1452)
 		ADD_STRUCT(float, m_fSkyHologramOffsetX, 1448)
@@ -79,108 +79,108 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptString*, m_sCapturePointName, 1360)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73788);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostInitAnimTree(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* SkelComp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.PostInitAnimTree");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73791);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = SkelComp;
+void**)params = SkelComp;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PulseMarker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.PulseMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73793);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PointPulseMarker()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.PointPulseMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73794);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateHologramVisibility()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.UpdateHologramVisibility");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73795);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73797);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73799);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPawnTouched(class TrPawn* TRP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.OnPawnTouched");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73805);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = TRP;
+			*(class TrPawn**)params = TRP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostCapturePointTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.PostCapturePointTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73813);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AwardPointTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.AwardPointTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73817);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool ShouldPostRenderForCaH()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.ShouldPostRenderForCaH");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73819);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		ScriptString* GetScreenName(class PlayerController* PC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.GetScreenName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73821);
 			byte params[16] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[4];
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Object::Vector CameraPosition, Object::Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* Canvas, Vector CameraPosition, Vector CameraDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.PostRenderFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73824);
 			byte params[32] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = Canvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CheckNearbyPlayersTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.CheckNearbyPlayersTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73835);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool IsPawnConsideredNearby(class TrPawn* TRP)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrCaHCapturePoint.IsPawnConsideredNearby");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73840);
 			byte params[8] = { NULL };
-			*(class TrPawn**)&params[0] = TRP;
+			*(class TrPawn**)params = TRP;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

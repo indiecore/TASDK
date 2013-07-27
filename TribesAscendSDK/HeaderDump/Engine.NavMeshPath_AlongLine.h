@@ -11,19 +11,19 @@ namespace UnrealScript
 	class NavMeshPath_AlongLine : public NavMeshPathConstraint
 	{
 	public:
-		ADD_STRUCT(Object::Vector, Direction, 80)
-		bool AlongLine(class NavigationHandle* NavHandle, Object::Vector Dir)
+		ADD_STRUCT(Vector, Direction, 80)
+		bool AlongLine(class NavigationHandle* NavHandle, Vector Dir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_AlongLine.AlongLine");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21050);
 			byte params[20] = { NULL };
-			*(class NavigationHandle**)&params[0] = NavHandle;
-			*(Object::Vector*)&params[4] = Dir;
+			*(class NavigationHandle**)params = NavHandle;
+			*(Vector*)&params[4] = Dir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[16];
 		}
 		void Recycle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshPath_AlongLine.Recycle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21055);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

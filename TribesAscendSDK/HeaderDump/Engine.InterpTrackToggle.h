@@ -27,7 +27,7 @@ namespace UnrealScript
 			ETTA_Trigger = 3,
 			ETTA_MAX = 4,
 		};
-		class ToggleTrackKey
+		struct ToggleTrackKey
 		{
 		public:
 			ADD_STRUCT(InterpTrackToggle::ETrackToggleAction, ToggleAction, 4)

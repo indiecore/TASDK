@@ -21,58 +21,58 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, PanicFocus, 84)
 		void ActivatedBy(class Actor* NewActionTarget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_RunFromPanic.ActivatedBy");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31257);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = NewActionTarget;
+			*(class Actor**)params = NewActionTarget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InitBehavior(class GameCrowdAgent* Agent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_RunFromPanic.InitBehavior");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31261);
 			byte params[4] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = Agent;
+			*(class GameCrowdAgent**)params = Agent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopBehavior()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_RunFromPanic.StopBehavior");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31263);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PropagateViralBehaviorTo(class GameCrowdAgent* OtherAgent)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_RunFromPanic.PropagateViralBehaviorTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31264);
 			byte params[4] = { NULL };
-			*(class GameCrowdAgent**)&params[0] = OtherAgent;
+			*(class GameCrowdAgent**)params = OtherAgent;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AllowThisDestination(class GameCrowdDestination* Destination)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_RunFromPanic.AllowThisDestination");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31266);
 			byte params[8] = { NULL };
-			*(class GameCrowdDestination**)&params[0] = Destination;
+			*(class GameCrowdDestination**)params = Destination;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool AllowBehaviorAt(class GameCrowdDestination* Destination)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_RunFromPanic.AllowBehaviorAt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31269);
 			byte params[8] = { NULL };
-			*(class GameCrowdDestination**)&params[0] = Destination;
+			*(class GameCrowdDestination**)params = Destination;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		ScriptString* GetBehaviorString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_RunFromPanic.GetBehaviorString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31272);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdBehavior_RunFromPanic.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31274);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

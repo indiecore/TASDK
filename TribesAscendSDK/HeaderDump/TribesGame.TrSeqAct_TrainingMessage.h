@@ -13,7 +13,7 @@ namespace UnrealScript
 		ADD_STRUCT(TrHelpTextManager_Training::EHelpTextTrainingType, m_MessageType, 232)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeqAct_TrainingMessage.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110921);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

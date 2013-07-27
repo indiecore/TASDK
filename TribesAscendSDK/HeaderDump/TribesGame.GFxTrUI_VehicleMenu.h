@@ -7,36 +7,36 @@ namespace UnrealScript
 	public:
 		bool Start(bool StartPaused)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_VehicleMenu.Start");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65218);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = StartPaused;
+			*(bool*)params = StartPaused;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void ConfigureOptions(ScriptClass* FamilyInfo)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_VehicleMenu.ConfigureOptions");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65221);
 			byte params[4] = { NULL };
-			*(ScriptClass**)&params[0] = FamilyInfo;
+			*(ScriptClass**)params = FamilyInfo;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void VehicleOptionsComplete(int Credits)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_VehicleMenu.VehicleOptionsComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65233);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Credits;
+			*(int*)params = Credits;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void VehicleOptionsClear()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_VehicleMenu.VehicleOptionsClear");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65235);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetVehicleOption(ScriptString* ClassName, ScriptString* DisplayName, int Cost, int nIconIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_VehicleMenu.SetVehicleOption");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65236);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = ClassName;
+			*(ScriptString**)params = ClassName;
 			*(ScriptString**)&params[12] = DisplayName;
 			*(int*)&params[24] = Cost;
 			*(int*)&params[28] = nIconIndex;
@@ -44,14 +44,14 @@ namespace UnrealScript
 		}
 		ScriptString* GetSelectedVehicle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_VehicleMenu.GetSelectedVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65241);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void OnVehicleScreenFinished()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.GFxTrUI_VehicleMenu.OnVehicleScreenFinished");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(65243);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

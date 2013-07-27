@@ -39,155 +39,155 @@ namespace UnrealScript
 		ADD_OBJECT(GameAICommand, ChildCommand, 60)
 		bool InitCommandUserActor(class GameAIController* AI, class Actor* UserActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.InitCommandUserActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30573);
 			byte params[12] = { NULL };
-			*(class GameAIController**)&params[0] = AI;
+			*(class GameAIController**)params = AI;
 			*(class Actor**)&params[4] = UserActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool InitCommand(class GameAIController* AI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.InitCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30577);
 			byte params[8] = { NULL };
-			*(class GameAIController**)&params[0] = AI;
+			*(class GameAIController**)params = AI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void InternalPrePushed(class GameAIController* AI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.InternalPrePushed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30581);
 			byte params[4] = { NULL };
-			*(class GameAIController**)&params[0] = AI;
+			*(class GameAIController**)params = AI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InternalPushed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.InternalPushed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30583);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InternalPopped()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.InternalPopped");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30584);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InternalPaused(class GameAICommand* NewCommand)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.InternalPaused");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30585);
 			byte params[4] = { NULL };
-			*(class GameAICommand**)&params[0] = NewCommand;
+			*(class GameAICommand**)params = NewCommand;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InternalResumed(ScriptName OldCommandName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.InternalResumed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30587);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = OldCommandName;
+			*(ScriptName*)params = OldCommandName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void InternalTick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.InternalTick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30589);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool ShouldIgnoreNotifies()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.ShouldIgnoreNotifies");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30591);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30593);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool AllowTransitionTo(ScriptClass* AttemptCommand)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.AllowTransitionTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30595);
 			byte params[8] = { NULL };
-			*(ScriptClass**)&params[0] = AttemptCommand;
+			*(ScriptClass**)params = AttemptCommand;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool AllowStateTransitionTo(ScriptName StateName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.AllowStateTransitionTo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30598);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = StateName;
+			*(ScriptName*)params = StateName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void PrePushed(class GameAIController* AI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.PrePushed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30601);
 			byte params[4] = { NULL };
-			*(class GameAIController**)&params[0] = AI;
+			*(class GameAIController**)params = AI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostPopped()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.PostPopped");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30603);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Pushed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.Pushed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30604);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Popped()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.Popped");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30605);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Paused(class GameAICommand* NewCommand)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.Paused");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30606);
 			byte params[4] = { NULL };
-			*(class GameAICommand**)&params[0] = NewCommand;
+			*(class GameAICommand**)params = NewCommand;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Resumed(ScriptName OldCommandName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.Resumed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30608);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = OldCommandName;
+			*(ScriptName*)params = OldCommandName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* GetDumpString()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.GetDumpString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30610);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		void DrawDebug(class HUD* H, ScriptName Category)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.DrawDebug");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30623);
 			byte params[12] = { NULL };
-			*(class HUD**)&params[0] = H;
+			*(class HUD**)params = H;
 			*(ScriptName*)&params[4] = Category;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GetDebugOverheadText(class PlayerController* PC, ScriptArray<ScriptString*>& OutText)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.GetDebugOverheadText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30626);
 			byte params[16] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(ScriptArray<ScriptString*>*)&params[4] = OutText;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutText = *(ScriptArray<ScriptString*>*)&params[4];
 		}
 		ScriptString* GetDebugVerboseText()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameAICommand.GetDebugVerboseText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(30630);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 	};
 }

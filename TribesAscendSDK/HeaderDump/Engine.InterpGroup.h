@@ -25,7 +25,7 @@ namespace UnrealScript
 	class InterpGroup : public Object
 	{
 	public:
-		class InterpEdSelKey
+		struct InterpEdSelKey
 		{
 		public:
 			ADD_STRUCT(float, UnsnappedPosition, 12)

@@ -19,7 +19,7 @@ namespace UnrealScript
 	class InterpTrackDirector : public InterpTrack
 	{
 	public:
-		class DirectorTrackCut
+		struct DirectorTrackCut
 		{
 		public:
 			ADD_STRUCT(ScriptName, TargetCamGroup, 8)

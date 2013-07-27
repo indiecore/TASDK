@@ -26,12 +26,12 @@ namespace UnrealScript
 		ADD_OBJECT(SoundCue, LoopedSound, 592)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib_Vehicle.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47946);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ActivateGibExplosionEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTGib_Vehicle.ActivateGibExplosionEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47947);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -31,7 +31,7 @@ namespace UnrealScript
 			LMODE_MAC = 3,
 			LMODE_MAX = 4,
 		};
-		class IpAddr
+		struct IpAddr
 		{
 		public:
 			ADD_STRUCT(int, Port, 4)
@@ -48,16 +48,16 @@ namespace UnrealScript
 		ADD_STRUCT(InternetLink::ELineMode, InLineMode, 477)
 		bool IsDataPending()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.IsDataPending");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33137);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool ParseURL(ScriptString* URL, ScriptString*& Addr, int& PortNum, ScriptString*& LevelName, ScriptString*& EntryName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.ParseURL");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33139);
 			byte params[56] = { NULL };
-			*(ScriptString**)&params[0] = URL;
+			*(ScriptString**)params = URL;
 			*(ScriptString**)&params[12] = Addr;
 			*(int*)&params[24] = PortNum;
 			*(ScriptString**)&params[28] = LevelName;
@@ -71,31 +71,31 @@ namespace UnrealScript
 		}
 		void Resolve(ScriptString* Domain)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.Resolve");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33146);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Domain;
+			*(ScriptString**)params = Domain;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		int GetLastError()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.GetLastError");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33148);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		ScriptString* IpAddrToString(InternetLink::IpAddr Arg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.IpAddrToString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33150);
 			byte params[20] = { NULL };
-			*(InternetLink::IpAddr*)&params[0] = Arg;
+			*(InternetLink::IpAddr*)params = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[8];
 		}
 		bool StringToIpAddr(ScriptString* Str, InternetLink::IpAddr& Addr)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.StringToIpAddr");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33153);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Str;
+			*(ScriptString**)params = Str;
 			*(InternetLink::IpAddr*)&params[12] = Addr;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Addr = *(InternetLink::IpAddr*)&params[12];
@@ -103,22 +103,22 @@ namespace UnrealScript
 		}
 		void GetLocalIP(InternetLink::IpAddr& Arg)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.GetLocalIP");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33157);
 			byte params[8] = { NULL };
-			*(InternetLink::IpAddr*)&params[0] = Arg;
+			*(InternetLink::IpAddr*)params = Arg;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			Arg = *(InternetLink::IpAddr*)&params[0];
+			Arg = *(InternetLink::IpAddr*)params;
 		}
 		void Resolved(InternetLink::IpAddr Addr)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.Resolved");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33159);
 			byte params[8] = { NULL };
-			*(InternetLink::IpAddr*)&params[0] = Addr;
+			*(InternetLink::IpAddr*)params = Addr;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResolveFailed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function IpDrv.InternetLink.ResolveFailed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33161);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

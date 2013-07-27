@@ -27,57 +27,57 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_bRoundOneTimeSecs, 1468)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90864);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnGeneratorBlownUp(class TrPowerGenerator_Siege* G)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.OnGeneratorBlownUp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90866);
 			byte params[4] = { NULL };
-			*(class TrPowerGenerator_Siege**)&params[0] = G;
+			*(class TrPowerGenerator_Siege**)params = G;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnCoreBlownUp()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.OnCoreBlownUp");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90868);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool IsInRoundOne()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.IsInRoundOne");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90869);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void RoundOneOver(bool bDestroyedCore)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.RoundOneOver");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90871);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDestroyedCore;
+			*(bool*)params = bDestroyedCore;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResetGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.ResetGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90876);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPhase(int PhaseNumber)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.SetPhase");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90878);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = PhaseNumber;
+			*(int*)params = PhaseNumber;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SwapTeams()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.SwapTeams");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90881);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void EndGame(class PlayerReplicationInfo* Winner, ScriptString* Reason)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrGame_TrSiege.EndGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(90887);
 			byte params[16] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = Winner;
+			*(class PlayerReplicationInfo**)params = Winner;
 			*(ScriptString**)&params[4] = Reason;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

@@ -36,9 +36,9 @@ namespace UnrealScript
 		ADD_BOOL(bWantsAsyncWrites, 496, 0x2)
 		bool OpenFile(ScriptString* InFilename, FileWriter::FWFileType InFileType, ScriptString* InExtension, bool bUnique, bool bIncludeTimeStamp)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FileWriter.OpenFile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15707);
 			byte params[37] = { NULL };
-			*(ScriptString**)&params[0] = InFilename;
+			*(ScriptString**)params = InFilename;
 			*(FileWriter::FWFileType*)&params[12] = InFileType;
 			*(ScriptString**)&params[16] = InExtension;
 			*(bool*)&params[28] = bUnique;
@@ -48,19 +48,19 @@ namespace UnrealScript
 		}
 		void CloseFile()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FileWriter.CloseFile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15714);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Logf(ScriptString* logString)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FileWriter.Logf");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15715);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = logString;
+			*(ScriptString**)params = logString;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FileWriter.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15717);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

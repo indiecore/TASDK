@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrSeqAct_EndMatch.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(110913);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -7,22 +7,22 @@ namespace UnrealScript
 	public:
 		bool StringToBlob(ScriptString*& InString, ScriptString*& OutBlob)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameSettingsCommon.StringToBlob");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34897);
 			byte params[28] = { NULL };
-			*(ScriptString**)&params[0] = InString;
+			*(ScriptString**)params = InString;
 			*(ScriptString**)&params[12] = OutBlob;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			InString = *(ScriptString**)&params[0];
+			InString = *(ScriptString**)params;
 			OutBlob = *(ScriptString**)&params[12];
 			return *(bool*)&params[24];
 		}
 		ScriptString* BlobToString(ScriptString*& InBlob)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKGameSettingsCommon.BlobToString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34901);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = InBlob;
+			*(ScriptString**)params = InBlob;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			InBlob = *(ScriptString**)&params[0];
+			InBlob = *(ScriptString**)params;
 			return *(ScriptString**)&params[12];
 		}
 	};

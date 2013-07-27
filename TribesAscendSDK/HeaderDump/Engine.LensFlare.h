@@ -28,7 +28,7 @@ namespace UnrealScript
 	class LensFlare : public Object
 	{
 	public:
-		class LensFlareElement
+		struct LensFlareElement
 		{
 		public:
 			ADD_STRUCT(ScriptArray<class MaterialInterface*>, LFMaterials, 28)
@@ -43,7 +43,7 @@ namespace UnrealScript
 			ADD_STRUCT(DistributionVector::RawDistributionVector, AxisScaling, 96)
 			ADD_STRUCT(DistributionFloat::RawDistributionFloat, Scaling, 68)
 			ADD_STRUCT(DistributionFloat::RawDistributionFloat, LFMaterialIndex, 40)
-			ADD_STRUCT(Object::Vector, Size, 16)
+			ADD_STRUCT(Vector, Size, 16)
 			ADD_BOOL(bModulateColorBySource, 12, 0x8)
 			ADD_BOOL(bNormalizeRadialDistance, 12, 0x4)
 			ADD_BOOL(bUseSourceDistance, 12, 0x2)
@@ -51,7 +51,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, RayDistance, 8)
 			ADD_STRUCT(ScriptName, ElementName, 0)
 		};
-		class LensFlareElementCurvePair
+		struct LensFlareElementCurvePair
 		{
 		public:
 			ADD_OBJECT(Object, CurveObject, 12)
@@ -60,7 +60,7 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<LensFlare::LensFlareElement>, Reflections, 392)
 		ADD_OBJECT(Texture2D, ThumbnailImage, 504)
 		ADD_STRUCT(float, ThumbnailDistance, 500)
-		ADD_STRUCT(Object::Rotator, ThumbnailAngle, 488)
+		ADD_STRUCT(Rotator, ThumbnailAngle, 488)
 		ADD_STRUCT(int, ReflectionCount, 484)
 		ADD_OBJECT(InterpCurveEdSetup, CurveEdSetup, 480)
 		ADD_STRUCT(Object::Box, FixedRelativeBoundingBox, 452)

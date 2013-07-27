@@ -15,7 +15,7 @@ namespace UnrealScript
 		ADD_OBJECT(Actor, Target, 208)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTSeqCond_IsCarryingFlag.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(49190);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

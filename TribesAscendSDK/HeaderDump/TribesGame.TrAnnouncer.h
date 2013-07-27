@@ -19,19 +19,19 @@ namespace UnrealScript
 		ADD_OBJECT(TrPlayerController, m_PlayerOwner, 492)
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnnouncer.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66546);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnnouncer.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66547);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayAnnouncement(class SoundCue* AnnouncementCue, bool bPlayRightNow)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnnouncer.PlayAnnouncement");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66548);
 			byte params[8] = { NULL };
-			*(class SoundCue**)&params[0] = AnnouncementCue;
+			*(class SoundCue**)params = AnnouncementCue;
 			*(bool*)&params[4] = bPlayRightNow;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
@@ -39,11 +39,11 @@ namespace UnrealScript
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void* AC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAnnouncer.AnnouncementFinished");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(66551);
 			byte params[4] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void**)&params[0] = AC;
+void**)params = AC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

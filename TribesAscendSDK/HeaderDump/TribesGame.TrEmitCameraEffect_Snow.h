@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrEmitCameraEffect_Snow.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(87269);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

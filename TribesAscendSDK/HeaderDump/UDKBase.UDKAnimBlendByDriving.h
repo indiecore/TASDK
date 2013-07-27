@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void UpdateDrivingState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKAnimBlendByDriving.UpdateDrivingState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34491);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -43,7 +43,7 @@ namespace UnrealScript
 			EPBM_Interpolated = 1,
 			EPBM_MAX = 2,
 		};
-		class ParticleBurst
+		struct ParticleBurst
 		{
 		public:
 			ADD_STRUCT(float, Time, 8)

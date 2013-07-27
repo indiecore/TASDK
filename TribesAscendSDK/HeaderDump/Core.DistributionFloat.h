@@ -20,7 +20,7 @@ namespace UnrealScript
 	class DistributionFloat : public Component
 	{
 	public:
-		class RawDistributionFloat : public RawDistribution
+		struct RawDistributionFloat : public RawDistribution
 		{
 		};
 		ADD_BOOL(bIsDirty, 76, 0x2)
@@ -28,9 +28,9 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_FCurveEdInterface, 72)
 		float GetFloatValue(float F)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Core.DistributionFloat.GetFloatValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(3432);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = F;
+			*(float*)params = F;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(float*)&params[4];
 		}

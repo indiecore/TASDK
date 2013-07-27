@@ -24,7 +24,7 @@ namespace UnrealScript
 		ADD_BOOL(bDeadBodies, 232, 0x20)
 		void Activated()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SeqAct_ToggleCinematicMode.Activated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(25985);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

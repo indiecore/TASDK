@@ -28,7 +28,7 @@ namespace UnrealScript
 			MUTE_All = 2,
 			MUTE_MAX = 3,
 		};
-		class LocalTalkerMcts
+		struct LocalTalkerMcts
 		{
 		public:
 			ADD_STRUCT(OnlineVoiceInterfaceMcts::EMuteType, MuteType, 4)
@@ -52,78 +52,78 @@ void*>, TalkingDelegates, 112)
 		ADD_STRUCT(Object::Pointer, MctsSubsystem, 60)
 		void OnRecognitionComplete()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.OnRecognitionComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157037);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnPlayerTalkingStateChange(OnlineSubsystem::UniqueNetId Player, bool bIsTalking)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.OnPlayerTalkingStateChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157040);
 			byte params[12] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = Player;
+			*(OnlineSubsystem::UniqueNetId*)params = Player;
 			*(bool*)&params[8] = bIsTalking;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool RegisterLocalTalker(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.RegisterLocalTalker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157054);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool UnregisterLocalTalker(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.UnregisterLocalTalker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157057);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool RegisterRemoteTalker(OnlineSubsystem::UniqueNetId PlayerID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.RegisterRemoteTalker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157060);
 			byte params[12] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			*(OnlineSubsystem::UniqueNetId*)params = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool UnregisterRemoteTalker(OnlineSubsystem::UniqueNetId PlayerID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.UnregisterRemoteTalker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157063);
 			byte params[12] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			*(OnlineSubsystem::UniqueNetId*)params = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool IsLocalPlayerTalking(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.IsLocalPlayerTalking");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157066);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool IsRemotePlayerTalking(OnlineSubsystem::UniqueNetId PlayerID)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.IsRemotePlayerTalking");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157069);
 			byte params[12] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = PlayerID;
+			*(OnlineSubsystem::UniqueNetId*)params = PlayerID;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool IsHeadsetPresent(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.IsHeadsetPresent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157072);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SetRemoteTalkerPriority(byte LocalUserNum, OnlineSubsystem::UniqueNetId PlayerID, int Priority)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.SetRemoteTalkerPriority");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157075);
 			byte params[17] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = PlayerID;
 			*(int*)&params[12] = Priority;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -131,9 +131,9 @@ void*>, TalkingDelegates, 112)
 		}
 		bool MuteRemoteTalker(byte LocalUserNum, OnlineSubsystem::UniqueNetId PlayerID, bool bIsSystemWide)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.MuteRemoteTalker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157080);
 			byte params[17] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = PlayerID;
 			*(bool*)&params[12] = bIsSystemWide;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -141,9 +141,9 @@ void*>, TalkingDelegates, 112)
 		}
 		bool UnmuteRemoteTalker(byte LocalUserNum, OnlineSubsystem::UniqueNetId PlayerID, bool bIsSystemWide)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.UnmuteRemoteTalker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157085);
 			byte params[17] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(OnlineSubsystem::UniqueNetId*)&params[4] = PlayerID;
 			*(bool*)&params[12] = bIsSystemWide;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -153,59 +153,59 @@ void*>, TalkingDelegates, 112)
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* TalkerDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.AddPlayerTalkingDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157092);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = TalkerDelegate;
+void**)params = TalkerDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearPlayerTalkingDelegate(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* TalkerDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.ClearPlayerTalkingDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157095);
 			byte params[12] = { NULL };
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
-void**)&params[0] = TalkerDelegate;
+void**)params = TalkerDelegate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StartNetworkedVoice(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.StartNetworkedVoice");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157098);
 			byte params[1] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopNetworkedVoice(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.StopNetworkedVoice");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157100);
 			byte params[1] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool StartSpeechRecognition(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.StartSpeechRecognition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157102);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool StopSpeechRecognition(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.StopSpeechRecognition");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157105);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool GetRecognitionResults(byte LocalUserNum, ScriptArray<OnlineSubsystem::SpeechRecognizedWord>& Words)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.GetRecognitionResults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157108);
 			byte params[17] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(ScriptArray<OnlineSubsystem::SpeechRecognizedWord>*)&params[4] = Words;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Words = *(ScriptArray<OnlineSubsystem::SpeechRecognizedWord>*)&params[4];
@@ -215,9 +215,9 @@ void**)&params[0] = TalkerDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* RecognitionDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.AddRecognitionCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157113);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = RecognitionDelegate;
@@ -227,9 +227,9 @@ void**)&params[4] = RecognitionDelegate;
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void* RecognitionDelegate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.ClearRecognitionCompleteDelegate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157116);
 			byte params[13] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(
 // ERROR: Unknown object class 'Class Core.DelegateProperty'!
 void**)&params[4] = RecognitionDelegate;
@@ -237,36 +237,36 @@ void**)&params[4] = RecognitionDelegate;
 		}
 		bool SelectVocabulary(byte LocalUserNum, int VocabularyId)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.SelectVocabulary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157120);
 			byte params[9] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(int*)&params[4] = VocabularyId;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool SetSpeechRecognitionObject(byte LocalUserNum, class SpeechRecognition* SpeechRecogObj)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.SetSpeechRecognitionObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157124);
 			byte params[9] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(class SpeechRecognition**)&params[4] = SpeechRecogObj;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool MuteAll(byte LocalUserNum, bool bAllowFriends)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.MuteAll");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157128);
 			byte params[9] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			*(bool*)&params[4] = bAllowFriends;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		bool UnmuteAll(byte LocalUserNum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function OnlineSubsystemMcts.OnlineVoiceInterfaceMcts.UnmuteAll");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(157132);
 			byte params[5] = { NULL };
-			params[0] = LocalUserNum;
+			*params = LocalUserNum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

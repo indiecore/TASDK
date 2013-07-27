@@ -12,9 +12,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, YawRotationRate, 512)
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTRotatingDroppedPickup.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(48999);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

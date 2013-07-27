@@ -11,7 +11,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(float, MaxDistance, 164)
-		ADD_STRUCT(Object::Vector, Origin, 152)
+		ADD_STRUCT(Vector, Origin, 152)
 	};
 }
 #undef ADD_STRUCT

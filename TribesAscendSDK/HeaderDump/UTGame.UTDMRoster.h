@@ -18,9 +18,9 @@ namespace UnrealScript
 		ADD_STRUCT(int, Position, 596)
 		bool AddToTeam(class Controller* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDMRoster.AddToTeam");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47180);
 			byte params[8] = { NULL };
-			*(class Controller**)&params[0] = Other;
+			*(class Controller**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

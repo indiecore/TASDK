@@ -13,9 +13,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, DistanceToCheck, 72)
 		bool NotNearOtherAI(class NavMeshGoal_GenericFilterContainer* FilterContainer, float InDistanceToCheck)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoalFilter_NotNearOtherAI.NotNearOtherAI");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(20996);
 			byte params[12] = { NULL };
-			*(class NavMeshGoal_GenericFilterContainer**)&params[0] = FilterContainer;
+			*(class NavMeshGoal_GenericFilterContainer**)params = FilterContainer;
 			*(float*)&params[4] = InDistanceToCheck;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];

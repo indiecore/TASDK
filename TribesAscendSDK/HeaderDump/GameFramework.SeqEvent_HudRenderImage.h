@@ -24,13 +24,13 @@ namespace UnrealScript
 		ADD_STRUCT(float, YL, 312)
 		ADD_STRUCT(float, XL, 308)
 		ADD_OBJECT(Texture2D, DisplayTexture, 304)
-		ADD_STRUCT(Object::Vector, DisplayLocation, 292)
+		ADD_STRUCT(Vector, DisplayLocation, 292)
 		ADD_STRUCT(Object::LinearColor, DisplayColor, 276)
 		void Render(class Canvas* TargetCanvas, class HUD* TargetHud)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_HudRenderImage.Render");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32987);
 			byte params[8] = { NULL };
-			*(class Canvas**)&params[0] = TargetCanvas;
+			*(class Canvas**)params = TargetCanvas;
 			*(class HUD**)&params[4] = TargetHud;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

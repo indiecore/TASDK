@@ -10,15 +10,15 @@ namespace UnrealScript
 	class SpotLightComponent : public PointLightComponent
 	{
 	public:
-		ADD_STRUCT(Object::Rotator, Rotation, 604)
+		ADD_STRUCT(Rotator, Rotation, 604)
 		ADD_STRUCT(float, LightShaftConeAngle, 592)
 		ADD_STRUCT(float, OuterConeAngle, 588)
 		ADD_STRUCT(float, InnerConeAngle, 584)
-		void SetRotation(Object::Rotator NewRotation)
+		void SetRotation(Rotator NewRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SpotLightComponent.SetRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14650);
 			byte params[12] = { NULL };
-			*(Object::Rotator*)&params[0] = NewRotation;
+			*(Rotator*)params = NewRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

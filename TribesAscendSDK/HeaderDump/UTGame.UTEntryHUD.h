@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void PostRender()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryHUD.PostRender");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47410);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

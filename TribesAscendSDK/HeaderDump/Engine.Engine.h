@@ -49,20 +49,20 @@ namespace UnrealScript
 			TT_Precaching = 5,
 			TT_MAX = 6,
 		};
-		class DropNoteInfo
+		struct DropNoteInfo
 		{
 		public:
 			ADD_STRUCT(ScriptString*, Comment, 24)
-			ADD_STRUCT(Object::Rotator, Rotation, 12)
-			ADD_STRUCT(Object::Vector, Location, 0)
+			ADD_STRUCT(Rotator, Rotation, 12)
+			ADD_STRUCT(Vector, Location, 0)
 		};
-		class StatColorMapEntry
+		struct StatColorMapEntry
 		{
 		public:
 			ADD_STRUCT(Object::Color, Out, 4)
 			ADD_STRUCT(float, In, 0)
 		};
-		class StatColorMapping
+		struct StatColorMapping
 		{
 		public:
 			ADD_STRUCT(ScriptArray<Engine::StatColorMapEntry>, ColorMap, 12)
@@ -297,120 +297,120 @@ namespace UnrealScript
 		ADD_OBJECT(Font, TinyFont, 64)
 		bool IsGame()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.IsGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7287);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool IsEditor()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.IsEditor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(7300);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		class Font* GetSmallFont()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetSmallFont");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9330);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Font**)&params[0];
+			return *(class Font**)params;
 		}
 		class AudioDevice* GetAudioDevice()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetAudioDevice");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(9508);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class AudioDevice**)&params[0];
+			return *(class AudioDevice**)params;
 		}
 		bool IsSplitScreen()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.IsSplitScreen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12288);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		class Font* GetTinyFont()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetTinyFont");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13765);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Font**)&params[0];
+			return *(class Font**)params;
 		}
 		class Font* GetMediumFont()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetMediumFont");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13867);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Font**)&params[0];
+			return *(class Font**)params;
 		}
 		class Font* GetLargeFont()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetLargeFont");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13869);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Font**)&params[0];
+			return *(class Font**)params;
 		}
 		class WorldInfo* GetCurrentWorldInfo()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetCurrentWorldInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15534);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class WorldInfo**)&params[0];
+			return *(class WorldInfo**)params;
 		}
 		ScriptString* GetBuildDate()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetBuildDate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15536);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		class Font* GetSubtitleFont()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetSubtitleFont");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15538);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Font**)&params[0];
+			return *(class Font**)params;
 		}
 		class Font* GetAdditionalFont(int AdditionalFontIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetAdditionalFont");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15540);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = AdditionalFontIndex;
+			*(int*)params = AdditionalFontIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Font**)&params[4];
 		}
 		ScriptString* GetLastMovieName()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetLastMovieName");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15543);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(ScriptString**)&params[0];
+			return *(ScriptString**)params;
 		}
 		bool PlayLoadMapMovie()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.PlayLoadMapMovie");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15545);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void StopMovie(bool bDelayStopUntilGameHasRendered)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.StopMovie");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15547);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bDelayStopUntilGameHasRendered;
+			*(bool*)params = bDelayStopUntilGameHasRendered;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RemoveAllOverlays()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.RemoveAllOverlays");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15549);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddOverlay(class Font* Font, ScriptString* Text, float X, float Y, float ScaleX, float ScaleY, bool bIsCentered)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.AddOverlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15550);
 			byte params[36] = { NULL };
-			*(class Font**)&params[0] = Font;
+			*(class Font**)params = Font;
 			*(ScriptString**)&params[4] = Text;
 			*(float*)&params[16] = X;
 			*(float*)&params[20] = Y;
@@ -421,9 +421,9 @@ namespace UnrealScript
 		}
 		void AddOverlayWrapped(class Font* Font, ScriptString* Text, float X, float Y, float ScaleX, float ScaleY, float WrapWidth)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.AddOverlayWrapped");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15558);
 			byte params[36] = { NULL };
-			*(class Font**)&params[0] = Font;
+			*(class Font**)params = Font;
 			*(ScriptString**)&params[4] = Text;
 			*(float*)&params[16] = X;
 			*(float*)&params[20] = Y;
@@ -434,30 +434,30 @@ namespace UnrealScript
 		}
 		class Engine* GetEngine()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetEngine");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15566);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Engine**)&params[0];
+			return *(class Engine**)params;
 		}
 		class PostProcessChain* GetWorldPostProcessChain()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.GetWorldPostProcessChain");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15568);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class PostProcessChain**)&params[0];
+			return *(class PostProcessChain**)params;
 		}
-		void AddTextureStreamingSlaveLoc(Object::Vector InLoc)
+		void AddTextureStreamingSlaveLoc(Vector InLoc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.AddTextureStreamingSlaveLoc");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15570);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = InLoc;
+			*(Vector*)params = InLoc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool BasicSaveObject(class Object* Obj, ScriptString* PathName, bool bIsSaveGame, int Version)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.BasicSaveObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15572);
 			byte params[28] = { NULL };
-			*(class Object**)&params[0] = Obj;
+			*(class Object**)params = Obj;
 			*(ScriptString**)&params[4] = PathName;
 			*(bool*)&params[16] = bIsSaveGame;
 			*(int*)&params[20] = Version;
@@ -466,9 +466,9 @@ namespace UnrealScript
 		}
 		bool BasicLoadObject(class Object* Obj, ScriptString* PathName, bool bIsSaveGame, int Version)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.Engine.BasicLoadObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15578);
 			byte params[28] = { NULL };
-			*(class Object**)&params[0] = Obj;
+			*(class Object**)params = Obj;
 			*(ScriptString**)&params[4] = PathName;
 			*(bool*)&params[16] = bIsSaveGame;
 			*(int*)&params[20] = Version;

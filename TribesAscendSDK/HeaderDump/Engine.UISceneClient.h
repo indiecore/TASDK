@@ -44,29 +44,29 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, VfTable_FExec, 60)
 		bool IsUIActive(int Flags)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UISceneClient.IsUIActive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17813);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Flags;
+			*(int*)params = Flags;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		Object::Matrix GetCanvasToScreen()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UISceneClient.GetCanvasToScreen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17816);
 			byte params[64] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Matrix*)&params[0];
+			return *(Object::Matrix*)params;
 		}
 		Object::Matrix GetInverseCanvasToScreen()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UISceneClient.GetInverseCanvasToScreen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17818);
 			byte params[64] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Matrix*)&params[0];
+			return *(Object::Matrix*)params;
 		}
 		void InitializeSceneClient()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UISceneClient.InitializeSceneClient");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(17820);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

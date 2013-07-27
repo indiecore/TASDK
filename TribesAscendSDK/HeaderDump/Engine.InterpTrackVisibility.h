@@ -33,7 +33,7 @@ namespace UnrealScript
 			EVTA_Toggle = 2,
 			EVTA_MAX = 3,
 		};
-		class VisibilityTrackKey
+		struct VisibilityTrackKey
 		{
 		public:
 			ADD_STRUCT(InterpTrackVisibility::EVisibilityTrackCondition, ActiveCondition, 5)

@@ -551,7 +551,7 @@ namespace UnrealScript
 		static const auto MOD_TYPE_IGNOREPULSESTEALTHTIME = 90;
 		static const auto MOD_TYPE_RAGEMASSREDUCTION = 91;
 		static const auto MOD_TYPE_REPAIRDEPLOYABLERATEPCT = 92;
-		class QueuedAccolade
+		struct QueuedAccolade
 		{
 		public:
 			ADD_STRUCT(ScriptString*, Subtitle, 20)
@@ -559,7 +559,7 @@ namespace UnrealScript
 			ADD_BOOL(bIsBadge, 4, 0x1)
 			ADD_STRUCT(int, Icon, 0)
 		};
-		class OverheadNumber
+		struct OverheadNumber
 		{
 		public:
 			ADD_STRUCT(float, CurrentScale, 36)
@@ -789,205 +789,205 @@ namespace UnrealScript
 		ADD_STRUCT(int, m_nLastPerk2Icon, 1544)
 		ADD_STRUCT(int, m_nLastPerk1Icon, 1540)
 		ADD_STRUCT(int, m_nWinningTeam, 1536)
-		Object::Vector DrawMarkerText(ScriptString* ShowText, bool bFriend, Object::Vector Placement, class Canvas* DrawCanvas, bool bBuddy)
+		Vector DrawMarkerText(ScriptString* ShowText, bool bFriend, Vector Placement, class Canvas* DrawCanvas, bool bBuddy)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawMarkerText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71610);
 			byte params[48] = { NULL };
-			*(ScriptString**)&params[0] = ShowText;
+			*(ScriptString**)params = ShowText;
 			*(bool*)&params[12] = bFriend;
-			*(Object::Vector*)&params[16] = Placement;
+			*(Vector*)&params[16] = Placement;
 			*(class Canvas**)&params[28] = DrawCanvas;
 			*(bool*)&params[32] = bBuddy;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[36];
+			return *(Vector*)&params[36];
 		}
-		Object::Vector DrawMICMarker(class MaterialInstanceConstant* MarkerMIC, Object::Vector Placement, class Canvas* DrawCanvas, Object::Vector2D MarkerSize, ScriptString* markText, bool bFriend, float distScale)
+		Vector DrawMICMarker(class MaterialInstanceConstant* MarkerMIC, Vector Placement, class Canvas* DrawCanvas, Object::Vector2D MarkerSize, ScriptString* markText, bool bFriend, float distScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawMICMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(71612);
 			byte params[60] = { NULL };
-			*(class MaterialInstanceConstant**)&params[0] = MarkerMIC;
-			*(Object::Vector*)&params[4] = Placement;
+			*(class MaterialInstanceConstant**)params = MarkerMIC;
+			*(Vector*)&params[4] = Placement;
 			*(class Canvas**)&params[16] = DrawCanvas;
 			*(Object::Vector2D*)&params[20] = MarkerSize;
 			*(ScriptString**)&params[28] = markText;
 			*(bool*)&params[40] = bFriend;
 			*(float*)&params[44] = distScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[48];
+			return *(Vector*)&params[48];
 		}
-		bool GetEdgeScreenCoordinates(class Canvas* inCanvas, Object::Vector CameraPosition, Object::Vector CameraDir, Object::Vector ObjectLocation, Object::Vector& ScreenLocation)
+		bool GetEdgeScreenCoordinates(class Canvas* inCanvas, Vector CameraPosition, Vector CameraDir, Vector ObjectLocation, Vector& ScreenLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.GetEdgeScreenCoordinates");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72894);
 			byte params[56] = { NULL };
-			*(class Canvas**)&params[0] = inCanvas;
-			*(Object::Vector*)&params[4] = CameraPosition;
-			*(Object::Vector*)&params[16] = CameraDir;
-			*(Object::Vector*)&params[28] = ObjectLocation;
-			*(Object::Vector*)&params[40] = ScreenLocation;
+			*(class Canvas**)params = inCanvas;
+			*(Vector*)&params[4] = CameraPosition;
+			*(Vector*)&params[16] = CameraDir;
+			*(Vector*)&params[28] = ObjectLocation;
+			*(Vector*)&params[40] = ScreenLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			ScreenLocation = *(Object::Vector*)&params[40];
+			ScreenLocation = *(Vector*)&params[40];
 			return *(bool*)&params[52];
 		}
-		Object::Vector DrawMarker(class Texture2D* Marker, Object::Vector Placement, class Canvas* DrawCanvas, ScriptString* markText, bool bFriend, float Alpha, float distScale)
+		Vector DrawMarker(class Texture2D* Marker, Vector Placement, class Canvas* DrawCanvas, ScriptString* markText, bool bFriend, float Alpha, float distScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72902);
 			byte params[56] = { NULL };
-			*(class Texture2D**)&params[0] = Marker;
-			*(Object::Vector*)&params[4] = Placement;
+			*(class Texture2D**)params = Marker;
+			*(Vector*)&params[4] = Placement;
 			*(class Canvas**)&params[16] = DrawCanvas;
 			*(ScriptString**)&params[20] = markText;
 			*(bool*)&params[32] = bFriend;
 			*(float*)&params[36] = Alpha;
 			*(float*)&params[40] = distScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[44];
+			return *(Vector*)&params[44];
 		}
-		Object::Vector DrawRotatedMarker(class Texture2D* Marker, Object::Vector Placement, Object::Rotator Rot, class Canvas* DrawCanvas, ScriptString* markText, bool bFriend, float Alpha, float distScale)
+		Vector DrawRotatedMarker(class Texture2D* Marker, Vector Placement, Rotator Rot, class Canvas* DrawCanvas, ScriptString* markText, bool bFriend, float Alpha, float distScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawRotatedMarker");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(72910);
 			byte params[68] = { NULL };
-			*(class Texture2D**)&params[0] = Marker;
-			*(Object::Vector*)&params[4] = Placement;
-			*(Object::Rotator*)&params[16] = Rot;
+			*(class Texture2D**)params = Marker;
+			*(Vector*)&params[4] = Placement;
+			*(Rotator*)&params[16] = Rot;
 			*(class Canvas**)&params[28] = DrawCanvas;
 			*(ScriptString**)&params[32] = markText;
 			*(bool*)&params[44] = bFriend;
 			*(float*)&params[48] = Alpha;
 			*(float*)&params[52] = distScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[56];
+			return *(Vector*)&params[56];
 		}
 		void ShowDebugInfo(float& out_YL, float& out_YPos)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowDebugInfo");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96115);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = out_YL;
+			*(float*)params = out_YL;
 			*(float*)&params[4] = out_YPos;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_YL = *(float*)&params[0];
+			out_YL = *(float*)params;
 			out_YPos = *(float*)&params[4];
 		}
 		void CreateHUDMovie()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.CreateHUDMovie");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96120);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowSpectatorControls(bool bForceEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowSpectatorControls");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96130);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bForceEnabled;
+			*(bool*)params = bForceEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetShowScores(bool bEnableShowScores)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.SetShowScores");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96132);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnableShowScores;
+			*(bool*)params = bEnableShowScores;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96136);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitializeGameHUD()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.InitializeGameHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96137);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FadeInTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.FadeInTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96145);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Fade(float FadeTarget, float FadeSpeed, float bForceFadeInStartAlpha)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.Fade");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96146);
 			byte params[12] = { NULL };
-			*(float*)&params[0] = FadeTarget;
+			*(float*)params = FadeTarget;
 			*(float*)&params[4] = FadeSpeed;
 			*(float*)&params[8] = bForceFadeInStartAlpha;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayRoundOver(int WinningTeam)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PlayRoundOver");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96150);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = WinningTeam;
+			*(int*)params = WinningTeam;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowRoundEnding()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowRoundEnding");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96152);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayMatchOver(int Winner, ScriptString* WinnerName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PlayMatchOver");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96153);
 			byte params[16] = { NULL };
-			*(int*)&params[0] = Winner;
+			*(int*)params = Winner;
 			*(ScriptString**)&params[4] = WinnerName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowEnding()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowEnding");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96156);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FadeInSummary()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.FadeInSummary");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96159);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ScaleformJoystickInputEvent(float leftAngle, float rightAngle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ScaleformJoystickInputEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96160);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = leftAngle;
+			*(float*)params = leftAngle;
 			*(float*)&params[4] = rightAngle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ToggleSkiEffect(bool bEnabled, float fSpeed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ToggleSkiEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96163);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bEnabled;
+			*(bool*)params = bEnabled;
 			*(float*)&params[4] = fSpeed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TogglePauseMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TogglePauseMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96166);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ToggleMovieHUD()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ToggleMovieHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96168);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ToggleVehicleMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ToggleVehicleMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96169);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ToggleTeamSelectionMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ToggleTeamSelectionMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96172);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetPowerOscillation(bool bEnable)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.SetPowerOscillation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96174);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bEnable;
+			*(bool*)params = bEnable;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddUpdateToCombatLog(int CombatType, ScriptString* Aggressor, int WeaponIcon, ScriptString* Victim)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddUpdateToCombatLog");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96176);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = CombatType;
+			*(int*)params = CombatType;
 			*(ScriptString**)&params[4] = Aggressor;
 			*(int*)&params[16] = WeaponIcon;
 			*(ScriptString**)&params[20] = Victim;
@@ -995,61 +995,61 @@ namespace UnrealScript
 		}
 		void AddToPromptPanel(ScriptString* Message, TgSupportCommands::GC_ALERT_PRIORITY Priority)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddToPromptPanel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96181);
 			byte params[13] = { NULL };
-			*(ScriptString**)&params[0] = Message;
+			*(ScriptString**)params = Message;
 			*(TgSupportCommands::GC_ALERT_PRIORITY*)&params[12] = Priority;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddToPromptPanelTime(ScriptString* Message, float EndTime, TgSupportCommands::GC_ALERT_PRIORITY Priority)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddToPromptPanelTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96184);
 			byte params[17] = { NULL };
-			*(ScriptString**)&params[0] = Message;
+			*(ScriptString**)params = Message;
 			*(float*)&params[12] = EndTime;
 			*(TgSupportCommands::GC_ALERT_PRIORITY*)&params[16] = Priority;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearPromptPanel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearPromptPanel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96188);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddToHeroStatus(ScriptString* Message, float ShowTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddToHeroStatus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96189);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Message;
+			*(ScriptString**)params = Message;
 			*(float*)&params[12] = ShowTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearHeroStatus()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearHeroStatus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96192);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearPromptPanelMessage(ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearPromptPanelMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96193);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Message;
+			*(ScriptString**)params = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateVGSMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateVGSMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96195);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideVGSMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideVGSMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96196);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddToHelpText(ScriptString* Title, ScriptString* Body, float PictureIndex, ScriptString* footer, ScriptString* SuppressString)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddToHelpText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96197);
 			byte params[52] = { NULL };
-			*(ScriptString**)&params[0] = Title;
+			*(ScriptString**)params = Title;
 			*(ScriptString**)&params[12] = Body;
 			*(float*)&params[24] = PictureIndex;
 			*(ScriptString**)&params[28] = footer;
@@ -1058,14 +1058,14 @@ namespace UnrealScript
 		}
 		void ClearHelpText()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearHelpText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96203);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void AddUpdateToKillMessage(int RankIcon, int PlayerIcon, ScriptString* PlayerName, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddUpdateToKillMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96204);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = RankIcon;
+			*(int*)params = RankIcon;
 			*(int*)&params[4] = PlayerIcon;
 			*(ScriptString**)&params[8] = PlayerName;
 			*(ScriptString**)&params[20] = Message;
@@ -1073,9 +1073,9 @@ namespace UnrealScript
 		}
 		void AddFlyingIcon(int iconNumber, ScriptString* Description, ScriptString* Points, int bIsBadge)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddFlyingIcon");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96209);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = iconNumber;
+			*(int*)params = iconNumber;
 			*(ScriptString**)&params[4] = Description;
 			*(ScriptString**)&params[16] = Points;
 			*(int*)&params[28] = bIsBadge;
@@ -1083,87 +1083,87 @@ namespace UnrealScript
 		}
 		void OnSpectate(bool bUpdateTeamState)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.OnSpectate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96214);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bUpdateTeamState;
+			*(bool*)params = bUpdateTeamState;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateSpectatorHUDCache()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.CreateSpectatorHUDCache");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96216);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearSpectatorHUDCache()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearSpectatorHUDCache");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96217);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideHUDElements(bool bShowStats, bool bForceCredits)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideHUDElements");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96218);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bShowStats;
+			*(bool*)params = bShowStats;
 			*(bool*)&params[4] = bForceCredits;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowHUDPlayerSpawning()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowHUDPlayerSpawning");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96221);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowHUDPlayerAlive()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowHUDPlayerAlive");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96222);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowCenterHUDElements(bool bShow)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowCenterHUDElements");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96223);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bShow;
+			*(bool*)params = bShow;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateRespawnText(ScriptString* Text)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateRespawnText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96225);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateRespawnTimer(int TimeRemaining)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateRespawnTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96227);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = TimeRemaining;
+			*(int*)params = TimeRemaining;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateHUDCredits(int changeAmount, int newTotal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateHUDCredits");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96229);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = changeAmount;
+			*(int*)params = changeAmount;
 			*(int*)&params[4] = newTotal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TeamScoreboardShow(bool bVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TeamScoreboardShow");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96232);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bVisible;
+			*(bool*)params = bVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RabbitScoreboardShow(bool bVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RabbitScoreboardShow");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96234);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bVisible;
+			*(bool*)params = bVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TeamScoreboardUpdateSlot(int Index, ScriptString* PlayerName, ScriptString* Score, ScriptString* Kills, ScriptString* Assists, ScriptString* Ping, ScriptString* ClassAbb, int Rank, int RankIcon)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TeamScoreboardUpdateSlot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96236);
 			byte params[84] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(ScriptString**)&params[4] = PlayerName;
 			*(ScriptString**)&params[16] = Score;
 			*(ScriptString**)&params[28] = Kills;
@@ -1176,9 +1176,9 @@ namespace UnrealScript
 		}
 		void RabbitScoreboardUpdateSlot(int Index, ScriptString* PlayerName, ScriptString* Score, ScriptString* Kills, ScriptString* Assists, ScriptString* Ping, ScriptString* ClassAbb, int Rank, int RankIcon)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RabbitScoreboardUpdateSlot");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96246);
 			byte params[84] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(ScriptString**)&params[4] = PlayerName;
 			*(ScriptString**)&params[16] = Score;
 			*(ScriptString**)&params[28] = Kills;
@@ -1191,113 +1191,113 @@ namespace UnrealScript
 		}
 		void TeamScoreboardUpdateTeamScore(int Index, int Score)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TeamScoreboardUpdateTeamScore");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96256);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(int*)&params[4] = Score;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TeamScoreboardUpdateTime(ScriptString* Time)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TeamScoreboardUpdateTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96259);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Time;
+			*(ScriptString**)params = Time;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RabbitScoreboardUpdateTime(ScriptString* Time)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RabbitScoreboardUpdateTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96261);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Time;
+			*(ScriptString**)params = Time;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TeamScoreboardActivePlayer(int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TeamScoreboardActivePlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96263);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RabbitScoreboardActivePlayer(int Index, bool bVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RabbitScoreboardActivePlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96265);
 			byte params[8] = { NULL };
-			*(int*)&params[0] = Index;
+			*(int*)params = Index;
 			*(bool*)&params[4] = bVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ResolutionChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ResolutionChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96268);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RestoreHUDState()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RestoreHUDState");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96271);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideMenus()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideMenus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96275);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RemoveMovies()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RemoveMovies");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96276);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CompleteVehicleMenuClose()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.CompleteVehicleMenuClose");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96277);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CompleteTeamSelectionMenuClose()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.CompleteTeamSelectionMenuClose");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96278);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearCrosshairOnFriendly()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearCrosshairOnFriendly");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96279);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool CheckCrosshairOnFriendly()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.CheckCrosshairOnFriendly");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96280);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
-		Object::Vector DrawColoredMarkerText(ScriptString* ShowText, Object::Color TextColor, Object::Vector Placement, class Canvas* DrawCanvas, float ScaleX, float ScaleY)
+		Vector DrawColoredMarkerText(ScriptString* ShowText, Object::Color TextColor, Vector Placement, class Canvas* DrawCanvas, float ScaleX, float ScaleY)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawColoredMarkerText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96323);
 			byte params[52] = { NULL };
-			*(ScriptString**)&params[0] = ShowText;
+			*(ScriptString**)params = ShowText;
 			*(Object::Color*)&params[12] = TextColor;
-			*(Object::Vector*)&params[16] = Placement;
+			*(Vector*)&params[16] = Placement;
 			*(class Canvas**)&params[28] = DrawCanvas;
 			*(float*)&params[32] = ScaleX;
 			*(float*)&params[36] = ScaleY;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[40];
+			return *(Vector*)&params[40];
 		}
-		void DrawSmallText(ScriptString* ShowText, bool bFriend, Object::Vector Placement, class Canvas* DrawCanvas)
+		void DrawSmallText(ScriptString* ShowText, bool bFriend, Vector Placement, class Canvas* DrawCanvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawSmallText");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96333);
 			byte params[32] = { NULL };
-			*(ScriptString**)&params[0] = ShowText;
+			*(ScriptString**)params = ShowText;
 			*(bool*)&params[12] = bFriend;
-			*(Object::Vector*)&params[16] = Placement;
+			*(Vector*)&params[16] = Placement;
 			*(class Canvas**)&params[28] = DrawCanvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DrawHealthBar(class MaterialInstanceConstant* HealthBarMIC, bool bFriend, Object::Vector Placement, class Canvas* DrawCanvas, float PlacementX, float PlacementY, float Width, float Height)
+		void DrawHealthBar(class MaterialInstanceConstant* HealthBarMIC, bool bFriend, Vector Placement, class Canvas* DrawCanvas, float PlacementX, float PlacementY, float Width, float Height)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DrawHealthBar");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96340);
 			byte params[40] = { NULL };
-			*(class MaterialInstanceConstant**)&params[0] = HealthBarMIC;
+			*(class MaterialInstanceConstant**)params = HealthBarMIC;
 			*(bool*)&params[4] = bFriend;
-			*(Object::Vector*)&params[8] = Placement;
+			*(Vector*)&params[8] = Placement;
 			*(class Canvas**)&params[20] = DrawCanvas;
 			*(float*)&params[24] = PlacementX;
 			*(float*)&params[28] = PlacementY;
@@ -1307,101 +1307,101 @@ namespace UnrealScript
 		}
 		void PostRender()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PostRender");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96369);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float GetRemainingFriendlyGeneratorRestoreTime()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.GetRemainingFriendlyGeneratorRestoreTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96370);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetRemainingEnemyGeneratorRestoreTime()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.GetRemainingEnemyGeneratorRestoreTime");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96372);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void UpdateSkiEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateSkiEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96374);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdatePickupFlashEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdatePickupFlashEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96376);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PulsePickupFlashEffect(float PulseAmount, float PulseSpeed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PulsePickupFlashEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96378);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = PulseAmount;
+			*(float*)params = PulseAmount;
 			*(float*)&params[4] = PulseSpeed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateInvulnerableEfect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateInvulnerableEfect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96381);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateShieldEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateShieldEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96385);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PulseShieldEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PulseShieldEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96389);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateJammerEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateJammerEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96390);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateFadeEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateFadeEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96393);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void FumbleFlag(float Speed)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.FumbleFlag");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96395);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = Speed;
+			*(float*)params = Speed;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateFumbledFlagEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateFumbledFlagEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96397);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Whiteout(float Speed, float Amount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.Whiteout");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96398);
 			byte params[8] = { NULL };
-			*(float*)&params[0] = Speed;
+			*(float*)params = Speed;
 			*(float*)&params[4] = Amount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearWhiteout()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearWhiteout");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96401);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateWhiteoutEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateWhiteoutEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96402);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void LocalizedMessage(ScriptClass* InMessageClass, class PlayerReplicationInfo* RelatedPRI_1, class PlayerReplicationInfo* RelatedPRI_2, ScriptString* CriticalString, int Switch, float Position, float Lifetime, int FontSize, Object::Color DrawColor, class Object* OptionalObject)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.LocalizedMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96403);
 			byte params[48] = { NULL };
-			*(ScriptClass**)&params[0] = InMessageClass;
+			*(ScriptClass**)params = InMessageClass;
 			*(class PlayerReplicationInfo**)&params[4] = RelatedPRI_1;
 			*(class PlayerReplicationInfo**)&params[8] = RelatedPRI_2;
 			*(ScriptString**)&params[12] = CriticalString;
@@ -1415,208 +1415,208 @@ namespace UnrealScript
 		}
 		void ChatMessageReceived(int Channel, ScriptString* Sender, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ChatMessageReceived");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96421);
 			byte params[28] = { NULL };
-			*(int*)&params[0] = Channel;
+			*(int*)params = Channel;
 			*(ScriptString**)&params[4] = Sender;
 			*(ScriptString**)&params[16] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		ScriptString* StripTag(ScriptString* sValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.StripTag");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96436);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = sValue;
+			*(ScriptString**)params = sValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[12];
 		}
 		void SendLocalMessageToGlobalAlert(ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.SendLocalMessageToGlobalAlert");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96440);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Message;
+			*(ScriptString**)params = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SendLocalMessageToChat(ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.SendLocalMessageToChat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96442);
 			byte params[12] = { NULL };
-			*(ScriptString**)&params[0] = Message;
+			*(ScriptString**)params = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPlayerClassObjects(ScriptString* ClassName, int PerkIcon1, int PerkIcon2)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.SetPlayerClassObjects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96446);
 			byte params[20] = { NULL };
-			*(ScriptString**)&params[0] = ClassName;
+			*(ScriptString**)params = ClassName;
 			*(int*)&params[12] = PerkIcon1;
 			*(int*)&params[16] = PerkIcon2;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void HideGlobalAlert()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideGlobalAlert");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96450);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void KickVoteMessage(bool bComplete, ScriptString* Message)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.KickVoteMessage");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96451);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = bComplete;
+			*(bool*)params = bComplete;
 			*(ScriptString**)&params[4] = Message;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EnableGameTypeHUD()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.EnableGameTypeHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96455);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowSpectatorPlayer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowSpectatorPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96456);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideSpectatorPlayer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideSpectatorPlayer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96457);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateSpectatorPlayerPanel(class TrPawn* ViewTargetTrPawn)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateSpectatorPlayerPanel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96458);
 			byte params[4] = { NULL };
-			*(class TrPawn**)&params[0] = ViewTargetTrPawn;
+			*(class TrPawn**)params = ViewTargetTrPawn;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowSpectatorVehicle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowSpectatorVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96466);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideSpectatorVehicle()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideSpectatorVehicle");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96467);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateSpectatorVehiclePanel(class TrVehicle* ViewTargetVehicle)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateSpectatorVehiclePanel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96468);
 			byte params[4] = { NULL };
-			*(class TrVehicle**)&params[0] = ViewTargetVehicle;
+			*(class TrVehicle**)params = ViewTargetVehicle;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowSpectatorBookmark()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowSpectatorBookmark");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96474);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideSpectatorBookmark()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideSpectatorBookmark");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96475);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateSpectatorBookmarkPanel(class TrCamera_SpectatorBookmark* BookMark)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateSpectatorBookmarkPanel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96476);
 			byte params[4] = { NULL };
-			*(class TrCamera_SpectatorBookmark**)&params[0] = BookMark;
+			*(class TrCamera_SpectatorBookmark**)params = BookMark;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowSpectatorObjectivePanel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowSpectatorObjectivePanel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96478);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideSpectatorObjectivePanel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideSpectatorObjectivePanel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96479);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateSpectatorObjectivePanel(class Actor* ObjectiveActor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateSpectatorObjectivePanel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96480);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = ObjectiveActor;
+			*(class Actor**)params = ObjectiveActor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ShowSpectatorFloatCameraPanel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ShowSpectatorFloatCameraPanel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96484);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideSpectatorFloatCameraPanel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideSpectatorFloatCameraPanel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96485);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateSpectatorFloatCameraPanel()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateSpectatorFloatCameraPanel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96486);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void HideAllSpectatorPanels()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.HideAllSpectatorPanels");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96487);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnViewTargetChange(class Actor* NewViewTarget)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.OnViewTargetChange");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96488);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = NewViewTarget;
+			*(class Actor**)params = NewViewTarget;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TestNumber(int Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.TestNumber");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96490);
 			byte params[4] = { NULL };
-			*(int*)&params[0] = Value;
+			*(int*)params = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddOverheadNumber(int Value, Object::Vector4 WorldLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.AddOverheadNumber");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96492);
 			byte params[20] = { NULL };
-			*(int*)&params[0] = Value;
+			*(int*)params = Value;
 			*(Object::Vector4*)&params[16] = WorldLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateOverheadNumbers(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateOverheadNumbers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96496);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96505);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PostRenderFor(class PlayerController* PC, class Canvas* DrawCanvas, Object::Vector CameraPosition, Object::Vector CameraDir)
+		void PostRenderFor(class PlayerController* PC, class Canvas* DrawCanvas, Vector CameraPosition, Vector CameraDir)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PostRenderFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96507);
 			byte params[32] = { NULL };
-			*(class PlayerController**)&params[0] = PC;
+			*(class PlayerController**)params = PC;
 			*(class Canvas**)&params[4] = DrawCanvas;
-			*(Object::Vector*)&params[8] = CameraPosition;
-			*(Object::Vector*)&params[20] = CameraDir;
+			*(Vector*)&params[8] = CameraPosition;
+			*(Vector*)&params[20] = CameraDir;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlayAward(class Canvas* DrawCanvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.PlayAward");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96512);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = DrawCanvas;
+			*(class Canvas**)params = DrawCanvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void QueueAccolade(int Icon, ScriptString* Title, ScriptString* Subtitle, bool bIsBadge)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.QueueAccolade");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96519);
 			byte params[32] = { NULL };
-			*(int*)&params[0] = Icon;
+			*(int*)params = Icon;
 			*(ScriptString**)&params[4] = Title;
 			*(ScriptString**)&params[16] = Subtitle;
 			*(bool*)&params[28] = bIsBadge;
@@ -1624,38 +1624,38 @@ namespace UnrealScript
 		}
 		void CheckQueuedAccolades()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.CheckQueuedAccolades");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96525);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RunQueuedAccoladesTimer(bool bIsBadge)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.RunQueuedAccoladesTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96526);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bIsBadge;
+			*(bool*)params = bIsBadge;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearQueuedAccoladesTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.ClearQueuedAccoladesTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96529);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DeployableReplicated(class TrDeployable* NewDep)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.DeployableReplicated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96530);
 			byte params[4] = { NULL };
-			*(class TrDeployable**)&params[0] = NewDep;
+			*(class TrDeployable**)params = NewDep;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void MineReplicated(class TrProj_Mine* NewMine)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.MineReplicated");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96532);
 			byte params[4] = { NULL };
-			*(class TrProj_Mine**)&params[0] = NewMine;
+			*(class TrProj_Mine**)params = NewMine;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateOwnedItems()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrHUD.UpdateOwnedItems");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(96535);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

@@ -34,7 +34,7 @@ namespace UnrealScript
 			CSG_Deintersect = 4,
 			CSG_MAX = 5,
 		};
-		class GeomSelection
+		struct GeomSelection
 		{
 		public:
 			ADD_STRUCT(int, SelectionIndex, 8)

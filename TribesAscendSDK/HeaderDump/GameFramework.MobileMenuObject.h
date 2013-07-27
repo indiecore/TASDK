@@ -26,7 +26,7 @@ namespace UnrealScript
 	class MobileMenuObject : public Object
 	{
 	public:
-		class UVCoords
+		struct UVCoords
 		{
 		public:
 			ADD_STRUCT(float, VL, 16)
@@ -68,9 +68,9 @@ namespace UnrealScript
 		ADD_BOOL(bHasBeenInitialized, 60, 0x1)
 		void InitMenuObject(class MobilePlayerInput* PlayerInput, class MobileMenuScene* Scene, int ScreenWidth, int ScreenHeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuObject.InitMenuObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32587);
 			byte params[16] = { NULL };
-			*(class MobilePlayerInput**)&params[0] = PlayerInput;
+			*(class MobilePlayerInput**)params = PlayerInput;
 			*(class MobileMenuScene**)&params[4] = Scene;
 			*(int*)&params[8] = ScreenWidth;
 			*(int*)&params[12] = ScreenHeight;
@@ -78,9 +78,9 @@ namespace UnrealScript
 		}
 		void RenderObject(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuObject.RenderObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32604);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

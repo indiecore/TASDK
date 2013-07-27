@@ -17,7 +17,7 @@ namespace UnrealScript
 			CMOT_Float4 = 3,
 			CMOT_MAX = 4,
 		};
-		class CustomInput
+		struct CustomInput
 		{
 		public:
 			ADD_STRUCT(MaterialExpression::ExpressionInput, Input, 12)

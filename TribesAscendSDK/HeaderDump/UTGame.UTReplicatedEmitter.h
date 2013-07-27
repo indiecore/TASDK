@@ -18,7 +18,7 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, EmitterTemplate, 488)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTReplicatedEmitter.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47383);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

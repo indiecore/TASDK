@@ -30,14 +30,14 @@ namespace UnrealScript
 	class GameCrowdAgentSkeletal : public GameCrowdAgent
 	{
 	public:
-		class GameCrowdAttachmentInfo
+		struct GameCrowdAttachmentInfo
 		{
 		public:
-			ADD_STRUCT(Object::Vector, Scale3D, 8)
+			ADD_STRUCT(Vector, Scale3D, 8)
 			ADD_STRUCT(float, Chance, 4)
 			ADD_OBJECT(StaticMesh, StaticMesh, 0)
 		};
-		class GameCrowdAttachmentList
+		struct GameCrowdAttachmentList
 		{
 		public:
 			ADD_STRUCT(ScriptArray<GameCrowdAgentSkeletal::GameCrowdAttachmentInfo>, List, 8)
@@ -68,66 +68,66 @@ namespace UnrealScript
 		ADD_OBJECT(AnimNodeBlend, SpeedBlendNode, 968)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgentSkeletal.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31167);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetLighting(bool bEnableLightEnvironment, LightComponent::LightingChannelContainer AgentLightingChannel, bool bCastShadows)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgentSkeletal.SetLighting");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31168);
 			byte params[12] = { NULL };
-			*(bool*)&params[0] = bEnableLightEnvironment;
+			*(bool*)params = bEnableLightEnvironment;
 			*(LightComponent::LightingChannelContainer*)&params[4] = AgentLightingChannel;
 			*(bool*)&params[8] = bCastShadows;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void PlayDeath(Object::Vector KillMomentum)
+		void PlayDeath(Vector KillMomentum)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgentSkeletal.PlayDeath");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31172);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = KillMomentum;
+			*(Vector*)params = KillMomentum;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetRootMotion(bool bRootMotionEnabled)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgentSkeletal.SetRootMotion");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31174);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bRootMotionEnabled;
+			*(bool*)params = bRootMotionEnabled;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void OnPlayAgentAnimation(class SeqAct_PlayAgentAnimation* Action)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgentSkeletal.OnPlayAgentAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31176);
 			byte params[4] = { NULL };
-			*(class SeqAct_PlayAgentAnimation**)&params[0] = Action;
+			*(class SeqAct_PlayAgentAnimation**)params = Action;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ClearLatentAnimation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgentSkeletal.ClearLatentAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31178);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PlayIdleAnimation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgentSkeletal.PlayIdleAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31179);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void StopIdleAnimation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgentSkeletal.StopIdleAnimation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31180);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void OnAnimEnd(class AnimNodeSequence* SeqNode, float PlayedTime, float ExcessTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgentSkeletal.OnAnimEnd");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31181);
 			byte params[12] = { NULL };
-			*(class AnimNodeSequence**)&params[0] = SeqNode;
+			*(class AnimNodeSequence**)params = SeqNode;
 			*(float*)&params[4] = PlayedTime;
 			*(float*)&params[8] = ExcessTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CreateAttachments()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.GameCrowdAgentSkeletal.CreateAttachments");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(31185);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

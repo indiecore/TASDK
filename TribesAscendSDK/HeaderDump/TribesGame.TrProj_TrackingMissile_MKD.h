@@ -7,7 +7,7 @@ namespace UnrealScript
 	public:
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrProj_TrackingMissile_MKD.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(109422);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

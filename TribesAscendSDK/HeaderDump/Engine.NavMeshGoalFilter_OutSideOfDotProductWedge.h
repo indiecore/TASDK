@@ -12,15 +12,15 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(float, Epsilon, 96)
-		ADD_STRUCT(Object::Vector, Rotation, 84)
-		ADD_STRUCT(Object::Vector, Location, 72)
-		bool OutsideOfDotProductWedge(class NavMeshGoal_GenericFilterContainer* FilterContainer, Object::Vector InLocation, Object::Rotator InRotation, float InEpsilon)
+		ADD_STRUCT(Vector, Rotation, 84)
+		ADD_STRUCT(Vector, Location, 72)
+		bool OutsideOfDotProductWedge(class NavMeshGoal_GenericFilterContainer* FilterContainer, Vector InLocation, Rotator InRotation, float InEpsilon)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.NavMeshGoalFilter_OutSideOfDotProductWedge.OutsideOfDotProductWedge");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21011);
 			byte params[36] = { NULL };
-			*(class NavMeshGoal_GenericFilterContainer**)&params[0] = FilterContainer;
-			*(Object::Vector*)&params[4] = InLocation;
-			*(Object::Rotator*)&params[16] = InRotation;
+			*(class NavMeshGoal_GenericFilterContainer**)params = FilterContainer;
+			*(Vector*)&params[4] = InLocation;
+			*(Rotator*)&params[16] = InRotation;
 			*(float*)&params[28] = InEpsilon;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[32];

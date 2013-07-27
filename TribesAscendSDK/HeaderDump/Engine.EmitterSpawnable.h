@@ -13,17 +13,17 @@ namespace UnrealScript
 		ADD_OBJECT(ParticleSystem, ParticleTemplate, 488)
 		void SetTemplate(class ParticleSystem* NewTemplate, bool bDestroyOnFinish)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterSpawnable.SetTemplate");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15280);
 			byte params[8] = { NULL };
-			*(class ParticleSystem**)&params[0] = NewTemplate;
+			*(class ParticleSystem**)params = NewTemplate;
 			*(bool*)&params[4] = bDestroyOnFinish;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ReplicatedEvent(ScriptName VarName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.EmitterSpawnable.ReplicatedEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(15283);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = VarName;
+			*(ScriptName*)params = VarName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

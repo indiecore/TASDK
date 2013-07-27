@@ -16,66 +16,66 @@ namespace UnrealScript
 		ADD_OBJECT(UTSeqAct_DummyWeaponFire, FireAction, 2208)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDummyPawn.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47295);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void WeaponFired(class Weapon* InWeapon, bool bViaReplication, Object::Vector HitLocation)
+		void WeaponFired(class Weapon* InWeapon, bool bViaReplication, Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDummyPawn.WeaponFired");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47296);
 			byte params[20] = { NULL };
-			*(class Weapon**)&params[0] = InWeapon;
+			*(class Weapon**)params = InWeapon;
 			*(bool*)&params[4] = bViaReplication;
-			*(Object::Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[8] = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetPawnAmbientSound(class SoundCue* NewAmbientSound)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDummyPawn.SetPawnAmbientSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47300);
 			byte params[4] = { NULL };
-			*(class SoundCue**)&params[0] = NewAmbientSound;
+			*(class SoundCue**)params = NewAmbientSound;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetWeaponAmbientSound(class SoundCue* NewAmbientSound)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDummyPawn.SetWeaponAmbientSound");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47303);
 			byte params[4] = { NULL };
-			*(class SoundCue**)&params[0] = NewAmbientSound;
+			*(class SoundCue**)params = NewAmbientSound;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		Object::Rotator GetAdjustedAimFor(class Weapon* InWeapon, Object::Vector projStart)
+		Rotator GetAdjustedAimFor(class Weapon* InWeapon, Vector projStart)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDummyPawn.GetAdjustedAimFor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47305);
 			byte params[28] = { NULL };
-			*(class Weapon**)&params[0] = InWeapon;
-			*(Object::Vector*)&params[4] = projStart;
+			*(class Weapon**)params = InWeapon;
+			*(Vector*)&params[4] = projStart;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Rotator*)&params[16];
+			return *(Rotator*)&params[16];
 		}
 		void WeaponAttachmentChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDummyPawn.WeaponAttachmentChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47312);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		Object::Vector GetWeaponStartTraceLocation(class Weapon* CurrentWeapon)
+		Vector GetWeaponStartTraceLocation(class Weapon* CurrentWeapon)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDummyPawn.GetWeaponStartTraceLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47313);
 			byte params[16] = { NULL };
-			*(class Weapon**)&params[0] = CurrentWeapon;
+			*(class Weapon**)params = CurrentWeapon;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[4];
+			return *(Vector*)&params[4];
 		}
-		Object::Vector GetPawnViewLocation()
+		Vector GetPawnViewLocation()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDummyPawn.GetPawnViewLocation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47316);
 			byte params[12] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[0];
+			return *(Vector*)params;
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDummyPawn.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47318);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

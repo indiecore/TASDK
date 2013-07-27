@@ -19,33 +19,33 @@ namespace UnrealScript
 		ADD_BOOL(m_bIsTracerActive, 784, 0x1)
 		void KillLaserEffect()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.KillLaserEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68427);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void SpawnLaserEffect(Object::Vector HitLocation)
+		void SpawnLaserEffect(Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.SpawnLaserEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68428);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
+			*(Vector*)params = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void UpdateLaserEffect(Object::Vector HitLocation)
+		void UpdateLaserEffect(Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.UpdateLaserEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68434);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
+			*(Vector*)params = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void ThirdPersonFireEffects(Object::Vector HitLocation)
+		void ThirdPersonFireEffects(Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.ThirdPersonFireEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68436);
 			byte params[12] = { NULL };
-			*(Object::Vector*)&params[0] = HitLocation;
+			*(Vector*)params = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void StopThirdPersonFireEffects()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrAttachment_LaserTargeter.StopThirdPersonFireEffects");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(68438);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

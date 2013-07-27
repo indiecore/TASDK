@@ -17,25 +17,25 @@ namespace UnrealScript
 		ADD_STRUCT(float, m_fSpottedActorsUpdateFrequency, 496)
 		void TeamBroadcastVGSCommand(class PlayerReplicationInfo* SenderPRI, TrVGSCommandList::VGSCommandType VGSCommandIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBroadcastHandler.TeamBroadcastVGSCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73676);
 			byte params[5] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = SenderPRI;
+			*(class PlayerReplicationInfo**)params = SenderPRI;
 			*(TrVGSCommandList::VGSCommandType*)&params[4] = VGSCommandIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GlobalBroadcastVGSCommand(class PlayerReplicationInfo* SenderPRI, TrVGSCommandList::VGSCommandType VGSCommandIndex)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBroadcastHandler.GlobalBroadcastVGSCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73680);
 			byte params[5] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = SenderPRI;
+			*(class PlayerReplicationInfo**)params = SenderPRI;
 			*(TrVGSCommandList::VGSCommandType*)&params[4] = VGSCommandIndex;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void TeamBroadcastVGSContextCommand(class PlayerReplicationInfo* SenderPRI, TrVGSCommandList::EVGSContextActor ContextActor, TrVGSCommandList::EVGSContextLocation ContextLocation, bool bEnemyLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBroadcastHandler.TeamBroadcastVGSContextCommand");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73684);
 			byte params[10] = { NULL };
-			*(class PlayerReplicationInfo**)&params[0] = SenderPRI;
+			*(class PlayerReplicationInfo**)params = SenderPRI;
 			*(TrVGSCommandList::EVGSContextActor*)&params[4] = ContextActor;
 			*(TrVGSCommandList::EVGSContextLocation*)&params[5] = ContextLocation;
 			*(bool*)&params[8] = bEnemyLocation;
@@ -43,15 +43,15 @@ namespace UnrealScript
 		}
 		void OnActorSpotted(class Actor* SpottedActor, ScriptClass* SpottedTargetClass)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBroadcastHandler.OnActorSpotted");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73690);
 			byte params[8] = { NULL };
-			*(class Actor**)&params[0] = SpottedActor;
+			*(class Actor**)params = SpottedActor;
 			*(ScriptClass**)&params[4] = SpottedTargetClass;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UpdateSpottedActorsTimer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrBroadcastHandler.UpdateSpottedActorsTimer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(73698);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

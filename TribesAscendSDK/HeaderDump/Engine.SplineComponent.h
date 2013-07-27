@@ -29,36 +29,36 @@ namespace UnrealScript
 		ADD_STRUCT(Object::InterpCurveVector, SplineInfo, 488)
 		void UpdateSplineCurviness()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineComponent.UpdateSplineCurviness");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27150);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateSplineReparamTable()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineComponent.UpdateSplineReparamTable");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27151);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float GetSplineLength()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineComponent.GetSplineLength");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27152);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
-		Object::Vector GetLocationAtDistanceAlongSpline(float Distance)
+		Vector GetLocationAtDistanceAlongSpline(float Distance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineComponent.GetLocationAtDistanceAlongSpline");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27154);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = Distance;
+			*(float*)params = Distance;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[4];
+			return *(Vector*)&params[4];
 		}
-		Object::Vector GetTangentAtDistanceAlongSpline(float Distance)
+		Vector GetTangentAtDistanceAlongSpline(float Distance)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.SplineComponent.GetTangentAtDistanceAlongSpline");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(27157);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = Distance;
+			*(float*)params = Distance;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(Object::Vector*)&params[4];
+			return *(Vector*)&params[4];
 		}
 	};
 }

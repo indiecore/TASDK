@@ -27,13 +27,13 @@ namespace UnrealScript
 	class TrPlayerVoice : public TrDevice
 	{
 	public:
-		class VGSCommandToVoiceMap
+		struct VGSCommandToVoiceMap
 		{
 		public:
 			ADD_OBJECT(SoundCue, Sound, 4)
 			ADD_STRUCT(TrVGSCommandList::VGSCommandType, Command, 0)
 		};
-		class VGSContextCommandToVoiceMap
+		struct VGSContextCommandToVoiceMap
 		{
 		public:
 			ADD_OBJECT(SoundCue, Sound, 8)
@@ -46,18 +46,18 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptArray<TrPlayerVoice::VGSContextCommandToVoiceMap>, m_VGSContextCommandToVoiceMap, 2172)
 		void PlaySoundEx(TrVGSCommandList::VGSCommandType Command, class TrPlayerController* TrPC, class PlayerReplicationInfo* InstigatorPRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerVoice.PlaySoundEx");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(101604);
 			byte params[9] = { NULL };
-			*(TrVGSCommandList::VGSCommandType*)&params[0] = Command;
+			*(TrVGSCommandList::VGSCommandType*)params = Command;
 			*(class TrPlayerController**)&params[4] = TrPC;
 			*(class PlayerReplicationInfo**)&params[8] = InstigatorPRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PlaySoundContext(class TrPlayerController* TrPC, TrVGSCommandList::EVGSContextActor ContextActor, TrVGSCommandList::EVGSContextLocation ContextLocation, bool bEnemyLocation, class PlayerReplicationInfo* InstigatorPRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerVoice.PlaySoundContext");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(101610);
 			byte params[14] = { NULL };
-			*(class TrPlayerController**)&params[0] = TrPC;
+			*(class TrPlayerController**)params = TrPC;
 			*(TrVGSCommandList::EVGSContextActor*)&params[4] = ContextActor;
 			*(TrVGSCommandList::EVGSContextLocation*)&params[5] = ContextLocation;
 			*(bool*)&params[8] = bEnemyLocation;
@@ -66,9 +66,9 @@ namespace UnrealScript
 		}
 		void PlayRandomSample(class TrPlayerController* TrPC)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrPlayerVoice.PlayRandomSample");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(101618);
 			byte params[4] = { NULL };
-			*(class TrPlayerController**)&params[0] = TrPC;
+			*(class TrPlayerController**)params = TrPC;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

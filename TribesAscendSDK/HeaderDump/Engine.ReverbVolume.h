@@ -50,7 +50,7 @@ namespace UnrealScript
 			REVERB_Plate = 22,
 			REVERB_MAX = 23,
 		};
-		class InteriorSettings
+		struct InteriorSettings
 		{
 		public:
 			ADD_BOOL(bIsWorldInfo, 0, 0x1)
@@ -63,7 +63,7 @@ namespace UnrealScript
 			ADD_STRUCT(float, InteriorLPF, 28)
 			ADD_STRUCT(float, InteriorLPFTime, 32)
 		};
-		class ReverbSettings
+		struct ReverbSettings
 		{
 		public:
 			ADD_BOOL(bApplyReverb, 0, 0x1)

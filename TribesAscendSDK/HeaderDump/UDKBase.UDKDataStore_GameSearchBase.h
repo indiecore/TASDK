@@ -13,48 +13,48 @@ namespace UnrealScript
 		ADD_OBJECT(UDKUIDataProvider_ServerDetails, ServerDetailsProvider, 168)
 		bool GetEnabledMutators(ScriptArray<int>& MutatorIndices)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKDataStore_GameSearchBase.GetEnabledMutators");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34756);
 			byte params[16] = { NULL };
-			*(ScriptArray<int>*)&params[0] = MutatorIndices;
+			*(ScriptArray<int>*)params = MutatorIndices;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			MutatorIndices = *(ScriptArray<int>*)&params[0];
+			MutatorIndices = *(ScriptArray<int>*)params;
 			return *(bool*)&params[12];
 		}
 		void Init()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKDataStore_GameSearchBase.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34760);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool SubmitGameSearch(byte ControllerIndex, bool bInvalidateExistingSearchResults)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKDataStore_GameSearchBase.SubmitGameSearch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34761);
 			byte params[9] = { NULL };
-			params[0] = ControllerIndex;
+			*params = ControllerIndex;
 			*(bool*)&params[4] = bInvalidateExistingSearchResults;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];
 		}
 		void OnSearchComplete(bool bWasSuccessful)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKDataStore_GameSearchBase.OnSearchComplete");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34766);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bWasSuccessful;
+			*(bool*)params = bWasSuccessful;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool HasOutstandingQueries(bool bRestrictCheckToSelf)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKDataStore_GameSearchBase.HasOutstandingQueries");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34768);
 			byte params[8] = { NULL };
-			*(bool*)&params[0] = bRestrictCheckToSelf;
+			*(bool*)params = bRestrictCheckToSelf;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool HasExistingSearchResults()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKDataStore_GameSearchBase.HasExistingSearchResults");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34773);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 	};
 }

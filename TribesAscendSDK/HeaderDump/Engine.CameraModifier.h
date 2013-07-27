@@ -37,35 +37,35 @@ namespace UnrealScript
 		ADD_BOOL(bDisabled, 60, 0x1)
 		bool AddCameraModifier(class Camera* Camera)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier.AddCameraModifier");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6408);
 			byte params[8] = { NULL };
-			*(class Camera**)&params[0] = Camera;
+			*(class Camera**)params = Camera;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
-		bool ProcessViewRotation(class Actor* ViewTarget, float DeltaTime, Object::Rotator& out_ViewRotation, Object::Rotator& out_DeltaRot)
+		bool ProcessViewRotation(class Actor* ViewTarget, float DeltaTime, Rotator& out_ViewRotation, Rotator& out_DeltaRot)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier.ProcessViewRotation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(6618);
 			byte params[36] = { NULL };
-			*(class Actor**)&params[0] = ViewTarget;
+			*(class Actor**)params = ViewTarget;
 			*(float*)&params[4] = DeltaTime;
-			*(Object::Rotator*)&params[8] = out_ViewRotation;
-			*(Object::Rotator*)&params[20] = out_DeltaRot;
+			*(Rotator*)&params[8] = out_ViewRotation;
+			*(Rotator*)&params[20] = out_DeltaRot;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_ViewRotation = *(Object::Rotator*)&params[8];
-			out_DeltaRot = *(Object::Rotator*)&params[20];
+			out_ViewRotation = *(Rotator*)&params[8];
+			out_DeltaRot = *(Rotator*)&params[20];
 			return *(bool*)&params[32];
 		}
 		void Init()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12200);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		bool ModifyCamera(class Camera* Camera, float DeltaTime, Object::TPOV& OutPOV)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier.ModifyCamera");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12201);
 			byte params[40] = { NULL };
-			*(class Camera**)&params[0] = Camera;
+			*(class Camera**)params = Camera;
 			*(float*)&params[4] = DeltaTime;
 			*(Object::TPOV*)&params[8] = OutPOV;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -74,41 +74,41 @@ namespace UnrealScript
 		}
 		bool IsDisabled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier.IsDisabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12206);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool RemoveCameraModifier(class Camera* Camera)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier.RemoveCameraModifier");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12212);
 			byte params[8] = { NULL };
-			*(class Camera**)&params[0] = Camera;
+			*(class Camera**)params = Camera;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		void DisableModifier(bool bImmediate)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier.DisableModifier");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12216);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bImmediate;
+			*(bool*)params = bImmediate;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void EnableModifier()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier.EnableModifier");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12218);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ToggleModifier()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier.ToggleModifier");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12219);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void UpdateAlpha(class Camera* Camera, float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.CameraModifier.UpdateAlpha");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(12224);
 			byte params[8] = { NULL };
-			*(class Camera**)&params[0] = Camera;
+			*(class Camera**)params = Camera;
 			*(float*)&params[4] = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}

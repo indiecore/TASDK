@@ -16,29 +16,29 @@ namespace UnrealScript
 		ADD_STRUCT(int, NumMessages, 300)
 		int IncrementKills(class UTPlayerReplicationInfo* KillerPRI)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDmgType_RanOver.IncrementKills");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47098);
 			byte params[8] = { NULL };
-			*(class UTPlayerReplicationInfo**)&params[0] = KillerPRI;
+			*(class UTPlayerReplicationInfo**)params = KillerPRI;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(int*)&params[4];
 		}
 		void SmallReward(class UTPlayerController* Killer, int KillCount)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDmgType_RanOver.SmallReward");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47102);
 			byte params[8] = { NULL };
-			*(class UTPlayerController**)&params[0] = Killer;
+			*(class UTPlayerController**)params = Killer;
 			*(int*)&params[4] = KillCount;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void SpawnHitEffect(class Pawn* P, float Damage, Object::Vector Momentum, ScriptName BoneName, Object::Vector HitLocation)
+		void SpawnHitEffect(class Pawn* P, float Damage, Vector Momentum, ScriptName BoneName, Vector HitLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTDmgType_RanOver.SpawnHitEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47106);
 			byte params[40] = { NULL };
-			*(class Pawn**)&params[0] = P;
+			*(class Pawn**)params = P;
 			*(float*)&params[4] = Damage;
-			*(Object::Vector*)&params[8] = Momentum;
+			*(Vector*)&params[8] = Momentum;
 			*(ScriptName*)&params[20] = BoneName;
-			*(Object::Vector*)&params[28] = HitLocation;
+			*(Vector*)&params[28] = HitLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

@@ -27,30 +27,30 @@ namespace UnrealScript
 		ADD_BOOL(bAutoLand, 2756, 0x1)
 		void LockOnWarning(class UDKProjectile* IncomingMissile)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAirVehicle.LockOnWarning");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40360);
 			byte params[4] = { NULL };
-			*(class UDKProjectile**)&params[0] = IncomingMissile;
+			*(class UDKProjectile**)params = IncomingMissile;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void SetDriving(bool bNewDriving)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAirVehicle.SetDriving");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40362);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewDriving;
+			*(bool*)params = bNewDriving;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool RecommendLongRangedAttack()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAirVehicle.RecommendLongRangedAttack");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40377);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool Dodge(Actor::EDoubleClickDir DoubleClickMove)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTAirVehicle.Dodge");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(40379);
 			byte params[5] = { NULL };
-			*(Actor::EDoubleClickDir*)&params[0] = DoubleClickMove;
+			*(Actor::EDoubleClickDir*)params = DoubleClickMove;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

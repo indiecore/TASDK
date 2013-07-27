@@ -7,21 +7,21 @@ namespace UnrealScript
 	public:
 		bool NeedPlayers()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryGame.NeedPlayers");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47395);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void StartMatch()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryGame.StartMatch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47397);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void InitGame(ScriptString* Options, ScriptString*& ErrorMessage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTEntryGame.InitGame");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(47398);
 			byte params[24] = { NULL };
-			*(ScriptString**)&params[0] = Options;
+			*(ScriptString**)params = Options;
 			*(ScriptString**)&params[12] = ErrorMessage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			ErrorMessage = *(ScriptString**)&params[12];

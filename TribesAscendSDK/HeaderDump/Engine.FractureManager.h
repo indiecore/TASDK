@@ -35,99 +35,99 @@ namespace UnrealScript
 		ADD_STRUCT(int, FSMPartPoolSize, 476)
 		float GetFSMFractureCullDistanceScale()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.GetFSMFractureCullDistanceScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16517);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetFSMDirectSpawnChanceScale()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.GetFSMDirectSpawnChanceScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16549);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
-		void SpawnChunkDestroyEffect(class ParticleSystem* Effect, Object::Box ChunkBox, Object::Vector ChunkDir, float Scale)
+		void SpawnChunkDestroyEffect(class ParticleSystem* Effect, Object::Box ChunkBox, Vector ChunkDir, float Scale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.SpawnChunkDestroyEffect");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16637);
 			byte params[48] = { NULL };
-			*(class ParticleSystem**)&params[0] = Effect;
+			*(class ParticleSystem**)params = Effect;
 			*(Object::Box*)&params[4] = ChunkBox;
-			*(Object::Vector*)&params[32] = ChunkDir;
+			*(Vector*)&params[32] = ChunkDir;
 			*(float*)&params[44] = Scale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		float GetNumFSMPartsScale()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.GetNumFSMPartsScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16644);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		float GetFSMRadialSpawnChanceScale()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.GetFSMRadialSpawnChanceScale");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16646);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(float*)&params[0];
+			return *(float*)params;
 		}
 		void PreBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.PreBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16648);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Destroyed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.Destroyed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16649);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CleanUpFSMParts()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.CleanUpFSMParts");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16650);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CreateFSMParts()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.CreateFSMParts");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16652);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ResetPoolVisibility()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.ResetPoolVisibility");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16653);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		class FracturedStaticMeshPart* GetFSMPart(class FracturedStaticMeshActor* Parent, Object::Vector SpawnLocation, Object::Rotator SpawnRotation)
+		class FracturedStaticMeshPart* GetFSMPart(class FracturedStaticMeshActor* Parent, Vector SpawnLocation, Rotator SpawnRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.GetFSMPart");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16654);
 			byte params[32] = { NULL };
-			*(class FracturedStaticMeshActor**)&params[0] = Parent;
-			*(Object::Vector*)&params[4] = SpawnLocation;
-			*(Object::Rotator*)&params[16] = SpawnRotation;
+			*(class FracturedStaticMeshActor**)params = Parent;
+			*(Vector*)&params[4] = SpawnLocation;
+			*(Rotator*)&params[16] = SpawnRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class FracturedStaticMeshPart**)&params[28];
 		}
-		class FracturedStaticMeshPart* SpawnPartActor(class FracturedStaticMeshActor* Parent, Object::Vector SpawnLocation, Object::Rotator SpawnRotation)
+		class FracturedStaticMeshPart* SpawnPartActor(class FracturedStaticMeshActor* Parent, Vector SpawnLocation, Rotator SpawnRotation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.SpawnPartActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16659);
 			byte params[32] = { NULL };
-			*(class FracturedStaticMeshActor**)&params[0] = Parent;
-			*(Object::Vector*)&params[4] = SpawnLocation;
-			*(Object::Rotator*)&params[16] = SpawnRotation;
+			*(class FracturedStaticMeshActor**)params = Parent;
+			*(Vector*)&params[4] = SpawnLocation;
+			*(Rotator*)&params[16] = SpawnRotation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class FracturedStaticMeshPart**)&params[28];
 		}
 		void ReturnPartActor(class FracturedStaticMeshPart* Part)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.ReturnPartActor");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16665);
 			byte params[4] = { NULL };
-			*(class FracturedStaticMeshPart**)&params[0] = Part;
+			*(class FracturedStaticMeshPart**)params = Part;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Tick(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.FractureManager.Tick");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(16667);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

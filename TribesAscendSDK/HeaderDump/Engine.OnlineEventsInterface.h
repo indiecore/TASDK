@@ -10,9 +10,9 @@ namespace UnrealScript
 	public:
 		bool UploadPlayerData(OnlineSubsystem::UniqueNetId UniqueId, ScriptString* PlayerNick, class OnlineProfileSettings* ProfileSettings, class OnlinePlayerStorage* PlayerStorage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineEventsInterface.UploadPlayerData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21608);
 			byte params[32] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = UniqueId;
+			*(OnlineSubsystem::UniqueNetId*)params = UniqueId;
 			*(ScriptString**)&params[8] = PlayerNick;
 			*(class OnlineProfileSettings**)&params[20] = ProfileSettings;
 			*(class OnlinePlayerStorage**)&params[24] = PlayerStorage;
@@ -21,9 +21,9 @@ namespace UnrealScript
 		}
 		bool UploadGameplayEventsData(OnlineSubsystem::UniqueNetId UniqueId, ScriptArray<byte>& Payload)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineEventsInterface.UploadGameplayEventsData");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21614);
 			byte params[24] = { NULL };
-			*(OnlineSubsystem::UniqueNetId*)&params[0] = UniqueId;
+			*(OnlineSubsystem::UniqueNetId*)params = UniqueId;
 			*(ScriptArray<byte>*)&params[8] = Payload;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			Payload = *(ScriptArray<byte>*)&params[8];
@@ -31,9 +31,9 @@ namespace UnrealScript
 		}
 		bool UpdatePlaylistPopulation(int PlaylistId, int NumPlayers)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.OnlineEventsInterface.UpdatePlaylistPopulation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(21619);
 			byte params[12] = { NULL };
-			*(int*)&params[0] = PlaylistId;
+			*(int*)params = PlaylistId;
 			*(int*)&params[4] = NumPlayers;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[8];

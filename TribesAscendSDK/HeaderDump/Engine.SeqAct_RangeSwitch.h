@@ -9,7 +9,7 @@ namespace UnrealScript
 	class SeqAct_RangeSwitch : public SequenceAction
 	{
 	public:
-		class SwitchRange
+		struct SwitchRange
 		{
 		public:
 			ADD_STRUCT(int, Max, 4)

@@ -15,7 +15,7 @@ namespace UnrealScript
 		ADD_STRUCT(int, TouchIndex, 256)
 		void RegisterEvent()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.SeqEvent_MobileRawInput.RegisterEvent");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(33054);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

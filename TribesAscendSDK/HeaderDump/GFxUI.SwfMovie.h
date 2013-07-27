@@ -28,7 +28,7 @@ namespace UnrealScript
 			FlashTextureScale_Mult4 = 3,
 			FlashTextureScale_MAX = 4,
 		};
-		ADD_STRUCT(Object::QWord, ImportTimeStamp, 164)
+		ADD_STRUCT(QWord, ImportTimeStamp, 164)
 		ADD_STRUCT(int, RTVideoTextures, 160)
 		ADD_STRUCT(int, RTTextures, 156)
 		ADD_STRUCT(ScriptString*, SourceFileTimestamp, 144)

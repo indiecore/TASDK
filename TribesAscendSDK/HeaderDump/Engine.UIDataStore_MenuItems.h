@@ -18,48 +18,48 @@ namespace UnrealScript
 		ADD_STRUCT(ScriptName, CurrentGameSettingsTag, 196)
 		void ClearSet(ScriptName SetName)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_MenuItems.ClearSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28607);
 			byte params[8] = { NULL };
-			*(ScriptName*)&params[0] = SetName;
+			*(ScriptName*)params = SetName;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AppendToSet(ScriptName SetName, int NumOptions)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_MenuItems.AppendToSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28609);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = SetName;
+			*(ScriptName*)params = SetName;
 			*(int*)&params[8] = NumOptions;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void GetSet(ScriptName SetName, ScriptArray<class UIDataProvider_MenuItem*>& OutProviders)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_MenuItems.GetSet");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28612);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = SetName;
+			*(ScriptName*)params = SetName;
 			*(ScriptArray<class UIDataProvider_MenuItem*>*)&params[8] = OutProviders;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutProviders = *(ScriptArray<class UIDataProvider_MenuItem*>*)&params[8];
 		}
 		void OnGameSettingsChanged(class UIDataProvider* SourceProvider, ScriptName PropTag)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_MenuItems.OnGameSettingsChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28616);
 			byte params[12] = { NULL };
-			*(class UIDataProvider**)&params[0] = SourceProvider;
+			*(class UIDataProvider**)params = SourceProvider;
 			*(ScriptName*)&params[4] = PropTag;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Registered(class LocalPlayer* PlayerOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_MenuItems.Registered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28620);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = PlayerOwner;
+			*(class LocalPlayer**)params = PlayerOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Unregistered(class LocalPlayer* PlayerOwner)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.UIDataStore_MenuItems.Unregistered");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(28623);
 			byte params[4] = { NULL };
-			*(class LocalPlayer**)&params[0] = PlayerOwner;
+			*(class LocalPlayer**)params = PlayerOwner;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

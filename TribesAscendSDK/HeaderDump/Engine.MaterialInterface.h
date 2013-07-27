@@ -55,7 +55,7 @@ namespace UnrealScript
 			MATUSAGE_Landscape = 21,
 			MATUSAGE_MAX = 22,
 		};
-		class LightmassMaterialInterfaceSettings
+		struct LightmassMaterialInterfaceSettings
 		{
 		public:
 			ADD_BOOL(bOverrideDistanceFieldPenumbraScale, 24, 0x20)
@@ -135,23 +135,23 @@ namespace UnrealScript
 		ADD_STRUCT(Object::RenderCommandFence_Mirror, ParentRefFence, 60)
 		class Material* GetMaterial()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14251);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class Material**)&params[0];
+			return *(class Material**)params;
 		}
 		class PhysicalMaterial* GetPhysicalMaterial()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetPhysicalMaterial");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14253);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(class PhysicalMaterial**)&params[0];
+			return *(class PhysicalMaterial**)params;
 		}
 		bool GetParameterDesc(ScriptName ParameterName, ScriptString*& OutDesc)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetParameterDesc");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14255);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(ScriptString**)&params[8] = OutDesc;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutDesc = *(ScriptString**)&params[8];
@@ -159,9 +159,9 @@ namespace UnrealScript
 		}
 		bool GetFontParameterValue(ScriptName ParameterName, class Font*& OutFontValue, int& OutFontPage)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetFontParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14259);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(class Font**)&params[8] = OutFontValue;
 			*(int*)&params[12] = OutFontPage;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
@@ -171,9 +171,9 @@ namespace UnrealScript
 		}
 		bool GetScalarParameterValue(ScriptName ParameterName, float& OutValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetScalarParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14264);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(float*)&params[8] = OutValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutValue = *(float*)&params[8];
@@ -181,9 +181,9 @@ namespace UnrealScript
 		}
 		bool GetScalarCurveParameterValue(ScriptName ParameterName, Object::InterpCurveFloat& OutValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetScalarCurveParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14268);
 			byte params[28] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(Object::InterpCurveFloat*)&params[8] = OutValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutValue = *(Object::InterpCurveFloat*)&params[8];
@@ -191,9 +191,9 @@ namespace UnrealScript
 		}
 		bool GetTextureParameterValue(ScriptName ParameterName, class Texture*& OutValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetTextureParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14272);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(class Texture**)&params[8] = OutValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutValue = *(class Texture**)&params[8];
@@ -201,9 +201,9 @@ namespace UnrealScript
 		}
 		bool GetVectorParameterValue(ScriptName ParameterName, Object::LinearColor& OutValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetVectorParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14276);
 			byte params[28] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(Object::LinearColor*)&params[8] = OutValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutValue = *(Object::LinearColor*)&params[8];
@@ -211,9 +211,9 @@ namespace UnrealScript
 		}
 		bool GetVectorCurveParameterValue(ScriptName ParameterName, Object::InterpCurveVector& OutValue)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.GetVectorCurveParameterValue");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14280);
 			byte params[28] = { NULL };
-			*(ScriptName*)&params[0] = ParameterName;
+			*(ScriptName*)params = ParameterName;
 			*(Object::InterpCurveVector*)&params[8] = OutValue;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			OutValue = *(Object::InterpCurveVector*)&params[8];
@@ -221,9 +221,9 @@ namespace UnrealScript
 		}
 		void SetForceMipLevelsToBeResident(bool OverrideForceMiplevelsToBeResident, bool bForceMiplevelsToBeResidentValue, float ForceDuration, int CinematicTextureGroups)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.MaterialInterface.SetForceMipLevelsToBeResident");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14284);
 			byte params[16] = { NULL };
-			*(bool*)&params[0] = OverrideForceMiplevelsToBeResident;
+			*(bool*)params = OverrideForceMiplevelsToBeResident;
 			*(bool*)&params[4] = bForceMiplevelsToBeResidentValue;
 			*(float*)&params[8] = ForceDuration;
 			*(int*)&params[12] = CinematicTextureGroups;

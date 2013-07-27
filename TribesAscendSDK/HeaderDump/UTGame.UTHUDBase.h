@@ -56,82 +56,82 @@ namespace UnrealScript
 		ADD_OBJECT(GFxUI_PauseMenu, PauseMenuMovie, 1428)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45438);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Timer()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.Timer");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45441);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ShowMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.ShowMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45442);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ResolutionChanged()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.ResolutionChanged");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45443);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
-		void DisplayHit(Object::Vector HitDir, int Damage, ScriptClass* DamageType)
+		void DisplayHit(Vector HitDir, int Damage, ScriptClass* DamageType)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.DisplayHit");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45445);
 			byte params[20] = { NULL };
-			*(Object::Vector*)&params[0] = HitDir;
+			*(Vector*)params = HitDir;
 			*(int*)&params[12] = Damage;
 			*(ScriptClass**)&params[16] = DamageType;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostRender()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.PostRender");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45449);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void RemoveMovies()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.RemoveMovies");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45450);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SetVisible(bool bNewVisible)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.SetVisible");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45451);
 			byte params[4] = { NULL };
-			*(bool*)&params[0] = bNewVisible;
+			*(bool*)params = bNewVisible;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CloseOtherMenus()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.CloseOtherMenus");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45453);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void TogglePauseMenu()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.TogglePauseMenu");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45454);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void CompletePauseMenuClose()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.CompletePauseMenuClose");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45455);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ReleaseShowScores()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.ReleaseShowScores");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45456);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		int GetLocalPlayerOwnerIndex()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.GetLocalPlayerOwnerIndex");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45457);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(int*)&params[0];
+			return *(int*)params;
 		}
 		void DrawToolTip(class Canvas* Cvs, class PlayerController* PC, ScriptString* Command, float X, float Y, float U, float V, float UL, float VL, float ResScale, class Texture2D* IconTexture, float Alpha)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.DrawToolTip");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45459);
 			byte params[56] = { NULL };
-			*(class Canvas**)&params[0] = Cvs;
+			*(class Canvas**)params = Cvs;
 			*(class PlayerController**)&params[4] = PC;
 			*(ScriptString**)&params[8] = Command;
 			*(float*)&params[20] = X;
@@ -147,21 +147,21 @@ namespace UnrealScript
 		}
 		bool CheckCrosshairOnFriendly()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.CheckCrosshairOnFriendly");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45482);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void ClearCrosshairOnFriendly()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.ClearCrosshairOnFriendly");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45495);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void DrawShadowedTile(class Texture2D* Tex, float X, float Y, float XL, float YL, float U, float V, float UL, float VL, Object::Color TileColor, bool bScaleToRes)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.DrawShadowedTile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45496);
 			byte params[44] = { NULL };
-			*(class Texture2D**)&params[0] = Tex;
+			*(class Texture2D**)params = Tex;
 			*(float*)&params[4] = X;
 			*(float*)&params[8] = Y;
 			*(float*)&params[12] = XL;
@@ -176,9 +176,9 @@ namespace UnrealScript
 		}
 		void DrawShadowedStretchedTile(class Texture2D* Tex, float X, float Y, float XL, float YL, float U, float V, float UL, float VL, Object::Color TileColor, bool bScaleToRes)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.DrawShadowedStretchedTile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45509);
 			byte params[44] = { NULL };
-			*(class Texture2D**)&params[0] = Tex;
+			*(class Texture2D**)params = Tex;
 			*(float*)&params[4] = X;
 			*(float*)&params[8] = Y;
 			*(float*)&params[12] = XL;
@@ -191,12 +191,12 @@ namespace UnrealScript
 			*(bool*)&params[40] = bScaleToRes;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void DrawShadowedRotatedTile(class Texture2D* Tex, Object::Rotator Rot, float X, float Y, float XL, float YL, float U, float V, float UL, float VL, Object::Color TileColor, bool bScaleToRes)
+		void DrawShadowedRotatedTile(class Texture2D* Tex, Rotator Rot, float X, float Y, float XL, float YL, float U, float V, float UL, float VL, Object::Color TileColor, bool bScaleToRes)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTHUDBase.DrawShadowedRotatedTile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(45523);
 			byte params[56] = { NULL };
-			*(class Texture2D**)&params[0] = Tex;
-			*(Object::Rotator*)&params[4] = Rot;
+			*(class Texture2D**)params = Tex;
+			*(Rotator*)&params[4] = Rot;
 			*(float*)&params[16] = X;
 			*(float*)&params[20] = Y;
 			*(float*)&params[24] = XL;

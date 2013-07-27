@@ -78,107 +78,107 @@ namespace UnrealScript
 		ADD_BOOL(bInvertMouse, 216, 0x2)
 		Actor::EDoubleClickDir CheckForDoubleClickMove(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.CheckForDoubleClickMove");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(8556);
 			byte params[5] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(Actor::EDoubleClickDir*)&params[4];
 		}
 		bool InvertMouse()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.InvertMouse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13979);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool InvertTurn()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.InvertTurn");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13981);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void SetSensitivity(float F)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.SetSensitivity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13983);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = F;
+			*(float*)params = F;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void DrawHUD(class HUD* H)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.DrawHUD");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13985);
 			byte params[4] = { NULL };
-			*(class HUD**)&params[0] = H;
+			*(class HUD**)params = H;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PreProcessInput(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.PreProcessInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13987);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void PostProcessInput(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.PostProcessInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13989);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AdjustMouseSensitivity(float FOVScale)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.AdjustMouseSensitivity");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13991);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = FOVScale;
+			*(float*)params = FOVScale;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool IsMouseSmoothEnabled()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.IsMouseSmoothEnabled");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13993);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		void PlayerInput(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.PlayerInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(13995);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void ProcessInputMatching(float DeltaTime)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.ProcessInputMatching");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14000);
 			byte params[4] = { NULL };
-			*(float*)&params[0] = DeltaTime;
+			*(float*)params = DeltaTime;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void CatchDoubleClickInput()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.CatchDoubleClickInput");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14001);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void Jump()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.Jump");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14010);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void SmartJump()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.SmartJump");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14011);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClearSmoothing()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.ClearSmoothing");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14012);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		float SmoothMouse(float aMouse, float DeltaTime, byte& SampleCount, int Index)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.SmoothMouse");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14014);
 			byte params[17] = { NULL };
-			*(float*)&params[0] = aMouse;
+			*(float*)params = aMouse;
 			*(float*)&params[4] = DeltaTime;
 			params[8] = SampleCount;
 			*(int*)&params[12] = Index;
@@ -188,19 +188,19 @@ namespace UnrealScript
 		}
 		void InitInputSystem()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.InitInputSystem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14021);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ClientInitInputSystem()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.ClientInitInputSystem");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14022);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void PreClientTravel(ScriptString* PendingURL, Actor::ETravelType TravelType, bool bIsSeamlessTravel)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.PlayerInput.PreClientTravel");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14023);
 			byte params[17] = { NULL };
-			*(ScriptString**)&params[0] = PendingURL;
+			*(ScriptString**)params = PendingURL;
 			*(Actor::ETravelType*)&params[12] = TravelType;
 			*(bool*)&params[16] = bIsSeamlessTravel;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);

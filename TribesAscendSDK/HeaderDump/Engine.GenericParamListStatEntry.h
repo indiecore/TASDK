@@ -18,41 +18,41 @@ namespace UnrealScript
 		ADD_STRUCT(Object::Pointer, StatEvent, 60)
 		void AddFloat(ScriptName ParamName, float Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GenericParamListStatEntry.AddFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18131);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ParamName;
+			*(ScriptName*)params = ParamName;
 			*(float*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddInt(ScriptName ParamName, int Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GenericParamListStatEntry.AddInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18134);
 			byte params[12] = { NULL };
-			*(ScriptName*)&params[0] = ParamName;
+			*(ScriptName*)params = ParamName;
 			*(int*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
-		void AddVector(ScriptName ParamName, Object::Vector Value)
+		void AddVector(ScriptName ParamName, Vector Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GenericParamListStatEntry.AddVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18137);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = ParamName;
-			*(Object::Vector*)&params[8] = Value;
+			*(ScriptName*)params = ParamName;
+			*(Vector*)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void AddString(ScriptName ParamName, ScriptString* Value)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GenericParamListStatEntry.AddString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18140);
 			byte params[20] = { NULL };
-			*(ScriptName*)&params[0] = ParamName;
+			*(ScriptName*)params = ParamName;
 			*(ScriptString**)&params[8] = Value;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool GetFloat(ScriptName ParamName, float& out_Float)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GenericParamListStatEntry.GetFloat");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18143);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = ParamName;
+			*(ScriptName*)params = ParamName;
 			*(float*)&params[8] = out_Float;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			out_Float = *(float*)&params[8];
@@ -60,29 +60,29 @@ namespace UnrealScript
 		}
 		bool GetInt(ScriptName ParamName, int& out_int)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GenericParamListStatEntry.GetInt");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18147);
 			byte params[16] = { NULL };
-			*(ScriptName*)&params[0] = ParamName;
+			*(ScriptName*)params = ParamName;
 			*(int*)&params[8] = out_int;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			out_int = *(int*)&params[8];
 			return *(bool*)&params[12];
 		}
-		bool GetVector(ScriptName ParamName, Object::Vector& out_vector)
+		bool GetVector(ScriptName ParamName, Vector& out_vector)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GenericParamListStatEntry.GetVector");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18151);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ParamName;
-			*(Object::Vector*)&params[8] = out_vector;
+			*(ScriptName*)params = ParamName;
+			*(Vector*)&params[8] = out_vector;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			out_vector = *(Object::Vector*)&params[8];
+			out_vector = *(Vector*)&params[8];
 			return *(bool*)&params[20];
 		}
 		bool GetString(ScriptName ParamName, ScriptString*& out_string)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GenericParamListStatEntry.GetString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18155);
 			byte params[24] = { NULL };
-			*(ScriptName*)&params[0] = ParamName;
+			*(ScriptName*)params = ParamName;
 			*(ScriptString**)&params[8] = out_string;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			out_string = *(ScriptString**)&params[8];
@@ -90,7 +90,7 @@ namespace UnrealScript
 		}
 		void CommitToDisk()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.GenericParamListStatEntry.CommitToDisk");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(18159);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 	};

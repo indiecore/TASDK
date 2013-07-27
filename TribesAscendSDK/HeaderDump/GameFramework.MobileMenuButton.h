@@ -25,9 +25,9 @@ namespace UnrealScript
 		ADD_OBJECT(Texture2D, Images, 132)
 		void InitMenuObject(class MobilePlayerInput* PlayerInput, class MobileMenuScene* Scene, int ScreenWidth, int ScreenHeight)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuButton.InitMenuObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32612);
 			byte params[16] = { NULL };
-			*(class MobilePlayerInput**)&params[0] = PlayerInput;
+			*(class MobilePlayerInput**)params = PlayerInput;
 			*(class MobileMenuScene**)&params[4] = Scene;
 			*(int*)&params[8] = ScreenWidth;
 			*(int*)&params[12] = ScreenHeight;
@@ -35,16 +35,16 @@ namespace UnrealScript
 		}
 		void RenderObject(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuButton.RenderObject");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32618);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void RenderCaption(class Canvas* Canvas)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function GameFramework.MobileMenuButton.RenderCaption");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(32625);
 			byte params[4] = { NULL };
-			*(class Canvas**)&params[0] = Canvas;
+			*(class Canvas**)params = Canvas;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 	};

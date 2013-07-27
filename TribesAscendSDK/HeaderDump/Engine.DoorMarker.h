@@ -42,40 +42,40 @@ namespace UnrealScript
 		ADD_OBJECT(InterpActor, MyDoor, 692)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DoorMarker.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14665);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void MoverOpened()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DoorMarker.MoverOpened");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14666);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void MoverClosed()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DoorMarker.MoverClosed");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14667);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		class Actor* SpecialHandling(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DoorMarker.SpecialHandling");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14668);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(class Actor**)&params[4];
 		}
 		bool ProceedWithMove(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DoorMarker.ProceedWithMove");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14672);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}
 		bool SuggestMovePreparation(class Pawn* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function Engine.DoorMarker.SuggestMovePreparation");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(14675);
 			byte params[8] = { NULL };
-			*(class Pawn**)&params[0] = Other;
+			*(class Pawn**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

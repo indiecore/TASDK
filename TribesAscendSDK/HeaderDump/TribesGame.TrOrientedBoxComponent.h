@@ -14,9 +14,9 @@ namespace UnrealScript
 		ADD_STRUCT(float, BoxHeight, 488)
 		void SetBoxSize(float NewHeight, float NewLength, float NewWidth, bool IsRadii)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrOrientedBoxComponent.SetBoxSize");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(100161);
 			byte params[16] = { NULL };
-			*(float*)&params[0] = NewHeight;
+			*(float*)params = NewHeight;
 			*(float*)&params[4] = NewLength;
 			*(float*)&params[8] = NewWidth;
 			*(bool*)&params[12] = IsRadii;

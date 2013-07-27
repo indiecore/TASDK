@@ -28,7 +28,7 @@ namespace UnrealScript
 	{
 	public:
 		ADD_STRUCT(ScriptArray<class UDKVehicle*>, TouchingVehicles, 608)
-		ADD_STRUCT(Object::Vector, ArrowDirection, 596)
+		ADD_STRUCT(Vector, ArrowDirection, 596)
 		ADD_BOOL(bBlockSpectators, 588, 0x8)
 		ADD_BOOL(bBlockPawns, 588, 0x4)
 		ADD_BOOL(bDenyExit, 588, 0x2)
@@ -36,42 +36,42 @@ namespace UnrealScript
 		ADD_OBJECT(ScriptClass, TypeToForce, 584)
 		void PostBeginPlay()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKForcedDirectionVolume.PostBeginPlay");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34841);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		void ActorEnteredVolume(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKForcedDirectionVolume.ActorEnteredVolume");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34842);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void Touch(class Actor* Other, 
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
-void* OtherComp, Object::Vector HitLocation, Object::Vector HitNormal)
+void* OtherComp, Vector HitLocation, Vector HitNormal)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKForcedDirectionVolume.Touch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34844);
 			byte params[32] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			*(
 // ERROR: Unknown object class 'Class Core.ComponentProperty'!
 void**)&params[4] = OtherComp;
-			*(Object::Vector*)&params[8] = HitLocation;
-			*(Object::Vector*)&params[20] = HitNormal;
+			*(Vector*)&params[8] = HitLocation;
+			*(Vector*)&params[20] = HitNormal;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		void UnTouch(class Actor* Other)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKForcedDirectionVolume.UnTouch");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34853);
 			byte params[4] = { NULL };
-			*(class Actor**)&params[0] = Other;
+			*(class Actor**)params = Other;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
 		bool StopsProjectile(class Projectile* P)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UDKBase.UDKForcedDirectionVolume.StopsProjectile");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(34857);
 			byte params[8] = { NULL };
-			*(class Projectile**)&params[0] = P;
+			*(class Projectile**)params = P;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(bool*)&params[4];
 		}

@@ -204,7 +204,7 @@ namespace UnrealScript
 			VGSContextActors_ActorDeployable = 7,
 			VGSContextActors_MAX = 8,
 		};
-		class TrVGSCommand
+		struct TrVGSCommand
 		{
 		public:
 			ADD_BOOL(bIsContext, 48, 0x1)
@@ -540,14 +540,14 @@ namespace UnrealScript
 		ADD_STRUCT(TrVGSCommandList::TrVGSCommand, m_CommandList, 60)
 		void Init()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVGSCommandList.Init");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51398);
 			((ScriptObject*)this)->ProcessEvent(function, NULL, NULL);
 		}
 		ScriptString* GetContextLocationString(TrVGSCommandList::EVGSContextLocation Loc, bool bEnemyLocation)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function TribesGame.TrVGSCommandList.GetContextLocationString");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(51399);
 			byte params[17] = { NULL };
-			*(TrVGSCommandList::EVGSContextLocation*)&params[0] = Loc;
+			*(TrVGSCommandList::EVGSContextLocation*)params = Loc;
 			*(bool*)&params[4] = bEnemyLocation;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 			return *(ScriptString**)&params[8];

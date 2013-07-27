@@ -13,16 +13,16 @@ namespace UnrealScript
 		ADD_STRUCT(int, TextCount, 452)
 		bool AnyBrowserOpen()
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsole.AnyBrowserOpen");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44076);
 			byte params[4] = { NULL };
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
-			return *(bool*)&params[0];
+			return *(bool*)params;
 		}
 		bool InputKey(int ControllerId, ScriptName Key, Object::EInputEvent Event, float AmountDepressed, bool bGamepad)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsole.InputKey");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44078);
 			byte params[25] = { NULL };
-			*(int*)&params[0] = ControllerId;
+			*(int*)params = ControllerId;
 			*(ScriptName*)&params[4] = Key;
 			*(Object::EInputEvent*)&params[12] = Event;
 			*(float*)&params[16] = AmountDepressed;
@@ -32,9 +32,9 @@ namespace UnrealScript
 		}
 		void OutputTextLine(ScriptString* Text, Object::Color OverrideColor)
 		{
-			static ScriptFunction* function = ScriptObject::Find<ScriptFunction>("Function UTGame.UTConsole.OutputTextLine");
+			static ScriptFunction* function = (ScriptFunction*)(*ScriptObject::object_array())(44093);
 			byte params[16] = { NULL };
-			*(ScriptString**)&params[0] = Text;
+			*(ScriptString**)params = Text;
 			*(Object::Color*)&params[12] = OverrideColor;
 			((ScriptObject*)this)->ProcessEvent(function, &params, NULL);
 		}
